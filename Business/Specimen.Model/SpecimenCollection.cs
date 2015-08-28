@@ -55,7 +55,16 @@ namespace YellowstonePathology.Business.Specimen.Model
             result.Add(new SpecimenDefinition.SkinShavePunchMiscBiopsy());
             result.Add(new SpecimenDefinition.AppendixExcision());
             result.Add(new SpecimenDefinition.GallbladderExcision());
-
+            result.Add(new SpecimenDefinition.TonsilExcision());
+            result.Add(new SpecimenDefinition.POC());
+            result.Add(new SpecimenDefinition.BreastReduction());
+            result.Add(new SpecimenDefinition.ECC());
+            result.Add(new SpecimenDefinition.EMB());
+            result.Add(new SpecimenDefinition.CervicalBiopsy());
+            result.Add(new SpecimenDefinition.LEEPExcision());
+            result.Add(new SpecimenDefinition.Placenta());
+            result.Add(new SpecimenDefinition.Uterus());
+            result.Add(new SpecimenDefinition.NeedleCoreBiopsy());
             return result;
         }
     }

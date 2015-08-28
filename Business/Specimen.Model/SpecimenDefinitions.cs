@@ -137,4 +137,133 @@ namespace YellowstonePathology.Business.Specimen.Model.SpecimenDefinition
             this.m_CPTCode = new YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88304();
         }
     }
+
+    public class TonsilExcision : Specimen
+    {
+        public TonsilExcision()
+        {
+            this.m_SpecimenId = "TNSLSPCM";
+            this.m_SpecimenName = "Tonsil Excision";
+            this.m_Description = null;
+            this.m_LabFixation = "Formalin";
+            this.m_ClientFixation = null;
+            this.m_RequiresGrossExamination = true;
+        }
+    }
+    public class POC : Specimen
+    {
+        public POC()
+        {
+            this.m_SpecimenId = "POCSPCMN";
+            this.m_SpecimenName = "POC";
+            this.m_Description = "Uteran Contents";
+            this.m_LabFixation = "Formalin";
+            this.m_ClientFixation = null;
+            this.m_RequiresGrossExamination = true;
+        }
+    }
+
+    public class BreastReduction : Specimen
+    {
+        public BreastReduction()
+        {
+            this.m_SpecimenId = "BRSTRDSPCMN";
+            this.m_SpecimenName = "Breast Reduction";
+            this.m_Description = null;
+            this.m_LabFixation = "Formalin";
+            this.m_ClientFixation = null;
+            this.m_RequiresGrossExamination = true;
+        }
+    }
+
+    public class ECC : Specimen
+    {
+        public ECC()
+        {
+            this.m_SpecimenId = "ECCSPCMN";
+            this.m_SpecimenName = "ECC";
+            this.m_Description = "Endocervical Curettage";
+            this.m_LabFixation = "Formalin";
+            this.m_ClientFixation = null;
+            this.m_RequiresGrossExamination = true;
+        }
+    }
+
+    public class EMB : Specimen
+    {
+        public EMB()
+        {
+            this.m_SpecimenId = "EMBSPCMN";
+            this.m_SpecimenName = "EMB";
+            this.m_Description = "Endometrium Biopsy";
+            this.m_LabFixation = "Formalin";
+            this.m_ClientFixation = null;
+            this.m_RequiresGrossExamination = true;
+        }
+    }
+
+    public class CervicalBiopsy : Specimen
+    {
+        public CervicalBiopsy()
+        {
+            this.m_SpecimenId = "CVCLBSPYSPCMN";
+            this.m_SpecimenName = "Cervical Biopsy";
+            this.m_Description = null;
+            this.m_LabFixation = "Formalin";
+            this.m_ClientFixation = null;
+            this.m_RequiresGrossExamination = true;
+        }
+    }
+
+        public class LEEPExcision : Specimen
+    {
+        public LEEPExcision()
+        {
+            this.m_SpecimenId = "LPSPCMN";
+            this.m_SpecimenName = "LEEP Excision";
+            this.m_Description = null;
+            this.m_LabFixation = "Formalin";
+            this.m_ClientFixation = null;
+            this.m_RequiresGrossExamination = true;
+        }
+    }
+
+        public class Placenta : Specimen
+        {
+            public Placenta()
+            {
+                this.m_SpecimenId = "PLCNTSPCMN";
+                this.m_SpecimenName = "Placenta";
+                this.m_Description = "Placenta";
+                this.m_LabFixation = "Formalin";
+                this.m_ClientFixation = null;
+                this.m_RequiresGrossExamination = true;
+            }
+        }
+
+        public class Uterus : Specimen
+        {
+            public Uterus()
+            {
+                this.m_SpecimenId = "UTRSSPCMN";
+                this.m_SpecimenName = "Uterus Excision";
+                this.m_Description = null;
+                this.m_LabFixation = "Formalin";
+                this.m_ClientFixation = null;
+                this.m_RequiresGrossExamination = true;
+            }
+        }
+
+        public class NeedleCoreBiopsy : Specimen
+        {
+            public NeedleCoreBiopsy()
+            {
+                this.m_SpecimenId = "NCBSPCMN";
+                this.m_SpecimenName = "Needle Core Biopsy";
+                this.m_Description = null;
+                this.m_LabFixation = "Formalin";
+                this.m_ClientFixation = null;
+                this.m_RequiresGrossExamination = true;
+            }
+        }
 }

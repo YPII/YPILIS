@@ -197,4 +197,127 @@ namespace YellowstonePathology.UI.Gross
 
         }
     }
+
+        public class TonsilExcisionTemplate : DictationTemplate
+    {
+        public TonsilExcisionTemplate()
+        {
+            this.m_TemplateName = "Tonsil Excision";
+            this.m_Text = "Specimen: *SPECIMENNUMBER* Received: *INFORMALIN/FRESH* Labeled: \"*PATIENTNAME*\"" + Environment.NewLine +
+                          "Received: *TONSILDESCRIPTION*" + Environment.NewLine +
+                          "Adenoids: *PRESENT/ABSENT*" + Environment.NewLine +
+                          "Weight: *AGGREGATEWEIGHT*" + Environment.NewLine +
+                          "Measurement Tonsil 1: *MEASUREMENTS*" + Environment.NewLine +
+                          "Measurement Tonsil 2: *MEASUREMENTS*" + Environment.NewLine +
+                          "[Measurement of Adenoids: *MEASUREMENTS*]" + Environment.NewLine +
+                          "Cut Surfaces: *SMOOTH/TAN/PINK/GLISTENING*" + Environment.NewLine +
+                          "Submitted: *SUBMISSIONKEY* Cassette: *COLOR/NUMBER*";
+
+
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Specimen Number", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Recieved In", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Container Labeling", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Tonsil Description", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Adenoids Present or Absent", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Aggregate Weight", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("First Tonsil Measurement", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Second Tonsil Measurement", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Adenoid Measurement", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Cut Surfaces", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Submission Key", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Cassette Color", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Cassette Number", ""));
+
+            YellowstonePathology.Business.Specimen.Model.SpecimenDefinition.TonsilExcision TonsilExcision = new YellowstonePathology.Business.Specimen.Model.SpecimenDefinition.TonsilExcision();
+            this.m_SpecimenCollection.Add(TonsilExcision);
+
+        }
+    }
+
+                    public class POCTemplate : DictationTemplate
+    {
+        public POCTemplate()
+        {
+            this.m_TemplateName = "POC";
+            this.m_Text = "Specimen: *SPECIMENNUMBER* Received: *INFORMALIN/FRESH* Labeled: \"*PATIENTNAME*\"" + Environment.NewLine +
+                          "Received: *TISSUE/MUCUS/CLOTTEDBLOOD*" + Environment.NewLine +
+                          "Measurement: *MEASUREMENTS*" + Environment.NewLine +
+                          "Villi: *PRESENT/ABSENT/INDETERMINATE*" + Environment.NewLine +
+                          "Fetal Parts: *PRESENT/ABSENT/INDETERMINATE*" + Environment.NewLine +
+                          "Submitted: *SUBMISSIONKEY* Cassette: *COLOR/NUMBER*";
+
+
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Specimen Number", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Recieved In", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Container Labeling", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Tissue Description", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Measurements", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Villi", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Fetal Parts", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Submission Key", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Cassette Color", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Cassette Number", ""));
+
+            YellowstonePathology.Business.Specimen.Model.SpecimenDefinition.POC POC = new YellowstonePathology.Business.Specimen.Model.SpecimenDefinition.POC();
+            this.m_SpecimenCollection.Add(POC);
+
+        }
+    }
+
+                    public class BreastReductionTemplate : DictationTemplate
+    {
+        public BreastReductionTemplate()
+        {
+            this.m_TemplateName = "BreastReduction";
+            this.m_Text = "Specimen: *SPECIMENNUMBER* Received: *INFORMALIN/FRESH* Labeled: \"*PATIENTNAME*\"" + Environment.NewLine +
+                          "Received: *NUMBER/SKIN/ADIPOSE*" + Environment.NewLine +
+                          "Measurement: *MEASUREMENTS*" + Environment.NewLine +
+                          "Skin Surface: *DESCRIPTION*" + Environment.NewLine +
+                          "Adipose: *DESCRIPTION*" + Environment.NewLine +
+                          "Submitted: *SUBMISSIONKEY* Cassette: *COLOR/NUMBER*";
+
+
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Specimen Number", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Recieved In", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Container Labeling", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Tissue Description", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Measurements", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Skin Description", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Adipose Description", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Submission Key", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Cassette Color", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Cassette Number", ""));
+
+            YellowstonePathology.Business.Specimen.Model.SpecimenDefinition.BreastReduction BreastReduction = new YellowstonePathology.Business.Specimen.Model.SpecimenDefinition.BreastReduction();
+            this.m_SpecimenCollection.Add(BreastReduction);
+
+        }
+    }
+
+                    public class ECCTemplate : DictationTemplate
+    {
+        public ECCTemplate()
+        {
+            this.m_TemplateName = "ECC";
+            this.m_Text = "Specimen: *SPECIMENNUMBER* Received: *INFORMALIN/FRESH* Labeled: \"*PATIENTNAME*\"" + Environment.NewLine +
+                          "Received: *NUMBER/SKIN/ADIPOSE*" + Environment.NewLine +
+                          "Measurement: *MEASUREMENTS*" + Environment.NewLine +
+                          "Skin Surface: *DESCRIPTION*" + Environment.NewLine +
+                          "Adipose: *DESCRIPTION*" + Environment.NewLine +
+                          "Submitted: *SUBMISSIONKEY* Cassette: *COLOR/NUMBER*";
+
+
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Specimen Number", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Recieved In", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Container Labeling", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Tissue Description", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Measurements", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Skin Description", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Adipose Description", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Submission Key", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Cassette Color", ""));
+            this.m_WordList.Add(new YellowstonePathology.UI.Gross.TemplateWord("Cassette Number", ""));
+
+            YellowstonePathology.Business.Specimen.Model.SpecimenDefinition.ECC ECC = new YellowstonePathology.Business.Specimen.Model.SpecimenDefinition.ECC();
+            this.m_SpecimenCollection.Add(ECC);
 }
