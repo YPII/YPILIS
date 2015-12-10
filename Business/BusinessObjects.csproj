@@ -646,7 +646,13 @@
     <Compile Include="Test\PantherOrderListItemHPV1618.cs" />
     <Compile Include="Test\PantherOrderListItemNGCT.cs" />
     <Compile Include="Test\PantherOrderListItem.cs" />
+    <Compile Include="Test\PDL1\PDL1EpicObxView.cs" />
+    <Compile Include="Test\PDL1\PDL1NegativeResult.cs" />
+    <Compile Include="Test\PDL1\PDL1PositiveResult.cs" />
+    <Compile Include="Test\PDL1\PDL1ResultCollection.cs" />
     <Compile Include="Test\PDL1\PDL1Test.cs" />
+    <Compile Include="Test\PDL1\PDL1TestOrder.cs" />
+    <Compile Include="Test\PDL1\PDL1WordDocument.cs" />
     <Compile Include="Test\RASRAFPanel\RASRAFPanelEpicObxView.cs" />
     <Compile Include="Test\RASRAFPanel\RASRAFPanelResult.cs" />
     <Compile Include="Test\RASRAFPanel\RASRAFPanelTest.cs" />
@@ -658,6 +664,7 @@
     <Compile Include="Test\Surgical\IntraoperativeConsultationResult.Validation.cs" />
     <Compile Include="Test\InformalConsult\InformalConsultTest.cs" />
     <Compile Include="Test\InformalConsult\InformalConsultTestOrder.cs" />
+    <Compile Include="Test\TechInitiatedPeripheralSmear\TechInitiatedPeripheralSmearCMMCNteView.cs" />
     <Compile Include="Test\TechInitiatedPeripheralSmear\TechInitiatedPeripheralSmearEpicObxView.cs" />
     <Compile Include="Test\TechInitiatedPeripheralSmear\TechInitiatedPeripheralSmearTest.cs" />
     <Compile Include="Test\TechInitiatedPeripheralSmear\TechInitiatedPeripheralSmearTestOrder.cs" />

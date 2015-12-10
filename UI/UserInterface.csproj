@@ -621,6 +621,10 @@
       <DependentUpon>MissingInformationResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Test\MissingInformationResultPath.cs" />
+    <Compile Include="Test\PDL1ResultPage.xaml.cs">
+      <DependentUpon>PDL1ResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test\PDL1ResultPath.cs" />
     <Compile Include="Test\RASRAFPanelResultPage.xaml.cs">
       <DependentUpon>RASRAFPanelResultPage.xaml</DependentUpon>
     </Compile>
@@ -2228,6 +2232,10 @@
     <Page Include="Test\MissingInformationResultPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Test\PDL1ResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Test\RASRAFPanelResultPage.xaml">
       <SubType>Designer</SubType>
