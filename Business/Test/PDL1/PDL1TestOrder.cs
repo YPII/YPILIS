@@ -13,6 +13,7 @@ namespace YellowstonePathology.Business.Test.PDL1
         private string m_Interpretation;
         private string m_Method;
         private string m_References;
+        private string m_StainPercent;
 
         public PDL1TestOrder(string masterAccessionNo, string reportNo, string objectId,
             YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet,
