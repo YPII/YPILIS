@@ -42,6 +42,8 @@ namespace YellowstonePathology.UI.Cytology
 		private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
         private YellowstonePathology.UI.PageNavigationWindow m_PageNavigationWindow;
 
+		private AmendmentPageController m_AmendmentPageController;
+
 		public CytologyUI(YellowstonePathology.Business.User.SystemIdentity systemIdentity)
         {
             this.m_SystemIdentity = systemIdentity;
@@ -487,8 +489,18 @@ namespace YellowstonePathology.UI.Cytology
 		public void ShowAmendmentDialog(object target, ExecutedRoutedEventArgs args)
 		{
 			this.Save();
-			YellowstonePathology.UI.AmendmentPageController amendmentPageController = new AmendmentPageController(this.m_AccessionOrder, this.m_ObjectTracker, this.m_PanelSetOrderCytology, this.m_SystemIdentity);
-			amendmentPageController.ShowDialog();			
+			//YellowstonePathology.UI.AmendmentPageController amendmentPageController = new AmendmentPageController(this.m_AccessionOrder, this.m_ObjectTracker, this.m_PanelSetOrderCytology, this.m_SystemIdentity);
+			//amendmentPageController.ShowDialog();			
+			this.m_AmendmentPageController = new AmendmentPageController();
+			AmendmentPath amendmentPath = new AmendmentPath(this.m_AccessionOrder, this.m_ObjectTracker, this.m_PanelSetOrderCytology, this.m_SystemIdentity, this.m_AmendmentPageController.PageNavigator);
+			amendmentPath.Finish += AmendmentPath_Finish;
+			amendmentPath.Start(this.m_SystemIdentity);
+			this.m_AmendmentPageController.ShowDialog();
+		}
+		
+		private void AmendmentPath_Finish(object sender, EventArgs e)
+		{
+			this.m_AmendmentPageController.Close();
 		}
 
         public YellowstonePathology.Business.Domain.HpvRequisitionInstructionCollection HpvRequisitionInstructions

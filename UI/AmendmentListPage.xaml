@@ -1,48 +1,83 @@
-﻿<Page x:Class="YellowstonePathology.UI.AmendmentListPage"
+<UserControl x:Class="YellowstonePathology.UI.AmendmentListPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="600"
-	Title="AmendmentListPage">
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
 
     <Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
-		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition></ColumnDefinition>
 		</Grid.ColumnDefinitions>
 
-		<ListView Grid.Column="0" Grid.Row="0"  Margin="5" Name="ListViewAmendments" SelectionChanged="ListViewAmendments_SelectionChanged"
-				  ItemsSource="{Binding Path=Amendments}" MouseDoubleClick="ListViewAmendments_MouseDoubleClick">
-			<ListView.View>
-				<GridView>
-					<GridViewColumn DisplayMemberBinding="{Binding Path=AmendmentDate, Converter={StaticResource ShortDateTimeConverter}}" Width="90" Header="Date"></GridViewColumn>
-					<GridViewColumn DisplayMemberBinding="{Binding Path=ShortAmendment}" Width="470" Header="Amendment"></GridViewColumn>
-				</GridView>
-			</ListView.View>
-		</ListView>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
 
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="Auto"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 
-			<Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
-			<StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
-				<Button Name="ButtonAdd" Margin="5,5,5,5" Click="ButtonAdd_Click"  Width="100" Height="40">Add</Button>
-				<Button Name="ButtonEdit" Margin="5,5,5,5" Click="ButtonEdit_Click" Width="100" Height="40">Edit</Button>
-				<Button Name="ButtonDelete" Margin="5,5,5,5" Click="ButtonDelete_Click" Width="100" Height="40">Delete</Button>
-			</StackPanel>
+			<Border Grid.Row="0" Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
 
-			<StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
-				<Button Name="ButtonClose" Margin="5,5,5,5" Click="ButtonClose_Click" Width="100" Height="40">Close</Button>
-			</StackPanel>
+			<Grid Grid.Column="0" Margin="10" Width="120">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>
+				
+				<TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkAddAmendment_Click">Add</Hyperlink>
+				</TextBlock>
+				
+				<TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,5">
+                    <Hyperlink Click="HyperLinkEditAmendment_Click">Edit</Hyperlink>
+				</TextBlock>
+
+				<TextBlock Grid.Column="0" Grid.Row="3" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkDeleteAmendment_Click">Delete</Hyperlink>
+				</TextBlock>
+
+			</Grid>
+
+			<ScrollViewer Grid.Column="1" Margin="10">
+				<Grid Grid.Column="1" Margin="10">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<ListView Grid.Column="0" Grid.Row="0"  Margin="5" Name="ListViewAmendments" SelectionChanged="ListViewAmendments_SelectionChanged"
+							  ItemsSource="{Binding Path=Amendments}" MouseDoubleClick="ListViewAmendments_MouseDoubleClick">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=AmendmentDate, Converter={StaticResource ShortDateTimeConverter}}" Width="90" Header="Date"></GridViewColumn>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=ShortAmendment}" Width="470" Header="Amendment"></GridViewColumn>
+							</GridView>
+						</ListView.View>
+					</ListView>
+
+				</Grid>
+
+			</ScrollViewer>
+
 		</Grid>
+
+		<Border Grid.Column="0" Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<Button Grid.Column="0" Grid.Row="2" Name="ButtonClose" Margin="5,5,5,5" Click="ButtonClose_Click" Width="100" Height="40" HorizontalAlignment="Right">Close</Button>
+
 	</Grid>
-</Page>
+    	
+</UserControl>

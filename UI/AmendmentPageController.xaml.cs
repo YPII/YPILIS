@@ -17,34 +17,25 @@ namespace YellowstonePathology.UI
     /// Interaction logic for AmendmentPageController.xaml
     /// </summary>
     public partial class AmendmentPageController : Window
-    {
-        AmendmentUI m_AmendmentUI;        
+    {       
+        private YellowstonePathology.UI.Navigation.PageNavigator m_PageNavigator;
 
-        public AmendmentPageController(YellowstonePathology.Business.Test.AccessionOrder accessionOrder,
-            YellowstonePathology.Business.Persistence.ObjectTracker objectTracker,
-            YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder,
-			YellowstonePathology.Business.User.SystemIdentity systemIdentity)
+        public AmendmentPageController()
         {
-
-            this.m_AmendmentUI = new AmendmentUI(accessionOrder, objectTracker, panelSetOrder, systemIdentity);
             InitializeComponent();
 
-            this.DataContext = this;
-            Closing += new System.ComponentModel.CancelEventHandler(AmendmentPageController_Closing);
-            this.Title = "Amendments for " + panelSetOrder.ReportNo + "   " + accessionOrder.PatientName;
+            this.m_PageNavigator = new UI.Navigation.PageNavigator(this.MainContent);
+            this.Closing += new System.ComponentModel.CancelEventHandler(AmendmentPageController_Closing);
+        }
 
-            AmendmentListPage amendmentListPage = new AmendmentListPage(this.m_AmendmentUI);
-            this.NavigationFrame.NavigationService.Navigate(amendmentListPage);
+        public YellowstonePathology.UI.Navigation.PageNavigator PageNavigator
+        {
+            get { return this.m_PageNavigator; }
         }
 
         private void AmendmentPageController_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (this.NavigationFrame.Content.GetType() == typeof(AmendmentEditPage))
-            {
-                AmendmentEditPage amendmentEditPage = (AmendmentEditPage)this.NavigationFrame.Content;
-                amendmentEditPage.TextBoxAmendment.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            }
-            this.m_AmendmentUI.Save();
+            this.m_PageNavigator.Close();
         }
     }
 }

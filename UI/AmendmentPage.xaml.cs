@@ -44,7 +44,7 @@ namespace YellowstonePathology.UI
             this.m_Amendment = amendment;
             this.m_SystemIdentity = systemIdentity;
             this.AmendmentSigners = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.AmendmentSigner, true);
-            this.m_PageHeaderText = "Amendment For: " + this.m_AccessionOrder.PatientDisplayName + " (" +this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical().ReportNo + ")";
+            this.m_PageHeaderText = "Amendment For: " + this.m_AccessionOrder.PatientDisplayName + " (" + this.m_Amendment.ReportNo + ")";
 
             InitializeComponent();
 

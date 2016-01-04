@@ -35,6 +35,8 @@ namespace YellowstonePathology.UI.Flow
         private YellowstonePathology.UI.Login.LoginPageWindow m_LoginPageWindow;
         private MainWindowCommandButtonHandler m_MainWindowCommandButtonHandler;
 
+		private AmendmentPageController m_AmendmentPageController;
+
         public FlowWorkspace(MainWindowCommandButtonHandler mainWindowCommandButtonHandler)
         {
             this.m_MainWindowCommandButtonHandler = mainWindowCommandButtonHandler;
@@ -573,9 +575,19 @@ namespace YellowstonePathology.UI.Flow
         private void ShowAmendmentDialog(object target, ExecutedRoutedEventArgs args)
         {
             this.Save();
-            YellowstonePathology.UI.AmendmentPageController amendmentPageController = new AmendmentPageController(this.m_FlowUI.AccessionOrder, this.m_FlowUI.ObjectTracker, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma, this.m_SystemIdentity);
-            amendmentPageController.ShowDialog();
+            //YellowstonePathology.UI.AmendmentPageController amendmentPageController = new AmendmentPageController(this.m_FlowUI.AccessionOrder, this.m_FlowUI.ObjectTracker, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma, this.m_SystemIdentity);
+            //amendmentPageController.ShowDialog();
+			this.m_AmendmentPageController = new AmendmentPageController();
+			AmendmentPath amendmentPath = new AmendmentPath(this.m_FlowUI.AccessionOrder, this.m_FlowUI.ObjectTracker, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma, this.m_SystemIdentity, this.m_AmendmentPageController.PageNavigator);
+			amendmentPath.Finish += AmendmentPath_Finish;
+			amendmentPath.Start(this.m_SystemIdentity);
+			this.m_AmendmentPageController.ShowDialog();
         }        
+		
+		private void AmendmentPath_Finish(object sender, EventArgs e)
+		{
+			this.m_AmendmentPageController.Close();
+		}
 
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {

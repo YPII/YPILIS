@@ -5,13 +5,8 @@
 		xmlns:converter="clr-namespace:YellowstonePathology.UI.Converter"
 		xmlns:customControls="clr-namespace:YellowstonePathology.UI.CustomControls"
 		xmlns:LocalUI="clr-namespace:YellowstonePathology.UI"
-	    xmlns:TemplateSelectorUI="clr-namespace:YellowstonePathology.UI.TemplateSelector"
-        Title="Amendments" Height="550" Width="640" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+        WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
     <Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"></RowDefinition>
-		</Grid.RowDefinitions>
-
-		<Frame x:Name="NavigationFrame" Grid.Row="0" NavigationUIVisibility="Hidden"/>
-	</Grid>
+        <ContentControl Name="MainContent" ></ContentControl>
+    </Grid>
 </Window>

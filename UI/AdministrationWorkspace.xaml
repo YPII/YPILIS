@@ -65,7 +65,7 @@
 		<Button Click="ButtonVoiceSpecimenDescription_Click" Width="200" Height="30" Margin="5,5,5,5">Specimen Voice Description now PQRI</Button>		        
 		
         <Button Click="ButtonDoStuff_Click" Width="200" Height="30" Margin="5,5,5,5">Do Stuff</Button>
-        <Button Click="ButtonCheckHPV_Click" Width="200" Height="30" Margin="5,5,5,5">Check HPV</Button>
+        <Button Click="ButtonActionWilliam_Click" Width="200" Height="30" Margin="5,5,5,5">William Actions</Button>
 
         <Button Click="ButtonCheckReportDistribution_Click" Width="200" Height="30" Margin="5,5,5,5">Report Distribution</Button>
 

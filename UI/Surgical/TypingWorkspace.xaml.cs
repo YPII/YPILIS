@@ -41,6 +41,8 @@ namespace YellowstonePathology.UI.Surgical
         private MainWindowCommandButtonHandler m_MainWindowCommandButtonHandler;
         private PageNavigationWindow m_SecondMonitorWindow;        
 
+		private AmendmentPageController m_AmendmentPageController;
+        
         public TypingWorkspace(MainWindowCommandButtonHandler mainWindowCommandButtonHandler, PageNavigationWindow secondMonitorWindow)
 		{
             this.m_MainWindowCommandButtonHandler = mainWindowCommandButtonHandler;
@@ -650,13 +652,23 @@ namespace YellowstonePathology.UI.Surgical
 		private void ShowAmendmentDialog(object target, ExecutedRoutedEventArgs args)
 		{
 			this.Save();
-			YellowstonePathology.UI.AmendmentPageController amendmentPageController = new AmendmentPageController(this.m_TypingUI.AccessionOrder, this.m_TypingUI.ObjectTracker, this.m_TypingUI.SurgicalTestOrder, this.m_SystemIdentity);
-			amendmentPageController.ShowDialog();
-
+			//YellowstonePathology.UI.AmendmentPageController amendmentPageController = new AmendmentPageController(this.m_TypingUI.AccessionOrder, this.m_TypingUI.ObjectTracker, this.m_TypingUI.SurgicalTestOrder, this.m_SystemIdentity);
+			//amendmentPageController.ShowDialog();
+			this.m_AmendmentPageController = new AmendmentPageController();
+			AmendmentPath amendmentPath = new AmendmentPath(this.m_TypingUI.AccessionOrder, this.m_TypingUI.ObjectTracker, this.m_TypingUI.SurgicalTestOrder, this.m_SystemIdentity, this.m_AmendmentPageController.PageNavigator);
+			amendmentPath.Finish += AmendmentPath_Finish;
+			amendmentPath.Start(this.m_SystemIdentity);
+			this.m_AmendmentPageController.ShowDialog();
+				
             string reportNo = this.m_TypingUI.AccessionOrder.PanelSetOrderCollection.GetItem(13).ReportNo;
             this.RefreshWorkspaces();
 
 			this.m_TypingUI.RunWorkspaceEnableRules();
+		}
+		
+		private void AmendmentPath_Finish(object sender, EventArgs e)
+		{
+			this.m_AmendmentPageController.Close();
 		}
 
         private void ButtonTemplate_Click(object sender, RoutedEventArgs e)

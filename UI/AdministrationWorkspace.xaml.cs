@@ -741,8 +741,11 @@ namespace YellowstonePathology.UI
 		{
 		}
 
-        private void ButtonCheckHPV_Click(object sender, RoutedEventArgs e)
+        private void ButtonActionWilliam_Click(object sender, RoutedEventArgs e)
         {
+        	//YellowstonePathology.Business.Task.Model.TaskOrderCollection.AddDailyTaskOrderCytologySlideDisposal(6);
+        	//YellowstonePathology.Business.Task.Model.TaskOrderCollection.AddDailyTaskOrderSurgicalSpecimenDisposal(6);
+        	
             /*Business.Test.AccessionOrder ao = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetAccessionOrderByMasterAccessionNo("15-23916");
             Business.Persistence.JSONObjectWriter jsonObjectWriter = new Business.Persistence.JSONObjectWriter();
             string s = Business.Persistence.JSONObjectWriter.Write(ao);

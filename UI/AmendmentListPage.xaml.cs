@@ -18,15 +18,22 @@ namespace YellowstonePathology.UI
 	/// <summary>
 	/// Interaction logic for AmendmentListPage.xaml
 	/// </summary>
-	public partial class AmendmentListPage : Page, INotifyPropertyChanged
+	public partial class AmendmentListPage : UserControl, INotifyPropertyChanged, Business.Interface.IPersistPageChanges
 	{		
 		public event PropertyChangedEventHandler PropertyChanged;
+		
+        public delegate void EditEventHandler(object sender, EventArgs e);
+        public event EditEventHandler Edit;        
+        public delegate void CloseEventHandler(object sender, EventArgs e);
+        public event CloseEventHandler Close;        
 
+        private string m_PageHeaderText;
 		private AmendmentUI m_AmendmentUI;
 
 		public AmendmentListPage(AmendmentUI amendmentUI)
 		{
 			this.m_AmendmentUI = amendmentUI;
+            this.m_PageHeaderText = " Amendments For: " + this.m_AmendmentUI.AccessionOrder.PatientDisplayName;
 			InitializeComponent();
 			DataContext = this;
 		}
@@ -44,12 +51,36 @@ namespace YellowstonePathology.UI
 			get { return this.m_AmendmentUI.AmendmentCollection; }
 		}
 
+        public string PageHeaderText
+        {
+            get { return this.m_PageHeaderText; }
+        }
+
+		public bool OkToSaveOnNavigation(Type pageNavigatingTo)
+		{
+			return true;
+		}
+
+		public bool OkToSaveOnClose()
+		{
+			return true;
+		}
+
+		public void Save()
+		{
+		}
+        
+		public void UpdateBindingSources()
+		{
+
+		}
+
 		private void ListViewAmendments_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
             this.m_AmendmentUI.SelectedAmendment = (YellowstonePathology.Business.Amendment.Model.Amendment)this.ListViewAmendments.SelectedItem;
 		}
 
-		private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+		private void HyperLinkAddAmendment_Click(object sender, RoutedEventArgs e)
 		{
             YellowstonePathology.Business.Amendment.Model.Amendment amendment = this.m_AmendmentUI.PanelSetOrder.AddAmendment();
 			amendment.TestResultAmendmentFill(this.m_AmendmentUI.ReportNo, this.m_AmendmentUI.AssignedToId, "???");
@@ -59,16 +90,15 @@ namespace YellowstonePathology.UI
 			this.ListViewAmendments.SelectedIndex = 0;
 		}
 
-		private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+		private void HyperLinkEditAmendment_Click(object sender, RoutedEventArgs e)
 		{
 			if (this.m_AmendmentUI.SelectedAmendment != null)
 			{
-				AmendmentEditPage amendmentEditPage = new AmendmentEditPage(this.m_AmendmentUI);
-				this.NavigationService.Navigate(amendmentEditPage);
+				if(this.Edit != null) this.Edit(this, new EventArgs());
 			}
 		}
 
-		private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+		private void HyperLinkDeleteAmendment_Click(object sender, RoutedEventArgs e)
 		{
 			if (this.ListViewAmendments.SelectedItem != null)
 			{
@@ -84,16 +114,14 @@ namespace YellowstonePathology.UI
 
 		private void ButtonClose_Click(object sender, RoutedEventArgs e)
 		{
-			Window window = Window.GetWindow(this);
-			window.Close();
+			if(this.Close != null) this.Close(this, new EventArgs());
 		}
 
 		private void ListViewAmendments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (this.ListViewAmendments.SelectedItem != null)
 			{
-				AmendmentEditPage amendmentEditPage = new AmendmentEditPage(this.m_AmendmentUI);
-				this.NavigationService.Navigate(amendmentEditPage);
+				if(this.Edit != null) this.Edit(this, new EventArgs());
 			}
 		}
 	}

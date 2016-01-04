@@ -37,6 +37,8 @@ namespace YellowstonePathology.UI.Surgical
         private bool m_SignatureButtonIsEnabled;
 
 		private int m_SelectedTabIndex;
+		
+		private AmendmentPageController m_AmendmentPageController;
 
 		public PathologistUI(YellowstonePathology.Business.User.SystemIdentity systemidentity)
         {
@@ -268,11 +270,22 @@ namespace YellowstonePathology.UI.Surgical
 		public void ShowAmendmentDialog()
 		{
 			this.Save();
-			YellowstonePathology.UI.AmendmentPageController amendmentPageController = new AmendmentPageController(this.m_AccessionOrder, this.m_ObjectTracker,
-				this.m_PanelSetOrder, this.m_SystemIdentity);
-			amendmentPageController.ShowDialog();
+			//YellowstonePathology.UI.AmendmentPageController amendmentPageController = new AmendmentPageController(this.m_AccessionOrder, this.m_ObjectTracker,
+			//	this.m_PanelSetOrder, this.m_SystemIdentity);
+			//amendmentPageController.ShowDialog();
+			this.m_AmendmentPageController = new AmendmentPageController();
+			AmendmentPath amendmentPath = new AmendmentPath(this.m_AccessionOrder, this.m_ObjectTracker, this.m_PanelSetOrder, this.m_SystemIdentity, this.m_AmendmentPageController.PageNavigator);
+			amendmentPath.Finish += AmendmentPath_Finish;
+			amendmentPath.Start(this.m_SystemIdentity);
+			this.m_AmendmentPageController.ShowDialog();
+			
 			this.RunPathologistEnableRules();
 			this.NotifyPropertyChanged("AccessonOrder");
+		}
+		
+		private void AmendmentPath_Finish(object sender, EventArgs e)
+		{
+			this.m_AmendmentPageController.Close();
 		}
 
 		public void RunWorkspaceEnableRules()

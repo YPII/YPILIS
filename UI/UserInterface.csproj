@@ -179,6 +179,7 @@
     <Compile Include="AmendmentPage.xaml.cs">
       <DependentUpon>AmendmentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AmendmentPath.cs" />
     <Compile Include="AuthenticationPath.cs" />
     <Compile Include="Billing\BillingPage.xaml.cs">
       <DependentUpon>BillingPage.xaml</DependentUpon>
@@ -952,9 +953,6 @@
     <Compile Include="AdministrationWorkspace.xaml.cs">
       <DependentUpon>AdministrationWorkspace.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="AmendmentEditPage.xaml.cs">
-      <DependentUpon>AmendmentEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AmendmentListPage.xaml.cs">
       <DependentUpon>AmendmentListPage.xaml</DependentUpon>
@@ -1785,10 +1783,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="AdministrationWorkspace.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AmendmentEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
