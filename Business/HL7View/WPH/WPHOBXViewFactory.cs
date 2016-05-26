@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.HL7View.WPH
 					//view = new YellowstonePathology.Business.Test.JAK2V617F.JAK2V617FWPHOBXView(accessionOrder, reportNo, obxCount);
                     break;                
                 case 3:
-                    //view = new YellowstonePathology.Business.Test.NGCT.NGCTWPHOBXView(accessionOrder, reportNo, obxCount);
+                    view = new YellowstonePathology.Business.Test.NGCT.NGCTWPHOBXView(accessionOrder, reportNo, obxCount);
 					break;
 				case 46:
 					//view = new YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHWPHOBXView(accessionOrder, reportNo, obxCount);
@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.HL7View.WPH
 					view = new YellowstonePathology.Business.Test.Surgical.SurgicalWPHOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 14:
-					//view = new YellowstonePathology.Business.Test.HPV.HPVWPHOBXView(accessionOrder, reportNo, obxCount);
+					view = new YellowstonePathology.Business.Test.HPV.HPVWPHOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 15:
 					view = new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapWPHOBXView(accessionOrder, reportNo, obxCount);
@@ -65,10 +65,10 @@ namespace YellowstonePathology.Business.HL7View.WPH
 					//view = new YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisWPHOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 61:
-					//view = new YellowstonePathology.Business.Test.Trichomonas.TrichomonasWPHOBXView(accessionOrder, reportNo, obxCount);
+					view = new YellowstonePathology.Business.Test.Trichomonas.TrichomonasWPHOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 62:
-					//view = new YellowstonePathology.Business.Test.HPV1618.HPV1618WPHOBXView(accessionOrder, reportNo, obxCount);
+					view = new YellowstonePathology.Business.Test.HPV1618.HPV1618WPHOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 213:
                     //view = new YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRWPHOBXView(accessionOrder, reportNo, obxCount);

@@ -578,6 +578,7 @@
     <Compile Include="Test\HPV1618ByPCR\HPV1618ByPCRResult.cs" />
     <Compile Include="Test\HPV1618ByPCR\HPV1618ByPCRIndication.cs" />
     <Compile Include="Test\HPV1618ByPCR\HPV1618ByPCREPICOBXView.cs" />
+    <Compile Include="Test\HPV1618ByPCR\HPV1618ByPCRWPHOBXView.cs" />
     <Compile Include="Test\HPV1618ByPCR\HPV1618NoResult.cs" />
     <Compile Include="Test\HPV1618ByPCR\HPV1618IndeterminateResult.cs" />
     <Compile Include="Test\HPV1618ByPCR\HPV1618ByPCRResultCollection.cs" />
@@ -588,9 +589,11 @@
     <Compile Include="Test\HPV1618\HPV1618Genotype16PositiveResult.cs" />
     <Compile Include="Test\HPV1618\HPV1618Genotype18NegativeResult.cs" />
     <Compile Include="Test\HPV1618\HPV1618Genotype18PositiveResult.cs" />
+    <Compile Include="Test\HPV1618\HPV1618WPHOBXView.cs" />
     <Compile Include="Test\HPV\HPVCMMCNteView.cs" />
     <Compile Include="Test\HPV\HPVInvalidResult.cs" />
     <Compile Include="Test\HPV\HPVNoResult.cs" />
+    <Compile Include="Test\HPV\HPVWPHOBXView.cs" />
     <Compile Include="Test\IDH1IDH2MutationAnalsysis\IDH1IDH2MutationAnalsysisTest.cs" />
     <Compile Include="Test\InformalConsult\InformalConsultWordDocument.cs" />
     <Compile Include="Test\KRASExon23Mutation\KRASExon23MutationEPICObxView.cs" />
@@ -607,6 +610,7 @@
     <Compile Include="Test\MissingInformation\MissingInformationTest.cs" />
     <Compile Include="Test\MissingInformation\MissingInformationTestOrder.cs" />
     <Compile Include="Test\NGCT\NGCTInvalidResult.cs" />
+    <Compile Include="Test\NGCT\NGCTWPHOBXView.cs" />
     <Compile Include="Test\PantherAliquotList.cs" />
     <Compile Include="Test\PantherOrderList.cs" />
     <Compile Include="Persistence\BooleanPropertyBridge.cs" />
@@ -778,6 +782,7 @@
     <Compile Include="Test\ThinPrepPap\ThinPrepPapCMMCNteView.cs" />
     <Compile Include="Test\ThinPrepPap\ThinPrepPapWPHOBXView.cs" />
     <Compile Include="Test\Trichomonas\TrichomonasInvalidResult.cs" />
+    <Compile Include="Test\Trichomonas\TrichomonasWPHOBXView.cs" />
     <Compile Include="Test\Trisomy21ByFISH\Trisomy21ByFISHTest.cs" />
     <Compile Include="Test\WomensHealthProfile\WomensHealthProfileWPHOBXView.cs" />
     <Compile Include="TrackedItemStatusEnum.cs" />
