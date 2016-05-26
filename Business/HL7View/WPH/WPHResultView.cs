@@ -117,6 +117,16 @@ namespace YellowstonePathology.Business.HL7View.WPH
                 result.Message ="The provider NPI is 0.";
                 result.Success = false;
             }
+            else if (string.IsNullOrEmpty(this.m_AccessionOrder.SvhAccount) == true)
+            {
+                result.Message = "The SVH Account is blank.";
+                result.Success = false;
+            }
+            else if (string.IsNullOrEmpty(this.m_AccessionOrder.SvhMedicalRecord) == true)
+            {
+                result.Message = "The SVH MRN is blank.";
+                result.Success = false;
+            }
             else if (string.IsNullOrEmpty(this.m_AccessionOrder.UniversalServiceId) == true)
             {
                 result.Message = "The Universal Serivce Id in the AccessionOrder is blank.";
@@ -127,6 +137,16 @@ namespace YellowstonePathology.Business.HL7View.WPH
                 result.Message = "The Universal Serivce Id in the PanelSetOrder is blank.";
                 result.Success = false;
             }
+            else if (this.m_AccessionOrder.SvhMedicalRecord.ToUpper().Contains("A") == true)
+            {
+                result.Message = "The Medical Record Number has an A in it.";
+                result.Success = false;
+            }
+            else if (this.m_AccessionOrder.SvhMedicalRecord.ToUpper().Contains("V") == true)
+            {
+                result.Message = "The Medical Record Number has a V in it.";
+                result.Success = false;
+            }
         }
-	}
+    }
 }

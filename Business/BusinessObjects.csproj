@@ -763,6 +763,7 @@
     <Compile Include="Test\Surgical\IntraoperativeConsultationResult.Validation.cs" />
     <Compile Include="Test\InformalConsult\InformalConsultTest.cs" />
     <Compile Include="Test\InformalConsult\InformalConsultTestOrder.cs" />
+    <Compile Include="Test\Surgical\SurgicalWPHOBXView.cs" />
     <Compile Include="Test\TCellSubsetAnalysis\TCellSubsetAnalysisEPICObxView.cs" />
     <Compile Include="Test\TCellSubsetAnalysis\TCellSubsetAnalysisTest.cs" />
     <Compile Include="Test\TCellSubsetAnalysis\TCellSubsetAnalysisTestOrder.cs" />
@@ -775,8 +776,10 @@
     <Compile Include="Test\ThinPrepPap\AcidWashListItem.cs" />
     <Compile Include="Test\ThinPrepPap\AcidWashList.cs" />
     <Compile Include="Test\ThinPrepPap\ThinPrepPapCMMCNteView.cs" />
+    <Compile Include="Test\ThinPrepPap\ThinPrepPapWPHOBXView.cs" />
     <Compile Include="Test\Trichomonas\TrichomonasInvalidResult.cs" />
     <Compile Include="Test\Trisomy21ByFISH\Trisomy21ByFISHTest.cs" />
+    <Compile Include="Test\WomensHealthProfile\WomensHealthProfileWPHOBXView.cs" />
     <Compile Include="TrackedItemStatusEnum.cs" />
     <Compile Include="Specimen.Model\AliquotCollection.cs" />
     <Compile Include="Specimen.Model\BlockMedium.cs" />

@@ -61,6 +61,7 @@ namespace YellowstonePathology.Business.HL7View.WPH
             this.AddNextObxElement("Patient Name: " + this.m_AccessionOrder.PatientDisplayName, document, "F");
             this.AddNextObxElement("Master Accession: " + this.m_AccessionOrder.MasterAccessionNo.ToString(), document, "F");
             this.AddNextObxElement("Report No: " + this.m_ReportNo, document, "F");
+            this.AddNextObxElement("MRN: " + this.m_AccessionOrder.SvhMedicalRecord, document, "F");
             this.AddNextObxElement("Encounter: " + this.m_AccessionOrder.SvhAccount, document, "F");
             this.AddNextObxElement("DOB: " + this.m_AccessionOrder.PBirthdate.Value.ToString("MM/dd/yyyy"), document, "F");
             this.AddNextObxElement("Provider: " + this.m_AccessionOrder.PhysicianName, document, "F");            

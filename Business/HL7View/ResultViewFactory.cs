@@ -68,7 +68,21 @@ namespace YellowstonePathology.Business.HL7View
                 case 1203:
                     resultView = new HL7View.ECW.ECWResultView(reportNo, accessionOrder, testing);
                     break;
-            }       
+                case 553:
+                case 935:
+                case 1035:
+                case 1063:
+                case 1088:
+                case 1288:
+                case 1319:
+                case 1338:
+                case 1341:
+                case 1399:
+                case 1439:
+                case 1508:
+                    resultView = new HL7View.WPH.WPHResultView(reportNo, accessionOrder, testing);
+                    break;
+            }
             return resultView;
         }
     }
