@@ -235,7 +235,6 @@
     <Compile Include="BarcodeScanning\HistologyBlock.cs" />
     <Compile Include="BarcodeScanning\HistologySlide.cs" />
     <Compile Include="BarcodeScanning\ThinPrepSlide.cs" />
-    <Compile Include="Billing.Model\JSONCPTCodeFactory.cs" />
     <Compile Include="Billing\BillingCodeSummaryList.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -483,6 +482,8 @@
     <Compile Include="Persistence\AODocumentBuilder.cs" />
     <Compile Include="Persistence\ClientDocumentBuilder.cs" />
     <Compile Include="Persistence\ClientOrderDocumentBuilder.cs" />
+    <Compile Include="Persistence\JSONDeserializer.cs" />
+    <Compile Include="Persistence\JSONReaderPropertyWriter.cs" />
     <Compile Include="Persistence\MaterialTrackingBatchDocumentBuilder.cs" />
     <Compile Include="Persistence\ProviderDocumentBuilder.cs" />
     <Compile Include="Persistence\SqlCommandHelper.cs" />

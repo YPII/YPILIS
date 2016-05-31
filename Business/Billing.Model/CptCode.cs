@@ -29,12 +29,14 @@ namespace YellowstonePathology.Business.Billing.Model
         public string Code
         {
             get { return this.m_Code; }
+            set { this.m_Code = value; }
         }
 
         [PersistentProperty()]
         public string Description
         {
             get { return this.m_Description; }
+            set { this.m_Description = value; }
         }
 
         [PersistentProperty()]
@@ -48,48 +50,56 @@ namespace YellowstonePathology.Business.Billing.Model
         public FeeScheduleEnum FeeSchedule
         {
             get { return this.m_FeeSchedule; }
+            set { this.m_FeeSchedule = value; }
         }
 
         [PersistentProperty()]
         public bool HasTechnicalComponent
         {
             get { return this.m_HasTechnicalComponent; }
+            set { this.m_HasTechnicalComponent = value; }
         }
 
         [PersistentProperty()]
         public bool HasProfessionalComponent
         {
             get { return this.m_HasProfessionalComponent; }
+            set { this.m_HasProfessionalComponent = value; }
         }
 
         [PersistentProperty()]
         public CPTCodeTypeEnum CodeType
         {
             get { return this.m_CodeType; }
+            set { this.m_CodeType = value; }
         }
 
         [PersistentProperty()]
         public bool IsBillable
         {
             get { return this.m_IsBillable; }
+            set { this.m_IsBillable = value; }
         }
 
         [PersistentProperty()]
         public string GCode
         {
             get { return this.m_GCode; }
+            set { this.m_GCode = value; }
         }
 
         [PersistentProperty()]
         public bool HasMedicareQuantityLimit
         {
             get { return this.m_HasMedicareQuantityLimit; }
+            set { this.m_HasTechnicalComponent = value; }
         }
 
         [PersistentProperty()]
         public int MedicareQuantityLimit
         {
             get { return this.m_MedicareQuantityLimit; }
+            set { this.m_MedicareQuantityLimit = value; }
         }
 
         public bool HasBillableProfessionalComponent()

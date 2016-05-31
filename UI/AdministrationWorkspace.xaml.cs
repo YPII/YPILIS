@@ -76,13 +76,18 @@ namespace YellowstonePathology.UI
 
         private void ButtonBuildJson_Click(object sender, RoutedEventArgs e)
         {
-            /*YellowstonePathology.Business.Billing.Model.CptCodeCollection cptCodes = YellowstonePathology.Business.Billing.Model.CptCodeCollection.GetAll();
-            StringBuilder result = new StringBuilder();
+            /*StringBuilder result = new StringBuilder();
+            YellowstonePathology.Business.Billing.Model.CptCodeCollection cptCodes = YellowstonePathology.Business.Billing.Model.CptCodeCollection.GetAll();
+            string qualifiedName = typeof(YellowstonePathology.Business.Billing.Model.CptCodeCollection).AssemblyQualifiedName;
+            result.AppendLine("{");
+            YellowstonePathology.Business.Persistence.JSONIndenter.AddTabs(result, 1);
+            result.AppendLine("\"" + qualifiedName + "\":");
+            YellowstonePathology.Business.Persistence.JSONIndenter.AddTabs(result, 1);
             result.Append("[");
 
             foreach (YellowstonePathology.Business.Billing.Model.CptCode cptCode in cptCodes)
             {
-                YellowstonePathology.Business.Persistence.JSONObjectWriter.WriteIndented(result, cptCode, 1);
+                YellowstonePathology.Business.Persistence.JSONObjectWriter.WriteIndented(result, cptCode, 2);
                 result.Append(",");
             }
 
@@ -91,13 +96,17 @@ namespace YellowstonePathology.UI
                 result.Remove(result.Length - 1, 1);
             }
             result.AppendLine();
+            YellowstonePathology.Business.Persistence.JSONIndenter.AddTabs(result, 1);
             result.AppendLine("]");
+            result.AppendLine("}");
 
             using (System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(@"C:\TEMP\CPTCodeDefinitions.txt", false))
             {
                 streamWriter.Write(result);
             }*/
-            YellowstonePathology.Business.Billing.Model.CptCodeCollection result = YellowstonePathology.Business.Billing.Model.JSONCPTCodeFactory.DeserializeJSONFile();
+            string filePath = "YellowstonePathology.Business.Billing.Model.JSONCPTCodes.txt";
+            object resultObject = YellowstonePathology.Business.Persistence.JSONDeserializer.DeserializeJSONCollectionFile(filePath);
+            YellowstonePathology.Business.Billing.Model.CptCodeCollection result = resultObject as YellowstonePathology.Business.Billing.Model.CptCodeCollection;
             MessageBox.Show("Done");
         }
 

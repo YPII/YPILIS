@@ -1,0 +1,2713 @@
+{
+   "YellowstonePathology.Business.Billing.Model.CptCodeCollection, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+   [
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3125F, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "The esophageal biopsy report documents the presence of Barrett's mucosa and includes a statement about dysplasia.", 
+            "Header": null, 
+            "Code": "3125F", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3126F, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "The esophageal biopsy reports with the histological finding of Barrett's mucosa that contains a statement about dysplasia. (present, absent, or indefinite and if peresent, contains appropriate grading)", 
+            "Header": null, 
+            "Code": "3126F", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3126F1P, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "The esophageal biopsy reports with the histological finding of Barrett's mucosa that contains a statement about dysplasia. (present, absent, or indefinite) not performed for medical reasons (eg, malignant neoplasm or absence of intestinal metaplasia)", 
+            "Header": null, 
+            "Code": "3126F", 
+            "Description": null, 
+            "Modifier": "1P", 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3126F8P, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "The esophageal biopsy reports with the histological finding of Barrett's mucosa that does noot contain a statement about dysplasia. (present, absent, or indefinite and if present, contains appropriate grading), reason not otherwise specified.", 
+            "Header": null, 
+            "Code": "3126F", 
+            "Description": null, 
+            "Modifier": "8P", 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3250F, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": null, 
+            "Header": null, 
+            "Code": "3250F", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3260, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": null, 
+            "Header": null, 
+            "Code": "3260", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3260F, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "pT category, pN category and histologic grade have been documented in pathology report.", 
+            "Header": null, 
+            "Code": "3260F", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3267F, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Pathology report includes pT category, pN category, Gleason score, and statement about margins.", 
+            "Header": null, 
+            "Code": "3267F", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3394F, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "", 
+            "Header": null, 
+            "Code": "3394F", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3394F8P, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": null, 
+            "Header": null, 
+            "Code": "3394F", 
+            "Description": null, 
+            "Modifier": "8P", 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRS3395F, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "", 
+            "Header": null, 
+            "Code": "3395F", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81170, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81170", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81206, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81206", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81207, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81207", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81210, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81210", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT8121026, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81210", 
+            "Description": null, 
+            "Modifier": "26", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81218, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81218", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81219, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81219", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81220, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81220", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT8122026, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81220", 
+            "Description": null, 
+            "Modifier": "26", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81235, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81235", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81240, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81240", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT8124026, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81240", 
+            "Description": null, 
+            "Modifier": "26", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81241, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81241", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT8124126, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81241", 
+            "Description": null, 
+            "Modifier": "26", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81245, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81245", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81246, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81246", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81261, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81261", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT8126126, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81261", 
+            "Description": null, 
+            "Modifier": "26", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81263, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81263", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81264, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81264", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81270, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81270", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT8127026, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81270", 
+            "Description": null, 
+            "Modifier": "26", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81272, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81272", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81275, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81275", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT8127526, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81275", 
+            "Description": null, 
+            "Modifier": "26", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81276, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81276", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81287, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81287", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81288, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81288", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT8129126, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "8129126", 
+            "Description": null, 
+            "Modifier": "26", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81301, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81301", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81310, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81310", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81311, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81311", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81314, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81314", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81315, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81315", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81321, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81321", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81342, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81342", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81401, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81401", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81402, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81402", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81403, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81403", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81404, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81404", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81406, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81406", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81407, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81407", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81445, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81445", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81450, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81450", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT81479, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "81479", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT83540, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "83540", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT84179, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "84179", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT85055, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "85055", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT85060, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "85060", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT85097, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "85097", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT86023, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "86023", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT86356, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "86356", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT86367, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "86367", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT87491, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "87491", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT87591, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "87591", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT87621, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "87621", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT87624, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "87624", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT87625, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "87625", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT87661, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "87661", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT87798, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "87798", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88104, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88104", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88108, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88108", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88112, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88112", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88120, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88120", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88141, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88141", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": "G0124", 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88142, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88142", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": "G0123", 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88155, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88155", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88160, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88160", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88161, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88161", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88172, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88172", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88173, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88173", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88175, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88175", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": "G0145", 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88177, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88177", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88182, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88182", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88184, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88184", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88185, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88185", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88187, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88187", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88188, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88188", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88189, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88189", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88230, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88230", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88233, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88233", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88237, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88237", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88239, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88239", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88261, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88261", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88262, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88262", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88264, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88264", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88280, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88280", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88285, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88285", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88291, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88291", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88300, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88300", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88302, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88302", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88304, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88304", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88305, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88305", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88307, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88307", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88309, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88309", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88311, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88311", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88312, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88312", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88312TC, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88312", 
+            "Description": null, 
+            "Modifier": "TC", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88313, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88313", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88313TC, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88313", 
+            "Description": null, 
+            "Modifier": "TC", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88314, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88314", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88319, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88319", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88321, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88321", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88323, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88323", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88325, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88325", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88327, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88327", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88329, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88329", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88331, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88331", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88332, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88332", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88333, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88333", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88334, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88334", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88341, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88341", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88342, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88342", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88342TC, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88342", 
+            "Description": null, 
+            "Modifier": "TC", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88343, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88343", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88343TC, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88343", 
+            "Description": null, 
+            "Modifier": "TC", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88346, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88346", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88347, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88347", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88348, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88348", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88360, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88360", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88360TC, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88360", 
+            "Description": null, 
+            "Modifier": "TC", 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88361, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88361", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88363, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88363", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88364, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88364", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88365, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88365", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88367, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88367", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": true, 
+            "MedicareQuantityLimit": 1 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88368, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88368", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": true, 
+            "MedicareQuantityLimit": 1 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88369, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88369", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88373, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88373", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88374, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88374", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88377, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "88377", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT89060, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "89060", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 1, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT99000, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "99000", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.CptCodeDefinition.AutopsyBlock, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "AUTOPSYBLOCK", 
+            "Description": null, 
+            "Modifier": "TC", 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 2, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.GCodeDefinitions.CPTG0123, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "G0123", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.GCodeDefinitions.CPTG0124, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "G0124", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.GCodeDefinitions.CPTG0145, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "G0145", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.GCodeDefinitions.CPTG0416, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "G0416", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 0, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.GCodeDefinitions.CPTG0461, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "G0461", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.GCodeDefinitions.CPTG0462, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "Code": "G0462", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 1, 
+            "HasTechnicalComponent": true, 
+            "HasProfessionalComponent": true, 
+            "CodeType": 0, 
+            "IsBillable": true, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG8721, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "pT category, pN category and histologic grade have been documented in pathology report.", 
+            "Header": null, 
+            "Code": "G8721", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG8722, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "The medical reason(s) for not including pT category, pN category, and histologic grade are included the the pathology report.", 
+            "Header": null, 
+            "Code": "G8722", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG8723, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "pT category, pN category, and histologic grade are not documented in the pathology report, reason not otherwise specified.", 
+            "Header": null, 
+            "Code": "G8723", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG8797, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Patient is not eligible for this measure because specimen(s) are not of esophageal origin (e.g. stomach) report: Specimen site other than anatomic location of esophagus", 
+            "Header": null, 
+            "Code": "G8797", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG8798, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Specimen Site other than anatomic location of prostate.", 
+            "Header": null, 
+            "Code": "G8798", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 3, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG9418, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Biopsy and\/or cytology specimen reports with a diagnosis of primary non-small cell lung cancer classified into specific hitologic type (squamous cell carcinoma, adenocarcinoma) OR classified as NSCLC-NOS with an explanation included in the pathology report.", 
+            "Header": null, 
+            "Code": "G9418", 
+            "Description": "Lung Cancer Reporting - Performance met", 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG9419, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Documentation of medical reason(s) for not reporting the histological type OR NSCLC-NOS classification with an explanation (eg, biopsy taken for other purposes in a patient with a history of primay non-small cell lung cancer or other documented medical reasons).", 
+            "Header": null, 
+            "Code": "G9419", 
+            "Description": "Lung Cancer Reporting - Medical Exclusions", 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG9420, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Specimen site other than anatomic location of lung or is not classified as primay non-small cell lung cancer.", 
+            "Header": null, 
+            "Code": "G9420", 
+            "Description": "Lung Cancer Reporting - Other Exclusions", 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG9421, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Primary non-small cell lung cancer biopsy and cytology specimen report does not document classification into specific histologic type OR classified as NSCLC-NOS with an explanation.", 
+            "Header": null, 
+            "Code": "G9421", 
+            "Description": "Lung Cancer Reporting - Performance Not Met", 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG9422, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Primary lung carcinoma that include the pT category, pN category and for Non-Small Cell Lung Cancer, Histologic Type (Squamous Cell Carcinomona, Adenocarcinoma) OR classified as NSCLC-NOS with an explanation.", 
+            "Header": null, 
+            "Code": "G9422", 
+            "Description": "Lung Cancer Reporting - Performance Met", 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG9423, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Primary Lung Carcinoma where the pT category, pN category and for Non Small Cell Lung Cancer, Histologic Type (Squamous Cell Carcinoma, Adenocarcinoma) OR NSCLC-NOS classification with an explanation (eg, a solitary fibrous tumor in a person with a history of non-small cell carcinoma or other documented medical reasons) not documented for medical reasons.", 
+            "Header": null, 
+            "Code": "G9423", 
+            "Description": "Lung Cancer Reporting - Medical Exclusions", 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG9424, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "specimen site other than anatomic location of lung, is not classified as non-small cell ung cancer or classified as NSCLC-NOS", 
+            "Header": null, 
+            "Code": "G9424", 
+            "Description": "Lung Cancer Reporting - Other Exclusions", 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG9425, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "For Primary Lung Carcinoma, the pT category, pN category not document, reason not given and for Non Small Cell Lung Cancer, Histologic Type (Squamous Cell Carcinoma, Adenocarcinoma) OR classified as NSCLC-NOS with an explanation is not documented, reason not given.", 
+            "Header": null, 
+            "Code": "G9425", 
+            "Description": "Code for performance not met", 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG9428, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Pathology report includes the pT Category and a statement on thickness and ulceration and for pT1, mitotic rate", 
+            "Header": null, 
+            "Code": "G9428", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      },
+      {
+         "YellowstonePathology.Business.Billing.Model.PQRSCodeDefinitions.PQRSG9429, BusinessObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null":
+         {
+            "ReportingDefinition": "Code for medical exclusions", 
+            "Header": null, 
+            "Code": "G9429", 
+            "Description": null, 
+            "Modifier": null, 
+            "FeeSchedule": 2, 
+            "HasTechnicalComponent": false, 
+            "HasProfessionalComponent": false, 
+            "CodeType": 0, 
+            "IsBillable": false, 
+            "GCode": null, 
+            "HasMedicareQuantityLimit": false, 
+            "MedicareQuantityLimit": 0 
+         }
+      }
+   ]
+}
