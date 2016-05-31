@@ -11,8 +11,9 @@ namespace YellowstonePathology.Business.Persistence
 		{
             for (int idx = 0; idx < indentCount; idx++)
             {
-                stringToIndent.Append("\t");
+                //stringToIndent.Append("\t");
+                stringToIndent.Append("   ");
             }
-		}        
+        }        
     }
 }

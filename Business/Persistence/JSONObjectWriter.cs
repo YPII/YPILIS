@@ -12,8 +12,6 @@ namespace YellowstonePathology.Business.Persistence
     {
         public static void WriteIndented(StringBuilder result, object objectToWrite, int indentCount)
         {
-            StringBuilder oString = new StringBuilder();
-            Type objectType = objectToWrite.GetType();
             JSONWriter.WriteIndented(result, objectToWrite, indentCount);
             //HandlePersistentChildCollections(objectToWrite, oString, null);
         }
