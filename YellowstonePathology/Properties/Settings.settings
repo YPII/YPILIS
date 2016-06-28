@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="YellowstonePathology.UI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LocalApplicationFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\</Value>
+    </Setting>
+    <Setting Name="LocalDictationFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\Dictation\</Value>
+    </Setting>
+    <Setting Name="LocalLoginDataFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\Application\</Value>
+    </Setting>
+    <Setting Name="LocalHistologyAlertFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\HistologyAlert.wav</Value>
+    </Setting>
+    <Setting Name="LocalDoneDictationFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\Dictation\Done\</Value>
+    </Setting>
+    <Setting Name="ClientMissingInformationLetterFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\ClientMissingInformationLetter.doc</Value>
+    </Setting>
+    <Setting Name="CytologySlideLabelPrinterName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Cytology Slide Label Printer</Value>
+    </Setting>
+    <Setting Name="HistologySlideLabelPrinterName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Histology Slide Label Printer</Value>
+    </Setting>
+    <Setting Name="LocalDICFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\ypi-custom.dic</Value>
+    </Setting>
+    <Setting Name="LocalAFFFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\ypi-custom.aff</Value>
+    </Setting>
+    <Setting Name="ServerDICFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\ypiidc\YPIILIS\Dictionary\ypi-custom.dic</Value>
+    </Setting>
+    <Setting Name="ServerAFFFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\ypiidc\YPIILIS\Dictionary\ypi-custom.aff</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

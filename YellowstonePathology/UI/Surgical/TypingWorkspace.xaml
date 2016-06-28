@@ -1,0 +1,826 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Surgical.TypingWorkspace"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:LocalUI="clr-namespace:YellowstonePathology.UI"
+    xmlns:SurgicalUI="clr-namespace:YellowstonePathology.UI.Surgical"
+    xmlns:CustomControlsUI="clr-namespace:YellowstonePathology.UI.CustomControls"
+    xmlns:s="clr-namespace:System;assembly=mscorlib" Loaded="TypingWorkspace_Loaded" Name="UserControlTypingWorkspace">
+
+	<Grid Name="GridTypingV2" KeyUp="GridTyping_KeyUp">
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<GridSplitter Width="5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"></GridSplitter>
+
+		<Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>                     
+            
+			<TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2" FontWeight="Bold">Name:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Birthdate:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Physician:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Client:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Pathologist:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold"
+                 Foreground="{Binding Path=IsPossibleReportableCase, Converter={StaticResource ReportableCaseConverter}}">Reportable:</TextBlock>
+
+			<TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=AccessionOrder.PatientName}" Margin="2,2,2,2" VerticalAlignment="Center"></TextBlock>
+
+			<StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+				<TextBlock Text="{Binding Path=AccessionOrder.PBirthdate, Converter={StaticResource ShortDateConverter}}" VerticalAlignment="Center"></TextBlock>
+				<TextBlock Text="{Binding Path=AccessionOrder.PatientAccessionAge}" Width="50" TextAlignment="Right" VerticalAlignment="Center"></TextBlock>
+			</StackPanel>
+
+			<TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=AccessionOrder.PhysicianName}" VerticalAlignment="Center"></TextBlock>
+			<TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Path=AccessionOrder.ClientName}" VerticalAlignment="Center"></TextBlock>
+
+			<ComboBox Name="comboBoxPathologistUsers" ItemsSource="{Binding Path=PathologistUsers}" 								 								 
+								 DisplayMemberPath="DisplayName" KeyboardNavigation.IsTabStop="False" VerticalAlignment="Center"
+                 SelectedValuePath="UserId" 
+                 SelectedValue="{Binding Path=SurgicalTestOrder.AssignedToId}"
+                 Grid.Column="1" Grid.Row="5" Margin="2,2,30,2" HorizontalAlignment="Stretch" 
+                 IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+			</ComboBox>
+
+			<CheckBox Grid.Column="1" Grid.Row="6" IsChecked="{Binding Path=SurgicalTestOrder.ReportableCase}"
+					  Margin="2,2,2,2" KeyboardNavigation.IsTabStop="False" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" VerticalAlignment="Center">
+			</CheckBox>
+
+			<TextBlock Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Report No:</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Date Of Service:</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Accession Date:</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Accepted By:</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Accepted:</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Case Final:</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="2,2,2,2" FontWeight="Bold">Hold Billing/Audited</TextBlock>
+
+			<StackPanel Grid.Column="3" Grid.Row="0" Orientation="Horizontal">
+				<TextBox Name="TextBoxReportNoSearch" Width="100" HorizontalAlignment="Left" KeyDown="TextBoxReportNoSearch_KeyDown" TabIndex="0" Margin="2,2,2,2" VerticalAlignment="Center">16-</TextBox>
+				<Button Click="ButtonRefresh_Click" Margin="2,2,2,2" VerticalAlignment="Center">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="/Resources/Refresh.ico" Margin="2" Height="16"></Image>
+						<TextBlock Margin="2" VerticalAlignment="Center">Refresh</TextBlock>
+					</StackPanel>
+				</Button>
+                <Button Click="ButtonLast_Click" Margin="2,2,2,2" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Restore.png" Margin="2" Height="16"></Image>
+                        <TextBlock Margin="2" VerticalAlignment="Center">Last</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding Path=AccessionOrder.CollectionDate, Converter={StaticResource ShortDateConverter}, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="2,2,30,2"/>
+			<TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Path=AccessionOrder.AccessionDate, Converter={StaticResource ShortDateConverter}}" VerticalAlignment="Center" Margin="2,2,2,2"></TextBlock>
+
+			<ComboBox Name="ComboBoxAcceptingUsers" VerticalContentAlignment="Center" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" VerticalAlignment="Center"
+               ItemsSource="{Binding Path=TypingUsers}" 								 								 
+               DisplayMemberPath="DisplayName" 
+               SelectedValuePath="UserId" KeyboardNavigation.IsTabStop="False" 
+               SelectedValue="{Binding Path=SurgicalTestOrder.AcceptedById}" SelectionChanged="ComboBoxAcceptingUsers_SelectionChanged"
+               Grid.Column="3" Grid.Row="3" Margin="2,2,30,2" HorizontalAlignment="Stretch">
+			</ComboBox>
+
+			<StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="4">
+				<CheckBox Name="CheckBoxAccepted" IsChecked="{Binding Path=SurgicalTestOrder.Accepted}" Margin="2,2,7,2" 
+                  Click="CheckBoxAccepted_Click" KeyboardNavigation.IsTabStop="False" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" VerticalAlignment="Center"></CheckBox>
+				<TextBlock Text="{Binding Path=SurgicalTestOrder.AcceptedDate, Converter={StaticResource ShortDateConverter}}" Margin="2,2,7,2" VerticalAlignment="Center"></TextBlock>
+				<TextBlock Text="{Binding Path=SurgicalTestOrder.AcceptedTime, Converter={StaticResource ShortTimeConverter}}" Margin="2,2,2,2" VerticalAlignment="Center"></TextBlock>
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="5" Margin="21,0,0,0">
+				<TextBlock Text="{Binding Path=SurgicalTestOrder.FinalDate, Converter={StaticResource ShortDateConverter}}" Margin="2,2,7,2" VerticalAlignment="Center"></TextBlock>
+				<TextBlock Text="{Binding Path=SurgicalTestOrder.FinalTime, Converter={StaticResource ShortTimeConverter}}" Margin="2,2,2,2" VerticalAlignment="Center"></TextBlock>
+			</StackPanel>
+
+			<StackPanel Grid.Column="3" Grid.Row="6" Orientation="Horizontal">
+				<CheckBox IsChecked="{Binding Path=SurgicalTestOrder.HoldBilling}"
+                    HorizontalAlignment="Left" Margin="2,2,5,2" KeyboardNavigation.IsTabStop="False" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" VerticalAlignment="Center"></CheckBox>
+				<CheckBox IsChecked="{Binding Path=SurgicalTestOrder.Audited}" VerticalAlignment="Center"
+                    HorizontalAlignment="Left" Margin="2,2,5,2" KeyboardNavigation.IsTabStop="False" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" Click="CheckBoxAudit_Click">
+				</CheckBox>
+			</StackPanel>
+		</Grid>
+
+		<TabControl Name="TabControlLeftMain" Grid.Column="0" Grid.Row="1" Margin="5,5,7,5">
+
+			<TabItem Name="tabItemPatient" Header="Patient" KeyboardNavigation.IsTabStop="False">
+				<Grid>
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="150"></ColumnDefinition>
+						<ColumnDefinition Width="210"></ColumnDefinition>
+						<ColumnDefinition Width="Auto"></ColumnDefinition>
+						<ColumnDefinition Width="210"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+
+					<Grid.RowDefinitions>
+						<RowDefinition Height="20"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="*"></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource TextBlockHeaderRight}">Last Name:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource TextBlockHeaderRight}">First Name:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="4" Style="{StaticResource TextBlockHeaderRight}">Middle Initial:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="5" Style="{StaticResource TextBlockHeaderRight}">Birthdate:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="6" Style="{StaticResource TextBlockHeaderRight}">Sex:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="7" Style="{StaticResource TextBlockHeaderRight}">SSN:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="8" Style="{StaticResource TextBlockHeaderRight}">Patient Type:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="9" Style="{StaticResource TextBlockHeaderRight}">Insurance:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="10" Style="{StaticResource TextBlockHeaderRight}">MRN/Acct:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="11" Style="{StaticResource TextBlockHeaderRight}">Patient ID:</TextBlock>
+
+					<TextBlock Grid.Column="0" Grid.Row="12" Style="{StaticResource TextBlockHeaderRight}" VerticalAlignment="Center">No Charge This Report:</TextBlock>
+
+					<Button Grid.Column="1" Grid.Row="13" Margin="2" Click="ButtonProviderEntry_Click" Width="200" HorizontalAlignment="Left" IsEnabled="True">Provider Entry</Button>
+					<Button Grid.Column="1" Grid.Row="14" Margin="2" Click="ButtonPatientDetails_Click" Width="200" HorizontalAlignment="Left" IsEnabled="True">Patient Details</Button>
+					<Button Grid.Column="1" Grid.Row="15" Margin="2" Click="ButtonPatientLinking_Click" Width="200" HorizontalAlignment="Left" IsEnabled="True">Patient Linking</Button>
+
+
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=AccessionOrder.PLastName, Converter={StaticResource UpperCaseConverter}, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}" Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=AccessionOrder.PFirstName, Converter={StaticResource UpperCaseConverter}, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}" Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=AccessionOrder.PMiddleInitial, Converter={StaticResource UpperCaseConverter}, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}" Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=AccessionOrder.PBirthdate, Converter={StaticResource ShortDateConverter}, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}" Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left"></TextBox>
+
+					<ComboBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=AccessionOrder.PSex}" Width="50" 
+							Style="{StaticResource NewComboBox}" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+						<ComboBoxItem>F</ComboBoxItem>
+						<ComboBoxItem>M</ComboBoxItem>
+					</ComboBox>
+
+                    <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=AccessionOrder.PSSN, Converter={StaticResource SocialSecurityNumberConverter}, UpdateSourceTrigger=PropertyChanged}" 
+                   Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+
+					<ComboBox Grid.Column="1" Grid.Row="8" Width="100" Style="{StaticResource NewComboBox}" IsEnabled="{Binding Path=FieldEnabler.IsBillingAuditEnabled}">
+						<ComboBox.Text>
+							<Binding Path="AccessionOrder.PatientType">
+								<Binding.ValidationRules>
+									<ExceptionValidationRule/>
+								</Binding.ValidationRules>
+							</Binding>
+						</ComboBox.Text>
+						<ComboBoxItem>IP</ComboBoxItem>
+						<ComboBoxItem>OP</ComboBoxItem>
+						<ComboBoxItem>Not Selected</ComboBoxItem>
+					</ComboBox>
+
+					<ComboBox Grid.Column="1" Grid.Row="9" Margin="3" Width="100" HorizontalAlignment="Left" Style="{StaticResource NewComboBox}" IsEnabled="{Binding Path=FieldEnabler.IsBillingAuditEnabled}">
+						<ComboBox.Text>
+							<Binding Path="AccessionOrder.PrimaryInsurance">
+								<Binding.ValidationRules>
+									<ExceptionValidationRule/>
+								</Binding.ValidationRules>
+							</Binding>
+						</ComboBox.Text>
+						<ComboBoxItem Content="Not Selected"></ComboBoxItem>
+						<ComboBoxItem Content="Medicare"></ComboBoxItem>
+						<ComboBoxItem Content="Medicaid"></ComboBoxItem>
+						<ComboBoxItem Content="BCHP"></ComboBoxItem>
+						<ComboBoxItem Content="BCBS"></ComboBoxItem>
+						<ComboBoxItem Content="Governmental"></ComboBoxItem>
+						<ComboBoxItem Content="Commercial"></ComboBoxItem>
+					</ComboBox>
+
+					<StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="10">
+                        <TextBox Text="{Binding Path=AccessionOrder.SvhMedicalRecord, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NewTextBox}" Width="75" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+                        <TextBox Text="{Binding Path=AccessionOrder.SvhAccount, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NewTextBox}" Width="75" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+					</StackPanel>
+
+					<TextBlock Grid.Column="1" Grid.Row="11" Text="{Binding Path=AccessionOrder.PatientId}" HorizontalAlignment="Left" Width="200" Margin="2"></TextBlock>
+
+					<CheckBox Grid.Column="1" Grid.Row="12" IsChecked="{Binding Path=SurgicalTestOrder.NoCharge}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2"></CheckBox>
+
+					<TextBlock Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBlockHeaderRight}">Address 1:</TextBlock>
+					<TextBox Grid.Column="3" Grid.Row="2" Text="{Binding Path=AccessionOrder.PAddress1, UpdateSourceTrigger=PropertyChanged}"
+							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+
+					<TextBlock Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBlockHeaderRight}">Address 2:</TextBlock>
+                    <TextBox Name="TextBoxAddress2" Grid.Column="3" Grid.Row="3" Text="{Binding Path=AccessionOrder.PAddress2, UpdateSourceTrigger=PropertyChanged}"
+							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+
+					<TextBlock Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBlockHeaderRight}">City:</TextBlock>
+                    <TextBox Grid.Column="3" Grid.Row="4" Text="{Binding Path=AccessionOrder.PCity, UpdateSourceTrigger=PropertyChanged}"
+							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+
+					<TextBlock Grid.Column="2" Grid.Row="5" Style="{StaticResource TextBlockHeaderRight}">State:</TextBlock>
+                    <TextBox Grid.Column="3" Grid.Row="5" Text="{Binding Path=AccessionOrder.PState, UpdateSourceTrigger=PropertyChanged}"
+							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+
+					<TextBlock Grid.Column="2" Grid.Row="6" Style="{StaticResource TextBlockHeaderRight}">Zip Code:</TextBlock>
+                    <TextBox Grid.Column="3" Grid.Row="6" Text="{Binding Path=AccessionOrder.PZipCode, UpdateSourceTrigger=PropertyChanged}"
+							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+				</Grid>
+			</TabItem>
+
+			<TabItem Name="TabItemSurgical" Header="Surgical" KeyboardNavigation.IsTabStop="False">
+				<ScrollViewer>
+					<Grid Margin="2,2,2,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+						
+                        <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold">Clinical Information:</TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,2,0">                    
+                            <Hyperlink Click="HyperLinkCleanClinicalInformation_Click">Clean</Hyperlink>
+                        </TextBlock>
+
+                        <TextBox Name="TextBoxClinical"  Grid.Column="0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True"
+									Text="{Binding Path=AccessionOrder.ClinicalHistory, UpdateSourceTrigger=PropertyChanged}"
+									KeyUp="TextBox_KeyUp" FontSize="12" IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}" 
+									Style="{StaticResource NewTextBox}" SpellCheck.IsEnabled="False">
+							<TextBox.ContextMenu>
+								<ContextMenu>
+									<MenuItem Header="Import Preop Diagnosis" Click="MenuItemImportPreopDiagnosis_Click"></MenuItem>
+									<MenuItem Header="Import Special Instructions" Click="MenuItemImportSpecialInstructions_Click"></MenuItem>
+								</ContextMenu>
+							</TextBox.ContextMenu>
+						</TextBox>
+
+                        <TextBlock  Grid.Column="0" Grid.Row="2" FontWeight="Bold">Gross Description:</TextBlock>
+                        <TextBox Name="TextBoxGross"  Grid.Column="0" Grid.Row="3"
+									TextWrapping="Wrap" AcceptsReturn="True"
+									Text="{Binding Path=SurgicalTestOrder.GrossX, UpdateSourceTrigger=PropertyChanged}"
+									KeyUp="TextBox_KeyUp" FontSize="12" IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}" MinWidth="200"
+									Style="{StaticResource NewTextBox}" SpellCheck.IsEnabled="False"></TextBox>
+
+                        <TextBlock  Grid.Column="0" Grid.Row="4" FontWeight="Bold">Microscopic Description:</TextBlock>
+                        <TextBox Name="TextBoxMicroscopic"  Grid.Column="0" Grid.Row="5" TextWrapping="Wrap" AcceptsReturn="True"
+									Text="{Binding Path=SurgicalTestOrder.MicroscopicX, UpdateSourceTrigger=PropertyChanged}"
+									KeyUp="TextBox_KeyUp" FontSize="12" IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}"
+									MinWidth="200" Style="{StaticResource NewTextBox}" SpellCheck.IsEnabled="False"></TextBox>
+
+                        <Grid Grid.Column="0" Grid.Row="6">
+							<Button ToolTip="Visit CAP Website, cancer section" HorizontalAlignment="Left" Width="200">
+								<StackPanel Orientation="Horizontal">
+									<Image Source="/Resources/caplogo.ico" Margin="2" Height="16"></Image>
+									<TextBlock VerticalAlignment="Center" Margin="2">
+											<Hyperlink Click="ButtonCAPLink_Click">Cancer Case Summary:</Hyperlink>
+									</TextBlock>
+								</StackPanel>
+							</Button>
+
+							<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+								<TextBlock VerticalAlignment="Center" Margin="2,2,2,2">AJCC Stage:</TextBlock>
+								<TextBox Width="200" IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}" Margin="2,2,2,2"
+											Text="{Binding Path=SurgicalTestOrder.AJCCStage, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+							</StackPanel>
+						</Grid>
+
+                        <TextBox Name="TextBoxCancerSummary"  Grid.Column="0" Grid.Row="7" TextWrapping="Wrap" AcceptsReturn="True"
+									Text="{Binding Path=SurgicalTestOrder.CancerSummary, UpdateSourceTrigger=PropertyChanged}" 
+									KeyUp="TextBox_KeyUp" FontSize="12" IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}"
+									MinWidth="200" Style="{StaticResource NewTextBox}" SpellCheck.IsEnabled="False"></TextBox>
+
+                        <TextBlock  Grid.Column="0" Grid.Row="8" FontWeight="Bold" Text="Specimen:" />
+
+                        <ItemsControl Name="ItemsControlSpecimen"  Grid.Column="0" Grid.Row="9"
+										ItemsSource="{Binding Path=BillingSpecimenViewCollection}"
+										KeyboardNavigation.IsTabStop="False">
+							<ItemsControl.Template>
+								<ControlTemplate TargetType="ItemsControl">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition></ColumnDefinition>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition></RowDefinition>
+										</Grid.RowDefinitions>
+										<ItemsPresenter Grid.Column="0" Grid.Row="0" Margin="5"/>
+									</Grid>
+								</ControlTemplate>
+							</ItemsControl.Template>
+
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="22"></ColumnDefinition>
+											<ColumnDefinition Width="*"></ColumnDefinition>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition></RowDefinition>
+											<RowDefinition></RowDefinition>
+											<RowDefinition></RowDefinition>
+											<RowDefinition></RowDefinition>
+											<RowDefinition></RowDefinition>
+											<RowDefinition></RowDefinition>
+										</Grid.RowDefinitions>
+
+										<TextBlock Text="{Binding Path=SurgicalSpecimen.DiagnosisIdFormatted}" Margin="5">
+											<TextBlock.ContextMenu>
+												<ContextMenu Opened="ContextMenu_Opened">
+													<MenuItem Tag="{Binding}" Header="Add CPT Codes" Click="ContextMenuAddCptCodes_Click"></MenuItem>
+												</ContextMenu>
+											</TextBlock.ContextMenu>
+										</TextBlock>
+
+                                        <TextBox Name="TextBoxSpecimenType" Text="{Binding Path=SpecimenOrder.Description, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"
+													AcceptsReturn="True" Margin="2" Grid.Row="0" Grid.Column="1" 
+													KeyUp="TextBox_KeyUp" FontSize="12" FontWeight="Bold"
+													IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.FieldEnabler.IsProtectedEnabled}" 
+													MinWidth="300" Style="{StaticResource NewTextBox}" SpellCheck.IsEnabled="False">
+										</TextBox>
+										<ComboBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=SpecimenCollection}" 
+                                                    SelectedValuePath="SpecimenId" DisplayMemberPath="SpecimenName" SelectedValue="{Binding Path=SpecimenOrder.SpecimenId}" />
+
+                                        <TextBox Name="TextBoxDiagnosis" Text="{Binding Path=SurgicalSpecimen.Diagnosis, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" AcceptsReturn="True"
+													Margin="2" Grid.Row="2" Grid.Column="1"  MinWidth="300"
+													KeyUp="TextBox_KeyUp" FontSize="12" IsEnabled="{Binding ElementName=TextBoxClinical, Path=IsEnabled}" 
+													Style="{StaticResource NewTextBox}" SpellCheck.IsEnabled="False"/>
+
+
+										<ItemsControl ItemsSource="{Binding Path=SurgicalSpecimen.IntraoperativeConsultationResultCollection}"  IsEnabled="{Binding ElementName=TextBoxClinical, Path=IsEnabled}"
+														Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"  KeyboardNavigation.IsTabStop="False">
+											<ItemsControl.Template>
+												<ControlTemplate TargetType="ItemsControl">
+													<Grid>
+														<Grid.ColumnDefinitions>
+															<ColumnDefinition></ColumnDefinition>
+														</Grid.ColumnDefinitions>
+														<Grid.RowDefinitions>
+															<RowDefinition></RowDefinition>
+														</Grid.RowDefinitions>
+														<ItemsPresenter Grid.Column="0" Grid.Row="0" Margin="5"/>
+													</Grid>
+												</ControlTemplate>
+											</ItemsControl.Template>
+
+											<ItemsControl.ItemsPanel>
+												<ItemsPanelTemplate>
+													<StackPanel/>
+												</ItemsPanelTemplate>
+											</ItemsControl.ItemsPanel>
+
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<Grid>
+														<Grid.ColumnDefinitions>
+															<ColumnDefinition Width="21"></ColumnDefinition>
+															<ColumnDefinition></ColumnDefinition>
+														</Grid.ColumnDefinitions>
+														<Grid.RowDefinitions>
+															<RowDefinition></RowDefinition>
+															<RowDefinition></RowDefinition>
+														</Grid.RowDefinitions>
+														<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0">Fs:</TextBlock>
+
+														<TextBox HorizontalAlignment="Stretch" Height="75" Margin="2,2,2,2" AcceptsReturn="True"
+																	Text="{Binding Path=Result, UpdateSourceTrigger=PropertyChanged}"
+																	KeyUp="TextBox_KeyUp" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0">
+															<TextBox.Style>
+																<Style TargetType="TextBox">
+																	<Setter Property="HorizontalAlignment" Value="Left"/>
+																	<Setter Property="Margin" Value="2"/>
+																	<Setter Property="HorizontalAlignment" Value="Stretch"/>
+																	<Style.Triggers>
+																		<Trigger Property="TextBox.IsEnabled" Value="False">
+																			<Setter Property="TextBox.Foreground" Value="Black"/>
+																		</Trigger>
+																		<Trigger Property="TextBox.IsEnabled" Value="True">
+																			<Setter Property="TextBox.Foreground" Value="Black"/>
+																		</Trigger>
+																	</Style.Triggers>
+																</Style>
+															</TextBox.Style>
+														</TextBox>
+
+														<StackPanel Orientation="Horizontal"  Grid.Column="1" Grid.Row="1">
+
+															<ComboBox Name="ComboBoxImmediateUsers"
+																		ItemsSource="{Binding ElementName=UserControlTypingWorkspace, Path=DataContext.PathologistUsers}" 								 								 
+																		DisplayMemberPath="DisplayName"
+																		SelectedValuePath="UserId"
+																		SelectedValue="{Binding Path=FinaledById}"
+																		Margin="3" MinWidth="150">
+															</ComboBox>
+
+                                                            <TextBox Text="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" Width="120" HorizontalAlignment="Stretch"
+																		Height="20" Margin="2,2,2,2">
+																<TextBox.Style>
+																	<Style TargetType="TextBox">
+																		<Setter Property="HorizontalAlignment" Value="Left"/>
+																		<Setter Property="Margin" Value="2"/>
+																		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+																		<Style.Triggers>
+																			<Trigger Property="TextBox.IsEnabled" Value="False">
+																				<Setter Property="TextBox.Foreground" Value="Black"/>
+																			</Trigger>
+																			<Trigger Property="TextBox.IsEnabled" Value="True">
+																				<Setter Property="TextBox.Foreground" Value="Black"/>
+																			</Trigger>
+																		</Style.Triggers>
+																	</Style>
+																</TextBox.Style>
+															</TextBox>
+
+                                                            <TextBox Text="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}" Width="120" HorizontalAlignment="Stretch"
+																		Height="20" Margin="2,2,2,2">
+																<TextBox.Style>
+																	<Style TargetType="TextBox">
+																		<Setter Property="HorizontalAlignment" Value="Left"/>
+																		<Setter Property="Margin" Value="2"/>
+																		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+																		<Style.Triggers>
+																			<Trigger Property="TextBox.IsEnabled" Value="False">
+																				<Setter Property="TextBox.Foreground" Value="Black"/>
+																			</Trigger>
+																			<Trigger Property="TextBox.IsEnabled" Value="True">
+																				<Setter Property="TextBox.Foreground" Value="Black"/>
+																			</Trigger>
+																		</Style.Triggers>
+																	</Style>
+																</TextBox.Style>
+															</TextBox>
+
+														</StackPanel>
+
+													</Grid>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+
+										<ItemsControl ItemsSource="{Binding Path=PanelSetOrderCPTCodeCollection}" Grid.Row="4" Grid.Column="1" KeyboardNavigation.IsTabStop="False"
+														IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.FieldEnabler.IsBillingAuditEnabled}">
+											<ItemsControl.Template>
+												<ControlTemplate TargetType="ItemsControl">
+													<StackPanel Margin="0,0,0,10">
+														<ItemsPresenter/>
+													</StackPanel>
+												</ControlTemplate>
+											</ItemsControl.Template>
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<StackPanel Orientation="Horizontal">
+														<StackPanel.ContextMenu>
+															<ContextMenu Opened="ContextMenu_Opened">
+																<MenuItem Tag="{Binding Path=PanelSetOrderCPTCodeId}" Header="Delete CPT Code" Click="ContextMenuDeleteCptCode_Click"></MenuItem>
+															</ContextMenu>
+														</StackPanel.ContextMenu>
+                                                        <TextBox Width="20" Text="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}" Margin="2"
+																	HorizontalAlignment="Left" KeyboardNavigation.IsTabStop="False" FontWeight="Bold" ToolTip="Quantity">
+														</TextBox>
+                                                        <TextBox Text="{Binding Path=CPTCode, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontWeight="Bold" Margin="2" Width="70"
+																	ToolTip="CPT Code"></TextBox>
+														<TextBlock Text="{Binding Path=PostDateProxy}" VerticalAlignment="Center" Margin="2" Width="80" ToolTip="Post Date"/>
+
+													</StackPanel>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+
+										<ItemsControl ItemsSource="{Binding Path=ICD9BillingCodeCollection}" Grid.Row="5" Grid.Column="1" KeyboardNavigation.IsTabStop="False"
+														IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.FieldEnabler.IsBillingAuditEnabled}">
+											<ItemsControl.Template>
+												<ControlTemplate TargetType="ItemsControl">
+													<StackPanel>
+														<ItemsPresenter/>
+													</StackPanel>
+												</ControlTemplate>
+											</ItemsControl.Template>
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<StackPanel Orientation="Horizontal">
+														<StackPanel.ContextMenu>
+															<ContextMenu Opened="ContextMenu_Opened">
+																<MenuItem Tag="{Binding Path=Icd9BillingId}" Header="Delete ICD9 Code" Click="ContextMenuDeleteIcd9Code_Click"></MenuItem>
+															</ContextMenu>
+														</StackPanel.ContextMenu>
+														<TextBlock Text="{Binding Path=Quantity}" VerticalAlignment="Center"/>
+														<TextBlock Text=" - " VerticalAlignment="Center"></TextBlock>
+														<TextBlock Text="{Binding Path=Icd9Code}" VerticalAlignment="Center" Margin="2,2,10,2"/>
+														<TextBlock Text="{Binding Path=BillingDateProxy}" VerticalAlignment="Center"/>
+													</StackPanel>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+
+									</Grid>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+
+                        <TextBlock  Grid.Column="0" Grid.Row="10" FontWeight="Bold">Comment:</TextBlock>
+                        <TextBox Name="textBoxComment"  Grid.Column="0" Grid.Row="11" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=SurgicalTestOrder.Comment, UpdateSourceTrigger=PropertyChanged}"
+									KeyUp="TextBox_KeyUp" FontSize="12" IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}" MinWidth="200"
+									Style="{StaticResource NewTextBox}" SpellCheck.IsEnabled="False"></TextBox>
+
+                    </Grid>
+				</ScrollViewer>
+			</TabItem>
+
+			<TabItem Name="TabItemAncillaryStudies" Header="Ancillary Studies">
+				<ScrollViewer>
+					<StackPanel>
+                        <StackPanel Orientation="Horizontal" Background="Gray">
+                            <TextBlock Width="75" Background="Gray" Foreground="White" Margin="2,2,2,2">No Charge</TextBlock>
+							<TextBlock Width="30" Background="Gray" Foreground="White" Margin="2,2,2,2">Qty</TextBlock>
+							<TextBlock Width="120" Background="Gray" Foreground="White" Margin="2,2,2,2">Stain</TextBlock>
+							<TextBlock Width="200" Background="Gray" Foreground="White" Margin="2,2,2,2">Result</TextBlock>
+							<TextBlock Width="200" Background="Gray" Foreground="White" Margin="2,2,2,2">Comment</TextBlock>
+							<TextBlock Width="75" Background="Gray" Foreground="White" Margin="2,2,2,2">Dual</TextBlock>
+							<TextBlock Width="75" Background="Gray" Foreground="White" Margin="2,2,2,2">Graded</TextBlock>
+						</StackPanel>
+						<ItemsControl ItemsSource="{Binding Path=SurgicalTestOrder.TypingStainCollection}"
+								  KeyboardNavigation.IsTabStop="False">
+							<ItemsControl.Template>
+								<ControlTemplate TargetType="ItemsControl">
+									<StackPanel Margin="0,0,0,10">
+										<ItemsPresenter/>
+									</StackPanel>
+								</ControlTemplate>
+							</ItemsControl.Template>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<StackPanel Orientation="Horizontal">
+                                        <Image Source="/Resources/out2.png" Width="17" Height="17" Visibility="{Binding Path=ClientAccessioned, Converter={StaticResource BooleanVisibilityHiddenConverter}}"></Image>
+										<CheckBox Margin="2,2,2,2" VerticalAlignment="Center" IsChecked="{Binding Path=NoCharge}" ToolTip="No Charge" Width="75"></CheckBox>
+										<TextBlock Text="{Binding Path=CptCodeQuantity}" Width="30" Margin="2,2,2,2"/>
+										<TextBlock Text="{Binding Path=ProcedureName}" Width="100" Margin="2,2,2,2"/>
+
+										<ComboBox VerticalContentAlignment="Center" DisplayMemberPath="StainResult" IsEditable="True"
+										ItemsSource="{Binding Path=ResultList}"					
+										Text="{Binding Path=Result}"
+										Margin="3" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding ElementName=PathologistUserControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}">
+										</ComboBox>
+
+                                        <TextBox Text="{Binding Path=ReportComment, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource NewTextBox}" Width="200"
+											 IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.FieldEnabler.IsProtectedEnabled}"/>
+										<CheckBox Margin="2,2,2,2" VerticalAlignment="Center" IsChecked="{Binding Path=OrderedAsDual}" ToolTip="Ordered As Dual" Width="75"></CheckBox>
+										<CheckBox Margin="2,2,2,2" VerticalAlignment="Center" IsChecked="{Binding Path=IsGraded}" ToolTip="Graded" Width="75"></CheckBox>
+									</StackPanel>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</StackPanel>
+				</ScrollViewer>
+			</TabItem>
+
+			<TabItem Name="TabItemAmendments" Header="Amendments"></TabItem>			
+
+			<TabItem Name="TabItemDocuments" Header="Documents">
+				<ListView Name="ListViewDocumentList" ItemsSource="{Binding Path=CaseDocumentCollection}" IsSynchronizedWithCurrentItem="True" MouseLeftButtonUp="ListViewDocumentList_MouseLeftButtonUp">
+					<ListView.ContextMenu>
+						<ContextMenu>
+							<MenuItem Header="Refresh" Click="MenuItemRefreshDocumentList_Click"></MenuItem>
+						</ContextMenu>
+					</ListView.ContextMenu>
+					<ListView.View>
+						<GridView>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=FileName}" Header="Date" Width="200"/>
+						</GridView>
+					</ListView.View>
+				</ListView>
+			</TabItem>
+
+		</TabControl>
+
+		<TabControl Name="TabControlRightMain" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Margin="3,5,5,5">
+
+			<TabItem Name="tabItemDocumentViewer" Header="Document">
+				<Grid>
+
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<ContentControl Name="ContentControlDocument" Grid.Column="0" Grid.Row="0"></ContentControl>
+
+					<Menu Grid.Column="0" Grid.Row="1" Height="30">
+						<MenuItem Header="Requisition" Click="MenuItemShowRequisition_Click"></MenuItem>
+						<MenuItem Header="Accession Data Sheet" Click="MenuItemShowAccessionDataSheet_Click"></MenuItem>
+						<MenuItem Header="Patient Face Sheet" Click="MenuItemShowPatientFaceSheet_Click"></MenuItem>
+					</Menu>
+
+				</Grid>
+			</TabItem>
+
+			<TabItem Name="tabItemDictationSearchWorkspace" Header="Dictation">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="*"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="*"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Row="0" FontWeight="Bold" Margin="2,2,2,2">Local Dictation</TextBlock>
+					<ListView Grid.Row="1" Name="ListViewLocalDictation" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Stretch" Margin="2,2,2,2">
+						<ListView.ContextMenu>
+							<ContextMenu>
+								<MenuItem Click="ContextMenuOpenDictation_Click" Header="Open"></MenuItem>
+								<MenuItem Click="ContextMenuMoveLocalFileToDone_Click" Header="Move to done"></MenuItem>
+								<MenuItem Click="ContextMenuDictationToCaseFolder_Click" Header="Copy to case folder"></MenuItem>
+							</ContextMenu>
+						</ListView.ContextMenu>
+						<ListView.View>
+							<GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=FullPath}" Header="File Name"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=ModifiedDate}" Header="Date"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+
+					<TextBlock Grid.Row="2" FontWeight="Bold" Margin="2,2,2,2">Server Dictation</TextBlock>
+
+					<ListView Grid.Row="3" Name="ListViewServerDictation" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Stretch" Margin="2,2,2,2">
+						<ListView.ContextMenu>
+							<ContextMenu>
+								<MenuItem Click="ContextMenuMoveServerFileToLocal_Click" Header="Move to local"></MenuItem>
+							</ContextMenu>
+						</ListView.ContextMenu>
+						<ListView.View>
+							<GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=FullPath}" Header="File Name"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=ModifiedDate}" Header="Date"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+
+					<Button Grid.Row="4" Height="30" Click="ButtonRefreshDictation_Click" HorizontalAlignment="Stretch" Margin="2,2,2,2">Refresh Dictation</Button>
+				</Grid>
+
+			</TabItem>			
+
+			<TabItem Name="TabItemTypingShortCuts" Header="Shortcuts">
+
+			</TabItem>
+
+			<TabItem Header="Case List">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30"></RowDefinition>
+						<RowDefinition Height="*"></RowDefinition>
+						<RowDefinition Height="30"></RowDefinition>
+					</Grid.RowDefinitions>
+					<StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+
+						<TextBox Name="TextBoxCaseListDate" Width="120" Height="20" Text="{Binding Path=CaseListDate, Converter={StaticResource ShortDateConverter}}"></TextBox>
+						<Button Width="50" Height="22" Click="ButtonGoBack_Click">Back</Button>
+						<Button Width="50" Height="22" Click="ButtonGoForward_Click">Forward</Button>
+
+						<ComboBox Name="ComboBoxCaseListPathologistUsers" VerticalContentAlignment="Center" KeyboardNavigation.IsTabStop="False"
+								  ItemsSource="{Binding Path=PathologistUsers}"
+								  DisplayMemberPath="DisplayName"
+								  SelectedValuePath="UserId" 
+								  Margin="3" MinWidth="150" HorizontalAlignment="Left">
+						</ComboBox>
+						<Button Width="50" Height="22" Click="ButtonFilterCaseList_Click">Filter</Button>
+
+					</StackPanel>
+					<ListView Name="ListViewSurgicalCaseList"  Grid.Column="0" Grid.Row="1" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Path=SurgicalOrderList.ListCollectionView}" SelectionChanged="ListViewSurgicalCaseList_SelectionChanged">
+						<ListView.ContextMenu>
+							<ContextMenu>
+								<MenuItem Click="ContextMenuOpenDocumentsFolder_Click" Header="Open Documents Folder"></MenuItem>
+							</ContextMenu>
+						</ListView.ContextMenu>
+						<ListView.View>
+							<GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Accession No" Width="90"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=PatientName}" Header="Patient Name" Width="200"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=AcceptedDate, Converter={StaticResource ShortDateConverter}}" Header="Accepted Date" Width="100"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=FinalDate, Converter={StaticResource ShortDateConverter}}" Header="Final Date" Width="100"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=Pathologist}" Header="Pathologist" Width="100"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=Audited}" Header="Audited" Width="90"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+
+					<StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
+						<ComboBox Name="ComboboxListSelection" Height="20" Width="300" VerticalAlignment="Center">
+							<ComboBoxItem IsSelected="True">Daily Accession List</ComboBoxItem>
+							<ComboBoxItem>Daily Final List</ComboBoxItem>
+							<ComboBoxItem>Cases Not Audited</ComboBoxItem>
+							<ComboBoxItem>Cases No Signature</ComboBoxItem>
+							<ComboBoxItem>SVH Electronic Orders</ComboBoxItem>
+							<ComboBoxItem>PQRI Cases</ComboBoxItem>
+                            <ComboBoxItem>No Gross</ComboBoxItem>
+                            <ComboBoxItem>No Clinical Info</ComboBoxItem>
+						</ComboBox>
+						<Button Width="50" Height="22" VerticalAlignment="Center" Click="ButtonGetList_Click">Go</Button>
+						<TextBlock Margin="20,2,2,2" VerticalAlignment="Center">Enable Audit Mode</TextBlock>
+						<CheckBox Margin="2" VerticalAlignment="Center" IsChecked="{Binding Path=AuditMode}"></CheckBox>
+					</StackPanel>
+
+				</Grid>
+			</TabItem>
+
+			<TabItem Name="tabItemTreeView" Header="Tree View"></TabItem>
+
+            <TabItem Name="tabItemTemplates" Header="Templates">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2">
+                        <Hyperlink Click="HyperLinkBuildTemplates_Click">Build Templates</Hyperlink>
+                    </TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Path=TemplateText}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextWrapping="Wrap" FontSize="14"></TextBox>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+
+		<StatusBar Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+			<StatusBarItem>
+				<TextBlock Margin="25,2,2,2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Current User:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+				<TextBlock Width="120"  Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=SystemIdentity.User.UserName}"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem>
+				<TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Locked By:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+                <TextBlock Width="300" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=AccessionOrder.AccessionLock.Address}"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem>
+				<TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Report No:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+				<TextBlock Width="60" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=SurgicalTestOrder.ReportNo}"></TextBlock>
+			</StatusBarItem>
+
+            <StatusBarItem HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="2,2,10,2">
+                        <Hyperlink Click="HyperLinkSpellCheck_Click">Spell Checker</Hyperlink>
+                    </TextBlock>
+                    <TextBlock Margin="2,2,10,2">
+                        <Hyperlink Click="HyperLinkShowProviderDistribution_Click">Provider Distribution</Hyperlink>
+                    </TextBlock>
+                    <TextBlock Margin="2,2,2,2">
+                        <Hyperlink Click="HyperLinkShowGossTemplate_Click">Gross Templates</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </StatusBarItem>
+        
+        </StatusBar>
+
+	</Grid>
+</UserControl>

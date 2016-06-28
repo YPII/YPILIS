@@ -1,0 +1,185 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+    x:Class="YellowstonePathology.UI.Monitor.PendingTestMonitorPage"	
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:my="clr-namespace:YellowstonePathology.Business.Document;assembly=BusinessObjects">
+
+    <Grid>
+        <Grid.Resources>
+            <Color x:Key="NormalColor">#e5fee7</Color>
+            <SolidColorBrush x:Key="NormalBrush" Color="{StaticResource NormalColor}" />
+
+            <Color x:Key="WarningColor">#fff697</Color>
+            <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}" />
+
+            <Color x:Key="CriticalColor">#f8b3be</Color>
+            <SolidColorBrush x:Key="CriticalBrush" Color="{StaticResource CriticalColor}" />
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" FontSize="24">Pending Test Monitor</TextBlock>
+
+        <ListView Name="ListViewPendingTests" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" ItemsSource="{Binding Path=PendingTestCollection}" HorizontalAlignment="Stretch" FontSize="14">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delay This Test" Click="MenuItemDelay_Click"></MenuItem>
+                    <MenuItem Header="Finalize This Test" Click="MenuItemFinalize_Click"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding State}" Value="Normal">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource NormalColor}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding State}" Value="Warning">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource WarningColor}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding State}" Value="Critical">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource CriticalColor}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Report No" HorizontalAlignment="Stretch" Width="150" Margin="2,2,2,2"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="150" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Path=ReportNo}" HorizontalAlignment="Stretch"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Ordered" HorizontalAlignment="Stretch" Width="200" Margin="2,2,2,2"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="200" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Path=OrderTime}" HorizontalAlignment="Stretch"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="ScreeningType" HorizontalAlignment="Stretch" Width="200" Margin="2,2,2,2"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="200">
+                                    <TextBlock Text="{Binding Path=TestName}" HorizontalAlignment="Stretch"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Assigned" HorizontalAlignment="Stretch" Width="250" Margin="2,2,2,2"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="250">
+                                    <TextBlock Text="{Binding Path=AssignedTo}" HorizontalAlignment="Stretch"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Provider" HorizontalAlignment="Stretch" Width="300" Margin="2,2,2,2"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="300">
+                                    <TextBlock Text="{Binding Path=ProviderName}" HorizontalAlignment="Stretch"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Running Time" HorizontalAlignment="Stretch" Width="100" Margin="2,2,2,2"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="200">
+                                    <TextBlock Text="{Binding Path=RunningTimeString}" HorizontalAlignment="Stretch"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Goal Time" HorizontalAlignment="Stretch" Width="100" Margin="2,2,2,2"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="200">
+                                    <TextBlock Text="{Binding Path=GoalTimeString}" HorizontalAlignment="Stretch"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="" HorizontalAlignment="Stretch" Width="100" Margin="2,2,2,2"/>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="200">
+                                    <TextBlock Text="{Binding Path=DifferenceString}" HorizontalAlignment="Stretch"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

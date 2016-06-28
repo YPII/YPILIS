@@ -1,0 +1,1002 @@
+<UserControl x:Class="YellowstonePathology.UI.Flow.FlowWorkspace"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:localUI="clr-namespace:YellowstonePathology.UI"
+			 xmlns:flowUI="clr-namespace:YellowstonePathology.UI.Flow"
+			 xmlns:RadioButtonGroups="clr-namespace:YellowstonePathology.UI.RadioButtonGroups"
+			 xmlns:validationRules="clr-namespace:YellowstonePathology.UI.ValidationRules"
+			 xmlns:converter="clr-namespace:YellowstonePathology.UI.Converter"
+             xmlns:CustomControls="clr-namespace:YellowstonePathology.UI.CustomControls">	
+    <UserControl.Resources>
+        <XmlDataProvider x:Key="ICDCodes" XPath="/ICDCodeCollection">
+            <x:XData>
+                <ICDCodeCollection xmlns="">
+                    <ICDCode ICD9="206.00" ICD10="C93.00" Description="Acute monoblastic/monocytic leukemia, not having achieved remission" />
+                    <ICDCode ICD9="205.00" ICD10="C92.00" Description="Acute myeloblastic leukemia, not having achieved remission" />
+                    <ICDCode ICD9="205.00" ICD10="C92.50" Description="Acute myelomonocytic leukemia, not having achieved remission" />
+                    <ICDCode ICD9="208.00" ICD10="C95.00" Description="Acute leukemia of unspecified cell type not having achieved remission" />
+                    <ICDCode ICD9="204.00" ICD10="C91.00" Description="Acute lymphoblastic leukemia not having achieved remission" />
+                    <ICDCode ICD9="205.00" ICD10="C92.40" Description="Acute promyelocytic leukemia, not having achieved remission" />
+                    <ICDCode ICD9="285.9" ICD10="D64.9" Description="Anemia, unspecified" />
+                    <ICDCode ICD9="284.9" ICD10="D61.9" Description="Aplastic anemia, unspecified" />
+                    <ICDCode ICD9="200.20" ICD10="C83.79" Description="Burkitt lymphoma, extranodal and solid organ sites" />
+                    <ICDCode ICD9="200.20" ICD10="C83.70" Description="Burkitt lymphoma, site unspecified" />
+                    <ICDCode ICD9="205.10" ICD10="C92.10" Description="Chronic myeloid leukemia, BCR/ABL-positive, not having achieved remission" />
+                    <ICDCode ICD9="206.10" ICD10="C93.10" Description="Chronic myelomonocytic leukemia not having achieved remission" />
+                    <ICDCode ICD9="238.76" ICD10="D47.1" Description="Chronic myeloproliferative disease" />
+                    <ICDCode ICD9="204.10" ICD10="C91.10" Description="Chronic lymphocytic leukemia of B-cell type not having achieved remission" />
+                    <ICDCode ICD9="" ICD10="C91.40" Description="Harry cell leukemia not having achieved remission" />
+                    <ICDCode ICD9="288.50" ICD10="D74.819" Description="Decreased white blood cell count, unspecified" /> ease" />
+                    <ICDCode ICD9="200.70" ICD10="C83.39" Description="Diffuse large B-cell lymphoma, extranodal and solid organ sites" />
+                    <ICDCode ICD9="288.60" ICD10="D72.829" Description="Elevated white blood cell count, unspecified" />
+                    <ICDCode ICD9="785.6" ICD10="R59.9" Description="Enlargement of lymph nodes, unspecified" />
+                    <ICDCode ICD9="202.00" ICD10="C82.99" Description="Follicular lymphoma, unspecified, extranodal and solid organ sites" />
+                    <ICDCode ICD9="202.00" ICD10="C82.90" Description="Follicular lymphoma, unspecified, unspecified site" />
+                    <ICDCode ICD9="201.90" ICD10="C81.99" Description="Hodgkin lymphoma, unspecified, extranodal and solid organ sites" />
+                    <ICDCode ICD9="201.90" ICD10="C81.90" Description="Hodgkin lymphoma, unspecified, unspecified site" />
+                    <ICDCode ICD9="288.61" ICD10="D72.820" Description="Lymphocytosis (symptomatic)" />
+                    <ICDCode ICD9="200.40" ICD10="C83.19" Description="Mantle cell lymphoma, extranodal and solid organ sites" />
+                    <ICDCode ICD9="200.40" ICD10="C83.10" Description="Mantle cell lymphoma, unspecified site" />
+                    <ICDCode ICD9="757.33" ICD10="Q82.2" Description="Mastocytosis" />
+                    <ICDCode ICD9="273.1" ICD10="D47.2" Description="Monoclonal gammopathy" />
+                    <ICDCode ICD9="288.63" ICD10="D72.821" Description="Monocytosis (symptomatic)" />
+                    <ICDCode ICD9="203.00" ICD10="C90.00" Description="Multiple myeloma not having achieved remission" />
+                    <ICDCode ICD9="238.75" ICD10="D46.9" Description="Myelodysplastic syndrome, unspecified" />
+                    <ICDCode ICD9="288.00" ICD10="D70.9" Description="Neutropenia, NOS" />
+                    <ICDCode ICD9="790.09" ICD10="R71.8" Description="Other abnormality of red blood cells" />
+                    <ICDCode ICD9="" ICD10="R19.09" Description="Other intra-abdominal and pelvic swelling, mass and lump" />
+                    <ICDCode ICD9="204.80" ICD10="C91.Z0" Description="Other lymphoid leukemia not having achieved remission" />
+                    <ICDCode ICD9="200.30" ICD10="C83.89" Description="Other non-follicular lymphoma, extranodal and solid organ sites" />
+                    <ICDCode ICD9="200.30" ICD10="C83.80" Description="Other non-follicular lymphoma, unspecified site" />
+                    <ICDCode ICD9="287.30" ICD10="D69.49" Description="Other primary thrombocytopenia" />
+                    <ICDCode ICD9="288.8" ICD10="D72.89" Description="Other specified disorders of white blood cells" />
+                    <ICDCode ICD9="202.80" ICD10="C85.89" Description="Other specified types of non-Hodgkin lymphoma, extranodal and solid organ sites" />
+                    <ICDCode ICD9="202.80" ICD10="C85.80" Description="Other specified types of non-Hodgkin lymphoma, unspecified site" />
+                    <ICDCode ICD9="288.64" ICD10="D72.822" Description="Plasmacytosis" />
+                    <ICDCode ICD9="511.9" ICD10="J91.8" Description="Pleural effusion in other conditions classified elsewhere" />
+                    <ICDCode ICD9="207.10" ICD10="D45" Description="Polycythemia vera" />
+                    <ICDCode ICD9="238.72" ICD10="D46.21" Description="Refractory anemia with excess of blasts 1" />
+                    <ICDCode ICD9="238.73" ICD10="D46.22" Description="Refractory anemia with excess of blasts 2" />
+                    <ICDCode ICD9="238.72" ICD10="D46.20" Description="Refractory anemia with excess of blasts, unspecified" />
+                    <ICDCode ICD9="238.72" ICD10="D46.0" Description="Refractory anemia without ring sideroblasts, so stated" />
+                    <ICDCode ICD9="238.72" ICD10="D46.1" Description="Refractory anemia with ring sideroblasts" />
+                    <ICDCode ICD9="238.72" ICD10="D46.A" Description="Refractory cytopenia with multilineage dysplasia" />
+                    <ICDCode ICD9="238.72" ICD10="D46.B" Description="Refractory cytopenia with multilineage dysplasia and ring sideroblasts" />
+                    <ICDCode ICD9="196.9" ICD10="C77.9" Description="Secondary and unspecified malignant neoplasm of lymph node, unspecified" />
+                    <ICDCode ICD9="202.20" ICD10="C84.19" Description="Sezary disease, extranodal and solid organ sites" />
+                    <ICDCode ICD9="202.20" ICD10="C84.10" Description="Sezary disease, unspecified site" />
+                    <ICDCode ICD9="287.5" ICD10="D69.6" Description="Thrombocytopenia, unspecified" />
+                    <ICDCode ICD9="780.79" ICD10="R53.1" Description="Weakness" />
+                    <ICDCode ICD9="757.33" ICD10="Q82.1" Description="Xeroderma pigmentosum" />
+                </ICDCodeCollection>
+            </x:XData>
+        </XmlDataProvider>
+    </UserControl.Resources>
+    <Grid>		        
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="5*"></ColumnDefinition>
+			<ColumnDefinition Width="4*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+		</Grid.RowDefinitions>			
+		
+		<Grid>						
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="40"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>				
+				<RowDefinition Height="300"></RowDefinition>
+			</Grid.RowDefinitions>
+			<StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal">
+				<Button Click="ButtonViewDocument_Click" KeyboardNavigation.IsTabStop="False" Width="25" Height="25">
+                    <Image Source="/Resources/Document.jpg"></Image>
+				</Button>				
+			    <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.ReportNo}" VerticalAlignment="Center" Margin="2,2,2,2" FontWeight="Bold"></TextBlock>
+                    <TextBlock Text=":" VerticalAlignment="Center" Margin="2,2,2,2" FontWeight="Bold"></TextBlock>
+                    <TextBlock Text="{Binding Path=AccessionOrder.PatientDisplayName}" VerticalAlignment="Center" Margin="2,2,2,2" FontWeight="Bold"></TextBlock>
+                </StackPanel>
+			</StackPanel>
+			<TabControl Grid.Column="0" Grid.Row="1" Name="tabControlFlow">
+				<TabItem Header="General" Name="TabItemGeneral">					
+					<StackPanel Margin="20">												
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Style="{StaticResource HeadingTextBlock}">Report No:</TextBlock>
+							<TextBlock Name="textBoxAccessionNo" Style="{StaticResource HeadingTextBlock}" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.ReportNo}" Width="200" TextAlignment="Left"></TextBlock>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Style="{StaticResource HeadingTextBlock}">Accession Date:</TextBlock>
+                            <TextBox Name="textBoxAccessionDate" IsEnabled="{Binding Path=IsWorkspaceEnabled}" Style="{StaticResource BoundTextBox}"
+                                     Text="{Binding Path=AccessionOrder.AccessionDate, Converter={StaticResource ShortDateConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Style="{StaticResource HeadingTextBlock}">Date Of Service:</TextBlock>
+                            <TextBox Name="TextBoxCollectionDate" Style="{StaticResource BoundTextBox}" IsEnabled="{Binding Path=IsWorkspaceEnabled}"
+                                     Text="{Binding Path=AccessionOrder.CollectionDate, Converter={StaticResource ShortDateConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalAlignment="Stretch" KeyUp="TextBoxCollectionDate_KeyUp" ToolTip="Please enter the Date Of Service for this specimen.">								
+							</TextBox>
+                            
+						</StackPanel>                        
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Style="{StaticResource HeadingTextBlock}">Date/Time Received:</TextBlock>
+                            <TextBox Name="textBoxDateTimeReceived" IsEnabled="{Binding Path=IsWorkspaceEnabled}" Style="{StaticResource BoundTextBox}"
+                                     Text="{Binding Path=AccessionOrder.SpecimenOrderCollection[0].DateReceived, Converter={StaticResource MilitaryDateTimeConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+						</StackPanel>                        
+                        <StackPanel Orientation="Horizontal">
+                            
+							<TextBlock Style="{StaticResource HeadingTextBlock}" VerticalAlignment="Center">Specimen:</TextBlock>
+
+                            <Button Name="ButtonShowSpecimenDialog" Width="100" Height="30" Margin="2,2,2,2" Click="ButtonShowSpecimenDialog_Click">Details</Button>
+
+                            <Button Name="ButtonShowSelectSpecimenDialog" Width="100" Height="30" Margin="2,2,2,2" Click="ButtonShowSelectSpecimenDialog_Click">Selection</Button>
+
+                        </StackPanel>                                              
+                        
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Style="{StaticResource HeadingTextBlock}">Clinical History:</TextBlock>
+							<TextBox Style="{StaticResource BoundTextBox}" Height="30" IsEnabled="{Binding Path=IsWorkspaceEnabled}"
+                                     Text="{Binding Path=AccessionOrder.ClinicalHistory, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Style="{StaticResource HeadingTextBlock}">Test Performed:</TextBlock>
+							<ComboBox Name="ComboBoxTestPerformed" Style="{StaticResource BoundTextBox}"
+									  ItemsSource="{Binding Path=FlowPanelSetCollection}"
+									  DisplayMemberPath="PanelSetName"
+									  SelectedValuePath="PanelSetId"
+									  SelectedValue="{Binding Path=PanelSetOrderLeukemiaLymphoma.PanelSetId}"
+									  IsEnabled="{Binding Path=IsWorkspaceEnabled}"
+									  SelectionChanged="ComboBoxTestPerformed_SelectionChanged">
+							</ComboBox>
+						</StackPanel>
+                        
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Style="{StaticResource HeadingTextBlock}">Professional Facility:</TextBlock>
+							<ComboBox Style="{StaticResource BoundTextBox}" ItemsSource="{Binding Path=FacilityCollection}"
+									  DisplayMemberPath="FacilityName"
+									  SelectedValuePath="FacilityId"
+									  SelectedValue="{Binding Path=PanelSetOrderLeukemiaLymphoma.ProfessionalComponentFacilityId}"
+									  IsEnabled="{Binding Path=IsWorkspaceEnabled}">
+							</ComboBox>
+						</StackPanel>
+						
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource HeadingTextBlock}">Assigned To:</TextBlock>
+                            <ComboBox Style="{StaticResource BoundTextBox}"
+								 ItemsSource="{Binding Path=PathologistUsers}" 								 								 
+								 DisplayMemberPath="DisplayName"								 
+								 SelectedValuePath="UserId"
+								 SelectedValue="{Binding Path=PanelSetOrderLeukemiaLymphoma.AssignedToId}"
+								 IsEnabled="{Binding Path=IsWorkspaceEnabled}">
+                            </ComboBox>							
+						</StackPanel>                                              
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource HeadingTextBlock}">Audited:</TextBlock>
+							<CheckBox IsChecked="{Binding Path=PanelSetOrderLeukemiaLymphoma.Audited}" VerticalAlignment="Center" Margin="2,2,2,2" IsEnabled="True"></CheckBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource HeadingTextBlock}">Audited By:</TextBlock>                            
+                            <ComboBox Style="{StaticResource BoundTextBox}" Margin="2,2,2,2"
+								         ItemsSource="{Binding Path=MedTechUsers}" HorizontalAlignment="Left"
+								         DisplayMemberPath="DisplayName"								 
+								         SelectedValuePath="UserId"
+								         SelectedValue="{Binding Path=PanelSetOrderLeukemiaLymphoma.AuditedById}">
+                            </ComboBox>                            
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource HeadingTextBlock}">Date Audited:</TextBlock>
+                            <TextBox Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.AuditedDate, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="2,2,2,2"></TextBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="20,5,5,5">							
+                            <Button Name="ButtonAuditComplete" Margin="2,2,2,2" ToolTip="Audit Commplete" Click="ButtonAuditComplete_Click" HorizontalAlignment="Left" Width="200" Height="30">Audit Complete</Button>
+                            <Button Name="buttonSendNotificationToNeogenomics" Click="ButtonSendNotificationToNeogenomics_Click" Height="30" Width="200" Margin="2,2,2,2">Send notification to Neogenomics</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+				</TabItem>
+				<TabItem Header="Patient" Name="TabItemPatient">
+					<Grid>
+						<Grid.Resources>							
+							<Style x:Key="TextBoxInput">
+								<Setter Property="TextBox.Margin" Value="3"></Setter>
+								<Setter Property="TextBox.VerticalAlignment" Value="Center"></Setter>
+								<Setter Property="TextBox.Width" Value="200"></Setter>
+								<Setter Property="TextBox.HorizontalAlignment" Value="Left"></Setter>
+							</Style>
+							<Style x:Key="TextBlockHeaderRight">
+								<Setter Property="TextBlock.Margin" Value="3"></Setter>
+								<Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+								<Setter Property="TextBlock.TextAlignment" Value="Right"></Setter>
+							</Style>
+						</Grid.Resources>
+
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="150"></ColumnDefinition>
+							<ColumnDefinition></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="20"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="*"></RowDefinition>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource TextBlockHeaderRight}">Last Name:</TextBlock>
+						<TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource TextBlockHeaderRight}">First Name:</TextBlock>
+						<TextBlock Grid.Column="0" Grid.Row="4" Style="{StaticResource TextBlockHeaderRight}">Middle Initial:</TextBlock>
+						<TextBlock Grid.Column="0" Grid.Row="5" Style="{StaticResource TextBlockHeaderRight}">Birthdate:</TextBlock>
+						<TextBlock Grid.Column="0" Grid.Row="6" Style="{StaticResource TextBlockHeaderRight}">Sex:</TextBlock>
+						<TextBlock Grid.Column="0" Grid.Row="7" Style="{StaticResource TextBlockHeaderRight}">SSN:</TextBlock>
+						<TextBlock Grid.Column="0" Grid.Row="8" Style="{StaticResource TextBlockHeaderRight}">Patient Type:</TextBlock>
+						<TextBlock Grid.Column="0" Grid.Row="9" Style="{StaticResource TextBlockHeaderRight}">Insurance:</TextBlock>
+						<TextBlock Grid.Column="0" Grid.Row="10" Style="{StaticResource TextBlockHeaderRight}">MR/Acct:</TextBlock>
+						<TextBlock Grid.Column="0" Grid.Row="11" Style="{StaticResource TextBlockHeaderRight}">Patient ID:</TextBlock>
+
+                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=AccessionOrder.PLastNameProxy, Converter={StaticResource UpperCaseConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxInput}" IsEnabled="{Binding Path=IsWorkspaceEnabled}"></TextBox>
+                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=AccessionOrder.PFirstNameProxy, Converter={StaticResource UpperCaseConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxInput}" IsEnabled="{Binding Path=IsWorkspaceEnabled}"></TextBox>
+                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=AccessionOrder.PMiddleInitial, Converter={StaticResource UpperCaseConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxInput}" IsEnabled="{Binding Path=IsWorkspaceEnabled}"></TextBox>
+                        
+                        <TextBox Name="textBoxPBirthdate" Grid.Column="1" Grid.Row="5" Style="{StaticResource TextBoxInput}" 
+                                 PreviewLostKeyboardFocus="TextBoxPBirthdate_PreviewLostKeyboardFocus"  IsEnabled="{Binding Path=IsWorkspaceEnabled}"
+                                 Text="{Binding Path=AccessionOrder.PBirthdate, Converter={StaticResource ShortDateConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <ComboBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=AccessionOrder.PSex}" Margin="3" Width="50" HorizontalAlignment="Left" IsEnabled="{Binding Path=IsWorkspaceEnabled}" IsEditable="True">
+							<ComboBoxItem>F</ComboBoxItem>
+							<ComboBoxItem>M</ComboBoxItem>
+						</ComboBox>
+                        <TextBox Grid.Column="1" Grid.Row="7" Style="{StaticResource TextBoxInput}" IsEnabled="{Binding Path=IsWorkspaceEnabled}"
+                                 Text="{Binding Path=AccessionOrder.PSSN, Converter={StaticResource SocialSecurityNumberConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <ComboBox Grid.Column="1" Grid.Row="8" Text="{Binding Path=AccessionOrder.PatientType}" Margin="3" Width="100" HorizontalAlignment="Left" IsEnabled="{Binding Path=IsWorkspaceEnabled}" IsEditable="True">
+							<ComboBoxItem>IP</ComboBoxItem>
+							<ComboBoxItem>OP</ComboBoxItem>
+							<ComboBoxItem>Not Selected</ComboBoxItem>
+						</ComboBox>
+                        <ComboBox Grid.Column="1" Grid.Row="9" Text="{Binding Path=AccessionOrder.PrimaryInsurance}" Margin="3" Width="100" HorizontalAlignment="Left" IsEnabled="{Binding Path=IsWorkspaceEnabled}" IsEditable="True">
+                            <ComboBoxItem Content="Not Selected"></ComboBoxItem>
+                            <ComboBoxItem Content="Medicare"></ComboBoxItem>
+                            <ComboBoxItem Content="Medicaid"></ComboBoxItem>
+                            <ComboBoxItem Content="BCHP"></ComboBoxItem>
+                            <ComboBoxItem Content="BCBS"></ComboBoxItem>
+                            <ComboBoxItem Content="Governmental"></ComboBoxItem>
+                            <ComboBoxItem Content="Commercial"></ComboBoxItem>
+                        </ComboBox>
+						<StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="10">
+                            <TextBox Text="{Binding Path=AccessionOrder.SvhMedicalRecord, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxInput}" Width="75" IsEnabled="{Binding Path=IsWorkspaceEnabled}"></TextBox>
+                            <TextBox Text="{Binding Path=AccessionOrder.SvhAccount, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TextBoxInput}" Width="75" IsEnabled="{Binding Path=IsWorkspaceEnabled}"></TextBox>
+						</StackPanel>
+						
+						<TextBlock Grid.Column="1" Grid.Row="11" Margin="3" Width="100" Text="{Binding Path=AccessionOrder.PatientId}" Style="{StaticResource TextBoxInput}"></TextBlock>
+
+                        <Button Grid.Column="1" Grid.Row="12" Margin="2" Click="ButtonPatientLinking_Click" Width="145" HorizontalAlignment="Left" IsEnabled="{Binding Path=IsWorkspaceEnabled}">Patient Linking</Button>
+					</Grid>
+				</TabItem>                       				                       
+                <TabItem Name="TabItemPatientHistory" Header="Data">
+                    <Grid>                       
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <ListView Grid.Column="0" Grid.Row="0" Name="listViewPatientHistory" ItemsSource="{Binding Path=PatientHistoryList}" IsSynchronizedWithCurrentItem="True" SelectionChanged="ListViewPatientHistory_SelectionChanged">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=AccessionDate, Converter={StaticResource ShortDateConverter}}" Header="Accession Date" Width="150"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+						<ListView Grid.Column="1" Grid.Row="0" Name="listViewCaseFileList" ItemsSource="{Binding Path=PatientHistoryList.CaseDocumentCollection}" IsSynchronizedWithCurrentItem="True" MouseDoubleClick="listViewCaseFileList_MouseDoubleClick">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=FileName}" Header="File Name" Width="200"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        
+                    </Grid>
+
+
+                </TabItem>                
+				<TabItem Header="Gating" Name="tabItemFlowGating">
+                    <Grid>            
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Column="0" Grid.Row="0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
+                                <TextBlock VerticalAlignment="Top" FontWeight="Bold">Gating Population:</TextBlock>
+							    <ComboBox Name="comboBoxGatingPopulation" Width="150" Height="20" IsEditable="True" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.GatingPopulationV2}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsWorkspaceEnabled}">
+                                    <ComboBoxItem>leukocytes</ComboBoxItem>
+                                    <ComboBoxItem>nucleated cells</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" Name="stackPanelGatginPopulation" Grid.Column="0" Grid.Row="1">
+                            <TextBlock Style="{StaticResource GatingTextBlock}" Width="200">E-Gate: (Blast marker percentages)</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource GatingTextBlock}">CD34</TextBlock>
+						        <TextBox Width="50" IsEnabled="{Binding Path=IsWorkspaceEnabled}" GotFocus="TextBoxSelect_GotFocus"
+                                            Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.EGateCD34Percent, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource GatingTextBlock}">CD117</TextBlock>
+						        <TextBox Width="50" IsEnabled="{Binding Path=IsWorkspaceEnabled}" GotFocus="TextBoxSelect_GotFocus"
+                                         Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.EGateCD117Percent, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource GatingTextBlock}">Cell Type</TextBlock>
+                                <TextBlock Style="{StaticResource GatingTextBlock}">Cell Count</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource GatingTextBlock}">Lymphocytes</TextBlock>
+					            <TextBox Width="50" IsEnabled="{Binding Path=IsWorkspaceEnabled}" GotFocus="TextBoxSelect_GotFocus"
+                                         Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.LymphocyteCount, Converter={StaticResource NumberConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+					            <TextBlock Style="{StaticResource GatingTextBox}"
+                                           Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.LymphocyteCountPercent, Converter={StaticResource GatingPercentConverter}}"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource GatingTextBlock}">Monocytes</TextBlock>
+					            <TextBox Width="50" IsEnabled="{Binding Path=IsWorkspaceEnabled}" GotFocus="TextBoxSelect_GotFocus"
+                                         Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.MonocyteCount, Converter={StaticResource NumberConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+					            <TextBlock Style="{StaticResource GatingTextBox}" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.MonocyteCountPercent, Converter={StaticResource GatingPercentConverter}}"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource GatingTextBlock}">Myeloid</TextBlock>
+					            <TextBox Width="50" IsEnabled="{Binding Path=IsWorkspaceEnabled}" GotFocus="TextBoxSelect_GotFocus"
+                                         Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.MyeloidCount, Converter={StaticResource NumberConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+					            <TextBlock Style="{StaticResource GatingTextBox}" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.MyeloidCountPercent, Converter={StaticResource GatingPercentConverter}}"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource GatingTextBlock}">Dim CD45/Mod SS</TextBlock>
+                                <TextBox Width="50" IsEnabled="{Binding Path=IsWorkspaceEnabled}" GotFocus="TextBoxSelect_GotFocus"
+                                         Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.DimCD45ModSSCount, Converter={StaticResource NumberConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+						        <TextBlock Style="{StaticResource GatingTextBox}" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.DimCD45ModSSCountPercent, Converter={StaticResource GatingPercentConverter}}"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+    					        <TextBox Width="120" Style="{StaticResource GatingTextBox}" IsEnabled="{Binding Path=IsWorkspaceEnabled}"
+                                         Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.OtherName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+    					        <TextBox Width="50" IsEnabled="{Binding Path=IsWorkspaceEnabled}" GotFocus="TextBoxSelect_GotFocus"
+                                         Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.OtherCount, Converter={StaticResource NumberConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+    					        <TextBlock Style="{StaticResource GatingTextBox}" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.OtherCountPercent, Converter={StaticResource PercentConverter}}"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+				<TabItem Header="Markers" Name="tabItemFlowCaseMarkers">
+					<Grid Background="White">
+                        <Grid.ContextMenu>
+                            <ContextMenu Name="ContextMenuFlowMarkers">
+                                <MenuItem Header="Remove Marker" Click="ContextMenuFlowMarkers_Click"></MenuItem>
+                                <MenuItem></MenuItem>
+                                <MenuItem></MenuItem>
+                            </ContextMenu>
+                        </Grid.ContextMenu>
+                        <Grid.ColumnDefinitions>
+							<ColumnDefinition></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="80"></RowDefinition>							
+							<RowDefinition></RowDefinition>
+						</Grid.RowDefinitions>
+						<StackPanel VerticalAlignment="Center" Grid.Column="0" Grid.Row="0">
+              
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock VerticalAlignment="Center" Width="200" Style="{StaticResource GatingTextBlock}" TextAlignment="Right" Margin="2,2,2,2">Cell Population Of Interest:</TextBlock>
+								<ComboBox Name="comboBoxCellPopulationOfInterest" Width="150" IsEditable="True" Margin="2,2,2,2"
+                                    Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.CellPopulationOfInterest}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsWorkspaceEnabled}">
+                                      <ComboBoxItem>Abnormal Lymphocytes</ComboBoxItem>
+                                      <ComboBoxItem>All WBC's</ComboBoxItem>
+                                    <ComboBoxItem>All Nucleated Cells</ComboBoxItem>
+                                      <ComboBoxItem>Blasts</ComboBoxItem>
+                                      <ComboBoxItem>Dim CD45</ComboBoxItem>                                    
+                                      <ComboBoxItem>Granulocytes</ComboBoxItem>
+                                      <ComboBoxItem>Lymphocytes</ComboBoxItem>
+                                      <ComboBoxItem>Monocytes</ComboBoxItem>									
+                                      <ComboBoxItem>Plasma Cells</ComboBoxItem>
+								</ComboBox>
+							</StackPanel>
+              
+							<StackPanel Orientation="Horizontal" Margin="5">
+								<TextBlock VerticalAlignment="Center" Width="200" Style="{StaticResource GatingTextBlock}" TextAlignment="Right" Margin="2,2,2,2">Marker Panel:</TextBlock>                
+								<ComboBox Name="comboBoxMarkerPanel" Width="150" ItemsSource="{Binding Path=FlowPanelList}" Margin="2,2,2,2"
+                                          DisplayMemberPath="PanelName" SelectedValuePath="PanelId" IsEnabled="{Binding Path=IsWorkspaceEnabled}">                  
+                                </ComboBox>
+                                <Button Name="ButtonSetMarkerPanel" Height="20" Width="100" Click="ButtonSetMarkerPanel_Click" IsEnabled="{Binding Path=IsWorkspaceEnabled}" Margin="2,2,2,2">Set Marker Panel</Button>
+								<Button Height="20" Width="100" Click="ButtonRemoveMarker_Click" IsEnabled="{Binding Path=IsWorkspaceEnabled}" Margin="2,2,2,2">Remove Marker</Button>
+							</StackPanel>
+						</StackPanel>
+
+						<ListView Name="listViewMarkers" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection}" ScrollViewer.CanContentScroll="True" 
+							ScrollViewer.VerticalScrollBarVisibility="Visible">
+							<ListView.View>
+								<GridView AllowsColumnReorder="true">
+									<GridViewColumn Width="60" DisplayMemberBinding="{Binding Path=Name}" Header="Marker"/>
+									<GridViewColumn Header="Interpretation">
+										<GridViewColumn.CellTemplate>
+											<DataTemplate>
+												<StackPanel Orientation="Horizontal">
+													<ComboBox Width="110" Margin="3" IsEditable="True" Text="{Binding Path=InterpretationProxy}">
+														<ComboBoxItem>Normal</ComboBoxItem>
+														<ComboBoxItem>Aberrant</ComboBoxItem>
+														<ComboBoxItem>Equivocal</ComboBoxItem>
+														<ComboBoxItem>Positive</ComboBoxItem>
+														<ComboBoxItem>Negative</ComboBoxItem>
+														<ComboBoxItem>Abnormal</ComboBoxItem>
+														<ComboBoxItem>Partially Positive</ComboBoxItem>
+														<ComboBoxItem>See comment</ComboBoxItem>
+														<ComboBoxItem>???</ComboBoxItem>
+													</ComboBox>
+												</StackPanel>
+											</DataTemplate>
+										</GridViewColumn.CellTemplate>
+									</GridViewColumn>
+									<GridViewColumn Header="Intensity">
+										<GridViewColumn.CellTemplate>
+											<DataTemplate>
+												<StackPanel Orientation="Horizontal">
+													<ComboBox Width="130"  Margin="3" IsEditable="True" Text="{Binding Path=Intensity}">
+														<ComboBoxItem>Dim</ComboBoxItem>
+														<ComboBoxItem>Moderate</ComboBoxItem>
+														<ComboBoxItem>Bright</ComboBoxItem>
+														<ComboBoxItem>Heterogeneous</ComboBoxItem>
+														<ComboBoxItem>Dimmer than expected</ComboBoxItem>
+														<ComboBoxItem>Brighter than expected</ComboBoxItem>
+														<ComboBoxItem>See Comment</ComboBoxItem>
+														<ComboBoxItem>???</ComboBoxItem>
+													</ComboBox>
+												</StackPanel>
+											</DataTemplate>
+										</GridViewColumn.CellTemplate>
+									</GridViewColumn>
+									<GridViewColumn Header="Expr Yes/No/=">
+										<GridViewColumn.CellTemplate>
+											<DataTemplate>
+												<RadioButtonGroups:RadioButtonGroupMarkerExpression SelectedItem="{Binding Path=Expresses}"/>
+											</DataTemplate>
+										</GridViewColumn.CellTemplate>
+									</GridViewColumn>
+									<GridViewColumn Header="Predictive">
+										<GridViewColumn.CellTemplate>
+											<DataTemplate>
+												<CheckBox IsChecked="{Binding Path=Predictive}" Width="50" HorizontalAlignment="Center"></CheckBox>
+											</DataTemplate>
+										</GridViewColumn.CellTemplate>
+									</GridViewColumn>
+								</GridView>
+							</ListView.View>
+						</ListView>
+
+					</Grid>		
+				</TabItem>				
+				<TabItem Header="Results">
+					<StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Style="{StaticResource HeadingTextBlock}">Leukemia Result:</TextBlock>
+							<ComboBox Name="comboBoxLeukemiaResult" Margin="3" Style="{StaticResource BoundTextBox}" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.TestResult}" Width="200" SelectionChanged="ComboBoxLeukemiaResult_SelectionChanged" IsEnabled="{Binding Path=IsWorkspaceEnabled}">
+								<ComboBoxItem>Normal</ComboBoxItem>
+								<ComboBoxItem>Abnormal</ComboBoxItem>
+							</ComboBox>
+						</StackPanel>
+						<StackPanel Name="stackPanelCellDescription" Orientation="Horizontal" Visibility="Collapsed">
+							<TextBlock Style="{StaticResource HeadingTextBlock}">Cell Description:</TextBlock>
+							<ComboBox Name="comboBoxCellDescription" Margin="3" Style="{StaticResource BoundTextBox}" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.CellDescription}" Width="200" SelectionChanged="ComboBoxCellDescription_SelectionChanged" IsEnabled="{Binding Path=IsWorkspaceEnabled}">
+								<ComboBoxItem>Lymphocytes</ComboBoxItem>
+								<ComboBoxItem>Monocytes</ComboBoxItem>
+								<ComboBoxItem>Myeloid Cells</ComboBoxItem>
+								<ComboBoxItem>DIM45</ComboBoxItem>
+								<ComboBoxItem>Plasma Cells</ComboBoxItem>
+								<ComboBoxItem>Myeloid Blasts</ComboBoxItem>
+							</ComboBox>
+						</StackPanel>
+						<StackPanel Name="stackPanelBTCellSelection" Orientation="Horizontal" Visibility="Collapsed">
+							<TextBlock Style="{StaticResource HeadingTextBlock}">Lymphocyte Type:</TextBlock>
+							<ComboBox Name="comboBoxBTCellSelection" Margin="3" Style="{StaticResource BoundTextBox}" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.BTCellSelection}" Width="200" IsEnabled="{Binding Path=IsWorkspaceEnabled}">
+								<ComboBoxItem>B-cells</ComboBoxItem>
+								<ComboBoxItem>T-cells</ComboBoxItem>								
+							</ComboBox>
+						</StackPanel>
+						<TextBlock FontWeight="Bold" Margin="5">Interpretive Comment:</TextBlock>
+                        <TextBox Name="textBoxInteretiveComment" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.InterpretiveComment, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MinHeight="100" AcceptsReturn="True" IsEnabled="{Binding Path=IsWorkspaceEnabled}"></TextBox>
+						<TextBlock FontWeight="Bold" Margin="5">Impression:</TextBlock>
+                        <TextBox Name="textBoxImpression" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.Impression, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MinHeight="100" AcceptsReturn="True" IsEnabled="{Binding Path=IsWorkspaceEnabled}"></TextBox>
+                        
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">							
+							<Button Height="25" VerticalAlignment="Top" Click="ButtonCreateComment_Click" IsEnabled="{Binding Path=IsWorkspaceEnabled}" Margin="2,2,2,2">Create Comment</Button>
+						</StackPanel>
+					</StackPanel>
+				</TabItem>
+				<TabItem Header="Coding">
+					<Grid Background="White">
+						<Grid.ContextMenu>
+							<ContextMenu>
+                                <!--<MenuItem Name="MenuItemSetCptCodes" Header="Set CPT Codes" Click="MenuItemSetCptCodes_Click"></MenuItem>-->
+                                <MenuItem Name="MeunuItemAddIcd9Code" Header="Insert ICD9 Code" Click="MenuItemAddIcd9Code_Click"></MenuItem>
+								<MenuItem></MenuItem>
+								<MenuItem Name="MeunuItemDeleteIcd9Code" Header="Delete ICD9 Code" Click="MenuItemDeleteIcd9Code_Click"></MenuItem>
+							</ContextMenu>							
+						</Grid.ContextMenu>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition></RowDefinition>
+							<RowDefinition Height="80"></RowDefinition>
+						</Grid.RowDefinitions>
+
+                        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <ListView Name="ListViewICD9BillingCodeCollection" ItemsSource="{Binding Path=ICD9BillingCodeCollection}" IsSynchronizedWithCurrentItem="True">
+                                <ListView.View>
+                                  <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ICD9Code}" Header="ICD9 Code" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ICD10Code}" Header="ICD10 Code" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="Quantity" Width="100"/>
+                                  </GridView>
+                                </ListView.View>
+                              </ListView>
+                              <ListView Name="ListViewICDCodes" ItemsSource="{Binding Source={StaticResource ICDCodes}, XPath=ICDCode}" MouseDoubleClick="ListICDCode_MouseDoubleClick">
+                                <ListView.View>
+                                  <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding XPath=@ICD9}" Header="ICD9 Code" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding XPath=@ICD10}" Header="ICD10 Code" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding XPath=@Description}" Header="Description" Width="400"/>                  
+                                  </GridView>
+                                </ListView.View>
+                              </ListView>
+                        </StackPanel>
+            
+                        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">              
+                          <Button VerticalAlignment="Top" Width="200" Style="{StaticResource NormalButton}" Click="ButtonRemoveICDCode_Click">Remove ICD Code</Button>
+                        </StackPanel>
+					</Grid>
+				</TabItem>								
+                <TabItem Header="Tech Final">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="150"></ColumnDefinition>
+                      <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="20"></RowDefinition>              
+                      <RowDefinition Height="25"></RowDefinition>
+                      <RowDefinition Height="25"></RowDefinition>
+                      <RowDefinition Height="25"></RowDefinition>
+                      <RowDefinition Height="25"></RowDefinition>
+                      <RowDefinition Height="25"></RowDefinition>
+                      <RowDefinition Height="100"></RowDefinition>
+                      <RowDefinition Height="50"></RowDefinition>
+                      <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>            
+                    <TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" Style="{StaticResource HeadingTextBlock}">Med Tech:</TextBlock>
+            
+                    <ComboBox Style="{StaticResource BoundTextBox}" Grid.Column="1" Grid.Row="1"
+								         ItemsSource="{Binding Path=MedTechUsers}" HorizontalAlignment="Left"
+								         DisplayMemberPath="DisplayName"								 
+								         SelectedValuePath="UserId"
+								         SelectedValue="{Binding Path=PanelSetOrderLeukemiaLymphoma.TechFinaledById}">
+                    </ComboBox>
+            
+                    <TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" Style="{StaticResource HeadingTextBlock}">Tech Final:</TextBlock>
+						<TextBlock HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.TechFinal}" Width="200" Style="{StaticResource HeadingTextBlock}" TextAlignment="Left"></TextBlock>
+                    <TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="3" Style="{StaticResource HeadingTextBlock}">Tech Final Date:</TextBlock>
+						<TextBlock HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.TechFinalDate, Converter={StaticResource ShortDateConverter}}" Style="{StaticResource HeadingTextBlock}" Width="200" TextAlignment="Left"></TextBlock>
+                    <TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4" Style="{StaticResource HeadingTextBlock}">Tech Final Time:</TextBlock>
+						<TextBlock HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.TechFinalTime, Converter={StaticResource ShortTimeConverter}}" Style="{StaticResource HeadingTextBlock}" Width="200" TextAlignment="Left"></TextBlock>
+                    <TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="5" Style="{StaticResource HeadingTextBlock}">Test Canceled:</TextBlock>
+						<CheckBox Name="CheckBoxTestCancelled" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" IsChecked="{Binding Path=PanelSetOrderLeukemiaLymphoma.TestCancelled}"></CheckBox>
+						<TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="6" Style="{StaticResource HeadingTextBlock}">Comment:</TextBlock>
+                        <TextBox HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.TestCancelledComment, UpdateSourceTrigger=PropertyChanged}" Width="400" TextWrapping="Wrap" TextAlignment="Left"                                   
+                                 IsEnabled="{Binding Path=IsWorkspaceEnabled}"></TextBox>
+                    <StackPanel Grid.Column="1" Grid.Row="7" Orientation="Horizontal">
+                        
+                      <Button HorizontalAlignment="Left" Name="buttonTechFinal" Click="ButtonTechFinal_Click" Height="25" Width="100" Margin="2,2,2,2">Tech Final</Button>
+                      <Button HorizontalAlignment="Left" Name="buttonTechUnfinal" Click="ButtonTechUnfinal_Click" Height="25" Width="100" Margin="2,2,2,2">Tech Unfinal</Button>                            
+                        </StackPanel>
+
+                        <TextBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.ReportComment, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBox>
+              
+                  </Grid>
+                </TabItem>
+				<TabItem Header="Case Final">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="150"></ColumnDefinition>
+							<ColumnDefinition></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							    <RowDefinition Height="20"></RowDefinition>
+							    <RowDefinition Height="25"></RowDefinition>
+							    <RowDefinition Height="25"></RowDefinition>
+							    <RowDefinition Height="25"></RowDefinition>
+                              <RowDefinition Height="25"></RowDefinition>
+                              <RowDefinition Height="25"></RowDefinition>
+                              <RowDefinition Height="100"></RowDefinition>
+							<RowDefinition Height="50"></RowDefinition>							
+							<RowDefinition Height="*"></RowDefinition>
+						</Grid.RowDefinitions>
+						<TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1" Style="{StaticResource HeadingTextBlock}">Final:</TextBlock>
+						<TextBlock HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.Final}" Width="200" Style="{StaticResource HeadingTextBlock}" TextAlignment="Left"></TextBlock>
+						<TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" Style="{StaticResource HeadingTextBlock}">Final Date:</TextBlock>
+						<TextBlock HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.FinalDate, Converter={StaticResource ShortDateConverter}}" Style="{StaticResource HeadingTextBlock}" Width="200" TextAlignment="Left"></TextBlock>
+            <TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="3" Style="{StaticResource HeadingTextBlock}">Final Time:</TextBlock>
+						<TextBlock HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.FinalTime, Converter={StaticResource ShortTimeConverter}}" Style="{StaticResource HeadingTextBlock}" Width="200" TextAlignment="Left"></TextBlock>            
+						<TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4" Style="{StaticResource HeadingTextBlock}" Width="200">Signature:</TextBlock>
+            
+            <TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="5" Style="{StaticResource HeadingTextBlock}">Test Canceled:</TextBlock>
+						<CheckBox HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" IsChecked="{Binding Path=PanelSetOrderLeukemiaLymphoma.TestCancelled}" IsEnabled="{Binding Path=IsWorkspaceEnabled}"></CheckBox>
+            <TextBlock HorizontalAlignment="Right" Grid.Column="0" Grid.Row="6" Style="{StaticResource HeadingTextBlock}">Comment:</TextBlock>
+                        <TextBox HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.TestCancelledComment, UpdateSourceTrigger=PropertyChanged}" Width="400" TextWrapping="Wrap" TextAlignment="Left" IsEnabled="{Binding Path=IsWorkspaceEnabled}"></TextBox>
+            
+            <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+							<TextBlock Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.Signature}" Style="{StaticResource HeadingTextBlock}" TextAlignment="Left" Width="200"></TextBlock>
+							<TextBlock Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.FinaledById}" Style="{StaticResource HeadingTextBlock}" TextAlignment="Left" Visibility="Hidden"></TextBlock>
+            </StackPanel>
+						<StackPanel Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Orientation="Horizontal">
+							<Button HorizontalAlignment="Left" Name="buttonViewReport" Click="ButtonViewReport_Click" Height="25" Width="100">View Report</Button>
+							<Button HorizontalAlignment="Left" Name="buttonSignReport" Click="ButtonSignReport_Click" Height="25" Width="100" IsEnabled="{Binding Path=SignReportButtonEnabled}" Content="{Binding Path=SignReportButtonContent}" />							
+						</StackPanel>						
+					</Grid>
+				</TabItem>                                
+                <TabItem Name="TabItemCommonMarkers" Header="Markers(Common)">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto"></RowDefinition>
+                      <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Margin="5" Grid.Column="0" Grid.Row="0">
+                      <TextBlock VerticalAlignment="Center" Width="200" Style="{StaticResource GatingTextBlock}" TextAlignment="Right" Margin="2,2,2,2">Marker Panel:</TextBlock>
+                      <ComboBox Name="comboBoxCommonMarkerPanel" Width="150" ItemsSource="{Binding Path=FlowPanelList}" Height="22" Margin="2,2,2,2"
+                        DisplayMemberPath="PanelName" SelectedValuePath="PanelId">
+                      </ComboBox>
+                      <Button Name="ButtonSetCommonMarkerPanel" Height="20" Width="100" Click="ButtonSetMarkerPanel_Click" Margin="2,2,2,2">Set Marker Panel</Button>              
+                    </StackPanel>
+            
+                    <ListView Name="listViewCommonMarkers" Grid.Column="0" Grid.Row="1" 
+				        ItemsSource="{Binding Path=PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection}" IsEnabled="{Binding Path=IsWorkspaceEnabled}">
+                      <ListView.View>
+                        <GridView>
+                          <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=Name}" Header="Marker"/>
+                          <GridViewColumn Header="Intensity" Width="150">
+                            <GridViewColumn.CellTemplate>
+                              <DataTemplate>                        
+                                <ComboBox Width="130"  Margin="3" IsEditable="True" Text="{Binding Path=Result}">
+                                  <ComboBoxItem>Negative</ComboBoxItem>
+                                  <ComboBoxItem>Weakly Positive</ComboBoxItem>
+                                  <ComboBoxItem>Positive</ComboBoxItem>
+                                  <ComboBoxItem>Strongly Positive</ComboBoxItem>
+                                </ComboBox>                        
+                              </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                          </GridViewColumn>
+                        </GridView>
+                      </ListView.View>
+                    </ListView>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" FontWeight="Bold" Margin="2,2,2,2">Report Comment:</TextBlock>
+                        <TextBox Name="TextBoxReportComment" Grid.Column="0" Grid.Row="3" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.ReportComment, UpdateSourceTrigger=PropertyChanged}" 
+                                 HorizontalAlignment="Stretch" Height="100" AcceptsReturn="True" Margin="2,2,2,2"></TextBox>
+                    </Grid>          
+                </TabItem>
+        
+			</TabControl>
+			
+			<GridSplitter Height="5" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></GridSplitter>
+			
+			<TabControl Name="tabControlBottomLeftPane" Grid.Column="0" Grid.Row="3">                                                                
+                
+				<TabItem Header="List">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Button Width="125" Height="30" Grid.Column="0" Grid.Row="0" Click="ButtonReportOrder_Click" HorizontalAlignment="Left" Margin="2,2,2,2">Additional Testing</Button>
+                        <Button Width="75" Height="30" Grid.Column="0" Grid.Row="0" Click="ButtonRefresh_Click" HorizontalAlignment="Right" Margin="2,2,2,2">Refresh</Button>
+
+						<ListView Name="ListViewFlowCaseList" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=FlowLogSearch.FlowLogList}" SelectionChanged="ListViewFlowCaseList_SelectionChanged">
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=IsLockAquiredByMe}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Background" Value="#cbf4c8"/>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=IsLockAquiredByMe}" Value="False"/>
+                                                <Condition Binding="{Binding Path=LockAquired}" Value="true"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Background" Value="#fae5e7"/>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=LockAquired}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Background" Value="#FFFFFF"/>
+                                        </MultiDataTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsSelected" Value="true" />
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                        </MultiTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Flow Case List">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="85"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=AccessionDate, Converter={StaticResource ShortDateConverter}}" Header="Accession Date" Width="85"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=TestName}" Header="Test" Width="90"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PLastName}" Header="Last Name" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PFirstName}" Header="First Name" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=FinalDate, Converter={StaticResource ShortDateConverter}}" Header="Final" Width="75"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>                                                          
+				</TabItem>
+                
+				<TabItem Name="tablItemSearch" Header="Search">
+					<StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<RadioButton Name="radioButtonSearchCurrentMonth"
+								Checked="RadioButtonFlowSearch_Checked"
+							  Style="{StaticResource RadioButtonStyle}"
+							  GroupName="radioButtonGroupSearch">Current Months Cases</RadioButton>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<RadioButton Name="radioButtonSearchLastMonth"
+								Checked="RadioButtonFlowSearch_Checked"
+							  Style="{StaticResource RadioButtonStyle}"
+							  GroupName="radioButtonGroupSearch">Last Months Cases</RadioButton>
+						</StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                <RadioButton Name="radioButtonSearchLeukemiaNotFinal"
+								Checked="RadioButtonFlowSearch_Checked"
+							  Style="{StaticResource RadioButtonStyle}"
+							  GroupName="radioButtonGroupSearch">Leukemia Cases Not Final</RadioButton>
+                        </StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<RadioButton Name="radioButtonSearchReportNo"
+								Checked="RadioButtonFlowSearch_Checked"
+								Style="{StaticResource RadioButtonStyle}"
+							  GroupName="radioButtonGroupSearch">Report No:</RadioButton>
+							<TextBox Name="textBoxSearchReportNo" Width="100" Visibility="Hidden" KeyUp="textBoxSearchReportNo_KeyUp">16-</TextBox>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<RadioButton Name="radioButtonSearchPatientName"
+								Checked="RadioButtonFlowSearch_Checked"
+								Style="{StaticResource RadioButtonStyle}"
+								GroupName="radioButtonGroupSearch">Patient Name:</RadioButton>
+							<TextBox Name="textBoxSearchPatientName" Width="200" Visibility="Hidden">Mouse, Mickey</TextBox>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<RadioButton Name="radioButtonSearchSelectMonth"
+								Checked="RadioButtonFlowSearch_Checked"
+								Style="{StaticResource RadioButtonStyle}"
+							  GroupName="radioButtonGroupSearch">Accession Month:</RadioButton>
+							<StackPanel Orientation="Horizontal" Name="stackPanelAccessionMonthSearch" Visibility="Hidden">
+								<TextBlock Margin="3">Month</TextBlock>
+								<ComboBox Name="comboBoxMonth" Width="100" Margin="3">
+									<ComboBoxItem Tag="1">January</ComboBoxItem>
+									<ComboBoxItem Tag="2">February</ComboBoxItem>
+									<ComboBoxItem Tag="3">March</ComboBoxItem>
+									<ComboBoxItem Tag="4">April</ComboBoxItem>
+									<ComboBoxItem Tag="5">May</ComboBoxItem>
+									<ComboBoxItem Tag="6">June</ComboBoxItem>
+									<ComboBoxItem Tag="7">July</ComboBoxItem>
+									<ComboBoxItem Tag="8">August</ComboBoxItem>
+									<ComboBoxItem Tag="9">September</ComboBoxItem>
+									<ComboBoxItem Tag="10">October</ComboBoxItem>
+									<ComboBoxItem Tag="11">November</ComboBoxItem>
+									<ComboBoxItem Tag="12">December</ComboBoxItem>
+								</ComboBox>
+								<TextBlock Margin="3">Year</TextBlock>
+								<ComboBox Name="comboBoxYear" Width="100" Margin="3">
+									<ComboBoxItem>2000</ComboBoxItem>
+									<ComboBoxItem>2001</ComboBoxItem>
+									<ComboBoxItem>2002</ComboBoxItem>
+									<ComboBoxItem>2003</ComboBoxItem>
+									<ComboBoxItem>2004</ComboBoxItem>
+									<ComboBoxItem>2005</ComboBoxItem>
+									<ComboBoxItem>2006</ComboBoxItem>
+									<ComboBoxItem>2007</ComboBoxItem>
+									<ComboBoxItem>2008</ComboBoxItem>
+									<ComboBoxItem>2009</ComboBoxItem>
+									<ComboBoxItem>2010</ComboBoxItem>
+									<ComboBoxItem>2011</ComboBoxItem>
+									<ComboBoxItem>2012</ComboBoxItem>
+									<ComboBoxItem>2013</ComboBoxItem>
+								</ComboBox>
+							</StackPanel>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<RadioButton Name="radioButtonSearchTestId"
+								Checked="RadioButtonFlowSearch_Checked"
+							  Style="{StaticResource RadioButtonStyle}"
+							  GroupName="radioButtonGroupSearch">Test Performed</RadioButton>							
+							<ComboBox Name="comboBoxFlowSearchTestType" Style="{StaticResource BoundTextBox}"
+								 ItemsSource="{Binding Path=FlowPanelSetCollection}" 								 								 
+								 DisplayMemberPath="PanelSetName" Visibility="Hidden">
+							</ComboBox>
+						</StackPanel>                        
+                        <Button Name="buttonSearch" Click="ButtonSearch_Click" Style="{StaticResource NormalButton}" Width="150">Search</Button>
+					</StackPanel>
+				</TabItem>
+				<TabItem Header="Tasks" Name="tabItemTasks">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>                            
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <Button Width="200" Grid.Column="0" Grid.Row="0" Style="{StaticResource NormalButton}" Click="ButtonReceiveSpecimen_Click">Receive Specimen</Button>                        
+                        <Button Width="200" Grid.Column="0" Grid.Row="1" Style="{StaticResource NormalButton}" Click="ButtonPrintReport_Click">Print Report</Button>
+                        <Button Width="200" Grid.Column="0" Grid.Row="2" Style="{StaticResource NormalButton}" Click="ButtonPublishReport_Click">Publish Report</Button>
+                        <Button Width="200" Grid.Column="0" Grid.Row="3" Style="{StaticResource NormalButton}" Click="ButtonViewReport_Click">View Report</Button>                        
+                        <Button Width="200" Grid.Column="0" Grid.Row="4" Style="{StaticResource NormalButton}" Click="ButtonOrderFlowOnExistingAccession_Click">Order Flow On Existing Accession</Button>
+
+                        <Button Width="200" Grid.Column="1" Grid.Row="0" Style="{StaticResource NormalButton}" Click="ButtonOpenDocumentFolder_Click">Open Document Folder</Button>
+                        <Button Width="200" Grid.Column="1" Grid.Row="1" Style="{StaticResource NormalButton}" Click="ButtonOpenFC500Folder_Click">Open FC500 Folder</Button>
+                        <Button Width="200" Grid.Column="1" Grid.Row="1" Style="{StaticResource NormalButton}" Click="ButtonOpenFGalliosFolder_Click">Open Gallios Folder</Button>
+
+                    </Grid>                                               
+				</TabItem>
+			</TabControl>
+		</Grid>
+		<GridSplitter Width="2" Grid.Column="0"></GridSplitter>
+		<TabControl Name="tabControlRightPane" Grid.Column="1" Grid.Row="0">
+      
+			<TabItem Name="tabItemDocumentViewer" Header="Documents">
+				
+			</TabItem>
+      
+			<TabItem Name="tabItemComment" Header="Comments">
+				<Grid Name="gridComments">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+					<ListView Grid.Column="0" Grid.Row="0" Name="listViewComments" ItemsSource="{Binding Path=FlowComment.FlowCommentCollectionView}" IsSynchronizedWithCurrentItem="True" MouseDoubleClick="ListViewComments_MouseDoubleClick">
+						<ListView.View>
+							<GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Flow Comments">
+								<GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="100"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=Description}" Header="Description" Width="300"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</Grid>
+			</TabItem>
+			<TabItem Name="tabItemMarkers" Header="Markers">
+				<Grid Name="gridMarkers">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"></RowDefinition>
+						<RowDefinition Height="40"></RowDefinition>
+					</Grid.RowDefinitions>
+					<ListView MouseDoubleClick="ListViewFlowMarkers_MouseDoubleClick" Grid.Column="0" Grid.Row="0" Name="listViewFlowMarkers" ItemsSource="{Binding Path=Marker.MarkerCollectionView}" IsSynchronizedWithCurrentItem="True">
+						<ListView.View>
+							<GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Markers">
+								<GridViewColumn DisplayMemberBinding="{Binding Path=MarkerId}" Header="ID" Width="100"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=MarkerName}" Header="Marker" Width="300"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+					<StackPanel Grid.Column="0" Grid.Row="1">
+						<Button Width="200" Style="{StaticResource NormalButton}" Click="ButtonAddMarker_Click">Add Marker To Case.</Button>
+					</StackPanel>
+				</Grid>
+			</TabItem>
+            
+			<TabItem Name="tabItemClientSearch" Header="Client Search">
+                
+            </TabItem>            
+                        
+      <TabItem Name="tablItemBrokenRules" Header="Broken Rules">
+        <Grid Name="gridFlowBrokenRules">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>            
+          </Grid.RowDefinitions>
+          <ListView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Name="listViewBrokenRules" ItemsSource="{Binding Path=FlowCaseValidation.BrokenRules}" IsSynchronizedWithCurrentItem="True">
+            <ListView.View>
+              <GridView ColumnHeaderToolTip="Broken Rules">
+                <GridViewColumn DisplayMemberBinding="{Binding Path=RuleName}" Header="Rule Name" Width="200" />
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Description}" Header="Description" Width="200"/>
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Severity}" Header="Severity" Width="100"/>
+              </GridView>
+            </ListView.View>
+          </ListView>
+        </Grid>
+      </TabItem>      
+		</TabControl>
+
+		<StatusBar Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+			<StatusBarItem>
+				<TextBlock Margin="25,2,2,2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Current User:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+				<TextBlock Width="120" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=CurrentUser.UserName}"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem>
+				<TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Locked By:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+                <TextBlock Width="300" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=AccessionOrder.AccessionLock.Address}"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem>
+				<TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Report No:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+				<TextBlock Width="60" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.ReportNo}"></TextBlock>
+			</StatusBarItem>
+
+		</StatusBar>
+	</Grid>
+</UserControl>

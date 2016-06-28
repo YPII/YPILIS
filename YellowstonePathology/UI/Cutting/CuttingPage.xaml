@@ -1,0 +1,162 @@
+﻿<UI:PageControl x:Class="YellowstonePathology.UI.Cutting.CuttingPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Cutting="clr-namespace:YellowstonePathology.UI.Cutting"
+             xmlns:UI="clr-namespace:YellowstonePathology.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <Cutting:OrderedAsDualConverter x:Key="OrderedAsDualConverter"/>        
+        <Cutting:SlideOrderStatusColorConverter x:Key="SlideOrderStatusColorConverter"/>
+        <Cutting:LongStringConverter x:Key="LongStringConverter"/>
+
+        <Style x:Key="ListBoxItemSlideStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Padding" Value="2,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Background" TargetName="Bd" Value="Blue"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left">
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <TextBlock FontSize="14" Margin="5,5,5,5" Width="100" TextAlignment="Right">Station:</TextBlock>
+                <TextBlock Text="{Binding Path=SystemIdentity.StationName}" FontSize="14" Margin="5,5,5,5"></TextBlock>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <TextBlock FontSize="14" Margin="5,5,5,5" Text="User:" Width="100" TextAlignment="Right"></TextBlock>
+                <TextBlock Text="{Binding Path=SystemIdentity.User.DisplayName}" FontSize="14" Margin="5,5,5,5"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="400">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Text="{Binding Path=PanelSetOrder.ReportNo}" FontSize="20" Margin="5,5,5,5"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Text="{Binding Path=PanelSetOrder.PanelSetName}" FontSize="20" Margin="5,5,5,5"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Text="{Binding Path=AccessionOrder.PLastName}" FontSize="20" Margin="5,5,5,5"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" Text="{Binding Path=SpecimenOrder.Description}" FontSize="20" Margin="5,5,5,5" TextWrapping="Wrap"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" Text="{Binding Path=AliquotOrder.Label}" FontSize="30" Margin="5,5,5,5"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" Text="{Binding Path=TestOrder.TestName}" FontSize="20" Margin="5,5,5,5"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Center" Text="{Binding Path=TestOrder.OrderedAsDual, Converter={StaticResource OrderedAsDualConverter}}" FontSize="20" Margin="5,5,5,5"/>
+            <TextBlock Grid.Column="0" Grid.Row="7" HorizontalAlignment="Center" Text="{Binding Path=PanelOrder.Comment}" FontSize="20" Margin="5,5,5,5"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="8" HorizontalAlignment="Center" Text="{Binding Path=TestOrder.Comment}" FontSize="20" Margin="5,5,5,5" TextWrapping="Wrap"></TextBlock>            
+
+        </Grid>
+
+        <Button Grid.Column="2" Grid.Row="0" Height="60" Width="200" Margin="5,5,5,5" Click="ButtonFinished_Click" HorizontalAlignment="Right" VerticalAlignment="Top">Finished</Button>
+        <Button Grid.Column="0" Grid.Row="0" Height="60" Width="150" Margin="2,2,2,2" Click="ButtonAddSlide_Click" HorizontalAlignment="Center" VerticalAlignment="Center">Add Slide</Button>
+
+        <ListBox ItemsSource="{Binding Path=AliquotOrder.SlideOrderCollection}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Name="ListBoxSlideOrderCollection" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                HorizontalAlignment="Stretch" Margin="5,5,5,5" ItemContainerStyle="{StaticResource ListBoxItemSlideStyle}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" IsItemsHost="True"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Border.Style>
+                            <Style>                                
+                                <Setter Property="Border.BorderBrush" Value="{Binding Path=Status, Converter={StaticResource SlideOrderStatusColorConverter}}"/>
+                                <Setter Property="Border.BorderThickness" Value="5"/>                                
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Setter Property="Border.BorderThickness" Value="7" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid MouseDown="ListBoxSlides_MouseDown" MouseUp="ListBoxSlides_MouseUp">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Margin="2,2,2,2" Background="White" Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="90"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>                                    
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Path=ReportNo}" FontSize="9" HorizontalAlignment="Center" Margin="2,5,2,2"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Path=Label}" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Margin="2,5,2,5"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Path=TestAbbreviation}" FontSize="9" HorizontalAlignment="Center" Margin="2,2,2,2"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding Path=PatientLastName}" FontSize="9" HorizontalAlignment="Center" Margin="2,2,2,2"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding Path=PrintedBy}" FontSize="9" HorizontalAlignment="Center" Margin="2,2,2,2"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding Path=PrintStation}" FontSize="9" HorizontalAlignment="Center" Margin="2,2,2,2"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding Path=Location}" FontSize="9" HorizontalAlignment="Center" Margin="2,2,2,5"></TextBlock>
+
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+    </Grid>
+</UI:PageControl>

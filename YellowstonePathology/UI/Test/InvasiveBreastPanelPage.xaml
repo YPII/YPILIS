@@ -1,0 +1,188 @@
+﻿<Test:ResultControl x:Class="YellowstonePathology.UI.Test.InvasiveBreastPanelPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Test="clr-namespace:YellowstonePathology.UI.Test">
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+		<Border Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}" Margin="5,5,5,5"></Border>
+
+		<Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10,10,10">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="20"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+			</Grid.RowDefinitions>
+
+			<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,5,0,0" FontWeight="Bold" FontSize="16">Order</TextBlock>
+
+			<TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0">
+                <Hyperlink Click="HyperLinkOrderFISH_Click" FontSize="14">HER2 by FISH</Hyperlink>
+			</TextBlock>
+
+			<TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkAcceptResults_Click" FontSize="14">Accept Results</Hyperlink>
+			</TextBlock>
+
+			<TextBlock Grid.Column="0" Grid.Row="4" Margin="0,0,0,0" FontWeight="Bold" FontSize="16">Options</TextBlock>
+
+            <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="5" Margin="5,3,0,0">                    
+                <Hyperlink Click="HyperLinkShowDocument_Click" FontSize="14">Show Document</Hyperlink>
+			</TextBlock>
+
+			<TextBlock Grid.Column="0" Grid.Row="6" Margin="5,3,0,20">
+                <Hyperlink Click="HyperLinkFinalizeResults_Click" FontSize="14">Finalize</Hyperlink>
+			</TextBlock>
+
+			<TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkUnacceptResults_Click" FontSize="14">Unaccept Results</Hyperlink>
+			</TextBlock>
+
+            <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="9" Margin="5,3,0,0">                    
+				<Hyperlink Click="HyperLinkUnfinalResults_Click" FontSize="14">Unfinalize Results</Hyperlink>
+			</TextBlock>
+
+		</Grid>
+
+		<ScrollViewer Grid.Column="1" Grid.Row="1" Margin="10">
+			<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="*"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Specimen:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.SpecimenOrder.Description}" />
+
+				<TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Diagnosis:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.SurgicalSpecimen.Diagnosis}" />
+
+				<TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Estrogen Receptor:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.ERResultString}" />
+
+				<TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold">Progesterone Receptor:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.PRResultString}" />
+
+				<TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold">HER2 By D-ISH Result:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.HER2ResultString}" />
+
+				<TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" FontWeight="Bold">HER2 By FISH Required:</TextBlock>
+				<CheckBox Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Margin="2,2,2,2" IsChecked="{Binding Path=InvasiveBreastPanelResult.IsHER2ByFISHRequired, Mode=OneWay}" IsEnabled="False" />
+
+				<TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold">HER2 By FISH Result:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.HER2ByFISHResultString}" />
+
+				<TextBlock Grid.Column="0" Grid.Row="11" FontWeight="Black" Margin="2,2,2,2">Current Orders:</TextBlock>
+				<ListView Name="ListBoxPanelSetOrders" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="12" Margin="2,2,2,2" HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection}">
+					<ListView.View>
+						<GridView>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="100"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=OrderTime}" Header="Date" Width="150"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Order" Width="200"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=FinalTime}" Header="Final" Width="150"/>
+							<GridViewColumn Header="Distribute" Width="120">
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal">
+											<CheckBox IsChecked="{Binding Path=Distribute}" Margin="45,0,0,0" IsEnabled="False"/>
+										</StackPanel>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+						</GridView>
+					</ListView.View>
+				</ListView>
+
+				<TextBlock Grid.Column="0" Grid.Row="13" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
+				<CheckBox Grid.Column="1" Grid.Row="13" Margin="2,2,2,2" IsChecked="{Binding Path=InvasiveBreastPanel.Distribute}"></CheckBox>
+
+				<TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
+				<CheckBox Grid.Column="1" Grid.Row="14" Margin="2,2,2,2" IsChecked="{Binding Path=InvasiveBreastPanel.NoCharge}"></CheckBox>
+
+				<Grid Grid.Column="0" Grid.Row="15" Grid.ColumnSpan="2">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"></ColumnDefinition>
+						<ColumnDefinition Width="*"></ColumnDefinition>
+						<ColumnDefinition Width="Auto"></ColumnDefinition>
+						<ColumnDefinition Width="*"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Accepted:</TextBlock>
+					<CheckBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=InvasiveBreastPanel.Accepted}" IsEnabled="False"></CheckBox>
+
+					<TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Date Accepted:</TextBlock>
+					<TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanel.AcceptedTime}" IsEnabled="False"></TextBox>
+
+					<TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Accepted By:</TextBlock>
+					<TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanel.AcceptedBy}" IsEnabled="False"></TextBox>
+
+					<TextBlock Grid.Column="2" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Final:</TextBlock>
+					<CheckBox Grid.Column="3" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=InvasiveBreastPanel.Final}" IsEnabled="False"></CheckBox>
+
+					<TextBlock Grid.Column="2" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Date Finaled:</TextBlock>
+					<TextBox Grid.Column="3" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanel.FinalTime}" IsEnabled="False"></TextBox>
+
+					<TextBlock Grid.Column="2" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Finaled By:</TextBlock>
+					<TextBox Grid.Column="3" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanel.Signature}" IsEnabled="False"></TextBox>
+
+				</Grid>
+
+			</Grid>
+
+		</ScrollViewer>
+
+		<Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}" Margin="0,0,0,0"></Border>
+		<Button Name="ButtonNext" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="5,5,5,5" Click="ButtonNext_Click" Width="100" Height="40" HorizontalAlignment="Right">Next</Button>
+
+	</Grid>
+</Test:ResultControl>

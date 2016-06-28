@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Login.DeleteAccessionLookupPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YellowstonePathology.UI.Login"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="640">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" Text="Search" />
+            <TextBox Name="TextBoxMasterAccessionNo" Grid.Column="1" Grid.Row="0" Margin="2" KeyUp="TextBoxMasterAccessionNo_KeyUp" Width="150" BorderBrush="AliceBlue" BorderThickness="1" HorizontalAlignment="Left" />
+
+            <ListView Name="ListViewAccessionOrders" Margin="3" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=ReportSearchList}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Case List">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="85"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PatientName}" Header="Patient Name" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Report" Width="170"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Client" Width="200"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <Border Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <Button Name="ButtonBack" Grid.Row="2" Margin="5,5,5,5" HorizontalAlignment="Left" Click="ButtonBack_Click" Width="100" Height="40">Back</Button>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Name="ButtonClose" Margin="5,5,5,5" Click="ButtonNext_Click" Width="100" Height="40">Next</Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

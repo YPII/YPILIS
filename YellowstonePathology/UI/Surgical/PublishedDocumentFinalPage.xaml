@@ -1,0 +1,116 @@
+﻿<Test:ResultControl x:Class="YellowstonePathology.UI.Surgical.PublishedDocumentFinalPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:local="clr-namespace:YellowstonePathology.UI.Test"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Test="clr-namespace:YellowstonePathology.UI.Test">
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+		<Grid Grid.Row="1" Margin="5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Row="0" Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+
+			<Grid Grid.Column="0" Margin="10" Width="120">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="20"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="*"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>
+                
+				<TextBlock Grid.Column="0" Grid.Row="3" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkAcceptResults_Click">Accept Results</Hyperlink>
+				</TextBlock>				
+
+				<TextBlock Grid.Column="0" Grid.Row="6" Margin="5,3,0,5">
+					<Hyperlink Click="HyperLinkFinalizeResults_Click">Finalize</Hyperlink>
+				</TextBlock>
+
+				<TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkUnacceptResults_Click">Unaccept Results</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="9" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkUnfinalResults_Click">Unfinalize Results</Hyperlink>
+				</TextBlock>
+
+			</Grid>
+
+			<ScrollViewer Grid.Column="1" Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" VerticalAlignment="Center">Test:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.PanelSetName}" IsEnabled="False"></TextBox>
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold" VerticalAlignment="Center">Distribute:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}" VerticalAlignment="Center" />                    
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Accepted:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Accepted}" IsEnabled="False"></CheckBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold">Date Accepted:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.AcceptedTime}" IsEnabled="False"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold">Accepted By:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.AcceptedBy, Mode=OneWay}" IsEnabled="False"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" FontWeight="Bold" VerticalAlignment="Center">Final:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Final}" VerticalAlignment="Center" IsEnabled="False"></CheckBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold">Final Date:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.FinalTime}" IsEnabled="False"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" FontWeight="Bold">Finaled By:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="7" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Signature}" IsEnabled="False"/>
+                </Grid>
+
+            </ScrollViewer>
+
+		</Grid>
+
+		<Border Grid.Column="0" Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<Button Name="ButtonClose" Grid.Column="0" Grid.Row="2" Width="100" Height="40" HorizontalAlignment="Right" Margin="5,5,5,5" Click="ButtonClose_Click">Close ></Button>
+
+	</Grid>
+</Test:ResultControl>

@@ -1,0 +1,12 @@
+﻿<Window x:Class="YellowstonePathology.UI.AppMessaging.MessagingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI.Login"
+        mc:Ignorable="d"
+        Title="Messaging" Height="400" Width="800" WindowStyle="ToolWindow">
+    <Grid>
+        <ContentControl Name="MainContent" ></ContentControl>
+    </Grid>
+</Window>

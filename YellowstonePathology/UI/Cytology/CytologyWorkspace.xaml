@@ -1,0 +1,161 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Cytology.CytologyWorkspace"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:LocalUI="clr-namespace:YellowstonePathology.UI"
+	xmlns:TemplateSelectorUI="clr-namespace:YellowstonePathology.UI.TemplateSelector"
+    xmlns:cytology="clr-namespace:YellowstonePathology.UI.Cytology"
+    Name="UserControlCytologyWorkspace">
+	<UserControl.Resources>
+
+        <cytology:CytologyPanelSetBrushConversion x:Key="CytologyPanelSetBrushConverter"/>
+        <cytology:CytologyPanelSetFinalDateConversion x:Key="CytologyPanelSetFinalDateConverter"/>
+        <cytology:CytologyPanelAcceptedDateConversion x:Key="CytologyPanelAcceptedDateConverter"/>
+        
+        <SolidColorBrush x:Key="PanelSetOrderBackgroundBrush" Color="#CCCCFA"/>
+        <SolidColorBrush x:Key="PanelSetOrderBorderBrush" Color="#CCCCFA"/>
+        
+        <SolidColorBrush x:Key="PanelOrderBackgroundBrush" Color="#F9EDFA"/>
+        <SolidColorBrush x:Key="PanelOrderBorderBrush" Color="#F9EDFA"/>
+        
+        <SolidColorBrush x:Key="DotReviewBackgroundBrush" Color="#C8F4E6"/>
+        <SolidColorBrush x:Key="DotReviewBorderBrush" Color="#C8F4E6"/>
+        
+	</UserControl.Resources>
+	
+	<Grid>
+		<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+		</Grid.RowDefinitions>        
+        
+        <GridSplitter Width="3" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"></GridSplitter>
+
+        <TabControl Name="TabControlLeft" Grid.Column="0" Grid.Row="0" Margin="5,5,10,5">
+            <TabItem Name="TabItemDocumentViewer" Header="Requisition">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+						<ColumnDefinition Width="*"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>                        
+                    </Grid.RowDefinitions>
+                    
+                    <ContentControl Name="ContentControlDocumentViewer" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,5"></ContentControl>                                       					
+                
+                </Grid>
+            </TabItem>
+            <TabItem Header="Search">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>                    
+                    
+                    <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+						<ComboBox Name="ComboBoxScreenerSelection" Width="150" Margin="2,2,2,2" 
+                                  ItemsSource="{Binding Path=Search.Screeners}" SelectedValuePath="UserId" 
+                                  DisplayMemberPath="DisplayName">
+						</ComboBox>
+						<ComboBox Name="ComboBoxSearchType" Width="150" Margin="2,2,2,2"
+                                  ItemsSource="{Binding Path=Search.SearchTypes}">                            
+                        </ComboBox>
+						<Button Click="ButtonGetList_Click" ToolTip="Get list" Margin="2,0,2,0">
+							<StackPanel Orientation="Horizontal">
+								<Image  Height="18" Source="/Resources/Magnify.ico"></Image>
+                            </StackPanel>
+						</Button>
+                        <Button Click="ButtonPrintList_Click" ToolTip="Print List" Margin="2,0,2,0">
+                            <StackPanel Orientation="Horizontal">
+                                <Image  Height="18" Source="/Resources/Printer.ico"></Image>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <ListView Name="ListViewSearchResults"  Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=Search.Results}"
+                              Margin="0,0,0,0" SelectionChanged="ListViewSearchResult_SelectionChanged" LocalUI:ListViewSorter.IsSortable="true">
+                        <ListView.View>
+                            <GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="90" LocalUI:ListViewSorter.SortPropertyName="ReportNo"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=PatientName}" Header="Patient Name" Width="150"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=AccessionTime, Converter={StaticResource ShortDateConverter}}" Header="Accessioned" Width="85"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=ScreeningType}" Header="Type" Width="110"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=CaseFinalTime, Converter={StaticResource ShortDateConverter}}" Header="Finaled" Width="75"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=AssignedToName}" Header="Assigned To" Width="150"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=ScreeningFinalTime, Converter={StaticResource ShortDateConverter}}" Header="Screened" Width="75"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=OrderedByName}" Header="Ordered By" Width="150"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Margin="2,2,2,2" VerticalAlignment="Center">Assigned To:</TextBlock>
+                        <ComboBox Name="ComboBoxAssignedToSelection" Width="150" Margin="2,2,2,2" 
+                                  ItemsSource="{Binding Path=Search.Screeners}" SelectedValuePath="UserId" 
+                                  DisplayMemberPath="DisplayName">
+                        </ComboBox>                        
+                        <Button Click="ButtonAssignTo_Click" ToolTip="Assign To" Margin="2,2,2,2">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="18" Source="/UserInterface;component/Resources/Magnify.ico"></Image>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Name="TextBlockCount" Margin="2,2,2,2" VerticalAlignment="Center">Count:</TextBlock>                        
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Data Sheet">
+                <DocumentViewer Name="DocumentViewerDataSheet">
+                    
+                </DocumentViewer>
+            </TabItem>
+                        
+		</TabControl>        
+    
+        <Grid Name="ResultsGrid" Grid.Column="1" Grid.Row="0" Margin="2,2,2,2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition></RowDefinition>
+			</Grid.RowDefinitions>
+		</Grid>
+
+		<StatusBar Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+			<StatusBarItem>
+				<TextBlock Margin="25,2,2,2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Current User:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+				<TextBlock Width="120"  Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=CurrentUser.UserName}"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem>
+				<TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Locked By:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+                <TextBlock Width="300" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=AccessionOrder.LockStatus}"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem>
+				<TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Report No:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+				<TextBlock Width="60" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrderCytology.ReportNo}"></TextBlock>
+			</StatusBarItem>
+
+		</StatusBar>
+	</Grid>
+</UserControl>    

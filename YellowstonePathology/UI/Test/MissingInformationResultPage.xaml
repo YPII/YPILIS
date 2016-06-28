@@ -1,0 +1,175 @@
+﻿<Test:ResultControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+    x:Class="YellowstonePathology.UI.Test.MissingInformationResultPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Test="clr-namespace:YellowstonePathology.UI.Test">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="Missing Information Page" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+        <Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+		<Grid Grid.Row="1" Margin="5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Row="0" Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+
+            <Grid Grid.Column="0" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Set Call</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0">                    
+					<Hyperlink Click="HyperLinkFirstCall_Click">First Call</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,0">                    
+					<Hyperlink Click="HyperLinkSecondCall_Click">Second Call</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,3,0,0">                    
+					<Hyperlink Click="HyperLinkFax_Click">Fax</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,3,0,0">                    
+					<Hyperlink Click="HyperLinkThirdCall_Click">Third Call</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,0">                    
+					<Hyperlink Click="HyperLinkClientSystemLookup_Click">Client System Lookup</Hyperlink>
+				</TextBlock>
+                
+                <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkShowFaxPage_Click">Send Fax</Hyperlink>
+				</TextBlock>
+                
+                <TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkShowICDEntryPage_Click">ICD Entry</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="10" Margin="5,3,0,0">                    
+					<Hyperlink Click="HyperLinkFinalize_Click">Finalize</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="11" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkUnfinalResults_Click">Unfinalize</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="12" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkClearResults_Click">Clear</Hyperlink>
+				</TextBlock>
+
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Missing Information:</TextBlock>
+                <ComboBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Stretch" IsEditable="True" Text="{Binding Path=MissingInformtionTestOrder.MissingInformation}">
+                    <ComboBoxItem>Clinical History</ComboBoxItem>
+                    <ComboBoxItem>ICD9</ComboBoxItem>
+                    <ComboBoxItem>Provider</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">First Call:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=MissingInformtionTestOrder.FirstCallComment}" IsEnabled="False"></TextBox>
+
+                <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Second Call:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=MissingInformtionTestOrder.SecondCallComment}" IsEnabled="False"></TextBox>
+
+                <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Fax:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=MissingInformtionTestOrder.FaxSentBy}" IsEnabled="False"></TextBox>
+
+                <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Third Call:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=MissingInformtionTestOrder.ThirdCallComment}" IsEnabled="False"></TextBox>
+
+                <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Client System Lookup:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=MissingInformtionTestOrder.ClientSystemLookupBy}" IsEnabled="False"></TextBox>
+                
+                <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Final:</TextBlock>
+                <CheckBox Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" IsChecked="{Binding Path=MissingInformtionTestOrder.Final}" IsEnabled="False"></CheckBox>
+
+                <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Date Finaled:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="7" Margin="2,2,2,2" Text="{Binding Path=MissingInformtionTestOrder.FinalTime}" IsEnabled="False"></TextBox>
+
+                <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Finaled By:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="8" Margin="2,2,2,2" Text="{Binding Path=MissingInformtionTestOrder.Signature}" IsEnabled="False"></TextBox>
+                
+            </Grid>
+
+            <Grid Grid.Column="2" Grid.Row="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Left">Call Comments:</TextBlock>
+                <TextBox Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                         Text="{Binding Path=MissingInformtionTestOrder.CallComments}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+                
+                <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Left">Clinical History:</TextBlock>
+                <TextBox Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                         Text="{Binding Path=AccessionOrder.ClinicalHistory}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+
+            </Grid>
+
+        </Grid>
+
+		<Border Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>                
+        <Button Name="ButtonNext" Grid.Column="1" Grid.Row="2" Margin="5,5,5,5" Click="ButtonNext_Click" Width="100" Height="40" HorizontalAlignment="Right">Next ></Button>                
+        
+    </Grid>
+</Test:ResultControl>

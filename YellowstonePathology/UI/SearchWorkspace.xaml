@@ -1,0 +1,142 @@
+<UserControl x:Class="YellowstonePathology.UI.SearchWorkspace"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:localUI="clr-namespace:YellowstonePathology.UI">
+	<UserControl.Resources>
+		<ResourceDictionary Source="/UI/Styles.xaml"/>
+	</UserControl.Resources>
+    <Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+      </Grid.RowDefinitions>
+
+      <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2">
+        <TextBlock Style="{StaticResource NormalTextBlock}">Search:</TextBlock>
+        <TextBox Name="textBoxSearchCriteria"  Width="200" KeyUp="TextBoxSearchCriteria_KeyUp" ToolTip="PN-Patient Name, RN-Report No, SN-SSN, BD-Birthdate MA-Master Accession No"></TextBox>
+        <TextBlock Style="{StaticResource NormalTextBlock}">Sort:</TextBlock>
+        <ComboBox Name="ComboBoxSort" Width="200" SelectionChanged="ComboBoxSort_SelectionChanged">
+          <ComboBoxItem IsSelected="True">Patient Name</ComboBoxItem>
+          <ComboBoxItem>Accession Date</ComboBoxItem>
+          <ComboBoxItem>SSN</ComboBoxItem>
+        </ComboBox>
+      </StackPanel>
+      
+      <TabControl Grid.Column="0" Grid.Row="1">
+        <TabItem Header="Results">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>              
+              <RowDefinition Height="2*"></RowDefinition>
+              <RowDefinition></RowDefinition>
+              <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>            
+            <ListView Name="listViewCaseList" ItemsSource="{Binding Path=SearchListCollectionView}" 
+                      Grid.Column="0" Grid.Row="0" IsSynchronizedWithCurrentItem="True" PreviewMouseLeftButtonUp="ListViewCaseList_MouseLeftButtonUp">
+                <ListView.ContextMenu>
+                    <ContextMenu>                        
+                        <MenuItem Header="Show Patient History Dialog" Click="ContextMenuShowPatientHistoryDialog_Click"></MenuItem>
+					</ContextMenu>
+                </ListView.ContextMenu>              
+                <ListView.View>
+                    <GridView AllowsColumnReorder="true">
+                      <GridViewColumn Width="85" DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No"/>
+                      <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=PatientName}" Header="Name"/>
+                      <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Birthdate, Converter={StaticResource ShortDateConverter}}" Header="Birthdate"/>
+                      <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=SSN}" Header="SSN"/>
+                      <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=AccessionDate, Converter={StaticResource ShortDateConverter}}" Header="Accession Date"/>
+                      <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=FinalDate, Converter={StaticResource ShortDateConverter}}" Header="Final Date"/>                  
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView Name="listViewResultList" ItemsSource="{Binding Path=ResultList}" Grid.Column="0" Grid.Row="1" IsSynchronizedWithCurrentItem="True">
+              <ListView.View>
+                <GridView AllowsColumnReorder="true">
+                  <GridViewColumn Width="85" DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No"/>
+                  <GridViewColumn Width="400" DisplayMemberBinding="{Binding Path=Result}" Header="Result"/>
+                </GridView>
+              </ListView.View>
+            </ListView>
+					<ListView Name="listViewDocumentList" ItemsSource="{Binding Path=CaseDocumentCollection}" 
+                      Grid.Column="0" Grid.Row="2" IsSynchronizedWithCurrentItem="True" SelectionChanged="ListViewDocumentList_SelectionChanged">
+              <ListView.View>
+                <GridView AllowsColumnReorder="true">
+                  <GridViewColumn Width="300" DisplayMemberBinding="{Binding Path=FileName}" Header="File"/>
+                </GridView>
+              </ListView.View>
+            </ListView>
+          </Grid>
+        </TabItem>
+        <TabItem Name="TabItemPatientHistory" Header="History">
+          <Grid>            
+            <Grid.Resources>
+              <ResourceDictionary Source="\UI\Styles.xaml"/>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition></ColumnDefinition>
+              <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ListView Grid.Column="0" Grid.Row="0" Name="listViewPatientHistory" ItemsSource="{Binding Path=PatientHistoryList}" PreviewMouseLeftButtonUp="ListViewPatientHistoryCaseList_MouseLeftButtonUp">
+              <ListView.ContextMenu>
+                <ContextMenu>
+                  <MenuItem Header="Get Patient History" Click="ContextMenuGetPatientHistory_Click"></MenuItem>                  
+                </ContextMenu>
+              </ListView.ContextMenu>
+              <ListView.View>
+                <GridView>
+                  <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="150"/>
+                  <GridViewColumn DisplayMemberBinding="{Binding Path=AccessionDate, Converter={StaticResource ShortDateConverter}}" Header="Accession Date" Width="150"/>
+                </GridView>
+              </ListView.View>
+            </ListView>
+					<ListView Grid.Column="1" Grid.Row="0" Name="listViewPatientHistoryCaseFileList" ItemsSource="{Binding Path=PatientHistoryCaseDocumentCollection}" PreviewMouseLeftButtonUp="ListViewPatientHistoryViewDocument_MouseLeftButtonUp">
+              <ListView.View>
+                <GridView>
+                  <GridViewColumn DisplayMemberBinding="{Binding Path=FileName}" Header="File Name" Width="200"/>
+                </GridView>
+              </ListView.View>
+            </ListView>
+          </Grid>
+        </TabItem>
+      </TabControl>      
+      <TabControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="5">
+          
+        <TabItem Name="TabItemDocumentViewer" Header="Document Viewer"/>                 
+          
+        <TabItem Name="TabItemPhysicianSearch" Header="Physician Client Search">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="25"></RowDefinition>
+              <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>            
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
+              <TextBlock VerticalAlignment="Center">Physician:</TextBlock>
+              <TextBox Name="TextBoxPhysicianLastName" Width="200" Height="20" TextChanged="TextBoxPhysicianLastName_TextChanged"></TextBox>
+            </StackPanel>
+            <ListView Grid.Column="0" Grid.Row="1" Name="listViewPhysicianClient" Margin="2,2,2,2" ItemsSource="{Binding Path=PhysicianClientCollection}"
+                      PreviewMouseLeftButtonUp="ListViewPhysicianClient_MouseLeftButtonUp">
+              <ListView.View>
+                <GridView>
+                  <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianClientId}" Header="ID" Width="50"/>
+                  <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianName}" Header="Last Name" Width="200"/>                  
+                  <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Client Name" Width="300"/>
+                </GridView>
+              </ListView.View>
+            </ListView>            
+          </Grid>
+        </TabItem>        
+      </TabControl>
+    </Grid>
+</UserControl>

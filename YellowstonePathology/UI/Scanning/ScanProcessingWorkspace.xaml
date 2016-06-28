@@ -1,0 +1,54 @@
+<UserControl x:Class="YellowstonePathology.UI.Scanning.ScanProcessingWorkspace"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<UserControl.Resources>
+		<ResourceDictionary Source="\UI\Styles.xaml"/>
+	</UserControl.Resources>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition></RowDefinition>
+		</Grid.RowDefinitions>
+		<Grid Grid.Column="0" Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"></RowDefinition>								
+				<RowDefinition Height="250"></RowDefinition>
+			</Grid.RowDefinitions>			
+			<ListView Name="listViewScannedFiles" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=ScanFileList}" SelectionChanged="ListViewScannedFiles_SelectionChanged" PreviewKeyDown="ListViewScannedFiles_PreviewKeyDown">
+				<ListView.View>
+					<GridView>						
+						<GridViewColumn DisplayMemberBinding="{Binding Path=FullName}" Header="File Name"/>												
+					</GridView>
+				</ListView.View>
+			</ListView>			
+			<TabControl Grid.Column="0" Grid.Row="2">
+				<TabItem Header="Scan Folders">
+					<ListView Name="listViewScanFolders" ItemsSource="{Binding Path=ScanFolderList}" SelectionChanged="ListViewScanFolders_SelectionChanged">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=FolderName}" Header="Scann Folders"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</TabItem>
+				<TabItem Header="Tasks">
+					<StackPanel>
+						<Button Name="buttonExtract" Style="{StaticResource NormalButton}" Width="200" Click="ButtonExtract_Click">Extract selected file.</Button>
+						<Button Name="buttonExtractAll" Style="{StaticResource NormalButton}" Width="200" Click="ButtonExtractAll_Click">Extract all files.</Button>
+						<Button Name="buttonFlipAll" Style="{StaticResource NormalButton}" Width="200" Click="ButtonFlipAll_Click">Flip all files.</Button>
+						<Button Name="buttonProcessImages" Style="{StaticResource NormalButton}" Width="200" Click="ButtonProcessImages_Click">Process images.</Button>
+						<Button Name="buttonDeleteFiles" Style="{StaticResource NormalButton}" Width="200" Click="ButtonDeleteFiles_Click">Delete marked files.</Button>				
+					</StackPanel>
+				</TabItem>
+			</TabControl>
+		</Grid>
+		<GridSplitter Grid.Column="0" Width="2"/>
+    <DocumentViewer Name="DocumentViewer" Grid.Column="1" Grid.Row="1"></DocumentViewer>		
+	</Grid>
+</UserControl>
