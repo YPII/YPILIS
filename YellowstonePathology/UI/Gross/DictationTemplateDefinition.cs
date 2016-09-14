@@ -80,7 +80,7 @@ namespace YellowstonePathology.UI.Gross
         public ConsultTemplate()
         {
             this.m_TemplateName = "Consult";
-            this.m_Text = "Received in consultation from [physicianname] ([clientname] - [clientcitystate]) are [slidecount] slide[?s?] and blockcount block[?s?] labeled [clientaccession] for patient [patientname].  ";
+            this.m_Text = "Received in consultation from [physicianname] ([clientname] - [clientcitystate]) are [slidecount] slide[?s?] and [blockcount] block[?s?] labeled [clientaccession] for patient [patientname].  ";
 
             YellowstonePathology.Business.Specimen.Model.SpecimenDefinition.Consult consult = new YellowstonePathology.Business.Specimen.Model.SpecimenDefinition.Consult();
             this.m_SpecimenCollection.Add(consult);
