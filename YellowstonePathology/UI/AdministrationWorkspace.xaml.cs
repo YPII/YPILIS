@@ -36,7 +36,6 @@ using MongoDB.Driver.Builders;
 using MongoDB.Driver.GridFS;
 using Newtonsoft.Json;
 using MySql.Data.MySqlClient;
-using LibGit2Sharp;
 
 namespace YellowstonePathology.UI
 {    

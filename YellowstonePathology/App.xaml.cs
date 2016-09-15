@@ -16,7 +16,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using Microsoft.Win32;
 using System.Diagnostics;
-using LibGit2Sharp;
+//using LibGit2Sharp;
 
 namespace YellowstonePathology.UI
 {
@@ -86,6 +86,7 @@ namespace YellowstonePathology.UI
 
         public static void HandleLocalRepository()
         {
+            /*
             string localRepoPath = @"C:\ProgramData\ypi\lisdata";
 
             if(System.IO.Directory.Exists(localRepoPath) == false)
@@ -112,7 +113,8 @@ namespace YellowstonePathology.UI
                 {
                     MessageBox.Show("The local repository has uncommitted changes.");
                 }
-            }            
+            }   
+            */         
         }
 
         public static bool HandledictionarySetup()
