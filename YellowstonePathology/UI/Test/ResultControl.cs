@@ -19,13 +19,23 @@ namespace YellowstonePathology.UI.Test
         {
             this.m_TestOrder = testOrder;
             this.m_ControlsNotDisabledOnFinal = new List<FrameworkElement>();
-            if (accessionOrder.AccessionLock.IsLockAquiredByMe == false ||
-                (this.m_TestOrder.Final == true &&
-                (this.m_TestOrder.Distribute == false ||
-                this.m_TestOrder.TestOrderReportDistributionCollection.HasDistributedItems())))
+
+            this.m_DisableRequired = false;
+            if (accessionOrder.AccessionLock.IsLockAquiredByMe == false)
             {
                 this.m_DisableRequired = true;
             }
+            else if(this.m_TestOrder.Final == true)
+            {
+                if(this.m_TestOrder.Distribute == false)
+                {
+                    this.m_DisableRequired = true;
+                }
+                else if(this.m_TestOrder.TestOrderReportDistributionCollection.HasDistributedItems())
+                {
+                    this.m_DisableRequired = true;
+                }
+            }            
 
             this.Loaded += ResultControl_Loaded;
         }
