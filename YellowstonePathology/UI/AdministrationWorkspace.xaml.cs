@@ -1004,35 +1004,18 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            //byte[] bytes = Convert.FromBase64String("XlhBXkNGLDAsMCwwXlBSMTJeTUQzMF5QVzgwMF5QT0leQ0kxM15MSDAsMjAKXkZPMTIsMTI0XkdCNzU1LDIsMl5GUwpeRk8xMiwzOTBeR0I3NzcsMiwyXkZTCl5GTzMyLDNeQWROLDAsMF5GV05eRkheRkRGUk9NOl5GUwpeRk8zMiwxOV5BZE4sMCwwXkZXTl5GSF5GRFNpZCBIYXJkZXJeRlMKXkZPMzIsMzdeQWROLDAsMF5GV05eRkheRkRZZWxsb3dzdG9uZSBQYXRob2xvZ3kgSW5zdGl0dXRlXkZTCl5GTzMyLDU1XkFkTiwwLDBeRldOXkZIXkZEMjkwMCAxMnRoIEF2ZS4gTi5eRlMKXkZPMzIsNzNeQWROLDAsMF5GV05eRkheRkRTdWl0ZSAyOTVXXkZTCl5GTzMyLDEwOV5BZE4sMCwwXkZXTl5GSF5GRFVTIF5GUwpeRk8yMjQsM15BZE4sMCwwXkZXTl5GSF5GRCg0MDYpIDIzOC02MzYwXkZTCl5GTzQ3OCwzN15BZE4sMCwwXkZXTl5GSF5GRENBRDogMTE4NzM3NjEzL1dTWEkzMDAwXkZTCl5GTzI4LDc0Ml5BME4sMjQsMjReRldOXkZIXkZEVFJLI15GUwpeRk8yOCw4MDBeQTBOLDI3LDMyXkZXTl5GSF5GRF5GUwpeRk8xMzYsNzEyXkEwTiwyNywzNl5GV05eRkheRkReRlMKXkZPMzIsOTFeQWROLDAsMF5GV05eRkheRkRCaWxsaW5ncyBNVCA1OTEwMl5GUwpeRk80NzgsM15BZE4sMCwwXkZXTl5GSF5GRFNISVAgREFURTogMjVBVUcxNl5GUwpeRk80NzgsMTleQWROLDAsMF5GV05eRkheRkRBQ1RXR1Q6IDIwLjAwIExCXkZTCl5GTzQ3OCw5MV5BZE4sMCwwXkZXTl5GSF5GREJJTEwgU0VOREVSXkZTCl5GTzM5LDM0N15BZE4sMCwwXkZXTl5GSF5GRCg4NjYpIDc3Ni01OTA3XkZTCl5GTzM5LDEzNl5BME4sMzksMzleRldOXkZIXkZETmVvZ2Vub21pY3NeRlMKXkZPMzksMTc4XkEwTiwzOSwzOV5GV05eRkheRkROZW9nZW5vbWljcyBJcnZpbmVeRlMKXkZPMzksMjIwXkEwTiwzOSwzOV5GV05eRkheRkQ1IEplbm5lciBTdHJlZXReRlMKXkZPMzksMjYyXkEwTiwzOSwzOV5GV05eRkheRkQqKlRFU1QgTEFCRUwgLSBETyBOT1QgU0hJUCoqXkZTCl5GTzM5LDMwNF5BME4sNDMsNDBeRldOXkZIXkZESXJ2aW5lIENBIDkyNjE4XkZTCl5GTzcxOSwzMDReQTBOLDQzLDQwXkZXTl5GSF5GRChVUyleRlMKXkZPNzA5LDQ0MF5BME4sMTksMjZeRldOXkZIXkZER3JvdW5kXkZTCl5GTzY4OSw0ODBeQTBOLDEyOCwxMzdeRldOXkZIXkZER15GUwpeRk82NzcsNDYyXkdCMTA0LDEwLDEwXkZTCl5GTzY3Nyw0NzJeR0IxMCwxMTIsMTBeRlMKXkZPNzcxLDQ3Ml5HQjEwLDExMiwxMF5GUwpeRk82NzcsNTg0XkdCMTA0LDEwLDEwXkZTCl5GTzQ2NCwtLV5HQjIsMTI2LDJeRlMKXkZPNjU0LDQwMl5BME4sNDMsNTheRldOXkZIXkZERmVkRXheRlMKXkZPNzA5LDQ0MF5BME4sMTksMjZeRldOXkZIXkZER3JvdW5kXkZTCl5GTzY4OSw0ODBeQTBOLDEyOCwxMzdeRldOXkZIXkZER15GUwpeRk83OTEsNDkzXkEwTiwxMywxOF5GV0JeRkheRkRKMTYyMDE2MDcwNTAxdXZeRlMKXkZPOSwxMzZeQTBOLDIxLDIxXkZXTl5GSF5GRFRPXkZTCl5GTzIxLDQwMF5CWTIsMl5CN04sMTAsNSwxNF5GSF5GV05eRkheRkRbKT5fMUUwMV8xRDAyOTI2MThfMUQ4NDBfMUQwMTlfMUQ3OTQ2MjE3NTQxNzZfMURGREVHXzFEODAwMDI4NF8xRDIzOF8xRF8xRDEvMV8xRDIwLjAwTEJfMUROXzFENSBKZW5uZXIgU3RyZWV0XzFESXJ2aW5lXzFEQ0FfMUROZW9nZW5vbWljc18xRTA2XzFEMTBaR0QwMDlfMUQxMVpOZW9nZW5vbWljcyBJcnZpbmVfMUQxMlo4NjY3NzY1OTA3XzFEMTRaU3VpdGUgMTAwXzFEMjBaXzFDXzFEMzFaOTYyMjAwMTkwMDAwODAwMDI4NDYwMDc5NDYyMTc1NDE3Nl8xRDM0WjAxXzFEOUtzdHJpbmdfMURfMUVfMDReRlMKXkZPMjgsODM3XkEwTiwxMDcsOTZeRldOXkZIXkZEXkZTCl5GTzEyLDY4MV5HQjc3NywyLDJeRlMKXkZPNDk0LDg4NV5BME4sNDMsNDNeRldOXkZIXkZEXkZTCl5GTzc4OCwyOF5BYk4sMTEsN15GV0JeRkheRkQ1NDRKMS8xMzcwLzE0RTheRlMKXkZPOTUsNzQ2XkEwTiw1Myw0MF5GV05eRkheRkQ3OTQ2IDIxNzUgNDE3Nl5GUwpeRk80MDksNjk1XkEwTiw1MSwzOF5GV05eRkheRkIzOTAsLCxSLF5GRCAgICAgICAgICAgICAgICAgICBeRlMKXkZPNDA0LDc0N15BME4sNTEsMzheRldOXkZIXkZCNDAwLCwsUixeRkQgICAgICAgICAgICAgICAgICAgXkZTCl5GTzQxMyw3OTleQTBOLDQwLDQwXkZXTl5GSF5GQjM4NiwsLFIsXkZEICAgICAgICAgICAgICAgIF5GUwpeRk80OTUsODQxXkEwTiw0NCw0NF5GV05eRkheRkIyOTgsLCxSLF5GRCAgICAgOTI2MTheRlMKXkZPNTc0LDkwMV5BME4sMjQsMjReRldOXkZIXkZCMTIwLCwsUixeRkQgICAgICBeRlMKXkZPNjk1LDg4NV5BME4sNDMsNDNeRldOXkZIXkZCMTAwLCwsUixeRkQgICBeRlMKXkZPMzksOTI3XkEwTiwyNywzNl5GV05eRkheRkQ5NjIyIDAwMTkgMCAoMDAwIDgwMCAwMjg0KSA2IDAwIDc5NDYgMjE3NSA0MTc2XkZTCl5GTzc1LDk2OF5CWTMsMl5CQ04sMjAwLE4sTixOLE5eRldOXkZEPjs5NjIyMDAxOTAwMDA4MDAwMjg0NjAwMDAwMDAwMDAwMDAwXkZTCl5GTzQ3OCw1NV5BZE4sMCwwXkZXTl5GSF5GRERJTU1FRDogMTIgWCAxMiBYIDEyIElOXkZTCl5GTzMyOSwzNDleQWJOLDExLDdeRldOXkZIXkZEUkVGOiBTVFJJTkdeRlMKXkZPMzksMzYzXkFiTiwxMSw3XkZXTl5GSF5GRElOVjogXkZTCl5GTzM5LDM3N15BYk4sMTEsN15GV05eRkheRkRQTzogXkZTCl5GTzQyOSwzNzdeQWJOLDExLDdeRldOXkZIXkZEREVQVDogXkZTCl5QUTEKXlhaCg==");
-            //string zplString = System.Text.Encoding.Default.GetString(bytes);
+            //if (accessionOrder.AccessionLock.IsLockAquiredByMe == false ||
+            //    (this.m_TestOrder.Final == true &&
+            //    (this.m_TestOrder.Distribute == false ||
+            //    this.m_TestOrder.TestOrderReportDistributionCollection.HasDistributedItems())))
 
-            //Business.Label.Model.ZPLPrinter zplPrinter = new Business.Label.Model.ZPLPrinter();
-            //zplPrinter.Print(Business.Label.Model.PantherZPLLabel.GetCommands("16-21986.1.2", DateTime.Parse("6/30/1993"), "MOUSE, MICKEY", "Thin Prep Fluid"));            
+            bool haveLock = false;
+            bool isFinal = false;
+            bool willDistribute = false;
+            bool hasDistributed = false;
 
-            //Business.Facility.Model.NeogenomicsIrvine neo = new Business.Facility.Model.NeogenomicsIrvine();
-            //Business.MaterialTracking.Model.FedexAccountProduction acct = new Business.MaterialTracking.Model.FedexAccountProduction();
-            //Business.MaterialTracking.Model.FedexTrackingRequest trackingRequest = new Business.MaterialTracking.Model.FedexTrackingRequest(acct, "784010962852");
-
-            //string result = trackingRequest.Post();
-
-            //Business.MaterialTracking.Model.FedexShipmentRequest fedexShipment = new Business.MaterialTracking.Model.FedexShipmentRequest(neo, acct);
-            //string result = fedexShipment.RequestShipment();           
-
-            //Business.MaterialTracking.Model.FedexDeleteShipmentRequest delete = new Business.MaterialTracking.Model.FedexDeleteShipmentRequest(acct, "783967960879");
-            //string result = delete.Post();
-
-
-            //LibGit2Sharp.Repository repo = new Repository("https://github.com/YPII/lisdata.git");
-            LibGit2Sharp.Repository repo = new Repository(@"C:\ProgramData\ypi\lisdata");
-            repo.Fetch("origin");
-            LibGit2Sharp.Signature signature = new Signature("SidHarder", "softwarenavigator@gmail.com", new DateTimeOffset(DateTime.Now));
-            Branch master = repo.Branches["master"];
-            repo.MergeFetchedRefs(signature, new MergeOptions());
-
-            //LibGit2Sharp.PullOptions pullOptions = new PullOptions();            
-            //LibGit2Sharp.Commands.Pull(repo, signature, pullOptions);
-
+            bool result = haveLock || (isFinal && (willDistribute || hasDistributed));
+            Console.WriteLine("Result: " + result);
         }        
 
         private void PrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)

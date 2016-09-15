@@ -268,10 +268,14 @@ namespace YellowstonePathology.UI.ReportDistribution
 
             //try
             //{
-                caseDocument.Render();
+            caseDocument.Render();
+            if(panelSetOrder.ResultDocumentSource != "Reference Lab")
+            {
                 caseDocument.Publish();
+            }
+                
+            this.m_ReportDistributionLogEntryCollection.AddEntry("INFO", "Publish Next", null, panelSetOrder.ReportNo, panelSetOrder.MasterAccessionNo, null, null, "PanelSetOrder Published");
 
-                this.m_ReportDistributionLogEntryCollection.AddEntry("INFO", "Publish Next", null, panelSetOrder.ReportNo, panelSetOrder.MasterAccessionNo, null, null, "PanelSetOrder Published");
             //}                                    
             //catch (Exception publishException)
             //{

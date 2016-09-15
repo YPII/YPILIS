@@ -29,6 +29,8 @@
     </AssemblyOriginatorKeyFile>
     <ApplicationIcon>YPI.ico</ApplicationIcon>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>\\ypiidc\YPIILIS\Application\</PublishUrl>
     <Install>false</Install>
     <InstallFrom>Unc</InstallFrom>
@@ -41,14 +43,12 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>98</ApplicationRevision>
+    <ApplicationRevision>107</ApplicationRevision>
     <ApplicationVersion>10.1.6.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,7 +66,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
     <Optimize>false</Optimize>
-    <OutputPath>.\bin\Release\</OutputPath>
+    <OutputPath>..\..\..\..\Program Files\Yellowstone Pathology Institute\apprelease\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
@@ -89,8 +89,8 @@
       <HintPath>dll\Interop.FAXCOMEXLib.dll</HintPath>
     </Reference>
     <Reference Include="LibGit2Sharp, Version=0.22.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
-      <HintPath>..\packages\LibGit2Sharp.0.22.0\lib\net40\LibGit2Sharp.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libgit2sharp\LibGit2Sharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
@@ -4668,9 +4668,6 @@
     <EmbeddedResource Include="DomainPersistence\Schema\WebServiceAccountSchema.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="PullLisData.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="UI\CEFSharp\CefSharp.WinForms.Example.exe.config" />
     <None Include="UI\CEFSharp\CefSharp.WinForms.Example.vshost.exe.config" />
     <None Include="UI\CEFSharp\CefSharp.WinForms.Example.vshost.exe.manifest" />
@@ -6749,6 +6746,10 @@
     <Resource Include="UI\XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="libgit2sharp\git2-785d8c4.dll" />
+    <Content Include="libgit2sharp\git2-785d8c4.pdb" />
+    <Content Include="libgit2sharp\LibGit2Sharp.dll" />
+    <Content Include="libgit2sharp\LibGit2Sharp.pdb" />
     <Content Include="UI\CEFSharp\avcodec-54.dll" />
     <Content Include="UI\CEFSharp\avformat-54.dll" />
     <Content Include="UI\CEFSharp\avutil-51.dll" />
