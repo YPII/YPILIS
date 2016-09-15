@@ -6742,10 +6742,6 @@
     <Resource Include="UI\XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="libgit2sharp\git2-785d8c4.dll" />
-    <Content Include="libgit2sharp\git2-785d8c4.pdb" />
-    <Content Include="libgit2sharp\LibGit2Sharp.dll" />
-    <Content Include="libgit2sharp\LibGit2Sharp.pdb" />
     <Content Include="UI\CEFSharp\avcodec-54.dll" />
     <Content Include="UI\CEFSharp\avformat-54.dll" />
     <Content Include="UI\CEFSharp\avutil-51.dll" />
