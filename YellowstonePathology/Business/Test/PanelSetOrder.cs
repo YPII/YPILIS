@@ -97,7 +97,8 @@ namespace YellowstonePathology.Business.Test
         private Nullable<DateTime> m_TimeAdditionalTestingEmailSent;
         private string m_AdditionalTestingEmailMessage;
         private string m_AdditionalTestingEmailAddress;
-        protected string m_ReportReferences;        
+        protected string m_ReportReferences;
+        protected bool m_ResearchTesting;  
 
         protected YellowstonePathology.Business.Document.CaseDocumentCollection m_CaseDocumentCollection;
 
@@ -124,7 +125,7 @@ namespace YellowstonePathology.Business.Test
 			this.m_OrderedByInitials = Business.User.SystemIdentity.Instance.User.Initials;
 			this.OrderDate = DateTime.Today;
 			this.OrderTime = DateTime.Now;
-
+            this.m_ResearchTesting = panelSet.ResearchTesting;
 			this.m_PanelSetId = panelSet.PanelSetId;
             this.m_CaseType = panelSet.CaseType;
 			this.m_PanelSetName = panelSet.PanelSetName;
@@ -175,7 +176,7 @@ namespace YellowstonePathology.Business.Test
             this.OrderDate = DateTime.Today;
 			this.OrderTime = DateTime.Now;
             this.m_CaseType = panelSet.CaseType;
-
+            this.m_ResearchTesting = panelSet.ResearchTesting;
 			if (orderTarget != null)
 			{
 				this.m_OrderedOnId = orderTarget.GetId();
@@ -221,7 +222,8 @@ namespace YellowstonePathology.Business.Test
             this.m_UniversalServiceId = universalService.UniversalServiceId;			
 		}
 
-		[PersistentDocumentIdProperty(50)]
+		[PersistentDocumentIdProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }
@@ -235,7 +237,8 @@ namespace YellowstonePathology.Business.Test
 			}
 		}
 
-        [PersistentPrimaryKeyProperty(false, 20)]
+        [PersistentPrimaryKeyProperty(false)]
+        [PersistentDataColumnProperty(false, "20", "null", "varchar")]
         public string ReportNo
         {
             get { return this.m_ReportNo; }
@@ -250,6 +253,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty(true)]
+        [PersistentDataColumnProperty(true, "11", "null", "int")]
         public int PanelSetId
         {
             get { return this.m_PanelSetId; }
@@ -263,7 +267,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(100)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
         public string PanelSetName
         {
             get { return this.m_PanelSetName; }
@@ -277,7 +282,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string MasterAccessionNo
         {
             get { return this.m_MasterAccessionNo; }
@@ -291,7 +297,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ExternalOrderId
         {
             get { return this.m_ExternalOrderId; }
@@ -305,7 +312,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
         public int FinaledById
         {
             get { return this.m_FinaledById; }
@@ -319,7 +327,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "bit")]
         public bool Final
         {
             get { return this.m_Final; }
@@ -334,6 +343,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> FinalDate
         {
             get { return this.m_FinalDate; }
@@ -348,6 +358,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> FinalTime
         {
             get { return this.m_FinalTime; }
@@ -361,7 +372,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "11", "0", "int")]
         public int AcceptedById
         {
             get { return this.m_AcceptedById; }
@@ -375,7 +387,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool Accepted
         {
             get { return this.m_Accepted; }
@@ -390,6 +403,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> AcceptedDate
         {
             get { return this.m_AcceptedDate; }
@@ -404,6 +418,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> AcceptedTime
         {
             get { return this.m_AcceptedTime; }
@@ -417,7 +432,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string AcceptedBy
 		{
 			get { return this.m_AcceptedBy; }
@@ -431,7 +447,8 @@ namespace YellowstonePathology.Business.Test
 			}
 		}
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
         public int OrderedById
         {
             get { return this.m_OrderedById; }
@@ -445,7 +462,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string OrderedByInitials
 		{
 			get { return this.m_OrderedByInitials; }
@@ -459,7 +477,8 @@ namespace YellowstonePathology.Business.Test
 			}
 		}
 
-        [PersistentProperty("CONVERT([varchar](20),getdate(),(102))")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> OrderDate
         {
             get { return this.m_OrderDate; }
@@ -473,7 +492,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("getdate()")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> OrderTime
         {
             get { return this.m_OrderTime; }
@@ -487,7 +507,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(150)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "150", "null", "varchar")]
         public string Signature
         {
             get { return this.m_Signature; }
@@ -501,7 +522,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
         public int AssignedToId
         {
             get { return this.m_AssignedToId; }
@@ -515,7 +537,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
         public int TemplateId
         {
             get { return this.m_TemplateId; }
@@ -529,7 +552,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool Audited
         {
             get { return this.m_Audited; }
@@ -543,7 +567,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
         public int AuditedById
         {
             get { return this.m_AuditedById; }
@@ -558,6 +583,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> AuditedDate
         {
             get { return this.m_AuditedDate; }
@@ -571,7 +597,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool HoldBilling
         {
             get { return this.m_HoldBilling; }
@@ -585,7 +612,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ResultDocumentSource
         {
             get { return this.m_ResultDocumentSource; }
@@ -599,7 +627,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(150)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "150", "null", "varchar")]
         public string ResultDocumentPath
         {
             get { return this.m_ResultDocumentPath; }
@@ -613,7 +642,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "bit")]
         public bool Published
         {
             get { return this.m_Published; }
@@ -628,6 +658,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> TimeLastPublished
         {
             get { return this.m_TimeLastPublished; }
@@ -642,6 +673,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> ScheduledPublishTime
         {
             get { return this.m_ScheduledPublishTime; }
@@ -655,7 +687,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool PublishNotificationSent
         {
             get { return this.m_PublishNotificationSent; }
@@ -670,6 +703,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> TimeOfLastPublishNotification
         {
             get { return this.m_TimeOfLastPublishNotification; }
@@ -683,7 +717,8 @@ namespace YellowstonePathology.Business.Test
             }
         }        
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string TechnicalComponentFacilityId
         {
             get { return this.m_TechnicalComponentFacilityId; }
@@ -697,7 +732,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string TechnicalComponentInstrumentId
         {
             get { return this.m_TechnicalComponentInstrumentId; }
@@ -711,7 +747,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string TechnicalComponentBillingFacilityId
         {
             get { return this.m_TechnicalComponentBillingFacilityId; }
@@ -725,7 +762,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "bit")]
         public bool HasTechnicalComponent
         {
             get { return this.m_HasTechnicalComponent; }
@@ -739,7 +777,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ProfessionalComponentFacilityId
         {
             get { return this.m_ProfessionalComponentFacilityId; }
@@ -753,7 +792,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ProfessionalComponentBillingFacilityId
         {
             get { return this.m_ProfessionalComponentBillingFacilityId; }
@@ -767,7 +807,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "bit")]
         public bool HasProfessionalComponent
         {
             get { return this.m_HasProfessionalComponent; }
@@ -781,7 +822,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(100)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
         public string OrderedOnId
         {
             get { return this.m_OrderedOnId; }
@@ -795,7 +837,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(100)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
         public string OrderedOn
         {
             get { return this.m_OrderedOn; }
@@ -809,7 +852,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(100)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
         public string PreparationProcedure
         {
             get { return this.m_PreparationProcedure; }
@@ -823,7 +867,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ResultCode
         {
             get { return this.m_ResultCode; }
@@ -837,7 +882,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "bit")]
         public bool NoCharge
         {
             get { return this.m_NoCharge; }
@@ -851,7 +897,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool Ordered14DaysPostDischarge
         {
             get { return this.m_Ordered14DaysPostDischarge; }
@@ -865,7 +912,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string BillingType
         {
             get { return this.m_BillingType; }
@@ -879,7 +927,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool IsBillable
         {
             get { return this.m_IsBillable; }
@@ -893,7 +942,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool IsPosted
         {
             get { return this.m_IsPosted; }
@@ -907,7 +957,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool Distribute
         {
             get { return this.m_Distribute; }
@@ -921,7 +972,8 @@ namespace YellowstonePathology.Business.Test
             }
         }        
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string UniversalServiceId
         {
             get { return this.m_UniversalServiceId; }
@@ -935,7 +987,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "150", "null", "varchar")]
         public string ReferenceLabSignature
         {
             get { return this.m_ReferenceLabSignature; }
@@ -950,6 +1003,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> ReferenceLabFinalDate
         {
             get { return this.m_ReferenceLabFinalDate; }
@@ -964,6 +1018,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> ExpectedFinalTime
         {
             get { return this.m_ExpectedFinalTime; }
@@ -977,7 +1032,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool IsDelayed
         {
             get { return this.m_IsDelayed; }
@@ -991,7 +1047,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string DelayedBy
         {
             get { return this.m_DelayedBy; }
@@ -1006,6 +1063,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> DelayedDate
         {
             get { return this.m_DelayedDate; }
@@ -1019,7 +1077,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string DelayComment
         {
             get { return this.m_DelayComment; }
@@ -1033,7 +1092,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string CaseType
         {
             get { return this.m_CaseType; }
@@ -1047,7 +1107,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool HoldForPeerReview
         {
             get { return this.m_HoldForPeerReview; }
@@ -1061,7 +1122,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(5000)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
         public string PeerReviewRequestComment
         {
             get { return this.m_PeerReviewRequestComment; }
@@ -1075,7 +1137,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string PeerReviewRequestType
         {
             get { return this.m_PeerReviewRequestType; }
@@ -1089,7 +1152,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool HoldDistribution
         {
             get { return this.m_HoldDistribution; }
@@ -1104,6 +1168,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "null", "bit")]
         public bool AdditionalTestingEmailSent
         {
             get { return this.m_AdditionalTestingEmailSent; }
@@ -1117,7 +1182,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string AdditionalTestingEmailSentBy
         {
             get { return this.m_AdditionalTestingEmailSentBy; }
@@ -1132,6 +1198,7 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> TimeAdditionalTestingEmailSent
         {
             get { return this.m_TimeAdditionalTestingEmailSent; }
@@ -1145,7 +1212,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string AdditionalTestingEmailMessage
         {
             get { return this.m_AdditionalTestingEmailMessage; }
@@ -1159,7 +1227,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(200)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "200", "null", "varchar")]
         public string AdditionalTestingEmailAddress
         {
             get { return this.m_AdditionalTestingEmailAddress; }
@@ -1173,7 +1242,8 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentStringProperty(5000)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
         public string ReportReferences
         {
             get { return this.m_ReportReferences; }
@@ -1185,7 +1255,21 @@ namespace YellowstonePathology.Business.Test
                     this.NotifyPropertyChanged("ReportReferences");
                 }
             }
-        }        
+        }
+
+        [PersistentProperty()]
+        public bool ResearchTesting
+        {
+            get { return this.m_ResearchTesting; }
+            set
+            {
+                if (this.m_ResearchTesting != value)
+                {
+                    this.m_ResearchTesting = value;
+                    this.NotifyPropertyChanged("ResearchTesting");
+                }
+            }
+        }
 
         public virtual void DeleteChildren()
 		{

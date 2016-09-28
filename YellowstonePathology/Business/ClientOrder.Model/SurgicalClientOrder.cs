@@ -23,8 +23,9 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 		{
 		}
 
-        [PersistentProperty()]
         [DataMember]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1000", "null", "varchar")]
         public string PreOpDiagnosis
         {
             get { return this.m_PreOpDiagnosis; }
@@ -38,8 +39,9 @@ namespace YellowstonePathology.Business.ClientOrder.Model
             }
         }
 
-        [PersistentProperty()]
         [DataMember]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
         public string PostOpDiagnosis
         {
             get { return this.m_PostOpDiagnosis; }

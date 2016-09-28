@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Specimen.Model
 		public SpecimenOrderCollection()
 		{
 			this.m_IsLoading = false;
-		}
+		}        
 
         public void RemoveDeleted(IEnumerable<XElement> elements)
         {

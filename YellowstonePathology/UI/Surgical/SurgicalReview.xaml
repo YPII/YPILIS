@@ -170,21 +170,15 @@
             </Grid>			                			
 		</DataTemplate>
 
-		<HierarchicalDataTemplate x:Key="DataTemplateAncillaryStudiesSpecimen" ItemsSource="{Binding Path=StainResultItemCollection}"
+        <HierarchicalDataTemplate x:Key="DataTemplateAncillaryStudiesSpecimen" ItemsSource="{Binding Path=StainResultItemCollection}"
 				 ItemTemplate="{StaticResource DataTemplateAncillaryStudies}">
-			<StackPanel Orientation="Horizontal" Margin="2,2,2,2">
-				<TextBlock Width="20" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=DiagnosisIdFormatted}"></TextBlock>
-				<TextBlock Width="200" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=SpecimenOrder.Description}"></TextBlock>
-			</StackPanel>
-		</HierarchicalDataTemplate>
+            <StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                <TextBlock Width="20" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=DiagnosisIdFormatted}"></TextBlock>
+                <TextBlock Width="200" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=SpecimenOrder.Description}"></TextBlock>
+            </StackPanel>
+        </HierarchicalDataTemplate>
 
-		<!--<x:Array x:Key="PeerReviewResults" Type="sys:String">
-			<sys:String>Not Performed</sys:String>
-			<sys:String>Agree</sys:String>
-			<sys:String>Disagree</sys:String>
-		</x:Array>-->
-		
-		<DataTemplate x:Key="CPTBillingTemplate">
+        <DataTemplate x:Key="CPTBillingTemplate">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="15"></ColumnDefinition>
@@ -214,83 +208,35 @@
 			</Grid>
 		</DataTemplate>
 
-		<DataTemplate x:Key="Icd9BillingTemplate">
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="15"></ColumnDefinition>
-					<ColumnDefinition></ColumnDefinition>
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition></RowDefinition>
-				</Grid.RowDefinitions>
+        <DataTemplate x:Key="Icd9BillingTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
 
-				<StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
                     <TextBox Margin="2,0,2,0" Width="20" MinWidth="20" MaxWidth="20" HorizontalAlignment="Left" Text="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}"
 						 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
-					</TextBox>
+                    </TextBox>
                     <TextBox Margin="2,0,2,0" Width="50" MinWidth="50" MaxWidth="50" Text="{Binding Path=ICD9Code, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
 						IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
-					</TextBox>
-					<Button Margin="2,0,2,0" Height="15" Width="15" HorizontalAlignment="Left" ToolTip="Delete Code"
+                    </TextBox>
+                    <Button Margin="2,0,2,0" Height="15" Width="15" HorizontalAlignment="Left" ToolTip="Delete Code"
 						Click="ButtonDeleteIcd9Code_Click" VerticalAlignment="Center" Tag="{Binding}"
 						IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
-						<StackPanel Orientation="Horizontal">
-							<Image Source="/Resources/Delete.ico"></Image>
-						</StackPanel>
-					</Button>
-				</StackPanel>
-			</Grid>
-		</DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Delete.ico"></Image>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
 
-		<!--<DataTemplate x:Key="DataTemplatePeerReview">
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition></ColumnDefinition>
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-				</Grid.RowDefinitions>
-
-				<StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
-					<TextBlock Margin="2,2,2,2">Review By:</TextBlock>
-					<TextBlock Margin="2,2,2,2" Text="{Binding Path=ReviewerName}"></TextBlock>
-				</StackPanel>
-
-				<StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
-					<ListBox Name="ListBoxPeerReview" ItemsSource="{StaticResource PeerReviewResults}"  
-                             BorderThickness="0" Margin="2,2,2,2" SelectedItem="{Binding Path=Result}">
-						<ListBox.ItemsPanel>
-							<ItemsPanelTemplate>
-								<WrapPanel></WrapPanel>
-							</ItemsPanelTemplate>
-						</ListBox.ItemsPanel>
-						<ListBox.ItemContainerStyle>
-							<Style TargetType="{x:Type ListBoxItem}">
-								<Setter Property="Template">
-									<Setter.Value>
-										<ControlTemplate TargetType="{x:Type ListBoxItem}">
-											<RadioButton Content="{Binding}" IsChecked="{Binding IsSelected, RelativeSource={x:Static RelativeSource.TemplatedParent}}" Margin="2,2,2,2"/>
-										</ControlTemplate>
-									</Setter.Value>
-								</Setter>
-							</Style>
-						</ListBox.ItemContainerStyle>
-					</ListBox>
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<CheckBox Margin="20,2,2,2" Name="CheckBoxAffectsPatientCare" IsChecked="{Binding Path=AffectsPatientCare}"></CheckBox>
-						<TextBlock Margin="2,2,2,2">Affects Patient Care</TextBlock>
-					</StackPanel>
-				</StackPanel>
-
-				<TextBox Grid.Column="0" Grid.Row="2" Margin="2" TextWrapping="Wrap" AcceptsReturn="True" 
-						 Text="{Binding Path=ResultComment}" HorizontalAlignment="Stretch"></TextBox>
-			</Grid>
-		</DataTemplate>-->
-
-		<DataTemplate x:Key="IntraoperativeConsultationTemplate">
+        <DataTemplate x:Key="IntraoperativeConsultationTemplate">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="21"></ColumnDefinition>
@@ -346,21 +292,21 @@
 		</ControlTemplate>
 
 		<DataTemplate x:Key="SpecimenControlItemTemplate">
-			<Grid>
+            <Grid Background="{Binding Path=IsSelected, Converter={StaticResource PathologistSpecimenColorConverter}}" Margin="2,2,2,2">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="22"></ColumnDefinition>
 					<ColumnDefinition Width="*"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
 				</Grid.RowDefinitions>
 
-				<TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=SurgicalSpecimen.DiagnosisIdFormatted}" Margin="5">
+				<TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=SurgicalSpecimen.DiagnosisIdFormatted}" Margin="2,5,2,2">
                     <TextBlock.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Add Interoperative Consultation" Click="ContextMenuAddInteropativeConsultation_Click" Tag="{Binding Path=SurgicalSpecimen}"></MenuItem>
@@ -368,7 +314,7 @@
                     </TextBlock.ContextMenu>
                 </TextBlock>
 
-				<TextBox Name="TextBoxSpecimenType" Grid.Row="0" Grid.Column="1" Margin="2" TextWrapping="Wrap" AcceptsReturn="True"
+				<TextBox Name="TextBoxSpecimenType" Grid.Row="0" Grid.Column="1" Margin="2,5,2,2" TextWrapping="Wrap" AcceptsReturn="True"
 						 FontSize="12" FontWeight="Bold" MinWidth="300"  RequestBringIntoView="Any_RequestBringIntoView"
 						 Text="{Binding Path=SpecimenOrder.Description, UpdateSourceTrigger=PropertyChanged}"  KeyUp="TextBox_KeyUp"
 						 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}">
@@ -377,11 +323,6 @@
 						 FontSize="12" MinWidth="300" SpellCheck.IsEnabled="False" KeyUp="TextBox_KeyUp"
 						 Text="{Binding Path=SurgicalSpecimen.Diagnosis, UpdateSourceTrigger=PropertyChanged}" RequestBringIntoView="Any_RequestBringIntoView"
 						 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}">
-                    <!--
-                    <SpellCheck.CustomDictionaries>
-                        <system:Uri>pack://application:,,,/ypi-custom.lex</system:Uri>
-                    </SpellCheck.CustomDictionaries>
-                    -->
                 </TextBox>
 
 				<ItemsControl Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"  KeyboardNavigation.IsTabStop="False"
@@ -395,77 +336,65 @@
 					</ItemsControl.ItemsPanel>
 				</ItemsControl>
 
-				<Grid Grid.Column="1" Grid.Row="3">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="200"></ColumnDefinition>
-						<ColumnDefinition Width="220"></ColumnDefinition>
-						<ColumnDefinition></ColumnDefinition>
-					</Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="220"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
-					<StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-						<TextBlock Margin="20, 2, 2, 2" VerticalAlignment="Top">ICD9 Codes</TextBlock>
+                    <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock Margin="20, 2, 2, 2" VerticalAlignment="Top">ICD9 Codes</TextBlock>
 
-						<Button Margin="5,2,2,2" Height="15" Width="15" HorizontalAlignment="Left" ToolTip="Add ICD9 Code"
+                        <Button Margin="5,2,2,2" Height="15" Width="15" HorizontalAlignment="Left" ToolTip="Add ICD9 Code"
 									Click="ButtonAddIcd9Code_Click" VerticalAlignment="Top" Tag="{Binding Path=SurgicalSpecimen}"
 									IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
-							<StackPanel Orientation="Horizontal">
-								<Image Source="/Resources/Add.ico"></Image>
-							</StackPanel>
-						</Button>
-						<StackPanel>
-						</StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Resources/Add.ico"></Image>
+                            </StackPanel>
+                        </Button>
+                        <StackPanel>
+                        </StackPanel>
 
-						<ItemsControl KeyboardNavigation.IsTabStop="False"
+                        <ItemsControl KeyboardNavigation.IsTabStop="False"
 									  ItemsSource="{Binding Path=ICD9BillingCodeCollection}"
 									  ItemTemplate="{StaticResource Icd9BillingTemplate}">
-							<ItemsControl.ItemsPanel>
-								<ItemsPanelTemplate>
-									<StackPanel/>
-								</ItemsPanelTemplate>
-							</ItemsControl.ItemsPanel>
-						</ItemsControl>
-					</StackPanel>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
 
-					<StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
-						<TextBlock Margin="40, 2, 2, 2" VerticalAlignment="Top">CPT Codes</TextBlock>
+                    <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock Margin="40, 2, 2, 2" VerticalAlignment="Top">CPT Codes</TextBlock>
 
-						<Button Margin="5,2,2,2" Height="15" Width="15" HorizontalAlignment="Left" ToolTip="Add CPT Code"
+                        <Button Margin="5,2,2,2" Height="15" Width="15" HorizontalAlignment="Left" ToolTip="Add CPT Code"
 									Click="ButtonAddCptCode_Click" VerticalAlignment="Top" Tag="{Binding Path=SurgicalSpecimen}"
 									IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
-							<StackPanel Orientation="Horizontal">
-								<Image Source="/Resources/Add.ico"></Image>
-							</StackPanel>
-						</Button>
-						<StackPanel>
-						</StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Resources/Add.ico"></Image>
+                            </StackPanel>
+                        </Button>
+                        <StackPanel>
+                        </StackPanel>
 
-						<ItemsControl KeyboardNavigation.IsTabStop="False"
+                        <ItemsControl KeyboardNavigation.IsTabStop="False"
 									  ItemsSource="{Binding Path=PanelSetOrderCPTCodeCollection}"
 									  ItemTemplate="{StaticResource CPTBillingTemplate}">
-							<ItemsControl.ItemsPanel>
-								<ItemsPanelTemplate>
-									<StackPanel/>
-								</ItemsPanelTemplate>
-							</ItemsControl.ItemsPanel>
-						</ItemsControl>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
 
-					</StackPanel>
+                    </StackPanel>
 
-				</Grid>
+                </Grid>
 
-				<!--<StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
-					<ItemsControl KeyboardNavigation.IsTabStop="False"
-							  ItemsSource="{Binding Path=SpecimenOrder.PeerReviewResults}"							  
-							  ItemTemplate="{StaticResource DataTemplatePeerReview}">
-						<ItemsControl.ItemsPanel>
-							<ItemsPanelTemplate>
-								<StackPanel/>
-							</ItemsPanelTemplate>
-						</ItemsControl.ItemsPanel>
-					</ItemsControl>
-				</StackPanel>-->
-
-			</Grid>
+            </Grid>
 		</DataTemplate>
 
 	</UserControl.Resources>
@@ -549,7 +478,7 @@
 
 						<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" Text="Diagnosis" RequestBringIntoView="Any_RequestBringIntoView"></TextBlock>
 
-						<ItemsControl Name="ItemsControlSpecimen" Grid.Column="0" Grid.Row="1"
+						<ItemsControl Name="ItemsControlSpecimen" Grid.Column="0" Grid.Row="1" BorderThickness="0"
 										ItemsSource="{Binding Path=BillingSpecimenViewCollection}"
 										KeyboardNavigation.IsTabStop="False"
 										ItemTemplate="{StaticResource SpecimenControlItemTemplate}">
@@ -557,12 +486,9 @@
 
 						<StackPanel Grid.Column="0" Grid.Row="2">
 							<TextBlock Margin="2, 2, 2, 2" FontWeight="Bold" TextAlignment="Left">Comment:</TextBlock>
-							<TextBox Name="textBoxComment" Margin="2, 2, 2, 2" TextWrapping="Wrap" AcceptsReturn="True" FontSize="12" RequestBringIntoView="Any_RequestBringIntoView"
+                            <TextBox Name="textBoxComment" Margin="2, 2, 2, 2" TextWrapping="Wrap" AcceptsReturn="True" FontSize="12" RequestBringIntoView="Any_RequestBringIntoView"
 										Text="{Binding Path=PanelSetOrderSurgical.Comment, UpdateSourceTrigger=PropertyChanged}"
 										IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}" KeyUp="TextBox_KeyUp" SpellCheck.IsEnabled="False">
-                                <SpellCheck.CustomDictionaries>
-                                    <system:Uri>pack://application:,,,/ypi-custom.lex</system:Uri>
-                                </SpellCheck.CustomDictionaries>
                             </TextBox>
 						</StackPanel>
 
@@ -636,8 +562,8 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
-                            
-                            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Background="LemonChiffon"></Border>
+
+                            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Background="#e4e2e4"></Border>
                             
                             <TextBlock Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" Text="Test" HorizontalAlignment="Center"></TextBlock>
                             <TextBlock Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Text="Result" HorizontalAlignment="Center"></TextBlock>

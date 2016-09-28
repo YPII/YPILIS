@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.Test.Trichomonas
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.Trichomonas.TrichomonasTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.Trichomonas.TrichomonasWordDocument).AssemblyQualifiedName;
             string taskDescription = "Gather materials and perform testing.";
-			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription, new Facility.Model.NeogenomicsIrvine()));
+			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription));
 
             this.m_TechnicalComponentFacility = new YellowstonePathology.Business.Facility.Model.YellowstonePathologyInstituteBillings();
             this.m_TechnicalComponentBillingFacility = new YellowstonePathology.Business.Facility.Model.YellowstonePathologyInstituteBillings();            

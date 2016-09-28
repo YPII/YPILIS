@@ -115,6 +115,7 @@ namespace YellowstonePathology.UI.Gross
 		private void PrintBlockPage_Loaded(object sender, RoutedEventArgs e)
 		{
 			this.m_BarcodeScanPort.HistologyBlockScanReceived += this.HistologyBlockScanReceived;
+            this.m_BarcodeScanPort.ContainerScanReceived += BarcodeScanPort_ContainerScanReceived;
 			if (this.m_CaseDocumentCollection.GetFirstRequisition() != null)
 			{
 				this.m_DocumentViewer.ShowDocument(this.m_CaseDocumentCollection.GetFirstRequisition());
@@ -125,9 +126,15 @@ namespace YellowstonePathology.UI.Gross
 			}
 		}
 
-		private void PrintBlockPage_Unloaded(object sender, RoutedEventArgs e)
+        private void BarcodeScanPort_ContainerScanReceived(Business.BarcodeScanning.ContainerBarcode containerBarcode)
+        {
+            MessageBox.Show("Warning!! This page does not respond to container scans.  Please finish processing the current specimen.");
+        }
+
+        private void PrintBlockPage_Unloaded(object sender, RoutedEventArgs e)
 		{
 			this.m_BarcodeScanPort.HistologyBlockScanReceived -= this.HistologyBlockScanReceived;
+            this.m_BarcodeScanPort.ContainerScanReceived -= this.BarcodeScanPort_ContainerScanReceived;
 		}
 
 		public void NotifyPropertyChanged(String info)

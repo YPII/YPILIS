@@ -71,7 +71,7 @@ namespace YellowstonePathology.Business.Mongo
             return transfer;
         }
 
-        [PersistentDocumentIdProperty(50)]
+        [PersistentDocumentIdProperty()]
         public string ObjectId
         {
             get { return this.m_ObjectId; }

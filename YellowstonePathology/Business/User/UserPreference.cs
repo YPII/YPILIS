@@ -60,7 +60,8 @@ namespace YellowstonePathology.Business.User
             return result;
         }
 
-		[PersistentPrimaryKeyProperty(false, 200)]
+		[PersistentPrimaryKeyProperty(false)]
+		[PersistentDataColumnProperty(false, "200", "null", "varchar")]
 		public string HostName
 		{
 			get { return this.m_HostName; }
@@ -74,7 +75,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "50", "null", "varchar")]
 		public string LocationId
 		{
 			get { return this.m_LocationId; }
@@ -88,7 +90,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool BarcodeScanEnabled
         {
             get { return this.m_BarcodeScanEnabled; }
@@ -102,7 +105,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50, "'COM3'")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "'COM3'", "varchar")]
         public string BarcodeScanPort
         {
             get { return this.m_BarcodeScanPort; }
@@ -116,7 +120,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentProperty("'10/1/2010'")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> LastLocalDataUpdate
         {
             get { return this.m_LastLocalDataUpdate; }
@@ -130,7 +135,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50, "'Always Attempt Lock'")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "'Always Attempt Lock'", "varchar")]
 		public string LockMode
 		{
 			get { return this.m_LockMode ; }
@@ -144,7 +150,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ContainerLabelPrinter
         {
             get { return this.m_ContainerLabelPrinter; }
@@ -158,7 +165,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string HistologySlideLabelPrinter
         {
 			get { return this.m_HistologySlideLabelPrinter; }
@@ -172,7 +180,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string CytologySlideLabelPrinter
 		{
 			get { return this.m_CytologySlideLabelPrinter; }
@@ -186,7 +195,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string RequisitionPrinter
 		{
 			get { return this.m_RequisitionPrinter; }
@@ -200,7 +210,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string CassettePrinter
 		{
 			get { return this.m_CassettePrinter; }
@@ -214,7 +225,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string LaserCassettePrinter
         {
             get { return this.m_LaserCassettePrinter; }
@@ -228,7 +240,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string SpecialStainAcknowledgementPrinter
         {
             get { return this.m_SpecialStainAcknowledgementPrinter; }
@@ -242,7 +255,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string StartupPage
 		{
 			get { return this.m_StartupPage; }
@@ -256,7 +270,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string MolecularLabelPrinter
 		{
 			get { return this.m_MolecularLabelPrinter; }
@@ -270,7 +285,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string MolecularLabelFormat
         {
             get { return this.m_MolecularLabelFormat; }
@@ -284,7 +300,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string PageScanner
 		{
 			get { return this.m_PageScanner; }
@@ -298,7 +315,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "50", "null", "varchar")]
         public string FacilityId
         {
             get { return this.m_FacilityId; }
@@ -312,7 +330,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "1", "0", "bit")]
 		public bool ActivateNotificationAlert
 		{
 			get { return this.m_ActivateNotificationAlert; }
@@ -326,7 +345,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-        [PersistentStringProperty(100)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
         public string AlertWaveFileName
         {
             get { return this.m_AlertWaveFileName; }
@@ -340,7 +360,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string AcknowledgeTasksFor
         {
             get { return this.m_AcknowledgeTasksFor; }
@@ -354,7 +375,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string TecanImportExportPath
         {
             get { return this.m_TecanImportExportPath; }
@@ -368,7 +390,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string SlideMatePrinterPath
         {
             get { return this.m_SlideMatePrinterPath; }
@@ -382,7 +405,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string WeekdayProcessorRunId
 		{
 			get { return this.m_WeekdayProcessorRunId; }
@@ -396,7 +420,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string WeekendProcessorRunId
 		{
 			get { return this.m_WeekendProcessorRunId; }
@@ -410,7 +435,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string CytologySlidePrinter
         {
             get { return this.m_CytologySlidePrinter; }
@@ -424,7 +450,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string LastReportNo
         {
             get { return this.m_LastReportNo; }
@@ -438,7 +465,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ThermoFisherSlidePrinter
         {
             get { return this.m_ThermoFisherSlidePrinter; }
@@ -452,7 +480,8 @@ namespace YellowstonePathology.Business.User
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public bool UseLaserCassettePrinter
         {
             get { return this.m_UseLaserCassettePrinter; }
@@ -467,6 +496,7 @@ namespace YellowstonePathology.Business.User
         }
         
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "11", "null", "int")]
         public Nullable<int> GPathologistId
         {
             get { return this.m_GPathologistId; }

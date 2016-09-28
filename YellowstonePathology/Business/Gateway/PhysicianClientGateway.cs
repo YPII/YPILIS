@@ -506,7 +506,7 @@ namespace YellowstonePathology.Business.Gateway
 #endif
         }*/
 
-		public static View.ClientSearchView GetClientSearchViewByClientName(string clientName)
+		/*public static View.ClientSearchView GetClientSearchViewByClientName(string clientName)
 		{
 #if MONGO
 			return PhysicianClientGatewayMongo.GetClientSearchViewByClientName(clientName);
@@ -522,7 +522,7 @@ namespace YellowstonePathology.Business.Gateway
 			}
 			return results;
 #endif
-		}
+		}*/
 
 		public static View.ClientLocationViewCollection GetClientLocationViewByClientName(string clientName)
 		{
@@ -530,16 +530,28 @@ namespace YellowstonePathology.Business.Gateway
 			return PhysicianClientGatewayMongo.GetClientLocationViewByClientName(clientName);
 #else
 			SqlCommand cmd = new SqlCommand();
-			cmd.CommandText = "select c.ClientId, c.ClientName, cl.ClientLocationId, cl.Location from tblClientLocation cl join tblClient c on cl.ClientId = c.ClientId where c.ClientName like @ClientName + '%' Order By 2, 4 " +
-				"for xml path('ClientLocationView'), type, root('ClientLocationViewCollection')";
-			cmd.CommandType = CommandType.Text;
-			cmd.Parameters.Add("@ClientName", SqlDbType.VarChar).Value = clientName;
-			View.ClientLocationViewCollection results = Persistence.SqlCommandHelper.ExecuteCollectionCommand<View.ClientLocationViewCollection>(cmd);
-			if (results == null)
-			{
-				results = new View.ClientLocationViewCollection();
-			}
-			return results;
+			cmd.CommandText = "select c.ClientId, c.ClientName, cl.ClientLocationId, cl.Location from tblClientLocation cl join tblClient c on cl.ClientId = c.ClientId where c.ClientName like @ClientName + '%' Order By 2, 4";
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@ClientName", SqlDbType.VarChar).Value = clientName;
+            View.ClientLocationViewCollection result = new View.ClientLocationViewCollection();
+
+            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Business.BaseData.SqlConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        View.ClientLocationView clientLocationView = new View.ClientLocationView();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(clientLocationView, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(clientLocationView);
+                    }
+                }
+            }
+
+            return result;
 #endif
 		}
 

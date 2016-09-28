@@ -32,6 +32,7 @@ namespace YellowstonePathology.UI
         private EmbeddingBreastCaseList m_EmbeddingBreastCaseList;
         private string m_StatusMessage;
         private string m_ScanCount;
+        private List<DateTime> m_ProcessorStartHourList;
 
         private BackgroundWorker m_BackgroundWorker;
 
@@ -44,8 +45,22 @@ namespace YellowstonePathology.UI
             this.m_StatusMessage = "Status: OK";
             this.m_ScanCount = "Block Count: " + this.m_EmbeddingScanCollection.Count.ToString();
 
+            this.m_ProcessorStartHourList = new List<DateTime>();
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 04:00"));
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 05:00"));
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 06:00"));
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 07:00"));
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 08:00"));
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 09:00"));
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 10:00"));
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 10:00"));
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 11:00"));
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 12:00"));
+            this.m_ProcessorStartHourList.Add(DateTime.Parse(DateTime.Today.ToShortDateString() + " 13:00"));
+
             InitializeComponent();
 
+            
             this.DataContext = this;
             this.Loaded += EmbeddingDialog_Loaded;
             this.Unloaded += EmbeddingDialog_Unloaded;
@@ -129,7 +144,21 @@ namespace YellowstonePathology.UI
                 }
                 else
                 {
-                    YellowstonePathology.Business.Surgical.ProcessorRun processorRun = (YellowstonePathology.Business.Surgical.ProcessorRun)this.ComboBoxProcessorRuns.SelectedItem;
+                    YellowstonePathology.Business.Surgical.ProcessorRun processorRun = (YellowstonePathology.Business.Surgical.ProcessorRun)this.ComboBoxProcessorRuns.SelectedItem;                    
+                    if (processorRun is Business.Surgical.CheechTodayShortMini)
+                    {
+                        if (this.ComboBoxProcessorStartHour.SelectedIndex < 0)
+                        {
+                            MessageBox.Show("You must select a start time from the combo box in the top right hand corner of the window.");
+                            return;
+                        }
+                        else
+                        {
+                            DateTime startTime = (DateTime)this.ComboBoxProcessorStartHour.SelectedItem;
+                            processorRun.StartTime = new TimeSpan(startTime.Hour, 0, 0);
+                        }
+                    }
+
                     YellowstonePathology.Business.BarcodeScanning.EmbeddingScan result = this.m_EmbeddingScanCollection.HandleScan(barcode.ID, processorRun.ProcessorRunId, processorRun.Name);
                     this.ListViewEmbeddingScans.SelectedIndex = 0;
                     this.m_ScanCount = "Block Count: " + this.m_EmbeddingScanCollection.Count.ToString();
@@ -147,6 +176,11 @@ namespace YellowstonePathology.UI
         public string ScanCount
         {
             get { return this.m_ScanCount; }
+        }
+
+        public List<DateTime> ProcessorStartHourList
+        {
+            get { return this.m_ProcessorStartHourList; }
         }
 
         public YellowstonePathology.UI.EmbeddingNotScannedList EmbeddingNotScannedList

@@ -40,7 +40,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			
 		}        
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ErResult
 		{
 			get { return this.m_ErResult; }
@@ -54,7 +55,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ErIntensity
 		{
 			get { return this.m_ErIntensity; }
@@ -68,7 +70,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ErPercentageOfCells
 		{
 			get { return this.m_ErPercentageOfCells; }
@@ -82,7 +85,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string PrResult
 		{
 			get { return this.m_PrResult; }
@@ -96,7 +100,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string PrIntensity
 		{
 			get { return this.m_PrIntensity; }
@@ -110,7 +115,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string PrPercentageOfCells
 		{
 			get { return this.m_PrPercentageOfCells; }
@@ -124,7 +130,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string SpecimenAdequacy
 		{
 			get { return this.m_SpecimenAdequacy; }
@@ -138,7 +145,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string InternalControls
 		{
 			get { return this.m_InternalControls; }
@@ -152,7 +160,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ExternalControls
 		{
 			get { return this.m_ExternalControls; }
@@ -166,7 +175,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -180,7 +190,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string ResultComment
 		{
 			get { return this.m_ResultComment; }
@@ -194,7 +205,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string SpecimenSiteAndType
 		{
 			get { return this.m_SpecimenSiteAndType; }
@@ -208,7 +220,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string SpecimenIdentification
 		{
 			get { return this.m_SpecimenIdentification; }
@@ -222,7 +235,8 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Method
 		{
 			get { return this.m_Method; }

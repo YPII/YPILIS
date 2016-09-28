@@ -380,7 +380,8 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private bool ShowGrossEntryPage()
         {
-            bool result = false;
+            bool result = false; //SEH set to always return false, don't want to see this page anymore maybe
+            /*
             if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(81) == true && 
                 this.m_AccessionOrder.PanelSetOrderCollection.HasSurgical() == true)
             {
@@ -390,6 +391,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 grossEntryPage.Next += new GrossEntryPage.NextEventHandler(GrossEntryPage_Next);
                 this.m_PageNavigator.Navigate(grossEntryPage);                
             }
+            */
             return result;
         }
 

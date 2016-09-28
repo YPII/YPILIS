@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Surgical
 		{
 		}
 
-		[PersistentPrimaryKeyProperty(false, 0)]
+		[PersistentPrimaryKeyProperty(false)]
 		public string ReportNo
 		{
 			get { return this.m_ReportNo; }

@@ -48,6 +48,7 @@
         <converter:ItemsReceivedColorConverter x:Key="ItemsReceivedColorConverter" />
 		<converter:BooleanAsteriskConverter x:Key="BooleanAsteriskConverter"/>
 		<converter:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <converter:PathologistSpecimenColorConverter x:Key="PathologistSpecimenColorConverter"/>
 		<converter:ClientOrderDetailColorConverter x:Key="ClientOrderDetailColorConverter"/>
 		<converter:CaseDocumentColorConverter x:Key="CaseDocumentColorConverter"/>
 		<converter:SpecimenOrderColorConverter x:Key="SpecimenOrderColorConverter"/>

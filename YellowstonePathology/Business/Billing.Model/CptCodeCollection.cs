@@ -333,7 +333,7 @@ namespace YellowstonePathology.Business.Billing.Model
         {
             string jsonString = string.Empty;
             Assembly assembly = Assembly.GetExecutingAssembly();
-            using (StreamReader sr = new StreamReader(assembly.GetManifestResourceStream("YellowstonePathology.Business.Billing.Model.JSONCPTCodes.txt")))
+            using (StreamReader sr = new StreamReader(assembly.GetManifestResourceStream("YellowstonePathology.Business.Billing.Model.CPTCodeDefinition.json")))
             {
                 jsonString = sr.ReadToEnd();
             }

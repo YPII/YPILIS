@@ -40,7 +40,8 @@ namespace YellowstonePathology.Business.Task.Model
             this.m_AssignedTo = task.AssignedTo;
 		}
 
-		[PersistentDocumentIdProperty(50)]
+		[PersistentDocumentIdProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }
@@ -54,7 +55,8 @@ namespace YellowstonePathology.Business.Task.Model
 			}
 		}
 		
-		[PersistentPrimaryKeyProperty(false, 50)]
+		[PersistentPrimaryKeyProperty(false)]
+		[PersistentDataColumnProperty(false, "50", "null", "varchar")]
 		public string TaskOrderDetailId
 		{
 			get { return this.m_TaskOrderDetailId; }
@@ -68,7 +70,8 @@ namespace YellowstonePathology.Business.Task.Model
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string TaskOrderId
 		{
 			get { return this.m_TaskOrderId; }
@@ -82,7 +85,8 @@ namespace YellowstonePathology.Business.Task.Model
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string TaskId
 		{
 			get { return this.m_TaskId; }
@@ -96,7 +100,8 @@ namespace YellowstonePathology.Business.Task.Model
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Description
 		{
 			get { return this.m_Description; }
@@ -110,7 +115,8 @@ namespace YellowstonePathology.Business.Task.Model
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Comment
 		{
 			get { return this.m_Comment; }
@@ -124,7 +130,8 @@ namespace YellowstonePathology.Business.Task.Model
 			}
 		}
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string AssignedTo
         {
             get { return this.m_AssignedTo; }
@@ -138,7 +145,8 @@ namespace YellowstonePathology.Business.Task.Model
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool Acknowledged
         {
             get { return this.m_Acknowledged; }
@@ -153,6 +161,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "11", "null", "int")]
         public int? AcknowledgedById
         {
             get { return this.m_AcknowledgedById; }
@@ -166,7 +175,8 @@ namespace YellowstonePathology.Business.Task.Model
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string AcknowledgedByInitials
         {
             get { return this.m_AcknowledgedByInitials; }
@@ -181,6 +191,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public DateTime? AcknowledgedDate
         {
             get { return this.m_AcknowledgedDate; }
@@ -195,6 +206,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public DateTime? ActionDate
         {
             get { return this.m_ActionDate; }

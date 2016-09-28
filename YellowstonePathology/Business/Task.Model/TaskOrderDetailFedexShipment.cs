@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,6 +64,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string TrackingNumber
         {
             get { return this.m_TrackingNumber; }
@@ -78,6 +79,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
         
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ShipToFacilityId
         {
             get { return this.m_ShipToFacilityId; }
@@ -92,6 +94,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
         public string ZPLII
         {
             get { return this.m_ZPLII; }
@@ -106,6 +109,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "null", "bit")]
         public bool LabelHasBeenPrinted
         {
             get { return this.m_LabelHasBeenPrinted; }
@@ -120,6 +124,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string ShipToName
         {
             get { return this.m_ShipToName; }
@@ -134,6 +139,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ShipToPhone
         {
             get { return this.m_ShipToPhone; }
@@ -148,6 +154,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string ShipToAddress1
         {
             get { return this.m_ShipToAddress1; }
@@ -162,6 +169,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string ShipToAddress2
         {
             get { return this.m_ShipToAddress2; }
@@ -176,6 +184,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string ShipToCity
         {
             get { return this.m_ShipToCity; }
@@ -190,6 +199,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ShipToState
         {
             get { return this.m_ShipToState; }
@@ -204,6 +214,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ShipToZip
         {
             get { return this.m_ShipToZip; }
@@ -218,6 +229,7 @@ namespace YellowstonePathology.Business.Task.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string PaymentType
         {
             get { return this.m_PaymentType; }

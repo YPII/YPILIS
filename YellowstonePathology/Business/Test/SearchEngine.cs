@@ -37,9 +37,6 @@ namespace YellowstonePathology.Business.Test
 				case YellowstonePathology.Business.Search.ReportSearchFillEnum.ByDateRange:
 					this.m_ReportSearchList = Gateway.ReportSearchGateway.GetReportSearchListByDateRange(m_Parameters);
 					break;
-				case YellowstonePathology.Business.Search.ReportSearchFillEnum.ByTodayLocation:
-					this.m_ReportSearchList = Gateway.ReportSearchGateway.GetReportSearchListByDateRangeLocation(m_Parameters);
-					break;
 				case YellowstonePathology.Business.Search.ReportSearchFillEnum.ByReportNo:
 					this.m_ReportSearchList = Gateway.ReportSearchGateway.GetReportSearchListByReportNo(m_Parameters);
 					break;
@@ -106,18 +103,6 @@ namespace YellowstonePathology.Business.Test
 			this.m_Parameters.Add(endDate);
 			this.m_Parameters.Add(panelSetId);
 			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByDateRange;
-		}
-
-		public void SetFillByToday(int panelSetId, string originatingLocation)
-		{
-			DateTime startDate = DateTime.Today;
-			DateTime endDate = DateTime.Today;
-			this.m_Parameters.Clear();
-			this.m_Parameters.Add(startDate);
-			this.m_Parameters.Add(endDate);
-			this.m_Parameters.Add(panelSetId);
-			this.m_Parameters.Add(originatingLocation);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByDateRangeLocation;
 		}
 
 		public void SetFillByYesterday(int panelSetId)

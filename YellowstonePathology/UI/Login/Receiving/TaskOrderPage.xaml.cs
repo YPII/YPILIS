@@ -238,7 +238,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         private void HyperLinkGetTrackingNumber_Click(object sender, RoutedEventArgs e)
         {
             Business.Task.Model.TaskOrderDetailFedexShipment taskOrderDetail = this.m_TaskOrder.TaskOrderDetailCollection.GetFedexShipment();
-            if(string.IsNullOrEmpty(taskOrderDetail.TrackingNumber) == true)
+            if(this.IsOKToGetTrackingNumber(taskOrderDetail) == true)
             {
                 Business.Facility.Model.FacilityCollection allFacilities = Business.Facility.Model.FacilityCollection.GetAllFacilities();
                 Business.Facility.Model.Facility facility = allFacilities.GetByFacilityId(taskOrderDetail.ShipToFacilityId);
@@ -258,8 +258,20 @@ namespace YellowstonePathology.UI.Login.Receiving
             }
             else
             {
-                MessageBox.Show("A Tracking number for this task already exists.");
+                MessageBox.Show("We are unable to get the tracking number at this point because there are problems with the data.");
             }        
+        }
+
+        private bool IsOKToGetTrackingNumber(Business.Task.Model.TaskOrderDetailFedexShipment taskOrderDetail)
+        {
+            bool result = true;
+            if (string.IsNullOrEmpty(taskOrderDetail.TrackingNumber) == false) result = false;
+            if (string.IsNullOrEmpty(taskOrderDetail.ShipToAddress1) == true) result = false;
+            if (string.IsNullOrEmpty(taskOrderDetail.ShipToCity) == true) result = false;
+            if (string.IsNullOrEmpty(taskOrderDetail.ShipToState) == true) result = false;
+            if (string.IsNullOrEmpty(taskOrderDetail.ShipToZip) == true) result = false;
+            if (string.IsNullOrEmpty(taskOrderDetail.PaymentType) == true) result = false;
+            return result;
         }
 
         private void HyperLinkPrintLabel_Click(object sender, RoutedEventArgs e)
@@ -316,6 +328,7 @@ namespace YellowstonePathology.UI.Login.Receiving
                 Business.Facility.Model.Facility facility = (Business.Facility.Model.Facility)comboBox.SelectedItem;
                 Business.Task.Model.TaskOrderDetailFedexShipment taskOrderDetail = this.m_TaskOrder.TaskOrderDetailCollection.GetFedexShipment();
                 taskOrderDetail.SetShipTo(facility);
+                this.NotifyPropertyChanged(string.Empty);
             }            
         }
     }

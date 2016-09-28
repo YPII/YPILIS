@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using YellowstonePathology.Business.Persistence;
 
 namespace YellowstonePathology.Business.View
 {
@@ -27,25 +28,29 @@ namespace YellowstonePathology.Business.View
             this.m_Location = location;
         }
 
+        [PersistentProperty()]
 		public int ClientId
 		{
 			get { return this.m_ClientId; }
 			set { this.m_ClientId = value; }
 		}
 
-		public int ClientLocationId
+        [PersistentProperty()]
+        public int ClientLocationId
 		{
 			get { return this.m_ClientLocationId; }
 			set { this.m_ClientLocationId = value; }
 		}
 
-		public string ClientName
+        [PersistentProperty()]
+        public string ClientName
 		{
 			get { return this.m_ClientName; }
 			set { this.m_ClientName = value; }
 		}
 
-		public string Location
+        [PersistentProperty()]
+        public string Location
 		{
 			get { return this.m_Location; }
 			set { this.m_Location = value; }

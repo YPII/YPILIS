@@ -28,6 +28,7 @@ namespace YellowstonePathology.Business.Test.FNAAdequacyAssessment
 		}        
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> StartDate
         {
             get { return this.m_StartDate; }
@@ -42,6 +43,7 @@ namespace YellowstonePathology.Business.Test.FNAAdequacyAssessment
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> EndDate
         {
             get { return this.m_EndDate; }

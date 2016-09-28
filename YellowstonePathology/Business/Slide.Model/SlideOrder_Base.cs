@@ -103,7 +103,8 @@ namespace YellowstonePathology.Business.Slide.Model
             this.NotifyPropertyChanged(string.Empty);
         }
 
-        [PersistentDocumentIdProperty(50)]
+        [PersistentDocumentIdProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ObjectId
         {
             get { return this.m_ObjectId; }
@@ -117,7 +118,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentPrimaryKeyProperty(false, 50)]
+        [PersistentPrimaryKeyProperty(false)]
+        [PersistentDataColumnProperty(false, "50", "null", "varchar")]
         public string SlideOrderId
         {
             get { return this.m_SlideOrderId; }
@@ -130,7 +132,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool ClientAccessioned
         {
             get { return this.m_ClientAccessioned; }
@@ -144,7 +147,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }        
 
-        [PersistentStringProperty(50, "0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "50", "0", "varchar")]
         public string AliquotOrderId
         {
             get
@@ -161,7 +165,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentProperty("getdate()")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "3", "null", "datetime")]
         public DateTime OrderDate
         {
             get { return this.m_OrderDate; }
@@ -175,7 +180,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ValidationStation
         {
             get
@@ -192,7 +198,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool Validated
         {
             get { return this.m_Validated; }
@@ -206,7 +213,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "11", "0", "int")]
         public int ValidatedById
         {
             get
@@ -223,7 +231,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string ValidatedBy
         {
             get
@@ -241,6 +250,7 @@ namespace YellowstonePathology.Business.Slide.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> ValidationDate
         {
             get { return this.m_ValidationDate; }
@@ -254,7 +264,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string PrintStation
         {
             get
@@ -271,7 +282,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool Printed
         {
             get { return this.m_Printed; }
@@ -286,6 +298,7 @@ namespace YellowstonePathology.Business.Slide.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "11", "null", "int")]
         public int PrintedById
         {
             get
@@ -302,7 +315,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string PrintedBy
         {
             get
@@ -320,6 +334,7 @@ namespace YellowstonePathology.Business.Slide.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> PrintDate
         {
             get { return this.m_PrintDate; }
@@ -333,7 +348,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string Description
         {
             get
@@ -350,7 +366,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string AliquotType
         {
             get
@@ -368,7 +385,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string Label
         {
             get
@@ -385,7 +403,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string ClientLabel
         {
             get
@@ -402,7 +421,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "11", "0", "int")]
         public int OrderedById
         {
             get
@@ -419,7 +439,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(100)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
         public string OrderedBy
         {
             get
@@ -436,7 +457,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string OrderedFrom
         {
             get
@@ -453,7 +475,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(50, "'Created'")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "'Created'", "varchar")]
         public string Status
         {
             get
@@ -471,6 +494,7 @@ namespace YellowstonePathology.Business.Slide.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "11", "null", "int")]
         public int TestId
         {
             get
@@ -487,7 +511,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(100)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
         public string TestName
         {
             get
@@ -504,7 +529,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(100)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
         public string TestAbbreviation
         {
             get
@@ -521,7 +547,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string TestOrderId
         {
             get
@@ -538,7 +565,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string PatientLastName
         {
             get
@@ -555,7 +583,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string Location
         {
             get
@@ -572,7 +601,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ReportNo
         {
             get
@@ -589,7 +619,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string LabelType
         {
             get
@@ -606,7 +637,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool OrderedAsDual
         {
             get
@@ -623,7 +655,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string LocationId
         {
             get { return this.m_LocationId; }
@@ -637,7 +670,8 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string FacilityId
         {
             get { return this.m_FacilityId; }

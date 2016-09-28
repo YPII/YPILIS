@@ -57,7 +57,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 			this.ReportNo = panelSetOrderSurgical.ReportNo;
 			this.AmendmentId = amendmentId;
             this.PathologistId = pathologistId;
-			//this.ClinicalInfo = panelSetOrderSurgical.ClinicalInfo;
+			this.ClinicalInfo = "None Provided";
 			this.GrossX = panelSetOrderSurgical.GrossX;
 			this.ImmediateX = panelSetOrderSurgical.ImmediateX;
 			this.MicroscopicX = panelSetOrderSurgical.MicroscopicX;
@@ -93,7 +93,8 @@ namespace YellowstonePathology.Business.Test.Surgical
             set { this.m_Amendment = value; }
         }
 
-		[PersistentDocumentIdProperty(50)]
+		[PersistentDocumentIdProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }
@@ -107,7 +108,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentPrimaryKeyProperty(false, 50)]
+		[PersistentPrimaryKeyProperty(false)]
+		[PersistentDataColumnProperty(false, "50", "null", "varchar")]
 		public string SurgicalAuditId
 		{
 			get { return this.m_SurgicalAuditId; }
@@ -122,7 +124,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(20)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "20", "null", "varchar")]
 		public string ReportNo
 		{
 			get { return this.m_ReportNo; }
@@ -136,7 +139,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}		
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "1", "0", "bit")]
 		public bool PapCorrelationRequired
 		{
 			get { return this.m_PapCorrelationRequired; }
@@ -150,7 +154,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "1", "0", "bit")]
 		public bool ReportableCase
 		{
 			get { return this.m_ReportableCase; }
@@ -164,7 +169,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "1", "0", "bit")]
 		public bool PQRIRequired
 		{
 			get { return this.m_PQRIRequired; }
@@ -178,7 +184,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}		
 
-		[PersistentStringProperty(50, "0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "50", "0", "varchar")]
 		public string AmendmentId
 		{
 			get { return this.m_AmendmentId; }
@@ -192,7 +199,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}		
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "0", "int")]
 		public int ImmediateCorrelation
 		{
 			get { return this.m_ImmediateCorrelation; }
@@ -206,7 +214,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "0", "int")]
 		public int PapCorrelation
 		{
 			get { return this.m_PapCorrelation; }
@@ -220,7 +229,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "0", "int")]
 		public int PQRIInstructions
 		{
 			get { return this.m_PQRIInstructions; }
@@ -234,7 +244,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(-1, "'None Provided'")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "-1", "null", "text")]
 		public string ClinicalInfo
 		{
 			get { return this.m_ClinicalInfo; }
@@ -248,7 +259,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(-1, "'None'")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "-1", "null", "text")]
 		public string GrossX
 		{
 			get { return this.m_GrossX; }
@@ -262,7 +274,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(-1, "'Not performed'")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "-1", "null", "text")]
 		public string ImmediateX
 		{
 			get { return this.m_ImmediateX; }
@@ -276,7 +289,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(-1, "'???'")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "-1", "null", "text")]
 		public string MicroscopicX
 		{
 			get { return this.m_MicroscopicX; }
@@ -290,7 +304,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(-1)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "-1", "null", "text")]
 		public string Comment
 		{
 			get { return this.m_Comment; }
@@ -304,7 +319,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(-1)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "-1", "null", "text")]
 		public string CancerSummary
 		{
 			get { return this.m_CancerSummary; }
@@ -318,7 +334,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(10, "'Open'")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "10", "'Open'", "varchar")]
 		public string Status
 		{
 			get { return this.m_Status; }
@@ -332,7 +349,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(20, "'Surgical'")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "20", "'Surgical'", "varchar")]
 		public string CaseType
 		{
 			get { return this.m_CaseType; }
@@ -346,7 +364,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(1000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "-1", "null", "text")]
 		public string ImmunoComment
 		{
 			get { return this.m_ImmunoComment; }
@@ -360,7 +379,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string LocumPerformedForInitials
 		{
 			get { return this.m_LocumPerformedForInitials; }
@@ -374,7 +394,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string AJCCStage
 		{
 			get { return this.m_AJCCStage; }
@@ -388,7 +409,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(250)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "250", "null", "varchar")]
 		public string ImmediateCorrelationComment
 		{
 			get { return this.m_ImmediateCorrelationComment; }
@@ -402,7 +424,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string PapCorrelationComment
 		{
 			get { return this.m_PapCorrelationComment; }
@@ -416,7 +439,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string PapCorrelationAccessionNo
 		{
 			get { return this.m_PapCorrelationAccessionNo; }
@@ -430,7 +454,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
         public int PathologistId
         {
             get { return this.m_PathologistId; }

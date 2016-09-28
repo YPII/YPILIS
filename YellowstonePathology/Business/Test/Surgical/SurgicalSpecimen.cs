@@ -105,7 +105,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			get { return DiagnosisId.ToString() + "."; }
 		}
 
-		[PersistentDocumentIdProperty(50)]
+		[PersistentDocumentIdProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }
@@ -119,7 +120,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentPrimaryKeyProperty(false, 50)]
+		[PersistentPrimaryKeyProperty(false)]
+		[PersistentDataColumnProperty(false, "50", "null", "varchar")]
 		public string SurgicalSpecimenId
 		{
 			get { return this.m_SurgicalSpecimenId; }
@@ -133,7 +135,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(20)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "20", "null", "varchar")]
 		public string ReportNo
 		{
 			get { return this.m_ReportNo; }
@@ -147,7 +150,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "1", "0", "bit")]
 		public bool Report
 		{
 			get { return this.m_Report; }
@@ -161,7 +165,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "1", "0", "bit")]
 		public bool ImmediatePerformed
 		{
 			get { return this.m_ImmediatePerformed; }
@@ -176,6 +181,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 		}
 
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "3", "null", "datetime")]
 		public Nullable<DateTime> ImmediateStartTime
 		{
 			get { return this.m_ImmediateStartTime; }
@@ -190,6 +196,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 		}
 
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "3", "null", "datetime")]
 		public Nullable<DateTime> ImmediateEndTime
 		{
 			get { return this.m_ImmediateEndTime; }
@@ -203,7 +210,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string SpecimenOrderId
 		{
 			get { return this.m_SpecimenOrderId; }
@@ -217,7 +225,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "0", "int")]
 		public int DiagnosisId
 		{
 			get { return this.m_DiagnosisId; }
@@ -231,7 +240,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "0", "int")]
 		public int ImmediateCorrelation
 		{
 			get { return this.m_ImmediateCorrelation; }
@@ -245,7 +255,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "0", "int")]
 		public int ImmediatePerformedById
 		{
 			get { return this.m_ImmediatePerformedById; }
@@ -259,7 +270,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(-1)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "-1", "null", "text")]
 		public string Diagnosis
 		{
 			get { return this.m_Diagnosis; }
@@ -273,7 +285,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(350)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "350", "null", "varchar")]
 		public string SpecimenType
 		{
 			get { return this.m_SpecimenType; }
@@ -287,7 +300,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(30)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "30", "null", "varchar")]
 		public string RescreenStatus
 		{
 			get { return this.m_RescreenStatus; }
@@ -301,7 +315,8 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 		}
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string ImmediatePerformedBy
 		{
 			get { return this.m_ImmediatePerformedBy; }

@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Xml.Serialization;
 using System.ComponentModel;
+using YellowstonePathology.Business.Persistence;
 
 namespace YellowstonePathology.Business.Search
 {
@@ -52,6 +53,7 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
+        [PersistentProperty()]
 		public string MasterAccessionNo
 		{
 			get { return this.m_MasterAccessionNo; }
@@ -65,7 +67,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public string ReportNo
+        [PersistentProperty()]
+        public string ReportNo
 		{
 			get { return this.m_ReportNo; }
 			set
@@ -78,7 +81,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public Nullable<DateTime> AccessionDate
+        [PersistentProperty()]
+        public Nullable<DateTime> AccessionDate
 		{
 			get { return this.m_AccessionDate; }
 			set
@@ -91,7 +95,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public int PanelSetId
+        [PersistentProperty()]
+        public int PanelSetId
 		{
 			get { return this.m_PanelSetId; }
 			set
@@ -104,7 +109,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public string PatientName
+        [PersistentProperty()]
+        public string PatientName
 		{
 			get { return this.m_PatientName; }
 			set
@@ -117,7 +123,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public string PLastName
+        [PersistentProperty()]
+        public string PLastName
 		{
 			get { return this.m_PLastName; }
 			set
@@ -130,7 +137,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public string PFirstName
+        [PersistentProperty()]
+        public string PFirstName
 		{
 			get { return this.m_PFirstName; }
 			set
@@ -143,7 +151,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public string ClientName
+        [PersistentProperty()]
+        public string ClientName
 		{
 			get { return this.m_ClientName; }
 			set
@@ -156,7 +165,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public string PhysicianName
+        [PersistentProperty()]
+        public string PhysicianName
 		{
 			get { return this.m_PhysicianName; }
 			set
@@ -169,7 +179,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public string ForeignAccessionNo
+        [PersistentProperty()]
+        public string ForeignAccessionNo
 		{
 			get { return this.m_ForeignAccessionNo; }
 			set
@@ -182,7 +193,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public Nullable<DateTime> FinalDate
+        [PersistentProperty()]
+        public Nullable<DateTime> FinalDate
 		{
 			get { return this.m_FinalDate; }
 			set
@@ -195,7 +207,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public string PanelSetName
+        [PersistentProperty()]
+        public string PanelSetName
 		{
 			get { return this.m_PanelSetName; }
 			set
@@ -208,7 +221,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public string OrderedBy
+        [PersistentProperty()]
+        public string OrderedBy
 		{
 			get { return this.m_OrderedBy; }
 			set
@@ -221,7 +235,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public string ColorCode
+        [PersistentProperty()]
+        public string ColorCode
 		{
 			get { return this.m_ColorCode; }
 			set
@@ -270,7 +285,8 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-		public Nullable<DateTime> PBirthdate
+        [PersistentProperty()]
+        public Nullable<DateTime> PBirthdate
 		{
 			get { return this.m_PBirthdate; }
 			set
@@ -296,6 +312,7 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
+        [PersistentProperty()]
         public string SpecimenDescription
         {
             get { return this.m_SpecimenDescription; }
@@ -329,6 +346,7 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
+        [PersistentProperty()]
         public bool IsPosted
         {
             get { return this.m_IsPosted; }

@@ -51,7 +51,8 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
                 "4. Stewart CC, Stewart SJ. Immunological monitoring utilizing novel probes.Annual of the New York Annal of New York Academy of Science.  1993; 95: 816 - 823.";
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Method
 		{
 			get { return this.m_Method; }
@@ -65,7 +66,8 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
 			}
 		}
 
-		[PersistentStringProperty(1000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1000", "null", "varchar")]
 		public string ASRComment
 		{
 			get { return this.m_ASRComment; }
@@ -80,6 +82,7 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
 		}
 
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "", "null", "float")]
 		public double? WBC
 		{
 			get { return this.m_WBC; }
@@ -96,6 +99,7 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
 		}
 
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "", "null", "float")]
 		public double? LymphocytePercentage
 		{
 			get { return this.m_LymphocytePercentage; }
@@ -112,6 +116,7 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
 		}		
 
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "", "null", "float")]
 		public double? CD19BCellPositivePercent
 		{
 			get { return this.m_CD19BCellPositivePercent; }
@@ -127,6 +132,7 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
 		}		
 
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "", "null", "float")]
 		public double? CD20BCellPositivePercent
 		{
 			get { return this.m_CD20BCellPositivePercent; }
@@ -142,6 +148,7 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
 		}
 		
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "", "null", "float")]
 		public double? CD19AbsoluteCount
 		{
 			get { return this.m_CD19AbsoluteCount; }
@@ -156,6 +163,7 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
 		}
 		
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "", "null", "float")]
 		public double? CD20AbsoluteCount
 		{
 			get { return this.m_CD20AbsoluteCount; }

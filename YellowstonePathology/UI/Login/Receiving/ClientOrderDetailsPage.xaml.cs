@@ -214,8 +214,17 @@ namespace YellowstonePathology.UI.Login.Receiving
                     {
                         if(this.m_ClientOrderDetail.FixationStartTime.HasValue == true)
                         {
-                            YellowstonePathology.Business.Surgical.CheechTodayOvernight cheechTodayOvernight = new Business.Surgical.CheechTodayOvernight();
-                            Nullable<DateTime> fixationEndTime = cheechTodayOvernight.GetFixationEndTime(this.m_ClientOrderDetail.FixationStartTime, this.m_ClientOrderDetail.DateReceived.Value);
+                            YellowstonePathology.Business.Surgical.ProcessorRun processorRun = null;
+                            if(DateTime.Today.DayOfWeek ==  DayOfWeek.Friday || DateTime.Today.DayOfWeek == DayOfWeek.Saturday)
+                            {
+                                processorRun = new Business.Surgical.CheechSunday();
+                            }
+                            else
+                            {
+                                processorRun = new Business.Surgical.CheechTodayOvernight();
+                            }                            
+
+                            Nullable<DateTime> fixationEndTime = processorRun.GetFixationEndTime(this.m_ClientOrderDetail.FixationStartTime, this.m_ClientOrderDetail.DateReceived.Value);
                             TimeSpan fixationDuration = fixationEndTime.Value - this.m_ClientOrderDetail.FixationStartTime.Value;
                             if(fixationDuration.TotalHours < 6)
                             {

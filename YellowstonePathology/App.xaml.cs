@@ -66,7 +66,7 @@ namespace YellowstonePathology.UI
                 YellowstonePathology.UI.Cutting.CuttingStationPath cuttingStationPath = new Cutting.CuttingStationPath();
                 cuttingStationPath.Start();
             }                        
-            else if (System.Environment.MachineName.ToUpper() == "CYTOLOG2")// || System.Environment.MachineName.ToUpper() == "COMPILE")
+            else if (System.Environment.MachineName.ToUpper() == "CYTOLOG2") // || System.Environment.MachineName.ToUpper() == "COMPILE")
             {
 				YellowstonePathology.UI.Cytology.ThinPrepPapSlidePrintingPath thinPrepPapSlidePrintingPath = new Cytology.ThinPrepPapSlidePrintingPath();
 				thinPrepPapSlidePrintingPath.Start();

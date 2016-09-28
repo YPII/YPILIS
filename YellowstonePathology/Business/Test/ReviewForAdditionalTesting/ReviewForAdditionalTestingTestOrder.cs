@@ -25,7 +25,8 @@ namespace YellowstonePathology.Business.Test.ReviewForAdditionalTesting
 		{
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Comment
 		{
             get { return this.m_Comment; }
@@ -39,7 +40,8 @@ namespace YellowstonePathology.Business.Test.ReviewForAdditionalTesting
 			}
 		}
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }

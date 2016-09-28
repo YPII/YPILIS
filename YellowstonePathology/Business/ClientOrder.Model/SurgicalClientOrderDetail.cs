@@ -64,8 +64,9 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 			throw new NotImplementedException("ToXml not implemented in ClientOrderDetailSurgicalProperty");
 		}
 
-		[PersistentProperty()]
 		[DataMember]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "null", "bit")]
 		public Nullable<bool> OrderImmediateExam
 		{
 			get { return this.m_OrderImmediateExam; }
@@ -79,8 +80,9 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 			}
 		}
 
-		[PersistentProperty()]
 		[DataMember]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "null", "bit")]
 		public Nullable<bool> OrderFrozenSection
 		{
 			get { return this.m_OrderFrozenSection; }

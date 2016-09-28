@@ -15,7 +15,9 @@ namespace YellowstonePathology.Business.Facility.Model
             this.m_Address1 = "500 Chipeta Way";
             this.m_City = "Salt Lake City";
             this.m_State = "UT";
-            this.m_ZipCode = "84108";
+            this.m_ZipCode = "84108-1221";
+            this.m_PhoneNumber = "(800)522-2787";
+            this.m_FedexPaymentType = "SENDER";
             this.m_IsReferenceLab = true;
 			
 			this.m_CliaLicense = new CLIALicense(this, null);

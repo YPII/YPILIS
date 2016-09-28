@@ -52,7 +52,7 @@ namespace YellowstonePathology.Business.Surgical
             }
 
             return result;
-        }
+        }        
 
         public Nullable<DateTime> GetFixationEndTime(Nullable<DateTime> fixationStartTime, DateTime dateReceived)
         {

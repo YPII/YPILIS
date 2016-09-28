@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Document
 
         }
 
-		[PersistentPrimaryKeyProperty(false, 0)]
+		[PersistentPrimaryKeyProperty(false)]
 		public string DocumentId
 		{
 			get { return this.m_DocumentId; }

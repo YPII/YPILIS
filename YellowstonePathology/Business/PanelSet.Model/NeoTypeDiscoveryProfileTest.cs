@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
-
+            this.m_ExpectedDuration = TimeSpan.FromDays(15);
             this.m_AllowMultiplePerAccession = true;
 
             string taskDescription = "Gather materials (Peripheral blood (preferred): 2 EDTA tubes, 5 mL each, Bone marrow: Minimum 1 mL in EDTA, 1-3 mL preferred," +

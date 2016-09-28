@@ -27,7 +27,8 @@ namespace YellowstonePathology.Business.Test.FGFR1
 		{
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string Result
         {
             get { return this.m_Result; }
@@ -41,7 +42,8 @@ namespace YellowstonePathology.Business.Test.FGFR1
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string Interpretation
         {
             get { return this.m_Interpretation; }
@@ -55,7 +57,8 @@ namespace YellowstonePathology.Business.Test.FGFR1
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string Comment
         {
             get { return this.m_Comment; }
@@ -69,7 +72,8 @@ namespace YellowstonePathology.Business.Test.FGFR1
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string Method
         {
             get { return this.m_Method; }
@@ -83,7 +87,8 @@ namespace YellowstonePathology.Business.Test.FGFR1
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ASR
         {
             get { return this.m_ASR; }

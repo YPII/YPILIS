@@ -11,6 +11,7 @@ namespace YellowstonePathology.Business.Surgical
         {
             this.m_Name = "Cheech";            
             this.m_ProcessorRunCollection.Add(new CheechTodayOvernight());
+            this.m_ProcessorRunCollection.Add(new CheechTodayShortMini());
             this.m_ProcessorRunCollection.Add(new CheechTomorrowLongMini());
             this.m_ProcessorRunCollection.Add(new CheechTomorrowShortMini());
             this.m_ProcessorRunCollection.Add(new CheechTomorrowOvernight());

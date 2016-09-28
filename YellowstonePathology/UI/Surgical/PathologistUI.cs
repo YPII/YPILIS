@@ -35,6 +35,7 @@ namespace YellowstonePathology.UI.Surgical
         private System.Windows.Controls.TabItem m_Writer;
 
         private List<int> m_PanelSetIdsThatCanOrderStains;
+        private string m_LastSlideOrderIdScanned;
 
         public PathologistUI(System.Windows.Controls.TabItem writer)
         {            
@@ -64,6 +65,12 @@ namespace YellowstonePathology.UI.Surgical
         public Business.User.SystemIdentity SystemIdentity
         {
             get { return this.m_SystemIdentity; }
+        }
+
+        public string LastSlideOrderIdScanned
+        {
+            get { return this.m_LastSlideOrderIdScanned; }
+            set { this.m_LastSlideOrderIdScanned = value; }
         }
 
         public string SignatureButtonText

@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.Domain
 			}
 		}
 
-        [PersistentPrimaryKeyProperty(true, 0)]
+        [PersistentPrimaryKeyProperty(true)]
 		public int MaterialLocationId
 		{
 			get { return this.m_MaterialLocationId; }

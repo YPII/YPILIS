@@ -34,7 +34,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 		{
 		}
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }
@@ -48,7 +49,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Indicator
 		{
 			get { return this.m_Indicator; }
@@ -62,7 +64,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string ReferenceRanges
 		{
 			get { return this.m_ReferenceRanges; }
@@ -76,7 +79,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string AverageHER2SignalsPerNucleus
 		{
 			get { return this.m_AverageHER2SignalsPerNucleus; }
@@ -90,7 +94,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string AverageCEN17SignalsPerNucleus
 		{
 			get { return this.m_AverageCEN17SignalsPerNucleus; }
@@ -104,7 +109,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string HER2CEN17SignalRatio
 		{
 			get { return this.m_HER2CEN17SignalRatio; }
@@ -118,7 +124,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -132,7 +139,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			}
 		}
 
-		[PersistentStringProperty(1000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1000", "null", "varchar")]
 		public string Comment
 		{
 			get { return this.m_Comment; }
@@ -146,7 +154,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string NucleiScored
 		{
 			get { return this.m_NucleiScored; }
@@ -160,7 +169,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			}
 		}
 
-		[PersistentStringProperty(1000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1000", "null", "varchar")]
 		public string Reference
 		{
 			get { return this.m_Reference; }
@@ -174,7 +184,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			}
 		}
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool NonBreast
         {
             get { return this.m_NonBreast; }

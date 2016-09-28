@@ -103,6 +103,7 @@ namespace YellowstonePathology.Business.Specimen.Model
             result.Add(new SpecimenDefinition.Fluid());
             result.Add(new SpecimenDefinition.Urine());
             result.Add(new SpecimenDefinition.Consult());
+            result.Add(new SpecimenDefinition.InitialReading());
             return Sort(result);
         }
 

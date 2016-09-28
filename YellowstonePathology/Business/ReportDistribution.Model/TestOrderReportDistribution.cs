@@ -58,7 +58,8 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             this.m_LongDistance = longDistance;
 		}
 
-        [PersistentDocumentIdProperty(50)]
+        [PersistentDocumentIdProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ObjectId
         {
             get { return this.m_ObjectId; }
@@ -72,7 +73,8 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 			}
         }
 
-		[PersistentPrimaryKeyProperty(false, 50)]
+		[PersistentPrimaryKeyProperty(false)]
+		[PersistentDataColumnProperty(false, "50", "null", "varchar")]
         public string TestOrderReportDistributionId
 		{
             get { return this.m_TestOrderReportDistributionId; }
@@ -86,7 +88,8 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 			}
 		}        
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ReportNo
         {
             get { return this.m_ReportNo; }
@@ -101,6 +104,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         }
 
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "11", "null", "int")]
 		public int PhysicianId
 		{
 			get { return this.m_PhysicianId; }
@@ -115,6 +119,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 		}
 
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "11", "null", "int")]
 		public int ClientId
 		{
 			get { return this.m_ClientId; }
@@ -128,7 +133,8 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 			}
 		}
 
-		[PersistentStringProperty(250)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "250", "null", "varchar")]
 		public string PhysicianName
 		{
 			get { return this.m_PhysicianName; }
@@ -142,7 +148,8 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 			}
 		}
 
-		[PersistentStringProperty(250)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "250", "null", "varchar")]
 		public string ClientName
 		{
 			get { return this.m_ClientName; }
@@ -156,7 +163,8 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string DistributionType
 		{
 			get { return this.m_DistributionType; }
@@ -171,6 +179,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 		}
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "null", "bit")]
         public bool Distributed
         {
             get { return this.m_Distributed; }
@@ -185,6 +194,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> DateAdded
         {
             get { return this.m_DateAdded; }
@@ -199,6 +209,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> ScheduledDistributionTime
         {
             get { return this.m_ScheduledDistributionTime; }
@@ -213,6 +224,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> TimeOfLastDistribution
         {
             get { return this.m_TimeOfLastDistribution; }
@@ -226,7 +238,8 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string FaxNumber
         {
             get { return this.m_FaxNumber; }
@@ -241,6 +254,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "null", "bit")]
         public bool LongDistance
         {
             get { return this.m_LongDistance; }
@@ -255,6 +269,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "null", "bit")]
         public bool Rescheduled
         {
             get { return this.m_Rescheduled; }
@@ -268,7 +283,8 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1000", "null", "varchar")]
         public string RescheduledMessage
         {
             get { return this.m_RescheduledMessage; }
@@ -282,7 +298,8 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             }
         }
 
-        [PersistentStringProperty(50, "F")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "'F'", "varchar")]
         public string ResultStatus
         {
             get { return this.m_ResultStatus; }

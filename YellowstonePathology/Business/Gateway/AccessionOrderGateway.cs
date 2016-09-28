@@ -768,9 +768,8 @@ namespace YellowstonePathology.Business.Gateway
         public static Surgical.PathologistHistoryList GetPathologistPatientHistory(string patientId)
         {
             Surgical.PathologistHistoryList result = new Surgical.PathologistHistoryList();
-            StringBuilder xmlString = new StringBuilder();
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "prcGetPatientHistory_4";
+            cmd.CommandText = "prcGetPatientHistory_5";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@PatientId", SqlDbType.VarChar).Value = patientId;
 
@@ -778,45 +777,32 @@ namespace YellowstonePathology.Business.Gateway
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (XmlReader xmlReader = cmd.ExecuteXmlReader())
+                using (SqlDataReader dr = cmd.ExecuteReader())
                 {
-                    while (xmlReader.Read())
+                    while (dr.Read())
                     {
-                        xmlString.Append(xmlReader.ReadOuterXml());
+                        Surgical.PathologistHistoryItem pathologistHistoryItem = new Surgical.PathologistHistoryItem();
+                        Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(pathologistHistoryItem, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(pathologistHistoryItem);
                     }
-                }
-            }
-
-            if (xmlString.Length != 0)
-            {
-                XElement resultElements = XElement.Parse(xmlString.ToString(), LoadOptions.PreserveWhitespace);
-                List<XElement> pathologistHistoryItemElements = (from item in resultElements.Elements("PathologistHistoryItem")
-                                                                 select item).ToList<XElement>();
-                foreach (XElement pathologistHistoryElement in pathologistHistoryItemElements)
-                {
-                    YellowstonePathology.Business.Surgical.PathologistHistoryItem pathologistHistory = new Surgical.PathologistHistoryItem();
-                    YellowstonePathology.Business.Persistence.XmlPropertyWriter xmlPropertyWriter = new Persistence.XmlPropertyWriter(pathologistHistoryElement, pathologistHistory);
-                    xmlPropertyWriter.Write();
-
-                    List<XElement> pathologistHistoryItemListElements = (from item in pathologistHistoryElement.Elements("PathologistHistoryItemList")
-                                                                         select item).ToList<XElement>();
-                    foreach (XElement pathologistHistoryItemListElement in pathologistHistoryItemListElements)
+                    dr.NextResult();
+                    while (dr.Read())
                     {
-                        List<XElement> pathologistHistoryItemListItemElements = (from item in pathologistHistoryItemListElement.Elements("PathologistHistoryItemListItem")
-                                                                                 select item).ToList<XElement>();
-                        foreach (XElement pathologistHistoryItemListItemElement in pathologistHistoryItemListItemElements)
+                        Surgical.PathologistHistoryItemListItem pathologistHistoryItemListItem = new Surgical.PathologistHistoryItemListItem();
+                        Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(pathologistHistoryItemListItem, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        foreach(Surgical.PathologistHistoryItem pathologistHistoryItem in result)
                         {
-                            YellowstonePathology.Business.Surgical.PathologistHistoryItemListItem pathologistHistoryItemListItem = new Surgical.PathologistHistoryItemListItem();
-                            YellowstonePathology.Business.Persistence.XmlPropertyWriter xmlPropertyWriter1 = new Persistence.XmlPropertyWriter(pathologistHistoryItemListItemElement, pathologistHistoryItemListItem);
-                            xmlPropertyWriter1.Write();
-
-                            pathologistHistory.PathologistHistoryItemList.Add(pathologistHistoryItemListItem);
+                            if(pathologistHistoryItemListItem.ReportNo == pathologistHistoryItem.ReportNo)
+                            {
+                                pathologistHistoryItem.PathologistHistoryItemList.Add(pathologistHistoryItemListItem);
+                                break;
+                            }
                         }
                     }
-                    result.Add(pathologistHistory);
                 }
             }
-
             return result;
         }
 
@@ -1052,68 +1038,68 @@ namespace YellowstonePathology.Business.Gateway
 		public static Surgical.SurgicalMasterLogList GetSurgicalMasterLogList(DateTime reportDate)
 		{
 			Surgical.SurgicalMasterLogList result = new Surgical.SurgicalMasterLogList();
-			StringBuilder xmlString = new StringBuilder();
-			SqlCommand cmd = new SqlCommand();
-			StringBuilder commandText = new StringBuilder();
-			commandText.Append("With rpts as(");
-			commandText.Append("SELECT Distinct a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, a.PBirthdate, a.PhysicianName, a.ClientName, Count(*) AliquotCount ");
-			commandText.Append("FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo ");
-			commandText.Append("JOIN tblSpecimenORder so on a.MasterAccessionNo = so.MasterAccessionNo ");
-			commandText.Append("LEFT OUTER JOIN tblAliquotOrder ao on so.SpecimenOrderId = ao.SpecimenOrderId ");
-			commandText.Append("WHERE AccessionDate = @ReportDate and pso.PanelSetId in (13, 50) ");
-			commandText.Append(" group by a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, a.PBirthdate, a.PhysicianName, a.ClientName");
-			commandText.Append(") ");
-			commandText.Append("SELECT rpts.*, ");
-			commandText.Append("(Select ssr.DiagnosisId, so.Description ");
-			commandText.Append("FROM tblSurgicalSpecimen ssr ");
-			commandText.Append("JOIN tblSpecimenOrder so ON ssr.SpecimenOrderId = so.SpecimenOrderId ");
-			commandText.Append("WHERE ssr.ReportNo = rpts.ReportNo for xml path('MasterLogItem'), type) MasterLogList ");
-			commandText.Append("From rpts Order By AccessionTime for xml path('SurgicalMasterLogItem'), type, root('SurgicalMasterLogList')");
-			cmd.CommandText = commandText.ToString();
-			cmd.CommandType = CommandType.Text;
-			cmd.Parameters.Add("@ReportDate", SqlDbType.VarChar, 20).Value = reportDate.ToShortDateString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "declare @rpts table " +
+                "( " +
+                "AccessionTime datetime, " +
+                "ReportNo varchar(20), " +
+                "AccessioningFacilityId varchar(100), " +
+                "PFirstName varchar(100), " +
+                "PLastName varchar(100), " +
+                "PBirthdate datetime, " +
+                "PhysicianName varchar(100), " +
+                "ClientName varchar(100), " +
+                "AliquotCount int " +
+                ") " +
+                "insert @rpts " +
+                "SELECT Distinct a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, " +
+                "a.PBirthdate, a.PhysicianName, a.ClientName, Count(*) AliquotCount " +
+                "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "JOIN tblSpecimenORder so on a.MasterAccessionNo = so.MasterAccessionNo " +
+                "LEFT OUTER JOIN tblAliquotOrder ao on so.SpecimenOrderId = ao.SpecimenOrderId " +
+                "WHERE AccessionDate = @ReportDate and pso.PanelSetId in (13, 50)  " +
+                " group by a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, " +
+                "a.PBirthdate, a.PhysicianName, a.ClientName " +
+                "Order By AccessionTime " +
+                "SELECT rpts.* From @rpts rpts Order By AccessionTime " +
+                "Select ssr.DiagnosisId, so.Description, ssr.ReportNo " +
+                "FROM tblSurgicalSpecimen ssr " +
+                "JOIN tblSpecimenOrder so ON ssr.SpecimenOrderId = so.SpecimenOrderId " +
+                "join @rpts rpts on ssr.ReportNo = rpts.ReportNo order by 1";
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@ReportDate", SqlDbType.VarChar, 20).Value = reportDate.ToShortDateString();
+            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.Surgical.SurgicalMasterLogItem surgicalMasterLogItem = new Surgical.SurgicalMasterLogItem();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(surgicalMasterLogItem, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(surgicalMasterLogItem);
+                    }
+                    dr.NextResult();
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.Surgical.MasterLogItem masterLogItem = new Surgical.MasterLogItem();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(masterLogItem, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
 
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
-			{
-				cn.Open();
-				cmd.Connection = cn;
-				using (XmlReader xmlReader = cmd.ExecuteXmlReader())
-				{
-					while (xmlReader.Read())
-					{
-						xmlString.Append(xmlReader.ReadOuterXml());
-					}
-				}
-			}
-
-			XElement resultElement = XElement.Parse(xmlString.ToString(), LoadOptions.PreserveWhitespace);
-			List<XElement> surgicalMasterLogItemElements = (from item in resultElement.Elements("SurgicalMasterLogItem")
-															 select item).ToList<XElement>();
-			foreach (XElement surgicalMasterLogItemElement in surgicalMasterLogItemElements)
-			{
-				YellowstonePathology.Business.Surgical.SurgicalMasterLogItem surgicalMasterLogItem = new Surgical.SurgicalMasterLogItem();
-				YellowstonePathology.Business.Persistence.XmlPropertyWriter xmlPropertyWriter = new Persistence.XmlPropertyWriter(surgicalMasterLogItemElement, surgicalMasterLogItem);
-				xmlPropertyWriter.Write();
-
-				List<XElement> masterLogListElements = (from item in surgicalMasterLogItemElement.Elements("MasterLogList")
-																	 select item).ToList<XElement>();
-				foreach (XElement masterLogListElement in masterLogListElements)
-				{
-					List<XElement> masterLogItemElements = (from item in masterLogListElement.Elements("MasterLogItem")
-																			 select item).ToList<XElement>();
-					foreach (XElement masterLogItemElement in masterLogItemElements)
-					{
-						YellowstonePathology.Business.Surgical.MasterLogItem masterLogItem = new Surgical.MasterLogItem();
-						YellowstonePathology.Business.Persistence.XmlPropertyWriter xmlPropertyWriter1 = new Persistence.XmlPropertyWriter(masterLogItemElement, masterLogItem);
-						xmlPropertyWriter1.Write();
-
-						surgicalMasterLogItem.MasterLogList.Add(masterLogItem);
-					}
-				}
-				result.Add(surgicalMasterLogItem);
-			}
-
-			return result;
+                        foreach(Surgical.SurgicalMasterLogItem surgicalMasterLogItem in result)
+                        {
+                            if(masterLogItem.ReportNo == surgicalMasterLogItem.ReportNo)
+                            {
+                                surgicalMasterLogItem.MasterLogList.Add(masterLogItem);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
 		}
 
 		public static YellowstonePathology.Business.Domain.OrderLogCollection GetOrderLogCollectionByReportDate(DateTime reportDate)
@@ -1827,101 +1813,22 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        public static List<Test.PanelOrder> GetPanelOrdersToAcknowledge(string panelOrderIdString)
-		{
-			List<Test.PanelOrder> result = new List<Test.PanelOrder>();
-			XElement collectionElement = new XElement("Document");
-			SqlCommand cmd = new SqlCommand("gwGetPanelOrderListFromIdString_A3");
-			cmd.CommandType = CommandType.StoredProcedure;
-			cmd.Parameters.Add("@PanelOrderIdString", SqlDbType.VarChar).Value = panelOrderIdString;
-			using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.ProductionConnectionString))
-			{
-				cn.Open();
-				cmd.Connection = cn;
-				using (XmlReader xmlReader = cmd.ExecuteXmlReader())
-				{
-					if (xmlReader.Read() == true)
-					{
-						collectionElement = XElement.Load(xmlReader);
-					}
-				}
-			}
-			foreach (XElement panelOrderElement in collectionElement.Elements("PanelOrder"))
-			{
-				Test.PanelOrder panelOrder = BuildPanelOrder(panelOrderElement);
-				result.Add(panelOrder);
-			}
-			return result;
-		}
-
-		public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetTaskOrderCollection()
-		{
-			YellowstonePathology.Business.Task.Model.TaskOrderCollection result = new YellowstonePathology.Business.Task.Model.TaskOrderCollection();
-			XElement collectionElement = new XElement("Document");
-			SqlCommand cmd = new SqlCommand(" select tsk.*,  ( select tskd.* from tblTaskOrderDetail tskd where tskd.TaskOrderId = tsk.TaskOrderId " +
-				"for xml Path('TaskOrderDetail'), type) [TaskOrderDetailCollection] " +
-				"from tblTaskOrder tsk where tsk.OrderDate between dateadd(dd, -30, GetDate()) and GetDate() order by tsk.OrderDate desc for xml Path('TaskOrder'), type, root('TaskOrderCollection')");
-			cmd.CommandType = CommandType.Text;
-
-			using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.ProductionConnectionString))
-			{
-				cn.Open();
-				cmd.Connection = cn;
-				using (XmlReader xmlReader = cmd.ExecuteXmlReader())
-				{
-					if (xmlReader.Read() == true)
-					{
-						collectionElement = XElement.Load(xmlReader);
-					}
-				}
-			}
-
-			foreach (XElement taskOrderElement in collectionElement.Elements("TaskOrder"))
-			{
-				YellowstonePathology.Business.Task.Model.TaskOrder taskOrder = BuildTaskOrder(taskOrderElement);
-				result.Add(taskOrder);
-			}
-
-			return result;
-		}
-
 		public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetTaskOrderCollection(string acknowledgementType)
 		{
-			YellowstonePathology.Business.Task.Model.TaskOrderCollection result = new YellowstonePathology.Business.Task.Model.TaskOrderCollection();
-			XElement collectionElement = new XElement("Document");
-			SqlCommand cmd = new SqlCommand(" select tsk.*,  ( select tskd.* from tblTaskOrderDetail tskd where tskd.TaskOrderId = tsk.TaskOrderId " +
-				"for xml Path('TaskOrderDetail'), type) [TaskOrderDetailCollection] " +
-				"from tblTaskOrder tsk where tsk.AcknowledgementType = @AcknowledgementType and tsk.OrderDate between dateadd(dd, -15, GetDate()) and GetDate() " +
-				"order by tsk.OrderDate desc for xml Path('TaskOrder'), type, root('TaskOrderCollection')");
-			cmd.CommandType = CommandType.Text;
-			cmd.Parameters.Add("@AcknowledgementType", SqlDbType.VarChar).Value = acknowledgementType;
-			
-			using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.ProductionConnectionString))
-			{
-				cn.Open();
-				cmd.Connection = cn;
-				using (XmlReader xmlReader = cmd.ExecuteXmlReader())
-				{
-					if (xmlReader.Read() == true)
-					{
-						collectionElement = XElement.Load(xmlReader);
-					}
-				}
-			}
-			foreach (XElement taskOrderElement in collectionElement.Elements("TaskOrder"))
-			{
-				YellowstonePathology.Business.Task.Model.TaskOrder taskOrder = BuildTaskOrder(taskOrderElement);
-				result.Add(taskOrder);
-			}
-
-			return result;
+            SqlCommand cmd = new SqlCommand("select * from tblTaskOrder where AcknowledgementType = @AcknowledgementType and " +
+                "OrderDate between dateadd(dd, -15, GetDate()) and GetDate() order by OrderDate desc " +
+                "select * from tblTaskOrderDetail where TaskOrderId in(select TaskOrderId from tblTaskOrder where " +
+                "AcknowledgementType = @AcknowledgementType and OrderDate between dateadd(dd, -15, GetDate()) and GetDate()) " +
+                "order by TaskOrderDetailId");
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@AcknowledgementType", SqlDbType.VarChar).Value = acknowledgementType;
+			YellowstonePathology.Business.Task.Model.TaskOrderCollection result = BuildTaskOrderCollection(cmd);
+            return result;
 		}
 
 		public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetDailyTaskOrderCollection()
 		{
 			YellowstonePathology.Business.Task.Model.TaskOrderCollection result = new YellowstonePathology.Business.Task.Model.TaskOrderCollection();
-			XElement collectionElement = new XElement("Document");
-			//SqlCommand cmd = new SqlCommand("Select * from tblTaskOrder where AcknowledgementType = @AcknowledgementType and TaskDate between dateadd(dd, -30, GetDate()) and GetDate() order by TaskDate desc");
             string sql = "Select * from tblTaskOrder where AcknowledgementType = 'Daily' " +
 	            "and Acknowledged = 0 " +
 	            "and TaskDate <= GetDate() order by TaskDate desc";
@@ -2043,42 +1950,17 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetTasksNotAcknowledged(string assignedTo, string acknowledgementType)
 		{
-			YellowstonePathology.Business.Task.Model.TaskOrderCollection result = new YellowstonePathology.Business.Task.Model.TaskOrderCollection();
-			XElement collectionElement = new XElement("Document");
-			SqlCommand cmd = new SqlCommand("select tsk.*,  " +
-				"(select tskd.* " +
-				"from tblTaskOrderDetail tskd " +
-				"where tskd.TaskOrderId = tsk.TaskOrderId " +
-				"for xml Path('TaskOrderDetail'), type) [TaskOrderDetailCollection] " +
-				"from tblTaskOrder tsk where AcknowledgementType = @AcknowledgementType and TaskOrderId in " +
-				"(Select TaskOrderId from tblTaskOrderDetail where Acknowledged = 0 and AssignedTo = @AssignedTo) order by tsk.OrderDate desc " +
-				"for xml Path('TaskOrder'), type, root('TaskOrderCollection')");
-			cmd.CommandType = CommandType.Text;
-			cmd.Parameters.Add("@AssignedTo", SqlDbType.VarChar).Value = assignedTo;
-			cmd.Parameters.Add("@AcknowledgementType", SqlDbType.VarChar).Value = acknowledgementType;
-
-			using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.ProductionConnectionString))
-			{
-				cn.Open();
-				cmd.Connection = cn;
-				using (XmlReader xmlReader = cmd.ExecuteXmlReader())
-				{
-					if (xmlReader.Read() == true)
-					{
-						collectionElement = XElement.Load(xmlReader);
-					}
-				}
-			}
-			foreach (XElement taskOrderElement in collectionElement.Elements("TaskOrder"))
-			{
-				YellowstonePathology.Business.Task.Model.TaskOrder taskOrder = BuildTaskOrder(taskOrderElement);
-				result.Add(taskOrder);
-			}
-
-			return result;
+            SqlCommand cmd = new SqlCommand("select * from tblTaskOrder where AcknowledgementType = @AcknowledgementType and TaskOrderId in " +
+                "(Select TaskOrderId from tblTaskOrderDetail where Acknowledged = 0 and AssignedTo = @AssignedTo) order by OrderDate desc " +
+                "select * from tblTaskOrderDetail where Acknowledged = 0 and AssignedTo = @AssignedTo order by TaskOrderDetailId");
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@AssignedTo", SqlDbType.VarChar).Value = assignedTo;
+            cmd.Parameters.Add("@AcknowledgementType", SqlDbType.VarChar).Value = acknowledgementType;
+            YellowstonePathology.Business.Task.Model.TaskOrderCollection result = BuildTaskOrderCollection(cmd);
+            return result;
 		}
 
-		public static YellowstonePathology.Business.Task.Model.TaskOrder BuildTaskOrder(XElement taskOrderElement)
+		/*public static YellowstonePathology.Business.Task.Model.TaskOrder BuildTaskOrder(XElement taskOrderElement)
 		{
 			YellowstonePathology.Business.Task.Model.TaskOrder taskOrder = new YellowstonePathology.Business.Task.Model.TaskOrder();
 			YellowstonePathology.Business.Persistence.XmlPropertyWriter xmlPropertyWriter = new YellowstonePathology.Business.Persistence.XmlPropertyWriter(taskOrderElement, taskOrder);
@@ -2098,9 +1980,45 @@ namespace YellowstonePathology.Business.Gateway
 			YellowstonePathology.Business.Persistence.XmlPropertyWriter xmlPropertyWriter = new YellowstonePathology.Business.Persistence.XmlPropertyWriter(taskOrderDetailElement, taskOrderDetail);
 			xmlPropertyWriter.Write();
 			return taskOrderDetail;
-		}
+		}*/
 
-		public static Test.PanelOrder BuildPanelOrder(XElement panelOrderElement)
+        private static Task.Model.TaskOrderCollection BuildTaskOrderCollection(SqlCommand cmd)
+        {
+            YellowstonePathology.Business.Task.Model.TaskOrderCollection result = new YellowstonePathology.Business.Task.Model.TaskOrderCollection();
+            using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.ProductionConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Task.Model.TaskOrder taskOrder = new Task.Model.TaskOrder();
+                        Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(taskOrder, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(taskOrder);
+                    }
+                    dr.NextResult();
+                    while (dr.Read())
+                    {
+                        Task.Model.TaskOrderDetail taskOrderDetail = new Task.Model.TaskOrderDetail();
+                        Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(taskOrderDetail, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        foreach (Task.Model.TaskOrder taskOrder in result)
+                        {
+                            if (taskOrderDetail.TaskOrderId == taskOrder.TaskOrderId)
+                            {
+                                taskOrder.TaskOrderDetailCollection.Add(taskOrderDetail);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+    public static Test.PanelOrder BuildPanelOrder(XElement panelOrderElement)
 		{
             YellowstonePathology.Business.Panel.Model.PanelCollection panelCollection = YellowstonePathology.Business.Panel.Model.PanelCollection.GetAll();
 			int panelId = Convert.ToInt32(panelOrderElement.Element("PanelId").Value);
@@ -2781,7 +2699,7 @@ namespace YellowstonePathology.Business.Gateway
                 "from tblAmendment a " +
                 "join tblTestOrderReportDistribution trd on a.ReportNo = trd.ReportNo " +
                 "join tblPanelSetOrder pso on trd.ReportNo = pso.ReportNo " +
-                "where trd.TimeOfLastDistribution < a.finalTime and trd.ScheduledDistributionTime is null and a.finalTime < dateAdd(mi, -15, getdate())";
+                "where trd.TimeOfLastDistribution < a.finalTime and trd.ScheduledDistributionTime is null and a.finalTime < dateAdd(mi, -15, getdate()) and a.DistributeOnFinal = 1 ";
 
             cmd.CommandType = CommandType.Text;
             using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))

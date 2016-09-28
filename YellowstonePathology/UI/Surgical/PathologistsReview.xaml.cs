@@ -28,13 +28,14 @@ namespace YellowstonePathology.UI.Surgical
 		private YellowstonePathology.Business.Document.CaseDocumentCollection m_CaseDocumentCollection;
 		private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
         private YellowstonePathology.UI.TypingShortcutUserControl m_TypingShortcutUserControl;
+        private object m_ReviewContent;
 
-		public PathologistsReview(PathologistUI pathologistUI, YellowstonePathology.Business.User.SystemIdentity systemIdentity)
+        public PathologistsReview(PathologistUI pathologistUI, YellowstonePathology.Business.User.SystemIdentity systemIdentity)
 		{
 			this.m_PathologistUI = pathologistUI;
 			this.m_SystemIdentity = systemIdentity;
 
-			InitializeComponent();
+			InitializeComponent();                      
 
 			this.m_DocumentViewer = new DocumentWorkspace();
 			this.TabItemDocumentWorkspace.Content = this.m_DocumentViewer;			
@@ -129,13 +130,13 @@ namespace YellowstonePathology.UI.Surgical
 
 		public void SetReviewContent()
 		{
-			object reviewContent = null;
+			this.m_ReviewContent = null;
 			object historyContent = null;
 			YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(this.PanelSetOrder.PanelSetId);
             if (panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument ||
                 panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.RetiredTestDocument)
 			{
-				reviewContent = new PublishedDocumentReview(this.m_PathologistUI, this.m_SystemIdentity);
+                this.m_ReviewContent = new PublishedDocumentReview(this.m_PathologistUI, this.m_SystemIdentity);
 				historyContent = new CommonHistory(this.AccessionOrder);
 			}
 			else
@@ -145,23 +146,28 @@ namespace YellowstonePathology.UI.Surgical
 					case 28: //Fetal Hemoglobin
 					case 29: //DNA Content and S-Phase Analysis
 					case 56: //T-Cell Immunodeficiency Profile
-						reviewContent = new PublishedDocumentReview(this.m_PathologistUI, this.m_SystemIdentity);
+                        this.m_ReviewContent = new PublishedDocumentReview(this.m_PathologistUI, this.m_SystemIdentity);
 						historyContent = new CommonHistory(this.AccessionOrder);
 						break;
 					case 13:
 					case 128:
-						reviewContent = new SurgicalReview(this.m_TypingShortcutUserControl, this.m_PathologistUI);
+                        this.m_ReviewContent = new SurgicalReview(this.m_TypingShortcutUserControl, this.m_PathologistUI);
 						historyContent = new SurgicalHistory(this.m_PathologistUI);
 						break;
 					default:
-						reviewContent = new ResultPathReview(this.m_PathologistUI, this.m_SystemIdentity);
+                        this.m_ReviewContent = new ResultPathReview(this.m_PathologistUI, this.m_SystemIdentity);
 						historyContent = new CommonHistory(this.AccessionOrder);
 						break;
 				}
 			}
-			this.ContentControlReview.Content = reviewContent;
+			this.ContentControlReview.Content = this.m_ReviewContent;
 			this.ContentControlHistory.Content = historyContent;
 		}
+
+        public object ReviewContent
+        {
+            get { return this.m_ReviewContent; }
+        }
 
 		public string CaseStatusTextColor
 		{

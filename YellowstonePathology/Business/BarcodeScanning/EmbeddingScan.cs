@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace YellowstonePathology.Business.BarcodeScanning
 {
-    public class EmbeddingScan: INotifyPropertyChanged 
+    public class EmbeddingScan : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
         private string m_ProcessorRun;
         private DateTime m_DateScanned;
         private string m_ScannedBy;
-        private int m_ScannedById; 
+        private int m_ScannedById;
         private bool m_Updated;
 
         public EmbeddingScan()
@@ -33,7 +33,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
             this.m_DateScanned = DateTime.Parse(hashEntries[3].Value);
             this.m_ScannedById = Convert.ToInt32(hashEntries[4].Value);
             this.m_ScannedBy = hashEntries[5].Value;
-            this.m_Updated = Convert.ToBoolean( hashEntries[6].Value);
+            this.m_Updated = Convert.ToBoolean(hashEntries[6].Value);
         }
 
         public EmbeddingScan(string aliquotOrderId, string processorRunId, string processorRun)
@@ -80,18 +80,18 @@ namespace YellowstonePathology.Business.BarcodeScanning
         public DateTime DateScanned
         {
             get { return this.m_DateScanned; }
-        }        
+        }
 
         public bool Updated
         {
             get { return this.m_Updated; }
             set
             {
-                if(this.m_Updated != value)
+                if (this.m_Updated != value)
                 {
                     this.m_Updated = true;
                     this.NotifyPropertyChanged("Updated");
-                }                
+                }
             }
         }
 

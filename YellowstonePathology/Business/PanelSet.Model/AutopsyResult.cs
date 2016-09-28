@@ -51,7 +51,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 			}
 		}
 
-		[PersistentPrimaryKeyProperty(true, 0)]
+		[PersistentPrimaryKeyProperty(true)]
 		public int AutopsyResultId
 		{
 			get { return this.m_AutopsyResultId; }

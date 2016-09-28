@@ -34,7 +34,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 		{
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }
@@ -48,7 +49,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Karyotype
 		{
 			get { return this.m_Karyotype; }
@@ -62,7 +64,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -76,7 +79,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Scored
 		{
 			get { return this.m_Scored; }
@@ -90,7 +94,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string NumberOfColonies
 		{
 			get { return this.m_NumberOfColonies; }
@@ -104,7 +109,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string NumberOfCultures
 		{
 			get { return this.m_NumberOfCultures; }
@@ -118,7 +124,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Karyotyped
 		{
 			get { return this.m_Karyotyped; }
@@ -132,7 +139,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Analyzed
 		{
 			get { return this.m_Analyzed; }
@@ -146,7 +154,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Counted
 		{
 			get { return this.m_Counted; }
@@ -160,7 +169,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string GTGBandLevel
 		{
 			get { return this.m_GTGBandLevel; }
@@ -174,7 +184,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly
 			}
 		}
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string TestDetails
         {
             get { return this.m_TestDetails; }

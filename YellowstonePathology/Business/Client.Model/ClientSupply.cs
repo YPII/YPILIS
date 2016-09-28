@@ -30,7 +30,8 @@ namespace YellowstonePathology.Business.Client.Model
             }
         }
 
-        [PersistentPrimaryKeyProperty(true, 0)]
+        [PersistentPrimaryKeyProperty(true)]
+        [PersistentDataColumnProperty(false, "50", "null", "varchar")]
 		public int clientsupplyid
 		{
 			get { return this.m_clientsupplyid; }
@@ -44,7 +45,8 @@ namespace YellowstonePathology.Business.Client.Model
 			}
 		}
 
-        [PersistentStringProperty(100)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string supplyname
 		{
 			get { return this.m_supplyname; }
@@ -58,7 +60,8 @@ namespace YellowstonePathology.Business.Client.Model
 			}
 		}
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string description
 		{
 			get { return this.m_description; }
@@ -72,7 +75,8 @@ namespace YellowstonePathology.Business.Client.Model
 			}
 		}
 
-        [PersistentStringProperty(100)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string supplycategory
 		{
 			get { return this.m_supplycategory; }
@@ -86,7 +90,8 @@ namespace YellowstonePathology.Business.Client.Model
 			}
 		}
 
-        [PersistentDocumentIdProperty(50)]
+        [PersistentDocumentIdProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }

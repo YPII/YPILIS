@@ -567,6 +567,21 @@ namespace YellowstonePathology.Business.Test
 			return result;
 		}
 
+        public string GetBlockCountString()
+        {
+            string result = null;
+            int blockCount = GetBlockCount();
+            if(blockCount == 1)
+            {
+                result = "1 block ";
+            }
+            else
+            {
+                result = blockCount.ToString() + " blocks ";
+            }
+            return result;
+        }
+
         public int GetBlockCount()
         {
             int result = 0;
@@ -580,6 +595,22 @@ namespace YellowstonePathology.Business.Test
                     }
                 }                
             }
+            return result;
+        }
+
+        public string GetClientAccessionedSlideOrderCountString()
+        {
+            string result = null;
+            int count = GetClientAccessionedSlideOrderCount();
+            if (count == 1)
+            {
+                result = "1 slide ";
+            }
+            else
+            {
+                result = count.ToString() + " slides ";
+            }
+
             return result;
         }
 
@@ -648,6 +679,20 @@ namespace YellowstonePathology.Business.Test
 			}
 			return result;
 		}
+
+        public bool SlideOrderExists(string slideOrderId)
+        {
+            bool result = false;
+            foreach (AliquotOrder aliquotOrder in this)
+            {
+                if (aliquotOrder.SlideOrderCollection.Exists(slideOrderId) == true)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
 
         public bool Exists(YellowstonePathology.Business.Specimen.Model.Aliquot aliquot)
         {

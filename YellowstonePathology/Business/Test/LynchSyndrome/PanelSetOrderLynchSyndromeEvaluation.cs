@@ -37,7 +37,8 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             accessionOrder.TakeATrip(orderTestOrderVisitor);            
 		}		
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string LynchSyndromeEvaluationType
         {
             get { return this.m_LynchSyndromeEvaluationType; }
@@ -51,7 +52,8 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             }
         }
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -65,7 +67,8 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Comment
 		{
 			get { return this.m_Comment; }
@@ -79,7 +82,8 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 			}
 		}
 
-        [PersistentStringProperty(5000)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
         public string Method
         {
             get { return this.m_Method; }
@@ -93,7 +97,8 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool BRAFIsIndicated
         {
             get { return this.m_BRAFIsIndicated; }

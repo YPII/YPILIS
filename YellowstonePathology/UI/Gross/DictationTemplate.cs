@@ -171,9 +171,7 @@ namespace YellowstonePathology.UI.Gross
                     }                    
                 }                
             }
-
             return text.Replace("[tipssubmittedwithcurettings]", statement);
-
         }
 
         protected string ReplaceSummarySubmission(string text, YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder)

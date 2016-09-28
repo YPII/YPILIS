@@ -31,6 +31,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             //    1 2 3     4       5     6     7           8        9 0 123456789      20                    1 2  23 4     25 
             // FT1||||20160523|20160523|CG|760502971|WDCUL$WOUND CULT||1||||||||||1962440800^^^^^^^^NPI^^^^NPI|||M3591||760502971
             // FT1||||20160523|20160523|CG|760101585|RENW$RENAL PANEL||1||||||||||1629286430^^^^^^^^NPI^^^^NPI|||M1019||760101585
+
             XElement ft1Element = new XElement("FT1", "FT1");
             document.Add(ft1Element);
 

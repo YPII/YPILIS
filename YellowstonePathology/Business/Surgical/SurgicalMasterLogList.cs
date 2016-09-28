@@ -118,8 +118,9 @@ namespace YellowstonePathology.Business.Surgical
 	{
 		private int m_DiagnosisId;
 		private string m_Description;
+        private string m_ReportNo;
 
-		public MasterLogItem()
+        public MasterLogItem()
 		{
 		}
 
@@ -136,5 +137,11 @@ namespace YellowstonePathology.Business.Surgical
 			get { return this.m_Description; }
 			set { this.m_Description = value; }
 		}
-	}
+        [PersistentProperty()]
+        public string ReportNo
+        {
+            get { return this.m_ReportNo; }
+            set { this.m_ReportNo = value; }
+        }
+    }
 }

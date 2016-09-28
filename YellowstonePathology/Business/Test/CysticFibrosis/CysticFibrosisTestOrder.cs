@@ -113,7 +113,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			return result;
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }
@@ -127,7 +128,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string EthnicGroupId
         {
             get { return this.m_EthnicGroupId; }
@@ -141,7 +143,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
             }
         }
 
-		[PersistentStringProperty(1000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1000", "null", "varchar")]
 		public string Comment
 		{
 			get { return this.m_Comment; }
@@ -155,7 +158,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -169,7 +173,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Method
 		{
 			get { return this.m_Method; }
@@ -183,7 +188,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string MutationsTested
 		{
 			get { return this.m_MutationsTested; }
@@ -197,7 +203,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string MutationsDetected
 		{
 			get { return this.m_MutationsDetected; }
@@ -211,7 +218,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result1898Plus1GtoA
 		{
 			get { return this.m_Result1898Plus1GtoA; }
@@ -225,7 +233,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultR117H
 		{
 			get { return this.m_ResultR117H; }
@@ -239,7 +248,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result621Plus1GtoT
 		{
 			get { return this.m_Result621Plus1GtoT; }
@@ -253,7 +263,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultG551D
 		{
 			get { return this.m_ResultG551D; }
@@ -267,7 +278,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultDeltaI507
 		{
 			get { return this.m_ResultDeltaI507; }
@@ -281,7 +293,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result711Plus1GtoT
 		{
 			get { return this.m_Result711Plus1GtoT; }
@@ -295,7 +308,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultG85E
 		{
 			get { return this.m_ResultG85E; }
@@ -309,7 +323,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result1717Minus1GtoA
 		{
 			get { return this.m_Result1717Minus1GtoA; }
@@ -323,7 +338,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultR560T
 		{
 			get { return this.m_ResultR560T; }
@@ -337,7 +353,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultR334W
 		{
 			get { return this.m_ResultR334W; }
@@ -351,7 +368,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result3659delC
 		{
 			get { return this.m_Result3659delC; }
@@ -365,7 +383,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result2184delA
 		{
 			get { return this.m_Result2184delA; }
@@ -379,7 +398,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result2789Plus5GtoA
 		{
 			get { return this.m_Result2789Plus5GtoA; }
@@ -393,7 +413,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultW1282X
 		{
 			get { return this.m_ResultW1282X; }
@@ -407,7 +428,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result3120Plus1GtoA
 		{
 			get { return this.m_Result3120Plus1GtoA; }
@@ -421,7 +443,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultA455E
 		{
 			get { return this.m_ResultA455E; }
@@ -435,7 +458,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultDeltaF508
 		{
 			get { return this.m_ResultDeltaF508; }
@@ -449,7 +473,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultR1162X
 		{
 			get { return this.m_ResultR1162X; }
@@ -463,7 +488,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultR553X
 		{
 			get { return this.m_ResultR553X; }
@@ -477,7 +503,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result3849Plus10KbCtoT
 		{
 			get { return this.m_Result3849Plus10KbCtoT; }
@@ -491,7 +518,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultR347P
 		{
 			get { return this.m_ResultR347P; }
@@ -505,7 +533,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultG542X
 		{
 			get { return this.m_ResultG542X; }
@@ -519,7 +548,8 @@ namespace YellowstonePathology.Business.Test.CysticFibrosis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ResultN1303K
 		{
 			get { return this.m_ResultN1303K; }

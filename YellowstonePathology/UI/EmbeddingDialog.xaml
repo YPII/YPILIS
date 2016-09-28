@@ -36,8 +36,8 @@
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right">
             <Button Width="150" Margin="2,2,2,2" Click="ButtonUpdate_Click">Update</Button>
-            <ComboBox  Name="ComboBoxProcessorRuns" ItemsSource="{Binding Path=ProcessorRunCollection}" DisplayMemberPath="Name" Margin="2,2,2,2" Width="200">
-            </ComboBox>
+            <ComboBox  Name="ComboBoxProcessorRuns" ItemsSource="{Binding Path=ProcessorRunCollection}" DisplayMemberPath="Name" Margin="2,2,2,2" Width="200"></ComboBox>
+            <ComboBox  Name="ComboBoxProcessorStartHour" ItemsSource="{Binding Path=ProcessorStartHourList}" Margin="2,2,2,2" Width="200"></ComboBox>
         </StackPanel>
         
 

@@ -13,13 +13,23 @@ namespace YellowstonePathology.Business.Persistence
 		object m_ObjectToWriteTo;
         SqlDataReader m_SqlDataReader;
         Type m_ObjectType;
+        //bool m_RemoveCarriageReturn; // for xml comparison testing
 
 		public SqlDataReaderPropertyWriter(object objectToWriteTo, SqlDataReader dataReader)
 		{
 			this.m_ObjectToWriteTo = objectToWriteTo;
             this.m_SqlDataReader = dataReader;
 			this.m_ObjectType = objectToWriteTo.GetType();
+            //this.m_RemoveCarriageReturn = false;
         }
+
+        /*public SqlDataReaderPropertyWriter(object objectToWriteTo, SqlDataReader dataReader, bool removeCarriageReturn)
+        {
+            this.m_ObjectToWriteTo = objectToWriteTo;
+            this.m_SqlDataReader = dataReader;
+            this.m_ObjectType = objectToWriteTo.GetType();
+            this.m_RemoveCarriageReturn = removeCarriageReturn;
+        }*/
 
         public void WriteProperties()
         {                                    
@@ -88,6 +98,10 @@ namespace YellowstonePathology.Business.Persistence
             if (this.m_SqlDataReader[property.Name] != DBNull.Value)
             {
                 string sqlValue = this.m_SqlDataReader[property.Name].ToString();
+                /*if (this.m_RemoveCarriageReturn == true && sqlValue.Contains("\r\n"))
+                {
+                    sqlValue = sqlValue.Replace("\r\n", "\n");
+                }*/
 				property.SetValue(this.m_ObjectToWriteTo, sqlValue, null);
             }
         }
@@ -116,8 +130,9 @@ namespace YellowstonePathology.Business.Persistence
 
         private void WriteDateTime(PropertyInfo property)
         {
-            DateTime sqlValue = DateTime.Parse(this.m_SqlDataReader[property.Name].ToString());
-			property.SetValue(this.m_ObjectToWriteTo, sqlValue, null);
+            //DateTime sqlValue = DateTime.Parse(this.m_SqlDataReader[property.Name].ToString());
+            DateTime sqlValue = (DateTime)this.m_SqlDataReader[property.Name];
+            property.SetValue(this.m_ObjectToWriteTo, sqlValue, null);
         }
 
         private void WriteBoolean(PropertyInfo property)
@@ -141,9 +156,10 @@ namespace YellowstonePathology.Business.Persistence
             Nullable<DateTime> sqlValue = null;
             if (this.m_SqlDataReader[property.Name] != DBNull.Value)
             {
-                sqlValue = DateTime.Parse(this.m_SqlDataReader[property.Name].ToString());
+                //sqlValue = DateTime.Parse(this.m_SqlDataReader[property.Name].ToString());
+                sqlValue = (DateTime)this.m_SqlDataReader[property.Name];
             }
-			property.SetValue(this.m_ObjectToWriteTo, sqlValue, null);
+            property.SetValue(this.m_ObjectToWriteTo, sqlValue, null);
         }
     }
 }

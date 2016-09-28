@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.Test
 
         }
 
-		[PersistentDocumentIdProperty(50)]
+		[PersistentDocumentIdProperty()]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }
@@ -44,7 +44,7 @@ namespace YellowstonePathology.Business.Test
 			}
 		}
 
-        [PersistentPrimaryKeyProperty(false, 0)]
+        [PersistentPrimaryKeyProperty(false)]
         public string MasterAccessionNo
         {
             get { return this.m_MasterAccessionNo; }

@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.View
 		{
 		}
 
-		[PersistentDocumentIdProperty(50)]
+		[PersistentDocumentIdProperty()]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }

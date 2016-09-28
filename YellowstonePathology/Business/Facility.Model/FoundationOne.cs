@@ -13,9 +13,9 @@ namespace YellowstonePathology.Business.Facility.Model
             this.m_FacilityIdOLD = null;
             this.m_FacilityName = "Foundation One";
             this.m_Address1 = "7010 Kit Creek Rd";
-            this.m_City = "Billings";
-            this.m_State = "MT";
-            this.m_ZipCode = "27560";
+            this.m_City = "Morrisville";
+            this.m_State = "NC";
+            this.m_ZipCode = "9999999999";
             this.m_IsReferenceLab = true;                        
         }
     }

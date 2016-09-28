@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace YellowstonePathology.Business.View
 {
-	public class BillingSpecimenView
-	{
-		private YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen m_SurgicalSpecimen;
+	public class BillingSpecimenView : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen m_SurgicalSpecimen;
 		private YellowstonePathology.Business.Specimen.Model.SpecimenOrder m_SpecimenOrder;
 		private YellowstonePathology.Business.Test.PanelSetOrderCPTCodeCollection m_PanelSetOrderCPTCodeCollection;
 		private YellowstonePathology.Business.Billing.Model.ICD9BillingCodeCollection m_ICD9BillingCodeCollection;
         private YellowstonePathology.Business.Specimen.Model.SpecimenCollection m_SpecimenCollection;
+        private bool m_IsSelected;
 
 		public BillingSpecimenView(YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen,
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder,
@@ -49,5 +53,23 @@ namespace YellowstonePathology.Business.View
 		{
 			get { return this.m_ICD9BillingCodeCollection; }
 		}
-	}
+
+        public bool IsSelected
+        {
+            get { return this.m_IsSelected; }
+            set
+            {
+                this.m_IsSelected = value;
+                this.NotifyPropertyChanged(string.Empty);
+            }
+        }
+
+        public void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+    }
 }

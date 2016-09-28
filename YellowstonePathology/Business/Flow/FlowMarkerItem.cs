@@ -40,7 +40,8 @@ namespace YellowstonePathology.Business.Flow
 			this.m_MarkerUsed = true;
 		}
 
-		[PersistentDocumentIdProperty(50)]
+		[PersistentDocumentIdProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }
@@ -54,7 +55,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentPrimaryKeyProperty(false, 50)]
+		[PersistentPrimaryKeyProperty(false)]
+		[PersistentDataColumnProperty(false, "50", "null", "varchar")]
 		public string FlowMarkerId
 		{
 			get { return this.m_FlowMarkerId; }
@@ -68,7 +70,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentStringProperty(20)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "20", "null", "varchar")]
 		public string ReportNo
 		{
 			get { return this.m_ReportNo; }
@@ -82,7 +85,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Name
 		{
 			get { return this.m_Name; }
@@ -96,7 +100,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "", "0", "float")]
 		public double Percentage
 		{
 			get { return this.m_Percentage; }
@@ -110,7 +115,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Intensity
 		{
 			get { return this.m_Intensity; }
@@ -124,7 +130,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "0", "bit")]
 		public bool Report
 		{
 			get { return this.m_Report; }
@@ -138,7 +145,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "0", "bit")]
 		public bool MarkerUsed
 		{
 			get { return this.m_MarkerUsed; }
@@ -152,7 +160,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentStringProperty(20)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "20", "null", "varchar")]
 		public string MarkerType
 		{
 			get { return this.m_MarkerType; }
@@ -166,7 +175,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -180,7 +190,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "0", "bit")]
 		public bool Predictive
 		{
 			get { return this.m_Predictive; }
@@ -194,7 +205,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "11", "0", "int")]
 		public int Expresses
 		{
 			get { return this.m_Expresses; }
@@ -208,7 +220,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "11", "0", "int")]
 		public int OrderFlag
 		{
 			get { return this.m_OrderFlag; }
@@ -222,7 +235,8 @@ namespace YellowstonePathology.Business.Flow
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }

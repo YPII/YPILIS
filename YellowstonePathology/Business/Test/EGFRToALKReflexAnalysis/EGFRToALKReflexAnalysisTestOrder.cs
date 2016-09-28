@@ -84,7 +84,8 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             this.ReportReferences = references.ToString().TrimEnd(lineFeedCharacters);
         }		
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Method
 		{
 			get { return this.m_Method; }
@@ -95,7 +96,8 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -106,7 +108,8 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string TumorNucleiPercentage
         {
             get { return this.m_TumorNucleiPercentage; }
@@ -120,7 +123,8 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool QNSForALK
         {
             get { return this.m_QNSForALK; }
@@ -131,7 +135,8 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             }
         }
 
-        [PersistentProperty("0")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "bit")]
         public bool QNSForROS1
         {
             get { return this.m_QNSForROS1; }

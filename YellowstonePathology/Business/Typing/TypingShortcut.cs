@@ -30,7 +30,8 @@ namespace YellowstonePathology.Business.Typing
 		}
 
 		//[PersistentDocumentIdProperty()]
-        [PersistentPrimaryKeyProperty(false, 50)]
+        [PersistentPrimaryKeyProperty(false)]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ObjectId
 		{
 			get { return this.m_ObjectId; }
@@ -44,7 +45,8 @@ namespace YellowstonePathology.Business.Typing
 			}
 		}        
 
-        [PersistentStringProperty(50)]   
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Shortcut
 		{
 			get { return this.m_Shortcut; }
@@ -58,7 +60,8 @@ namespace YellowstonePathology.Business.Typing
 			}
 		}
 
-        [PersistentStringProperty(-1)] 
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "8000", "null", "varchar")]
 		public string Text
 		{
 			get { return this.m_Text; }
@@ -73,7 +76,8 @@ namespace YellowstonePathology.Business.Typing
 			}
 		}
 
-        [PersistentStringProperty(50, "'Global'")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "'Global'", "varchar")]
 		public string Type
 		{
 			get { return this.m_Type; }
@@ -87,7 +91,8 @@ namespace YellowstonePathology.Business.Typing
 			}
 		}
 
-        [PersistentProperty("5075")]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "11", "5075", "int")]
 		public int UserId
 		{
 			get { return this.m_UserId; }

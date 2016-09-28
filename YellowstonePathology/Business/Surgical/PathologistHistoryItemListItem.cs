@@ -14,7 +14,8 @@ namespace YellowstonePathology.Business.Surgical
     {
 		private string m_Id;
 		private string m_Item;
-        private string m_Result;        
+        private string m_Result;
+        private string m_ReportNo;        
 
         public PathologistHistoryItemListItem()
         {
@@ -59,6 +60,20 @@ namespace YellowstonePathology.Business.Surgical
 					this.m_Result = value;
                     NotifyPropertyChanged("Result");
 				}
+            }
+        }
+
+        [PersistentProperty()]
+        public string ReportNo
+        {
+            get { return this.m_ReportNo; }
+            set
+            {
+                if (this.m_ReportNo != value)
+                {
+                    this.m_ReportNo = value;
+                    NotifyPropertyChanged("ReportNo");
+                }
             }
         }
     }

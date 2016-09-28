@@ -45,10 +45,10 @@ namespace YellowstonePathology.UI.MySql
 
         private void MySqlMigrationDialog_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach(MySQLMigration.MigrationStatus migrationStatus in this.m_MigrationStatusCollection)
-            {
-                this.m_MySQLDatabaseBuilder.GetStatus(migrationStatus);
-            }
+            //foreach(MySQLMigration.MigrationStatus migrationStatus in this.m_MigrationStatusCollection)
+            //{
+            //    this.m_MySQLDatabaseBuilder.GetStatus(migrationStatus);
+            //}
         }
 
         public void NotifyPropertyChanged(String info)

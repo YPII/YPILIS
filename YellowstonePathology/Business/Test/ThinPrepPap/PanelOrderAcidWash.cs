@@ -75,7 +75,8 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             return methodResult;
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }

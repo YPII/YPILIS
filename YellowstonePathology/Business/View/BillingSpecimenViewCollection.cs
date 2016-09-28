@@ -35,5 +35,20 @@ namespace YellowstonePathology.Business.View
 				this.Add(billingSpecimenView);
 			}
 		}
+
+        public void SetSelectedBySlideOrderid(string slideOrderid)
+        {
+            foreach(BillingSpecimenView item in this)
+            {
+                if(item.SpecimenOrder.AliquotOrderCollection.SlideOrderExists(slideOrderid) == true)
+                {
+                    item.IsSelected = true;
+                }
+                else
+                {
+                    item.IsSelected = false;
+                }
+            }
+        }
 	}
 }

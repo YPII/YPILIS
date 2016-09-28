@@ -24,7 +24,8 @@ namespace YellowstonePathology.Business.User
 		{
 		}
 
-		[PersistentPrimaryKeyProperty(true, 0)]
+		[PersistentPrimaryKeyProperty(true)]
+		[PersistentDataColumnProperty(false, "11", "null", "int")]
 		public int SystemUserRoleID
 		{
 			get { return this.m_SystemUserRoleId; }
@@ -38,7 +39,8 @@ namespace YellowstonePathology.Business.User
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "11", "0", "int")]
 		public int UserID
 		{
 			get { return this.m_UserId; }

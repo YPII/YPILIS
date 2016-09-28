@@ -22,7 +22,7 @@ namespace YellowstonePathology.UI.Gross
                 {
                     if (dictationTemplate.SpecimenCollection.Exists(specimenId) == true)
                     {
-                        result = dictationTemplate;
+                        result = (DictationTemplate)Activator.CreateInstance(dictationTemplate.GetType());                        
                         break;
                     }
                 }
@@ -71,6 +71,7 @@ namespace YellowstonePathology.UI.Gross
             result.Add(new UterusAdnexaTemplate());
             result.Add(new UterusTemplate());
             result.Add(new FluidTemplate());
+            result.Add(new InitialReadingTemplate());
             return result;
         }               
     }

@@ -41,7 +41,8 @@ namespace YellowstonePathology.Business.Test.KRASStandardReflex
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -55,7 +56,8 @@ namespace YellowstonePathology.Business.Test.KRASStandardReflex
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Comment
 		{
 			get { return this.m_Comment; }
@@ -69,7 +71,8 @@ namespace YellowstonePathology.Business.Test.KRASStandardReflex
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string TumorNucleiPercentage
         {
             get { return this.m_TumorNucleiPercentage; }
@@ -83,7 +86,8 @@ namespace YellowstonePathology.Business.Test.KRASStandardReflex
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string Indication
         {
             get { return this.m_Indication; }
@@ -97,7 +101,8 @@ namespace YellowstonePathology.Business.Test.KRASStandardReflex
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string IndicationComment
         {
             get { return this.m_IndicationComment; }
@@ -111,7 +116,8 @@ namespace YellowstonePathology.Business.Test.KRASStandardReflex
             }
         }
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Method
 		{
 			get { return this.m_Method; }
@@ -125,7 +131,8 @@ namespace YellowstonePathology.Business.Test.KRASStandardReflex
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ReportDisclaimer
 		{
 			get { return this.m_ReportDisclaimer; }

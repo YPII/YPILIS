@@ -169,7 +169,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
             {
                 if (USPostalServiceCertifiedMailReceived != null) this.USPostalServiceCertifiedMailReceived(scanData);
             }
-            else if(scanData.Trim().Length == 34 && scanData.StartsWith("1001"))
+            else if(scanData.Trim().Length == 34 && scanData.StartsWith("100"))
             {
                 if (FedexOvernightScanReceived != null) this.FedexOvernightScanReceived(scanData);
             }

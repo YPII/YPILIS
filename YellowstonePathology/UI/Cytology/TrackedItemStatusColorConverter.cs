@@ -12,6 +12,8 @@ namespace YellowstonePathology.UI.Cytology
 	{
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
+            if (value == null) return System.Windows.Media.Brushes.Gray;
+
             YellowstonePathology.Business.TrackedItemStatusEnum slideStatus = (YellowstonePathology.Business.TrackedItemStatusEnum)Enum.Parse(typeof(YellowstonePathology.Business.TrackedItemStatusEnum), value.ToString());
             System.Windows.Media.SolidColorBrush result = System.Windows.Media.Brushes.Yellow;  
           

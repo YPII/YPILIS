@@ -51,7 +51,8 @@ namespace YellowstonePathology.Business.Test.MissingInformation
 
         }       
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
         public string MissingInformation
         {
             get { return this.m_MissingInformation; }
@@ -65,7 +66,8 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             }
         }
 
-        [PersistentStringProperty(1000)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
         public string CallComments
         {
             get { return this.m_CallComments; }
@@ -80,6 +82,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "null", "bit")]
         public bool FirstCall
         {
             get { return this.m_FirstCall; }
@@ -93,7 +96,8 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string FirstCallMadeBy
         {
             get { return this.m_FirstCallMadeBy; }
@@ -108,6 +112,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> TimeOfFirstCall
         {
             get { return this.m_TimeOfFirstCall; }
@@ -121,7 +126,8 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
         public string FirstCallComment
         {
             get { return this.m_FirstCallComment; }
@@ -136,6 +142,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "null", "bit")]
         public bool SecondCall
         {
             get { return this.m_SecondCall; }
@@ -149,7 +156,8 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string SecondCallMadeBy
         {
             get { return this.m_SecondCallMadeBy; }
@@ -164,6 +172,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> TimeOfSecondCall
         {
             get { return this.m_TimeOfSecondCall; }
@@ -177,7 +186,8 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
         public string SecondCallComment
         {
             get { return this.m_SecondCallComment; }
@@ -192,6 +202,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "null", "bit")]
         public bool ThirdCall
         {
             get { return this.m_ThirdCall; }
@@ -205,7 +216,8 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string ThirdCallMadeBy
         {
             get { return this.m_ThirdCallMadeBy; }
@@ -220,6 +232,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> TimeOfThirdCall
         {
             get { return this.m_TimeOfThirdCall; }
@@ -233,7 +246,8 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
         public string ThirdCallComment
         {
             get { return this.m_ThirdCallComment; }
@@ -248,6 +262,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "null", "bit")]
         public bool Fax
         {
             get { return this.m_Fax; }
@@ -261,7 +276,8 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string FaxSentBy
         {
             get { return this.m_FaxSentBy; }
@@ -276,6 +292,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> TimeFaxSent
         {
             get { return this.m_TimeFaxSent; }
@@ -290,6 +307,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "null", "bit")]
         public bool ClientSystemLookup
         {
             get { return this.m_ClientSystemLookup; }
@@ -303,7 +321,8 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             }
         }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string ClientSystemLookupBy
         {
             get { return this.m_ClientSystemLookupBy; }
@@ -318,6 +337,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
         public Nullable<DateTime> TimeOfClientSystemLookup
         {
             get { return this.m_TimeOfClientSystemLookup; }

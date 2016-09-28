@@ -277,7 +277,14 @@ namespace YellowstonePathology.UI.Gross
 
         private void ProcessorSelectionPage_Next(object sender, CustomEventArgs.SpecimenOrderReturnEventArgs e)
         {
-            this.ShowPrintBlockPage(e.SpecimenOrder);
+            if(e.SpecimenOrder.ProcessorRunId == "HOLD")
+            {
+                this.ShowScanContainerPage();
+            }
+            else
+            {
+                this.ShowPrintBlockPage(e.SpecimenOrder);
+            }            
         }        
 
         private void PrintBlockPage_ShowStainOrderPage(object sender, YellowstonePathology.UI.CustomEventArgs.SpecimenOrderAliquotOrderReturnEventArgs e)

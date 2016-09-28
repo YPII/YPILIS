@@ -324,10 +324,15 @@ namespace YellowstonePathology.UI.Surgical
 					{
 
 						if (barcode.IsValidated == true)
-						{
-							//this.Save();
+						{                                                        
 							this.DoSlideOrderIdSearch(barcode.ID);
-						}
+
+                            if (this.m_PathologistsReview.ReviewContent is SurgicalReview)
+                            {
+                                SurgicalReview surgicalReview = (SurgicalReview)this.m_PathologistsReview.ReviewContent;
+                                surgicalReview.BillingSpecimenViewCollection.SetSelectedBySlideOrderid(barcode.ID);
+                            }
+                        }
 						else
 						{
 							MessageBox.Show("The scanner did not read the barcode correctly.  Please try again.");
@@ -341,8 +346,10 @@ namespace YellowstonePathology.UI.Surgical
 				new Action(
 					delegate()
 					{						
-						this.DoAliquotOrderIdSearch(barcode.ID, 13);
-					}));
+						this.DoAliquotOrderIdSearch(barcode.ID, 13);                        
+                        //this.path
+                        //this.m_PathologistUI.AccessionOrder.SpecimenOrderCollection.SetIsSelectedFromSlideOrderId(barcode.ID);                        
+                    }));
 		}
 
 		private void TextBoxSearchANPN_MouseUp(object sender, MouseButtonEventArgs e)
@@ -434,8 +441,8 @@ namespace YellowstonePathology.UI.Surgical
 		private void LoadData()
 		{
 			if (this.ListViewSearchResults.SelectedItem != null)
-			{
-				YellowstonePathology.Business.Search.PathologistSearchResult item = (YellowstonePathology.Business.Search.PathologistSearchResult)this.ListViewSearchResults.SelectedItem;
+			{                
+                YellowstonePathology.Business.Search.PathologistSearchResult item = (YellowstonePathology.Business.Search.PathologistSearchResult)this.ListViewSearchResults.SelectedItem;
 				if (item.PanelSetId == 15)
 				{
 					this.m_PathologistUI.GetAccessionOrderByReportNo(item.ReportNo);
@@ -444,13 +451,12 @@ namespace YellowstonePathology.UI.Surgical
 				{
 					this.m_PathologistUI.GetAccessionOrder(item.MasterAccessionNo, item.ReportNo);
 				}                
-
                 this.SetReviewResult();
 			}
 		}
 
 		private void SetReviewResult()
-		{
+		{            
             switch (this.m_PathologistUI.PanelSetOrder.PanelSetId)
 			{                
 				case 15:
@@ -505,12 +511,7 @@ namespace YellowstonePathology.UI.Surgical
                 this.ReleaseLock();
                 this.m_PathologistUI.DoPatientIdSearch((YellowstonePathology.Business.Search.PathologistSearchResult)this.ListViewSearchResults.SelectedItem);
 			}
-		}
-
-		/*public void DoSearch()
-		{
-			this.m_PathologistUI.DoGenericSearch();
-		}*/
+		}		
 
 		private void CheckEnabled()
 		{

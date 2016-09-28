@@ -1002,19 +1002,10 @@ namespace YellowstonePathology.UI
         
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
-        {
-            //if (accessionOrder.AccessionLock.IsLockAquiredByMe == false ||
-            //    (this.m_TestOrder.Final == true &&
-            //    (this.m_TestOrder.Distribute == false ||
-            //    this.m_TestOrder.TestOrderReportDistributionCollection.HasDistributedItems())))
-
-            bool haveLock = false;
-            bool isFinal = false;
-            bool willDistribute = false;
-            bool hasDistributed = false;
-
-            bool result = haveLock || (isFinal && (willDistribute || hasDistributed));
-            Console.WriteLine("Result: " + result);
+        {            
+            Business.Label.Model.ZPLPrinter printer = new Business.Label.Model.ZPLPrinter("10.1.1.21"); 
+            YellowstonePathology.Business.BarcodeScanning.ContainerBarcode containerBarcode = Business.BarcodeScanning.ContainerBarcode.Parse();
+            printer.Print(Business.Label.Model.ContainerZPLLabel.GetCommands(containerBarcode.ID));
         }        
 
         private void PrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
@@ -1224,16 +1215,16 @@ namespace YellowstonePathology.UI
             
         }
 
-        private void ButtonWilliamTesting_Click(object sender, RoutedEventArgs e) // Compares AccessionOrderBuilder ao to AccessionOrderBuilderV2 ao
+        /*private void ButtonWilliamTesting_Click(object sender, RoutedEventArgs e) // Compares AccessionOrderBuilder ao to AccessionOrderBuilderV2 ao
         {
             string resultString = string.Empty;
             DateTime startDate = DateTime.Parse("2/10/2016");
-            for (int didx = 0; didx < 4; didx++)
-            {
+            //for (int didx = 0; didx < 4; didx++)
+            //{
                 //DateTime endDate = startDate.AddMonths(1).AddDays(-1);
             DateTime endDate = startDate.AddDays(1);
             List<string> masterAccessionNos = new List<string>();
-            //masterAccessionNos.Add("16-3667");
+                masterAccessionNos.Add("16-22139");
                 SqlCommand cmd = new SqlCommand("select MasteraccessionNo from tblAccessionOrder where AccessionDate between '" + startDate.ToString() + "' and '" + endDate.ToString() + "'"); // order by 1 asc");
                 cmd.CommandType = CommandType.Text;
                 using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
@@ -1282,10 +1273,10 @@ namespace YellowstonePathology.UI
                 //Console.WriteLine("Finished " + startDate.ToString("MM/dd/yyyy") + " : at " + DateTime.Now.ToString());
                 //startDate = startDate.AddMonths(1);
                 startDate = startDate.AddDays(2);
-            }
+            //}
             resultString = "done";
             MessageBox.Show(resultString);
-        }
+        }*/
 
         /*private void ButtonWilliamTesting_Click(object sender, RoutedEventArgs e) //Compares MySql accession order (accession table only) to Sql Server
         {
@@ -1346,7 +1337,7 @@ namespace YellowstonePathology.UI
             MessageBox.Show(resultString);
         }*/
 
-        /*private void ButtonWilliamTesting_Click(object sender, RoutedEventArgs e) //Set initial string lengths in .cs files
+        /*private void ButtonWilliamTesting_Click(object sender, RoutedEventArgs e)
         {
             string basePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
             basePath = basePath.Remove(0, 6);
@@ -1359,7 +1350,7 @@ namespace YellowstonePathology.UI
                 if (File.Exists(filePath))
                 {
                     string[] lines = File.ReadAllLines(filePath);
-                    if (builder.SetPersistentAttributeDefaultValue(migrationStatus, lines))
+                    if (builder.BuildPersistentDataColumnProperty(migrationStatus, lines))
                     {
                         using (StreamWriter writer = new StreamWriter(filePath, false))
                         {
@@ -1383,24 +1374,31 @@ namespace YellowstonePathology.UI
             MessageBox.Show(resultString);
         }*/
 
-        /*private void ButtonWilliamTesting_Click(object sender, RoutedEventArgs e) // Recalculates and Sets the length of the string in the .cs files
+        private void ButtonWilliamTesting_Click(object sender, RoutedEventArgs e)
         {
-            MySQLMigration.MySQLDatabaseBuilder builder = new MySQLMigration.MySQLDatabaseBuilder();
-            List<string> dbTypes = new List<string>();
-            MySQLMigration.MigrationStatusCollection migrationStatusCollection = MySQLMigration.MigrationStatusCollection.GetAll();
-            foreach (MySQLMigration.MigrationStatus migrationStatus in migrationStatusCollection)
+            List<int> panelIds = new List<int>();
+            panelIds.Add(0);
+            panelIds.Add(1);
+            panelIds.Add(2);
+            panelIds.Add(5);
+            panelIds.Add(6);
+            panelIds.Add(8);
+            panelIds.Add(9);
+            panelIds.Add(10);
+            panelIds.Add(11);
+            panelIds.Add(12);
+            panelIds.Add(13);
+            panelIds.Add(14);
+            panelIds.Add(15);
+            panelIds.Add(16);
+            panelIds.Add(17);
+            panelIds.Add(18);
+            panelIds.Add(19);
+            foreach(int id in panelIds)
             {
-                builder.GetDBDataTypes(migrationStatus.TableName, dbTypes);
+                Business.Flow.FlowMarkerCollection result = Business.Gateway.FlowGateway.GetFlowMarkerCollectionByPanelId("16-99999.F1", id);
             }
-            using (StreamWriter writer = new StreamWriter(@"C:\TEMP\DBTypesToUse.txt", true))
-            {
-                foreach (string ctype in dbTypes)
-                {
-                    writer.WriteLine(ctype);
-                }
-            }
-            string resultString = "done";
-            MessageBox.Show(resultString);
-        }*/
+            MessageBox.Show("done");
+        }
     }
 }

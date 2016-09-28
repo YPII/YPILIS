@@ -26,15 +26,15 @@ namespace YellowstonePathology.Business.BarcodeScanning
         }
 
         public EmbeddingScan HandleScan(string aliquotOrderId, string processorRunId, string processorRun)
-        {            
+        {
             IDatabase db = Business.RedisConnection.Instance.GetDatabase();
             EmbeddingScan scan = new EmbeddingScan(aliquotOrderId, processorRunId, processorRun);
 
             if (db.KeyExists("EmbeddingScan:" + aliquotOrderId) == true)
             {
-                foreach(EmbeddingScan item in this)
+                foreach (EmbeddingScan item in this)
                 {
-                    if(item.AliquotOrderId == aliquotOrderId)
+                    if (item.AliquotOrderId == aliquotOrderId)
                     {
                         this.Remove(item);
                         break;
@@ -43,7 +43,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
             }
             else
             {
-                db.SetAdd("EmbeddingScans:" + DateTime.Today.ToShortDateString(), scan.HashKey);                                
+                db.SetAdd("EmbeddingScans:" + DateTime.Today.ToShortDateString(), scan.HashKey);
             }
 
             HashEntry[] hashEntries = scan.GetHasEntries();
@@ -52,7 +52,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
 
             return scan;
         }
-        
+
         public static EmbeddingScanCollection GetByScanDate(DateTime scanDate)
         {
             EmbeddingScanCollection result = new EmbeddingScanCollection();
@@ -62,13 +62,13 @@ namespace YellowstonePathology.Business.BarcodeScanning
 
             List<EmbeddingScan> list = new List<EmbeddingScan>();
             for (int i = 0; i < members.Length; i++)
-            {                
-                HashEntry[] hashEntries = db.HashGetAll(members[i].ToString());                                    
+            {
+                HashEntry[] hashEntries = db.HashGetAll(members[i].ToString());
                 EmbeddingScan item = new EmbeddingScan(hashEntries);
-                list.Add(item);                    
+                list.Add(item);
             }
-            
-           
+
+
             list.Sort(delegate (EmbeddingScan x, EmbeddingScan y)
             {
                 if (x.DateScanned == y.DateScanned) return 0;
@@ -81,7 +81,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
                     return -1;
                 }
             });
-           
+
 
             foreach (EmbeddingScan item in list)
             {
@@ -89,6 +89,6 @@ namespace YellowstonePathology.Business.BarcodeScanning
             }
 
             return result;
-        }        
+        }
     }
 }

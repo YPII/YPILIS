@@ -122,33 +122,35 @@ namespace YellowstonePathology.Business.Gateway
 #if MONGO
             return FlowGatewayMongo.GetFlowMarkerCollectionByPanelId(reportNo, panelId);
 #else
-			SqlCommand cmd = new SqlCommand();
-			cmd.CommandType = CommandType.Text;
-			cmd.CommandText = "Select @ReportNo as ReportNo, mp.MarkerName as Name, mp.Intensity, mp.Interpretation, 1 as MarkerUsed " +
-				"from tblFlowMarkerPanel mp left outer join tblMarkers m on mp.MarkerName = m.MarkerName where PanelId = @PanelId " +
-				"order by m.OrderFlag, m.MarkerName for xml path('FlowMarkerItem'), type, root('FlowMarkerCollection')";
-			cmd.Parameters.Add("@ReportNo", SqlDbType.VarChar).Value = reportNo;
-			cmd.Parameters.Add("@PanelId", SqlDbType.Int).Value = panelId;
+            Flow.FlowMarkerCollection result = new Flow.FlowMarkerCollection();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select @ReportNo as ReportNo, mp.MarkerName as Name, mp.Intensity, mp.Interpretation, 'true' as MarkerUsed " +
+                "from tblFlowMarkerPanel mp left outer join tblMarkers m on mp.MarkerName = m.MarkerName where PanelId = @PanelId " +
+                "order by m.OrderFlag, m.MarkerName";
+            cmd.Parameters.Add("@ReportNo", SqlDbType.VarChar).Value = reportNo;
+            cmd.Parameters.Add("@PanelId", SqlDbType.Int).Value = panelId;
 
-            XElement flowMarkerCollectionElement = null;
             using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.ProductionConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (XmlReader xmlReader = cmd.ExecuteXmlReader())
+                using (SqlDataReader dr = cmd.ExecuteReader())
                 {
-                    if (xmlReader.Read() == true)
+                    while(dr.Read())
                     {
-                        flowMarkerCollectionElement = XElement.Load(xmlReader, LoadOptions.PreserveWhitespace);
+                        Flow.FlowMarkerItem flowMarkerItem = new Flow.FlowMarkerItem();
+                        Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(flowMarkerItem, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(flowMarkerItem);
                     }
                 }
             }
-
-			return BuildFlowMarkerCollection(flowMarkerCollectionElement);
+            return result;
 #endif
-		}
+        }
 
-		private static Flow.FlowLogList BuildFlowLogList(SqlCommand cmd)
+        private static Flow.FlowLogList BuildFlowLogList(SqlCommand cmd)
 		{
 			Flow.FlowLogList result = new Flow.FlowLogList();
 			using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.ProductionConnectionString))

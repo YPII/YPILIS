@@ -20,8 +20,9 @@ namespace YellowstonePathology.Business
 		{
 		}
 
-		[PersistentDocumentIdProperty(50)]
-		[PersistentPrimaryKeyProperty(false, 50)]
+		[PersistentDocumentIdProperty()]
+		[PersistentPrimaryKeyProperty(false)]
+		[PersistentDataColumnProperty(false, "50", "null", "varchar")]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }
@@ -35,7 +36,8 @@ namespace YellowstonePathology.Business
 			}
 		}
 
-		[PersistentStringProperty(200)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "200", "null", "varchar")]
 		public string Version
 		{
 			get { return this.m_Version; }
@@ -50,6 +52,7 @@ namespace YellowstonePathology.Business
 		}
 
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "null", "bit")]
 		public bool EnforceChange
 		{
 			get { return this.m_EnforceChange; }

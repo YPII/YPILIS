@@ -16,22 +16,21 @@ namespace YellowstonePathology.Business.PanelSet.Model
 			this.m_HasProfessionalComponent = true;			
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterM();
-            this.m_Active = false;
+            this.m_Active = true;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
             this.m_SurgicalAmendmentRequired = true;
 
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
 			this.m_AllowMultiplePerAccession = true;
+            
+			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(Business.Task.Model.TaskAssignment.Molecular, "Gather materials and send to ARUP for testing.", new Facility.Model.ARUP()));
 
-            string taskDescription = "Gather materials and do testing.";
-			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription));
+            this.m_TechnicalComponentFacility = new YellowstonePathology.Business.Facility.Model.ARUP();
+            this.m_ProfessionalComponentFacility = new YellowstonePathology.Business.Facility.Model.ARUP();
 
-            this.m_TechnicalComponentFacility = new YellowstonePathology.Business.Facility.Model.YellowstonePathologyInstituteBillings();
-            this.m_ProfessionalComponentFacility = new YellowstonePathology.Business.Facility.Model.YellowstonePathologistBillings();
-
-            this.m_TechnicalComponentBillingFacility = new YellowstonePathology.Business.Facility.Model.YellowstonePathologyInstituteBillings();
-            this.m_ProfessionalComponentBillingFacility = new YellowstonePathology.Business.Facility.Model.YellowstonePathologyInstituteBillings();
+            this.m_TechnicalComponentBillingFacility = new YellowstonePathology.Business.Facility.Model.ARUP();
+            this.m_ProfessionalComponentBillingFacility = new YellowstonePathology.Business.Facility.Model.ARUP();
             
             this.m_HasSplitCPTCode = true;
 

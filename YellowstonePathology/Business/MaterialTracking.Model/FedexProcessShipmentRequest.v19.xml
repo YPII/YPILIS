@@ -105,25 +105,11 @@
         <v19:RateRequestTypes>LIST</v19:RateRequestTypes>
         <v19:PackageCount>1</v19:PackageCount>
         <v19:RequestedPackageLineItems>
-          <v19:SequenceNumber>1</v19:SequenceNumber>
-          <v19:InsuredValue>
-            <v19:Currency>USD</v19:Currency>
-            <v19:Amount>100</v19:Amount>
-          </v19:InsuredValue>
+          <v19:SequenceNumber>1</v19:SequenceNumber>            
           <v19:Weight>
             <v19:Units>LB</v19:Units>
-            <v19:Value>30</v19:Value>
-          </v19:Weight>
-          <v19:Dimensions>
-            <v19:Length>20</v19:Length>
-            <v19:Width>15</v19:Width>
-            <v19:Height>20</v19:Height>
-            <v19:Units>IN</v19:Units>
-          </v19:Dimensions>
-          <v19:CustomerReferences>
-            <v19:CustomerReferenceType>CUSTOMER_REFERENCE</v19:CustomerReferenceType>
-            <v19:Value>TC#053</v19:Value>
-          </v19:CustomerReferences>
+            <v19:Value>2</v19:Value>
+          </v19:Weight>          
         </v19:RequestedPackageLineItems>
       </v19:RequestedShipment>
     </v19:ProcessShipmentRequest>

@@ -57,6 +57,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         private OrderPageCaseTypeList m_CaseTypeList;
 
         private PageNavigationModeEnum m_PageNavigationMode;
+        private bool m_OrderAsResearchTesting;
 
 		public AccessionOrderPage(YellowstonePathology.Business.Test.AccessionOrder accessionOrder,             
             YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder,        
@@ -78,6 +79,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
             this.m_FacilityCollection = Business.Facility.Model.FacilityCollection.GetAllFacilities();
             this.m_CaseTypeList = new OrderPageCaseTypeList();
+            this.m_OrderAsResearchTesting = false;
 
 			InitializeComponent();
 
@@ -98,6 +100,7 @@ namespace YellowstonePathology.UI.Login.Receiving
             this.m_FacilityCollection = YellowstonePathology.Business.Facility.Model.FacilityCollection.GetAllFacilities();
 
             this.m_CaseTypeList = new OrderPageCaseTypeList();
+            this.m_OrderAsResearchTesting = false;
 
             InitializeComponent();
 
@@ -110,6 +113,12 @@ namespace YellowstonePathology.UI.Login.Receiving
         private void AccessionOrderPage_Loaded(object sender, RoutedEventArgs e)
 		{
             this.SelectTestOrder();            
+        }
+
+        public bool OrderAsResearchTesting
+        {
+            get { return this.m_OrderAsResearchTesting; }
+            set { this.m_OrderAsResearchTesting = value; }
         }
                 
         private void AccessionOrderPage_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -268,6 +277,8 @@ namespace YellowstonePathology.UI.Login.Receiving
         {
             Hyperlink hyperLink = (Hyperlink)sender;
 			YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = (YellowstonePathology.Business.PanelSet.Model.PanelSet)hyperLink.Tag;
+            panelSet.ResearchTesting = this.m_OrderAsResearchTesting;
+            
             YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new Business.Test.TestOrderInfo();
             testOrderInfo.PanelSet = panelSet;
             testOrderInfo.Distribute = true;

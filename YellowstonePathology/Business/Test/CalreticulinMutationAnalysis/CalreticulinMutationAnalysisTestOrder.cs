@@ -29,7 +29,8 @@ namespace YellowstonePathology.Business.Test.CalreticulinMutationAnalysis
 
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string Result
         {
             get { return this.m_Result; }
@@ -43,7 +44,8 @@ namespace YellowstonePathology.Business.Test.CalreticulinMutationAnalysis
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string Percentage
         {
             get { return this.m_Percentage; }
@@ -57,7 +59,8 @@ namespace YellowstonePathology.Business.Test.CalreticulinMutationAnalysis
             }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string Mutations
         {
             get { return this.m_Mutations; }
@@ -71,7 +74,8 @@ namespace YellowstonePathology.Business.Test.CalreticulinMutationAnalysis
             }
         }
 
-        [PersistentStringProperty(1000)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1000", "null", "varchar")]
         public string Interpretation
         {
             get { return this.m_Interpretation; }
@@ -85,7 +89,8 @@ namespace YellowstonePathology.Business.Test.CalreticulinMutationAnalysis
             }
         }
 
-        [PersistentStringProperty(5000)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
         public string Method
         {
             get { return this.m_Method; }

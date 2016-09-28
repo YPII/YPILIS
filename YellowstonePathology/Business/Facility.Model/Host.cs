@@ -19,7 +19,8 @@ namespace YellowstonePathology.Business.Facility.Model
 
         }
 
-		[PersistentDocumentIdProperty(50)]
+		[PersistentDocumentIdProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }
@@ -32,21 +33,24 @@ namespace YellowstonePathology.Business.Facility.Model
 			}
 		}
 
-        [PersistentPrimaryKeyProperty(false, 50)]
+        [PersistentPrimaryKeyProperty(false)]
+        [PersistentDataColumnProperty(false, "50", "null", "varchar")]
         public string HostName
         {
             get { return this.m_HostName; }
             set { this.m_HostName = value; }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "50", "null", "varchar")]
         public string FacilityId
         {
             get { return this.m_FacilityId; }
             set { this.m_FacilityId = value; }
         }
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "50", "null", "varchar")]
         public string LocationId
         {
             get { return this.m_LocationId; }

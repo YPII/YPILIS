@@ -591,4 +591,17 @@ namespace YellowstonePathology.Business.Specimen.Model.SpecimenDefinition
             this.m_RequiresGrossExamination = false;
         }
     }
+
+    public class InitialReading : Specimen
+    {
+        public InitialReading()
+        {
+            this.m_SpecimenId = "NTLRDNG";
+            this.m_SpecimenName = "Initial Reading";
+            this.m_Description = null;
+            this.m_LabFixation = null;
+            this.m_ClientFixation = null;
+            this.m_RequiresGrossExamination = false;
+        }
+    }
 }

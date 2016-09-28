@@ -48,7 +48,8 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 			return clientOrderDetailAliquotElement;
 		}
 
-		[PersistentDocumentIdProperty(50)]
+		[PersistentDocumentIdProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId
 		{
 			get { return this.m_ObjectId; }
@@ -62,8 +63,9 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 			}
 		}
 
-		[PersistentPrimaryKeyProperty(false, 0)]
 		[DataMember]
+		[PersistentPrimaryKeyProperty(false)]
+		[PersistentDataColumnProperty(false, "50", "null", "varchar")]
 		public string ClientOrderDetailAliquotId
 		{
 			get { return this.m_ClientOrderDetailAliquotId; }
@@ -77,8 +79,9 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 			}
 		}
 
-		[PersistentProperty()]
 		[DataMember]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ClientOrderDetailId
 		{
 			get { return this.m_ClientOrderDetailId; }
@@ -92,8 +95,9 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 			}
 		}
 
-		[PersistentProperty()]
 		[DataMember]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Description
 		{
 			get { return this.m_Description; }

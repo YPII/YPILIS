@@ -32,7 +32,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 			this.m_ObjectId = objectId;
 		}
 
-        [PersistentDocumentIdProperty(50)]
+        [PersistentDocumentIdProperty()]
         public string ObjectId
         {
             get { return this.m_ObjectId; }

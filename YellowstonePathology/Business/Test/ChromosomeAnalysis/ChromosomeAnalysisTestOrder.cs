@@ -32,7 +32,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 		{
 		}
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }
@@ -46,7 +47,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Karyotype
 		{
 			get { return this.m_Karyotype; }
@@ -60,7 +62,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -74,7 +77,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Comment
 		{
 			get { return this.m_Comment; }
@@ -88,7 +92,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string MetaphasesCounted
 		{
 			get { return this.m_MetaphasesCounted; }
@@ -102,7 +107,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string MetaphasesAnalyzed
 		{
 			get { return this.m_MetaphasesAnalyzed; }
@@ -116,7 +122,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string MetaphasesKaryotyped
 		{
 			get { return this.m_MetaphasesKaryotyped; }
@@ -130,7 +137,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string CultureType
 		{
 			get { return this.m_CultureType; }
@@ -144,7 +152,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string BandingTechnique
 		{
 			get { return this.m_BandingTechnique; }
@@ -158,7 +167,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string BandingResolution
 		{
 			get { return this.m_BandingResolution; }

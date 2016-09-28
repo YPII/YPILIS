@@ -27,7 +27,8 @@ namespace YellowstonePathology.Business.Test.ALLAdultByFISH
 		{
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }
@@ -41,7 +42,8 @@ namespace YellowstonePathology.Business.Test.ALLAdultByFISH
 			}
 		}
 
-		[PersistentStringProperty(1000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1000", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -55,7 +57,8 @@ namespace YellowstonePathology.Business.Test.ALLAdultByFISH
 			}
 		}
 
-		[PersistentStringProperty(1000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1000", "null", "varchar")]
 		public string ProbeSetDetail
 		{
 			get { return this.m_ProbeSetDetail; }
@@ -69,7 +72,8 @@ namespace YellowstonePathology.Business.Test.ALLAdultByFISH
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string NucleiScored
 		{
 			get { return this.m_NucleiScored; }
@@ -83,7 +87,8 @@ namespace YellowstonePathology.Business.Test.ALLAdultByFISH
 			}
 		}
 
-		[PersistentStringProperty(1000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1000", "null", "varchar")]
 		public string ASRComment
 		{
 			get { return this.m_ASRComment; }

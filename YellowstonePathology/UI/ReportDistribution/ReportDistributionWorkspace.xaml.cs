@@ -434,12 +434,12 @@ namespace YellowstonePathology.UI.ReportDistribution
                     
                     System.Net.Mail.MailAddress from = new System.Net.Mail.MailAddress("Results@YPII.com");
                     System.Net.Mail.MailAddress to = new System.Net.Mail.MailAddress(physician.PublishNotificationEmailAddress);
-                    System.Net.Mail.MailAddress bcc = new System.Net.Mail.MailAddress("Results@YPII.com");
+                    //System.Net.Mail.MailAddress bcc = new System.Net.Mail.MailAddress("Results@YPII.com");
 
                     System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage(from, to);
                     message.Subject = subject;
                     message.Body = body;
-                    message.Bcc.Add(bcc);
+                    //message.Bcc.Add(bcc);
                     
                     System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.111");
 

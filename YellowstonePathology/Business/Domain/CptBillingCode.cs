@@ -82,7 +82,7 @@ namespace YellowstonePathology.Business.Domain
 			}
 		}
 
-		[PersistentPrimaryKeyProperty(true, 0)]
+		[PersistentPrimaryKeyProperty(true)]
 		public string CptBillingId
 		{
 			get { return this.m_CptBillingId; }

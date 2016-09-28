@@ -152,7 +152,8 @@ namespace YellowstonePathology.Business.Test.Retired
 		}
 
 		#region Persistent Properties
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "1", "0", "bit")]
 		public bool IncludeImmunoRecommendedComment
 		{
 			get { return this.m_IncludeImmunoRecommendedComment; }
@@ -166,7 +167,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "1", "0", "bit")]
 		public bool IncludeResultComment
 		{
 			get { return this.m_IncludeResultComment; }
@@ -180,7 +182,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "1", "0", "bit")]
 		public bool IncludePolysomyComment
 		{
 			get { return this.m_IncludePolysomyComment; }
@@ -194,7 +197,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "0", "int")]
 		public int CellsCounted
 		{
 			get { return this.m_CellsCounted; }
@@ -208,7 +212,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "0", "int")]
 		public int TotalChr17SignalsCounted
 		{
 			get { return this.m_TotalChr17SignalsCounted; }
@@ -222,7 +227,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "0", "int")]
 		public int TotalHer2SignalsCounted
 		{
 			get { return this.m_TotalHer2SignalsCounted; }
@@ -236,7 +242,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentProperty("0")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "0", "int")]
 		public int Her2byIHCOrder
 		{
 			get { return this.m_Her2byIHCOrder; }
@@ -250,7 +257,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentProperty("2")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "11", "2", "int")]
 		public int NumberOfObservers
 		{
 			get { return this.m_NumberOfObservers; }
@@ -264,7 +272,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }
@@ -278,7 +287,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(20)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "20", "null", "varchar")]
 		public string PolysomyPercent
 		{
 			get { return this.m_PolysomyPercent; }
@@ -292,7 +302,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(10)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "10", "null", "varchar")]
 		public string Chr17SignalRangeLow
 		{
 			get { return this.m_Chr17SignalRangeLow; }
@@ -306,7 +317,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Chr17SignalRangeHigh
 		{
 			get { return this.m_Chr17SignalRangeHigh; }
@@ -320,7 +332,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(10)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "10", "null", "varchar")]
 		public string Her2SignalRangeLow
 		{
 			get { return this.m_Her2SignalRangeLow; }
@@ -334,7 +347,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(10)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "10", "null", "varchar")]
 		public string Her2SignalRangeHigh
 		{
 			get { return this.m_Her2SignalRangeHigh; }
@@ -348,7 +362,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string CommentLabel
 		{
 			get { return this.m_CommentLabel; }
@@ -362,7 +377,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string ResultDescription
 		{
 			get { return this.m_ResultDescription; }
@@ -376,7 +392,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string SampleAdequacy
 		{
 			get { return this.m_SampleAdequacy; }
@@ -390,7 +407,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(30)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "30", "null", "varchar")]
 		public string ProbeSignalIntensity
 		{
 			get { return this.m_ProbeSignalIntensity; }
@@ -404,7 +422,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string TechComment
 		{
 			get { return this.m_TechComment; }
@@ -418,7 +437,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string ResultComment
 		{
 			get { return this.m_ResultComment; }
@@ -432,7 +452,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string InterpretiveComment
 		{
 			get { return this.m_InterpretiveComment; }
@@ -446,7 +467,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(100)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
 		public string GeneticHeterogeneity
 		{
 			get { return this.m_GeneticHeterogeneity; }
@@ -460,7 +482,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(20)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "20", "null", "varchar")]
 		public string Her2Chr17ClusterRatio
 		{
 			get { return this.m_Her2Chr17ClusterRatio; }
@@ -474,7 +497,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string ReportReference
 		{
 			get { return this.m_ReportReference; }
@@ -488,7 +512,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(350)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "350", "null", "varchar")]
 		public string SourceBlock
 		{
 			get { return this.m_SourceBlock; }
@@ -502,7 +527,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Indicator
 		{
 			get { return this.m_Indicator; }
@@ -516,7 +542,8 @@ namespace YellowstonePathology.Business.Test.Retired
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Method
 		{
 			get { return this.m_Method; }

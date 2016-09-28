@@ -30,7 +30,8 @@ namespace YellowstonePathology.Business.Test.HoldForFlow
             : base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
         { }
 
-        [PersistentStringProperty(500)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
         public string Comment
         {
             get { return this.m_Comment; }

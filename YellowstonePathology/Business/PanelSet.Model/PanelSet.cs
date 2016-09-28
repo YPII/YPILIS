@@ -47,6 +47,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         protected string m_WordDocumentClassName;
         protected string m_EPICOBXViewClassName;
         protected string m_CMMCNTEViewClassName;
+        protected bool m_ResearchTesting;
 
         protected YellowstonePathology.Business.Specimen.Model.Aliquot m_AliquotToAddOnOrder;        
 
@@ -147,7 +148,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             get { return this.m_ProfessionalComponentBillingFacility; }
         }
 
-        [PersistentDocumentIdProperty(50)]
+        [PersistentDocumentIdProperty()]
         public string ObjectId
         {
             get { return this.m_ObjectId; }
@@ -576,6 +577,20 @@ namespace YellowstonePathology.Business.PanelSet.Model
                 {
                     this.m_WordDocumentClassName = value;
                     this.NotifyPropertyChanged("WordDocumentClassName");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public bool ResearchTesting
+        {
+            get { return this.m_ResearchTesting; }
+            set
+            {
+                if (this.m_ResearchTesting != value)
+                {
+                    this.m_ResearchTesting = value;
+                    this.NotifyPropertyChanged("ResearchTesting");
                 }
             }
         }

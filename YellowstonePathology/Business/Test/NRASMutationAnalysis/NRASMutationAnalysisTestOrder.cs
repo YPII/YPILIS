@@ -26,7 +26,8 @@ namespace YellowstonePathology.Business.Test.NRASMutationAnalysis
 		{
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }
@@ -40,7 +41,8 @@ namespace YellowstonePathology.Business.Test.NRASMutationAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -54,7 +56,8 @@ namespace YellowstonePathology.Business.Test.NRASMutationAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Method
 		{
 			get { return this.m_Method; }
@@ -68,7 +71,8 @@ namespace YellowstonePathology.Business.Test.NRASMutationAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string TestDevelopment
 		{
 			get { return this.m_TestDevelopment; }

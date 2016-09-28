@@ -28,7 +28,8 @@ namespace YellowstonePathology.Business.Test.BCRABLByPCR
 		{
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }
@@ -42,7 +43,8 @@ namespace YellowstonePathology.Business.Test.BCRABLByPCR
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string DetectedLogReduction
 		{
 			get { return this.m_DetectedLogReduction; }
@@ -56,7 +58,8 @@ namespace YellowstonePathology.Business.Test.BCRABLByPCR
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string FusionTranscriptType
 		{
 			get { return this.m_FusionTranscriptType; }
@@ -70,7 +73,8 @@ namespace YellowstonePathology.Business.Test.BCRABLByPCR
 			}
 		}
 
-        [PersistentStringProperty(50)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string PercentBCRABL
         {
             get { return this.m_PercentBCRABL; }
@@ -84,7 +88,8 @@ namespace YellowstonePathology.Business.Test.BCRABLByPCR
             }
         }
 
-        [PersistentStringProperty(5000)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -98,7 +103,8 @@ namespace YellowstonePathology.Business.Test.BCRABLByPCR
 			}
 		}
 
-		[PersistentStringProperty(5000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
 		public string Method
 		{
 			get { return this.m_Method; }

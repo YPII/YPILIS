@@ -32,7 +32,8 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 		{
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string Result
 		{
 			get { return this.m_Result; }
@@ -46,7 +47,8 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 			}
 		}
 
-		[PersistentStringProperty(50)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string InstabilityLevel
 		{
 			get { return this.m_InstabilityLevel; }
@@ -60,7 +62,8 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string BAT25Instability
 		{
 			get { return this.m_BAT25Instability; }
@@ -74,7 +77,8 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string BAT26Instability
 		{
 			get { return this.m_BAT26Instability; }
@@ -88,7 +92,8 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string D5S346Instability
 		{
 			get { return this.m_D5S346Instability; }
@@ -102,7 +107,8 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string D17S250Instability
 		{
 			get { return this.m_D17S250Instability; }
@@ -116,7 +122,8 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string D2S123Instability
 		{
 			get { return this.m_D2S123Instability; }
@@ -130,7 +137,8 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 			}
 		}
 
-		[PersistentStringProperty(1000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1000", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }
@@ -144,7 +152,8 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 			}
 		}
 
-		[PersistentStringProperty(1000)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1000", "null", "varchar")]
 		public string Method
 		{
 			get { return this.m_Method; }
@@ -158,7 +167,8 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 			}
 		}
 
-		[PersistentStringProperty(500)]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
 		public string TestDevelopment
 		{
 			get { return this.m_TestDevelopment; }
