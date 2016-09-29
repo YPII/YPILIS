@@ -1005,7 +1005,7 @@ namespace YellowstonePathology.UI
         {            
             Business.Label.Model.ZPLPrinter printer = new Business.Label.Model.ZPLPrinter("10.1.1.21"); 
             YellowstonePathology.Business.BarcodeScanning.ContainerBarcode containerBarcode = Business.BarcodeScanning.ContainerBarcode.Parse();
-            printer.Print(Business.Label.Model.ContainerZPLLabel.GetCommands(containerBarcode.ID));
+            printer.Print(Business.Label.Model.ContainerZPLLabel.GetCommands(containerBarcode.ToString()));
         }        
 
         private void PrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
