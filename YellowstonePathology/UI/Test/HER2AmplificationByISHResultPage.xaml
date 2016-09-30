@@ -1,0 +1,271 @@
+﻿<Test:ResultControl x:Class="YellowstonePathology.UI.Test.HER2AmplificationByISHResultPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Test="clr-namespace:YellowstonePathology.UI.Test">
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+		<Grid Grid.Row="1" Margin="5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Row="0" Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+
+			<Grid Grid.Column="0" Margin="10">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="20"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>                    
+					<RowDefinition Height="*"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>
+
+				<TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkSetResults_Click">Set Results</Hyperlink>
+				</TextBlock>
+
+				<TextBlock Grid.Column="0" Grid.Row="3" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkAcceptResults_Click">Accept Results</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="4" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkShowDocument_Click">Show Document</Hyperlink>
+				</TextBlock>
+
+				<TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,5">
+					<Hyperlink Click="HyperLinkFinalize_Click">Finalize</Hyperlink>
+				</TextBlock>
+
+				<TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">                    
+                    <Hyperlink Click ="HyperlinkSpecimenDetails_Click">Specimen Details</Hyperlink>
+				</TextBlock>
+
+				<TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkCancelTestUniterpretable_Click">Cancel (Uninterpretable)</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="9" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkCancelTestInsufficient_Click">Cancel (Insufficient)</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="10" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkUnacceptResults_Click">Unaccept Results</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="11" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkUnfinalResults_Click">Unfinalize Results</Hyperlink>
+				</TextBlock>
+
+			</Grid>
+
+			<ScrollViewer Grid.Column="1" Margin="10">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"></ColumnDefinition>
+						<ColumnDefinition Width="*"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,5" FontWeight="Bold" VerticalAlignment="Center">Ordered On:</TextBlock>
+					<TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,5" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
+
+					<TextBlock Grid.Column="0" Grid.Row="1" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result:</TextBlock>
+					<TextBlock Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding Path=PanelSetOrder.Result}" VerticalAlignment="Center" />
+
+					<TextBlock Grid.Column="0" Grid.Row="2" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result Description:</TextBlock>
+					<TextBlock Grid.Column="1" Grid.Row="2" Margin="2" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.ResultDescription}" VerticalAlignment="Center" />
+
+					<TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Indication:</TextBlock>
+					<ComboBox Grid.Column="1" Grid.Row="3" Margin="2" ItemsSource="{Binding Path=IndicatorCollection}" SelectedValue="{Binding Path=PanelSetOrder.Indicator}">
+					</ComboBox>					
+
+					<TextBlock Grid.Column="0" Grid.Row="4" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Sample Adequacy:</TextBlock>
+					<ComboBox Grid.Column="1" Grid.Row="4" Margin="2" ItemsSource="{Binding Path=SampleAdequacyCollection}"
+							  SelectedValue="{Binding Path=PanelSetOrder.SampleAdequacy}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="5" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Probe Signal Intensity:</TextBlock>
+					<ComboBox Grid.Column="1" Grid.Row="5" Margin="2" ItemsSource="{Binding Path=ProbeSignalIntensityCollection}"
+							  SelectedValue="{Binding Path=PanelSetOrder.ProbeSignalIntensity}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="6" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total Cells Counted:</TextBlock>
+					<TextBox Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding Path=PanelSetOrder.CellsCountedUI}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="7" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total HER2 Signals Counted:</TextBlock>
+					<TextBox Grid.Column="1" Grid.Row="7"  Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsCountedUI}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="8" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total CHR17 Signals Counted:</TextBlock>
+					<TextBox Grid.Column="1" Grid.Row="8" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsCountedUI}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="9" Margin="2" VerticalAlignment="Center" FontWeight="Bold">CHR17 Signal Range:</TextBlock>
+					<Grid Grid.Column="1" Grid.Row="9">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="38"></ColumnDefinition>
+							<ColumnDefinition Width="7"></ColumnDefinition>
+							<ColumnDefinition Width="38"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<TextBox Grid.Column="0" Grid.Row="0" Margin="2" Width="30" Text="{Binding Path=PanelSetOrder.Chr17SignalRangeLow}" />
+						<TextBlock Grid.Column="1" Grid.Row="0" Width="5" VerticalAlignment="Center">-</TextBlock>
+						<TextBox Grid.Column="2" Grid.Row="0" Margin="2" Width="30" Text="{Binding Path=PanelSetOrder.Chr17SignalRangeHigh}" />
+					</Grid>
+
+					<TextBlock Grid.Column="0" Grid.Row="10" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2 Signal Range:</TextBlock>
+					<Grid Grid.Column="1" Grid.Row="10">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="38"></ColumnDefinition>
+							<ColumnDefinition Width="7"></ColumnDefinition>
+							<ColumnDefinition Width="38"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<TextBox Grid.Column="0" Grid.Row="0"  Margin="2" Width="30" Text="{Binding Path=PanelSetOrder.Her2SignalRangeLow}" />
+						<TextBlock Grid.Column="1" Grid.Row="0" Width="5" VerticalAlignment="Center">-</TextBlock>
+						<TextBox Grid.Column="2" Grid.Row="0" Margin="2" Width="30" Text="{Binding Path=PanelSetOrder.Her2SignalRangeHigh}" />
+					</Grid>
+
+					<TextBlock Grid.Column="0" Grid.Row="11" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Number of observers:</TextBlock>
+					<TextBox Grid.Column="1" Grid.Row="11" Margin="2" Text="{Binding Path=PanelSetOrder.NumberOfObservers}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="12" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Genetic Heterogeneity:</TextBlock>
+					<ComboBox Grid.Column="1" Grid.Row="12" Margin="2" ItemsSource="{Binding Path=GeneticHeterogeneityCollection}"
+							  SelectedValue="{Binding Path=PanelSetOrder.GeneticHeterogeneity}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="13" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2/CHR17 ratio in cluster:</TextBlock>
+					<TextBox Grid.Column="1" Grid.Row="13" Margin="2" Text="{Binding Path=PanelSetOrder.Her2Chr17ClusterRatio}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="14" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2 average copy number per nucleus:</TextBlock>
+					<TextBlock Grid.Column="1" Grid.Row="14" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.AverageHer2NeuSignal}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="15" Margin="2" VerticalAlignment="Center" FontWeight="Bold">CHR17 average copy number per nucleus:</TextBlock>
+					<TextBlock Grid.Column="1" Grid.Row="15" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.AverageChr17Signal}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="16" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Ratio of average HER2/CHR17 signals:</TextBlock>
+					<TextBlock Grid.Column="1" Grid.Row="16" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.AverageHer2Chr17Signal}" />
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="17" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Tech Comment:</TextBlock>
+					<TextBox Grid.Column="0" Grid.Row="18" Margin="2" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.TechComment}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="19" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result Comment:</TextBlock>
+					<TextBox Grid.Column="0" Grid.Row="20" Margin="2" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.ResultComment}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="21" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Interpretation Comments:</TextBlock>
+					<TextBox Grid.Column="0" Grid.Row="22" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" Margin="2" Text="{Binding Path=PanelSetOrder.InterpretiveComment}" />
+
+					<TextBlock Grid.Column="0" Grid.Row="23" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Method:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="24" Grid.ColumnSpan="2" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.Method}" TextWrapping="Wrap" />
+
+					<TextBlock Grid.Column="0" Grid.Row="25" FontWeight="Bold" Margin="2" VerticalAlignment="Center">Report Reference:</TextBlock>
+					<TextBlock Grid.Column="0" Grid.Row="26" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.ReportReference}" />                    
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="27" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
+					<CheckBox Grid.Column="1" Grid.Row="27" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}"></CheckBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="28" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="28" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.NoCharge}"></CheckBox>
+
+                    <Grid Grid.Column="0" Grid.Row="29" Grid.ColumnSpan="2">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+							<ColumnDefinition Width="Auto"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Accepted:</TextBlock>
+						<CheckBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Accepted}" IsEnabled="False"></CheckBox>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Date Accepted:</TextBlock>
+						<TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.AcceptedTime}" IsEnabled="False"></TextBox>
+
+						<TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Accepted By:</TextBlock>
+						<TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.AcceptedBy, Mode=OneWay}" IsEnabled="False"></TextBox>
+
+						<TextBlock Grid.Column="2" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Final:</TextBlock>
+						<CheckBox Grid.Column="3" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Final}" IsEnabled="False"></CheckBox>
+
+						<TextBlock Grid.Column="2" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Date Finaled:</TextBlock>
+						<TextBox Grid.Column="3" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.FinalTime}" IsEnabled="False"></TextBox>
+
+						<TextBlock Grid.Column="2" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Finaled By:</TextBlock>
+						<TextBox Grid.Column="3" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Signature}" IsEnabled="False"></TextBox>
+
+					</Grid>
+
+				</Grid>
+
+			</ScrollViewer>
+
+		</Grid>
+
+		<Border Grid.Column="0" Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<Button Name="ButtonNext" Grid.Column="0" Grid.Row="2" Width="100" Height="40" HorizontalAlignment="Right" Margin="5,5,5,5" Click="ButtonNext_Click">Next ></Button>
+
+	</Grid>
+</Test:ResultControl>

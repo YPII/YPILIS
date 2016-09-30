@@ -1,0 +1,58 @@
+﻿<Window x:Class="YellowstonePathology.UI.MySql.MySqlMigrationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI.MySql"
+        Title="MySql Migration Dialog" Width="1500" Height="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu Name="MainMenu" Grid.Column="0" Grid.Row="0" DockPanel.Dock="Top">
+            <MenuItem Header="Get Status" Click="MenuItemGetStatus_Click" Margin="5"></MenuItem>
+            <MenuItem Header="Create Table" Click="MenuItemCreateTable_Click" Margin="5"></MenuItem>
+            <MenuItem Header="Add Transfer Column" Click="MenuItemAddTransferColumn_Click" Margin="5"></MenuItem>
+            <MenuItem Header="Add Timestamp Column" Click="MenuItemAddTimestampColumn_Click" Margin="5"></MenuItem>
+            <MenuItem Header="Add DBTS Attribute" Click="MenuItemAddDBTS_Click" Margin="5"></MenuItem>
+            <MenuItem Header="Load Data" Click="MenuItemLoadData_Click" Margin="5"></MenuItem>
+            <MenuItem Header="Synchronize Data" Click="MenuItemSynchronizeData_Click" Margin="5"></MenuItem>
+        </Menu>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Margin="5">Number of items to query:</TextBlock>
+            <TextBox Name="TextBoxItemsToQuery" Margin="5" Width="25" Text="{Binding Path=NumberOfItemsInQuery}" />
+            <TextBlock Margin="5">Number of times to query:</TextBlock>
+            <TextBox Name="TextBoxRepetitionsOfQuery" Margin="5" Width="25" Text="{Binding Path=NumberOfTimesToQuery}" />
+        </StackPanel>
+            
+        <ListView Name="ListViewMigrationStatus" Grid.Column="0" Grid.Row="2" ItemsSource="{Binding Path=MigrationStatusCollection}" 
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name, Mode=OneWay}" Header="Class" Width="280"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=TableName, Mode=OneWay}" Header="Table Name" Width="280"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=KeyFieldName, Mode=OneWay}" Header="Key Field" Width="150"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=HasTable}" Header="Has MySql Table" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=HasTransferredColumn}" Header="Has Transferred Col" Width="130"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=HasTimestampColumn}" Header="Has Timestamp Col" Width="130"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=HasDBTS}" Header="Has DBTS Attribute" Width="130"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=UnLoadedDataCount}" Header="Unmigrated Count" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=OutOfSyncCount}" Header="Unsynced Count" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
+            <TextBlock Margin="5" Text="Status"></TextBlock>
+            <TextBlock Name="TextBlockStatusMessage"  Margin="5" Text="{Binding Path=StatusMessage}" MinHeight="40"></TextBlock>
+        </StackPanel>
+
+    </Grid>
+</Window>

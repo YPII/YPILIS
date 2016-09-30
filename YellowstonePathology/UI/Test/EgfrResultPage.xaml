@@ -1,0 +1,229 @@
+﻿<Test:ResultControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+    x:Class="YellowstonePathology.UI.Test.EGFRResultPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:Test="clr-namespace:YellowstonePathology.UI.Test">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>        
+        
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0" Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+
+            <Grid Grid.Column="0" Margin="10" Width="120">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="*"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>                
+                
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Results</TextBlock>
+                
+                <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkPositiveL858R_Click">Positive L858R</Hyperlink>
+                </TextBlock>
+                
+                <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkPositiveExon19_Click">Positive Exon 19</Hyperlink>
+                </TextBlock>
+                
+                <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkPositiveE709X_Click">Positive E709X</Hyperlink>
+                </TextBlock>
+                
+                <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkPositiveG719X_Click">Positive G719X</Hyperlink>
+                </TextBlock>
+                
+                <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkPositiveS768I_Click">Positive S768I</Hyperlink>
+                </TextBlock>
+                
+                <TextBlock Grid.Column="0" Grid.Row="6" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkPositiveL861Q_Click">Positive L861Q</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkResistantT790M_Click">Resistant T790M</Hyperlink>
+                </TextBlock>
+                
+                <TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkResistantExon20_Click">Resistant Exon 20</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="9" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkNotDetected_Click">Not Detected</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="10" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkUninterpretable_Click">Uninterpretable</Hyperlink>
+                </TextBlock>
+
+				<TextBlock Grid.Column="0" Grid.Row="11" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkAcceptResults_Click">Accept Results</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="13" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkShowDocument_Click">Show Document</Hyperlink>
+				</TextBlock>
+				<TextBlock Grid.Column="0" Grid.Row="14" Margin="5,3,0,5">
+					<Hyperlink Click="HyperLinkFinalizeResults_Click">Finalize</Hyperlink>
+				</TextBlock>
+
+				<TextBlock Grid.Column="0" Grid.Row="16" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkUnacceptResults_Click">Unaccept Results</Hyperlink>
+				</TextBlock>
+
+                <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="17" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkUnfinalResults_Click">Unfinalize Results</Hyperlink>
+				</TextBlock>
+
+			</Grid>
+
+            <ScrollViewer Grid.Column="1" Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>                
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Ordered On:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Result:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.Result}"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Result Code:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.ResultCode}"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold">Indication:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.Indication}"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold">Tumor Nuclei Percentage:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.TumorNucleiPercentage}"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" FontWeight="Bold">Microdissection Performed:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRMutationAnalysisTestOrder.MicrodissectionPerformed}"></CheckBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold">Comment:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.Comment}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" FontWeight="Bold">Interpretation:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.Interpretation}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" FontWeight="Bold">References:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" FontWeight="Bold">Method:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="13" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,2" FontWeight="Bold">Report Disclaimer:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="15" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.ReportDisclaimer}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="16" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="16" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRMutationAnalysisTestOrder.Distribute}"></CheckBox>
+
+					<TextBlock Grid.Column="0" Grid.Row="17" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
+					<CheckBox Grid.Column="1" Grid.Row="17" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRMutationAnalysisTestOrder.NoCharge}"></CheckBox>
+
+					<Grid Grid.Column="0" Grid.Row="19" Grid.ColumnSpan="2">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+							<ColumnDefinition Width="Auto"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Accepted:</TextBlock>
+						<CheckBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRMutationAnalysisTestOrder.Accepted}" IsEnabled="False"></CheckBox>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Date Accepted:</TextBlock>
+						<TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.AcceptedTime}" IsEnabled="False"></TextBox>
+
+						<TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Accepted By:</TextBlock>
+						<TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.AcceptedBy, Mode=OneWay}" IsEnabled="False"></TextBox>
+
+						<TextBlock Grid.Column="2" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Final:</TextBlock>
+						<CheckBox Grid.Column="3" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRMutationAnalysisTestOrder.Final}" IsEnabled="False"></CheckBox>
+
+						<TextBlock Grid.Column="2" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Date Finaled:</TextBlock>
+						<TextBox Grid.Column="3" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.FinalTime}" IsEnabled="False"></TextBox>
+
+						<TextBlock Grid.Column="2" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Finaled By:</TextBlock>
+						<TextBox Grid.Column="3" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=EGFRMutationAnalysisTestOrder.Signature}" IsEnabled="False"></TextBox>
+
+					</Grid>
+
+				</Grid>
+            </ScrollViewer>
+
+        </Grid>
+
+        <Border Grid.Column="0" Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <Button Name="ButtonNext" Grid.Column="0" Grid.Row="2" Width="100" Height="40" HorizontalAlignment="Right" Margin="5,5,5,5" Click="ButtonNext_Click">Next ></Button>
+        
+    </Grid>
+</Test:ResultControl>

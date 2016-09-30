@@ -1,0 +1,868 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Test.LabWorkspace"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:LocalUI="clr-namespace:YellowstonePathology.UI"
+			 xmlns:MolecularUI="clr-namespace:YellowstonePathology.UI.Test"
+			 xmlns:TemplateSelectorUI="clr-namespace:YellowstonePathology.UI.TemplateSelector"
+			 xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit" 
+			 xmlns:validationRules="clr-namespace:YellowstonePathology.UI.ValidationRules"
+			 xmlns:converter="clr-namespace:YellowstonePathology.UI.Converter"
+			 xmlns:customControls="clr-namespace:YellowstonePathology.UI.CustomControls"
+			 xmlns:diagnostics="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+			 Name="LabUserControl">
+
+	<UserControl.Resources>
+		<Style TargetType="TreeViewItem" x:Key="TreeViewItemIsExpanded">
+			<Setter Property="IsExpanded" Value="True"/>
+		</Style>
+		
+		<Style TargetType="toolkit:DataGridCell" x:Key="GridCellStyle">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+
+		<TemplateSelectorUI:PanelSetOrderTemplateSelector x:Key="PanelSetOrderTemplateSelector"/>
+
+		<DataTemplate x:Key="CommentTemplate">
+			<MenuItem Header="{Binding Path=Description}" Tag="{Binding}" Click="MenuItemSelectComment_Click"></MenuItem>
+		</DataTemplate>
+
+		<DataTemplate x:Key="AcidWashTemplateResultTestbox">
+			<StackPanel>
+				<TextBox Text="{Binding Path=TestOrderCollection[0].Result}" Margin="3" Width="400" HorizontalAlignment="Left">
+				</TextBox>
+			</StackPanel>
+		</DataTemplate>
+
+		<DataTemplate x:Key="DataTemplateXMLTestOrder">
+			<StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+				<TextBlock FontWeight="Bold" Margin="2,2,2,2" VerticalAlignment="Center">Test:</TextBlock>
+				<TextBlock Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=TestName}" Width="200"></TextBlock>
+				<ComboBox VerticalContentAlignment="Center" Text="{Binding Path=Result}" 
+					Margin="2" Width="350" IsEditable="True">
+					<ComboBoxItem>Completed</ComboBoxItem>
+					<ComboBoxItem>QNS</ComboBoxItem>
+					<ComboBoxItem>QNS for HPV only</ComboBoxItem>
+				</ComboBox>
+			</StackPanel>
+		</DataTemplate>
+
+		<HierarchicalDataTemplate x:Key="DataTemplateAcidWashOrder" ItemsSource="{Binding Path=TestOrderCollection}" ItemTemplate="{StaticResource DataTemplateXMLTestOrder}">
+			<Grid>
+				<Grid.ContextMenu>
+					<ContextMenu>
+						<MenuItem Header="Accept Results" Click="MenuItemAcceptResults_Click" Tag="{Binding}"></MenuItem>
+					</ContextMenu>
+				</Grid.ContextMenu>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="30"></ColumnDefinition>
+					<ColumnDefinition Width="150"></ColumnDefinition>
+					<ColumnDefinition Width="150"></ColumnDefinition>
+					<ColumnDefinition Width="150"></ColumnDefinition>
+					<ColumnDefinition Width="150"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+
+
+				<TextBlock FontWeight="Bold" Margin="2,2,2,2" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Background="Gray">Panel Order</TextBlock>
+				<TextBlock FontWeight="Bold" Margin="2,2,2,2" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Background="Gray">Order Date</TextBlock>
+				<TextBlock FontWeight="Bold" Margin="2,2,2,2" VerticalAlignment="Center" Grid.Column="3" Grid.Row="0" Background="Gray">Accepted Date</TextBlock>
+
+				<TextBlock Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=PanelName}" Grid.Column="1" Grid.Row="1"></TextBlock>
+				<TextBlock Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=OrderTime}" Grid.Column="2" Grid.Row="1"></TextBlock>
+				<TextBlock Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=AcceptedTime}" Grid.Column="3" Grid.Row="1"></TextBlock>
+			</Grid>
+		</HierarchicalDataTemplate>
+
+		<!-- ***** DataTemplateResultPath ***** -->
+		<DataTemplate x:Key="DataTemplateResultPath">
+			<Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<ScrollViewer Grid.Row="0" Margin="10">
+					<TextBlock Margin="2,2,2,2" FontSize="14" Text="{Binding ElementName=LabUserControl, Path=DataContext.ResultString}" TextWrapping="Wrap" />
+				</ScrollViewer>
+				
+				<Button Grid.Row="1"  Margin="2,10,2,2" Height="30" Width="100" HorizontalAlignment="Left" Click="ButtonResults_Click"
+						IsEnabled="True">Results</Button>
+			</Grid>
+		</DataTemplate>
+
+		<!-- ***** DataTemplatePublishedDocument ***** -->
+		<DataTemplate x:Key="DataTemplatePublishedDocument">
+			<Grid Margin="10" HorizontalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+				<DocumentViewer Grid.Column="0" Grid.Row="0" Document="{Binding Path=PublishedDocument}" ></DocumentViewer>
+			</Grid>
+		</DataTemplate>
+
+		<!-- ***** DataTemplateCytologyResult ***** -->
+		<DataTemplate x:Key="DataTemplateCytologyResult">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="100"></RowDefinition>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+				<ListView Grid.Row="0" ItemsSource="{Binding Path=PanelOrderCollection}">
+					<ListView.View>
+						<GridView>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=PanelName}" Header="Tests Ordered" Width="200"/>
+							<GridViewColumn Header="Results" CellTemplate="{StaticResource AcidWashTemplateResultTestbox}"/>
+						</GridView>
+					</ListView.View>
+				</ListView>
+
+				<TreeView Name="TreeViewPanelOrder" Grid.Row="1" ItemsSource="{Binding Path=PanelOrderCollection}"
+					ItemTemplate="{StaticResource DataTemplateAcidWashOrder}">
+				</TreeView>
+			</Grid>
+		</DataTemplate>			
+	</UserControl.Resources>
+
+	<Grid PreviewKeyDown="MainGrid_PreviewKeyDown">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="8*"></ColumnDefinition>
+			<ColumnDefinition Width="11*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="0" Grid.Column="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>				
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>						
+
+			<TabControl Name="RightTabControl" Grid.Column="0" Grid.Row="0">
+				<TabItem Name="TabItemCaseList">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/Cases.ico"></Image>
+							<TextBlock Margin="4,0,0,0" VerticalAlignment="Center">List</TextBlock>
+						</StackPanel>
+					</TabItem.Header>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+						</Grid.RowDefinitions>
+						<Grid Grid.Column="0" Grid.Row="0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="31"></RowDefinition>
+								<RowDefinition></RowDefinition>
+							</Grid.RowDefinitions>
+							<ToolBarTray Grid.Column="0" Grid.Row="0" Background="Gainsboro" FocusManager.IsFocusScope="False">
+								<ToolBar FocusManager.IsFocusScope="False">									
+									<StackPanel>                                        
+                                        <ComboBox Name="ComboBoxPanelSetType" Margin="3"
+												Style="{StaticResource BoundTextBox}" 
+												MaxWidth="165" Height="22" MaxHeight="22"
+												ItemsSource="{Binding Path=PanelSetCollection}"
+												DisplayMemberPath="PanelSetName"
+												SelectedValuePath="PanelSetId"												
+												SelectionChanged="ComboBoxPanelSetType_SelectionChanged" FontSize="12">
+										</ComboBox>
+									</StackPanel>									
+									<Button Click="ButtonGo_Click" IsTabStop="False">
+										<StackPanel Orientation="Horizontal">
+											<Image Source="/Resources/Go.ico" Margin="2" Height="16"></Image>
+											<TextBlock Margin="2" VerticalAlignment="Center">Go</TextBlock>
+										</StackPanel>
+									</Button>	
+									<Button Click="ButtonBack_Click" IsTabStop="False">
+										<StackPanel Orientation="Horizontal">
+											<Image Source="/Resources/Previous.ico" Margin="2" Height="16"></Image>
+										</StackPanel>
+									</Button>
+									<Button Click="ButtonForward_Click" IsTabStop="False">
+										<StackPanel Orientation="Horizontal">
+											<Image Source="/Resources/Next.ico" Margin="2" Height="16"></Image>
+										</StackPanel>
+									</Button>								
+								</ToolBar>
+								
+								<ToolBar FocusManager.IsFocusScope="False">
+									<StackPanel>
+										<ComboBox Name="ComboBoxLogLocation" Margin="3" Style="{StaticResource BoundTextBox}" MaxWidth="65" Height="22" MaxHeight="22" FontSize="12"
+												  SelectionChanged="ComboBoxLogLocation_SelectionChanged">
+											<ComboBoxItem>All</ComboBoxItem>
+											<ComboBoxItem>Billings</ComboBoxItem>
+											<ComboBoxItem>Cody</ComboBoxItem>                                            
+                                        </ComboBox>
+									</StackPanel>
+
+									<TextBox Name="TextBoxSearch" Margin="2" KeyUp="TextBoxSearch_KeyUp" Width="150" BorderBrush="AliceBlue" BorderThickness="1" />
+
+								</ToolBar>
+							</ToolBarTray>
+							<ListView Name="ListViewCaseList" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=CaseList}" SelectionChanged="ListViewCaseList_SelectionChanged" FontSize="12">
+
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=IsLockAquiredByMe}" Value="True"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Background" Value="#cbf4c8"/>
+                                            </MultiDataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=IsLockAquiredByMe}" Value="False"/>
+                                                    <Condition Binding="{Binding Path=LockAquired}" Value="true"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Background" Value="#fae5e7"/>
+                                            </MultiDataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=LockAquired}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Background" Value="#FFFFFF"/>
+                                            </MultiDataTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="IsSelected" Value="true" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter Property="FontWeight" Value="Bold" />
+                                            </MultiTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                                <ListView.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Print Selected" Click="MenuItemPrintSelected_Click"></MenuItem>
+                                        <MenuItem Header="Print Molecular Label" Click="MenuItemPrintMolecularLabel_Click"></MenuItem>
+                                        <MenuItem Header="Open Document Folder" Click="MenuItemOpenDocumentFolder_Click"></MenuItem>                                        
+                                        <MenuItem Header="Send HL7 Result" Click="MenuItemSendHL7Result_Click"></MenuItem>
+                                        <MenuItem Header="Send HL7 Result Test" Click="MenuItemSendHL7ResultTest_Click"></MenuItem>
+                                        <MenuItem Header="Send HL7 Status Message" Click="MenuItemSendHL7StatusMessage_Click"></MenuItem>
+                                        <MenuItem Header="Publish" Click="MenuItemPublish_Click"></MenuItem>
+                                        <MenuItem Header="Show HL7 Result" Click="MenuItemShowHl7Result_Click"></MenuItem>
+                                        <MenuItem Header="Send Meditech Result" Click="MenuItemSendMeditechResult_Click"></MenuItem>
+                                        <MenuItem Header="Send HL7 Order" Click="MenuItemSendHL7Order_Click"></MenuItem>
+                                        <MenuItem Header="Send Panther Order" Click="MenuItemSendPantherOrder_Click"></MenuItem>
+                                    </ContextMenu>
+                                </ListView.ContextMenu>
+                                <ListView.View>                                    
+									<GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Case List">
+										<GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="85" />										
+										<GridViewColumn DisplayMemberBinding="{Binding Path=AccessionDate, Converter={StaticResource ShortDateConverter}}" Header="Accession Date" Width="90"/>
+										<GridViewColumn DisplayMemberBinding="{Binding Path=PatientName}" Header="Patient Name" Width="120"/>
+										<GridViewColumn DisplayMemberBinding="{Binding Path=PBirthdate, Converter={StaticResource ShortDateConverter}}" Header="Birthdate" Width="90"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Test" Width="120"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=FinalDate, Converter={StaticResource ShortDateConverter}}" Header="Final Date" Width="90"/>
+										<GridViewColumn DisplayMemberBinding="{Binding Path=OrderedBy}" Header="Ordered By" Width="90"/>
+									</GridView>
+								</ListView.View>
+							</ListView>
+						</Grid>
+                        
+                        <Grid Grid.Column="0" Grid.Row="1" Margin="5,5,5,5" KeyUp="Search_KeyUp">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="170"></ColumnDefinition>
+								<ColumnDefinition Width="170"></ColumnDefinition>
+								<ColumnDefinition Width="160"></ColumnDefinition>
+								<ColumnDefinition></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+								<RowDefinition Height="*"></RowDefinition>
+							</Grid.RowDefinitions>
+							<RadioButton Name="radioButtonSearchThisMonth"                  
+							Grid.Column="0" Grid.Row="0"
+							Style="{StaticResource RadioButtonStyle}"
+							GroupName="radioButtonGroupSearch">This Month:</RadioButton>
+										
+							<RadioButton Name="radioButtonSearchLastMonth"                  
+							Grid.Column="0" Grid.Row="1"
+							Style="{StaticResource RadioButtonStyle}"
+							GroupName="radioButtonGroupSearch">Last Month:</RadioButton>
+										
+							<RadioButton Name="radioButtonSearchToday"                  
+							Grid.Column="0" Grid.Row="2"
+							Style="{StaticResource RadioButtonStyle}"
+							GroupName="radioButtonGroupSearch">Today:</RadioButton>
+										
+							<RadioButton Name="radioButtonSearchYesterday"                  
+							Grid.Column="0" Grid.Row="3"
+							Style="{StaticResource RadioButtonStyle}"
+							GroupName="radioButtonGroupSearch">Yesterday:</RadioButton>
+										
+							<RadioButton Name="radioButtonSearchNotDistributed"                  
+							Grid.Column="0" Grid.Row="4"
+							Style="{StaticResource RadioButtonStyle}"
+							GroupName="radioButtonGroupSearch">Not Distributed:</RadioButton>
+										
+							<RadioButton Name="radioButtonSearchNotFinal"                  
+							Grid.Column="0" Grid.Row="5"
+							Style="{StaticResource RadioButtonStyle}"
+							GroupName="radioButtonGroupSearch">Not Final:</RadioButton>
+										
+							<RadioButton Name="radioButtonSearchNotAudited"                  
+								Grid.Column="1" Grid.Row="0"
+								Style="{StaticResource RadioButtonStyle}"
+								GroupName="radioButtonGroupSearch">Not Audited:</RadioButton>
+							<ComboBox Name="comboBoxAuditType" Width="150" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="2"
+										ItemsSource="{Binding Path=PanelSetCaseTypeCollection}" DisplayMemberPath="CaseType" Style="{StaticResource BoundTextBox}">
+							</ComboBox>
+										
+							<RadioButton Name="radioButtonSearchAccessionNo"
+								Grid.Column="1" Grid.Row="1"
+								Style="{StaticResource RadioButtonStyle}"
+								GroupName="radioButtonGroupSearch">Report No:</RadioButton>
+							<TextBox Name="textBoxSearchReportNo" Width="150" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="2"></TextBox>
+										
+							<RadioButton Name="radioButtonSearchPatientName"                  
+								Grid.Column="1" Grid.Row="2"
+								Style="{StaticResource RadioButtonStyle}"
+								GroupName="radioButtonGroupSearch">Patient Last Name:</RadioButton>
+							<TextBox Name="textBoxSearchPatientName" Width="150" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Margin="2"></TextBox>
+										
+							<RadioButton Name="radioButtonSearchMasterAccessionNo"                  
+								Grid.Column="1" Grid.Row="3"
+								Style="{StaticResource RadioButtonStyle}"
+								GroupName="radioButtonGroupSearch">Master Accession No:</RadioButton>
+							<TextBox Name="textBoxSearchMasterAccessionNo" Width="150" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="2"></TextBox>
+
+                            <RadioButton Name="radioButtonSearchInHouseMolecularNotFinal"
+							Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2"
+							Style="{StaticResource RadioButtonStyle}"
+							GroupName="radioButtonGroupSearch">In House Molecular Pending:</RadioButton>
+
+                            <Button Name="buttonSearch" Style="{StaticResource NormalButton}" Width="150" Click="ButtonSearch_Click" Grid.Column="0" Grid.Row="7">Search</Button>
+						</Grid>
+					</Grid>
+				</TabItem>
+
+				<TabItem Name="TabItemDocumentWorkspace">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/Documents.ico"></Image>
+							<TextBlock Margin="4,0,0,0" VerticalAlignment="Center">Document</TextBlock>
+						</StackPanel>
+					</TabItem.Header>
+				</TabItem>												                                                            
+                               
+			</TabControl>
+
+		</Grid>
+		
+		<GridSplitter Width="2" Grid.Column="0"></GridSplitter>
+
+		<Grid Grid.Column="1" Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>
+			
+			<StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+				<TextBlock Margin="2">Report Number:</TextBlock>
+				<TextBlock Margin="5,2,2,2" Text="{Binding Path=PanelSetOrder.ReportNo}" FontSize="12" FontWeight="Bold"></TextBlock>
+			</StackPanel>
+			
+			<TabControl Name="TabControlLeftMain" Grid.Column="1" Grid.Row="1">
+
+				<TabItem>
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/Login.ico"></Image>
+							<TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Login</TextBlock>
+						</StackPanel>
+					</TabItem.Header>
+					<Grid Margin="5,5,5,5">
+						<Grid.Resources>
+							<Style x:Key="LogTextBlock" TargetType="TextBlock">
+								<Setter Property="TextAlignment" Value="Right"/>
+								<Setter Property="VerticalAlignment" Value="Center"/>
+								<Setter Property="Margin" Value="2"/>
+								<Setter Property="FontWeight" Value="Bold"/>
+							</Style>
+							<Style x:Key="LogTextBox" TargetType="TextBox">
+								<Setter Property="HorizontalAlignment" Value="Left"/>
+								<Setter Property="Margin" Value="2"/>
+								<Setter Property="Width" Value="180"/>
+								<Setter Property="FontSize" Value="12"/>
+								<Style.Triggers>
+									<Trigger Property="Validation.HasError" Value="True">
+										<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+							<Style x:Key="LogComboBox" TargetType="ComboBox">
+								<Setter Property="FontSize" Value="12"/>
+								<Setter Property="VerticalAlignment" Value="Center"/>
+								<Setter Property="Margin" Value="2"/>
+							</Style>
+						</Grid.Resources>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="100"></ColumnDefinition>
+							<ColumnDefinition Width="195"></ColumnDefinition>
+							<ColumnDefinition Width="100"></ColumnDefinition>
+							<ColumnDefinition Width="100"></ColumnDefinition>
+							<ColumnDefinition Width="100"></ColumnDefinition>
+							<ColumnDefinition Width="195"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="5"></RowDefinition>
+							<RowDefinition Height="25"></RowDefinition>
+							<RowDefinition Height="25"></RowDefinition>
+							<RowDefinition Height="25"></RowDefinition>
+							<RowDefinition Height="25"></RowDefinition>
+							<RowDefinition Height="25"></RowDefinition>
+							<RowDefinition Height="25"></RowDefinition>
+							<RowDefinition Height="25"></RowDefinition>
+							<RowDefinition Height="25"></RowDefinition>
+							<RowDefinition Height="10"></RowDefinition>
+							<RowDefinition Height="*"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+						</Grid.RowDefinitions>
+
+						<ToolBarTray Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Background="Gainsboro" FocusManager.IsFocusScope="False">
+							<ToolBar FocusManager.IsFocusScope="False">																												
+
+								<Button Margin="2" ToolTip="Fixation Details" Click="ButtonCurrentFixationDetails_Click" TabIndex="3" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+									<StackPanel Orientation="Horizontal">
+										<Image Source="/Resources/Specimen.ico"></Image>
+										<TextBlock Margin="2" VerticalAlignment="Center">Fixation ...</TextBlock>
+									</StackPanel>
+								</Button>								
+
+								<Button Name="ButtonLinkPatient" Margin="2" ToolTip="Link Patient" Click="ButtonLinkPatient_Click" TabIndex="5" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+									<StackPanel Orientation="Horizontal">
+										<Image Source="/Resources/Patient.ico"></Image>
+										<TextBlock Margin="2" VerticalAlignment="Center">Link ...</TextBlock>
+									</StackPanel>
+								</Button>
+
+								<Button Name="ButtonScan" Margin="2" ToolTip="Scan Document" Click="ButtonScan_Click" HorizontalAlignment="Left" TabIndex="6"
+										IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+									<StackPanel Orientation="Horizontal">
+										<Image Source="/Resources/Scan.ico"></Image>
+										<TextBlock Margin="2" VerticalAlignment="Center">Scan</TextBlock>
+									</StackPanel>
+								</Button>
+
+								<Button Name="ButtonAcceptAliquotDetails" ToolTip="Accept Aliquot Details" Click="ButtonAcceptAliquotDetails_Click"
+										Margin="2" TabIndex="7" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+									<StackPanel Orientation="Horizontal">
+										<Image Source="/Resources/AcceptResults.ico"></Image>
+										<TextBlock Margin="2" VerticalAlignment="Center">Accept</TextBlock>
+									</StackPanel>
+								</Button>
+
+								<Button Name="ButtonOrder" ToolTip="Order FS, Gross Only, Touch Prep ..." Click="ButtonOrder_Click" Margin="2" TabIndex="8"
+										IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+									<StackPanel Orientation="Horizontal">
+										<Image Source="/Resources/Order.ico"></Image>
+										<TextBlock Margin="2" VerticalAlignment="Center">Order ...</TextBlock>
+									</StackPanel>
+								</Button>								
+
+								<Button Name="ButtonAssignPathologist" Margin="2" ToolTip="Assign Pathologist" Click="ButtonAssignPathologist_Click" TabIndex="10" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+									<StackPanel Orientation="Horizontal">
+										<Image Source="/Resources/Assign.ico"></Image>
+										<TextBlock Margin="2" VerticalAlignment="Center">Assign ...</TextBlock>
+									</StackPanel>
+								</Button>	                                                           
+                                
+                                <Button Name="ButtonCaseHistory" Margin="2" ToolTip="Case History" Click="ButtonCaseHistory_Click"  TabIndex="12" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Resources/Cases.ico"></Image>
+                                        <TextBlock Margin="2" VerticalAlignment="Center">Case History</TextBlock>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Name="ButtonCodes" Margin="2" ToolTip="Codes" Click="ButtonCodes_Click"  TabIndex="12" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Resources/Cases.ico"></Image>
+                                        <TextBlock Margin="2" VerticalAlignment="Center">Codes</TextBlock>
+                                    </StackPanel>
+                                </Button>
+
+								<Button Name="ButtonReportDetails" Margin="2" ToolTip="Report Details" Click="ButtonReportDetails_Click"  TabIndex="13" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+									<StackPanel Orientation="Horizontal">
+										<Image Source="/Resources/List.ico"></Image>
+										<TextBlock Margin="2" VerticalAlignment="Center">Report Details</TextBlock>
+									</StackPanel>
+								</Button>
+
+							</ToolBar>
+						</ToolBarTray>
+
+						<TextBlock Margin="2" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Style="{StaticResource LogTextBlock}" HorizontalAlignment="Right">Logged By:</TextBlock>
+						<TextBlock Width="150" Margin="2" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Text="{Binding Path=OrderedBy}"></TextBlock>					
+	                    
+						<StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="3">
+							<TextBlock Style="{StaticResource LogTextBlock}" Margin="2,2,2,2" VerticalAlignment="Center">Assigned To:</TextBlock>
+                            <TextBlock Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.AssignedToId, Converter={StaticResource SystemUserIdConverter}}" VerticalAlignment="Center"></TextBlock>                        
+						</StackPanel>
+						
+						<TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource LogTextBlock}">Physician/Client:</TextBlock>
+						<TextBox Name="TextBoxPhysicianClientName" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Text="{Binding Path=AccessionOrder.PhysicianClientName, Mode=OneWay}" 
+							HorizontalAlignment="Stretch" FontSize="12" IsEnabled="False" Margin="2,2,2,2"></TextBox>
+							
+						<TextBlock Grid.Column="0" Grid.Row="4" Style="{StaticResource LogTextBlock}">Date of Service:</TextBlock>
+                        <TextBox Name="TextBoxCollectionDate" Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"
+                                     HorizontalAlignment="Stretch" KeyUp="TextBoxCollectionDate_KeyUp" ToolTip="Please enter the Date Of Service for this specimen.">
+                            <TextBox.Text>
+                                <MultiBinding Converter="{StaticResource SplitDateTimeConverter}" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
+                                    <Binding Path="AccessionOrder.CollectionDate" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"/>
+                                    <Binding Path="AccessionOrder.CollectionTime" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"/>
+                                </MultiBinding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                        <TextBlock Grid.Column="2" Grid.Row="4" Style="{StaticResource LogTextBlock}">Accession Date:</TextBlock>
+						<customControls:ValidTextBox Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2"  Style="{StaticResource ValidTextBoxStyle}" Margin="2,2,2,2"
+														 IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" TabIndex="11" HorizontalAlignment="Stretch">
+							<TextBox.Text>
+								<Binding Path="AccessionOrder.AccessionDateTime" UpdateSourceTrigger="Explicit">
+									<Binding.Converter>
+										<converter:ShortDateConverter />
+									</Binding.Converter>
+									<Binding.ValidationRules>
+										<validationRules:ShortDateValidation />
+									</Binding.ValidationRules>
+								</Binding>
+							</TextBox.Text>
+						</customControls:ValidTextBox>					
+
+						<TextBlock Grid.Column="0" Grid.Row="5" Style="{StaticResource LogTextBlock}">Last Name:</TextBlock>
+						<TextBox Name="TextBoxLastName" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"
+									 Text="{Binding Path=AccessionOrder.PLastName, Converter={StaticResource UpperCaseConverter}}" TabIndex="12"></TextBox>
+
+						<TextBlock Grid.Column="0" Grid.Row="6" Style="{StaticResource LogTextBlock}">First Name:</TextBlock>
+						<TextBox Name="TextBoxFirstName" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"
+									 Text="{Binding Path=AccessionOrder.PFirstName, Converter={StaticResource UpperCaseConverter}}" TabIndex="13"></TextBox>
+									 
+						<TextBlock Grid.Column="0" Grid.Row="7" Style="{StaticResource LogTextBlock}">Middle Initial:</TextBlock>
+						<TextBox Name="TextBoxMiddleInitial" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"
+									 Text="{Binding Path=AccessionOrder.PMiddleInitial, Converter={StaticResource UpperCaseConverter}}" TabIndex="14"></TextBox>
+									 
+						<TextBlock Grid.Column="0" Grid.Row="8" Style="{StaticResource LogTextBlock}">Suffix:</TextBlock>
+						<TextBox Grid.Column="1" Grid.Row="8" VerticalAlignment="Center" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"
+									 Text="{Binding Path=AccessionOrder.PSuffix, Converter={StaticResource UpperCaseConverter}}" FontSize="12" TabIndex="15"></TextBox>
+									 
+						<TextBlock Grid.Column="0" Grid.Row="9" Style="{StaticResource LogTextBlock}">Sex:</TextBlock>
+						<ComboBox Grid.Column="1" Grid.Row="9" Text="{Binding Path=AccessionOrder.PSex}" Style="{StaticResource LogComboBox}" Width="50" BorderBrush="LightGray" BorderThickness="1" 
+								HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" TabIndex="16">
+							<ComboBoxItem>F</ComboBoxItem>
+							<ComboBoxItem>M</ComboBoxItem>
+						</ComboBox>								 			 
+								
+						<TextBlock Grid.Column="2" Grid.Row="5" Style="{StaticResource LogTextBlock}">Birthdate:</TextBlock>
+						<customControls:ValidTextBox x:Name="TextBoxBirthdate" Grid.Column="3" Grid.Row="5" Style="{StaticResource ValidTextBoxStyle}"
+														 IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" TabIndex="17" Margin="2,2,2,2" HorizontalAlignment="Stretch">
+							<TextBox.Text>
+								<Binding Path="AccessionOrder.PBirthdate" UpdateSourceTrigger="Explicit">
+									<Binding.Converter>
+										<converter:ShortDateConverter />
+									</Binding.Converter>
+									<Binding.ValidationRules>
+										<validationRules:BirthDateValidation />
+									</Binding.ValidationRules>
+								</Binding>
+							</TextBox.Text>
+						</customControls:ValidTextBox>
+									 		 			 								 
+						<TextBlock Grid.Column="2" Grid.Row="6" Style="{StaticResource LogTextBlock}">SSN:</TextBlock> 
+						<customControls:ValidTextBox x:Name="TextBoxSSN" Grid.Column="3" Grid.Row="6" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"
+									  Style="{StaticResource ValidTextBoxStyle}" TabIndex="18" Margin="2,2,2,2" HorizontalAlignment="Stretch">
+							<TextBox.Text>
+								<Binding Path="AccessionOrder.PSSN" UpdateSourceTrigger="Explicit">
+									<Binding.Converter>
+										<converter:SocialSecurityNumberConverter />
+									</Binding.Converter>
+									<Binding.ValidationRules>
+										<validationRules:SSNValidRule />
+									</Binding.ValidationRules>
+								</Binding>
+							</TextBox.Text>
+						</customControls:ValidTextBox>						
+									 
+						<TextBlock Grid.Column="2" Grid.Row="8" Style="{StaticResource LogTextBlock}">Patient ID:</TextBlock>
+						<TextBox Grid.Column="3" Grid.Row="8" Text="{Binding Path=AccessionOrder.PatientId}" Margin="2,2,2,2" HorizontalAlignment="Stretch"  FontSize="12" IsEnabled="False"></TextBox>						
+
+                        <TextBlock Grid.Column="4" Grid.Row="5" Style="{StaticResource LogTextBlock}">MRN:</TextBlock>
+                        <TextBox Grid.Column="5" Grid.Row="5" Text="{Binding Path=AccessionOrder.SvhMedicalRecord}" TabIndex="21" Margin="2,2,2,2" HorizontalAlignment="Stretch" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+                        
+                        <TextBlock Grid.Column="4" Grid.Row="6" Style="{StaticResource LogTextBlock}">Acct:</TextBlock>
+						<TextBox Grid.Column="5" Grid.Row="6" Text="{Binding Path=AccessionOrder.SvhAccount}" TabIndex="22" Margin="2,2,2,2"  HorizontalAlignment="Stretch" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>										
+																	
+						<TextBlock Grid.Column="4" Grid.Row="7" Style="{StaticResource LogTextBlock}">Patient Type:</TextBlock>
+                        <ComboBox Grid.Column="5" Grid.Row="7" Text="{Binding Path=AccessionOrder.PatientType}" HorizontalAlignment="Stretch" FontSize="12" TabIndex="23" BorderBrush="LightGray" BorderThickness="1" Margin="2,2,2,2">
+							<ComboBoxItem>IP</ComboBoxItem>
+							<ComboBoxItem>OP</ComboBoxItem>
+							<ComboBoxItem>Not Selected</ComboBoxItem>
+						</ComboBox>
+										
+						<TextBlock Grid.Column="4" Grid.Row="8" Style="{StaticResource LogTextBlock}">Primary Ins:</TextBlock>
+                        <ComboBox Grid.Column="5" Grid.Row="8" Text="{Binding Path=AccessionOrder.PrimaryInsurance}" HorizontalAlignment="Stretch" FontSize="12" TabIndex="24" BorderBrush="LightGray" BorderThickness="1" Margin="2,2,2,2">
+							<ComboBoxItem>Medicare</ComboBoxItem>
+							<ComboBoxItem>Medicaid</ComboBoxItem>
+                            <ComboBoxItem>Governmental</ComboBoxItem>
+                            <ComboBoxItem>Commercial</ComboBoxItem>
+							<ComboBoxItem>Not Selected</ComboBoxItem>
+						</ComboBox>										
+                        
+						<toolkit:DataGrid Name="SpecimenGrid" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="7" IsTabStop="True" Margin="2,5,2,3" TabIndex="26" RowHeight="25" CellStyle="{StaticResource GridCellStyle}"
+										  ItemsSource="{Binding Path=AccessionOrder.SpecimenOrderCollection}" AutoGenerateColumns="False" PreviewKeyDown="SpecimenGrid_PreviewKeyDown"
+										  CanUserSortColumns="False" SelectionMode="Single" CanUserAddRows="False"
+										  SelectionUnit="FullRow" GotFocus="SpecimenGrid_GotFocus" LostFocus="SpecimenGrid_LostFocus" HorizontalAlignment="Left" FontSize="12" CurrentCellChanged="SpecimenGrid_CurrentCellChanged"
+										  BorderBrush="LightGray" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+							<toolkit:DataGrid.Columns>
+								<toolkit:DataGridTextColumn Binding="{Binding Accepted, Converter={StaticResource BooleanAsteriskConverter}}" Width="3" IsReadOnly="True"></toolkit:DataGridTextColumn>
+								<toolkit:DataGridTextColumn Binding="{Binding SpecimenNumber}" Width="10" IsReadOnly="True"></toolkit:DataGridTextColumn>
+								<toolkit:DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="647"></toolkit:DataGridTextColumn>
+								<toolkit:DataGridTextColumn Binding="{Binding AliquotRequestCount}" Header="Aliquots" Width="62"></toolkit:DataGridTextColumn>
+								<toolkit:DataGridCheckBoxColumn Binding="{Binding DeletePending}" Header="Delete" Width="52"></toolkit:DataGridCheckBoxColumn>
+							</toolkit:DataGrid.Columns>
+							
+						</toolkit:DataGrid>			
+					</Grid>
+				</TabItem>
+
+				<TabItem Name="TabItemTestResult">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/Results.ico"></Image>
+							<TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Results</TextBlock>
+						</StackPanel>
+					</TabItem.Header>
+					<Grid>
+						<Grid.Resources>
+
+						</Grid.Resources>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="30"></RowDefinition>
+							<RowDefinition Height="100"></RowDefinition>
+							<RowDefinition Height="*"></RowDefinition>
+						</Grid.RowDefinitions>						
+
+						<ListView Name="ListViewResultPanelSetOrder" ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection}"
+								  Grid.Column="0" Grid.Row="1" SelectionChanged="ListViewPanelSetOrder_SelectionChanged"  FontSize="12"
+								  IsEnabled="{Binding ElementName=LabUserControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">		
+							<ListView.View>
+								<GridView>
+									<GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Panel Sets Ordered" Width="200"/>
+									<GridViewColumn DisplayMemberBinding="{Binding Path=OrderDate}" Header="Date Ordered" Width="150"/>
+									<GridViewColumn DisplayMemberBinding="{Binding Path=FinalTime}" Header="Final Date" Width="150"/>
+									<GridViewColumn Header="Audited" Width="50">
+										<GridViewColumn.CellTemplate>
+											<DataTemplate>
+												<StackPanel Orientation="Horizontal">
+													<CheckBox IsChecked="{Binding Path=Audited}" Margin="15,0,0,0"></CheckBox>
+												</StackPanel>
+											</DataTemplate>
+										</GridViewColumn.CellTemplate>
+									</GridViewColumn>									
+								</GridView>
+							</ListView.View>
+						</ListView>
+
+						<ContentControl Name="ControlResultView" Grid.Column="0" Grid.Row="2" ContentTemplateSelector="{StaticResource PanelSetOrderTemplateSelector}" Content="{Binding Path=PanelSetOrder}">
+						</ContentControl>							
+
+					</Grid>
+				</TabItem>				
+
+				<!--<TabItem Name="TabItemTestComments">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/Comments.ico"></Image>
+							<TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Comments</TextBlock>
+						</StackPanel>
+					</TabItem.Header>
+					<ScrollViewer>
+						<Grid>
+							<ItemsControl Name="ItemsControlComments" ItemsSource="{Binding Path=PanelSetOrder.PanelSetOrderCommentCollection}" 
+										  IsEnabled="True" FontSize="12">
+								<ItemsControl.Template>
+									<ControlTemplate TargetType="ItemsControl">
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition></ColumnDefinition>
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition></RowDefinition>
+											</Grid.RowDefinitions>
+											<ItemsPresenter Grid.Column="0" Grid.Row="0" Margin="2,2,2,2"/>
+										</Grid>
+									</ControlTemplate>
+								</ItemsControl.Template>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition></ColumnDefinition>
+											</Grid.ColumnDefinitions>
+											<Grid.RowDefinitions>
+												<RowDefinition></RowDefinition>
+												<RowDefinition></RowDefinition>
+											</Grid.RowDefinitions>
+											<StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+												<TextBlock Text="{Binding Path=CommentName}" FontWeight="Bold" Margin="2" VerticalAlignment="Center"></TextBlock>
+
+												<Menu Background="Transparent">
+													<MenuItem Header="Select ..." ItemsSource="{Binding Path=AvailableComments}" ItemTemplate="{StaticResource CommentTemplate}" Tag="{Binding}" Click="MenuItemSelect_Click"/>
+												</Menu>
+											</StackPanel>
+											<TextBox Name="TextBoxComment" Text="{Binding Path=Comment}" TextWrapping="Wrap" AcceptsReturn="True" Margin="2,2,2,2" Grid.Row="1" Grid.Column="0"
+													 AcceptsTab="True" FontSize="12">
+											</TextBox>
+										</Grid>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</Grid>
+					</ScrollViewer>
+				</TabItem>-->
+
+                <!--<TabItem Name="TabItemFinal" Visibility="Collapsed">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/Finalize.ico"></Image>
+							<TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Final</TextBlock>
+						</StackPanel>
+					</TabItem.Header>
+					<StackPanel>
+						<Grid Name="GridResult" Margin="10,10,10,10">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="150"></ColumnDefinition>
+								<ColumnDefinition></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>                                
+								<RowDefinition Height="*"></RowDefinition>								
+							</Grid.RowDefinitions>
+                            
+							<TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,5,2" FontWeight="Bold">Pathologist:</TextBlock>
+							<ComboBox Name="ComboBoxPathologist" Grid.Column="1" Grid.Row="0" Width="200" ItemsSource="{Binding Path=PathologistUsers}" HorizontalAlignment="Left" 								 								 
+								 DisplayMemberPath="DisplayName"								 
+								 SelectedValuePath="UserId"
+								 SelectedValue="{Binding Path=PanelSetOrder.AssignedToId}"
+								 IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" FontSize="12">
+							</ComboBox>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,5,2" FontWeight="Bold">Distribute:</TextBlock>
+                            <CheckBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="2,2,5,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}"></CheckBox>
+                            
+                            <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,5,2" FontWeight="Bold">Final:</TextBlock>
+							<CheckBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Margin="2,2,5,2" IsChecked="{Binding Path=PanelSetOrder.Final}" IsEnabled="False"></CheckBox>
+
+							<TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,5,2" FontWeight="Bold">Final Date:</TextBlock>
+							<TextBlock Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Margin="2,2,5,2" Text="{Binding Path=PanelSetOrder.FinalDate, Converter={StaticResource ShortDateConverter}}" IsEnabled="True"></TextBlock>
+
+							<TextBlock Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,5,2" FontWeight="Bold">Final Time:</TextBlock>
+							<TextBlock Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Margin="2,2,5,2" Text="{Binding Path=PanelSetOrder.FinalTime, Converter={StaticResource ShortTimeConverter}}" IsEnabled="True"></TextBlock>
+
+							<Button Grid.Column="0" Grid.Row="5" Name="ButtonFinalizeCase" Click="ButtonFinalizeCase_Click" Content="Finalize" Width="100" Height="25" IsEnabled="True" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Button>
+
+						</Grid>
+					</StackPanel>
+				</TabItem>-->				
+
+				<TabItem Name="TabItemAmendment">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/Amendments.ico"></Image>
+							<TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Amendments</TextBlock>
+						</StackPanel>
+					</TabItem.Header>
+				</TabItem>
+
+				<TabItem Name="TabItemDocuments">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/List.ico"></Image>
+							<TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Documents</TextBlock>
+						</StackPanel>
+					</TabItem.Header>
+					<ListView Name="ListViewDocumentList" ItemsSource="{Binding Path=AccessionOrder.CaseDocumentCollection}" IsSynchronizedWithCurrentItem="True"
+								  MouseLeftButtonUp="ListViewDocumentList_MouseLeftButtonUp" FontSize="12">
+						<ListView.ContextMenu>
+							<ContextMenu>
+								<MenuItem Header="Refresh" Click="MenuItemRefreshDocumentList_Click"></MenuItem>								
+							</ContextMenu>
+						</ListView.ContextMenu>
+						<ListView.View>
+							<GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=FileName}" Header="Date" Width="200"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</TabItem>
+				
+				<TabItem Name="TabItemTreeView">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/tree.ico"></Image>
+							<TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Tree View</TextBlock>
+						</StackPanel>
+					</TabItem.Header>
+				</TabItem>
+			</TabControl>
+		</Grid>
+
+		<StatusBar Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">            
+            <StatusBarItem>
+				<TextBlock Margin="25,2,2,2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Current User:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+                <TextBlock Width="200" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=SystemIdentity.User.UserName}"></TextBlock>
+            </StatusBarItem>
+
+			<StatusBarItem>
+				<TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Locked By:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+                <TextBlock Width="300" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=AccessionOrder.AccessionLock.Address}"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem>
+				<TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Report No:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+				<TextBlock Width="100" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.ReportNo}"></TextBlock>
+			</StatusBarItem>
+            
+        </StatusBar>
+	</Grid>
+</UserControl>

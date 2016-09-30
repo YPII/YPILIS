@@ -1,0 +1,117 @@
+﻿<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v19="http://fedex.com/ws/ship/v19">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <v19:ProcessShipmentRequest>
+      <v19:WebAuthenticationDetail>
+        <v19:UserCredential>
+          <v19:Key></v19:Key>
+          <v19:Password></v19:Password>
+        </v19:UserCredential>
+      </v19:WebAuthenticationDetail>
+      <v19:ClientDetail>
+        <v19:AccountNumber></v19:AccountNumber>
+        <v19:MeterNumber></v19:MeterNumber>
+      </v19:ClientDetail>
+      <v19:TransactionDetail>
+        <v19:CustomerTransactionId>ProcessShip_Basic</v19:CustomerTransactionId>
+      </v19:TransactionDetail>
+      <v19:Version>
+        <v19:ServiceId>ship</v19:ServiceId>
+        <v19:Major>19</v19:Major>
+        <v19:Intermediate>0</v19:Intermediate>
+        <v19:Minor>0</v19:Minor>
+      </v19:Version>
+      <v19:RequestedShipment>
+        <v19:ShipTimestamp></v19:ShipTimestamp>
+        <v19:DropoffType>REGULAR_PICKUP</v19:DropoffType>
+        <v19:ServiceType>PRIORITY_OVERNIGHT</v19:ServiceType>
+        <v19:PackagingType>YOUR_PACKAGING</v19:PackagingType>
+        <v19:Shipper>
+          <v19:AccountNumber>235542196</v19:AccountNumber>
+          <v19:Contact>
+            <v19:PersonName></v19:PersonName>
+            <v19:CompanyName>Yellowstone Pathology Institute</v19:CompanyName>
+            <v19:PhoneNumber>4062386360</v19:PhoneNumber>
+            <v19:EMailAddress/>
+          </v19:Contact>
+          <v19:Address>
+            <v19:StreetLines>2900 12th Ave. N.</v19:StreetLines>
+            <v19:StreetLines>Suite 295W</v19:StreetLines>
+            <v19:City>Billings</v19:City>
+            <v19:StateOrProvinceCode>MT</v19:StateOrProvinceCode>
+            <v19:PostalCode>59101</v19:PostalCode>
+            <v19:CountryCode>US</v19:CountryCode>
+          </v19:Address>
+        </v19:Shipper>
+        <v19:Recipient>
+          <v19:Contact>
+            <v19:PersonName></v19:PersonName>
+            <v19:CompanyName></v19:CompanyName>
+            <v19:PhoneNumber></v19:PhoneNumber>
+            <v19:EMailAddress></v19:EMailAddress>
+          </v19:Contact>
+          <v19:Address>
+            <v19:StreetLines></v19:StreetLines>
+            <v19:StreetLines></v19:StreetLines>
+            <v19:City></v19:City>
+            <v19:StateOrProvinceCode></v19:StateOrProvinceCode>
+            <v19:PostalCode></v19:PostalCode>
+            <v19:CountryCode>US</v19:CountryCode>
+          </v19:Address>
+        </v19:Recipient>
+        <v19:Origin>
+          <v19:Contact>
+            <v19:PersonName></v19:PersonName>
+            <v19:CompanyName>Yellowstone Pathology Institute</v19:CompanyName>
+            <v19:PhoneNumber>4062386360</v19:PhoneNumber>
+            <v19:EMailAddress/>
+          </v19:Contact>
+          <v19:Address>
+            <v19:StreetLines>2900 12th Ave. N.</v19:StreetLines>
+            <v19:StreetLines>Suite 295W</v19:StreetLines>
+            <v19:City>Billings</v19:City>
+            <v19:StateOrProvinceCode>MT</v19:StateOrProvinceCode>
+            <v19:PostalCode>59101</v19:PostalCode>
+            <v19:CountryCode>US</v19:CountryCode>
+          </v19:Address>
+        </v19:Origin>
+        <v19:ShippingChargesPayment>
+          <v19:PaymentType>SENDER</v19:PaymentType>
+          <v19:Payor>
+            <v19:ResponsibleParty>
+              <v19:AccountNumber>235542196</v19:AccountNumber>
+              <v19:Contact>
+                <v19:PersonName></v19:PersonName>
+                <v19:CompanyName>Yellowstone Pathology Institute</v19:CompanyName>
+                <v19:PhoneNumber>4062386360</v19:PhoneNumber>
+                <v19:EMailAddress/>
+              </v19:Contact>
+              <v19:Address>
+                <v19:StreetLines>2900 12th Ave. N.</v19:StreetLines>
+                <v19:StreetLines>Suite 295W</v19:StreetLines>
+                <v19:City>Billings</v19:City>
+                <v19:StateOrProvinceCode>MT</v19:StateOrProvinceCode>
+                <v19:PostalCode>59101</v19:PostalCode>
+                <v19:CountryCode>US</v19:CountryCode>
+              </v19:Address>
+            </v19:ResponsibleParty>
+          </v19:Payor>
+        </v19:ShippingChargesPayment>        
+        <v19:LabelSpecification>
+          <v19:LabelFormatType>COMMON2D</v19:LabelFormatType>
+          <v19:ImageType>ZPLII</v19:ImageType>
+          <v19:LabelStockType>STOCK_4X6</v19:LabelStockType>
+        </v19:LabelSpecification>
+        <v19:RateRequestTypes>LIST</v19:RateRequestTypes>
+        <v19:PackageCount>1</v19:PackageCount>
+        <v19:RequestedPackageLineItems>
+          <v19:SequenceNumber>1</v19:SequenceNumber>            
+          <v19:Weight>
+            <v19:Units>LB</v19:Units>
+            <v19:Value>2</v19:Value>
+          </v19:Weight>          
+        </v19:RequestedPackageLineItems>
+      </v19:RequestedShipment>
+    </v19:ProcessShipmentRequest>
+  </soapenv:Body>
+</soapenv:Envelope>

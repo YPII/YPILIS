@@ -1,0 +1,280 @@
+<UserControl x:Class="YellowstonePathology.UI.Surgical.PathologistWorkspace"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:TemplateSelectorUI="clr-namespace:YellowstonePathology.UI.TemplateSelector"
+	xmlns:local="clr-namespace:YellowstonePathology.UI"
+	xmlns:cytology="clr-namespace:YellowstonePathology.UI.Cytology"
+    xmlns:CustomControlsUI="clr-namespace:YellowstonePathology.UI.CustomControls"
+	xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit" 
+	xmlns:Presentation="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+	Name="PathologistUserControl" Loaded="PathologistUserControl_Loaded">
+
+	<Grid PreviewKeyDown="Grid_PreviewKeyDown" KeyUp="GridPathologist_KeyUp">
+		<Grid.Resources>
+
+			<Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBoxBase}">
+				<Setter Property="SnapsToDevicePixels" Value="True"/>
+				<Setter Property="OverridesDefaultStyle" Value="True"/>
+				<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+				<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+				<Setter Property="MinWidth" Value="120"/>
+				<Setter Property="MinHeight" Value="20"/>
+				<Setter Property="AllowDrop" Value="false"/>
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type TextBoxBase}">
+							<Border 
+						  Name="Border"
+						  CornerRadius="2" 
+						  Padding="2"
+						  Background="{StaticResource WindowBackgroundBrush}"
+						  BorderBrush="{StaticResource SolidBorderBrush}"
+						  BorderThickness="1" >
+								<ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+							</Border>
+							<ControlTemplate.Triggers>
+								<Trigger Property="IsEnabled" Value="False">
+									<Setter TargetName="Border" Property="Background" Value="{StaticResource WindowBackgroundBrush}"/>
+									<Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBackgroundBrush}"/>
+									<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+								</Trigger>
+								<Trigger Property="IsEnabled" Value="True">
+									<Setter TargetName="Border" Property="Background" Value="{StaticResource WindowBackgroundBrush}"/>
+									<Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBackgroundBrush}"/>
+									<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+								</Trigger>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+		</Grid.Resources>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Column="0" Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="30"></RowDefinition>
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Column="0" Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="200"></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<Grid.Resources>
+					<CollectionViewSource x:Key="ViewSource" Source="{Binding Path=Search.Results}">
+						<CollectionViewSource.GroupDescriptions>
+							<Presentation:PropertyGroupDescription PropertyName="GroupType" />
+						</CollectionViewSource.GroupDescriptions>
+					</CollectionViewSource>
+
+					<DataTemplate x:Key="ListViewCheckBoxCellTemplate">
+						<StackPanel Orientation="Horizontal">
+							<CheckBox IsChecked="{Binding Path=Assign}" Margin="8,2,0,2" />
+						</StackPanel>
+					</DataTemplate>
+				</Grid.Resources>
+
+				<ToolBarPanel Grid.Column="0" Grid.Row="0" Name="ToolBarPanelPathologistSearch">
+					<ToolBarTray Background="Gainsboro">
+						<ToolBar>
+							<StackPanel>
+								<ComboBox Name="comboPanelSetType" Margin="2" VerticalAlignment="Center"
+										  ItemsSource="{Binding Path=Search.PathologistCaseTypes}"
+										  SelectedValue="{Binding Path=Search.SelectedCaseType}"
+										  Width="130">
+								</ComboBox>
+							</StackPanel>
+
+							<StackPanel>
+								<ComboBox Name="comboBoxSearchPathologistUser" Margin="2" VerticalAlignment="Center"
+										  ItemsSource="{Binding Path=Search.Pathologists}"
+										  DisplayMemberPath="DisplayName"
+										  SelectedValuePath="UserId"
+										  SelectedValue="{Binding Path=Search.SelectedPathologistId}"
+										  HorizontalAlignment="Left"
+										  Width="120">
+								</ComboBox>
+							</StackPanel>
+							<StackPanel>
+								<ComboBox Name="ComboFinal" VerticalAlignment="Center" Margin="2" Width="130" 
+										  ItemsSource="{Binding Path=Search.FinalDates}"
+										  SelectedValue="{Binding Path=Search.FinalDateValue}">
+								</ComboBox>
+							</StackPanel>
+
+							<Button Margin="2" Click="ButtonRefresh_Click" ToolTip="Refresh list">
+								<Image Source="/Resources/Refresh.ico"></Image>
+							</Button>
+
+							<Button Margin="2" Click="ButtonRedoSearch_Click"  ToolTip="Run all case types, pathologist, not final search">
+								<Image Source="/Resources/Home.ico"></Image>
+							</Button>
+						</ToolBar>
+						<ToolBar>
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Margin="2" VerticalAlignment="Center">Search</TextBlock>
+								<CustomControlsUI:SelectedTextBox x:Name="TextBoxSearchANPN" Margin="2" Width="130" VerticalAlignment="Center" KeyUp="TextBoxSearchANPN_KeyUp" MouseUp="TextBoxSearchANPN_MouseUp"></CustomControlsUI:SelectedTextBox>
+							</StackPanel>
+
+							<Button Margin="2" Click="ButtonSearch_Click" ToolTip="Get list for selected patient">
+								<Image Source="/Resources/Patient.ico"></Image>
+							</Button>
+						</ToolBar>
+					</ToolBarTray>
+				</ToolBarPanel>
+
+				<local:GroupingListView x:Name="ListViewSearchResults" ItemsSource="{Binding Source={StaticResource ViewSource}}" Grid.Column="0" Grid.Row="2"
+								  Margin="5" local:ListViewSorter.IsSortable="true" SelectionChanged="ListViewSearchResults_SelectionChanged" FontSize="12">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>                                                                                               
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=Accepted}" Value="True"/>
+                                        <Condition Binding="{Binding Path=Final}" Value="False"/>
+                                        <Condition Binding="{Binding Path=IsInCriticalState}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>                                    
+                                    <Setter Property="Background" Value="#cbf4c8"/>
+                                </MultiDataTrigger>
+                                <DataTrigger Binding="{Binding Path=IsInCriticalState}" Value="True">                                                                                                                 
+                                    <Setter Property="Background" Value="#fae5e7"/>                                    
+                                </DataTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="true" />                                        
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                </MultiTrigger>
+                            </Style.Triggers>                            
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Show all tests for this case" Click="MenuItemShowAllTestsForThisCase_Click"></MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.View>
+						<GridView>
+							<GridViewColumn Header="Assign" CellTemplate="{StaticResource ListViewCheckBoxCellTemplate}" Width="42"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="85" local:ListViewSorter.SortPropertyName="Report No"/>                            
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=AccessionDate, Converter={StaticResource ShortDateConverter}}" Header="Accessioned" Width="74"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=TestName}" Header="Test" Width="100"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=PatientName}" Header="Patient Name" Width="120"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=PathologistName}" Header="Pathologist" Width="100"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=AcceptedBy}" Header="Accepted By" Width="100"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=AcceptedTime, Converter={StaticResource ShortDateTimeConverter}}" Header="Accepted" Width="80"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=FinalDate, Converter={StaticResource ShortDateConverter}}" Header="Final Date" Width="74"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=PBirthdate, Converter={StaticResource ShortDateConverter}}" Header="Birth Date" Width="74"/>
+						</GridView>
+					</ListView.View>
+				</local:GroupingListView>
+
+				<GridSplitter Height="2" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></GridSplitter>
+
+				<ToolBarTray Grid.Column="0" Grid.Row="3">
+					<ToolBar>
+						<Button Name="ButtonStainOrder" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"
+							HorizontalAlignment="Center" Click="ButtonStainOrder_Click" Background="Gainsboro"
+							IsEnabled="{Binding Path=StainOrderButtonIsEnabled}">
+							<StackPanel Orientation="Horizontal">
+								<Image Margin="2" Height="16" Source="/UserInterface;component/Resources/Order.ico"></Image>
+								<TextBlock Margin="2" VerticalAlignment="Center">Stain Order ...</TextBlock>
+							</StackPanel>
+						</Button>
+						<Button Name="ButtonReportOrder" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"
+							HorizontalAlignment="Center" Click="ButtonReportOrder_Click" Background="Gainsboro"
+							IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+							<StackPanel Orientation="Horizontal">
+								<Image Margin="2" Height="16" Source="/UserInterface;component/Resources/Order.ico"></Image>
+								<TextBlock Margin="2" VerticalAlignment="Center">Report Order ...</TextBlock>
+							</StackPanel>
+						</Button>
+                        <Button Name="ButtonPeerReview" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"
+							HorizontalAlignment="Center" Click="ButtonPeerReview_Click" Background="Gainsboro"
+							IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="2" Height="16" Source="/UserInterface;component/Resources/Order.ico"></Image>
+                                <TextBlock Margin="2" VerticalAlignment="Center">Peer Review ...</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </ToolBar>
+				</ToolBarTray>
+
+				<ListView Name="ListViewCaseList" Grid.Column="0" Grid.Row="4"
+					  ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection.PathologistTestOrderItemList}">                    
+                    <ListView.View>
+						<GridView>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=TestName}" Header="Test Name" Width="250"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=AliquotDescription}" Header="Ordered On" Width="350"/>
+							<GridViewColumn DisplayMemberBinding="{Binding Path=TestOrderDate}" Header="Date Ordered" Width="150"/>
+						</GridView>
+					</ListView.View>
+				</ListView>
+
+			</Grid>
+		</Grid>
+
+		<GridSplitter Grid.Column="0" Width="5"></GridSplitter>
+
+		<Grid Name="ResultsGrid" Grid.Column="1" Grid.Row="0" Margin="2">
+			<ContentControl Name="ContentControlReview"></ContentControl>
+		</Grid>
+
+		<StatusBar Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+			<StatusBarItem>
+				<TextBlock Margin="25,2,2,2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Current User:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+                <TextBlock Width="120"  Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=SystemIdentity.User.UserName}"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem>
+				<TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Locked By:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+                <TextBlock Width="300" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=AccessionOrder.AccessionLock.Address}"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem>
+				<TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">Report No:</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem>
+				<TextBlock Width="80" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=ReportNo}"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem HorizontalAlignment="Right">
+				<TextBlock Name="StatusBarTextBlockSaveNotification" Width="120" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="Red"></TextBlock>
+			</StatusBarItem>
+
+			<StatusBarItem HorizontalAlignment="Right">
+				<TextBlock Margin="2,2,2,2">
+                    <Hyperlink Click="HyperLinkOpenDocumentFolder_Click">
+                        <TextBlock Text="Open Document Folder"></TextBlock>
+                    </Hyperlink>
+                </TextBlock>
+			</StatusBarItem>
+		</StatusBar>
+	</Grid>
+</UserControl>

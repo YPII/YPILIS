@@ -1,8 +1,0 @@
-﻿<Window x:Class="YellowstonePathology.UI.Login.LoginPageWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Height="800" Width="1150" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <ContentControl Name="MainContent" Grid.Column="0"></ContentControl>
-	</Grid>
-</Window>

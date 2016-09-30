@@ -1,0 +1,92 @@
+<UserControl x:Class="YellowstonePathology.UI.AdministrationWorkspace" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:LocalUI="clr-namespace:YellowstonePathology.UI">        
+    <WrapPanel Grid.Column="0" Grid.Row="0">
+        <Button Click="ButtonBuildJson_Click" Width="200" Height="30" Margin="5,5,5,5">Build JSON</Button>
+        <Button Name="ButtonPOCRetension" Click="ButtonPOCRetension_Click" Width="200" Height="30" Margin="5,5,5,5">POC Retension</Button>
+        <Button Name="ButtonCytologyUnsatLetters" Click="ButtonCytologyUnsatLetters_Click" Width="200" Height="30" Margin="5,5,5,5">Cytology Unsat Letters</Button>
+        <Button Name="ButtonConvertXPSToPDF" Click="ButtonConvertXPSToPDF_Click" Width="200" Height="30" Margin="5,5,5,5">Convert XPS To PDF</Button>                        
+        <Button Click="ButtonShowCuttingStationWindow_Click" Width="200" Height="30" Margin="5,5,5,5">Show Cutting Station Window</Button>        
+        <Button Click="ButtonPublishCase_Click" Width="200" Height="30" Margin="5,5,5,5">Publish Case</Button>        
+        <Button Click="ButtonFix2001_Click" Width="200" Height="30" Margin="5,5,5,5">Fix 2001 Docs</Button>
+        <Button Click="ButtonXpsToTiff_Click" Width="200" Height="30" Margin="5,5,5,5">Convert Xps To Tiff</Button>
+        <Button Click="ComprehensiveCareReports_Click" Width="200" Height="30" Margin="5,5,5,5">Comprehensive Care Reports</Button>
+        <Button Click="Stuff_Click" Width="200" Height="30" Margin="5,5,5,5">Stuff</Button>
+		<Button Click="GrossWorkspace_Click" Width="200" Height="30" Margin="5,5,5,5">Gross Workspace</Button>
+        <Button Click="PrintRequisition_Click" Width="200" Height="30" Margin="5,5,5,5">Print Requisition</Button>
+        <Button Click="XpsToTiff_Click" Width="200" Height="30" Margin="5,5,5,5">Xps To Tiff</Button>        		
+        <Button Click="TestBillingData_Click" Width="200" Height="30" Margin="5,5,5,5">Test Billing Data</Button>
+        <Button Click="SerializeAccessionOrder_Click" Width="200" Height="30" Margin="5,5,5,5">Serialize Accession Order</Button>
+        <Button Click="ButtonShowTestWindow_Click" Width="200" Height="30" Margin="5,5,5,5">Show Test Window</Button>
+        <Button Click="ButtonDeleteTest_Click" Width="200" Height="30" Margin="5,5,5,5">Delete Test</Button>
+        <Button Click="ButtonHL7Response_Click" Width="200" Height="30" Margin="5,5,5,5">Create HL7 Response</Button>
+
+        <Button Click="ButtonTestYpiConnect_Click" Width="200" Height="30" Margin="5,5,5,5">Test YPI Connect Stuff</Button>
+        <Button Click="ButtonOpenVerificationWindow_Click" Width="200" Height="30" Margin="5,5,5,5">Open Verification Window</Button>
+        <Button Click="ButtonProcessBillingFile_Click" Width="200" Height="30" Margin="5,5,5,5">Process Billing data file</Button>
+		<Button Click="ButtonIncomingBillingData_Click" Width="200" Height="30" Margin="5,5,5,5">View Incoming Billing Data</Button>
+
+
+        <Button Click="ButtonSerumLabels_Click" Width="200" Height="30" Margin="5,5,5,5">Serum Labels</Button>
+        <Button Click="ButtonUrineLabels_Click" Width="200" Height="30" Margin="5,5,5,5">Urine Labels</Button>
+        <Button Click="ButtonIFLabels_Click" Width="200" Height="30" Margin="5,5,5,5">IFLabels</Button>
+        <Button Click="ButtonFormalinAddedLabels_Click" Width="200" Height="30" Margin="5,5,5,5">Formalin Added Labels</Button>
+        
+		<Button Click="ButtonAccessionSlideOrderTracking_Click" Width="200" Height="30" Margin="5,5,5,5">Slide Order tracking</Button>
+        <Button Click="ButtonSpellCheckTesting_Click" Width="200" Height="30" Margin="5,5,5,5">Spell Check Testing</Button>
+        <Button Click="ButtonPhysicianEntry_Click" Width="200" Height="30" Margin="5,5,5,5">Physician Entry</Button>
+		<Button Click="ButtonListInvalidShortcut_Click" Width="200" Height="30" Margin="5,5,5,5">Find InvalidShortcuts</Button>
+		<Button Click="ButtonProcessSvhBillingFile_Click" Width="200" Height="30" Margin="5,5,5,5">Process Svh Billing File</Button>
+        
+        <Button Click="ButtonBarcodeTesting_Click" Width="200" Height="30" Margin="5,5,5,5">2D Barcode Test</Button>
+        <Button Click="ButtonPageScanningTest_Click" Width="200" Height="30" Margin="5,5,5,5">Page Scanning Test</Button>
+
+        <Button Click="ButtonGetPatientHistoryTest_Click" Width="200" Height="30" Margin="5,5,5,5">Get Patient History Test</Button>
+		<Button Click="ButtonSetTestOrderCptCodes_Click" Width="200" Height="30" Margin="5,5,5,5">Set TestOrder CptCodes</Button>
+		<Button Click="ButtonTestInMemoryXml_Click" Width="200" Height="30" Margin="5,5,5,5">Test InMemory Xml</Button>
+
+        <Button Click="ButtonHL7StatusTest_Click" Width="200" Height="30" Margin="5,5,5,5">HL7 Status Test</Button>        
+
+        <Button Click="ButtonPatientInfo_Click" Width="200" Height="30" Margin="5,5,5,5">Patient Info Test</Button>
+        <Button Click="ButtonPDFToXPSConversion_Click" Width="200" Height="30" Margin="5,5,5,5">PDF to XPS Conversion</Button>
+
+        <Button Click="ButtonParsePsa_Click" Width="200" Height="30" Margin="5,5,5,5">Parse Psa Accessions</Button>
+
+		<Button Click="ButtonReportSlides_Click" Width="200" Height="30" Margin="5,5,5,5">Report Slides</Button>
+        <Button Click="ButtonXPSTest_Click" Width="200" Height="30" Margin="5,5,5,5">XPS Test</Button>		        
+
+        <Button Click="ButtonClientOrderSubmitTest_Click" Width="200" Height="30" Margin="5,5,5,5">ClientOrderSubmitTest</Button>
+        <Button Click="ButtonShowGrossWorkspace_Click" Width="200" Height="30" Margin="5,5,5,5">Show Gross Workspace</Button>        
+
+		<Button Click="ButtonBillingTypeProcessorTests_Click" Width="200" Height="30" Margin="5,5,5,5">Billing Type Processor Tests</Button>		
+
+		<Button Click="ButtonPqrs_Click" Width="200" Height="30" Margin="5,5,5,5">PQRI Test</Button>
+		<Button Click="ButtonVoiceSpecimenDescription_Click" Width="200" Height="30" Margin="5,5,5,5">Specimen Voice Description now PQRI</Button>		        
+		
+        <Button Click="ButtonDoStuff_Click" Width="200" Height="30" Margin="5,5,5,5">Do Stuff</Button>
+        <Button Click="ButtonAccessionMickyMouseCreate_Click" Width="200" Height="30" Margin="5,5,5,5">Create Micky Mouse Accession</Button>
+
+        <Button Click="ButtonAccessionMickyMouseRemove_Click" Width="200" Height="30" Margin="5,5,5,5">Remove Micky Mouse Accession</Button>
+
+		<Button Click="ButtonFLowSpecimenOrder_Click" Width="200" Height="30" Margin="5,5,5,5">Flow Specimen Order Create</Button>
+		<Button Click="ButtonTestEGFRAccession_Click" Width="200" Height="30" Margin="5,5,5,5">Test EGFR Accession</Button>
+
+        <Button Click="ButtonCDCPrep_Click" Width="200" Height="30" Margin="5,5,5,5">CDC Prep</Button>
+
+        <Button Click="ButtonSVHTesting_Click" Width="200" Height="30" Margin="5,5,5,5">SVH Testing</Button>
+        <Button Click="ButtonInsertTesting_Click" Width="200" Height="30" Margin="5,5,5,5">Insert Testing</Button>
+        
+        <Button Click="ButtonStartMessageHost_Click" Width="200" Height="30" Margin="5,5,5,5">Start Message Host</Button>
+        <Button Click="ButtonSendMessageToSid_Click" Width="200" Height="30" Margin="5,5,5,5">Send Message To Sid</Button>
+        <Button Click="ButtonSendMessageToEric_Click" Width="200" Height="30" Margin="5,5,5,5">Send Message To Eric</Button>
+
+
+        <Button Click="ButtonRunShowTemplatePage_Click" Width="200" Height="30" Margin="5,5,5,5">Show Template Page</Button>
+
+        <Button Click="ButtonRunMethod_Click" Width="200" Height="30" Margin="5,5,5,5">Run Method</Button>
+        <Button Click="ButtonWilliamTesting_Click" Width="200" Height="30" Margin="5,5,5,5">William Testing</Button>
+
+
+    </WrapPanel>                
+</UserControl>

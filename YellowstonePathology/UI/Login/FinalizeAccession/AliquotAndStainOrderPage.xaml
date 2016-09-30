@@ -1,0 +1,676 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+    x:Class="YellowstonePathology.UI.Login.FinalizeAccession.AliquotAndStainOrderPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:validationRules="clr-namespace:YellowstonePathology.UI.ValidationRules"
+	xmlns:converter="clr-namespace:YellowstonePathology.UI.Converter"
+	xmlns:customControls="clr-namespace:YellowstonePathology.UI.CustomControls"
+	xmlns:LocalUI="clr-namespace:YellowstonePathology.UI"
+    mc:Ignorable="d"
+    d:DesignHeight="855" d:DesignWidth="950">
+
+	<Grid>
+		<Grid.Resources>
+
+            <Style x:Key="CheckBoxClientAccessionedStyle" TargetType="{x:Type CheckBox}">
+                <Setter Property="SnapsToDevicePixels" Value="true"/>
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type CheckBox}">
+                            <BulletDecorator Background="Transparent">
+                                <BulletDecorator.Bullet>
+                                    <Border x:Name="Border" 
+                                       Width="13" 
+                                       Height="13" 
+                                       CornerRadius="0" 
+                                       Background="#C0C0C0"
+                                       BorderThickness="1"
+                                       BorderBrush="#404040">
+                                        <Path 
+                                            Width="7" Height="7" 
+                                            x:Name="CheckMark"
+                                            SnapsToDevicePixels="False" 
+                                            Stroke="#404040"
+                                            StrokeThickness="2"
+                                            Data="M 0 0 L 7 7 M 0 7 L 7 0" />
+                                    </Border>
+                                </BulletDecorator.Bullet>
+                                <ContentPresenter Margin="4,0,0,0"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Left"
+                                  RecognizesAccessKey="True"/>
+                            </BulletDecorator>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="false">
+                                    <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="{x:Null}">
+                                    <Setter TargetName="CheckMark" Property="Data" Value="M 0 7 L 7 0" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter TargetName="Border" Property="Background" Value="#808080" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter TargetName="Border" Property="Background" Value="#E0E0E0" />
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="#606060" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter TargetName="Border" Property="Background" Value="#EEEEEE" />
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="#AAAAAA" />
+                                    <Setter Property="Foreground" Value="#888888"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+            <DataTemplate x:Key="PanelSetOrderTemplate">
+                <Grid>                    
+                    <Grid Margin="2,2,2,2" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Bottom" Text="{Binding Path=ReportNo}" Margin="2,2,2,2"/>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Text="{Binding Path=PanelSetName}" Margin="2,2,2,2"/>
+                    </Grid>                    
+                </Grid>
+            </DataTemplate>
+            
+            <Style x:Key="PanelSetOrderStyle" TargetType="ListBoxItem">
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Border Name="Border" Margin="2,2,2,2" Padding="2,2,2,2" SnapsToDevicePixels="true" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Background="#F5F5F5">
+                                <ContentPresenter />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter TargetName="Border" Property="Background" Value="#DCE6F2"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <converter:NullableIntConverter x:Key="NullableIntConverter"/>
+            
+            <DataTemplate x:Key="TestItemTemplate">
+                <Grid>
+                    <TextBlock Margin="5,5,5,5">
+                        <Hyperlink Click="HyperlinkTestItem_Click" Tag="{Binding}">
+                            <TextBlock Text="{Binding Path=TestName}"></TextBlock>
+                        </Hyperlink>
+                    </TextBlock>
+                </Grid>                       
+            </DataTemplate>
+            
+            <Style x:Key="HyperLinkStyle1" TargetType="{x:Type Hyperlink}">
+				<Setter Property="Foreground" Value="#965b50"/>
+				<Setter Property="TextDecorations" Value="Underline"/>
+				<Setter Property="FontSize" Value="14"/>
+				<Style.Triggers>
+					<Trigger Property="IsMouseOver" Value="True">
+						<Setter Property="Foreground" Value="#7d7965"/>
+						<Setter Property="FontSize" Value="14"/>
+					</Trigger>
+					<Trigger Property="IsEnabled" Value="False">
+						<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+					</Trigger>
+					<Trigger Property="IsEnabled" Value="True">
+						<Setter Property="Cursor" Value="Hand"/>
+					</Trigger>
+				</Style.Triggers>
+			</Style>
+
+			<DataTemplate x:Key="DataTemplateCaseTreeSlideOrder">
+				<StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                    <Image Source="/Resources/out2.png" Width="17" Height="17" Visibility="{Binding Path=Element[ClientAccessioned].Value, Converter={StaticResource BooleanVisibilityConverter}}"></Image>
+                    <CheckBox Margin="2,2,2,2" VerticalAlignment="Center" IsChecked="{Binding Path=Element[IsSelected].Value, Converter={StaticResource BooleanStringConverter}}" />                    
+					<TextBlock FontWeight="Bold" Margin="2,2,0,2" VerticalAlignment="Center" Text="{Binding Path=Element[Label].Value}"></TextBlock>
+				</StackPanel>
+			</DataTemplate>
+
+			<HierarchicalDataTemplate x:Key="DataTemplateCaseTreeTestListOrder" ItemsSource="{Binding Path=Elements[SlideOrder]}" ItemTemplate="{StaticResource DataTemplateCaseTreeSlideOrder}">
+				<StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                    <CheckBox Margin="2,2,2,2" VerticalAlignment="Center" IsChecked="{Binding Path=Element[IsSelected].Value, Converter={StaticResource BooleanStringConverter}}" />
+					<TextBlock Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=Element[TestName].Value}" Width="200"></TextBlock>
+				</StackPanel>
+			</HierarchicalDataTemplate>
+
+			<HierarchicalDataTemplate x:Key="DataTemplateCaseTreeAliquotOrder" ItemsSource="{Binding Path=Elements[TestOrder]}" ItemTemplate="{StaticResource DataTemplateCaseTreeTestListOrder}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Print Paper Label" Click="MenuItemPrintPaperLabel_Click" Tag="{Binding}"></MenuItem>
+                        </ContextMenu>
+                    </Grid.ContextMenu>
+
+                    <Image Grid.Column="0" Source="/Resources/out2.png" Width="17" Height="17" Visibility="{Binding Path=Element[ClientAccessioned].Value, Converter={StaticResource BooleanVisibilityConverter}}"></Image>
+                    <CheckBox Grid.Column="1" Margin="2,2,2,2" VerticalAlignment="Center" IsChecked="{Binding Path=Element[IsSelected].Value, Converter={StaticResource BooleanStringConverter}}" />                    
+                    <TextBlock Grid.Column="2" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=Element[LabelType].Value}"></TextBlock>                    
+                    <TextBlock Grid.Column="3" FontWeight="Bold" Margin="2,2,0,2" VerticalAlignment="Center" Text="{Binding Path=Element[Type].Value}"></TextBlock>                    
+                    <TextBlock Grid.Column="4" FontWeight="Bold" Margin="0,2,2,2" VerticalAlignment="Center">:</TextBlock>
+                    <TextBlock Grid.Column="5" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=Element[Label].Value}"></TextBlock>
+
+                    <ComboBox Grid.Column="6" Margin="10,2,2,2" HorizontalAlignment="Stretch"
+							BorderBrush="LightGray" BorderThickness="1" Width="100"
+							ItemsSource="{Binding Path=EmbeddingInstructionList, RelativeSource={RelativeSource AncestorType=UserControl}}" Text="{Binding Path=Element[EmbeddingInstructions].Value}" IsEditable="True">
+                    </ComboBox>
+                    
+                </Grid>                				
+			</HierarchicalDataTemplate>
+
+			<DataTemplate x:Key="DataTemplateCaseSpecimenOrder">
+				<StackPanel>
+                    
+					<StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                        <Image Source="/Resources/out2.png" Width="17" Height="17" Visibility="{Binding Path=Element[ClientAccessioned].Value, Converter={StaticResource BooleanVisibilityConverter}}"></Image>
+                        <CheckBox Margin="2,2,2,2" VerticalAlignment="Center" IsChecked="{Binding Path=Element[IsSelected].Value, Converter={StaticResource BooleanStringConverter}}"></CheckBox>                        
+                        <TextBlock Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=Element[DescriptionString].Value}" Width="300"></TextBlock>
+					</StackPanel>
+                    <TreeView BorderThickness="0" ItemsSource="{Binding Path=Elements[AliquotOrder]}" ItemTemplate="{StaticResource DataTemplateCaseTreeAliquotOrder}"></TreeView>
+                    
+				</StackPanel>
+			</DataTemplate>		
+            
+		</Grid.Resources>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+		<Grid Grid.Column="0" Grid.Row="1" Margin="10">
+            
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Column="0" Grid.Row="0" Margin="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>					
+                    <RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="*"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Visibility="{Binding Path=AccessionOrder.ClientAccessioned, Converter={StaticResource BooleanVisibilityConverter}}">
+                    <Image Source="/Resources/out2.png" Width="17" Height="17"></Image>
+                    <TextBlock Margin="2,2,2,2">Client Accessioned:</TextBlock>
+                    <TextBlock Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.ClientAccessionNo}" Width="200" IsEnabled="{Binding Path=AccessionOrder.ClientAccessioned}"></TextBlock>
+                </StackPanel>
+                
+                <Grid Grid.Column="0" Grid.Row="1" Margin="2,2,2,2">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"></ColumnDefinition>
+						<ColumnDefinition Width="*"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" CornerRadius="5" BorderThickness="1" BorderBrush="Black" />
+					
+					<CheckBox Grid.Column="0" Grid.Row="0" Margin="10,10,2,2" VerticalAlignment="Center" Checked="CheckBoxSpecimen_Checked" Unchecked="CheckBoxSpecimen_Unchecked" />
+					<TextBlock Grid.Column="1" Grid.Row="0" Margin="2,10,10,2" HorizontalAlignment="Stretch" Text="Specimen" />
+
+					<CheckBox Grid.Column="0" Grid.Row="1" Margin="10,2,2,2" VerticalAlignment="Center" Checked="CheckBoxAliquots_Checked" Unchecked="CheckBoxAliquots_Unchecked" />
+					<TextBlock Grid.Column="1" Grid.Row="1" Margin="2,2,10,2" HorizontalAlignment="Stretch" Text="Aliquots" />
+
+					<CheckBox Grid.Column="0" Grid.Row="2" Margin="10,2,2,10" VerticalAlignment="Center" Checked="CheckBoxTests_Checked" Unchecked="CheckBoxTests_Unchecked" />
+					<TextBlock Grid.Column="1" Grid.Row="2" Margin="2,2,10,10" HorizontalAlignment="Stretch" Text="Tests" />
+				</Grid>
+
+                <ListBox Name="ListBoxPanelSetOrders" Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection}" SelectionChanged="ListBoxPanelSetOrders_SelectionChanged"
+				    ItemTemplate="{StaticResource PanelSetOrderTemplate}" ItemContainerStyle="{StaticResource PanelSetOrderStyle}" SelectedItem="{Binding Path=PanelSetOrder, Mode=OneWay}" BorderThickness="0" VerticalAlignment="Stretch">
+                </ListBox>
+
+                <Border Grid.Column="0" Grid.Row="3" CornerRadius="5" BorderThickness="1" BorderBrush="Black" />				                
+                
+				<TreeView Grid.Column="0" Grid.Row="3" Margin="3" ItemsSource="{Binding Path=AliquotAndStainOrderView.View.Elements[SpecimenOrder]}" BorderThickness="0"
+					  ItemTemplate="{StaticResource DataTemplateCaseSpecimenOrder}" HorizontalAlignment="Stretch"/>
+
+                <Grid Grid.Column="1" Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Column="0" Height="30" Width="100" Content="Print Labels" Click="ButtonPrintLabels_Click" HorizontalAlignment="Left" Margin="2,2,2,2"/>
+                    <Button Grid.Column="1" Height="30" Width="150" Content="Add Slide To Test" Click="ButtonAddSlideOrder_Click" HorizontalAlignment="Center" Margin="2,2,2,2"/>
+                    <Button Grid.Column="2" Height="30" Width="100" Content="Delete" Click="ButtonDelete_Click" HorizontalAlignment="Right" Margin="2,2,2,2"/>
+                    
+                </Grid>                
+                
+			</Grid>
+
+            <Grid Grid.Column="1" Grid.Row="0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+                <Grid Name="GridTextBoxes" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>                    
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+						<RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Aliquots:" HorizontalAlignment="Right" Margin="2,2,2,2"></TextBlock>
+                    <TextBox Name="TextBoxAliquots" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="2,2,2,2" Text="{Binding Path=Aliquots, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Pass Number:" HorizontalAlignment="Right" Margin="2,2,2,2"></TextBlock>
+                    <TextBox Name="TextBoxPassNumber" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Margin="2,2,2,2" Text="{Binding Path=PassNumber, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Aliquot Type:" HorizontalAlignment="Right" Margin="2,2,2,2"></TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Margin="2,2,2,2" Text="{Binding Path=Aliquot.Name, Mode=OneWay}" IsEnabled="False"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Test:" HorizontalAlignment="Right" Margin="2,2,2,2"></TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" Margin="2,2,2,2" Text="{Binding Path=Test.TestName, Mode=OneWay}" IsEnabled="False"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Label Type:" HorizontalAlignment="Right" Margin="2,2,2,2"></TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" Margin="2,2,2,2" Text="{Binding Path=Aliquot.LabelType, Mode=OneWay}" IsEnabled="False"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Cassette Color:" HorizontalAlignment="Right" Margin="2,2,2,2"></TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="5" Name="ComboBoxPrintMateColumnNumber" Margin="2,2,2,2" HorizontalAlignment="Stretch"
+							BorderBrush="LightGray" BorderThickness="1" 
+							ItemsSource="{Binding Path=PrintMate.Carousel.Columns}"
+							DisplayMemberPath="Description"
+							SelectedValuePath="ColumnNumber"
+							SelectedValue="{Binding Path=AccessionOrder.PrintMateColumnNumber}">
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" HorizontalAlignment="Right">Accessioning Facility:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.AccessioningFacilityId}" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
+                        <ComboBoxItem>YPIBLGS</ComboBoxItem>
+                        <ComboBoxItem>YPICDY</ComboBoxItem>
+                        <ComboBoxItem>YPCDY</ComboBoxItem>
+                    </ComboBox>
+                    
+                </Grid>                
+
+                <Grid Name="GridNumberPad" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" Width="50" Height="50" Tag="1" Click="ButtonNumberPad_Click">1</Button>
+                    <Button Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Width="50" Height="50" Tag="2" Click="ButtonNumberPad_Click">2</Button>
+                    <Button Grid.Column="2" Grid.Row="0" Margin="2,2,2,2" Width="50" Height="50" Tag="3" Click="ButtonNumberPad_Click">3</Button>
+                    <Button Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" Width="50" Height="50" Tag="4" Click="ButtonNumberPad_Click">4</Button>
+                    <Button Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Width="50" Height="50" Tag="5" Click="ButtonNumberPad_Click">5</Button>
+                    <Button Grid.Column="2" Grid.Row="1" Margin="2,2,2,2" Width="50" Height="50" Tag="6" Click="ButtonNumberPad_Click">6</Button>
+                    <Button Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" Width="50" Height="50" Tag="7" Click="ButtonNumberPad_Click">7</Button>
+                    <Button Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Width="50" Height="50" Tag="8" Click="ButtonNumberPad_Click">8</Button>
+                    <Button Grid.Column="2" Grid.Row="2" Margin="2,2,2,2" Width="50" Height="50" Tag="9" Click="ButtonNumberPad_Click">9</Button>
+
+                    <Button Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Width="50" Height="50" Tag="0" Click="ButtonNumberPad_Click">0</Button>
+                    <Button Grid.Column="2" Grid.Row="3" Margin="2,2,2,2" Width="50" Height="50" Tag="Clear" Click="ButtonNumberPad_Click">Clear</Button>
+
+                </Grid>
+				
+				<Grid Name="GridShortcuts" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<Border Grid.Column="0" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="Black" />
+					
+					<TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Text="Shortcuts" />
+					
+					<StackPanel Grid.Column="0" Grid.Row="1" >
+						<StackPanel Orientation="Horizontal">
+							<Button Margin="2,2,2,2" Width="115" Height="50" Click="ButtonOrderHEBlock_Click">
+								<StackPanel>
+									<TextBlock FontSize="12">Block</TextBlock>
+									<TextBlock FontSize="8">with H&amp;E (Direct Print)</TextBlock>
+								</StackPanel>
+							</Button>
+
+							<Button Margin="2,2,2,2" Width="115" Height="50" Click="ButtonOrderFrozenBlock_Click">
+								<StackPanel>
+									<TextBlock FontSize="12">Frozen Block</TextBlock>
+									<TextBlock FontSize="8">with IC</TextBlock>
+								</StackPanel>
+							</Button>
+
+							<Button Margin="2,2,2,2" Width="115" Height="50" Click="ButtonOrderHECellBlock_Click">
+								<StackPanel>
+									<TextBlock FontSize="12">Cell Block</TextBlock>
+									<TextBlock FontSize="8">with H&amp;E</TextBlock>
+								</StackPanel>
+							</Button>
+
+							<Button Margin="2,2,2,2" Width="115" Height="50" Click="ButtonOrderGrossOnlySpecimen_Click">
+								<StackPanel>
+									<TextBlock FontSize="12">Gross Only</TextBlock>
+									<TextBlock FontSize="8">on a specimen</TextBlock>
+								</StackPanel>
+							</Button>
+
+							<Button Margin="2,2,2,2" Width="115" Height="50" Click="ButtonOrderhPyloriBlock_Click">
+								<StackPanel>
+									<TextBlock FontSize="12">Helicobactor Pylori</TextBlock>
+									<TextBlock FontSize="8">on a block</TextBlock>
+								</StackPanel>
+							</Button>
+						</StackPanel>
+						
+						<StackPanel Orientation="Horizontal">
+                            <Button Margin="2,2,2,2" Width="115" Height="50" Click="ButtonOrderHEBlockPaperLabel_Click">
+                                <StackPanel>
+                                    <TextBlock FontSize="12">Block</TextBlock>
+                                    <TextBlock FontSize="8">with H&amp;E (Paper Label)</TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Margin="2,2,2,2" Width="115" Height="50" Click="ButtonOrderIronBlock_Click">
+								<StackPanel>
+									<TextBlock FontSize="12">Iron</TextBlock>
+									<TextBlock FontSize="8">on a block</TextBlock>
+								</StackPanel>
+							</Button>
+
+							<Button Margin="2,2,2,2" Width="115" Height="50" Click="ButtonOrderWrightsStainSlide_Click">
+								<StackPanel>
+									<TextBlock FontSize="12">Wrights Stain</TextBlock>
+									<TextBlock FontSize="8">on a Slide</TextBlock>
+								</StackPanel>
+							</Button>
+
+							<Button Margin="2,2,2,2" Width="115" Height="50" Click="ButtonOrderHEWithSlide_Click">
+								<StackPanel>
+									<TextBlock FontSize="12">Block</TextBlock>
+									<TextBlock FontSize="8">H&amp;E and slide</TextBlock>
+								</StackPanel>
+							</Button>
+
+							<Button Margin="2,2,2,2" Width="115" Height="50" Click="ButtonOrderIronSlide_Click">
+								<StackPanel>
+									<TextBlock FontSize="12">Iron</TextBlock>
+									<TextBlock FontSize="8">on a slide</TextBlock>
+								</StackPanel>
+							</Button>
+						</StackPanel>
+					</StackPanel>
+				</Grid>
+
+				<Grid Name="GridBlockType" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="593"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<Border Grid.Column="0" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="Black" />
+
+					<TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Text="Aliquot Type" />
+
+					<StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" >
+						<Button Margin="2,2,2,2" Width="120" Height="30" Click="ButtonAliquotTypeBlock_Click">
+							<TextBlock FontSize="12">Block</TextBlock>
+						</Button>
+						<Button Margin="2,2,2,2" Width="120" Height="30" Click="ButtonAliquotTypeFrozen_Click">
+							<TextBlock FontSize="12">Frozen Block</TextBlock>
+						</Button>
+						<Button Margin="2,2,2,2" Width="120" Height="30" Click="ButtonAliquotTypeCellBlock_Click">
+							<TextBlock FontSize="12">Cell Block</TextBlock>
+						</Button>
+						<Button Margin="2,2,2,2" Width="120" Height="30" Click="ButtonAliquotTypeSpecimen_Click">
+							<TextBlock FontSize="12">Specimen</TextBlock>
+						</Button>						
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" >                        
+                        <Button Margin="2,2,2,2" Width="120" Height="30" Click="ButtonAliquotTypeSlide_Click">
+                            <TextBlock FontSize="12">Slide</TextBlock>
+                        </Button>
+                        <Button Margin="2,2,2,2" Width="120" Height="30" Click="ButtonAliquotTypeFNASlide_Click">
+                            <TextBlock FontSize="12">FNA Slide</TextBlock>
+                        </Button>                        
+                        <Button Margin="2,2,2,2" Width="120" Height="30" Click="ButtonAliquotTypeCESlide_Click">
+                            <TextBlock FontSize="12">CE Slide</TextBlock>
+                        </Button>
+                        <Button Margin="2,2,2,2" Width="120" Height="30" Click="ButtonAddHESlide_Click">
+                            <TextBlock FontSize="12">H&amp;E with Slide</TextBlock>
+                        </Button>
+                    </StackPanel>
+                    
+                </Grid>
+
+				<Grid Name="GridTests" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="585"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" ></RowDefinition>
+						<RowDefinition Height="Auto" ></RowDefinition>
+						<RowDefinition Height="125" ></RowDefinition>
+                        <RowDefinition Height="*" ></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<Border Grid.Column="0" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="Black" />
+					
+					<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,10,2,2" HorizontalAlignment="Left" Text="Tests" />
+
+					<StackPanel Grid.Column="0" Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Left">
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="A">A</Hyperlink>
+						</TextBlock>
+							
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="B">B</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="C">C</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="D">D</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="E">E</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="F">F</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="G">G</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="H">H</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="I">I</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="J">J</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="K">K</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="L">L</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="M">M</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="N">N</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="O">O</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="P">P</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="Q">Q</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="R">R</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="S">S</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="T">T</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="U">U</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click"  Style="{StaticResource HyperLinkStyle1}" Tag="V">V</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="W">W</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="X">X</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="Y">Y</Hyperlink>
+						</TextBlock>
+
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="7" VerticalAlignment="Center">
+							<Hyperlink Click="HyperlinkTestBeginsWith_Click" Style="{StaticResource HyperLinkStyle1}" Tag="Z">Z</Hyperlink>
+						</TextBlock>
+					</StackPanel>
+					
+                    <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Path=TestCollection}" ItemTemplate="{StaticResource TestItemTemplate}" Margin="2,0,2,2"
+							 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+								<WrapPanel Orientation="Horizontal" ScrollViewer.HorizontalScrollBarVisibility="Disabled"></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+
+                    <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Vertical">                        
+                        <TextBlock Margin="2,2,5,2">
+						    <Hyperlink Click="HyperlinkDualStains_Click" Style="{StaticResource HyperLinkStyle1}">Dual Stains</Hyperlink>
+                        </TextBlock>                                                    
+                    </StackPanel>
+                    
+                    <Button Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Height="30" Width="100" Content="Order" Click="ButtonOrder_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                    
+                </Grid>				
+                
+			</Grid>
+				
+		</Grid>
+
+		<Grid Grid.Row="2">
+            
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>			
+			<Button Grid.Column="0" Grid.Row="0" Name="ButtonBack" Margin="5,5,5,5" Click="ButtonBack_Click" Width="100" Height="40" HorizontalAlignment="Left">&lt; Back</Button>
+            <Button Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Name="ButtonMapping" Margin="5,5,5,5" Click="ButtonMapping_Click" Width="100" Height="40" HorizontalAlignment="Center">Mapping</Button>
+			<Button Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Name="ButtonNext" Margin="5,5,5,5" Click="ButtonNext_Click" Width="100" Height="40" HorizontalAlignment="Right">Next ></Button>
+			
+		</Grid>
+	</Grid>
+</UserControl>

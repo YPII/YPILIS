@@ -1,0 +1,204 @@
+﻿<Window x:Class="YellowstonePathology.UI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:YellowstonePathology.UI"
+    Title="Yellowstone Pathology Lab Information System"
+    WindowState="Maximized" Icon="/YPI.ICO"
+    Closing="MainWindow_Closing">
+	<Window.Resources>		
+		
+	</Window.Resources>
+		<Grid>
+   
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>      
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Column="0" Grid.Row="0">
+            
+			<Menu Name="MainMenu" DockPanel.Dock="Top">
+                
+				<MenuItem Header="_File" Name="MenuItemFile">
+					<MenuItem Header="_Exit" Click="onFileExit_Click"></MenuItem>
+					<MenuItem Header="_Search"></MenuItem>
+					<MenuItem Header="Preferences" Click="MenuItemPreferences_Click"></MenuItem>
+					<MenuItem Header="Database" Click="MenuItemDatabase_Click"></MenuItem>
+                    <MenuItem Header="Application Validation" Click="MenuItemValidate_Click"></MenuItem>
+                    <MenuItem Header="Locked Cases" Click="MenuItemLockedCases_Click"></MenuItem>
+                    <MenuItem Header="Update Spelling Dictionary" Click="MenuItemUpdateSpellDictionary_Click"></MenuItem>
+                    <MenuItem Header="Delete Test" Click="MenuItemDelete_Click"></MenuItem>
+                </MenuItem>			
+        
+			<MenuItem Header="_Surgical" Name="MenuItemSurgical">
+				<MenuItem Header="_Typing" Click="ToolBarButtonTypingWorkspace_Click"></MenuItem>				
+				<MenuItem Header="Surgical Rescreen" Click="SurgicalRescreen_Click"></MenuItem>
+            </MenuItem>
+        
+			<MenuItem Header="_Cytology" Name="MenuItemCytology">
+				<MenuItem Header="_Cytology Workspace" Click="MenuItemCytologyWorkspace_Click"></MenuItem>				
+			</MenuItem>
+        
+			<MenuItem Header="_Flow" Name="MenuItemFlow">
+				<MenuItem Header="Leukemia/Lymphoma Phenotyping" Click="FlowWorkspace_Click"></MenuItem>                            				
+			</MenuItem>
+
+			<MenuItem Header="Lab" Name="MenuItemLab">
+				<MenuItem Header="_Lab" Click="MenuItemLabWorkspace_Click"></MenuItem>
+				<MenuItem Header="Master Log" Click="MenuItemMasterLog_Click"></MenuItem>
+				<MenuItem Header="Login" Click="MenuItemLogin_Click" />
+                <MenuItem Header="Material Tracking" Click="MenuItemMaterialTracking_Click" />
+                <MenuItem Header="Panther Orders" Click="MenuItemPantherOrders_Click" />
+                <MenuItem Header="Panther Storage" Click="MenuItemPantherStorage_Click" />
+                <MenuItem Header="Acid Wash Orders" Click="MenuItemAcidWashOrders_Click" />
+                <MenuItem Header="Embedding" Click="MenuItemEmbedding_Click" />
+            </MenuItem>
+
+            <MenuItem Header="_Client" Name="MenuItemClient">
+                <MenuItem Header="Provider Lookup" Click="MenuItemProviderLookup_Click"></MenuItem>
+                <MenuItem Header="Client Supply Orders" Click="MenuItemClientSupplyOrders_Click"></MenuItem>
+                <MenuItem Header="Cytology Unsat Letter Dialog" Click="MenuItemCytologyUnsatLetterDialog_Click"></MenuItem>
+            </MenuItem>
+
+			<MenuItem Header="_Billing" Name="MenuItemBilling">
+                    <MenuItem Header="SVH CDM/Results" Click="MenuItemSVHCDMResults_Click"></MenuItem>
+                    <MenuItem Header="Billing Reports" Click="MenuItemBillingReports_Click"></MenuItem>
+                <MenuItem Header="PSA Transfer" Click="MenuItemPSATransder_Click"></MenuItem>
+                <MenuItem Header="SVH Billing Data Import" Click="MenuItemSVHBillingDataImport_Click"></MenuItem>
+                <MenuItem Header="Parse PSA Data" Click="MenuItemParsePSAData_Click"></MenuItem>
+            </MenuItem>
+
+			<MenuItem Header="_Scan Processing" Name="MenuItemScanProcessing">
+				<MenuItem Header="Process Scanned Documents" Click="MenuItemScanProcessing_Click"></MenuItem>
+			</MenuItem>
+        			
+			<MenuItem Header="_Distribution" Name="MenuItemDistribution">
+				<MenuItem Name="MenuItemReportDistributionMonitor" Header="Distribution Monitor" Click="MenuItemReportDistributionMonitor_Click"></MenuItem>                    
+                    <MenuItem Name="MenuItemTumorRegistryDistribution" Header="Tumor Registry Distribution" Click="MenuItemTumorRegistryDistribution_Click"></MenuItem>                
+            </MenuItem>
+        
+			<MenuItem Header="_Admin" Name="MenuItemAdmin">				
+                <MenuItem Name="MenuItemReportDistribution" Header="Report Distribution" Click="MenuItemReportDistributionWorkspace_Click"></MenuItem>
+                <MenuItem Name="MenuItemAdministration" Header="Administration" Click="MenuItemAdministrationWorkspace_Click"></MenuItem>				
+				<MenuItem Name="MenuItemRuleBrowser" Header="Rule Browser" Click="MenuItemRuleBrowser_Click"></MenuItem>                
+                <MenuItem Name="MenuItemValidationTesting" Header="Validation Testing" Click="MenuItemValidationTesting_Click"></MenuItem>
+                <MenuItem Name="MenuItemMongoMigration" Header="Mongo Migration" Click="MenuItemMongoMigration_Click"></MenuItem>
+                <MenuItem Name="MenuItemMySqlMigration" Header="MySql Migration" Click="MenuItemMySqlMigration_Click"></MenuItem>
+                <MenuItem Name="MenuItemTesting" Header="Testing" Click="MenuItemTesting_Click"></MenuItem>
+            </MenuItem>
+
+            <MenuItem Header="_Monitor" Name="MenuItemMonitor">
+                <MenuItem Name="MenuItemMonitorReportDistribution" Header="Report Distribution" Click="MenuItemShowReportDistributionMonitor_Click"></MenuItem>
+                <MenuItem Name="MenuItemMonitorCytologyScreening" Header="Cytology Screening" Click="MenuItemShowCytologyScreeningMonitor_Click"></MenuItem>
+                <MenuItem Name="MenuItemMonitorPendingTests" Header="Pending Tests" Click="MenuItemShowPendingTestMonitor_Click"></MenuItem>
+                <MenuItem Name="MenuItemMonitorMissingInformation" Header="Missing Information" Click="MenuItemShowMissingInformationMonitor_Click"></MenuItem>
+            </MenuItem>
+                
+            </Menu>
+
+		    <ToolBarTray Background="Gainsboro" Name="ToolBarTrayMain">
+			<ToolBar Name="ToolBarMain">
+                
+					<Button Click="ToolBarButtonSave_Click" ToolTip="Save Data" Margin="0,0,2,0" Name="ToolBarButtonSave">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/Save.ico"></Image>
+							<TextBlock Margin="2,0,0,0">Save</TextBlock>
+						</StackPanel>
+				</Button>
+
+                    <Button Click="ToolBarButtonSendMessage_Click" ToolTip="Send Message" Margin="2,0,0,0" Height="22" Name="ToolBarButtonSendMessage" Visibility="Visible">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/message.png"></Image>
+                            <TextBlock Margin="2" VerticalAlignment="Center">Messages</TextBlock>
+                        </StackPanel>
+                    </Button>
+                
+                    <Button Click="ToolBarButtonViewDocument_Click" ToolTip="View Document" Height="22" Name="ToolBarButtonViewDocument" MouseDoubleClick="ToolBarButtonViewDocument_MouseDoubleClick">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Document.jpg"></Image>
+						<TextBlock Margin="2,0,0,0">Document</TextBlock>
+					</StackPanel>
+				</Button>
+					<Button Click="ToolBarButtonSearchWorkspace_Click" ToolTip="Search Workspace" Margin="2,0,0,0" Name="ToolBarButtonSearchWorkspace">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="/Resources/Search.ico"></Image>
+						<TextBlock Margin="2,0,0,0">Search</TextBlock>
+					</StackPanel>
+				</Button>          
+			</ToolBar>
+			<ToolBar>								
+				<Button Click="ToolBarButtonTypingWorkspace_Click" ToolTip="Typing Workspace" Margin="0,0,2,0">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="/Resources/Typing.ico"></Image>
+						<TextBlock Margin="2,0,0,0">Typing</TextBlock>
+					</StackPanel>
+				</Button>
+				<Button Click="ToolBarButtonPathologistWorkspace_Click" ToolTip="Pathologist Workspace" Margin="2,0,2,0" Height="22">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="/Resources/Microscope.ico"></Image>
+						<TextBlock Margin="2,0,0,0">Pathologist</TextBlock>
+					</StackPanel>
+				</Button>
+					<Button Click="ToolBarButtonFlowWorkspace_Click" ToolTip="Flow Workspace" Margin="2,0,2,0" Name="ToolBarButtonFlowWorkspace">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="/Resources/Flow.ico"></Image>
+						<TextBlock Margin="2,0,0,0">Flow</TextBlock>
+					</StackPanel>
+				</Button>                    
+				<Button Click="ToolBarButtonLabWorkspace_Click" ToolTip="Lab Workspace" Margin="2,0,2,0">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/Lab.ico"></Image>
+							<TextBlock Margin="2,0,0,0">Lab</TextBlock>
+						</StackPanel>
+				</Button>
+                <Button Click="ToolBarButtonCytologyWorkspace_Click" ToolTip="Cytology Workspace" Margin="2,0,2,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/cytology.ico"></Image>
+                        <TextBlock Margin="2,0,0,0">Cytology</TextBlock>
+                    </StackPanel>
+                </Button>				
+             </ToolBar>
+
+			<ToolBar Name="ToolBarPathologistFunctions">
+				<Button Click="ToolBarButtonOrderForm_Click" ToolTip="Order Form" Margin="0,0,2,0">
+					<StackPanel Orientation="Horizontal">
+						<Image Margin="2" Height="16" Source="/UserInterface;component/Resources/Order.ico"></Image>
+						<TextBlock Margin="2" VerticalAlignment="Center">Order ...</TextBlock>
+					</StackPanel>
+				</Button>
+				<Button Click="ToolBarButtonAssign_Click" ToolTip="Assign" Margin="2,0,0,0" Height="22" Name="ToolBarButtonAssign">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="/UserInterface;component/Resources/Assign.ico"></Image>
+						<TextBlock Margin="2,0,0,0">Assignment</TextBlock>
+					</StackPanel>
+				</Button>
+				<Button Click="ToolBarButtonProviderDistribution_Click" ToolTip="Provider/Distribution" Margin="0,0,2,0">
+					<StackPanel Orientation="Horizontal">
+						<Image Margin="2" Height="16" Source="/UserInterface;component/Resources/Magnify.ico"></Image>
+						<TextBlock Margin="2" VerticalAlignment="Center">Provider/Distribution ...</TextBlock>
+					</StackPanel>
+				</Button>                                    
+
+                <Button Click="ToolBarButtonAddAmendment_Click" ToolTip="Admendment Maintenance" IsEnabled="True">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Amendments.ico" Margin="2" Height="16"></Image>
+                        <TextBlock VerticalAlignment="Center" Margin="2" Text="Amendments"></TextBlock>
+                    </StackPanel>
+                </Button>
+                    
+			</ToolBar>
+				
+			</ToolBarTray>
+			
+		</StackPanel>
+	    
+		<TabControl Name="TabControlLeftWorkspace" Grid.Column="0" Grid.Row="1">
+	      
+		</TabControl>
+    
+	</Grid>
+</Window>

@@ -1,0 +1,644 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Surgical.SurgicalReview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:TemplateSelectorUI="clr-namespace:YellowstonePathology.UI.TemplateSelector"
+			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:system="clr-namespace:System;assembly=system"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="700"
+			 Name="SurgicalReviewControl">
+	<UserControl.Resources>
+
+		<DataTemplate x:Key="DataTemplatePeerReviewPanel">
+			<StackPanel>
+				<TextBlock FontWeight="Bold" Margin="2,2,2,2">Peer Reviews:</TextBlock>
+
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="{Binding Path=PanelName}" Margin="2,2,2,2"></TextBlock>
+					<TextBlock Margin="10,2,2,2" Visibility="{Binding Path=Accepted, Converter={StaticResource InverseBooleanConverter}}">
+                        <Hyperlink Tag="{Binding}" Click="HyperlinkAcceptPeerReview_Click" >Accept Review Results</Hyperlink>
+					</TextBlock>
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Margin="2,2,2,2">Ordered on:</TextBlock>
+					<TextBlock Margin="2,2,2,2" Text="{Binding Path=OrderTime}"></TextBlock>
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Margin="2,2,2,2">Accepted on:</TextBlock>
+					<TextBlock Margin="2,2,2,2" Text="{Binding Path=AcceptedTime}"></TextBlock>
+				</StackPanel>
+
+			</StackPanel>
+		</DataTemplate>
+
+		<DataTemplate x:Key="RevisedDiagnosisSpecimenControlItemTemplate">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+				<StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+					<TextBlock Margin="2" Text="{Binding Path=DiagnosisIdFormatted}"></TextBlock>
+                    <TextBlock Margin="2" Text="{Binding Path=SpecimenOrder.Description}"></TextBlock>
+				</StackPanel>
+
+                <TextBlock Margin="2" Text="{Binding Path=Diagnosis}" Grid.Column="0" Grid.Row="1" KeyUp="TextBox_KeyUp"></TextBlock>
+			</Grid>
+		</DataTemplate>
+
+		<DataTemplate x:Key="RevisedDiagnosisControlItemTemplate">
+			<Grid Visibility="{Binding Path=Amendment.RevisedDiagnosis, Converter={StaticResource BooleanVisibilityConverter}}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2">
+					<TextBlock FontWeight="Bold" Margin="2">Previous Diagnosis:</TextBlock>
+					<TextBlock FontWeight="Bold" Text="{Binding Path=FinalDate, Converter={StaticResource ShortDateConverter}}" Margin="2"></TextBlock>
+					<TextBlock FontWeight="Bold" Text="{Binding Path=FinalTime, Converter={StaticResource ShortTimeConverter}}" Margin="2"></TextBlock>
+				</StackPanel>
+
+				<ItemsControl Name="ItemsControlRevisedDiagnosisSpecimen" Grid.Column="0" Grid.Row="1"
+					ItemsSource="{Binding Path=SurgicalSpecimenAuditCollection}"					
+					ItemTemplate="{StaticResource RevisedDiagnosisSpecimenControlItemTemplate}">
+				</ItemsControl>
+			</Grid>
+		</DataTemplate>
+
+		<DataTemplate x:Key="AmendmentControlItemTemplate">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Stroke="LightGray"  RadiusX="3" RadiusY="3"></Rectangle>
+
+				<StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" Visibility="{Binding Path=Final, Converter={StaticResource BooleanInverseVisibilityConverter}}">
+					<TextBlock FontWeight="Bold" Margin="2" VerticalAlignment="Center">Amendment Type:</TextBlock>
+					<ComboBox Name="ComboBoxAmendmentType" Text="{Binding Path=AmendmentType}" IsEditable="True" Width="100" Margin="2" VerticalAlignment="Center"
+							  IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}">
+						<ComboBoxItem>Addendum</ComboBoxItem>
+						<ComboBoxItem>Correction</ComboBoxItem>
+					</ComboBox>
+					<TextBlock FontWeight="Bold" Margin="2" VerticalAlignment="Center">Revised Diagnosis:</TextBlock>
+					<CheckBox Name="CheckBoxRevisedDiagnosis" IsChecked="{Binding Path=RevisedDiagnosis, UpdateSourceTrigger=PropertyChanged}" Margin="2" VerticalAlignment="Center"
+							  IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}" 
+							  Checked="CheckBoxRevisedDiagnosis_Checked" Unchecked="CheckBoxRevisedDiagnosis_Unchecked" Tag="{Binding}"></CheckBox>
+					<TextBlock FontWeight="Bold" Margin="2" VerticalAlignment="Center">Assigned To:</TextBlock>
+					<ComboBox DisplayMemberPath="DisplayName" ItemsSource="{Binding ElementName=SurgicalReviewControl, Path=DataContext.AmendmentUsers}"
+						SelectedValuePath="UserId" Tag="{Binding}"
+						SelectedValue="{Binding Path=UserId}"
+						Margin="2,2,2,2" IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}" VerticalAlignment="Center"
+						SelectionChanged="ComboBoxAmendmentUsers_SelectionChanged">
+					</ComboBox>
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" Visibility="{Binding Path=Final, Converter={StaticResource BooleanVisibilityConverter}}">
+					<TextBlock Text="{Binding Path=AmendmentType}" FontWeight="Bold" Margin="2"></TextBlock>
+					<TextBlock FontWeight="Bold" Margin="0,2,2,2">:</TextBlock>
+					<TextBlock FontWeight="Bold" Text="{Binding Path=FinalDate, Converter={StaticResource ShortDateConverter}}" Margin="2"></TextBlock>
+					<TextBlock FontWeight="Bold" Text="{Binding Path=FinalTime, Converter={StaticResource ShortTimeConverter}}" Margin="2"></TextBlock>
+				</StackPanel>
+
+				<TextBox Name="TextBoxAmendment" Grid.Row="1" Grid.Column="0" Margin="2" TextWrapping="Wrap" AcceptsReturn="True" RequestBringIntoView="Any_RequestBringIntoView"
+						 FontSize="12" Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" KeyUp="TextBox_KeyUp" IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}">
+				</TextBox>
+
+				<Button Margin="2,2,2,2" Height="24" Width="200" HorizontalAlignment="Left" ToolTip="Delete Amendment"  Grid.Column="0" Grid.Row="2"
+					Click="ButtonDeleteAmendment_Click" VerticalAlignment="Top" BorderBrush="Beige" Tag="{Binding}"  IsEnabled="{Binding Path=DeleteButtonIsEnabled}">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Foreground="Blue" Text="Delete Amendment" IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}"></TextBlock>
+					</StackPanel>
+				</Button>
+
+				<Button Margin="2,2,2,2" Height="24" Width="200" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2"
+					Click="ButtonSignAmendment_Click" VerticalAlignment="Top" BorderBrush="Beige" Tag="{Binding}" IsEnabled="{Binding Path=SignatureButtonIsEnabled}">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Foreground="Blue" Text="{Binding Path=SignatureButtonText}"></TextBlock>
+					</StackPanel>
+				</Button>
+
+			</Grid>
+		</DataTemplate>
+
+		<DataTemplate x:Key="DataTemplateAncillaryStudies">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Column="0" Source="/Resources/out2.png" Width="17" Height="17" Visibility="{Binding Path=ClientAccessioned, Converter={StaticResource BooleanVisibilityConverter}}"></Image>
+                <TextBlock Grid.Column="1" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=ProcedureName}" HorizontalAlignment="Stretch"></TextBlock>
+				<ComboBox Grid.Column="2" Name="comboBoxAncillaryStudiesResult" VerticalContentAlignment="Center" DisplayMemberPath="StainResult" ItemsSource="{Binding Path=ResultList}" 
+						  Text="{Binding Path=Result}" Margin="3" HorizontalAlignment="Stretch"
+						  IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}" IsEditable="True" >
+                </ComboBox>
+                <TextBox Grid.Column="3" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=ReportComment, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch"
+						 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}" KeyUp="TextBox_KeyUp"></TextBox>
+                <TextBox  Grid.Column="4" Margin="2,2,2,2" Width="100" VerticalAlignment="Center" Text="{Binding Path=ProcedureComment, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch"
+						 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}"></TextBox>
+                                
+                <CheckBox Grid.Column="5" Margin="2,2,2,2" VerticalAlignment="Center" IsChecked="{Binding Path=NoCharge}" ToolTip="No Charge"></CheckBox>
+
+                <CheckBox Grid.Column="6" Margin="2,2,2,2" VerticalAlignment="Center" IsChecked="{Binding Path=IsGraded}" ToolTip="Graded"></CheckBox>
+
+            </Grid>			                			
+		</DataTemplate>
+
+        <HierarchicalDataTemplate x:Key="DataTemplateAncillaryStudiesSpecimen" ItemsSource="{Binding Path=StainResultItemCollection}"
+				 ItemTemplate="{StaticResource DataTemplateAncillaryStudies}">
+            <StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                <TextBlock Width="20" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=DiagnosisIdFormatted}"></TextBlock>
+                <TextBlock Width="200" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=SpecimenOrder.Description}"></TextBlock>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+        <DataTemplate x:Key="CPTBillingTemplate">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="15"></ColumnDefinition>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<StackPanel Grid.Column="1" Grid.Row="0">
+					<StackPanel Orientation="Horizontal">
+                        <TextBox Margin="2,0,2,0" Width="20" MinWidth="20" MaxWidth="20" HorizontalAlignment="Left" Text="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}"
+								 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
+						</TextBox>
+                        <TextBox Margin="2,0,2,0" Width="50" MinWidth="50" MaxWidth="50" HorizontalAlignment="Left" Text="{Binding Path=CPTCode, UpdateSourceTrigger=PropertyChanged}"
+								 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
+						</TextBox>						
+						<Button Margin="2,0,2,0" Height="15" Width="15" HorizontalAlignment="Left" ToolTip="Delete Code"
+									Click="ButtonDeleteCptCode_Click" VerticalAlignment="Center" Tag="{Binding}"
+									IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
+							<StackPanel Orientation="Horizontal">
+								<Image Source="/Resources/Delete.ico"></Image>
+							</StackPanel>
+						</Button>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>
+
+        <DataTemplate x:Key="Icd9BillingTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                    <TextBox Margin="2,0,2,0" Width="20" MinWidth="20" MaxWidth="20" HorizontalAlignment="Left" Text="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}"
+						 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
+                    </TextBox>
+                    <TextBox Margin="2,0,2,0" Width="50" MinWidth="50" MaxWidth="50" Text="{Binding Path=ICD9Code, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"
+						IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
+                    </TextBox>
+                    <Button Margin="2,0,2,0" Height="15" Width="15" HorizontalAlignment="Left" ToolTip="Delete Code"
+						Click="ButtonDeleteIcd9Code_Click" VerticalAlignment="Center" Tag="{Binding}"
+						IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Delete.ico"></Image>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="IntraoperativeConsultationTemplate">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="21"></ColumnDefinition>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+				<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0">
+                    <Hyperlink Name="HyperLinkFS" Click="HyperLinkFS_Click" Tag="{Binding}" IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">Fs:</Hyperlink>
+				</TextBlock>
+
+				<TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Height="75" Margin="2,2,2,2" AcceptsReturn="True" TextWrapping="Wrap" KeyUp="TextBox_KeyUp"
+						 Text="{Binding Path=Result, UpdateSourceTrigger=PropertyChanged}" 
+						 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}">
+				</TextBox>
+
+				<StackPanel Orientation="Horizontal"  Grid.Column="1" Grid.Row="1">
+					<ComboBox Name="comboBoxImmediateUsers" VerticalContentAlignment="Center"
+							  ItemsSource="{Binding ElementName=SurgicalReviewControl, Path=DataContext.PathologistUsers}"
+							  DisplayMemberPath="DisplayName" SelectedValuePath="UserId"
+							  SelectedValue="{Binding Path=FinaledById}"
+							  Margin="3" MinWidth="150" HorizontalAlignment="Left"
+							  IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
+					</ComboBox>
+
+                    <TextBox Text="{Binding Path=StartDate, Converter={StaticResource MilitaryDateTimeConverter}}" Width="125" HorizontalAlignment="Stretch" Height="20" Margin="2,2,2,2"
+							 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}">
+					</TextBox>
+
+                    <TextBox Text="{Binding Path=EndDate, Converter={StaticResource MilitaryDateTimeConverter}}" Width="125" HorizontalAlignment="Stretch" Height="20" Margin="2,2,2,2"
+							 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}">
+					</TextBox>
+
+					<Button Click="ButtonCorrelation_Click" Tag="{Binding}">
+						<TextBlock Margin="5,2,5,2">Correlation</TextBlock>
+					</Button>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>
+
+		<ControlTemplate x:Key="SpecimenControlTemplate">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+				<ItemsPresenter Grid.Column="0" Grid.Row="0" Margin="3"/>
+			</Grid>
+		</ControlTemplate>
+
+		<DataTemplate x:Key="SpecimenControlItemTemplate">
+            <Grid Background="{Binding Path=IsSelected, Converter={StaticResource PathologistSpecimenColorConverter}}" Margin="2,2,2,2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="22"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=SurgicalSpecimen.DiagnosisIdFormatted}" Margin="2,5,2,2">
+                    <TextBlock.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Add Interoperative Consultation" Click="ContextMenuAddInteropativeConsultation_Click" Tag="{Binding Path=SurgicalSpecimen}"></MenuItem>
+                        </ContextMenu>
+                    </TextBlock.ContextMenu>
+                </TextBlock>
+
+				<TextBox Name="TextBoxSpecimenType" Grid.Row="0" Grid.Column="1" Margin="2,5,2,2" TextWrapping="Wrap" AcceptsReturn="True"
+						 FontSize="12" FontWeight="Bold" MinWidth="300"  RequestBringIntoView="Any_RequestBringIntoView"
+						 Text="{Binding Path=SpecimenOrder.Description, UpdateSourceTrigger=PropertyChanged}"  KeyUp="TextBox_KeyUp"
+						 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}">
+				</TextBox>
+                <TextBox Name="TextBoxDiagnosis" Grid.Row="1" Grid.Column="1" Margin="2" TextWrapping="Wrap" AcceptsReturn="True"
+						 FontSize="12" MinWidth="300" SpellCheck.IsEnabled="False" KeyUp="TextBox_KeyUp"
+						 Text="{Binding Path=SurgicalSpecimen.Diagnosis, UpdateSourceTrigger=PropertyChanged}" RequestBringIntoView="Any_RequestBringIntoView"
+						 IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsProtectedEnabled}">
+                </TextBox>
+
+				<ItemsControl Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"  KeyboardNavigation.IsTabStop="False"
+							  ItemsSource="{Binding Path=SurgicalSpecimen.IntraoperativeConsultationResultCollection}"
+							  Template="{StaticResource SpecimenControlTemplate}"
+							  ItemTemplate="{StaticResource IntraoperativeConsultationTemplate}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+				</ItemsControl>
+
+                <Grid Grid.Column="1" Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="220"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock Margin="20, 2, 2, 2" VerticalAlignment="Top">ICD9 Codes</TextBlock>
+
+                        <Button Margin="5,2,2,2" Height="15" Width="15" HorizontalAlignment="Left" ToolTip="Add ICD9 Code"
+									Click="ButtonAddIcd9Code_Click" VerticalAlignment="Top" Tag="{Binding Path=SurgicalSpecimen}"
+									IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Resources/Add.ico"></Image>
+                            </StackPanel>
+                        </Button>
+                        <StackPanel>
+                        </StackPanel>
+
+                        <ItemsControl KeyboardNavigation.IsTabStop="False"
+									  ItemsSource="{Binding Path=ICD9BillingCodeCollection}"
+									  ItemTemplate="{StaticResource Icd9BillingTemplate}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock Margin="40, 2, 2, 2" VerticalAlignment="Top">CPT Codes</TextBlock>
+
+                        <Button Margin="5,2,2,2" Height="15" Width="15" HorizontalAlignment="Left" ToolTip="Add CPT Code"
+									Click="ButtonAddCptCode_Click" VerticalAlignment="Top" Tag="{Binding Path=SurgicalSpecimen}"
+									IsEnabled="{Binding ElementName=SurgicalReviewControl, Path=DataContext.FieldEnabler.IsUnprotectedEnabled}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Resources/Add.ico"></Image>
+                            </StackPanel>
+                        </Button>
+                        <StackPanel>
+                        </StackPanel>
+
+                        <ItemsControl KeyboardNavigation.IsTabStop="False"
+									  ItemsSource="{Binding Path=PanelSetOrderCPTCodeCollection}"
+									  ItemTemplate="{StaticResource CPTBillingTemplate}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </Grid>
+		</DataTemplate>
+
+	</UserControl.Resources>
+	
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>
+			<ToolBarTray Grid.Column="0" Grid.Row="0" Background="Gainsboro">
+				<ToolBar Grid.Column="0" Grid.Row="0">
+					<Button Click="ButtonAddAmendment_Click" ToolTip="Add Admendment" IsEnabled="True">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/Amendments.ico" Margin="2" Height="16"></Image>
+							<TextBlock VerticalAlignment="Center" Margin="2" Text="Add Amendment"></TextBlock>
+						</StackPanel>
+					</Button>
+
+					<Button Click="ButtonSetAncillaryStudiesCommentsToGood_Click" ToolTip="Set Stain Comments to Good">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/CommittedToGood.ico" Margin="2" Height="16"></Image>
+							<TextBlock VerticalAlignment="Center" Margin="2" Text="Good"></TextBlock>
+						</StackPanel>
+					</Button>
+
+					<Button Click="ButtonCancerCaseSummary_Click" ToolTip="Cancer Summary">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/CancerCase.ico" Margin="2" Height="16"></Image>
+							<TextBlock VerticalAlignment="Center" Margin="2" Text="Cancer"></TextBlock>
+						</StackPanel>
+					</Button>
+
+					<Button ToolTip="Visit CAP Website, cancer section">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/caplogo.ico" Margin="2" Height="16"></Image>
+							<TextBlock VerticalAlignment="Center" Margin="2">
+									<Hyperlink Click="ButtonCAPLink_Click">CAP</Hyperlink>
+							</TextBlock>
+						</StackPanel>
+					</Button>
+					<Button ToolTip="Take over case" Click="ButtonReassignCase_Click">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/Resources/reassign.ico" Margin="2" Height="16"></Image>
+							<TextBlock VerticalAlignment="Center" Margin="2">Reassign Case</TextBlock>
+						</StackPanel>
+					</Button>
+                </ToolBar>
+			</ToolBarTray>
+
+			<Rectangle RadiusX="5" RadiusY="5" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Margin="2"></Rectangle>
+
+			<ScrollViewer Grid.Column="0" Grid.Row="1" CanContentScroll="False">
+				<StackPanel>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+
+						<Grid.RowDefinitions>
+							<RowDefinition></RowDefinition>
+							<RowDefinition></RowDefinition>
+							<RowDefinition></RowDefinition>
+							<RowDefinition></RowDefinition>
+							<RowDefinition></RowDefinition>
+							<RowDefinition></RowDefinition>
+							<RowDefinition></RowDefinition>
+							<RowDefinition Height="*"></RowDefinition>
+						</Grid.RowDefinitions>
+
+						<Rectangle Grid.Row="0" Stroke="LightGray"  RadiusX="3" RadiusY="3" Grid.ColumnSpan="1" Grid.RowSpan="5"></Rectangle>
+
+						<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" Text="Diagnosis" RequestBringIntoView="Any_RequestBringIntoView"></TextBlock>
+
+						<ItemsControl Name="ItemsControlSpecimen" Grid.Column="0" Grid.Row="1" BorderThickness="0"
+										ItemsSource="{Binding Path=BillingSpecimenViewCollection}"
+										KeyboardNavigation.IsTabStop="False"
+										ItemTemplate="{StaticResource SpecimenControlItemTemplate}">
+						</ItemsControl>
+
+						<StackPanel Grid.Column="0" Grid.Row="2">
+							<TextBlock Margin="2, 2, 2, 2" FontWeight="Bold" TextAlignment="Left">Comment:</TextBlock>
+                            <TextBox Name="textBoxComment" Margin="2, 2, 2, 2" TextWrapping="Wrap" AcceptsReturn="True" FontSize="12" RequestBringIntoView="Any_RequestBringIntoView"
+										Text="{Binding Path=PanelSetOrderSurgical.Comment, UpdateSourceTrigger=PropertyChanged}"
+										IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}" KeyUp="TextBox_KeyUp" SpellCheck.IsEnabled="False">
+                            </TextBox>
+						</StackPanel>
+
+						<TextBlock Name="TextBlockSignature" Margin="2, 2, 30, 2" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="3"
+							Text="{Binding Path=PanelSetOrderSurgical.Signature}">
+						</TextBlock>
+
+						<Button Name="ButtonSignature" Margin="2,2,2,2" Height="24" Width="200" HorizontalAlignment="Right" ToolTip="Electronic Signature" Grid.Column="0" Grid.Row="4"
+								Click="ButtonSignature_Click" VerticalAlignment="Top" BorderBrush="Beige" IsEnabled="{Binding Path=DataContext.PathologistUI.SignatureButtonIsEnabled}">
+							<StackPanel Orientation="Horizontal">
+                                <TextBlock Foreground="Blue" Text="{Binding Path=DataContext.PathologistUI.SignatureButtonText}"></TextBlock>
+							</StackPanel>
+						</Button>
+
+						<ItemsControl Name="ItemsControlAmendment" Grid.Column="0" Grid.Row="5"
+										ItemsSource="{Binding Path=PanelSetOrderSurgical.AmendmentCollection}"
+										KeyboardNavigation.IsTabStop="False"
+										ItemTemplate="{StaticResource AmendmentControlItemTemplate}">
+						</ItemsControl>
+
+						<ItemsControl Name="ItemsControlRevisedDiagnosis" Grid.Column="0" Grid.Row="6"
+										ItemsSource="{Binding Path=PanelSetOrderSurgical.SurgicalAuditCollection}"
+										KeyboardNavigation.IsTabStop="False"
+										ItemTemplate="{StaticResource RevisedDiagnosisControlItemTemplate}">
+						</ItemsControl>
+
+					</Grid>
+
+					<StackPanel Name="PanelCancerCase2" Visibility="{Binding ElementName=SurgicalReviewControl, Path=DataContext.CancerCaseSummaryVisibility}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" Margin="5, 2, 2, 2" FontWeight="Bold">Cancer Case Summary:</TextBlock>
+                            <TextBlock Margin="2,2,2,2">
+					            <Hyperlink Click="HyperLinkReplaceSpecialCharacters_Click">
+						            <TextBlock Text="Replace Special Characters" />
+					            </Hyperlink>
+				            </TextBlock>
+                        </StackPanel>
+						
+						<TextBox Name="TextBoxCancerSummary" TextWrapping="Wrap" AcceptsReturn="True" FontSize="12" MinWidth="500" RequestBringIntoView="Any_RequestBringIntoView"
+							Text="{Binding Path=PanelSetOrderSurgical.CancerSummary, UpdateSourceTrigger=PropertyChanged}"							
+							IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" KeyUp="TextBox_KeyUp">
+						</TextBox>
+					</StackPanel>
+
+					<StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding ElementName=SurgicalReviewControl, Path=DataContext.CancerCaseSummaryVisibility}">
+						<TextBlock VerticalAlignment="Center" Margin="5, 2, 2, 2">Pathologic TNM Stage:</TextBlock>
+                        <TextBox Width="300" Margin="2,2,2,2" RequestBringIntoView="Any_RequestBringIntoView"
+							Text="{Binding Path=PanelSetOrderSurgical.AJCCStage, UpdateSourceTrigger=PropertyChanged}"
+							IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}" TextWrapping="Wrap" AcceptsReturn="True">
+						</TextBox>
+					</StackPanel>
+
+					<TextBlock Margin="2,2,2,2" FontWeight="Bold">Microscopic Description:</TextBlock>
+                    <TextBox Name="TextBoxMicroscopic" TextWrapping="Wrap" AcceptsReturn="True" FontSize="12" MinWidth="200" KeyUp="TextBox_KeyUp"
+						Text="{Binding Path=PanelSetOrderSurgical.MicroscopicX, UpdateSourceTrigger=PropertyChanged}" RequestBringIntoView="Any_RequestBringIntoView"
+						IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}">
+					</TextBox>
+
+					<StackPanel>
+						<TextBlock Margin="2,2,2,2" FontWeight="Bold">Ancillary Studies:</TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition Width="150"></ColumnDefinition>                                
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Background="#e4e2e4"></Border>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" Text="Test" HorizontalAlignment="Center"></TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Text="Result" HorizontalAlignment="Center"></TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="2" Margin="2,2,2,2" Text="Comment" HorizontalAlignment="Center"></TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" Text="Control" HorizontalAlignment="Center"></TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="4" Margin="2,2,2,2" Text="No Charge" HorizontalAlignment="Center"></TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="5" Margin="2,2,2,2" Text="Graded" HorizontalAlignment="Center"></TextBlock>
+
+                        </Grid>
+						<TreeView Name="TreeViewAncillaryStudies" BorderThickness="0" ItemsSource="{Binding Path=PanelSetOrderSurgical.SurgicalSpecimenCollection}"
+					        ItemTemplate="{StaticResource DataTemplateAncillaryStudiesSpecimen}">                            
+                        </TreeView>
+					</StackPanel>
+
+					<TextBlock Margin="2,2,2,2" FontWeight="Bold">Clinical Information:</TextBlock>
+                    <TextBox Name="TextBoxClinical" TextWrapping="Wrap" AcceptsReturn="True" FontSize="12" RequestBringIntoView="Any_RequestBringIntoView" KeyUp="TextBox_KeyUp"
+						Text="{Binding Path=AccessionOrder.ClinicalHistory, UpdateSourceTrigger=PropertyChanged}" 
+						IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}">
+					</TextBox>
+
+					<TextBlock Margin="2,2,2,2" FontWeight="Bold">Gross Description:</TextBlock>
+                    <TextBox Name="TextBoxGross" TextWrapping="Wrap" AcceptsReturn="True" FontSize="12" RequestBringIntoView="Any_RequestBringIntoView" KeyUp="TextBox_KeyUp"
+						Text="{Binding Path=PanelSetOrderSurgical.GrossX, UpdateSourceTrigger=PropertyChanged}" 
+						IsEnabled="{Binding Path=FieldEnabler.IsProtectedEnabled}"></TextBox>
+
+					<StackPanel Visibility="{Binding Path=PanelSetOrderSurgical.PapCorrelationRequired, Converter={StaticResource BooleanVisibilityConverter}}">
+						<TextBlock Margin="2,2,2,2" FontWeight="Bold">Cytologic Correlation:</TextBlock>
+						<ListBox Grid.Column="0" Grid.Row="0" Name="RadioButtonListPapCorrelation" BorderThickness="0" Margin="2"  RequestBringIntoView="Any_RequestBringIntoView"
+									SelectedIndex="{Binding Path=PanelSetOrderSurgical.PapCorrelation}"
+									IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}">
+							<ListBox.ItemContainerStyle>
+								<Style TargetType="{x:Type ListBoxItem}">
+									<Setter Property="Template">
+										<Setter.Value>
+											<ControlTemplate TargetType="{x:Type ListBoxItem}">
+												<ContentPresenter/>
+											</ControlTemplate>
+										</Setter.Value>
+									</Setter>
+								</Style>
+							</ListBox.ItemContainerStyle>
+							<ListBoxItem Name="ListBoxItemPapCorrelation1">
+								<RadioButton GroupName="GroupPapCorrelation" Margin="2,2,2,2" IsChecked="{Binding IsSelected, ElementName=ListBoxItemPapCorrelation1}">Not Correlated.</RadioButton>
+							</ListBoxItem>
+							<ListBoxItem Name="ListBoxItemPapCorrelation2">
+								<RadioButton GroupName="GroupPapCorrelation" Margin="2,2,2,2" IsChecked="{Binding IsSelected, ElementName=ListBoxItemPapCorrelation2}">Correlates.</RadioButton>
+							</ListBoxItem>
+							<ListBoxItem Name="ListBoxItemPapCorrelation3">
+								<RadioButton GroupName="GroupPapCorrelation" Margin="2,2,2,2" IsChecked="{Binding IsSelected, ElementName=ListBoxItemPapCorrelation3}">Does Not Correlate.</RadioButton>
+							</ListBoxItem>
+							<ListBoxItem Name="ListBoxItemPapCorrelation4">
+								<RadioButton GroupName="GroupPapCorrelation" Margin="2,2,2,2" IsChecked="{Binding IsSelected, ElementName=ListBoxItemPapCorrelation4}">Not Applicable.</RadioButton>
+							</ListBoxItem>
+						</ListBox>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Margin="2,2,2,2">Pap Accession:</TextBlock>
+							<TextBox Width="300" RequestBringIntoView="Any_RequestBringIntoView"
+								Text="{Binding Path=PanelSetOrderSurgical.PapCorrelationAccessionNo, UpdateSourceTrigger=PropertyChanged}"
+								IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+							<Button Name="ButtonPapAccession" Margin="10, 2, 2, 2" Height="20" ToolTip="Choose Accession" Click="ButtonPapAccession_Click" VerticalAlignment="Center">
+								<Image Source="/Resources/Magnify.ico" Height="10"></Image>
+							</Button>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Margin="2,2,2,2">Comment:</TextBlock>
+                            <TextBox Width="300" Text="{Binding Path=PanelSetOrderSurgical.PapCorrelationComment, UpdateSourceTrigger=PropertyChanged}" 
+									 RequestBringIntoView="Any_RequestBringIntoView" 
+									 IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+						</StackPanel>
+					</StackPanel>
+
+				</StackPanel>
+			</ScrollViewer>
+
+		</Grid>
+	</Grid>
+
+</UserControl>
