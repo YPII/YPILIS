@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
-using System.Data.SqlClient;
-using System.Collections.ObjectModel;
 using System.Xml.Linq;
-using System.Xml;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Gateway
 {
@@ -14,7 +9,7 @@ namespace YellowstonePathology.Business.Gateway
 	{               
 		public static Flow.FlowLogList GetByLeukemiaNotFinal()
 		{
-            SqlCommand cmd = new SqlCommand("select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.AccessionDate, pso.FinalDate, pso.PanelSetName [TestName], pso.ObjectId, pso.MasterAccessionNo " +
+            MySqlCommand cmd = new MySqlCommand("select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.AccessionDate, pso.FinalDate, pso.PanelSetName [TestName], pso.ObjectId, pso.MasterAccessionNo " +
 				"from tblPanelSetOrder pso join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
 				"where pso.PanelSetId = 20 and pso.Final = 0 order by ao.AccessionDate desc, pso.ReportNo desc");
 			cmd.CommandType = CommandType.Text;
@@ -23,7 +18,7 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static Flow.FlowLogList GetByTestType(int panelSetId)
 		{
-			SqlCommand cmd = new SqlCommand("select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.AccessionDate, pso.FinalDate, pso.PanelSetName [TestName], pso.ObjectId, pso.MasterAccessionNo " +
+			MySqlCommand cmd = new MySqlCommand("select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.AccessionDate, pso.FinalDate, pso.PanelSetName [TestName], pso.ObjectId, pso.MasterAccessionNo " +
                 "from tblPanelSetOrder pso join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
 				"Where PanelSetId = @PanelSetId order by ao.AccessionDate desc, pso.ReportNo desc");
 			cmd.CommandType = CommandType.Text;
@@ -33,7 +28,7 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static Flow.FlowLogList GetFlowLogListByReportNo(string reportNo)
 		{
-			SqlCommand cmd = new SqlCommand("select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.AccessionDate, pso.FinalDate, pso.PanelSetName [TestName], pso.ObjectId, pso.MasterAccessionNo " +
+			MySqlCommand cmd = new MySqlCommand("select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.AccessionDate, pso.FinalDate, pso.PanelSetName [TestName], pso.ObjectId, pso.MasterAccessionNo " +
 				"from tblPanelSetOrder pso join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
                 "where pso.PanelSetId not in (19,143,211,222,223) and pso.CaseType = 'Flow Cytometry' and pso.ReportNo = @ReportNo ");
 			cmd.CommandType = CommandType.Text;
@@ -43,7 +38,7 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static Flow.FlowLogList GetByAccessionMonth(DateTime date)
 		{
-			SqlCommand cmd = new SqlCommand("Select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.AccessionDate, pso.FinalDate, pso.PanelSetName [TestName], pso.ObjectId, pso.MasterAccessionNo " +
+			MySqlCommand cmd = new MySqlCommand("Select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.AccessionDate, pso.FinalDate, pso.PanelSetName [TestName], pso.ObjectId, pso.MasterAccessionNo " +
                 "from tblPanelSetOrder pso join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
 				"where pso.PanelSetId not in (19,143,211,222,223) and pso.CaseType = 'Flow Cytometry' and month(ao.AccessionDate) = @Month and Year(ao.AccessionDate) = @Year " +
 				"order by ao.AccessionDate desc, pso.ReportNo desc");
@@ -55,7 +50,7 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static Flow.FlowLogList GetByPatientName(string patientName)
 		{
-			SqlCommand cmd = new SqlCommand();
+			MySqlCommand cmd = new MySqlCommand();
 			cmd.CommandType = CommandType.Text;
 
 			string whereClause = string.Empty;
@@ -84,7 +79,7 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static Flow.FlowLogList GetByPathologistId(int pathologistId)
 		{
-			SqlCommand cmd = new SqlCommand("select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.AccessionDate, pso.FinalDate, pso.PanelSetName [TestName], pso.ObjectId, pso.MasterAccessionNo " +
+			MySqlCommand cmd = new MySqlCommand("select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.AccessionDate, pso.FinalDate, pso.PanelSetName [TestName], pso.ObjectId, pso.MasterAccessionNo " +
                 "from tblPanelSetOrder pso join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
                 "where dateadd(yy, +1, ao.AccessionDate) > getDate() and pso.AssignedToId = @PathologistId " +
 				"order by ao.AccessionDate desc, pso.ReportNo desc");
@@ -96,7 +91,7 @@ namespace YellowstonePathology.Business.Gateway
 		public static Flow.FlowMarkerCollection GetFlowMarkerCollectionByPanelId(string reportNo, int panelId)
 		{
             Flow.FlowMarkerCollection result = new Flow.FlowMarkerCollection();
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "Select @ReportNo as ReportNo, mp.MarkerName as Name, mp.Intensity, mp.Interpretation, 'true' as MarkerUsed " +
                 "from tblFlowMarkerPanel mp left outer join tblMarkers m on mp.MarkerName = m.MarkerName where PanelId = @PanelId " +
@@ -104,11 +99,11 @@ namespace YellowstonePathology.Business.Gateway
             cmd.Parameters.Add("@ReportNo", SqlDbType.VarChar).Value = reportNo;
             cmd.Parameters.Add("@PanelId", SqlDbType.Int).Value = panelId;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while(dr.Read())
                     {
@@ -122,14 +117,14 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        private static Flow.FlowLogList BuildFlowLogList(SqlCommand cmd)
+        private static Flow.FlowLogList BuildFlowLogList(MySqlCommand cmd)
 		{
 			Flow.FlowLogList result = new Flow.FlowLogList();
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{

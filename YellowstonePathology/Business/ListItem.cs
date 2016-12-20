@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business
 {
@@ -17,7 +14,7 @@ namespace YellowstonePathology.Business
 
         }
 
-        public virtual void Fill(SqlDataReader dr)
+        public virtual void Fill(MySqlDataReader dr)
         {
             BaseData.FillListItem(this, dr);
         }

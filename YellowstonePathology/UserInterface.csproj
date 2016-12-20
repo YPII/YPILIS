@@ -808,7 +808,6 @@
     <Compile Include="Business\Flow\MarkerItem.cs" />
     <Compile Include="Business\Flow\MarkerItem.Generated.cs" />
     <Compile Include="Business\FtpTransfer.cs" />
-    <Compile Include="Business\Gateway\AccessionOrderBuilder.cs" />
     <Compile Include="Business\Gateway\AccessionOrderBuilderV2.cs" />
     <Compile Include="Business\Gateway\AccessionOrderGateway.cs" />
     <Compile Include="Business\Gateway\AccessionSlideOrderViewBuilder.cs" />
@@ -1342,7 +1341,6 @@
     <Compile Include="Business\Persistence\RemoteObjectTransferAgent.cs" />
     <Compile Include="Business\Persistence\SpecimenOrderDocumentBuilder.cs" />
     <Compile Include="Business\Persistence\SqlCommandBuilder.cs" />
-    <Compile Include="Business\Persistence\SqlCommandHelper.cs" />
     <Compile Include="Business\Persistence\SqlCommandQueues.cs" />
     <Compile Include="Business\Persistence\SqlCommandSubmitter.cs" />
     <Compile Include="Business\Persistence\SqlDataReaderPropertyWriter.cs" />
@@ -1414,27 +1412,15 @@
     <Compile Include="Business\ReportNoLetter.cs" />
     <Compile Include="Business\ReportNoLetterDefinitions.cs" />
     <Compile Include="Business\Reports\CreateExcelSpreadSheet.cs" />
-    <Compile Include="Business\Reports\CytologySlideDisposalReport.xaml.cs">
-      <DependentUpon>CytologySlideDisposalReport.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Business\Reports\Cytology\CytologyUnsatLetters.cs" />
     <Compile Include="Business\Reports\IReport.cs" />
     <Compile Include="Business\Reports\LabOrderSheet.cs" />
     <Compile Include="Business\Reports\OrderLog.cs" />
     <Compile Include="Business\Reports\PatientLinkingListing.cs" />
-    <Compile Include="Business\Reports\POCRetensionReport.xaml.cs">
-      <DependentUpon>POCRetensionReport.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Business\Reports\Report.cs" />
     <Compile Include="Business\Reports\ReportBase.cs" />
     <Compile Include="Business\Reports\ReportParameterAttribute.cs" />
     <Compile Include="Business\Reports\ReportUI.cs" />
-    <Compile Include="Business\Reports\SpecimenDisposalReport.xaml.cs">
-      <DependentUpon>SpecimenDisposalReport.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Business\Reports\SurgicalSpecimenDisposalReport.xaml.cs">
-      <DependentUpon>SurgicalSpecimenDisposalReport.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Business\Reports\Surgical\SurgicalMasterLog.cs" />
     <Compile Include="Business\Requisition.cs" />
     <Compile Include="Business\Rules\Amendment\FinalAmendment.cs" />
@@ -4898,29 +4884,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Page Include="Business\Reports\CytologySlideDisposalReport.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Business\Reports\CytologySlideDisposalReportV2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Business\Reports\POCRetensionReport.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Business\Reports\POCRetensionReportV2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Business\Reports\SpecimenDisposalReport.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Business\Reports\SurgicalSpecimenDisposalReport.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Business\Reports\SurgicalSpecimenDisposalReportV2.xaml">
       <SubType>Designer</SubType>

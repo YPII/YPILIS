@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {	
 	public class SqlCommandSubmitter
     {
 
-        private Queue<SqlCommand> m_SqlInsertCommands;
-        private Queue<SqlCommand> m_SqlInsertLastCommands;
-        private Stack<SqlCommand> m_SqlDeleteFirstCommands;
-        private Stack<SqlCommand> m_SqlDeleteCommands;
-        private Queue<SqlCommand> m_SqlUpdateCommands;
+        private Queue<MySqlCommand> m_SqlInsertCommands;
+        private Queue<MySqlCommand> m_SqlInsertLastCommands;
+        private Stack<MySqlCommand> m_SqlDeleteFirstCommands;
+        private Stack<MySqlCommand> m_SqlDeleteCommands;
+        private Queue<MySqlCommand> m_SqlUpdateCommands;
         private string m_ConnectionString;
 
         public SqlCommandSubmitter(string databaseName)
@@ -32,38 +29,38 @@ namespace YellowstonePathology.Business.Persistence
                     throw new Exception("Database name does not match existing.");
             }
 
-            this.m_SqlInsertCommands = new Queue<SqlCommand>();
-            this.m_SqlInsertLastCommands = new Queue<SqlCommand>();
-            this.m_SqlDeleteFirstCommands = new Stack<SqlCommand>();
-            this.m_SqlDeleteCommands = new Stack<SqlCommand>();
-            this.m_SqlUpdateCommands = new Queue<SqlCommand>();
+            this.m_SqlInsertCommands = new Queue<MySqlCommand>();
+            this.m_SqlInsertLastCommands = new Queue<MySqlCommand>();
+            this.m_SqlDeleteFirstCommands = new Stack<MySqlCommand>();
+            this.m_SqlDeleteCommands = new Stack<MySqlCommand>();
+            this.m_SqlUpdateCommands = new Queue<MySqlCommand>();
         }
 		
-        public Queue<SqlCommand> SqlInsertCommands
+        public Queue<MySqlCommand> SqlInsertCommands
         {
             get { return this.m_SqlInsertCommands; }
 			set { this.m_SqlInsertCommands = value; }
         }
 
-		public Queue<SqlCommand> SqlInsertLastCommands
+		public Queue<MySqlCommand> SqlInsertLastCommands
         {
             get { return this.m_SqlInsertLastCommands; }
 			set { this.m_SqlInsertLastCommands = value; }
         }
 		
-		public Stack<SqlCommand> SqlDeleteFirstCommands
+		public Stack<MySqlCommand> SqlDeleteFirstCommands
         {
             get { return this.m_SqlDeleteFirstCommands; }
 			set { this.m_SqlDeleteFirstCommands = value; }
         }
 
-        public Stack<SqlCommand> SqlDeleteCommands
+        public Stack<MySqlCommand> SqlDeleteCommands
         {
             get { return this.m_SqlDeleteCommands; }
             set { this.m_SqlDeleteCommands = value; }
         }
 
-		public Queue<SqlCommand> SqlUpdateCommands
+		public Queue<MySqlCommand> SqlUpdateCommands
         {
             get { return this.m_SqlUpdateCommands; }
 			set { this.m_SqlUpdateCommands = value; }
@@ -80,11 +77,11 @@ namespace YellowstonePathology.Business.Persistence
 
             if (result.HasUpdateCommands || result.HasDeleteFirstCommands || result.HasDeleteCommands || result.HasInsertCommands || result.HasInsertLastCommands)
             {
-                using (SqlConnection cn = new SqlConnection(this.m_ConnectionString))
+                using (MySqlConnection cn = new MySqlConnection(this.m_ConnectionString))
                 {
                     cn.Open();
 
-                    SqlTransaction trans = cn.BeginTransaction();
+                    MySqlTransaction trans = cn.BeginTransaction();
                     try
                     {
                         this.RunSqlCommands(this.m_SqlUpdateCommands, cn, trans);
@@ -105,22 +102,22 @@ namespace YellowstonePathology.Business.Persistence
             return result;
         }
 
-        private void RunSqlCommands(Queue<SqlCommand> sqlCommandQueue, SqlConnection cn, SqlTransaction trans)
+        private void RunSqlCommands(Queue<MySqlCommand> sqlCommandQueue, MySqlConnection cn, MySqlTransaction trans)
         {            
             while (sqlCommandQueue.Count != 0)
             {
-                SqlCommand cmd = sqlCommandQueue.Dequeue();
+                MySqlCommand cmd = sqlCommandQueue.Dequeue();
                 cmd.Connection = cn;
                 cmd.Transaction = trans;
                 cmd.ExecuteNonQuery();
             }
         }
 
-        private void RunSqlCommands(Stack<SqlCommand> sqlCommandStack, SqlConnection cn, SqlTransaction trans)
+        private void RunSqlCommands(Stack<MySqlCommand> sqlCommandStack, MySqlConnection cn, MySqlTransaction trans)
         {            
             while (sqlCommandStack.Count != 0)
             {
-                SqlCommand cmd = sqlCommandStack.Pop();
+                MySqlCommand cmd = sqlCommandStack.Pop();
                 cmd.Connection = cn;
                 cmd.Transaction = trans;
                 cmd.ExecuteNonQuery();
@@ -130,7 +127,7 @@ namespace YellowstonePathology.Business.Persistence
         public bool HasNonASCIICharacters()
         {
             bool result = false;
-            foreach (SqlCommand sqlCommand in this.m_SqlUpdateCommands)
+            foreach (MySqlCommand sqlCommand in this.m_SqlUpdateCommands)
             {
                 for (int i = 0; i < sqlCommand.CommandText.Length; ++i)
                 {
@@ -161,7 +158,7 @@ namespace YellowstonePathology.Business.Persistence
 
         public void LogCommands()
         {
-            foreach(SqlCommand cmd in this.m_SqlUpdateCommands)
+            foreach(MySqlCommand cmd in this.m_SqlUpdateCommands)
             {
                 Console.WriteLine(cmd.CommandText);
             }

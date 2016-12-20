@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using System.Xml;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Reports
 {
@@ -40,17 +37,17 @@ namespace YellowstonePathology.Business.Reports
             this.m_Writer.WriteAttributeString("ss:Name", sheetName);                
             this.m_Writer.WriteStartElement("Table");                              
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "prcGetBillingClientReportData";
-                cmd.Parameters.Add("@StartDate", SqlDbType.VarChar, 10).Value = startDate.ToShortDateString();
-                cmd.Parameters.Add("@EndDate", SqlDbType.VarChar, 10).Value = endDate.ToShortDateString();
+                cmd.Parameters.AddWithValue("@StartDate", startDate.ToShortDateString());
+                cmd.Parameters.AddWithValue("@EndDate", endDate.ToShortDateString());
 
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     //Write column headers
                     this.m_Writer.WriteStartElement("Row");

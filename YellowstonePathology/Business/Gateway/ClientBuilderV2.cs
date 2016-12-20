@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Gateway
 {
@@ -21,13 +16,13 @@ namespace YellowstonePathology.Business.Gateway
             get { return this.m_Client; }
         }
 
-        public void Build(SqlCommand cmd)
+        public void Build(MySqlCommand cmd)
         {
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.KeyInfo))
+                using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.KeyInfo))
                 {
                     while (dr.Read())
                     {

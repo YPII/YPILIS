@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using System.Windows;
 using System.Data;
-using System.Data.SqlClient;
-using System.Xml.Serialization;    
+using System.Xml.Serialization;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business
 {
@@ -14,7 +12,7 @@ namespace YellowstonePathology.Business
     {
 		protected DataSet m_DataSet;
  		protected int m_Id;
-		protected SqlCommand m_Cmd;
+		protected MySqlCommand m_Cmd;
 		protected bool m_IsLoadedFromParent;
 		protected string m_TblName;		        
 
@@ -42,7 +40,7 @@ namespace YellowstonePathology.Business
             this.m_BrokenRules = new Validation.BrokenRuleCollection();
             this.m_PropertyChangedList = new List<PropertyChangedItem>();            
 
-			m_Cmd = new SqlCommand();
+			m_Cmd = new MySqlCommand();
 			m_DataSet = new DataSet();
 			m_TblName = string.Empty;
 			m_Id = -1;
@@ -51,7 +49,7 @@ namespace YellowstonePathology.Business
 
 		public BaseItem(DataSet dataSet, int id)
 		{
-			m_Cmd = new SqlCommand();
+			m_Cmd = new MySqlCommand();
 			m_DataSet = dataSet;
 			m_TblName = string.Empty;
 			m_Id = id;
@@ -92,7 +90,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public virtual void Fill(SqlDataReader dr)
+        public virtual void Fill(MySqlDataReader dr)
         {
             BaseData.Fill(this, dr);
         }

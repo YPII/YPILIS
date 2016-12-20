@@ -12,8 +12,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Threading;
 using System.IO;
-using System.Data;
-using System.Data.SqlClient;
 using System.ComponentModel;
 using Microsoft.Win32;
 

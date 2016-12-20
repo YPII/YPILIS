@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Reflection;
 using System.Data;
-using System.Data.SqlClient;
-using System.Xml;
-using System.Xml.Linq;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
@@ -157,7 +149,7 @@ namespace YellowstonePathology.Business.Persistence
         {
             lock (locker)
             {
-                SqlCommand cmd = new SqlCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 TypingShortcutDocumentBuilder builder = new TypingShortcutDocumentBuilder(objectId);
                 DocumentId documentId = new DocumentId(typeof(YellowstonePathology.Business.Typing.TypingShortcut), writer, objectId);
                 Document document = this.m_Stack.Pull(documentId, builder);
@@ -250,9 +242,9 @@ namespace YellowstonePathology.Business.Persistence
             lock (locker)
             {
                 string hostName = Environment.MachineName;
-                SqlCommand cmd = new SqlCommand("Select * from tblUserPreference where HostName = @HostName");
+                MySqlCommand cmd = new MySqlCommand("Select * from tblUserPreference where tblUserPreference.HostName = HostName;");
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.Add("@HostName", System.Data.SqlDbType.VarChar).Value = hostName;
+                cmd.Parameters.AddWithValue("HostName", hostName);
                 GenericDocumentBuilder builder = new GenericDocumentBuilder(cmd, typeof(YellowstonePathology.Business.User.UserPreference));
 
                 DocumentId documentId = new DocumentId(typeof(YellowstonePathology.Business.User.UserPreference), writer, hostName);
@@ -267,8 +259,8 @@ namespace YellowstonePathology.Business.Persistence
         {
             lock (locker)
             {
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "Select * from tblApplicationVersion";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = "Select * from tblApplicationVersion;";
                 cmd.CommandType = CommandType.Text;
                 GenericDocumentBuilder builder = new GenericDocumentBuilder(cmd, typeof(YellowstonePathology.Business.ApplicationVersion));
                 YellowstonePathology.Business.ApplicationVersion result = (YellowstonePathology.Business.ApplicationVersion)builder.BuildNew();
@@ -280,11 +272,9 @@ namespace YellowstonePathology.Business.Persistence
         {
             lock (locker)
             {
-                SqlCommand cmd = new SqlCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 cmd.CommandText = "gwGetClientOrderByClientOrderId";
-                SqlParameter clientOrderIdParameter = new SqlParameter("@ClientOrderId", SqlDbType.VarChar, 100);
-                clientOrderIdParameter.Value = clientOrderId;
-                cmd.Parameters.Add(clientOrderIdParameter);
+                cmd.Parameters.AddWithValue("ClientOrderId", clientOrderId);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 ClientOrderDocumentBuilder builder = new ClientOrderDocumentBuilder(cmd);
 
@@ -294,25 +284,6 @@ namespace YellowstonePathology.Business.Persistence
                 return (YellowstonePathology.Business.ClientOrder.Model.ClientOrder)document.Value;
             }
         }              
-
-        /*public YellowstonePathology.Business.ClientOrder.Model.ClientOrder PullClientOrderByExternalOrderId(string clientOrderId, object writer)
-        {
-            lock (locker)
-            {
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "gwGetClientOrderByExternalOrderId";
-                SqlParameter clientOrderIdParameter = new SqlParameter("@ExternalOrderId", SqlDbType.VarChar, 100);
-                clientOrderIdParameter.Value = clientOrderId;
-                cmd.Parameters.Add(clientOrderIdParameter);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                ClientOrderDocumentBuilder builder = new ClientOrderDocumentBuilder(cmd);
-
-                DocumentId documentId = new DocumentId(typeof(YellowstonePathology.Business.User.UserPreference), writer, clientOrderId);
-                Document document = this.m_Stack.Pull(documentId, builder);
-
-                return (YellowstonePathology.Business.ClientOrder.Model.ClientOrder)document.Value;
-            }
-        }*/
 
         public YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch PullMaterialTrackingBatch(string materialTrackingBatchId, object writer)
         {

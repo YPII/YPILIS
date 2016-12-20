@@ -1,25 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
-using System.Data.SqlClient;
-using System.Xml;
-using System.Xml.Linq;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
     public class TaskOrderDocumentBuilder : DocumentBuilder
     {
-        SqlCommand m_SQLCommand;
+        MySqlCommand m_SQLCommand;
 
         public TaskOrderDocumentBuilder(string taskOrderId)
         {
-            //this.m_SQLCommand = new SqlCommand("select tsk.*, ( select tskd.* from tblTaskOrderDetail tskd where tskd.TaskOrderId = tsk.TaskOrderId " +
+            //this.m_SQLCommand = new MySqlCommand("select tsk.*, ( select tskd.* from tblTaskOrderDetail tskd where tskd.TaskOrderId = tsk.TaskOrderId " +
             //    "for xml Path('TaskOrderDetail'), type) [TaskOrderDetailCollection] " +
             //    "from tblTaskOrder tsk where tsk.TaskOrderId = @TaskOrderId  for xml Path('TaskOrder')");
 
-            this.m_SQLCommand = new SqlCommand("select * from tblTaskOrder where TaskOrderId = @TaskOrderId " +
+            this.m_SQLCommand = new MySqlCommand("select * from tblTaskOrder where TaskOrderId = @TaskOrderId " +
                 "select * from tblTaskOrderDetail where TaskOrderId = @TaskOrderId");
             this.m_SQLCommand.CommandType = CommandType.Text;
             this.m_SQLCommand.Parameters.Add("@TaskOrderId", SqlDbType.VarChar).Value = taskOrderId;
@@ -35,11 +30,11 @@ namespace YellowstonePathology.Business.Persistence
 
         private void Build(YellowstonePathology.Business.Task.Model.TaskOrder taskOrder)
         {
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 this.m_SQLCommand.Connection = cn;
-                using (SqlDataReader dr = this.m_SQLCommand.ExecuteReader(CommandBehavior.KeyInfo))
+                using (MySqlDataReader dr = this.m_SQLCommand.ExecuteReader(CommandBehavior.KeyInfo))
                 {
                     while (dr.Read())
                     {
@@ -63,7 +58,7 @@ namespace YellowstonePathology.Business.Persistence
         {
             XElement documentElement = new XElement("Document");
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 this.m_SQLCommand.Connection = cn;

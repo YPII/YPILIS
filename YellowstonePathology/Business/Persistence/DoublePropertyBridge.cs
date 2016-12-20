@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
@@ -16,10 +12,10 @@ namespace YellowstonePathology.Business.Persistence
             
         }
 
-        public override void SetSqlParameter(SqlCommand cmd)
+        public override void SetSqlParameter(MySqlCommand cmd)
         {
             base.SetSqlParameter(cmd);
-            this.m_SqlParameter.SqlDbType = SqlDbType.Float;            
+            this.m_SqlParameter.MySqlDbType = MySqlDbType.Double;            
         }
     }
 }

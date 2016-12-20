@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Web;
-using System.Data;
-using System.Data.SqlClient;
 using YellowstonePathology.Business.Persistence;
 
 namespace YellowstonePathology.Business.Monitor.Model

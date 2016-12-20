@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.ComponentModel;
+using YellowstonePathology.Business.Persistence;
 
 namespace YellowstonePathology.Business.Client.Model
 {    
@@ -24,7 +20,8 @@ namespace YellowstonePathology.Business.Client.Model
         {
 
         }
-        
+
+        [PersistentProperty()]
         public int PhysicianID
         {
             get { return this.m_PhysicianID; }
@@ -37,7 +34,8 @@ namespace YellowstonePathology.Business.Client.Model
                 }
             }
         }
-        
+
+        [PersistentProperty()]
         public string FirstName
         {
             get { return this.m_FirstName; }
@@ -50,7 +48,8 @@ namespace YellowstonePathology.Business.Client.Model
                 }
             }
         }
-        
+
+        [PersistentProperty()]
         public string LastName
         {
             get { return this.m_LastName; }
@@ -65,6 +64,7 @@ namespace YellowstonePathology.Business.Client.Model
         }
 
         [Column(Name = "FullName", Storage = "m_FullName")]
+        [PersistentProperty()]
         public string FullName
         {
             get { return this.m_FullName; }
@@ -79,6 +79,7 @@ namespace YellowstonePathology.Business.Client.Model
         }
 
         [Column(Name = "Active", Storage = "m_Active")]
+        [PersistentProperty()]
         public bool Active
         {
             get { return this.m_Active; }

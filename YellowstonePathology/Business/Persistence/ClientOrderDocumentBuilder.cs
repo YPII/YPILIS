@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
     public class ClientOrderDocumentBuilder : DocumentBuilder
     {
-        SqlCommand m_SQLCommand;
+        MySqlCommand m_SQLCommand;
 
-        public ClientOrderDocumentBuilder(SqlCommand sqlCommand)
+        public ClientOrderDocumentBuilder(MySqlCommand sqlCommand)
         {
             this.m_SQLCommand = sqlCommand;
         }

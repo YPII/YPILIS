@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Data;
-using System.Data.SqlClient;
 using System.Xml.Linq;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Gateway
 {    
@@ -15,20 +10,21 @@ namespace YellowstonePathology.Business.Gateway
         public static YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection GetOrderBrowserListItemsByOrderDate(DateTime orderDate)
         {
             YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection resultCollection = new YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, ClientName, OrderedBy, OrderTime, Submitted, Received, OrderType " +
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, ClientName, " +
+                "OrderedBy, OrderTime, Submitted, Received, OrderType " +
                 "from tblClientOrder " +
-                "Where OrderDate = @OrderDate " + 
-                "Order by OrderTime desc";
+                "Where tblClientOrder.OrderDate = OrderDate " + 
+                "Order by OrderTime desc;";
 
-            cmd.Parameters.Add("@OrderDate", SqlDbType.DateTime).Value = orderDate;
+            cmd.Parameters.AddWithValue("OrderDate", SqlDbType.DateTime).Value = orderDate;
             cmd.CommandType = System.Data.CommandType.Text;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -46,19 +42,20 @@ namespace YellowstonePathology.Business.Gateway
         public static YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection GetOrderBrowserListItemsByHoldStatus()
         {
             YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection resultCollection = new YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, ClientName, OrderedBy, OrderTime, Submitted, Received, OrderType " +
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, ClientName, " +
+                "OrderedBy, OrderTime, Submitted, Received, OrderType " +
                 "from tblClientOrder " +
                 "Where Hold = 1 " +
-                "Order by OrderTime desc";
+                "Order by OrderTime desc;";
             
             cmd.CommandType = System.Data.CommandType.Text;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -87,21 +84,22 @@ namespace YellowstonePathology.Business.Gateway
             }
 
             YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection resultCollection = new YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "Select ClientOrderId, OrderStatus, ClientName, PanelSetId, PLastName, PFirstName, ProviderName, OrderedBy, OrderTime, Submitted, Received, OrderType " +
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "Select ClientOrderId, OrderStatus, ClientName, PanelSetId, PLastName, PFirstName, ProviderName, " +
+                "OrderedBy, OrderTime, Submitted, Received, OrderType " +
                 "from tblClientOrder " +
                 "Where ClientId in (" + clientIdString + ") and " +
-                "OrderTime >  dateadd(dd, -7, getdate()) and " +
+                "OrderTime >  date_add(curdate(), Interval -7 Day) and " +
                 "SystemInitiatingOrder <> 'YPIILIS' " +
-                "Order by OrderTime desc";
+                "Order by OrderTime desc;";
 
             cmd.CommandType = System.Data.CommandType.Text;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -119,20 +117,21 @@ namespace YellowstonePathology.Business.Gateway
 		public static YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection GetOrderBrowserListItemsByMasterAccessionNo(string masterAccessionNo)
 		{
 			YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection resultCollection = new YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection();
-			SqlCommand cmd = new SqlCommand();
-			cmd.Parameters.Add("@MasterAccessionNo", SqlDbType.VarChar).Value = masterAccessionNo;
-			cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, ClientName, OrderedBy, OrderTime, Submitted, Received, OrderType " +
+			MySqlCommand cmd = new MySqlCommand();
+			cmd.Parameters.AddWithValue("MasterAccessionNo", masterAccessionNo);
+			cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, ClientName, " +
+                "OrderedBy, OrderTime, Submitted, Received, OrderType " +
 				"from tblClientOrder " +
-				"Where MasterAccessionNo = @MasterAccessionNo " +
-				"Order by OrderTime desc";
+                "Where tblClientOrder.MasterAccessionNo = MasterAccessionNo " +
+				"Order by OrderTime desc;";
 
 			cmd.CommandType = System.Data.CommandType.Text;
 
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -150,27 +149,30 @@ namespace YellowstonePathology.Business.Gateway
 		public static YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection GetOrderBrowserListItemsByPatientName(string lastName, string firstName)
 		{
 			YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection resultCollection = new YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection();
-			SqlCommand cmd = new SqlCommand();
-			cmd.Parameters.Add("@PLastName", SqlDbType.VarChar).Value = lastName;
+			MySqlCommand cmd = new MySqlCommand();
+			cmd.Parameters.AddWithValue("PLastName", lastName);
 			if (string.IsNullOrEmpty(firstName) == true)
 			{
-				cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, ClientName, OrderedBy, OrderTime, Submitted, Received, OrderType " +
-					"from tblClientOrder Where PLastName like @PLastName + '%' Order by OrderTime desc";
+				cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, " +
+                    "ClientName, OrderedBy, OrderTime, Submitted, Received, OrderType " +
+                    "from tblClientOrder Where tblClientOrder.PLastName like concat(PLastName, '%') Order by OrderTime desc;";
 			}
 			else
 			{
-				cmd.Parameters.Add("@PFirstName", SqlDbType.VarChar).Value = firstName;
-				cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, ClientName, OrderedBy, OrderTime, Submitted, Received, OrderType " +
-					"from tblClientOrder Where PLastName like @PLastName + '%' and  PFirstName like @PFirstName + '%' Order by OrderTime desc";
+				cmd.Parameters.AddWithValue("@PFirstName", SqlDbType.VarChar).Value = firstName;
+				cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, " +
+                    "ClientName, OrderedBy, OrderTime, Submitted, Received, OrderType " +
+                    "from tblClientOrder Where tblClientOrder.PLastName like concat(PLastName, '%') and PFirstName like " +
+                    "concat(PFirstName, '%') Order by OrderTime desc;";
 			}
 
 			cmd.CommandType = System.Data.CommandType.Text;
 
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -187,24 +189,31 @@ namespace YellowstonePathology.Business.Gateway
 
         public static YellowstonePathology.Business.Client.Model.PhysicianCollection GetPhysiciansByClientId(int clientId)
         {
-            YellowstonePathology.Business.Client.Model.PhysicianCollection physicianCollection = null;
+            YellowstonePathology.Business.Client.Model.PhysicianCollection physicianCollection = new Client.Model.PhysicianCollection();
 
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select ph.* " +
                 "from tblPhysician ph " +
                 "join tblPhysicianClient pc on ph.PhysicianId = pc.PhysicianId " +
                 "join tblClient c on pc.ClientId = c.ClientId " +
-                "where c.ClientId = @ClientId for xml path('Physician'), root('PhysicianCollection')";
-            cmd.Parameters.Add("@ClientId", SqlDbType.Int).Value = clientId;
+                "where c.ClientId = ClientId";
+            cmd.Parameters.AddWithValue("ClientId", clientId);
             cmd.CommandType = System.Data.CommandType.Text;
 
-            try
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
-                //physicianCollection = YellowstonePathology.Business.Domain.Persistence.SqlXmlPersistence.CrudOperations.ExecuteXmlCommand<YellowstonePathology.YpiConnect.Contract.Domain.PhysicianCollection>(cmd, Business.Domain.Persistence.DataLocationEnum.ProductionData);
-            }
-            catch (Exception)
-            {
-                physicianCollection = new YellowstonePathology.Business.Client.Model.PhysicianCollection();
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while(dr.Read())
+                    {
+                        Client.Model.Physician physician = new Client.Model.Physician();
+                        Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(physician, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        physicianCollection.Add(physician);
+                    }
+                }
             }
 
             return physicianCollection;
@@ -212,21 +221,18 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection GetClientOrdersByMasterAccessionNo(string masterAccessionNo)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "gwGetClientOrdersByMasterAccessionNo";
-
-            SqlParameter masterAccessionNoParameter = new SqlParameter("@MasterAccessionNo", SqlDbType.VarChar, 100);
-            masterAccessionNoParameter.Value = masterAccessionNo;
-            cmd.Parameters.Add(masterAccessionNoParameter);
+            cmd.Parameters.AddWithValue("MasterAccessionNo", masterAccessionNo);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = new YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection();
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     BuildClientOrderCollection(dr, clientOrderCollection);
                 }
@@ -237,21 +243,18 @@ namespace YellowstonePathology.Business.Gateway
 
         public static YellowstonePathology.Business.ClientOrder.Model.ClientOrder GetClientOrderByExternalOrderId(string externalOrderId)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "gwGetClientOrderByExternalOrderId";
-
-            SqlParameter externalOrderIdParameter = new SqlParameter("@ExternalOrderId", SqlDbType.VarChar, 100);
-            externalOrderIdParameter.Value = externalOrderId;
-            cmd.Parameters.Add(externalOrderIdParameter);
+            cmd.Parameters.AddWithValue("ExternalOrderId", externalOrderId);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = null;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     clientOrder = BuildClientOrder(dr);
                     dr.NextResult();
@@ -269,21 +272,18 @@ namespace YellowstonePathology.Business.Gateway
 
         public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection GetClientOrdersBySvhAccountNo(string svhAccountNo)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "gwGetClientOrdersBySvhAccount";
-
-            SqlParameter svhAccountParameter = new SqlParameter("@SvhAccount", SqlDbType.VarChar, 100);
-            svhAccountParameter.Value = svhAccountNo;
-            cmd.Parameters.Add(svhAccountParameter);
+            cmd.Parameters.AddWithValue("SvhAccount", svhAccountNo);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = new YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection();
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     BuildClientOrderCollection(dr, clientOrderCollection);                    
                 }
@@ -294,19 +294,18 @@ namespace YellowstonePathology.Business.Gateway
 
         public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection GetClientOrdersByExternalOrderId(string externalOrderId)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "gwGetClientOrdersByExternalOrderId";
-
-            cmd.Parameters.Add("@ExternalOrderId", SqlDbType.VarChar).Value = externalOrderId;
+            cmd.Parameters.AddWithValue("ExternalOrderId", SqlDbType.VarChar).Value = externalOrderId;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = new YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection();
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     BuildClientOrderCollection(dr, clientOrderCollection);
                 }
@@ -317,19 +316,18 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection GetClientOrdersBySvhMedicalRecord(string svhMedicalRecord)
 		{
-			SqlCommand cmd = new SqlCommand();
+			MySqlCommand cmd = new MySqlCommand();
 			cmd.CommandText = "gwGetClientOrdersBySvhMedicalRecord";
-
-			cmd.Parameters.Add("@SvhMedicalRecord", SqlDbType.VarChar).Value = svhMedicalRecord;
+			cmd.Parameters.AddWithValue("SvhMedicalRecord", SqlDbType.VarChar).Value = svhMedicalRecord;
 			cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = new YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection();
 
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					BuildClientOrderCollection(dr, clientOrderCollection);
 				}
@@ -340,22 +338,19 @@ namespace YellowstonePathology.Business.Gateway
 
         public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection GetClientOrdersByOrderDate(DateTime orderDate)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "gwGetClientOrdersByOrderDate";
-
-            SqlParameter orderDateParameter = new SqlParameter("@OrderDate", SqlDbType.DateTime);
-            orderDateParameter.Value = orderDate;
-            cmd.Parameters.Add(orderDateParameter);            
+            cmd.Parameters.AddWithValue("OrderDate", orderDate);            
 
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = new YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection();
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     BuildClientOrderCollection(dr, clientOrderCollection);
                 }
@@ -366,26 +361,19 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection GetClientOrdersByPatientName(string pFirstName, string pLastName)
 		{			
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "gwGetClientOrdersByPatientName";
-
-            SqlParameter firstNameParameter = new SqlParameter("@PFirstName", SqlDbType.VarChar, 100);
-            firstNameParameter.Value = pFirstName;
-            cmd.Parameters.Add(firstNameParameter);
-
-            SqlParameter lastNameParameter = new SqlParameter("@PLastName", SqlDbType.VarChar, 100);
-            lastNameParameter.Value = pLastName;
-            cmd.Parameters.Add(lastNameParameter);
-
+            cmd.Parameters.AddWithValue("PFirstName", pFirstName);
+            cmd.Parameters.AddWithValue("PLastName", pLastName);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = new YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection();
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     BuildClientOrderCollection(dr, clientOrderCollection);
                 }
@@ -396,20 +384,18 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static string GetClientOrderByContainerId(string containerId)
 		{
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select co.ClientOrderId " +
                 "from tblClientOrder co " +
                 "join tblClientOrderDetail cod on co.ClientOrderId = cod.ClientOrderId " +
-                "where cod.Containerid = @ContainerId";
+                "where cod.Containerid = ContainerId;";
 
-            SqlParameter containerIdParameter = new SqlParameter("@ContainerId", SqlDbType.VarChar, 100);
-            containerIdParameter.Value = containerId;
-            cmd.Parameters.Add(containerIdParameter);
+            cmd.Parameters.AddWithValue("ContainerId", containerId);
             cmd.CommandType = System.Data.CommandType.Text;
 
             string result = null;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
@@ -421,21 +407,18 @@ namespace YellowstonePathology.Business.Gateway
 
         public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection GetClientOrderCollectionByContainerIdString(string containerIdString)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "gwGetClientOrdersByContainerIdString";
-
-            SqlParameter containerIdStringParameter = new SqlParameter("@ContainerIdString", SqlDbType.VarChar);
-            containerIdStringParameter.Value = containerIdString;
-            cmd.Parameters.Add(containerIdStringParameter);
+            cmd.Parameters.AddWithValue("ContainerIdString", containerIdString);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = new YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection();
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     BuildClientOrderCollection(dr, clientOrderCollection);
                 }
@@ -446,9 +429,9 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetail GetClientOrderDetailByContainerId(string containerId)
 		{
-			SqlCommand cmd = new SqlCommand();
+			MySqlCommand cmd = new MySqlCommand();
 			cmd.CommandText = "gwGetClientOrderDetailByContainerId";
-			cmd.Parameters.Add("@ContainerId", SqlDbType.VarChar).Value = containerId;
+			cmd.Parameters.AddWithValue("ContainerId", SqlDbType.VarChar).Value = containerId;
 			cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
 			return BuildClientOrderDetail(cmd);
@@ -457,15 +440,15 @@ namespace YellowstonePathology.Business.Gateway
 		public static string GetContainerIdByLast12Characters(string last12Characters)
 		{
 			string result = string.Empty;
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
-				SqlCommand cmd = new SqlCommand("Select ContainerId from tblClientOrderDetail where ContainerId like '%' + @Last12Characters");
+				MySqlCommand cmd = new MySqlCommand("Select ContainerId from tblClientOrderDetail where ContainerId like concat('%', Last12Characters);");
 				cmd.CommandType = System.Data.CommandType.Text;
-				cmd.Parameters.Add("@Last12Characters", SqlDbType.VarChar).Value = last12Characters;
+				cmd.Parameters.AddWithValue("Last12Characters", last12Characters);
 				cmd.Connection = cn;
 
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -479,16 +462,17 @@ namespace YellowstonePathology.Business.Gateway
 		public static YellowstonePathology.Business.ClientOrder.Model.ShipmentListItemCollection GetShipmentListItemCollection(int clientId)
 		{
 			YellowstonePathology.Business.ClientOrder.Model.ShipmentListItemCollection resultCollection = new YellowstonePathology.Business.ClientOrder.Model.ShipmentListItemCollection();
-			SqlCommand cmd = new SqlCommand();
-			cmd.CommandText = " Select * from tblShipment where ClientId = @ClientId and (ShipDate is null or datediff(dd, ShipDate, getdate()) < 8) order by ShipDate Desc";
+			MySqlCommand cmd = new MySqlCommand();
+			cmd.CommandText = " Select * from tblShipment where tblShipment.ClientId = ClientId and (ShipDate is null or " +
+                "datediff(curdate(), ShipDate) < 8) order by ShipDate Desc;";
 			cmd.CommandType = CommandType.Text;
-			cmd.Parameters.Add("@ClientId", SqlDbType.Int).Value = clientId;
+			cmd.Parameters.AddWithValue("ClientId", clientId);
 
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -506,10 +490,10 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static YellowstonePathology.Business.ClientOrder.Model.ShipmentReturnResult GetShipment(string shipmentId)
 		{
-			SqlCommand cmd = new SqlCommand();
+			MySqlCommand cmd = new MySqlCommand();
 			cmd.CommandText = "ws_GetShipment";
 			cmd.CommandType = CommandType.StoredProcedure;
-			cmd.Parameters.Add("@ShipmentId", SqlDbType.VarChar).Value = shipmentId;
+			cmd.Parameters.AddWithValue("ShipmentId", shipmentId);
 
             YellowstonePathology.Business.ClientOrder.Model.ShipmentReturnResult shipmentReturnResult = new YellowstonePathology.Business.ClientOrder.Model.ShipmentReturnResult();
 
@@ -519,11 +503,11 @@ namespace YellowstonePathology.Business.Gateway
             shipmentReturnResult.Shipment = shipment;
             shipmentReturnResult.ClientOrderDetailCollection = clientOrderDetailCollection;
 
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -542,9 +526,9 @@ namespace YellowstonePathology.Business.Gateway
 
 		public XElement PackingSlipReport(string shipmentId)
 		{
-			SqlCommand cmd = new SqlCommand("ws_PackingSlipReport");
+			MySqlCommand cmd = new MySqlCommand("ws_PackingSlipReport");
 			cmd.CommandType = CommandType.StoredProcedure;
-			cmd.Parameters.Add("ShipmentId", SqlDbType.VarChar).Value = shipmentId;
+			cmd.Parameters.AddWithValue("ShipmentId", SqlDbType.VarChar).Value = shipmentId;
 
             throw new Exception("This needs to be fixed");
             /*
@@ -555,8 +539,8 @@ namespace YellowstonePathology.Business.Gateway
 
 		public YellowstonePathology.Business.ClientOrder.Model.OrderTypeCollection GetAllOrderTypes()
 		{
-			SqlCommand cmd = new SqlCommand();
-			cmd.CommandText = "Select * from tblOrderType order by priority";
+			MySqlCommand cmd = new MySqlCommand();
+			cmd.CommandText = "Select * from tblOrderType order by priority;";
 			cmd.CommandType = System.Data.CommandType.Text;
 
 			YellowstonePathology.Business.ClientOrder.Model.OrderTypeCollection result = BuildOrderTypeCollection(cmd);
@@ -565,9 +549,9 @@ namespace YellowstonePathology.Business.Gateway
 
 		public YellowstonePathology.Business.ClientOrder.Model.OrderCategoryCollection GetAllOrderCategories()
 		{
-			SqlCommand cmd = new SqlCommand();
+			MySqlCommand cmd = new MySqlCommand();
 			cmd.CommandText = "Select * from tblOrderCategory order by priority; " +
-				"Select * from tblOrderType order by priority";
+				"Select * from tblOrderType order by priority;";
 			cmd.CommandType = System.Data.CommandType.Text;
 
 			YellowstonePathology.Business.ClientOrder.Model.OrderCategoryCollection result = BuildOrderCategoryCollection(cmd);
@@ -576,11 +560,11 @@ namespace YellowstonePathology.Business.Gateway
 
 		public YellowstonePathology.Business.ClientOrder.Model.OrderCategoryCollection GetOrderCategory(string orderCategoryId)
 		{
-			SqlCommand cmd = new SqlCommand();
-			cmd.CommandText = "Select * from tblOrderCategory where OrderCategoryId = @OrderCategoryId order by Priority; " +
-				"Select * from tblOrderType where OrderCategoryId = @OrderCategoryId order by Priority";
+			MySqlCommand cmd = new MySqlCommand();
+			cmd.CommandText = "Select * from tblOrderCategory where tblOrderCategory.OrderCategoryId = OrderCategoryId order by Priority; " +
+                "Select * from tblOrderType where tblOrderType.OrderCategoryId = OrderCategoryId order by Priority;";
 			cmd.CommandType = System.Data.CommandType.Text;
-			cmd.Parameters.Add("@OrderCategoryId", SqlDbType.VarChar).Value = orderCategoryId;
+			cmd.Parameters.AddWithValue("OrderCategoryId", orderCategoryId);
 
 			YellowstonePathology.Business.ClientOrder.Model.OrderCategoryCollection result = BuildOrderCategoryCollection(cmd);
 			return result;
@@ -589,16 +573,17 @@ namespace YellowstonePathology.Business.Gateway
 		public static YellowstonePathology.Business.ClientOrder.Model.ContainerIdLookupResponse DoesContainerIdExist(string containerId, string clientOrderDetailId)
 		{
             YellowstonePathology.Business.ClientOrder.Model.ContainerIdLookupResponse result = new YellowstonePathology.Business.ClientOrder.Model.ContainerIdLookupResponse();
-			SqlCommand cmd = new SqlCommand();
-			cmd.CommandText = "Select count(*) from tblClientOrderDetail where ContainerId = @ContainerId and ClientOrderDetailId <> @ClientOrderDetailId";
+			MySqlCommand cmd = new MySqlCommand();
+			cmd.CommandText = "Select count(*) from tblClientOrderDetail where tblClientOrderDetail.ContainerId = ContainerId and " +
+                "tblClientOrderDetail.ClientOrderDetailId <> ClientOrderDetailId;";
 			cmd.CommandType = System.Data.CommandType.Text;
-			cmd.Parameters.Add("@ContainerId", SqlDbType.VarChar).Value = containerId;
-			cmd.Parameters.Add("@ClientOrderDetailId", SqlDbType.VarChar).Value = clientOrderDetailId;
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			cmd.Parameters.AddWithValue("ContainerId", containerId);
+			cmd.Parameters.AddWithValue("ClientOrderDetailId", clientOrderDetailId);
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -613,7 +598,7 @@ namespace YellowstonePathology.Business.Gateway
 			return result;
 		}        		
 
-		public static void BuildClientOrderDetailCollection(YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetailCollection clientOrderDetailCollection, SqlDataReader dr)
+		public static void BuildClientOrderDetailCollection(YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetailCollection clientOrderDetailCollection, MySqlDataReader dr)
 		{        
             int clientOrderDetailCount = 0;
             while (dr.Read())
@@ -651,7 +636,7 @@ namespace YellowstonePathology.Business.Gateway
             }
 		}
 
-        public static YellowstonePathology.Business.ClientOrder.Model.ClientOrder BuildClientOrder(SqlDataReader dr)
+        public static YellowstonePathology.Business.ClientOrder.Model.ClientOrder BuildClientOrder(MySqlDataReader dr)
         {
             YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = null;
             Nullable<int> panelSetId = null;
@@ -684,7 +669,7 @@ namespace YellowstonePathology.Business.Gateway
             return clientOrder;
         }
 
-        public static void BuildClientOrderCollection(SqlDataReader dr, YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection)
+        public static void BuildClientOrderCollection(MySqlDataReader dr, YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection)
         {
             int clientOrderIdCount = 0;
             while (dr.Read())
@@ -709,14 +694,14 @@ namespace YellowstonePathology.Business.Gateway
             }
         }
 
-        public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetail BuildClientOrderDetail(SqlCommand cmd)
+        public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetail BuildClientOrderDetail(MySqlCommand cmd)
         {
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetail clientOrderDetail = null; 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
 					string orderTypeCode = null;
 					while (dr.Read())
@@ -751,14 +736,14 @@ namespace YellowstonePathology.Business.Gateway
             return clientOrderDetail;
         }                
 
-		private static YellowstonePathology.Business.ClientOrder.Model.OrderTypeCollection BuildOrderTypeCollection(SqlCommand cmd)
+		private static YellowstonePathology.Business.ClientOrder.Model.OrderTypeCollection BuildOrderTypeCollection(MySqlCommand cmd)
 		{
             YellowstonePathology.Business.ClientOrder.Model.OrderTypeCollection orderTypeCollection = new YellowstonePathology.Business.ClientOrder.Model.OrderTypeCollection();
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -773,14 +758,14 @@ namespace YellowstonePathology.Business.Gateway
 			return orderTypeCollection;
 		}
 
-		private static YellowstonePathology.Business.ClientOrder.Model.OrderCategoryCollection BuildOrderCategoryCollection(SqlCommand cmd)
+		private static YellowstonePathology.Business.ClientOrder.Model.OrderCategoryCollection BuildOrderCategoryCollection(MySqlCommand cmd)
 		{
             YellowstonePathology.Business.ClientOrder.Model.OrderCategoryCollection orderCategoryCollection = new YellowstonePathology.Business.ClientOrder.Model.OrderCategoryCollection();
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{

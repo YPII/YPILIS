@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using System.Data.SqlClient;
+
 using System.Xml;
 using System.Xml.Linq;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Domain.Persistence
 {
     public class DataReaderPropertyWriter : IPropertyWriter
     {
-        SqlDataReader m_SqlDataReader;
+        MySqlDataReader m_SqlDataReader;
 
-        public DataReaderPropertyWriter(SqlDataReader sqlDataReader)
+        public DataReaderPropertyWriter(MySqlDataReader sqlDataReader)
         {
             this.m_SqlDataReader = sqlDataReader;
         }

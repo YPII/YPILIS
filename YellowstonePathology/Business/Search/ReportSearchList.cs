@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
-using System.Windows;
-using System.Windows.Data;
 using System.Xml.Serialization;
 
 namespace YellowstonePathology.Business.Search

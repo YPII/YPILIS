@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Validation
 {
@@ -42,7 +39,7 @@ namespace YellowstonePathology.Business.Validation
             set { this.m_Severity = value; }
         }
 
-        public void Fill(SqlDataReader dr)
+        public void Fill(MySqlDataReader dr)
         {
             this.AccessionNo = BaseData.GetStringValue("AccessionNo", dr);
             this.Description = BaseData.GetStringValue("Description", dr);

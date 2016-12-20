@@ -1,33 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Gateway
 {
     public class ClientOrderBuilder
     {
-        SqlCommand m_Command;
-        SqlConnection m_Connection;
-        SqlDataReader m_DataReader;
+        MySqlCommand m_Command;
+        MySqlConnection m_Connection;
+        MySqlDataReader m_DataReader;
         YellowstonePathology.Business.ClientOrder.Model.ClientOrder m_ClientOrder;
 
-        public ClientOrderBuilder(SqlCommand cmd)
+        public ClientOrderBuilder(MySqlCommand cmd)
         {
             this.m_Command = cmd;
-            this.m_Connection = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString);
+            this.m_Connection = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString);
             this.m_Connection.Open();
             this.m_Command.Connection = this.m_Connection;
             this.m_DataReader = this.m_Command.ExecuteReader();
         }
 
-        public ClientOrderBuilder(YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder, SqlCommand cmd)
+        public ClientOrderBuilder(YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder, MySqlCommand cmd)
         {
             this.m_ClientOrder = clientOrder;
             this.m_Command = cmd;
-            this.m_Connection = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString);
+            this.m_Connection = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString);
             this.m_Connection.Open();
             this.m_Command.Connection = this.m_Connection;
             this.m_DataReader = this.m_Command.ExecuteReader();

@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace YellowstonePathology.Business
 {
@@ -40,14 +36,14 @@ namespace YellowstonePathology.Business
         void m_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             System.Windows.MessageBox.Show("asdf");            
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 cmd.CommandText = "prcGetLabOrdersNotAcknowledged";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     if (dr.HasRows == true)
                     {

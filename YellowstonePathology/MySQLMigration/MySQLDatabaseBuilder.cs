@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
-using MySql.Data;
+using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using System.Data;
-using System.Data.SqlClient;
-using System.IO;
 
 namespace YellowstonePathology.MySQLMigration
 {

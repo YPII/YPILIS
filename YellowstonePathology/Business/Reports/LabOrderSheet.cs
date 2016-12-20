@@ -5,9 +5,10 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml;
 using System.Data;
-using System.Data.SqlClient;
+
 using System.Xml.Linq;
 using System.Linq;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Reports
 {

@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Data;
-using System.Data.SqlClient;
-using System.Xml;
-using System.Xml.Linq;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
     public class ProviderDocumentBuilder : DocumentBuilder
     {
-        private SqlCommand m_SQLCommand;
+        private MySqlCommand m_SQLCommand;
 
         public ProviderDocumentBuilder(int physicianId)
         {
-            this.m_SQLCommand = new SqlCommand();
+            this.m_SQLCommand = new MySqlCommand();
             this.m_SQLCommand.CommandText = "select * From tblPhysician where PhysicianId = @PhysicianId";
             this.m_SQLCommand.CommandType = CommandType.Text;
             this.m_SQLCommand.Parameters.Add("@PhysicianId", SqlDbType.Int).Value = physicianId;
@@ -29,12 +25,12 @@ namespace YellowstonePathology.Business.Persistence
 
         private void Build(YellowstonePathology.Business.Domain.Physician physician)
         {
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 m_SQLCommand.Connection = cn;
 
-                using (SqlDataReader dr = m_SQLCommand.ExecuteReader())
+                using (MySqlDataReader dr = m_SQLCommand.ExecuteReader())
                 {
                     while (dr.Read())
                     {

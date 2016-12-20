@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using System.Data.SqlClient;
 using System.Collections;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Document.Old.DataClasses
 {   
@@ -13,27 +10,25 @@ namespace YellowstonePathology.Business.Document.Old.DataClasses
         public DataSet GetDataSetFromSqlStatementsWithHistory(ArrayList sqlStatements, ArrayList tableNames, string reportNo)
         {
             DataSet dataSet = new DataSet();
-			SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString);
+			MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString);
             cn.Open();
 
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = cn;
             cmd.CommandType = CommandType.Text;
 
             for (int i = 0; i < sqlStatements.Count; i++)
             {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
                 cmd.CommandText = (string)sqlStatements[i];
                 dataAdapter.SelectCommand = cmd;                
                 dataAdapter.Fill(dataSet, (string)tableNames[i]);
             }
 
-            SqlDataAdapter dataAdapterHist = new SqlDataAdapter();
+            MySqlDataAdapter dataAdapterHist = new MySqlDataAdapter();
             cmd.CommandText = "prcGetCaseHistory";
             cmd.CommandType = CommandType.StoredProcedure;
-            SqlParameter param = new SqlParameter("@ReportNo", SqlDbType.VarChar);
-            param.Value = reportNo;
-            cmd.Parameters.Add(param);
+            cmd.Parameters.AddWithValue("ReportNo", reportNo);
             dataAdapterHist.SelectCommand = cmd;
             dataAdapterHist.Fill(dataSet, "tblCaseHistory");
 

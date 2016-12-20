@@ -4,18 +4,19 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Web;
 using System.Data;
-using System.Data.SqlClient;
+
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Patient.Model
 {
     public class PatientHistoryList : ObservableCollection<PatientHistoryListItem>
     {
-		private SqlCommand m_SqlCommand;
+		private MySqlCommand m_SqlCommand;
 		Document.CaseDocumentCollection m_CaseDocumentCollection;
 
 		public PatientHistoryList()
 		{
-			this.m_SqlCommand = new SqlCommand();
+			this.m_SqlCommand = new MySqlCommand();
 		}
 
 		public Document.CaseDocumentCollection CaseDocumentCollection
@@ -39,11 +40,11 @@ namespace YellowstonePathology.Business.Patient.Model
 		public void Fill()
 		{
 			this.Clear();
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				this.m_SqlCommand.Connection = cn;
-				using (SqlDataReader dr = this.m_SqlCommand.ExecuteReader())
+				using (MySqlDataReader dr = this.m_SqlCommand.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -103,7 +104,7 @@ namespace YellowstonePathology.Business.Patient.Model
 			get { return this.m_AccessionDate; }
 		}
 
-		public void Fill(SqlDataReader dr)
+		public void Fill(MySqlDataReader dr)
 		{
 			this.m_ReportNo = BaseData.GetStringValue("ReportNo", dr);
 			this.m_AccessionDate = BaseData.GetDateTimeValue("AccessionDate", dr);

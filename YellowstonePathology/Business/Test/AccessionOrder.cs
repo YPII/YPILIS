@@ -1,12 +1,13 @@
 using System;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+
 using System.Linq;
 using System.Xml.Linq;
 using System.Text;
 using YellowstonePathology.Business.Persistence;
 using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Test
 {

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Gateway
 {
@@ -15,15 +11,15 @@ namespace YellowstonePathology.Business.Gateway
         {
             XElement result = new XElement("SpecimenOrders");
 
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select * from tblSpecimenOrder where MasterAccessionno = '" + masterAccessionNo + "' order by SpecimenNumber";
             cmd.CommandType = CommandType.Text;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -44,16 +40,16 @@ namespace YellowstonePathology.Business.Gateway
 
 		/*public static XElement GetAccessionOrder(string masterAccessionNo)
         {            
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select * from tblAccessionOrder where MasterAccessionno = '" + masterAccessionNo + "'";
             cmd.CommandType = CommandType.Text;
 
             YellowstonePathology.Business.Test.AccessionOrder accessionOrder = new Test.AccessionOrder();
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -93,17 +89,17 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static XElement GetOrderComments(string masterAccessionNo)
 		{
-			SqlCommand cmd = new SqlCommand();
+			MySqlCommand cmd = new MySqlCommand();
 			cmd.CommandText = "Select * from tblOrderCommentLog where MasterAccessionNo = @MasterAccessionNo; ";
 			cmd.CommandType = CommandType.Text;
 			cmd.Parameters.Add("@MasterAccessionNo", SqlDbType.VarChar).Value = masterAccessionNo;
 
 			XElement result = new XElement("OrderComments");
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -153,13 +149,13 @@ namespace YellowstonePathology.Business.Gateway
 
         /*public static YellowstonePathology.Business.Domain.XElementFromSql GetXmlOrdersToAcknowledge(string panelOrderIds)
 		{
-			SqlCommand cmd = new SqlCommand();
+			MySqlCommand cmd = new MySqlCommand();
 			cmd.CommandText = "pGetXmlOrdersToAcknowledge_A1";
 			cmd.CommandType = CommandType.StoredProcedure;
 			cmd.Parameters.Add("@PanelOrderIdString", SqlDbType.VarChar).Value = panelOrderIds;
 
 			XElement fromSqlElement = new XElement("Document");
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
@@ -179,16 +175,16 @@ namespace YellowstonePathology.Business.Gateway
         public static YellowstonePathology.Business.Reports.LabOrderSheetData GetOrdersToAcknowledge(string panelOrderIds)
         {
             Reports.LabOrderSheetData result = new Reports.LabOrderSheetData();
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "pGetXmlOrdersToAcknowledge_A2";
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@PanelOrderIdString", SqlDbType.VarChar).Value = panelOrderIds;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while(dr.Read())
                     {
@@ -262,18 +258,18 @@ namespace YellowstonePathology.Business.Gateway
 
         public static Test.AccessionOrder GetAccessionOrder(string masterAccessionNo)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select * from tblAccessionOrder where MasterAccessionno = @MasterAccessionNo " +
                 "Select * from tblSpecimenOrder where MasterAccessionNo = @MasterAccessionNo order by SpecimenNumber";
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@MasterAccessionNo", SqlDbType.VarChar).Value = masterAccessionNo;
 
             YellowstonePathology.Business.Test.AccessionOrder result = new Test.AccessionOrder();
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -298,14 +294,14 @@ namespace YellowstonePathology.Business.Gateway
         /*public static XElement GetClientBillingDetailReport(DateTime postDateStart, DateTime postDateEnd, Nullable<int> clientGroupId)
         {
             XElement result = new XElement("Document");
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "prcGetClientBillingDetailReport";
             cmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = postDateStart;
             cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = postDateEnd;
             cmd.Parameters.Add("@ClientGroupId", SqlDbType.Int).Value = clientGroupId;                        
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
@@ -324,18 +320,18 @@ namespace YellowstonePathology.Business.Gateway
         public static XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportData GetClientBillingDetailReport(DateTime postDateStart, DateTime postDateEnd, Nullable<int> clientGroupId)
         {
             XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportData result = new XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportData();
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "prcGetClientBillingDetailReport_1";
             cmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = postDateStart;
             cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = postDateEnd;
             cmd.Parameters.Add("@ClientGroupId", SqlDbType.Int).Value = clientGroupId;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -410,7 +406,7 @@ namespace YellowstonePathology.Business.Gateway
         /*public static XElement GetClientSupplyOrderReportData(string clientSupplyOrderId)
         {
             XElement result = new XElement("Document");
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "SELECT c.*," +
                 " (Select cd.* " +
                 "  from tblClientSupplyOrderDetail cd where cd.clientSupplyOrderId = c.clientSupplyOrderId for xml path('ClientSupplyOrderDetail'), type) ClientSupplyOrderDetailCollection" +
@@ -418,7 +414,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@ClientSupplyOrderId", SqlDbType.VarChar).Value = clientSupplyOrderId;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;

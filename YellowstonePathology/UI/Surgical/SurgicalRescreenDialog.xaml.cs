@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.UI.Surgical
 {
@@ -101,12 +92,12 @@ namespace YellowstonePathology.UI.Surgical
 				{
 					string specimenOrderId = item.SpecimenOrderId;
 
-					SqlCommand cmd = new SqlCommand();
+					MySqlCommand cmd = new MySqlCommand();
 					cmd.CommandText = "Update tblSurgicalSpecimen set RescreenStatus = @RescreenStatus where SpecimenOrderId = @SpecimenOrderId";
 					cmd.CommandType = CommandType.Text;
 					cmd.Parameters.Add("@RescreenStatus", SqlDbType.VarChar).Value = rescreenStatus;
 					cmd.Parameters.Add("@SpecimenOrderId", SqlDbType.VarChar).Value = specimenOrderId;
-					using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+					using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 					{
 						cn.Open();
 						cmd.Connection = cn;

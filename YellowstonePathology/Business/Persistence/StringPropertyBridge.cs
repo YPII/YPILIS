@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
-using System.Data.SqlClient;
 using System.Reflection;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
@@ -35,12 +32,12 @@ namespace YellowstonePathology.Business.Persistence
             return this.m_StringPropertyValue;
         }
 
-        public override void SetSqlParameter(SqlCommand cmd)
+        public override void SetSqlParameter(MySqlCommand cmd)
         {
-            this.m_SqlParameter = new SqlParameter();
+            this.m_SqlParameter = new MySqlParameter();
             this.m_SqlParameter.ParameterName = this.m_AtName;
             this.m_SqlParameter.Direction = ParameterDirection.Input;
-            this.m_SqlParameter.SqlDbType = SqlDbType.NVarChar;
+            this.m_SqlParameter.DbType = DbType.String;
             
             if (string.IsNullOrEmpty(this.m_StringPropertyValue) == false)
             {

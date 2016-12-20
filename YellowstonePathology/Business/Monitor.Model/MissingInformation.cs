@@ -5,8 +5,9 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Web;
 using System.Data;
-using System.Data.SqlClient;
+
 using YellowstonePathology.Business.Persistence;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Monitor.Model
 {

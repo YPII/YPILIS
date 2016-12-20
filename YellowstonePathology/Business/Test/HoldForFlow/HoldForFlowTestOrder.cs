@@ -1,16 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Linq;
-using System.Data;
-using System.Data.SqlClient;
-using System.Xml.Linq;
-using System.Xml.Serialization;
-using System.Windows.Xps;
-using System.Windows.Xps.Packaging;
-using System.Windows.Xps.Serialization;
 using YellowstonePathology.Business.Persistence;
 
 namespace YellowstonePathology.Business.Test.HoldForFlow

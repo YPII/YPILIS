@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Gateway
 {
@@ -16,18 +11,18 @@ namespace YellowstonePathology.Business.Gateway
             YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection result = new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection();
             string sql = "Select * from tblTestOrderReportDistribution where TimeOfLastDistribution between @StartDate and @EndDate and DistributionType = @DistributionType";
 
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = sql;
             cmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = startDate;
             cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = endDate;
             cmd.Parameters.Add("@DistributionType", SqlDbType.VarChar).Value = distributionType;
             cmd.CommandType = CommandType.Text;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -52,17 +47,17 @@ namespace YellowstonePathology.Business.Gateway
                 "join tblPhysician ph on pc2.Physicianid = ph.PhysicianId " +
 	            "where pc.ClientId = @ClientId and pc.PhysicianId = @PhysicianId";
 
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = sql;
             cmd.Parameters.Add("@PhysicianId", SqlDbType.Int).Value = physicianId;
             cmd.Parameters.Add("@ClientId", SqlDbType.Int).Value = clientId;            
             cmd.CommandType = CommandType.Text;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -88,16 +83,16 @@ namespace YellowstonePathology.Business.Gateway
                 "join tblPhysician ph on pc2.Physicianid = ph.PhysicianId " +
                 "where pc.PhysicianClientId = @PhysicianClientId";
 
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = sql;
             cmd.Parameters.Add("@PhysicianClientId", SqlDbType.VarChar).Value = physicianClientId;            
             cmd.CommandType = CommandType.Text;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {

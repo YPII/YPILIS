@@ -18,7 +18,7 @@ using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 using System.Diagnostics;
 using System.Data;
-using System.Data.SqlClient;
+
 using System.Net;
 using System.Linq;
 using System.Data.Linq;
@@ -89,7 +89,7 @@ namespace YellowstonePathology.UI
 
         private void ButtonPOCRetension_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Reports.POCRetensionReport report = new Business.Reports.POCRetensionReport(DateTime.Parse("3/26/2011"), DateTime.Parse("5/04/2011"));
+            YellowstonePathology.Business.Reports.POCRetensionReportV2 report = new Business.Reports.POCRetensionReportV2(DateTime.Parse("3/26/2011"), DateTime.Parse("5/04/2011"));
             System.Windows.Controls.PrintDialog printDialog = new System.Windows.Controls.PrintDialog();
             printDialog.ShowDialog();
             printDialog.PrintDocument(report.DocumentPaginator, "POC Retention Report for: ");
@@ -858,7 +858,7 @@ namespace YellowstonePathology.UI
             //System.Collections.IList childObjectCollection = (System.Collections.IList)Activator.CreateInstance(collectionType);
 
             //YellowstonePathology.Business.Persistence.SqlCommandBuilder sqlCommandBuilder = new Persistence.SqlCommandBuilder(typeof(YellowstonePathology.Business.Test.AccessionOrder), "14-19341");
-            //System.Data.SqlClient.SqlCommand cmd = sqlCommandBuilder.Build();
+            //System.Data.SqlClient.MySqlCommand cmd = sqlCommandBuilder.Build();
 
             /*
             YellowstonePathology.Business.PanelSet.Model.PanelSetCollection psc = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
@@ -1255,15 +1255,15 @@ namespace YellowstonePathology.UI
         {
             StringBuilder results = new StringBuilder();
             List<string> panelSetIds = new List<string>();
-            SqlCommand cmd = new SqlCommand("Select distinct PanelSetId from tblPanelSetOrder where orderdate between '4/1/2016' and '9/1/2016' " +
+            MySqlCommand cmd = new MySqlCommand("Select distinct PanelSetId from tblPanelSetOrder where orderdate between '4/1/2016' and '9/1/2016' " +
                 "and PanelSetId between 102 and 205 order by 1");
             cmd.CommandType = CommandType.Text;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -1275,14 +1275,14 @@ namespace YellowstonePathology.UI
             foreach(string panelSetId in panelSetIds)
             {
                 List<string> masterAccessionNos = new List<string>();
-                cmd = new SqlCommand("Select top 10 MasterAccessionNo from tblPanelSetOrder where orderdate between '1/1/2016' and '11/1/2016' and PanelSetId = " + panelSetId);
+                cmd = new MySqlCommand("Select top 10 MasterAccessionNo from tblPanelSetOrder where orderdate between '1/1/2016' and '11/1/2016' and PanelSetId = " + panelSetId);
                 cmd.CommandType = CommandType.Text;
 
-                using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+                using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
                 {
                     cn.Open();
                     cmd.Connection = cn;
-                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {

@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
     public class ClientSupplyOrderDocumentBuilder : DocumentBuilder
     {
-        SqlCommand m_SQLCommand;
+        MySqlCommand m_SQLCommand;
 
         /*public ClientSupplyOrderDocumentBuilder(string clientSupplyOrderId)
         {
-            this.m_SQLCommand = new SqlCommand();
+            this.m_SQLCommand = new MySqlCommand();
             this.m_SQLCommand.CommandText = "SELECT cso.*, (SELECT * from tblClientSupplyOrderDetail where clientsupplyorderid = " +
                 "cso.ClientSupplyOrderId for xml path('ClientSupplyOrderDetail'), type) ClientSupplyOrderDetailCollection " +
                 "FROM tblClientSupplyOrder cso where cso.ClientSupplyOrderId = @ClientSupplyOrderId for xml Path('ClientSupplyOrder'), type";
@@ -25,7 +19,7 @@ namespace YellowstonePathology.Business.Persistence
 
         public ClientSupplyOrderDocumentBuilder(string clientSupplyOrderId)
         {
-            this.m_SQLCommand = new SqlCommand();
+            this.m_SQLCommand = new MySqlCommand();
             this.m_SQLCommand.CommandText = "SELECT * from tblClientSupplyOrder where ClientSupplyOrderId = @ClientSupplyOrderId " +
                 "Select * from tblClientSupplyOrderDetail where clientSupplyOrderId = @ClientSupplyOrderId";
             this.m_SQLCommand.CommandType = CommandType.Text;
@@ -41,11 +35,11 @@ namespace YellowstonePathology.Business.Persistence
 
         private void BuildClientSupplyOrder(YellowstonePathology.Business.Client.Model.ClientSupplyOrder clientSupplyOrder)
         {
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 this.m_SQLCommand.Connection = cn;
-                using (SqlDataReader dr = this.m_SQLCommand.ExecuteReader(CommandBehavior.KeyInfo))
+                using (MySqlDataReader dr = this.m_SQLCommand.ExecuteReader(CommandBehavior.KeyInfo))
                 {
                     while (dr.Read())
                     {
@@ -66,7 +60,7 @@ namespace YellowstonePathology.Business.Persistence
         }
         /*private void BuildClientSupplyOrder(YellowstonePathology.Business.Client.Model.ClientSupplyOrder clientSupplyOrder)
         {
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 this.m_SQLCommand.Connection = cn;

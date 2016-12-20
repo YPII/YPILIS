@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.IO;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Input;
 

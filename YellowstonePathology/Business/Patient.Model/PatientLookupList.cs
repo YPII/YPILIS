@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Data;
-using System.Data.SqlClient;
+
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Patient.Model
 {
     public class PatientLookupList : ObservableCollection<PatientLookupListItem>
     {
-        SqlCommand m_Cmd;
+        MySqlCommand m_Cmd;
 
         public PatientLookupList()
         {
-            this.m_Cmd = new SqlCommand();
+            this.m_Cmd = new MySqlCommand();
         }
 
         public void SetFillCommandByPatientName(string lastName, string firstName)
@@ -21,18 +22,18 @@ namespace YellowstonePathology.Business.Patient.Model
             this.m_Cmd.Parameters.Clear();
             this.m_Cmd.CommandText = "prcGetPatientLookup";
             this.m_Cmd.CommandType = CommandType.StoredProcedure;
-            this.m_Cmd.Parameters.Add("@Lastname", SqlDbType.VarChar, 100).Value = lastName;
-            this.m_Cmd.Parameters.Add("@Firstname", SqlDbType.VarChar, 100).Value = firstName;            
+            this.m_Cmd.Parameters.AddWithValue("Lastname", lastName);
+            this.m_Cmd.Parameters.AddWithValue("Firstname", firstName);            
         }
 
         public void Fill()
         {
             this.Clear();
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 this.m_Cmd.Connection = cn;
-                using (SqlDataReader dr = this.m_Cmd.ExecuteReader())
+                using (MySqlDataReader dr = this.m_Cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -130,7 +131,7 @@ namespace YellowstonePathology.Business.Patient.Model
             }
         }
 
-        public override void Fill(SqlDataReader dr)
+        public override void Fill(MySqlDataReader dr)
         {
             this.LastName = BaseData.GetStringValue("LastName", dr);
             this.FirstName = BaseData.GetStringValue("FirstName", dr);

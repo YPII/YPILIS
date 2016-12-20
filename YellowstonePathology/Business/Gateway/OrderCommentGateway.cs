@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Xml;
-using System.Xml.Linq;
-using System.Linq;
-using System.Text;
-using System.Data.SqlClient;
+﻿using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Gateway
 {
@@ -14,7 +6,7 @@ namespace YellowstonePathology.Business.Gateway
     {
 		public static Domain.OrderCommentLogCollection GetOrderCommentLogCollectionByClientOrderId(string clientOrderId)
 		{
-			SqlCommand cmd = new SqlCommand();
+			MySqlCommand cmd = new MySqlCommand();
 			cmd.CommandText = "gwOrderCommentsByClientOrderId_1";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.Add("@ClientOrderId", System.Data.SqlDbType.VarChar).Value = clientOrderId;
@@ -24,7 +16,7 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static Domain.OrderCommentLogCollection GetOrderCommentLogCollectionByMasterAccessionNo(string masterAccessionNo)
 		{
-			SqlCommand cmd = new SqlCommand();
+			MySqlCommand cmd = new MySqlCommand();
 			cmd.CommandText = "gwOrderCommentsByMasterAccessionNo_1";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.Add("@MasterAccessionNo", System.Data.SqlDbType.VarChar).Value = masterAccessionNo;
@@ -34,7 +26,7 @@ namespace YellowstonePathology.Business.Gateway
 
         public static Domain.OrderCommentLogCollection GetOrderCommentsForSpecimenLogId(int specimenLogId)
 		{
-			SqlCommand cmd = new SqlCommand();
+			MySqlCommand cmd = new MySqlCommand();
 			cmd.CommandText = "SELECT * from tblOrderCommentLog where SpecimenLogId = @SpecimenLogId order by LogDate desc";
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Parameters.Add("@SpecimenLogId", System.Data.SqlDbType.Int).Value = specimenLogId;
@@ -47,7 +39,7 @@ namespace YellowstonePathology.Business.Gateway
             Domain.OrderCommentLogCollection result = new Domain.OrderCommentLogCollection();
             foreach (Domain.CaseNotesKey caseNotesKey in caseNotesKeyCollection)
             {
-                SqlCommand cmd = new SqlCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 switch (caseNotesKey.CaseNotesKeyName)
                 {
@@ -74,14 +66,14 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        private static YellowstonePathology.Business.Domain.OrderCommentLogCollection BuildOrderCommentLogCollection(SqlCommand cmd)
+        private static YellowstonePathology.Business.Domain.OrderCommentLogCollection BuildOrderCommentLogCollection(MySqlCommand cmd)
         {
             Domain.OrderCommentLogCollection result = new Domain.OrderCommentLogCollection();
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {

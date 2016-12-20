@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
@@ -14,7 +14,7 @@ namespace YellowstonePathology.Business.Persistence
             
         }
 
-        public void Build(object parentObject, Stack<SqlCommand> deleteFirstCommands, Stack<SqlCommand> deleteCommands)
+        public void Build(object parentObject, Stack<MySqlCommand> deleteFirstCommands, Stack<MySqlCommand> deleteCommands)
         {
             Type objectType = parentObject.GetType();
             this.ProcessObjectForDelete(parentObject, objectType, deleteFirstCommands, deleteCommands);
@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Persistence
             this.HandlePersistentChildren(parentObject, objectType, deleteFirstCommands, deleteCommands);
         }
 
-        private void ProcessObjectForDelete(object objectToDelete, Type objectType, Stack<SqlCommand> deleteFirstCommands, Stack<SqlCommand> deleteCommands)
+        private void ProcessObjectForDelete(object objectToDelete, Type objectType, Stack<MySqlCommand> deleteFirstCommands, Stack<MySqlCommand> deleteCommands)
         {
             PersistentClass persistentClassAttribute = (PersistentClass)objectType.GetCustomAttributes(typeof(PersistentClass), false).Single();
             PropertyInfo keyProperty = objectType.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(PersistentPrimaryKeyProperty))).Single();
@@ -53,7 +53,7 @@ namespace YellowstonePathology.Business.Persistence
             }
         }
 
-        private void HandlePersistentChildCollections(object parentObject, Type objectType, Stack<SqlCommand> deleteFirstCommands, Stack<SqlCommand> deleteCommands)
+        private void HandlePersistentChildCollections(object parentObject, Type objectType, Stack<MySqlCommand> deleteFirstCommands, Stack<MySqlCommand> deleteCommands)
         {
             List<PropertyInfo> childCollectionProperties = objectType.GetProperties()
                 .Where(
@@ -75,7 +75,7 @@ namespace YellowstonePathology.Business.Persistence
             }
         }
 
-        private void HandlePersistentChildren(object objectToInsert, Type objectType, Stack<SqlCommand> deleteFirstCommands, Stack<SqlCommand> deleteCommands)
+        private void HandlePersistentChildren(object objectToInsert, Type objectType, Stack<MySqlCommand> deleteFirstCommands, Stack<MySqlCommand> deleteCommands)
         {
             List<PropertyInfo> childProperties = objectType.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(PersistentChild))).ToList();
             foreach (PropertyInfo propertyInfo in childProperties)
@@ -91,9 +91,9 @@ namespace YellowstonePathology.Business.Persistence
             }
         }
 
-        private SqlCommand CreateSqlCommand(PropertyBridge keyPropertyBridge, string storageName)
+        private MySqlCommand CreateSqlCommand(PropertyBridge keyPropertyBridge, string storageName)
         {
-            SqlCommand cmd = new SqlCommand();            
+            MySqlCommand cmd = new MySqlCommand();            
                         
             StringBuilder sqlStatement = new StringBuilder("Delete " + storageName);
             sqlStatement.Append(" Where " + keyPropertyBridge.Name + " = " + keyPropertyBridge.AtName);

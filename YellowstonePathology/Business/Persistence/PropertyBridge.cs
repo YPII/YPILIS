@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
@@ -14,7 +11,7 @@ namespace YellowstonePathology.Business.Persistence
         protected object m_Object;        
         protected string m_Name;
         protected string m_AtName;
-        protected SqlParameter m_SqlParameter;
+        protected MySqlParameter m_SqlParameter;
         protected object m_SqlValue;
         protected object m_PropertyValue;
 
@@ -26,9 +23,9 @@ namespace YellowstonePathology.Business.Persistence
             this.m_AtName = "@" + this.m_Property.Name;            
         }        
 
-        public virtual void SetSqlParameter(SqlCommand cmd)
+        public virtual void SetSqlParameter(MySqlCommand cmd)
         {
-            this.m_SqlParameter = new SqlParameter();
+            this.m_SqlParameter = new MySqlParameter();
             this.m_SqlParameter.ParameterName = this.m_AtName;
             this.m_SqlParameter.Direction = ParameterDirection.Input;
 

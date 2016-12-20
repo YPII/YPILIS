@@ -1,20 +1,17 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Reflection;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business
 {
     public class SearchResultList : ObservableCollection<SearchResultListItem>
     {
-        SqlCommand m_Cmd;
+        MySqlCommand m_Cmd;
 
         public SearchResultList()
         {
-            this.m_Cmd = new SqlCommand();
+            this.m_Cmd = new MySqlCommand();
         }
 
 		public void SetFillByAccessionNo(string reportNo)
@@ -28,11 +25,11 @@ namespace YellowstonePathology.Business
         public void Fill()
         {
             this.Clear();
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 this.m_Cmd.Connection = cn;
-                using (SqlDataReader dr = this.m_Cmd.ExecuteReader())
+                using (MySqlDataReader dr = this.m_Cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -81,7 +78,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public void Fill(SqlDataReader dr)
+        public void Fill(MySqlDataReader dr)
         {
             this.ReportNo = BaseData.GetStringValue("ReportNo", dr);
             this.Result = BaseData.GetStringValue("Result", dr);

@@ -134,7 +134,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TestSQL;Initial Catalog=YPIData;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis;")]
         public string CurrentConnectionString {
             get {
                 return ((string)(this["CurrentConnectionString"]));

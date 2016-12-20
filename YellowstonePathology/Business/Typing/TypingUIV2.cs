@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
-using System.Data;
-using System.Data.SqlClient;
 using System.ComponentModel;
 
 namespace YellowstonePathology.Business.Typing

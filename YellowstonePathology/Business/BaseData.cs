@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Data;
-using System.Data.SqlClient;
 using System.Reflection;
 using System.Windows.Forms;
 using System.IO;
-using System.Diagnostics;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business
 {
@@ -54,7 +52,7 @@ namespace YellowstonePathology.Business
             PropertyInfo propertyInfoPropertyChangedList = objectType.GetProperty("PropertyChangedList");
             List<PropertyChangedItem> propertyChangedList = (List<PropertyChangedItem>)propertyInfoPropertyChangedList.GetValue(dataObject, null);            
 
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             string sql = string.Empty;            
 
             if (propertyChangedList.Count != 0)
@@ -62,7 +60,7 @@ namespace YellowstonePathology.Business
                 YellowstonePathology.Business.CustomAttributes.SqlTableAttribute tableAttribute = (YellowstonePathology.Business.CustomAttributes.SqlTableAttribute)Attribute.GetCustomAttribute(objectType, typeof(YellowstonePathology.Business.CustomAttributes.SqlTableAttribute));
                 sql = "Update " + tableAttribute.TableName + " Set ";
 
-                SqlParameter keyParam = new SqlParameter();
+                MySqlParameter keyParam = new MySqlParameter();
                 keyParam.ParameterName = "@" + tableAttribute.KeyFieldName;
                 keyParam.Size = tableAttribute.KeyFieldLength;
 
@@ -79,7 +77,7 @@ namespace YellowstonePathology.Business
                     YellowstonePathology.Business.CustomAttributes.SqlFieldAttribute fieldAttribute = (YellowstonePathology.Business.CustomAttributes.SqlFieldAttribute)Attribute.GetCustomAttribute(propertyInfo, typeof(YellowstonePathology.Business.CustomAttributes.SqlFieldAttribute));
                     sql += fieldAttribute.FieldName + " = @" + fieldAttribute.FieldName + ", ";
 
-                    SqlParameter param = new SqlParameter();
+                    MySqlParameter param = new MySqlParameter();
                     param.ParameterName = "@" + fieldAttribute.FieldName;
                     SetParameterValue(param, fieldAttribute.SqlDbType, value);
                     cmd.Parameters.Add(param);
@@ -88,7 +86,7 @@ namespace YellowstonePathology.Business
                 sql = sql.Remove(sql.Length - 2, 1);
                 sql += "Where " + tableAttribute.KeyFieldName + " = @" + tableAttribute.KeyFieldName;                
 
-                using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+                using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
                 {                    
                     cn.Open();
                     cmd.Connection = cn;
@@ -105,7 +103,7 @@ namespace YellowstonePathology.Business
             PropertyInfo propertyInfoPropertyChangedList = objectType.GetProperty("PropertyChangedList");
             List<PropertyChangedItem> propertyChangedList = (List<PropertyChangedItem>)propertyInfoPropertyChangedList.GetValue(dataObject, null);
 
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             string sql = string.Empty;
             string fieldList = string.Empty;
             string valueList = string.Empty;
@@ -125,7 +123,7 @@ namespace YellowstonePathology.Business
                     fieldList += fieldAttribute.FieldName + ", ";
                     valueList += "@" + fieldAttribute.FieldName + ", ";
 
-                    SqlParameter param = new SqlParameter();
+                    MySqlParameter param = new MySqlParameter();
                     param.ParameterName = "@" + fieldAttribute.FieldName;
                     SetParameterValue(param, fieldAttribute.SqlDbType, value);
                     cmd.Parameters.Add(param);
@@ -134,7 +132,7 @@ namespace YellowstonePathology.Business
                 fieldList = fieldList.Remove(fieldList.Length - 2, 1);
                 valueList = valueList.Remove(valueList.Length - 2, 1);
                 sql += "(" + fieldList + ") values (" + valueList + ") ";                
-                using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+                using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
                 {                    
                     cn.Open();
                     cmd.Connection = cn;
@@ -145,7 +143,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static void SetParameterValue(SqlParameter param, SqlDbType sqlDbType, object value)
+        public static void SetParameterValue(MySqlParameter param, SqlDbType sqlDbType, object value)
         {
             switch (sqlDbType)
             {
@@ -178,7 +176,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static string GetStringValue(string fieldName, SqlDataReader dr)
+        public static string GetStringValue(string fieldName, MySqlDataReader dr)
         {            
 			if (dr[fieldName] == DBNull.Value)
             {
@@ -190,7 +188,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static string GetPatientName(SqlDataReader dr)
+        public static string GetPatientName(MySqlDataReader dr)
         {
             string patientName = string.Empty;
             if (dr["PFirstName"] != DBNull.Value)
@@ -204,7 +202,7 @@ namespace YellowstonePathology.Business
             return patientName;
         }
 
-        public static int GetIntValue(string fieldName, SqlDataReader dr)
+        public static int GetIntValue(string fieldName, MySqlDataReader dr)
         {
             if (dr[fieldName] == DBNull.Value)
             {
@@ -216,7 +214,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static Nullable<DateTime> GetDateTimeValue(string fieldName, SqlDataReader dr)
+        public static Nullable<DateTime> GetDateTimeValue(string fieldName, MySqlDataReader dr)
         {
             if (dr[fieldName] == DBNull.Value)
             {
@@ -228,7 +226,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static bool GetBoolValue(string fieldName, SqlDataReader dr)
+        public static bool GetBoolValue(string fieldName, MySqlDataReader dr)
         {
             if (dr[fieldName] == DBNull.Value)
             {
@@ -240,7 +238,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static long GetLongValue(string fieldName, SqlDataReader dr)
+        public static long GetLongValue(string fieldName, MySqlDataReader dr)
         {
             if (dr[fieldName] == DBNull.Value)
             {
@@ -252,7 +250,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static double GetDoubleValue(string fieldName, SqlDataReader dr)
+        public static double GetDoubleValue(string fieldName, MySqlDataReader dr)
         {
             if (dr[fieldName] == DBNull.Value)
             {
@@ -276,13 +274,13 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static void SetSqlStringValue(SqlParameter param, object value)
+        public static void SetSqlStringValue(MySqlParameter param, object value)
         {
             string strValue = (string)value;
             SetSqlStringValue(param, strValue);
         }
 
-        public static void SetSqlStringValue(SqlParameter param, string value)
+        public static void SetSqlStringValue(MySqlParameter param, string value)
         {
             if (value == string.Empty || value == null)
             {
@@ -294,7 +292,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static void SetSqlIntValue(SqlParameter param, object value)
+        public static void SetSqlIntValue(MySqlParameter param, object value)
         {
             if (value == null)
             {
@@ -307,7 +305,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static void SetSqlDoubleValue(SqlParameter param, object value)
+        public static void SetSqlDoubleValue(MySqlParameter param, object value)
         {
             if (value == null)
             {
@@ -320,13 +318,13 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static void SetSqlBitValue(SqlParameter param, object value)
+        public static void SetSqlBitValue(MySqlParameter param, object value)
         {
             bool boolValue = (bool)value;
             SetSqlBitValue(param, boolValue);
         }
 
-        public static void SetSqlBitValue(SqlParameter param, bool value)
+        public static void SetSqlBitValue(MySqlParameter param, bool value)
         {
             if (value == true)
             {
@@ -338,13 +336,13 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static void SetSqlDateValue(SqlParameter param, object dateTime)
+        public static void SetSqlDateValue(MySqlParameter param, object dateTime)
         {
             Nullable<DateTime> dateTimeValue = (Nullable<DateTime>)dateTime;
             SetSqlDateValue(param, dateTimeValue);
         }
 
-        public static void SetSqlDateValue(SqlParameter param, Nullable<DateTime> dateTime)
+        public static void SetSqlDateValue(MySqlParameter param, Nullable<DateTime> dateTime)
         {
             if (dateTime.HasValue == false)
             {
@@ -376,10 +374,10 @@ namespace YellowstonePathology.Business
                     text = text + "\n" + line;
                 }
 
-                using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+                using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
                 {
                     cn.Open();
-                    SqlCommand cmd = new SqlCommand();
+                    MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = cn;
                     cmd.CommandText = text;
                     cmd.CommandType = CommandType.Text;
@@ -398,10 +396,10 @@ namespace YellowstonePathology.Business
 
         public static void GetStoredProcedures()
         {
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand();
+                MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandText = "select so.Name, sc.Text " +
                     "from SysObjects so " +
@@ -409,7 +407,7 @@ namespace YellowstonePathology.Business
                     "where so.XType = 'P' and Category = 0";
                 cmd.CommandType = CommandType.Text;
 
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -423,7 +421,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public static void FillListItem(object dataObject, SqlDataReader dr)
+        public static void FillListItem(object dataObject, MySqlDataReader dr)
         {
             Type objectType = dataObject.GetType();
             PropertyInfo[] objectProperties = objectType.GetProperties();            
@@ -462,7 +460,7 @@ namespace YellowstonePathology.Business
             }            
         }
 
-        public static void Fill(object dataObject, SqlDataReader dr)
+        public static void Fill(object dataObject, MySqlDataReader dr)
         {
             Type objectType = dataObject.GetType();
             PropertyInfo[] objectProperties = objectType.GetProperties();            
@@ -563,7 +561,7 @@ namespace YellowstonePathology.Business
             }
         }        
 
-        public static void SetSqlDateParameterValue(Nullable<DateTime> date, SqlParameter param)
+        public static void SetSqlDateParameterValue(Nullable<DateTime> date, MySqlParameter param)
         {
             if (date.HasValue == true)
             {

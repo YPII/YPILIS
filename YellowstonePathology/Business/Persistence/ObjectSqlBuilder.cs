@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
@@ -14,13 +12,13 @@ namespace YellowstonePathology.Business.Persistence
 
         public ObjectSqlBuilder(Type typeToBuild, string primaryKeyValue)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
             this.BuildCommand(cmd, typeToBuild, primaryKeyValue);     
             object result = this.ExcuteCommandAndBuild(cmd, typeToBuild);
         }        
 
-        private void BuildCommand(SqlCommand cmd, Type typeToBuild, string primaryKeyValue)
+        private void BuildCommand(MySqlCommand cmd, Type typeToBuild, string primaryKeyValue)
         {
             PersistentClass persistentClassAttribute = (PersistentClass)typeToBuild.GetCustomAttributes(typeof(PersistentClass), false).Single();
             PropertyInfo primaryKeyPropertyInfo = typeToBuild.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(PersistentPrimaryKeyProperty))).Single();
@@ -32,7 +30,7 @@ namespace YellowstonePathology.Business.Persistence
             this.BuildPersistentChildCollectionCommands(typeToBuild, cmd);
         }
 
-        private void BuildPersistentChildCollectionCommands(Type parentType, SqlCommand cmd)
+        private void BuildPersistentChildCollectionCommands(Type parentType, MySqlCommand cmd)
         {        
             List<PropertyInfo> childCollectionProperties = parentType.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(PersistentCollection))).ToList();            
             foreach (PropertyInfo propertyInfo in childCollectionProperties)
@@ -42,15 +40,15 @@ namespace YellowstonePathology.Business.Persistence
             }            
         }
 
-        private object ExcuteCommandAndBuild(SqlCommand cmd, Type topLevelType)
+        private object ExcuteCommandAndBuild(MySqlCommand cmd, Type topLevelType)
         {
             object result = null;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {                    
                     while (dr.Read())
                     {

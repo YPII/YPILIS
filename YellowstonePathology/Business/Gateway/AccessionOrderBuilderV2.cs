@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Gateway
@@ -25,17 +22,17 @@ namespace YellowstonePathology.Business.Gateway
             this.m_PanelSetCollection = PanelSet.Model.PanelSetCollection.GetAll();
         }
 
-        public void Build(SqlCommand cmd, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public void Build(MySqlCommand cmd, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             this.m_PanelSetOrderReportNumbers = new List<string>();
             this.m_PanelOrderIds = new List<string>();
             this.m_AccessionOrder = accessionOrder;
                         
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.KeyInfo))
+                using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.KeyInfo))
                 {
                     HandleDataSets(dr);
                 }
@@ -70,7 +67,7 @@ namespace YellowstonePathology.Business.Gateway
             }
         }
 
-        private void HandleDataSets(SqlDataReader dr)
+        private void HandleDataSets(MySqlDataReader dr)
         {
             DataSet dataSet = new DataSet();
             dataSet.EnforceConstraints = false;

@@ -1,20 +1,16 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Windows;
-using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Typing
 {
     public class TypingShortcutCollection : ObservableCollection<TypingShortcut>
     {
-        SqlCommand m_Cmd;
+        MySqlCommand m_Cmd;
 
         public TypingShortcutCollection()
         {
-            this.m_Cmd = new SqlCommand();
+            this.m_Cmd = new MySqlCommand();
         }        
 
         public string Find(string shortcut)

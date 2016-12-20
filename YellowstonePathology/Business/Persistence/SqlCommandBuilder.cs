@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Data.SqlClient;
 using System.Reflection;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
@@ -18,9 +17,9 @@ namespace YellowstonePathology.Business.Persistence
             this.m_PrimaryKeyValue = primaryKeyValue;
         }
 
-        public SqlCommand Build()
+        public MySqlCommand Build()
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             PersistentClass persistentClassAttribute = (PersistentClass)this.m_Type.GetCustomAttributes(typeof(PersistentClass), false).Single();            
 
             PropertyInfo primaryKeyPropertyInfo = this.m_Type.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(PersistentPrimaryKeyProperty))).Single();
@@ -36,7 +35,7 @@ namespace YellowstonePathology.Business.Persistence
             return cmd;
         }
 
-        private void HandlChildCollections(Type type, SqlCommand cmd, SqlSelectClause sqlSelect)
+        private void HandlChildCollections(Type type, MySqlCommand cmd, SqlSelectClause sqlSelect)
         {
             List<PropertyInfo> childCollectionPropertList = type.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(PersistentCollection))).ToList();
             foreach (PropertyInfo propertyInfo in childCollectionPropertList)

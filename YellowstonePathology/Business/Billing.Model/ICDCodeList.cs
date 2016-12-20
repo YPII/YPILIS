@@ -1,19 +1,16 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Billing.Model
 {
     public class  ICDCodeList : ObservableCollection<ICDCode>
     {
-        private SqlCommand m_SqlCommand;  
+        private MySqlCommand m_SqlCommand;  
 
         public ICDCodeList()
         {
-            this.m_SqlCommand = new SqlCommand();
+            this.m_SqlCommand = new MySqlCommand();
         }
 
         public void SetFillCommandByFlowCodes()
@@ -25,11 +22,11 @@ namespace YellowstonePathology.Business.Billing.Model
         public void Fill()
         {
             this.Clear();
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 this.m_SqlCommand.Connection = cn;
-                using (SqlDataReader dr = this.m_SqlCommand.ExecuteReader())
+                using (MySqlDataReader dr = this.m_SqlCommand.ExecuteReader())
                 {
                     while (dr.Read())
                     {
@@ -85,7 +82,7 @@ namespace YellowstonePathology.Business.Billing.Model
             set { this.m_Description = value; }
         }
 
-		public override void Fill(SqlDataReader dr)
+		public override void Fill(MySqlDataReader dr)
         {
             this.m_ICD9CodeId = BaseData.GetIntValue("ICD9CodeId", dr);
             this.m_ICD9Code = BaseData.GetStringValue("ICD9Code", dr);

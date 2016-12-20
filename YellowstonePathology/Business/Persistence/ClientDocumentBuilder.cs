@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
     public class ClientDocumentBuilder : DocumentBuilder
     {
-        private SqlCommand m_SQLCommand;
+        private MySqlCommand m_SQLCommand;
 
         public ClientDocumentBuilder(int clientId)
         {            
-            this.m_SQLCommand = new SqlCommand();
+            this.m_SQLCommand = new MySqlCommand();
             //this.m_SQLCommand.CommandText = "SELECT c.*, (SELECT * from tblClientLocation where ClientId = c.ClientId order by Location for xml path('ClientLocation'), type) ClientLocationCollection " +
             //    "FROM tblClient c where c.ClientId = @ClientId for xml Path('Client'), type";
             this.m_SQLCommand.CommandText = "SELECT * FROM tblClient where ClientId = @ClientId " +
@@ -33,11 +27,11 @@ namespace YellowstonePathology.Business.Persistence
 
         private void BuildClient(YellowstonePathology.Business.Client.Model.Client client)
         {
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 this.m_SQLCommand.Connection = cn;
-                using (SqlDataReader dr = this.m_SQLCommand.ExecuteReader(CommandBehavior.KeyInfo))
+                using (MySqlDataReader dr = this.m_SQLCommand.ExecuteReader(CommandBehavior.KeyInfo))
                 {
                     while (dr.Read())
                     {
@@ -61,7 +55,7 @@ namespace YellowstonePathology.Business.Persistence
 
         /*private void BuildClient(YellowstonePathology.Business.Client.Model.Client client)
         {
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 this.m_SQLCommand.Connection = cn;

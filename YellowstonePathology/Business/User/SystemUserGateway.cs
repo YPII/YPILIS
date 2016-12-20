@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using System.Data.SqlClient;
 using System.Reflection;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.User
 {
@@ -14,27 +8,20 @@ namespace YellowstonePathology.Business.User
     {
 		public static YellowstonePathology.Business.User.SystemUserCollection GetSystemUserCollection()
         {
-            /*SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "select su.UserId, su.Active, su.UserName, su.FirstName, su.LastName, su.Initials, su.Signature, su.DisplayName, su.EmailAddress, su.NationalProviderId, (select sr.* from tblSystemUserRole sr where sr.UserId = su.UserId " +
-                "for xml Path('SystemUserRole'), type) [SystemUserRoleCollection] from tblSystemUser su order by su.UserName for xml Path('SystemUser'), root('SystemUserCollection')";
-            cmd.CommandType = System.Data.CommandType.Text;
-            YellowstonePathology.Business.User.SystemUserCollection systemUserCollection = Persistence.SqlCommandHelper.ExecuteCollectionCommand<YellowstonePathology.Business.User.SystemUserCollection>(cmd);
-            return systemUserCollection;*/
-
             Type t = typeof(YellowstonePathology.Business.User.SystemUserCollection);
             ConstructorInfo ci = t.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[0], null);
             YellowstonePathology.Business.User.SystemUserCollection systemUserCollection = (YellowstonePathology.Business.User.SystemUserCollection)ci.Invoke(null);
 
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "select UserId, Active, UserName, FirstName, LastName, Initials, Signature, DisplayName, " +
-                "EmailAddress, NationalProviderId from tblSystemUser order by UserName " +
-                "select * from tblSystemUserRole";
+                "EmailAddress, NationalProviderId from tblSystemUser order by UserName; " +
+                "select * from tblSystemUserRole;";
             cmd.CommandType = System.Data.CommandType.Text;
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {

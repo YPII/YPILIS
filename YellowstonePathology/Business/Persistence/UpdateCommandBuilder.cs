@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
@@ -14,14 +14,14 @@ namespace YellowstonePathology.Business.Persistence
         {                        
         }
 
-		public void Build(object parentObject, object originalValues, Queue<SqlCommand> commandQueue)
+		public void Build(object parentObject, object originalValues, Queue<MySqlCommand> commandQueue)
         {			
             Type objectType = parentObject.GetType();
             this.ProcessObjectForUpdate(parentObject, objectType, originalValues, commandQueue);
             this.HandlePersistentChildCollections(parentObject, objectType, originalValues, commandQueue);         
         }
 
-        private void HandlePersistentChildCollections(object parentObject, Type objectType, object originalValues, Queue<SqlCommand> commandQueue)
+        private void HandlePersistentChildCollections(object parentObject, Type objectType, object originalValues, Queue<MySqlCommand> commandQueue)
         {            
             List<PropertyInfo> childCollectionProperties = objectType.GetProperties()
                 .Where(
@@ -74,7 +74,7 @@ namespace YellowstonePathology.Business.Persistence
             return result;
         }
 
-        private void HandlePersistentChildren(object parentObject, Type objectType, object parentObjectOriginalValues, Queue<SqlCommand> commandQueue)
+        private void HandlePersistentChildren(object parentObject, Type objectType, object parentObjectOriginalValues, Queue<MySqlCommand> commandQueue)
         {
             List<PropertyInfo> childProperties = objectType.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(PersistentChild))).ToList();
             foreach (PropertyInfo propertyInfo in childProperties)
@@ -91,7 +91,7 @@ namespace YellowstonePathology.Business.Persistence
             }
         }
 
-        private void ProcessObjectForUpdate(object objectToUpdate, Type objectType, object originalValues, Queue<SqlCommand> commandQueue)
+        private void ProcessObjectForUpdate(object objectToUpdate, Type objectType, object originalValues, Queue<MySqlCommand> commandQueue)
         {
             if (PersistenceHelper.ArePersistentPropertiesEqual(objectToUpdate, originalValues) == false)
             {
@@ -121,9 +121,9 @@ namespace YellowstonePathology.Business.Persistence
             }
         }
 
-        private SqlCommand CreateSqlCommand(PropertyBridge keyPropertyBridge, List<PropertyBridge> propertyBridgeList, string storageName)
+        private MySqlCommand CreateSqlCommand(PropertyBridge keyPropertyBridge, List<PropertyBridge> propertyBridgeList, string storageName)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
 
             keyPropertyBridge.SetSqlParameter(cmd);
             StringBuilder sqlStatement = new StringBuilder("Update " + storageName + " Set ");

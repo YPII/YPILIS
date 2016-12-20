@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Xml;
-using System.Xml.Linq;
-using System.Linq;
-using System.Text;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Gateway
 {
@@ -16,7 +10,7 @@ namespace YellowstonePathology.Business.Gateway
 		public static ObservableCollection<YellowstonePathology.Business.Patient.Model.PatientLinkingListItem> GetPatientLinkingList(YellowstonePathology.Business.Patient.Model.PatientLinkingListItem patientLinkingListItem)
 		{
 			ObservableCollection<YellowstonePathology.Business.Patient.Model.PatientLinkingListItem> result = new ObservableCollection<Patient.Model.PatientLinkingListItem>();
-			SqlCommand cmd = new SqlCommand("pGetPatientLinkingV2");
+			MySqlCommand cmd = new MySqlCommand("pGetPatientLinkingV2");
 			cmd.CommandType = CommandType.StoredProcedure;
 
 			cmd.Parameters.Add("@MasterAccessionNo", SqlDbType.VarChar).Value = patientLinkingListItem.MasterAccessionNo;
@@ -34,11 +28,11 @@ namespace YellowstonePathology.Business.Gateway
 			}
 			cmd.Parameters.Add("@PBirthdate", SqlDbType.DateTime).Value = patientLinkingListItem.PBirthdate.Value;
 
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -54,14 +48,14 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static string GetNewPatientId()
 		{
-			SqlCommand cmd = new SqlCommand("Insert into tblPatient DEFAULT VALUES; SELECT * from tblPatient where PatientId = IDENT_CURRENT('tblPatient')");
+			MySqlCommand cmd = new MySqlCommand("Insert into tblPatient DEFAULT VALUES; SELECT * from tblPatient where PatientId = IDENT_CURRENT('tblPatient')");
 			cmd.CommandType = CommandType.Text;
 			string patientId = null;
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{

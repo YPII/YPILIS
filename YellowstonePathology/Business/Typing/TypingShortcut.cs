@@ -2,9 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
-using System.Data;
-using System.Data.SqlClient;
-using System.Windows;
 using YellowstonePathology.Business.Persistence;
 
 namespace YellowstonePathology.Business.Typing

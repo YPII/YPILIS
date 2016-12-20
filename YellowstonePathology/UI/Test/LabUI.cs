@@ -6,7 +6,6 @@ using System.Text;
 using System.ComponentModel;
 using System.IO;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace YellowstonePathology.UI.Test
 {

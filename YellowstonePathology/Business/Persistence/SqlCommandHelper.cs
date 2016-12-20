@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Linq;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
     public class SqlCommandHelper
     {
-        public static T ExecuteCollectionCommand<T>(SqlCommand sqlCommand)
+        public static T ExecuteCollectionCommand<T>(MySqlCommand sqlCommand)
         {
             StringBuilder xmlString = new StringBuilder();
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 sqlCommand.Connection = cn;

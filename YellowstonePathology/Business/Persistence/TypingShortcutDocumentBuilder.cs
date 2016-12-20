@@ -1,22 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using System.Data.SqlClient;
-using System.Xml;
-using System.Xml.Linq;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Persistence
 {
     class TypingShortcutDocumentBuilder : DocumentBuilder
     {
-        SqlCommand m_SQLCommand;
+        MySqlCommand m_SQLCommand;
 
         public TypingShortcutDocumentBuilder(string objectId)
         {
-            this.m_SQLCommand = new SqlCommand();
+            this.m_SQLCommand = new MySqlCommand();
             this.m_SQLCommand.CommandText = "select * From tblTypingShortcut where ObjectId = @ObjectId";
             this.m_SQLCommand.CommandType = CommandType.Text;
             this.m_SQLCommand.Parameters.Add("@ObjectId", SqlDbType.VarChar).Value = objectId;
@@ -31,12 +25,12 @@ namespace YellowstonePathology.Business.Persistence
 
         private void BuildTypingShortcut(YellowstonePathology.Business.Typing.TypingShortcut typingShortcut)
         {
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 m_SQLCommand.Connection = cn;
 
-                using (SqlDataReader dr = m_SQLCommand.ExecuteReader())
+                using (MySqlDataReader dr = m_SQLCommand.ExecuteReader())
                 {
                     while (dr.Read())
                     {

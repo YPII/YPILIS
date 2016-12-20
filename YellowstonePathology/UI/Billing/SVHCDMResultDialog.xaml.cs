@@ -1,21 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml;
-using System.Xml.Linq;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using YellowstonePathology.Business.Persistence;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.UI.Billing
 {    
@@ -75,12 +64,12 @@ namespace YellowstonePathology.UI.Billing
 
         private void ScheduleDistribution(string testOrderReportDistributionId)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "update tbltestOrderReportDistribution set [distributed] = 0, ScheduledDistributiontime = getdate() " +
                 "where testOrderReportDistributionId = '" + testOrderReportDistributionId + "'";
 
             cmd.CommandType = CommandType.Text;
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
@@ -90,12 +79,12 @@ namespace YellowstonePathology.UI.Billing
 
         private void UpdateResultStatus(string testOrderReportDistributionId)
         {
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "update tblTestOrderReportDistribution set ResultStatus = 'F' " +                
                 "where testOrderReportDistributionId = '" + testOrderReportDistributionId + "'";
 
             cmd.CommandType = CommandType.Text;
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
@@ -106,7 +95,7 @@ namespace YellowstonePathology.UI.Billing
         private List<SVHCDMItem> GetList(DateTime workDate)
         {
             List<SVHCDMItem> result = new List<SVHCDMItem>();
-            SqlCommand cmd = new SqlCommand();
+            MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "select pso.ReportNo, ao.PLastName, ao.PFirstName, ao.ClientName, ao.PhysicianName, pso.PanelSetName, tor.ResultStatus, tor.TestOrderReportDistributionId, pso.Distribute, tor.ScheduledDistributionTime " +
                 "from tblPanelSetOrder pso " +
                 "join tblTestOrderReportDistribution tor on pso.ReportNo = tor.ReportNo " +
@@ -115,11 +104,11 @@ namespace YellowstonePathology.UI.Billing
 
             cmd.CommandType = CommandType.Text;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {

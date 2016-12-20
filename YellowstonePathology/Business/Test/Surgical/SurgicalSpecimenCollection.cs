@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Data;
-using System.Data.SqlClient;
-using System.Data.Linq;
 using System.Linq;
-using System.Xml.Serialization;
 using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.Surgical

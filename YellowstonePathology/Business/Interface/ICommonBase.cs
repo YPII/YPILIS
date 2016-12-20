@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data.SqlClient;
 
 namespace YellowstonePathology.Business.Interface
 {
 	/*public interface ICommonBase
 	{
-		void Fill(SqlDataReader dr);
+		void Fill(MySqlDataReader dr);
         string GetPatientIdOfOldestCase(YellowstonePathology.Business.Patient.Model.PatientLinkingList linkingList);
         void LinkSelectedPatients(YellowstonePathology.Business.Patient.Model.PatientLinkingList linkingList);
         void Save();

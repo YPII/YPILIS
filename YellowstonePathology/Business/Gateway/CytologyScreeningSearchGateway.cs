@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.Gateway
 {
@@ -11,13 +8,13 @@ namespace YellowstonePathology.Business.Gateway
 		public static List<YellowstonePathology.Business.Search.CytologyScreeningSearchResult> GetCytologyScreeningSearchResults(string sqlStatement)
 		{
 			List<YellowstonePathology.Business.Search.CytologyScreeningSearchResult> result = new List<Search.CytologyScreeningSearchResult>();
-			SqlCommand cmd = new SqlCommand(sqlStatement);
+			MySqlCommand cmd = new MySqlCommand(sqlStatement);
 
-			using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+			using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
 			{
 				cn.Open();
 				cmd.Connection = cn;
-				using (SqlDataReader dr = cmd.ExecuteReader())
+				using (MySqlDataReader dr = cmd.ExecuteReader())
 				{
 					while (dr.Read())
 					{
@@ -55,14 +52,14 @@ namespace YellowstonePathology.Business.Gateway
                     "and po.AssignedToId = @AssignedToId " +
                     "and pso.ResultCode <> po.ResultCode ";
 
-            SqlCommand cmd = new SqlCommand(sqlStatement);
+            MySqlCommand cmd = new MySqlCommand(sqlStatement);
             cmd.Parameters.Add("@AssignedToId", System.Data.SqlDbType.Int).Value = assignedToId;
 
-            using (SqlConnection cn = new SqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
                 cmd.Connection = cn;
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
