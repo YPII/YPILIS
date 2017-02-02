@@ -56,8 +56,9 @@ namespace YellowstonePathology.Business.Test.CLLByFish
 			this.HandleLongString(panelSetOrder.ReportReferences, document, "F");
 
 			this.AddNextObxElement("", document, "F");
+            this.HandleLongString(panelSetOrder.ASR, document, "F");
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-			this.AddNextObxElement(locationPerformed, document, "F");
+			this.HandleLongString(locationPerformed, document, "F");
 			this.AddNextObxElement(string.Empty, document, "F");
 		}
 	}

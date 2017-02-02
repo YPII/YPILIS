@@ -31,7 +31,6 @@ namespace YellowstonePathology.Business.Test.TCellNKProfile
         private double? m_CD45Percent;
         private double? m_CD56Percent;
 
-
         public TCellNKProfileTestOrder()
         {
 
@@ -271,7 +270,7 @@ namespace YellowstonePathology.Business.Test.TCellNKProfile
         [PersistentDataColumnProperty(true, "", "null", "float")]
         public double? CD4Percent
         {
-            get { return this.m_CD3Percent; }
+            get { return this.m_CD4Percent; }
             set
             {
                 if (this.m_CD4Percent != value)
@@ -359,12 +358,12 @@ namespace YellowstonePathology.Business.Test.TCellNKProfile
 
         private string CalculateAbsoluteCount(double? valueToSet)
         {
-            string result = "0/uL";
+            string result = "0";
             if (this.m_WBC.HasValue && this.m_LymphocytePercentage.HasValue && valueToSet.HasValue)
             {
                 double doubleValue = Math.Round(this.m_WBC.Value * this.m_LymphocytePercentage.Value * valueToSet.Value / 10000, 2);
                 int resultValue = Convert.ToInt32(doubleValue);
-                result = resultValue.ToString() + "/uL";
+                result = resultValue.ToString();
             }
             return result;
         }

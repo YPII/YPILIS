@@ -38,6 +38,7 @@ namespace YellowstonePathology.Business.Amendment.Model
         private Nullable<DateTime> m_AcceptedTime;
         private string m_AcceptedBy;
         private bool m_SystemGenerated;
+        private string m_CorrectionType;
 
         public Amendment()
         {
@@ -517,6 +518,21 @@ namespace YellowstonePathology.Business.Amendment.Model
                 {
                     this.m_SystemGenerated = value;
                     this.NotifyPropertyChanged("SystemGenerated");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
+        public string CorrectionType
+        {
+            get { return this.m_CorrectionType; }
+            set
+            {
+                if (this.m_CorrectionType != value)
+                {
+                    this.m_CorrectionType = value;
+                    this.NotifyPropertyChanged("CorrectionType");
                 }
             }
         }

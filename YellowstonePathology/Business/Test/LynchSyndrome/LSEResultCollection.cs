@@ -18,6 +18,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             LSEResultCollection result = new LSEResultCollection();
 
             result.Add(new LSEColorectalResult1());
+            result.Add(new LSEColorectalResult1A());
             result.Add(new LSEColorectalResult2());
             result.Add(new LSEColorectalResult12());
             result.Add(new LSEColorectalResult3());
@@ -27,8 +28,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             result.Add(new LSEColorectalResult5());
             result.Add(new LSEColorectalResult6());
             result.Add(new LSEColorectalResult7());
-            result.Add(new LSEColorectalResult8());
-            result.Add(new LSEColorectalResult9());
+            result.Add(new LSEColorectalResult8());            
             result.Add(new LSEColorectalResult10());
             result.Add(new LSEColorectalResult11());
 
@@ -44,6 +44,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             LSEResultCollection result = new LSEResultCollection();
 
             result.Add(new LSEColorectalResult1());
+            result.Add(new LSEColorectalResult1A());
             result.Add(new LSEColorectalResult2());
             result.Add(new LSEColorectalResult12());
             result.Add(new LSEColorectalResult3());
@@ -53,8 +54,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             result.Add(new LSEColorectalResult5());
             result.Add(new LSEColorectalResult6());
             result.Add(new LSEColorectalResult7());
-            result.Add(new LSEColorectalResult8());
-            result.Add(new LSEColorectalResult9());
+            result.Add(new LSEColorectalResult8());            
             result.Add(new LSEColorectalResult10());
             result.Add(new LSEColorectalResult11());
 

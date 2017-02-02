@@ -37,11 +37,20 @@ namespace YellowstonePathology.Business.Test.PDL1SP142
             base.ReplaceText("specimen_description", specimenOrder.Description);
 
             string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
-            this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
+            this.SetXmlNodeData("date_time_collected", collectionDateTimeString);            
 
-            this.ReplaceText("report_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate));
-            this.ReplaceText("report_time", YellowstonePathology.Business.Helper.DateTimeExtensions.ShortTimeStringFromNullable(this.m_PanelSetOrder.FinalDate));
-            this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.Signature);
+            if (this.m_PanelSetOrder.ReferenceLabFinalDate.HasValue == true)
+            {
+                this.ReplaceText("report_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.ReferenceLabFinalDate));
+                this.ReplaceText("report_time", YellowstonePathology.Business.Helper.DateTimeExtensions.ShortTimeStringFromNullable(this.m_PanelSetOrder.ReferenceLabFinalDate));
+                this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.ReferenceLabSignature);
+            }
+            else
+            {
+                this.ReplaceText("report_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate));
+                this.ReplaceText("report_time", YellowstonePathology.Business.Helper.DateTimeExtensions.ShortTimeStringFromNullable(this.m_PanelSetOrder.FinalDate));
+                this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.Signature);
+            }
 
             this.SaveReport();
         }

@@ -73,6 +73,15 @@ namespace YellowstonePathology.UI
 
         public void ButtonOk_Click(object sender, RoutedEventArgs args)
         {
+            if(this.m_Amendment.AmendmentType == "Correction")
+            {
+                if(string.IsNullOrEmpty(this.m_Amendment.CorrectionType) == true)
+                {
+                    MessageBox.Show("You must select a correction type for this amendment.");
+                    return;
+                }
+            }
+
             this.DialogResult = true;
             this.Save(false);            
             this.Close();

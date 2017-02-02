@@ -17,6 +17,33 @@ namespace YellowstonePathology.Business.Test
 
         }
 
+        public void UpdateCodeType()
+        {
+            Business.Billing.Model.CptCodeCollection cptCodeCollection = Business.Billing.Model.CptCodeCollection.Instance;
+            foreach (Business.Test.PanelSetOrderCPTCode panelSetCptCode in this)
+            {
+                if (string.IsNullOrEmpty(panelSetCptCode.CodeType) == true)
+                {
+                    Business.Billing.Model.CptCode cptCode = cptCodeCollection.GetCptCode(panelSetCptCode.CPTCode);
+                    panelSetCptCode.CodeType = cptCode.CodeType.ToString();
+                }
+            }
+        }
+
+        public List<PanelSetOrderCPTCode> FindUnrecognizedCodes()
+        {
+            List<PanelSetOrderCPTCode> result = new List<PanelSetOrderCPTCode>();
+            Business.Billing.Model.CptCodeCollection cptCodeCollection = Business.Billing.Model.CptCodeCollection.Instance;
+            foreach (Business.Test.PanelSetOrderCPTCode panelSetCptCode in this)
+            {
+                if(cptCodeCollection.GetCptCode(panelSetCptCode.CPTCode) == null)
+                {
+                    result.Add(panelSetCptCode);
+                }
+            }
+            return result;
+        }
+
         public void RemoveDeleted(IEnumerable<XElement> elements)
         {
             for (int i = this.Count - 1; i > -1; i--)
@@ -36,7 +63,7 @@ namespace YellowstonePathology.Business.Test
                     this.RemoveItem(i);
                 }
             }
-        }
+        }        
 
         public bool HasCodesWithMedicareQuantityLimit()
         {

@@ -229,6 +229,9 @@ namespace YellowstonePathology.Business.HL7View.WPH
                 case 204:
                     //view = new YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHWPHOBXView(accessionOrder, reportNo, obxCount);
                     break;
+                case 211:
+                    view = new YellowstonePathology.Business.Test.HoldForFlow.HoldForFlowWPHOBXView(accessionOrder, reportNo, obxCount);
+                    break;
                 case 214:
                     //view = new YellowstonePathology.Business.Test.TechInitiatedPeripheralSmear.TechInitiatedPeripheralSmearWPHOBXView(accessionOrder, reportNo, obxCount);
                     break;

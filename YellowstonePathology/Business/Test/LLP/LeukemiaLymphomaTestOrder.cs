@@ -20,8 +20,7 @@ namespace YellowstonePathology.Business.Test.LLP
 		private int m_DimCD45ModSSCount;
 		private int m_OtherCount;
 		private string m_OtherName;
-		private int? m_LightScatter;
-		//private string m_LightScatterV2;
+		private int? m_LightScatter;		
 		private double m_BCellPercent;
 		private double m_TCellPercent;
 		private double m_NKCellPercent;

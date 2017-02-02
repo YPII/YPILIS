@@ -138,7 +138,7 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 		}
 
 		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "1000", "null", "varchar")]
+		[PersistentDataColumnProperty(true, "1500", "null", "varchar")]
 		public string Interpretation
 		{
 			get { return this.m_Interpretation; }

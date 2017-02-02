@@ -118,7 +118,10 @@
 					<TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" FontWeight="Bold">References:</TextBlock>
 					<TextBox Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
 
-					<local:ReferenceLabFinalControl x:Name="ReferenceLabFinalControl" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13" Margin="2,2,2,2"/>
+                    <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" FontWeight="Bold">ASR:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ASR}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+
+                    <local:ReferenceLabFinalControl x:Name="ReferenceLabFinalControl" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13" Margin="2,2,2,2"/>
 
 				</Grid>
 

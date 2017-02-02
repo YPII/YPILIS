@@ -79,6 +79,7 @@ namespace YellowstonePathology.UI
 
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotFocusEvent, new RoutedEventHandler(TextBox_GotFocus));
             base.OnStartup(e);
+            
 
             this.StartTimer();
             //HandleLocalRepository(); 
@@ -143,34 +144,25 @@ namespace YellowstonePathology.UI
 		}
 
         private void SetupApplicationFolders()
-        {
-            try
+        {            
+            List<string> appDirectories = new List<string>();            
+            appDirectories.Add(@"%USERPROFILE%\AppData\Local\ypi\");
+            appDirectories.Add(YellowstonePathology.Properties.Settings.Default.MonitoredPropertyFolder);
+
+            foreach (string appDir in appDirectories)
             {
-                if (Directory.Exists(YellowstonePathology.Properties.Settings.Default.LocalApplicationFolder) == false)
+                if (System.IO.Directory.Exists(Environment.ExpandEnvironmentVariables(appDir)) == false)
                 {
-                    Directory.CreateDirectory(YellowstonePathology.Properties.Settings.Default.LocalApplicationFolder);
+                    try
+                    {                        
+                        System.IO.Directory.CreateDirectory(Environment.ExpandEnvironmentVariables(appDir));
+                    }
+                    catch (Exception e)
+                    {
+                        Business.Logging.EmailExceptionHandler.HandleException(e.Message);
+                    }                    
                 }
-                if (Directory.Exists(YellowstonePathology.Properties.Settings.Default.LocalDictationFolder) == false)
-                {
-                    Directory.CreateDirectory(YellowstonePathology.Properties.Settings.Default.LocalDictationFolder);
-                }
-                if (Directory.Exists(YellowstonePathology.Properties.Settings.Default.LocalDoneDictationFolder) == false)
-                {
-                    Directory.CreateDirectory(YellowstonePathology.Properties.Settings.Default.LocalDoneDictationFolder);
-                }
-                if (Directory.Exists(YellowstonePathology.Properties.Settings.Default.LocalLoginDataFolder) == false)
-                {
-                    Directory.CreateDirectory(YellowstonePathology.Properties.Settings.Default.LocalLoginDataFolder);
-                }
-                if (Directory.Exists(YellowstonePathology.Properties.Settings.Default.MonitoredPropertyFolder) == false)
-                {
-                    Directory.CreateDirectory(YellowstonePathology.Properties.Settings.Default.MonitoredPropertyFolder);
-                }
-            }
-            catch(Exception e)
-            {
-                Business.Logging.EmailExceptionHandler.HandleException(e.Message);
-            }
+            }                                    
         }                      
 
 		private bool CheckDuplicateProcess()

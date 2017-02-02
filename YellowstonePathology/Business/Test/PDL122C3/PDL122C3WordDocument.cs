@@ -42,7 +42,19 @@ namespace YellowstonePathology.Business.Test.PDL122C3
 
             this.ReplaceText("report_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate));
             this.ReplaceText("report_time", YellowstonePathology.Business.Helper.DateTimeExtensions.ShortTimeStringFromNullable(this.m_PanelSetOrder.FinalDate));
-            this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.Signature);
+
+            if (this.m_PanelSetOrder.ReferenceLabFinalDate.HasValue == true)
+            {
+                this.ReplaceText("report_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.ReferenceLabFinalDate));
+                this.ReplaceText("report_time", YellowstonePathology.Business.Helper.DateTimeExtensions.ShortTimeStringFromNullable(this.m_PanelSetOrder.ReferenceLabFinalDate));
+                this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.ReferenceLabSignature);
+            }
+            else
+            {
+                this.ReplaceText("report_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate));
+                this.ReplaceText("report_time", YellowstonePathology.Business.Helper.DateTimeExtensions.ShortTimeStringFromNullable(this.m_PanelSetOrder.FinalDate));
+                this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.Signature);
+            }
 
             this.SaveReport();
         }

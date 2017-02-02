@@ -1,0 +1,43 @@
+﻿<Window x:Class="YellowstonePathology.UI.MySql.SqlServerRefreshDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI.MySql"
+        mc:Ignorable="d"
+        Title="SqlServerRefreshDialog" Height="700" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu Name="MainMenu" Grid.Column="0" Grid.Row="0" DockPanel.Dock="Top">
+            <MenuItem Header="Get Status" Click="MenuItemGetStatus_Click" Margin="5"></MenuItem>
+            <MenuItem Header="Refresh Data" Click="MenuItemRefreshData_Click"  Margin="5"></MenuItem>
+        </Menu>
+
+        <ListView Name="ListViewNonpersistentTableDef" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=NonpersistentTableDefCollection}" 
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=TableName, Mode=OneWay}" Header="Table Name" Width="300"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=SqlServerRowCount}" Header="SqlServer Rows" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=MySqlRowCount}" Header="MySql Rows" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ModifiedCount}" Header="MySql Modified Count" Width="140"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CreatedCount}" Header="MySql Created Count" Width="140"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Margin="5" Text="Status"></TextBlock>
+            <TextBlock Name="TextBlockStatusMessage"  Margin="5" Text="{Binding Path=StatusMessage}" MinHeight="40" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+
+    </Grid>
+</Window>

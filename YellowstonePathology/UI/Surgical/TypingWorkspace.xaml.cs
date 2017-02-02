@@ -436,7 +436,7 @@ namespace YellowstonePathology.UI.Surgical
 
             Control ctrl = (Control)args.Source;
 			YellowstonePathology.Business.View.BillingSpecimenView billingSpecimenView = (YellowstonePathology.Business.View.BillingSpecimenView)ctrl.Tag;            
-			YellowstonePathology.UI.CodeSelectionV2 codeSelection = new CodeSelectionV2(this.m_TypingUI.AccessionOrder, billingSpecimenView.SurgicalSpecimen);
+			YellowstonePathology.UI.CodeSelection codeSelection = new CodeSelection(this.m_TypingUI.AccessionOrder, billingSpecimenView.SurgicalSpecimen);
             codeSelection.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             codeSelection.ShowDialog();
 			this.m_TypingUI.RefreshBillingSpecimenViewCollection();

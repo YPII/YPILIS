@@ -18,8 +18,8 @@
 
         <Menu Name="MainMenu" Grid.Column="0" Grid.Row="0" DockPanel.Dock="Top">
             <MenuItem Header="Select MySql Database ..." Margin="5">
+                <MenuItem Header="temp" Click="MenuItemSetDBToTemp_Click" Margin="5"></MenuItem>
                 <MenuItem Header="LIS" Click="MenuItemSetDBToLIS_Click" Margin="5"></MenuItem>
-                <MenuItem Header="Test" Click="MenuItemSetDBToTest_Click" Margin="5"></MenuItem>
             </MenuItem>
             <TextBlock Text="{Binding Path=DBIndicator}" Width="30" TextAlignment="Left" Margin="5"></TextBlock>
             <MenuItem Header="Get Status" Click="MenuItemGetStatus_Click" Margin="5" IsEnabled="{Binding Path=HaveDBSelection}"></MenuItem>

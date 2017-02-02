@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.EGFRMutationAnalysis
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisWordDocument).AssemblyQualifiedName;
             
 			this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = new TimeSpan(5, 0, 0, 0);
+            this.m_ExpectedDuration = new TimeSpan(7, 0, 0, 0);
             
             this.m_EpicDistributionIsImplemented = true;
 

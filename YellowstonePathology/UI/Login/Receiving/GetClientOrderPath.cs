@@ -26,6 +26,7 @@ namespace YellowstonePathology.UI.Login.Receiving
                 case OrderTypeEnum.EPIC:
                 case OrderTypeEnum.YPICONNECT:
                 case OrderTypeEnum.ECLINICALWORKS:
+                case OrderTypeEnum.MEDITECH:
                     this.ShowClientOrderLookupPage();
                     break;
                 case OrderTypeEnum.REQUISITION:

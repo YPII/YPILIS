@@ -13,16 +13,16 @@ using System.Windows.Shapes;
 namespace YellowstonePathology.UI
 {
 	/// <summary>
-	/// Interaction logic for CodeSelectionV2.xaml
+	/// Interaction logic for CodeSelection.xaml
 	/// </summary>
-	public partial class CodeSelectionV2 : System.Windows.Window
+	public partial class CodeSelection : System.Windows.Window
 	{		
 		YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
 		YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder m_SurgicalTestOrder;
 		YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen m_SurgicalSpecimen;
 		YellowstonePathology.Business.Billing.Model.TypingCptCodeList m_TypingCptCodeList;
 
-		public CodeSelectionV2(YellowstonePathology.Business.Test.AccessionOrder accessionOrder,
+		public CodeSelection(YellowstonePathology.Business.Test.AccessionOrder accessionOrder,
 			YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen)
         {
 			this.m_AccessionOrder = accessionOrder;

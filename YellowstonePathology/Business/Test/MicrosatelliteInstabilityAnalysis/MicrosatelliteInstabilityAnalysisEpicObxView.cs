@@ -43,18 +43,18 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 			this.AddNextObxElement("", document, "F");
 
 			this.AddNextObxElement("Method: ", document, "F");
-			this.AddNextObxElement(panelSetOrder.Method, document, "F");
+            this.HandleLongString(panelSetOrder.Method, document, "F");
 			this.AddNextObxElement("", document, "F");
 
 			this.AddNextObxElement("References: ", document, "F");
-			this.AddNextObxElement(panelSetOrder.ReportReferences, document, "F");
+			this.HandleLongString(panelSetOrder.ReportReferences, document, "F");
 			this.AddNextObxElement("", document, "F");
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-			this.AddNextObxElement(locationPerformed, document, "F");
+            this.HandleLongString(locationPerformed, document, "F");
 			this.AddNextObxElement("", document, "F");
 
-			this.AddNextObxElement(panelSetOrder.TestDevelopment, document, "F");
+            this.HandleLongString(panelSetOrder.TestDevelopment, document, "F");
 			this.AddNextObxElement(string.Empty, document, "F");
 		}
 	}

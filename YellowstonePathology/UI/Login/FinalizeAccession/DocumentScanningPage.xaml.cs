@@ -74,7 +74,31 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_AccessionOrder.MasterAccessionNo);            
             this.m_FileName = YellowstonePathology.Business.Requisition.GetNextFileName(orderIdParser);
             this.NotifyPropertyChanged("FileName");
-            YellowstonePathology.Business.Requisition.Save(this.m_FileName, this.m_ImageList); 
+            YellowstonePathology.Business.Requisition.Save(this.m_FileName, this.m_ImageList);
+            //this.SavePNG();
+        }
+
+        private void SavePNG()
+        {
+            string filePath = @"\\CFILESERVER\Documents\Scanning\png\" + this.m_AccessionOrder.MasterAccessionNo;
+            System.Windows.MessageBox.Show(this.m_ImageList.Count.ToString());
+            foreach (System.Windows.Controls.Image visual in this.m_ImageList)
+            {
+                var encoder = new PngBitmapEncoder();
+                RenderTargetBitmap bitmap = new RenderTargetBitmap((int)visual.ActualWidth, (int)visual.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+                Size visualSize = new Size(visual.ActualWidth, visual.ActualHeight);
+                visual.Measure(visualSize);
+                visual.Arrange(new Rect(visualSize));
+                bitmap.Render(visual);
+                BitmapFrame frame = BitmapFrame.Create(bitmap);
+                encoder.Frames.Add(frame);
+
+                Random rnd = new Random();
+                using (FileStream stream = File.Create(filePath + rnd.Next(1000, 9000).ToString() + ".png"))
+                {
+                    encoder.Save(stream);
+                }
+            }
         }
 
         private void Twain_TransferImage(object sender, TransferImageEventArgs e)

@@ -66,14 +66,16 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 				IHCResultLossOfNuclearExpressionPMS2 iHCResultLossOfNuclearExpressionPMS2 = new IHCResultLossOfNuclearExpressionPMS2();
 				IHCResultNoLossOfNuclearExpression iHCResultNoLossOfNuclearExpression = new IHCResultNoLossOfNuclearExpression();
 				IHCResultLossOfNuclearExpressionMLH1 iHCResultLossOfNuclearExpressionMLH1 = new IHCResultLossOfNuclearExpressionMLH1();
-				
-				if (resultCode == iHCResultLossOfNuclearExpressionMLH1PMS2.ResultCode) result = iHCResultLossOfNuclearExpressionMLH1PMS2;
+                IHCResultLossOfNuclearExpressionMSH2 iHCResultLossOfNuclearExpressionMSH2 = new IHCResultLossOfNuclearExpressionMSH2();
+
+                if (resultCode == iHCResultLossOfNuclearExpressionMLH1PMS2.ResultCode) result = iHCResultLossOfNuclearExpressionMLH1PMS2;
 				else if (resultCode == iHCResultLossOfNuclearExpressionMSH2MSH6.ResultCode) result = iHCResultLossOfNuclearExpressionMSH2MSH6;
 				else if (resultCode == iHCResultLossOfNuclearExpressionMSH6.ResultCode) result = iHCResultLossOfNuclearExpressionMSH6;
 				else if (resultCode == iHCResultLossOfNuclearExpressionPMS2.ResultCode) result = iHCResultLossOfNuclearExpressionPMS2;
 				else if (resultCode == iHCResultNoLossOfNuclearExpression.ResultCode) result = iHCResultNoLossOfNuclearExpression;
 				else if (resultCode == iHCResultLossOfNuclearExpressionMLH1.ResultCode) result = iHCResultLossOfNuclearExpressionMLH1;
-			}
+                else if (resultCode == iHCResultLossOfNuclearExpressionMSH2.ResultCode) result = iHCResultLossOfNuclearExpressionMSH2;
+            }
 			return result;
 		}
     }

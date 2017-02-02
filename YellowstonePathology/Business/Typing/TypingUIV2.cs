@@ -32,7 +32,11 @@ namespace YellowstonePathology.Business.Typing
 		private string m_TemplateText;
         private System.Windows.Controls.TabItem m_Writer;
 
-		public TypingUIV2(System.Windows.Controls.TabItem writer)
+        private string m_SpecialInstructions;
+        private System.Windows.Visibility m_SpecialInstructionsVisibility = Visibility.Collapsed;
+        List<Business.Specimen.Model.Specimen> m_FluidSpecimenList;
+
+        public TypingUIV2(System.Windows.Controls.TabItem writer)
 		{
             this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 
@@ -40,7 +44,13 @@ namespace YellowstonePathology.Business.Typing
 
 			this.m_CaseListDate = DateTime.Today;
 
-			this.m_TypingUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Typing, true);
+            Business.Specimen.Model.SpecimenDefinition.Fluid fluid = new Specimen.Model.SpecimenDefinition.Fluid();
+            Business.Specimen.Model.SpecimenDefinition.Urine urine = new Specimen.Model.SpecimenDefinition.Urine();
+            this.m_FluidSpecimenList = new List<Specimen.Model.Specimen>();
+            this.m_FluidSpecimenList.Add(fluid);
+            this.m_FluidSpecimenList.Add(urine);
+
+            this.m_TypingUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Typing, true);
 
 			this.m_SurgicalOrderList = new YellowstonePathology.Business.Surgical.SurgicalOrderList();
 			this.m_SurgicalOrderList.FillByAccessionDate(DateTime.Today);
@@ -64,10 +74,23 @@ namespace YellowstonePathology.Business.Typing
                 if (this.m_AccessionOrder != null)
                 {
                     this.m_SurgicalTestOrder = (YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
-
                     this.m_CaseDocumentCollection = new Business.Document.CaseDocumentCollection(this.m_AccessionOrder, reportNo);
-
                     this.RefreshBillingSpecimenViewCollection();
+                    
+                    this.m_SpecialInstructions = null;
+                    this.m_SpecialInstructionsVisibility = Visibility.Collapsed;                    
+
+                    if (this.m_AccessionOrder.SpecimenOrderCollection.SpecimenTypeExists(this.m_FluidSpecimenList) == true)
+                    {
+                        if (this.m_AccessionOrder.AccessioningFacilityId == "YPICDY")
+                        {
+                            if(this.m_AccessionOrder.AccessionDate == DateTime.Today)
+                            {
+                                this.m_SpecialInstructions = "Its best that we wait to type the gross for this case. Cell blocks may be added later.";
+                                this.m_SpecialInstructionsVisibility = Visibility.Visible;
+                            }                            
+                        }                        
+                    }
 
                     this.NotifyPropertyChanged("");
                 }
@@ -91,8 +114,34 @@ namespace YellowstonePathology.Business.Typing
 		{			            
             
 		}
-		
-		public string TemplateText
+
+        public string SpecialInstructions
+        {
+            get { return this.m_SpecialInstructions; }
+            set
+            {
+                if(this.m_SpecialInstructions != value)
+                {
+                    this.m_SpecialInstructions = value;
+                    this.NotifyPropertyChanged("SpecialInstructions");
+                }                
+            }
+        }
+
+        public System.Windows.Visibility SpecialInstructionsVisibility
+        {
+            get { return this.m_SpecialInstructionsVisibility; }
+            set
+            {
+                if (this.m_SpecialInstructionsVisibility != value)
+                {
+                    this.m_SpecialInstructionsVisibility = value;
+                    this.NotifyPropertyChanged("SpecialInstructionsVisibility");
+                }
+            }
+        }
+
+        public string TemplateText
         {
             get { return this.m_TemplateText; }
             set { this.m_TemplateText = value; }

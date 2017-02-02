@@ -120,7 +120,6 @@ namespace YellowstonePathology.UI.Gross
             {
                 System.Windows.MessageBox.Show("The scanned container was not found.");
                 this.ShowScanContainerPage();
-
             }            
         } 
         

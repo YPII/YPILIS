@@ -261,6 +261,7 @@
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="*"></RowDefinition>
 				</Grid.RowDefinitions>
@@ -283,7 +284,10 @@
                 <TextBlock Grid.Column="0" Grid.Row="5" Margin="2" FontSize="14" TextAlignment="Right" FontWeight="Bold">Acknowledged:</TextBlock>
 				<TextBlock Grid.Column="1" Grid.Row="5" Margin="2" FontSize="14" Text="{Binding Path=TaskOrder.AcknowledgedDate, Converter={StaticResource MilitaryDateTimeConverter}}"></TextBlock>
 
-                <ListBox Name="ListBoxTaskDetails" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Margin="2,2,2,2" ItemsSource="{Binding Path=TaskOrder.TaskOrderDetailCollection}"
+                <TextBlock Grid.Column="0" Grid.Row="6" Margin="2" FontSize="14" TextAlignment="Right" FontWeight="Bold">Patient Id:</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="6" Margin="2" FontSize="14" Text="{Binding Path=AccessionOrder.PatientId}"></TextBlock>
+
+                <ListBox Name="ListBoxTaskDetails" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Margin="2,2,2,2" ItemsSource="{Binding Path=TaskOrder.TaskOrderDetailCollection}"
 					 ItemTemplateSelector="{StaticResource TaskOrderDetailTemplateSelector}" ItemContainerStyle="{StaticResource TaskOrderDetailStyle}" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 </ListBox>     
                 

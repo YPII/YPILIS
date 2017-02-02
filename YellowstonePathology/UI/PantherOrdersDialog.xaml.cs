@@ -25,6 +25,7 @@ namespace YellowstonePathology.UI
         private YellowstonePathology.Business.Test.PantherOrderList m_PantherHPV1618OrderList;
         private YellowstonePathology.Business.Test.PantherOrderList m_PantherTrichomonasOrderList;
         private YellowstonePathology.Business.Test.PantherOrderList m_PantherWHPOrderList;
+        private YellowstonePathology.Business.Test.PantherOrderList m_PantherPreviouslyRunList;
         private YellowstonePathology.Business.Test.PantherAliquotList m_PantherAliquotList;
 
         private Login.Receiving.LoginPageWindow m_LoginPageWindow;
@@ -36,6 +37,7 @@ namespace YellowstonePathology.UI
             this.m_PantherNGCTOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPantherOrdersNotAcceptedNGCT();
             this.m_PantherHPV1618OrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPantherOrdersNotAcceptedHPV1618();
             this.m_PantherTrichomonasOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPantherOrdersNotAcceptedTrichomonas();
+            this.m_PantherPreviouslyRunList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPantherOrdersPreviouslyRun();
             this.m_PantherWHPOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPantherOrdersNotFinalWHP();
 
             InitializeComponent();
@@ -52,6 +54,11 @@ namespace YellowstonePathology.UI
         public YellowstonePathology.Business.Test.PantherOrderList PantherHPVOrderList
         {
             get { return this.m_PantherHPVOrderList; }
+        }
+
+        public YellowstonePathology.Business.Test.PantherOrderList PantherPreviouslyRunList
+        {
+            get { return this.m_PantherPreviouslyRunList; }
         }
 
         public YellowstonePathology.Business.Test.PantherOrderList PantherNGCTOrderList

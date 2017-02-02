@@ -47,7 +47,13 @@ namespace YellowstonePathology.UI.Login.Receiving
         }
 
         public void Start()
-        {			
+        {
+            if (string.IsNullOrEmpty(this.m_AccessionOrder.SpecialInstructions) == false)
+            {
+                SpecialInstructionsWindow specialInstructionsWindow = new SpecialInstructionsWindow(this.m_AccessionOrder.SpecialInstructions);
+                this.m_PageNavigator.ShowSecondMonitorWindow(specialInstructionsWindow);
+            }
+
             this.ShowAccessionOrderPage();
             if (this.m_PageNavigationMode == PageNavigationModeEnum.Standalone)
             {

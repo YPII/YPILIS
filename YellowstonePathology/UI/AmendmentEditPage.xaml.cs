@@ -131,6 +131,15 @@ namespace YellowstonePathology.UI
 
 		private void ButtonClose_Click(object sender, RoutedEventArgs e)
 		{
+            if(this.m_AmendmentUI.SelectedAmendment.AmendmentType == "Correction")
+            {
+                if(string.IsNullOrEmpty(this.m_AmendmentUI.SelectedAmendment.CorrectionType) == true)
+                {
+                    MessageBox.Show("You must choose the type of correction for this amendment.");
+                    return;
+                }
+            }
+
 			Window window = Window.GetWindow(this);
 			window.Close();
 		}

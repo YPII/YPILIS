@@ -123,11 +123,11 @@ namespace YellowstonePathology.UI.MySql
             this.DBIndicator = "LIS";
         }
 
-        private void MenuItemSetDBToTest_Click(object sender, RoutedEventArgs e)
+        private void MenuItemSetDBToTemp_Click(object sender, RoutedEventArgs e)
         {
-            m_MySQLDatabaseBuilder = new MySQLMigration.MySQLDatabaseBuilder("Test");
+            m_MySQLDatabaseBuilder = new MySQLMigration.MySQLDatabaseBuilder("temp");
             this.MigrationStatusCollection = MySQLMigration.MigrationStatusCollection.GetAll();
-            this.DBIndicator = "Test";
+            this.DBIndicator = "temp";
         }
 
         private void MenuItemGetStatus_Click(object sender, RoutedEventArgs e)
@@ -321,9 +321,9 @@ namespace YellowstonePathology.UI.MySql
                 {
                     if(migrationStatus.HasTimestampColumn == false)
                     {
-                        MySQLMigration.MySQLDatabaseBuilder.AddSQLTimestampColumn(migrationStatus.TableName);
-                        MySQLMigration.MySQLDatabaseBuilder.AddTransferDBTSAttribute(migrationStatus.TableName);
-                        MySQLMigration.MySQLDatabaseBuilder.AddTransferStraightAcrossAttribute(migrationStatus.TableName, false);
+                        this.m_MySQLDatabaseBuilder.AddSQLTimestampColumn(migrationStatus.TableName);
+                        this.m_MySQLDatabaseBuilder.AddTransferDBTSAttribute(migrationStatus.TableName);
+                        this.m_MySQLDatabaseBuilder.AddTransferStraightAcrossAttribute(migrationStatus.TableName, false);
                     }
                     this.StatusMessage = "Timestamp Column added.";
                 }
@@ -423,7 +423,23 @@ namespace YellowstonePathology.UI.MySql
             Business.Rules.MethodResult overallResult = new Business.Rules.MethodResult();
             foreach (MySQLMigration.MigrationStatus migrationStatus in this.ListViewMigrationStatus.SelectedItems)
             {
-                this.m_MySQLDatabaseBuilder.RemoveDeletedRowsFromMySql(migrationStatus);
+                this.m_MySQLDatabaseBuilder.RemoveFromMySqlNoLongerInSqlServer(migrationStatus);
+            }
+            this.SetStatusMessage(overallResult);
+        }
+
+        private void MenuItemAddMissingTransferredData_Click(object sender, RoutedEventArgs e)
+        {
+            this.StatusMessage = "Working on it.";
+            Business.Rules.MethodResult overallResult = new Business.Rules.MethodResult();
+            foreach (MySQLMigration.MigrationStatus migrationStatus in this.ListViewMigrationStatus.SelectedItems)
+            {
+                Business.Rules.MethodResult result = this.m_MySQLDatabaseBuilder.InsertMySqlTransferredButMissing(migrationStatus);
+                if (result.Success == false)
+                {
+                    overallResult.Success = false;
+                    overallResult.Message += result.Message;
+                }
             }
             this.SetStatusMessage(overallResult);
         }

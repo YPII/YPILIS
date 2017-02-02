@@ -744,6 +744,34 @@ namespace YellowstonePathology.Business.Specimen.Model
             return result;
         }
 
+        public bool SpecimenTypeExists(List<Business.Specimen.Model.Specimen> specimenList)
+        {
+            bool result = false;
+            foreach (Business.Specimen.Model.Specimen specimen in specimenList)
+            {
+                if (SpecimenTypeExists(specimen) == true)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public bool SpecimenTypeExists(Business.Specimen.Model.Specimen specimen)
+        {
+            bool result = false;
+            foreach (SpecimenOrder specimenOrder in this)
+            {
+                if (specimenOrder.SpecimenId == specimen.SpecimenId)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public bool Exists(string specimenOrderId)
         {
             bool result = false;

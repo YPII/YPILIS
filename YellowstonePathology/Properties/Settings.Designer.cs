@@ -197,7 +197,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\Yellowstone Pathology Institute\\MonitoredProperty")]
+        [global::System.Configuration.DefaultSettingValueAttribute("%USERPROFILE%\\AppData\\Local\\ypi\\MonitoredProperty")]
         public string MonitoredPropertyFolder {
             get {
                 return ((string)(this["MonitoredPropertyFolder"]));

@@ -17,8 +17,8 @@
 
         <Menu Name="MainMenu" Grid.Column="0" Grid.Row="0" DockPanel.Dock="Top">
             <MenuItem Header="Select MySql Database ..." Margin="5">
+                <MenuItem Header="temp" Click="MenuItemSetDBToTemp_Click" Margin="5"></MenuItem>
                 <MenuItem Header="LIS" Click="MenuItemSetDBToLIS_Click" Margin="5"></MenuItem>
-                <MenuItem Header="Test" Click="MenuItemSetDBToTest_Click" Margin="5"></MenuItem>
             </MenuItem>
             <TextBlock Text="{Binding Path=DBIndicator}" Width="30" TextAlignment="Left" Margin="5"></TextBlock>
             <MenuItem Header="Get Status" Click="MenuItemGetStatus_Click" Margin="5" IsEnabled="{Binding Path=HaveDBSelection}"></MenuItem>
@@ -37,6 +37,7 @@
                 <MenuItem Header="Sync and Load new and altered" Click="MenuItemDailySync_Click" Margin="5"></MenuItem>
                 <MenuItem Header="Bulk Load Data" Click="MenuItemLoadData_Click" Margin="5"></MenuItem>
                 <MenuItem Header="Synchronize Data" Click="MenuItemSynchronizeData_Click" Margin="5"></MenuItem>
+                <MenuItem Header="Add MySql Transferred in SqlServer" Click="MenuItemAddMissingTransferredData_Click" Margin="5"></MenuItem>
                 <MenuItem Header="Remove MySql not in SqlServer" Click="MenuItemRemoveUnneededData_Click" Margin="5"></MenuItem>
             </MenuItem>
             <MenuItem Header="Compare/Update Selected Data" Click="MenuItemCompareData_Click" Margin="5" IsEnabled="{Binding Path=HaveDBSelection}"></MenuItem>

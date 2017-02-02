@@ -297,7 +297,7 @@ namespace YellowstonePathology.Business.Specimen.Model.SpecimenDefinition
         {
             this.m_SpecimenId = "ADSPCM";
             this.m_SpecimenName = "Adenoid Excision";
-            this.m_Description = "Adenoid, excision";
+            this.m_Description = "Adenoids, excision";
             this.m_LabFixation = "Formalin";
             this.m_ClientFixation = null;
             this.m_RequiresGrossExamination = true;

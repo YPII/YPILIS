@@ -300,6 +300,12 @@ namespace YellowstonePathology.UI.Test
                 case 247:
                     result = new TCellNKProfileResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
+                case 250:
+                    result = new FISH5p159q2215p22ResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
+                case 251:
+                    result = new LiposarcomaFusionProfileResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
             }
             return result;
         }

@@ -69,9 +69,12 @@ namespace YellowstonePathology.MySQLMigration
             def.Append(columnName);
             def.Append("` ");
             def.Append(columnType);
-            def.Append("(");
-            def.Append(columnWidth);
-            def.Append(")");
+            if (string.IsNullOrEmpty(columnWidth) == false)
+            {
+                def.Append("(");
+                def.Append(columnWidth);
+                def.Append(")");
+            }
             if (isNull == false) def.Append(" NOT NULL");
             if (string.IsNullOrEmpty(defaultValue) == false)
             {

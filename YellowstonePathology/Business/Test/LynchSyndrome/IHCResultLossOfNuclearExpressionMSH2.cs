@@ -9,7 +9,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
     {
 		public IHCResultLossOfNuclearExpressionMSH2()
         {
-            this.m_ResultCode = "LNCHIHC07";
+            this.m_ResultCode = "LNCHIHC1A";
 			this.m_MLH1Result = new LSEIHCResultIntactExpression();
 			this.m_MSH2Result = new LSEIHCResultLossOfExpression();
 			this.m_MSH6Result = new LSEIHCResultIntactExpression();

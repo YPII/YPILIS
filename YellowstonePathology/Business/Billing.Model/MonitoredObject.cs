@@ -41,7 +41,7 @@ namespace YellowstonePathology.Business.Billing.Model
             {
                 string json = JsonConvert.SerializeObject(propertyChangeList, Newtonsoft.Json.Formatting.Indented);
 
-                string fileName = YellowstonePathology.Properties.Settings.Default.MonitoredPropertyFolder + "\\" + this.m_ReportNo + "-" + DateTime.Now.ToString("hhMMss") + ".json";
+                string fileName = Environment.ExpandEnvironmentVariables(YellowstonePathology.Properties.Settings.Default.MonitoredPropertyFolder) + "\\" + this.m_ReportNo + "-" + DateTime.Now.ToString("hhMMss") + ".json";
                 using (System.IO.StreamWriter sw = new System.IO.StreamWriter(fileName, false))
                 {
                     sw.Write(json);

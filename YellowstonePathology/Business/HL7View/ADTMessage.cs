@@ -66,14 +66,14 @@ namespace YellowstonePathology.Business.HL7View
                 if (fields[0] == "IN1")
                 {
                     Business.HL7View.IN1 in1 = new HL7View.IN1();
-                    in1.FromHl7(lines[i]);
+                    in1.FromHl7(lines[i], this.m_DateReceived);
                     this.m_IN1Segments.Add(in1);
                 }
 
                 if (fields[0] == "IN2")
                 {
                     Business.HL7View.IN2 in2 = new HL7View.IN2();
-                    in2.FromHl7(lines[i]);
+                    in2.FromHl7(lines[i], this.m_DateReceived);
                     this.m_IN2Segments.Add(in2);
                 }
 

@@ -670,7 +670,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 
         [DataMember]
         [PersistentProperty()]
-        [PersistentDataColumnProperty(true, "250", "0", "varchar")]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
         public string HoldMessage
         {
             get { return this.m_HoldMessage; }

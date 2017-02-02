@@ -10,6 +10,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         EPIC,
         ECLINICALWORKS,
         YPICONNECT,
-        REQUISITION
+        REQUISITION,
+        MEDITECH
     }
 }

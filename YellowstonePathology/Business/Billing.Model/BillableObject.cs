@@ -72,8 +72,10 @@ namespace YellowstonePathology.Business.Billing.Model
                         this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.Add(panelSetOrderCPTCode);
                     }
                 }
+
+                this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.UpdateCodeType();
             }
-        }        
+        }                  
 
         public virtual void PostGlobal(string billTo, string billby)
         {

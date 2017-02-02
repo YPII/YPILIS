@@ -14,8 +14,9 @@ namespace YellowstonePathology.Business.Test.CLLByFish
 		private string m_Interpretation;
 		private string m_ProbeSetDetail;
 		private string m_NucleiScored;
+        private string m_ASR;
 
-		public CLLByFishTestOrder()
+        public CLLByFishTestOrder()
 		{
 		}
 
@@ -29,9 +30,10 @@ namespace YellowstonePathology.Business.Test.CLLByFish
                 "2.Hamblin TJ.Best Practice &Research Clinical Haematology. 2007; 20(3):455 - 68." + Environment.NewLine +
                 "3.Nowakowski GS, et al. Br J Hematol. 2005; 130:36 - 42." + Environment.NewLine +
                 "4.Atlas of Genetics and Cytogenetics in Oncology and Hematology http://atlasgeneticsoncology.org/";
+            this.m_ASR = "The performance characteristics of this test have been determined by NeoGenomics Laboratories. This test has not been approved by the FDA. The FDA has determined such clearance or approval is not necessary. This laboratory is CLIA certified to perform high complexity clinical testing.";
         }
 
-		[PersistentProperty()]
+        [PersistentProperty()]
 		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string Result
 		{
@@ -106,7 +108,22 @@ namespace YellowstonePathology.Business.Test.CLLByFish
 			}
 		}
 
-		public override string ToResultString(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
+        public string ASR
+        {
+            get { return this.m_ASR; }
+            set
+            {
+                if (this.m_ASR != value)
+                {
+                    this.m_ASR = value;
+                    this.NotifyPropertyChanged("ASR");
+                }
+            }
+        }
+
+        public override string ToResultString(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             StringBuilder result = new StringBuilder();
 

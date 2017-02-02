@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.ZAP70LymphoidPanel
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.ZAP70LymphoidPanel.ZAP70LymphoidPanelTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.ZAP70LymphoidPanel.ZAP70LymphoidPanelWordDocument).AssemblyQualifiedName;
 			this.m_AllowMultiplePerAccession = true;
-            //Changed by MS and TK;
+            
             this.m_EpicDistributionIsImplemented = true;
 
             string taskDescription = "Collect (Peripheral blood: 2-5 mL in sodium heparin tube, 2x5 mL in EDTA tube; " +

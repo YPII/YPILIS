@@ -403,6 +403,7 @@
 						<Grid.RowDefinitions>
 							<RowDefinition Height="100"></RowDefinition>							
 							<RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
 						</Grid.RowDefinitions>
 
                         <ListView Grid.Column="0" Grid.Row="0" Name="listViewCellPopulationsOfInterest" ItemsSource="{Binding Path=PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.CellPopulationsOfInterest}"
@@ -486,6 +487,10 @@
 							</ListView.View>
 						</ListView>
 
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2">
+                            <TextBlock Margin="2,2,2,2">Marker Count:</TextBlock>
+                            <TextBlock Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.Count}" Margin="2,2,2,2"></TextBlock>
+                        </StackPanel>
 					</Grid>		
 				</TabItem>				
 				<TabItem Header="Results">
@@ -525,7 +530,7 @@
 						</StackPanel>
 					</StackPanel>
 				</TabItem>
-				<TabItem Header="Coding">
+				<TabItem Header="ICD10 Codes">
 					<Grid Background="White">
 						<Grid.ContextMenu>
                             <ContextMenu>
@@ -567,7 +572,33 @@
                           <Button VerticalAlignment="Top" Width="200" Style="{StaticResource NormalButton}" Click="ButtonRemoveICDCode_Click">Remove ICD Code</Button>
                         </StackPanel>
 					</Grid>
-				</TabItem>								
+				</TabItem>
+                <TabItem Header="CPT Codes">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <ListView Name="ListViewPanelSetOrderCPTCode" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=PanelSetOrderLeukemiaLymphoma.PanelSetOrderCPTCodeCollection}" Margin="2,2,2,2">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="Qty" Width="75"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=CPTCode}" Header="CPT Code" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=CodeableDescription}" Header="Description" Width="200"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=CodeableType}" Header="Type" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Modifier}" Header="Modifier" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PostDate, Converter={StaticResource ShortDateConverter}}" Header="Post Date" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EntryType}" Header="Entry Type" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientId}" Header="Client" Width="100"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Grid.Column="0" Grid.Row="1" Width="100" Height="30" Click="ButtonSetCodes_Click" HorizontalAlignment="Right" Margin="2,2,2,2">Set Codes</Button>
+                    </Grid>
+                </TabItem>
                 <TabItem Header="Tech Final">
                   <Grid>
                     <Grid.ColumnDefinitions>
@@ -654,59 +685,58 @@
 							<Button HorizontalAlignment="Left" Name="buttonSignReport" Click="ButtonSignReport_Click" Height="25" Width="100" IsEnabled="{Binding Path=SignReportButtonEnabled}" Content="{Binding Path=SignReportButtonContent}" />							
 						</StackPanel>						
 					</Grid>
-				</TabItem>                                
+				</TabItem>
                 <TabItem Name="TabItemCommonMarkers" Header="Markers(Common)">
-                  <Grid>
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="Auto"></RowDefinition>
-                      <RowDefinition Height="*"></RowDefinition>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
+                        </Grid.RowDefinitions>
 
-                    <StackPanel Orientation="Horizontal" Margin="5" Grid.Column="0" Grid.Row="0">
-                      <TextBlock VerticalAlignment="Center" Width="200" Style="{StaticResource GatingTextBlock}" TextAlignment="Right" Margin="2,2,2,2">Marker Panel:</TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="5" Grid.Column="0" Grid.Row="0">
+                            <TextBlock VerticalAlignment="Center" Width="200" Style="{StaticResource GatingTextBlock}" TextAlignment="Right" Margin="2,2,2,2">Marker Panel:</TextBlock>
                             <ComboBox Name="comboBoxCommonMarkerPanel" Width="150" ItemsSource="{Binding Path=FlowPanelList}" DisplayMemberPath="PanelName" SelectedValuePath="PanelId" Height="22" Margin="2,2,2,2"/>
-                            <Button Name="ButtonAddCommonMarkerPanel" Height="20" Width="100" Click="ButtonAddCommonMarkerPanel_Click" Margin="2,2,2,2">Add Panel</Button>              
-                    </StackPanel>
-            
-                    <ListView Name="listViewCommonMarkers" Grid.Column="0" Grid.Row="1" 
+                            <Button Name="ButtonAddCommonMarkerPanel" Height="20" Width="100" Click="ButtonAddCommonMarkerPanel_Click" Margin="2,2,2,2">Add Panel</Button>
+                        </StackPanel>
+
+                        <ListView Name="listViewCommonMarkers" Grid.Column="0" Grid.Row="1" 
 				        ItemsSource="{Binding Path=PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection}" IsEnabled="{Binding Path=IsWorkspaceEnabled}">
-                      <ListView.View>
-                        <GridView>
-                          <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=Name}" Header="Marker"/>
-                          <GridViewColumn Header="Intensity" Width="150">
-                            <GridViewColumn.CellTemplate>
-                              <DataTemplate>                        
-                                <ComboBox Width="130"  Margin="3" IsEditable="True" Text="{Binding Path=Result}">
-                                  <ComboBoxItem>Negative</ComboBoxItem>
-                                  <ComboBoxItem>Weakly Positive</ComboBoxItem>
-                                  <ComboBoxItem>Positive</ComboBoxItem>
-                                  <ComboBoxItem>Strongly Positive</ComboBoxItem>
-                                </ComboBox>                        
-                              </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                          </GridViewColumn>
-                        </GridView>
-                      </ListView.View>
-                    </ListView>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=Name}" Header="Marker"/>
+                                    <GridViewColumn Header="Intensity" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ComboBox Width="130"  Margin="3" IsEditable="True" Text="{Binding Path=Result}">
+                                                    <ComboBoxItem>Negative</ComboBoxItem>
+                                                    <ComboBoxItem>Weakly Positive</ComboBoxItem>
+                                                    <ComboBoxItem>Positive</ComboBoxItem>
+                                                    <ComboBoxItem>Strongly Positive</ComboBoxItem>
+                                                </ComboBox>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
 
                         <TextBlock Grid.Column="0" Grid.Row="2" FontWeight="Bold" Margin="2,2,2,2">Report Comment:</TextBlock>
                         <TextBox Name="TextBoxReportComment" Grid.Column="0" Grid.Row="3" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.ReportComment, UpdateSourceTrigger=PropertyChanged}" 
                                  HorizontalAlignment="Stretch" Height="100" AcceptsReturn="True" Margin="2,2,2,2"></TextBox>
-                    </Grid>          
+                    </Grid>
                 </TabItem>
-        
-			</TabControl>
+            </TabControl>
 			
 			<GridSplitter Height="5" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"></GridSplitter>
 			
-			<TabControl Name="tabControlBottomLeftPane" Grid.Column="0" Grid.Row="3">                                                                
-                
-				<TabItem Header="List">
+			<TabControl Name="tabControlBottomLeftPane" Grid.Column="0" Grid.Row="3">
+
+                <TabItem Header="List">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -719,7 +749,7 @@
                         <Button Width="125" Height="30" Grid.Column="0" Grid.Row="0" Click="ButtonReportOrder_Click" HorizontalAlignment="Left" Margin="2,2,2,2">Additional Testing</Button>
                         <Button Width="75" Height="30" Grid.Column="0" Grid.Row="0" Click="ButtonRefresh_Click" HorizontalAlignment="Right" Margin="2,2,2,2">Refresh</Button>
 
-						<ListView Name="ListViewFlowCaseList" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=FlowLogSearch.FlowLogList}" SelectionChanged="ListViewFlowCaseList_SelectionChanged">
+                        <ListView Name="ListViewFlowCaseList" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=FlowLogSearch.FlowLogList}" SelectionChanged="ListViewFlowCaseList_SelectionChanged">
 
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
@@ -752,7 +782,7 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.ItemContainerStyle>
-                            
+
                             <ListView.View>
                                 <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Flow Case List">
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="85"/>
@@ -764,10 +794,9 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                    </Grid>                                                          
-				</TabItem>
-                
-				<TabItem Name="tablItemSearch" Header="Search">
+                    </Grid>
+                </TabItem>
+                <TabItem Name="tablItemSearch" Header="Search">
 					<StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<RadioButton Name="radioButtonSearchCurrentMonth"

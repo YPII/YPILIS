@@ -85,7 +85,8 @@ namespace YellowstonePathology.UI.Login.Receiving
                 {
                     case OrderTypeEnum.EPIC:
                     case OrderTypeEnum.YPICONNECT:
-                        clientOrderCollection = this.HandleEPICLookup(keyValue);
+                    case OrderTypeEnum.MEDITECH:
+                        clientOrderCollection = this.HandleOrderLookup(keyValue);
                         break;
                     case OrderTypeEnum.ECLINICALWORKS:
                         clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByExternalOrderId(keyValue);
@@ -111,7 +112,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 			}
 		}
 
-        private YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection HandleEPICLookup(string keyValue)
+        private YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection HandleOrderLookup(string keyValue)
         {
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection result = new Business.ClientOrder.Model.ClientOrderCollection();
             if (this.IsTheEnteredKeyAnMrn(keyValue) == true)
@@ -128,12 +129,22 @@ namespace YellowstonePathology.UI.Login.Receiving
 		private bool IsTheEnteredKeyAnMrn(string keyValue)
 		{
 			bool result = false;
-			if (keyValue.Substring(0, 1).ToUpper() == "A" ||
-				keyValue.Substring(0, 1).ToUpper() == "R" ||
-				keyValue.Substring(0, 1).ToUpper() == "V")
-			{
-				result = true;
-			}
+            if(this.m_ExpectedOrderType == OrderTypeEnum.MEDITECH)
+            {
+                if (keyValue.Substring(0, 1).ToUpper() == "W")
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                if (keyValue.Substring(0, 1).ToUpper() == "A" ||
+                keyValue.Substring(0, 1).ToUpper() == "R" ||
+                keyValue.Substring(0, 1).ToUpper() == "V")
+                {
+                    result = true;
+                }
+            }			
 			return result;
 		}
 

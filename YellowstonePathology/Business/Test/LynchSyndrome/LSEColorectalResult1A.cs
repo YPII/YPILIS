@@ -5,9 +5,10 @@ using System.Text;
 
 namespace YellowstonePathology.Business.Test.LynchSyndrome
 {
-	public class LSEColorectalResult9 : LSEResult
+	public class LSEColorectalResult1A : LSEResult
 	{
-		public LSEColorectalResult9()
+
+		public LSEColorectalResult1A()
 		{
 			this.m_MLH1Result = LSEResultEnum.Intact;
 			this.m_MSH2Result = LSEResultEnum.Loss;
@@ -18,7 +19,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             this.m_BRAFIsIndicated = false;
 
 			this.m_Interpretation = "Loss of nuclear expression of MSH2 mismatch repair protein.";
-			this.m_Comment = "This staining pattern is highly suggestive of Lynch Syndrome and is associated with germline PMS2 or MLH1 mutations.  Recommend genetic counseling and further evaluation.";
+            this.m_Comment = "This staining pattern is extremely rare and may be due to an MSH2 gene mutation.  Recommend genetic counseling and further evaluation to exclude Lynch Syndrome. ";
             this.m_Method = IHCMethod;
             this.m_References = LSEColonReferences;
 		}

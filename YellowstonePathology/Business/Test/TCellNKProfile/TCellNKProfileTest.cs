@@ -25,8 +25,14 @@ namespace YellowstonePathology.Business.Test.TCellNKProfile
             this.m_AllowMultiplePerAccession = true;
             this.m_EpicDistributionIsImplemented = true;
 
-            YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(new YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT86356(), 3);
-            this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);
+            YellowstonePathology.Business.Billing.Model.PanelSetCptCode cpt88184 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(new YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT88184(), 1);
+            YellowstonePathology.Business.Billing.Model.PanelSetCptCode cpt86357 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(new YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT86357(), 1);
+            YellowstonePathology.Business.Billing.Model.PanelSetCptCode cpt86359 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(new YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT86359(), 1);
+            YellowstonePathology.Business.Billing.Model.PanelSetCptCode cpt86360 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(new YellowstonePathology.Business.Billing.Model.CptCodeDefinition.CPT86360(), 1);
+            this.m_PanelSetCptCodeCollection.Add(cpt88184);
+            this.m_PanelSetCptCodeCollection.Add(cpt86357);
+            this.m_PanelSetCptCodeCollection.Add(cpt86359);
+            this.m_PanelSetCptCodeCollection.Add(cpt86360);
 
             string taskDescription = "Perform T-Cell/NK Profile testing.";
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription));

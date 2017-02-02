@@ -393,8 +393,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 		{            
             if(this.m_PanelSetOrder.PanelSetId == 216)
             {
-                MessageBox.Show("Sorry, I can't let you add stains to an Informal Consult.");
-                return;
+                MessageBox.Show("Warning: Stains should only be added to Informal Consults when adding client accessioned blocks/slide/stains.");                
             }
             if (this.m_PanelSetOrder.PanelSetId == 197)  //Peer Review
             {

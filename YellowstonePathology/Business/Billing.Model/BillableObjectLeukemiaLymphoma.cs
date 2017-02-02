@@ -15,7 +15,9 @@ namespace YellowstonePathology.Business.Billing.Model
 
         public override void SetPanelSetOrderCPTCodes()
         {
-			if (this.IsOkToSet() == true)
+            Business.Test.LLP.PanelSetOrderLeukemiaLymphoma panelSetOrderLeukemiaLymphoma = (Business.Test.LLP.PanelSetOrderLeukemiaLymphoma)this.PanelSetOrder;
+
+            if (panelSetOrderLeukemiaLymphoma.FlowMarkerCollection.Count > 0)
 			{
 				if (this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.Exists("88184", 1) == false)
 				{
@@ -91,6 +93,7 @@ namespace YellowstonePathology.Business.Billing.Model
 						this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.Add(panelSetOrderCPTCode88189);
 					}
 				}
+                this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.UpdateCodeType();
             }                       
         }        
     }

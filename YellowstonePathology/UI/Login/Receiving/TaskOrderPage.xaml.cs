@@ -77,6 +77,11 @@ namespace YellowstonePathology.UI.Login.Receiving
              
         }
 
+        public Business.Test.AccessionOrder AccessionOrder
+        {
+            get { return this.m_AccessionOrder; }
+        }
+
         public List<string> PaymentTypeList
         {
             get { return this.m_PaymentTypeList; }
@@ -135,12 +140,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 		public YellowstonePathology.Business.Task.Model.TaskOrder TaskOrder
 		{
 			get { return this.m_TaskOrder; }
-		}
-
-		public YellowstonePathology.Business.Test.AccessionOrder AccessionOrder
-		{
-			get { return this.m_AccessionOrder; }
-		}
+		}		
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {

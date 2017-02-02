@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.CLLByFish
 		{			
 			CLLByFishTestOrder testOrder = (CLLByFishTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\CLLByFish.1.xml";
+			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\CLLByFish.2.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();
@@ -34,6 +34,7 @@ namespace YellowstonePathology.Business.Test.CLLByFish
 			this.SetXMLNodeParagraphData("probe_set_detail", testOrder.ProbeSetDetail);
 			this.ReplaceText("nuclei_scored", testOrder.NucleiScored);
 			this.SetXMLNodeParagraphData("report_references", testOrder.ReportReferences);
+            this.ReplaceText("asr_comment", testOrder.ASR);
 
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
 			base.ReplaceText("specimen_description", specimenOrder.Description);
@@ -44,7 +45,7 @@ namespace YellowstonePathology.Business.Test.CLLByFish
 			this.ReplaceText("report_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.ReferenceLabFinalDate));
 			this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.ReferenceLabSignature);
 
-			this.SaveReport();
+            this.SaveReport();
 		}
 
 		public override void Publish()

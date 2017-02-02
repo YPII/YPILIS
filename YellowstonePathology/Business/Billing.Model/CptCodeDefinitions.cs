@@ -1643,7 +1643,46 @@ namespace YellowstonePathology.Business.Billing.Model.CptCodeDefinition
 		}
 	}
 
-	public class CPT88363 : CptCode
+    public class CPT86355 : CptCode
+    {
+        public CPT86355()
+        {
+            this.m_Code = "86355";
+            this.m_FeeSchedule = FeeScheduleEnum.Clinical;
+            this.m_HasProfessionalComponent = false;
+            this.m_HasTechnicalComponent = true;
+            this.m_IsBillable = true;
+            this.m_CodeType = CPTCodeTypeEnum.TechnicalOnly;
+        }
+    }
+
+    public class CPT86357 : CptCode
+    {
+        public CPT86357()
+        {
+            this.m_Code = "86357";
+            this.m_FeeSchedule = FeeScheduleEnum.Clinical;
+            this.m_HasProfessionalComponent = false;
+            this.m_HasTechnicalComponent = true;
+            this.m_IsBillable = true;
+            this.m_CodeType = CPTCodeTypeEnum.TechnicalOnly;
+        }
+    }
+
+    public class CPT86359 : CptCode
+    {
+        public CPT86359()
+        {
+            this.m_Code = "86359";
+            this.m_FeeSchedule = FeeScheduleEnum.Clinical;
+            this.m_HasProfessionalComponent = false;
+            this.m_HasTechnicalComponent = true;
+            this.m_IsBillable = true;
+            this.m_CodeType = CPTCodeTypeEnum.TechnicalOnly;
+        }
+    }
+
+    public class CPT88363 : CptCode
 	{
 		public CPT88363()
 		{

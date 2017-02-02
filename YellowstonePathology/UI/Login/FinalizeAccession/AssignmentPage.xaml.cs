@@ -137,26 +137,48 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 {
                     panelSetOrder.TechnicalComponentFacilityId = ypiBLGS.FacilityId;
                     panelSetOrder.TechnicalComponentBillingFacilityId = ypiBLGS.FacilityId;
-                    panelSetOrder.ProfessionalComponentFacilityId = buttePathology.FacilityId;
-                    panelSetOrder.ProfessionalComponentBillingFacilityId = buttePathology.FacilityId;
+
+                    if(panelSetOrder.HasProfessionalComponent == true)
+                    {
+                        panelSetOrder.ProfessionalComponentFacilityId = buttePathology.FacilityId;
+                        panelSetOrder.ProfessionalComponentBillingFacilityId = buttePathology.FacilityId;
+                    }
+                    else
+                    {
+                        panelSetOrder.ProfessionalComponentFacilityId = null;
+                        panelSetOrder.ProfessionalComponentBillingFacilityId = null;
+                    }                    
                 }
                 else
-                {     
-                    //Taken out by SH on 7/7/2016.                                   
-                    //panelSetOrder.TechnicalComponentFacilityId = ypiBLGS.FacilityId;
-                    //panelSetOrder.TechnicalComponentBillingFacilityId = ypiBLGS.FacilityId;
-
+                {                         
                     if(systemUser.UserId == 5061) //Dr Clegg
                     {
                         YellowstonePathology.Business.Facility.Model.YellowstonePathologistCody ypCody = new Business.Facility.Model.YellowstonePathologistCody();
                         YellowstonePathology.Business.Facility.Model.YellowstonePathologyInstituteCody ypiCody = new Business.Facility.Model.YellowstonePathologyInstituteCody();
-                        panelSetOrder.ProfessionalComponentFacilityId = ypCody.FacilityId;
-                        panelSetOrder.ProfessionalComponentBillingFacilityId = ypiCody.FacilityId;
+
+                        if(panelSetOrder.HasProfessionalComponent == true)
+                        {
+                            panelSetOrder.ProfessionalComponentFacilityId = ypCody.FacilityId;
+                            panelSetOrder.ProfessionalComponentBillingFacilityId = ypiCody.FacilityId;
+                        }
+                        else
+                        {
+                            panelSetOrder.ProfessionalComponentFacilityId = null;
+                            panelSetOrder.ProfessionalComponentBillingFacilityId = null;
+                        }
                     }
                     else
                     {
-                        panelSetOrder.ProfessionalComponentFacilityId = ypBLGS.FacilityId;
-                        panelSetOrder.ProfessionalComponentBillingFacilityId = ypiBLGS.FacilityId;
+                        if(panelSetOrder.HasProfessionalComponent == true)
+                        {
+                            panelSetOrder.ProfessionalComponentFacilityId = ypBLGS.FacilityId;
+                            panelSetOrder.ProfessionalComponentBillingFacilityId = ypiBLGS.FacilityId;
+                        }
+                        else
+                        {
+                            panelSetOrder.ProfessionalComponentFacilityId = null;
+                            panelSetOrder.ProfessionalComponentBillingFacilityId = null;
+                        }                        
                     }                    
                 }
             }

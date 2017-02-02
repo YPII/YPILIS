@@ -232,7 +232,38 @@
 
                 </Grid>
             </TabItem>
+            <TabItem Header="Previously RUn">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
 
+                    <ListView Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" ItemsSource="{Binding Path=PantherPreviouslyRunList}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Report No" DisplayMemberBinding="{Binding Path=ReportNo}" Width="100" />
+                                <GridViewColumn Header="Order Time" DisplayMemberBinding="{Binding Path=OrderTime, Converter={StaticResource MilitaryDateTimeConverter}}" Width="150" />
+                                <GridViewColumn Header="Test" DisplayMemberBinding="{Binding Path=PanelSetName}" Width="150" />
+                                <GridViewColumn Header="Accepted" DisplayMemberBinding="{Binding Path=AcceptedTime, Converter={StaticResource MilitaryDateTimeConverter}}" Width="150" />
+                                <GridViewColumn Header="Finaled" DisplayMemberBinding="{Binding Path=FinalTime, Converter={StaticResource MilitaryDateTimeConverter}}" Width="150" />
+                                <GridViewColumn Header="Result" DisplayMemberBinding="{Binding Path=Result}" Width="150" />
+                                <GridViewColumn Header="Hold Distribution" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path=HoldDistribution}" Margin="2,2,2,2" HorizontalAlignment="Center" IsEnabled="False"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </Grid>
+
+            </TabItem>
             <TabItem Header="Womans Health Profile">
                 <Grid>
                     <Grid.ColumnDefinitions>
