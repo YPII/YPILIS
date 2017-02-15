@@ -1101,6 +1101,7 @@
     <Compile Include="Business\Task.Model\TaskOrderDetailFedexShipment.cs" />
     <Compile Include="Business\Test\AMLFavorableRisk\AMLFavorableRiskTest.cs" />
     <Compile Include="Business\Test\AMLPrognosticProfile\AMLPrognosticProfileTest.cs" />
+    <Compile Include="Business\Test\AMLStandardByFish\AMLStandardByFishWPHOBXView.cs" />
     <Compile Include="Business\Test\BRAFV600EK\BRAFV600EKWPHOBXView.cs" />
     <Compile Include="Business\Test\CKIT\CKITWPHOBXView.cs" />
     <Compile Include="Business\Test\ComprehensiveColonCancerProfile\ComprehensiveColonCancerProfileWPHOBXView.cs" />

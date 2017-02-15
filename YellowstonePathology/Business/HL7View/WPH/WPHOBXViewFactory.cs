@@ -177,7 +177,7 @@ namespace YellowstonePathology.Business.HL7View.WPH
 					//view = new YellowstonePathology.Business.Test.MDSExtendedByFish.MDSExtendedByFishWPHOBXView(accessionOrder, reportNo, obxCount);
 					break;
 				case 168:
-					//view = new YellowstonePathology.Business.Test.AMLStandardByFish.AMLStandardByFishWPHOBXView(accessionOrder, reportNo, obxCount);
+					view = new YellowstonePathology.Business.Test.AMLStandardByFish.AMLStandardByFishWPHOBXView(accessionOrder, reportNo, obxCount);
 					break;
 				case 169:
 					//view = new YellowstonePathology.Business.Test.ChromosomeAnalysisForFetalAnomaly.ChromosomeAnalysisForFetalAnomalyWPHOBXView(accessionOrder, reportNo, obxCount);
