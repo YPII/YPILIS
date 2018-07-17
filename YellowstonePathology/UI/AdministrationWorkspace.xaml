@@ -5,7 +5,7 @@
     <WrapPanel Grid.Column="0" Grid.Row="0">
         <Button Click="ButtonBuildJson_Click" Width="200" Height="30" Margin="5,5,5,5">Build JSON</Button>
         <Button Name="ButtonBlocksSentNotReturned" Click="ButtonBlocksSentNotReturned_Click" Width="200" Height="30" Margin="5,5,5,5">Blocks Sent Not Returned</Button>
-        <Button Name="ButtonStains" Click="ButtonStains_Click"  Width="200" Height="30" Margin="5,5,5,5">Stains</Button>
+        <Button Name="ButtonDictationTemplate" Click="ButtonDictationTemplate_Click"  Width="200" Height="30" Margin="5,5,5,5">Dictation Template</Button>
         <Button Name="ButtonConvertXPSToPDF" Click="ButtonConvertXPSToPDF_Click" Width="200" Height="30" Margin="5,5,5,5">Convert XPS To PDF</Button>                        
         <Button Click="ButtonShowCuttingStationWindow_Click" Width="200" Height="30" Margin="5,5,5,5">Show Cutting Station Window</Button>        
         <Button Click="ButtonPublishCase_Click" Width="200" Height="30" Margin="5,5,5,5">Publish Case</Button>        

@@ -85,16 +85,104 @@ namespace YellowstonePathology.UI
 
         private void ButtonBuildJson_Click(object sender, RoutedEventArgs e)
         {
-            /*YellowstonePathology.Business.Specimen.Model.SpecimenCollection specimens = YellowstonePathology.Business.Specimen.Model.SpecimenCollection.GetAll();
-            using (StreamWriter sw = new StreamWriter(@"C:\ProgramData\ypi\lisdata\YellowstonePathology.Business.Specimen.Model.SpecimenCollection.json", false))
+            Gross.DictationTemplateCollection templates = Gross.DictationTemplateCollection.GetAll();
+            using (StreamWriter sw = new StreamWriter(@"C:\ProgramData\ypi\lisdata\DictationTemplateCollection.json", false))
             {
-                sw.Write(specimens.ToJSON());
+                sw.Write(templates.ToJSON());
             }
-            MessageBox.Show("Done");*/
+            MessageBox.Show("Done");
         }
 
-        private void ButtonStains_Click(object sender, RoutedEventArgs e)
+        private void ButtonDictationTemplate_Click(object sender, RoutedEventArgs e)
         {
+            //Gross.DictationTemplateCollection templates = Gross.DictationTemplateCollection.GetAll();
+            List<string> specimenIds = new List<string>();
+            foreach(Gross.DictationTemplate template in Gross.DictationTemplateCollection.Instance)
+            {
+                if (template.TemplateName != "Template Not found.")
+                {
+                    foreach (Business.Specimen.Model.Specimen specimen in template.SpecimenCollection)
+                    {
+                        if (specimenIds.Exists(s => s == specimen.SpecimenId) == false) specimenIds.Add(specimen.SpecimenId);
+                    }
+                }
+            }
+
+            foreach (string id in specimenIds)
+            {
+                List<string> accessionNos = new List<string>();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = "select Distinct MasterAccessionNo, CollectionDate from tblSpecimenOrder where SpecimenId = @SpecimenId and CollectionDate between '2017-1-1' and '2018-6-21' order by CollectionDate desc limit 3;";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@SpecimenId", id);
+
+                using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+                {
+                    cn.Open();
+                    cmd.Connection = cn;
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            accessionNos.Add(dr[0].ToString());
+                        }
+                    }
+                }
+
+                foreach(string masterAccessionNo in accessionNos)
+                {
+                    YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this);
+                    StringBuilder result = new StringBuilder();
+                    foreach (YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder in accessionOrder.SpecimenOrderCollection)
+                    {
+                        Gross.DictationTemplate template = Gross.DictationTemplateCollection.Instance.GetClone(specimenOrder.SpecimenId);
+                        if (template.TemplateName != "Template Not Found.")
+                        {
+                            result.AppendLine(template.BuildResultText(specimenOrder, accessionOrder, YellowstonePathology.Business.User.SystemIdentity.Instance));
+                            result.AppendLine();
+                            result.AppendLine();
+                        }
+                    }
+                    using (StreamWriter sw = new StreamWriter(@"C:\Test\Redis_" + id + "_" + accessionOrder.MasterAccessionNo + ".txt", false))
+                    {
+                        sw.Write(result.ToString());
+                    }
+                }
+            }
+
+            string [] classFiles = Directory.GetFiles(@"C:\Test", "Class*");
+            using (StreamWriter sw = new StreamWriter(@"C:\Test\AAADiferences.txt", false))
+            {
+                foreach (string fileName in classFiles)
+                {
+                    string redisFileName = fileName.Replace("Class", "Redis");
+                    if (File.Exists(redisFileName) == true)
+                    {
+                        string[] classLines = File.ReadAllLines(fileName);
+                        string[] redisLines = File.ReadAllLines(redisFileName);
+                        if (classLines.Count() == redisLines.Count())
+                        {
+                            for (int idx = 0; idx < classLines.Count(); idx++)
+                            {
+                                if (classLines[idx] != redisLines[idx])
+                                {
+                                    sw.WriteLine(fileName + " - " + redisFileName + "mismatch");
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            sw.WriteLine(fileName + " count " + classLines.Count().ToString() + " - " + redisFileName + " count " + redisLines.Count().ToString());
+                        }
+                    }
+                    else
+                    {
+                        sw.WriteLine(fileName + " - No Redis file");
+                    }
+                }
+            }
+            MessageBox.Show("Done");
         }
 
         private void ButtonBlocksSentNotReturned_Click(object sender, RoutedEventArgs e)

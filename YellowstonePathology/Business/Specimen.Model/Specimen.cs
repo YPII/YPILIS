@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using YellowstonePathology.Business.Persistence;
 
 namespace YellowstonePathology.Business.Specimen.Model
 {
@@ -33,54 +34,63 @@ namespace YellowstonePathology.Business.Specimen.Model
             get { return this.m_SpecimenId; }
         }
 
+        [PersistentPrimaryKeyProperty(false)]
         public string SpecimenId
         {
             get { return this.m_SpecimenId; }
             set { this.m_SpecimenId = value; }
         }
 
+        [PersistentProperty()]
         public string SpecimenName
         {
             get { return this.m_SpecimenName; }
             set { this.m_SpecimenName = value; }
         }
 
+        [PersistentProperty()]
         public string Description
         {
             get { return this.m_Description; }
             set { this.m_Description = value; }
         }
 
+        [PersistentProperty()]
         public YellowstonePathology.Business.Billing.Model.CptCode CPTCode
         {
             get { return this.m_CPTCode; }
             set { this.m_CPTCode = value; }
         }
 
+        [PersistentProperty()]
         public int CPTCodeQuantity
         {
             get { return this.m_CPTCodeQuantity; }
             set { this.m_CPTCodeQuantity = value; }
         }
 
+        [PersistentProperty()]
         public string ClientFixation
         {
             get { return this.m_ClientFixation; }
             set { this.m_ClientFixation = value; }
         }
 
+        [PersistentProperty()]
         public string LabFixation
         {
             get { return this.m_LabFixation; }
             set { this.m_LabFixation = value; }
         }
 
+        [PersistentProperty()]
         public bool RequiresGrossExamination
         {
             get { return this.m_RequiresGrossExamination; }
             set { this.m_RequiresGrossExamination = value; }
         }
 
+        [PersistentProperty()]
         public string ProcessorRunId
         {
             get { return this.m_ProcessorRunId; }

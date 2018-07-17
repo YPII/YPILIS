@@ -17,6 +17,7 @@ namespace YellowstonePathology.Store
         EmbeddingScan,
         BozemanBlockCount,
         TempPQRS,
-        Specimen
+        Specimen,
+        DictationTemplate
     }
 }
