@@ -29,8 +29,9 @@ namespace YellowstonePathology.UI.Gross
             this.m_AccessionOrder = accessionOrder;
             this.m_SystemIdentity = systemIdentity;
 
-            DictationTemplateCollection dictationTemplateCollection = DictationTemplateCollection.GetAll();
-            this.m_DictationTemplate = dictationTemplateCollection.GetTemplate(m_SpecimenOrder.SpecimenId);
+            //DictationTemplateCollection dictationTemplateCollection = DictationTemplateCollection.GetAll();
+            //this.m_DictationTemplate = dictationTemplateCollection.GetTemplate(m_SpecimenOrder.SpecimenId);
+            this.m_DictationTemplate = DictationTemplateCollection.Instance.GetClone(m_SpecimenOrder.SpecimenId);
             this.SetGrossDescription();
 
             InitializeComponent();

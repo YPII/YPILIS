@@ -20,7 +20,7 @@ namespace YellowstonePathology.UI.Surgical
         public event PropertyChangedEventHandler PropertyChanged;
 
         private YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder m_SurgicalTestOrder;
-        private YellowstonePathology.UI.Gross.DictationTemplateCollection m_DictationTemplateCollection;
+        //private YellowstonePathology.UI.Gross.DictationTemplateCollection m_DictationTemplateCollection;
         private YellowstonePathology.UI.Gross.DictationTemplate m_DictationTemplate;        
         private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
         private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
@@ -34,7 +34,7 @@ namespace YellowstonePathology.UI.Surgical
             this.m_SystemIdentity = systemIdentity;
 
             this.m_SurgicalTestOrder = (YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
-            this.m_DictationTemplateCollection = YellowstonePathology.UI.Gross.DictationTemplateCollection.GetAll();            
+            //this.m_DictationTemplateCollection = YellowstonePathology.UI.Gross.DictationTemplateCollection.GetAll();            
 			this.m_PathologistUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
 			this.m_UserPreference = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference;
 
@@ -93,9 +93,10 @@ namespace YellowstonePathology.UI.Surgical
                 YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = (YellowstonePathology.Business.Specimen.Model.SpecimenOrder)this.ListBoxSpecimenOrders.SelectedItem;                    
                 if(string.IsNullOrEmpty(specimenOrder.SpecimenId) == false)
                 {
-                    this.m_DictationTemplate = this.m_DictationTemplateCollection.GetTemplate(specimenOrder.SpecimenId);
-                    
-                    if(this.m_DictationTemplate is YellowstonePathology.UI.Gross.TemplateNotFound == false)
+                    //this.m_DictationTemplate = this.m_DictationTemplateCollection.GetTemplate(specimenOrder.SpecimenId);
+                    this.m_DictationTemplate = Gross.DictationTemplateCollection.Instance.GetClone(specimenOrder.SpecimenId);
+
+                    if (this.m_DictationTemplate.TemplateName != "Template Not Found.")
                     {
 	                    this.m_GrossDescription = this.m_DictationTemplate.BuildResultText(specimenOrder, this.m_AccessionOrder, this.m_SystemIdentity);	                    	                    
 	                    this.NotifyPropertyChanged(string.Empty);

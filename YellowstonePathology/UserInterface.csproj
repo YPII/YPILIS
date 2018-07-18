@@ -3279,7 +3279,6 @@
       <DependentUpon>StainOrderPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Gross\DictationTemplateCollection.cs" />
-    <Compile Include="UI\Gross\DictationTemplateDefinition.cs" />
     <Compile Include="UI\Gross\DictationTemplatePage.xaml.cs">
       <DependentUpon>DictationTemplatePage.xaml</DependentUpon>
     </Compile>

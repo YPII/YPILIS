@@ -1021,8 +1021,8 @@ namespace YellowstonePathology.UI.Surgical
             StringBuilder result = new StringBuilder();
             if (this.m_TypingUI.AccessionOrder != null)
             {
-            	YellowstonePathology.UI.Gross.DictationTemplateCollection collection = YellowstonePathology.UI.Gross.DictationTemplateCollection.GetAll();
-            	foreach(YellowstonePathology.UI.Gross.DictationTemplate template in collection)
+            	//YellowstonePathology.UI.Gross.DictationTemplateCollection collection = YellowstonePathology.UI.Gross.DictationTemplateCollection.GetAll();
+            	foreach(YellowstonePathology.UI.Gross.DictationTemplate template in YellowstonePathology.UI.Gross.DictationTemplateCollection.Instance)
             	{
                     result.AppendLine("Name: " + template.TemplateName);
                     result.Append(template.BuildResultText(this.m_TypingUI.AccessionOrder.SpecimenOrderCollection[0], this.m_TypingUI.AccessionOrder, this.m_SystemIdentity));

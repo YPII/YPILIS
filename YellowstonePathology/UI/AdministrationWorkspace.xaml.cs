@@ -85,12 +85,12 @@ namespace YellowstonePathology.UI
 
         private void ButtonBuildJson_Click(object sender, RoutedEventArgs e)
         {
-            Gross.DictationTemplateCollection templates = Gross.DictationTemplateCollection.GetAll();
+            /*Gross.DictationTemplateCollection templates = Gross.DictationTemplateCollection.GetAll();
             using (StreamWriter sw = new StreamWriter(@"C:\ProgramData\ypi\lisdata\DictationTemplateCollection.json", false))
             {
                 sw.Write(templates.ToJSON());
             }
-            MessageBox.Show("Done");
+            MessageBox.Show("Done");*/
         }
 
         private void ButtonDictationTemplate_Click(object sender, RoutedEventArgs e)

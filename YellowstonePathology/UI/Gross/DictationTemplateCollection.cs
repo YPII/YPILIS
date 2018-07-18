@@ -27,7 +27,7 @@ namespace YellowstonePathology.UI.Gross
             }
         }
 
-        public DictationTemplate GetTemplate(string specimenId)
+        /*public DictationTemplate GetTemplate(string specimenId)
         {
             DictationTemplate result = new TemplateNotFound();
             if (string.IsNullOrEmpty(specimenId) == false)
@@ -42,7 +42,7 @@ namespace YellowstonePathology.UI.Gross
                 }
             }
             return result;
-        }
+        }*/
 
         public DictationTemplate GetClone(string specimenId)
         {
@@ -50,7 +50,7 @@ namespace YellowstonePathology.UI.Gross
             YellowstonePathology.Business.Persistence.ObjectCloner objectCloner = new YellowstonePathology.Business.Persistence.ObjectCloner();
             DictationTemplate result = (DictationTemplate)objectCloner.Clone(notFound);
 
-            foreach (DictationTemplate dictationTemplate in DictationTemplateCollection.Instance)
+            foreach (DictationTemplate dictationTemplate in this)
             {
                 if(dictationTemplate.SpecimenCollection.Exists(specimenId) == true)
                 {
@@ -93,7 +93,7 @@ namespace YellowstonePathology.UI.Gross
             return result;
         }
 
-        public static DictationTemplateCollection GetAll()
+        /*public static DictationTemplateCollection GetAll()
         {
             DictationTemplateCollection result = new DictationTemplateCollection();
             result.Add(new AdenoidExcisionTemplate());
@@ -140,6 +140,6 @@ namespace YellowstonePathology.UI.Gross
             //Added for creation of redis WHC result.Add(new TemplateNotFound());
 
             return result;
-        }               
+        }*/               
     }
 }
