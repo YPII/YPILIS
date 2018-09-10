@@ -1000,6 +1000,7 @@
     <Compile Include="Business\PanelSet.Model\NeoTypeDiscoveryProfileTest.cs" />
     <Compile Include="Business\PanelSet.Model\PanelSetPMLRARAByFish.cs" />
     <Compile Include="Business\PanelSet.Model\ShipMaterialTest.cs" />
+    <Compile Include="Business\PanelSet.Model\TestToJSONConverter.cs" />
     <Compile Include="Business\ParseSpecimenOrderIdResult.cs" />
     <Compile Include="Business\Patient.Model\Address.cs" />
     <Compile Include="Business\Persistence\BatchMaterialTrackingLogDocumentBuilder.cs" />
