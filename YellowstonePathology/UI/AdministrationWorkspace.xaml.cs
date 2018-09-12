@@ -86,7 +86,7 @@ namespace YellowstonePathology.UI
 
         private void ButtonBuildJson_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Test.JAK2V617F.JAK2V617FTest test = new Business.Test.JAK2V617F.JAK2V617FTest();
+            /*YellowstonePathology.Business.Test.JAK2V617F.JAK2V617FTest test = new Business.Test.JAK2V617F.JAK2V617FTest();
             var camelCaseFormatter = new JsonSerializerSettings();
             camelCaseFormatter.ContractResolver = new CamelCasePropertyNamesContractResolver();
             string result = JsonConvert.SerializeObject(test, Newtonsoft.Json.Formatting.Indented, camelCaseFormatter);
@@ -94,6 +94,19 @@ namespace YellowstonePathology.UI
             using (StreamWriter sw = new StreamWriter(@"C:\ProgramData\ypi\lisdata\JAK2V617FTest.json", false))
             {
                 sw.Write(result);
+            }*/
+
+            YellowstonePathology.Business.PanelSet.Model.TestToJSONConverter converter = new Business.PanelSet.Model.TestToJSONConverter();
+            string basePath = @"C:\Test\tests\";
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection tests = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            foreach (YellowstonePathology.Business.PanelSet.Model.PanelSet test in tests)
+            {
+                string file = "ps" + test.PanelSetId.ToString() + ".json";
+                string jstring = converter.Convert(test);
+                using (StreamWriter sw = new StreamWriter(basePath + file, false))
+                {
+                    sw.Write(jstring);
+                }
             }
             MessageBox.Show("Done");
         }

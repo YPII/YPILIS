@@ -38,7 +38,7 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
             YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81270", null), 1);
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);
 			
-            string taskDescription = "Gather materials and semd to Neo.";
+            string taskDescription = "Gather materials and send to Neo.";
 			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription));
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceJAK2());
