@@ -107,6 +107,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		public YellowstonePathology.Business.Task.Model.TaskCollection TaskCollection
         {
             get { return this.m_TaskCollection; }
+            set { this.m_TaskCollection = value; }
         }
 
         public YellowstonePathology.Business.Panel.Model.PanelCollection PanelCollection
@@ -127,21 +128,25 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public YellowstonePathology.Business.Facility.Model.Facility TechnicalComponentFacility
         {
             get { return this.m_TechnicalComponentFacility; }
+            set { this.m_TechnicalComponentFacility = value; }
         }
 
         public YellowstonePathology.Business.Facility.Model.Facility ProfessionalComponentFacility
         {
             get { return this.m_ProfessionalComponentFacility; }
+            set { this.m_ProfessionalComponentFacility = value; }
         }
 
         public YellowstonePathology.Business.Facility.Model.Facility TechnicalComponentBillingFacility
         {
             get { return this.m_TechnicalComponentBillingFacility; }
+            set { this.m_TechnicalComponentBillingFacility = value; }
         }
 
         public YellowstonePathology.Business.Facility.Model.Facility ProfessionalComponentBillingFacility
         {
             get { return this.m_ProfessionalComponentBillingFacility; }
+            set { this.m_ProfessionalComponentBillingFacility = value; }
         }
 
         [PersistentDocumentIdProperty()]
