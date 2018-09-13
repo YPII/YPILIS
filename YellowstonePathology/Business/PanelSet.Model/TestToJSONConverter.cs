@@ -30,9 +30,9 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.GetPanelCollectionInfo(jObject);
             this.GetFacilityInfo(jObject, "professionalComponentFacility", "professionalComponentFacilityId");
             this.GetFacilityInfo(jObject, "technicalComponentFacility", "technicalComponentFacilityId");
-            this.GetFacilityInfo(jObject, "professionalComponentBillingFacility", "professionalComponentBillingFacilityID");
+            this.GetFacilityInfo(jObject, "professionalComponentBillingFacility", "professionalComponentBillingFacilityId");
             this.GetFacilityInfo(jObject, "technicalComponentBillingFacility", "technicalComponentBillingFacilityId");
-            this.GetTaskInfo(jObject);
+            //this.GetTaskInfo(jObject);
             this.GetPanelSetCptCodeInfo(jObject);
             result = JsonConvert.SerializeObject(jObject, Newtonsoft.Json.Formatting.Indented, camelCaseFormatter);
             return result;
@@ -184,7 +184,12 @@ namespace YellowstonePathology.Business.PanelSet.Model
                 JToken jCPT = jObj["cptCode"];
                 string code = jCPT["code"].ToString();
                 int qty = (int)jObj["quantity"];
-                string modifier = jObj["modifier"].ToString();
+                JToken mod = jObj["modifier"];
+                string modifier = null;
+                if (mod != null)
+                {
+                    modifier = mod.ToString();
+                }
                 JObject cpt = new JObject();
                 cpt.Add("cptCode", code);
                 cpt.Add("quantity", qty);

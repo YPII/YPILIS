@@ -78,19 +78,15 @@ namespace YellowstonePathology.Business.PanelSet.Model
                     break;
             }
 
-            HandleInternalObjects(result, jObject);
+            SetReportNumberLetterInfo(result, jObject);
+            SetUniversalServiceIdInfo(result, jObject);
+            SetOrderTargetTypeExclusionInfo(result, jObject);
+            SetOrderTargetTypeRestrictionInfo(result, jObject);
+            SetPanelCollectionInfo(result, jObject);
+            SetFacilityInfo(result, jObject);
+            SetPanelSetCptCodeInfo(result, jObject);
 
             return result;
-        }
-
-        private static void HandleInternalObjects(PanelSet test, JObject jObject)
-        {
-            SetReportNumberLetterInfo(test, jObject);
-            SetUniversalServiceIdInfo(test, jObject);
-            SetOrderTargetTypeExclusionInfo(test, jObject);
-            SetOrderTargetTypeRestrictionInfo(test, jObject);
-
-            SetPanelSetCptCodeInfo(test, jObject);
         }
 
         private static void SetReportNumberLetterInfo(PanelSet test, JObject jObject)
@@ -105,7 +101,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             ClientOrder.Model.UniversalServiceCollection universalServiceCollection = ClientOrder.Model.UniversalServiceCollection.GetAll();
             JArray universalServiceIds = jObject["universalServiceIds"] as JArray;
-            foreach (JObject universalServiceId in universalServiceIds)
+            foreach (JValue universalServiceId in universalServiceIds)
             {
                 string id = universalServiceId.ToString();
                 ClientOrder.Model.UniversalService universalService = universalServiceCollection.GetByUniversalServiceId(id);
@@ -188,36 +184,58 @@ namespace YellowstonePathology.Business.PanelSet.Model
             {
                 int id = (int)jObj["panelId"];
                 Panel.Model.Panel panel = Panel.Model.PanelCollection.GetAll().GetPanel(id);
+                test.PanelCollection.Add(panel);
             }
         }
 
-        private static void GetFacilityInfo(PanelSet test, JObject jObject, string removePropertyName, string addPropertyName)
+        private static void SetFacilityInfo(PanelSet test, JObject jObject)
         {
-            JToken facility = jObject[removePropertyName];
+            string facilityId = GetFacilityId(jObject, "professionalComponentFacilityId");
+            if (string.IsNullOrEmpty(facilityId) == false)
+            {
+                test.ProfessionalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(facilityId);
+            }
+
+            facilityId = GetFacilityId(jObject, "technicalComponentFacilityId");
+            if (string.IsNullOrEmpty(facilityId) == false)
+            {
+                test.TechnicalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(facilityId);
+            }
+
+            facilityId = GetFacilityId(jObject, "professionalComponentBillingFacilityId");
+            if (string.IsNullOrEmpty(facilityId) == false)
+            {
+                test.ProfessionalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(facilityId);
+            }
+
+            facilityId = GetFacilityId(jObject, "technicalComponentBillingFacilityId");
+            if (string.IsNullOrEmpty(facilityId) == false)
+            {
+                test.TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(facilityId);
+            }
+        }
+
+        private static string GetFacilityId(JObject jObject, string propertyName)
+        {
             string facilityId = null;
+            JToken facility = jObject[propertyName];
             if (facility.HasValues == true)
             {
                 facilityId = facility["facilityId"].ToString();
             }
-            jObject.Add(addPropertyName, facilityId);
-            jObject.Remove(removePropertyName);
+            return facilityId;
         }
 
-        private static void GetTaskInfo(PanelSet test, JObject jObject)
+        private static void SetTaskInfo(PanelSet test, JObject jObject)
         {
-            JArray tasks = new JArray();
-            JArray collection = jObject["taskCollection"] as JArray;
+            JArray collection = jObject["tasks"] as JArray;
             foreach (JObject jObj in collection)
             {
-                string id = jObj["assignedTo"].ToString();
+                string id = jObj["assignTo"].ToString();
                 string desc = jObj["description"].ToString();
-                JObject task = new JObject();
-                task.Add("assignTo", id);
-                task.Add("description", desc);
-                tasks.Add(task);
+                Business.Task.Model.Task task = new Business.Task.Model.Task(id, desc);
+                test.TaskCollection.Add(task);
             }
-            jObject.Add("tasks", tasks);
-            jObject.Remove("taskCollection");
         }
 
         private static void SetPanelSetCptCodeInfo(PanelSet test, JObject jObject)
@@ -225,10 +243,10 @@ namespace YellowstonePathology.Business.PanelSet.Model
             JArray collection = jObject["panelSetCptCodes"] as JArray;
             foreach (JObject jObj in collection)
             {
-                JToken jCPT = jObj["cptCode"];
-                string code = jCPT["code"].ToString();
+                string code = jObj["cptCode"].ToString();
                 int quantity = (int)jObj["quantity"];
                 string modifier = jObj["modifier"].ToString();
+                if (string.IsNullOrEmpty(modifier) == true) modifier = null;
                 Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone(code, modifier), quantity);
                 test.PanelSetCptCodeCollection.Add(panelSetCptCode);
             }
