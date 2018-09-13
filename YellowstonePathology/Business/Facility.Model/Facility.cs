@@ -326,7 +326,8 @@ namespace YellowstonePathology.Business.Facility.Model
             {
                 if (this.m_PhoneNumber != value)
                 {
-                    this.m_PhoneNumber = YellowstonePathology.Business.Helper.PhoneNumberHelper.CorrectPhoneNumber(value);
+                    this.m_PhoneNumber = value;
+                    this.NotifyPropertyChanged("PhoneNumber");
                     this.NotifyPropertyChanged("PhoneNumberProxy");
                 }
             }

@@ -8,6 +8,12 @@ namespace YellowstonePathology.Business.Persistence
 {
     public class PersistenceHelper
     {
+        public static string GetTableName(Type type)
+        {            
+            PersistentClass persistentClassAttribute = (PersistentClass)type.GetCustomAttributes(typeof(PersistentClass), false).Single();
+            return persistentClassAttribute.StorageName;
+        }
+
         public static List<PropertyInfo> GetPropertiesToHandle(Type type)
         {
             PersistentClass persistentClassAttribute = (PersistentClass)type.GetCustomAttributes(typeof(PersistentClass), false).Single();

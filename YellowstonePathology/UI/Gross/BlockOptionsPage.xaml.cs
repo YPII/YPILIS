@@ -136,7 +136,7 @@ namespace YellowstonePathology.UI.Gross
         {
             if(this.m_AliquotOrder.Status == "Hold")
             {
-                this.m_AliquotOrder.Status = null;
+                this.m_AliquotOrder.Status = "Created";
             }
             else
             {

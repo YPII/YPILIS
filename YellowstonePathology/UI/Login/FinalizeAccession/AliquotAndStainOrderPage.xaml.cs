@@ -534,7 +534,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             {
                 if (aliquotOrder.Status == "Hold")
                 {
-                    aliquotOrder.Status = null;
+                    aliquotOrder.Status = "Created";
                 }
                 else
                 {

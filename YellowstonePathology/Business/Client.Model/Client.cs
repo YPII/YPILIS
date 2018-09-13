@@ -392,22 +392,6 @@ namespace YellowstonePathology.Business.Client.Model
             }
         }
 
-        /*public string FormattedTelephone
-        {
-            get
-            {
-                return YellowstonePathology.Business.Helper.PhoneNumberHelper.FormatWithDashes(this.m_Telephone);
-            }
-        }
-
-        public string FormattedFax
-        {
-            get
-            {
-                return YellowstonePathology.Business.Helper.PhoneNumberHelper.FormatWithDashes(this.m_Fax);
-            }
-        }*/
-
         public string TelephoneProxy
         {
             get { return YellowstonePathology.Business.Helper.PhoneNumberHelper.CorrectPhoneNumber(this.m_Telephone); }
@@ -415,7 +399,8 @@ namespace YellowstonePathology.Business.Client.Model
             {
                 if (this.m_Telephone != value)
                 {
-                    this.m_Telephone = YellowstonePathology.Business.Helper.PhoneNumberHelper.CorrectPhoneNumber(value);
+                    this.m_Telephone = value;
+                    this.NotifyPropertyChanged("Telephone");
                     this.NotifyPropertyChanged("TelephoneProxy");
                 }
             }
@@ -428,7 +413,8 @@ namespace YellowstonePathology.Business.Client.Model
             {
                 if (this.m_Fax != value)
                 {
-                    this.m_Fax = YellowstonePathology.Business.Helper.PhoneNumberHelper.CorrectPhoneNumber(value);
+                    this.m_Fax = value;
+                    this.NotifyPropertyChanged("Fax");
                     this.NotifyPropertyChanged("FaxProxy");
                 }
             }

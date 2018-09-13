@@ -16,20 +16,25 @@ namespace YellowstonePathology.UI.Test
 {    
     public partial class PreviousResultDialog : Window
     {
-        private Business.Test.PanelSetOrder m_PanelSetOrder;
-        private Business.Interface.ICommonResult m_CommonResult;
+        private Business.Test.PanelSetOrder m_PanelSetOrder;        
         private Business.Search.ReportSearchList m_ReportSearchList;
+        private string m_TableName;
 
-        public PreviousResultDialog(Business.Test.PanelSetOrder panelSetOrder, Business.Interface.ICommonResult commonResult)
-        {
+        public PreviousResultDialog(Business.Test.PanelSetOrder panelSetOrder)
+        {            
             this.m_PanelSetOrder = panelSetOrder;
-            this.m_CommonResult = commonResult;
 
-            this.m_ReportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListByTestFinal(panelSetOrder.PanelSetId, DateTime.Today.AddDays(-90), DateTime.Today);            
+            this.m_TableName = Business.Persistence.PersistenceHelper.GetTableName(panelSetOrder.GetType());
+            this.m_ReportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListByTestFinal(this.m_PanelSetOrder.PanelSetId, DateTime.Today.AddDays(-90), DateTime.Today, this.m_TableName);            
 
             InitializeComponent();
             DataContext = this;
-        }        
+        }    
+        
+        public Business.Test.PanelSetOrder PanelSetOrder
+        {
+            get { return this.m_PanelSetOrder; }
+        }    
 
         public YellowstonePathology.Business.Search.ReportSearchList ReportSearchList
         {
@@ -49,19 +54,17 @@ namespace YellowstonePathology.UI.Test
                 {
                     Business.Search.ReportSearchItem reportSearchItem = (Business.Search.ReportSearchItem)this.ListViewPreviousResults.SelectedItem;
                     Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(reportSearchItem.MasterAccessionNo, this);
-                    Business.Test.PanelSetOrder pso = ao.PanelSetOrderCollection.GetPanelSetOrder(reportSearchItem.ReportNo);
-                    Business.Interface.ICommonResult commonResult = (Business.Interface.ICommonResult)ao.PanelSetOrderCollection.GetPanelSetOrder(reportSearchItem.ReportNo);
-
-                    this.m_CommonResult.Result = commonResult.Result;
-                    this.m_PanelSetOrder.ResultCode = pso.ResultCode;
-                    this.m_CommonResult.Interpretation = commonResult.Interpretation;
-                    this.m_CommonResult.Indication = commonResult.Indication;
-                    this.m_CommonResult.IndicationComment = commonResult.IndicationComment;
-                    this.m_CommonResult.Comment = commonResult.Comment;
-                    this.m_CommonResult.Method = commonResult.Method;
-                    this.m_CommonResult.ReportDisclaimer = commonResult.ReportDisclaimer;
-                    this.m_PanelSetOrder.ReportReferences = pso.ReportReferences;
+                    Business.Test.PanelSetOrder pso = ao.PanelSetOrderCollection.GetPanelSetOrder(reportSearchItem.ReportNo);                    
+                    pso.SetPreviousResults(this.m_PanelSetOrder);
                 }
+            }
+        }
+
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.m_PanelSetOrder.Final == false && this.m_PanelSetOrder.Accepted == false)
+            {
+                this.m_PanelSetOrder.ClearPreviousResults();
             }
         }
     }

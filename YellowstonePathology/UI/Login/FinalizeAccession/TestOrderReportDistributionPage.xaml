@@ -47,8 +47,9 @@
             </ComboBox>
 
             <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" TextAlignment="Right" Text="Fax Number:" FontSize="14" FontWeight="Bold" />            
-            <toolkit:MaskedTextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=TestOrderReportDistribution.FaxNumber}" FontSize="14" 
-                                   HorizontalAlignment="Stretch" Mask="(000) 000\-0000" ValueDataType="{x:Type s:String}"/>                           
+            <toolkit:MaskedTextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=TestOrderReportDistribution.FaxNumberProxy}" FontSize="14" 
+                RestrictToAscii="False" AllowPromptAsInput="False" HorizontalAlignment="Stretch" Mask="(000) 000\-0000" ValueDataType="{x:Type s:String}" 
+                IncludeLiteralsInValue="False" IncludePromptInValue="False"/>                           
 
         </Grid>            
                 		

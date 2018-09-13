@@ -123,9 +123,7 @@ namespace YellowstonePathology.UI.Test
 		}
 
 		private void HyperLinkAcceptResults_Click(object sender, RoutedEventArgs e)
-		{
-			if (this.ComboBoxResult.SelectedItem != null)
-			{
+		{			
 			YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrder.IsOkToAccept();
 			if (result.Success == true)
 			{
@@ -134,12 +132,7 @@ namespace YellowstonePathology.UI.Test
 			else
 			{
 				MessageBox.Show(result.Message);
-			}
-			}
-			else
-			{
-				MessageBox.Show("A result must be selected before it can be accepted.");
-			}
+			}			
 		}
 
 		private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)
@@ -158,15 +151,12 @@ namespace YellowstonePathology.UI.Test
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {       
             if (this.Next != null) this.Next(this, new EventArgs());
-        }
+        }        
 
-        private void ComboBoxResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void HyperLinkPreviousResults_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ComboBoxResult.SelectedItem != null)
-            {
-                YellowstonePathology.Business.Test.TestResult testResult = (YellowstonePathology.Business.Test.TestResult)this.ComboBoxResult.SelectedItem;
-                this.m_PanelSetOrder.ResultCode = testResult.ResultCode;
-            }
-        }       
-	}
+            UI.Test.PreviousResultDialog dlg = new UI.Test.PreviousResultDialog(this.m_PanelSetOrder);
+            dlg.ShowDialog();
+        }
+    }
 }

@@ -178,37 +178,12 @@ namespace YellowstonePathology.UI.Test
             {
                 MessageBox.Show("The results must be accepted before the document can be viewed.", "Accept then view");
             }
-        }
-
-        private void ComboBoxResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (this.ComboBoxResult.SelectedItem != null)
-            {
-                YellowstonePathology.Business.Test.TestResult testResult = (YellowstonePathology.Business.Test.TestResult)this.ComboBoxResult.SelectedItem;
-                this.m_PanelSetOrder.ResultCode = testResult.ResultCode;
-            }
-        }
+        }        
 
         private void HyperLinkPreviousResults_Click(object sender, RoutedEventArgs e)
         {
-            UI.Test.PreviousResultDialog dlg = new UI.Test.PreviousResultDialog(this.m_PanelSetOrder, this.m_PanelSetOrder);
+            UI.Test.PreviousResultDialog dlg = new UI.Test.PreviousResultDialog(this.m_PanelSetOrder);
             dlg.ShowDialog();
-        }
-
-        private void ComboBoxIndication_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(string.IsNullOrEmpty(this.m_PanelSetOrder.ResultCode) == false)
-            {
-                if (this.ComboBoxIndication.SelectedItem != null)
-                {
-                    YellowstonePathology.Business.Test.Indication indiction = (YellowstonePathology.Business.Test.Indication)this.ComboBoxIndication.SelectedItem;
-                    indiction.SetComment(this.m_PanelSetOrder.ResultCode, this.m_PanelSetOrder);
-                }
-            }
-            else
-            {
-                MessageBox.Show("The Result must be selected to set Indication Comment.");
-            }
-        }
+        }        
     }
 }

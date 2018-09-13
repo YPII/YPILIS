@@ -107,43 +107,33 @@
                     <TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
 
                     <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Result:</TextBlock>
-                    <Grid Grid.Column="1" Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="auto" />
-                        </Grid.ColumnDefinitions>
-                        <ComboBox Name="ComboBoxResult" Grid.Column="0" Margin="2,2,2,2" ItemsSource="{Binding Path=ResultCollection}" DisplayMemberPath="Result" 
-							    SelectedValue="{Binding Path=PanelSetOrder.Result}" SelectedValuePath="Result" HorizontalAlignment="Stretch" SelectionChanged="ComboBoxResult_SelectionChanged" />
-                        <TextBlock Grid.Column="1" Width="140" Margin="2" Text="{Binding Path=PanelSetOrder.ResultCode}" />
-                    </Grid>
+                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding Path=PanelSetOrder.Result}" HorizontalAlignment="Stretch"/>
 
                     <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Indication:</TextBlock>
-                    <ComboBox Name="ComboBoxIndication" Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" ItemsSource="{Binding Path=IndicationCollection}" 
-							  DisplayMemberPath="IndicationCode" SelectedValuePath="IndicationCode" SelectedValue="{Binding Path=PanelSetOrder.Indication}" 
-                              SelectionChanged="ComboBoxIndication_SelectionChanged" HorizontalAlignment="Stretch"/>
+                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Indication}" HorizontalAlignment="Stretch"/>
 
-                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Tumor Nuclei Percent:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=PanelSetOrder.TumorNucleiPercentage}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Tumor Nuclei Percent:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=PanelSetOrder.TumorNucleiPercentage}" HorizontalAlignment="Stretch"/>
 
-                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Interpretation:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=PanelSetOrder.Interpretation}" />
+                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Interpretation:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=PanelSetOrder.Interpretation}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Comment:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=PanelSetOrder.Comment}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Comment:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=PanelSetOrder.Comment}"/>
 
-                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Indication Comment:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=PanelSetOrder.IndicationComment}" />
+                    <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Indication Comment:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=PanelSetOrder.IndicationComment}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Method:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True" />
+                    <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Method:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">References:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="13" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True" />
+                    <TextBlock Grid.Column="0" Grid.Row="13" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">References:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="14" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Report Diclaimer:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="15" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportDisclaimer}" TextWrapping="Wrap" AcceptsReturn="True" />
+                    <TextBlock Grid.Column="0" Grid.Row="15" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Report Diclaimer:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportDisclaimer}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                    <local:ReferenceLabFinalControl x:Name="ReferenceLabFinalControl" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="16" Margin="2,2,2,2"/>
+                    <local:ReferenceLabFinalControl x:Name="ReferenceLabFinalControl" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="17" Margin="2,2,2,2"/>
 
                 </Grid>
 

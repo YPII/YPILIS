@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace YellowstonePathology.Business.Helper
 {
@@ -19,14 +20,9 @@ namespace YellowstonePathology.Business.Helper
 
         public static string CorrectPhoneNumber(string numberIn)
         {
-            string result = numberIn;
+            if (string.IsNullOrEmpty(numberIn) == true) return numberIn;
 
-            if (string.IsNullOrEmpty(result) == true) return numberIn;
-
-            result = result.Replace("(", "");
-            result = result.Replace(")", "");
-            result = result.Replace("-", "");
-            result = result.Replace(" ", "");
+            string result = Regex.Replace(numberIn, @"[^\d]", String.Empty);
 
             if (result.Length == 10 || result.Length == 7) return result;
             if (result.Length == 11 && result[0] == '1') return result.Remove(0, 1);

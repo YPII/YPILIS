@@ -138,7 +138,8 @@ namespace YellowstonePathology.UI.Client
 
         private bool CanSave()
         {
-            bool result = this.MaskNumberIsValid(this.MaskedTextBoxFax);
+            bool result = this.MaskNumberIsValid(this.MaskedTextBoxTelephone);
+            if(result == true) result = this.MaskNumberIsValid(this.MaskedTextBoxFax);
             return result;
         }
 

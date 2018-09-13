@@ -436,7 +436,7 @@ namespace YellowstonePathology.UI.Login.Receiving
                 reportNotify.Publish();
 
                 string notifyFileName = Business.Document.CaseDocument.GetCaseFileNameTifNotify(orderIdParser);
-                Business.ReportDistribution.Model.FaxSubmission.Submit(taskOrderDetailFax.FaxNumber, "Additional Testing Notification", notifyFileName);
+                Business.ReportDistribution.Model.FaxSubmission.Submit(taskOrderDetailFax.FaxNumber, panelSetOrder.ReportNo + " - Additional Testing Notification", notifyFileName);
                 MessageBox.Show("The fax was successfully submitted.");
             }
             else if(taskOrderDetailFax.DocumentName == "PreauthorizationNotification")
@@ -447,7 +447,7 @@ namespace YellowstonePathology.UI.Login.Receiving
                 reportPreauth.Publish();
 
                 string preauthFileName = Business.Document.CaseDocument.GetCaseFileNameTifPreAuth(orderIdParser);
-                Business.ReportDistribution.Model.FaxSubmission.Submit(taskOrderDetailFax.FaxNumber, "Preauthorization Notification", preauthFileName);
+                Business.ReportDistribution.Model.FaxSubmission.Submit(taskOrderDetailFax.FaxNumber, panelSetOrder.ReportNo + "Preauthorization Notification", preauthFileName);
                 MessageBox.Show("The fax was successfully submitted.");
             }                       
         }        

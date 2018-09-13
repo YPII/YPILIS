@@ -453,21 +453,30 @@ namespace YellowstonePathology.Business.Gateway
             return reportSearchList;
         }
 
-        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByTestFinal(int panelSetId, DateTime startDate, DateTime endDate)
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByTestFinal(int panelSetId, DateTime startDate, DateTime endDate, string tableName)
         {
+            string fieldList = null;            
+            switch(tableName)
+            {
+                case "tblJAK2Exon1214TestOrder":
+                    fieldList = "b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId";
+                    break;
+                case "tblBRAFMutationAnalysisTestOrder":
+                    fieldList = "b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId, b.Indication";
+                    break;
+            }
+
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT b.Result, b.Indication, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
-                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
-                "'' ForeignAccessionNo, pso.IsPosted " +
+            cmd.CommandText = "Select " + fieldList + " " +
                 "FROM tblAccessionOrder a " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
-                "join tblBRAFMutationAnalysisTestOrder b on pso.ReportNo = b.ReportNo " +
+                "join table_name b on pso.ReportNo = b.ReportNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
                 "WHERE pso.PanelSetId  =  @PanelSetId " +
                 "and pso.OrderDate between @StartDate and @EndDate " +
                 "and pso.final = 1 order by pso.FinalDate desc;";
+            cmd.CommandText = cmd.CommandText.Replace("table_name", tableName);
             cmd.Parameters.AddWithValue("@PanelSetId", panelSetId);
             cmd.Parameters.AddWithValue("@StartDate", startDate);
             cmd.Parameters.AddWithValue("@EndDate", endDate);

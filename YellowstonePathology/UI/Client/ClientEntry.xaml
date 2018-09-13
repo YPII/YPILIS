@@ -70,8 +70,7 @@
 						<TextBox Grid.Column="4" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=Client.ZipCode}" />
 					</Grid>
 
-					<TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Telephone:</TextBlock>
-                    <!--<TextBox Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=Client.Telephone, Converter={StaticResource PhoneNumberConverter}}" />-->
+                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Telephone:</TextBlock>
                     <wpfx:MaskedTextBox Name="MaskedTextBoxTelephone" Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                         RestrictToAscii="False" AllowPromptAsInput="False" IncludeLiteralsInValue="False" IncludePromptInValue="False" 
                                         ValueDataType="{x:Type sys:String}" Mask="(000) 000\-0000" Value="{Binding Path=Client.TelephoneProxy}">

@@ -8,7 +8,7 @@ using YellowstonePathology.Business.Persistence;
 namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
 {
     [PersistentClass("tblBRAFMutationAnalysisTestOrder", "tblPanelSetOrder", "YPIDATA")]
-    public class BRAFMutationAnalysisTestOrder : YellowstonePathology.Business.Test.PanelSetOrder, Business.Interface.ICommonResult
+    public class BRAFMutationAnalysisTestOrder : YellowstonePathology.Business.Test.PanelSetOrder
     {
         private string m_Result;
         private string m_Interpretation;
@@ -153,6 +153,31 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
                     this.NotifyPropertyChanged("ReportDisclaimer");
                 }
             }
+        }
+
+        public override void SetPreviousResults(PanelSetOrder pso)
+        {
+            Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTestOrder panelSetOrder = (Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTestOrder)pso;
+            panelSetOrder.Result = this.m_Result;
+            panelSetOrder.Interpretation = this.m_Interpretation;
+            panelSetOrder.Indication = this.m_Indication;
+            panelSetOrder.IndicationComment = this.m_IndicationComment;
+            panelSetOrder.Comment = this.m_Comment;
+            panelSetOrder.Method = this.m_Method;
+            panelSetOrder.ReportDisclaimer = this.m_ReportDisclaimer;
+            base.SetPreviousResults(pso);
+        }
+
+        public override void ClearPreviousResults()
+        {
+            this.m_Result = null;
+            this.m_Interpretation = null;
+            this.m_Indication = null;
+            this.m_IndicationComment = null;
+            this.m_Comment = null;
+            this.m_Method = null;
+            this.m_ReportDisclaimer = null;
+            base.ClearPreviousResults();
         }
 
         public override string ToResultString(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)

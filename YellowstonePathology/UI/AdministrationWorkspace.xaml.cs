@@ -30,15 +30,9 @@ using System.ServiceModel;
 using YellowstonePathology.Business.Helper;
 using System.Collections.ObjectModel;
 using MongoDB.Bson;
-//using MongoDB.Driver;
-//using MongoDB.Driver.Linq;
-//using MongoDB.Driver.Builders;
-//using MongoDB.Driver.GridFS;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-//using MySql.Data.MySqlClient;
 using Grpc.Core;
-//using StackExchange.Redis;
 
 namespace YellowstonePathology.UI
 {    
@@ -1021,16 +1015,8 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            int counter = 0;
-            string line;
-
-            System.IO.StreamReader file = new System.IO.StreamReader(@"c:\testing\phoneprefix.txt");
-            while ((line = file.ReadLine()) != null)
-            {
-                string [] lineSplit = line.Split(';');
-                Console.WriteLine("this.Add(\"" + lineSplit[1] + "\");");
-                counter++;
-            }
+            YellowstonePathology.Business.Test.JAK2Exon1214.JAK2Exon1214TestOrder t = new Business.Test.JAK2Exon1214.JAK2Exon1214TestOrder();
+            string tableName = Business.Persistence.PersistenceHelper.GetTableName(t.GetType());
         }
 
         private void GetSlideNumberTest()
