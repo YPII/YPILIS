@@ -246,5 +246,115 @@ namespace YellowstonePathology.Business.Test.ALKForNSCLCByFISH
 
 			return result.ToString();
 		}
-	}
+
+        public override void SetPreviousResults(PanelSetOrder pso)
+        {
+            ALKForNSCLCByFISHTestOrder panelSetOrder = (ALKForNSCLCByFISHTestOrder)pso;
+            panelSetOrder.Result = this.m_Result;
+            panelSetOrder.Interpretation = this.m_Interpretation;
+            panelSetOrder.ReferenceRange = this.m_ReferenceRange;
+            panelSetOrder.ProbeSetDetail = this.m_ProbeSetDetail;
+            panelSetOrder.NucleiScored = this.m_NucleiScored;
+            panelSetOrder.NucleiPercent = this.m_NucleiPercent;
+            panelSetOrder.Fusions = this.m_Fusions;
+            panelSetOrder.Method = this.Method;
+            panelSetOrder.ReportDisclaimer = this.m_ReportDisclaimer;
+            panelSetOrder.ThreeFPercentage = this.m_ThreeFPercentage;
+            panelSetOrder.ALKGeneAmplification = this.m_ALKGeneAmplification;
+            panelSetOrder.TumorNucleiPercentage = this.m_TumorNucleiPercentage;
+            base.SetPreviousResults(pso);
+        }
+
+        public override void ClearPreviousResults()
+        {
+            this.m_Result = null;
+            this.m_Interpretation = null;
+            this.m_ReferenceRange = null;
+            this.m_ProbeSetDetail = null;
+            this.m_NucleiScored = null;
+            this.m_NucleiPercent = null;
+            this.m_Fusions = null;
+            this.Method = null;
+            this.m_ReportDisclaimer = null;
+            this.m_ThreeFPercentage = null;
+            this.m_ALKGeneAmplification = false;
+            this.m_TumorNucleiPercentage = null;
+            base.ClearPreviousResults();
+        }
+
+        public override Audit.Model.AuditResult IsOkToSetPreviousResults(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToSetPreviousResults(panelSetOrder, accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                ALKForNSCLCByFISHTestOrder pso = (ALKForNSCLCByFISHTestOrder)panelSetOrder;
+                this.DoesFinalSummaryResultMatch(accessionOrder, pso.Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskSetPreviousResults;
+                }
+            }
+
+            return result;
+        }
+
+        public override Audit.Model.AuditResult IsOkToAccept(AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToAccept(accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.Result) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = UnableToAccept;
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskAccept;
+                }
+            }
+
+            return result;
+        }
+
+        public override YellowstonePathology.Business.Audit.Model.AuditResult IsOkToFinalize(Test.AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToFinalize(accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.m_Result) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = UnableToFinal;
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskFinal;
+                }
+            }
+
+            return result;
+        }
+
+        private void DoesFinalSummaryResultMatch(AccessionOrder accessionOrder, string result, Audit.Model.AuditResult auditResult)
+        {
+            Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest egfrToALKReflexAnalysisTest = new EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest();
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(egfrToALKReflexAnalysisTest.PanelSetId) == true)
+            {
+                Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder egfrToALKReflexAnalysisTestOrder = (EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(egfrToALKReflexAnalysisTest.PanelSetId);
+                egfrToALKReflexAnalysisTestOrder.DoesALKForNSCLCByFISHResultMatch(result, auditResult);
+            }
+        }
+    }
 }

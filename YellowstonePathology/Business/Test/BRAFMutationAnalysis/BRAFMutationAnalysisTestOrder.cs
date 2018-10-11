@@ -218,29 +218,131 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
             }
         }
 
-        public override YellowstonePathology.Business.Audit.Model.AuditResult IsOkToFinalize(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public override Audit.Model.AuditResult IsOkToSetPreviousResults(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
         {
-            YellowstonePathology.Business.Rules.MethodResult finalResult = this.IsOkToFinalize();
-            if (finalResult.Success == true)
+            Audit.Model.AuditResult result = base.IsOkToSetPreviousResults(panelSetOrder, accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                BRAFMutationAnalysisTestOrder pso = (BRAFMutationAnalysisTestOrder)panelSetOrder;
+                this.DoesFinalSummaryResultMatch(accessionOrder, pso.Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskSetPreviousResults;
+                }
+            }
+
+            return result;
+        }
+
+        public override Audit.Model.AuditResult IsOkToAccept(AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToAccept(accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.Result) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = UnableToAccept;
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.Indication) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = "The results cannot be accepted because the BRAF indicator is not set.";
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
             {
                 YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexTest krasStandardReflexTest = new KRASStandardReflex.KRASStandardReflexTest();
                 if (accessionOrder.PanelSetOrderCollection.Exists(krasStandardReflexTest.PanelSetId, this.OrderedOnId, true) == false)
                 {
                     if (string.IsNullOrEmpty(this.TumorNucleiPercentage) == true)
                     {
-                        finalResult.Success = false;
-                        finalResult.Message = "This case cannot be finalized because the Tumor Nuclei Percent is not set.";
+                        result.Status = Audit.Model.AuditStatusEnum.Failure;
+                        result.Message = "This case cannot be accepted because the Tumor Nuclei Percent is not set.";
                     }
                 }
-                else if (string.IsNullOrEmpty(this.Result) == true)
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
                 {
-                    finalResult.Success = false;
-                    finalResult.Message = "We are unable to finalize this case because the result is blank.";
+                    result.Message += AskAccept;
                 }
             }
-            YellowstonePathology.Business.Audit.Model.AuditResult result = base.IsOkToFinalize(accessionOrder);
+
             return result;
         }
+
+        public override YellowstonePathology.Business.Audit.Model.AuditResult IsOkToFinalize(Test.AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToFinalize(accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.m_Result) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = UnableToFinal;
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.Indication) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = "The results cannot be finalized because the BRAF indicator is not set.";
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexTest krasStandardReflexTest = new KRASStandardReflex.KRASStandardReflexTest();
+                if (accessionOrder.PanelSetOrderCollection.Exists(krasStandardReflexTest.PanelSetId, this.OrderedOnId, true) == false)
+                {
+                    if (string.IsNullOrEmpty(this.TumorNucleiPercentage) == true)
+                    {
+                        result.Status = Audit.Model.AuditStatusEnum.Failure;
+                        result.Message = "This case cannot be finalized because the Tumor Nuclei Percent is not set.";
+                    }
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskFinal;
+                }
+            }
+
+            return result;
+        }
+
+        private void DoesFinalSummaryResultMatch(AccessionOrder accessionOrder, string result, Audit.Model.AuditResult auditResult)
+        {
+            Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest egfrToALKReflexAnalysisTest = new EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest();
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(egfrToALKReflexAnalysisTest.PanelSetId) == true)
+            {
+                Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder egfrToALKReflexAnalysisTestOrder = (EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(egfrToALKReflexAnalysisTest.PanelSetId);
+                egfrToALKReflexAnalysisTestOrder.DoesBRAFMutationAnalysisResultMatch(result, auditResult);
+            }
+        }
+
+
+
+
+
+
+
 
         public override YellowstonePathology.Business.Rules.MethodResult IsOkToAccept()
         {

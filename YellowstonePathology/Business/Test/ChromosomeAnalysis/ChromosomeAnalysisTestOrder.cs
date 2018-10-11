@@ -222,13 +222,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
             panelSetOrder.Result = this.m_Result;
             panelSetOrder.Interpretation = this.m_Interpretation;
             panelSetOrder.Karyotype = this.Karyotype;
-            panelSetOrder.MetaphasesCounted = this.m_MetaphasesCounted;
             panelSetOrder.Comment = this.m_Comment;
-            panelSetOrder.MetaphasesAnalyzed = this.m_MetaphasesAnalyzed;
-            panelSetOrder.MetaphasesKaryotyped = this.m_MetaphasesKaryotyped;
             panelSetOrder.CultureType = this.m_CultureType;
-            panelSetOrder.BandingTechnique = this.m_BandingTechnique;
-            panelSetOrder.BandingResolution = this.m_BandingResolution;
             panelSetOrder.ASR = this.m_ASR;
             base.SetPreviousResults(pso);
         }
@@ -238,13 +233,8 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
             this.m_Result = null;
             this.m_Interpretation = null;
             this.Karyotype = null;
-            this.m_MetaphasesCounted = null;
             this.m_Comment = null;
-            this.m_MetaphasesAnalyzed = null;
-            this.m_MetaphasesKaryotyped = null;
             this.m_CultureType = null;
-            this.m_BandingTechnique = null;
-            this.m_BandingResolution = null;
             this.m_ASR = null;
             base.ClearPreviousResults();
         }

@@ -41,7 +41,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();
             amendmentSection.SetAmendment(egfrToALKReflexAnalysisTestOrder.AmendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, true);
 
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult egfrMutationAnalysisDetectedResult = new EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult();
+            //YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult egfrMutationAnalysisDetectedResult = new EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult();
 
             if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(131) == true)
             {
@@ -58,7 +58,8 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                 base.ReplaceText("alk_result", "Quantity not sufficient to perform ALK");
                 base.ReplaceText("ros1_result", "Quantity not sufficient to perform ROS1");
             }
-            else if (egfrMutationAnalysisTestOrder.ResultCode == egfrMutationAnalysisDetectedResult.ResultCode)
+            //else if (egfrMutationAnalysisTestOrder.ResultCode == egfrMutationAnalysisDetectedResult.ResultCode)
+            else if (egfrMutationAnalysisTestOrder.Result.ToUpper().Contains("POSITIVE"))
             {
                 base.ReplaceText("alk_result", "Not Indicated");
             }
@@ -72,7 +73,8 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                 YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHTestOrder ros1ByFISHTestOrder = (YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(204);
                 base.ReplaceText("ros1_result", ros1ByFISHTestOrder.Result);
             }
-            else if (egfrMutationAnalysisTestOrder.ResultCode == egfrMutationAnalysisDetectedResult.ResultCode)
+            //else if (egfrMutationAnalysisTestOrder.ResultCode == egfrMutationAnalysisDetectedResult.ResultCode)
+            else if (egfrMutationAnalysisTestOrder.Result.ToUpper().Contains("POSITIVE"))
             {
                 base.ReplaceText("ros1_result", "Not Indicated");
             }

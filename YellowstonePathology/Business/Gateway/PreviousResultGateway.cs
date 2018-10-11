@@ -114,6 +114,72 @@ namespace YellowstonePathology.Business.Gateway
                 "and pso.OrderDate between @StartDate and @EndDate " +
                 "and pso.final = 1 order by pso.FinalDate desc;";
             this.m_TableDictionary.Add("tblChromosomeAnalysisTestOrder", chromosomeAnalysisTestOrder);
+
+            string pdl122C3TestOrder = "Select b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblPDL122C3TestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblPDL122C3TestOrder", pdl122C3TestOrder);
+
+            string pdl1SP142TestOrder = "Select b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblPDL1SP142TestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblPDL1SP142TestOrder", pdl1SP142TestOrder);
+
+            string alkForNSCLCByFISHTestOrder = "Select b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblALKForNSCLCByFISHTestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblALKForNSCLCByFISHTestOrder", alkForNSCLCByFISHTestOrder);
+
+            string ros1ByFISHTestOrder = "Select b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblROS1ByFISHTestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblROS1ByFISHTestOrder", ros1ByFISHTestOrder);
+
+            string egfrMutationAnalysisTestOrder = "Select concat(b.Result, ' - ', b.indication) `Result`, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblEgfrMutationAnalysisTestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblEgfrMutationAnalysisTestOrder", egfrMutationAnalysisTestOrder);
+
+            string egrfToALKReflexAnalysisTestOrder = "Select concat('EGFR: ', case when b.EGFRMutationAnalysisResult is null then '' else b.EGFRMutationAnalysisResult end, " +
+                "' ALK: ', case when b.ALKForNSCLCByFISHResult is null then '' else b.ALKForNSCLCByFISHResult end, " +
+                "' ROS1: ', case when b.ROS1ByFISHResult is null then '' else b.ROS1ByFISHResult end, " +
+                "' PDL1SP142: ', case when b.PDL1SP142Result is null then '' else b.PDL1SP142Result end, " +
+                "' PDL122C3: ', case when b.PDL122C3Result is null then '' else b.PDL122C3Result end, " +
+                "' BRAF: ', case when b.BRAFMutationAnalysisResult is null then '' else b.BRAFMutationAnalysisResult end) `Result`, " +
+                "pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblEGFRToALKReflexAnalysisTestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblEGFRToALKReflexAnalysisTestOrder", egrfToALKReflexAnalysisTestOrder);
         }
 
         public YellowstonePathology.Business.PreviousResultCollection GetPreviousResultsByTestFinal(int panelSetId, DateTime startDate, DateTime endDate, string tableName)

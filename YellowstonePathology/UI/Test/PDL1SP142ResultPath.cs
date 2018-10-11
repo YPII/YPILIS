@@ -32,8 +32,11 @@ namespace YellowstonePathology.UI.Test
         {
             if (this.ShowAmendmentPage() == false)
             {
-				this.Finished();
-			}
+                if (this.ShowReflexTestPage() == false)
+                {
+                    this.Finished();
+                }
+            }
         }
 
         private bool ShowAmendmentPage()
@@ -57,12 +60,44 @@ namespace YellowstonePathology.UI.Test
 
         private void AmendmentPage_Finish(object sender, EventArgs e)
         {
-            base.Finished();
+            if (this.ShowReflexTestPage() == false)
+            {
+                this.Finished();
+            }
         }
 
         private void AmendmentPage_Back(object sender, EventArgs e)
         {
             this.ShowResultPage();
+        }
+
+        private bool ShowReflexTestPage()
+        {
+            bool result = false;
+            YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest panelSet = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest();
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(panelSet.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) == true)
+            {
+                YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder testOrder = (YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSet.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
+                result = true;
+                Test.EGFRToALKReflexPath egfrToALKReflexPath = new Test.EGFRToALKReflexPath(testOrder.ReportNo, this.m_AccessionOrder, this.m_PageNavigator, this.m_Window, System.Windows.Visibility.Visible);
+                egfrToALKReflexPath.Finish += new Test.EGFRToALKReflexPath.FinishEventHandler(EGFRToALKReflexPath_Finish);
+                egfrToALKReflexPath.Back += new EGFRToALKReflexPath.BackEventHandler(EGFRToALKReflexPath_Back);
+                egfrToALKReflexPath.Start();
+            }
+            return result;
+        }
+
+        private void EGFRToALKReflexPath_Back(object sender, EventArgs e)
+        {
+            if (this.ShowAmendmentPage() == false)
+            {
+                this.ShowResultPage();
+            }
+        }
+
+        private void EGFRToALKReflexPath_Finish(object sender, EventArgs e)
+        {
+            base.Finished();
         }
     }
 }

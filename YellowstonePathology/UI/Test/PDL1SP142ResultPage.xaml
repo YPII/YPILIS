@@ -32,7 +32,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -42,7 +42,11 @@
 
                 <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>
 
-                <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0">                    
+                <TextBlock Name="TextBlockPreviousResults" Grid.Column="0" Grid.Row="1" Margin="5,3,0,5">
+					<Hyperlink Click="HyperLinkPreviousResults_Click">Previous Results</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkAcceptResults_Click">Accept Results</Hyperlink>
                 </TextBlock>
 
@@ -82,6 +86,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,5" FontWeight="Bold">Ordered On:</TextBlock>
@@ -90,19 +95,22 @@
                     <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Stain Percent:</TextBlock>
                     <TextBox Name="TextBoxStainPercent" Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.StainPercent}"/>
 
-                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Comment:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Comment}" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Result:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Result}"/>
 
-                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold">Interpretation:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Interpretation}" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold">Comment:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Comment}" TextWrapping="Wrap" AcceptsReturn="True"/>
 
-                    <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold">Method:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" FontWeight="Bold">Interpretation:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Interpretation}" TextWrapping="Wrap" AcceptsReturn="True"/>
 
-                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" FontWeight="Bold">References:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" FontWeight="Bold">Method:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True"/>
 
-                    <local:ReferenceLabFinalControl x:Name="ReferenceLabFinalControl" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" Margin="2,2,2,2"/>
+                    <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" FontWeight="Bold">References:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True"/>
+
+                    <local:ReferenceLabFinalControl x:Name="ReferenceLabFinalControl" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11" Margin="2,2,2,2"/>
 
                 </Grid>
 

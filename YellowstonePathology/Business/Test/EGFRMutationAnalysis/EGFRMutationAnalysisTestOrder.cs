@@ -194,38 +194,124 @@ namespace YellowstonePathology.Business.Test.EGFRMutationAnalysis
 			return result.ToString();
 		}
 
-		public override Business.Rules.MethodResult IsOkToFinalize()
-		{
-			YellowstonePathology.Business.Rules.MethodResult result = base.IsOkToFinalize();
-			if (result.Success == true)
-			{
-				if (string.IsNullOrEmpty(this.m_TumorNucleiPercentage) == true)
-				{
-					result.Success = false;
-					result.Message = "The results cannot be finalized because the Tumor Nuclei Percentage has no value.";
-				}
-			}
-			return result;
-		}
-
-        public override YellowstonePathology.Business.Audit.Model.AuditResult IsOkToFinalize(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public override void SetPreviousResults(PanelSetOrder pso)
         {
-            return base.IsOkToFinalize(accessionOrder);
+            EGFRMutationAnalysisTestOrder panelSetOrder = (EGFRMutationAnalysisTestOrder)pso;
+            panelSetOrder.Result = this.m_Result;
+            panelSetOrder.Mutation = this.m_Mutation;
+            panelSetOrder.Method = this.m_Method;
+            panelSetOrder.Indication = this.m_Indication;
+            panelSetOrder.Interpretation = this.m_Interpretation;
+            panelSetOrder.MicrodissectionPerformed = this.m_MicrodissectionPerformed;
+            panelSetOrder.Comment = this.Comment;
+            panelSetOrder.ReportDisclaimer = this.m_ReportDisclaimer;
+            base.SetPreviousResults(pso);
         }
 
-        public override MethodResult IsOkToAccept()
+        public override void ClearPreviousResults()
         {
-            MethodResult result = base.IsOkToAccept();
-            if(result.Success == true)
+            this.m_Result = null;
+            this.m_Mutation = null;
+            this.m_Method = null;
+            this.m_Indication = null;
+            this.m_Interpretation = null;
+            this.m_MicrodissectionPerformed = false;
+            this.m_Comment = null;
+            this.m_ReportDisclaimer = null;
+            base.ClearPreviousResults();
+        }
+
+        public override Audit.Model.AuditResult IsOkToSetPreviousResults(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToSetPreviousResults(panelSetOrder, accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
             {
-                if(string.IsNullOrEmpty(this.m_ResultCode) == true)
+                EGFRMutationAnalysisTestOrder egfrMutationAnalysisTestOrder = (EGFRMutationAnalysisTestOrder)panelSetOrder;
+                this.DoesFinalSummaryResultMatch(accessionOrder, egfrMutationAnalysisTestOrder.Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
                 {
-                    result.Success = false;
-                    result.Message = "This case cannot be accepted because the results are not set.";
+                    result.Message += AskSetPreviousResults;
                 }
             }
 
             return result;
+        }
+
+        public override Audit.Model.AuditResult IsOkToAccept(AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToAccept(accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.Result) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = UnableToAccept;
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.m_TumorNucleiPercentage) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = "The results cannot be accepted because the Tumor Nuclei Percentage has no value.";
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskAccept;
+                }
+            }
+
+            return result;
+        }
+
+        public override YellowstonePathology.Business.Audit.Model.AuditResult IsOkToFinalize(Test.AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToFinalize(accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.m_Result) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = UnableToFinal;
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.m_TumorNucleiPercentage) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = "The results cannot be finalized because the Tumor Nuclei Percentage has no value.";
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskFinal;
+                }
+            }
+
+            return result;
+        }
+
+        private void DoesFinalSummaryResultMatch(AccessionOrder accessionOrder, string result, Audit.Model.AuditResult auditResult)
+        {
+            Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest egfrToALKReflexAnalysisTest = new EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest();
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(egfrToALKReflexAnalysisTest.PanelSetId) == true)
+            {
+                Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder egfrToALKReflexAnalysisTestOrder = (EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(egfrToALKReflexAnalysisTest.PanelSetId);
+                egfrToALKReflexAnalysisTestOrder.DoesEGFRMutationAnalysisResultMatch(result, auditResult);
+            }
         }
     }
 }

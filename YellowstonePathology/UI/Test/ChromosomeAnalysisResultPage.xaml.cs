@@ -138,6 +138,15 @@ namespace YellowstonePathology.UI.Test
             {
                 this.m_PanelSetOrder.Accept();
             }
+            else if (result.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(result.Message, "Results do not match the finaled summary results",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    this.m_PanelSetOrder.Accept();
+                }
+            }
             else
             {
                 MessageBox.Show(result.Message);

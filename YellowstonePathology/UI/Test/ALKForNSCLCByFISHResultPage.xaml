@@ -32,11 +32,8 @@
 
             <Grid Grid.Column="0" Margin="10" Width="210">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>                    
 					<RowDefinition Height="Auto"></RowDefinition>
-					<RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -46,33 +43,33 @@
                     <RowDefinition Height="Auto"></RowDefinition>
 				</Grid.RowDefinitions>                
                 
-                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>                               				
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>
 
-                <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0" FontSize="14">
-                    <Hyperlink Click="HyperLinkSetResults_Click">Set Results</Hyperlink>
+                <TextBlock Name="TextBlockPreviousResults" Grid.Column="0" Grid.Row="1" Margin="5,3,0,5" FontSize="14">
+					<Hyperlink Click="HyperLinkPreviousResults_Click">Previous Results</Hyperlink>
                 </TextBlock>
 
-                <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,0" FontSize="14">
+                <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,0" FontSize="14">
                     <Hyperlink Click="HyperLinkAcceptResults_Click">Accept Results</Hyperlink>
 				</TextBlock>
 
-                <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="6" Margin="5,3,0,0" FontSize="14">                    
+                <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="3" Margin="5,3,0,0" FontSize="14">                    
                     <Hyperlink Click="HyperLinkShowDocument_Click">Show Document</Hyperlink>
 				</TextBlock>
                 
-				<TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,5" FontSize="14">
+				<TextBlock Grid.Column="0" Grid.Row="4" Margin="5,3,0,5" FontSize="14">
 					<Hyperlink Click="HyperLinkFinalizeResults_Click">Finalize</Hyperlink>
 				</TextBlock>
 
-                <TextBlock Grid.Column="0" Grid.Row="9" Margin="5,3,0,0" FontSize="14">                    
+                <TextBlock Grid.Column="0" Grid.Row="6" Margin="5,3,0,0" FontSize="14">                    
                     <Hyperlink Click="HyperLinkCancelInsufficient_Click">Cancel (Insufficient)</Hyperlink>
                 </TextBlock>
                 
-                <TextBlock Grid.Column="0" Grid.Row="10" Margin="5,3,0,0" FontSize="14">                    
+                <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0" FontSize="14">                    
                     <Hyperlink Click="HyperLinkUnacceptResults_Click">Unaccept Results</Hyperlink>
 				</TextBlock>
 
-                <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="11" Margin="5,3,0,0" FontSize="14">                    
+                <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="8" Margin="5,3,0,0" FontSize="14">                    
                     <Hyperlink Click="HyperLinkUnfinalResults_Click">Unfinalize Results</Hyperlink>
 				</TextBlock>
 
@@ -104,13 +101,12 @@
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="*"></RowDefinition>
 					</Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Ordered On:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
                                         
-                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Result:</TextBlock>
-                    <ComboBox Name="ComboBoxResult" Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" ItemsSource="{Binding Path=ResultCollection}" DisplayMemberPath="ResultDisplayText" 
-							  SelectedValue="{Binding Path=PanelSetOrder.ResultCode}" SelectedValuePath="ResultCode" HorizontalAlignment="Stretch"/>
-                    
-                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Ordered On:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Result:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Result}"></TextBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Tumor Nuclei Percentage:</TextBlock>
                     <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=PanelSetOrder.TumorNucleiPercentage}" HorizontalAlignment="Stretch" />

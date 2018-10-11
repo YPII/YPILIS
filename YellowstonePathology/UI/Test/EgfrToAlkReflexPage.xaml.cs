@@ -44,7 +44,6 @@ namespace YellowstonePathology.UI.Test
         private YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder m_EGFRToALKReflexAnalysisTestOrder;
         private YellowstonePathology.Business.Test.ALKForNSCLCByFISH.ALKForNSCLCByFISHTestOrder m_ALKForNSCLCByFISHTestOrder;
         private YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisTestOrder m_EGFRMutationAnalysisTestOrder;
-        private YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult m_EGFRToALKReflexAnalysisResult;
 
         private string m_PageHeaderText;
         private string m_OrderedOnDescription;
@@ -80,9 +79,7 @@ namespace YellowstonePathology.UI.Test
             this.m_OrderedOnDescription = specimenOrder.Description;
             if (aliquotOrder != null) this.m_OrderedOnDescription += ": " + aliquotOrder.Label;
 
-            this.m_EGFRToALKReflexAnalysisResult = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder);
-
-			InitializeComponent();
+            InitializeComponent();
 
 			this.DataContext = this;
 
@@ -90,11 +87,6 @@ namespace YellowstonePathology.UI.Test
             this.m_ControlsNotDisabledOnFinal.Add(this.ButtonFinish);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalResults);
-        }
-
-        public YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult EGFRToALKReflexAnalysisResult
-        {
-            get { return this.m_EGFRToALKReflexAnalysisResult; }
         }
 
         public System.Windows.Visibility BackButtonVisibility
@@ -152,11 +144,6 @@ namespace YellowstonePathology.UI.Test
             this.OrderBRAF(this, new EventArgs());
         }
 
-        private void HyperLinkSetResults_Click(object sender, RoutedEventArgs e)
-		{
-            this.m_EGFRToALKReflexAnalysisTestOrder.SetResults(this.m_AccessionOrder);
-		}
-
 		private void HyperLinkShowDocument_Click(object sender, RoutedEventArgs e)
 		{            
             YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisWordDocument report = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisWordDocument(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder, Business.Document.ReportSaveModeEnum.Draft);
@@ -169,21 +156,38 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkFinalizeResults_Click(object sender, RoutedEventArgs e)
 		{
-            if (string.IsNullOrEmpty(this.m_EGFRToALKReflexAnalysisTestOrder.TumorNucleiPercentage) == true)
+            bool okToFinal = false;
+            Business.Audit.Model.AuditResult auditResult = this.m_EGFRToALKReflexAnalysisTestOrder.IsOkToFinalize(this.m_AccessionOrder);
+            if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
-                MessageBox.Show("The results cannot be finalized because the Tumor Nuclei Percentage has no value.");
+                okToFinal = true;
+            }
+            else if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(auditResult.Message, "Results do not match the component report results",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    okToFinal = true;
+                }
             }
             else
             {
-                if (this.m_EGFRToALKReflexAnalysisTestOrder.Final == false)
-                {
-                    YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_EGFRToALKReflexAnalysisTestOrder.Finish(this.m_AccessionOrder);
-                    this.HandleFinalizeTestResult(finalizeTestResult);
-                }
-            }			
-		}
+                MessageBox.Show(auditResult.Message, "Unable to final");
+            }
 
-		private void HyperLinkUnfinalResults_Click(object sender, RoutedEventArgs e)
+            if (okToFinal == true)
+            {
+                YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_EGFRToALKReflexAnalysisTestOrder.Finish(this.m_AccessionOrder);
+                this.HandleFinalizeTestResult(finalizeTestResult);
+                if (this.m_EGFRToALKReflexAnalysisTestOrder.Accepted == false)
+                {
+                    this.m_EGFRToALKReflexAnalysisTestOrder.Accept();
+                }
+            }
+        }
+
+        private void HyperLinkUnfinalResults_Click(object sender, RoutedEventArgs e)
 		{
 			if (this.m_EGFRToALKReflexAnalysisTestOrder.Final == true)
 			{
@@ -192,29 +196,26 @@ namespace YellowstonePathology.UI.Test
 		}
 
 		private void HyperLinkAcceptResults_Click(object sender, RoutedEventArgs e)
-		{			
-			YellowstonePathology.Business.Rules.MethodResult result = this.m_EGFRToALKReflexAnalysisTestOrder.IsOkToAccept();
-			if (result.Success == true)
-			{
-                YellowstonePathology.Business.Rules.MethodResult methodResult = this.m_EGFRToALKReflexAnalysisTestOrder.HaveResultsBeenSet(this.m_AccessionOrder);
-                if (methodResult.Success == true)
+		{
+            YellowstonePathology.Business.Audit.Model.AuditResult result = this.m_EGFRToALKReflexAnalysisTestOrder.IsOkToAccept(this.m_AccessionOrder);
+            if (result.Status == Business.Audit.Model.AuditStatusEnum.OK)
+            {
+                this.m_EGFRToALKReflexAnalysisTestOrder.Accept();
+            }
+            else if (result.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(result.Message, "Results do not match the component report results",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     this.m_EGFRToALKReflexAnalysisTestOrder.Accept();
                 }
-                else
-                {
-                    MessageBoxResult messageBoxResult = MessageBox.Show("Have the results been set?", "Set Results", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.Yes);
-                    if (messageBoxResult == MessageBoxResult.Yes)
-                    {
-                        this.m_EGFRToALKReflexAnalysisTestOrder.Accept();
-                    }
-                }
-			}
-			else
-			{
-				MessageBox.Show(result.Message);
-			}		
-		}
+            }
+            else
+            {
+                MessageBox.Show(result.Message);
+            }
+        }
 
 		private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)
 		{
@@ -249,26 +250,32 @@ namespace YellowstonePathology.UI.Test
 
         private void CheckBoxQNSForALK_Checked(object sender, RoutedEventArgs e)
         {
-            this.m_EGFRToALKReflexAnalysisResult = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder);
+            //this.m_EGFRToALKReflexAnalysisResult = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder);
             this.NotifyPropertyChanged(string.Empty);
         }
 
         private void CheckBoxQNSForALK_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.m_EGFRToALKReflexAnalysisResult = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder);
+            //this.m_EGFRToALKReflexAnalysisResult = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder);
             this.NotifyPropertyChanged(string.Empty);
         }
 
         private void CheckBoxQNSForROS1_Checked(object sender, RoutedEventArgs e)
         {
-            this.m_EGFRToALKReflexAnalysisResult = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder);
+            //this.m_EGFRToALKReflexAnalysisResult = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder);
             this.NotifyPropertyChanged(string.Empty);
         }
 
         private void CheckBoxQNSForROS1_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.m_EGFRToALKReflexAnalysisResult = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder);
+            //this.m_EGFRToALKReflexAnalysisResult = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisResult(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder);
             this.NotifyPropertyChanged(string.Empty);
-        }        
+        }
+
+        private void HyperLinkPreviousResults_Click(object sender, RoutedEventArgs e)
+        {
+            UI.Test.PreviousResultDialog dlg = new UI.Test.PreviousResultDialog(this.m_EGFRToALKReflexAnalysisTestOrder, this.m_AccessionOrder);
+            dlg.ShowDialog();
+        }
     }
 }

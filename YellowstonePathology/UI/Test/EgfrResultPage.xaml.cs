@@ -77,66 +77,6 @@ namespace YellowstonePathology.UI.Test
 			get { return this.m_PageHeaderText; }
 		}				        
 
-        private void HyperLinkPositiveL858R_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult result = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult();
-            result.SetResult(this.m_PanelSetOrder, "L858R");
-        }
-
-        private void HyperLinkPositiveExon19_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult result = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult();
-            result.SetResult(this.m_PanelSetOrder, "exon 19 insertion/deletion");
-        }
-
-        private void HyperLinkPositiveE709X_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult result = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult();
-            result.SetResult(this.m_PanelSetOrder, "E709X");
-        }
-
-        private void HyperLinkPositiveG719X_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult result = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult();
-            result.SetResult(this.m_PanelSetOrder, "G719X");
-        }
-
-        private void HyperLinkPositiveS768I_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult result = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult();
-            result.SetResult(this.m_PanelSetOrder, "S768I");
-        }
-
-        private void HyperLinkPositiveL861Q_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult result = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisDetectedResult();
-            result.SetResult(this.m_PanelSetOrder, "L861Q");
-        }
-
-        private void HyperLinkResistantT790M_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisResistanceResult result = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisResistanceResult();
-            result.SetResult(this.m_PanelSetOrder, "T790M");
-        }
-
-        private void HyperLinkResistantExon20_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisResistanceResult result = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisResistanceResult();
-            result.SetResult(this.m_PanelSetOrder, "Resistant Exon 20");
-        }
-
-        private void HyperLinkUninterpretable_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisUninterpretableResult result = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisUninterpretableResult();
-            result.SetResult(this.m_PanelSetOrder, null);
-        }        
-
-        private void HyperLinkNotDetected_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisNotDetectedResult result = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisNotDetectedResult();
-            result.SetResult(this.m_PanelSetOrder, null);
-        }
-
 		private void HyperLinkShowDocument_Click(object sender, RoutedEventArgs e)
 		{
 			YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisWordDocument report = new Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisWordDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft);
@@ -149,19 +89,38 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkFinalizeResults_Click(object sender, RoutedEventArgs e)
         {
-			YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrder.IsOkToFinalize();
-            if (result.Success == true)
+            bool okToFinal = false;
+            YellowstonePathology.Business.Audit.Model.AuditResult auditResult = this.m_PanelSetOrder.IsOkToFinalize(this.m_AccessionOrder);
+            if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
-                YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
-                this.HandleFinalizeTestResult(finalizeTestResult);
+                okToFinal = true;
+            }
+            else if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(auditResult.Message, "Results do not match the finaled summary results",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    okToFinal = true;
+                }
             }
             else
             {
-				MessageBox.Show(result.Message);
-            }            
+                MessageBox.Show(auditResult.Message);
+            }
+
+            if (okToFinal == true)
+            {
+                YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
+                this.HandleFinalizeTestResult(finalizeTestResult);
+                if (this.m_PanelSetOrder.Accepted == false)
+                {
+                    this.m_PanelSetOrder.Accept();
+                }
+            }
         }
 
-		private void HyperLinkUnfinalResults_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkUnfinalResults_Click(object sender, RoutedEventArgs e)
 		{
 			YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrder.IsOkToUnfinalize();
 			if (result.Success == true)
@@ -176,29 +135,38 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkAcceptResults_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrder.IsOkToAccept();
-			if (result.Success == true)
-			{
-				this.m_PanelSetOrder.Accept();
-			}
-			else
-			{
-				MessageBox.Show(result.Message);
-			}
-		}
+            YellowstonePathology.Business.Audit.Model.AuditResult result = this.m_PanelSetOrder.IsOkToAccept(this.m_AccessionOrder);
+            if (result.Status == Business.Audit.Model.AuditStatusEnum.OK)
+            {
+                this.m_PanelSetOrder.Accept();
+            }
+            else if (result.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(result.Message, "Results do not match the finaled summary results",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    this.m_PanelSetOrder.Accept();
+                }
+            }
+            else
+            {
+                MessageBox.Show(result.Message);
+            }
+        }
 
-		private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrder.IsOkToUnaccept();
-			if (result.Success == true)
-			{
-				this.m_PanelSetOrder.Unaccept();
-			}
-			else
-			{
-				MessageBox.Show(result.Message);
-			}
-		}
+            YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrder.IsOkToUnaccept();
+            if (result.Success == true)
+            {
+                this.m_PanelSetOrder.Unaccept();
+            }
+            else
+            {
+                MessageBox.Show(result.Message);
+            }
+        }
 
         private void HyperLinkCloseWindow_Click(object sender, RoutedEventArgs e)
         {
@@ -208,6 +176,12 @@ namespace YellowstonePathology.UI.Test
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {       
             if (this.Next != null) this.Next(this, new EventArgs());
-        }        
-	}
+        }
+
+        private void HyperLinkPreviousResults_Click(object sender, RoutedEventArgs e)
+        {
+            UI.Test.PreviousResultDialog dlg = new UI.Test.PreviousResultDialog(this.m_PanelSetOrder, this.m_AccessionOrder);
+            dlg.ShowDialog();
+        }
+    }
 }

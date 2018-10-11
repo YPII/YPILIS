@@ -30,8 +30,6 @@ namespace YellowstonePathology.UI.Test
         private YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHTestOrder m_PanelSetOrder;
         private string m_OrderedOnDescription;
 
-        private YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHResultCollection m_ResultCollection;
-
         public ROS1ResultPage(YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHTestOrder ros1ByFISHTestOrder,
             YellowstonePathology.Business.Test.AccessionOrder accessionOrder,
 			YellowstonePathology.Business.User.SystemIdentity systemIdentity) : base(ros1ByFISHTestOrder, accessionOrder)
@@ -40,7 +38,6 @@ namespace YellowstonePathology.UI.Test
 			this.m_AccessionOrder = accessionOrder;			
 			this.m_SystemIdentity = systemIdentity;
 
-            this.m_ResultCollection = new Business.Test.ROS1ByFISH.ROS1ByFISHResultCollection();
             this.m_PageHeaderText = "ROS1 Results For: " + this.m_AccessionOrder.PatientDisplayName;
 
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByOrderTarget(this.m_PanelSetOrder.OrderedOnId);
@@ -51,22 +48,10 @@ namespace YellowstonePathology.UI.Test
 			InitializeComponent();
 
 			DataContext = this;				
-			
-			Loaded += ROS1ResultPage_Loaded;
 
             this.m_ControlsNotDisabledOnFinal.Add(this.ButtonNext);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalResults);
-        }
-
-        public void ROS1ResultPage_Loaded(object sender, RoutedEventArgs e)
-        {
-        	this.ComboBoxResult.SelectionChanged += ComboBoxResult_SelectionChanged;             
-        }
-
-        public YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHResultCollection ResultCollection
-        {
-            get { return this.m_ResultCollection; }
         }
 
         public string OrderedOnDescription
@@ -104,25 +89,38 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkFinalizeResults_Click(object sender, RoutedEventArgs e)
         {
-            if (this.m_PanelSetOrder.Accepted == true)
+            bool okToFinal = false;
+            YellowstonePathology.Business.Audit.Model.AuditResult auditResult = this.m_PanelSetOrder.IsOkToFinalize(this.m_AccessionOrder);
+            if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
-                if (this.m_PanelSetOrder.Final == false)
+                okToFinal = true;
+            }
+            else if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(auditResult.Message, "Results do not match the finaled summary results",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (messageBoxResult == MessageBoxResult.Yes)
                 {
-                    YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
-                    this.HandleFinalizeTestResult(finalizeTestResult);
-                }
-                else
-                {
-                    MessageBox.Show("This case cannot be finaled because it is already final.");
+                    okToFinal = true;
                 }
             }
             else
             {
-                MessageBox.Show("This case cannot be finaled because it is not accepted.");
+                MessageBox.Show(auditResult.Message);
+            }
+
+            if (okToFinal == true)
+            {
+                YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
+                this.HandleFinalizeTestResult(finalizeTestResult);
+                if (this.m_PanelSetOrder.Accepted == false)
+                {
+                    this.m_PanelSetOrder.Accept();
+                }
             }
         }
 
-		private void HyperLinkUnfinalResults_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkUnfinalResults_Click(object sender, RoutedEventArgs e)
 		{            			
 			if (this.m_PanelSetOrder.Final == true)
             {
@@ -136,24 +134,27 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkAcceptResults_Click(object sender, RoutedEventArgs e)
 		{
-            if (this.m_PanelSetOrder.Final == false)
+            YellowstonePathology.Business.Audit.Model.AuditResult result = this.m_PanelSetOrder.IsOkToAccept(this.m_AccessionOrder);
+            if (result.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
-                if (this.m_PanelSetOrder.Accepted == false)
+                this.m_PanelSetOrder.Accept();
+            }
+            else if (result.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(result.Message, "Results do not match the finaled summary results",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     this.m_PanelSetOrder.Accept();
-                }
-                else
-                {
-                    MessageBox.Show("This case cannot be accepted because it is already accepted.");
                 }
             }
             else
             {
-                MessageBox.Show("This case cannot be accepted because it is final.");
+                MessageBox.Show(result.Message);
             }
-		}
+        }
 
-		private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)
 		{            			
 			if (this.m_PanelSetOrder.Accepted == true)
 			{
@@ -175,29 +176,10 @@ namespace YellowstonePathology.UI.Test
             if (this.Next != null) this.Next(this, new EventArgs());
         }
 
-        private void HyperLinkSetResults_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkPreviousResults_Click(object sender, RoutedEventArgs e)
         {
-            if (this.m_PanelSetOrder.Accepted == false)
-            {
-                if (this.ComboBoxResult.SelectedItem != null)
-                {
-                    YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHResult result = (YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHResult)this.ComboBoxResult.SelectedItem;
-                    result.SetResult(this.m_PanelSetOrder);
-                }
-            }
-            else
-            {
-                MessageBox.Show("You cannot set the result because the test has been accepted.");
-            }
+            UI.Test.PreviousResultDialog dlg = new UI.Test.PreviousResultDialog(this.m_PanelSetOrder, this.m_AccessionOrder);
+            dlg.ShowDialog();
         }
-
-        private void ComboBoxResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (this.ComboBoxResult.SelectedItem != null)
-            {
-                YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHResult result = (YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHResult)this.ComboBoxResult.SelectedItem;
-                this.m_PanelSetOrder.ResultCode = result.ResultCode;
-            }
-        }
-	}
+    }
 }

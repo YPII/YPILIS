@@ -26,28 +26,6 @@ namespace YellowstonePathology.Business.Test.PDL1SP142
             bool distribute)
             : base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
         {
-            this.m_Method = "Formalin-fixed paraffin-embedded tissue sections were stained with an anti-PD-L1 primary antibody (clone SP142) " +
-                "and a polymertechnology based system was used for detection.  Stains were scored by a pathologist using manual microscopy.  " +
-                "The percentage of tumor cells with membrane staining is reported and the intensity of staining is scored as follows: 0, " +
-                "absent; 1 +, weak; 2 +, moderate; and 3 +, strong.  Currently, there are no standardized cut offs for determining positivity " +
-                "or negativity for PD - L1, however some published studies have used 5 % of tumor cells with moderate to strong staining as " +
-                "the positive cut - off.";
-            this.m_Interpretation = "PD-L1 is one of the receptors for PD-1. PD-L1 is inducibly expressed on both hematopoietic and " +
-                "non-hematopoietic cells following cellspecific stimulation and plays a role in maintenance of peripheral tolerance.  PD - L1 " +
-                "expression has been linked to poorer prognosis and shorter survival in some tumor types.  On - going clinical trials are " +
-                "evaluating the efficacy of inhibition of PD - L1 in various tumors.";
-            this.m_ReportReferences = "1. Ohaegbulam KC, Assal A, Lazar-Molnar E, et al. Human cancer immunotherapy with antibodies to the PD-1 and " +
-                "PD-L1 pathway. Trends Mol Med. 2015; 21(1):24 - 33." + Environment.NewLine +
-                "2. D'Incecco A, Andreozzi M, et al.PD - 1 and PD - L1 expression in molecularly selected non - small - cell lung cancer " +
-                "patients.Br J Cancer. 2015; 112(1):95 - 102." + Environment.NewLine +
-                "3. Massi D, Brusa D, Merelli B, et al. PD - L1 marks a subset of melanomas with a shorter overall survival and distinct genetic " +
-                "and morphological characteristics. Ann Oncol. 2014; 25(12):2433 - 42." + Environment.NewLine +
-                "4. Chen BJ, Chapuy B, Ouyang J, et al. PD - L1 expression is characteristic of a subset of aggressive B-cell lymphomas and " +
-                "virusassociated malignancies.Clin Cancer Res. 2013; 19(13):3462 - 73." + Environment.NewLine +
-                "5. Zhang Y, Kang S, Shen J, et al. Prognostic significance of programmed cell death 1(PD - 1) or PD-1 ligand 1(PD - L1) Expression " +
-                "in epithelial - originated cancer: a meta-analysis.Medicine(Baltimore). 2015; 94(6):e515.";
-            this.m_Comment = "This test utilizes PD-L1 antibody clone SP142.  In general, higher levels of PD-L1 expression are associated with " +
-                "better response to PD-1 antagonists.";
         }
 
         [PersistentProperty()]
@@ -151,5 +129,117 @@ namespace YellowstonePathology.Business.Test.PDL1SP142
 			}
 			return result;
 		}
+
+        public override void SetPreviousResults(PanelSetOrder pso)
+        {
+            PDL1SP142TestOrder panelSetOrder = (PDL1SP142TestOrder)pso;
+            panelSetOrder.Result = this.m_Result;
+            panelSetOrder.Method = this.Method;
+            panelSetOrder.Comment = this.Comment;
+            panelSetOrder.Interpretation = this.m_Interpretation;
+            base.SetPreviousResults(pso);
+        }
+
+        public override void ClearPreviousResults()
+        {
+            this.m_Result = null;
+            this.m_Method = null;
+            this.m_Comment = null;
+            this.m_Interpretation = null;
+            base.ClearPreviousResults();
+        }
+
+        public override Audit.Model.AuditResult IsOkToSetPreviousResults(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToSetPreviousResults(panelSetOrder, accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                PDL1SP142TestOrder pdl1SP142TestOrder = (PDL1SP142TestOrder)panelSetOrder;
+                this.DoesFinalSummaryResultMatch(accessionOrder, pdl1SP142TestOrder.Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskSetPreviousResults;
+                }
+            }
+
+            return result;
+        }
+
+        public override Audit.Model.AuditResult IsOkToAccept(AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToAccept(accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.Result) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = UnableToAccept;
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.StainPercent) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = "The results cannot be accepted because the stain percent is not set.";
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskAccept;
+                }
+            }
+
+            return result;
+        }
+
+        public override YellowstonePathology.Business.Audit.Model.AuditResult IsOkToFinalize(Test.AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToFinalize(accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.m_Result) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = UnableToFinal;
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                if (string.IsNullOrEmpty(this.StainPercent) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = "The case cannot be finalized because the stain percent is not set.";
+                }
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskFinal;
+                }
+            }
+
+            return result;
+        }
+
+        private void DoesFinalSummaryResultMatch(AccessionOrder accessionOrder, string result, Audit.Model.AuditResult auditResult)
+        {
+            Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest egfrToALKReflexAnalysisTest = new EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest();
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(egfrToALKReflexAnalysisTest.PanelSetId) == true)
+            {
+                Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder egfrToALKReflexAnalysisTestOrder = (EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(egfrToALKReflexAnalysisTest.PanelSetId);
+                egfrToALKReflexAnalysisTestOrder.DoesPDL122C3ResultMatch(result, auditResult);
+            }
+        }
     }
 }
