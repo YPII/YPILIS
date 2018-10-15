@@ -213,7 +213,7 @@ namespace YellowstonePathology.UI.Test
             }
             else
             {
-                MessageBox.Show(result.Message);
+                MessageBox.Show(result.Message, "Unable to Accept.");
             }
         }
 
@@ -272,10 +272,17 @@ namespace YellowstonePathology.UI.Test
             this.NotifyPropertyChanged(string.Empty);
         }
 
-        private void HyperLinkPreviousResults_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkSetResults_Click(object sender, RoutedEventArgs e)
         {
-            UI.Test.PreviousResultDialog dlg = new UI.Test.PreviousResultDialog(this.m_EGFRToALKReflexAnalysisTestOrder, this.m_AccessionOrder);
-            dlg.ShowDialog();
+            Business.Audit.Model.AuditResult result = this.m_EGFRToALKReflexAnalysisTestOrder.IsOkToSetResults();
+            if (result.Status == Business.Audit.Model.AuditStatusEnum.OK)
+            {
+                this.m_EGFRToALKReflexAnalysisTestOrder.SetResults(this.m_AccessionOrder.PanelSetOrderCollection);
+            }
+            else
+            {
+                MessageBox.Show(result.Message, "Unable to set Results");
+            }
         }
     }
 }

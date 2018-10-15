@@ -20,6 +20,8 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
         private string m_ALKForNSCLCByFISHResult;
         private string m_BRAFMutationAnalysisResult;
         private string m_PDL1SP142Result;
+        private string m_EGFRMutationAnalysisComment;
+        private string m_PDL1SP142StainPercent;
 
         public EGFRToALKReflexAnalysisTestOrder() 
         {
@@ -207,9 +209,39 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             }
         }
 
-        public string BRAFMutationAnalysisTestAbbreviation
+        [PersistentProperty()]
+        public string EGFRMutationAnalysisComment
         {
-            get { return new Test.BRAFMutationAnalysis.BRAFMutationAnalysisTest().Abbreviation; }
+            get { return this.m_EGFRMutationAnalysisComment; }
+            set
+            {
+                this.m_EGFRMutationAnalysisComment = value;
+                NotifyPropertyChanged("EGFRMutationAnalysisComment");
+            }
+        }
+
+        [PersistentProperty()]
+        public string PDL1SP142StainPercent
+        {
+            get { return this.m_PDL1SP142StainPercent; }
+            set
+            {
+                this.m_PDL1SP142StainPercent = value;
+                NotifyPropertyChanged("PDL1SP142StainPercent");
+            }
+        }
+
+        public YellowstonePathology.Business.Audit.Model.AuditResult IsOkToSetResults()
+        {
+            Audit.Model.AuditResult result = new Audit.Model.AuditResult();
+            result.Status = Audit.Model.AuditStatusEnum.OK;
+
+            if (this.Accepted == true)
+            {
+                result.Status = Audit.Model.AuditStatusEnum.Failure;
+                result.Message += UnableToSetPreviousResults;
+            }
+            return result;
         }
 
         public override string ToResultString(Business.Test.AccessionOrder accessionOrder)
@@ -240,52 +272,100 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
 			return result.ToString();
 		}
 
-        public override void SetPreviousResults(PanelSetOrder panelSetOrder)
+        public void SetResults(PanelSetOrderCollection panelSetOrderCollection)
         {
-            EGFRToALKReflexAnalysisTestOrder egfrToALKReflexAnalysisTestOrder = (EGFRToALKReflexAnalysisTestOrder)panelSetOrder;
-            egfrToALKReflexAnalysisTestOrder.Method = this.m_Method;
-            egfrToALKReflexAnalysisTestOrder.Interpretation = this.m_Interpretation;
-            egfrToALKReflexAnalysisTestOrder.TumorNucleiPercentage = this.m_TumorNucleiPercentage;
-            egfrToALKReflexAnalysisTestOrder.QNSForALK = this.m_QNSForALK;
-            egfrToALKReflexAnalysisTestOrder.QNSForROS1 = this.m_QNSForROS1;
-            egfrToALKReflexAnalysisTestOrder.PDL122C3Result = this.m_PDL122C3Result;
-            egfrToALKReflexAnalysisTestOrder.EGFRMutationAnalysisResult = this.m_EGFRMutationAnalysisResult;
-            egfrToALKReflexAnalysisTestOrder.ROS1ByFISHResult = this.m_ROS1ByFISHResult;
-            egfrToALKReflexAnalysisTestOrder.ALKForNSCLCByFISHResult = this.m_ALKForNSCLCByFISHResult;
-            egfrToALKReflexAnalysisTestOrder.BRAFMutationAnalysisResult = this.m_BRAFMutationAnalysisResult;
-            egfrToALKReflexAnalysisTestOrder.PDL1SP142Result = this.m_PDL1SP142Result;
-            base.SetPreviousResults(panelSetOrder);
-    }
+            StringBuilder interpretation = new StringBuilder();
+            StringBuilder method = new StringBuilder();
+            StringBuilder references = new StringBuilder();
 
-    public override void ClearPreviousResults()
-        {
-            this.m_Method = null;
-            this.m_Interpretation = null;
-            this.m_TumorNucleiPercentage = null;
-            this.m_QNSForALK = false;
-            this.m_QNSForROS1 = false;
-            this.m_PDL122C3Result = null;
-            this.m_EGFRMutationAnalysisResult = null;
-            this.m_ROS1ByFISHResult = null;
-            this.m_ALKForNSCLCByFISHResult = null;
-            this.m_BRAFMutationAnalysisResult = null;
-            this.m_PDL1SP142Result = null;
-            base.ClearPreviousResults();
-        }
+            YellowstonePathology.Business.Test.PDL122C3.PDL122C3Test pdl122C3Test = new PDL122C3.PDL122C3Test();
+            YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisTest egfrMutationAnalysisTest = new YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisTest();
+            YellowstonePathology.Business.Test.ROS1ByFISH.ROS1ByFISHTest ros1ByfishTest = new ROS1ByFISH.ROS1ByFISHTest();
+            YellowstonePathology.Business.Test.ALKForNSCLCByFISH.ALKForNSCLCByFISHTest alkTest = new ALKForNSCLCByFISH.ALKForNSCLCByFISHTest();
+            YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTest brafTest = new BRAFMutationAnalysis.BRAFMutationAnalysisTest();
+            YellowstonePathology.Business.Test.PDL1SP142.PDL1SP142Test pdl1SP142Test = new PDL1SP142.PDL1SP142Test();
 
-        public override Audit.Model.AuditResult IsOkToSetPreviousResults(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
-        {
-            Audit.Model.AuditResult result = base.IsOkToSetPreviousResults(panelSetOrder, accessionOrder);
-            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            YellowstonePathology.Business.PanelSet.Model.PanelSetALKRetired panelSetALKRetired = new PanelSet.Model.PanelSetALKRetired();
+
+            if (panelSetOrderCollection.Exists(egfrMutationAnalysisTest.PanelSetId) == true)
             {
-                this.DoComponentTestResultsMatchPreviousResults(accessionOrder, (EGFRToALKReflexAnalysisTestOrder)panelSetOrder, result);
-                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
-                {
-                    result.Message += AskSetPreviousResults;
-                }
+                Test.EGFRMutationAnalysis.EGFRMutationAnalysisTestOrder egfrMutationAnalysisTestOrder = (EGFRMutationAnalysis.EGFRMutationAnalysisTestOrder)panelSetOrderCollection.GetPanelSetOrder(egfrMutationAnalysisTest.PanelSetId);
+                interpretation.AppendLine("EGFR: " + egfrMutationAnalysisTestOrder.Interpretation);
+                references.AppendLine("EGFR: " + egfrMutationAnalysisTestOrder.ReportReferences);
+                method.AppendLine("EGFR: " + egfrMutationAnalysisTestOrder.Method);
+                this.m_EGFRMutationAnalysisResult = egfrMutationAnalysisTestOrder.Result;
+                this.m_EGFRMutationAnalysisComment = egfrMutationAnalysisTestOrder.Comment;
             }
 
-            return result;
+            if (panelSetOrderCollection.Exists(alkTest.PanelSetId) == true)
+            {
+                Test.ALKForNSCLCByFISH.ALKForNSCLCByFISHTestOrder alkTestOrder = (ALKForNSCLCByFISH.ALKForNSCLCByFISHTestOrder)panelSetOrderCollection.GetPanelSetOrder(alkTest.PanelSetId);
+                references.AppendLine();
+                references.AppendLine("ALK: " + alkTestOrder.ReportReferences);
+
+                interpretation.AppendLine();
+                interpretation.AppendLine("ALK: " + alkTestOrder.Interpretation);
+
+                method.AppendLine();
+                method.AppendLine("ALK: " + alkTestOrder.Method);
+                this.m_ALKForNSCLCByFISHResult = alkTestOrder.Result;
+            }
+            else if (panelSetOrderCollection.Exists(panelSetALKRetired.PanelSetId) == true)
+            {
+                YellowstonePathology.Business.Test.ALKForNSCLCByFISH.ALKForNSCLCByFISHTestOrderReportedSeparately alkForNSCLCByFISHTestOrderReportedSeparately = new YellowstonePathology.Business.Test.ALKForNSCLCByFISH.ALKForNSCLCByFISHTestOrderReportedSeparately();
+                this.m_ALKForNSCLCByFISHResult = alkForNSCLCByFISHTestOrderReportedSeparately.Result;
+            }
+
+            if (panelSetOrderCollection.Exists(ros1ByfishTest.PanelSetId) == true)
+            {
+                Test.ROS1ByFISH.ROS1ByFISHTestOrder ros1ByFISHTestOrder = (ROS1ByFISH.ROS1ByFISHTestOrder)panelSetOrderCollection.GetPanelSetOrder(ros1ByfishTest.PanelSetId);
+                interpretation.AppendLine();
+                interpretation.AppendLine("ROS1: " + ros1ByFISHTestOrder.Interpretation);
+
+                method.AppendLine();
+                method.AppendLine("ROS1: " + ros1ByFISHTestOrder.Method);
+                this.m_ROS1ByFISHResult = ros1ByFISHTestOrder.Result;
+            }
+
+            if (panelSetOrderCollection.Exists(pdl1SP142Test.PanelSetId) == true)
+            {
+                Test.PDL1SP142.PDL1SP142TestOrder pdl1SP142TestOrder = (PDL1SP142.PDL1SP142TestOrder)panelSetOrderCollection.GetPanelSetOrder(pdl1SP142Test.PanelSetId);
+                interpretation.AppendLine();
+                interpretation.AppendLine(pdl1SP142TestOrder.PanelSetName + ": " + pdl1SP142TestOrder.Interpretation);
+
+                method.AppendLine();
+                method.AppendLine(pdl1SP142TestOrder.PanelSetName + ": " + pdl1SP142TestOrder.Method);
+                this.m_PDL1SP142Result = pdl1SP142TestOrder.Result;
+                this.m_PDL1SP142StainPercent = pdl1SP142TestOrder.StainPercent;
+            }
+
+            if (panelSetOrderCollection.Exists(pdl122C3Test.PanelSetId) == true)
+            {
+                Test.PDL122C3.PDL122C3TestOrder pdl122C3TestOrder = (PDL122C3.PDL122C3TestOrder)panelSetOrderCollection.GetPanelSetOrder(pdl122C3Test.PanelSetId);
+                interpretation.AppendLine();
+                interpretation.AppendLine(pdl122C3TestOrder.PanelSetName + ": " + pdl122C3TestOrder.Interpretation);
+
+                method.AppendLine();
+                method.AppendLine(pdl122C3TestOrder.PanelSetName + ": " + pdl122C3TestOrder.Method);
+                this.m_PDL122C3Result = pdl122C3TestOrder.Result;
+            }
+
+            if (panelSetOrderCollection.Exists(brafTest.PanelSetId) == true)
+            {
+                Test.BRAFMutationAnalysis.BRAFMutationAnalysisTestOrder brafTestOrder = (BRAFMutationAnalysis.BRAFMutationAnalysisTestOrder)panelSetOrderCollection.GetPanelSetOrder(brafTest.PanelSetId);
+                interpretation.AppendLine();
+                interpretation.AppendLine(brafTestOrder.PanelSetName + ": " + brafTestOrder.Interpretation);
+
+                method.AppendLine();
+                method.AppendLine(brafTestOrder.PanelSetName + ": " + brafTestOrder.Method);
+                this.m_BRAFMutationAnalysisResult = brafTestOrder.Result;
+            }
+
+            char[] lineFeedCharacters = { '\r', '\n' };
+            this.Interpretation = interpretation.ToString().TrimEnd(lineFeedCharacters);
+            this.Method = method.ToString().TrimEnd(lineFeedCharacters);
+            this.ReportReferences = references.ToString().TrimEnd(lineFeedCharacters);
+            this.NotifyPropertyChanged(string.Empty);
         }
 
         public override Audit.Model.AuditResult IsOkToAccept(AccessionOrder accessionOrder)
@@ -299,16 +379,23 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                     result.Message = "The results cannot be accepted because the Tumor Nuclei Percentage has no value.";
                 }
             }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.AreComponentTestOrdersFinal(accessionOrder, result);
+            }
+
             if (result.Status == Audit.Model.AuditStatusEnum.OK)
             {
                 this.AreTestResultsPresent(accessionOrder, result);
-                if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            }
+
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.DoComponentTestResultsMatchPreviousResults(accessionOrder, this, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
                 {
-                    this.DoComponentTestResultsMatchPreviousResults(accessionOrder, this, result);
-                    if (result.Status == Audit.Model.AuditStatusEnum.Warning)
-                    {
-                        result.Message += AskAccept;
-                    }
+                    result.Message += AskAccept;
                 }
             }
 
@@ -329,12 +416,12 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
 
             if (result.Status == Audit.Model.AuditStatusEnum.OK)
             {
-                this.AreTestResultsPresent(accessionOrder, result);
+                this.AreComponentTestOrdersFinal(accessionOrder, result);
             }
 
             if (result.Status == Audit.Model.AuditStatusEnum.OK)
             {
-                this.AreComponentTestOrdersFinal(accessionOrder, result);
+                this.AreTestResultsPresent(accessionOrder, result);
             }
 
             if (result.Status == Audit.Model.AuditStatusEnum.OK)
@@ -605,5 +692,53 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                 auditResult.Message += MismatchMessage(this.PanelSetName, this.m_PDL1SP142Result);
             }
         }
+
+        /*public override void SetPreviousResults(PanelSetOrder panelSetOrder)
+        {
+            EGFRToALKReflexAnalysisTestOrder egfrToALKReflexAnalysisTestOrder = (EGFRToALKReflexAnalysisTestOrder)panelSetOrder;
+            egfrToALKReflexAnalysisTestOrder.Method = this.m_Method;
+            egfrToALKReflexAnalysisTestOrder.Interpretation = this.m_Interpretation;
+            egfrToALKReflexAnalysisTestOrder.TumorNucleiPercentage = this.m_TumorNucleiPercentage;
+            egfrToALKReflexAnalysisTestOrder.QNSForALK = this.m_QNSForALK;
+            egfrToALKReflexAnalysisTestOrder.QNSForROS1 = this.m_QNSForROS1;
+            egfrToALKReflexAnalysisTestOrder.PDL122C3Result = this.m_PDL122C3Result;
+            egfrToALKReflexAnalysisTestOrder.EGFRMutationAnalysisResult = this.m_EGFRMutationAnalysisResult;
+            egfrToALKReflexAnalysisTestOrder.ROS1ByFISHResult = this.m_ROS1ByFISHResult;
+            egfrToALKReflexAnalysisTestOrder.ALKForNSCLCByFISHResult = this.m_ALKForNSCLCByFISHResult;
+            egfrToALKReflexAnalysisTestOrder.BRAFMutationAnalysisResult = this.m_BRAFMutationAnalysisResult;
+            egfrToALKReflexAnalysisTestOrder.PDL1SP142Result = this.m_PDL1SP142Result;
+            base.SetPreviousResults(panelSetOrder);
+    }
+
+    public override void ClearPreviousResults()
+        {
+            this.m_Method = null;
+            this.m_Interpretation = null;
+            this.m_TumorNucleiPercentage = null;
+            this.m_QNSForALK = false;
+            this.m_QNSForROS1 = false;
+            this.m_PDL122C3Result = null;
+            this.m_EGFRMutationAnalysisResult = null;
+            this.m_ROS1ByFISHResult = null;
+            this.m_ALKForNSCLCByFISHResult = null;
+            this.m_BRAFMutationAnalysisResult = null;
+            this.m_PDL1SP142Result = null;
+            base.ClearPreviousResults();
+        }
+
+        public override Audit.Model.AuditResult IsOkToSetPreviousResults(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
+        {
+            Audit.Model.AuditResult result = base.IsOkToSetPreviousResults(panelSetOrder, accessionOrder);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                this.DoComponentTestResultsMatchPreviousResults(accessionOrder, (EGFRToALKReflexAnalysisTestOrder)panelSetOrder, result);
+                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
+                {
+                    result.Message += AskSetPreviousResults;
+                }
+            }
+
+            return result;
+        }*/
     }
 }
