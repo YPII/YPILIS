@@ -87,27 +87,8 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkFinalizeResults_Click(object sender, RoutedEventArgs e)
 		{
-            bool okToFinal = false;
             YellowstonePathology.Business.Audit.Model.AuditResult auditResult = this.m_PanelSetOrder.IsOkToFinalize(this.m_AccessionOrder);
             if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.OK)
-            {
-                okToFinal = true;
-            }
-            else if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.Warning)
-            {
-                MessageBoxResult messageBoxResult = MessageBox.Show(auditResult.Message, "Results do not match the finaled summary results",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-                if (messageBoxResult == MessageBoxResult.Yes)
-                {
-                    okToFinal = true;
-                }
-            }
-            else
-            {
-                MessageBox.Show(auditResult.Message);
-            }
-
-            if (okToFinal == true)
             {
                 YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
                 this.HandleFinalizeTestResult(finalizeTestResult);
@@ -115,6 +96,10 @@ namespace YellowstonePathology.UI.Test
                 {
                     this.m_PanelSetOrder.Accept();
                 }
+            }
+            else
+            {
+                MessageBox.Show(auditResult.Message);
             }
         }
 
@@ -137,15 +122,6 @@ namespace YellowstonePathology.UI.Test
             if (result.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
                 this.m_PanelSetOrder.Accept();
-            }
-            else if (result.Status == Business.Audit.Model.AuditStatusEnum.Warning)
-            {
-                MessageBoxResult messageBoxResult = MessageBox.Show(result.Message, "Results do not match the finaled summary results",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-                if (messageBoxResult == MessageBoxResult.Yes)
-                {
-                    this.m_PanelSetOrder.Accept();
-                }
             }
             else
             {

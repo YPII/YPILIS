@@ -96,15 +96,19 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkFinalizeResults_Click(object sender, RoutedEventArgs e)
         {
-			YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrder.IsOkToFinalize();
-			if (result.Success == true)
-			{
+            YellowstonePathology.Business.Audit.Model.AuditResult auditResult = this.m_PanelSetOrder.IsOkToFinalize(this.m_AccessionOrder);
+            if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.OK)
+            {
                 YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
                 this.HandleFinalizeTestResult(finalizeTestResult);
+                if (this.m_PanelSetOrder.Accepted == false)
+                {
+                    this.m_PanelSetOrder.Accept();
+                }
             }
             else
             {
-				MessageBox.Show(result.Message);
+                MessageBox.Show(auditResult.Message);
             }
         }
 
@@ -123,18 +127,18 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkAcceptResults_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrder.IsOkToAccept();
-			if (result.Success == true)
-			{
-				this.m_PanelSetOrder.Accept();
-			}
-			else
-			{
-				MessageBox.Show(result.Message);
-			}
-		}
+            YellowstonePathology.Business.Audit.Model.AuditResult result = this.m_PanelSetOrder.IsOkToAccept(this.m_AccessionOrder);
+            if (result.Status == Business.Audit.Model.AuditStatusEnum.OK)
+            {
+                this.m_PanelSetOrder.Accept();
+            }
+            else
+            {
+                MessageBox.Show(result.Message);
+            }
+        }
 
-		private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)
 		{
 			YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrder.IsOkToUnaccept();
 			if (result.Success == true)

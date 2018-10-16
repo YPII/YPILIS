@@ -21,11 +21,17 @@ namespace YellowstonePathology.Business.Test.MPNStandardReflex
             this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 			this.AddNextObxElement("", document, "F");
 
-			this.AddNextObxElement("JAK2 V617F Analysis: " + panelSetOrder.JAK2V617FResult, document, "F");
-			this.AddNextObxElement(string.Empty, document, "F");
+            if (string.IsNullOrEmpty(panelSetOrder.JAK2V617FResult) == false)
+            {
+                this.AddNextObxElement("JAK2 V617F Analysis: " + panelSetOrder.JAK2V617FResult, document, "F");
+                this.AddNextObxElement(string.Empty, document, "F");
+            }
 
-			this.AddNextObxElement("JAK2 Exon 12-14 Analysis: " + panelSetOrder.JAK2Exon1214Result, document, "F");
-			this.AddNextObxElement(string.Empty, document, "F");
+            if (string.IsNullOrEmpty(panelSetOrder.JAK2Exon1214Result) == false)
+            {
+                this.AddNextObxElement("JAK2 Exon 12-14 Analysis: " + panelSetOrder.JAK2Exon1214Result, document, "F");
+                this.AddNextObxElement(string.Empty, document, "F");
+            }
 
 			this.AddNextObxElement("Pathologist: " + panelSetOrder.Signature, document, "F");
 			if (panelSetOrder.FinalDate.HasValue == true)

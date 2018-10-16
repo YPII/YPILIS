@@ -54,6 +54,11 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
 			this.AddNextObxElement(locationPerformed, document, "F");
 			this.AddNextObxElement(string.Empty, document, "F");
-		}
-	}
+
+            this.AddNextObxElement("", document, "F");
+            string asr = panelSetOrder.ASRComment;
+            this.AddNextObxElement(asr, document, "F");
+            this.AddNextObxElement("", document, "F");
+        }
+    }
 }

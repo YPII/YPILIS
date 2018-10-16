@@ -65,6 +65,9 @@ namespace YellowstonePathology.Business.Test.ROS1ByFISH
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
             this.AddNextObxElement(locationPerformed, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
+
+            this.AddNextObxElement(panelSetOrder.ReportDisclaimer, document, "F");
+            this.AddNextObxElement(string.Empty, document, "F");
         }
     }
 }

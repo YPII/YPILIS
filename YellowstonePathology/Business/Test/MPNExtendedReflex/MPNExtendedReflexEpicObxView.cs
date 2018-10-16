@@ -16,46 +16,55 @@ namespace YellowstonePathology.Business.Test.MPNExtendedReflex
 
 		public override void ToXml(XElement document)
 		{
-			MPNExtendedReflexResult mpnExtendedReflexResult = new MPNExtendedReflexResult(this.m_AccessionOrder);
+            PanelSetOrderMPNExtendedReflex panelSetOrderMPNExtendedReflex = (PanelSetOrderMPNExtendedReflex)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
 
-			this.AddHeader(document, mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex, mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.PanelSetName);
+            this.AddHeader(document, panelSetOrderMPNExtendedReflex, panelSetOrderMPNExtendedReflex.PanelSetName);
 			this.AddNextObxElement("", document, "F");
 
-			this.AddNextObxElement("JAK2 V617F Mutation Analysis: " + mpnExtendedReflexResult.JAK2V617FResult.Result, document, "F");
-			this.AddNextObxElement("Calreticulin Mutation Analysis: " + mpnExtendedReflexResult.CALRResult.Result, document, "F");
-			this.AddNextObxElement("MPL Mutation Analysis: " + mpnExtendedReflexResult.MPLResult.Result, document, "F");
-			this.AddNextObxElement(string.Empty, document, "F");
+            if (string.IsNullOrEmpty(panelSetOrderMPNExtendedReflex.JAK2V617FResult) == false)
+            {
+                this.AddNextObxElement("JAK2 V617F Mutation Analysis: " + panelSetOrderMPNExtendedReflex.JAK2V617FResult, document, "F");
+            }
+            if (string.IsNullOrEmpty(panelSetOrderMPNExtendedReflex.CalreticulinMutationAnalysisResult) == false)
+            {
+                this.AddNextObxElement("Calreticulin Mutation Analysis: " + panelSetOrderMPNExtendedReflex.CalreticulinMutationAnalysisResult, document, "F");
+            }
+            if (string.IsNullOrEmpty(panelSetOrderMPNExtendedReflex.MPLResult) == false)
+            {
+                this.AddNextObxElement("MPL Mutation Analysis: " + panelSetOrderMPNExtendedReflex.MPLResult, document, "F");
+            }
+            this.AddNextObxElement(string.Empty, document, "F");
 
-			this.AddNextObxElement("Pathologist: " + mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.Signature, document, "F");
-			if (mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.FinalTime.HasValue == true)
+			this.AddNextObxElement("Pathologist: " + panelSetOrderMPNExtendedReflex.Signature, document, "F");
+			if (panelSetOrderMPNExtendedReflex.FinalTime.HasValue == true)
 			{
-				this.AddNextObxElement("E-signed " + mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
+				this.AddNextObxElement("E-signed " + panelSetOrderMPNExtendedReflex.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
 			}
 			this.AddNextObxElement("", document, "F");
             this.AddAmendments(document);
 
             this.AddNextObxElement("Specimen Description:", document, "F");
-			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.OrderedOn, mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.OrderedOnId);
+			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrderMPNExtendedReflex.OrderedOn, panelSetOrderMPNExtendedReflex.OrderedOnId);
 			this.HandleLongString(specimenOrder.Description, document, "F");
 			this.AddNextObxElement(string.Empty, document, "F");
 
 			this.AddNextObxElement("Comment: ", document, "F");
-			this.HandleLongString(mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.Comment, document, "F");
+			this.HandleLongString(panelSetOrderMPNExtendedReflex.Comment, document, "F");
 			this.AddNextObxElement("", document, "F");
 
 			this.AddNextObxElement("Interpretation: ", document, "F");
-			this.HandleLongString(mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.Interpretation, document, "F");
+			this.HandleLongString(panelSetOrderMPNExtendedReflex.Interpretation, document, "F");
 			this.AddNextObxElement("", document, "F");
 
 			this.AddNextObxElement("Method: ", document, "F");
-			this.HandleLongString(mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.Method, document, "F");
+			this.HandleLongString(panelSetOrderMPNExtendedReflex.Method, document, "F");
 			this.AddNextObxElement("", document, "F");
 
 			this.AddNextObxElement("References: ", document, "F");
-			this.HandleLongString(mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.ReportReferences, document, "F");
+			this.HandleLongString(panelSetOrderMPNExtendedReflex.ReportReferences, document, "F");
 			this.AddNextObxElement("", document, "F");			
 
-            string locationPerformed = mpnExtendedReflexResult.PanelSetOrderMPNExtendedReflex.GetLocationPerformedComment();
+            string locationPerformed = panelSetOrderMPNExtendedReflex.GetLocationPerformedComment();
 			this.HandleLongString(locationPerformed, document, "F");
 			this.AddNextObxElement(string.Empty, document, "F");
 		}

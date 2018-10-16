@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.CalreticulinMutationAnalysis
 		{			
 			CalreticulinMutationAnalysisTestOrder reportOrderCalreticulinMutationAnalysis = (CalreticulinMutationAnalysisTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\CalreticulinMutationAnalysis.2.xml";
+			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\CalreticulinMutationAnalysis.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();
@@ -33,9 +33,13 @@ namespace YellowstonePathology.Business.Test.CalreticulinMutationAnalysis
 				reportResult = string.Empty;
 			}
 
-            if(reportOrderCalreticulinMutationAnalysis.Result == "Detected")
+            if (reportOrderCalreticulinMutationAnalysis.Result == "Detected")
             {
-                reportResult = reportResult + "(" + reportOrderCalreticulinMutationAnalysis.Mutations + ")";
+                this.ReplaceText("report_mutations", reportOrderCalreticulinMutationAnalysis.Mutations);
+            }
+            else
+            {
+                this.DeleteRow("report_mutations");
             }
 
 			this.ReplaceText("report_result", reportResult);            

@@ -32,8 +32,24 @@ namespace YellowstonePathology.Business.Test.MPNStandardReflex
 			amendmentSection.SetAmendment(m_PanelSetOrder.AmendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, true);
 
             this.ReplaceText("panelset_name", panelSetOrderMPNStandardReflex.PanelSetName);
-            this.ReplaceText("jak2v617f_result", panelSetOrderMPNStandardReflex.JAK2V617FResult);
-            this.ReplaceText("jak2exon1214_result", panelSetOrderMPNStandardReflex.JAK2Exon1214Result);
+            if (string.IsNullOrEmpty(panelSetOrderMPNStandardReflex.JAK2V617FResult) == false)
+            {
+                this.ReplaceText("jak2v617f_result", panelSetOrderMPNStandardReflex.JAK2V617FResult);
+            }
+            else
+            {
+                this.DeleteRow("jak2v617f_result");
+            }
+
+            if (string.IsNullOrEmpty(panelSetOrderMPNStandardReflex.JAK2Exon1214Result) == false)
+            {
+                this.ReplaceText("jak2exon1214_result", panelSetOrderMPNStandardReflex.JAK2Exon1214Result);
+            }
+            else
+            {
+                this.DeleteRow("jak2exon1214_result");
+            }
+
             base.ReplaceText("specimen_description", specimenOrder.Description);
             this.ReplaceText("result_comment", panelSetOrderMPNStandardReflex.Comment);            
 
