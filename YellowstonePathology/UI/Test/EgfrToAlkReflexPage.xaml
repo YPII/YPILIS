@@ -112,63 +112,50 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Ordered On:</TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Ordered On:</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
 
-                <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">EGFR Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.EGFRMutationAnalysisResult}" HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">EGFR Result:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.EGFRMutationAnalysisResult}" HorizontalAlignment="Stretch" />
 
-                <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">ALK Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.ALKForNSCLCByFISHResult}" HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Column="0" Grid.Row="2" FontWeight="Bold" Margin="2,2,2,2">EGFR Comment:</TextBlock>
+                <TextBox Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.EGFRMutationAnalysisComment}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">ROS1 Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.ROS1ByFISHResult}" HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">ALK Result:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.ALKForNSCLCByFISHResult}" HorizontalAlignment="Stretch" />
 
-                <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">BRAF Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.BRAFMutationAnalysisResult}" HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">ROS1 Result:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.ROS1ByFISHResult}" HorizontalAlignment="Stretch" />
 
-                <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (22C3) Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL122C3Result}" HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">BRAF Result:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.BRAFMutationAnalysisResult}" HorizontalAlignment="Stretch" />
 
-                <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (SP142) Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="7" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL1SP142Result}" HorizontalAlignment="Stretch" />
+                <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (22C3) Result:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="7" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL122C3Result}" HorizontalAlignment="Stretch" />
 
                 <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Tumor Nuclei Percentage:</TextBlock>
                 <TextBox Grid.Column="1" Grid.Row="8" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.TumorNucleiPercentage}" HorizontalAlignment="Stretch" />
 
-                <TextBlock Grid.Column="0" Grid.Row="9" FontWeight="Bold" Margin="2,2,2,2">EGFR Comment:</TextBlock>
-                <TextBox Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.EGFRMutationAnalysisComment}" TextWrapping="Wrap" AcceptsReturn="True" />
+                <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">QNS:</TextBlock>
+                <CheckBox Grid.Column="1" Grid.Row="9" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRToALKReflexAnalysisTestOrder.QNS}">"Quantity not sufficient to complete all testing."</CheckBox>
 
-                <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">QNS for ALK:</TextBlock>
-                <CheckBox Grid.Column="1" Grid.Row="11" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRToALKReflexAnalysisTestOrder.QNSForALK}" Checked="CheckBoxQNSForALK_Checked" Unchecked="CheckBoxQNSForALK_Unchecked"/>
+                <TextBlock Grid.Column="0" Grid.Row="11" FontWeight="Bold" Margin="2,2,2,2">Interpretation:</TextBlock>
+                <TextBox Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.Interpretation}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">QNS for ROS1:</TextBlock>
-                <CheckBox Grid.Column="1" Grid.Row="12" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRToALKReflexAnalysisTestOrder.QNSForROS1}" Checked="CheckBoxQNSForROS1_Checked" Unchecked="CheckBoxQNSForROS1_Unchecked"/>
+                <TextBlock Grid.Column="0" Grid.Row="13" FontWeight="Bold" Margin="2,2,2,2">Method:</TextBlock>
+                <TextBox Grid.Column="0" Grid.Row="14" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                <TextBlock Grid.Column="0" Grid.Row="13" FontWeight="Bold" Margin="2,2,2,2">Interpretation:</TextBlock>
-                <TextBox Grid.Column="0" Grid.Row="14" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.Interpretation}" TextWrapping="Wrap" AcceptsReturn="True" />
+                <TextBlock Grid.Column="0" Grid.Row="15" FontWeight="Bold" Margin="2,2,2,2">References:</TextBlock>
+                <TextBox Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                <TextBlock Grid.Column="0" Grid.Row="15" FontWeight="Bold" Margin="2,2,2,2">Method:</TextBlock>
-                <TextBox Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True" />
-
-                <TextBlock Grid.Column="0" Grid.Row="17" FontWeight="Bold" Margin="2,2,2,2">References:</TextBlock>
-                <TextBox Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True" />
-
-                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="19" FontWeight="Bold" Margin="2,2,2,2">Current Orders</TextBlock>
-                <ListView Name="ListBoxPanelSetOrders" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="20" Margin="2,2,2,2" HorizontalAlignment="Stretch"
+                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="17" FontWeight="Bold" Margin="2,2,2,2">Current Orders</TextBlock>
+                <ListView Name="ListBoxPanelSetOrders" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="18" Margin="2,2,2,2" HorizontalAlignment="Stretch"
                       ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection}">
                     <ListView.View>
                         <GridView>
@@ -181,13 +168,13 @@
                     </ListView.View>
                 </ListView>
 
-                <TextBlock Grid.Column="0" Grid.Row="21" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
-                <CheckBox Grid.Column="1" Grid.Row="21" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRToALKReflexAnalysisTestOrder.Distribute}"></CheckBox>
+                <TextBlock Grid.Column="0" Grid.Row="19" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
+                <CheckBox Grid.Column="1" Grid.Row="19" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRToALKReflexAnalysisTestOrder.Distribute}"></CheckBox>
 
-                <TextBlock Grid.Column="0" Grid.Row="22" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
-                <CheckBox Grid.Column="1" Grid.Row="22" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRToALKReflexAnalysisTestOrder.NoCharge}"></CheckBox>
+                <TextBlock Grid.Column="0" Grid.Row="20" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
+                <CheckBox Grid.Column="1" Grid.Row="20" Margin="2,2,2,2" IsChecked="{Binding Path=EGFRToALKReflexAnalysisTestOrder.NoCharge}"></CheckBox>
 
-                <Grid Grid.Column="0" Grid.Row="23" Grid.ColumnSpan="2">
+                <Grid Grid.Column="0" Grid.Row="21" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>

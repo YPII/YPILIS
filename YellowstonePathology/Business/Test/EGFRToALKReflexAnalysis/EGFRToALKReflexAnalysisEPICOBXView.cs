@@ -60,7 +60,11 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                 this.AddNextObxElement("", document, "F");
             }
 
-
+            if(egfrToALKReflexAnalysisTestOrder.QNS == true)
+            {
+                this.AddNextObxElement("QNS: " + EGFRToALKReflexAnalysisTestOrder.QNSStatement, document, "F");
+                this.AddNextObxElement("", document, "F");
+            }
 
             this.AddNextObxElement("Pathologist: " + egfrToALKReflexAnalysisTestOrder.Signature, document, "F");
             if (egfrToALKReflexAnalysisTestOrder.FinalTime.HasValue == true)

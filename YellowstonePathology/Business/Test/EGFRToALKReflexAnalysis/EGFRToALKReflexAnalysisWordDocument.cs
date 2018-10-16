@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
 
         public override void Render()
         {            
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\EGFRALKROS1PDLBRAF.1.xml";
+            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\EGFRALKROS1PDLBRAF.2.xml";
             this.OpenTemplate();
             this.SetDemographicsV2();
             this.SetReportDistribution();
@@ -29,11 +29,18 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             if(string.IsNullOrEmpty(egfrToALKReflexAnalysisTestOrder.EGFRMutationAnalysisResult) == false)
             {
                 base.ReplaceText("egfr_result", egfrToALKReflexAnalysisTestOrder.EGFRMutationAnalysisResult);
-                base.SetXMLNodeParagraphData("egfr_comment", egfrToALKReflexAnalysisTestOrder.EGFRMutationAnalysisComment);
             }
             else
             {
                 this.DeleteRow("egfr_result");
+            }
+
+            if (string.IsNullOrEmpty(egfrToALKReflexAnalysisTestOrder.EGFRMutationAnalysisComment) == false)
+            {
+                base.SetXMLNodeParagraphData("egfr_comment", egfrToALKReflexAnalysisTestOrder.EGFRMutationAnalysisComment);
+            }
+            else
+            {
                 this.DeleteRow("egfr_comment");
             }
 
@@ -80,6 +87,15 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             else
             {
                 this.DeleteRow("braf_result");
+            }
+
+            if(egfrToALKReflexAnalysisTestOrder.QNS == true)
+            {
+                base.ReplaceText("qns_statement", EGFRToALKReflexAnalysisTestOrder.QNSStatement);
+            }
+            else
+            {
+                this.DeleteRow("qns_statement");
             }
 
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();

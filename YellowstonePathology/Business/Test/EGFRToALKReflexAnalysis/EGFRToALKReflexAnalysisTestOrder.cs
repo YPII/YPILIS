@@ -9,6 +9,8 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
 	[PersistentClass("tblEGFRToALKReflexAnalysisTestOrder", "tblPanelSetOrder", "YPIDATA")]
     public class EGFRToALKReflexAnalysisTestOrder : YellowstonePathology.Business.Test.ReflexTesting.ReflexTestingPlan, YellowstonePathology.Business.Interface.ISolidTumorTesting
 	{
+        public static string QNSStatement = "Quantity not sufficient to complete all testing.";
+
 		private string m_Method;
 		private string m_Interpretation;
         private string m_TumorNucleiPercentage;
@@ -22,6 +24,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
         private string m_PDL1SP142Result;
         private string m_EGFRMutationAnalysisComment;
         private string m_PDL1SP142StainPercent;
+        private bool m_QNS;
 
         public EGFRToALKReflexAnalysisTestOrder() 
         {
@@ -228,6 +231,17 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             {
                 this.m_PDL1SP142StainPercent = value;
                 NotifyPropertyChanged("PDL1SP142StainPercent");
+            }
+        }
+
+        [PersistentProperty()]
+        public bool QNS
+        {
+            get { return this.m_QNS; }
+            set
+            {
+                this.m_QNS = value;
+                NotifyPropertyChanged("QNS");
             }
         }
 
