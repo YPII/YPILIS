@@ -145,6 +145,36 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
         public virtual Audit.Model.AuditResult IsOkToSetResults(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeEvaluation panelSetOrderLynchSyndromeEvaluation)
         {
             Audit.Model.AuditResult result = panelSetOrderLynchSyndromeEvaluation.IsOkToSetResults();
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                Rules.MethodResult hasIHCResult = this.HasFinalIHCResult(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
+                if(hasIHCResult.Success == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = hasIHCResult.Message;
+                }
+            }
+                return result;
+        }
+
+        protected Rules.MethodResult HasFinalIHCResult(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeEvaluation panelSetOrderLynchSyndromeEvaluation)
+        {
+            Rules.MethodResult result = new Rules.MethodResult();
+            YellowstonePathology.Business.Test.LynchSyndrome.LynchSyndromeIHCPanelTest panelSetLynchSyndromeIHCPanel = new YellowstonePathology.Business.Test.LynchSyndrome.LynchSyndromeIHCPanelTest();
+            if (accessionOrder.PanelSetOrderCollection.Exists(panelSetLynchSyndromeIHCPanel.PanelSetId, panelSetOrderLynchSyndromeEvaluation.OrderedOnId, false) == true)
+            {
+                YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeIHC panelSetOrderLynchSyndromeIHC = (YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeIHC)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetLynchSyndromeIHCPanel.PanelSetId, panelSetOrderLynchSyndromeEvaluation.OrderedOnId, true);
+                if (panelSetOrderLynchSyndromeIHC.Final == false)
+                {
+                    result.Success = false;
+                    result.Message = "Unable to set results as the " + panelSetLynchSyndromeIHCPanel.PanelSetName + " is not final.";
+                }
+            }
+            else
+            {
+                result.Success = false;
+                result.Message = "Unable to set results as a " + panelSetLynchSyndromeIHCPanel.PanelSetName + " must be ordered.";
+            }
 
             return result;
         }
@@ -226,7 +256,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             else
             {
                 result.Success = false;
-                result.Message = "Unable to set results as a " + panelSetMLH1 + " has not been ordered.";
+                result.Message = "Unable to set results as a " + panelSetMLH1.PanelSetName + " has not been ordered.";
             }
 
             return result;

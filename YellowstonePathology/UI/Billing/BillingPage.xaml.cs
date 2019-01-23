@@ -379,14 +379,21 @@ namespace YellowstonePathology.UI.Billing
             }
         }        
 
-        private void MenuItemPostAsGlobal_Click(object sender, RoutedEventArgs e)
-        {            
-            if (this.ListViewPanelSetOrderCPTCodeBill.SelectedItem != null)
+        private void MenuItemAddOne_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewPanelSetOrderCPTCodeBill.SelectedItems.Count != 0)
             {
-                foreach (YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill in this.ListViewPanelSetOrderCPTCodeBill.SelectedItems)
-                {
-                    this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.PostAsGlobal(panelSetOrderCPTCodeBill);
-                }
+                YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill = (YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill)this.ListViewPanelSetOrderCPTCodeBill.SelectedItem;
+                panelSetOrderCPTCodeBill.Quantity += 1;
+            }
+        }
+
+        private void MenuItemChangeTo88342_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewPanelSetOrderCPTCode.SelectedItems.Count != 0)
+            {
+                YellowstonePathology.Business.Test.PanelSetOrderCPTCode panelSetOrderCPTCode = (YellowstonePathology.Business.Test.PanelSetOrderCPTCode)this.ListViewPanelSetOrderCPTCode.SelectedItem;
+                panelSetOrderCPTCode.CPTCode = "88342";
             }
         }
     }

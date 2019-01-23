@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace YellowstonePathology.Business.Test.LynchSyndrome
 {
-    public class LSEGYNBRAFMeth : LSERule
+    public class LSEGYNMeth : LSERule
     {
         public static string Interpretation = "The results are compatible with a sporadic tumor and further genetic evaluation is not indicated.";
 
-        public LSEGYNBRAFMeth()
+        public LSEGYNMeth()
         {
-            this.m_ResultName = "Reflex to BRAF/Meth";
+            this.m_ResultName = "Reflex to Meth";
             this.m_Indication = LSEType.GYN;
         }
 
@@ -32,13 +32,40 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
         public override void SetResults(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeEvaluation panelSetOrderLynchSyndromeEvaluation)
         {
             string result = this.BuildLossResult(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
-            result += this.BuildBRAFResult(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
             result += this.BuildMethResult(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
             panelSetOrderLynchSyndromeEvaluation.Result = result;
-            panelSetOrderLynchSyndromeEvaluation.Interpretation = LSEGYNBRAFMeth.Interpretation;
+            panelSetOrderLynchSyndromeEvaluation.Interpretation = LSEGYNMeth.Interpretation;
             panelSetOrderLynchSyndromeEvaluation.Method = this.BuildMethod(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
             panelSetOrderLynchSyndromeEvaluation.ReportReferences = LSEGYNReferences;
             panelSetOrderLynchSyndromeEvaluation.ReflexToBRAFMeth = true;
+        }
+
+        public override Audit.Model.AuditResult IsOkToSetResults(AccessionOrder accessionOrder, PanelSetOrderLynchSyndromeEvaluation panelSetOrderLynchSyndromeEvaluation)
+        {
+            Audit.Model.AuditResult result = base.IsOkToSetResults(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
+            if (result.Status == Audit.Model.AuditStatusEnum.OK)
+            {
+                Rules.MethodResult methResult = this.HasFinalMethResult(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
+                if (methResult.Success == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message = methResult.Message;
+                }
+            }
+            return result;
+        }
+
+        private string BuildInterpretation(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeEvaluation panelSetOrderLynchSyndromeEvaluation)
+        {
+            string result = LSEGYNMeth.Interpretation;
+            Rules.MethodResult methResult = this.HasFinalMethResult(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
+
+            if (methResult.Message == TestResult.NotDetected)
+            {
+                result = LSEColonSendOut.Interpretation;
+            }
+
+            return result;
         }
     }
 }

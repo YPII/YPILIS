@@ -46,15 +46,20 @@ namespace YellowstonePathology.Business.HL7View
             if(subNameOfInsuredFields.Length >= 2)
             {
                 this.m_NameOfInsured = this.m_NameOfInsured + ", " + subNameOfInsuredFields[1];
-            }
-               
-            if(string.IsNullOrEmpty(split[5]) == false)
+            }                          
+
+            if (string.IsNullOrEmpty(split[5]) == false)
             {
                 string[] subAddressSubfields = split[5].Split('^');
-                this.m_InsuranceAddress = subAddressSubfields[0] + ", " + subAddressSubfields[2] + ", " + subAddressSubfields[3] + ", " + subAddressSubfields[4];
+                foreach(string s in subAddressSubfields)
+                {
+                    if (string.IsNullOrEmpty(this.m_InsuranceAddress) == false)
+                        this.m_InsuranceAddress += " ,";
+                    this.m_InsuranceAddress += s;
+                }                
             }
 
-            if(split.Length >= 36) this.m_PolicyNumber = split[36];            
+            if (split.Length >= 36) this.m_PolicyNumber = split[36];            
         }
 
         public int SetId

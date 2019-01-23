@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>10.1.13.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -1077,7 +1077,7 @@
     <Compile Include="Business\Test\LynchSyndrome\LSEColonBRAFMeth.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEColonSendOut.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEGeneralSendOut.cs" />
-    <Compile Include="Business\Test\LynchSyndrome\LSEGYNBRAFMeth.cs" />
+    <Compile Include="Business\Test\LynchSyndrome\LSEGYNMeth.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEGYNSendOut.cs" />
     <Compile Include="Business\Test\MissingInformation\MissingInformationWordDocument.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEIHCResult.cs" />
@@ -6854,12 +6854,12 @@
   <ItemGroup>
     <PublishFile Include="Microsoft.Exchange.WebServices">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

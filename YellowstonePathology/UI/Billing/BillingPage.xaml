@@ -193,6 +193,7 @@
                     <ContextMenu>
                         <MenuItem Header="Delete" Click="MenuItemDeletePanelSetOrderCPTCodes_Click"></MenuItem>
                         <MenuItem Header="Update Client Id" Click="MenuItemUpdateClientId_Click"></MenuItem>
+                        <MenuItem Header="Change To 88342" Click="MenuItemChangeTo88342_Click"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>                    
@@ -219,7 +220,7 @@
                         <MenuItem Header="Reverse" Click="MenuItemReverse_Click"></MenuItem>                                                
                         <MenuItem Header="Add With Current Client" Click="MenuItemAddWithCurrentClient_Click"></MenuItem>
                         <MenuItem Header="Update Client" Click="MenuItemUpdateClient_Click"></MenuItem>
-                        <MenuItem Header="Post As Global" Click="MenuItemPostAsGlobal_Click"></MenuItem>
+                        <MenuItem Header="Add 1" Click="MenuItemAddOne_Click"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>
