@@ -8,46 +8,42 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 {
     public class LSEColonSendOut : LSERule
     {
+        public static string Interpretation = "This staining pattern is highly suggestive of Lynch Syndrome.  Recommend genetic counseling and further evaluation.";
+
         public LSEColonSendOut()
         {
             this.m_ResultName = "Send out for further testing";
             this.m_Indication = LSEType.COLON;
-
-            this.m_Interpretation = "This staining pattern is highly suggestive of Lynch Syndrome.  Recommend genetic counseling and further evaluation.";
-            this.m_Method = IHCMethod;
-            this.m_References = LSEColonReferences;
         }
 
         public override bool IncludeInIHCCollection(YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeIHC panelSetOrderLynchSyndromeIHC)
         {
             bool result = false;
-            LSEIHCResultIntactExpression intactExpression = new LSEIHCResultIntactExpression();
-            LSEIHCResultLossOfExpression lossExpression = new LSEIHCResultLossOfExpression();
-            if (panelSetOrderLynchSyndromeIHC.MLH1Result == intactExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.MSH2Result == lossExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.MSH6Result == intactExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.PMS2Result == intactExpression.Description)
+            if (panelSetOrderLynchSyndromeIHC.MLH1Result == LSEIHCResult.IntactDescription &&
+                panelSetOrderLynchSyndromeIHC.MSH2Result == LSEIHCResult.LossDescription &&
+                panelSetOrderLynchSyndromeIHC.MSH6Result == LSEIHCResult.IntactDescription &&
+                panelSetOrderLynchSyndromeIHC.PMS2Result == LSEIHCResult.IntactDescription)
             {
                 result = true;
             }
-            else if (panelSetOrderLynchSyndromeIHC.MLH1Result == intactExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.MSH2Result == lossExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.MSH6Result == lossExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.PMS2Result == intactExpression.Description)
+            else if (panelSetOrderLynchSyndromeIHC.MLH1Result == LSEIHCResult.IntactDescription &&
+                panelSetOrderLynchSyndromeIHC.MSH2Result == LSEIHCResult.LossDescription &&
+                panelSetOrderLynchSyndromeIHC.MSH6Result == LSEIHCResult.LossDescription &&
+                panelSetOrderLynchSyndromeIHC.PMS2Result == LSEIHCResult.IntactDescription)
             {
                 result = true;
             }
-            else if (panelSetOrderLynchSyndromeIHC.MLH1Result == intactExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.MSH2Result == intactExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.MSH6Result == lossExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.PMS2Result == intactExpression.Description)
+            else if (panelSetOrderLynchSyndromeIHC.MLH1Result == LSEIHCResult.IntactDescription &&
+                panelSetOrderLynchSyndromeIHC.MSH2Result == LSEIHCResult.IntactDescription &&
+                panelSetOrderLynchSyndromeIHC.MSH6Result == LSEIHCResult.LossDescription &&
+                panelSetOrderLynchSyndromeIHC.PMS2Result == LSEIHCResult.IntactDescription)
             {
                 result = true;
             }
-            else if (panelSetOrderLynchSyndromeIHC.MLH1Result == intactExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.MSH2Result == intactExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.MSH6Result == intactExpression.Description &&
-                panelSetOrderLynchSyndromeIHC.PMS2Result == lossExpression.Description)
+            else if (panelSetOrderLynchSyndromeIHC.MLH1Result == LSEIHCResult.IntactDescription &&
+                panelSetOrderLynchSyndromeIHC.MSH2Result == LSEIHCResult.IntactDescription &&
+                panelSetOrderLynchSyndromeIHC.MSH6Result == LSEIHCResult.IntactDescription &&
+                panelSetOrderLynchSyndromeIHC.PMS2Result == LSEIHCResult.LossDescription)
             {
                 result = true;
             }
@@ -56,8 +52,11 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 
         public override void SetResults(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeEvaluation panelSetOrderLynchSyndromeEvaluation)
         {
-            base.SetResults(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
             panelSetOrderLynchSyndromeEvaluation.Result = this.BuildLossResult(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
+            panelSetOrderLynchSyndromeEvaluation.Interpretation = LSEColonSendOut.Interpretation;
+            panelSetOrderLynchSyndromeEvaluation.Method = IHCMethod;
+            panelSetOrderLynchSyndromeEvaluation.ReportReferences = LSEColonReferences;
+            panelSetOrderLynchSyndromeEvaluation.ReflexToBRAFMeth = false;
         }
     }
 }

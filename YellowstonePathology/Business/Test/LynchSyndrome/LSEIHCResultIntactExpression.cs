@@ -9,8 +9,8 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 	{
 		public LSEIHCResultIntactExpression()
 		{
-			this.m_Description = "Intact nuclear expression";
-			this.m_IHCResultType = IHCResult.Intact;
+			this.m_Description = LSEIHCResult.IntactDescription;
+			this.m_IHCResultType = LSEIHCResult.Intact;
 		}
 	}
 }

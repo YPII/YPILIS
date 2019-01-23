@@ -7,8 +7,6 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 {
     public class IHCResult
     {
-        public static string Intact = "Intact";
-        public static string Loss = "Loss";
         public static string Method = "Immunohistochemistry was performed on paraffin embedded tissue using antibody clones for MLH1 (G168-15), " +
             "PMS2 (MRQ-28), MSH2 (G219-1129), and MSH6 (44). These tests were run on the Ventana Ultra automated immunohistochemical platform.";
 

@@ -9,8 +9,8 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 	{
 		public LSEIHCResultLossOfExpression()
 		{
-			this.m_Description = "Loss of nuclear expression";
-			this.m_IHCResultType = IHCResult.Loss;
+			this.m_Description = LSEIHCResult.LossDescription;
+			this.m_IHCResultType = LSEIHCResult.Loss;
 		}
 	}
 }
