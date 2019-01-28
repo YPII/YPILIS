@@ -13,8 +13,9 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 
         public LSEColonAllIntact()
 		{
-            this.m_ResultName = "All Intact";
+            this.m_RuleName = "All Intact";
             this.m_Indication = LSEType.COLON;
+            this.m_AdditionalTesting = LSERule.NoFurtherTesting;
 		}
 
         public override bool IncludeInIHCCollection(YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeIHC panelSetOrderLynchSyndromeIHC)

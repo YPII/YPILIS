@@ -12,8 +12,9 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 
         public LSEColonSendOut()
         {
-            this.m_ResultName = "Send out for further testing";
+            this.m_RuleName = "Send out";
             this.m_Indication = LSEType.COLON;
+            this.m_AdditionalTesting = LSERule.SendOutForTesting;
         }
 
         public override bool IncludeInIHCCollection(YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeIHC panelSetOrderLynchSyndromeIHC)

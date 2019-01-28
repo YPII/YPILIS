@@ -13,8 +13,9 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 
         public LSEColonBRAFMeth()
         {
-            this.m_ResultName = "Reflex to BRAF/Meth";
+            this.m_RuleName = "Reflex to BRAF/Meth";
             this.m_Indication = LSEType.COLON;
+            this.m_AdditionalTesting = "> BRAF > Meth";
         }
 
         public override bool IncludeInIHCCollection(YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeIHC panelSetOrderLynchSyndromeIHC)

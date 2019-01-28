@@ -12,8 +12,9 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 
         public LSEGYNMeth()
         {
-            this.m_ResultName = "Reflex to Meth";
+            this.m_RuleName = "Reflex to Meth";
             this.m_Indication = LSEType.GYN;
+            this.m_AdditionalTesting = "> Meth";
         }
 
         public override bool IncludeInIHCCollection(YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeIHC panelSetOrderLynchSyndromeIHC)

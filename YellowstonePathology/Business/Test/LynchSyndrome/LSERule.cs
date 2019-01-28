@@ -24,23 +24,33 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
         public static string GeneralIndication = "Assess tumor for mismatch repair deficiency to determine eligibility for PD-1 blockade therapy; screening for Lynch Syndrome.";
         public static string IHCAllIntactResult = "Intact nuclear expression of MLH1, MSH2, MSH6, and PMS2 mismatch repair proteins.";
 
+        public static string NoFurtherTesting = "No further testing required";
+        public static string SendOutForTesting = "Send out for further testing";
+
         protected string m_Indication;
-        protected string m_ResultName;
+        protected string m_RuleName;
+        protected string m_AdditionalTesting;
 
 		public LSERule()
 		{
 		}
 
-        public string ResultName
+        public string RuleName
         {
-            get { return this.m_ResultName; }
-            set { this.m_ResultName = value; }
+            get { return this.m_RuleName; }
+            set { this.m_RuleName = value; }
         }
 
         public string Indication
         {
             get { return this.m_Indication; }
             set { this.m_Indication = value; }
+        }
+
+        public string AdditionalTesting
+        {
+            get { return this.m_AdditionalTesting; }
+            set { this.m_AdditionalTesting = value; }
         }
 
         public virtual void SetResults(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeEvaluation panelSetOrderLynchSyndromeEvaluation)
