@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 
         public LSEGeneralSendOut()
         {
-            this.m_RuleName = "Send out for further testing";
+            this.m_RuleName = "Send out";
             this.m_Indication = LSEType.GENERAL;
             this.m_AdditionalTesting = LSERule.SendOutForTesting;
         }

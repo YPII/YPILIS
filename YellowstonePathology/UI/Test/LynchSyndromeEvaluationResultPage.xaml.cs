@@ -173,19 +173,20 @@ namespace YellowstonePathology.UI.Test
 
             if (auditCollection.ActionRequired == false)
             {
-                if (this.m_PanelSetOrderLynchSyndromeEvaluation.Final == false)
+                YellowstonePathology.Business.Rules.MethodResult methodResult = this.m_PanelSetOrderLynchSyndromeEvaluation.IsOkToFinalize();
+                if (methodResult.Success == true)
                 {
                     YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrderLynchSyndromeEvaluation.Finish(this.m_AccessionOrder);
                     this.HandleFinalizeTestResult(finalizeTestResult);
                 }
                 else
                 {
-                    MessageBox.Show("This case cannot be finalized because it is already final.");
+                    MessageBox.Show(methodResult.Message);
                 }
             }
             else
             {
-                MessageBoxResult messageBosResult = MessageBox.Show("We are unable to finalize this report because: " + auditCollection.Message);
+               MessageBox.Show("We are unable to finalize this report because: " + auditCollection.Message);
             }
         }
 
@@ -207,13 +208,14 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkUnfinalResults_Click(object sender, RoutedEventArgs e)
         {
-            if (this.m_PanelSetOrderLynchSyndromeEvaluation.Final == true)
+            YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrderLynchSyndromeEvaluation.IsOkToUnfinalize();
+            if (result.Success == true)
             {
                 this.m_PanelSetOrderLynchSyndromeEvaluation.Unfinalize();
             }
             else
             {
-                MessageBox.Show("This case cannot be unfinalized because it is not final.");
+                MessageBox.Show(result.Message);
             }
         }		
 
@@ -240,22 +242,10 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkAcceptResults_Click(object sender, RoutedEventArgs e)
 		{
-            YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrderLynchSyndromeEvaluation.IsOkToAccept();
-            if (result.Success == true)
+            YellowstonePathology.Business.Audit.Model.AuditResult result = this.m_PanelSetOrderLynchSyndromeEvaluation.IsOkToAccept(this.m_AccessionOrder);
+            if (result.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
-                YellowstonePathology.Business.Rules.MethodResult methodResult = this.m_PanelSetOrderLynchSyndromeEvaluation.HaveResultsBeenSet(this.m_AccessionOrder);
-                if (methodResult.Success == true)
-                {
-                    this.m_PanelSetOrderLynchSyndromeEvaluation.Accept();
-                }
-                else
-                {
-                    MessageBoxResult messageBoxResult = MessageBox.Show("Have the results been set?", "Set Results", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.Yes);
-                    if(messageBoxResult == MessageBoxResult.Yes)
-                    {
-                        this.m_PanelSetOrderLynchSyndromeEvaluation.Accept();
-                    }
-                }
+                this.m_PanelSetOrderLynchSyndromeEvaluation.Accept();
             }
             else
             {

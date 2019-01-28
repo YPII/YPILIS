@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using YellowstonePathology.Business.Audit.Model;
 using YellowstonePathology.Business.Persistence;
 
 namespace YellowstonePathology.Business.Test.LynchSyndrome
@@ -32,9 +33,12 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 		public override void OrderInitialTests(AccessionOrder accessionOrder, YellowstonePathology.Business.Interface.IOrderTarget orderTarget)
 		{						
             YellowstonePathology.Business.Test.LynchSyndrome.LynchSyndromeIHCPanelTest lynchSyndromeIHCPanelTest = new YellowstonePathology.Business.Test.LynchSyndrome.LynchSyndromeIHCPanelTest();
-            YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new TestOrderInfo(lynchSyndromeIHCPanelTest, orderTarget, false);            
-            YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitor = new Visitor.OrderTestOrderVisitor(testOrderInfo);            
-            accessionOrder.TakeATrip(orderTestOrderVisitor);            
+            if (accessionOrder.PanelSetOrderCollection.Exists(lynchSyndromeIHCPanelTest.PanelSetId, this.m_OrderedOnId, true) == false)
+            {
+                YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new TestOrderInfo(lynchSyndromeIHCPanelTest, orderTarget, false);
+                YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitor = new Visitor.OrderTestOrderVisitor(testOrderInfo);
+                accessionOrder.TakeATrip(orderTestOrderVisitor);
+            }
 		}		
 
         [PersistentProperty()]
@@ -159,6 +163,20 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             {
                 result.Status = Audit.Model.AuditStatusEnum.Failure;
                 result.Message = "Results may not be set as the results have been accepted.";
+            }
+            return result;
+        }
+
+        public override AuditResult IsOkToAccept(AccessionOrder accessionOrder)
+        {
+            AuditResult result = base.IsOkToAccept(accessionOrder);
+            if(result.Status == AuditStatusEnum.OK)
+            {
+                if(string.IsNullOrEmpty(this.m_Result) == true)
+                {
+                    result.Status = AuditStatusEnum.Failure;
+                    result.Message = "Unable to accept results as the result has not been set.";
+                }
             }
             return result;
         }
