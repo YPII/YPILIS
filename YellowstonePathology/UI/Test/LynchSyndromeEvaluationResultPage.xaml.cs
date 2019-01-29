@@ -178,6 +178,10 @@ namespace YellowstonePathology.UI.Test
                 {
                     YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrderLynchSyndromeEvaluation.Finish(this.m_AccessionOrder);
                     this.HandleFinalizeTestResult(finalizeTestResult);
+
+                    // Temporary use for checking results
+                    YellowstonePathology.Business.Test.LynchSyndrome.LSERule lseRule = (YellowstonePathology.Business.Test.LynchSyndrome.LSERule)this.ListViewResults.Items[0];
+                    Business.Logging.EmailExceptionHandler.HandleException(this.m_PanelSetOrderLynchSyndromeEvaluation, "This LSE has just been finalized using " + lseRule.Indication + " - " + lseRule.RuleName);
                 }
                 else
                 {
