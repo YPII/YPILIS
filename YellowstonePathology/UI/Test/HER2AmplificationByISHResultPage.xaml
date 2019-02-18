@@ -45,11 +45,11 @@
 					<RowDefinition Height="Auto"></RowDefinition>
 				</Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Order</TextBlock>
+                <!--<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Order</TextBlock>
 
                 <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkOrderHER2IHC_Click">HER2 By IHC</Hyperlink>
-                </TextBlock>
+                </TextBlock>-->
 
                 <TextBlock Grid.Column="0" Grid.Row="4" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>
 

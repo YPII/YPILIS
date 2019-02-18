@@ -717,7 +717,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             
             if(result.Status == AuditStatusEnum.OK)
             {
-                this.SetHER2ByIHCRequired();
+/*                this.SetHER2ByIHCRequired();
                 HER2AmplificationResultCollection her2AmplificationResultCollection = new HER2AmplificationResultCollection(accessionOrder.PanelSetOrderCollection, this.m_ReportNo);
                 HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
                 if (this.HER2ByIHCRequired == true)
@@ -765,10 +765,29 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                             }
                         }
                     }
-                }
+                }*/
             }
             return result;
 		}
+
+        public void SetResults(AccessionOrder accessionOrder)
+        {
+            this.SetHER2ByIHCRequired();
+            YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest();
+            if(this.m_HER2ByIHCRequired == true && this.CheckTestExists(accessionOrder, her2AmplificationByIHCTest.PanelSetId) == false)
+            {
+                this.Result = HER2AmplificationResultEnum.Equivocal.ToString();
+                this.Distribute = false;
+            }
+            else
+            {
+                HER2AmplificationResultCollection her2AmplificationResultCollection = new HER2AmplificationResultCollection(accessionOrder.PanelSetOrderCollection, this.m_ReportNo);
+                HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
+                YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = accessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.OrderedOn, this.OrderedOnId);
+                her2AmplificationResult.SetResults(specimenOrder);
+                this.Distribute = true;
+            }
+        }
 
         public override AuditResult IsOkToAccept(AccessionOrder accessionOrder)
         {
@@ -791,7 +810,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                 }
             }
 
-            if (result.Status == AuditStatusEnum.OK)
+            /*if (result.Status == AuditStatusEnum.OK)
             {
                 HER2AmplificationResultCollection her2AmplificationResultCollection = new HER2AmplificationResultCollection(accessionOrder.PanelSetOrderCollection, this.m_ReportNo);
                 HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
@@ -841,7 +860,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                         }
                     }
                 }
-            }
+            }*/
             return result;
         }
 
@@ -856,7 +875,21 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                 result.Message = methodResult.Message;
             }
 
-            if(result.Status == AuditStatusEnum.OK)
+            if (result.Status == AuditStatusEnum.OK)
+            {
+                if(string.IsNullOrEmpty(this.m_Result) == true)
+                {
+                    result.Status = AuditStatusEnum.Failure;
+                    result.Message = "Unable to final as the result is not set.";
+                }
+                else if(this.m_Result == HER2AmplificationResultEnum.Equivocal.ToString())
+                {
+                    result.Status = AuditStatusEnum.Warning;
+                    result.Message = "This case will be finaled but not distributed. " + Environment.NewLine +
+                        "A HER2 Amplification by IHC and a HER2 Amplification Summary will be ordered.";
+                }
+            }
+            /*if(result.Status == AuditStatusEnum.OK)
             {
                 HER2AmplificationResultCollection her2AmplificationResultCollection = new HER2AmplificationByISH.HER2AmplificationResultCollection(accessionOrder.PanelSetOrderCollection, this.m_ReportNo);
                 HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
@@ -904,9 +937,19 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                         }
                     }
                 }
-            }
+            }*/
 
             return result;
+        }
+
+        public override FinalizeTestResult Finish(AccessionOrder accessionOrder)
+        {
+            if (this.m_Result == HER2AmplificationResultEnum.Equivocal.ToString())
+            {
+                this.m_Distribute = false;
+
+            }
+            return base.Finish(accessionOrder);
         }
 
         public AuditResult IsOkToOrderIHC(AccessionOrder accessionOrder)

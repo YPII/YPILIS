@@ -9,6 +9,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
     public enum HER2AmplificationResultEnum
     {
         Positive,
-        Negative
+        Negative,
+        Equivocal
     }
 }

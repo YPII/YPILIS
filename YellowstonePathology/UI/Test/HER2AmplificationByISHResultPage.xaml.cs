@@ -56,7 +56,7 @@ namespace YellowstonePathology.UI.Test
             this.m_SystemIdentity = systemIdentity;
             this.m_PageNavigator = pageNavigator;
 
-            this.m_PageHeaderText = "HER2 Amplification By ISH Results For: " + this.m_AccessionOrder.PatientDisplayName;
+            this.m_PageHeaderText = this.m_PanelSetOrder.PanelSetName + " Results For: " + this.m_AccessionOrder.PatientDisplayName;
             this.m_IndicatorCollection = new YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHIndicatorCollection();
             this.m_SampleAdequacyCollection = new YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHSampleAdequacyCollection();
             this.m_ProbeSignalIntensityCollection = new YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHProbeSignalIntensityCollection();
@@ -136,7 +136,14 @@ namespace YellowstonePathology.UI.Test
         private void HyperLinkFinalize_Click(object sender, RoutedEventArgs e)
         {            
             YellowstonePathology.Business.Audit.Model.AuditResult auditResult = this.m_PanelSetOrder.IsOkToFinalize(this.m_AccessionOrder);
-            if (auditResult.Status ==  Business.Audit.Model.AuditStatusEnum.OK)
+            if(auditResult.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            {
+                MessageBox.Show(auditResult.Message);
+                this.OrderIHCOnOk();
+                auditResult.Status = Business.Audit.Model.AuditStatusEnum.OK;
+            }
+
+            if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
                 YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);                    
                 this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
@@ -226,11 +233,7 @@ namespace YellowstonePathology.UI.Test
             }
             else
             {
-                YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection her2AmplificationResultCollection = new Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection(this.m_AccessionOrder.PanelSetOrderCollection, this.m_PanelSetOrder.ReportNo);
-                YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
-                YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
-                her2AmplificationResult.SetResults(specimenOrder);
-                this.m_PanelSetOrder.SetHER2ByIHCRequired();
+                this.m_PanelSetOrder.SetResults(this.m_AccessionOrder);
             }
         }
 

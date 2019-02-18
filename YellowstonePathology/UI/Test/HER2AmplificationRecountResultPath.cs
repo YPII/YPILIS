@@ -31,6 +31,31 @@ namespace YellowstonePathology.UI.Test
 
         private void ResultPage_Next(object sender, EventArgs e)
         {
+            if(this.ShowHER2AmplificationSummaryResultPage() == false)
+            {
+                this.Finished();
+            }
+        }
+
+        private bool ShowHER2AmplificationSummaryResultPage()
+        {
+            bool result = false;
+
+            {
+                YellowstonePathology.Business.Test.PanelSetOrder summaryTestOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetHER2Summary();
+                if (summaryTestOrder != null)
+                {
+                    result = true;
+                    HER2AmplificationSummaryResultPath resultPath = new HER2AmplificationSummaryResultPath(summaryTestOrder.ReportNo, this.m_AccessionOrder, this.m_PageNavigator, this.m_Window);
+                    resultPath.Finish += HER2AmplificationSummaryResultPath_Finish;
+                    resultPath.Start();
+                }
+            }
+            return result;
+        }
+
+        private void HER2AmplificationSummaryResultPath_Finish(object sender, EventArgs e)
+        {
             this.Finished();
         }
     }

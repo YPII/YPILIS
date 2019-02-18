@@ -64,13 +64,6 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 
         protected void HandleIHC()
         {
-            if (this.m_HER2AmplificationRecountTestOrder != null && this.m_HER2AmplificationRecountTestOrder.Accepted == true)
-            {
-                this.m_HER2AmplificationByISHTestOrder.TotalChr17SignalsCounted = m_HER2AmplificationRecountTestOrder.Chr17SignalsCounted;
-                this.m_HER2AmplificationByISHTestOrder.TotalHer2SignalsCounted = this.m_HER2AmplificationRecountTestOrder.Her2SignalsCounted;
-                this.m_HER2AmplificationByISHTestOrder.CellsCounted = this.m_HER2AmplificationRecountTestOrder.CellsCounted;
-            }
-
             if (this.m_PanelSetOrderHer2AmplificationByIHC != null && this.m_PanelSetOrderHer2AmplificationByIHC.Accepted == true)
             {
                 if (this.m_PanelSetOrderHer2AmplificationByIHC.Score.Contains("0") || this.m_PanelSetOrderHer2AmplificationByIHC.Score.Contains("1+"))
