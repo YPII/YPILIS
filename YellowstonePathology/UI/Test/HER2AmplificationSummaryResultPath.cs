@@ -8,9 +8,9 @@ namespace YellowstonePathology.UI.Test
 {
     public class HER2AmplificationSummaryResultPath : ResultPath
     {
-        HER2AmplificationByISHResultPage m_ResultPage;
+        HER2AmplificationSummaryResultPage m_ResultPage;
         YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
-        YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder m_PanelSetOrder;
+        YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
 
         public HER2AmplificationSummaryResultPath(string reportNo,
             YellowstonePathology.Business.Test.AccessionOrder accessionOrder,
@@ -19,14 +19,13 @@ namespace YellowstonePathology.UI.Test
             : base(pageNavigator, window)
         {
             this.m_AccessionOrder = accessionOrder;
-            this.m_PanelSetOrder = (Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
+            this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
         }
 
         protected override void ShowResultPage()
         {
-            this.m_ResultPage = new HER2AmplificationByISHResultPage(this.m_PanelSetOrder, this.m_AccessionOrder, this.m_SystemIdentity, this.m_PageNavigator);
+            this.m_ResultPage = new HER2AmplificationSummaryResultPage(this.m_PanelSetOrder, this.m_AccessionOrder, this.m_SystemIdentity);
             this.m_ResultPage.Next += ResultPage_Next;
-            this.m_ResultPage.SpecimenDetail += ResultPage_SpecimenDetail;
             this.m_PageNavigator.Navigate(this.m_ResultPage);
         }
 

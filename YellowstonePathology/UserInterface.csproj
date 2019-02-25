@@ -3547,6 +3547,9 @@
       <DependentUpon>HER2AmplificationRecountResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Test\HER2AmplificationRecountResultPath.cs" />
+    <Compile Include="UI\Test\HER2AmplificationSummaryResultPage.xaml.cs">
+      <DependentUpon>HER2AmplificationSummaryResultPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Test\HER2AmplificationSummaryResultPath.cs" />
     <Compile Include="UI\Test\OrderAssociationResultPage.xaml.cs">
       <DependentUpon>OrderAssociationResultPage.xaml</DependentUpon>
@@ -5480,6 +5483,10 @@
     <Page Include="UI\Test\HER2AmplificationRecountResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Test\HER2AmplificationSummaryResultPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Test\OrderAssociationResultPage.xaml">
       <SubType>Designer</SubType>

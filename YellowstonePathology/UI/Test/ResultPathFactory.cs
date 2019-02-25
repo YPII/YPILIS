@@ -54,16 +54,7 @@ namespace YellowstonePathology.UI.Test
 					result = new BCellClonalityByPCRResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
 				case 46:
-                    YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest ishTest = new Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest();
-                    YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
-                    if (panelSetOrder.PanelSetName == ishTest.PanelSetName)
-                    {
-                        result = new HER2AmplificationByISHResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    }
-                    else
-                    {
-                        result = new HER2AmplificationSummaryResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    }
+                    result = new HER2AmplificationByISHResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
 				case 50:
 					result = new ErPrSemiQuantitativeResultPath(reportNo, accessionOrder, pageNavigator, window);
@@ -347,6 +338,9 @@ namespace YellowstonePathology.UI.Test
                     break;
                 case 303:
                     result = new TechnicalOnlyResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
+                case 313:
+                    result = new HER2AmplificationSummaryResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
                 case 314:
                     result = new HER2AmplificationRecountResultPath(reportNo, accessionOrder, pageNavigator, window);

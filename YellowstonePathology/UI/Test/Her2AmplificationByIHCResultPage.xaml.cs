@@ -25,8 +25,8 @@ namespace YellowstonePathology.UI.Test
 		public delegate void NextEventHandler(object sender, EventArgs e);
 		public event NextEventHandler Next;
 
-        public delegate void OrderHER2RecountEventHandler(object sender, EventArgs e);
-        public event OrderHER2RecountEventHandler OrderHER2Recount;
+        public delegate void OrderTestEventHandler(object sender, CustomEventArgs.PanelSetReturnEventArgs e);
+        public event OrderTestEventHandler OrderTest;
 
         private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
 		private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
@@ -89,14 +89,16 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkFinalizeResults_Click(object sender, RoutedEventArgs e)
 		{
-			if (this.m_PanelSetOrder.Final == false)
+            Business.Audit.Model.AuditResult result = this.m_PanelSetOrder.IsOkToFinalize(this.m_AccessionOrder);
+
+            if (result.Status == Business.Audit.Model.AuditStatusEnum.OK)
 			{
                 YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
                 this.HandleFinalizeTestResult(finalizeTestResult);
             }
             else
 			{
-				MessageBox.Show("This case cannot be finalized because it is already final.");
+				MessageBox.Show(result.Message);
 			}
 		}
 
@@ -118,29 +120,6 @@ namespace YellowstonePathology.UI.Test
             if (result.Success == true)
             {
                 this.m_PanelSetOrder.Accept();
-                YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest ishTest = new Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest();
-                if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(ishTest.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) == true)
-                {
-                    YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder ishTestOrder = (YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(ishTest.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
-                    Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection her2ResultCollection = new Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection(this.m_AccessionOrder.PanelSetOrderCollection, ishTestOrder.ReportNo);
-                    Business.Test.HER2AmplificationByISH.HER2AmplificationResult her2Result = her2ResultCollection.FindMatch();
-                    if (her2Result.IsRecountNeeded() == true)
-                    {
-                        Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest her2AmplificationRecountTest = new Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
-                        if(this.m_AccessionOrder.PanelSetOrderCollection.Exists(her2AmplificationRecountTest.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) == false)
-                        {
-                            MessageBoxResult messageBoxResult = MessageBox.Show("A HER2 Recount is required.  If one is not ordered this test will not be accepted.  Do you want to order it now?", "Recount required", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
-                            if(messageBoxResult == MessageBoxResult.Yes)
-                            {
-                                this.OrderHER2Recount(this, new EventArgs());
-                            }
-                            else
-                            {
-                                this.m_PanelSetOrder.Unaccept();
-                            }
-                        }
-                    }
-                }
             }
             else
             {
@@ -162,7 +141,39 @@ namespace YellowstonePathology.UI.Test
 			}
 		}
 
-		private void ButtonNext_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkOrderHER2DISH_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest test = new Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest();
+            this.OrderATest(test);
+        }
+
+        private void HyperLinkOrderRecount_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest test = new Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
+            this.OrderATest(test);
+        }
+
+        private void HyperLinkOrderHER2Summary_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryTest test = new Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryTest();
+            this.OrderATest(test);
+        }
+
+        private void OrderATest(YellowstonePathology.Business.PanelSet.Model.PanelSet test)
+        {
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) == false)
+            {
+                CustomEventArgs.PanelSetReturnEventArgs args = new CustomEventArgs.PanelSetReturnEventArgs(test);
+                this.OrderTest(this, args);
+            }
+            else
+            {
+                MessageBox.Show("Unable to order a " + test.PanelSetName + " as one already exists.");
+            }
+        }
+
+
+        private void ButtonNext_Click(object sender, RoutedEventArgs e)
 		{
 			if (this.Next != null) this.Next(this, new EventArgs());
 		}

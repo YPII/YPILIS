@@ -27,8 +27,8 @@ namespace YellowstonePathology.UI.Test
 		public delegate void SpecimenDetailEventHandler(object sender, EventArgs e);
 		public event SpecimenDetailEventHandler SpecimenDetail;
 
-        public delegate void OrderHER2IHCEventHandler(object sender, EventArgs e);
-        public event OrderHER2IHCEventHandler OrderHER2IHC;
+        public delegate void OrderTestEventHandler(object sender, CustomEventArgs.PanelSetReturnEventArgs e);
+        public event OrderTestEventHandler OrderTest;
 
         public delegate void NextEventHandler(object sender, EventArgs e);
         public event NextEventHandler Next;
@@ -136,13 +136,6 @@ namespace YellowstonePathology.UI.Test
         private void HyperLinkFinalize_Click(object sender, RoutedEventArgs e)
         {            
             YellowstonePathology.Business.Audit.Model.AuditResult auditResult = this.m_PanelSetOrder.IsOkToFinalize(this.m_AccessionOrder);
-            if(auditResult.Status == Business.Audit.Model.AuditStatusEnum.Warning)
-            {
-                MessageBox.Show(auditResult.Message);
-                this.OrderIHCOnOk();
-                auditResult.Status = Business.Audit.Model.AuditStatusEnum.OK;
-            }
-
             if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
                 YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);                    
@@ -185,21 +178,13 @@ namespace YellowstonePathology.UI.Test
         private void HyperLinkAcceptResults_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Audit.Model.AuditResult auditResult = this.m_PanelSetOrder.IsOkToAccept(this.m_AccessionOrder);
-            if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
-                MessageBoxResult result = MessageBox.Show(auditResult.Message, "Order Test", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.Yes);
-                if (result == MessageBoxResult.Yes)
-                {
-                    this.OrderHER2IHC(this, new EventArgs());
-                }
-            }
-            else if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.Failure)
-            {
-                MessageBox.Show(auditResult.Message);
+                Business.Test.HER2AmplificationByISH.HER2AmplificationResult.AcceptResults(this.m_PanelSetOrder);
             }
             else
             {
-                Business.Test.HER2AmplificationByISH.HER2AmplificationResult.AcceptResults(this.m_PanelSetOrder);
+                MessageBox.Show(auditResult.Message);
             }
         }
 
@@ -219,21 +204,13 @@ namespace YellowstonePathology.UI.Test
         private void HyperLinkSetResults_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Audit.Model.AuditResult auditResult = this.m_PanelSetOrder.IsOkToSetResults(this.m_AccessionOrder);
-            if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
-                MessageBoxResult result = MessageBox.Show(auditResult.Message, "Order Test", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.Yes);
-                if (result == MessageBoxResult.Yes)
-                {
-                    this.OrderIHCOnOk();
-                }
-            }
-            else if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.Failure)
-            {
-                MessageBox.Show(auditResult.Message);
+                this.m_PanelSetOrder.SetResults(this.m_AccessionOrder);
             }
             else
             {
-                this.m_PanelSetOrder.SetResults(this.m_AccessionOrder);
+                MessageBox.Show(auditResult.Message);
             }
         }
 
@@ -275,19 +252,32 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkOrderHER2IHC_Click(object sender, RoutedEventArgs e)
         {
-            this.OrderIHCOnOk();
+            YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest test = new Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest();
+            this.OrderATest(test);
         }
 
-        private void OrderIHCOnOk()
+        private void HyperLinkOrderRecount_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Audit.Model.AuditResult auditResult = this.m_PanelSetOrder.IsOkToOrderIHC(this.m_AccessionOrder);
-            if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.OK)
+            YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest test = new Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
+            this.OrderATest(test);
+        }
+
+        private void HyperLinkOrderHER2Summary_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryTest test = new Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryTest();
+            this.OrderATest(test);
+        }
+
+        private void OrderATest(YellowstonePathology.Business.PanelSet.Model.PanelSet test)
+        {
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) == false)
             {
-                this.OrderHER2IHC(this, new EventArgs());
+                CustomEventArgs.PanelSetReturnEventArgs args = new CustomEventArgs.PanelSetReturnEventArgs(test);
+                this.OrderTest(this, args);
             }
             else
             {
-                MessageBox.Show(auditResult.Message);
+                MessageBox.Show("Unable to order a " + test.PanelSetName + " as one already exists.");
             }
         }
     }

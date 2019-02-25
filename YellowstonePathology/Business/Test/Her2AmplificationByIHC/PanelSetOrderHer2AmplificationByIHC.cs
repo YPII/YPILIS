@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using YellowstonePathology.Business.Audit.Model;
 using YellowstonePathology.Business.Persistence;
 using YellowstonePathology.Business.Rules;
 
@@ -192,6 +193,35 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
                     result.Message += "Unable to accept results as the score is not present." + Environment.NewLine;
                 }
             }
+            return result;
+        }
+
+        public override AuditResult IsOkToFinalize(AccessionOrder accessionOrder)
+        {
+            AuditResult result = base.IsOkToFinalize(accessionOrder);
+
+            if (result.Status == AuditStatusEnum.OK)
+            {
+                if (this.m_Score.Contains("2+") == true)
+                {
+                    HER2AmplificationRecount.HER2AmplificationRecountTest test = new HER2AmplificationRecount.HER2AmplificationRecountTest();
+                    if (accessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_OrderedOnId, true) == false)
+                    {
+                        result.Status = AuditStatusEnum.Failure;
+                        result.Message = "Unable to finalize as a " + test.PanelSetName + " is required.";
+                    }
+                }
+                else
+                {
+                    HER2AmplificationSummary.HER2AmplificationSummaryTest summaryTest = new HER2AmplificationSummary.HER2AmplificationSummaryTest();
+                    if (accessionOrder.PanelSetOrderCollection.Exists(summaryTest.PanelSetId, this.m_OrderedOnId, true) == false)
+                    {
+                        result.Status = AuditStatusEnum.Failure;
+                        result.Message = "Unable to finalize as a " + summaryTest.PanelSetName + " is required.";
+                    }
+                }
+            }
+
             return result;
         }
     }

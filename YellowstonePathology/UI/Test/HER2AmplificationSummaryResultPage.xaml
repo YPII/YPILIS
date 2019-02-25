@@ -121,28 +121,119 @@
                     <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,5" FontWeight="Bold" VerticalAlignment="Center">Ordered On:</TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,5" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
 
-                    <TextBlock Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="2" Text="{Binding Path=SummaryMessage}" />
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding Path=PanelSetOrder.Result}" VerticalAlignment="Center" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result Description:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Margin="2" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.ResultDescription}" VerticalAlignment="Center" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Indication:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="3" Margin="2" ItemsSource="{Binding Path=IndicatorCollection}" SelectedValue="{Binding Path=PanelSetOrder.Indicator}">
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Sample Adequacy:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="4" Margin="2" ItemsSource="{Binding Path=SampleAdequacyCollection}"
+							  SelectedValue="{Binding Path=PanelSetOrder.SampleAdequacy}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Probe Signal Intensity:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="5" Margin="2" ItemsSource="{Binding Path=ProbeSignalIntensityCollection}"
+							  SelectedValue="{Binding Path=PanelSetOrder.ProbeSignalIntensity}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="6" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total Cells Counted:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.CellsCountedUI}" />
+                    <TextBox Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding Path=PanelSetOrder.CellsCountedUI}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="7" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total HER2 Signals Counted:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="7"  Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsCountedUI}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total CHR17 Signals Counted:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="8" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsCountedUI}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="9" Margin="2" VerticalAlignment="Center" FontWeight="Bold">CHR17 Signal Range:</TextBlock>
+                    <Grid Grid.Column="1" Grid.Row="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="38"></ColumnDefinition>
+                            <ColumnDefinition Width="7"></ColumnDefinition>
+                            <ColumnDefinition Width="38"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" Grid.Row="0" Margin="2" Width="30" Text="{Binding Path=PanelSetOrder.Chr17SignalRangeLow}" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" Width="5" VerticalAlignment="Center">-</TextBlock>
+                        <TextBox Grid.Column="2" Grid.Row="0" Margin="2" Width="30" Text="{Binding Path=PanelSetOrder.Chr17SignalRangeHigh}" />
+                    </Grid>
+
+                    <TextBlock Grid.Column="0" Grid.Row="10" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2 Signal Range:</TextBlock>
+                    <Grid Grid.Column="1" Grid.Row="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="38"></ColumnDefinition>
+                            <ColumnDefinition Width="7"></ColumnDefinition>
+                            <ColumnDefinition Width="38"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" Grid.Row="0"  Margin="2" Width="30" Text="{Binding Path=PanelSetOrder.Her2SignalRangeLow}" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" Width="5" VerticalAlignment="Center">-</TextBlock>
+                        <TextBox Grid.Column="2" Grid.Row="0" Margin="2" Width="30" Text="{Binding Path=PanelSetOrder.Her2SignalRangeHigh}" />
+                    </Grid>
 
                     <TextBlock Grid.Column="0" Grid.Row="11" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Number of observers:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="11" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.NumberOfObservers}" />
+                    <TextBox Grid.Column="1" Grid.Row="11" Margin="2" Text="{Binding Path=PanelSetOrder.NumberOfObservers}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="12" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Genetic Heterogeneity:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="12" Margin="2" ItemsSource="{Binding Path=GeneticHeterogeneityCollection}"
+							  SelectedValue="{Binding Path=PanelSetOrder.GeneticHeterogeneity}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="13" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2/CHR17 ratio in cluster:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="13" Margin="2" Text="{Binding Path=PanelSetOrder.Her2Chr17ClusterRatio}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="14" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2 average copy number per nucleus:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="14" Margin="2" VerticalAlignment="Center" Text="{Binding Path=HER2AmplificationByISHTestOrder.AverageHer2NeuSignal}" />
+                    <TextBlock Grid.Column="1" Grid.Row="14" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.AverageHer2NeuSignal}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="15" Margin="2" VerticalAlignment="Center" FontWeight="Bold">CHR17 average copy number per nucleus:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="15" Margin="2" VerticalAlignment="Center" Text="{Binding Path=HER2AmplificationByISHTestOrder.AverageChr17Signal}" />
+                    <TextBlock Grid.Column="1" Grid.Row="15" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.AverageChr17Signal}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="16" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Ratio of average HER2/CHR17 signals:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="16" Margin="2" VerticalAlignment="Center" Text="{Binding Path=HER2AmplificationByISHTestOrder.AverageHer2Chr17Signal}" />
+                    <TextBlock Grid.Column="1" Grid.Row="16" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.AverageHer2Chr17Signal}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="17" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2 IHC Required:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="17" Margin="2" VerticalAlignment="Center" IsChecked="{Binding Path=PanelSetOrder.HER2ByIHCRequired}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="18" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Recount Required:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="18" Margin="2" VerticalAlignment="Center" IsChecked="{Binding Path=PanelSetOrder.RecountRequired}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="19" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Tech Comment:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="20" Margin="2" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.TechComment}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="21" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result Comment:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="22" Margin="2" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.ResultComment}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="23" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Interpretation Comments:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="24" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" Margin="2" Text="{Binding Path=PanelSetOrder.InterpretiveComment}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="25" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Method:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="26" Grid.ColumnSpan="2" Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="27" FontWeight="Bold" Margin="2" VerticalAlignment="Center">Report Reference:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="28" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.ReportReference}" AcceptsReturn="True" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="29" FontWeight="Bold" Margin="2" VerticalAlignment="Center">Fixation Comment:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="30" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="2" AcceptsReturn="True" VerticalAlignment="Center" Text="{Binding Path=SpecimenOrder.FixationComment}" />
+
+                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="31" FontWeight="Bold" Margin="2,2,2,2">Current Orders</TextBlock>
+                    <ListView Name="ListBoxPanelSetOrders" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="32" Margin="2,2,2,2" HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=OrderTime}" Header="Date" Width="150"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Order" Width="200"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=FinalTime}" Header="Final" Width="150"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Distribute}" Header="Distribute" Width="150"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
 
                     <TextBlock Grid.Column="0" Grid.Row="33" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="33" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}" IsEnabled="False"></CheckBox>
+                    <CheckBox Grid.Column="1" Grid.Row="33" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}"></CheckBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="34" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="34" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.NoCharge}" IsEnabled="False"></CheckBox>
+                    <CheckBox Grid.Column="1" Grid.Row="34" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.NoCharge}"></CheckBox>
 
                     <Grid Grid.Column="0" Grid.Row="35" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>

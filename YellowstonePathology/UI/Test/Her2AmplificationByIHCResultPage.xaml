@@ -32,33 +32,50 @@
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
-					<RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
-					<RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="*"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
 				</Grid.RowDefinitions>
 
-				<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Results</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Order</TextBlock>
 
-				<TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,0">
+                <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkOrderHER2DISH_Click">HER2 By D-ISH</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkOrderRecount_Click">Recount</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkOrderHER2Summary_Click">HER2 Summary</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="5" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="6" Margin="5,3,0,0">
                     <Hyperlink Click="HyperLinkAcceptResults_Click">Accept Results</Hyperlink>
 				</TextBlock>
 
-                <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="4" Margin="5,3,0,0">                    
+                <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkShowDocument_Click">Show Document</Hyperlink>
 				</TextBlock>
 
-				<TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,5">
+				<TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,5">
 					<Hyperlink Click="HyperLinkFinalizeResults_Click">Finalize</Hyperlink>
 				</TextBlock>
 
-				<TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">                    
+				<TextBlock Grid.Column="0" Grid.Row="10" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkUnacceptResults_Click">Unaccept Results</Hyperlink>
 				</TextBlock>
 
-                <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">                    
+                <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="11" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkUnfinalResults_Click">Unfinalize Results</Hyperlink>
 				</TextBlock>
 

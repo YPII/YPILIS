@@ -1224,20 +1224,5 @@ namespace YellowstonePathology.Business.Test
                 }
             }
         }
-
-        public YellowstonePathology.Business.Test.PanelSetOrder GetHER2Summary()
-        {
-            YellowstonePathology.Business.Test.PanelSetOrder result = null;
-            HER2AmplificationSummary.HER2AmplificationSummaryTest summaryTest = new HER2AmplificationSummary.HER2AmplificationSummaryTest();
-            foreach (YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in this)
-            {
-                if (panelSetOrder.PanelSetId == summaryTest.PanelSetId && panelSetOrder.PanelSetName == summaryTest.PanelSetName)
-                {
-                    result = panelSetOrder;
-                    break;
-                }
-            }
-            return result;
-        }
     }
 }
