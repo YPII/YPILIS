@@ -88,16 +88,12 @@ namespace YellowstonePathology.UI.Billing
             if(firstRequisition != null)
             {
                 this.ShowTIFDocument(this, new CustomEventArgs.FileNameReturnEventArgs(firstRequisition.FullFileName));
-            }
-
-            //this.m_MonitoredObjectCollection = new Business.Billing.Model.MonitoredObjectCollection();
-            //this.m_MonitoredObjectCollection.Load(typeof(Business.Test.PanelSetOrder), this.m_PanelSetOrder, this.m_PanelSetOrder.ReportNo);
+            }            
         }
 
         private void BillingPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Save();
-            //this.m_MonitoredObjectCollection.WriteChanges();
+            YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Save();            
         }
 
         public YellowstonePathology.Business.Facility.Model.FacilityCollection FacilityCollection

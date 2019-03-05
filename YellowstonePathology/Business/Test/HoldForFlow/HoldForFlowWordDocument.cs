@@ -19,10 +19,13 @@ namespace YellowstonePathology.Business.Test.HoldForFlow
             HoldForFlowTestOrder holdForFlowTestOrder = (HoldForFlowTestOrder)this.m_PanelSetOrder;
             this.m_PanelSetOrder = holdForFlowTestOrder;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HoldForFlow.2.xml";
+            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HoldForFlow.3.xml";
             base.OpenTemplate();
 
             base.SetDemographicsV2();
+
+            string title = this.m_PanelSetOrder.PanelSetName;
+            this.ReplaceText("report_title", title);
 
             this.ReplaceText("report_comment", holdForFlowTestOrder.Comment);
             this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.Signature);

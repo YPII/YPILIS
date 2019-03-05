@@ -5,20 +5,20 @@ using System.Text;
 
 namespace YellowstonePathology.Business.Test
 {
-	public class DirectHarvestForFISHTest : YellowstonePathology.Business.PanelSet.Model.PanelSet
+	public class CultureAndHoldForCytogeneticsTestRetired : YellowstonePathology.Business.PanelSet.Model.PanelSet
 	{
-        public DirectHarvestForFISHTest()
+        public CultureAndHoldForCytogeneticsTestRetired()
 		{
-			this.m_PanelSetId = 190;
-            this.m_PanelSetName = "Direct Harvest For FISH";
+			this.m_PanelSetId = 189;
+            this.m_PanelSetName = "Culture And Hold For Cytogenetics - Retired";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Cytogenetics;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;
 			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.None;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
-            this.m_Active = true;            			            
-			this.m_AllowMultiplePerAccession = true;
-            this.m_NeverDistribute = true;
+            this.m_Active = false;           			            
+			this.m_AllowMultiplePerAccession = true;            
+
             this.m_ExpectedDuration = new TimeSpan(5, 0, 0, 0);
 
             string taskDescription = "Gather materials (Peripheral blood: 2-5 mL in sodium heparin tube and 2x5 mL in EDTA tube or " +
@@ -28,7 +28,10 @@ namespace YellowstonePathology.Business.Test
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription, neogenomicsIrvine)); 
 
             this.m_TechnicalComponentFacility = neogenomicsIrvine;            
-            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");            
+            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+
+            YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88237", null), 1);
+            this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
 		}

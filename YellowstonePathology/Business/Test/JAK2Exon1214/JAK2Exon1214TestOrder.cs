@@ -120,20 +120,6 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
             base.ClearPreviousResults();
         }
 
-        public override Audit.Model.AuditResult IsOkToSetPreviousResults(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
-        {
-            Audit.Model.AuditResult result = base.IsOkToSetPreviousResults(panelSetOrder, accessionOrder);
-            if (result.Status == Audit.Model.AuditStatusEnum.OK)
-            {
-                JAK2Exon1214TestOrder jak2Exon1214TestOrder = (JAK2Exon1214TestOrder)panelSetOrder;
-                this.DoesFinalSummaryResultMatch(accessionOrder, jak2Exon1214TestOrder.Result, result);
-                if(result.Status == Audit.Model.AuditStatusEnum.Warning)
-                result.Message += AskSetPreviousResults;
-            }
-
-            return result;
-        }
-
         public override Audit.Model.AuditResult IsOkToAccept(AccessionOrder accessionOrder)
         {
             Audit.Model.AuditResult result = base.IsOkToAccept(accessionOrder);
@@ -143,15 +129,6 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
                 {
                     result.Status = Audit.Model.AuditStatusEnum.Failure;
                     result.Message = UnableToAccept;
-                }
-
-                if (result.Status == Audit.Model.AuditStatusEnum.OK)
-                {
-                    this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
-                    if (result.Status == Audit.Model.AuditStatusEnum.Warning)
-                    {
-                        result.Message += AskAccept;
-                    }
                 }
             }
 
@@ -168,27 +145,8 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
                     result.Status = Audit.Model.AuditStatusEnum.Failure;
                     result.Message = UnableToFinal;
                 }
-                else
-                {
-                    this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
-                    if (result.Status == Audit.Model.AuditStatusEnum.Warning)
-                    {
-                        result.Message += AskFinal;
-                    }
-                }
             }
             return result;
-        }
-
-        private void DoesFinalSummaryResultMatch(AccessionOrder accessionOrder, string result, Audit.Model.AuditResult auditResult)
-        {
-            Business.Test.MPNStandardReflex.MPNStandardReflexTest mpnStandardReflexTest = new MPNStandardReflex.MPNStandardReflexTest();
-
-            if (accessionOrder.PanelSetOrderCollection.Exists(mpnStandardReflexTest.PanelSetId) == true)
-            {
-                MPNStandardReflex.PanelSetOrderMPNStandardReflex panelSetOrderMPNStandardReflex = (MPNStandardReflex.PanelSetOrderMPNStandardReflex)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(mpnStandardReflexTest.PanelSetId);
-                panelSetOrderMPNStandardReflex.DoesJAK2Exon1214ResultMatch(result, auditResult);
-            }
         }
     }
 }

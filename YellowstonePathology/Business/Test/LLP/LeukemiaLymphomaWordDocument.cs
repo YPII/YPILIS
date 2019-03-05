@@ -44,7 +44,7 @@ namespace YellowstonePathology.Business.Test.LLP
 			this.SetXmlNodeData("pathologist_signature", signature);
 
 			this.SetXMLNodeParagraphData("report_impression", panelSetOrderLeukemiaLymphoma.Impression);
-			this.SetXmlNodeData("interpretive_comment", panelSetOrderLeukemiaLymphoma.InterpretiveComment);			
+			this.SetXMLNodeParagraphData("interpretive_comment", panelSetOrderLeukemiaLymphoma.InterpretiveComment);			
 
 			double LymphCnt = Convert.ToDouble(panelSetOrderLeukemiaLymphoma.LymphocyteCount);
 			double MonoCnt = Convert.ToDouble(panelSetOrderLeukemiaLymphoma.MonocyteCount);
@@ -145,10 +145,10 @@ namespace YellowstonePathology.Business.Test.LLP
                 nodeToInsertAfter1 = newCellPopulationNode;
 
                 for (int i = 0; i < FirstHalfCount; i++)
-                {
+                {                    
                     XmlNode NewMarkerNode1 = MarkerNode1.Clone();
-                    NewMarkerNode1.SelectSingleNode("descendant::w:r[w:t='marker_name1']/w:t", this.m_NameSpaceManager).InnerText = flowMarkerCollection[i].Name;
-                    NewMarkerNode1.SelectSingleNode("descendant::w:r[w:t='marker_interpretation1']/w:t", this.m_NameSpaceManager).InnerText = flowMarkerCollection[i].Interpretation;
+                    NewMarkerNode1.SelectSingleNode("descendant::w:r[w:t='marker_name1']/w:t", this.m_NameSpaceManager).InnerText = flowMarkerCollection[i].Name;                    
+                    NewMarkerNode1.SelectSingleNode("descendant::w:r[w:t='marker_interpretation1']/w:t", this.m_NameSpaceManager).InnerText = flowMarkerCollection[i].Interpretation;                    
                     NewMarkerNode1.SelectSingleNode("descendant::w:r[w:t='marker_intensity1']/w:t", this.m_NameSpaceManager).InnerText = flowMarkerCollection[i].Intensity;
                     tableNode1.InsertAfter(NewMarkerNode1, nodeToInsertAfter1);
                     nodeToInsertAfter1 = NewMarkerNode1;

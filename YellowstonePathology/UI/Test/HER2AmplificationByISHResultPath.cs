@@ -51,11 +51,14 @@ namespace YellowstonePathology.UI.Test
 
         private void ResultPage_Next(object sender, EventArgs e)
         {
-            if (this.ShowReflexTestPage() == false)
+            if (this.ShowHER2IHCPage() == false)
             {
-                if (this.ShowAmendmentPage() == false)
+                if (this.ShowReflexTestPage() == false)
                 {
-                    this.Finished();
+                    if (this.ShowAmendmentPage() == false)
+                    {
+                        this.Finished();
+                    }
                 }
             }
         }
@@ -73,22 +76,23 @@ namespace YellowstonePathology.UI.Test
             this.ShowResultPage();
         }
 
-        /*private bool ShowSummaryPage()
+        private bool ShowHER2IHCPage()
         {
             bool result = false;
-            YellowstonePathology.Business.Test.PanelSetOrder summaryTestOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetHER2Summary();
-            if (summaryTestOrder != null)
+            YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest test = new Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest();
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) == true)
             {
+                YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC panelSetOrderHer2AmplificationByIHC = (Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
                 result = true;
-                HER2AmplificationSummaryResultPath resultPath = new HER2AmplificationSummaryResultPath(summaryTestOrder.ReportNo, this.m_AccessionOrder, this.m_PageNavigator, this.m_Window);
-                resultPath.Finish += SummaryResultPath_Finish;
+                Her2AmplificationByIHCResultPath resultPath = new Her2AmplificationByIHCResultPath(panelSetOrderHer2AmplificationByIHC.ReportNo, this.m_AccessionOrder, this.m_PageNavigator, this.m_Window);
+                resultPath.Finish += HER2IHCPath_Finish;
                 resultPath.Start();
             }
 
             return result;
         }
 
-        private void SummaryResultPath_Finish(object sender, EventArgs e)
+        private void HER2IHCPath_Finish(object sender, EventArgs e)
         {
             if (this.ShowReflexTestPage() == false)
             {
@@ -97,7 +101,7 @@ namespace YellowstonePathology.UI.Test
                     base.Finished();
                 }
             }
-        }*/
+        }
 
         private bool ShowReflexTestPage()
         {

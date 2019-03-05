@@ -8,45 +8,45 @@ using YellowstonePathology.Business.Persistence;
 namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 {
 	[PersistentClass("tblHER2AmplificationByISHTestOrder", "tblPanelSetOrder", "YPIDATA")]
-	public class HER2AmplificationByISHTestOrder : YellowstonePathology.Business.Test.PanelSetOrder
-	{
+	public class HER2AmplificationByISHTestOrder : YellowstonePathology.Business.Test.PanelSetOrder, Interface.IHER2ISH
+    {
 		public static string PositiveResult = "POSITIVE (amplified)";
 		public static string NegativeResult = "NEGATIVE (not amplified)";
 		public static string IndeterminateResult = "INDETERMINATE";
 		public static string EquivocalResult = "EQUIVOCAL";
 
-		private string m_Result;
-		private int m_CellsCounted;
-		private int m_TotalChr17SignalsCounted;
-		private int m_TotalHer2SignalsCounted;
-		private int m_Her2byIHCOrder;
-		private int m_NumberOfObservers;
-		private bool m_IncludeImmunoRecommendedComment;
-		private bool m_IncludeResultComment;
-		private bool m_IncludePolysomyComment;
-		private string m_PolysomyPercent;
-		private string m_Chr17SignalRangeLow;
-		private string m_Chr17SignalRangeHigh;
-		private string m_Her2SignalRangeLow;
-		private string m_Her2SignalRangeHigh;
-		private string m_CommentLabel;
-		private string m_SampleAdequacy;
-		private string m_ProbeSignalIntensity;
-		private string m_TechComment;
-		private string m_ResultComment;
-		private string m_InterpretiveComment;
-		private string m_ResultDescription;
-		private string m_SourceBlock;
-		private string m_GeneticHeterogeneity;
-		private string m_Her2Chr17ClusterRatio;
-		private string m_ReportReference;
-		private string m_Indicator;
-		private string m_Method;
-		private bool m_NotInterpretable;
-		private string m_ASRComment;
-        private string m_FixationComment;
-        private bool m_HER2ByIHCRequired;
-        private bool m_RecountRequired;
+		protected string m_Result;
+        protected int m_CellsCounted;
+        protected int m_TotalChr17SignalsCounted;
+        protected int m_TotalHer2SignalsCounted;
+        protected int m_Her2byIHCOrder;
+        protected int m_NumberOfObservers;
+        protected bool m_IncludeImmunoRecommendedComment;
+        protected bool m_IncludeResultComment;
+        protected bool m_IncludePolysomyComment;
+        protected string m_PolysomyPercent;
+        protected string m_Chr17SignalRangeLow;
+        protected string m_Chr17SignalRangeHigh;
+        protected string m_Her2SignalRangeLow;
+        protected string m_Her2SignalRangeHigh;
+        protected string m_CommentLabel;
+        protected string m_SampleAdequacy;
+        protected string m_ProbeSignalIntensity;
+        protected string m_TechComment;
+        protected string m_ResultComment;
+		protected string m_InterpretiveComment;
+        protected string m_ResultDescription;
+        protected string m_SourceBlock;
+        protected string m_GeneticHeterogeneity;
+        protected string m_Her2Chr17ClusterRatio;
+        protected string m_ReportReference;
+        protected string m_Indicator;
+        protected string m_Method;
+        protected bool m_NotInterpretable;
+        protected string m_ASRComment;
+        protected string m_FixationComment;
+        protected bool m_HER2ByIHCRequired;
+        protected bool m_RecountRequired;
 
         public HER2AmplificationByISHTestOrder()
 		{
@@ -187,6 +187,11 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 				}
 			}
 		}
+
+        public int CellCountToUse
+        {
+            get { return this.m_CellsCounted; }
+        }
 
 		[PersistentProperty()]
 		[PersistentDataColumnProperty(false, "1", "0", "tinyint")]

@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.HoldForFlow
         {
             HoldForFlowTestOrder holdForFlowTestOrder = (HoldForFlowTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
 
-            this.AddHeader(document, holdForFlowTestOrder, "Hold For Flow");
+            this.AddHeader(document, holdForFlowTestOrder, holdForFlowTestOrder.PanelSetName);
             this.AddNextObxElement("", document, "F");
             this.AddNextObxElement("Comment: " + holdForFlowTestOrder.Comment, document, "F");
             this.AddNextObxElement("", document, "F");

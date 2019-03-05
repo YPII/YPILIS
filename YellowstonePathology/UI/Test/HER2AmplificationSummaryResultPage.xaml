@@ -124,9 +124,6 @@
                     <TextBlock Grid.Column="0" Grid.Row="1" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result:</TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding Path=PanelSetOrder.Result}" VerticalAlignment="Center" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result Description:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="2" Margin="2" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.ResultDescription}" VerticalAlignment="Center" />
-
                     <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Indication:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="3" Margin="2" ItemsSource="{Binding Path=IndicatorCollection}" SelectedValue="{Binding Path=PanelSetOrder.Indicator}">
                     </ComboBox>
@@ -140,13 +137,56 @@
 							  SelectedValue="{Binding Path=PanelSetOrder.ProbeSignalIntensity}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="6" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total Cells Counted:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding Path=PanelSetOrder.CellsCountedUI}" />
+
+                    <Grid Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.CellsCountedUI}" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="10,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Recounted:</TextBlock>
+                        <TextBox Grid.Column="2" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.CellsRecount}" />
+                    </Grid>
 
                     <TextBlock Grid.Column="0" Grid.Row="7" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total HER2 Signals Counted:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="7"  Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsCountedUI}" />
+                    <Grid Grid.Column="1" Grid.Row="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsCountedUI}" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="10,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Visibility="Hidden">Recounted:</TextBlock>
+                        <TextBox Grid.Column="2" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsRecount}" />
+                    </Grid>
 
                     <TextBlock Grid.Column="0" Grid.Row="8" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total CHR17 Signals Counted:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="8" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsCountedUI}" />
+                    <Grid Grid.Column="1" Grid.Row="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsCountedUI}" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="10,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Visibility="Hidden">Recounted:</TextBlock>
+                        <TextBox Grid.Column="2" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsRecount}" />
+                    </Grid>
 
                     <TextBlock Grid.Column="0" Grid.Row="9" Margin="2" VerticalAlignment="Center" FontWeight="Bold">CHR17 Signal Range:</TextBlock>
                     <Grid Grid.Column="1" Grid.Row="9">
@@ -191,14 +231,8 @@
                     <TextBlock Grid.Column="0" Grid.Row="16" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Ratio of average HER2/CHR17 signals:</TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="16" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.AverageHer2Chr17Signal}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="17" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2 IHC Required:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="17" Margin="2" VerticalAlignment="Center" IsChecked="{Binding Path=PanelSetOrder.HER2ByIHCRequired}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="18" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Recount Required:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="18" Margin="2" VerticalAlignment="Center" IsChecked="{Binding Path=PanelSetOrder.RecountRequired}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="19" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Tech Comment:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="20" Margin="2" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.TechComment}" />
+                    <TextBlock Grid.Column="0" Grid.Row="17" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2 IHC Score:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="17" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.IHCScore}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="21" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result Comment:</TextBlock>
                     <TextBox Grid.Column="0" Grid.Row="22" Margin="2" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.ResultComment}" />
@@ -214,20 +248,6 @@
 
                     <TextBlock Grid.Column="0" Grid.Row="29" FontWeight="Bold" Margin="2" VerticalAlignment="Center">Fixation Comment:</TextBlock>
                     <TextBox Grid.Column="0" Grid.Row="30" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="2" AcceptsReturn="True" VerticalAlignment="Center" Text="{Binding Path=SpecimenOrder.FixationComment}" />
-
-                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="31" FontWeight="Bold" Margin="2,2,2,2">Current Orders</TextBlock>
-                    <ListView Name="ListBoxPanelSetOrders" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="32" Margin="2,2,2,2" HorizontalAlignment="Stretch"
-                      ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=OrderTime}" Header="Date" Width="150"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Order" Width="200"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=FinalTime}" Header="Final" Width="150"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=Distribute}" Header="Distribute" Width="150"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
 
                     <TextBlock Grid.Column="0" Grid.Row="33" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
                     <CheckBox Grid.Column="1" Grid.Row="33" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}"></CheckBox>

@@ -122,6 +122,13 @@ namespace YellowstonePathology.UI.Test
             }
         }
 
+        private void HyperLinkShowDocument_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Test.HoldForFlow.HoldForFlowWordDocument report = new Business.Test.HoldForFlow.HoldForFlowWordDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft);
+            report.Render();
+            YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWordViewer(report.SaveFileName);
+        }
+
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {
             if (this.Next != null) this.Next(this, new EventArgs());
