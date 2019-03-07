@@ -41,6 +41,22 @@ namespace YellowstonePathology.Business.HL7View
             return result;
         }
 
+        public string GetPrimaryInsuranceV2()
+        {
+            string result = null;
+            List<IN1> in1List = this.GetUniqueIN1Segments();
+            
+            foreach (IN1 in1 in in1List)
+            {
+                if(string.IsNullOrEmpty(in1.InsuranceName) == false)
+                {
+                    result = in1.InsuranceName;
+                    break;
+                }
+            }            
+            return result;
+        }
+
         public ObservableCollection<ADTMessage> TakeTop(int count)
         {
             ObservableCollection<ADTMessage> result = new ObservableCollection<ADTMessage>();

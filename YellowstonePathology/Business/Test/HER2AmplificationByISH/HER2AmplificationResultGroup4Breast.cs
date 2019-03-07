@@ -21,12 +21,12 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
         public override bool IsAMatch()
         {
             bool result = false;
-            if (this.m_HER2AmplificationByISHTestOrder.Indicator == HER2AmplificationByISHIndicatorCollection.BreastIndication &&
-                this.m_HER2AmplificationByISHTestOrder.AverageHer2Chr17SignalAsDouble.HasValue &&
-                this.m_HER2AmplificationByISHTestOrder.AverageHer2Chr17SignalAsDouble < 2.0 &&
-                this.m_HER2AmplificationByISHTestOrder.AverageHer2NeuSignal.HasValue &&
-                this.m_HER2AmplificationByISHTestOrder.AverageHer2NeuSignal >= 4.0 &&
-                this.m_HER2AmplificationByISHTestOrder.AverageHer2NeuSignal < 6.0)
+            if (this.m_HER2ISH.Indicator == HER2AmplificationByISHIndicatorCollection.BreastIndication &&
+                this.m_HER2ISH.AverageHer2Chr17SignalAsDouble.HasValue &&
+                this.m_HER2ISH.AverageHer2Chr17SignalAsDouble < 2.0 &&
+                this.m_HER2ISH.AverageHer2NeuSignal.HasValue &&
+                this.m_HER2ISH.AverageHer2NeuSignal >= 4.0 &&
+                this.m_HER2ISH.AverageHer2NeuSignal < 6.0)
             {
                 result = true;
                 this.HandleIHC();

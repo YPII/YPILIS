@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>34</ApplicationRevision>
+    <ApplicationRevision>41</ApplicationRevision>
     <ApplicationVersion>10.1.13.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -307,11 +307,14 @@
     <Compile Include="Business\Billing.Model\HospitalSplitSurgicalAndReferenceLabBillingRuleSet.cs" />
     <Compile Include="Business\Billing.Model\ICDCode.cs" />
     <Compile Include="Business\Billing.Model\ICDCodeFactory.cs" />
+    <Compile Include="Business\Billing.Model\InsuranceMap.cs" />
+    <Compile Include="Business\Billing.Model\InsuranceMapCollection.cs" />
     <Compile Include="Business\Billing.Model\MonitoredObject.cs" />
     <Compile Include="Business\Billing.Model\MonitoredObjectCollection.cs" />
     <Compile Include="Business\Billing.Model\PlaceOfService.cs" />
     <Compile Include="Business\Billing.Model\PlaceOfServiceCollection.cs" />
     <Compile Include="Business\Billing.Model\PropertyChanges.cs" />
+    <Compile Include="Business\Billing.Model\SimulationSerializer.cs" />
     <Compile Include="Business\Billing.Model\SVHNoCDMMailMessage.cs" />
     <Compile Include="Business\Client.Model\HPV1618CompoundStandingOrderRule1.cs" />
     <Compile Include="Business\Client.Model\HPV1618ReflexOrderPAPNormalHPVPositive.cs" />
@@ -333,6 +336,7 @@
     <Compile Include="Business\EthBlock.cs" />
     <Compile Include="Business\EthContract.cs" />
     <Compile Include="Business\EthContractCollection.cs" />
+    <Compile Include="Business\Interface\IHER2ISH.cs" />
     <Compile Include="Business\PanelSet.Model\FISHTest.cs" />
     <Compile Include="Business\Flow\CytoplasmicMarkerMapping.cs" />
     <Compile Include="Business\Flow\CytoplasmicMarkerMappingCollection.cs" />
@@ -1063,6 +1067,7 @@
     <Compile Include="Business\Test\EGFRAmplification\EGFRAmplificationTest.cs" />
     <Compile Include="Business\Test\EGFRMutationAnalysisPreliminary\EGFRMutationAnalysisPreliminaryTest.cs" />
     <Compile Include="Business\Test\EGFRToALKReflexAnalysis\EGFRToALKReflexAnalysisBRAFResult.cs" />
+    <Compile Include="Business\Test\ExtractAndHoldForMolecular\ExtractAndHoldForMolecularTestRetired.cs" />
     <Compile Include="Business\Test\ExtractAndHoldForPreauthorization\ExtractAndHoldForPreauthorizationWordDocument.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResult.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultBreast.cs" />
@@ -1077,7 +1082,10 @@
     <Compile Include="Business\Test\HER2AmplificationRecount\HER2AmplificationRecountTest.cs" />
     <Compile Include="Business\Test\HER2AmplificationRecount\HER2AmplificationRecountTestOrder.cs" />
     <Compile Include="Business\Test\HER2AmplificationSummary\HER2AmplificationSummaryTest.cs" />
+    <Compile Include="Business\Test\HER2AmplificationSummary\HER2AmplificationSummaryTestOrder.cs" />
     <Compile Include="Business\Test\HER2AmplificationSummary\HER2AmplificationSummaryWordDocument.cs" />
+    <Compile Include="Business\Test\HoldForFlow\CultureAndHoldForCytogeneticsTest.cs" />
+    <Compile Include="Business\Test\HoldForFlow\DirectHarvestForFISHTest.cs" />
     <Compile Include="Business\Test\HPV1618\HPV1618WPHOBXView.cs" />
     <Compile Include="Business\Test\HPVRNAISH\HPVRNAISHTest.cs" />
     <Compile Include="Business\Test\INI1\INI1Test.cs" />
@@ -1138,6 +1146,7 @@
     <Compile Include="Business\Test\NeoTYPEGastricTumorProfile\NeoTYPEGastricTumorProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPEGISTProfile\NeoTYPEGISTProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPELiposarcomaFusionProfile\NeoTYPELiposarcomaFusionProfileTest.cs" />
+    <Compile Include="Business\Test\NeoTYPELiverBiliaryTumorProfile\NeoTYPELiverBiliaryTumorProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPELymphomaProfile\NeoTYPELymphomaProfileTest.cs" />
     <Compile Include="Business\Test\NeoTypeLungTumorFISHPanel\NeoTypeLungTumorFISHPanelTest.cs" />
     <Compile Include="Business\Test\NeoTYPELungTumorProfile\NeoTYPELungTumorProfileTestOrder.cs" />
@@ -1368,9 +1377,9 @@
     <Compile Include="Business\PanelSet.Model\ALK1Test.cs" />
     <Compile Include="Business\PanelSet.Model\AutopsyResult.cs" />
     <Compile Include="Business\PanelSet.Model\CTNNB1Test.cs" />
-    <Compile Include="Business\PanelSet.Model\CultureAndHoldForCytogeneticsTest.cs" />
+    <Compile Include="Business\PanelSet.Model\CultureAndHoldForCytogeneticsTestRetired.cs" />
     <Compile Include="Business\PanelSet.Model\CysticFibrosisTestRetired.cs" />
-    <Compile Include="Business\PanelSet.Model\DirectHarvestForFISHTest.cs" />
+    <Compile Include="Business\PanelSet.Model\DirectHarvestForFISHTestRetired.cs" />
     <Compile Include="Business\PanelSet.Model\ETV6RUNX1Test.cs" />
     <Compile Include="Business\PanelSet.Model\FISH820Q20Test.cs" />
     <Compile Include="Business\PanelSet.Model\FishAnalysisTest.cs" />
@@ -2191,7 +2200,7 @@
     <Compile Include="Business\Test\ErPrSemiQuantitative\ErPrSemiQuantitativeTest.cs" />
     <Compile Include="Business\Test\ErPrSemiQuantitative\ErPrSemiQuantitativeTestOrder.cs" />
     <Compile Include="Business\Test\ErPrSemiQuantitative\ErPrSemiQuantitativeWordDocument.cs" />
-    <Compile Include="Business\Test\ExtractAndHoldForMolecular\ExtractAndHoldForMolecularTest.cs" />
+    <Compile Include="Business\Test\HoldForFlow\ExtractAndHoldForMolecularTest.cs" />
     <Compile Include="Business\Test\ExtractAndHoldForMolecular\ExtractAndHoldForMolecularTestOrder.cs" />
     <Compile Include="Business\Test\FactorVLeiden\FactorVLeidenEpicObxView.cs" />
     <Compile Include="Business\Test\FactorVLeiden\FactorVLeidenHeterozygousMutationDetectedResult.cs" />
@@ -2977,8 +2986,8 @@
     <Compile Include="UI\Billing\AddFISHCPTCodePage.xaml.cs">
       <DependentUpon>AddFISHCPTCodePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Billing\AutomatedBillingDialog.xaml.cs">
-      <DependentUpon>AutomatedBillingDialog.xaml</DependentUpon>
+    <Compile Include="UI\Billing\SimulationDialog.xaml.cs">
+      <DependentUpon>SimulationDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Billing\BillingPage.xaml.cs">
       <DependentUpon>BillingPage.xaml</DependentUpon>
@@ -2987,8 +2996,8 @@
     <Compile Include="UI\Billing\ADTPage.xaml.cs">
       <DependentUpon>ADTPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Billing\AutomationListItem.cs" />
-    <Compile Include="UI\Billing\AutomationList.cs" />
+    <Compile Include="UI\Billing\SimulationListItem.cs" />
+    <Compile Include="UI\Billing\SimulationList.cs" />
     <Compile Include="UI\Billing\SVHCDMResultDialog.xaml.cs">
       <DependentUpon>SVHCDMResultDialog.xaml</DependentUpon>
     </Compile>
@@ -4914,7 +4923,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Billing\AutomatedBillingDialog.xaml">
+    <Page Include="UI\Billing\SimulationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -38,7 +38,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             panelSetOrderLynchSyndromeEvaluation.Interpretation = LSEGYNMeth.Interpretation;
             panelSetOrderLynchSyndromeEvaluation.Method = this.BuildMethod(accessionOrder, panelSetOrderLynchSyndromeEvaluation);
             panelSetOrderLynchSyndromeEvaluation.ReportReferences = LSEGYNReferences;
-            panelSetOrderLynchSyndromeEvaluation.ReflexToBRAFMeth = true;
+            panelSetOrderLynchSyndromeEvaluation.ReflexToBRAFMeth = false;
         }
 
         public override Audit.Model.AuditResult IsOkToSetResults(AccessionOrder accessionOrder, PanelSetOrderLynchSyndromeEvaluation panelSetOrderLynchSyndromeEvaluation)

@@ -264,5 +264,13 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
 
             return result;
         }
+
+        public override FinalizeTestResult Finish(AccessionOrder accessionOrder)
+        {
+            HER2AmplificationSummary.HER2AmplificationSummaryTest test = new HER2AmplificationSummary.HER2AmplificationSummaryTest();
+            HER2AmplificationSummary.HER2AmplificationSummaryTestOrder testOrder = (HER2AmplificationSummary.HER2AmplificationSummaryTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_OrderedOnId, true);
+            testOrder.SetValues(accessionOrder);
+            return base.Finish(accessionOrder);
+        }
     }
 }

@@ -10,7 +10,8 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
     public class LSEColonBRAFMeth : LSERule
     {
         public static string Interpretation = "The results are compatible with a sporadic tumor and further genetic evaluation is not indicated.";
-
+        public static string BRAFMethNotDetectedInterpretation = "The immunohistochemical staining pattern and molecular test results are highly " +
+            "suggestive of Lynch Syndrome.  Recommend genetic counseling and further evaluation.";
         public LSEColonBRAFMeth()
         {
             this.m_RuleName = "Reflex to BRAF/Meth";
@@ -87,7 +88,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 
             if (brafResult.Message == TestResult.NotDetected && methResult.Message == TestResult.NotDetected)
             {
-                result = LSEColonSendOut.Interpretation;
+                result = BRAFMethNotDetectedInterpretation;
             }
 
             return result;

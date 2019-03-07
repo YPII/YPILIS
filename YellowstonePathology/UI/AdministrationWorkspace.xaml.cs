@@ -33,6 +33,8 @@ using MongoDB.Bson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Grpc.Core;
+using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.UI
 {    
@@ -1020,7 +1022,63 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            Business.Test.API2MALT1ByFISH.API2MALT1ByFISHTest t = new Business.Test.API2MALT1ByFISH.API2MALT1ByFISHTest();
+            InsertPatitneType();
+        }
+
+        private void InsertADT()
+        {
+            MySqlCommand cmdl = new MySqlCommand();
+            cmdl.CommandText = "Select * from tblADT where DateReceived Between '2019-01-01' and '2019-02-01'";
+            cmdl.CommandType = CommandType.Text;
+
+            using (MySqlConnection cnl = new MySqlConnection("Server = localhost; Uid = sqldude; Pwd = 123Whatsup; Database = lis; Pooling=True;"))
+            {
+                cnl.Open();
+                cmdl.Connection = cnl;
+                using (MySqlDataReader dr = cmdl.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        DateTime dateReceived = DateTime.Parse(dr["DateReceived"].ToString());
+                        DateTime birthdate = DateTime.Parse(dr["PBirthdate"].ToString());
+                        string sql = "Insert tblADT (MessageId, DateReceived, Message, PFirstName, PLastName, PBirthdate, AccountNo, MedicalRecordNo, MessageType) values " +
+                        "('" + dr["MessageId"].ToString() + "', @DateReceived, @Message, @PFirstName, PLastName, @Birthdate, '" + dr["AccountNo"].ToString() + "', '" + dr["MedicalRecordNo"].ToString() + "', '" + dr["MessageType"].ToString() + "');";
+                        
+                        MySqlCommand cmd = new MySqlCommand();
+                        cmd.CommandText = sql;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@Message", dr["Message"].ToString());
+                        cmd.Parameters.AddWithValue("@DateReceived", dateReceived);
+                        cmd.Parameters.AddWithValue("@Birthdate", birthdate);
+                        cmd.Parameters.AddWithValue("@PLastName", dr["PLastName"].ToString());
+                        cmd.Parameters.AddWithValue("@PFirstName", dr["PFirstName"].ToString());
+
+                        using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+                        {
+                            cn.Open();
+                            cmd.Connection = cn;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                MessageBox.Show("Done");
+            }
+        }
+
+        private void InsertPatitneType()
+        {
+            using (StreamReader sr = new StreamReader(@"C:\Users\sid.harder\Documents\patienttypemapping.csv"))
+            {
+                string line = null;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] fields = line.Split(',');
+                    string sql = "Insert tblSVHPatientTypeMap (PatientClass, AssignedPatientLocation, PatientType)" +
+                        " values " +
+                        "('" + fields[1] + "', '" + fields[0] + "', '" + fields[2] + "');";
+                    Console.WriteLine(sql);
+                }
+            }
         }
 
         private void AddWebService()

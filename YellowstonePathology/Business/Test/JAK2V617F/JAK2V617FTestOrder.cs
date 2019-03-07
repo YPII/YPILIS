@@ -161,22 +161,6 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
             base.ClearPreviousResults();
         }
 
-        public override Audit.Model.AuditResult IsOkToSetPreviousResults(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
-        {
-            Audit.Model.AuditResult result = base.IsOkToSetPreviousResults(panelSetOrder, accessionOrder);
-            if (result.Status == Audit.Model.AuditStatusEnum.OK)
-            {
-                JAK2V617FTestOrder jak2V617FTestOrder = (JAK2V617FTestOrder)panelSetOrder;
-                this.DoesFinalSummaryResultMatch(accessionOrder, jak2V617FTestOrder.Result, result);
-                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
-                {
-                    result.Message += AskSetPreviousResults;
-                }
-            }
-
-            return result;
-        }
-
         public override Audit.Model.AuditResult IsOkToAccept(AccessionOrder accessionOrder)
         {
             Audit.Model.AuditResult result = base.IsOkToAccept(accessionOrder);
@@ -186,15 +170,6 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
                 {
                     result.Status = Audit.Model.AuditStatusEnum.Failure;
                     result.Message = UnableToAccept;
-                }
-
-                if (result.Status == Audit.Model.AuditStatusEnum.OK)
-                {
-                    this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
-                    if (result.Status == Audit.Model.AuditStatusEnum.Warning)
-                    {
-                        result.Message += AskAccept;
-                    }
                 }
             }
 
@@ -211,28 +186,8 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
                     result.Status = Audit.Model.AuditStatusEnum.Failure;
                     result.Message = UnableToFinal;
                 }
-
-                if (result.Status == Audit.Model.AuditStatusEnum.OK)
-                {
-                    this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
-                    if (result.Status == Audit.Model.AuditStatusEnum.Warning)
-                    {
-                        result.Message += AskFinal;
-                    }
-                }
             }
             return result;
-        }
-
-        private void DoesFinalSummaryResultMatch(AccessionOrder accessionOrder, string result, Audit.Model.AuditResult auditResult)
-        {
-            Business.Test.MPNStandardReflex.MPNStandardReflexTest mpnStandardReflexTest = new MPNStandardReflex.MPNStandardReflexTest();
-
-            if (accessionOrder.PanelSetOrderCollection.Exists(mpnStandardReflexTest.PanelSetId) == true)
-            {
-                MPNStandardReflex.PanelSetOrderMPNStandardReflex panelSetOrderMPNStandardReflex = (MPNStandardReflex.PanelSetOrderMPNStandardReflex)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(mpnStandardReflexTest.PanelSetId);
-                panelSetOrderMPNStandardReflex.DoesJAK2V617FResultMatch(result, auditResult);
-            }
         }
     }
 }

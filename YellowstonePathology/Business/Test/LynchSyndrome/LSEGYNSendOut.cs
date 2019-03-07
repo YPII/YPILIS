@@ -30,6 +30,13 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             }
             else if (panelSetOrderLynchSyndromeIHC.MLH1Result == LSEIHCResult.IntactDescription &&
                 panelSetOrderLynchSyndromeIHC.MSH2Result == LSEIHCResult.IntactDescription &&
+                panelSetOrderLynchSyndromeIHC.MSH6Result == LSEIHCResult.LossDescription &&
+                panelSetOrderLynchSyndromeIHC.PMS2Result == LSEIHCResult.IntactDescription)
+            {
+                result = true;
+            }
+            else if (panelSetOrderLynchSyndromeIHC.MLH1Result == LSEIHCResult.IntactDescription &&
+                panelSetOrderLynchSyndromeIHC.MSH2Result == LSEIHCResult.IntactDescription &&
                 panelSetOrderLynchSyndromeIHC.MSH6Result == LSEIHCResult.IntactDescription &&
                 panelSetOrderLynchSyndromeIHC.PMS2Result == LSEIHCResult.LossDescription)
             {

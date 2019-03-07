@@ -9,7 +9,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 	{
         public static string Interpretation = "The results are compatible with a sporadic tumor and indicate a low risk for Lynch Syndrome.  " +
                 "If clinical suspicion for Lynch Syndrome is high, microsatellite instability (MSI) testing by PCR is recommended. " +
-                "If MSI testing is desired, please contact Yellowstone Pathology with the request.";
+                "If MSI testing is desired, please contact Yellowstone Pathology Institute with the request.";
 
         public LSEColonAllIntact()
 		{

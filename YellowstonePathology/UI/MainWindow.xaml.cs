@@ -1032,12 +1032,12 @@ namespace YellowstonePathology.UI
         {
             Policy.PolicyExplorer policyExplorer = new Policy.PolicyExplorer();
             policyExplorer.Show();
-        }
+        }        
 
-        private void MenuItemAdmin_Click(object sender, RoutedEventArgs e)
+        private void MenuItemBillingSimulation_Click(object sender, RoutedEventArgs e)
         {
-            UI.Billing.AutomatedBillingDialog automatedBillingDialog = new Billing.AutomatedBillingDialog();
-            automatedBillingDialog.Show();
+            UI.Billing.SimulationDialog simulationDialog = new Billing.SimulationDialog();
+            simulationDialog.Show();
         }
     }
 }

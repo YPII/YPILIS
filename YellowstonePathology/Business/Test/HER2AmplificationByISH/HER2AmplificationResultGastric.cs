@@ -23,20 +23,20 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
         public override bool IsAMatch()
         {
             bool result = false;
-            if (this.m_HER2AmplificationByISHTestOrder.Indicator == HER2AmplificationByISHIndicatorCollection.GastricIndication) result = true;
+            if (this.m_HER2ISH.Indicator == HER2AmplificationByISHIndicatorCollection.GastricIndication) result = true;
             return result;
         }
 
         public override void SetResults(Business.Specimen.Model.SpecimenOrder specimenOrder)
         {
             this.m_ResultComment = null;
-            this.m_ResultDescription = "Ratio = " + this.m_HER2AmplificationByISHTestOrder.Her2Chr17Ratio;
+            this.m_ResultDescription = "Ratio = " + this.m_HER2ISH.Her2Chr17Ratio;
 
-            this.m_InterpretiveComment = this.m_InterpretiveComment.Replace("*RATIO*", this.m_HER2AmplificationByISHTestOrder.Her2Chr17Ratio.Value.ToString());
-            this.m_InterpretiveComment = this.m_InterpretiveComment.Replace("*CELLSCOUNTED*", this.m_HER2AmplificationByISHTestOrder.CellsCounted.ToString());
-            if (this.m_HER2AmplificationByISHTestOrder.AverageHer2NeuSignal.HasValue == true) this.m_InterpretiveComment = this.m_InterpretiveComment.Replace("*HER2COPY*", this.m_HER2AmplificationByISHTestOrder.AverageHer2NeuSignal.Value.ToString());
+            this.m_InterpretiveComment = this.m_InterpretiveComment.Replace("*RATIO*", this.m_HER2ISH.Her2Chr17Ratio.Value.ToString());
+            this.m_InterpretiveComment = this.m_InterpretiveComment.Replace("*CELLSCOUNTED*", this.m_HER2ISH.CellCountToUse.ToString());
+            if (this.m_HER2ISH.AverageHer2NeuSignal.HasValue == true) this.m_InterpretiveComment = this.m_InterpretiveComment.Replace("*HER2COPY*", this.m_HER2ISH.AverageHer2NeuSignal.Value.ToString());
 
-            Nullable<double> her2Chr17Ratio = this.m_HER2AmplificationByISHTestOrder.AverageHer2Chr17SignalAsDouble;
+            Nullable<double> her2Chr17Ratio = this.m_HER2ISH.AverageHer2Chr17SignalAsDouble;
             if (her2Chr17Ratio.HasValue)
             {
                 if (her2Chr17Ratio < 2.0)

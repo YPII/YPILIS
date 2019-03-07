@@ -70,16 +70,20 @@ namespace YellowstonePathology.UI.Login
 			switch(caseDocument.Extension.ToUpper())
 			{
 				case "XPS":
-					if (caseDocument.CaseDocumentType == "AccessionOrderDataSheet")
-					{
-						this.ShowAccessionDataSheet();
-					}
-					else
-					{
-						XpsDocumentViewer viewer = new XpsDocumentViewer();
-						viewer.ViewDocument(caseDocument.FullFileName);
-						viewer.ShowDialog();
-					}
+                    if (caseDocument.CaseDocumentType == "AccessionOrderDataSheet")
+                    {
+                        this.ShowAccessionDataSheet();
+                    }
+                    else if (caseDocument.CaseDocumentType == "PlacentalPathologySheet")
+                    {
+                        this.ShowPlacentalPathologySheet();
+                    }
+                    else
+                    {
+                        XpsDocumentViewer viewer = new XpsDocumentViewer();
+                        viewer.ViewDocument(caseDocument.FullFileName);
+                        viewer.ShowDialog();
+                    }
 					break;
 				case "DOC":
 					YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWordViewer(caseDocument.FullFileName);
@@ -105,7 +109,16 @@ namespace YellowstonePathology.UI.Login
 			viewer.ShowDialog();
 		}
 
-		private void ButtonViewDocument_Click(object sender, RoutedEventArgs e)
+        private void ShowPlacentalPathologySheet()
+        {
+            YellowstonePathology.Business.XPSDocument.Result.Data.PlacentalPathologyQuestionnaireDataV2 placentalPathologyData = YellowstonePathology.Business.Gateway.XmlGateway.GetPlacentalPathologyQuestionnaire1(this.m_AccessionOrder.ClientOrderId, this);
+            YellowstonePathology.Business.XPSDocument.PlacentalPathologyQuestionnaireV2 placentalPathologyQuestionnare = new Business.XPSDocument.PlacentalPathologyQuestionnaireV2(placentalPathologyData);
+            XpsDocumentViewer viewer = new XpsDocumentViewer();
+            viewer.LoadDocument(placentalPathologyQuestionnare.FixedDocument);
+            viewer.ShowDialog();
+        }
+
+        private void ButtonViewDocument_Click(object sender, RoutedEventArgs e)
 		{
 			if (this.ListBoxDocumentList.SelectedItem != null)
 			{

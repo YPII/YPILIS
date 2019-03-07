@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
         public override void SetResults(Business.Specimen.Model.SpecimenOrder specimenOrder)
         {
             this.m_ResultComment = null;
-            this.m_ResultDescription = "Ratio = " + this.m_HER2AmplificationByISHTestOrder.Her2Chr17Ratio;
+            this.m_ResultDescription = "Ratio = " + this.m_HER2ISH.Her2Chr17Ratio;
 
             base.SetResults(specimenOrder);
         }

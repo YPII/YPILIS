@@ -29,9 +29,7 @@
 				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
-				<RowDefinition Height="Auto"></RowDefinition>
-				<RowDefinition Height="Auto"></RowDefinition>
-				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="20"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="*"></RowDefinition>
@@ -39,40 +37,30 @@
 				<RowDefinition Height="Auto"></RowDefinition>
 			</Grid.RowDefinitions>
 
-			<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,5,0,0" FontWeight="Bold" FontSize="16">Order</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,0,0" FontWeight="Bold" FontSize="16">Options</TextBlock>
 
-			<TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0">
-                <Hyperlink Click="HyperLinkOrderJak2Exon1214_Click" FontSize="14">JAK2 Exon 12-14</Hyperlink>
-			</TextBlock>
-
-            <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,0">
-                <Hyperlink Click="HyperLinkOrderMPL_Click" FontSize="14">MPL</Hyperlink>
-            </TextBlock>
-
-            <TextBlock Grid.Column="0" Grid.Row="3" Margin="0,20,0,0" FontWeight="Bold" FontSize="16">Options</TextBlock>
-
-            <TextBlock Name="TextBlockPreviousResults" Grid.Column="0" Grid.Row="4" Margin="5,3,0,5">
+            <TextBlock Name="TextBlockPreviousResults" Grid.Column="0" Grid.Row="1" Margin="5,3,0,5">
 					<Hyperlink Click="HyperLinkPreviousResults_Click" FontSize="14">Previous Results</Hyperlink>
             </TextBlock>
                        
 
-			<TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,0">                    
+			<TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkAcceptResults_Click" FontSize="14">Accept Results</Hyperlink>
 			</TextBlock>
 
-            <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="6" Margin="5,3,0,0">                    
+            <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="4" Margin="5,3,0,0">                    
                 <Hyperlink Click="HyperLinkShowDocument_Click" FontSize="14">Show Document</Hyperlink>
 			</TextBlock>
 
-			<TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">
+			<TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,0">
                 <Hyperlink Click="HyperLinkFinalizeResults_Click" FontSize="14">Finalize</Hyperlink>
 			</TextBlock>
 
-			<TextBlock Grid.Column="0" Grid.Row="9" Margin="5,3,0,0">                    
+			<TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkUnacceptResults_Click" FontSize="14">Unaccept Results</Hyperlink>
 			</TextBlock>
 
-            <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="10" Margin="5,3,0,0">                    
+            <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">                    
 				<Hyperlink Click="HyperLinkUnfinalResults_Click" FontSize="14">Unfinalize Results</Hyperlink>
 			</TextBlock>
 
@@ -111,25 +99,25 @@
 		        <TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=SpecimenOrder.Description}"></TextBlock>
 
 		        <TextBlock Grid.Column="0" Grid.Row="1" FontWeight="Bold" Margin="2,2,2,2">JAK2 V617F Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.JAK2V617FResult}" />
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.JAK2V617FResult}" />
 
                 <TextBlock Grid.Column="0" Grid.Row="2" FontWeight="Bold" Margin="2,2,2,2">JAK2 Exon 12-14 Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.JAK2Exon1214Result}" />
+                <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.JAK2Exon1214Result}" />
 
                 <TextBlock Grid.Column="0" Grid.Row="3" FontWeight="Bold" Margin="2,2,2,2">MPL Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.MPLResult}" />
+                <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.MPLResult}" />
 
                 <TextBlock Grid.Column="0" Grid.Row="4" FontWeight="Bold" Margin="2,2,2,2">JAK2 Comment:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.Comment}" />
+                <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Comment}" />
             
                 <TextBlock Grid.Column="0" Grid.Row="5" FontWeight="Bold" Margin="2,2,2,2">Interpretation:</TextBlock>
-                <TextBox Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.Interpretation}" TextWrapping="Wrap" AcceptsReturn="True" />
+                <TextBox Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Interpretation}" TextWrapping="Wrap" AcceptsReturn="True" />
 
 		        <TextBlock Grid.Column="0" Grid.Row="7" FontWeight="Bold" Margin="2,2,2,2">Method:</TextBlock>
-                <TextBox Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.Method}" TextWrapping="Wrap" AcceptsReturn="True" />
+                <TextBox Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True" />
 
 		        <TextBlock Grid.Column="0" Grid.Row="9" FontWeight="Bold" Margin="2,2,2,2">References:</TextBlock>
-                <TextBox Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True" />
+                <TextBox Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True" />
 
 		        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11" FontWeight="Bold" Margin="2,2,2,2">Current Orders</TextBlock>
 		        <ListView Name="ListBoxPanelSetOrders" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="12" Margin="2,2,2,2" HorizontalAlignment="Stretch"
@@ -146,10 +134,10 @@
 		        </ListView>
 
 		        <TextBlock Grid.Column="0" Grid.Row="13" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
-		        <CheckBox Grid.Column="1" Grid.Row="13" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrderMPNStandardReflex.Distribute}"></CheckBox>
+                <CheckBox Grid.Column="1" Grid.Row="13" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}"></CheckBox>
 
 				<TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
-				<CheckBox Grid.Column="1" Grid.Row="14" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrderMPNStandardReflex.NoCharge}"></CheckBox>
+                <CheckBox Grid.Column="1" Grid.Row="14" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.NoCharge}"></CheckBox>
 
 				<Grid Grid.Column="0" Grid.Row="15" Grid.ColumnSpan="2">
 					<Grid.ColumnDefinitions>
@@ -167,22 +155,22 @@
 					</Grid.RowDefinitions>
 
 					<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Accepted:</TextBlock>
-					<CheckBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrderMPNStandardReflex.Accepted}" IsEnabled="False"></CheckBox>
+                    <CheckBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Accepted}" IsEnabled="False"></CheckBox>
 
 					<TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Date Accepted:</TextBlock>
-					<TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.AcceptedTime}" IsEnabled="False"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.AcceptedTime}" IsEnabled="False"></TextBox>
 
 					<TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Accepted By:</TextBlock>
-					<TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.AcceptedBy}" IsEnabled="False"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.AcceptedBy}" IsEnabled="False"></TextBox>
 
 					<TextBlock Grid.Column="2" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold">Final:</TextBlock>
-					<CheckBox Grid.Column="3" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrderMPNStandardReflex.Final}" IsEnabled="False"></CheckBox>
+                    <CheckBox Grid.Column="3" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Final}" IsEnabled="False"></CheckBox>
 
 					<TextBlock Grid.Column="2" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Date Finaled:</TextBlock>
-					<TextBox Grid.Column="3" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.FinalTime}" IsEnabled="False"></TextBox>
+                    <TextBox Grid.Column="3" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.FinalTime}" IsEnabled="False"></TextBox>
 
 					<TextBlock Grid.Column="2" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Finaled By:</TextBlock>
-					<TextBox Grid.Column="3" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderMPNStandardReflex.Signature}" IsEnabled="False"></TextBox>
+                    <TextBox Grid.Column="3" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Signature}" IsEnabled="False"></TextBox>
 
 				</Grid>
 

@@ -48,19 +48,12 @@ namespace YellowstonePathology.UI.Test
 
         private void ResultPage_Next(object sender, EventArgs e)
 		{
-            if (this.m_PanelSetOrder.Final == true)
+            if (this.ShowRecountPage() == false)
             {
-                if (this.ShowRecountPage() == false)
+                if (this.ShowHER2AmplificationSummaryResultPage() == false)
                 {
-                    if (this.ShowHER2AmplificationSummaryResultPage() == false)
-                    {
-                        this.Finished();
-                    }
+                    this.Finished();
                 }
-            }
-            else
-            {
-                this.Finished();
             }
         }
 
@@ -91,7 +84,7 @@ namespace YellowstonePathology.UI.Test
             bool result = false;
 
             YellowstonePathology.Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryTest test = new Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryTest();
-            YellowstonePathology.Business.Test.PanelSetOrder summaryTestOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
+            YellowstonePathology.Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryTestOrder summaryTestOrder = (Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
             if (summaryTestOrder != null)
             {
                 result = true;

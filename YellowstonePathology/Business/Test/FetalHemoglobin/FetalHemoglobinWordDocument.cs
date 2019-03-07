@@ -14,7 +14,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobin
             : base(accessionOrder, panelSetOrder, reportSaveMode)
         {
             this.m_PanelList = new YellowstonePathology.Business.Flow.FlowMarkerPanelList();
-            this.m_PanelList.SetFillCommandByPanelId(8);
+            this.m_PanelList.SetFillCommandByPanelId(14);
             this.m_PanelList.Fill();
         }        
 
@@ -51,6 +51,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobin
                 {
                     case "HB-F":                        
                         this.SetXmlNodeData("test_result", markerItem.Result);
+                        this.SetXmlNodeData("test_sensitivity", "Sensitivity for Hb-F is " + markerItem.Result);
                         break;                    
                 }
             }

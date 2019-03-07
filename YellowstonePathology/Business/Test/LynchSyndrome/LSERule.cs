@@ -100,7 +100,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
                 }
 
                 string multiLoss = "proteins. ";
-                if (results.Count > 1) multiLoss = "protein. ";
+                if (results.Count == 1) multiLoss = "protein. ";
                 result = result + joinedResults + " mismatch repair " + multiLoss;
             }
             return result;

@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Test.HoldForFlow
             this.AddCompanyHeader(document);
             this.AddBlankNteElement(document);
 
-            this.AddNextNteElement("Hold For Flow", document);
+            this.AddNextNteElement(panelSetOrder.PanelSetName, document);
             this.AddNextNteElement("Master Accession #: " + panelSetOrder.MasterAccessionNo, document);
             this.AddNextNteElement("Report #: " + panelSetOrder.ReportNo, document);
             this.AddBlankNteElement(document);

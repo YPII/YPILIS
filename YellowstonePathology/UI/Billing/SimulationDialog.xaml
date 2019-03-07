@@ -1,0 +1,64 @@
+﻿<Window x:Class="YellowstonePathology.UI.Billing.SimulationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI.Billing"
+        mc:Ignorable="d"
+        Title="Billing Simulation Dialog" Height="500" Width="1500" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid Grid.Column="0" Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Text="Final Date:" />
+            <TextBox Name="TextBoxFinalDate" Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=FinalDate, Converter={StaticResource ShortDateConverter}}"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0">
+                <Button Width="25" Height="20" Margin="1,1,1,1" Click="ButtonBack_Click">&lt;</Button>
+                <Button Width="25" Height="20" Margin="1,1,1,1" Click="ButtonForward_Click">&gt;</Button>
+            </StackPanel>
+
+            <ListView Name="ListViewSimulationList" Margin="2,2,2,2" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" ItemsSource="{Binding Path=SimulationList}">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Map To Medicare" Click="MenuItemMapToMedicare_Click" Tag="{Binding}"></MenuItem>
+                        <MenuItem Header="Map To Medicaid" Click="MenuItemMapToMedicaid_Click" Tag="{Binding}"></MenuItem>
+                        <MenuItem Header="Map To Governmental" Click="MenuItemMapToGovernmental_Click" Tag="{Binding}"></MenuItem>
+                        <MenuItem Header="Map To Commercial" Click="MenuItemMapToCommercial_Click" Tag="{Binding}"></MenuItem>
+                        <MenuItem Header="Unmap" Click="MenuItemUnmap_Click" Tag="{Binding}"></MenuItem>
+                        <MenuItem Header="Simulate Set/Post" Click="MenuItemSimulateSetPost_Click" Tag="{Binding}"></MenuItem>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="85"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PostDate, Converter={StaticResource ShortDateTimeConverter}}" Header="Posted" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ClientId}" Header="Id" Width="75"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Name" Width="200"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=MedicalRecord}" Header="MRN" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PrimaryInsuranceManual}" Header="Manual" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PrimaryInsuranceADT}" Header="ADT" Width="200"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PrimaryInsuranceSim}" Header="Sim" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PatientType}" Header="IP/OP" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PatientTypeSim}" Header="SIM" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PatientClass}" Header="Class" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=AssignedPatientLocation}" Header="Location" Width="100"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Button Grid.Column="0" Grid.Row="2" Width="150" Height="25" Margin="2,2,2,2" Click="ButtonWriteCodesToFile_Click">Write Codes To File</Button>
+            <Button Grid.Column="2" Grid.Row="2" Width="75" Height="25" Margin="2,2,2,2" Click="ButtonClose_Click">Close</Button>
+
+        </Grid>
+    </Grid>
+</Window>

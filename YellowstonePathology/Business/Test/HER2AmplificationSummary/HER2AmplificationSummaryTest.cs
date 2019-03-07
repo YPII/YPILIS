@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationSummary
             this.IsBillable = false;
             this.NeverDistribute = false;
             this.m_SurgicalAmendmentRequired = false;
-            this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
+            this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryWordDocument).AssemblyQualifiedName;
 
             this.m_AllowMultiplePerAccession = true;

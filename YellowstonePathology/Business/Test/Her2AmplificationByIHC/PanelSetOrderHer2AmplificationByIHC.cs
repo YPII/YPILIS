@@ -202,27 +202,49 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
 
             if (result.Status == AuditStatusEnum.OK)
             {
-                if (this.m_Score.Contains("2+") == true)
+                HER2AmplificationByISH.HER2AmplificationByISHTest ishTest = new HER2AmplificationByISH.HER2AmplificationByISHTest();
+                if(accessionOrder.PanelSetOrderCollection.Exists(ishTest.PanelSetId, this.m_OrderedOnId, true) == true)
                 {
-                    HER2AmplificationRecount.HER2AmplificationRecountTest test = new HER2AmplificationRecount.HER2AmplificationRecountTest();
-                    if (accessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_OrderedOnId, true) == false)
+                    HER2AmplificationByISH.HER2AmplificationByISHTestOrder ishTestOrder = (HER2AmplificationByISH.HER2AmplificationByISHTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(ishTest.PanelSetId, this.m_OrderedOnId, true);
+                    if(ishTestOrder.Final == true)
                     {
-                        result.Status = AuditStatusEnum.Failure;
-                        result.Message = "Unable to finalize as a " + test.PanelSetName + " is required.";
-                    }
-                }
-                else
-                {
-                    HER2AmplificationSummary.HER2AmplificationSummaryTest summaryTest = new HER2AmplificationSummary.HER2AmplificationSummaryTest();
-                    if (accessionOrder.PanelSetOrderCollection.Exists(summaryTest.PanelSetId, this.m_OrderedOnId, true) == false)
-                    {
-                        result.Status = AuditStatusEnum.Failure;
-                        result.Message = "Unable to finalize as a " + summaryTest.PanelSetName + " is required.";
+                        if (this.m_Score.Contains("2+") == true)
+                        {
+                            HER2AmplificationRecount.HER2AmplificationRecountTest test = new HER2AmplificationRecount.HER2AmplificationRecountTest();
+                            if (accessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_OrderedOnId, true) == false)
+                            {
+                                result.Status = AuditStatusEnum.Failure;
+                                result.Message = "Unable to finalize as a " + test.PanelSetName + " is required.";
+                            }
+                        }
+                        else
+                        {
+                            HER2AmplificationSummary.HER2AmplificationSummaryTest summaryTest = new HER2AmplificationSummary.HER2AmplificationSummaryTest();
+                            if (accessionOrder.PanelSetOrderCollection.Exists(summaryTest.PanelSetId, this.m_OrderedOnId, true) == false)
+                            {
+                                result.Status = AuditStatusEnum.Failure;
+                                result.Message = "Unable to finalize as a " + summaryTest.PanelSetName + " is required.";
+                            }
+                        }
                     }
                 }
             }
 
             return result;
+        }
+
+        public override FinalizeTestResult Finish(AccessionOrder accessionOrder)
+        {
+            if (this.m_Score.Contains("2+") == false)
+            {
+                HER2AmplificationSummary.HER2AmplificationSummaryTest test = new HER2AmplificationSummary.HER2AmplificationSummaryTest();
+                if (accessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_OrderedOnId, true) == true)
+                {
+                    HER2AmplificationSummary.HER2AmplificationSummaryTestOrder testOrder = (HER2AmplificationSummary.HER2AmplificationSummaryTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_OrderedOnId, true);
+                    testOrder.SetValues(accessionOrder);
+                }
+            }
+            return base.Finish(accessionOrder);
         }
     }
 }

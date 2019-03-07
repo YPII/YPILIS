@@ -72,7 +72,7 @@
                     <MenuItem Header="EOD Processing" Click="MenuItemEODProcessing_Click"></MenuItem>
                     <MenuItem Header="SVH Billing Data Import" Click="MenuItemSVHBillingDataImport_Click"></MenuItem>
                     <MenuItem Header="Parse PSA Data" Click="MenuItemParsePSAData_Click"></MenuItem>
-                    <MenuItem Header="Admin" Click="MenuItemAdmin_Click"></MenuItem>
+                    <MenuItem Header="Simulation" Click="MenuItemBillingSimulation_Click"></MenuItem>
                 </MenuItem>
 
 			    <MenuItem Header="_Scan Processing" Name="MenuItemScanProcessing">
