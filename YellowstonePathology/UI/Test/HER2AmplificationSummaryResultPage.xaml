@@ -141,7 +141,6 @@
                     <Grid Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="100"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
@@ -150,15 +149,13 @@
                         </Grid.RowDefinitions>
 
                         <TextBox Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.CellsCountedUI}" />
-                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="10,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Recounted:</TextBlock>
-                        <TextBox Grid.Column="2" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.CellsRecount}" />
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.CellsRecount}" Visibility="{Binding Path=RecountVisibility}" />
                     </Grid>
 
                     <TextBlock Grid.Column="0" Grid.Row="7" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total HER2 Signals Counted:</TextBlock>
                     <Grid Grid.Column="1" Grid.Row="7">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="100"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
@@ -167,15 +164,13 @@
                         </Grid.RowDefinitions>
 
                         <TextBox Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsCountedUI}" />
-                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="10,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Visibility="Hidden">Recounted:</TextBlock>
-                        <TextBox Grid.Column="2" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsRecount}" />
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsRecount}" Visibility="{Binding Path=RecountVisibility}" />
                     </Grid>
 
                     <TextBlock Grid.Column="0" Grid.Row="8" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total CHR17 Signals Counted:</TextBlock>
                     <Grid Grid.Column="1" Grid.Row="8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="100"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
@@ -184,8 +179,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBox Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsCountedUI}" />
-                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="10,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Visibility="Hidden">Recounted:</TextBlock>
-                        <TextBox Grid.Column="2" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsRecount}" />
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsRecount}" Visibility="{Binding Path=RecountVisibility}" />
                     </Grid>
 
                     <TextBlock Grid.Column="0" Grid.Row="9" Margin="2" VerticalAlignment="Center" FontWeight="Bold">CHR17 Signal Range:</TextBlock>

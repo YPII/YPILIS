@@ -250,28 +250,6 @@ namespace YellowstonePathology.UI.Test
             }
         }
 
-        private void HyperLinkCancelTestInsufficient_Click(object sender, RoutedEventArgs e)
-        {
-            string reasonForTestCancelation = this.m_PanelSetOrder.PanelSetName + " testing has been cancelled due to insufficient specimen.";
-            YellowstonePathology.UI.CustomEventArgs.CancelTestEventArgs cancelTestEventArgs = new CustomEventArgs.CancelTestEventArgs(this.m_PanelSetOrder, this.m_AccessionOrder, reasonForTestCancelation, this);
-            this.CancelTest(this, cancelTestEventArgs);
-        }
-
-        private void HyperLinkCancelTestUniterpretable_Click(object sender, RoutedEventArgs e)
-        {
-            string reasonForTestCancelation = this.m_PanelSetOrder.PanelSetName + " testing has been cancelled due to an uninterpretable result.";
-            YellowstonePathology.UI.CustomEventArgs.CancelTestEventArgs cancelTestEventArgs = new CustomEventArgs.CancelTestEventArgs(this.m_PanelSetOrder, this.m_AccessionOrder, reasonForTestCancelation, this);
-            this.CancelTest(this, cancelTestEventArgs);
-        }
-
-		private void HyperlinkSpecimenDetails_Click(object sender, RoutedEventArgs e)
-		{
-			if (this.SpecimenDetail != null)
-			{
-				this.SpecimenDetail(this, new EventArgs());
-			}
-		}
-
         private void HyperLinkOrderHER2IHC_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest test = new Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest();

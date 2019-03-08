@@ -81,7 +81,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationSummary
                 }
                 else
                 {
-                    this.DeleteRow("Recount");
+                    this.DeleteRow("HER2 By ISH Recount");
                     this.DeleteRow("re_cells_counted");
                     this.DeleteRow("re_her2_counted");
                     this.DeleteRow("re_chr17_counted");

@@ -914,7 +914,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationSummary
             this.m_ASRComment = ishTestOrder.ASRComment;
             this.m_FixationComment = ishTestOrder.FixationComment;
             this.m_HER2ByIHCRequired = ishTestOrder.HER2ByIHCRequired;
-            this.m_RecountRequired = ishTestOrder.RecountRequired;
+            this.m_RecountRequired = false;
 
             Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC ihcTestOrder = (Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(ihcTest.PanelSetId, this.m_OrderedOnId, true);
             this.m_IHCScore = ihcTestOrder.Score;
@@ -925,6 +925,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationSummary
                 this.m_CellsRecount = recountTestOrder.CellsCounted;
                 this.m_TotalChr17SignalsRecount = recountTestOrder.Chr17SignalsCounted;
                 this.m_TotalHer2SignalsRecount = recountTestOrder.Her2SignalsCounted;
+                this.m_RecountRequired = true;
             }
 
             this.m_Distribute = true;

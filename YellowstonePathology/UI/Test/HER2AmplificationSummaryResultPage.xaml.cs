@@ -24,6 +24,8 @@ namespace YellowstonePathology.UI.Test
         private string m_PageHeaderText;
         private string m_OrderedOnDescription;
 
+        private Visibility m_RecountVisibility;
+
 
         public HER2AmplificationSummaryResultPage(YellowstonePathology.Business.Test.HER2AmplificationSummary.HER2AmplificationSummaryTestOrder testOrder,
             YellowstonePathology.Business.Test.AccessionOrder accessionOrder,
@@ -41,6 +43,9 @@ namespace YellowstonePathology.UI.Test
             this.m_GeneticHeterogeneityCollection = new YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHGeneticHeterogeneityCollection();
             YellowstonePathology.Business.Interface.IOrderTarget orderTarget = this.m_AccessionOrder.SpecimenOrderCollection.GetOrderTarget(this.m_PanelSetOrder.OrderedOnId);
             this.m_OrderedOnDescription = orderTarget.GetDescription();
+
+            YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest test = new Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
+            this.m_RecountVisibility = this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) ? Visibility.Visible : Visibility.Hidden;
 
             InitializeComponent();
 
@@ -84,6 +89,11 @@ namespace YellowstonePathology.UI.Test
         public string OrderedOnDescription
         {
             get { return this.m_OrderedOnDescription; }
+        }
+
+        public Visibility RecountVisability
+        {
+            get { return this.m_RecountVisibility; }
         }
 
         public void NotifyPropertyChanged(String info)
