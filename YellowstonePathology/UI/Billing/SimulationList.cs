@@ -13,6 +13,14 @@ namespace YellowstonePathology.UI.Billing
 
 		}  
         
+        public void SetInsuranceBackgrounColor()
+        {
+            foreach(SimulationListItem item in this)
+            {
+                item.SetInsuranceBackgroundColor();
+            }
+        }        
+        
         public void HandlePatientTypeSimulation()
         {
             foreach (SimulationListItem item in this)
@@ -42,20 +50,20 @@ namespace YellowstonePathology.UI.Billing
             }            
         }      
 
-        public static SimulationList GetList(DateTime postDate)
+        public static SimulationList GetList(DateTime finalDate)
         {
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = "SELECT distinct a.MasterAccessionNo, pso.ReportNo, a.ClientId, a.ClientName, pso.PanelSetName, a.PatientType, a.PrimaryInsurance PrimaryInsuranceManual, psocpt.PostDate, a.SVHMedicalRecord MedicalRecord, pso.FinalDate " +
                 "FROM tblAccessionOrder a  " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
-                "join tblPanelSetOrderCPTCodeBill psocpt on pso.ReportNo = psocpt.ReportNo " +
-                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
-                "WHERE pso.IsPosted = 1 and a.SvhMedicalRecord like 'V%' and pso.PanelSetId = 13 and psocpt.PostDate = @PostDate;";
+                "left outer join tblPanelSetOrderCPTCodeBill psocpt on pso.ReportNo = psocpt.ReportNo " +
+                "Left outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE a.SvhMedicalRecord like 'V%' and pso.PanelSetId = 13 and pso.FinalDate = @finalDate;";
 
-            cmd.Parameters.AddWithValue("@PostDate", postDate);
+            cmd.Parameters.AddWithValue("@finalDate", finalDate);
             return BuildList(cmd);            
-        }        
+        }                
 
         private static SimulationList BuildList(MySqlCommand cmd)
         {

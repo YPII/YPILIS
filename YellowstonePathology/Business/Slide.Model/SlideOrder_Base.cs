@@ -79,7 +79,7 @@ namespace YellowstonePathology.Business.Slide.Model
             this.m_OrderedFrom = Environment.MachineName;
             this.m_OrderedAsDual = testOrder.OrderedAsDual;
             this.m_FacilityId = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId).FacilityId;
-            this.m_Location = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.Location;
+            this.m_Location = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
             this.m_LocationTime = DateTime.Now;
         }
 

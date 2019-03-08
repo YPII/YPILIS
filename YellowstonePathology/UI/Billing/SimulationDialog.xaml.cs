@@ -29,20 +29,12 @@ namespace YellowstonePathology.UI.Billing
 
         public SimulationDialog()
         {
-            this.m_InsuranceMapCollection = Business.Billing.Model.InsuranceMapCollection.GetCollection();
+            this.m_InsuranceMapCollection = Business.Billing.Model.InsuranceMapCollection.GetCollection();            
             this.m_FinalDate = DateTime.Today;
-            this.GetList();
+            this.m_SimulationList = SimulationList.GetList(this.m_FinalDate);
 
             InitializeComponent();
             this.DataContext = this;
-        }
-
-        public void GetList()
-        {
-            this.m_SimulationList = SimulationList.GetList(this.m_FinalDate);
-            this.HandlePrimaryInsuranceSimulation();
-            this.m_SimulationList.HandlePatientTypeSimulation();
-            this.NotifyPropertyChanged("SimulationList");
         }
 
         public DateTime FinalDate
@@ -151,70 +143,125 @@ namespace YellowstonePathology.UI.Billing
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
             this.m_FinalDate = this.m_FinalDate.AddDays(-1);
-            this.GetList();
+            this.m_SimulationList = SimulationList.GetList(this.m_FinalDate);
+            this.NotifyPropertyChanged("SimulationList");
             this.NotifyPropertyChanged("FinalDate");
         }
 
         private void ButtonForward_Click(object sender, RoutedEventArgs e)
         {
             this.m_FinalDate = this.m_FinalDate.AddDays(1);
-            this.GetList();
+            this.m_SimulationList = SimulationList.GetList(this.m_FinalDate);
+            this.NotifyPropertyChanged("SimulationList");
             this.NotifyPropertyChanged("FinalDate");
-        }
+        }        
 
-        private void MenuItemSimulateSetPost_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        public string HandleSerializeFolderFileName(DateTime finalDate, string reportNo)
-        {
-            string folderName = BaseSerializeFolder + finalDate.ToString("MMddyyy");
-            if(System.IO.Directory.Exists(folderName) == false)
+        public void HandleMakeFolders()
+        {            
+            if (System.IO.Directory.Exists(this.GetDateFolderName()) == false)
             {
-                System.IO.Directory.CreateDirectory(folderName);
-            }
-            return folderName + "\\" + reportNo + ".json";
-        }
-
-        public void Serialize(Business.Test.AccessionOrder ao, string reportNo, string fileName)
-        {
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.Converters.Add(new Newtonsoft.Json.Converters.JavaScriptDateTimeConverter());
-            serializer.NullValueHandling = NullValueHandling.Ignore;
-
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(fileName))
-            using (JsonWriter writer = new JsonTextWriter(sw))
+                System.IO.Directory.CreateDirectory(this.GetDateFolderName());
+            }            
+            if (System.IO.Directory.Exists(this.GetCPTCodeFolderName()) == false)
             {
-                Business.Test.PanelSetOrder pso = ao.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
-                serializer.Serialize(writer, pso.PanelSetOrderCPTCodeBillCollection);
+                string x = this.GetCPTCodeFolderName();
+                System.IO.Directory.CreateDirectory(this.GetCPTCodeFolderName());
             }
+            if (System.IO.Directory.Exists(this.GetCPTCodeBillFolderName()) == false)
+            {
+                System.IO.Directory.CreateDirectory(this.GetCPTCodeBillFolderName());
+            }            
         }
 
-        private void ButtonWriteCodesToFile_Click(object sender, RoutedEventArgs e)
+        public string GetDateFolderName()
+        {
+            return BaseSerializeFolder + this.m_FinalDate.ToString("MMddyyy") + "\\";
+        }
+
+        public string GetCPTCodeFolderName()
+        {
+            return this.GetDateFolderName() + "cpt-code\\";
+        }
+
+        public string GetCPTCodeBillFolderName()
+        {
+            return this.GetDateFolderName() + "cpt-code-bill\\";
+        }
+
+        public bool SetAndPost(Business.Test.AccessionOrder ao, string reportNo)
+        {
+            bool result = true;
+            YellowstonePathology.Business.Billing.Model.BillableObject billableObject = Business.Billing.Model.BillableObjectFactory.GetBillableObject(ao, reportNo);
+            YellowstonePathology.Business.Rules.MethodResult setResult = billableObject.Set();
+            if (setResult.Success == false)
+            {
+                Console.WriteLine(setResult.Message);
+                result = false;
+            }
+            else
+            {
+                YellowstonePathology.Business.Rules.MethodResult postResult = billableObject.Post();
+                if (postResult.Success == false)
+                {
+                    Console.WriteLine(postResult.Message);
+                    result = false;
+                }                
+            }
+            return result;
+        }
+
+        public void SerializeCPTCodeBillSimulation()
         {
             foreach (SimulationListItem item in this.ListViewSimulationList.Items)
             {
                 Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(item.MasterAccessionNo);
+                ao.PrimaryInsurance = item.GetAdjustedPrimaryInsurance();
+                ao.PatientType = item.PatientTypeSim;
 
-                YellowstonePathology.Business.Billing.Model.BillableObject billableObject = Business.Billing.Model.BillableObjectFactory.GetBillableObject(ao, item.ReportNo);
-                YellowstonePathology.Business.Rules.MethodResult setResult = billableObject.Set();
-                if (setResult.Success == false)
-                {
-                    MessageBox.Show(setResult.Message);
-                }
-                else
-                {
-                    YellowstonePathology.Business.Rules.MethodResult postResult = billableObject.Post();
-                    if (postResult.Success == false)
-                    {
-                        MessageBox.Show(postResult.Message);
-                    }
-                    string fileName = HandleSerializeFolderFileName(this.m_FinalDate, item.ReportNo);
-                    Business.Billing.Model.SimulationSerializer.Serialize(ao, item.ReportNo, fileName);
-                }
+                this.SetAndPost(ao, item.ReportNo);
+                string fileName = this.GetCPTCodeBillFolderName() + item.ReportNo + ".json";
+                Business.Billing.Model.SimulationSerializer.SerializePanelSetOrderCPTCodeBill(ao, item.ReportNo, fileName);                
+            }            
+        }       
+        
+        private void SerializeCPTCodeManual()
+        {
+            foreach (SimulationListItem item in this.ListViewSimulationList.Items)
+            {
+                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(item.MasterAccessionNo);
+                this.SetAndPost(ao, item.ReportNo);
+                string fileName = this.GetCPTCodeFolderName() + item.ReportNo + ".json";
+                Business.Billing.Model.SimulationSerializer.SerializePanelSetOrderCPTCode(ao, item.ReportNo, fileName);
             }
-            MessageBox.Show("Completed writing CPT Billing Codes");
+        }              
+
+        private void ButtonSerialize_Click(object sender, RoutedEventArgs e)
+        {
+            this.HandleMakeFolders();
+            this.SerializeCPTCodeBillSimulation();
+            this.SerializeCPTCodeManual();
+            MessageBox.Show("Serialization is complete.");
+        }
+
+        private void ButtonDeserialize_Click(object sender, RoutedEventArgs e)
+        {
+            string folderName = this.GetCPTCodeBillFolderName();
+            string[] files = System.IO.Directory.GetFiles(folderName);
+
+            Business.Test.PanelSetOrderCPTCodeBillCollection panelSetOrderCPTCodeBillCollection = Business.Billing.Model.SimulationSerializer.Deserialize();
+        }
+
+        private void ButtonInsuranceNotMatched_Click(object sender, RoutedEventArgs e)
+        {            
+            this.m_SimulationList.SetInsuranceBackgrounColor();
+            this.NotifyPropertyChanged("SimulationList");
+        }
+
+        private void ButtonRun_Click(object sender, RoutedEventArgs e)
+        {
+            this.HandlePrimaryInsuranceSimulation();
+            this.m_SimulationList.HandlePatientTypeSimulation();
+            this.NotifyPropertyChanged("SimulationList");
         }
     }
 }

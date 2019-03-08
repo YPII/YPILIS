@@ -1022,7 +1022,11 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            InsertPatitneType();
+            //string printerName = "ZDesigner ZT410-203dpi ZPL";
+            //Business.Label.Model.RawPrinterHelper.SendStringToPrinter(printerName, this.TextBoxZPL.Text);
+
+            //Business.Label.Model.HologicContainerLabel hologicContainerLabel = new Business.Label.Model.HologicContainerLabel("123", "MOUSE", "MICKEY", "19-12345");
+            //Business.Label.Model.HologicContainerLabelPrinter.Print(hologicContainerLabel);
         }
 
         private void InsertADT()

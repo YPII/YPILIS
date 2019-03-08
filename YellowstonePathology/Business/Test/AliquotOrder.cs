@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.Test
             this.Status = YellowstonePathology.Business.TrackedItemStatusEnum.Created.ToString();
 
             YellowstonePathology.Business.Facility.Model.Facility facility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string location = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.Location;
+            string location = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
             this.SetLocation(facility, location);
 
             this.m_TestOrderCollection = new YellowstonePathology.Business.Test.Model.TestOrderCollection_Base();			

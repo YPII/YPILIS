@@ -248,16 +248,16 @@ namespace YellowstonePathology.Business.Persistence
             }
         }
 
-        public YellowstonePathology.Business.User.UserPreference PullUserPreference(string location, object writer)
+        public YellowstonePathology.Business.User.UserPreference PullUserPreference(string hostName, object writer)
         {
             lock (locker)
             {
-                MySqlCommand cmd = new MySqlCommand("Select * from tblUserPreference where tblUserPreference.Location = @Location;");
+                MySqlCommand cmd = new MySqlCommand("Select * from tblUserPreference where tblUserPreference.HostName = @HostName;");
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Location", location);
+                cmd.Parameters.AddWithValue("@HostName", hostName);
                 GenericDocumentBuilder builder = new GenericDocumentBuilder(cmd, typeof(YellowstonePathology.Business.User.UserPreference));
 
-                DocumentId documentId = new DocumentId(typeof(YellowstonePathology.Business.User.UserPreference), writer, location);
+                DocumentId documentId = new DocumentId(typeof(YellowstonePathology.Business.User.UserPreference), writer, hostName);
                 documentId.IsGlobal = true;
                 Document document = this.m_Stack.Pull(documentId, builder);
 

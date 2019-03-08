@@ -53,7 +53,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 item.BillTo = billTo;
                 item.BillBy = billBy;
                 item.Quantity = blockCount - billedCount;
-                item.Modifier = autopsyBlock.Modifier == null ? null : autopsyBlock.Modifier.Modifier;
+                item.Modifier = "TC";
                 this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.Add(item);
             }                                
             

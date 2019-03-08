@@ -975,7 +975,7 @@ namespace YellowstonePathology.UI
 
         private void MenuItemUserPreferences_Click(object sender, RoutedEventArgs e)
         {
-            Common.UserPreferencesList dlg = new Common.UserPreferencesList(false);
+            Common.UserPreferencesList dlg = new Common.UserPreferencesList();
             dlg.ShowDialog();
         }
 

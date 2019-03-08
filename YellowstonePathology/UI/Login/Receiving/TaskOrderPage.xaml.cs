@@ -313,7 +313,7 @@ namespace YellowstonePathology.UI.Login.Receiving
                     }
                     else
                     {
-                        MessageBox.Show("There was a problem with this shipping request.");
+                        MessageBox.Show(result.Message);
                     }
                 }
                 else
@@ -431,6 +431,8 @@ namespace YellowstonePathology.UI.Login.Receiving
                 reportNotify.Render();
                 reportNotify.Publish();
 
+                System.Threading.Thread.Sleep(2000);
+
                 string notifyFileName = Business.Document.CaseDocument.GetCaseFileNameTifNotify(orderIdParser);
                 Business.ReportDistribution.Model.FaxSubmission.Submit(taskOrderDetailFax.FaxNumber, panelSetOrder.ReportNo + " - Additional Testing Notification", notifyFileName);
                 MessageBox.Show("The fax was successfully submitted.");
@@ -441,6 +443,8 @@ namespace YellowstonePathology.UI.Login.Receiving
                 new YellowstonePathology.Business.Test.ExtractAndHoldForPreauthorization.ExtractAndHoldForPreauthorizationWordDocument(this.m_AccessionOrder, panelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
                 reportPreauth.Render();
                 reportPreauth.Publish();
+
+                System.Threading.Thread.Sleep(2000);
 
                 string preauthFileName = Business.Document.CaseDocument.GetCaseFileNameTifPreAuth(orderIdParser);
                 Business.ReportDistribution.Model.FaxSubmission.Submit(taskOrderDetailFax.FaxNumber, panelSetOrder.ReportNo + "Preauthorization Notification", preauthFileName);

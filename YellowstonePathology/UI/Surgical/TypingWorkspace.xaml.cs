@@ -81,6 +81,7 @@ namespace YellowstonePathology.UI.Surgical
 
             UI.AppMessaging.MessagingPath.Instance.LockReleasedActionList.Add(this.Save);
             UI.AppMessaging.MessagingPath.Instance.LockAquiredActionList.Add(this.m_TypingUI.RunWorkspaceEnableRules);
+            if(string.IsNullOrEmpty(this.TextBoxReportNoSearch.Text) == true) this.TextBoxReportNoSearch.Text = DateTime.Today.Year.ToString().Substring(2, 2) + "-";
         }
 
         private void MainWindowCommandButtonHandler_ShowAmendmentDialog(object sender, EventArgs e)

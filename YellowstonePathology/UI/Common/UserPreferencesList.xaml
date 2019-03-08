@@ -20,7 +20,7 @@
                   ItemsSource="{Binding Path=UserPreferenceList}" MouseDoubleClick="ListViewUserPreferences_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Location" Width="200" DisplayMemberBinding="{Binding Path=Location}" />
+                    <GridViewColumn Header="Host Name" Width="200" DisplayMemberBinding="{Binding Path=HostName}" />
                     <GridViewColumn Header="Startup" Width="150" DisplayMemberBinding="{Binding Path=StartupPage}" />
                     <GridViewColumn Header="Port" Width="100" DisplayMemberBinding="{Binding Path=BarcodeScanPort}" />
                 </GridView>

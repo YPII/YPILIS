@@ -102,7 +102,7 @@ namespace YellowstonePathology.UI.MaterialTracking
 		private void AddMaterialTrackingLog(YellowstonePathology.Business.Test.AliquotOrder aliquotOrder)
 		{
 			YellowstonePathology.Business.Facility.Model.Facility thisFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-			string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.Location;
+			string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 			string scanLocation = "Block Scanned At " + thisLocation;
 
 			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
@@ -138,7 +138,7 @@ namespace YellowstonePathology.UI.MaterialTracking
 		private void AddMaterialTrackingLog(YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder)
 		{
 			YellowstonePathology.Business.Facility.Model.Facility thisFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-			string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.Location;
+			string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 			string scanLocation = "Slide Scanned At " + thisLocation;
 
 			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();

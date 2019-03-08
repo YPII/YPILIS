@@ -926,6 +926,8 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationSummary
                 this.m_TotalChr17SignalsRecount = recountTestOrder.Chr17SignalsCounted;
                 this.m_TotalHer2SignalsRecount = recountTestOrder.Her2SignalsCounted;
             }
+
+            this.m_Distribute = true;
         }
     }
 }

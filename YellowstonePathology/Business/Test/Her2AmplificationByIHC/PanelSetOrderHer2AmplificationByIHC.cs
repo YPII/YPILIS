@@ -213,17 +213,8 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
                             HER2AmplificationRecount.HER2AmplificationRecountTest test = new HER2AmplificationRecount.HER2AmplificationRecountTest();
                             if (accessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_OrderedOnId, true) == false)
                             {
-                                result.Status = AuditStatusEnum.Failure;
-                                result.Message = "Unable to finalize as a " + test.PanelSetName + " is required.";
-                            }
-                        }
-                        else
-                        {
-                            HER2AmplificationSummary.HER2AmplificationSummaryTest summaryTest = new HER2AmplificationSummary.HER2AmplificationSummaryTest();
-                            if (accessionOrder.PanelSetOrderCollection.Exists(summaryTest.PanelSetId, this.m_OrderedOnId, true) == false)
-                            {
-                                result.Status = AuditStatusEnum.Failure;
-                                result.Message = "Unable to finalize as a " + summaryTest.PanelSetName + " is required.";
+                                result.Status = AuditStatusEnum.Warning;
+                                result.Message = "This test will be finalized but not distributed as a " + test.PanelSetName + " is needed to determine the actual result and will be ordered.";
                             }
                         }
                     }
@@ -240,6 +231,7 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
                 HER2AmplificationSummary.HER2AmplificationSummaryTest test = new HER2AmplificationSummary.HER2AmplificationSummaryTest();
                 if (accessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_OrderedOnId, true) == true)
                 {
+                    this.Distribute = false;
                     HER2AmplificationSummary.HER2AmplificationSummaryTestOrder testOrder = (HER2AmplificationSummary.HER2AmplificationSummaryTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_OrderedOnId, true);
                     testOrder.SetValues(accessionOrder);
                 }

@@ -787,10 +787,13 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                 if (this.m_HER2ByIHCRequired == true)
                 {
                     Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new Her2AmplificationByIHC.Her2AmplificationByIHCTest();
+                    HER2AmplificationSummary.HER2AmplificationSummaryTest her2AmplificationSummaryTest = new HER2AmplificationSummary.HER2AmplificationSummaryTest();
                     if (accessionOrder.PanelSetOrderCollection.Exists(her2AmplificationByIHCTest.PanelSetId, this.OrderedOnId, true) == false)
                     {
-                        result.Status = AuditStatusEnum.Failure;
-                        result.Message = "Unable to finalize as a " + her2AmplificationByIHCTest.PanelSetName + " is required";
+                        result.Status = AuditStatusEnum.Warning;
+                        result.Message = "This test will be finalized but not distributed as a " + her2AmplificationByIHCTest.PanelSetName + 
+                            " is needed to determine the actual result and will be ordered." + Environment.NewLine + "A " + her2AmplificationSummaryTest.PanelSetName + 
+                            " will be also be ordered and set for distribution.";
                     }
                 }
             }

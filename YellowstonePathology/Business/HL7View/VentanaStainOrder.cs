@@ -45,7 +45,7 @@ namespace YellowstonePathology.Business.HL7View
                 }
                 
                 Business.Label.Model.ZPLPrinterUSB zplPrinterUSB = new Business.Label.Model.ZPLPrinterUSB();
-                Business.Label.Model.HistologySlidePaperZPLLabelV1 zplCommand = new Label.Model.HistologySlidePaperZPLLabelV1(slideOrder.SlideOrderId, slideOrder.ReportNo, slideOrder.PatientFirstName, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.Label, slideOrder.AccessioningFacility, slideOrder.UseWetProtocol, slideOrder.PerformedByHand);
+                Business.Label.Model.HistologySlidePaperZPLLabelV1 zplCommand = new Label.Model.HistologySlidePaperZPLLabelV1(slideOrder.SlideOrderId, slideOrder.ReportNo, slideOrder.PatientFirstName, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.Label, slideOrder.AccessioningFacility, slideOrder.UseWetProtocol, slideOrder.PerformedByHand);                
                 zplPrinterUSB.Print(zplCommand);
 
                 slideOrder.Printed = true;

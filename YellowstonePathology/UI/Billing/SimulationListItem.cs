@@ -23,6 +23,7 @@ namespace YellowstonePathology.UI.Billing
         private string m_PrimaryInsuranceADT;
         private string m_PrimaryInsuranceSim;
         private string m_MedicalRecord;
+        private string m_BackgroundColor;        
 
         public SimulationListItem()
 		{
@@ -245,6 +246,54 @@ namespace YellowstonePathology.UI.Billing
                     this.NotifyPropertyChanged("MedicalRecord");
                 }
             }
+        }
+
+        public string BackgroundColor
+        {
+            get { return this.m_BackgroundColor; }
+            set
+            {
+                if (value != this.m_BackgroundColor)
+                {
+                    this.m_BackgroundColor = value;
+                    this.NotifyPropertyChanged("BackgroundColor");
+                }
+            }
+        }
+
+        public void SetInsuranceBackgroundColor()
+        {
+            this.m_BackgroundColor = "Warning";
+            if(string.IsNullOrEmpty(this.m_PrimaryInsuranceManual) == false)
+            {
+                if(this.m_PrimaryInsuranceManual != "Not Selected")
+                {                    
+                    if(this.m_PrimaryInsuranceManual == this.m_PrimaryInsuranceSim)
+                    {
+                        this.m_BackgroundColor = "Normal";
+                    }                    
+                    else
+                    {
+                        this.m_BackgroundColor = "Critical";
+                    }                    
+                }
+                else
+                {
+                    if (this.m_PrimaryInsuranceSim == "Commercial")
+                    {
+                        this.m_BackgroundColor = "Normal";
+                    }
+                }
+            }
+            this.NotifyPropertyChanged("BackgroundColor");
+        }
+
+        public string GetAdjustedPrimaryInsurance()
+        {
+            string result = this.m_PrimaryInsuranceSim;
+            if (this.m_PrimaryInsuranceSim == "Commercial")
+                result = "Not Selected";
+            return result;
         }
     }
 }

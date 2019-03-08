@@ -138,5 +138,38 @@ namespace YellowstonePathology.Business.Gateway
             }
             return result;
         }
+
+        public static YellowstonePathology.Business.View.StVClientDOHReportViewCollection GetReportDistributionCollectionByDateTumorRegistryStVClients(DateTime startDate, DateTime endDate)
+        {
+            YellowstonePathology.Business.View.StVClientDOHReportViewCollection result = new YellowstonePathology.Business.View.StVClientDOHReportViewCollection();
+            string sql = "select tord.ReportNo, ao.ClientName, tord.ClientName ReportedTo, tord.TimeOfLastDistribution from tblTestOrderReportDistribution tord " +
+                "join tblPanelSetOrder pso on tord.ReportNo = pso.ReportNo " +
+                "join tblAccessionOrder ao on ao.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblClientGroupClient cgc on ao.ClientId = cgc.ClientId " +
+                "where tord.DateAdded between @StartDate and @EndDate and tord.DistributionType in('MTDOH', 'WYDOH') and cgc.ClientGroupId = 1;";
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("@StartDate", startDate);
+            cmd.Parameters.AddWithValue("@EndDate", endDate);
+            cmd.CommandType = CommandType.Text;
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.View.StVClientDOHReportView view = new YellowstonePathology.Business.View.StVClientDOHReportView();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(view, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(view);
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

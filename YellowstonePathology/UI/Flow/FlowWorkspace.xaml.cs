@@ -68,6 +68,7 @@ namespace YellowstonePathology.UI.Flow
 
             UI.AppMessaging.MessagingPath.Instance.LockReleasedActionList.Add(this.Save);
             UI.AppMessaging.MessagingPath.Instance.LockAquiredActionList.Add(this.m_FlowUI.SetAccess);
+            if (string.IsNullOrEmpty(this.textBoxSearchReportNo.Text) == true) this.textBoxSearchReportNo.Text = DateTime.Today.Year.ToString().Substring(2, 2) + "-";
         }
 
         private void MainWindowCommandButtonHandler_RemoveTab(object sender, EventArgs e)

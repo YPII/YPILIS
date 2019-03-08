@@ -15,6 +15,7 @@ namespace YellowstonePathology.Business.MaterialTracking.Model
         private XDocument m_ShipmentResponse;
         private string m_ZPLII;
         private bool m_RequestWasSuccessful;
+        private string m_Message;
 
         public FedexProcessShipmentReply(string response)
         {
@@ -22,16 +23,17 @@ namespace YellowstonePathology.Business.MaterialTracking.Model
             namespaces.AddNamespace("SOAP-ENV", "http://schemas.xmlsoap.org/soap/envelope/");
             namespaces.AddNamespace("ns", "http://fedex.com/ws/ship/v19");
 
-            this.m_ShipmentResponse = XDocument.Parse(response);
-            this.m_TrackingNumber = this.m_ShipmentResponse.XPathSelectElement("//SOAP-ENV:Envelope/SOAP-ENV:Body/ns:ProcessShipmentReply/ns:CompletedShipmentDetail/ns:CompletedPackageDetails/ns:TrackingIds/ns:TrackingNumber", namespaces).Value;
-            this.m_ZPLII = this.m_ShipmentResponse.XPathSelectElement("//SOAP-ENV:Envelope/SOAP-ENV:Body/ns:ProcessShipmentReply/ns:CompletedShipmentDetail/ns:CompletedPackageDetails/ns:Label/ns:Parts/ns:Image", namespaces).Value;
+            this.m_ShipmentResponse = XDocument.Parse(response);            
             string status = this.m_ShipmentResponse.XPathSelectElement("//SOAP-ENV:Envelope/SOAP-ENV:Body/ns:ProcessShipmentReply/ns:HighestSeverity", namespaces).Value;
             if (status == "SUCCESS" || status == "WARNING")
             {
+                this.m_TrackingNumber = this.m_ShipmentResponse.XPathSelectElement("//SOAP-ENV:Envelope/SOAP-ENV:Body/ns:ProcessShipmentReply/ns:CompletedShipmentDetail/ns:CompletedPackageDetails/ns:TrackingIds/ns:TrackingNumber", namespaces).Value;
+                this.m_ZPLII = this.m_ShipmentResponse.XPathSelectElement("//SOAP-ENV:Envelope/SOAP-ENV:Body/ns:ProcessShipmentReply/ns:CompletedShipmentDetail/ns:CompletedPackageDetails/ns:Label/ns:Parts/ns:Image", namespaces).Value;
                 this.m_RequestWasSuccessful = true;
             }
             else
             {
+                this.m_Message = this.m_ShipmentResponse.XPathSelectElement("//SOAP-ENV:Envelope/SOAP-ENV:Body/ns:ProcessShipmentReply/ns:Notifications/ns:LocalizedMessage", namespaces).Value;                
                 this.m_RequestWasSuccessful = false;
             }            
         }
@@ -54,6 +56,11 @@ namespace YellowstonePathology.Business.MaterialTracking.Model
         public bool RequestWasSuccessful
         {
             get { return this.m_RequestWasSuccessful; }
+        }
+
+        public string Message
+        {
+            get { return this.m_Message; }
         }
     }
 }

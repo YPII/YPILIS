@@ -505,6 +505,7 @@ namespace YellowstonePathology.UI.Billing
 
         private void RunAllProcesses(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            this.RunUpdateMRNAcct(sender, e);
             this.MatchAccessionOrdersToADT(sender, e);            
             this.ProcessSVHCDMFiles(sender, e);
             this.TransferSVHFiles(sender, e);
@@ -555,6 +556,13 @@ namespace YellowstonePathology.UI.Billing
             this.m_BackgroundWorker.RunWorkerAsync();            
         }
 
+        private void RunUpdateMRNAcct(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            this.m_BackgroundWorker.ReportProgress(1, "Starting Updating MRN/ACCT: " + DateTime.Now.ToLongTimeString());
+            Business.Gateway.BillingGateway.UpdateMRNACCT();
+            this.m_BackgroundWorker.ReportProgress(1, "Finished Updating MRN/ACCT: " + DateTime.Now.ToLongTimeString());
+        }
+
         private void FaxTheReport(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             Application.Current.Dispatcher.Invoke((Action)delegate {
@@ -587,35 +595,36 @@ namespace YellowstonePathology.UI.Billing
             foreach (Business.Billing.Model.AccessionListItem accessionListItem in accessionList)
             {
                 this.m_BackgroundWorker.ReportProgress(1, "Looking for a match for: " + accessionListItem.MasterAccessionNo);
-                List<Business.Billing.Model.ADTListItem> adtList = Business.Gateway.AccessionOrderGateway.GetADTList(accessionListItem.PFirstName, accessionListItem.PLastName, accessionListItem.PBirthdate.Value);
 
-                foreach (Business.Billing.Model.ADTListItem adtItem in adtList)
+                Business.ClientOrder.Model.ClientOrderCollection clientOrdersNeedingRegistration = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(accessionListItem.MasterAccessionNo);
+                Business.ClientOrder.Model.ClientOrder clientOrderNeedingRegistration = clientOrdersNeedingRegistration[0];
+
+                Business.ClientOrder.Model.ClientOrderCollection possibleNewClientOrders = Business.Gateway.ClientOrderGateway.GetClientOrdersByPatientName(accessionListItem.PFirstName, accessionListItem.PLastName);
+                foreach(Business.ClientOrder.Model.ClientOrder clientOrder in possibleNewClientOrders)
                 {
-                    DateTime received = DateTime.Parse(adtItem.DateReceived.ToShortDateString());
-                    int daysDiff = (int)(this.m_PostDate - received).TotalDays;
-                    if (daysDiff <= 3)
+                    if (clientOrder.OrderDate > clientOrderNeedingRegistration.OrderDate &&
+                        clientOrder.PBirthdate == clientOrderNeedingRegistration.PBirthdate && 
+                        clientOrder.ProviderName == "ANGELA DURDEN" &&
+                        clientOrder.SvhMedicalRecord.StartsWith("V"))
                     {
-                        if (adtItem.MedicalRecord.StartsWith("V") == true)
+                        Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(accessionListItem.MasterAccessionNo, this);
+                        Business.Test.PanelSetOrder pso = ao.PanelSetOrderCollection.GetPanelSetOrder(accessionListItem.ReportNo);
+
+                        foreach (Business.Test.PanelSetOrderCPTCodeBill psocb in pso.PanelSetOrderCPTCodeBillCollection)
                         {
-                            Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(accessionListItem.MasterAccessionNo, this);
-                            Business.Test.PanelSetOrder pso = ao.PanelSetOrderCollection.GetPanelSetOrder(accessionListItem.ReportNo);
-
-                            foreach (Business.Test.PanelSetOrderCPTCodeBill psocb in pso.PanelSetOrderCPTCodeBillCollection)
+                            this.m_BackgroundWorker.ReportProgress(1, "Found a match for: " + accessionListItem.MasterAccessionNo);
+                            if (psocb.BillTo == "Client")
                             {
-                                this.m_BackgroundWorker.ReportProgress(1, "Found a match for: " + accessionListItem.MasterAccessionNo);
-                                if (psocb.BillTo == "Client")
-                                {
-                                    psocb.MedicalRecord = adtItem.MedicalRecord;
-                                    psocb.Account = adtItem.Account;
-                                }
-
-                                if (psocb.PostDate.HasValue == false)
-                                    psocb.PostDate = this.m_PostDate;
+                                psocb.MedicalRecord = clientOrder.SvhMedicalRecord;
+                                psocb.Account = clientOrder.SvhAccountNo;
                             }
 
-                            Business.Persistence.DocumentGateway.Instance.Push(ao, this);
-                            break;
+                            if (psocb.PostDate.HasValue == false)
+                                psocb.PostDate = this.m_PostDate;
                         }
+
+                        Business.Persistence.DocumentGateway.Instance.Push(ao, this);
+                        break;
                     }
                 }
             }

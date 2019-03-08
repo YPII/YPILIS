@@ -87,5 +87,7 @@
         <Button Click="ButtonRunMethod_Click" Width="200" Height="30" Margin="5,5,5,5">Run Method</Button>
         <Button Click="ButtonAddYearDailyTasks_Click" Width="200" Height="30" Margin="5,5,5,5">Add 1Yr. Daily Tasks</Button>
 
+        <TextBox Name="TextBoxZPL" Grid.Row="1" Grid.Column="0" Margin="2" TextWrapping="Wrap" AcceptsReturn="True" Width="500" Height="200"></TextBox>
+
     </WrapPanel>                
 </UserControl>

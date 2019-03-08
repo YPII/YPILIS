@@ -96,6 +96,18 @@ namespace YellowstonePathology.UI.Test
                 YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
                 this.HandleFinalizeTestResult(finalizeTestResult);
             }
+            else if(result.Status == Business.Audit.Model.AuditStatusEnum.Warning)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(result.Message, "Additional testing required", MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
+                if (messageBoxResult == MessageBoxResult.OK)
+                {
+                    YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
+                    this.HandleFinalizeTestResult(finalizeTestResult);
+
+                    YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest test = new Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
+                    this.OrderATest(test);
+                }
+            }
             else
 			{
 				MessageBox.Show(result.Message);

@@ -331,14 +331,10 @@ namespace YellowstonePathology.UI.Gross
             {
                 result = result.Replace("[curettingssubmitted]", "Entirely submitted in cassette \"" + specimenOrder.AliquotOrderCollection[0].Label + "\"");
             }
-            else if (specimenOrder.AliquotOrderCollection.Count == 2)
-            {
-                result = result.Replace("[curettingssubmitted]", "Shave [procedure] and submitted in cassette \"" + specimenOrder.SpecimenNumber + "A\".  " + "The curettings are filtered through a fine mesh bag and entirely submitted in cassette \"" + specimenOrder.AliquotOrderCollection.GetLastBlock().Label + "\"");
-            }
             else
             {
-                result = "This template only works with 2 blocks.";
-            }
+                result = result.Replace("[curettingssubmitted]", "Shave [procedure] and submitted in cassette \"" + specimenOrder.SpecimenNumber + "A\".  " + "The curettings are filtered through a fine mesh bag and entirely submitted in cassette \"" + specimenOrder.AliquotOrderCollection.GetLastBlock().Label + "\"");
+            }            
             return result;
         }
 

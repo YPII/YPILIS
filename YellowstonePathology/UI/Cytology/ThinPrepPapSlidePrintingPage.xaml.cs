@@ -85,7 +85,7 @@ namespace YellowstonePathology.UI.Cytology
                         if (this.m_SpecimenOrder.AliquotOrderCollection.Exists(scanData) == true)
                         {
                             YellowstonePathology.Business.Facility.Model.Facility thisFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-                            string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.Location;
+                            string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
                             YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = this.m_SpecimenOrder.AliquotOrderCollection.GetByAliquotOrderId(scanData);
                             aliquotOrder.Validate();
@@ -118,7 +118,7 @@ namespace YellowstonePathology.UI.Cytology
                             if (this.m_SpecimenOrder.AliquotOrderCollection.Exists(barcode.ID) == true)
                             {
                                 YellowstonePathology.Business.Facility.Model.Facility thisFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-                                string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.Location;
+                                string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
                                 YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = this.m_SpecimenOrder.AliquotOrderCollection.GetByAliquotOrderId(barcode.ID);
                                 aliquotOrder.Validate();
@@ -183,12 +183,17 @@ namespace YellowstonePathology.UI.Cytology
 
         private void PrintThinPrepSlide(YellowstonePathology.Business.Test.AliquotOrder aliquotOrder)
         {
+            //YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2 barcode = new YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2(Business.BarcodeScanning.BarcodePrefixEnum.PSLD, aliquotOrder.AliquotOrderId);
+            //YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = YellowstonePathology.Business.BarcodeScanning.CytycBarcode.Parse(this.m_AccessionOrder.MasterAccessionNo);
+            //YellowstonePathology.Business.Label.Model.ThinPrepSlide thinPrepSlide = new Business.Label.Model.ThinPrepSlide(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, barcode, cytycBarcode);
+            //YellowstonePathology.Business.Label.Model.ThinPrepSlidePrinter thinPrepSlidePrinter = new Business.Label.Model.ThinPrepSlidePrinter();
+            //thinPrepSlidePrinter.Queue.Enqueue(thinPrepSlide);
+            //thinPrepSlidePrinter.Print();
+
             YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2 barcode = new YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2(Business.BarcodeScanning.BarcodePrefixEnum.PSLD, aliquotOrder.AliquotOrderId);
             YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = YellowstonePathology.Business.BarcodeScanning.CytycBarcode.Parse(this.m_AccessionOrder.MasterAccessionNo);
-            YellowstonePathology.Business.Label.Model.ThinPrepSlide thinPrepSlide = new Business.Label.Model.ThinPrepSlide(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, barcode, cytycBarcode);
-            YellowstonePathology.Business.Label.Model.ThinPrepSlidePrinter thinPrepSlidePrinter = new Business.Label.Model.ThinPrepSlidePrinter();
-            thinPrepSlidePrinter.Queue.Enqueue(thinPrepSlide);
-            thinPrepSlidePrinter.Print();
+            Business.Label.Model.HologicSlideLabel hologicSlideLabel = new Business.Label.Model.HologicSlideLabel(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, barcode, cytycBarcode);
+            Business.Label.Model.HologicSlideLabelPrinter.Print(hologicSlideLabel, Business.User.UserPreferenceInstance.Instance.UserPreference.CytologySlideLabelPrinter, 1);
         }
 
         private void ButtonAddPantherAliquot_Click(object sender, RoutedEventArgs e)

@@ -15,15 +15,10 @@ namespace YellowstonePathology.Business.User
 
 		private UserPreferenceInstance()
 		{
-            string path = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\ypilis.json";
-            string jString = System.IO.File.ReadAllText(path);
-            JObject jObject = JsonConvert.DeserializeObject<JObject>(jString);
-            string location = jObject["location"].ToString();
-
-            this.m_UserPreference = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullUserPreference(location, this);
+            this.m_UserPreference = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullUserPreference(System.Environment.MachineName, this);
         }
 
-		public static UserPreferenceInstance Instance
+        public static UserPreferenceInstance Instance
 		{
 			get
 			{
@@ -49,5 +44,24 @@ namespace YellowstonePathology.Business.User
         {
             instance = null;
         }
-	}
+
+        public static void SetUserPreferenceHostNameByLocation()
+        {
+            string path = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\ypilis.json";
+            string jString = System.IO.File.ReadAllText(path);
+            JObject jObject = JsonConvert.DeserializeObject<JObject>(jString);
+            string location = jObject["location"].ToString();
+            YellowstonePathology.Business.Gateway.AccessionOrderGateway.SetUserPreferenceHostNameByLocation(location);
+            UserPreferenceInstance.Instance.Refresh();
+            YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Flush();
+        }
+
+
+        public static void SetDefaultUserPreference()
+        {
+            YellowstonePathology.Business.Gateway.AccessionOrderGateway.SetDefaultUserPreference();
+            UserPreferenceInstance.Instance.Refresh();
+            YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Flush();
+        }
+    }
 }

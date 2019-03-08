@@ -31,8 +31,6 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 		public PrintCytologyLabelsPage(string reportNo, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
 		{
 			this.m_AccessionOrder = accessionOrder;
-
-
 			this.m_PageHeaderText = "Print labels for " + this.m_AccessionOrder.PFirstName + " " + this.m_AccessionOrder.PLastName + ": " + reportNo;
 
 			InitializeComponent();
@@ -67,8 +65,8 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 else
                 {
                     aliquotOrder = specimenOrder.AliquotOrderCollection.GetThinPrepSlide();
-                }
-
+                }                
+                
                 YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2 barcode = new YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2(Business.BarcodeScanning.BarcodePrefixEnum.PSLD, aliquotOrder.AliquotOrderId);
                 YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = YellowstonePathology.Business.BarcodeScanning.CytycBarcode.Parse(this.m_AccessionOrder.MasterAccessionNo);
                 YellowstonePathology.Business.Label.Model.PAPSlideLabel papSlideLabel = new Business.Label.Model.PAPSlideLabel(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, barcode, cytycBarcode);
@@ -88,23 +86,19 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         private void ButtonPrintCytologyDummyLabel_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPAP();
-			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(panelSetOrder.ReportNo);                
-            string dummyReportNo = (orderIdParser.MasterAccessionNo + 50).ToString();
+			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(panelSetOrder.ReportNo);
+            string normalMA = orderIdParser.MasterAccessionNo;            
+            string dummyMA = normalMA.Replace("19", "69");
 
             if (this.m_AccessionOrder.SpecimenOrderCollection.HasThinPrepFluidSpecimen() == true)
             {
                 YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetThinPrep();
                 YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = specimenOrder.AliquotOrderCollection.GetThinPrepSlide();
-                
+
                 YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2 barcode = new YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2(Business.BarcodeScanning.BarcodePrefixEnum.PSLD, aliquotOrder.AliquotOrderId);
-                YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = YellowstonePathology.Business.BarcodeScanning.CytycBarcode.Parse(dummyReportNo);
-                YellowstonePathology.Business.Label.Model.PAPSlideLabel papSlideLabel = new Business.Label.Model.PAPSlideLabel(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, barcode, cytycBarcode);
-                YellowstonePathology.Business.Label.Model.PAPSlideLabelPrinter papSlideLabelPrinter = new Business.Label.Model.PAPSlideLabelPrinter();
-                for (int i = 0; i < 2; i++)
-                {
-                    papSlideLabelPrinter.Queue.Enqueue(papSlideLabel);
-                }
-                papSlideLabelPrinter.Print();
+                YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = YellowstonePathology.Business.BarcodeScanning.CytycBarcode.Parse(dummyMA);
+                Business.Label.Model.HologicSlideLabel hologicSlideLabel = new Business.Label.Model.HologicSlideLabel(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, barcode, cytycBarcode);
+                Business.Label.Model.HologicSlideLabelPrinter.Print(hologicSlideLabel, Business.User.UserPreferenceInstance.Instance.UserPreference.CytologySlideLabelPrinter, 2);
             }
             else
             {
@@ -127,6 +121,32 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             {
                 MessageBox.Show("The label format must first be selected in User Preferences.");
             }
-        }        
-	}
+        }
+
+        private void ButtonPrintCytologyNewLabel_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.m_AccessionOrder.SpecimenOrderCollection.HasThinPrepFluidSpecimen() == true)
+            {
+                YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetThinPrep();
+                YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = null;
+                if (specimenOrder.AliquotOrderCollection.HasThinPrepSlide() == false)
+                {
+                    aliquotOrder = specimenOrder.AliquotOrderCollection.AddThinPrepSlide(specimenOrder, this.m_AccessionOrder.AccessionDate.Value);
+                }
+                else
+                {
+                    aliquotOrder = specimenOrder.AliquotOrderCollection.GetThinPrepSlide();
+                }
+
+                YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2 barcode = new YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2(Business.BarcodeScanning.BarcodePrefixEnum.PSLD, aliquotOrder.AliquotOrderId);
+                YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = YellowstonePathology.Business.BarcodeScanning.CytycBarcode.Parse(this.m_AccessionOrder.MasterAccessionNo);
+                Business.Label.Model.HologicSlideLabel hologicSlideLabel = new Business.Label.Model.HologicSlideLabel(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, barcode, cytycBarcode);
+                Business.Label.Model.HologicSlideLabelPrinter.Print(hologicSlideLabel, Business.User.UserPreferenceInstance.Instance.UserPreference.CytologySlideLabelPrinter, 2);
+            }
+            else
+            {
+                MessageBox.Show("Unable to find a Thin Prep Specimen");
+            }
+        }
+    }
 }

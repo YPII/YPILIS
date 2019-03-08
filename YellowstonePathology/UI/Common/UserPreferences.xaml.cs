@@ -30,6 +30,7 @@ namespace YellowstonePathology.UI.Common
         private System.Printing.PrintQueueCollection m_PrintQueueCollection;
 		private YellowstonePathology.Business.ApplicationVersion m_ApplicationVersion;
         private Business.Label.Model.CassettePrinterCollection m_CassettePrinterCollection;
+        private bool m_HostNameEnabled;
 
         public UserPreferences(YellowstonePathology.Business.User.UserPreference userPreference)
 		{
@@ -48,10 +49,12 @@ namespace YellowstonePathology.UI.Common
             if (userPreference == null)
             {
                 this.m_UserPreference = new Business.User.UserPreference();
+                this.m_HostNameEnabled = true;
             }
             else
             {
-                this.m_UserPreference = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullUserPreference(userPreference.Location, this);
+                this.m_UserPreference = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullUserPreference(userPreference.HostName, this);
+                this.m_HostNameEnabled = false;
             }
 
             this.m_PageScannerCollection = new Business.Common.PageScannerCollection();
@@ -65,12 +68,6 @@ namespace YellowstonePathology.UI.Common
             if (this.DialogResult.HasValue && this.DialogResult == true)
             {
                 YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
-
-                //if (YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.Location == this.m_UserPreference.Location)
-                //{
-                    string path = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\ypilis.json";
-                    File.WriteAllText(path, "{'location': '" + this.m_UserPreference.Location + "'}");
-                //}
             }
             YellowstonePathology.Business.User.UserPreferenceInstance.Instance.Refresh();
         }
@@ -125,10 +122,15 @@ namespace YellowstonePathology.UI.Common
 			get { return this.m_ApplicationVersion; }
 		}
 
+        public bool HostNameEnabled
+        {
+            get { return this.m_HostNameEnabled; }
+        }
+
         private bool CanSave()
         {
             bool result = true;
-            if (string.IsNullOrEmpty(this.m_UserPreference.Location) == true)
+            if (string.IsNullOrEmpty(this.m_UserPreference.HostName) == true)
             {
                 result = false;
             }
@@ -136,13 +138,12 @@ namespace YellowstonePathology.UI.Common
             {
                 foreach (Business.User.UserPreference userPreference in this.m_UserPreferenceList)
                 {
-                    if (this.m_UserPreference.Location != userPreference.Location)
+                    if (this.m_UserPreference.HostName == userPreference.HostName
+                        && this.m_UserPreference.UserPreferenceId != userPreference.UserPreferenceId
+                        )
                     {
-                        if (this.m_UserPreference.Location == userPreference.Location)
-                        {
-                            result = false;
-                            break;
-                        }
+                        result = false;
+                        break;
                     }
                 }
             }
@@ -157,8 +158,6 @@ namespace YellowstonePathology.UI.Common
                 if(userPreference == null)
                 {
                     this.m_UserPreference.UserPreferenceId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-                    this.m_UserPreference.HostName = this.m_UserPreference.Location;
-                    this.m_UserPreference.LocationId = this.m_UserPreference.Location;
                     YellowstonePathology.Business.Persistence.DocumentGateway.Instance.InsertDocument(this.m_UserPreference, this);
                 }
                 this.DialogResult = true;
@@ -166,7 +165,7 @@ namespace YellowstonePathology.UI.Common
             }
             else
             {
-                MessageBox.Show("Enter a unique location.");
+                MessageBox.Show("Enter a unique Host Name.");
             }
         }
 

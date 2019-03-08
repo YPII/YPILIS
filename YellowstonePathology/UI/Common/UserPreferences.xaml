@@ -37,20 +37,20 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Barcode Scanner Enabled:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" IsChecked="{Binding Path=UserPreference.BarcodeScanEnabled}" HorizontalAlignment="Stretch"></CheckBox>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Host Name:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="0" Name="TextBoxLocation" Text="{Binding Path=UserPreference.HostName}" IsEnabled="{Binding Path=HostNameEnabled}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Barcode Scanner Port:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=UserPreference.BarcodeScanPort}" HorizontalAlignment="Stretch"></TextBox>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Barcode Scanner Enabled:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" IsChecked="{Binding Path=UserPreference.BarcodeScanEnabled}" HorizontalAlignment="Stretch"></CheckBox>
 
-                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Facility:</TextBlock>
-                    <ComboBox Grid.Column="1" Grid.Row="2" Name="ComboBoxFacility"  ItemsSource="{Binding Path=FacilityCollection}" Margin="2,2,2,2"
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Barcode Scanner Port:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=UserPreference.BarcodeScanPort}" HorizontalAlignment="Stretch"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Facility:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="3" Name="ComboBoxFacility"  ItemsSource="{Binding Path=FacilityCollection}" Margin="2,2,2,2"
                               HorizontalAlignment="Stretch" SelectionChanged="ComboBoxFacility_SelectionChanged"
                               SelectedValue="{Binding Path=UserPreference.FacilityId}" SelectedValuePath="FacilityId" DisplayMemberPath="FacilityName" >
                     </ComboBox>
-
-                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Location:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="3" Name="TextBoxLocation" Text="{Binding Path=UserPreference.Location}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Lock Mode:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=UserPreference.LockMode}" IsEditable="True">
@@ -136,40 +136,40 @@
 
                     <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Barcode Label Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="0" Name="ComboBoxConainerLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name" Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.ContainerLabelPrinter}">
+                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.ContainerLabelPrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Histology Slide Label Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="1" Name="ComboBoxHistologySlideLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.HistologySlideLabelPrinter}">
+                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.HistologySlideLabelPrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Cytology Slide Label Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="2" Name="ComboBoxCytologySlideLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CytologySlideLabelPrinter}">
+                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CytologySlideLabelPrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Requisition Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="3" Name="ComboBoxRequisitionLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.RequisitionPrinter}">
+                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.RequisitionPrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Stain Acknowledgement Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="4" Name="ComboBoxStainAcknowledgementPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.SpecialStainAcknowledgementPrinter}">
+                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.SpecialStainAcknowledgementPrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Molecular Label Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="5" Name="ComboBoxMolecularLabelPrinter" Margin="2,2,2,2" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name" 
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.MolecularLabelPrinter}" />
+                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.MolecularLabelPrinter}" IsEditable="True" />
 
                     <TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Molecular Label Format:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="6" Name="ComboBoxMolecularLabelFormat" Margin="2,2,2,2" ItemsSource="{Binding Path=MolecularLabelFormatCollection}"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.MolecularLabelFormat}" />
+                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.MolecularLabelFormat}" IsEditable="True" />
 
                     <TextBlock Grid.Column="0" Grid.Row="7" Margin="2" VerticalAlignment="Center" TextAlignment="Right">Cassette Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="7" ItemsSource="{Binding Path=CassettePrinterCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CassettePrinter}">
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CassettePrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">SlideMate Printer Path:</TextBlock>
@@ -178,12 +178,12 @@
 
                     <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Cytology Slide Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="9" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CytologySlidePrinter}">
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CytologySlidePrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Thermo Fisher Slide Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="10" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.ThermoFisherSlidePrinter}">
+                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.ThermoFisherSlidePrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="11" Margin="2" VerticalAlignment="Center" TextAlignment="Right">Laser Cassette Printer:</TextBlock>
@@ -214,7 +214,6 @@
 
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
             <Button Name="ButtonOK" Margin="5,5,5,5" HorizontalAlignment="Center" Click="ButtonOK_Click" Width="50" Height="30">OK</Button>
-            <Button Name="ButtonCancel" Margin="5,5,5,5" HorizontalAlignment="Center" Click="ButtonCancel_Click" Width="50" Height="30">Cancel</Button>
         </StackPanel>
     </Grid>
 </Window>

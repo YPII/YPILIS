@@ -4,7 +4,7 @@
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:validationRules="clr-namespace:YellowstonePathology.UI.ValidationRules"
-        Title="Client Entry" Height="600"  Width="900" FontSize="14"
+        Title="Client Entry" Height="650"  Width="900" FontSize="14"
 		WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
 
 	<Grid>
@@ -42,7 +42,9 @@
 						<RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
-					</Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
 					
 					<TextBlock Grid.Column="0" Grid.Row="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right" >Client Id:</TextBlock>
 					<TextBlock Grid.Column="1" Grid.Row="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=Client.ClientId}" />
@@ -108,20 +110,28 @@
 					<TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Show Physicians:</TextBlock>
 					<CheckBox Grid.Column="1" Grid.Row="14" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding Path=Client.ShowPhysiciansOnRequisition}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="15" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Notification Email:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="15" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=Client.AdditionalTestingNotificationEmail}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="16" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Path Group:</TextBlock>
-                    <ComboBox Grid.Column="1" Grid.Row="16" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=PathGroupFacilities}"
+                    <TextBlock Grid.Column="0" Grid.Row="15" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Path Group:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="15" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=PathGroupFacilities}"
 							  SelectedValue="{Binding Path=Client.PathologyGroupId}" SelectedValuePath="FacilityId" DisplayMemberPath="FacilityName" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="17" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Place Of Service:</TextBlock>
-                    <ComboBox Grid.Column="1" Grid.Row="17" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=PlaceOfServiceCodes}"
+                    <TextBlock Grid.Column="0" Grid.Row="16" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Place Of Service:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="16" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=PlaceOfServiceCodes}"
 							  SelectedValue="{Binding Path=Client.PlaceOfServiceCode}" SelectedValuePath="Code" DisplayMemberPath="Description" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="18" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Location Code:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="18" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=Client.LocationCode}" />
+                    <TextBlock Grid.Column="0" Grid.Row="17" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Location Code:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="17" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=Client.LocationCode}" />
 
+                    <TextBlock Grid.Column="0" Grid.Row="18" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Send Notifications:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="18" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding Path=Client.SendAdditionalTestingNotifications}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="19" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Notification Contact:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="19" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=Client.AdditionalTestingNotificationContact}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="20" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" >Notification Fax:</TextBlock>
+                    <wpfx:MaskedTextBox Name="MaskedTextBoxAdditionalTestingNotificationFax" Grid.Column="1" Grid.Row="20" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                        RestrictToAscii="False" AllowPromptAsInput="False" IncludeLiteralsInValue="False" IncludePromptInValue="False" 
+                                        ValueDataType="{x:Type sys:String}" Mask="(000) 000\-0000" Value="{Binding Path=Client.AdditionalTestingNotificationFaxProxy}">
+                    </wpfx:MaskedTextBox>
                 </Grid>
 			</TabItem>
 			

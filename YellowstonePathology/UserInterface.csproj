@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>41</ApplicationRevision>
+    <ApplicationRevision>63</ApplicationRevision>
     <ApplicationVersion>10.1.13.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -337,6 +337,8 @@
     <Compile Include="Business\EthContract.cs" />
     <Compile Include="Business\EthContractCollection.cs" />
     <Compile Include="Business\Interface\IHER2ISH.cs" />
+    <Compile Include="Business\Label.Model\HologicSlideLabelPrinter.cs" />
+    <Compile Include="Business\Label.Model\HologicSlideLabel.cs" />
     <Compile Include="Business\PanelSet.Model\FISHTest.cs" />
     <Compile Include="Business\Flow\CytoplasmicMarkerMapping.cs" />
     <Compile Include="Business\Flow\CytoplasmicMarkerMappingCollection.cs" />
@@ -1166,6 +1168,8 @@
     <Compile Include="Business\Test\WholeExomeSequencing\WholeExomeSequencingTest.cs" />
     <Compile Include="Business\User\SystemRoleView.cs" />
     <Compile Include="Business\User\SystemRoleViewCollection.cs" />
+    <Compile Include="Business\View\StVClientDOHReportView.cs" />
+    <Compile Include="Business\View\StVClientDOHReportViewCollection.cs" />
     <Compile Include="Business\WebService\PasswordGenerator.cs" />
     <Compile Include="Business\WebService\WebServiceAccount.cs" />
     <Compile Include="Business\WebService\WebServiceAccountClient.cs" />

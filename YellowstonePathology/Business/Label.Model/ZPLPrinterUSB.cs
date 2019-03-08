@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Label.Model
 
         public void Print(ZPLCommand zplCommand)
         {
-            string printerName = "ZDesigner GX430t";            
+            string printerName = "ZDesigner GX430t";
             RawPrinterHelper.SendStringToPrinter(printerName, "^XA" + zplCommand.GetCommand() + "^XZ");
         }
 

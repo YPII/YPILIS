@@ -42,6 +42,9 @@ namespace YellowstonePathology.Business.Client.Model
         private string m_PathologyGroupId;
         private string m_PlaceOfServiceCode;
         private string m_LocationCode;
+        private bool m_SendAdditionalTestingNotifications;
+        private string m_AdditionalTestingNotificationContact;
+        private string m_AdditionalTestingNotificationFax;
 
         public Client()
         {
@@ -424,6 +427,51 @@ namespace YellowstonePathology.Business.Client.Model
             }
         }
 
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+        public bool SendAdditionalTestingNotifications
+        {
+            get { return this.m_SendAdditionalTestingNotifications; }
+            set
+            {
+                if (this.m_SendAdditionalTestingNotifications != value)
+                {
+                    this.m_SendAdditionalTestingNotifications = value;
+                    this.NotifyPropertyChanged("SendAdditionalTestingNotifications");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
+        public string AdditionalTestingNotificationContact
+        {
+            get { return this.m_AdditionalTestingNotificationContact; }
+            set
+            {
+                if (this.m_AdditionalTestingNotificationContact != value)
+                {
+                    this.m_AdditionalTestingNotificationContact = value;
+                    this.NotifyPropertyChanged("AdditionalTestingNotificationContact");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string AdditionalTestingNotificationFax
+        {
+            get { return this.m_AdditionalTestingNotificationFax; }
+            set
+            {
+                if (this.m_AdditionalTestingNotificationFax != value)
+                {
+                    this.m_AdditionalTestingNotificationFax= value;
+                    this.NotifyPropertyChanged("AdditionalTestingNotificationFax");
+                }
+            }
+        }
+
         public string TelephoneProxy
         {
             get { return YellowstonePathology.Business.Helper.PhoneNumberHelper.CorrectPhoneNumber(this.m_Telephone); }
@@ -448,6 +496,20 @@ namespace YellowstonePathology.Business.Client.Model
                     this.m_Fax = value;
                     this.NotifyPropertyChanged("Fax");
                     this.NotifyPropertyChanged("FaxProxy");
+                }
+            }
+        }
+
+        public string AdditionalTestingNotificationFaxProxy
+        {
+            get { return YellowstonePathology.Business.Helper.PhoneNumberHelper.CorrectPhoneNumber(this.m_AdditionalTestingNotificationFax); }
+            set
+            {
+                if (this.m_AdditionalTestingNotificationFax != value)
+                {
+                    this.m_AdditionalTestingNotificationFax = value;
+                    this.NotifyPropertyChanged("AdditionalTestingNotificationFax");
+                    this.NotifyPropertyChanged("AdditionalTestingNotificationFaxProxy");
                 }
             }
         }

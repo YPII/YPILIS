@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="Billing Simulation Dialog" Height="500" Width="1500" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.Resources>
+            <Color x:Key="NormalColor">#e5fee7</Color>
+            <SolidColorBrush x:Key="NormalBrush" Color="{StaticResource NormalColor}" />
+
+            <Color x:Key="WarningColor">#fff697</Color>
+            <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}" />
+
+            <Color x:Key="CriticalColor">#f8b3be</Color>
+            <SolidColorBrush x:Key="CriticalBrush" Color="{StaticResource CriticalColor}" />
+        </Grid.Resources>
         <Grid Grid.Column="0" Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -28,6 +38,34 @@
             </StackPanel>
 
             <ListView Name="ListViewSimulationList" Margin="2,2,2,2" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" ItemsSource="{Binding Path=SimulationList}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding BackgroundColor}" Value="Normal">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource NormalColor}"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding BackgroundColor}" Value="Warning">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource WarningColor}"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding BackgroundColor}" Value="Critical">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource CriticalColor}"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Map To Medicare" Click="MenuItemMapToMedicare_Click" Tag="{Binding}"></MenuItem>
@@ -35,19 +73,18 @@
                         <MenuItem Header="Map To Governmental" Click="MenuItemMapToGovernmental_Click" Tag="{Binding}"></MenuItem>
                         <MenuItem Header="Map To Commercial" Click="MenuItemMapToCommercial_Click" Tag="{Binding}"></MenuItem>
                         <MenuItem Header="Unmap" Click="MenuItemUnmap_Click" Tag="{Binding}"></MenuItem>
-                        <MenuItem Header="Simulate Set/Post" Click="MenuItemSimulateSetPost_Click" Tag="{Binding}"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="85"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=PostDate, Converter={StaticResource ShortDateTimeConverter}}" Header="Posted" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=FinalDate, Converter={StaticResource ShortDateTimeConverter}}" Header="Final" Width="110"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ClientId}" Header="Id" Width="75"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Name" Width="200"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=MedicalRecord}" Header="MRN" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PrimaryInsuranceManual}" Header="Manual" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=PrimaryInsuranceADT}" Header="ADT" Width="200"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PrimaryInsuranceSim}" Header="Sim" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PrimaryInsuranceADT}" Header="ADT" Width="200"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PatientType}" Header="IP/OP" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PatientTypeSim}" Header="SIM" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PatientClass}" Header="Class" Width="100"/>
@@ -56,7 +93,12 @@
                 </ListView.View>
             </ListView>
 
-            <Button Grid.Column="0" Grid.Row="2" Width="150" Height="25" Margin="2,2,2,2" Click="ButtonWriteCodesToFile_Click">Write Codes To File</Button>
+            <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Button Width="110" Height="25" Margin="2,2,2,2" Click="ButtonRun_Click">Run</Button>
+                <Button Width="110" Height="25" Margin="2,2,2,2" Click="ButtonSerialize_Click">Serialize</Button>
+                <Button Width="110" Height="25" Margin="2,2,2,2" Click="ButtonDeserialize_Click">Deserialize</Button>
+                <Button Width="110" Height="25" Margin="2,2,2,2" Click="ButtonInsuranceNotMatched_Click">Insurance</Button>
+            </StackPanel>
             <Button Grid.Column="2" Grid.Row="2" Width="75" Height="25" Margin="2,2,2,2" Click="ButtonClose_Click">Close</Button>
 
         </Grid>

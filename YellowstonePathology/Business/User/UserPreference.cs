@@ -18,7 +18,6 @@ namespace YellowstonePathology.Business.User
 
         private string m_UserPreferenceId;
         private string m_HostName;
-        private string m_LocationId;
         private bool m_BarcodeScanEnabled;
         private string m_BarcodeScanPort;
         private Nullable<DateTime> m_LastLocalDataUpdate;
@@ -48,7 +47,6 @@ namespace YellowstonePathology.Business.User
         private bool m_UseLaserCassettePrinter;
         private Nullable<int> m_GPathologistId;
         private string m_FedExLabelPrinter;
-        private string m_Location;
         private bool m_Administrator;
 
         public UserPreference()
@@ -74,21 +72,6 @@ namespace YellowstonePathology.Business.User
                 {
                     this.m_HostName = value;
                     this.NotifyPropertyChanged("HostName");
-                }
-            }
-        }
-
-        [PersistentProperty()]
-        [PersistentDataColumnProperty(false, "50", "null", "varchar")]
-        public string LocationId
-        {
-            get { return this.m_LocationId; }
-            set
-            {
-                if (this.m_LocationId != value)
-                {
-                    this.m_LocationId = value;
-                    this.NotifyPropertyChanged("LocationId");
                 }
             }
         }
@@ -539,21 +522,6 @@ namespace YellowstonePathology.Business.User
                 {
                     this.m_FedExLabelPrinter = value;
                     this.NotifyPropertyChanged("FedExLabelPrinter");
-                }
-            }
-        }
-
-        [PersistentProperty()]
-        [PersistentDataColumnProperty(true, "150", "null", "varchar")]
-        public string Location
-        {
-            get { return this.m_Location; }
-            set
-            {
-                if (this.m_Location != value)
-                {
-                    this.m_Location = value;
-                    this.NotifyPropertyChanged("Location");
                 }
             }
         }

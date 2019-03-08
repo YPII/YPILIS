@@ -62,7 +62,7 @@ namespace YellowstonePathology.UI.Surgical
             this.m_PanelSetIdsThatCanOrderStains.Add(reviewForAdditionalTestingTest.PanelSetId);
 
             this.m_Facility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            this.m_Location = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.Location;
+            this.m_Location = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
         }
 
         public Business.User.SystemIdentity SystemIdentity
