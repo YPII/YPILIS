@@ -68,12 +68,7 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
                 }
                 this.SetXmlNodeData("test_result", result);
 
-                this.SetXmlNodeData("ihc_score", her2AmplificationSummaryTestOrder.IHCScore);
-
-                //removed per MSB by SEH
-                //this.SetXmlNodeData("ish_cells_counted", her2AmplificationSummaryTestOrder.CellsCounted.ToString());
-                //this.SetXmlNodeData("ish_her2_counted", her2AmplificationSummaryTestOrder.TotalHer2SignalsCounted.ToString());
-                //this.SetXmlNodeData("ish_chr17_counted", her2AmplificationSummaryTestOrder.TotalChr17SignalsCounted.ToString());
+                this.SetXmlNodeData("ihc_score", her2AmplificationSummaryTestOrder.IHCScore);                
 
                 if (her2AmplificationSummaryTestOrder.RecountRequired == true)
                 {

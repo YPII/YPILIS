@@ -150,9 +150,7 @@ namespace YellowstonePathology.UI.MaterialTracking
 		{
 			this.m_BarcodeScanPort.HistologySlideScanReceived -= HistologySlideScanReceived;
             this.m_BarcodeScanPort.USPostalServiceCertifiedMailReceived -= BarcodeScanPort_USPostalServiceCertifiedMailReceived;
-            this.m_BarcodeScanPort.ContainerScanReceived -= BarcodeScanPort_ContainerScanReceived;
-
-            
+            this.m_BarcodeScanPort.ContainerScanReceived -= BarcodeScanPort_ContainerScanReceived;            
 		}
 
         public YellowstonePathology.Business.Facility.Model.FacilityCollection FacilityCollection

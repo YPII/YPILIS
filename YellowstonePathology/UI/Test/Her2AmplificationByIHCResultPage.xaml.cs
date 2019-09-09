@@ -95,8 +95,24 @@ namespace YellowstonePathology.UI.Test
 			{
                 YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
                 this.HandleFinalizeTestResult(finalizeTestResult);
-                //Business.Logging.EmailExceptionHandler.HandleException(this.m_PanelSetOrder, "This report has just been finalized, score = " + 
-                //    this.m_PanelSetOrder.Score + ".  No recount ordered on final.");
+                if (this.m_PanelSetOrder.Result != YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
+                {
+                    YellowstonePathology.Business.Test.Surgical.SurgicalTest panelSetSurgical = new YellowstonePathology.Business.Test.Surgical.SurgicalTest();
+
+                    if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(panelSetSurgical.PanelSetId) == true)
+                    {
+                        YellowstonePathology.Business.Test.PanelSetOrder surgicalPanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetSurgical.PanelSetId);
+                        YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(surgicalPanelSetOrder.ReportNo);
+                        if (amendmentCollection.HasAmendmentForReport(this.m_PanelSetOrder.ReportNo) == false)
+                        {
+                            string amendmentText = YellowstonePathology.Business.Test.Her2AmplificationByIHC.HER2AmplificationByIHCSystemGeneratedAmendmentText.AmendmentText(this.m_PanelSetOrder);
+                            YellowstonePathology.Business.Amendment.Model.Amendment amendment = this.m_AccessionOrder.AddAmendment(surgicalPanelSetOrder.ReportNo);
+                            amendment.TestResultAmendmentFill(surgicalPanelSetOrder.ReportNo, surgicalPanelSetOrder.AssignedToId, amendmentText);
+                            amendment.ReferenceReportNo = this.m_PanelSetOrder.ReportNo;
+                            amendment.SystemGenerated = true;
+                        }
+                    }
+                }
             }
             else if(result.Status == Business.Audit.Model.AuditStatusEnum.Warning)
             {

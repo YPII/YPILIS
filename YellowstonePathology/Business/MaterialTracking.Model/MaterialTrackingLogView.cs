@@ -22,7 +22,8 @@ namespace YellowstonePathology.Business.MaterialTracking.Model
         private string m_MaterialId;
         private string m_MaterialLabel;
         private DateTime m_LogDate;
-        private string m_LoggedBy;        
+        private string m_LoggedBy;
+        private string m_Test;    
 
         public MaterialTrackingLogView()
         {
@@ -181,7 +182,21 @@ namespace YellowstonePathology.Business.MaterialTracking.Model
                     this.NotifyPropertyChanged("LoggedBy");
                 }
             }
-        }               
+        }
+
+        [PersistentProperty()]
+        public string Test
+        {
+            get { return this.m_Test; }
+            set
+            {
+                if (this.m_Test != value)
+                {
+                    this.m_Test = value;
+                    this.NotifyPropertyChanged("Test");
+                }
+            }
+        }
 
         public void FromScannedItemView(MaterialTrackingScannedItemView materialTrackingScannedItemView, MaterialTrackingLog materialTrackingLog)
         {
@@ -194,10 +209,12 @@ namespace YellowstonePathology.Business.MaterialTracking.Model
             this.m_PLastName = materialTrackingScannedItemView.PLastName;
             this.m_PFirstName = materialTrackingScannedItemView.PFirstName;
             this.m_MaterialLabel = materialTrackingScannedItemView.MaterialLabel;
+
             if(string.IsNullOrEmpty(materialTrackingScannedItemView.TestName) == false)
             {
                 this.m_MaterialLabel += " - " + materialTrackingScannedItemView.TestName;
             }
+
             this.m_LogDate = materialTrackingLog.LogDate;
             this.m_LoggedBy = materialTrackingLog.LoggedBy;
         }
