@@ -17,13 +17,9 @@ namespace YellowstonePathology.Business.Test.NGCT
             NGCTTestOrder testOrder = (NGCTTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
-            this.AddNextObxElementBeaker("Report No: ", this.m_ReportNo, document, "F");
-
-            this.AddNextObxElementBeaker("Chlamydia trachomatis result: ", testOrder.ChlamydiaTrachomatisResult, document, "F");
-            this.AddNextObxElementBeaker("Reference: ", "Negative", document, "F");
-
-            this.AddNextObxElementBeaker("Neisseria gonorrhoeae result: ", testOrder.NeisseriaGonorrhoeaeResult, document, "F");
-            this.AddNextObxElementBeaker("Reference: ", "Negative", document, "F");
+            this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");
+            this.AddNextObxElementBeaker("Chlamydia trachomatis result", testOrder.ChlamydiaTrachomatisResult, document, "F", "Negative");            
+            this.AddNextObxElementBeaker("Neisseria gonorrhoeae result", testOrder.NeisseriaGonorrhoeaeResult, document, "F", "Negative");            
 
             if (amendmentCollection.Count != 0)
             {
@@ -45,16 +41,13 @@ namespace YellowstonePathology.Business.Test.NGCT
                 this.AddNextObxElementBeaker("Amendments", amendments.ToString(), document, "F");
             }
 
-            this.AddNextObxElementBeaker("Specimen: ", "Thin Prep Fluid", document, "F");
-
-            this.AddNextObxElementBeaker("Method: ", testOrder.Method, document, "F");
-
-            this.AddNextObxElementBeaker("References: ", testOrder.ReportReferences, document, "F");
-
-            this.AddNextObxElementBeaker("Test Information: ", testOrder.TestInformation, document, "F");
+            this.AddNextObxElementBeaker("Specimen", "Thin Prep Fluid", document, "F");
+            this.AddNextObxElementBeaker("Method", testOrder.Method, document, "F");
+            this.AddNextObxElementBeaker("References", testOrder.ReportReferences, document, "F");
+            this.AddNextObxElementBeaker("Test Information", testOrder.TestInformation, document, "F");
 
             string locationPerformed = testOrder.GetLocationPerformedComment();
-            this.AddNextObxElementBeaker("Location Performed: ", locationPerformed, document, "F");
+            this.AddNextObxElementBeaker("Location Performed", locationPerformed, document, "F");
         }
     }
 }

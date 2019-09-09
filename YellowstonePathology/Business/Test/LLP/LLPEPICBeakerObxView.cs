@@ -18,12 +18,10 @@ namespace YellowstonePathology.Business.Test.LLP
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
             this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");
-
             this.AddNextObxElementBeaker("Impression", panelSetOrder.Impression, document, "F");
+            this.AddNextObxElementBeaker("Interpretive Comment", panelSetOrder.InterpretiveComment, document, "F");
+            this.AddNextObxElementBeaker("Pathologist", panelSetOrder.Signature, document, "F");
 
-            this.AddNextObxElementBeaker("Interpretive Comment:", panelSetOrder.InterpretiveComment, document, "F");
-
-            this.AddNextObxElementBeaker("Pathologist: ", panelSetOrder.Signature, document, "F");
             if (panelSetOrder.FinalTime.HasValue == true)
             {
                 this.AddNextObxElementBeaker("E-signed ", panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
@@ -49,7 +47,7 @@ namespace YellowstonePathology.Business.Test.LLP
                 this.AddNextObxElementBeaker("Amendments", amendments.ToString(), document, "F");
             }
 
-            this.AddNextObxElementBeaker("Cell Population Of Interest: ", panelSetOrder.CellPopulationOfInterest, document, "F");
+            this.AddNextObxElementBeaker("Cell Population Of Interest", panelSetOrder.CellPopulationOfInterest, document, "F");
 
             StringBuilder markers = new StringBuilder();
             foreach (YellowstonePathology.Business.Flow.FlowMarkerItem flowMarkerItem in panelSetOrder.FlowMarkerCollection)
@@ -58,7 +56,7 @@ namespace YellowstonePathology.Business.Test.LLP
                 markers.AppendLine("Interpretation: " + flowMarkerItem.Interpretation);
                 markers.AppendLine("Intensity: " + flowMarkerItem.Intensity);
             }
-            this.AddNextObxElementBeaker("Markers:", markers.ToString(), document, "F");
+            this.AddNextObxElementBeaker("Markers", markers.ToString(), document, "F");
 
             StringBuilder cellDistribution = new StringBuilder();
 
@@ -80,7 +78,7 @@ namespace YellowstonePathology.Business.Test.LLP
             cellDistribution.AppendLine("Myeloid " + this.GetGatingPercent(MyePcnt));
             cellDistribution.AppendLine("Dim CD45/Mod SS " + this.GetGatingPercent(DimPcnt));
 
-            AddNextObxElementBeaker("Cell Distribution:", cellDistribution.ToString(), document, "F");
+            AddNextObxElementBeaker("Cell Distribution", cellDistribution.ToString(), document, "F");
 
             string blastCD34Percent = panelSetOrder.EGateCD34Percent;
             string blastCD117Percent = panelSetOrder.EGateCD117Percent;
@@ -95,23 +93,23 @@ namespace YellowstonePathology.Business.Test.LLP
 
             if (string.IsNullOrEmpty(panelSetOrder.SpecimenViabilityPercent) == false && panelSetOrder.SpecimenViabilityPercent != "0")
             {
-                this.AddNextObxElementBeaker("Specimen Viability Percentage: ", panelSetOrder.SpecimenViabilityPercent, document, "F");
+                this.AddNextObxElementBeaker("Specimen Viability Percentage", panelSetOrder.SpecimenViabilityPercent, document, "F");
             }
 
-            this.AddNextObxElementBeaker("Clinical History:", this.m_AccessionOrder.ClinicalHistory, document, "F");
+            this.AddNextObxElementBeaker("Clinical History", this.m_AccessionOrder.ClinicalHistory, document, "F");
 
-            this.AddNextObxElementBeaker("Method: ", "Qualitative Flow Cytometry", document, "F");
+            this.AddNextObxElementBeaker("Method", "Qualitative Flow Cytometry", document, "F");
 
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
-            this.AddNextObxElementBeaker("Specimen: ", specimenOrder.Description, document, "F");
+            this.AddNextObxElementBeaker("Specimen", specimenOrder.Description, document, "F");
 
             string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
-            this.AddNextObxElementBeaker("Collection Date/Time: ", collectionDateTimeString, document, "F");
+            this.AddNextObxElementBeaker("Collection Date/Time", collectionDateTimeString, document, "F");
 
-            this.AddNextObxElementBeaker("Specimen Adequacy: ", specimenOrder.SpecimenAdequacy, document, "F");
+            this.AddNextObxElementBeaker("Specimen Adequacy", specimenOrder.SpecimenAdequacy, document, "F");
 
             string asrStatement = "Tests utilizing Analytic Specific Reagents (ASR's) were developed and performance characteristics determined by Yellowstone Pathology Institute, Inc.  They have not been cleared or approved by the U.S. Food and Drug Administration.  The FDA has determined that such clearance or approval is not necessary.  ASR's may be used for clinical purposes and should not be regarded as investigational or for research.  This laboratory is certified under the Clinical Laboratory Improvement Amendments of 1988 (CLIA-88) as qualified to perform high complexity clinical laboratory testing.";
-            this.AddNextObxElementBeaker("ASR: ", asrStatement, document, "F");
+            this.AddNextObxElementBeaker("ASR", asrStatement, document, "F");
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
             this.AddNextObxElementBeaker("Location Performed", locationPerformed, document, "F");

@@ -20,17 +20,13 @@ namespace YellowstonePathology.Business.Test.HPV1618
             PanelSetOrderHPV1618 panelSetOrder = (PanelSetOrderHPV1618)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
-            this.AddNextObxElementBeaker("Report No: ", this.m_ReportNo, document, "F");
-
-            this.AddNextObxElementBeaker("HPV-16 Result: ", panelSetOrder.HPV16Result, document, "F");
-            this.AddNextObxElementBeaker("HPV-16 Reference:", "Negative", document, "F");
-
-            this.AddNextObxElementBeaker("HPV-18/45 Result: ", panelSetOrder.HPV18Result, document, "F");
-            this.AddNextObxElementBeaker("HPV-18/45 Reference:,", "Negative", document, "F");
+            this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");
+            this.AddNextObxElementBeaker("HPV-16 Result", panelSetOrder.HPV16Result, document, "F", "Negative");            
+            this.AddNextObxElementBeaker("HPV-18/45 Result", panelSetOrder.HPV18Result, document, "F", "Negative");            
 
             if (string.IsNullOrEmpty(panelSetOrder.Comment) == false)
             {
-                this.AddNextObxElementBeaker("Comment: ", panelSetOrder.Comment, document, "F");
+                this.AddNextObxElementBeaker("Comment", "Comment" + panelSetOrder.Comment, document, "F");
             }
 
             if (amendmentCollection.Count != 0)
@@ -54,14 +50,14 @@ namespace YellowstonePathology.Business.Test.HPV1618
             }
 
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByOrderTarget(panelSetOrder.OrderedOnId);
-            this.AddNextObxElementBeaker("Specimen: ", specimenOrder.GetDescription(), document, "F");
+            this.AddNextObxElementBeaker("Specimen", specimenOrder.GetDescription(), document, "F");
 
-            this.AddNextObxElementBeaker("Method: ", panelSetOrder.Method, document, "F");
+            this.AddNextObxElementBeaker("Method", panelSetOrder.Method, document, "F");
 
-            this.AddNextObxElementBeaker("References: ", panelSetOrder.ReportReferences, document, "F");
+            this.AddNextObxElementBeaker("References", panelSetOrder.ReportReferences, document, "F");
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-            this.AddNextObxElementBeaker("Location Performed: ", locationPerformed, document, "F");
+            this.AddNextObxElementBeaker("Location Performed", locationPerformed, document, "F");
         }
     }
 }

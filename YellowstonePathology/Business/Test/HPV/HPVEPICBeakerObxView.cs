@@ -20,11 +20,8 @@ namespace YellowstonePathology.Business.Test.HPV
             HPVTestOrder panelSetOrder = (HPVTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
-            this.AddNextObxElementBeaker("Report No: ", this.m_ReportNo, document, "F");
-
-            this.AddNextObxElementBeaker("Result: ", panelSetOrder.Result, document, "F");
-
-            this.AddNextObxElementBeaker("Reference: ", "Negative", document, "F");
+            this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");            
+            this.AddNextObxElementBeaker("Result", "Positive", document, "F", "Negative");
 
             if (amendmentCollection.Count != 0)
             {
@@ -46,16 +43,16 @@ namespace YellowstonePathology.Business.Test.HPV
                 this.AddNextObxElementBeaker("Amendments", amendments.ToString(), document, "F");
             }
 
-            this.AddNextObxElementBeaker("Specimen: ", "ThinPrep fluid", document, "F");
+            this.AddNextObxElementBeaker("Specimen", "ThinPrep fluid", document, "F");
 
-            this.AddNextObxElementBeaker("Test Information: ", panelSetOrder.TestInformation, document, "F");
+            this.AddNextObxElementBeaker("Test Information", panelSetOrder.TestInformation, document, "F");
 
-            this.AddNextObxElementBeaker("References: ", panelSetOrder.ReportReferences, document, "F");
+            this.AddNextObxElementBeaker("References", panelSetOrder.ReportReferences, document, "F");
 
-            this.AddNextObxElementBeaker("ASR: ", panelSetOrder.ASRComment, document, "F");
+            this.AddNextObxElementBeaker("ASR", panelSetOrder.ASRComment, document, "F");
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-            this.AddNextObxElementBeaker("Location Performed: ", locationPerformed, document, "F");
+            this.AddNextObxElementBeaker("Location Performed", locationPerformed, document, "F");
         }
     }
 }
