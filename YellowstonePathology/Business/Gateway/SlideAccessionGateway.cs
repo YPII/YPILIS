@@ -331,15 +331,17 @@ namespace YellowstonePathology.Business.Gateway
                 " mtl.MaterialId AS MaterialId, " +
                 "mtl.LogDate AS LogDate, " +
                 "(CASE " +
-                "WHEN " +
-                "(mtl.MaterialType = 'Slide') " +
-                "THEN " +
-                "(SELECT " +
-                    "tblSlideOrder.Label " +
-                "FROM " +
-                    "tblSlideOrder " +
-                    "WHERE " +
-                    "(tblSlideOrder.SlideOrderId = mtl.MaterialId)) " +
+                    "WHEN " +
+                    "(`mtl`.`MaterialType` = 'Slide') " +
+                    "THEN " +
+                        "(CASE " +
+                            "WHEN " +
+                                "ISNULL(`mtl`.`MaterialLabel`) " +
+                                "THEN " +
+                                "(SELECT `tblSlideOrder`.`Label` FROM `tblSlideOrder` " +
+                                "WHERE (`tblSlideOrder`.`SlideOrderId` = `mtl`.`MaterialId`)) " +
+                            "ELSE `mtl`.`MaterialLabel` " +
+                        "END) " +
                     "ELSE 'None' " +
                 "END) AS `MaterialLabel`, " +
                 "mtl.LoggedBy AS `LoggedBy` " +

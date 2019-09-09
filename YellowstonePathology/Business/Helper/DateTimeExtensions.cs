@@ -55,14 +55,65 @@ namespace YellowstonePathology.Business.Helper
             return result;
         }
 
-        public static int GetWeekendHoursBetween(DateTime startDate, DateTime endDate)
+        public static int GetWeekendAndHolidayHoursBetween(DateTime startDate, DateTime endDate)
         {
-            int weekEndDays = 0;
-            for (int i = (int)startDate.DayOfWeek; i < (int)endDate.DayOfWeek; i++)
+            if (startDate == null) throw new Exception("GetWeekendAndHolidayHoursBetween: startDate is null");
+            if (endDate == null) throw new Exception("GetWeekendAndHolidayHoursBetween: endDate is null");
+            if (startDate >= endDate) throw new Exception("GetWeekendAndHolidayHoursBetween: startDate is >= endDate");
+
+            DateTime tryStartDate = new DateTime(startDate.Year, startDate.Month, startDate.Day);
+            DateTime tryEndDate = new DateTime(endDate.Year, endDate.Month, endDate.Day);
+            TimeSpan weekendHours = new TimeSpan();
+            //bool startDateIsHoliday = false;
+            //bool endDateIsHoliday = false;
+
+            /*HashSet<DateTime> holidays = GetHolidays(startDate.Year);
+            if (endDate.Year != startDate.Year)
             {
-                weekEndDays += 1;
+                HashSet<DateTime> endholidays = GetHolidays(endDate.Year);
+                foreach(DateTime holiday in endholidays)
+                {
+                    holidays.Add(holiday);
+                }
             }
-            return weekEndDays * 24;
+
+            foreach (DateTime holiday in holidays)
+            {
+                if (holiday == tryStartDate) startDateIsHoliday = true;
+                if (holiday == tryEndDate) endDateIsHoliday = true;
+            }*/
+
+            //if ((startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday || startDateIsHoliday == true) &&
+            //    (endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday || endDateIsHoliday == true))
+            if ((startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday) &&
+                (endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday))
+            {
+                tryStartDate = tryStartDate.AddDays(1);
+            }
+
+            while (tryStartDate < tryEndDate)
+            {
+                //if (tryStartDate.DayOfWeek == DayOfWeek.Saturday || tryStartDate.DayOfWeek == DayOfWeek.Sunday || startDateIsHoliday == true)
+                if (tryStartDate.DayOfWeek == DayOfWeek.Saturday || tryStartDate.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    weekendHours = weekendHours.Add(new TimeSpan(1, 0, 0, 0));
+                }
+                tryStartDate = tryStartDate.AddDays(1);
+            }
+
+            //if (startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday || startDateIsHoliday == true)
+            if (startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday)
+            {
+                weekendHours = weekendHours.Add(new TimeSpan(24 - startDate.Hour, 0, 0));
+            }
+
+            //if (endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday || endDateIsHoliday == true)
+            if (endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday)
+            {
+                weekendHours = weekendHours.Add(new TimeSpan(endDate.Hour, 0, 0));
+            }
+
+            return (int)weekendHours.TotalHours;
         }
 
         public static string FormatDateTimeString(string shortcutString)
@@ -506,6 +557,72 @@ namespace YellowstonePathology.Business.Helper
                 return new DateTime(dateAndTime.Value.Year, dateAndTime.Value.Month, dateAndTime.Value.Day);
             }
             return dateAndTime;
+        }
+
+        public static YPHolidayCollection GetHolidays(int year)
+        {
+            YPHolidayCollection holidays = new YPHolidayCollection();
+            //NEW YEARS
+            DateTime newYearsDate = AdjustForWeekendHoliday(new DateTime(year, 1, 1).Date);
+            YPHoliday newYear = new Business.YPHoliday("New Years", newYearsDate);
+            holidays.Add(newYear);
+
+            //MEMORIAL DAY  -- last monday in May
+            DateTime memorialDay = new DateTime(year, 5, 31);
+            DayOfWeek dayOfWeek = memorialDay.DayOfWeek;
+            while (dayOfWeek != DayOfWeek.Monday)
+            {
+                memorialDay = memorialDay.AddDays(-1);
+                dayOfWeek = memorialDay.DayOfWeek;
+            }
+            YPHoliday memorial = new Business.YPHoliday("Memorial Day", memorialDay.Date);
+            holidays.Add(memorial);
+
+            //INDEPENCENCE DAY
+            DateTime independenceDay = AdjustForWeekendHoliday(new DateTime(year, 7, 4).Date);
+            YPHoliday july4 = new Business.YPHoliday("Independence Day", independenceDay);
+            holidays.Add(july4);
+
+            //LABOR DAY -- 1st Monday in September
+            DateTime laborDay = new DateTime(year, 9, 1);
+            dayOfWeek = laborDay.DayOfWeek;
+            while (dayOfWeek != DayOfWeek.Monday)
+            {
+                laborDay = laborDay.AddDays(1);
+                dayOfWeek = laborDay.DayOfWeek;
+            }
+            YPHoliday labor = new Business.YPHoliday("Labor Day", laborDay.Date);
+            holidays.Add(labor);
+
+            //THANKSGIVING DAY - 4th Thursday in November
+            var thanksgiving = (from day in Enumerable.Range(1, 30)
+                                where new DateTime(year, 11, day).DayOfWeek == DayOfWeek.Thursday
+                                select day).ElementAt(3);
+            DateTime thanksgivingDay = new DateTime(year, 11, thanksgiving);
+            YPHoliday turkey = new Business.YPHoliday("Thanksgiving Day", thanksgivingDay.Date);
+            holidays.Add(turkey);
+
+            //CHRISTMAS December 25th
+            DateTime christmasDay = AdjustForWeekendHoliday(new DateTime(year, 12, 25).Date);
+            YPHoliday christmas = new Business.YPHoliday("Christmas Day", christmasDay);
+            holidays.Add(christmas);
+            return holidays;
+        }
+
+        public static DateTime AdjustForWeekendHoliday(DateTime holiday)
+        {
+            if (holiday.DayOfWeek == DayOfWeek.Saturday)
+            {
+                return holiday.AddDays(-1);
+            }
+            else if (holiday.DayOfWeek == DayOfWeek.Sunday)
+            {
+                return holiday.AddDays(1);
+            }
+            else
+            {
+                return holiday;
+            }
         }
     }
 }

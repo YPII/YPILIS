@@ -1762,6 +1762,89 @@ namespace YellowstonePathology.UI
                 panelSet.Save();
             }
             MessageBox.Show("Done");*/
+
+            StringBuilder msg = new StringBuilder();
+            int hours = 0;
+
+            try
+            {
+                DateTime? ns = null;
+                DateTime? nn = new DateTime(2019, 12, 18, 9, 12, 15);
+                hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(ns.Value, nn.Value);
+            }
+            catch (Exception e1)
+            {
+                msg.AppendLine(e1.Message);
+            }
+
+            try
+            {
+                DateTime? ns = new DateTime(2019, 12, 18, 9, 12, 15);
+                DateTime? nn = null;
+                hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(ns.Value, nn.Value);
+            }
+            catch (Exception e2)
+            {
+                msg.AppendLine(e2.Message);
+            }
+
+            try
+            {
+                DateTime? ns = new DateTime(2019, 12, 18, 9, 12, 15);
+                DateTime? nn = new DateTime(2019, 12, 18, 9, 12, 15); ;
+                hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(ns.Value, nn.Value);
+            }
+            catch (Exception e3)
+            {
+                msg.AppendLine(e3.Message);
+            }
+
+            DateTime s = new DateTime(2019, 12, 18, 9, 12, 15);
+            DateTime n = new DateTime(2019, 12, 20, 10, 42, 15);
+            hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(s, n);
+            msg.AppendLine("No Weekend or Holiday: " + hours.ToString());
+
+            s = new DateTime(2019, 12, 20, 9, 12, 15);
+            n = new DateTime(2019, 12, 23, 10, 42, 15);
+            hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(s, n);
+            msg.AppendLine("WeekDay to weekday over weekend: " + hours.ToString());
+
+            s = new DateTime(2019, 12, 20, 9, 12, 15);
+            n = new DateTime(2019, 12, 21, 10, 42, 15);
+            hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(s, n);
+            msg.AppendLine("WeekDay to Saturday: " + hours.ToString());
+
+            s = new DateTime(2019, 12, 20, 9, 12, 15);
+            n = new DateTime(2019, 12, 22, 10, 42, 15);
+            hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(s, n);
+            msg.AppendLine("WeekDay to Sunday: " + hours.ToString());
+
+            s = new DateTime(2019, 12, 22, 9, 12, 15);
+            n = new DateTime(2019, 12, 24, 10, 42, 15);
+            hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(s, n);
+            msg.AppendLine("Sunday to WeekDay: " + hours.ToString());
+
+            s = new DateTime(2019, 12, 21, 9, 12, 15);
+            n = new DateTime(2019, 12, 24, 10, 42, 15);
+            hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(s, n);
+            msg.AppendLine("Saturday to WeekDay: " + hours.ToString());
+
+            s = new DateTime(2019, 12, 21, 9, 12, 15);
+            n = new DateTime(2019, 12, 22, 10, 42, 15);
+            hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(s, n);
+            msg.AppendLine("Saturday to Sunday: " + hours.ToString());
+
+            s = new DateTime(2019, 12, 15, 9, 12, 15);
+            n = new DateTime(2019, 12, 21, 10, 42, 15);
+            hours = YellowstonePathology.Business.Helper.DateTimeExtensions.GetWeekendAndHolidayHoursBetween(s, n);
+            msg.AppendLine("Sunday to Saturday: " + hours.ToString());
+
+            /*msg.AppendLine("WeekDay to Weekday over Holiday: " + hours.ToString());
+            msg.AppendLine("WeekDay to Sunday over Holiday: " + hours.ToString());
+            msg.AppendLine("Sunday to WeekDay over Holiday: " + hours.ToString());
+            msg.AppendLine("Saturday to WeekDay over Holiday: " + hours.ToString());
+            msg.AppendLine("Sunday to Saturday over Holiday: " + hours.ToString());*/
+            MessageBox.Show(msg.ToString());
         }
     }
 }
