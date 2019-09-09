@@ -41,8 +41,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void PatientDetailsPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.ComboBoxSex.Focus();
-             
+            this.ComboBoxSex.Focus();             
         }
 
         private void PatientDetailsPage_Unloaded(object sender, RoutedEventArgs e)
@@ -74,7 +73,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
 		private void ButtonLink_Click(object sender, RoutedEventArgs e)
 		{
-            //this.Save(false);
+            
 		}
 
 		private void ButtonCaseNotes_Click(object sender, RoutedEventArgs e)

@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>166</ApplicationRevision>
+    <ApplicationRevision>171</ApplicationRevision>
     <ApplicationVersion>10.1.15.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -1125,6 +1125,7 @@
     <Compile Include="Business\Test\FetalHemoglobinV2\FetalHemoglobinV2WordDocument.cs" />
     <Compile Include="Business\Test\FetalHemoglobin\FetalHemoglobinTestOrder.cs" />
     <Compile Include="Business\Test\FumarateHydrataseByIHC\FumarateHydrataseByIHCTest.cs" />
+    <Compile Include="Business\Test\Her2AmplificationByIHC\HER2AmplificationByIHCSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISHSendOut\HER2AmplificationByISHSendOutTest.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResult.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultBreast.cs" />
@@ -7095,12 +7096,12 @@
   <ItemGroup>
     <PublishFile Include="Microsoft.Exchange.WebServices">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

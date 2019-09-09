@@ -30,6 +30,7 @@ namespace YellowstonePathology.Business.MaterialTracking.Model
         private string m_Action;
         private bool m_ClientAccessioned;
         private string m_ClientAccession;
+        private string m_Comment;
 
         public MaterialTrackingLog()
         {
@@ -55,7 +56,7 @@ namespace YellowstonePathology.Business.MaterialTracking.Model
             this.m_MasterAccessionNo = masterAccessionNo;
             this.m_MaterialLabel = materialLabel;
             this.m_ClientAccessioned = clientAccessioned;
-            this.m_ClientAccession = clientAccession;
+            this.m_ClientAccession = clientAccession;           
         }
 
         public MaterialTrackingLog(string objectId, string materialId, string materialTrackingBatchId, string facilityId, string facilityName, string location, string materialType)
@@ -77,7 +78,7 @@ namespace YellowstonePathology.Business.MaterialTracking.Model
         {                        
             this.m_MasterAccessionNo = materialTrackingScannedItemView.MasterAccessionNo;
             this.m_MaterialLabel = materialTrackingScannedItemView.MaterialLabel;
-            this.m_MaterialType = materialTrackingScannedItemView.MaterialType;
+            this.m_MaterialType = materialTrackingScannedItemView.MaterialType;            
             if(string.IsNullOrEmpty(materialTrackingScannedItemView.TestName) == false)
             {
                 this.m_MaterialLabel += " - " + materialTrackingScannedItemView.TestName;
@@ -335,6 +336,21 @@ namespace YellowstonePathology.Business.MaterialTracking.Model
                 {
                     this.m_ClientAccession = value;
                     this.NotifyPropertyChanged("ClientAccession");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1000", "null", "varchar")]
+        public string Comment
+        {
+            get { return this.m_Comment; }
+            set
+            {
+                if (this.m_Comment != value)
+                {
+                    this.m_Comment = value;
+                    this.NotifyPropertyChanged("Comment");
                 }
             }
         }
