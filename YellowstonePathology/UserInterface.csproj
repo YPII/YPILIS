@@ -1289,6 +1289,8 @@
     <Compile Include="Business\WebService\WebServiceAccountView.cs" />
     <Compile Include="Business\WebService\WebServiceAccountCollection.cs" />
     <Compile Include="Business\WebService\WebServiceClientView.cs" />
+    <Compile Include="Business\YPHoliday.cs" />
+    <Compile Include="Business\YPHolidayCollection.cs" />
     <Compile Include="Policy\EditDirectoryDialog.xaml.cs">
       <DependentUpon>EditDirectoryDialog.xaml</DependentUpon>
     </Compile>
@@ -4601,6 +4603,12 @@
       <DependentUpon>XpsDocumentViewerPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\YPHolidayDialog.xaml.cs">
+      <DependentUpon>YPHolidayDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\YPHolidayEditDialog.xaml.cs">
+      <DependentUpon>YPHolidayEditDialog.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\Billing\CodeSelection.cs" />
@@ -5273,6 +5281,14 @@
     <Page Include="UI\Cutting\ScanAliquotPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\YPHolidayDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\YPHolidayEditDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="UI\GroupingListViewStyle.xaml">
       <Generator>MSBuild:Compile</Generator>

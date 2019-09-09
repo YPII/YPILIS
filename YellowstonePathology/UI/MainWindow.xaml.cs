@@ -1063,5 +1063,11 @@ namespace YellowstonePathology.UI
             SVHLabelDialog dlg = new UI.SVHLabelDialog();
             dlg.ShowDialog();
         }
+
+        private void MenuItemHolidays_Click(object sender, RoutedEventArgs e)
+        {
+            YPHolidayDialog dlg = new UI.YPHolidayDialog();
+            dlg.ShowDialog();
+        }
     }
 }
