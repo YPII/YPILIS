@@ -4,8 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI"
+    	xmlns:validationRules="clr-namespace:YellowstonePathology.UI.ValidationRules"
+    	xmlns:converter="clr-namespace:YellowstonePathology.UI.Converter"
+    	xmlns:customControls="clr-namespace:YellowstonePathology.UI.CustomControls"
         mc:Ignorable="d"
-        Title="YP Holiday" Height="120" Width="300">
+        Title="YP Holiday" Height="140" Width="300" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -15,16 +18,31 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Right">Date:</TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=HolidayDate}" />
+        <customControls:ValidTextBox x:Name="TextBoxHolidayDate" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="2,2,2,2">
+            <TextBox.Text>
+                <Binding Path="YPHoliday.HolidayDate" UpdateSourceTrigger="Explicit">
+                    <Binding.Converter>
+                        <converter:ShortDateConverter />
+                    </Binding.Converter>
+                    <Binding.ValidationRules>
+                        <validationRules:BirthDateValidation />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </customControls:ValidTextBox>
 
         <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Right">Name:</TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=HolidayName}" />
-        
-        <Button Grid.Row="2" Grid.Column="1" Margin="5" Height="30" Width="80" HorizontalAlignment="Right" Content="OK" Click="ButtonOK_Click" />
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=YPHoliday.HolidayName}" />
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Right">Work Day:</TextBlock>
+        <CheckBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" IsChecked="{Binding Path=YPHoliday.IsAWorkDay}" />
+
+        <Button Grid.Row="3" Grid.Column="1" Margin="5" Height="30" Width="80" HorizontalAlignment="Right" Content="OK" Click="ButtonOK_Click" />
 
     </Grid>
 </Window>

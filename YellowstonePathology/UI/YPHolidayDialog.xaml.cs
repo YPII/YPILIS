@@ -184,7 +184,11 @@ namespace YellowstonePathology.UI
         private bool CanSave(Business.YPHoliday holiday)
         {
             bool result = true;
-
+            if(this.m_YPHolidayCollection.Exists(holiday.HolidayDate) == true)
+            {
+                result = false;
+                MessageBox.Show("There already is a holiday on that date.");
+            }
             return result;
         }
     }
