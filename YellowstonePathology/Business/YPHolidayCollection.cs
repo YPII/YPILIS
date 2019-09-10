@@ -71,5 +71,20 @@ namespace YellowstonePathology.Business
                 }
             }
         }
+
+        public void DeleteHoliday(YPHoliday holiday)
+        {
+            MySqlCommand cmd = new MySqlCommand("Delete from tblYPHoliday where HolidayDate = @HolidayDate;");
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@HolidayDate", holiday.HolidayDate);
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+
+            this.Remove(holiday);
+        }
     }
 }
