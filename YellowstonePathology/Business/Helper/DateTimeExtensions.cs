@@ -564,7 +564,7 @@ namespace YellowstonePathology.Business.Helper
             YPHolidayCollection holidays = new YPHolidayCollection();
             //NEW YEARS
             DateTime newYearsDate = AdjustForWeekendHoliday(new DateTime(year, 1, 1).Date);
-            YPHoliday newYear = new Business.YPHoliday("New Years", newYearsDate);
+            YPHoliday newYear = new Business.YPHoliday("New Years", newYearsDate, false);
             holidays.Add(newYear);
 
             //MEMORIAL DAY  -- last monday in May
@@ -575,12 +575,12 @@ namespace YellowstonePathology.Business.Helper
                 memorialDay = memorialDay.AddDays(-1);
                 dayOfWeek = memorialDay.DayOfWeek;
             }
-            YPHoliday memorial = new Business.YPHoliday("Memorial Day", memorialDay.Date);
+            YPHoliday memorial = new Business.YPHoliday("Memorial Day", memorialDay.Date, false);
             holidays.Add(memorial);
 
             //INDEPENCENCE DAY
             DateTime independenceDay = AdjustForWeekendHoliday(new DateTime(year, 7, 4).Date);
-            YPHoliday july4 = new Business.YPHoliday("Independence Day", independenceDay);
+            YPHoliday july4 = new Business.YPHoliday("Independence Day", independenceDay, false);
             holidays.Add(july4);
 
             //LABOR DAY -- 1st Monday in September
@@ -591,7 +591,7 @@ namespace YellowstonePathology.Business.Helper
                 laborDay = laborDay.AddDays(1);
                 dayOfWeek = laborDay.DayOfWeek;
             }
-            YPHoliday labor = new Business.YPHoliday("Labor Day", laborDay.Date);
+            YPHoliday labor = new Business.YPHoliday("Labor Day", laborDay.Date, false);
             holidays.Add(labor);
 
             //THANKSGIVING DAY - 4th Thursday in November
@@ -599,12 +599,12 @@ namespace YellowstonePathology.Business.Helper
                                 where new DateTime(year, 11, day).DayOfWeek == DayOfWeek.Thursday
                                 select day).ElementAt(3);
             DateTime thanksgivingDay = new DateTime(year, 11, thanksgiving);
-            YPHoliday turkey = new Business.YPHoliday("Thanksgiving Day", thanksgivingDay.Date);
+            YPHoliday turkey = new Business.YPHoliday("Thanksgiving Day", thanksgivingDay.Date, false);
             holidays.Add(turkey);
 
             //CHRISTMAS December 25th
             DateTime christmasDay = AdjustForWeekendHoliday(new DateTime(year, 12, 25).Date);
-            YPHoliday christmas = new Business.YPHoliday("Christmas Day", christmasDay);
+            YPHoliday christmas = new Business.YPHoliday("Christmas Day", christmasDay, false);
             holidays.Add(christmas);
             return holidays;
         }

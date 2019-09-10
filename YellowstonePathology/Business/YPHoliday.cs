@@ -13,13 +13,16 @@ namespace YellowstonePathology.Business
 
         private DateTime m_HolidayDate;
         private string m_HolidayName;
+        private bool m_IsAWorkDay;
+
         public YPHoliday()
         { }
 
-        public YPHoliday(string holidayName, DateTime holidayDate)
+        public YPHoliday(string holidayName, DateTime holidayDate, bool isAWorkDay)
         {
             this.m_HolidayDate = holidayDate;
             this.m_HolidayName = holidayName;
+            this.m_IsAWorkDay = isAWorkDay;
         }
 
         public void NotifyPropertyChanged(String info)
@@ -52,6 +55,19 @@ namespace YellowstonePathology.Business
                 {
                     this.m_HolidayName = value;
                     this.NotifyPropertyChanged("HolidayName");
+                }
+            }
+        }
+
+        public bool IsAWorkDay
+        {
+            get { return this.m_IsAWorkDay; }
+            set
+            {
+                if (this.m_IsAWorkDay != value)
+                {
+                    this.m_IsAWorkDay = value;
+                    this.NotifyPropertyChanged("IsAWorkDay");
                 }
             }
         }

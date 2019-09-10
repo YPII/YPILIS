@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI"
         mc:Ignorable="d"
-        Title="YP Holidays" Height="400" Width="650">
+        Title="YP Holidays" Height="400" Width="600" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
     <Grid Margin="10" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -13,61 +13,32 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" Grid.Row="0">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,3,0,0">
-                    <Hyperlink Click="HyperLinkAddHoliday_Click">Add Holiday</Hyperlink>
-            </TextBlock>
-
-            <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,5,0">
-                    <Hyperlink Click="HyperLinkAddStandardHolidays_Click">Add Standard Holidays</Hyperlink>
-            </TextBlock>
-        </Grid>
-
-        <Grid Grid.Column="1" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
             <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-                <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Right">Start Date:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Width="120" Text="{Binding Path=StartDate, Converter={StaticResource ShortDateConverter}}" />
+                <TextBlock Margin="2,2,2,2" HorizontalAlignment="Right">Year:</TextBlock>
+                <TextBox Margin="2,2,2,2" Width="120" Text="{Binding Path=Year}" />
 
-                <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Right">End Date:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Width="120" Text="{Binding Path=EndDate, Converter={StaticResource ShortDateConverter}}" />
+                <TextBlock  Margin="10,2,2,2">
+                    <Hyperlink Click="HyperLinkAddStandardHolidays_Click">Add For Year</Hyperlink>
+                </TextBlock>
 
-                <Button Margin="2" Click="ButtonRefresh_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Refresh.ico"></Image>
-                        <TextBlock Margin="2,0,0,0">Refresh</TextBlock>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-            <ListView Name="ListViewHolidays" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="2,2,2,2" ItemsSource="{Binding Path=YPHolidayCollection}" Grid.RowSpan="2"
+            <TextBlock  Margin="10,2,2,2">
+                    <Hyperlink Click="HyperLinkChangeWorkDay_Click">Change to/from Work Day</Hyperlink>
+            </TextBlock>
+        </StackPanel>
+            
+            <ListView Name="ListViewHolidays" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="2,2,2,2" ItemsSource="{Binding Path=YPHolidayCollection}" Grid.RowSpan="2"
                       MouseDoubleClick="ListViewHolidays_MouseDoubleClick">
 
                 <ListView.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="DeleteHoliday_Click"></MenuItem>
+                        <MenuItem Header="Add Day After" Click="ContextMenuAddDayAfter_Click"></MenuItem>
+                        <MenuItem Header="Add Day Before" Click="ContextMenuAddDayBefore_Click"></MenuItem>
+                        <MenuItem Header="Delete" Click="ContextMenuDeleteHoliday_Click"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
 
@@ -75,11 +46,11 @@
                     <GridView>
                         <GridViewColumn Header="Date" Width="250" DisplayMemberBinding="{Binding Path=DisplayDate}" />
                         <GridViewColumn Header="Name" Width="210" DisplayMemberBinding="{Binding Path=HolidayName}" />
+                        <GridViewColumn Header="Work Day" Width="80" DisplayMemberBinding="{Binding Path=IsAWorkDay}" />
                     </GridView>
                 </ListView.View>
             </ListView>
 
-        </Grid>
         <Button Grid.Row="2" Grid.Column="1" Margin="5" Height="30" Width="80" HorizontalAlignment="Right" Content="OK" Click="ButtonOK_Click" />
 
     </Grid>

@@ -20,23 +20,12 @@ namespace YellowstonePathology.UI
     public partial class YPHolidayEditDialog : Window
     {
         private YellowstonePathology.Business.YPHoliday m_YPHoliday;
-        private string m_HolidayName;
-        private string m_HolidayDate;
-        bool m_SaveAsked;
+        private YellowstonePathology.Business.YPHoliday m_YPHolidayOriginal;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="holiday"></param>
         public YPHolidayEditDialog(YellowstonePathology.Business.YPHoliday holiday)
         {
-            this.m_SaveAsked = false;
             this.m_YPHoliday = holiday;
-            if (holiday != null)
-            {
-                this.m_HolidayDate = m_YPHoliday.HolidayDate.ToString("yyyy/MM/dd");
-                this.m_HolidayName = m_YPHoliday.HolidayName;
-            }
+            this.m_YPHolidayOriginal = new Business.YPHoliday(holiday.HolidayName, holiday.HolidayDate, holiday.IsAWorkDay);
 
             InitializeComponent();
 
@@ -48,21 +37,9 @@ namespace YellowstonePathology.UI
             get { return this.m_YPHoliday; }
         }
 
-        public string HolidayDate
-        {
-            get { return this.m_HolidayDate; }
-            set { this.m_HolidayDate = value; }
-        }
-
-        public string HolidayName
-        {
-            get { return this.m_HolidayName; }
-            set { this.m_HolidayName = value; }
-        }
-
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
-            if (this.SaveChanges() == true)
+            if (this.AskSaveChanges() == true)
             {
                 if (this.CanSave() == true)
                 {
@@ -76,30 +53,28 @@ namespace YellowstonePathology.UI
             }
         }
 
-        private bool SaveChanges()
+        private bool AskSaveChanges()
         {
             bool result = false;
-            if(this.m_SaveAsked == false)
+            if (this.m_YPHolidayOriginal.HolidayDate != this.m_YPHoliday.HolidayDate)
             {
-                this.m_SaveAsked = true;
-                if (this.m_YPHoliday == null && (string.IsNullOrEmpty(this.m_HolidayDate) == false || string.IsNullOrEmpty(this.m_HolidayName) == false))
+                result = true;
+            }
+            if (string.IsNullOrEmpty(this.m_YPHoliday.HolidayName) == true || this.m_YPHolidayOriginal.HolidayName != this.m_YPHoliday.HolidayName)
+            {
+                result = true;
+            }
+            if(this.m_YPHolidayOriginal.IsAWorkDay != this.m_YPHoliday.IsAWorkDay)
+            {
+                result = true;
+            }
+
+            if (result == true)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Do you want to save the changes?", "Save Changes", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+                if(messageBoxResult == MessageBoxResult.No)
                 {
-                    result = true;
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(this.m_HolidayDate) == false)
-                    {
-                        string dt = this.m_YPHoliday.HolidayDate.ToString("yyyy/MM/dd");
-                        if (dt != this.m_HolidayDate)
-                        {
-                            result = true;
-                        }
-                    }
-                    if (string.IsNullOrEmpty(this.m_HolidayName) == false && this.m_HolidayName != this.m_YPHoliday.HolidayName)
-                    {
-                        result = true;
-                    }
+                    result = false;
                 }
             }
             return result;
@@ -108,36 +83,14 @@ namespace YellowstonePathology.UI
         private bool CanSave()
         {
             bool result = true;
-            if(string.IsNullOrEmpty(this.m_HolidayName) == true)
+            if(string.IsNullOrEmpty(this.m_YPHoliday.HolidayName) == true)
             {
                 MessageBox.Show("Enter a valid holiday name.");
                 result = false;
             }
-            else if (string.IsNullOrEmpty(this.m_HolidayName) == true)
-            {
-                MessageBox.Show("Enter a valid date.");
-                result = false;
-            }
-            else
-            {
-                DateTime dt;
-                result = DateTime.TryParse(this.m_HolidayDate, out dt);
-                if(result == false)
-                {
-                    MessageBox.Show("Enter a valid date.");
-                }
-            }
 
             if(result == true)
             {
-                DateTime holidayDate = DateTime.Parse(this.m_HolidayDate);
-                if (this.m_YPHoliday == null)
-                {
-                    this.m_YPHoliday = new Business.YPHoliday();
-                }
-                this.m_YPHoliday.HolidayDate = holidayDate;
-                this.m_YPHoliday.HolidayName = this.m_HolidayName;
-
                 string jString = this.m_YPHoliday.ToJSON();
                 YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Helper.JSONHelper.IsValidJSONString(jString);
                 if (methodResult.Success == false)
