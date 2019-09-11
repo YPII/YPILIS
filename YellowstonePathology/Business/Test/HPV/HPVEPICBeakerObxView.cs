@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.HPV
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
             this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");            
-            this.AddNextObxElementBeaker("Result", "Positive", document, "F", "Negative");
+            this.AddNextObxElementBeaker("HPV Result", "Positive", document, "F", "Negative");
 
             if (amendmentCollection.Count != 0)
             {
