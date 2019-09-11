@@ -21,17 +21,25 @@ namespace YellowstonePathology.UI
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private int m_Year;
+        private List<int> m_Years;
+        private int m_SelectedYear;
         private YellowstonePathology.Business.YPHolidayCollection m_YPHolidayCollection;
 
         public YPHolidayDialog()
         {
-            this.m_Year = DateTime.Today.Year;
-            this.GetHolidays();
+            this.m_Years = new List<int>();
+            int yr = DateTime.Today.AddYears(-2).Year;
+            for (int idx = 0; idx < 6; idx++)
+            {
+                yr++;
+                this.m_Years.Add(yr);
+            }
 
             InitializeComponent();
 
             DataContext = this;
+
+            this.ComboBoxYears.SelectedIndex = 1;
         }
 
         public void NotifyPropertyChanged(String info)
@@ -52,26 +60,36 @@ namespace YellowstonePathology.UI
             }
         }
 
-        public int Year
+        public List<int> Years
         {
-            get { return this.m_Year; }
-            set
-            {
-                this.m_Year = value;
-                this.NotifyPropertyChanged("Year");
-            }
+            get { return this.m_Years; }
         }
 
 
         private void GetHolidays()
         {
-            this.m_YPHolidayCollection = YellowstonePathology.Business.YPHolidayCollection.GetByDateRange(new DateTime(this.m_Year, 1, 1), new DateTime(this.m_Year, 12, 31));
+            this.m_YPHolidayCollection = YellowstonePathology.Business.YPHolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
             this.NotifyPropertyChanged("YPHolidayCollection");
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void ButtonAddStandardHolidays_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.YPHolidayCollection holidays = YellowstonePathology.Business.YPHolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
+            if (holidays.Count == 0)
+            {
+                holidays = YellowstonePathology.Business.Helper.DateTimeExtensions.GetHolidays(this.m_SelectedYear);
+                foreach (YellowstonePathology.Business.YPHoliday holiday in holidays)
+                {
+                    holiday.Save();
+                }
+            }
+
+            this.GetHolidays();
         }
 
         private void ContextMenuAddDayAfter_Click(object sender, RoutedEventArgs e)
@@ -89,7 +107,7 @@ namespace YellowstonePathology.UI
                     dateToChange = dateToChange.AddDays(1);
                 }
 
-                YellowstonePathology.Business.YPHoliday holidayToAdd = new Business.YPHoliday("Day after " + holiday.HolidayName, dateToChange, false);
+                YellowstonePathology.Business.YPHoliday holidayToAdd = new Business.YPHoliday(string.Empty, dateToChange, false);
                 if (this.CanSave(holidayToAdd) == true)
                 {
                     holidayToAdd.Save();
@@ -113,7 +131,7 @@ namespace YellowstonePathology.UI
                     dateToChange = dateToChange.AddDays(-1);
                 }
 
-                YellowstonePathology.Business.YPHoliday holidayToAdd = new Business.YPHoliday("Day before " + holiday.HolidayName, dateToChange, false);
+                YellowstonePathology.Business.YPHoliday holidayToAdd = new Business.YPHoliday(string.Empty, dateToChange, false);
                 if (this.CanSave(holidayToAdd) == true)
                 {
                     holidayToAdd.Save();
@@ -127,7 +145,7 @@ namespace YellowstonePathology.UI
             if (this.ListViewHolidays.SelectedItem != null)
             {
                 YellowstonePathology.Business.YPHoliday holiday = (YellowstonePathology.Business.YPHoliday)this.ListViewHolidays.SelectedItem;
-                MessageBoxResult messageBoxResult = MessageBox.Show("Delete " + holiday.HolidayName + "?", "Delete Holiday", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                MessageBoxResult messageBoxResult = MessageBox.Show("Delete " + holiday.DisplayDate + "?", "Delete Holiday", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     this.m_YPHolidayCollection.DeleteHoliday(holiday);
@@ -136,38 +154,11 @@ namespace YellowstonePathology.UI
             }
         }
 
-        private void ListViewHolidays_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ContextMenuChangeWorkDay_Click(object sender, RoutedEventArgs e)
         {
-            if(this.ListViewHolidays.SelectedItem != null)
+            if (this.ListViewHolidays.SelectedItem != null)
             {
                 YellowstonePathology.Business.YPHoliday holiday = (YellowstonePathology.Business.YPHoliday)this.ListViewHolidays.SelectedItem;
-                YPHolidayEditDialog dlg = new UI.YPHolidayEditDialog(holiday);
-                dlg.ShowDialog();
-                this.GetHolidays();
-            }
-        }
-
-        private void HyperLinkAddStandardHolidays_Click(object sender, RoutedEventArgs e)
-        {
-            int year = DateTime.Today.Year;
-            YellowstonePathology.Business.YPHolidayCollection holidays = YellowstonePathology.Business.YPHolidayCollection.GetByDateRange(new DateTime(this.m_Year, 1, 1), new DateTime(this.m_Year, 12, 31));
-            if(holidays.Count == 0)
-            {
-                holidays = YellowstonePathology.Business.Helper.DateTimeExtensions.GetHolidays(year);
-                foreach (YellowstonePathology.Business.YPHoliday holiday in holidays)
-                {
-                    holiday.Save();
-                }
-            }
-
-            this.GetHolidays();
-        }
-
-        private void HyperLinkChangeWorkDay_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.ListViewHolidays.SelectedItems.Count > 0)
-            {
-                foreach (YellowstonePathology.Business.YPHoliday holiday in this.ListViewHolidays.SelectedItems)
                 {
                     holiday.IsAWorkDay = !holiday.IsAWorkDay;
                     holiday.Save();
@@ -190,6 +181,15 @@ namespace YellowstonePathology.UI
                 MessageBox.Show("There already is a holiday on that date.");
             }
             return result;
+        }
+
+        private void ComboBoxYears_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ComboBoxYears.SelectedItem != null)
+            {
+                this.m_SelectedYear = (int)ComboBoxYears.SelectedItem;
+                this.GetHolidays();
+            }
         }
     }
 }

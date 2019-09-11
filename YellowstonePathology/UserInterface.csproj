@@ -4607,9 +4607,6 @@
     <Compile Include="UI\YPHolidayDialog.xaml.cs">
       <DependentUpon>YPHolidayDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\YPHolidayEditDialog.xaml.cs">
-      <DependentUpon>YPHolidayEditDialog.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\Billing\CodeSelection.cs" />
@@ -5284,10 +5281,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\YPHolidayDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\YPHolidayEditDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -7112,12 +7105,12 @@
   <ItemGroup>
     <PublishFile Include="Microsoft.Exchange.WebServices">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
