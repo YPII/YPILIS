@@ -49,9 +49,8 @@ namespace YellowstonePathology.Business.Label.Model
                         cassette.FromAliquotOrder(aliquotOrder, accessionOrder);
 
                         CarouselColumn column = this.m_Carousel.GetColumn(accessionOrder.CassetteColor);
-                        string line = cassette.GetLine(column.PrinterCode);
-
-                        string fileName = System.IO.Path.Combine(column.PrinterPath, System.Guid.NewGuid().ToString() + cassette.GetFileExtension());
+                        string line = cassette.GetLine(column.PrinterCode);                        
+                        string fileName = System.IO.Path.Combine(column.PrinterPath, MongoDB.Bson.ObjectId.GenerateNewId().ToString() + "." + aliquotOrder.AliquotOrderId + cassette.GetFileExtension());
 
                         try
                         {
