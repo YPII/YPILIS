@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business
 {
-    public class YPHoliday : INotifyPropertyChanged
+    public class Holiday : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -15,10 +15,10 @@ namespace YellowstonePathology.Business
         private string m_HolidayName;
         private bool m_IsAWorkDay;
 
-        public YPHoliday()
+        public Holiday()
         { }
 
-        public YPHoliday(string holidayName, DateTime holidayDate, bool isAWorkDay)
+        public Holiday(string holidayName, DateTime holidayDate, bool isAWorkDay)
         {
             this.m_HolidayDate = holidayDate;
             this.m_HolidayName = holidayName;

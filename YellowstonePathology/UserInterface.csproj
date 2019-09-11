@@ -1290,8 +1290,8 @@
     <Compile Include="Business\WebService\WebServiceAccountView.cs" />
     <Compile Include="Business\WebService\WebServiceAccountCollection.cs" />
     <Compile Include="Business\WebService\WebServiceClientView.cs" />
-    <Compile Include="Business\YPHoliday.cs" />
-    <Compile Include="Business\YPHolidayCollection.cs" />
+    <Compile Include="Business\Holiday.cs" />
+    <Compile Include="Business\HolidayCollection.cs" />
     <Compile Include="Policy\EditDirectoryDialog.xaml.cs">
       <DependentUpon>EditDirectoryDialog.xaml</DependentUpon>
     </Compile>

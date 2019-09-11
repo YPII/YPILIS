@@ -10,37 +10,37 @@ using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business
 {
-    public class YPHolidayCollection : ObservableCollection<YPHoliday>
+    public class HolidayCollection : ObservableCollection<Holiday>
     {
-        public YPHolidayCollection()
+        public HolidayCollection()
         {
 
         }
 
         public bool Exists(DateTime holidayDate)
         {
-            YPHoliday result = this.FirstOrDefault(y => y.HolidayDate == holidayDate);
+            Holiday result = this.FirstOrDefault(y => y.HolidayDate == holidayDate);
             return result == null ? false : true;
         }
 
-        public YPHoliday Get(DateTime holidayDate)
+        public Holiday Get(DateTime holidayDate)
         {
-            YPHoliday result = this.FirstOrDefault(y => y.HolidayDate == holidayDate);
+            Holiday result = this.FirstOrDefault(y => y.HolidayDate == holidayDate);
             return result;
         }
 
-        public static YPHolidayCollection GetAll()
+        public static HolidayCollection GetAll()
         {
-            YPHolidayCollection result = new Business.YPHolidayCollection();
+            HolidayCollection result = new Business.HolidayCollection();
             DateTime startDate = new DateTime(2018, 1, 1);
             DateTime endDate = new DateTime(2120, 12, 31);
             result.Load(startDate, endDate);
             return result;
         }
 
-        public static YPHolidayCollection GetByDateRange(DateTime startDate, DateTime endDate)
+        public static HolidayCollection GetByDateRange(DateTime startDate, DateTime endDate)
         {
-            YPHolidayCollection result = new Business.YPHolidayCollection();
+            HolidayCollection result = new Business.HolidayCollection();
             result.Load(startDate, endDate);
             return result;
         }
@@ -61,7 +61,7 @@ namespace YellowstonePathology.Business
                 {
                     while (dr.Read())
                     {
-                        YPHoliday ypHoliday = JsonConvert.DeserializeObject<Business.YPHoliday>(dr[0].ToString(), new JsonSerializerSettings
+                        Holiday ypHoliday = JsonConvert.DeserializeObject<Business.Holiday>(dr[0].ToString(), new JsonSerializerSettings
                         {
                             TypeNameHandling = TypeNameHandling.All,
                             ObjectCreationHandling = ObjectCreationHandling.Replace
@@ -72,7 +72,7 @@ namespace YellowstonePathology.Business
             }
         }
 
-        public void DeleteHoliday(YPHoliday holiday)
+        public void DeleteHoliday(Holiday holiday)
         {
             MySqlCommand cmd = new MySqlCommand("Delete from tblYPHoliday where HolidayDate = @HolidayDate;");
             cmd.CommandType = CommandType.Text;

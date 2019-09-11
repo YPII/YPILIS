@@ -23,7 +23,7 @@ namespace YellowstonePathology.UI
 
         private List<int> m_Years;
         private int m_SelectedYear;
-        private YellowstonePathology.Business.YPHolidayCollection m_YPHolidayCollection;
+        private YellowstonePathology.Business.HolidayCollection m_YPHolidayCollection;
 
         public YPHolidayDialog()
         {
@@ -50,7 +50,7 @@ namespace YellowstonePathology.UI
             }
         }
 
-        public YellowstonePathology.Business.YPHolidayCollection YPHolidayCollection
+        public YellowstonePathology.Business.HolidayCollection YPHolidayCollection
         {
             get { return this.m_YPHolidayCollection; }
             set
@@ -68,7 +68,7 @@ namespace YellowstonePathology.UI
 
         private void GetHolidays()
         {
-            this.m_YPHolidayCollection = YellowstonePathology.Business.YPHolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
+            this.m_YPHolidayCollection = YellowstonePathology.Business.HolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
             this.NotifyPropertyChanged("YPHolidayCollection");
         }
 
@@ -79,11 +79,11 @@ namespace YellowstonePathology.UI
 
         private void ButtonAddStandardHolidays_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.YPHolidayCollection holidays = YellowstonePathology.Business.YPHolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
+            YellowstonePathology.Business.HolidayCollection holidays = YellowstonePathology.Business.HolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
             if (holidays.Count == 0)
             {
                 holidays = YellowstonePathology.Business.Helper.DateTimeExtensions.GetHolidays(this.m_SelectedYear);
-                foreach (YellowstonePathology.Business.YPHoliday holiday in holidays)
+                foreach (YellowstonePathology.Business.Holiday holiday in holidays)
                 {
                     holiday.Save();
                 }
@@ -96,7 +96,7 @@ namespace YellowstonePathology.UI
         {
             if (this.ListViewHolidays.SelectedItem != null)
             {
-                YellowstonePathology.Business.YPHoliday holiday = (YellowstonePathology.Business.YPHoliday)this.ListViewHolidays.SelectedItem;
+                YellowstonePathology.Business.Holiday holiday = (YellowstonePathology.Business.Holiday)this.ListViewHolidays.SelectedItem;
                 DateTime dateToChange = new DateTime(holiday.HolidayDate.Year, holiday.HolidayDate.Month, holiday.HolidayDate.Day);
                 if (dateToChange.DayOfWeek == DayOfWeek.Friday)
                 {
@@ -107,7 +107,7 @@ namespace YellowstonePathology.UI
                     dateToChange = dateToChange.AddDays(1);
                 }
 
-                YellowstonePathology.Business.YPHoliday holidayToAdd = new Business.YPHoliday(string.Empty, dateToChange, false);
+                YellowstonePathology.Business.Holiday holidayToAdd = new Business.Holiday(string.Empty, dateToChange, false);
                 if (this.CanSave(holidayToAdd) == true)
                 {
                     holidayToAdd.Save();
@@ -120,7 +120,7 @@ namespace YellowstonePathology.UI
         {
             if (this.ListViewHolidays.SelectedItem != null)
             {
-                YellowstonePathology.Business.YPHoliday holiday = (YellowstonePathology.Business.YPHoliday)this.ListViewHolidays.SelectedItem;
+                YellowstonePathology.Business.Holiday holiday = (YellowstonePathology.Business.Holiday)this.ListViewHolidays.SelectedItem;
                 DateTime dateToChange = new DateTime(holiday.HolidayDate.Year, holiday.HolidayDate.Month, holiday.HolidayDate.Day);
                 if (dateToChange.DayOfWeek == DayOfWeek.Monday)
                 {
@@ -131,7 +131,7 @@ namespace YellowstonePathology.UI
                     dateToChange = dateToChange.AddDays(-1);
                 }
 
-                YellowstonePathology.Business.YPHoliday holidayToAdd = new Business.YPHoliday(string.Empty, dateToChange, false);
+                YellowstonePathology.Business.Holiday holidayToAdd = new Business.Holiday(string.Empty, dateToChange, false);
                 if (this.CanSave(holidayToAdd) == true)
                 {
                     holidayToAdd.Save();
@@ -144,7 +144,7 @@ namespace YellowstonePathology.UI
         {
             if (this.ListViewHolidays.SelectedItem != null)
             {
-                YellowstonePathology.Business.YPHoliday holiday = (YellowstonePathology.Business.YPHoliday)this.ListViewHolidays.SelectedItem;
+                YellowstonePathology.Business.Holiday holiday = (YellowstonePathology.Business.Holiday)this.ListViewHolidays.SelectedItem;
                 MessageBoxResult messageBoxResult = MessageBox.Show("Delete " + holiday.DisplayDate + "?", "Delete Holiday", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
@@ -158,7 +158,7 @@ namespace YellowstonePathology.UI
         {
             if (this.ListViewHolidays.SelectedItem != null)
             {
-                YellowstonePathology.Business.YPHoliday holiday = (YellowstonePathology.Business.YPHoliday)this.ListViewHolidays.SelectedItem;
+                YellowstonePathology.Business.Holiday holiday = (YellowstonePathology.Business.Holiday)this.ListViewHolidays.SelectedItem;
                 {
                     holiday.IsAWorkDay = !holiday.IsAWorkDay;
                     holiday.Save();
@@ -172,7 +172,7 @@ namespace YellowstonePathology.UI
             }
         }
 
-        private bool CanSave(Business.YPHoliday holiday)
+        private bool CanSave(Business.Holiday holiday)
         {
             bool result = true;
             if(this.m_YPHolidayCollection.Exists(holiday.HolidayDate) == true)
