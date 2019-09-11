@@ -17,7 +17,7 @@ namespace YellowstonePathology.UI
     /// <summary>
     /// Interaction logic for YPHolidayDialog.xaml
     /// </summary>
-    public partial class YPHolidayDialog : Window, INotifyPropertyChanged
+    public partial class HolidayDialog : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -25,7 +25,7 @@ namespace YellowstonePathology.UI
         private int m_SelectedYear;
         private YellowstonePathology.Business.HolidayCollection m_YPHolidayCollection;
 
-        public YPHolidayDialog()
+        public HolidayDialog()
         {
             this.m_Years = new List<int>();
             int yr = DateTime.Today.AddYears(-2).Year;

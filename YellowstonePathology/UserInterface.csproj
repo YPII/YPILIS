@@ -4604,8 +4604,8 @@
       <DependentUpon>XpsDocumentViewerPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\YPHolidayDialog.xaml.cs">
-      <DependentUpon>YPHolidayDialog.xaml</DependentUpon>
+    <Compile Include="UI\HolidayDialog.xaml.cs">
+      <DependentUpon>HolidayDialog.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -5280,7 +5280,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\YPHolidayDialog.xaml">
+    <Page Include="UI\HolidayDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

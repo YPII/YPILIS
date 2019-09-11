@@ -1066,7 +1066,7 @@ namespace YellowstonePathology.UI
 
         private void MenuItemHolidays_Click(object sender, RoutedEventArgs e)
         {
-            YPHolidayDialog dlg = new UI.YPHolidayDialog();
+            HolidayDialog dlg = new UI.HolidayDialog();
             dlg.ShowDialog();
         }
     }
