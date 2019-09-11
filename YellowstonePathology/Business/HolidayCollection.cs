@@ -48,7 +48,7 @@ namespace YellowstonePathology.Business
         private void Load(DateTime startDate, DateTime endDate)
         {
             this.ClearItems();
-            MySqlCommand cmd = new MySqlCommand("Select JSONValue from tblYPHoliday where HolidayDate between @StartDate and @EndDate order by HolidayDate;");
+            MySqlCommand cmd = new MySqlCommand("Select JSONValue from tblHoliday where HolidayDate between @StartDate and @EndDate order by HolidayDate;");
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@StartDate", startDate);
             cmd.Parameters.AddWithValue("@EndDate", endDate);
@@ -74,7 +74,7 @@ namespace YellowstonePathology.Business
 
         public void DeleteHoliday(Holiday holiday)
         {
-            MySqlCommand cmd = new MySqlCommand("Delete from tblYPHoliday where HolidayDate = @HolidayDate;");
+            MySqlCommand cmd = new MySqlCommand("Delete from tblHoliday where HolidayDate = @HolidayDate;");
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@HolidayDate", holiday.HolidayDate);
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
@@ -85,6 +85,12 @@ namespace YellowstonePathology.Business
             }
 
             this.Remove(holiday);
+        }
+
+        public bool IsDateAHoliday(DateTime dateToCheck)
+        {
+            DateTime dt = new DateTime(dateToCheck.Year, dateToCheck.Month, dateToCheck.Day);
+            return this.Exists(dt);
         }
     }
 }

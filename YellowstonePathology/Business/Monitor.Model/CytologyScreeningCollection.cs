@@ -57,11 +57,11 @@ namespace YellowstonePathology.Business.Monitor.Model
             }           
         }
 
-        public void SetState()
+        public void SetState(YellowstonePathology.Business.HolidayCollection holidays)
         {
             foreach (CytologyScreening cytologyScreening in this)
             {
-                cytologyScreening.SetState();
+                cytologyScreening.SetState(holidays);
             }
         }
     }

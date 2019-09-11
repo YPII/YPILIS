@@ -88,7 +88,7 @@ namespace YellowstonePathology.Business
         public void Save()
         {
             string jString = this.ToJSON();
-            MySqlCommand cmd = new MySqlCommand("Insert tblYPHoliday (HolidayDate, JSonValue) values (@HolidayDate, @JSONValue) ON DUPLICATE KEY UPDATE HolidayDate = @HolidayDate, JSONValue = @JSONValue;");
+            MySqlCommand cmd = new MySqlCommand("Insert tblHoliday (HolidayDate, JSonValue) values (@HolidayDate, @JSONValue) ON DUPLICATE KEY UPDATE HolidayDate = @HolidayDate, JSONValue = @JSONValue;");
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@JSONValue", jString);
             cmd.Parameters.AddWithValue("@HolidayDate", this.m_HolidayDate);

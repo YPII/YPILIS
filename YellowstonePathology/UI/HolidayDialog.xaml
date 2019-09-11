@@ -24,13 +24,14 @@
         </ComboBox>
             
         <ListView Name="ListViewHolidays" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="2,2,2,2" 
-                    ItemsSource="{Binding Path=YPHolidayCollection}">
+                    ItemsSource="{Binding Path=HolidayCollection}">
 
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Add Day After" Click="ContextMenuAddDayAfter_Click"></MenuItem>
                     <MenuItem Header="Add Day Before" Click="ContextMenuAddDayBefore_Click"></MenuItem>
-                    <MenuItem Header="Change to/from Workday" Click="ContextMenuChangeWorkDay_Click"></MenuItem>
+                    <MenuItem Header="Set as Workday" Click="ContextMenuIsWorkDay_Click"></MenuItem>
+                    <MenuItem Header="Set as not a Workday" Click="ContextMenuIsNotWorkDay_Click"></MenuItem>
                     <MenuItem Header="Delete" Click="ContextMenuDeleteHoliday_Click"></MenuItem>
                 </ContextMenu>
             </ListView.ContextMenu>

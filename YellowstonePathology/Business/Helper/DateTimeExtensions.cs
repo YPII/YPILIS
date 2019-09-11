@@ -55,67 +55,6 @@ namespace YellowstonePathology.Business.Helper
             return result;
         }
 
-        public static int GetWeekendAndHolidayHoursBetween(DateTime startDate, DateTime endDate)
-        {
-            if (startDate == null) throw new Exception("GetWeekendAndHolidayHoursBetween: startDate is null");
-            if (endDate == null) throw new Exception("GetWeekendAndHolidayHoursBetween: endDate is null");
-            if (startDate >= endDate) throw new Exception("GetWeekendAndHolidayHoursBetween: startDate is >= endDate");
-
-            DateTime tryStartDate = new DateTime(startDate.Year, startDate.Month, startDate.Day);
-            DateTime tryEndDate = new DateTime(endDate.Year, endDate.Month, endDate.Day);
-            TimeSpan weekendHours = new TimeSpan();
-            //bool startDateIsHoliday = false;
-            //bool endDateIsHoliday = false;
-
-            /*HashSet<DateTime> holidays = GetHolidays(startDate.Year);
-            if (endDate.Year != startDate.Year)
-            {
-                HashSet<DateTime> endholidays = GetHolidays(endDate.Year);
-                foreach(DateTime holiday in endholidays)
-                {
-                    holidays.Add(holiday);
-                }
-            }
-
-            foreach (DateTime holiday in holidays)
-            {
-                if (holiday == tryStartDate) startDateIsHoliday = true;
-                if (holiday == tryEndDate) endDateIsHoliday = true;
-            }*/
-
-            //if ((startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday || startDateIsHoliday == true) &&
-            //    (endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday || endDateIsHoliday == true))
-            if ((startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday) &&
-                (endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday))
-            {
-                tryStartDate = tryStartDate.AddDays(1);
-            }
-
-            while (tryStartDate < tryEndDate)
-            {
-                //if (tryStartDate.DayOfWeek == DayOfWeek.Saturday || tryStartDate.DayOfWeek == DayOfWeek.Sunday || startDateIsHoliday == true)
-                if (tryStartDate.DayOfWeek == DayOfWeek.Saturday || tryStartDate.DayOfWeek == DayOfWeek.Sunday)
-                {
-                    weekendHours = weekendHours.Add(new TimeSpan(1, 0, 0, 0));
-                }
-                tryStartDate = tryStartDate.AddDays(1);
-            }
-
-            //if (startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday || startDateIsHoliday == true)
-            if (startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday)
-            {
-                weekendHours = weekendHours.Add(new TimeSpan(24 - startDate.Hour, 0, 0));
-            }
-
-            //if (endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday || endDateIsHoliday == true)
-            if (endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday)
-            {
-                weekendHours = weekendHours.Add(new TimeSpan(endDate.Hour, 0, 0));
-            }
-
-            return (int)weekendHours.TotalHours;
-        }
-
         public static string FormatDateTimeString(string shortcutString)
         {            
             string result = shortcutString;
@@ -524,22 +463,74 @@ namespace YellowstonePathology.Business.Helper
 			return result;
 		}
 
-		public static TimeSpan GetHoursBetweenExcludingWeekends(DateTime startDate, DateTime endDate)
-		{
-			TimeSpan result = new TimeSpan();
-			TimeSpan timeSpanOneHour = new TimeSpan(1, 0, 0);
+        public static TimeSpan GetHoursBetween(DateTime startDate, DateTime endDate, HolidayCollection holidays)
+        {
+            if (startDate >= endDate) throw new Exception("GetWeekendAndHolidayHoursBetween: startDate is >= endDate");
+            TimeSpan result = new TimeSpan();
+            TimeSpan timeSpanOneHour = new TimeSpan(1, 0, 0);
 
-			for (DateTime rollingDate = startDate; rollingDate < endDate; rollingDate = rollingDate.Add(timeSpanOneHour))
-			{
-				int dow = (int)rollingDate.DayOfWeek;
-				if (dow != 0 && dow != 6)
-				{
-					result = result.Add(timeSpanOneHour);
-				}
-			}
+            for (DateTime rollingDate = startDate; rollingDate < endDate; rollingDate = rollingDate.Add(timeSpanOneHour))
+            {
+                int dow = (int)rollingDate.DayOfWeek;
+                bool isHoliday = holidays.IsDateAHoliday(rollingDate);
+                if (dow != 0 && dow != 6 && isHoliday == false)
+                {
+                    result = result.Add(timeSpanOneHour);
+                }
+            }
 
-			return result;
-		}
+            return result;
+        }
+
+        /*public static TimeSpan GetHoursBetween(DateTime startDate, DateTime endDate, HolidayCollection holidays)
+        {
+            if (startDate >= endDate) throw new Exception("GetWeekendAndHolidayHoursBetween: startDate is >= endDate");
+
+            TimeSpan result = new TimeSpan();
+            TimeSpan timeSpanOneHour = new TimeSpan(1, 0, 0);
+            DateTime tryStartDate = new DateTime(startDate.Year, startDate.Month, startDate.Day);
+            DateTime tryEndDate = new DateTime(endDate.Year, endDate.Month, endDate.Day);
+            TimeSpan weekendHours = new TimeSpan();
+            bool startDateIsHoliday = holidays.IsDateAHoliday(tryStartDate);
+            bool endDateIsHoliday = holidays.IsDateAHoliday(tryEndDate);
+
+            for (DateTime rollingDate = startDate; rollingDate < endDate; rollingDate = rollingDate.Add(timeSpanOneHour))
+            {
+                result = result.Add(timeSpanOneHour);
+            }
+
+            if ((startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday || startDateIsHoliday == true) &&
+                (endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday || endDateIsHoliday == true))
+            {
+                tryStartDate = tryStartDate.AddDays(1);
+            }
+
+            while (tryStartDate < tryEndDate)
+            {
+                bool dayIsAHoliday = holidays.IsDateAHoliday(tryStartDate);
+                if (tryStartDate.DayOfWeek == DayOfWeek.Saturday || tryStartDate.DayOfWeek == DayOfWeek.Sunday || dayIsAHoliday == true)
+                {
+                    if (tryStartDate.DayOfYear != startDate.DayOfYear)
+                    {
+                        weekendHours = weekendHours.Add(new TimeSpan(1, 0, 0, 0));
+                    }
+                }
+                tryStartDate = tryStartDate.AddDays(1);
+            }
+
+            if (startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday || startDateIsHoliday == true)
+            {
+                weekendHours = weekendHours.Add(new TimeSpan(24 - startDate.Hour, 0, 0));
+            }
+
+            if (endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday || endDateIsHoliday == true)
+            {
+                weekendHours = weekendHours.Add(new TimeSpan(endDate.Hour, 0, 0));
+            }
+
+            result = result.Subtract(weekendHours);
+            return result;
+        }*/
 
         public static DateTime? RemoveSeconds(DateTime? dateToSet)
         {

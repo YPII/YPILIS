@@ -23,7 +23,7 @@ namespace YellowstonePathology.UI
 
         private List<int> m_Years;
         private int m_SelectedYear;
-        private YellowstonePathology.Business.HolidayCollection m_YPHolidayCollection;
+        private YellowstonePathology.Business.HolidayCollection m_HolidayCollection;
 
         public HolidayDialog()
         {
@@ -50,13 +50,13 @@ namespace YellowstonePathology.UI
             }
         }
 
-        public YellowstonePathology.Business.HolidayCollection YPHolidayCollection
+        public YellowstonePathology.Business.HolidayCollection HolidayCollection
         {
-            get { return this.m_YPHolidayCollection; }
+            get { return this.m_HolidayCollection; }
             set
             {
-                this.m_YPHolidayCollection = value;
-                this.NotifyPropertyChanged("YPHolidayCollection");
+                this.m_HolidayCollection = value;
+                this.NotifyPropertyChanged("HolidayCollection");
             }
         }
 
@@ -68,8 +68,8 @@ namespace YellowstonePathology.UI
 
         private void GetHolidays()
         {
-            this.m_YPHolidayCollection = YellowstonePathology.Business.HolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
-            this.NotifyPropertyChanged("YPHolidayCollection");
+            this.m_HolidayCollection = YellowstonePathology.Business.HolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
+            this.NotifyPropertyChanged("HolidayCollection");
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -148,19 +148,37 @@ namespace YellowstonePathology.UI
                 MessageBoxResult messageBoxResult = MessageBox.Show("Delete " + holiday.DisplayDate + "?", "Delete Holiday", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
-                    this.m_YPHolidayCollection.DeleteHoliday(holiday);
-                    this.NotifyPropertyChanged("YPHolidayCollection");
+                    this.m_HolidayCollection.DeleteHoliday(holiday);
+                    this.NotifyPropertyChanged("HolidayCollection");
                 }
             }
         }
 
-        private void ContextMenuChangeWorkDay_Click(object sender, RoutedEventArgs e)
+        private void ContextMenuIsWorkDay_Click(object sender, RoutedEventArgs e)
         {
             if (this.ListViewHolidays.SelectedItem != null)
             {
                 YellowstonePathology.Business.Holiday holiday = (YellowstonePathology.Business.Holiday)this.ListViewHolidays.SelectedItem;
                 {
-                    holiday.IsAWorkDay = !holiday.IsAWorkDay;
+                    holiday.IsAWorkDay = true;
+                    holiday.Save();
+                }
+
+                this.GetHolidays();
+            }
+            else
+            {
+                MessageBox.Show("Select a holiday to change.");
+            }
+        }
+
+        private void ContextMenuIsNotWorkDay_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewHolidays.SelectedItem != null)
+            {
+                YellowstonePathology.Business.Holiday holiday = (YellowstonePathology.Business.Holiday)this.ListViewHolidays.SelectedItem;
+                {
+                    holiday.IsAWorkDay = false;
                     holiday.Save();
                 }
 
@@ -175,7 +193,7 @@ namespace YellowstonePathology.UI
         private bool CanSave(Business.Holiday holiday)
         {
             bool result = true;
-            if(this.m_YPHolidayCollection.Exists(holiday.HolidayDate) == true)
+            if(this.m_HolidayCollection.Exists(holiday.HolidayDate) == true)
             {
                 result = false;
                 MessageBox.Show("There already is a holiday on that date.");
