@@ -184,10 +184,10 @@ namespace YellowstonePathology.Business.Monitor.Model
             }
         }
 
-        public void SetState()
+        public void SetState(YellowstonePathology.Business.HolidayCollection holidays)
         {
-            this.SetRunningTime();
-            this.SetGoalTime();
+            this.SetRunningTime(holidays);
+            this.SetGoalTime(holidays);
             this.SetDifference();
 
             if (this.m_Difference.TotalMinutes < 0)
@@ -217,9 +217,9 @@ namespace YellowstonePathology.Business.Monitor.Model
             }
         }
 
-        private void SetGoalTime()
+        private void SetGoalTime(HolidayCollection holidays)
         {
-            this.m_GoalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetHoursBetweenExcludingWeekends(this.m_AccessionTime, this.m_ExpectedFinalTime.Value);
+            this.m_GoalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetHoursBetween(this.m_AccessionTime, this.m_ExpectedFinalTime.Value, holidays);
 
             if (this.m_GoalTime.TotalHours <= 48)
             {
@@ -232,9 +232,9 @@ namespace YellowstonePathology.Business.Monitor.Model
             }
         }
 
-        private void SetRunningTime()
+        private void SetRunningTime(HolidayCollection holidays)
         {
-            this.m_RunningTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetHoursBetweenExcludingWeekends(this.m_AccessionTime, DateTime.Now);
+            this.m_RunningTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetHoursBetween(this.m_AccessionTime, DateTime.Now, holidays);
             if (this.m_RunningTime.TotalHours <= 48)
             {
                 this.m_RunningTimeString = Math.Round(this.m_RunningTime.TotalHours, 0).ToString() + " hrs";
