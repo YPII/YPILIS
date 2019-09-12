@@ -89,8 +89,18 @@ namespace YellowstonePathology.Business
 
         public bool IsDateAHoliday(DateTime dateToCheck)
         {
+            bool result = false;
             DateTime dt = new DateTime(dateToCheck.Year, dateToCheck.Month, dateToCheck.Day);
-            return this.Exists(dt);
+            if( this.Exists(dt) == true)
+            {
+                Holiday holiday = this.Get(dt);
+                if(holiday.IsAWorkDay == false)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
         }
     }
 }
