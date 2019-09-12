@@ -24,11 +24,11 @@ namespace YellowstonePathology.Business.Monitor.Model
             return result;
         }
 
-        public void SetState()
+        public void SetState(YellowstonePathology.Business.HolidayCollection holidays)
         {
             foreach (PendingTest test in this)
             {
-                test.SetState();
+                test.SetState(holidays);
             }
         }
 
