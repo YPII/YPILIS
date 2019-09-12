@@ -328,6 +328,7 @@
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -347,10 +348,13 @@
                 <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,3,0,5">
                     <Hyperlink Click="HyperLinkAddSendAuthorizationFaxTask_Click">Authorization Fax</Hyperlink>
                 </TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="6" Margin="5,3,0,5" VerticalAlignment="Bottom">
-                    <Hyperlink Click="HyperlingPrintTaskOrder_Click">Print (1 copy)</Hyperlink>
+                <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,5">
+                    <Hyperlink Click="HyperLinkBlockMaterialAlertTask_Click">Block Material Alert</Hyperlink>
                 </TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,5" VerticalAlignment="Bottom">
+                    <Hyperlink Click="HyperlingPrintTaskOrder_Click">Print (1 copy)</Hyperlink>
+                </TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,5" VerticalAlignment="Bottom">
                     <Hyperlink Click="HyperlingPrint2CopiesTaskOrder_Click">Print (2 copies)</Hyperlink>
                 </TextBlock>
 
