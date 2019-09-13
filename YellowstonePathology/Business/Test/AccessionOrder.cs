@@ -1341,8 +1341,9 @@ namespace YellowstonePathology.Business.Test
 
 			this.AccessionedById = orderingUserId;
 			this.LoggedById = orderingUserId;
+
 			this.ClientOrderId = clientOrder.ClientOrderId;
-            if (clientOrder.SystemInitiatingOrder == "EPIC")
+            if (clientOrder.SystemInitiatingOrder == "EPIC" || clientOrder.SystemInitiatingOrder == "Beaker")
             {
                 this.ExternalOrderId = accessionOrderIds;
             }
