@@ -143,7 +143,7 @@ namespace YellowstonePathology.UI.Test
             }
             else if (auditResult.Status == Business.Audit.Model.AuditStatusEnum.Warning)
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show(auditResult.Message, "Additional testing required", MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
+                MessageBoxResult messageBoxResult = MessageBox.Show(auditResult.Message, "Test information", MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
                 if(messageBoxResult == MessageBoxResult.OK)
                 {
                     canFinal = true;
@@ -276,10 +276,10 @@ namespace YellowstonePathology.UI.Test
                 CustomEventArgs.PanelSetReturnEventArgs args = new CustomEventArgs.PanelSetReturnEventArgs(test);
                 this.OrderTest(this, args);
             }
-            else
+            /*else
             {
                 MessageBox.Show("Unable to order a " + test.PanelSetName + " as one already exists.");
-            }
+            }*/
         }
     }
 }

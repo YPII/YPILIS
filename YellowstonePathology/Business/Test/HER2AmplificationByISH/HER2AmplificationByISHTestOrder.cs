@@ -775,9 +775,32 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                     if (accessionOrder.PanelSetOrderCollection.Exists(her2AmplificationByIHCTest.PanelSetId, this.OrderedOnId, true) == false)
                     {
                         result.Status = AuditStatusEnum.Warning;
-                        result.Message = "This test will be finalized but not distributed as a " + her2AmplificationByIHCTest.PanelSetName + 
-                            " is needed to determine the actual result and will be ordered." + Environment.NewLine + "A " + her2AmplificationSummaryTest.PanelSetName + 
-                            " will be also be ordered and set for distribution.";
+                        if (accessionOrder.PanelSetOrderCollection.Exists(her2AmplificationSummaryTest.PanelSetId, this.OrderedOnId, true) == false)
+                        {
+                            result.Message = "This test will be finalized but not distributed as a " + her2AmplificationByIHCTest.PanelSetName +
+                            " is needed to determine the actual result and will be ordered." + Environment.NewLine + "A " + her2AmplificationSummaryTest.PanelSetName +
+                            " will also be ordered and set for distribution.";
+                        }
+                        else
+                        {
+                            result.Message = "This test will be finalized but not distributed as a " + her2AmplificationSummaryTest.PanelSetName +
+                            " will be ordered and set for distribution.";
+                        }
+                    }
+                    else
+                    {
+                        if (accessionOrder.PanelSetOrderCollection.Exists(her2AmplificationSummaryTest.PanelSetId, this.OrderedOnId, true) == false)
+                        {
+                            result.Status = AuditStatusEnum.Warning;
+                            result.Message = "This test will be finalized but not distributed as a " + her2AmplificationSummaryTest.PanelSetName +
+                            " will be ordered and set for distribution.";
+                        }
+                        else
+                        {
+                            result.Status = AuditStatusEnum.Warning;
+                            result.Message = "This test will be finalized but not distributed as results will be transferred to the " + her2AmplificationSummaryTest.PanelSetName +
+                            " which will be set for distribution.";
+                        }
                     }
                 }
             }

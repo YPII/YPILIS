@@ -149,7 +149,7 @@ namespace YellowstonePathology.Business.Test
 			
 			this.m_ResultDocumentSource = panelSet.ResultDocumentSource.ToString();
 			this.m_IsBillable = panelSet.IsBillable;
-            this.m_ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetEndDateConsideringWeekends(this.m_OrderTime.Value, panelSet.ExpectedDuration);
+            this.m_ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetEndDate(this.m_OrderTime.Value, panelSet.ExpectedDuration);
 
 			this.m_Distribute = distribute;
 			if (panelSet.NeverDistribute == true)

@@ -95,37 +95,22 @@ namespace YellowstonePathology.UI.Test
 			{
                 YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
                 this.HandleFinalizeTestResult(finalizeTestResult);
-                if (this.m_PanelSetOrder.Result != YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
-                {
-                    YellowstonePathology.Business.Test.Surgical.SurgicalTest panelSetSurgical = new YellowstonePathology.Business.Test.Surgical.SurgicalTest();
-
-                    if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(panelSetSurgical.PanelSetId) == true)
-                    {
-                        YellowstonePathology.Business.Test.PanelSetOrder surgicalPanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetSurgical.PanelSetId);
-                        YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(surgicalPanelSetOrder.ReportNo);
-                        if (amendmentCollection.HasAmendmentForReport(this.m_PanelSetOrder.ReportNo) == false)
-                        {
-                            string amendmentText = YellowstonePathology.Business.Test.Her2AmplificationByIHC.HER2AmplificationByIHCSystemGeneratedAmendmentText.AmendmentText(this.m_PanelSetOrder);
-                            YellowstonePathology.Business.Amendment.Model.Amendment amendment = this.m_AccessionOrder.AddAmendment(surgicalPanelSetOrder.ReportNo);
-                            amendment.TestResultAmendmentFill(surgicalPanelSetOrder.ReportNo, surgicalPanelSetOrder.AssignedToId, amendmentText);
-                            amendment.ReferenceReportNo = this.m_PanelSetOrder.ReportNo;
-                            amendment.SystemGenerated = true;
-                        }
-                    }
-                }
             }
             else if(result.Status == Business.Audit.Model.AuditStatusEnum.Warning)
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show(result.Message, "Additional testing required", MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
+                MessageBoxResult messageBoxResult = MessageBox.Show(result.Message, "Test information", MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
                 if (messageBoxResult == MessageBoxResult.OK)
                 {
+
                     YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
                     this.HandleFinalizeTestResult(finalizeTestResult);
                     Business.Logging.EmailExceptionHandler.HandleException(this.m_PanelSetOrder, "This report has just been finalized, score = " + 
                         this.m_PanelSetOrder.Score + ".  A recount has been ordered on final.");
 
-                    YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest test = new Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
-                    this.OrderATest(test);
+                    YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest recountTest = new Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
+                    this.OrderATest(recountTest);
+                    YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest summaryTest = new Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest();
+                    this.OrderATest(summaryTest);
                 }
             }
             else
@@ -198,10 +183,10 @@ namespace YellowstonePathology.UI.Test
                 CustomEventArgs.PanelSetReturnEventArgs args = new CustomEventArgs.PanelSetReturnEventArgs(test);
                 this.OrderTest(this, args);
             }
-            else
+            /*else
             {
                 MessageBox.Show("Unable to order a " + test.PanelSetName + " as one already exists.");
-            }
+            }*/
         }
 
 
