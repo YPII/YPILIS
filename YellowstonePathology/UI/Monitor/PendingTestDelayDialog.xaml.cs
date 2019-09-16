@@ -75,7 +75,7 @@ namespace YellowstonePathology.UI.Monitor
             this.m_PanelSetOrder.DelayedBy = YellowstonePathology.Business.User.SystemIdentity.Instance.User.DisplayName;
             this.m_PanelSetOrder.DelayedDate = DateTime.Now;
 
-            this.m_PanelSetOrder.ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetEndDateConsideringWeekends(this.m_PanelSetOrder.ExpectedFinalTime.Value, timeSpanDelay);
+            this.m_PanelSetOrder.ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetEndDate(this.m_PanelSetOrder.ExpectedFinalTime.Value, timeSpanDelay);
         }
     }
 }
