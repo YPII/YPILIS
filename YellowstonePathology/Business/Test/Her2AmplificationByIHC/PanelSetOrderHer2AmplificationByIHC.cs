@@ -213,6 +213,7 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
                 HER2AmplificationByISH.HER2AmplificationByISHTest ishTest = new HER2AmplificationByISH.HER2AmplificationByISHTest();
                 if(accessionOrder.PanelSetOrderCollection.Exists(ishTest.PanelSetId, this.m_OrderedOnId, true) == true)
                 {
+                    bool needsRecount = false;
                     HER2AmplificationByISH.HER2AmplificationByISHTestOrder ishTestOrder = (HER2AmplificationByISH.HER2AmplificationByISHTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(ishTest.PanelSetId, this.m_OrderedOnId, true);
                     if(ishTestOrder.Final == true)
                     {
@@ -221,8 +222,23 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
                             HER2AmplificationRecount.HER2AmplificationRecountTest test = new HER2AmplificationRecount.HER2AmplificationRecountTest();
                             if (accessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_OrderedOnId, true) == false)
                             {
+                                needsRecount = true;
                                 result.Status = AuditStatusEnum.Warning;
                                 result.Message = "This test will be finalized but not distributed as a " + test.PanelSetName + " is needed to determine the actual result and will be ordered.";
+                            }
+
+                            HER2AnalysisSummary.HER2AnalysisSummaryTest her2AnalysisSummaryTest = new HER2AnalysisSummary.HER2AnalysisSummaryTest();
+                            if (accessionOrder.PanelSetOrderCollection.Exists(her2AnalysisSummaryTest.PanelSetId, this.m_OrderedOnId, true) == false)
+                            {
+                                result.Status = AuditStatusEnum.Warning;
+                                if(needsRecount == true)
+                                {
+                                    result.Message = result.Message + "  A " + her2AnalysisSummaryTest.PanelSetName + " will also be ordered and set for distribution";
+                                }
+                                else
+                                {
+                                    result.Message = "A " + her2AnalysisSummaryTest.PanelSetName + " will be ordered and set for distribution";
+                                }
                             }
                         }
                     }

@@ -421,45 +421,50 @@ namespace YellowstonePathology.Business.Helper
 			return dt;
 		}
 
-        public static DateTime GetEndDateConsideringWeekends(DateTime startDate, TimeSpan timeSpan)
+        public static DateTime GetEndDate(DateTime startDate, TimeSpan timeSpan)
         {
-            DateTime result = startDate;
+            DateTime rollingDate = startDate;
             TimeSpan timeSpanOneHour = new TimeSpan(1, 0, 0);
-            TimeSpan oneHour = new TimeSpan(1, 0, 0);
+            TimeSpan timeSpanMatch = new TimeSpan();
+            YellowstonePathology.Business.HolidayCollection holidays = YellowstonePathology.Business.HolidayCollection.GetByDateRange(new DateTime(startDate.Year, 1, 1), new DateTime(startDate.Add(timeSpan).Year + 1, 12, 31));
+            bool isHoliday = holidays.IsDateAHoliday(startDate);
 
-            int i=0;
-            while (i < timeSpan.TotalHours)
-            {                
-                int dow = (int)result.Add(oneHour).DayOfWeek;
-                if (dow != 0 && dow != 6)
-                {
-                    i += 1;                    
-                }
-                result = result.Add(oneHour);
+            int dow = (int)startDate.DayOfWeek;
+            if (dow == 0 || dow == 6 || isHoliday == true)
+            {
+                rollingDate = new DateTime(startDate.Year, startDate.Month, startDate.Day);
             }
 
-            return result;
+            while (timeSpanMatch < timeSpan)
+            {
+                dow = (int)rollingDate.DayOfWeek;
+                if (rollingDate.Hour == 0)
+                {
+                    isHoliday = holidays.IsDateAHoliday(rollingDate);
+                    if (dow == 0 || dow == 6 || isHoliday == true)
+                    {
+                        rollingDate = rollingDate.AddHours(24);
+                        continue;
+                    }
+                }
+                if (dow != 0 && dow != 6 && isHoliday == false)
+                {
+                    timeSpanMatch = timeSpanMatch.Add(timeSpanOneHour);
+                }
+                rollingDate = rollingDate.AddHours(1);
+            };
+
+            if(rollingDate.Hour == 0)
+            {
+                rollingDate = new DateTime(rollingDate.Year, rollingDate.Month, rollingDate.Day - 1, 17, 0, 0);
+            }
+            return rollingDate;
         }
 
         public static DateTime GetExpectedFinalTime(DateTime startDate, TimeSpan timeSpan)
         {
-            DateTime result = startDate;
-            TimeSpan timeSpanOneHour = new TimeSpan(1, 0, 0);
-            TimeSpan oneHour = new TimeSpan(1, 0, 0);
-
-            int i = 0;
-            while (i < timeSpan.TotalHours)
-            {
-                int dow = (int)result.Add(oneHour).DayOfWeek;
-                if (dow != 0 && dow != 6)
-                {
-                    i += 1;
-                }
-                result = result.Add(oneHour);
-            }
-
+            DateTime result = GetEndDate(startDate, timeSpan);
 			result = DateTime.Parse(result.Month + "/" + result.Day.ToString() + "/" + result.Year.ToString() + " 17:00");
-
 			return result;
 		}
 

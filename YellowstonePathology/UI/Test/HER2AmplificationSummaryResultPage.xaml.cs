@@ -55,6 +55,20 @@ namespace YellowstonePathology.UI.Test
             this.m_ControlsNotDisabledOnFinal.Add(this.ButtonNext);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalResults);
+
+            this.Loaded += HER2AmplificationSummaryResultPage_Loaded;
+        }
+
+        private void HER2AmplificationSummaryResultPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (this.m_PanelSetOrder.CanSetValues(this.m_AccessionOrder) == true)
+            {
+                if (this.m_PanelSetOrder.ValuesAreSet(this.m_AccessionOrder) == false)
+                {
+                    this.m_PanelSetOrder.SetValues(this.m_AccessionOrder);
+                    this.NotifyPropertyChanged("PanelSetOrder");
+                }
+            }
         }
 
         public YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTestOrder PanelSetOrder
@@ -120,7 +134,23 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.Audit.Model.AuditResult result = this.m_PanelSetOrder.IsOkToFinalize(this.m_AccessionOrder);
             if (result.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
-                this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
+                YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
+                this.HandleFinalizeTestResult(finalizeTestResult);
+                YellowstonePathology.Business.Test.Surgical.SurgicalTest panelSetSurgical = new YellowstonePathology.Business.Test.Surgical.SurgicalTest();
+
+                if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(panelSetSurgical.PanelSetId) == true)
+                {
+                    YellowstonePathology.Business.Test.PanelSetOrder surgicalPanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetSurgical.PanelSetId);
+                    YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(surgicalPanelSetOrder.ReportNo);
+                    if (amendmentCollection.HasAmendmentForReport(this.m_PanelSetOrder.ReportNo) == false)
+                    {
+                        string amendmentText = YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummarySystemGeneratedAmendmentText.AmendmentText(this.m_PanelSetOrder);
+                        YellowstonePathology.Business.Amendment.Model.Amendment amendment = this.m_AccessionOrder.AddAmendment(surgicalPanelSetOrder.ReportNo);
+                        amendment.TestResultAmendmentFill(surgicalPanelSetOrder.ReportNo, surgicalPanelSetOrder.AssignedToId, amendmentText);
+                        amendment.ReferenceReportNo = this.m_PanelSetOrder.ReportNo;
+                        amendment.SystemGenerated = true;
+                    }
+                }
             }
             else
             {

@@ -1141,6 +1141,7 @@
     <Compile Include="Business\Test\HER2AmplificationRecount\HER2AmplificationRecountTestOrder.cs" />
     <Compile Include="Business\Test\HER2AnalysisSummary\HER2AnalysisSummaryCMMCNTEView.cs" />
     <Compile Include="Business\Test\HER2AnalysisSummary\HER2AnalysisSummaryEPICOBXView.cs" />
+    <Compile Include="Business\Test\HER2AnalysisSummary\HER2AnalysisSummarySystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\HER2AnalysisSummary\HER2AnalysisSummaryTest.cs" />
     <Compile Include="Business\Test\HER2AnalysisSummary\HER2AnalysisSummaryTestOrder.cs" />
     <Compile Include="Business\Test\HER2AnalysisSummary\HER2AnalysisSummaryWordDocument.cs" />
