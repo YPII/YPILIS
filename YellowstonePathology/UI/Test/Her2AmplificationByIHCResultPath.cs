@@ -89,8 +89,8 @@ namespace YellowstonePathology.UI.Test
         }
 
         private void AmendmentPage_Back(object sender, EventArgs e)
-        {            
-            this.ShowResultPage();            
+        {
+            this.ShowResultPage();
         }
 
         private bool ShowRecountPage()
@@ -120,18 +120,18 @@ namespace YellowstonePathology.UI.Test
             bool result = false;
 
             YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest test = new Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest();
-            YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTestOrder summaryTestOrder = (Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
-            if (summaryTestOrder != null)
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) == true)
             {
+                YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTestOrder summaryTestOrder = (Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
                 result = true;
-                HER2AmplificationSummaryResultPage her2AmplificationSummaryResultPage = new HER2AmplificationSummaryResultPage(summaryTestOrder, this.m_AccessionOrder, Business.User.SystemIdentity.Instance);
-                her2AmplificationSummaryResultPage.Next += HER2AmplificationSummaryResultPage_Next;
-                this.m_PageNavigator.Navigate(her2AmplificationSummaryResultPage);
+                HER2AmplificationSummaryResultPath her2AmplificationSummaryResultPath = new HER2AmplificationSummaryResultPath(summaryTestOrder.ReportNo, this.m_AccessionOrder, this.m_PageNavigator, this.m_Window);
+                her2AmplificationSummaryResultPath.Finish += Her2AmplificationSummaryResultPath_Finish;
+                her2AmplificationSummaryResultPath.Start();
             }
             return result;
         }
 
-        private void HER2AmplificationSummaryResultPage_Next(object sender, EventArgs e)
+        private void Her2AmplificationSummaryResultPath_Finish(object sender, EventArgs e)
         {
             this.Finished();
         }
