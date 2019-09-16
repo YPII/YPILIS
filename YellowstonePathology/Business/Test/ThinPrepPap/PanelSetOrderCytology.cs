@@ -519,7 +519,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             StringBuilder message = new StringBuilder();
             message.Append("The previously reported ");
             StringBuilder comment = new StringBuilder();
-            comment.Append("Because the specimen is unsatisfactory for evaluation, the previously reported ");
+            comment.Append("Because the specimen is unsatisfactory for evaluation, the associated ");
 
             if (this.ScreeningType.ToUpper() == "FINAL RESULT" && Business.User.SystemIdentity.Instance.User.IsUserInRole(User.SystemUserRoleDescriptionEnum.Pathologist) == true)
             {

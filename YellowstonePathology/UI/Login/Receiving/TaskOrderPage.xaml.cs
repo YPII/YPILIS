@@ -509,5 +509,10 @@ namespace YellowstonePathology.UI.Login.Receiving
             taskOrderDetailFedexShipment.PaymentType = "THIRD_PARTY";
             this.NotifyPropertyChanged(string.Empty);
         }
+
+        private void HyperLinkBlockMaterialAlertTask_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not implemented yet.");
+        }
     }
 }

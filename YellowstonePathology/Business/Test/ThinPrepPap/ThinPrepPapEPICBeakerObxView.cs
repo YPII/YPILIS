@@ -44,7 +44,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             this.AddNextObxElementBeaker("Finaled By", panelSetOrderCytology.Signature, document, "F");
             if (panelSetOrderCytology.FinalTime.HasValue == true)
             {
-                this.AddNextObxElementBeaker("E-signed ", panelSetOrderCytology.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
+                this.AddNextObxElementBeaker("E-signed", panelSetOrderCytology.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
             }
 
             if (amendmentCollection.Count != 0)
