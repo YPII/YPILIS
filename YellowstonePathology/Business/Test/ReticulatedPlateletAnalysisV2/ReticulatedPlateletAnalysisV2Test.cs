@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Test.ReticulatedPlateletAnalysisV2
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = false;
             this.m_Active = true;
-            this.m_ExpectedDuration = new TimeSpan(24, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromHours(24);
 
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.ReticulatedPlateletAnalysisV2.ReticulatedPlateletAnalysisV2TestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.ReticulatedPlateletAnalysisV2.ReticulatedPlateletAnalysisV2WordDocument).AssemblyQualifiedName;

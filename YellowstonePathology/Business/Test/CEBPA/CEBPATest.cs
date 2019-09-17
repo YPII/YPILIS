@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Test.CEBPA
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.CEBPA.CEBPAWordDocument).AssemblyQualifiedName;
             
 			this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = TimeSpan.FromDays(10);
+            this.m_ExpectedDuration = TimeSpan.FromDays(8);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

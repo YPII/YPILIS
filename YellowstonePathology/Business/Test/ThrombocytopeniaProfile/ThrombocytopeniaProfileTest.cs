@@ -14,7 +14,7 @@ namespace YellowstonePathology.Business.Test.ThrombocytopeniaProfile
 			this.m_AllowMultiplePerAccession = true;
             this.m_CaseType = this.m_CaseType = YellowstonePathology.Business.CaseType.FlowCytometry;
             this.m_Active = true;
-            this.m_ExpectedDuration = new TimeSpan(24, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromHours(24);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

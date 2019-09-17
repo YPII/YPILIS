@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             this.m_IsBillable = false;
             this.m_NeverDistribute = true;
             this.m_ShowResultPageOnOrder = true;            
-            this.m_ExpectedDuration = new TimeSpan(7, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(6);
             this.m_MonitorPriority = PanelSet.Model.PanelSet.MonitorPriorityNormal;
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);

@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.MPL
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.MPL.PanelSetOrderMPL).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.MPL.MPLWordDocument).AssemblyQualifiedName;            
 			this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = TimeSpan.FromDays(10);
+            this.m_ExpectedDuration = TimeSpan.FromDays(8);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

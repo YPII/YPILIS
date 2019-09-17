@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.SF3B1MutationAnalysis
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
-            this.m_ExpectedDuration = new TimeSpan(10, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(8);
 
             this.m_AllowMultiplePerAccession = true;
 

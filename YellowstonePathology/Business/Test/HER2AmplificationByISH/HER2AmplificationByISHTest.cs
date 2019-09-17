@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHWordDocument).AssemblyQualifiedName;
             
 			this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = new TimeSpan(4, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(4);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.StemCellCD34Enumeration
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterF();
             this.m_CaseType = this.m_CaseType = YellowstonePathology.Business.CaseType.FlowCytometry;
             this.m_Active = true;
-            this.m_ExpectedDuration = new TimeSpan(24, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromHours(24);
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.StemCellCD34Enumeration.StemCellCD34EnumerationTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.StemCellCD34Enumeration.StemCellCD34EnumerationWordDocument).AssemblyQualifiedName;
 

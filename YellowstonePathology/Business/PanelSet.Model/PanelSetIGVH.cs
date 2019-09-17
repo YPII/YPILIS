@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_Active = true;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
-            this.m_ExpectedDuration = TimeSpan.FromDays(10);
+            this.m_ExpectedDuration = TimeSpan.FromDays(8);
             this.m_AllowMultiplePerAccession = true;
 
             string taskDescription = "Gather materials (Peripheral blood: 5 mL in EDTA tube or Bone marrow: 2 mL in EDTA tube) and send out to Neo.";

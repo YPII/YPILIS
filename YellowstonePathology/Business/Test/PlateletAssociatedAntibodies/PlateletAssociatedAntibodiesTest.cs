@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.PlateletAssociatedAntibodies
             this.m_PanelSetId = 22;
             this.m_PanelSetName = "Platelet Associated Antibodies - Retired";            
 			this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = new TimeSpan(24, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromHours(24);
             this.m_Active = true;
             this.m_CaseType = this.m_CaseType = YellowstonePathology.Business.CaseType.FlowCytometry;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

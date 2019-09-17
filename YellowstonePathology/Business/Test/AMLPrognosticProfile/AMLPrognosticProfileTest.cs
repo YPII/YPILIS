@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Test.AMLPrognosticProfile
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
-            this.m_ExpectedDuration = TimeSpan.FromDays(14);
+            this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
             this.m_AllowMultiplePerAccession = true;
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.AMLPrognosticProfile.AMLPrognosticProfileTestOrder).AssemblyQualifiedName;

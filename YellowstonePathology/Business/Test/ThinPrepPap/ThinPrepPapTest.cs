@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapWordDocument).AssemblyQualifiedName;
 			this.m_AllowMultiplePerAccession = false;            
-            this.m_ExpectedDuration = new TimeSpan(24, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromHours(24);
 			this.m_AcceptOnFinal = true;
             this.m_AttemptOrderTargetLookup = true;
             this.m_RequiresAssignment = false;

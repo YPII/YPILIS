@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Test.MDSCMMLProfile
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = new TimeSpan(5, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(5);
             //changed by MS and TK
 
             string taskDescription = "Gather materials (Peripheral blood: 2-5 mL in sodium heparin tube and 2x5 mL in EDTA tube or " +

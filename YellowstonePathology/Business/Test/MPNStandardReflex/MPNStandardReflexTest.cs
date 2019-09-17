@@ -28,7 +28,7 @@ namespace YellowstonePathology.Business.Test.MPNStandardReflex
 			this.m_IsReflexPanel = true;
 			this.m_AllowMultiplePerAccession = true;
 			this.m_IsBillable = true;
-            this.m_ExpectedDuration = new TimeSpan(14, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

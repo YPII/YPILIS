@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.HPV
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.HPV.HPVWordDocument).AssemblyQualifiedName;                        
 			this.m_AcceptOnFinal = true;
 			this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = new TimeSpan(4, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(4);
             this.m_AttemptOrderTargetLookup = true;
             this.m_RequiresAssignment = false;
 

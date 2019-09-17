@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.Test.ProspectiveReview
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.ProspectiveReview.ProspectiveReviewTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.NothingToPublishReport).AssemblyQualifiedName;
 
-            this.m_ExpectedDuration = new TimeSpan(3, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(3);
             this.m_NeverDistribute = true;
             this.m_IsBillable = false;
 

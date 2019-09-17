@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.CalcitoninByImmunohistochemistry
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
-            this.m_ExpectedDuration = TimeSpan.FromDays(7);
+            this.m_ExpectedDuration = TimeSpan.FromDays(6);
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 

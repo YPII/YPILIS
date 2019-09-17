@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.ETV6F
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = new TimeSpan(7, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(6);
 
             YellowstonePathology.Business.Facility.Model.Facility facility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("MAYO");
             string taskDescription = "Gather materials and send out to Mayo Clinic.";

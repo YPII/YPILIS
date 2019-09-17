@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.Surgical.SurgicalWordDocument).AssemblyQualifiedName;
 			this.m_AllowMultiplePerAccession = false;            
-            this.m_ExpectedDuration = new TimeSpan(3, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(3);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

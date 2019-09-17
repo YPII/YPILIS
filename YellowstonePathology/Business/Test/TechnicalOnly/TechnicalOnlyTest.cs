@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.TechnicalOnly
 			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterT();
             this.m_Active = true;
-            this.m_ExpectedDuration = new TimeSpan(7, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(6);
 
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.TechnicalOnly.TechnicalOnlyTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
