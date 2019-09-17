@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.MPNExtendedReflexPanel
             this.m_Active = true;
             this.m_IsBillable = true;            
             this.m_HasNoOrderTarget = false;
-            this.m_ExpectedDuration = TimeSpan.FromDays(15);            
+            this.m_ExpectedDuration = TimeSpan.FromDays(12);            
 
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;

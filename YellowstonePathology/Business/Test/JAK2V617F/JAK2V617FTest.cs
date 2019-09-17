@@ -28,7 +28,7 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WPH);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.CMMC);
 
-            this.m_ExpectedDuration = new TimeSpan(5, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(5);
 
             YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
             this.m_TechnicalComponentFacility = neogenomicsIrvine;

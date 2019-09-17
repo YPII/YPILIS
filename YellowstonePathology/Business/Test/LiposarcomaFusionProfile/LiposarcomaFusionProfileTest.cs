@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.Test.LiposarcomaFusionProfile
 
             this.m_NeverDistribute = true;
             this.m_HasNoOrderTarget = false;
-            this.m_ExpectedDuration = TimeSpan.FromDays(10);
+            this.m_ExpectedDuration = TimeSpan.FromDays(8);
             this.m_IsClientAccessioned = true;
 
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.LiposarcomaFusionProfile.LiposarcomaFusionProfileTestOrder).AssemblyQualifiedName;

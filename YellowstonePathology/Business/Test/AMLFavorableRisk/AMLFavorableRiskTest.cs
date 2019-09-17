@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.AMLFavorableRisk
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
-            this.m_ExpectedDuration = TimeSpan.FromDays(14);
+            this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
             this.m_AllowMultiplePerAccession = true;
 

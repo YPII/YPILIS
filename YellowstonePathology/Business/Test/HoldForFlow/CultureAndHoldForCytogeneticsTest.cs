@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.HoldForFlow
                 this.m_HasTechnicalComponent = true;                
                 this.m_AllowMultiplePerAccession = true;
                 this.m_IsBillable = true;
-                this.m_ExpectedDuration = new TimeSpan(7, 0, 0, 0);
+                this.m_ExpectedDuration = TimeSpan.FromDays(6);
 
                 string taskDescription = "Gather materials (Peripheral blood: 2-5 mL in sodium heparin tube and 2x5 mL in EDTA tube or " +
                     "Bone marrow: 1-2 mL in sodium heparin tube and 2 mL in EDTA tube) and send out to Neo.";

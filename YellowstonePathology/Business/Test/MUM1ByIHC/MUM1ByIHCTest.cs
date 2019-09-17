@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.MUM1ByIHC
             this.m_IsBillable = true;
             this.m_NeverDistribute = true;
             this.m_HasNoOrderTarget = false;
-            this.m_ExpectedDuration = TimeSpan.FromDays(10);
+            this.m_ExpectedDuration = TimeSpan.FromDays(8);
             this.m_IsClientAccessioned = true;
 
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;

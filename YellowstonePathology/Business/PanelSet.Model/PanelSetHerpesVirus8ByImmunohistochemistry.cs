@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_NeverDistribute = true;
 			this.m_AllowMultiplePerAccession = true;
             this.IsBillable = false;
-            this.m_ExpectedDuration = TimeSpan.FromDays(7);
+            this.m_ExpectedDuration = TimeSpan.FromDays(5);
 
             string taskDescription = "Gather materials and send out to Neo.";
 

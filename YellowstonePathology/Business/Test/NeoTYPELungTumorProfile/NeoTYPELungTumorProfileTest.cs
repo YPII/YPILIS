@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.NeoTYPELungTumorProfile
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.NeoTYPELungTumorProfile.NeoTYPELungTumorProfileTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = TimeSpan.FromDays(14);
+            this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
             string taskDescription = "Gather materials and send out to Neo.";
 

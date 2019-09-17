@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterI();
             this.m_Active = true;
             this.m_IsBillable = false;
-            this.m_ExpectedDuration = new TimeSpan(1, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(1);
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.MissingInformation.MissingInformationTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.NothingToPublishReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;

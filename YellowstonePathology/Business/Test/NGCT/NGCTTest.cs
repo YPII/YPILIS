@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Test.NGCT
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.NGCT.NGCTTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.NGCT.NGCTWordDocument).AssemblyQualifiedName;
 			this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = new TimeSpan(4, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(4);
 
             this.m_AddAliquotOnOrder = true;
             this.m_AliquotToAddOnOrder = new YellowstonePathology.Business.Specimen.Model.PantherAliquot();

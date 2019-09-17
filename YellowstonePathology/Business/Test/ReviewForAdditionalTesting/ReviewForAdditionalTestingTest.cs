@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.ReviewForAdditionalTesting
             this.m_IsBillable = false;
             this.m_NeverDistribute = true;
             this.m_HasNoOrderTarget = false;
-            this.m_ExpectedDuration = new TimeSpan(1, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(1);
             this.m_IsClientAccessioned = true;
 
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingTestOrder).AssemblyQualifiedName;

@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Test.EGFRMutationAnalysis
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisWordDocument).AssemblyQualifiedName;
 
             this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = new TimeSpan(7, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(6);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

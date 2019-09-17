@@ -16,11 +16,11 @@
 
 		<HierarchicalDataTemplate x:Key="DataTemplateCaseTreeTestListOrder">
 			<StackPanel Orientation="Horizontal" Margin="2,2,2,2">
-				<StackPanel.ContextMenu>
+				<!--<StackPanel.ContextMenu>
 					<ContextMenu Opened="ContextMenuCancelTest_Opened" Tag="{Binding}">
 						<MenuItem Header="Cancel Test" Click="MenuItemCancelTest_Click" Tag="{Binding}" IsEnabled="True"></MenuItem>
 					</ContextMenu>
-				</StackPanel.ContextMenu>
+				</StackPanel.ContextMenu>-->
 				<TextBlock Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=TestName}" Width="200"></TextBlock>
             </StackPanel>
 		</HierarchicalDataTemplate>

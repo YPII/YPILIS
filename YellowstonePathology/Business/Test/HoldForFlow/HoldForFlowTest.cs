@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Test.HoldForFlow
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WPH);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.CMMC);
 
-            this.m_ExpectedDuration = new TimeSpan(7, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(6);
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.HoldForFlow.HoldForFlowTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.HoldForFlow.HoldForFlowWordDocument).AssemblyQualifiedName;
             this.m_RequiresPathologistSignature = false;

@@ -81,7 +81,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_IsBillable = true;
             this.m_NeverDistribute = false;            
             this.m_Active = true;
-            this.m_ExpectedDuration = TimeSpan.FromDays(7);
+            this.m_ExpectedDuration = TimeSpan.FromDays(5);
 
             this.m_PanelCollection = new Business.Panel.Model.PanelCollection();
             this.m_UniversalServiceIdCollection = new Business.ClientOrder.Model.UniversalServiceCollection();
