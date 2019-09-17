@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.LLP
             this.m_PanelSetId = 20;
             this.m_PanelSetName = "Leukemia/Lymphoma Phenotyping";            
 			this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = new TimeSpan(48, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromHours(48);
 
             this.m_CaseType = "Flow Cytometry";
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;

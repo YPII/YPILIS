@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
 			this.m_AllowMultiplePerAccession = true;
             this.m_IsBillable = false;
             this.m_NeverDistribute = true;
-            this.m_ExpectedDuration = new TimeSpan(14, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

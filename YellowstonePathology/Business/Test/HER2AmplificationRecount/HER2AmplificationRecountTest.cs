@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.DoNotPublishReport).AssemblyQualifiedName;
 
             this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = new TimeSpan(4, 0, 0, 0);
+            this.m_ExpectedDuration = TimeSpan.FromDays(4);
 
             YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;

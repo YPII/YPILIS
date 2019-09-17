@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
 			this.m_IsReflexPanel = true;
 			this.m_AllowMultiplePerAccession = true;
             this.m_IsBillable = false;
-            this.m_ExpectedDuration = TimeSpan.FromDays(14);
+            this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

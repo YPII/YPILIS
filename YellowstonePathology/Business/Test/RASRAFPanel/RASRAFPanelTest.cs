@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.RASRAFPanel
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.RASRAFPanel.RASRAFPanelWordDocument).AssemblyQualifiedName;
 
             this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = TimeSpan.FromDays(14);
+            this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);
