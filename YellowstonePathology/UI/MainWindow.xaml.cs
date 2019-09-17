@@ -1069,5 +1069,11 @@ namespace YellowstonePathology.UI
             HolidayDialog dlg = new UI.HolidayDialog();
             dlg.ShowDialog();
         }
+
+        private void MenuItemAxisCamera_Click(object sender, RoutedEventArgs e)
+        {
+            AxisCamera axisCamera = new AxisCamera();
+            axisCamera.Show();
+        }
     }
 }
