@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>174</ApplicationRevision>
+    <ApplicationRevision>175</ApplicationRevision>
     <ApplicationVersion>10.1.15.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -3085,12 +3085,6 @@
     <Compile Include="UI\AxisCamera.xaml.cs">
       <DependentUpon>AxisCamera.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\AxisViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\AxisViewer.Designer.cs">
-      <DependentUpon>AxisViewer.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Billing\AddFISHCPTCodePage.xaml.cs">
       <DependentUpon>AddFISHCPTCodePage.xaml</DependentUpon>
     </Compile>
@@ -4963,9 +4957,6 @@
     <Compile Include="UI\ValidationRules\IntValidation.cs" />
     <Compile Include="UI\ValidationRules\SSNValidRule.cs" />
     <AppDesigner Include="Properties\" />
-    <EmbeddedResource Include="UI\AxisViewer.resx">
-      <DependentUpon>AxisViewer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\MaterialTracking\FedXTrackingRequest.json" />
     <Resource Include="Business\Document\CaseHeader.xml" />
     <Resource Include="Business\Document\DnaReport.xml" />
@@ -7139,15 +7130,6 @@
     <Resource Include="Resources\TwoDBarcode.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AXISMEDIACONTROLLib">
-      <Guid>{A48F4EE0-B408-4376-B4C9-BC9CF6E16EBC}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
       <VersionMajor>2</VersionMajor>
