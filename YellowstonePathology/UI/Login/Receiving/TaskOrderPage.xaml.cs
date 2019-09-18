@@ -512,7 +512,11 @@ namespace YellowstonePathology.UI.Login.Receiving
 
         private void HyperLinkBlockMaterialAlertTask_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Not implemented yet.");
+            YellowstonePathology.Business.Task.Model.Task task = new Business.Task.Model.TaskBlockMaterialAlert();
+            string taskOrderDetailId = YellowstonePathology.Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);
+            string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+            YellowstonePathology.Business.Task.Model.TaskOrderDetail taskOrderDetail = new Business.Task.Model.TaskOrderDetail(taskOrderDetailId, this.m_TaskOrder.TaskOrderId, objectId, task, this.m_AccessionOrder.ClientId);
+            this.m_TaskOrder.TaskOrderDetailCollection.Add(taskOrderDetail);
         }
     }
 }
