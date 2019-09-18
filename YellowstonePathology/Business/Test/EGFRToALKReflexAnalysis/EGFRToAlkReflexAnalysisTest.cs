@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
         public EGFRToALKReflexAnalysisTest()
 		{
 			this.m_PanelSetId = 124;
-			this.m_PanelSetName = "EGFR, ALK, ROS1, PD-L1, BRAF Analysis";
+			this.m_PanelSetName = "Lung Adenocarcinoma Panel";
             this.m_Abbreviation = "EGFRALKRFLX";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.ReflexTesting;
 			this.m_HasTechnicalComponent = true;
