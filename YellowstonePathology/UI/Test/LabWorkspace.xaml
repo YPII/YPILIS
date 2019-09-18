@@ -267,7 +267,7 @@
 										<GridViewColumn DisplayMemberBinding="{Binding Path=PatientName}" Header="Patient Name" Width="120"/>
 										<GridViewColumn DisplayMemberBinding="{Binding Path=PBirthdate, Converter={StaticResource ShortDateConverter}}" Header="Birthdate" Width="90"/>
                                         <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Test" Width="120"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=FinalDate, Converter={StaticResource ShortDateConverter}}" Header="Final Date" Width="90"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=FinalTime, Converter={StaticResource ShortDateConverter}}" Header="Final Date" Width="90"/>
 										<GridViewColumn DisplayMemberBinding="{Binding Path=OrderedBy}" Header="Ordered By" Width="90"/>
 									</GridView>
 								</ListView.View>
