@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate,  pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo " +
                 "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
@@ -45,7 +45,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
@@ -61,7 +61,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.PanelSetId, " +
 	            "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy,  " +            
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy,  " +            
 	            "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
@@ -78,7 +78,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, ao.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(ao.PFirstName, ' ', ao.PLastName) AS PatientName, " +
-                "ao.PLastName, ao.PFirstName, ao.ClientName, ao.PhysicianName, ao.PBirthdate, pso.FinalTime FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "ao.PLastName, ao.PFirstName, ao.ClientName, ao.PhysicianName, ao.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "from tblAccessionOrder ao " +
                 "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -99,7 +99,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT distinct pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a  " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -118,7 +118,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT distinct pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a  " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -137,7 +137,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT distinct pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a " +
                 "join tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -159,7 +159,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a " +
                 "join tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -175,7 +175,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a " +
                 "join tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -191,7 +191,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a " +
                 "join tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -207,7 +207,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -231,7 +231,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
@@ -249,7 +249,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -339,7 +339,7 @@ namespace YellowstonePathology.Business.Gateway
 			cmd.CommandType = CommandType.Text;
 			cmd.CommandText = "SELECT a.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a " +
                 "Left outer JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -356,7 +356,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-               "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+               "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                "'' ForeignAccessionNo, pso.IsPosted " +
                "FROM tblAccessionOrder a " +
                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -375,7 +375,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT a.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a " +
                 "Left outer JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -496,7 +496,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -572,7 +572,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate,  pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo " +
                 "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
@@ -587,7 +587,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
-                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate,  pso.FinalDate, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
                 "'' ForeignAccessionNo " +
                 "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +

@@ -163,7 +163,7 @@ namespace YellowstonePathology.UI.Login
             grid.Children.Add(textBlockPanelSetName);
 
             string finalDateString = string.Empty;
-            if (reportSearchItem.FinalDate.HasValue == true) finalDateString = reportSearchItem.FinalDate.Value.ToString("MM/dd/yyyy hh:mm");
+            if (reportSearchItem.FinalTime.HasValue == true) finalDateString = reportSearchItem.FinalTime.Value.ToString("MM/dd/yyyy hh:mm");
             TextBlock textBlockFinalDate = new TextBlock();
             textBlockFinalDate.FontSize = 8;
             textBlockFinalDate.Text = finalDateString;

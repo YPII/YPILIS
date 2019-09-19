@@ -167,7 +167,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PBirthdate, Converter={StaticResource ShortDateConverter}}" Header="Birthdate" Width="90"/>                                
                         <GridViewColumn DisplayMemberBinding="{Binding Path=OrderedBy}" Header="Ordered By" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Report" Width="170"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=FinalDate, Converter={StaticResource MilitaryDateTimeConverter}}" Header="Final" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=FinalTime, Converter={StaticResource MilitaryDateTimeConverter}}" Header="Final" Width="150"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=IsPosted}" Header="Billed" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Client" Width="200"/>
                     </GridView>

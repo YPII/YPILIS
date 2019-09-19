@@ -18,8 +18,8 @@ namespace YellowstonePathology.Business.Search
 		private string m_ClientName;
 		private string m_PhysicianName;
 		private string m_ForeignAccessionNo;		
-		private Nullable<DateTime> m_FinalDate;
-		private string m_PanelSetName;
+        private Nullable<DateTime> m_FinalTime;
+        private string m_PanelSetName;
         private string m_SpecimenDescription;
         private string m_Result;
         private string m_Indication;
@@ -187,18 +187,18 @@ namespace YellowstonePathology.Business.Search
 		}
 
         [PersistentProperty()]
-        public Nullable<DateTime> FinalDate
-		{
-			get { return this.m_FinalDate; }
-			set
-			{
-				if (value != this.m_FinalDate)
-				{
-					this.m_FinalDate = value;
-					this.NotifyPropertyChanged("FinalDate");
-				}
-			}
-		}
+        public Nullable<DateTime> FinalTime
+        {
+            get { return this.m_FinalTime; }
+            set
+            {
+                if (value != this.m_FinalTime)
+                {
+                    this.m_FinalTime = value;
+                    this.NotifyPropertyChanged("FinalTime");
+                }
+            }
+        }
 
         [PersistentProperty()]
         public string PanelSetName
