@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace YellowstonePathology.Business.Client.Model
 {
-    public class HPVReflexOrderRule17 : ReflexOrder
+    public class HPVReflexOrderRule19 : ReflexOrder
     {
-        public HPVReflexOrderRule17()
+        public HPVReflexOrderRule19()
         {
-            this.m_RuleNumber = 17;
-            this.m_ReflexOrderCode = "RFLXHPVRL17";
-            this.m_Description = "Perform reflex HPV testing on patients who have a PAP result of ASCUS or LSIL."; //no positive HPV result in the last year
+            this.m_RuleNumber = 19;
+            this.m_ReflexOrderCode = "RFLXHPVRL19";
+            this.m_Description = "Perform reflex HPV testing on patients who have an abnormal PAP result."; //no positive HPV result in the last year
             this.m_PanelSet = new YellowstonePathology.Business.Test.HPV.HPVTest();
         }
 
@@ -35,7 +35,7 @@ namespace YellowstonePathology.Business.Client.Model
                 YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology panelSetOrderCytology = (YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetThinPrep.PanelSetId);
                 if (panelSetOrderCytology.Final == true)
                 {
-                    if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisAscusLsil(panelSetOrderCytology.ResultCode) == true)
+                    if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisGreaterThanThree(panelSetOrderCytology.ResultCode) == true)
                     {
                         result = true;
                     }
