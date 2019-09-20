@@ -331,6 +331,8 @@
     <Compile Include="Business\Client.Model\HPVCompoundStandingOrderRule6.cs" />
     <Compile Include="Business\Client.Model\HPVReflexOrderRule141.cs" />
     <Compile Include="Business\Client.Model\HPVReflexOrderRule17.cs" />
+    <Compile Include="Business\Client.Model\HPVReflexOrderRule18.cs" />
+    <Compile Include="Business\Client.Model\HPVReflexOrderRule19.cs" />
     <Compile Include="Business\Client.Model\HPVReflexOrderRule51.cs" />
     <Compile Include="Business\Client.Model\HPVRule.cs" />
     <Compile Include="Business\Client.Model\HPVRuleAge1.cs" />
