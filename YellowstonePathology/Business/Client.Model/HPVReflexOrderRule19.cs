@@ -35,7 +35,7 @@ namespace YellowstonePathology.Business.Client.Model
                 YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology panelSetOrderCytology = (YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetThinPrep.PanelSetId);
                 if (panelSetOrderCytology.Final == true)
                 {
-                    if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisGreaterThanThree(panelSetOrderCytology.ResultCode) == true)
+                    if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisThreeOrBetter(panelSetOrderCytology.ResultCode) == true)
                     {
                         result = true;
                     }

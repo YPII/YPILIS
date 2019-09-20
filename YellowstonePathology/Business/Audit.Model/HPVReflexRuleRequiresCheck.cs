@@ -19,20 +19,34 @@ namespace YellowstonePathology.Business.Audit.Model
 
         private void DoesHPVAuditRequireHPVOrder()
         {
+            this.ActionRequired = false;
             YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTest womensHealthProfileTest = new YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTest();
             if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(womensHealthProfileTest.PanelSetId) == true)
             {
                 YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder womensHealthProfileTestOrder = (YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(womensHealthProfileTest.PanelSetId);
-                if (womensHealthProfileTestOrder.HPVReflexOrderCode == "RFLXHPVRL17")
+                YellowstonePathology.Business.Client.Model.ReflexOrder oldReflexOrder = null;
+
+                switch (womensHealthProfileTestOrder.HPVReflexOrderCode)
+                {
+                    case "RFLXHPVRL17":
+                        oldReflexOrder = new Client.Model.HPVReflexOrderRule14();
+                        break;
+                    case "RFLXHPVRL18":
+                        oldReflexOrder = new Client.Model.HPVReflexOrderRule2();
+                        break;
+                    case "RFLXHPVRL19":
+                        oldReflexOrder = new Client.Model.HPVReflexOrderRule14();
+                        break;
+                }
+                if (oldReflexOrder != null)
                 {
                     YellowstonePathology.Business.Audit.Model.HPVIsRequiredAudit hpvAudit = new HPVIsRequiredAudit(this.m_AccessionOrder);
                     hpvAudit.Run();
                     if (hpvAudit.ActionRequired == false)
                     {
-                        YellowstonePathology.Business.Client.Model.HPVReflexOrderRule14 oldReflexOrder = new Client.Model.HPVReflexOrderRule14();
                         if (oldReflexOrder.IsRequired(this.m_AccessionOrder) == true)
-                        {                            
-                            this.ActionRequired = true;                            
+                        {
+                            this.ActionRequired = true;
                         }
                     }
                 }
