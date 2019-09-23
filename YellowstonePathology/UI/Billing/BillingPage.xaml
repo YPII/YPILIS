@@ -222,6 +222,7 @@
                         <MenuItem Header="Add With Current Client" Click="MenuItemAddWithCurrentClient_Click"></MenuItem>
                         <MenuItem Header="Update Client" Click="MenuItemUpdateClient_Click"></MenuItem>
                         <MenuItem Header="Add 1" Click="MenuItemAddOne_Click"></MenuItem>
+                        <MenuItem Header="Send CDM" Click="MenuItemSendCDM_Click"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>

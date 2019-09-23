@@ -456,7 +456,7 @@ namespace YellowstonePathology.Business.Helper
 
             if(rollingDate.Hour == 0)
             {
-                rollingDate = new DateTime(rollingDate.Year, rollingDate.Month, rollingDate.Day - 1, 17, 0, 0);
+                rollingDate = new DateTime(rollingDate.Year, rollingDate.Month, rollingDate.Day, 17, 0, 0);
             }
             return rollingDate;
         }
