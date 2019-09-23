@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Client.Model
             return result;
         }
 
-        public bool MeetsBaseRequirements(Business.Test.AccessionOrder accessionOrder)
+        public override bool MeetsBaseRequirements(Business.Test.AccessionOrder accessionOrder)
         {
             bool result = false;
             YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest panelSetThinPrep = new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest();
@@ -44,7 +44,7 @@ namespace YellowstonePathology.Business.Client.Model
             return result;
         }
 
-        public bool HasNoPositiveHPVInLastYear(Business.Test.AccessionOrder accessionOrder)
+        public override bool HasNoPositiveHPVInLastYear(Business.Test.AccessionOrder accessionOrder)
         {
             bool result = true;
             YellowstonePathology.Business.Domain.PatientHistory patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
