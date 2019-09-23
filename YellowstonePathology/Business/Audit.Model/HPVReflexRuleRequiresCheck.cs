@@ -24,29 +24,20 @@ namespace YellowstonePathology.Business.Audit.Model
             if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(womensHealthProfileTest.PanelSetId) == true)
             {
                 YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder womensHealthProfileTestOrder = (YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(womensHealthProfileTest.PanelSetId);
-                YellowstonePathology.Business.Client.Model.ReflexOrder oldReflexOrder = null;
-
-                switch (womensHealthProfileTestOrder.HPVReflexOrderCode)
+                YellowstonePathology.Business.Audit.Model.HPVIsRequiredAudit hpvAudit = new HPVIsRequiredAudit(this.m_AccessionOrder);
+                hpvAudit.Run();
+                if (hpvAudit.ActionRequired == false)
                 {
-                    case "RFLXHPVRL17":
-                        oldReflexOrder = new Client.Model.HPVReflexOrderRule14();
-                        break;
-                    case "RFLXHPVRL18":
-                        oldReflexOrder = new Client.Model.HPVReflexOrderRule2();
-                        break;
-                    case "RFLXHPVRL19":
-                        oldReflexOrder = new Client.Model.HPVReflexOrderRule14();
-                        break;
-                }
-                if (oldReflexOrder != null)
-                {
-                    YellowstonePathology.Business.Audit.Model.HPVIsRequiredAudit hpvAudit = new HPVIsRequiredAudit(this.m_AccessionOrder);
-                    hpvAudit.Run();
-                    if (hpvAudit.ActionRequired == false)
+                    YellowstonePathology.Business.Client.Model.ReflexOrder reflexOrder = YellowstonePathology.Business.Client.Model.ReflexOrderCollection.GetByReflexByOrderCode(womensHealthProfileTestOrder.HPVReflexOrderCode);
+                    if (reflexOrder.MeetsBaseRequirements(this.m_AccessionOrder) == true)
                     {
-                        if (oldReflexOrder.IsRequired(this.m_AccessionOrder) == true)
+                        if (reflexOrder.HasNoPositiveHPVInLastYear(this.m_AccessionOrder) == false)
                         {
-                            this.ActionRequired = true;
+                            YellowstonePathology.Business.Test.HPV.HPVTest hpvTest = new Test.HPV.HPVTest();
+                            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(hpvTest.PanelSetId) == false)
+                            {
+                                this.m_ActionRequired = true;
+                            }
                         }
                     }
                 }

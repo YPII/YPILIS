@@ -99,7 +99,7 @@
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="*"></RowDefinition>
 				</Grid.RowDefinitions>
-
+                
 				<Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -155,10 +155,10 @@
 					<CheckBox Grid.Column="1" Grid.Row="7" IsChecked="{Binding Path=WomensHealthProfileTestOrder.OrderHPV1618}" Margin="2,2,2,2"></CheckBox>
 
 					<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Margin="2,2,2,2" FontWeight="Bold">HPV Reflex Order:</TextBlock>
-					<ComboBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9" Margin="2,2,2,2" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=HPVReflexOrderCollection}" SelectedValuePath="ReflexOrderCode" DisplayMemberPath="Description"
+                    <ComboBox Name="ComboboxHPVReflex" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9" Margin="2,2,2,2" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=HPVReflexOrderCollection}" SelectedValuePath="ReflexOrderCode" DisplayMemberPath="Description"
 									SelectedValue="{Binding Path=WomensHealthProfileTestOrder.HPVReflexOrderCode}" SelectionChanged="ComboBoxHPVReflexOrderCode_SelectionChanged" />
-
-					<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" FontWeight="Bold" Margin="2,5,2,2">HPV Standing Order</TextBlock>
+                    
+                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" FontWeight="Bold" Margin="2,5,2,2">HPV Standing Order</TextBlock>
 					<TextBox Name="TextBlockStandingOrderDescription" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=HPVStandingOrderDescription}" TextWrapping="Wrap" IsEnabled="False"></TextBox>                              
                 
 					<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="12" Margin="2,2,2,2" FontWeight="Bold">HPV 16/18 Reflex Order:</TextBlock>
