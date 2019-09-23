@@ -44,5 +44,15 @@ namespace YellowstonePathology.Business.Client.Model
         {
             throw new Exception("Not implemented here.");
         }
+
+        public virtual bool MeetsBaseRequirements(Business.Test.AccessionOrder accessionOrder)
+        {
+            return false;
+        }
+
+        public virtual bool HasNoPositiveHPVInLastYear(Business.Test.AccessionOrder accessionOrder)
+        {
+            return false;
+        }
     }
 }

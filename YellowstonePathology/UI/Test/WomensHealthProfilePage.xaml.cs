@@ -100,6 +100,27 @@ namespace YellowstonePathology.UI.Test
             this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBoxAcceptedTime);
             this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBoxFinalTime);
             this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBoxSignaure);
+
+            Loaded += WomensHealthProfilePage_Loaded;
+        }
+
+        private void WomensHealthProfilePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            var gen = ComboboxHPVReflex.ItemContainerGenerator;
+            gen.StatusChanged += Gen_StatusChanged;
+        }
+
+        private void Gen_StatusChanged(object sender, EventArgs e)
+        {
+            var gen = ComboboxHPVReflex.ItemContainerGenerator;
+            if (gen.Status == System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
+            {
+                for(int idx = 0; idx < this.ComboboxHPVReflex.Items.Count; idx++ )
+                {
+                    ComboBoxItem comboBoxItem = (ComboBoxItem)ComboboxHPVReflex.ItemContainerGenerator.ContainerFromItem(ComboboxHPVReflex.Items[idx]);
+                    comboBoxItem.Foreground = idx == 1 || idx == 2 ? Brushes.Red : Brushes.Green;
+                }
+            }
         }
 
         public string HPVStandingOrderDescription
@@ -454,6 +475,6 @@ namespace YellowstonePathology.UI.Test
         private void HyperLinkNext_Click(object sender, RoutedEventArgs e)
         {
             this.GoNext();
-        }        
+        }
     }
 }
