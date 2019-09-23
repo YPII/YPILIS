@@ -134,7 +134,7 @@ namespace YellowstonePathology.Business.HL7View.WPH
 					view = new YellowstonePathology.Business.Test.CCNDIBCLIGHByFISH.CCNDIBCLIGHByFISHWPHOBXView(accessionOrder, reportNo, obxCount);
 					break;
 				case 149:
-					//view = new YellowstonePathology.Business.Test.HighGradeLargeBCellLymphoma.HighGradeLargeBCellLymphomaWPHOBXView(accessionOrder, reportNo, obxCount);
+					view = new YellowstonePathology.Business.Test.HighGradeLargeBCellLymphoma.HighGradeLargeBCellLymphomaWPHOBXView(accessionOrder, reportNo, obxCount);
 					break;
 				case 150:
 					view = new YellowstonePathology.Business.Test.CEBPA.CEBPAWPHOBXView(accessionOrder, reportNo, obxCount);
