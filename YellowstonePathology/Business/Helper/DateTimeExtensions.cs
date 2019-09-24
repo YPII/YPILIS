@@ -423,17 +423,12 @@ namespace YellowstonePathology.Business.Helper
 
         public static DateTime GetEndDate(DateTime startDate, TimeSpan timeSpan)
         {
-            DateTime rollingDate = startDate;
+            DateTime rollingDate = new DateTime(startDate.Year, startDate.Month, startDate.Day);
             TimeSpan timeSpanOneHour = new TimeSpan(1, 0, 0);
             TimeSpan timeSpanMatch = new TimeSpan();
             YellowstonePathology.Business.HolidayCollection holidays = YellowstonePathology.Business.HolidayCollection.GetByDateRange(new DateTime(startDate.Year, 1, 1), new DateTime(startDate.Add(timeSpan).Year + 1, 12, 31));
-            bool isHoliday = holidays.IsDateAHoliday(startDate);
-
-            int dow = (int)startDate.DayOfWeek;
-            if (dow == 0 || dow == 6 || isHoliday == true)
-            {
-                rollingDate = new DateTime(startDate.Year, startDate.Month, startDate.Day);
-            }
+            bool isHoliday = false;
+            int dow = 0;
 
             while (timeSpanMatch < timeSpan)
             {
@@ -452,12 +447,22 @@ namespace YellowstonePathology.Business.Helper
                     timeSpanMatch = timeSpanMatch.Add(timeSpanOneHour);
                 }
                 rollingDate = rollingDate.AddHours(1);
-            };
-
-            if(rollingDate.Hour == 0)
-            {
-                rollingDate = new DateTime(rollingDate.Year, rollingDate.Month, rollingDate.Day, 17, 0, 0);
             }
+
+            isHoliday = holidays.IsDateAHoliday(rollingDate);
+            dow = (int)rollingDate.DayOfWeek;
+            while (dow == 0 || dow == 6 || isHoliday == true)
+            {
+<<<<<<< HEAD
+                rollingDate = new DateTime(rollingDate.Year, rollingDate.Month, rollingDate.Day, 17, 0, 0);
+=======
+                rollingDate = rollingDate.AddHours(24);
+                isHoliday = holidays.IsDateAHoliday(rollingDate);
+                dow = (int)rollingDate.DayOfWeek;
+>>>>>>> 1f4d465bdcefe7550616a93735d82167e4eeac6f
+            }
+
+            rollingDate = new DateTime(rollingDate.Year, rollingDate.Month, rollingDate.Day, rollingDate.Hour + startDate.Hour, 0, 0);
             return rollingDate;
         }
 
