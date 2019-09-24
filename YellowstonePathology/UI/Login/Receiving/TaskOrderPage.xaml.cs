@@ -206,16 +206,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
         private void HyperLinkSendToNeogenomics_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility neo = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
-
             this.m_TaskOrder.TaskOrderDetailCollection.Clear();
-            YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_TaskOrder.ReportNo);
-            panelSetOrder.TechnicalComponentBillingFacilityId = ypi.FacilityId;
-            panelSetOrder.TechnicalComponentFacilityId = neo.FacilityId;
-
-            panelSetOrder.ProfessionalComponentBillingFacilityId = neo.FacilityId;
-            panelSetOrder.ProfessionalComponentFacilityId = neo.FacilityId;
 
             YellowstonePathology.Business.Task.Model.TaskSendBlockToNeogenomics task = new Business.Task.Model.TaskSendBlockToNeogenomics();
             string taskOrderDetailId = YellowstonePathology.Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);

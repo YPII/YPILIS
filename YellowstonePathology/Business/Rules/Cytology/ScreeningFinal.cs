@@ -395,14 +395,10 @@ namespace YellowstonePathology.Business.Rules.Cytology
             if (this.m_PanelOrderToFinal.ScreeningType.ToUpper() == "PATHOLOGIST REVIEW")
             {
 				this.m_PanelSetOrderCytology.HasProfessionalComponent = true;
-				this.m_PanelSetOrderCytology.ProfessionalComponentFacilityId = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId;
-                this.m_PanelSetOrderCytology.ProfessionalComponentBillingFacilityId = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS").FacilityId;
 			}
             else
             {
 				this.m_PanelSetOrderCytology.HasProfessionalComponent = false;
-				this.m_PanelSetOrderCytology.ProfessionalComponentFacilityId = null;
-				this.m_PanelSetOrderCytology.ProfessionalComponentBillingFacilityId = null;
 			}            
 		}
 

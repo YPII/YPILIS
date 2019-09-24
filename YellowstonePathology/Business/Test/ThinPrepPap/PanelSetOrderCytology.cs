@@ -41,7 +41,6 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             : base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
         {
             this.HasProfessionalComponent = false;
-            this.ProfessionalComponentFacilityId = null;
             this.ScreeningType = "Final Result";
 
             this.m_ReportReferences = YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapResult.References;
