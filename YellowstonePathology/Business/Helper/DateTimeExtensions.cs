@@ -453,13 +453,9 @@ namespace YellowstonePathology.Business.Helper
             dow = (int)rollingDate.DayOfWeek;
             while (dow == 0 || dow == 6 || isHoliday == true)
             {
-<<<<<<< HEAD
-                rollingDate = new DateTime(rollingDate.Year, rollingDate.Month, rollingDate.Day, 17, 0, 0);
-=======
                 rollingDate = rollingDate.AddHours(24);
                 isHoliday = holidays.IsDateAHoliday(rollingDate);
                 dow = (int)rollingDate.DayOfWeek;
->>>>>>> 1f4d465bdcefe7550616a93735d82167e4eeac6f
             }
 
             rollingDate = new DateTime(rollingDate.Year, rollingDate.Month, rollingDate.Day, rollingDate.Hour + startDate.Hour, 0, 0);
