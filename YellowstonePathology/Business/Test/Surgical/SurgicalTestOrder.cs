@@ -11,50 +11,50 @@ using YellowstonePathology.Business.Rules;
 
 namespace YellowstonePathology.Business.Test.Surgical
 {
-	[PersistentClass("tblSurgicalTestOrder", "tblPanelSetOrder", "YPIDATA")]
-	public class SurgicalTestOrder : YellowstonePathology.Business.Test.PanelSetOrder
-	{
-		private bool m_PapCorrelationRequired;
-		private bool m_ReportableCase;
-		private bool m_PQRIRequired;
-		private int m_PhysicianId;
-		private int m_ImmediateCorrelation;
-		private int m_PapCorrelation;
-		private int m_PQRIInstructions;		
-		private string m_GrossX;
-		private string m_ImmediateX;
-		private string m_MicroscopicX;
-		private string m_Comment;
-		private string m_CancerSummary;
-		private string m_Status;		
-		private string m_ImmunoComment;
-		private string m_LocumPerformedForInitials;
-		private string m_AJCCStage;
-		private string m_ImmediateCorrelationComment;
-		private string m_PapCorrelationComment;
-		private string m_PapCorrelationAccessionNo;
+    [PersistentClass("tblSurgicalTestOrder", "tblPanelSetOrder", "YPIDATA")]
+    public class SurgicalTestOrder : YellowstonePathology.Business.Test.PanelSetOrder
+    {
+        private bool m_PapCorrelationRequired;
+        private bool m_ReportableCase;
+        private bool m_PQRIRequired;
+        private int m_PhysicianId;
+        private int m_ImmediateCorrelation;
+        private int m_PapCorrelation;
+        private int m_PQRIInstructions;
+        private string m_GrossX;
+        private string m_ImmediateX;
+        private string m_MicroscopicX;
+        private string m_Comment;
+        private string m_CancerSummary;
+        private string m_Status;
+        private string m_ImmunoComment;
+        private string m_LocumPerformedForInitials;
+        private string m_AJCCStage;
+        private string m_ImmediateCorrelationComment;
+        private string m_PapCorrelationComment;
+        private string m_PapCorrelationAccessionNo;
         private bool m_PQRSIsIndicated;
         private bool m_PQRSNotApplicable;
 
-		private SurgicalSpecimenCollection m_SurgicalSpecimenCollection;
-		private YellowstonePathology.Business.Specimen.Model.SpecimenOrderCollection m_SpecimenOrderCollection;
-		private YellowstonePathology.Business.SpecialStain.StainResultItemCollection m_TypingStainCollection;
-		private SurgicalAuditCollection m_SurgicalAuditCollection;		
+        private SurgicalSpecimenCollection m_SurgicalSpecimenCollection;
+        private YellowstonePathology.Business.Specimen.Model.SpecimenOrderCollection m_SpecimenOrderCollection;
+        private YellowstonePathology.Business.SpecialStain.StainResultItemCollection m_TypingStainCollection;
+        private SurgicalAuditCollection m_SurgicalAuditCollection;
 
-		public SurgicalTestOrder()
-		{
+        public SurgicalTestOrder()
+        {
             this.m_SurgicalSpecimenCollection = new SurgicalSpecimenCollection();
             this.m_SurgicalAuditCollection = new SurgicalAuditCollection();
             this.m_TypingStainCollection = new SpecialStain.StainResultItemCollection();
             this.m_SpecimenOrderCollection = new YellowstonePathology.Business.Specimen.Model.SpecimenOrderCollection();
-		}
+        }
 
-		public SurgicalTestOrder(string masterAccessionNo, string reportNo, string objectId,
-			YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet,
-			bool distribute)
-			: base(masterAccessionNo, reportNo, objectId, panelSet, distribute)
-		{
-			this.m_SurgicalSpecimenCollection = new SurgicalSpecimenCollection();
+        public SurgicalTestOrder(string masterAccessionNo, string reportNo, string objectId,
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet,
+            bool distribute)
+            : base(masterAccessionNo, reportNo, objectId, panelSet, distribute)
+        {
+            this.m_SurgicalSpecimenCollection = new SurgicalSpecimenCollection();
             this.m_SurgicalAuditCollection = new SurgicalAuditCollection();
             this.m_TypingStainCollection = new SpecialStain.StainResultItemCollection();
             this.m_SpecimenOrderCollection = new YellowstonePathology.Business.Specimen.Model.SpecimenOrderCollection();
@@ -108,320 +108,320 @@ namespace YellowstonePathology.Business.Test.Surgical
         }
 
         public override string ToResultString(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
-		{
-			StringBuilder result = new StringBuilder();
-			foreach (SurgicalSpecimen surgicalSpecimenResult in this.SurgicalSpecimenCollection)
-			{
-				result.AppendLine(surgicalSpecimenResult.Diagnosis);
-			}
+        {
+            StringBuilder result = new StringBuilder();
+            foreach (SurgicalSpecimen surgicalSpecimenResult in this.SurgicalSpecimenCollection)
+            {
+                result.AppendLine(surgicalSpecimenResult.Diagnosis);
+            }
 
-			return result.ToString().Trim();
-		}        
+            return result.ToString().Trim();
+        }
 
         public YellowstonePathology.Business.Specimen.Model.SpecimenOrderCollection SpecimenOrderCollection
-		{
-			get { return m_SpecimenOrderCollection; }
-			set { m_SpecimenOrderCollection = value; }
-		}
+        {
+            get { return m_SpecimenOrderCollection; }
+            set { m_SpecimenOrderCollection = value; }
+        }
 
-		[PersistentCollection()]
-		public YellowstonePathology.Business.Test.Surgical.SurgicalSpecimenCollection SurgicalSpecimenCollection
-		{
-			get { return m_SurgicalSpecimenCollection; }
-			set { this.m_SurgicalSpecimenCollection = value; }
-		}
+        [PersistentCollection()]
+        public YellowstonePathology.Business.Test.Surgical.SurgicalSpecimenCollection SurgicalSpecimenCollection
+        {
+            get { return m_SurgicalSpecimenCollection; }
+            set { this.m_SurgicalSpecimenCollection = value; }
+        }
 
-		[PersistentCollection()]
-		public SurgicalAuditCollection SurgicalAuditCollection
-		{
-			get { return m_SurgicalAuditCollection; }
-			set { this.m_SurgicalAuditCollection = value; }
-		}
+        [PersistentCollection()]
+        public SurgicalAuditCollection SurgicalAuditCollection
+        {
+            get { return m_SurgicalAuditCollection; }
+            set { this.m_SurgicalAuditCollection = value; }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(false, "1", "0", "tinyint")]
-		public bool PapCorrelationRequired
-		{
-			get { return this.m_PapCorrelationRequired; }
-			set
-			{
-				if (this.m_PapCorrelationRequired != value)
-				{
-					this.m_PapCorrelationRequired = value;
-					this.NotifyPropertyChanged("PapCorrelationRequired");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "tinyint")]
+        public bool PapCorrelationRequired
+        {
+            get { return this.m_PapCorrelationRequired; }
+            set
+            {
+                if (this.m_PapCorrelationRequired != value)
+                {
+                    this.m_PapCorrelationRequired = value;
+                    this.NotifyPropertyChanged("PapCorrelationRequired");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(false, "1", "0", "tinyint")]
-		public bool ReportableCase
-		{
-			get { return this.m_ReportableCase; }
-			set
-			{
-				if (this.m_ReportableCase != value)
-				{
-					this.m_ReportableCase = value;
-					this.NotifyPropertyChanged("ReportableCase");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "tinyint")]
+        public bool ReportableCase
+        {
+            get { return this.m_ReportableCase; }
+            set
+            {
+                if (this.m_ReportableCase != value)
+                {
+                    this.m_ReportableCase = value;
+                    this.NotifyPropertyChanged("ReportableCase");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(false, "1", "0", "tinyint")]
-		public bool PQRIRequired
-		{
-			get { return this.m_PQRIRequired; }
-			set
-			{
-				if (this.m_PQRIRequired != value)
-				{
-					this.m_PQRIRequired = value;
-					this.NotifyPropertyChanged("PQRIRequired");
-				}
-			}
-		}		
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "tinyint")]
+        public bool PQRIRequired
+        {
+            get { return this.m_PQRIRequired; }
+            set
+            {
+                if (this.m_PQRIRequired != value)
+                {
+                    this.m_PQRIRequired = value;
+                    this.NotifyPropertyChanged("PQRIRequired");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(false, "11", "255", "int")]
-		public int PhysicianId
-		{
-			get { return this.m_PhysicianId; }
-			set
-			{
-				if (this.m_PhysicianId != value)
-				{
-					this.m_PhysicianId = value;
-					this.NotifyPropertyChanged("PhysicianId");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "255", "int")]
+        public int PhysicianId
+        {
+            get { return this.m_PhysicianId; }
+            set
+            {
+                if (this.m_PhysicianId != value)
+                {
+                    this.m_PhysicianId = value;
+                    this.NotifyPropertyChanged("PhysicianId");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(false, "11", "0", "int")]
-		public int ImmediateCorrelation
-		{
-			get { return this.m_ImmediateCorrelation; }
-			set
-			{
-				if (this.m_ImmediateCorrelation != value)
-				{
-					this.m_ImmediateCorrelation = value;
-					this.NotifyPropertyChanged("ImmediateCorrelation");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
+        public int ImmediateCorrelation
+        {
+            get { return this.m_ImmediateCorrelation; }
+            set
+            {
+                if (this.m_ImmediateCorrelation != value)
+                {
+                    this.m_ImmediateCorrelation = value;
+                    this.NotifyPropertyChanged("ImmediateCorrelation");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(false, "11", "0", "int")]
-		public int PapCorrelation
-		{
-			get { return this.m_PapCorrelation; }
-			set
-			{
-				if (this.m_PapCorrelation != value)
-				{
-					this.m_PapCorrelation = value;
-					this.NotifyPropertyChanged("PapCorrelation");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
+        public int PapCorrelation
+        {
+            get { return this.m_PapCorrelation; }
+            set
+            {
+                if (this.m_PapCorrelation != value)
+                {
+                    this.m_PapCorrelation = value;
+                    this.NotifyPropertyChanged("PapCorrelation");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(false, "11", "0", "int")]
-		public int PQRIInstructions
-		{
-			get { return this.m_PQRIInstructions; }
-			set
-			{
-				if (this.m_PQRIInstructions != value)
-				{
-					this.m_PQRIInstructions = value;
-					this.NotifyPropertyChanged("PQRIInstructions");
-				}
-			}
-		}		
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
+        public int PQRIInstructions
+        {
+            get { return this.m_PQRIInstructions; }
+            set
+            {
+                if (this.m_PQRIInstructions != value)
+                {
+                    this.m_PQRIInstructions = value;
+                    this.NotifyPropertyChanged("PQRIInstructions");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "-1", "null", "text")]
-		public string GrossX
-		{
-			get { return this.m_GrossX; }
-			set
-			{
-				if (this.m_GrossX != value)
-				{
-					this.m_GrossX = value;
-					this.NotifyPropertyChanged("GrossX");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "-1", "null", "text")]
+        public string GrossX
+        {
+            get { return this.m_GrossX; }
+            set
+            {
+                if (this.m_GrossX != value)
+                {
+                    this.m_GrossX = value;
+                    this.NotifyPropertyChanged("GrossX");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "-1", "null", "text")]
-		public string ImmediateX
-		{
-			get { return this.m_ImmediateX; }
-			set
-			{
-				if (this.m_ImmediateX != value)
-				{
-					this.m_ImmediateX = value;
-					this.NotifyPropertyChanged("ImmediateX");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "-1", "null", "text")]
+        public string ImmediateX
+        {
+            get { return this.m_ImmediateX; }
+            set
+            {
+                if (this.m_ImmediateX != value)
+                {
+                    this.m_ImmediateX = value;
+                    this.NotifyPropertyChanged("ImmediateX");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "-1", "null", "text")]
-		public string MicroscopicX
-		{
-			get { return this.m_MicroscopicX; }
-			set
-			{
-				if (this.m_MicroscopicX != value)
-				{
-					this.m_MicroscopicX = value;
-					this.NotifyPropertyChanged("MicroscopicX");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "-1", "null", "text")]
+        public string MicroscopicX
+        {
+            get { return this.m_MicroscopicX; }
+            set
+            {
+                if (this.m_MicroscopicX != value)
+                {
+                    this.m_MicroscopicX = value;
+                    this.NotifyPropertyChanged("MicroscopicX");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "-1", "null", "text")]
-		public string Comment
-		{
-			get { return this.m_Comment; }
-			set
-			{
-				if (this.m_Comment != value)
-				{
-					this.m_Comment = value;
-					this.NotifyPropertyChanged("Comment");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "-1", "null", "text")]
+        public string Comment
+        {
+            get { return this.m_Comment; }
+            set
+            {
+                if (this.m_Comment != value)
+                {
+                    this.m_Comment = value;
+                    this.NotifyPropertyChanged("Comment");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "-1", "null", "text")]
-		public string CancerSummary
-		{
-			get { return this.m_CancerSummary; }
-			set
-			{
-				if (this.m_CancerSummary != value)
-				{
-					this.m_CancerSummary = value;
-					this.NotifyPropertyChanged("CancerSummary");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "-1", "null", "text")]
+        public string CancerSummary
+        {
+            get { return this.m_CancerSummary; }
+            set
+            {
+                if (this.m_CancerSummary != value)
+                {
+                    this.m_CancerSummary = value;
+                    this.NotifyPropertyChanged("CancerSummary");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "10", "'Open'", "varchar")]
-		public string Status
-		{
-			get { return this.m_Status; }
-			set
-			{
-				if (this.m_Status != value)
-				{
-					this.m_Status = value;
-					this.NotifyPropertyChanged("Status");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "10", "'Open'", "varchar")]
+        public string Status
+        {
+            get { return this.m_Status; }
+            set
+            {
+                if (this.m_Status != value)
+                {
+                    this.m_Status = value;
+                    this.NotifyPropertyChanged("Status");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "-1", "null", "text")]
-		public string ImmunoComment
-		{
-			get { return this.m_ImmunoComment; }
-			set
-			{
-				if (this.m_ImmunoComment != value)
-				{
-					this.m_ImmunoComment = value;
-					this.NotifyPropertyChanged("ImmunoComment");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "-1", "null", "text")]
+        public string ImmunoComment
+        {
+            get { return this.m_ImmunoComment; }
+            set
+            {
+                if (this.m_ImmunoComment != value)
+                {
+                    this.m_ImmunoComment = value;
+                    this.NotifyPropertyChanged("ImmunoComment");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
-		public string LocumPerformedForInitials
-		{
-			get { return this.m_LocumPerformedForInitials; }
-			set
-			{
-				if (this.m_LocumPerformedForInitials != value)
-				{
-					this.m_LocumPerformedForInitials = value;
-					this.NotifyPropertyChanged("LocumPerformedForInitials");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string LocumPerformedForInitials
+        {
+            get { return this.m_LocumPerformedForInitials; }
+            set
+            {
+                if (this.m_LocumPerformedForInitials != value)
+                {
+                    this.m_LocumPerformedForInitials = value;
+                    this.NotifyPropertyChanged("LocumPerformedForInitials");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
-		public string AJCCStage
-		{
-			get { return this.m_AJCCStage; }
-			set
-			{
-				if (this.m_AJCCStage != value)
-				{
-					this.m_AJCCStage = value;
-					this.NotifyPropertyChanged("AJCCStage");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
+        public string AJCCStage
+        {
+            get { return this.m_AJCCStage; }
+            set
+            {
+                if (this.m_AJCCStage != value)
+                {
+                    this.m_AJCCStage = value;
+                    this.NotifyPropertyChanged("AJCCStage");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "250", "null", "varchar")]
-		public string ImmediateCorrelationComment
-		{
-			get { return this.m_ImmediateCorrelationComment; }
-			set
-			{
-				if (this.m_ImmediateCorrelationComment != value)
-				{
-					this.m_ImmediateCorrelationComment = value;
-					this.NotifyPropertyChanged("ImmediateCorrelationComment");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public string ImmediateCorrelationComment
+        {
+            get { return this.m_ImmediateCorrelationComment; }
+            set
+            {
+                if (this.m_ImmediateCorrelationComment != value)
+                {
+                    this.m_ImmediateCorrelationComment = value;
+                    this.NotifyPropertyChanged("ImmediateCorrelationComment");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
-		public string PapCorrelationComment
-		{
-			get { return this.m_PapCorrelationComment; }
-			set
-			{
-				if (this.m_PapCorrelationComment != value)
-				{
-					this.m_PapCorrelationComment = value;
-					this.NotifyPropertyChanged("PapCorrelationComment");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
+        public string PapCorrelationComment
+        {
+            get { return this.m_PapCorrelationComment; }
+            set
+            {
+                if (this.m_PapCorrelationComment != value)
+                {
+                    this.m_PapCorrelationComment = value;
+                    this.NotifyPropertyChanged("PapCorrelationComment");
+                }
+            }
+        }
 
-		[PersistentProperty()]
-		[PersistentDataColumnProperty(true, "50", "", "varchar")]
-		public string PapCorrelationAccessionNo
-		{
-			get { return this.m_PapCorrelationAccessionNo; }
-			set
-			{
-				if (this.m_PapCorrelationAccessionNo != value)
-				{
-					this.m_PapCorrelationAccessionNo = value;
-					this.NotifyPropertyChanged("PapCorrelationAccessionNo");
-				}
-			}
-		}
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "", "varchar")]
+        public string PapCorrelationAccessionNo
+        {
+            get { return this.m_PapCorrelationAccessionNo; }
+            set
+            {
+                if (this.m_PapCorrelationAccessionNo != value)
+                {
+                    this.m_PapCorrelationAccessionNo = value;
+                    this.NotifyPropertyChanged("PapCorrelationAccessionNo");
+                }
+            }
+        }
 
         [PersistentProperty()]
         [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
@@ -454,139 +454,139 @@ namespace YellowstonePathology.Business.Test.Surgical
         }
 
         public YellowstonePathology.Business.SpecialStain.StainResultItemCollection TypingStainCollection
-		{
-			get	{ return this.m_TypingStainCollection; }
-		}
+        {
+            get { return this.m_TypingStainCollection; }
+        }
 
-		public string GetAncillaryStudyComment()
-		{
-			string comment = string.Empty;
-			int cytoCnt = 0;
-			int immunoCnt = 0;
-			foreach (SurgicalSpecimen surgicalSpecimen in this.m_SurgicalSpecimenCollection)
-			{
-				foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResultItem in surgicalSpecimen.StainResultItemCollection)
-				{
-					switch (stainResultItem.StainType.ToUpper())
-					{
-						case "CYTOCHEMICAL":
-							cytoCnt += 1;
-							break;
-						case "IMMUNOHISTOCHEMICAL":
-							immunoCnt += 1;
-							break;
-						default:
-							break;
-					}
-				}
-			}
+        public string GetAncillaryStudyComment()
+        {
+            string comment = string.Empty;
+            int cytoCnt = 0;
+            int immunoCnt = 0;
+            foreach (SurgicalSpecimen surgicalSpecimen in this.m_SurgicalSpecimenCollection)
+            {
+                foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResultItem in surgicalSpecimen.StainResultItemCollection)
+                {
+                    switch (stainResultItem.StainType.ToUpper())
+                    {
+                        case "CYTOCHEMICAL":
+                            cytoCnt += 1;
+                            break;
+                        case "IMMUNOHISTOCHEMICAL":
+                            immunoCnt += 1;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
 
-			if (cytoCnt == 1 && immunoCnt == 0)
-				comment = "A cytochemical study was performed, with appropriately reacting controls. Results are listed below.";
-			if (cytoCnt > 1 && immunoCnt == 0)
-				comment = "Cytochemical studies were performed, with appropriately reacting controls. Results are listed below.";
-			if (cytoCnt > 0 && immunoCnt > 0)
-				comment = "Cytochemical and immunohistochemical studies were performed, with appropriately reacting controls. Results are listed below.";
-			if (cytoCnt == 0 && immunoCnt == 1)
-				comment = "An immunohistochemical study was performed, with appropriately reacting controls. Results are listed below.";
-			if (cytoCnt == 0 && immunoCnt > 1)
-				comment = "Immunohistochemical studies were performed, with appropriately reacting controls. Results are listed below.";
-			return comment;
-		}
+            if (cytoCnt == 1 && immunoCnt == 0)
+                comment = "A cytochemical study was performed, with appropriately reacting controls. Results are listed below.";
+            if (cytoCnt > 1 && immunoCnt == 0)
+                comment = "Cytochemical studies were performed, with appropriately reacting controls. Results are listed below.";
+            if (cytoCnt > 0 && immunoCnt > 0)
+                comment = "Cytochemical and immunohistochemical studies were performed, with appropriately reacting controls. Results are listed below.";
+            if (cytoCnt == 0 && immunoCnt == 1)
+                comment = "An immunohistochemical study was performed, with appropriately reacting controls. Results are listed below.";
+            if (cytoCnt == 0 && immunoCnt > 1)
+                comment = "Immunohistochemical studies were performed, with appropriately reacting controls. Results are listed below.";
+            return comment;
+        }
 
-		public string GetImmunoComment()
-		{
-			string ret = string.Empty;
+        public string GetImmunoComment()
+        {
+            string ret = string.Empty;
             List<string> comments = new List<string>();
-			
-			foreach (SurgicalSpecimen surgicalSpecimen in this.m_SurgicalSpecimenCollection)
-			{
-				foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResultItem in surgicalSpecimen.StainResultItemCollection)
-				{
+
+            foreach (SurgicalSpecimen surgicalSpecimen in this.m_SurgicalSpecimenCollection)
+            {
+                foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResultItem in surgicalSpecimen.StainResultItemCollection)
+                {
                     if (comments.Contains(stainResultItem.ImmunoComment) == false)
                     {
                         comments.Add(stainResultItem.ImmunoComment);
-                    }                    
-				}
-			}
+                    }
+                }
+            }
 
-			foreach (string comment in comments)
-			{
-				ret += comment + " ";
-			}
+            foreach (string comment in comments)
+            {
+                ret += comment + " ";
+            }
 
-			return ret.Trim();
-		}
+            return ret.Trim();
+        }
 
-		public class ImmunoCommentsListItem
-		{
-			private int m_Seq;
-			private string m_Comment;
+        public class ImmunoCommentsListItem
+        {
+            private int m_Seq;
+            private string m_Comment;
 
-			public ImmunoCommentsListItem(int seq, string comment)
-			{
-				m_Seq = seq;
-				m_Comment = comment;
-			}
+            public ImmunoCommentsListItem(int seq, string comment)
+            {
+                m_Seq = seq;
+                m_Comment = comment;
+            }
 
-			public int Sequence
-			{
-				get { return this.m_Seq; }
-				set { this.m_Seq = value; }
-			}
+            public int Sequence
+            {
+                get { return this.m_Seq; }
+                set { this.m_Seq = value; }
+            }
 
-			public string Comment
-			{
-				get { return this.m_Comment; }
-				set { m_Comment = value; }
-			}
-		}
+            public string Comment
+            {
+                get { return this.m_Comment; }
+                set { m_Comment = value; }
+            }
+        }
 
-		public void SetProcedureCommentsToGood()
-		{
-			foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResultItem in this.TypingStainCollection)
-			{
-				if (string.IsNullOrEmpty(stainResultItem.ProcedureComment) == true)
-				{
-					stainResultItem.ProcedureComment = "Good.";
-				}
-			}
-		}
+        public void SetProcedureCommentsToGood()
+        {
+            foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResultItem in this.TypingStainCollection)
+            {
+                if (string.IsNullOrEmpty(stainResultItem.ProcedureComment) == true)
+                {
+                    stainResultItem.ProcedureComment = "Good.";
+                }
+            }
+        }
 
-		public bool ContainsString(string text)
-		{
-			return this.m_SurgicalSpecimenCollection.ContainsString(text);
-		}
+        public bool ContainsString(string text)
+        {
+            return this.m_SurgicalSpecimenCollection.ContainsString(text);
+        }
 
-		public YellowstonePathology.Business.SpecialStain.StainResultItemCollection GetAllStains()
-		{
-			YellowstonePathology.Business.SpecialStain.StainResultItemCollection result = new YellowstonePathology.Business.SpecialStain.StainResultItemCollection();
-			foreach (SurgicalSpecimen surgicalSpecimen in this.m_SurgicalSpecimenCollection)
-			{
-				foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResultItem in surgicalSpecimen.StainResultItemCollection)
-				{
-					result.Add(stainResultItem);
-				}
-			}
-			return result;
-		}
+        public YellowstonePathology.Business.SpecialStain.StainResultItemCollection GetAllStains()
+        {
+            YellowstonePathology.Business.SpecialStain.StainResultItemCollection result = new YellowstonePathology.Business.SpecialStain.StainResultItemCollection();
+            foreach (SurgicalSpecimen surgicalSpecimen in this.m_SurgicalSpecimenCollection)
+            {
+                foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResultItem in surgicalSpecimen.StainResultItemCollection)
+                {
+                    result.Add(stainResultItem);
+                }
+            }
+            return result;
+        }
 
-		public YellowstonePathology.Business.SpecialStain.StainResultItem GetStainResult(string testOrderId)
-		{
-			YellowstonePathology.Business.SpecialStain.StainResultItem result = null;
-			foreach (SurgicalSpecimen surgicalSpecimen in this.m_SurgicalSpecimenCollection)
-			{
-				foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResult in surgicalSpecimen.StainResultItemCollection)
-				{
-					if (stainResult.TestOrderId == testOrderId)
-					{
-						result = stainResult;
-						break;
-					}
-				}
-			}
-			return result;
-		}		
+        public YellowstonePathology.Business.SpecialStain.StainResultItem GetStainResult(string testOrderId)
+        {
+            YellowstonePathology.Business.SpecialStain.StainResultItem result = null;
+            foreach (SurgicalSpecimen surgicalSpecimen in this.m_SurgicalSpecimenCollection)
+            {
+                foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResult in surgicalSpecimen.StainResultItemCollection)
+                {
+                    if (stainResult.TestOrderId == testOrderId)
+                    {
+                        result = stainResult;
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
 
         public override void PullOver(Business.Visitor.AccessionTreeVisitor accessionTreeVisitor)
         {
@@ -600,7 +600,7 @@ namespace YellowstonePathology.Business.Test.Surgical
         {
             this.m_SurgicalSpecimenCollection.PullOver(accessionTreeVisitor);
             foreach (YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen in this.m_SurgicalSpecimenCollection)
-            {                
+            {
                 surgicalSpecimen.PullOver(accessionTreeVisitor);
                 surgicalSpecimen.StainResultItemCollection.PullOver(accessionTreeVisitor);
 
@@ -623,6 +623,24 @@ namespace YellowstonePathology.Business.Test.Surgical
             Audit.Model.PathologistSignoutAuditCollection pathologistSignoutAuditCollection = new PathologistSignoutAuditCollection(accessionOrder);
             AuditResult auditResult = pathologistSignoutAuditCollection.Run2();
             return auditResult;
+        }
+
+        public override void SetFacilityIds(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        {
+            base.SetFacilityIds(accessionOrder);
+            this.ProfessionalComponentFacilityId = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId;
+            if (accessionOrder.IsDermatologyClient() == true)
+            {
+                if ((accessionOrder.ClientId == 1260 || accessionOrder.ClientId == 1511) && this.AssignedToId == 5132) // Dr. Shannon
+                {
+                    this.ProfessionalComponentBillingFacilityId = this.ProfessionalComponentFacilityId;
+                }
+                else if (accessionOrder.ClientId == 579 && this.AssignedToId == 5149) //tallman cases to Messner
+                {
+                    this.ProfessionalComponentFacilityId = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS").FacilityId;
+                    this.ProfessionalComponentBillingFacilityId = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS").FacilityId;
+                }
+            }
         }
     }
 }

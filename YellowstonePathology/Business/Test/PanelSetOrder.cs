@@ -1965,5 +1965,26 @@ namespace YellowstonePathology.Business.Test
         {
             return "The " + panelSetName + " is not accepted." + Environment.NewLine;
         }
+
+        public virtual void SetFacilityIds(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        {
+            PanelSet.Model.PanelSet panelSet = PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(this.m_PanelSetId);
+
+            this.m_HasTechnicalComponent = false;
+            if (panelSet.HasTechnicalComponent == true)
+            {
+                this.m_HasTechnicalComponent = true;
+                this.m_TechnicalComponentFacilityId = panelSet.TechnicalComponentFacility.FacilityId;
+                this.m_TechnicalComponentBillingFacilityId = panelSet.TechnicalComponentBillingFacility.FacilityId;
+            }
+
+            this.m_HasProfessionalComponent = false;
+            if (panelSet.HasProfessionalComponent == true)
+            {
+                this.m_HasProfessionalComponent = true;
+                this.m_ProfessionalComponentFacilityId = panelSet.ProfessionalComponentFacility.FacilityId;
+                this.m_ProfessionalComponentBillingFacilityId = panelSet.ProfessionalComponentBillingFacility.FacilityId;
+            }
+        }
     }
 }

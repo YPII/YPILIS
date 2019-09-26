@@ -399,7 +399,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
             else
             {
 				this.m_PanelSetOrderCytology.HasProfessionalComponent = false;
-			}            
+			}
 		}
 
         public void Execute(YellowstonePathology.Business.User.SystemUser userPerformingFinal, YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology panelOrderToFinal, YellowstonePathology.Business.Rules.ExecutionStatus executionStatus)
