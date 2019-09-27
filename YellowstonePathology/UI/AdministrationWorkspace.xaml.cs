@@ -1766,7 +1766,7 @@ namespace YellowstonePathology.UI
             List<string> masterAccessionNos = new List<string>();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select MasterAccessionNo from tblPanelSetOrder where PanelSetId = 13 and Final = 1 and FinalDate between " +
-                "'2019-6-1' and '2019-8-30' and ProfessionalComponentBillingFacilityId = 'YPBLGS';";
+                "'2019-8-25' and '2019-8-30' and FinaledById = 5010;";
             cmd.CommandType = CommandType.Text;
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))

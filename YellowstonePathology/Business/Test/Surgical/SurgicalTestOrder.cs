@@ -628,17 +628,13 @@ namespace YellowstonePathology.Business.Test.Surgical
         public override void SetFacilityIds(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             base.SetFacilityIds(accessionOrder);
+
             this.ProfessionalComponentFacilityId = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId;
             if (accessionOrder.IsDermatologyClient() == true)
             {
                 if ((accessionOrder.ClientId == 1260 || accessionOrder.ClientId == 1511) && this.AssignedToId == 5132) // Dr. Shannon
                 {
                     this.ProfessionalComponentBillingFacilityId = this.ProfessionalComponentFacilityId;
-                }
-                else if (accessionOrder.ClientId == 579 && this.AssignedToId == 5149) //tallman cases to Messner
-                {
-                    this.ProfessionalComponentFacilityId = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS").FacilityId;
-                    this.ProfessionalComponentBillingFacilityId = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS").FacilityId;
                 }
             }
         }

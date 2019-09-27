@@ -204,17 +204,6 @@ namespace YellowstonePathology.UI.Login.Receiving
             return result;
         }
 
-        private void HyperLinkSendToNeogenomics_Click(object sender, RoutedEventArgs e)
-        {
-            this.m_TaskOrder.TaskOrderDetailCollection.Clear();
-
-            YellowstonePathology.Business.Task.Model.TaskSendBlockToNeogenomics task = new Business.Task.Model.TaskSendBlockToNeogenomics();
-            string taskOrderDetailId = YellowstonePathology.Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);
-            string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-            YellowstonePathology.Business.Task.Model.TaskOrderDetail taskOrderDetail = new Business.Task.Model.TaskOrderDetail(taskOrderDetailId, this.m_TaskOrder.TaskOrderId, objectId, task, this.m_AccessionOrder.ClientId);
-            this.m_TaskOrder.TaskOrderDetailCollection.Add(taskOrderDetail);
-        }
-
         private void HyperlingPrintTaskOrder_Click(object sender, RoutedEventArgs e)
         {
             this.PrintTaskOrder(1);
