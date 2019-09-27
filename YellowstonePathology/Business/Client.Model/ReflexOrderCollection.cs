@@ -51,6 +51,7 @@ namespace YellowstonePathology.Business.Client.Model
             result.Add(new HPVReflexOrderRule17());
             result.Add(new HPVReflexOrderRule18());
             result.Add(new HPVReflexOrderRule19());
+            result.Add(new HPVReflexOrderRule20());
             return result;
         }
 
@@ -63,7 +64,7 @@ namespace YellowstonePathology.Business.Client.Model
             return result;
         }
 
-        public static ReflexOrderCollection GetHPVReflexOrders()
+        /*public static ReflexOrderCollection GetHPVReflexOrders()
         {
             ReflexOrderCollection result = new ReflexOrderCollection();
             result.Add(new ReflexOrderNone());
@@ -82,7 +83,7 @@ namespace YellowstonePathology.Business.Client.Model
             result.Add(new HPVReflexOrderRule14());
             result.Add(new HPVReflexOrderRule141());
             return result;
-        }
+        }*/
 
         public static ReflexOrderCollection GetHPVRequisitionReflexOrders()
         {
