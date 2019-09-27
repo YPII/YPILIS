@@ -18,6 +18,7 @@ namespace YellowstonePathology.Business.Client.Model
             result.Add(new Model.HPVRuleAge3());
             result.Add(new Model.HPVRuleAge4());
             result.Add(new Model.HPVRuleAge5());
+            result.Add(new Model.HPVRuleAge6());
             return result;
         }
 
