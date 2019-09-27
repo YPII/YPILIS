@@ -333,6 +333,7 @@
     <Compile Include="Business\Client.Model\HPVReflexOrderRule17.cs" />
     <Compile Include="Business\Client.Model\HPVReflexOrderRule18.cs" />
     <Compile Include="Business\Client.Model\HPVReflexOrderRule19.cs" />
+    <Compile Include="Business\Client.Model\HPVReflexOrderRule20.cs" />
     <Compile Include="Business\Client.Model\HPVReflexOrderRule51.cs" />
     <Compile Include="Business\Client.Model\HPVRule.cs" />
     <Compile Include="Business\Client.Model\HPVRuleAge1.cs" />
@@ -340,6 +341,7 @@
     <Compile Include="Business\Client.Model\HPVRuleAge3.cs" />
     <Compile Include="Business\Client.Model\HPVRuleAge4.cs" />
     <Compile Include="Business\Client.Model\HPVRuleAge5.cs" />
+    <Compile Include="Business\Client.Model\HPVRuleAge6.cs" />
     <Compile Include="Business\Client.Model\HPVRuleAgeCollection.cs" />
     <Compile Include="Business\Client.Model\HPVRuleCollection.cs" />
     <Compile Include="Business\Client.Model\HPVRuleEndoCervical1.cs" />
@@ -359,6 +361,7 @@
     <Compile Include="Business\Client.Model\HPVStandingOrder.cs" />
     <Compile Include="Business\Client.Model\HPVStandingOrderCollection.cs" />
     <Compile Include="Business\Client.Model\HPVStandingOrderRule141.cs" />
+    <Compile Include="Business\Client.Model\HPVStandingOrderRule20.cs" />
     <Compile Include="Business\Client.Model\HPVStandingOrderRule51.cs" />
     <Compile Include="Business\Client.Model\HRHClinics.cs" />
     <Compile Include="Business\Client.Model\IdahoClientIdList.cs" />
