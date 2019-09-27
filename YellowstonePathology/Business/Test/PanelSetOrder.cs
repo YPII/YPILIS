@@ -1424,7 +1424,7 @@ namespace YellowstonePathology.Business.Test
             }
 
             accessionOrder.SetCaseOwnerId();
-
+            this.SetFacilityIds(accessionOrder);
             FinalizeTestResult result = this.HandleBoneMarrowSummaryOnFinal(accessionOrder);
 
             this.NotifyPropertyChanged(string.Empty);

@@ -388,7 +388,6 @@ namespace YellowstonePathology.Business.Rules.Cytology
         
         private void FinalPanelSetOrder()
         {
-			this.m_PanelSetOrderCytology.Finish(this.m_AccessionOrder);
 			this.m_PanelSetOrderCytology.AssignedToId = this.m_UserPerformingFinal.UserId;
 			this.m_PanelSetOrderCytology.Audited = true;            
 
@@ -400,6 +399,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
             {
 				this.m_PanelSetOrderCytology.HasProfessionalComponent = false;
 			}
+			this.m_PanelSetOrderCytology.Finish(this.m_AccessionOrder);
 		}
 
         public void Execute(YellowstonePathology.Business.User.SystemUser userPerformingFinal, YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology panelOrderToFinal, YellowstonePathology.Business.Rules.ExecutionStatus executionStatus)
