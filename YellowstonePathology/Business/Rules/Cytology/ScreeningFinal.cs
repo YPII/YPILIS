@@ -388,22 +388,18 @@ namespace YellowstonePathology.Business.Rules.Cytology
         
         private void FinalPanelSetOrder()
         {
-			this.m_PanelSetOrderCytology.Finish(this.m_AccessionOrder);
 			this.m_PanelSetOrderCytology.AssignedToId = this.m_UserPerformingFinal.UserId;
 			this.m_PanelSetOrderCytology.Audited = true;            
 
             if (this.m_PanelOrderToFinal.ScreeningType.ToUpper() == "PATHOLOGIST REVIEW")
             {
 				this.m_PanelSetOrderCytology.HasProfessionalComponent = true;
-				this.m_PanelSetOrderCytology.ProfessionalComponentFacilityId = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId;
-                this.m_PanelSetOrderCytology.ProfessionalComponentBillingFacilityId = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS").FacilityId;
 			}
             else
             {
 				this.m_PanelSetOrderCytology.HasProfessionalComponent = false;
-				this.m_PanelSetOrderCytology.ProfessionalComponentFacilityId = null;
-				this.m_PanelSetOrderCytology.ProfessionalComponentBillingFacilityId = null;
-			}            
+			}
+			this.m_PanelSetOrderCytology.Finish(this.m_AccessionOrder);
 		}
 
         public void Execute(YellowstonePathology.Business.User.SystemUser userPerformingFinal, YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology panelOrderToFinal, YellowstonePathology.Business.Rules.ExecutionStatus executionStatus)
