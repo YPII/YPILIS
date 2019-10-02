@@ -1607,17 +1607,10 @@ namespace YellowstonePathology.Business.Test
                 if(this.m_ClientId == 1260 || this.m_ClientId == 1511) //If Advanced Dermatology or Big Sky Diagnosistics
                 {
                     panelSetOrder.AssignedToId = 5132; //Assign to Dr. Shannon
-                    YellowstonePathology.Business.Facility.Model.Facility buttePathology = Facility.Model.FacilityCollection.Instance.GetByFacilityId("BTTPTHLGY");
-                    panelSetOrder.ProfessionalComponentFacilityId = buttePathology.FacilityId;
-                    panelSetOrder.ProfessionalComponentBillingFacilityId = buttePathology.FacilityId;
                 }
                 else if(this.m_ClientId == 579)
                 {
                     panelSetOrder.AssignedToId = 5149;  //tallman cases to Messner
-                    YellowstonePathology.Business.Facility.Model.Facility yp = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
-                    YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
-                    panelSetOrder.ProfessionalComponentFacilityId = yp.FacilityId;
-                    panelSetOrder.ProfessionalComponentBillingFacilityId = ypi.FacilityId;
                 }                              
             }
             else if (this.m_CaseOwnerId != 0)

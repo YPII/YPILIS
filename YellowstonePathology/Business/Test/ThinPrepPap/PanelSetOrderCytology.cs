@@ -41,7 +41,6 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             : base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
         {
             this.HasProfessionalComponent = false;
-            this.ProfessionalComponentFacilityId = null;
             this.ScreeningType = "Final Result";
 
             this.m_ReportReferences = YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapResult.References;
@@ -617,6 +616,30 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             if(this.m_ExpectedFinalTime <= originalExpectedFinalTime)
             {
                 this.m_ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetExpectedFinalTime(this.m_ExpectedFinalTime.Value, new TimeSpan(24, 0, 0));
+            }
+        }
+
+        public override void SetFacilityIds(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        {
+            PanelSet.Model.PanelSet panelSet = PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(this.m_PanelSetId);
+            if (panelSet.HasTechnicalComponent == true)
+            {
+                this.m_HasTechnicalComponent = true;
+                this.m_TechnicalComponentFacilityId = panelSet.TechnicalComponentFacility.FacilityId;
+                this.m_TechnicalComponentBillingFacilityId = panelSet.TechnicalComponentBillingFacility.FacilityId;
+            }
+
+            if (this.m_PanelOrderCollection.HasPathologistReview() == true)
+            {
+                this.HasProfessionalComponent = true;
+                this.ProfessionalComponentFacilityId = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId;
+                this.ProfessionalComponentBillingFacilityId = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS").FacilityId;
+            }
+            else
+            {
+                this.HasProfessionalComponent = false;
+                this.ProfessionalComponentFacilityId = null;
+                this.ProfessionalComponentBillingFacilityId = null;
             }
         }
     }

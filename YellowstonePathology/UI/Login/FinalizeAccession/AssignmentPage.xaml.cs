@@ -124,33 +124,6 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void ComboBoxUser_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.m_IsLoaded == true)
-            {
-                ComboBox comboBox = (ComboBox)sender;
-                YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (YellowstonePathology.Business.Test.PanelSetOrder)comboBox.Tag;
-                YellowstonePathology.Business.User.SystemUser systemUser = (YellowstonePathology.Business.User.SystemUser)comboBox.SelectedItem;
-                YellowstonePathology.Business.Facility.Model.Facility ypiBLGS = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
-                YellowstonePathology.Business.Facility.Model.Facility buttePathology = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("BTTPTHLGY");
-
-                YellowstonePathology.Business.Facility.Model.Facility ypBLGS = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
-
-                if (systemUser.UserId == 5132 || systemUser.UserId == 5133) //Dr Shannon and Dr Smirnoff
-                {
-                    panelSetOrder.TechnicalComponentFacilityId = ypiBLGS.FacilityId;
-                    panelSetOrder.TechnicalComponentBillingFacilityId = ypiBLGS.FacilityId;
-
-                    if(panelSetOrder.HasProfessionalComponent == true)
-                    {
-                        panelSetOrder.ProfessionalComponentFacilityId = buttePathology.FacilityId;
-                        panelSetOrder.ProfessionalComponentBillingFacilityId = buttePathology.FacilityId;
-                    }
-                    else
-                    {
-                        panelSetOrder.ProfessionalComponentFacilityId = null;
-                        panelSetOrder.ProfessionalComponentBillingFacilityId = null;
-                    }                    
-                }                
-            }
         }
 
         private void ButtonSetInvalidFinal_Click(object sender, RoutedEventArgs e)
