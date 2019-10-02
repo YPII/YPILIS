@@ -56,7 +56,8 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 		private bool m_Validated;
 		private Nullable<DateTime> m_CollectionDate;
 		private string m_ExternalOrderId;
-		private string m_IncomingHL7;
+        private string m_SecondaryExternalOrderId;
+        private string m_IncomingHL7;
 		private string m_MasterAccessionNo;
 		private string m_OrderedByFirstName;
 		private string m_OrderedByLastName;
@@ -540,6 +541,22 @@ namespace YellowstonePathology.Business.ClientOrder.Model
                 {
                     this.m_ExternalOrderId = value;
                     this.NotifyPropertyChanged("ExternalOrderId");
+                }
+            }
+        }
+
+        [DataMember]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string SecondaryExternalOrderId
+        {
+            get { return this.m_SecondaryExternalOrderId; }
+            set
+            {
+                if (this.m_SecondaryExternalOrderId != value)
+                {
+                    this.m_SecondaryExternalOrderId = value;
+                    this.NotifyPropertyChanged("SecondaryExternalOrderId");
                 }
             }
         }
