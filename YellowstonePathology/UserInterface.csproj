@@ -1101,6 +1101,7 @@
     <Compile Include="Business\Surgical\AssignmentScan.cs" />
     <Compile Include="Business\Surgical\AssignmentScanCollection.cs" />
     <Compile Include="Business\Task.Model\TaskBlockMaterialAlert.cs" />
+    <Compile Include="Business\Task.Model\TaskSendBlockToFrontierCancer.cs" />
     <Compile Include="Business\Task.Model\TaskOrderView.cs" />
     <Compile Include="Business\Task.Model\TaskOrderViewList.cs" />
     <Compile Include="Business\Test.Model\TestCollectionInstance.cs" />
@@ -1168,6 +1169,7 @@
     <Compile Include="Business\Test\LynchSyndrome\LSEGeneralSendOut.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEGYNMeth.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEGYNSendOut.cs" />
+    <Compile Include="Business\Test\MaterialRequestForResearch\MaterialRequestForResearchTest.cs" />
     <Compile Include="Business\Test\MissingInformation\MissingInformationWordDocument.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEIHCResult.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEIHCResultIntactExpression.cs" />
