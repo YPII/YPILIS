@@ -1124,6 +1124,7 @@
     <Compile Include="Business\Test\EGFRAmplification\EGFRAmplificationTest.cs" />
     <Compile Include="Business\Test\EGFRMutationAnalysisPreliminary\EGFRMutationAnalysisPreliminaryTest.cs" />
     <Compile Include="Business\Test\EGFRToALKReflexAnalysis\EGFRToALKReflexAnalysisBRAFResult.cs" />
+    <Compile Include="Business\Test\ErPrSemiQuantitative\ErPrSemiQuantitativeWPHOBXView.cs" />
     <Compile Include="Business\Test\ETV6F\ETV6FTest.cs" />
     <Compile Include="Business\Test\ExtractAndHoldForMolecular\ExtractAndHoldForMolecularTestRetired.cs" />
     <Compile Include="Business\Test\ExtractAndHoldForPreauthorization\ExtractAndHoldForPreauthorizationWordDocument.cs" />
