@@ -59,7 +59,7 @@ namespace YellowstonePathology.Business.HL7View.WPH
 					//view = new YellowstonePathology.Business.Test.Prothrombin.ProthrombinWPHOBXView(accessionOrder, reportNo, obxCount);
                     break;
 				case 50:
-					//view = new YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeWPHOBXView(accessionOrder, reportNo, obxCount);
+					view = new YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeWPHOBXView(accessionOrder, reportNo, obxCount);
 					break;
                 case 60:
 					//view = new YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisWPHOBXView(accessionOrder, reportNo, obxCount);
