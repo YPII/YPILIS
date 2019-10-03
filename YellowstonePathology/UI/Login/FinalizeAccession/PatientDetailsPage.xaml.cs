@@ -23,11 +23,14 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 		public event ReturnEventHandler Return;
 
 		private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
-		private string m_PageHeaderText;
+        //private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrderClone;
+        private string m_PageHeaderText;
 
 		public PatientDetailsPage(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
 		{
 			this.m_AccessionOrder = accessionOrder;
+            //YellowstonePathology.Business.Persistence.ObjectCloner objectCloner = new Business.Persistence.ObjectCloner();
+            //this.m_AccessionOrderClone = (YellowstonePathology.Business.Test.AccessionOrder)objectCloner.Clone(this.m_AccessionOrder);
 
             this.m_PageHeaderText = accessionOrder.MasterAccessionNo + ": " + 
                 accessionOrder.PFirstName + " " + accessionOrder.PLastName;
