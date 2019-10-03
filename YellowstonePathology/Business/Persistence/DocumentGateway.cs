@@ -371,5 +371,21 @@ namespace YellowstonePathology.Business.Persistence
                 return (YellowstonePathology.Business.Domain.OrderCommentLog)document.Value;
             }
         }
+
+        public YellowstonePathology.Business.Client.Model.PhysicianClientDistribution PullPhysicianClientDistribution(int physicianClientDistributionId, object writer)
+        {
+            lock (locker)
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = "SELECT * from tblPhysicianClientDistribution where PhysicianClientDistributionID = @PhysicianClientDistributionId;";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@PhysicianClientDistributionId", physicianClientDistributionId);
+                GenericDocumentBuilder builder = new GenericDocumentBuilder(cmd, typeof(YellowstonePathology.Business.Client.Model.PhysicianClientDistribution));
+
+                DocumentId documentId = new DocumentId(typeof(YellowstonePathology.Business.Client.Model.PhysicianClientDistribution), writer, physicianClientDistributionId);
+                Document document = this.m_Stack.Pull(documentId, builder);
+                return (YellowstonePathology.Business.Client.Model.PhysicianClientDistribution)document.Value;
+            }
+        }
     }
 }

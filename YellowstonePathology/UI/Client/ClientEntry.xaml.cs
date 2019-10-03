@@ -22,7 +22,8 @@ namespace YellowstonePathology.UI.Client
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		private Business.Client.Model.Client m_Client;
-		private Business.Billing.Model.InsuranceTypeCollection m_InsuranceTypeCollection;
+        private Business.Client.Model.Client m_ClientClone;
+        private Business.Billing.Model.InsuranceTypeCollection m_InsuranceTypeCollection;
 		private List<string> m_FacilityTypes;
 		private Business.ReportDistribution.Model.DistributionTypeList m_DistributionTypeList;
         private Business.View.ClientPhysicianView m_ClientPhysicianView;
@@ -37,7 +38,10 @@ namespace YellowstonePathology.UI.Client
 
         public ClientEntry(Business.Client.Model.Client client)
         {
-            this.m_Client = client;                        
+            this.m_Client = client;
+            YellowstonePathology.Business.Persistence.ObjectCloner objectCloner = new Business.Persistence.ObjectCloner();
+            this.m_ClientClone = (Business.Client.Model.Client)objectCloner.Clone(this.m_Client);
+
             this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 
             this.m_PathGroupFacilities = Business.Facility.Model.FacilityCollection.GetPathGroupFacilities();
@@ -70,7 +74,17 @@ namespace YellowstonePathology.UI.Client
 
         private void ClientEntry_Closing(object sender, CancelEventArgs e)
         {
-            if (this.CanSave() == true) YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+            if (this.CanSave() == true)
+            {
+                YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+                if (string.IsNullOrEmpty(this.m_ClientClone.DistributionType) == false)
+                {
+                    if (this.m_ClientClone.DistributionType != this.m_Client.DistributionType)
+                    {
+                        this.m_Client.ResetDistributions();
+                    }
+                }
+            }
             else e.Cancel = true;
         }
 
