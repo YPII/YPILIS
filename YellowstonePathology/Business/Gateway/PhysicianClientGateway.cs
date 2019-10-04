@@ -1030,6 +1030,38 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
+        public static YellowstonePathology.Business.Client.Model.PhysicianClientDistributionCollection GetDistributionPhysicianClientCollection(int distributionClientId, int physicianClientClientId)
+        {
+            YellowstonePathology.Business.Client.Model.PhysicianClientDistributionCollection result = new Client.Model.PhysicianClientDistributionCollection();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "Select pcd.* from tblPhysicianClient pc " +
+                "join tblPhysicianClientDistribution pcd on pcd.DistributionID = pc.PhysicianClientId " +
+                "join tblPhysicianClient pc2 on pc2.PhysicianClientId = pcd.PhysicianClientID " +
+                "join tblClient c on pc.ClientId = c.ClientId " +
+                "join tblClient c2 on pc2.ClientId = c2.ClientId " +
+                "where pc.ClientId = @DistributionClientId and pc2.ClientId = @PCClientId order by c2.ClientId;";
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@DistributionClientId", distributionClientId);
+            cmd.Parameters.AddWithValue("@PCClientId", physicianClientClientId);
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = new Client.Model.PhysicianClientDistribution();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(physicianClientDistribution, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(physicianClientDistribution);
+                    }
+                }
+            }
+            return result;
+        }
+
         public static YellowstonePathology.Business.Client.Model.PhysicianClientDistributionCollection GetPhysicianClientDistributionByPhysicianClientId(string physicianClientId)
         {
             YellowstonePathology.Business.Client.Model.PhysicianClientDistributionCollection result = new Client.Model.PhysicianClientDistributionCollection();

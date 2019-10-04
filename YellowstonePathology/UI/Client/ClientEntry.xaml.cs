@@ -76,16 +76,42 @@ namespace YellowstonePathology.UI.Client
         {
             if (this.CanSave() == true)
             {
-                YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
-                if (string.IsNullOrEmpty(this.m_ClientClone.DistributionType) == false)
+                if(this.HasDistributionTypeChanged() == true)
                 {
-                    if (this.m_ClientClone.DistributionType != this.m_Client.DistributionType)
+                    MessageBoxResult result =  MessageBox.Show("The distribution type has changed." + Environment.NewLine +
+                        "The distributions for the client membership will be updated to reflect this changed." + Environment.NewLine +
+                        Environment.NewLine + "Press OK to continue or Cancel to return to the form.", "Distribution Change",
+                        MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
+                    if (result == MessageBoxResult.OK)
                     {
+                        YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
                         this.m_Client.ResetDistributions();
                     }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else
+                {
+                    YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
                 }
             }
             else e.Cancel = true;
+        }
+
+        private bool HasDistributionTypeChanged()
+        {
+            bool result = false;
+            if (string.IsNullOrEmpty(this.m_ClientClone.DistributionType) == false)
+            {
+                if (this.m_ClientClone.DistributionType != this.m_Client.DistributionType)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
         }
 
         public void NotifyPropertyChanged(String info)
