@@ -530,15 +530,8 @@ namespace YellowstonePathology.Business.Client.Model
             }
         }
 
-        public string ResetDistributions()
+        public void ResetDistributions()
         {
-            int scnt = 0;
-            int acnt = 0;
-            int dcnt = 0;
-            int tcnt = 0;
-            StringBuilder result = new StringBuilder();
-            result.AppendLine(" new dist " + this.m_DistributionType);
-
             List<int> clientIds = new List<int>();
 
             YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection incompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
@@ -546,7 +539,6 @@ namespace YellowstonePathology.Business.Client.Model
             foreach (Business.Domain.PhysicianClient physicianClient in physicianClientCollection)
             {
                 List<PhysicianClientDistributionView> physicianClientDistributionViewList = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionsV2(physicianClient.PhysicianClientId);
-                tcnt += physicianClientDistributionViewList.Count;
                 foreach (PhysicianClientDistributionView physicianClientDistributionView in physicianClientDistributionViewList)
                 {
                     YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullPhysicianClientDistribution(physicianClientDistributionView.PhysicianClientDistribution.PhysicianClientDistributionID, this);
@@ -561,40 +553,29 @@ namespace YellowstonePathology.Business.Client.Model
 
                     if(this.m_ClientId == distributionClient.ClientId)
                     {
-                        //physicianClientDistribution.DistributionType = this.m_DistributionType;
-                        result.AppendLine(" pcd was (S) " + physicianClientDistribution.DistributionType + " is " + this.m_DistributionType);
-                        scnt++;
+                        physicianClientDistribution.DistributionType = this.m_DistributionType;
                     }
                     else if (incompatibleDistributionTypeCollection.TypesAreIncompatible(this.m_DistributionType, distributionClient.DistributionType) == true)
                     {
-                        //physicianClientDistribution.DistributionType = distributionClient.AlternateDistributionType;
-                        result.AppendLine(" pcd was (A) " + physicianClientDistribution.DistributionType + " is " + distributionClient.AlternateDistributionType);
-                        acnt++;
+                        physicianClientDistribution.DistributionType = distributionClient.AlternateDistributionType;
                     }
                     else
                     {
-                        //physicianClientDistribution.DistributionType = distributionClient.DistributionType;
-                        result.AppendLine(" pcd was (D) " + physicianClientDistribution.DistributionType + " is " + distributionClient.DistributionType);
-                        dcnt++;
+                        physicianClientDistribution.DistributionType = distributionClient.DistributionType;
                     }
                     YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
                 }
             }
-            result.AppendLine("Members = " + physicianClientCollection.Count.ToString() + " Distributions Processed = " + (scnt + acnt + dcnt).ToString() + " == " + tcnt.ToString() + " Same client = " + scnt.ToString() + " Alternate distribution = " + acnt.ToString() + " Client Distribution = " + dcnt.ToString());
-            result.AppendLine();
+
             foreach (int clientId in clientIds)
             {
                 YellowstonePathology.Business.Client.Model.Client clientToCheck = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(clientId);
-                result.AppendLine(clientToCheck.ResetDistributions(this));
+                clientToCheck.ResetDistributions(this);
             }
-            return result.ToString();
         }
 
-        public string ResetDistributions(Client clientThatChangedDistributiontype)
+        public void ResetDistributions(Client clientThatChangedDistributiontype)
         {
-            StringBuilder result = new StringBuilder();
-            result.AppendLine(" Dist originates from " + this.m_ClientName + " Dist Type " + this.m_DistributionType);
-
             YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection incompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
             PhysicianClientDistributionCollection physicianClientDistributionCollection = Gateway.PhysicianClientGateway.GetDistributionPhysicianClientCollection(clientThatChangedDistributiontype.ClientId, this.ClientId);
             foreach(PhysicianClientDistribution physicianClientDistributionSource in physicianClientDistributionCollection)
@@ -602,17 +583,14 @@ namespace YellowstonePathology.Business.Client.Model
                 YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullPhysicianClientDistribution(physicianClientDistributionSource.PhysicianClientDistributionID, this);
                 if (incompatibleDistributionTypeCollection.TypesAreIncompatible(this.m_DistributionType, clientThatChangedDistributiontype.DistributionType) == true)
                 {
-                    //physicianClientDistribution.DistributionType = distributionClient.AlternateDistributionType;
-                    result.AppendLine("(A)  pcd was " + physicianClientDistribution.DistributionType + " is " + clientThatChangedDistributiontype.AlternateDistributionType);
+                    physicianClientDistribution.DistributionType = clientThatChangedDistributiontype.AlternateDistributionType;
                 }
                 else
                 {
-                    //physicianClientDistribution.DistributionType = distributionClient.DistributionType;
-                    result.AppendLine("(D)  pcd was " + physicianClientDistribution.DistributionType + " is " + clientThatChangedDistributiontype.DistributionType);
+                    physicianClientDistribution.DistributionType = clientThatChangedDistributiontype.DistributionType;
                 }
                 YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
             }
-            return result.ToString();
         }
 
         public void NotifyPropertyChanged(String info)

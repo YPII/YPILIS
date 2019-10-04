@@ -1762,17 +1762,6 @@ namespace YellowstonePathology.UI
                 panelSet.Save();
             }
             MessageBox.Show("Done");*/
-            StringBuilder msg = new StringBuilder();
-            YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(558);
-            msg.Append(client.ClientName + " old dist " + client.DistributionType + " alternate dist " + client.AlternateDistributionType);
-            //client.DistributionType = "EPIC";
-            msg.AppendLine(client.ResetDistributions());
-
-            using (StreamWriter sw = new StreamWriter(@"C:\wcTemp\DistDif.txt", false))
-            {
-                sw.Write(msg.ToString());
-            }
-            MessageBox.Show("Done");
         }
     }
 }
