@@ -9,6 +9,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 	public class EPICBeakerObrView
 	{        
         private string m_ExternalOrderId;
+        private string m_SecondaryExternalOrderId;
         private string m_DateFormat = "yyyyMMddHHmm";
 
         private string m_MasterAccessionNo;
@@ -24,10 +25,11 @@ namespace YellowstonePathology.Business.HL7View.EPIC
         YellowstonePathology.Business.Domain.Physician m_OrderingPhysician;
         YellowstonePathology.Business.ClientOrder.Model.UniversalService m_UniversalService;
 
-        public EPICBeakerObrView(string externalOrderId, string masterAccessionNo, string reportNo, Nullable<DateTime> collectionDate, Nullable<DateTime> collectionTime, Nullable<DateTime> accessionTime, Nullable<DateTime> finalTime,
+        public EPICBeakerObrView(string externalOrderId, string secondaryExternalOrderId, string masterAccessionNo, string reportNo, Nullable<DateTime> collectionDate, Nullable<DateTime> collectionTime, Nullable<DateTime> accessionTime, Nullable<DateTime> finalTime,
             YellowstonePathology.Business.Domain.Physician orderingPhysician, string observationResultStatus, YellowstonePathology.Business.ClientOrder.Model.UniversalService universalService, bool sendUnsolicited, string systemInitiatingOrder)
         {         
             this.m_ExternalOrderId = externalOrderId;
+            this.m_SecondaryExternalOrderId = secondaryExternalOrderId;
             this.m_MasterAccessionNo = masterAccessionNo;
             this.m_ReportNo = reportNo;
             this.m_CollectionTime = collectionTime;
@@ -58,9 +60,17 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             }
 
             XElement obr03Element = new XElement("OBR.3");
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.3.1", this.m_ReportNo, obr03Element);
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.3.2", "YPILIS", obr03Element);
-            obrElement.Add(obr03Element);            
+            //YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.3.1", this.m_ReportNo, obr03Element);
+            //YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.3.2", "YPILIS", obr03Element);            
+
+            string obr3Value = "";
+            if(string.IsNullOrEmpty(this.m_SecondaryExternalOrderId) == false)
+            {
+                obr3Value = this.m_SecondaryExternalOrderId + "^Beaker~";
+            }
+            obr3Value += this.m_ReportNo + "^YPILIS";
+            obr03Element.Value = obr3Value;
+            obrElement.Add(obr03Element);
 
             XElement obr04Element = new XElement("OBR.4");                        
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.4.1", this.m_UniversalService.UniversalServiceId, obr04Element);

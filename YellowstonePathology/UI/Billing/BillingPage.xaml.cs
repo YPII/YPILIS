@@ -420,5 +420,29 @@ namespace YellowstonePathology.UI.Billing
                 panelSetOrderCPTCode.PostDate = null;
             }
         }
+
+        private void MenuItemSendCDM_Click(object sender, RoutedEventArgs e)
+        {
+            string destinationFolder = @"\\ypiiinterface1\ChannelData\Outgoing\1002\In\";            
+            if (this.ListViewPanelSetOrderCPTCodeBill.SelectedItems.Count != 0)
+            {
+                YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill = (YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill)this.ListViewPanelSetOrderCPTCodeBill.SelectedItem;
+                if(panelSetOrderCPTCodeBill.BillTo == "Client")
+                {
+                    Business.HL7View.EPIC.EPICFT1ResultView result = new Business.HL7View.EPIC.EPICFT1ResultView(this.m_AccessionOrder, panelSetOrderCPTCodeBill);
+                    result.Publish(destinationFolder);                    
+                }                
+            }            
+        }
+
+        private void MenuItemUpdateMRNACCT_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewPanelSetOrderCPTCode.SelectedItems.Count != 0)
+            {
+                YellowstonePathology.Business.Test.PanelSetOrderCPTCode panelSetOrderCPTCode = (YellowstonePathology.Business.Test.PanelSetOrderCPTCode)this.ListViewPanelSetOrderCPTCode.SelectedItem;
+                panelSetOrderCPTCode.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
+                panelSetOrderCPTCode.Account = this.m_AccessionOrder.SvhAccount;
+            }
+        }
     }
 }

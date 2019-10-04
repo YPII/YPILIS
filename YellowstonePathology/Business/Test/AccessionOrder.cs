@@ -75,8 +75,9 @@ namespace YellowstonePathology.Business.Test
 		private string m_SurgicalAccessionNo;
 		private string m_CytologyAccessionNo;
 		private bool m_OrderCancelled;
-		private string m_ExternalOrderId;		
-		private bool m_Verified;
+		private string m_ExternalOrderId;
+        private string m_SecondaryExternalOrderId;
+        private bool m_Verified;
 		private int m_VerifiedById;
 		private Nullable<DateTime> m_VerifiedDate;
 		private string m_IncomingHL7;
@@ -844,9 +845,24 @@ namespace YellowstonePathology.Business.Test
 					this.NotifyPropertyChanged("ExternalOrderId");
 				}
 			}
-		}		
+		}
+        
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string SecondaryExternalOrderId
+        {
+            get { return this.m_SecondaryExternalOrderId; }
+            set
+            {
+                if (this.m_SecondaryExternalOrderId != value)
+                {
+                    this.m_SecondaryExternalOrderId = value;
+                    this.NotifyPropertyChanged("SecondaryExternalOrderId");
+                }
+            }
+        }
 
-		[PersistentProperty()]
+        [PersistentProperty()]
 		[PersistentDataColumnProperty(false, "1", "0", "tinyint")]
 		public bool Verified
 		{
@@ -1352,6 +1368,7 @@ namespace YellowstonePathology.Business.Test
                 this.ExternalOrderId = clientOrder.ExternalOrderId;
             }
 
+            this.SecondaryExternalOrderId = clientOrder.SecondaryExternalOrderId;
             this.IncomingHL7 = clientOrder.IncomingHL7;
 			this.OrderedByFirstName = clientOrder.OrderedByFirstName;
 			this.OrderedByLastName = clientOrder.OrderedByLastName;

@@ -50,7 +50,7 @@ namespace YellowstonePathology.Business.Gateway
                 "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
                 "WHERE pso.Final = 1 and pso.IsPosted = 0 and pso.OrderDate >= '2014-1-1' and pso.IsBillable = 1 " +
-                "Order By pso.FinalTime, pso.PanelSetId, a.AccessionTime;";
+                "Order By pso.FinalDate, pso.PanelSetId, a.AccessionTime;";
             Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
             return reportSearchList;
         }

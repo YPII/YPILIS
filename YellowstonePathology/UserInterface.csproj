@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>173</ApplicationRevision>
+    <ApplicationRevision>182</ApplicationRevision>
     <ApplicationVersion>10.1.15.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -3091,6 +3091,9 @@
       <DependentUpon>AutoCompleteTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Business\Billing.Model\AccessionListItem.cs" />
+    <Compile Include="UI\AxisCamera.xaml.cs">
+      <DependentUpon>AxisCamera.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Billing\AddFISHCPTCodePage.xaml.cs">
       <DependentUpon>AddFISHCPTCodePage.xaml</DependentUpon>
     </Compile>
@@ -5076,6 +5079,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\AutoCompleteTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\AxisCamera.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

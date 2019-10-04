@@ -1234,7 +1234,7 @@ namespace YellowstonePathology.Business.Gateway
             "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
             "JOIN tblSpecimenOrder so on a.MasterAccessionNo = so.MasterAccessionNo " +
             "LEFT OUTER JOIN tblAliquotOrder ao on so.SpecimenOrderId = ao.SpecimenOrderId " +
-            "WHERE AccessionDate = @ReportDate and pso.PanelSetId = 31 and a.ClientId = 587 " +
+            "WHERE AccessionDate = @ReportDate and pso.PanelSetId = 31 and a.ClientId = 587 and ao.Status <> 'Hold' " +
             "group by a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, " +
             "a.PBirthdate, a.PhysicianName, a.ClientName " +
             "Order By AccessionTime; " +
@@ -1248,8 +1248,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.Parameters.AddWithValue("@ReportDate", reportDate);
             return BuildMasterLogList(cmd);
         }
-
-        /*WHC needs to be fixed */
+        
         public static Surgical.SurgicalMasterLogList GetSurgicalMasterLogList(DateTime reportDate)
         {
             MySqlCommand cmd = new MySqlCommand();
@@ -1272,7 +1271,7 @@ namespace YellowstonePathology.Business.Gateway
             "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
             "JOIN tblSpecimenOrder so on a.MasterAccessionNo = so.MasterAccessionNo " +
             "LEFT OUTER JOIN tblAliquotOrder ao on so.SpecimenOrderId = ao.SpecimenOrderId " +
-            "WHERE AccessionDate = @ReportDate and pso.PanelSetId in (13, 50) " +
+            "WHERE AccessionDate = @ReportDate and pso.PanelSetId in (13, 50) and ao.Status <> 'Hold' " +
             "group by a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, " +
             "a.PBirthdate, a.PhysicianName, a.ClientName " +
             "Order By AccessionTime; " +
