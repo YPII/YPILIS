@@ -479,5 +479,11 @@ namespace YellowstonePathology.UI.Client
                 YellowstonePathology.Business.Persistence.DocumentGateway.Instance.InsertDocument(physicianClientDistribution, this);
             }
         }
+
+        private void ButtonShowDistributions_Click(object sender, RoutedEventArgs e)
+        {
+            ClientDistributionDialog dlg = new UI.Client.ClientDistributionDialog(this.m_Client);
+            dlg.ShowDialog();
+        }
     }
 }
