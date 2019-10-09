@@ -22,7 +22,8 @@ namespace YellowstonePathology.UI.Client
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		private Business.Client.Model.Client m_Client;
-		private Business.Billing.Model.InsuranceTypeCollection m_InsuranceTypeCollection;
+        private Business.Client.Model.Client m_ClientClone;
+        private Business.Billing.Model.InsuranceTypeCollection m_InsuranceTypeCollection;
 		private List<string> m_FacilityTypes;
 		private Business.ReportDistribution.Model.DistributionTypeList m_DistributionTypeList;
         private Business.View.ClientPhysicianView m_ClientPhysicianView;
@@ -37,7 +38,10 @@ namespace YellowstonePathology.UI.Client
 
         public ClientEntry(Business.Client.Model.Client client)
         {
-            this.m_Client = client;                        
+            this.m_Client = client;
+            YellowstonePathology.Business.Persistence.ObjectCloner objectCloner = new Business.Persistence.ObjectCloner();
+            this.m_ClientClone = (Business.Client.Model.Client)objectCloner.Clone(this.m_Client);
+
             this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 
             this.m_PathGroupFacilities = Business.Facility.Model.FacilityCollection.GetPathGroupFacilities();
@@ -70,8 +74,44 @@ namespace YellowstonePathology.UI.Client
 
         private void ClientEntry_Closing(object sender, CancelEventArgs e)
         {
-            if (this.CanSave() == true) YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+            if (this.CanSave() == true)
+            {
+                if(this.HasDistributionTypeChanged() == true)
+                {
+                    MessageBoxResult result =  MessageBox.Show("The distribution type has changed." + Environment.NewLine +
+                        "The distributions for the client membership will be updated to reflect this changed." + Environment.NewLine +
+                        Environment.NewLine + "Press OK to continue or Cancel to return to the form.", "Distribution Change",
+                        MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+                        this.m_Client.ResetDistributions();
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else
+                {
+                    YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+                }
+            }
             else e.Cancel = true;
+        }
+
+        private bool HasDistributionTypeChanged()
+        {
+            bool result = false;
+            if (string.IsNullOrEmpty(this.m_ClientClone.DistributionType) == false)
+            {
+                if (this.m_ClientClone.DistributionType != this.m_Client.DistributionType)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
         }
 
         public void NotifyPropertyChanged(String info)

@@ -14,6 +14,10 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             this.Add(new Model.IncompatibleDistributionType(DistributionType.EPIC, DistributionType.ECW));
             this.Add(new Model.IncompatibleDistributionType(DistributionType.EPIC, DistributionType.MEDITECH));
 
+            this.Add(new Model.IncompatibleDistributionType(DistributionType.EPICANDFAX, DistributionType.ATHENA));
+            this.Add(new Model.IncompatibleDistributionType(DistributionType.EPICANDFAX, DistributionType.ECW));
+            this.Add(new Model.IncompatibleDistributionType(DistributionType.EPICANDFAX, DistributionType.MEDITECH));
+
             this.Add(new Model.IncompatibleDistributionType(DistributionType.ATHENA, DistributionType.EPIC));
             this.Add(new Model.IncompatibleDistributionType(DistributionType.ATHENA, DistributionType.EPICANDFAX));
             this.Add(new Model.IncompatibleDistributionType(DistributionType.ATHENA, DistributionType.ECW));
@@ -50,7 +54,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             this.Add(new Model.IncompatibleDistributionType(DistributionType.WEBSERVICE, DistributionType.EPIC));
             this.Add(new Model.IncompatibleDistributionType(DistributionType.WEBSERVICE, DistributionType.EPICANDFAX));
             this.Add(new Model.IncompatibleDistributionType(DistributionType.WEBSERVICE, DistributionType.ATHENA));
-            this.Add(new Model.IncompatibleDistributionType(DistributionType.WEBSERVICE, DistributionType.EPIC));
+            this.Add(new Model.IncompatibleDistributionType(DistributionType.WEBSERVICE, DistributionType.ECW));
             this.Add(new Model.IncompatibleDistributionType(DistributionType.WEBSERVICE, DistributionType.MEDITECH));
 
             this.Add(new Model.IncompatibleDistributionType(DistributionType.WEBSERVICEANDFAX, DistributionType.EPIC));
@@ -64,17 +68,6 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         {
             IncompatibleDistributionType incompatibleDistributionType = this.FirstOrDefault(i => i.PrimaryDistributionType == primaryDistributionType && i.SecondaryDistributionType == checkingingDistributionType);
             return incompatibleDistributionType != null ? true : false;
-            /*bool result = false;
-            foreach(IncompatibleDistributionType incompatibleDistributionType in this)
-            {
-                if(incompatibleDistributionType.PrimaryDistributionType == primaryDistributionType && 
-                    incompatibleDistributionType.SecondaryDistributionType == checkingingDistributionType)
-                {
-                    result = true;
-                    break;
-                }
-            }
-            return result;*/
         }
     }
 }
