@@ -86,6 +86,7 @@ namespace YellowstonePathology.UI.Client
                     {
                         YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
                         this.m_Client.ResetDistributions();
+                        Business.Logging.EmailExceptionHandler.HandleException(this.m_Client.ClientName + " distribution type has changed from " + this.m_ClientClone.DistributionType + " to " + this.m_Client.DistributionType);
                     }
                     else
                     {
