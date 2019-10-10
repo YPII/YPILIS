@@ -1,0 +1,56 @@
+﻿<Window x:Class="YellowstonePathology.UI.Client.ClientDistributionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI.Client"
+        mc:Ignorable="d"
+        Title="ClientDistributionDialog" Height="500" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <TextBlock Margin="2,2,2,2">Client Name:</TextBlock>
+            <TextBox Margin="2,2,2,2" Text="{Binding Path=Client.ClientName}" />
+
+            <TextBlock Margin="2,2,2,2">Distribution Type:</TextBlock>
+            <TextBox Margin="2,2,2,2" Text="{Binding Path=Client.DistributionType}" />
+
+            <TextBlock Margin="2,2,2,2">Alt. DistributionType:</TextBlock>
+            <TextBox Margin="2,2,2,2" Text="{Binding Path=Client.AlternateDistributionType}" />
+        </StackPanel>
+
+        <ListView Grid.Column="0" Grid.Row="1" Margin="2,2,5,2" Name="ListViewClientDistributions"
+				  ItemsSource="{Binding Path=FromPhysicianClientDistributionViews}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Width="210" Header="To Client" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianName}" Width="150" Header="Physician " />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionType}" Width="100" Header="Distribution Type" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,2,2,2" Name="ListViewDistributionClients"
+				  ItemsSource="{Binding Path=ToPhysicianClientDistributionViews}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Width="210" Header="From Client" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianName}" Width="150" Header="Physician" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionType}" Width="100" Header="Distribution Type" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Name="ButtonOK" Grid.Column="1" Grid.Row="2" Height="30" Width="100" Margin="2,2,2,2" HorizontalAlignment="Right" Click="ButtonOK_Click">OK</Button>
+    </Grid>
+</Window>

@@ -1030,19 +1030,20 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        public static YellowstonePathology.Business.Client.Model.PhysicianClientDistributionCollection GetDistributionPhysicianClientCollection(int distributionClientId, int physicianClientClientId)
+        public static List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> GetDistributionPhysicianClientDistributions(int physicianClientDistributionID, string physicianClientId)
         {
-            YellowstonePathology.Business.Client.Model.PhysicianClientDistributionCollection result = new Client.Model.PhysicianClientDistributionCollection();
+            List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> result = new List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView>();
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "Select pcd.* from tblPhysicianClient pc " +
-                "join tblPhysicianClientDistribution pcd on pcd.DistributionID = pc.PhysicianClientId " +
-                "join tblPhysicianClient pc2 on pc2.PhysicianClientId = pcd.PhysicianClientID " +
+            cmd.CommandText = "Select pcd.*, c.ClientId, c.ClientName, ph.PhysicianId, ph.ObjectId as ProviderId, ph.DisplayName PhysicianName " +
+                "from tblPhysicianClient pc " +
+                "join tblPhysicianClientDistribution pcd on pc.PhysicianClientId = pcd.PhysicianClientId " +
+                "join tblPhysicianClient pc2 on pcd.DistributionId = pc2.PhysicianClientId " +
                 "join tblClient c on pc.ClientId = c.ClientId " +
-                "join tblClient c2 on pc2.ClientId = c2.ClientId " +
-                "where pc.ClientId = @DistributionClientId and pc2.ClientId = @PCClientId order by c2.ClientId;";
+                "join tblPhysician ph on pc.ProviderId = ph.ObjectId " +
+                "where pcd.PhysicianClientDistributionID <> @PhysicianClientDistributionID and pc2.PhysicianClientId = @PhysicianClientId;";
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@DistributionClientId", distributionClientId);
-            cmd.Parameters.AddWithValue("@PCClientId", physicianClientClientId);
+            cmd.Parameters.AddWithValue("@PhysicianClientDistributionID", physicianClientDistributionID);
+            cmd.Parameters.AddWithValue("@PhysicianClientId", physicianClientId);
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
@@ -1052,10 +1053,13 @@ namespace YellowstonePathology.Business.Gateway
                 {
                     while (dr.Read())
                     {
-                        YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = new Client.Model.PhysicianClientDistribution();
+                        YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = new YellowstonePathology.Business.Client.Model.PhysicianClientDistribution();
                         YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(physicianClientDistribution, dr);
                         sqlDataReaderPropertyWriter.WriteProperties();
-                        result.Add(physicianClientDistribution);
+                        YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView physicianClientDistributionView = new YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView(physicianClientDistribution);
+                        sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(physicianClientDistributionView, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(physicianClientDistributionView);
                     }
                 }
             }

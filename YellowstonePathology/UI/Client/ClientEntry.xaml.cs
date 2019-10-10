@@ -86,6 +86,7 @@ namespace YellowstonePathology.UI.Client
                     {
                         YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
                         this.m_Client.ResetDistributions();
+                        Business.Logging.EmailExceptionHandler.HandleException(this.m_Client.ClientName + " distribution type has changed from " + this.m_ClientClone.DistributionType + " to " + this.m_Client.DistributionType);
                     }
                     else
                     {
@@ -477,6 +478,12 @@ namespace YellowstonePathology.UI.Client
                 YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = new Business.Client.Model.PhysicianClientDistribution(objectId, newPhysicianClient.PhysicianClientId, newPhysicianClient.PhysicianClientId, this.m_Client.DistributionType);
                 YellowstonePathology.Business.Persistence.DocumentGateway.Instance.InsertDocument(physicianClientDistribution, this);
             }
+        }
+
+        private void ButtonShowDistributions_Click(object sender, RoutedEventArgs e)
+        {
+            ClientDistributionDialog dlg = new UI.Client.ClientDistributionDialog(this.m_Client);
+            dlg.ShowDialog();
         }
     }
 }
