@@ -130,8 +130,24 @@ namespace YellowstonePathology.Business.Test
 			this.m_PanelSetId = panelSet.PanelSetId;
             this.m_CaseType = panelSet.CaseType;
 			this.m_PanelSetName = panelSet.PanelSetName;
-			
-			this.m_ResultDocumentSource = panelSet.ResultDocumentSource.ToString();
+
+            this.m_HasTechnicalComponent = false;
+            if (panelSet.HasTechnicalComponent == true)
+            {
+                this.m_HasTechnicalComponent = true;
+                this.m_TechnicalComponentFacilityId = panelSet.TechnicalComponentFacility.FacilityId;
+                this.m_TechnicalComponentBillingFacilityId = panelSet.TechnicalComponentBillingFacility.FacilityId;
+            }
+
+            this.m_HasProfessionalComponent = false;
+            if (panelSet.HasProfessionalComponent == true)
+            {
+                this.m_HasProfessionalComponent = true;
+                this.m_ProfessionalComponentFacilityId = panelSet.ProfessionalComponentFacility.FacilityId;
+                this.m_ProfessionalComponentBillingFacilityId = panelSet.ProfessionalComponentBillingFacility.FacilityId;
+            }
+
+            this.m_ResultDocumentSource = panelSet.ResultDocumentSource.ToString();
 			this.m_IsBillable = panelSet.IsBillable;
             this.m_ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetEndDate(this.m_OrderTime.Value, panelSet.ExpectedDuration);
 
@@ -184,7 +200,23 @@ namespace YellowstonePathology.Business.Test
 
 			this.m_PanelSetId = panelSet.PanelSetId;
 			this.m_PanelSetName = panelSet.PanelSetName;
-            
+
+            this.m_HasTechnicalComponent = false;
+            if (panelSet.HasTechnicalComponent == true)
+            {
+                this.m_HasTechnicalComponent = true;
+                this.m_TechnicalComponentFacilityId = panelSet.TechnicalComponentFacility.FacilityId;
+                this.m_TechnicalComponentBillingFacilityId = panelSet.TechnicalComponentBillingFacility.FacilityId;
+            }
+
+            this.m_HasProfessionalComponent = false;
+            if (panelSet.HasProfessionalComponent == true)
+            {
+                this.m_HasProfessionalComponent = true;
+                this.m_ProfessionalComponentFacilityId = panelSet.ProfessionalComponentFacility.FacilityId;
+                this.m_ProfessionalComponentBillingFacilityId = panelSet.ProfessionalComponentBillingFacility.FacilityId;
+            }
+
             this.m_ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetExpectedFinalTime(this.m_OrderTime.Value, panelSet.ExpectedDuration);
 			this.m_IsBillable = panelSet.IsBillable;
 			this.m_ResultDocumentSource = panelSet.ResultDocumentSource.ToString();
