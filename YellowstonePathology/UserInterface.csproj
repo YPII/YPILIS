@@ -323,6 +323,8 @@
     <Compile Include="Business\Billing.Model\PropertyChanges.cs" />
     <Compile Include="Business\Billing.Model\SimulationSerializer.cs" />
     <Compile Include="Business\Billing.Model\SVHNoCDMMailMessage.cs" />
+    <Compile Include="Business\Client.Model\ClientDistribution.cs" />
+    <Compile Include="Business\Client.Model\ClientDistributionCollection.cs" />
     <Compile Include="Business\Client.Model\HPV1618CompoundStandingOrderRule1.cs" />
     <Compile Include="Business\Client.Model\HPV1618ReflexOrderPAPNormalHPVPositive.cs" />
     <Compile Include="Business\Client.Model\HPVCompoundStandingOrderRule9.cs" />

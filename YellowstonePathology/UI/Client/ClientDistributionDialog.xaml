@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI.Client"
         mc:Ignorable="d"
-        Title="ClientDistributionDialog" Height="500" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+        Title="ClientDistributionDialog" Height="550" Width="820" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -30,23 +29,13 @@
         </StackPanel>
 
         <ListView Grid.Column="0" Grid.Row="1" Margin="2,2,5,2" Name="ListViewClientDistributions"
-				  ItemsSource="{Binding Path=FromPhysicianClientDistributionViews}">
+				  ItemsSource="{Binding Path=ClientDistributionCollection}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Width="210" Header="To Client" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianName}" Width="150" Header="Physician " />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionType}" Width="100" Header="Distribution Type" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-
-        <ListView Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,2,2,2" Name="ListViewDistributionClients"
-				  ItemsSource="{Binding Path=ToPhysicianClientDistributionViews}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Width="210" Header="From Client" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianName}" Width="150" Header="Physician" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionType}" Width="100" Header="Distribution Type" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Client.ClientName}" Width="250" Header="Client" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionClientName}" Width="250" Header=" Disribution Client" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Physician.DisplayName}" Width="150" Header="Physician " />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianClientDistribution.DistributionType}" Width="100" Header="Distribution Type" />
                 </GridView>
             </ListView.View>
         </ListView>
