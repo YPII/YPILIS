@@ -283,13 +283,13 @@ namespace YellowstonePathology.Business.Helper
 
         public static string DateStringFromNullable(Nullable<DateTime> source)
         {
-            string returnValue = source.HasValue ? source.Value.ToShortDateString() : string.Empty;
+            string returnValue = source.HasValue ? source.Value.ToString("MM/dd/yyyy") : string.Empty;
             return returnValue;
-        }
+        }        
 
         public static string DateAndTimeStringFromNullable(Nullable<DateTime> source)
         {
-            string returnValue = source.HasValue ? source.Value.ToShortDateString() + " " + source.Value.ToLongTimeString() : string.Empty;
+            string returnValue = source.HasValue ? source.Value.ToString("MM/dd/yyyy HH:mm") : string.Empty;
             return returnValue;
         }
 

@@ -536,6 +536,7 @@ namespace YellowstonePathology.Business.Client.Model
 
             YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection incompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
             Domain.PhysicianClientCollection physicianClientCollection = Gateway.PhysicianClientGateway.GetPhysicianClientCollectionByClientId(this.m_ClientId);
+
             foreach (Business.Domain.PhysicianClient physicianClient in physicianClientCollection)
             {
                 List<PhysicianClientDistributionView> physicianClientDistributionViewList = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionsV2(physicianClient.PhysicianClientId);

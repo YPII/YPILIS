@@ -43,12 +43,14 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
             this.m_ProfessionalComponentFacility = neogenomicsIrvine;
             this.m_ProfessionalComponentBillingFacility = neogenomicsIrvine;
 
-            YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode1 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88264", null), 1);
-            YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode2 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88262", null), 1);
-            
+            YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode1 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88237", null), 1);
+            YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode2 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88264", null), 1);
+            YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode3 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88291", null), 1);
+
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode1);
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode2);
-            
+            this.m_PanelSetCptCodeCollection.Add(panelSetCptCode3);
+
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
 		}
 
