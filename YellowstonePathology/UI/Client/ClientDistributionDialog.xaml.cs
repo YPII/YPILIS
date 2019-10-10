@@ -20,15 +20,12 @@ namespace YellowstonePathology.UI.Client
     public partial class ClientDistributionDialog : Window
     {
         private YellowstonePathology.Business.Client.Model.Client m_Client;
-        List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> m_ToPhysicianClientDistributionViews;
-        List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> m_FromPhysicianClientDistributionViews;
+        private YellowstonePathology.Business.Client.Model.ClientDistributionCollection m_ClientDistributionCollection;
 
         public ClientDistributionDialog(YellowstonePathology.Business.Client.Model.Client client)
         {
             this.m_Client = client;
-            this.m_ToPhysicianClientDistributionViews = new List<Business.Client.Model.PhysicianClientDistributionView>();
-            this.m_FromPhysicianClientDistributionViews = new List<Business.Client.Model.PhysicianClientDistributionView>();
-            this.SetupDistributionViews();
+            this.FillClientDistributionCollection();
 
             InitializeComponent();
 
@@ -40,58 +37,14 @@ namespace YellowstonePathology.UI.Client
             get { return this.m_Client; }
         }
 
-        public List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> ToPhysicianClientDistributionViews
+        public YellowstonePathology.Business.Client.Model.ClientDistributionCollection ClientDistributionCollection
         {
-            get { return this.m_ToPhysicianClientDistributionViews; }
+            get { return this.m_ClientDistributionCollection; }
         }
 
-        public List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> FromPhysicianClientDistributionViews
+        private void FillClientDistributionCollection()
         {
-            get { return this.m_FromPhysicianClientDistributionViews; }
-        }
-
-        private void SetupDistributionViews()
-        {
-            YellowstonePathology.Business.Domain.PhysicianClientCollection physicianClientCollection = Business.Gateway.PhysicianClientGateway.GetPhysicianClientCollectionByClientId(this.m_Client.ClientId);
-            foreach (Business.Domain.PhysicianClient physicianClient in physicianClientCollection)
-            {
-                List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> physicianClientDistributionViewList = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionsV2(physicianClient.PhysicianClientId);
-                foreach (YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView physicianClientDistributionView in physicianClientDistributionViewList)
-                {
-                    this.m_FromPhysicianClientDistributionViews.Add(physicianClientDistributionView);
-                    List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> distributeToPhysicianClientDistributionViewList = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetDistributionPhysicianClientDistributions(physicianClientDistributionView.PhysicianClientDistribution.PhysicianClientDistributionID, physicianClient.PhysicianClientId);
-                    foreach(YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView distributeToPhysicianClientDistributionView in distributeToPhysicianClientDistributionViewList)
-                    {
-                        if (this.ShouldAddPhysicianClientDistributionForProcessing(m_FromPhysicianClientDistributionViews, distributeToPhysicianClientDistributionView) == true)
-                        {
-                            if (this.ShouldAddPhysicianClientDistributionForProcessing(m_ToPhysicianClientDistributionViews, distributeToPhysicianClientDistributionView) == true)
-                            {
-                                this.m_ToPhysicianClientDistributionViews.Add(distributeToPhysicianClientDistributionView);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private bool ShouldAddPhysicianClientDistributionForProcessing(List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> existingList, YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView viewToCheck)
-        {
-            bool result = false;
-            bool found = false;
-            foreach (YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView existingView in existingList)
-            {
-                if (viewToCheck.PhysicianClientDistribution.PhysicianClientDistributionID ==
-                existingView.PhysicianClientDistribution.PhysicianClientDistributionID)
-                {
-                    found = true;
-                    break;
-                }
-            }
-            if (found == false)
-            {
-                result = true;
-            }
-            return result;
+            this.m_ClientDistributionCollection  = Business.Gateway.PhysicianClientGateway.GetClientDistributionCollection(this.m_Client.ClientId);
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
