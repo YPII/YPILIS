@@ -559,6 +559,9 @@ namespace YellowstonePathology.Document.Result.Xps
             RowDefinition row6 = new RowDefinition();
             accessionedGrid.RowDefinitions.Add(row6);
 
+            RowDefinition row7 = new RowDefinition();
+            accessionedGrid.RowDefinitions.Add(row7);
+
             ColumnDefinition col1 = new ColumnDefinition();
             col1.Width = new GridLength(96 * 1.2);
             accessionedGrid.ColumnDefinitions.Add(col1);
@@ -580,6 +583,7 @@ namespace YellowstonePathology.Document.Result.Xps
 
             this.WriteAccessionedDescription(specimenOrderData, accessionedGrid);
             this.WriteAccessionedCollectionDate(specimenOrderData, accessionedGrid);
+            this.WriteDateReceived(specimenOrderData, accessionedGrid);
             this.WriteAccessionedFixationType(specimenOrderData, accessionedGrid);
 
             return accessionedGrid;
@@ -617,6 +621,25 @@ namespace YellowstonePathology.Document.Result.Xps
             accessionedGrid.Children.Add(text);
         }
 
+        private void WriteDateReceived(Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataSpecimenOrder specimenOrderData, Grid accessionedGrid)
+        {
+            TextBlock label = new TextBlock();
+            label.Text = "Received:";
+            label.Margin = new Thickness(2, 0, 2, 0);
+            label.HorizontalAlignment = HorizontalAlignment.Right;
+            Grid.SetColumn(label, 0);
+            Grid.SetRow(label, 3);
+            accessionedGrid.Children.Add(label);
+
+            TextBlock text = new TextBlock();
+            text.Text = specimenOrderData.DateReceived;
+            text.Margin = new Thickness(2, 0, 2, 0);
+            text.HorizontalAlignment = HorizontalAlignment.Left;
+            Grid.SetColumn(text, 1);
+            Grid.SetRow(text, 3);
+            accessionedGrid.Children.Add(text);
+        }
+
         private void WriteAccessionedFixationType(Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataSpecimenOrder specimenOrderData, Grid accessionedGrid)
         {
             TextBlock receivedLabel = new TextBlock();
@@ -624,7 +647,7 @@ namespace YellowstonePathology.Document.Result.Xps
             receivedLabel.Margin = new Thickness(2, 0, 2, 0);
             receivedLabel.HorizontalAlignment = HorizontalAlignment.Right;
             Grid.SetColumn(receivedLabel, 0);
-            Grid.SetRow(receivedLabel, 3);
+            Grid.SetRow(receivedLabel, 4);
             accessionedGrid.Children.Add(receivedLabel);
 
             TextBlock receivedText = new TextBlock();
@@ -632,7 +655,7 @@ namespace YellowstonePathology.Document.Result.Xps
             receivedText.Margin = new Thickness(2, 0, 2, 0);
             receivedText.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(receivedText, 1);
-            Grid.SetRow(receivedText, 3);
+            Grid.SetRow(receivedText, 4);
             accessionedGrid.Children.Add(receivedText);
 
             TextBlock label = new TextBlock();
@@ -640,7 +663,7 @@ namespace YellowstonePathology.Document.Result.Xps
             label.Margin = new Thickness(2, 0, 2, 0);
             label.HorizontalAlignment = HorizontalAlignment.Right;
             Grid.SetColumn(label, 0);
-            Grid.SetRow(label, 4);
+            Grid.SetRow(label, 5);
             accessionedGrid.Children.Add(label);
 
             TextBlock text = new TextBlock();
@@ -648,7 +671,7 @@ namespace YellowstonePathology.Document.Result.Xps
             text.Margin = new Thickness(2, 0, 2, 0);
             text.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(text, 1);
-            Grid.SetRow(text, 4);
+            Grid.SetRow(text, 5);
             accessionedGrid.Children.Add(text);
         }
 

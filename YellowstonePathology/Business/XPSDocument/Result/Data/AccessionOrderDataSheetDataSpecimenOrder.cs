@@ -10,6 +10,7 @@ namespace YellowstonePathology.Business.XPSDocument.Result.Data
     {
         private string m_Description;
         private string m_CollectionTime;
+        private string m_DateReceived;
         private string m_ReceivedIn;
         private string m_ProcessedIn;
         private string m_AccessionTime;
@@ -47,7 +48,8 @@ namespace YellowstonePathology.Business.XPSDocument.Result.Data
                 YellowstonePathology.Business.Helper.DateTimeJoiner dateTimeJoiner = new Business.Helper.DateTimeJoiner(specimenOrder.CollectionTime.Value, specimenOrder.CollectionTime);
                 this.m_CollectionTime = dateTimeJoiner.DisplayString;
             }
-
+            
+            this.m_DateReceived = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(specimenOrder.DateReceived);                        
             this.m_ReceivedIn = string.IsNullOrEmpty(specimenOrder.ClientFixation) == false ? specimenOrder.ClientFixation : string.Empty;
             this.m_ProcessedIn = string.IsNullOrEmpty(specimenOrder.LabFixation) == false ? specimenOrder.LabFixation : string.Empty;
             this.m_AccessionTime = specimenOrder.AccessionTime.HasValue ? specimenOrder.AccessionTime.Value.ToShortDateString() + " " + specimenOrder.AccessionTime.Value.ToShortTimeString() : string.Empty;
@@ -110,6 +112,11 @@ namespace YellowstonePathology.Business.XPSDocument.Result.Data
         public string CollectionTime
         {
             get { return this.m_CollectionTime; }
+        }
+
+        public string DateReceived
+        {
+            get { return this.m_DateReceived; }
         }
 
         public string ReceivedIn
