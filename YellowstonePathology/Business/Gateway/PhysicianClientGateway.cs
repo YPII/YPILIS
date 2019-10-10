@@ -1337,5 +1337,66 @@ namespace YellowstonePathology.Business.Gateway
             result = PhysicianClientGateway.GetPhysicianCollectionFromCommand(cmd);
             return result;
         }
+
+        public static Client.Model.ClientDistributionCollection GetClientDistributionCollection(int clientId)
+        {
+            Client.Model.ClientDistributionCollection result = new Client.Model.ClientDistributionCollection();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select ca.ClientId DistributionClientId, ca.ClientName DistributionClientName, pcd.*, c.*, p.* " +
+                "from tblPhysicianClientDistribution pcd " +
+                "join tblPhysicianClient pc on pcd.PhysicianClientID = pc.PhysicianClientId " +
+                "join tblPhysician p on pc.PhysicianId = p.PhysicianId " +
+                "join tblClient c on pc.ClientId = c.ClientId " +
+                "left outer join tblPhysicianClient pca on pcd.DistributionID = pca.PhysicianClientId " +
+                "left outer join tblClient ca on pca.ClientId = ca.ClientId " +
+                "where pc.ClientId = @ClientId " +
+                "union " +
+                "select c1.ClientId DistributionClientId, c1.ClientName DistributionClientName, pcd1.*, cb.*, p1.* " +
+                "from tblPhysicianClientDistribution pcd1 " +
+                "join tblPhysicianClient pc1 on pcd1.DistributionID = pc1.PhysicianClientId " +
+                "join tblPhysician p1 on pc1.PhysicianId = p1.PhysicianId " +
+                "join tblClient c1 on pc1.ClientId = c1.ClientId " +
+                "left outer join tblPhysicianClient pcb on pcd1.PhysicianClientID = pcb.PhysicianClientId " +
+                "left outer join tblClient cb on pcb.ClientId = cb.ClientId " +
+                "where pc1.ClientId = @ClientId " +
+                "order by 59, 11, 2;";
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@ClientId", clientId);
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+
+                        Client.Model.ClientDistribution clientDistribution = new Client.Model.ClientDistribution();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWritercd = new Persistence.SqlDataReaderPropertyWriter(clientDistribution, dr);
+                        sqlDataReaderPropertyWritercd.WriteProperties();
+
+                        Client.Model.PhysicianClientDistribution physicianClientDistribution = new Client.Model.PhysicianClientDistribution();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriterPCD = new Persistence.SqlDataReaderPropertyWriter(physicianClientDistribution, dr);
+                        sqlDataReaderPropertyWriterPCD.WriteProperties();
+                        clientDistribution.PhysicianClientDistribution = physicianClientDistribution;
+
+                        YellowstonePathology.Business.Client.Model.Client client = new Client.Model.Client();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriterc = new Persistence.SqlDataReaderPropertyWriter(client, dr);
+                        sqlDataReaderPropertyWriterc.WriteProperties();
+                        clientDistribution.Client = client;
+
+                        YellowstonePathology.Business.Domain.Physician physician = new Domain.Physician();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriterp = new Persistence.SqlDataReaderPropertyWriter(physician, dr);
+                        sqlDataReaderPropertyWriterp.WriteProperties();
+                        clientDistribution.Physician = physician;
+
+                        result.Add(clientDistribution);
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }
