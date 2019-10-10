@@ -42,7 +42,7 @@ namespace YellowstonePathology.Business.Gateway
         {
             List<WebService.WebServiceAccountView> result = new List<WebService.WebServiceAccountView>();
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "Select c.ClientName, w.WebServiceAccountId, w.PrimaryClientId, w.DisplayName, w.InitialPage from tblClient c join tblWebServiceAccount w on c.ClientId = w.PrimaryClientId order by w.DisplayName;";
+            cmd.CommandText = "Select c.ClientName, w.WebServiceAccountId, w.PrimaryClientId, w.DisplayName, w.InitialPage from  tblWebServiceAccount w  left outer join tblClient c on w.PrimaryClientId = c.ClientId order by w.DisplayName;";
             cmd.CommandType = CommandType.Text;
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))

@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.EWSR1
         public EWSR1Test()
         {
             this.m_PanelSetId = 264;
-            this.m_PanelSetName = "EWSR1";
+            this.m_PanelSetName = "EWSR1 Breakapart";
             this.m_Abbreviation = "EWSR1";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
@@ -25,10 +25,10 @@ namespace YellowstonePathology.Business.Test.EWSR1
 
             string taskDescription = "Collect paraffin block from Histology and send to Neo.";
 
-            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
-            this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription, neogenomicsIrvine));
+            YellowstonePathology.Business.Facility.Model.Facility phenoPath = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("PHNPTH");
+            this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription, phenoPath));
 
-            this.m_TechnicalComponentFacility = neogenomicsIrvine;
+            this.m_TechnicalComponentFacility = phenoPath;
             this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             this.m_ProfessionalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");            
