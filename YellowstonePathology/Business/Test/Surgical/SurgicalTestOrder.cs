@@ -627,8 +627,6 @@ namespace YellowstonePathology.Business.Test.Surgical
 
         public override void SetFacilityIds(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
-            base.SetFacilityIds(accessionOrder);
-
             this.ProfessionalComponentFacilityId = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId;
             if (accessionOrder.IsDermatologyClient() == true)
             {
