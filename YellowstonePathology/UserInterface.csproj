@@ -3149,6 +3149,9 @@
     <Compile Include="UI\ChainExplorer.xaml.cs">
       <DependentUpon>ChainExplorer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Client\ClientDistributionDialog.xaml.cs">
+      <DependentUpon>ClientDistributionDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Client\ClientFedxDialog.xaml.cs">
       <DependentUpon>ClientFedxDialog.xaml</DependentUpon>
     </Compile>
@@ -5171,6 +5174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ClientOrderWorkspace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Client\ClientDistributionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
