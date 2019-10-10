@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI.Client"
         mc:Ignorable="d"
-        Title="ClientDistributionDialog" Height="500" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+        Title="ClientDistributionDialog" Height="500" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -33,7 +33,7 @@
 				  ItemsSource="{Binding Path=FromPhysicianClientDistributionViews}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Width="150" Header="To Client" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Width="210" Header="To Client" />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianName}" Width="150" Header="Physician " />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionType}" Width="100" Header="Distribution Type" />
                 </GridView>
@@ -44,7 +44,7 @@
 				  ItemsSource="{Binding Path=ToPhysicianClientDistributionViews}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Width="150" Header="From Client" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Width="210" Header="From Client" />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianName}" Width="150" Header="Physician" />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionType}" Width="100" Header="Distribution Type" />
                 </GridView>
