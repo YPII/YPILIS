@@ -1342,7 +1342,8 @@ namespace YellowstonePathology.Business.Gateway
         {
             Client.Model.ClientDistributionCollection result = new Client.Model.ClientDistributionCollection();
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "select ca.ClientId DistributionClientId, ca.ClientName DistributionClientName, pcd.*, c.*, p.* " +
+            cmd.CommandText = "select case when c.ClientId = @ClientId then 1 else 3 end as sortindicator, " +
+                "ca.ClientId DistributionClientId, ca.ClientName DistributionClientName, pcd.*, c.*, p.* " +
                 "from tblPhysicianClientDistribution pcd " +
                 "join tblPhysicianClient pc on pcd.PhysicianClientID = pc.PhysicianClientId " +
                 "join tblPhysician p on pc.PhysicianId = p.PhysicianId " +
@@ -1351,7 +1352,8 @@ namespace YellowstonePathology.Business.Gateway
                 "left outer join tblClient ca on pca.ClientId = ca.ClientId " +
                 "where pc.ClientId = @ClientId " +
                 "union " +
-                "select c1.ClientId DistributionClientId, c1.ClientName DistributionClientName, pcd1.*, cb.*, p1.* " +
+                "select case when cb.ClientId = @ClientId then 1 else 3 end as sortindicator, " +
+                "c1.ClientId DistributionClientId, c1.ClientName DistributionClientName, pcd1.*, cb.*, p1.* " +
                 "from tblPhysicianClientDistribution pcd1 " +
                 "join tblPhysicianClient pc1 on pcd1.DistributionID = pc1.PhysicianClientId " +
                 "join tblPhysician p1 on pc1.PhysicianId = p1.PhysicianId " +
@@ -1359,7 +1361,7 @@ namespace YellowstonePathology.Business.Gateway
                 "left outer join tblPhysicianClient pcb on pcd1.PhysicianClientID = pcb.PhysicianClientId " +
                 "left outer join tblClient cb on pcb.ClientId = cb.ClientId " +
                 "where pc1.ClientId = @ClientId " +
-                "order by 59, 11, 2;";
+                "order by 1, 60;";
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@ClientId", clientId);
 
