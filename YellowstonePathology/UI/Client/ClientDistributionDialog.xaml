@@ -19,22 +19,22 @@
 
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Stretch">
             <TextBlock Margin="2,2,2,2">Client Name:</TextBlock>
-            <TextBox Margin="2,2,2,2" Text="{Binding Path=Client.ClientName}" />
+            <TextBlock Margin="2,2,2,2" Text="{Binding Path=Client.ClientName}" />
 
             <TextBlock Margin="2,2,2,2">Distribution Type:</TextBlock>
-            <TextBox Margin="2,2,2,2" Text="{Binding Path=Client.DistributionType}" />
+            <TextBlock Margin="2,2,2,2" Text="{Binding Path=Client.DistributionType}" />
 
             <TextBlock Margin="2,2,2,2">Alt. DistributionType:</TextBlock>
-            <TextBox Margin="2,2,2,2" Text="{Binding Path=Client.AlternateDistributionType}" />
+            <TextBlock Margin="2,2,2,2" Text="{Binding Path=Client.AlternateDistributionType}" />
         </StackPanel>
 
         <ListView Grid.Column="0" Grid.Row="1" Margin="2,2,5,2" Name="ListViewClientDistributions"
 				  ItemsSource="{Binding Path=ClientDistributionCollection}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Client.ClientName}" Width="250" Header="Client" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Width="250" Header="Client" />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionClientName}" Width="250" Header=" Disribution Client" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Physician.DisplayName}" Width="150" Header="Physician " />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DisplayName}" Width="150" Header="Physician " />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianClientDistribution.DistributionType}" Width="100" Header="Distribution Type" />
                 </GridView>
             </ListView.View>
