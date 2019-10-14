@@ -1306,7 +1306,7 @@ namespace YellowstonePathology.Business.Gateway
         {
             Client.Model.ClientDistributionCollection result = new Client.Model.ClientDistributionCollection();
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "select case when c.ClientId = @ClientId then 1 else 2 end as sortindicator, c.ClientName sortname, " +
+            cmd.CommandText = "select case when c.ClientId = @ClientId then 1 else 2 end as SortId, c.ClientName sortname, " +
                 "c.ClientId, c.ClientName, c.DistributionType ClientDistributionType, c.AlternateDistributionType ClientAlternateDistributionType, " +
                 "ca.ClientId DistributionClientId, ca.ClientName DistributionClientName, ca.DistributionType DistributionClientDistributionType, " +
                 "ca.AlternateDistributionType DistributionClientAlternateDistributionType, p.DisplayName, p.PhysicianId, pcd.* " +
