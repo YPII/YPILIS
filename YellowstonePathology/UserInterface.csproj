@@ -1117,6 +1117,9 @@
     <Compile Include="Business\Test\AndrogenReceptor\AndrogenReceptorTestOrder.cs" />
     <Compile Include="Business\Test\AndrogenReceptor\AndrogenReceptorWordDocument.cs" />
     <Compile Include="Business\Test\API2MALT1ByFISH\API2MALT1ByFISHWPHOBXView.cs" />
+    <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestTest.cs" />
+    <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestTestOrder.cs" />
+    <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestWordDocument.cs" />
     <Compile Include="Business\Test\CancerTYPEID\CancerTYPEIDTest.cs" />
     <Compile Include="Business\Test\CarbonicAnhydraseIXCAIX\CarbonicAnhydraseIXCAIXTest.cs" />
     <Compile Include="Business\Test\CheckResultsActionEnum.cs" />
@@ -3664,6 +3667,10 @@
       <DependentUpon>API2MALT1ByPCRResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Test\API2MALT1ByPCRResultPath.cs" />
+    <Compile Include="UI\Test\AuthorizationForVerbalTestRequestResultPage.xaml.cs">
+      <DependentUpon>AuthorizationForVerbalTestRequestResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\AuthorizationForVerbalTestRequestResultPath.cs" />
     <Compile Include="UI\Test\BCellClonalityByPCRResultPage.xaml.cs">
       <DependentUpon>BCellClonalityByPCRResultPage.xaml</DependentUpon>
     </Compile>
@@ -5681,6 +5688,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Test\API2MALT1ByPCRResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Test\AuthorizationForVerbalTestRequestResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

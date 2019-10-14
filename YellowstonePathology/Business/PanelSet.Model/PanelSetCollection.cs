@@ -313,6 +313,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.ReticulatedPlateletAnalysisV2.ReticulatedPlateletAnalysisV2Test());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.PlateletAssociatedAntibodiesV2.PlateletAssociatedAntibodiesV2Test());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.MaterialRequestForResearch.MaterialRequestForResearchTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestTest());
 
             //UniversityofWashington
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.PanelSetUniversalOrganismByPCR());

@@ -375,9 +375,12 @@ namespace YellowstonePathology.UI.Test
                 case 340:
                     result = new PlateletAssociatedAntibodiesV2ResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
+                case 363:
+                    result = new AuthorizationForVerbalTestRequestResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
             }
 
-            if(result == null)
+            if (result == null)
             {
                 YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetId);
                 if (panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument)
