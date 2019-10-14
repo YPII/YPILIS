@@ -12,7 +12,8 @@ namespace YellowstonePathology.Business.Client.Model
         public event PropertyChangedEventHandler PropertyChanged;
 
         private PhysicianClientDistribution m_PhysicianClientDistribution;
-        private string m_SortId;
+        private string m_ClientPhysicianClientId;
+        private string m_DistributionClientPhysicianClientId;
         private int m_ClientId;
         private string m_ClientName;
         private string m_ClientDistributionType;
@@ -49,15 +50,29 @@ namespace YellowstonePathology.Business.Client.Model
         }
 
         [PersistentProperty()]
-        public string SortId
+        public string ClientPhysicianClientId
         {
-            get { return this.m_SortId; }
+            get { return this.m_ClientPhysicianClientId; }
             set
             {
-                if (this.m_SortId != value)
+                if (this.m_ClientPhysicianClientId != value)
                 {
-                    this.m_SortId = value;
-                    this.NotifyPropertyChanged("SortId");
+                    this.m_ClientPhysicianClientId = value;
+                    this.NotifyPropertyChanged("ClientPhysicianClientId");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string DistributionClientPhysicianClientId
+        {
+            get { return this.m_DistributionClientPhysicianClientId; }
+            set
+            {
+                if (this.m_DistributionClientPhysicianClientId != value)
+                {
+                    this.m_DistributionClientPhysicianClientId = value;
+                    this.NotifyPropertyChanged("DistributionClientPhysicianClientId");
                 }
             }
         }

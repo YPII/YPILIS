@@ -1309,7 +1309,8 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandText = "select case when c.ClientId = @ClientId then 1 else 2 end as SortId, c.ClientName sortname, " +
                 "c.ClientId, c.ClientName, c.DistributionType ClientDistributionType, c.AlternateDistributionType ClientAlternateDistributionType, " +
                 "ca.ClientId DistributionClientId, ca.ClientName DistributionClientName, ca.DistributionType DistributionClientDistributionType, " +
-                "ca.AlternateDistributionType DistributionClientAlternateDistributionType, p.DisplayName, p.PhysicianId, pcd.* " +
+                "ca.AlternateDistributionType DistributionClientAlternateDistributionType, p.DisplayName, p.PhysicianId, pcd.*, " +
+                "pc.PhysicianClientID ClientPhysicianClientId, pca.PhysicianClientId DistributionClientPhysicianClientId " +
                 "from tblPhysicianClientDistribution pcd " +
                 "join tblPhysicianClient pc on pcd.PhysicianClientID = pc.PhysicianClientId " +
                 "join tblPhysician p on pc.PhysicianId = p.PhysicianId " +
@@ -1319,9 +1320,9 @@ namespace YellowstonePathology.Business.Gateway
                 "where pcd.PhysicianClientDistributionID in(" +
                 "select PhysicianClientDistributionID from tblPhysicianClientDistribution where PhysicianClientID in(" +
                 "select PhysicianClientId from tblPhysicianClient where PhysicianId in(" +
-                "select distinct physicianId from tblPhysicianClient where clientId = @ClientId)) " +
+                "select distinct PhysicianId from tblPhysicianClient where ClientId = @ClientId) and ClientId = @ClientId) " +
                 "or DistributionID in(select PhysicianClientId from tblPhysicianClient where PhysicianId in(" +
-                "select distinct physicianId from tblPhysicianClient where clientId = @ClientId))) " +
+                "select distinct PhysicianId from tblPhysicianClient where ClientId = @ClientId) and ClientId = @ClientId)) " +
                 "order by 11, 1, 2;";
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@ClientId", clientId);
