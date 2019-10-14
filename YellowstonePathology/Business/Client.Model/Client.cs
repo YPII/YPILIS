@@ -530,7 +530,7 @@ namespace YellowstonePathology.Business.Client.Model
             }
         }
 
-        public void ResetDistributions()
+        /*public void ResetDistributions()
         {
             List<PhysicianClientDistributionView> physicianClientDistributionViewListToProcess = new List<Model.PhysicianClientDistributionView>();
             YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection incompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
@@ -612,7 +612,7 @@ namespace YellowstonePathology.Business.Client.Model
                 result = true;
             }
             return result;
-        }
+        }*/
 
         public void NotifyPropertyChanged(String info)
         {

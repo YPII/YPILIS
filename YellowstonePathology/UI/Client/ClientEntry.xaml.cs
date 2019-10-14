@@ -76,7 +76,7 @@ namespace YellowstonePathology.UI.Client
         {
             if (this.CanSave() == true)
             {
-                if(this.HasDistributionTypeChanged() == true)
+                /*if(this.HasDistributionTypeChanged() == true)
                 {
                     MessageBoxResult result =  MessageBox.Show("The distribution type has changed." + Environment.NewLine +
                         "The distributions for the client membership will be updated to reflect this changed." + Environment.NewLine +
@@ -94,9 +94,9 @@ namespace YellowstonePathology.UI.Client
                     }
                 }
                 else
-                {
+                {*/
                     YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
-                }
+                //}
             }
             else e.Cancel = true;
         }
