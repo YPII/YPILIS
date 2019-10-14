@@ -1030,42 +1030,6 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        public static List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> GetDistributionPhysicianClientDistributions(int physicianClientDistributionID, string physicianClientId)
-        {
-            List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> result = new List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView>();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "Select pcd.*, c.ClientId, c.ClientName, ph.PhysicianId, ph.ObjectId as ProviderId, ph.DisplayName PhysicianName " +
-                "from tblPhysicianClient pc " +
-                "join tblPhysicianClientDistribution pcd on pc.PhysicianClientId = pcd.PhysicianClientId " +
-                "join tblPhysicianClient pc2 on pcd.DistributionId = pc2.PhysicianClientId " +
-                "join tblClient c on pc.ClientId = c.ClientId " +
-                "join tblPhysician ph on pc.ProviderId = ph.ObjectId " +
-                "where pcd.PhysicianClientDistributionID <> @PhysicianClientDistributionID and pc2.PhysicianClientId = @PhysicianClientId;";
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@PhysicianClientDistributionID", physicianClientDistributionID);
-            cmd.Parameters.AddWithValue("@PhysicianClientId", physicianClientId);
-
-            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
-            {
-                cn.Open();
-                cmd.Connection = cn;
-                using (MySqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = new YellowstonePathology.Business.Client.Model.PhysicianClientDistribution();
-                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(physicianClientDistribution, dr);
-                        sqlDataReaderPropertyWriter.WriteProperties();
-                        YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView physicianClientDistributionView = new YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView(physicianClientDistribution);
-                        sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(physicianClientDistributionView, dr);
-                        sqlDataReaderPropertyWriter.WriteProperties();
-                        result.Add(physicianClientDistributionView);
-                    }
-                }
-            }
-            return result;
-        }
-
         public static YellowstonePathology.Business.Client.Model.PhysicianClientDistributionCollection GetPhysicianClientDistributionByPhysicianClientId(string physicianClientId)
         {
             YellowstonePathology.Business.Client.Model.PhysicianClientDistributionCollection result = new Client.Model.PhysicianClientDistributionCollection();
@@ -1345,27 +1309,20 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandText = "select case when c.ClientId = @ClientId then 1 else 2 end as sortindicator, c.ClientName sortname, " +
                 "c.ClientId, c.ClientName, c.DistributionType ClientDistributionType, c.AlternateDistributionType ClientAlternateDistributionType, " +
                 "ca.ClientId DistributionClientId, ca.ClientName DistributionClientName, ca.DistributionType DistributionClientDistributionType, " +
-                "ca.AlternateDistributionType DistributionClientAlternateDistributionType, p.DisplayName, pcd.* " +
+                "ca.AlternateDistributionType DistributionClientAlternateDistributionType, p.DisplayName, p.PhysicianId, pcd.* " +
                 "from tblPhysicianClientDistribution pcd " +
                 "join tblPhysicianClient pc on pcd.PhysicianClientID = pc.PhysicianClientId " +
                 "join tblPhysician p on pc.PhysicianId = p.PhysicianId " +
                 "join tblClient c on pc.ClientId = c.ClientId " +
                 "left outer join tblPhysicianClient pca on pcd.DistributionID = pca.PhysicianClientId " +
                 "left outer join tblClient ca on pca.ClientId = ca.ClientId " +
-                "where pc.ClientId = @ClientId " +
-                "union " +
-                "select case when cb.ClientId = @ClientId then 1 else 2 end as sortindicator, cb.ClientName sortname, " +
-                "cb.ClientId, cb.ClientName, cb.DistributionType ClientDistributionType, cb.AlternateDistributionType ClientAlternateDistributionType, " +
-                "c1.ClientId DistributionClientId, c1.ClientName DistributionClientName, c1.DistributionType DistributionClientDistributionType, " +
-                "c1.AlternateDistributionType DistributionClientAlternateDistributionType, p1.DisplayName, pcd1.* " +
-                "from tblPhysicianClientDistribution pcd1 " +
-                "join tblPhysicianClient pc1 on pcd1.DistributionID = pc1.PhysicianClientId " +
-                "join tblPhysician p1 on pc1.PhysicianId = p1.PhysicianId " +
-                "join tblClient c1 on pc1.ClientId = c1.ClientId " +
-                "left outer join tblPhysicianClient pcb on pcd1.PhysicianClientID = pcb.PhysicianClientId " +
-                "left outer join tblClient cb on pcb.ClientId = cb.ClientId " +
-                "where pc1.ClientId = @ClientId " +
-                "order by 1, 2, 9;";
+                "where pcd.PhysicianClientDistributionID in(" +
+                "select PhysicianClientDistributionID from tblPhysicianClientDistribution where PhysicianClientID in(" +
+                "select PhysicianClientId from tblPhysicianClient where PhysicianId in(" +
+                "select distinct physicianId from tblPhysicianClient where clientId = @ClientId)) " +
+                "or DistributionID in(select PhysicianClientId from tblPhysicianClient where PhysicianId in(" +
+                "select distinct physicianId from tblPhysicianClient where clientId = @ClientId))) " +
+                "order by 11, 1, 2;";
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@ClientId", clientId);
 
