@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml;
 
 namespace YellowstonePathology.UI.Client
 {
@@ -370,6 +372,35 @@ namespace YellowstonePathology.UI.Client
 
         private void ButtonAddHPVStandingOrder_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void HyperLinkShowReflexLetter_Click(object sender, RoutedEventArgs e)
+        {
+            string reflexLetterPath = @"\\CFILESERVER\Documents\Clients\ProviderReflexLetter.xml";
+            XmlDocument letterTemplate = new XmlDocument();            
+            letterTemplate.Load(reflexLetterPath);
+
+            XmlNamespaceManager nameSpaceManager = new XmlNamespaceManager(letterTemplate.NameTable);
+            nameSpaceManager.AddNamespace("w", "http://schemas.microsoft.com/office/word/2003/wordml");
+            
+            XmlNode nodeProviderName = letterTemplate.SelectSingleNode("//w:t[.='provider_name']", nameSpaceManager);
+            nodeProviderName.InnerText = this.m_Physician.DisplayName;
+
+            Business.Client.Model.StandingOrder hpvStandingOrder = Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.Physician.HPVStandingOrderCode);
+            XmlNode nodeHPVStandingOrder = letterTemplate.SelectSingleNode("//w:t[.='hpv_standing_order']", nameSpaceManager);
+            nodeHPVStandingOrder.InnerText = hpvStandingOrder.Description;
+
+            Business.Client.Model.StandingOrder hpv1618StandingOrder = Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.Physician.HPV1618StandingOrderCode);
+            XmlNode nodeHPV1618StandingOrder = letterTemplate.SelectSingleNode("//w:t[.='hpv1618_standing_order']", nameSpaceManager);
+            nodeHPV1618StandingOrder.InnerText = hpv1618StandingOrder.Description;
+
+            string thisProviderLetterPath = @"\\CFILESERVER\Documents\Clients\Provider_" + this.m_Physician.LastName + this.m_Physician.PhysicianId + ".doc";
+            letterTemplate.Save(thisProviderLetterPath);
+
+            Process p1 = new Process();
+            p1.StartInfo = new ProcessStartInfo("winword.exe", thisProviderLetterPath);
+            p1.Start();
+            p1.Close();
         }
     }
 }
