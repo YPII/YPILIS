@@ -8,16 +8,19 @@ namespace YellowstonePathology.Business.Client.Model
 {
     public class ClientDistributionCollection : ObservableCollection<ClientDistribution>
     {
+        YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection m_IncompatibleDistributionTypeCollection;
+
         public ClientDistributionCollection()
         { }
 
-        /*public void UpdateDistributionType(Client clientWithChangedDistributionType, string distributionType)
+        public void UpdateDistributionType(Client clientWithChangedDistributionType, string distributionType, string suggestedAlternativeDistributionType)
         {
+           this.m_IncompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
             List<string> pcids = this.GetUniquePhysicianClientIds();
             foreach (string pcId in pcids)
             {
                 ClientDistributionCollection distributionsToSet = this.GetMatchingClientDistributions(pcId);
-                this.SetDistributionType(clientWithChangedDistributionType, distributionType, distributionsToSet);
+                this.SetDistributionType(clientWithChangedDistributionType, distributionType, suggestedAlternativeDistributionType, distributionsToSet);
             }
         }
         private List<string> GetUniquePhysicianClientIds()
@@ -52,36 +55,53 @@ namespace YellowstonePathology.Business.Client.Model
                 }
             }
             return result;
-        }*/
+        }
 
-        //private void SetDistributionType(Client clientWithChangedDistributionType, string distributionType) //, ClientDistributionCollection distributionsToSet)
-        public void UpdateDistributionType(Client clientWithChangedDistributionType, string distributionType, string suggestedAlternativeDistributionType)
+        private void SetDistributionType(Client clientWithChangedDistributionType, string distributionType, string suggestedAlternativeDistributionType, ClientDistributionCollection distributionsToSet)
         {
-            foreach(ClientDistribution clientDistribution in this) //distributionsToSet)
+            foreach (ClientDistribution clientDistribution in distributionsToSet)
             {
                 if(clientDistribution.ClientId == clientWithChangedDistributionType.ClientId)
                 {
-                    ResetClientDistribution(clientWithChangedDistributionType, distributionType, suggestedAlternativeDistributionType, clientDistribution);
+                    if(clientDistribution.ClientPhysicianClientId == clientDistribution.DistributionClientPhysicianClientId) // same client same provider
+                    {
+                        clientDistribution.SuggestedDistributionType = distributionType;
+                    }
+                    else
+                    {
+                        if(clientDistribution.ClientId == clientDistribution.DistributionClientId) //same client different provider
+                        {
+                            clientDistribution.SuggestedDistributionType = this.IsEmptySuggestedAlternativeDistributionType(distributionType, suggestedAlternativeDistributionType);
+                        }
+                        else //distributed to a different client
+                        {
+                            SetDistributionToDifferentClient(clientDistribution, distributionType, suggestedAlternativeDistributionType);
+                        }
+                    }
                 }
-                else
+                else //distributed from a different client
                 {
-                    ResetDistributionClientDistribution(distributionType, suggestedAlternativeDistributionType, clientDistribution);
+                    clientDistribution.SuggestedDistributionType = this.IsEmptySuggestedAlternativeDistributionType(distributionType, suggestedAlternativeDistributionType);
                 }
             }
         }
 
-        private void ResetClientDistribution(Client clientWithChangedDistributionType, string distributionType, string suggestedAlternativeDistributionType, ClientDistribution clientDistribution)
+        private void SetDistributionToDifferentClient(ClientDistribution clientDistribution, string distributionType, string suggestedAlternativeDistributionType)
         {
-            YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection incompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
-            if (clientWithChangedDistributionType.ClientId == clientDistribution.DistributionClientId)
+            if (this.m_IncompatibleDistributionTypeCollection.TypesAreIncompatible(distributionType, clientDistribution.DistributionClientDistributionType) == true)
             {
-                clientDistribution.SuggestedDistributionType = distributionType;
+                clientDistribution.SuggestedDistributionType = clientDistribution.DistributionClientAlternateDistributionType;
             }
             else
             {
-                if (incompatibleDistributionTypeCollection.TypesAreIncompatible(distributionType, clientDistribution.DistributionClientDistributionType) == true)
+                if (clientDistribution.DistributionClientDistributionType == distributionType &&
+                    (distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH))
                 {
-                    clientDistribution.SuggestedDistributionType = clientDistribution.DistributionClientAlternateDistributionType;
+                    clientDistribution.SuggestedDistributionType = this.IsEmptySuggestedAlternativeDistributionType(distributionType, suggestedAlternativeDistributionType);
                 }
                 else
                 {
@@ -90,17 +110,14 @@ namespace YellowstonePathology.Business.Client.Model
             }
         }
 
-        private void ResetDistributionClientDistribution(string distributionType, string suggestedAlternativeDistributionType, ClientDistribution clientDistribution)
+        private string IsEmptySuggestedAlternativeDistributionType(string suggestedDistributionType, string suggestedAlternativeDistributionType)
         {
-            YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection incompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
-            if (incompatibleDistributionTypeCollection.TypesAreIncompatible(clientDistribution.DistributionClientDistributionType, distributionType) == true)
+            string result = suggestedAlternativeDistributionType;
+            if (string.IsNullOrEmpty(suggestedAlternativeDistributionType) == true)
             {
-                clientDistribution.SuggestedDistributionType = suggestedAlternativeDistributionType;
+                result = suggestedDistributionType;
             }
-            else
-            {
-                clientDistribution.SuggestedDistributionType = distributionType;
-            }
+            return result;
         }
     }
 }

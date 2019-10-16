@@ -75,6 +75,7 @@ namespace YellowstonePathology.UI.Client
                 if(distributionType != this.m_Client.DistributionType)
                 {
                     if (distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC ||
+                        distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX ||
                         distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA ||
                         distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH ||
                         distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW)
@@ -87,6 +88,10 @@ namespace YellowstonePathology.UI.Client
                         {
                             MessageBox.Show("The Alternate Distribution Type must be set when the Distribution Type is " + distributionType + ".");
                         }
+                    }
+                    else
+                    {
+                        this.m_ClientDistributionCollection.UpdateDistributionType(this.m_Client, distributionType, this.m_SuggestedAlternateDistributionType);
                     }
                 }
                 else
