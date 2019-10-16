@@ -24,6 +24,8 @@ namespace YellowstonePathology.Business.Client.Model
         private string m_DistributionClientAlternateDistributionType;
         private int m_PhysicianId;
         private string m_DisplayName;
+        private string m_SuggestedDistributionType;
+        private string m_SuggestedAlternateDistributionType;
 
         public ClientDistribution()
         { }
@@ -213,6 +215,32 @@ namespace YellowstonePathology.Business.Client.Model
                 {
                     this.m_PhysicianId = value;
                     this.NotifyPropertyChanged("PhysicianId");
+                }
+            }
+        }
+
+        public string SuggestedDistributionType
+        {
+            get { return this.m_SuggestedDistributionType; }
+            set
+            {
+                if (this.m_SuggestedDistributionType != value)
+                {
+                    this.m_SuggestedDistributionType = value;
+                    this.NotifyPropertyChanged("SuggestedDistributionType");
+                }
+            }
+        }
+
+        public string SuggestedAlternateDistributionType
+        {
+            get { return this.m_SuggestedAlternateDistributionType; }
+            set
+            {
+                if (this.m_SuggestedAlternateDistributionType != value)
+                {
+                    this.m_SuggestedAlternateDistributionType = value;
+                    this.NotifyPropertyChanged("SuggestedAlternateDistributionType");
                 }
             }
         }
