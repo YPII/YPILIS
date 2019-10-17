@@ -1138,6 +1138,8 @@
     <Compile Include="Business\Test\FetalHemoglobinV2\FetalHemoglobinV2WordDocument.cs" />
     <Compile Include="Business\Test\FetalHemoglobin\FetalHemoglobinTestOrder.cs" />
     <Compile Include="Business\Test\FumarateHydrataseByIHC\FumarateHydrataseByIHCTest.cs" />
+    <Compile Include="Business\Test\GastricAdenocarcinoma\GastricAdenocarcinomaTest.cs" />
+    <Compile Include="Business\Test\GastricAdenocarcinoma\GastricAdenocarcinomaTestOrder.cs" />
     <Compile Include="Business\Test\Her2AmplificationByIHC\HER2AmplificationByIHCSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISHSendOut\HER2AmplificationByISHSendOutTest.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResult.cs" />
