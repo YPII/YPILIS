@@ -634,7 +634,7 @@ namespace YellowstonePathology.Business.Test.Surgical
                 {
                     this.ProfessionalComponentBillingFacilityId = this.ProfessionalComponentFacilityId;
                 }
-            }
+            }            
         }
     }
 }

@@ -2017,6 +2017,22 @@ namespace YellowstonePathology.Business.Test
                 this.m_ProfessionalComponentFacilityId = panelSet.ProfessionalComponentFacility.FacilityId;
                 this.m_ProfessionalComponentBillingFacilityId = panelSet.ProfessionalComponentBillingFacility.FacilityId;
             }
+
+            if(this.FinaledById == 5088 || this.FinaledById == 5148 || this.FinaledById == 5111)
+            {
+                if (panelSet.HasTechnicalComponent == true)
+                {
+                    this.m_HasTechnicalComponent = true;
+                    this.m_TechnicalComponentFacilityId = "YPIBLGS";
+                    this.m_TechnicalComponentBillingFacilityId = "YPIBLGS";
+                }
+                if (panelSet.HasProfessionalComponent == true)
+                {
+                    this.m_HasProfessionalComponent = true;
+                    this.m_ProfessionalComponentFacilityId = "YPBZMN";
+                    this.m_ProfessionalComponentBillingFacilityId = "YPIBLGS";
+                }
+            }
         }
     }
 }

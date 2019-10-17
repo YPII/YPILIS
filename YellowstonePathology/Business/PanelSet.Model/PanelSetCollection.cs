@@ -494,6 +494,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.GrossOnly.GrossOnlyTest());
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.ShipMaterialTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.SlideTracking.SlideTrackingTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.MaterialRequestForResearch.MaterialRequestForResearchTest());
             return panelSetCollection;
         }
 
@@ -517,6 +518,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.LynchSyndrome.LynchSyndromeEvaluationTest());
 			panelSetCollection.Add(new YellowstonePathology.Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.RetrospectiveReview.RetrospectiveReviewTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.MaterialRequestForResearch.MaterialRequestForResearchTest());
             return panelSetCollection;
         }
 
