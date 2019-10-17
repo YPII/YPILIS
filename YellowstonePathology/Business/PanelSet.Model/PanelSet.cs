@@ -54,6 +54,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         protected bool m_ResearchTesting;
         protected bool m_ReportAsAdditionalTesting;
         protected string m_MonitorPriority;
+        protected bool m_OrderInitialTestsOnly;
 
         protected List<string> m_ImplementedResultTypes;
 
@@ -631,6 +632,20 @@ namespace YellowstonePathology.Business.PanelSet.Model
                 {
                     this.m_MonitorPriority = value;
                     this.NotifyPropertyChanged("MonitorPriority");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public bool OrderInitialTestsOnly
+        {
+            get { return this.m_OrderInitialTestsOnly; }
+            set
+            {
+                if (this.m_OrderInitialTestsOnly != value)
+                {
+                    this.m_OrderInitialTestsOnly = value;
+                    this.NotifyPropertyChanged("OrderInitialTestsOnly");
                 }
             }
         }

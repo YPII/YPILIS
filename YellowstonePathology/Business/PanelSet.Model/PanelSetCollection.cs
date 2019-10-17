@@ -314,6 +314,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.PlateletAssociatedAntibodiesV2.PlateletAssociatedAntibodiesV2Test());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.MaterialRequestForResearch.MaterialRequestForResearchTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.GastricAdenocarcinoma.GastricAdenocarcinomaTest());
 
             //UniversityofWashington
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.PanelSetUniversalOrganismByPCR());
@@ -507,6 +508,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 			panelSetCollection.Add(new YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.BoneMarrowSummary.BoneMarrowSummaryTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.GastricAdenocarcinoma.GastricAdenocarcinomaTest());
 			panelSetCollection.Add(new YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest());
 			panelSetCollection.Add(new YellowstonePathology.Business.Test.HPV1618SolidTumor.HPV1618SolidTumorTest());
 			panelSetCollection.Add(new YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanelTest());

@@ -184,10 +184,14 @@ namespace YellowstonePathology.Business.Visitor
 
             this.m_PanelSetOrder.ExternalOrderId = externalOrderId;
             if (string.IsNullOrEmpty(universalServiceId) == false) this.m_PanelSetOrder.UniversalServiceId = universalServiceId;
-            this.m_AccessionOrder.PanelSetOrderCollection.Add(this.m_PanelSetOrder);
-            this.m_AccessionOrder.PanelSetOrderCollection.UpdateWHPExpectedFinalTimeOnOrder(this.m_PanelSetOrder);
-            this.m_AccessionOrder.UpdateCaseAssignment(this.m_PanelSetOrder);
-			this.m_TestOrderInfo.PanelSetOrder = this.m_PanelSetOrder;            
+
+            if (this.m_PanelSet.OrderInitialTestsOnly == false)
+            {
+                this.m_AccessionOrder.PanelSetOrderCollection.Add(this.m_PanelSetOrder);
+                this.m_AccessionOrder.PanelSetOrderCollection.UpdateWHPExpectedFinalTimeOnOrder(this.m_PanelSetOrder);
+                this.m_AccessionOrder.UpdateCaseAssignment(this.m_PanelSetOrder);
+			    this.m_TestOrderInfo.PanelSetOrder = this.m_PanelSetOrder;            
+            }
         }
 
         public virtual void HandlePanelOrders()
