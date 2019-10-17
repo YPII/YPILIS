@@ -614,12 +614,14 @@ namespace YellowstonePathology.UI.Billing
                 Business.ReportDistribution.Model.FaxSubmission.Submit("4062332714", "HRH Billing Report", tifPath);
                 this.m_BackgroundWorker.ReportProgress(1, "Completed faxing report: " + DateTime.Now.ToLongTimeString());
 
+                /*
                 clientBillingDetailReportData = YellowstonePathology.Business.Gateway.XmlGateway.GetClientBillingDetailReport(this.m_PostDate, this.m_PostDate, "2");
                 clientBillingDetailReport = new Document.ClientBillingDetailReportV2(clientBillingDetailReportData, this.m_PostDate, this.m_PostDate);
                 tifPath = @"C:\ProgramData\ypi\HRH_TOSVH_BILLING_" + this.m_PostDate.Year + "_" + this.m_PostDate.Month + "_" + this.m_PostDate.Day + ".tif";
                 Business.Helper.FileConversionHelper.SaveFixedDocumentAsTiff(clientBillingDetailReport.FixedDocument, tifPath);
                 Business.ReportDistribution.Model.FaxSubmission.Submit("4062378090", "HRH Billing Report", tifPath);
                 this.m_BackgroundWorker.ReportProgress(1, "Completed faxing report: " + DateTime.Now.ToLongTimeString());
+                */
 
                 Business.Gateway.BillingGateway.UpdateBillingEODProcess(this.m_PostDate, "FaxTheReport");
             });            

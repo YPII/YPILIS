@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Client.Model
 
         public void UpdateDistributionType(Client clientWithChangedDistributionType, string distributionType, string suggestedAlternativeDistributionType)
         {
-           this.m_IncompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
+            this.m_IncompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
             List<string> pcids = this.GetUniquePhysicianClientIds();
             foreach (string pcId in pcids)
             {
