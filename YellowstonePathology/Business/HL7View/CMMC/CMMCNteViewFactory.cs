@@ -132,6 +132,21 @@ namespace YellowstonePathology.Business.HL7View.CMMC
                 case 338:
                     view = new YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2.ThrombocytopeniaProfileV2CMMCNTEView(accessionOrder, reportNo);
                     break;
+                case 365:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3EsophSquamCellCarcinomaCMMCNTEView(accessionOrder, reportNo);
+                    break;
+                case 366:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEACMMCNTEView(accessionOrder, reportNo);
+                    break;
+                case 367:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckCMMCNTEView(accessionOrder, reportNo);
+                    break;
+                case 368:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaCMMCNTEView(accessionOrder, reportNo);
+                    break;
+                case 369:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerCMMCNTEView(accessionOrder, reportNo);
+                    break;
             }
             return view;
         }        

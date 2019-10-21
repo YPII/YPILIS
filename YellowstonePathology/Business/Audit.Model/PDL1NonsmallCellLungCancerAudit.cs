@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace YellowstonePathology.Business.Audit.Model
 {
-    public class PDL1Audit : Audit
+    public class PDL1NonsmallCellLungCancerAudit : Audit
     {
         private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
         private YellowstonePathology.Business.Surgical.KeyWordCollection m_DescriptionKeyWords;
         private YellowstonePathology.Business.Surgical.KeyWordCollection m_DiagnosisKeyWords;
         private YellowstonePathology.Business.Billing.Model.CptCodeCollection m_CptCodeCollection;
 
-        public PDL1Audit(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public PDL1NonsmallCellLungCancerAudit(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             this.m_AccessionOrder = accessionOrder;
             this.m_DescriptionKeyWords = new YellowstonePathology.Business.Surgical.KeyWordCollection { "lung" };
@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Audit.Model
             this.m_Status = AuditStatusEnum.OK;
             this.m_Message.Clear();
 
-            YellowstonePathology.Business.Test.PDL122C3.PDL122C3Test pdl = new Test.PDL122C3.PDL122C3Test();
+            YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest pdl = new Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest();
             if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(pdl.PanelSetId) == false)
             {
                 YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();

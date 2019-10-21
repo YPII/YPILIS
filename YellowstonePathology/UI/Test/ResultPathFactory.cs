@@ -378,6 +378,21 @@ namespace YellowstonePathology.UI.Test
                 case 363:
                     result = new AuthorizationForVerbalTestRequestResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
+                case 365:
+                    result = new PDL122C3forEsophagealSquamousCellCarcinomaResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
+                case 366:
+                    result = new PDL122C3forGastricGEAResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
+                case 367:
+                    result = new PDL122C3forHeadandNeckResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
+                case 368:
+                    result = new PDL122C3forUrothelialCarcinomaResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
+                case 369:
+                    result = new PDL122C3forNonsmallCellLungCancerResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
             }
 
             if (result == null)
