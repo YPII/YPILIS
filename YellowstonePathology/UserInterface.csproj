@@ -1115,6 +1115,7 @@
     <Compile Include="Business\Test.Model\TestOrderStatusView.cs" />
     <Compile Include="Business\Test.Model\TestOrderStatusViewCollection.cs" />
     <Compile Include="Business\Test\Adenovirus\AdenovirusTest.cs" />
+    <Compile Include="Business\Test\ALLFusionProfile\ALLFusionProfileTest.cs" />
     <Compile Include="Business\Test\ALLPediatricFISHPanel\ALLPediatricFISHPanelTest.cs" />
     <Compile Include="Business\Test\AMLPrognosticProfile\AMLPrognosticProfileTestOrder.cs" />
     <Compile Include="Business\Test\AndrogenReceptor\AndrogenReceptorEPICOBXView.cs" />
