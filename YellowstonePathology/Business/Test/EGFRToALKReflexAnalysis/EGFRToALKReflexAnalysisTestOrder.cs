@@ -25,6 +25,11 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
         private string m_EGFRMutationAnalysisComment;
         private string m_PDL1SP142StainPercent;
         private string m_Comment;
+        private string m_PDL122C3forEsophagealSquamousCellCarcinomaResult;
+        private string m_PDL122C3forGastricGEAResult;
+        private string m_PDL122C3forHeadandNeckResult;
+        private string m_PDL122C3forNonsmallCellLungCancerResult;
+        private string m_PDL122C3forUrothelialCarcinomaResult;
 
         public EGFRToALKReflexAnalysisTestOrder() 
         {
@@ -42,10 +47,10 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
 
         public override void OrderInitialTests(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Interface.IOrderTarget orderTarget)
         {
-            YellowstonePathology.Business.Test.PDL122C3.PDL122C3Test pdl122C3Test = new PDL122C3.PDL122C3Test();
-            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3Test.PanelSetId, orderTarget.GetId(), true) == false)
+            YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest pdl122C3forNonsmallCellLungCancerTest = new PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest();
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forNonsmallCellLungCancerTest.PanelSetId, orderTarget.GetId(), true) == false)
             {
-                YellowstonePathology.Business.Test.TestOrderInfo testOrderInfoPDL122C3 = new TestOrderInfo(pdl122C3Test, orderTarget, false);
+                YellowstonePathology.Business.Test.TestOrderInfo testOrderInfoPDL122C3 = new TestOrderInfo(pdl122C3forNonsmallCellLungCancerTest, orderTarget, false);
                 YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitorPDL122C3 = new Visitor.OrderTestOrderVisitor(testOrderInfoPDL122C3);
                 accessionOrder.TakeATrip(orderTestOrderVisitorPDL122C3);
             }
@@ -245,6 +250,61 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             }
         }
 
+        [PersistentProperty()]
+        public string PDL122C3forEsophagealSquamousCellCarcinomaResult
+        {
+            get { return this.m_PDL122C3forEsophagealSquamousCellCarcinomaResult; }
+            set
+            {
+                this.m_PDL122C3forEsophagealSquamousCellCarcinomaResult = value;
+                NotifyPropertyChanged("PDL122C3forEsophagealSquamousCellCarcinomaResult");
+            }
+        }
+
+        [PersistentProperty()]
+        public string PDL122C3forGastricGEAResult
+        {
+            get { return this.m_PDL122C3forGastricGEAResult; }
+            set
+            {
+                this.m_PDL122C3forGastricGEAResult = value;
+                NotifyPropertyChanged("PDL122C3forGastricGEAResult");
+            }
+        }
+
+        [PersistentProperty()]
+        public string PDL122C3forHeadandNeckResult
+        {
+            get { return this.m_PDL122C3forHeadandNeckResult; }
+            set
+            {
+                this.m_PDL122C3forHeadandNeckResult = value;
+                NotifyPropertyChanged("PDL122C3forHeadandNeckResult");
+            }
+        }
+
+        [PersistentProperty()]
+        public string PDL122C3forNonsmallCellLungCancerResult
+        {
+            get { return this.m_PDL122C3forNonsmallCellLungCancerResult; }
+            set
+            {
+                this.m_PDL122C3forNonsmallCellLungCancerResult = value;
+                NotifyPropertyChanged("PDL122C3forNonsmallCellLungCancerResult");
+            }
+        }
+
+        [PersistentProperty()]
+        public string PDL122C3forUrothelialCarcinomaResult
+        {
+            get { return this.m_PDL122C3forUrothelialCarcinomaResult; }
+            set
+            {
+                this.m_PDL122C3forUrothelialCarcinomaResult = value;
+                NotifyPropertyChanged("PDL122C3forUrothelialCarcinomaResult");
+            }
+        }
+
         public override Audit.Model.AuditResult IsOkToSetPreviousResults(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
         {
             Audit.Model.AuditResult result = base.IsOkToSetPreviousResults(panelSetOrder, accessionOrder);
@@ -305,6 +365,11 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             YellowstonePathology.Business.Test.ALKForNSCLCByFISH.ALKForNSCLCByFISHTest alkTest = new ALKForNSCLCByFISH.ALKForNSCLCByFISHTest();
             YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTest brafTest = new BRAFMutationAnalysis.BRAFMutationAnalysisTest();
             YellowstonePathology.Business.Test.PDL1SP142.PDL1SP142Test pdl1SP142Test = new PDL1SP142.PDL1SP142Test();
+            YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest pdl122C3forEsophagealSquamousCellCarcinomaTest = new PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest();
+            YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest pdl122C3forGastricGEATest = new PDL122C3forGastricGEA.PDL122C3forGastricGEATest();
+            YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest pdl122C3forHeadandNeckTest = new PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest();
+            YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest pdl122C3forNonsmallCellLungCancerTest = new PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest();
+            YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest pdl122C3forUrothelialCarcinomaTest = new PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest();
 
             YellowstonePathology.Business.PanelSet.Model.PanelSetALKRetired panelSetALKRetired = new PanelSet.Model.PanelSetALKRetired();
 
@@ -380,6 +445,61 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                 method.AppendLine();
                 method.AppendLine(brafTestOrder.PanelSetName + ": " + brafTestOrder.Method);
                 this.m_BRAFMutationAnalysisResult = brafTestOrder.Result;
+            }
+
+            if (panelSetOrderCollection.Exists(pdl122C3forEsophagealSquamousCellCarcinomaTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTestOrder pdl122C3forEsophagealSquamousCellCarcinomaTestOrder = (PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTestOrder)panelSetOrderCollection.GetPanelSetOrder(pdl122C3forEsophagealSquamousCellCarcinomaTest.PanelSetId);
+                interpretation.AppendLine();
+                interpretation.AppendLine(pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.PanelSetName + ": " + pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.Interpretation);
+
+                method.AppendLine();
+                method.AppendLine(pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.PanelSetName + ": " + pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.Method);
+                this.m_PDL122C3forEsophagealSquamousCellCarcinomaResult = pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.Result;
+            }
+
+            if (panelSetOrderCollection.Exists(pdl122C3forGastricGEATest.PanelSetId) == true)
+            {
+                Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder pdl122C3forGastricGEATestOrder = (PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder)panelSetOrderCollection.GetPanelSetOrder(pdl122C3forGastricGEATest.PanelSetId);
+                interpretation.AppendLine();
+                interpretation.AppendLine(pdl122C3forGastricGEATestOrder.PanelSetName + ": " + pdl122C3forGastricGEATestOrder.Interpretation);
+
+                method.AppendLine();
+                method.AppendLine(pdl122C3forGastricGEATestOrder.PanelSetName + ": " + pdl122C3forGastricGEATestOrder.Method);
+                this.m_PDL122C3forGastricGEAResult = pdl122C3forGastricGEATestOrder.Result;
+            }
+
+            if (panelSetOrderCollection.Exists(pdl122C3forHeadandNeckTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTestOrder pdl122C3forHeadandNeckTestOrder = (PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTestOrder)panelSetOrderCollection.GetPanelSetOrder(pdl122C3forHeadandNeckTest.PanelSetId);
+                interpretation.AppendLine();
+                interpretation.AppendLine(pdl122C3forHeadandNeckTestOrder.PanelSetName + ": " + pdl122C3forHeadandNeckTestOrder.Interpretation);
+
+                method.AppendLine();
+                method.AppendLine(pdl122C3forHeadandNeckTestOrder.PanelSetName + ": " + pdl122C3forHeadandNeckTestOrder.Method);
+                this.m_PDL122C3forHeadandNeckResult = pdl122C3forHeadandNeckTestOrder.Result;
+            }
+
+            if (panelSetOrderCollection.Exists(pdl122C3forNonsmallCellLungCancerTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTestOrder pdl122C3forNonsmallCellLungCancerTestOrder = (PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTestOrder)panelSetOrderCollection.GetPanelSetOrder(pdl122C3forNonsmallCellLungCancerTest.PanelSetId);
+                interpretation.AppendLine();
+                interpretation.AppendLine(pdl122C3forNonsmallCellLungCancerTestOrder.PanelSetName + ": " + pdl122C3forNonsmallCellLungCancerTestOrder.Interpretation);
+
+                method.AppendLine();
+                method.AppendLine(pdl122C3forNonsmallCellLungCancerTestOrder.PanelSetName + ": " + pdl122C3forNonsmallCellLungCancerTestOrder.Method);
+                this.m_PDL122C3forNonsmallCellLungCancerResult = pdl122C3forNonsmallCellLungCancerTestOrder.Result;
+            }
+
+            if (panelSetOrderCollection.Exists(pdl122C3forUrothelialCarcinomaTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTestOrder pdl122C3forUrothelialCarcinomaTestOrder = (PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTestOrder)panelSetOrderCollection.GetPanelSetOrder(pdl122C3forUrothelialCarcinomaTest.PanelSetId);
+                interpretation.AppendLine();
+                interpretation.AppendLine(pdl122C3forUrothelialCarcinomaTestOrder.PanelSetName + ": " + pdl122C3forUrothelialCarcinomaTestOrder.Interpretation);
+
+                method.AppendLine();
+                method.AppendLine(pdl122C3forUrothelialCarcinomaTestOrder.PanelSetName + ": " + pdl122C3forUrothelialCarcinomaTestOrder.Method);
+                this.m_PDL122C3forUrothelialCarcinomaResult = pdl122C3forUrothelialCarcinomaTestOrder.Result;
             }
 
             char[] lineFeedCharacters = { '\r', '\n' };
@@ -464,6 +584,11 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             YellowstonePathology.Business.Test.ALKForNSCLCByFISH.ALKForNSCLCByFISHTest alkTest = new ALKForNSCLCByFISH.ALKForNSCLCByFISHTest();
             YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTest brafTest = new BRAFMutationAnalysis.BRAFMutationAnalysisTest();
             YellowstonePathology.Business.Test.PDL1SP142.PDL1SP142Test pdl1SP142Test = new PDL1SP142.PDL1SP142Test();
+            YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest pdl122C3forEsophagealSquamousCellCarcinomaTest = new PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest();
+            YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest pdl122C3forGastricGEATest = new PDL122C3forGastricGEA.PDL122C3forGastricGEATest();
+            YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest pdl122C3forHeadandNeckTest = new PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest();
+            YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest pdl122C3forNonsmallCellLungCancerTest = new PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest();
+            YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest pdl122C3forUrothelialCarcinomaTest = new PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest();
 
             if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3Test.PanelSetId) == true)
             {
@@ -524,6 +649,56 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                     result.Message += MismatchMessage(pdl1SP142TestOrder.PanelSetName);
                 }
             }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forEsophagealSquamousCellCarcinomaTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTestOrder pdl122C3forEsophagealSquamousCellCarcinomaTestOrder = (PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forEsophagealSquamousCellCarcinomaTest.PanelSetId);
+                if (pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.Result != panelSetOrder.PDL122C3forEsophagealSquamousCellCarcinomaResult)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Warning;
+                    result.Message += MismatchMessage(pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forGastricGEATest.PanelSetId) == true)
+            {
+                Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder pdl122C3forGastricGEATestOrder = (PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forGastricGEATest.PanelSetId);
+                if (pdl122C3forGastricGEATestOrder.Result != panelSetOrder.PDL122C3forGastricGEAResult)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Warning;
+                    result.Message += MismatchMessage(pdl122C3forGastricGEATestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forHeadandNeckTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTestOrder pdl122C3forHeadandNeckTestOrder = (PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forHeadandNeckTest.PanelSetId);
+                if (pdl122C3forHeadandNeckTestOrder.Result != panelSetOrder.PDL122C3forHeadandNeckResult)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Warning;
+                    result.Message += MismatchMessage(pdl122C3forHeadandNeckTestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forNonsmallCellLungCancerTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTestOrder pdl122C3forNonsmallCellLungCancerTestOrder = (PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forNonsmallCellLungCancerTest.PanelSetId);
+                if (pdl122C3forNonsmallCellLungCancerTestOrder.Result != panelSetOrder.PDL122C3forNonsmallCellLungCancerResult)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Warning;
+                    result.Message += MismatchMessage(pdl122C3forNonsmallCellLungCancerTestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forUrothelialCarcinomaTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTestOrder pdl122C3forUrothelialCarcinomaTestOrder = (PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forUrothelialCarcinomaTest.PanelSetId);
+                if (pdl122C3forUrothelialCarcinomaTestOrder.Result != panelSetOrder.PDL122C3forUrothelialCarcinomaResult)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Warning;
+                    result.Message += MismatchMessage(pdl122C3forUrothelialCarcinomaTestOrder.PanelSetName);
+                }
+            }
         }
 
         private void AreComponentTestOrdersAccepted(AccessionOrder accessionOrder, Audit.Model.AuditResult result)
@@ -534,6 +709,11 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             YellowstonePathology.Business.Test.ALKForNSCLCByFISH.ALKForNSCLCByFISHTest alkTest = new ALKForNSCLCByFISH.ALKForNSCLCByFISHTest();
             YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTest brafTest = new BRAFMutationAnalysis.BRAFMutationAnalysisTest();
             YellowstonePathology.Business.Test.PDL1SP142.PDL1SP142Test pdl1SP142Test = new PDL1SP142.PDL1SP142Test();
+            YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest pdl122C3forEsophagealSquamousCellCarcinomaTest = new PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest();
+            YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest pdl122C3forGastricGEATest = new PDL122C3forGastricGEA.PDL122C3forGastricGEATest();
+            YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest pdl122C3forHeadandNeckTest = new PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest();
+            YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest pdl122C3forNonsmallCellLungCancerTest = new PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest();
+            YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest pdl122C3forUrothelialCarcinomaTest = new PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest();
 
             if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3Test.PanelSetId) == true)
             {
@@ -594,6 +774,56 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                     result.Message += NotAcceptedMessage(pdl1SP142TestOrder.PanelSetName);
                 }
             }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forEsophagealSquamousCellCarcinomaTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTestOrder pdl122C3forEsophagealSquamousCellCarcinomaTestOrder = (PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forEsophagealSquamousCellCarcinomaTest.PanelSetId);
+                if (pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.Accepted == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotAcceptedMessage(pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forGastricGEATest.PanelSetId) == true)
+            {
+                Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder pdl122C3forGastricGEATestOrder = (PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forGastricGEATest.PanelSetId);
+                if (pdl122C3forGastricGEATestOrder.Accepted == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotAcceptedMessage(pdl122C3forGastricGEATestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forHeadandNeckTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTestOrder pdl122C3forHeadandNeckTestOrder = (PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forHeadandNeckTest.PanelSetId);
+                if (pdl122C3forHeadandNeckTestOrder.Accepted == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotAcceptedMessage(pdl122C3forHeadandNeckTestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forNonsmallCellLungCancerTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTestOrder pdl122C3forNonsmallCellLungCancerTestOrder = (PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forNonsmallCellLungCancerTest.PanelSetId);
+                if (pdl122C3forNonsmallCellLungCancerTestOrder.Accepted == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotAcceptedMessage(pdl122C3forNonsmallCellLungCancerTestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forUrothelialCarcinomaTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTestOrder pdl122C3forUrothelialCarcinomaTestOrder = (PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forUrothelialCarcinomaTest.PanelSetId);
+                if (pdl122C3forUrothelialCarcinomaTestOrder.Accepted == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotAcceptedMessage(pdl122C3forUrothelialCarcinomaTestOrder.PanelSetName);
+                }
+            }
         }
 
         private void AreComponentTestOrdersFinal(AccessionOrder accessionOrder, Audit.Model.AuditResult result)
@@ -604,6 +834,11 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             YellowstonePathology.Business.Test.ALKForNSCLCByFISH.ALKForNSCLCByFISHTest alkTest = new ALKForNSCLCByFISH.ALKForNSCLCByFISHTest();
             YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTest brafTest = new BRAFMutationAnalysis.BRAFMutationAnalysisTest();
             YellowstonePathology.Business.Test.PDL1SP142.PDL1SP142Test pdl1SP142Test = new PDL1SP142.PDL1SP142Test();
+            YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest pdl122C3forEsophagealSquamousCellCarcinomaTest = new PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest();
+            YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest pdl122C3forGastricGEATest = new PDL122C3forGastricGEA.PDL122C3forGastricGEATest();
+            YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest pdl122C3forHeadandNeckTest = new PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest();
+            YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest pdl122C3forNonsmallCellLungCancerTest = new PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest();
+            YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest pdl122C3forUrothelialCarcinomaTest = new PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest();
 
             if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3Test.PanelSetId) == true)
             {
@@ -664,6 +899,56 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                     result.Message += NotFinaledMessage(pdl1SP142TestOrder.PanelSetName);
                 }
             }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forEsophagealSquamousCellCarcinomaTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTestOrder pdl122C3forEsophagealSquamousCellCarcinomaTestOrder = (PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forEsophagealSquamousCellCarcinomaTest.PanelSetId);
+                if (pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.Final == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotFinaledMessage(pdl122C3forEsophagealSquamousCellCarcinomaTestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forGastricGEATest.PanelSetId) == true)
+            {
+                Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder pdl122C3forGastricGEATestOrder = (PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forGastricGEATest.PanelSetId);
+                if (pdl122C3forGastricGEATestOrder.Final == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotFinaledMessage(pdl122C3forGastricGEATestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forHeadandNeckTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTestOrder pdl122C3forHeadandNeckTestOrder = (PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forHeadandNeckTest.PanelSetId);
+                if (pdl122C3forHeadandNeckTestOrder.Final == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotFinaledMessage(pdl122C3forHeadandNeckTestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forNonsmallCellLungCancerTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTestOrder pdl122C3forNonsmallCellLungCancerTestOrder = (PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forNonsmallCellLungCancerTest.PanelSetId);
+                if (pdl122C3forNonsmallCellLungCancerTestOrder.Final == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotFinaledMessage(pdl122C3forNonsmallCellLungCancerTestOrder.PanelSetName);
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forUrothelialCarcinomaTest.PanelSetId) == true)
+            {
+                Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTestOrder pdl122C3forUrothelialCarcinomaTestOrder = (PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(pdl122C3forUrothelialCarcinomaTest.PanelSetId);
+                if (pdl122C3forUrothelialCarcinomaTestOrder.Final == false)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotFinaledMessage(pdl122C3forUrothelialCarcinomaTestOrder.PanelSetName);
+                }
+            }
         }
 
         private void AreTestResultsPresent(AccessionOrder accessionOrder, Audit.Model.AuditResult result)
@@ -674,6 +959,11 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             YellowstonePathology.Business.Test.ALKForNSCLCByFISH.ALKForNSCLCByFISHTest alkTest = new ALKForNSCLCByFISH.ALKForNSCLCByFISHTest();
             YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTest brafTest = new BRAFMutationAnalysis.BRAFMutationAnalysisTest();
             YellowstonePathology.Business.Test.PDL1SP142.PDL1SP142Test pdl1SP142Test = new PDL1SP142.PDL1SP142Test();
+            YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest pdl122C3forEsophagealSquamousCellCarcinomaTest = new PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest();
+            YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest pdl122C3forGastricGEATest = new PDL122C3forGastricGEA.PDL122C3forGastricGEATest();
+            YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest pdl122C3forHeadandNeckTest = new PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest();
+            YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest pdl122C3forNonsmallCellLungCancerTest = new PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest();
+            YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest pdl122C3forUrothelialCarcinomaTest = new PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest();
 
             if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3Test.PanelSetId) == true)
             {
@@ -728,6 +1018,51 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                     result.Message += NotFilledMessage("PDL1SP142Result");
                 }
             }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forEsophagealSquamousCellCarcinomaTest.PanelSetId) == true)
+            {
+                if (string.IsNullOrEmpty(this.m_PDL122C3forEsophagealSquamousCellCarcinomaResult) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotFilledMessage("PDL122C3forEsophagealSquamousCellCarcinomaResult");
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forGastricGEATest.PanelSetId) == true)
+            {
+                if (string.IsNullOrEmpty(this.m_PDL122C3forGastricGEAResult) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotFilledMessage("PDL122C3forGastricGEAResult");
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forHeadandNeckTest.PanelSetId) == true)
+            {
+                if (string.IsNullOrEmpty(this.m_PDL122C3forHeadandNeckResult) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotFilledMessage("PDL122C3forHeadandNeckResult");
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forNonsmallCellLungCancerTest.PanelSetId) == true)
+            {
+                if (string.IsNullOrEmpty(this.m_PDL122C3forNonsmallCellLungCancerResult) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotFilledMessage("PDL122C3forNonsmallCellLungCancerResult");
+                }
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forUrothelialCarcinomaTest.PanelSetId) == true)
+            {
+                if (string.IsNullOrEmpty(this.m_PDL122C3forUrothelialCarcinomaResult) == true)
+                {
+                    result.Status = Audit.Model.AuditStatusEnum.Failure;
+                    result.Message += NotFilledMessage("PDL122C3forUrothelialCarcinomaResult");
+                }
+            }
         }
 
         public void DoesPDL122C3ResultMatch(string result, Audit.Model.AuditResult auditResult)
@@ -778,6 +1113,51 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
         public void DoesPDL1SP142ResultMatch(string result, Audit.Model.AuditResult auditResult)
         {
             if (this.Final == true && this.m_PDL1SP142Result != result)
+            {
+                auditResult.Status = Audit.Model.AuditStatusEnum.Warning;
+                auditResult.Message += MismatchMessage(this.PanelSetName);
+            }
+        }
+
+        public void DoesPDL122C3forEsophagealSquamousCellCarcinomaResultMatch(string result, Audit.Model.AuditResult auditResult)
+        {
+            if (this.Final == true && this.m_PDL122C3forEsophagealSquamousCellCarcinomaResult != result)
+            {
+                auditResult.Status = Audit.Model.AuditStatusEnum.Warning;
+                auditResult.Message += MismatchMessage(this.PanelSetName);
+            }
+        }
+
+        public void DoesPDL122C3forGastricGEAResultMatch(string result, Audit.Model.AuditResult auditResult)
+        {
+            if (this.Final == true && this.m_PDL122C3forGastricGEAResult != result)
+            {
+                auditResult.Status = Audit.Model.AuditStatusEnum.Warning;
+                auditResult.Message += MismatchMessage(this.PanelSetName);
+            }
+        }
+
+        public void DoesPDL122C3forHeadandNeckResultMatch(string result, Audit.Model.AuditResult auditResult)
+        {
+            if (this.Final == true && this.m_PDL122C3forHeadandNeckResult != result)
+            {
+                auditResult.Status = Audit.Model.AuditStatusEnum.Warning;
+                auditResult.Message += MismatchMessage(this.PanelSetName);
+            }
+        }
+
+        public void DoesPDL122C3forNonsmallCellLungCancerResultMatch(string result, Audit.Model.AuditResult auditResult)
+        {
+            if (this.Final == true && this.m_PDL122C3forNonsmallCellLungCancerResult != result)
+            {
+                auditResult.Status = Audit.Model.AuditStatusEnum.Warning;
+                auditResult.Message += MismatchMessage(this.PanelSetName);
+            }
+        }
+
+        public void DoesPDL122C3forUrothelialCarcinomaResultMatch(string result, Audit.Model.AuditResult auditResult)
+        {
+            if (this.Final == true && this.m_PDL122C3forUrothelialCarcinomaResult != result)
             {
                 auditResult.Status = Audit.Model.AuditStatusEnum.Warning;
                 auditResult.Message += MismatchMessage(this.PanelSetName);

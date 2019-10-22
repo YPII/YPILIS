@@ -149,12 +149,48 @@ namespace YellowstonePathology.UI.Surgical
             }
         }
 
-        private void HyperLinkPDL1_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkPDL1ESCC_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Test.PDL122C3.PDL122C3Test pdl1Test = new Business.Test.PDL122C3.PDL122C3Test();
-            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(pdl1Test.PanelSetId) == false)
+            YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest test = new Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest();
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId) == false)
             {
-                this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(pdl1Test));
+                this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(test));
+            }
+        }
+
+        private void HyperLinkPDL1Gastric_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest test = new Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest();
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId) == false)
+            {
+                this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(test));
+            }
+        }
+
+        private void HyperLinkPDL1hn_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest test = new Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest();
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId) == false)
+            {
+                this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(test));
+            }
+        }
+
+        private void HyperLinkPDL1nscl_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest test = new Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest();
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId) == false)
+            {
+                this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(test));
+            }
+        }
+
+        private void HyperLinkPDL1uc_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest test = new Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest();
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId) == false)
+            {
+                this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(test));
             }
         }
 

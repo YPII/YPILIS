@@ -183,7 +183,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.NeoARRAYSNPCytogeneticProfileTest.NeoARRAYSNPCytogeneticProfileTest());
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.PanelSetNextGenMyeloidDisordersProfile());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.PDL1SP142.PDL1SP142Test());
-            panelSetCollection.Add(new YellowstonePathology.Business.Test.PDL122C3.PDL122C3Test());
+            //panelSetCollection.Add(new YellowstonePathology.Business.Test.PDL122C3.PDL122C3Test());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.NeoTYPEBrainTumorProfile.NeoTYPEBrainTumorProfileTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.CarbonicAnhydraseIXCAIX.CarbonicAnhydraseIXCAIXTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.NeoTYPEGastricTumorProfile.NeoTYPEGastricTumorProfileTest());
@@ -213,6 +213,11 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.TET2MutationAnalysis.TET2MutationAnalysisTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.WT1MutationAnalsysis.WT1MutationAnalsysisTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.PanTRK.PanTRKTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest());
 
             //ARUP
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.PanelSetArupBraf());

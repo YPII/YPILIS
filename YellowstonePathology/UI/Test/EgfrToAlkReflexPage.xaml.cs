@@ -38,6 +38,21 @@ namespace YellowstonePathology.UI.Test
         public delegate void OrderBRAFEventHandler(object sender, EventArgs e);
         public event OrderBRAFEventHandler OrderBRAF;
 
+        public delegate void OrderPDL122C3EsophagealSquamousCellEventHandler(object sender, EventArgs e);
+        public event OrderPDL122C3EsophagealSquamousCellEventHandler OrderPDL122C3EsophagealSquamousCell;
+
+        public delegate void OrderPDL122C3GastricGEAEventHandler(object sender, EventArgs e);
+        public event OrderPDL122C3GastricGEAEventHandler OrderPDL122C3GastricGEA;
+
+        public delegate void OrderPDL122C3HeadandNeckEventHandler(object sender, EventArgs e);
+        public event OrderPDL122C3HeadandNeckEventHandler OrderPDL122C3HeadandNeck;
+
+        public delegate void OrderPDL122C3NonsmallCellLungEventHandler(object sender, EventArgs e);
+        public event OrderPDL122C3NonsmallCellLungEventHandler OrderPDL122C3NonsmallCellLung;
+
+        public delegate void OrderPDL122C3UrothelialEventHandler(object sender, EventArgs e);
+        public event OrderPDL122C3UrothelialEventHandler OrderPDL122C3Urothelial;
+
         private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
 		private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
 
@@ -144,7 +159,33 @@ namespace YellowstonePathology.UI.Test
             this.OrderBRAF(this, new EventArgs());
         }
 
-		private void HyperLinkShowDocument_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkOrderPDL122C3EsophagealSquamousCell_Click(object sender, RoutedEventArgs e)
+        {
+            this.OrderPDL122C3EsophagealSquamousCell(this, new EventArgs());
+        }
+
+        private void HyperLinkOrderPDL122C3GastricGEA_Click(object sender, RoutedEventArgs e)
+        {
+            this.OrderPDL122C3GastricGEA(this, new EventArgs());
+        }
+
+        private void HyperLinkOrderPDL122C3HeadandNeck_Click(object sender, RoutedEventArgs e)
+        {
+            this.OrderPDL122C3HeadandNeck(this, new EventArgs());
+        }
+
+        private void HyperLinkOrderPDL122C3NonsmallCellLung_Click(object sender, RoutedEventArgs e)
+        {
+            this.OrderPDL122C3NonsmallCellLung(this, new EventArgs());
+        }
+
+        private void HyperLinkOrderPDL122C3Urothelial_Click(object sender, RoutedEventArgs e)
+        {
+            this.OrderPDL122C3Urothelial(this, new EventArgs());
+        }
+
+
+        private void HyperLinkShowDocument_Click(object sender, RoutedEventArgs e)
 		{            
             YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisWordDocument report = new Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisWordDocument(this.m_AccessionOrder, this.m_EGFRToALKReflexAnalysisTestOrder, Business.Document.ReportSaveModeEnum.Draft);
             report.Render();

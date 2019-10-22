@@ -385,6 +385,21 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                 case 340:
                     view = new YellowstonePathology.Business.Test.PlateletAssociatedAntibodiesV2.PlateletAssociatedAntibodiesV2EPICOBXView(accessionOrder, reportNo, obxCount);
                     break;
+                case 365:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3EsophSquamCellCarcinomaEPICOBXView(accessionOrder, reportNo, obxCount);
+                    break;
+                case 366:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEAEPICObxView(accessionOrder, reportNo, obxCount);
+                    break;
+                case 367:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckEPICObxView(accessionOrder, reportNo, obxCount);
+                    break;
+                case 368:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaEpicObxView(accessionOrder, reportNo, obxCount);
+                    break;
+                case 369:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerEPICObxView(accessionOrder, reportNo, obxCount);
+                    break;
             }
             return view;
         }
