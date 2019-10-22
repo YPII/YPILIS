@@ -34,6 +34,10 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Order</TextBlock>
@@ -62,10 +66,26 @@
                 </TextBlock>
 
                 <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0" TextWrapping="Wrap">                    
-                    <Hyperlink Click="HyperLinkPDL1_Click">PD-L1</Hyperlink>
+                    <Hyperlink Click="HyperLinkPDL1ESCC_Click">PD-L1 (22C3) for Esophageal Squamous Cell Carcinoma</Hyperlink>
                 </TextBlock>
 
                 <TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,0" TextWrapping="Wrap">                    
+                    <Hyperlink Click="HyperLinkPDL1Gastric_Click">PD-L1 (22C3) for Gastric/GEA</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="9" Margin="5,3,0,0" TextWrapping="Wrap">                    
+                    <Hyperlink Click="HyperLinkPDL1hn_Click">PD-L1 (22C3) for Head and Neck</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="10" Margin="5,3,0,0" TextWrapping="Wrap">                    
+                    <Hyperlink Click="HyperLinkPDL1nscl_Click">PD-L1 (22C3) for Non-small Cell Lung Cancer</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="11" Margin="5,3,0,0" TextWrapping="Wrap">                    
+                    <Hyperlink Click="HyperLinkPDL1uc_Click">PD-L1 (22C3) for Urothelial Carcinoma</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="12" Margin="5,3,0,0" TextWrapping="Wrap">                    
                     <Hyperlink Click="HyperLinkBoneMarrowSummary_Click">Bone Marrow Summary</Hyperlink>
                 </TextBlock>
             </Grid>

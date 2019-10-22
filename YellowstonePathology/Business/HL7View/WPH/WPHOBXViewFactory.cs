@@ -295,6 +295,21 @@ namespace YellowstonePathology.Business.HL7View.WPH
                 case 313:
                     view = new YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryWPHOBXView(accessionOrder, reportNo, obxCount);
                     break;
+                case 365:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3EsophSquamCellCarcinomaWPHOBXView(accessionOrder, reportNo, obxCount);
+                    break;
+                case 366:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEAWPHOBXView(accessionOrder, reportNo, obxCount);
+                    break;
+                case 367:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckWPHOBXView(accessionOrder, reportNo, obxCount);
+                    break;
+                case 368:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaWPHOBXView(accessionOrder, reportNo, obxCount);
+                    break;
+                case 369:
+                    view = new YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerWPHOBXView(accessionOrder, reportNo, obxCount);
+                    break;
             }
             return view;
         }

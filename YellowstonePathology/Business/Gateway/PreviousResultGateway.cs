@@ -170,7 +170,12 @@ namespace YellowstonePathology.Business.Gateway
                 "' ROS1: ', case when b.ROS1ByFISHResult is null then '' else b.ROS1ByFISHResult end, " +
                 "' PDL1SP142: ', case when b.PDL1SP142Result is null then '' else b.PDL1SP142Result end, " +
                 "' PDL122C3: ', case when b.PDL122C3Result is null then '' else b.PDL122C3Result end, " +
-                "' BRAF: ', case when b.BRAFMutationAnalysisResult is null then '' else b.BRAFMutationAnalysisResult end) `Result`, " +
+                "' BRAF: ', case when b.BRAFMutationAnalysisResult is null then '' else b.BRAFMutationAnalysisResult end, " +
+                "' PDL122C3 Esoph. Squam. Cell: ', case when b.PDL122C3forEsophagealSquamousCellCarcinomaResult is null then '' else b.PDL122C3forEsophagealSquamousCellCarcinomaResult end, " +
+                "' PDL122C3 Gastric/GEA: ', case when b.PDL122C3forGastricGEAResult is null then '' else b.PDL122C3forGastricGEAResult end, " +
+                "' PDL122C3 Head and Neck: ', case when b.PDL122C3forHeadandNeckResult is null then '' else b.PDL122C3forHeadandNeckResult end, " +
+                "' PDL122C3 Lung: ', case when b.PDL122C3forNonsmallCellLungCancerResult is null then '' else b.PDL122C3forNonsmallCellLungCancerResult end, " +
+                "' PDL122C3 Urothelial: ', case when b.PDL122C3forUrothelialCarcinomaResult is null then '' else b.PDL122C3forUrothelialCarcinomaResult end) `Result`, " +
                 "pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
                 "FROM tblAccessionOrder a " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
@@ -190,6 +195,56 @@ namespace YellowstonePathology.Business.Gateway
                 "and pso.OrderDate between @StartDate and @EndDate " +
                 "and pso.final = 1 order by pso.FinalDate desc;";
             this.m_TableDictionary.Add("tblCKITTestOrder", ckitTestOrder);
+
+            string pdl122C3forEsophagealSquamousCellCarcinomaTestOrder = "Select b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblPDL122C3forEsophagealSquamousCellCarcinomaTestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblPDL122C3forEsophagealSquamousCellCarcinomaTestOrder", pdl122C3forEsophagealSquamousCellCarcinomaTestOrder);
+
+            string pdl122C3forGastricGEATestOrder = "Select b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblPDL122C3forGastricGEATestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblPDL122C3forGastricGEATestOrder", pdl122C3forGastricGEATestOrder);
+
+            string pdl122C3forHeadandNeckTestOrder = "Select b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblPDL122C3forHeadandNeckTestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblPDL122C3forHeadandNeckTestOrder", pdl122C3forHeadandNeckTestOrder);
+
+            string pdl122C3forNonsmallCellLungCancerTestOrder = "Select b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblPDL122C3forNonsmallCellLungCancerTestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblPDL122C3forNonsmallCellLungCancerTestOrder", pdl122C3forNonsmallCellLungCancerTestOrder);
+
+            string pdl122C3forUrothelialCarcinomaTestOrder = "Select b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblPDL122C3forUrothelialCarcinomaTestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblPDL122C3forUrothelialCarcinomaTestOrder", pdl122C3forUrothelialCarcinomaTestOrder);
         }
 
         public YellowstonePathology.Business.PreviousResultCollection GetPreviousResultsByTestFinal(int panelSetId, DateTime startDate, DateTime endDate, string tableName)

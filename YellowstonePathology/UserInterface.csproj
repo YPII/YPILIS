@@ -271,7 +271,7 @@
     <Compile Include="Business\Audit.Model\PapCorrelationIsRequiredAudit.cs" />
     <Compile Include="Business\Audit.Model\PathologistSignOutAuditCollection.cs" />
     <Compile Include="Business\Audit.Model\PathologistSignoutIsHandledAuditCollection.cs" />
-    <Compile Include="Business\Audit.Model\PDL1Audit.cs" />
+    <Compile Include="Business\Audit.Model\PDL1NonsmallCellLungCancerAudit.cs" />
     <Compile Include="Business\Audit.Model\PhoneNumberAudit.cs" />
     <Compile Include="Business\Audit.Model\PhysicianNotSetAudit.cs" />
     <Compile Include="Business\Audit.Model\PNHOnBoneMarrowSpecimenAudit.cs" />
@@ -1269,6 +1269,41 @@
     <Compile Include="Business\Test\ParvovirusB19ByPCR\ParvovirusB19ByPCRTest.cs" />
     <Compile Include="Business\Test\ParvovirusB19ByIHC\ParvovirusB19ByIHCTest.cs" />
     <Compile Include="Business\Test\PAX2\PAX2Test.cs" />
+    <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3EsophSquamCellCarcinomaCMMCNTEView.cs" />
+    <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3EsophSquamCellCarcinomaEPICOBXView.cs" />
+    <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3EsophSquamCellCarcinomaSysGenAmendmentText.cs" />
+    <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3EsophSquamCellCarcinomaWordDocument.cs" />
+    <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3EsophSquamCellCarcinomaWPHOBXView.cs" />
+    <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3forEsophagealSquamousCellCarcinomaTest.cs" />
+    <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3forEsophagealSquamousCellCarcinomaTestOrder.cs" />
+    <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEAEpicObxView.cs" />
+    <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEATest.cs" />
+    <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEATestOrder.cs" />
+    <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEAWordDocument.cs" />
+    <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEACMMCNTEView.cs" />
+    <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEAWPHOBXView.cs" />
+    <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEASystemGeneratedAmendmentText.cs" />
+    <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckEpicObxView.cs" />
+    <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckTest.cs" />
+    <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckTestOrder.cs" />
+    <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckWordDocument.cs" />
+    <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckCMMCNTEView.cs" />
+    <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckWPHOBXView.cs" />
+    <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckSystemGeneratedAmendmentText.cs" />
+    <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerEpicObxView.cs" />
+    <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerTest.cs" />
+    <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerTestOrder.cs" />
+    <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerWordDocument.cs" />
+    <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerCMMCNTEView.cs" />
+    <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerWPHOBXView.cs" />
+    <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerSystemGeneratedAmendmentText.cs" />
+    <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaEpicObxView.cs" />
+    <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaTest.cs" />
+    <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaTestOrder.cs" />
+    <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaWordDocument.cs" />
+    <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaCMMCNTEView.cs" />
+    <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaWPHOBXView.cs" />
+    <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3\PDL22C3CMMCNTEView.cs" />
     <Compile Include="Business\Test\PDL1288\PDL1288Test.cs" />
     <Compile Include="Business\Test\PDL1SP142FDA\PDL1SP142FDATest.cs" />
@@ -3751,6 +3786,26 @@
       <DependentUpon>HER2AmplificationSummaryResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Test\HER2AmplificationSummaryResultPath.cs" />
+    <Compile Include="UI\Test\PDL122C3forEsophagealSquamousCellCarcinomaResultPage.xaml.cs">
+      <DependentUpon>PDL122C3forEsophagealSquamousCellCarcinomaResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\PDL122C3forEsophagealSquamousCellCarcinomaResultPath.cs" />
+    <Compile Include="UI\Test\PDL122C3forGastricGEAResultPage.xaml.cs">
+      <DependentUpon>PDL122C3forGastricGEAResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\PDL122C3forGastricGEAResultPath.cs" />
+    <Compile Include="UI\Test\PDL122C3forHeadandNeckResultPage.xaml.cs">
+      <DependentUpon>PDL122C3forHeadandNeckResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\PDL122C3forHeadandNeckResultPath.cs" />
+    <Compile Include="UI\Test\PDL122C3forNonsmallCellLungCancerResultPage.xaml.cs">
+      <DependentUpon>PDL122C3forNonsmallCellLungCancerResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\PDL122C3forNonsmallCellLungCancerResultPath.cs" />
+    <Compile Include="UI\Test\PDL122C3forUrothelialCarcinomaResultPage.xaml.cs">
+      <DependentUpon>PDL122C3forUrothelialCarcinomaResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\PDL122C3forUrothelialCarcinomaResultPath.cs" />
     <Compile Include="UI\Test\SlideTrackingResultPage.xaml.cs">
       <DependentUpon>SlideTrackingResultPage.xaml</DependentUpon>
     </Compile>
@@ -5771,6 +5826,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Test\HER2AmplificationSummaryResultPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Test\PDL122C3forEsophagealSquamousCellCarcinomaResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Test\PDL122C3forGastricGEAResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Test\PDL122C3forHeadandNeckResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Test\PDL122C3forNonsmallCellLungCancerResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Test\PDL122C3forUrothelialCarcinomaResultPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
