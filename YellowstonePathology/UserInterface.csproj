@@ -338,6 +338,8 @@
     <Compile Include="Business\Billing.Model\PropertyChanges.cs" />
     <Compile Include="Business\Billing.Model\SimulationSerializer.cs" />
     <Compile Include="Business\Billing.Model\SVHNoCDMMailMessage.cs" />
+    <Compile Include="Business\CalendarPathologist.cs" />
+    <Compile Include="Business\CalendarPathologistCollection.cs" />
     <Compile Include="Business\Client.Model\ClientDistribution.cs" />
     <Compile Include="Business\Client.Model\ClientDistributionCollection.cs" />
     <Compile Include="Business\Client.Model\HPV1618CompoundStandingOrderRule1.cs" />
@@ -1084,8 +1086,13 @@
     <Compile Include="Business\PanelSet.Model\PanelSetPMLRARAByFish.cs" />
     <Compile Include="Business\PanelSet.Model\ShipMaterialTest.cs" />
     <Compile Include="Business\ParseSpecimenOrderIdResult.cs" />
+<<<<<<< HEAD
     <Compile Include="Business\PathologistCalendarCollection.cs" />
     <Compile Include="Business\PathologyCalendar.cs" />
+=======
+    <Compile Include="Business\PathologistCalendar.cs" />
+    <Compile Include="Business\PathologistCalendarCollection.cs" />
+>>>>>>> 92a9298d26283fb9b336860bd807920c31fc886f
     <Compile Include="Business\Patient.Model\Address.cs" />
     <Compile Include="Business\Persistence\BatchMaterialTrackingLogDocumentBuilder.cs" />
     <Compile Include="Business\Persistence\DocumentTestBuilders.cs" />
@@ -1128,6 +1135,7 @@
     <Compile Include="Business\Test.Model\TestOrderStatusView.cs" />
     <Compile Include="Business\Test.Model\TestOrderStatusViewCollection.cs" />
     <Compile Include="Business\Test\Adenovirus\AdenovirusTest.cs" />
+    <Compile Include="Business\Test\ALLFusionProfile\ALLFusionProfileTest.cs" />
     <Compile Include="Business\Test\ALLPediatricFISHPanel\ALLPediatricFISHPanelTest.cs" />
     <Compile Include="Business\Test\AMLPrognosticProfile\AMLPrognosticProfileTestOrder.cs" />
     <Compile Include="Business\Test\AndrogenReceptor\AndrogenReceptorEPICOBXView.cs" />
