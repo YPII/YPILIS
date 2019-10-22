@@ -1069,6 +1069,8 @@
     <Compile Include="Business\PanelSet.Model\PanelSetPMLRARAByFish.cs" />
     <Compile Include="Business\PanelSet.Model\ShipMaterialTest.cs" />
     <Compile Include="Business\ParseSpecimenOrderIdResult.cs" />
+    <Compile Include="Business\PathologistCalendar.cs" />
+    <Compile Include="Business\PathologistCalendarCollection.cs" />
     <Compile Include="Business\Patient.Model\Address.cs" />
     <Compile Include="Business\Persistence\BatchMaterialTrackingLogDocumentBuilder.cs" />
     <Compile Include="Business\Persistence\DocumentTestBuilders.cs" />
@@ -3223,6 +3225,9 @@
     <Compile Include="UI\Gross\DictationTemplateRedis.cs" />
     <Compile Include="UI\Gross\SpecimenSelectionPage.xaml.cs">
       <DependentUpon>SpecimenSelectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PathologistCalendarDialog.xaml.cs">
+      <DependentUpon>PathologistCalendarDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SVHLabelDialog.xaml.cs">
       <DependentUpon>SVHLabelDialog.xaml</DependentUpon>
@@ -5379,6 +5384,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Page Include="UI\PathologistCalendarDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\SVHLabelDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

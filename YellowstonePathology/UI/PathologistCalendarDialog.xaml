@@ -1,0 +1,28 @@
+﻿<Window x:Class="YellowstonePathology.UI.PathologistCalendarDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI"
+        mc:Ignorable="d"
+        Title="Pathologist Calendar" Height="600" Width="1200" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" ItemsSource="{Binding Path=PathologistCalendarCollection}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Date" Width="150" DisplayMemberBinding="{Binding Path=CalendarDisplayDate}" />
+                    <GridViewColumn Header="Pathologist" Width="200" DisplayMemberBinding="{Binding Path=PathologistName}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
