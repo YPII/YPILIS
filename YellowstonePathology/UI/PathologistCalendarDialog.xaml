@@ -5,24 +5,106 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI"
         mc:Ignorable="d"
-        Title="Pathologist Calendar" Height="600" Width="1200" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+        Title="Pathologist Calendar" Height="800" Width="1100" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" FontSize="10">
+    
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ListView Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" ItemsSource="{Binding Path=PathologistCalendarCollection}">
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Margin="10,2,2,2" VerticalAlignment="Center">Date:</TextBlock>
+            <TextBox Name="TextBoxStartDate" Margin="2,2,2,2" Width="200" Text="{Binding Path=StartDate, Converter={StaticResource ShortDateConverter}}" />
+            <Button Name="ButtonGetCalendar" Margin="2,2,2,2" Height="27" Width="100" Click="ButtonGetCalendar_Click">Get Calendar</Button>
+        </StackPanel>
+        
+        <ListView Name="ListViewPatholigistStatus" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" ItemsSource="{Binding Path=PathologistCalendarCollection}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Date" Width="150" DisplayMemberBinding="{Binding Path=CalendarDisplayDate}" />
-                    <GridViewColumn Header="Pathologist" Width="200" DisplayMemberBinding="{Binding Path=PathologistName}" />
+                    <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Path=CalendarDisplayDate}" />
+                    <GridViewColumn Header="Dr Bibbey">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[0].Status}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Dr Brown">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[1].Status}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Dr Durden">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[2].Status}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Dr Emerick">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[3].Status}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Dr Luem">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[4].Status}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Dr Messner">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[5].Status}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Dr Nero">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[6].Status}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Dr Schneider">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[7].Status}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <Button Name="ButtonAddMonth" Grid.Column="0" Grid.Row="2" Margin="5,5,5,5" Width="100" Height="30" HorizontalAlignment="Center" Click="ButtonAddMonth_Click">Add Month</Button>
+        <Button Name="ButtonOK" Grid.Column="0" Grid.Row="2" Margin="5,5,5,5" Width="100" Height="30" HorizontalAlignment="Right" Click="ButtonOK_Click">OK</Button>
     </Grid>
 </Window>

@@ -10,16 +10,25 @@ namespace YellowstonePathology.Business
 {
     public class PathologistCalendarCollection : ObservableCollection<PathologistCalendar>
     {
+        private List<string> m_Pathologists;
 
-        private PathologistCalendarCollection()
+        public PathologistCalendarCollection()
         {
-
+            this.m_Pathologists = new List<string>();
+            this.m_Pathologists.Add("Dr Bibbey");
+            this.m_Pathologists.Add("Dr Brown");
+            this.m_Pathologists.Add("Dr Durden");
+            this.m_Pathologists.Add("Dr Emerick");
+            this.m_Pathologists.Add("Dr Luem");
+            this.m_Pathologists.Add("Dr Messner");
+            this.m_Pathologists.Add("Dr Nero");
+            this.m_Pathologists.Add("Dr Schneider");
         }
 
-        private static PathologistCalendarCollection Load(DateTime startDate, DateTime endDate)
+        public static PathologistCalendarCollection Load(DateTime startDate, DateTime endDate)
         {
             PathologistCalendarCollection result = new PathologistCalendarCollection();
-            MySqlCommand cmd = new MySqlCommand("Select JSONValue from tbPathologistCalendarCollection where CalendarDate between @StartDate and @EndDate;");
+            MySqlCommand cmd = new MySqlCommand("Select JSONValue from tblPathologistCalendar where CalendarDate between @StartDate and @EndDate;");
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@StartDate", startDate);
             cmd.Parameters.AddWithValue("@EndDate", endDate);
@@ -42,19 +51,43 @@ namespace YellowstonePathology.Business
                     }
                 }
             }
-            result = Sort(result);
             return result;
         }
 
-        private static PathologistCalendarCollection Sort(PathologistCalendarCollection unSortedCollection)
+        public List<string> Pathologists
         {
-            PathologistCalendarCollection result = new PathologistCalendarCollection();
-            IOrderedEnumerable<PathologistCalendar> orderedResult = unSortedCollection.OrderBy(i => i.CalendarDate).ThenBy(i => i.PathologistName);
-            foreach (PathologistCalendar pathologistCalendar in orderedResult)
+            get { return this.m_Pathologists; }
+        }
+
+        public void Save()
+        {
+            foreach(PathologistCalendar pathologistCalendar in this)
             {
-                result.Add(pathologistCalendar);
+                pathologistCalendar.Save();
             }
-            return result;
+        }
+
+        public void AddMonth(DateTime startDate)
+        {
+            if(startDate.Day != 1)
+            {
+                startDate = startDate.AddDays(-(startDate.Day - 1));
+            }
+            DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+            if (this.CanAddMonth(startDate, endDate) == true)
+            {
+                for(DateTime curDate = startDate; curDate <= endDate; curDate = curDate.AddDays(1))
+                {
+                    PathologistCalendar pathologistCalendar = new PathologistCalendar(curDate, this.m_Pathologists);
+                    pathologistCalendar.Save();
+                }
+            }
+        }
+
+        private bool CanAddMonth(DateTime startDate, DateTime endDate)
+        {
+            PathologistCalendarCollection tmp = PathologistCalendarCollection.Load(startDate, endDate);
+            return tmp.Count > 0 ? false : true;
         }
     }
 }

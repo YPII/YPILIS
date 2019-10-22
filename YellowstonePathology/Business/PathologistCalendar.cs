@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Data;
@@ -10,11 +11,25 @@ namespace YellowstonePathology.Business
     public class PathologistCalendar
     {
         private DateTime m_CalendarDate;
-        private string m_PathologistName;
-        private string m_Status;
+        private CalendarPathologistCollection m_CalendarPathologistCollection;
 
         public PathologistCalendar()
-        { }
+        {
+            this.m_CalendarPathologistCollection = new CalendarPathologistCollection();
+        }
+
+        public PathologistCalendar(DateTime calendarDate, List<string> pathologists)
+        {
+            this.m_CalendarDate = calendarDate;
+            this.m_CalendarPathologistCollection = new CalendarPathologistCollection();
+            foreach (string pathologist in pathologists)
+            {
+                CalendarPathologist calendarPathologist = new CalendarPathologist();
+                calendarPathologist.PathologistName = pathologist;
+                calendarPathologist.Status = "In";
+                this.m_CalendarPathologistCollection.Add(calendarPathologist);
+            }
+        }
 
         public DateTime CalendarDate
         {
@@ -22,16 +37,15 @@ namespace YellowstonePathology.Business
             set { this.m_CalendarDate = value; }
         }
 
-        public string PathologistName
+        public CalendarPathologistCollection CalendarPathologistCollection
         {
-            get { return this.m_PathologistName; }
-            set { this.m_PathologistName = value; }
+            get { return this.m_CalendarPathologistCollection; }
+            set { this.m_CalendarPathologistCollection = value; }
         }
 
-        public string Status
+        public string CalendarDisplayDate
         {
-            get { return this.m_Status; }
-            set { this.m_Status = value; }
+            get { return this.m_CalendarDate.ToString("ddd MMM d"); }
         }
 
         public string ToJSON()
@@ -45,7 +59,7 @@ namespace YellowstonePathology.Business
         public void Save()
         {
             string jString = this.ToJSON();
-            MySqlCommand cmd = new MySqlCommand("Insert tblPathologistCalendar (CalendarDate, JSONValue) values (@CalendarDate, @JSONValue) ON DUPLICATE KEY UPDATE CPTCode = @CalendarDate, JSONValue = @JSONValue;");
+            MySqlCommand cmd = new MySqlCommand("Insert tblPathologistCalendar (CalendarDate, JSONValue) values (@CalendarDate, @JSONValue) ON DUPLICATE KEY UPDATE CalendarDate = @CalendarDate, JSONValue = @JSONValue;");
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@JSONValue", jString);
             cmd.Parameters.AddWithValue("@CalendarDate", this.m_CalendarDate);
