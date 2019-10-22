@@ -1072,7 +1072,7 @@ namespace YellowstonePathology.UI
 
         private void MenuItemAxisCamera_Click(object sender, RoutedEventArgs e)
         {
-            AxisCamera axisCamera = new AxisCamera();
+            YellowstonePathology.AxisCamera axisCamera = new AxisCamera();
             axisCamera.Show();
         }
     }

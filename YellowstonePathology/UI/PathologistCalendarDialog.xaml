@@ -1,0 +1,40 @@
+﻿<Window x:Class="YellowstonePathology.UI.PathologistCalendarDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI"
+        mc:Ignorable="d"
+        Title="Pathologist Calendar" Height="500" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ListView Name="ListViewCalendar" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" 
+                    ItemsSource="{Binding Path=PathologistCalendarCollection}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Do It"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Path=Date}"/>
+                    <GridViewColumn Header="Bibbey" Width="100" DisplayMemberBinding="{Binding Path=Bibbey}"/>
+                    <GridViewColumn Header="Brown" Width="100" DisplayMemberBinding="{Binding Path=Brown}"/>
+                    <GridViewColumn Header="Durden" Width="100" DisplayMemberBinding="{Binding Path=Durden}"/>
+                    <GridViewColumn Header="Emerick" Width="100" DisplayMemberBinding="{Binding Path=Emerick}"/>
+                    <GridViewColumn Header="Luem" Width="100" DisplayMemberBinding="{Binding Path=Luem}"/>
+                    <GridViewColumn Header="Messner" Width="100" DisplayMemberBinding="{Binding Path=Messner}"/>
+                    <GridViewColumn Header="Nero" Width="100" DisplayMemberBinding="{Binding Path=Nero}"/>
+                    <GridViewColumn Header="Schneider" Width="100" DisplayMemberBinding="{Binding Path=Schneider}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

@@ -34,8 +34,7 @@ namespace YellowstonePathology.Business.Test.Model
             this.m_List.Add(YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("140")); // PASWithDiastase());
             this.m_List.Add(YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("151")); // Reticulin());
             this.m_List.Add(YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("155")); // SteinerandSteiner());
-            this.m_List.Add(YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("160")); // Trichrome());
-            this.m_List.Add(new AlphaNaphthylAcetateEsterase());            
+            this.m_List.Add(YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("160")); // Trichrome());            
         }
 
         public string GroupName

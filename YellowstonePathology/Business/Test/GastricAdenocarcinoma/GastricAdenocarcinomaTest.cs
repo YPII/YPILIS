@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.GastricAdenocarcinoma
         public GastricAdenocarcinomaTest()
         {
             this.m_PanelSetId = 364;
-            this.m_PanelSetName = "Gastric Adenocarcinoma";
-            this.m_Abbreviation = "GstrcAdnocrcnma";
+            this.m_PanelSetName = "Gastric Adenocarcinoma Panel";
+            this.m_Abbreviation = "Gastric Adenocarcinoma";
             this.m_CaseType = YellowstonePathology.Business.CaseType.ALLCaseTypes;
             this.m_HasTechnicalComponent = false;
             this.m_HasProfessionalComponent = false;
