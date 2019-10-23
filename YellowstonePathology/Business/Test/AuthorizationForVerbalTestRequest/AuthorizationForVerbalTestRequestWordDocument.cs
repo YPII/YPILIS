@@ -19,15 +19,18 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\AuthorizationForVerbalTestRequest.xml";
             base.OpenTemplate();
 
+            PanelSetOrder panelSetOrder = this.m_PanelSetOrder;
+            this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(363);
+
             base.SetDemographicsV2();
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();
             amendmentSection.SetAmendment(amendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, false);
 
-            AuthorizationForVerbalTestRequestTestOrder panelSetOrder = (AuthorizationForVerbalTestRequestTestOrder)this.m_PanelSetOrder;
+            AuthorizationForVerbalTestRequestTestOrder testOrder = (AuthorizationForVerbalTestRequestTestOrder)this.m_PanelSetOrder;
 
-            if (string.IsNullOrEmpty(panelSetOrder.Comment) == false) base.ReplaceText("report_comment", panelSetOrder.Comment);
+            if (string.IsNullOrEmpty(testOrder.Comment) == false) base.ReplaceText("report_comment", testOrder.Comment);
             else base.DeleteRow("report_comment");
 
             this.SetReportDistribution();
