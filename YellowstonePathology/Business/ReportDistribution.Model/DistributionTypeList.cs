@@ -13,6 +13,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             this.Add("Mail");
             this.Add("Print");
             this.Add("Web Service");
+            this.Add("Web Service and Fax");
             this.Add("EPIC");
             this.Add("EPIC and Fax");
             this.Add("Eclinical Works");

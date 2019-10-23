@@ -53,6 +53,10 @@
 					<Hyperlink Click="HyperLinkFinalize_Click">Finalize</Hyperlink>
                 </TextBlock>
 
+                <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,0">
+					<Hyperlink Click="HyperLinkSendFax_Click">Send Fax</Hyperlink>
+                </TextBlock>
+
                 <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkUnacceptResults_Click">Unaccept Results</Hyperlink>
                 </TextBlock>
@@ -88,6 +92,11 @@
 
                     <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Left" FontWeight="Bold">Report Comment:</TextBlock>
                     <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=PanelSetOrder.Comment}"  TextWrapping="Wrap"/>
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold">Test Needs Authorization:</TextBlock>
+                    <ComboBox Name="ComboBoxTestNeedsAuthorization" Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection}"
+                              DisplayMemberPath="PanelSetName"></ComboBox>
+
                     <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
                     <CheckBox Grid.Column="1" Grid.Row="11" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}"></CheckBox>
 
