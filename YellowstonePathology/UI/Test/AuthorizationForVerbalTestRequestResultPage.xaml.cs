@@ -38,6 +38,7 @@ namespace YellowstonePathology.UI.Test
             this.m_PanelSetOrder = testOrder;
             this.m_PageHeaderText = "Authorization For Verbal Test Request For: " + this.m_AccessionOrder.PatientDisplayName;
 
+
             InitializeComponent();
 
             DataContext = this;
@@ -128,9 +129,17 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkShowDocument_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft);
-            report.Render();
-            YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(report.SaveFileName);
+            if (this.ComboBoxTestNeedsAuthorization.SelectedItem != null)
+            {
+                YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
+                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder, panelSetOrder, Business.Document.ReportSaveModeEnum.Draft);
+                report.Render();
+                YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(report.SaveFileName);
+            }
+        }
+
+        private void HyperLinkSendFax_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
