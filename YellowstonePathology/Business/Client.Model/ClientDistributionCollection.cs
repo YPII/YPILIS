@@ -131,6 +131,7 @@ namespace YellowstonePathology.Business.Client.Model
                         YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullPhysicianClientDistribution(clientDistribution.PhysicianClientDistribution.PhysicianClientDistributionID, this);
                         physicianClientDistribution.DistributionType = clientDistribution.SuggestedDistributionType;
                         YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+                        clientDistribution.PhysicianClientDistribution.DistributionType = clientDistribution.SuggestedDistributionType;
                     }
                 }
             }
