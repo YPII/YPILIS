@@ -119,5 +119,21 @@ namespace YellowstonePathology.Business.Client.Model
             }
             return result;
         }
+
+        public void SetDistributions()
+        {
+            foreach(ClientDistribution clientDistribution in this)
+            {
+                if(string.IsNullOrEmpty(clientDistribution.SuggestedDistributionType) == false)
+                {
+                    if(clientDistribution.SuggestedDistributionType != clientDistribution.ClientDistributionType)
+                    {
+                        YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullPhysicianClientDistribution(clientDistribution.PhysicianClientDistribution.PhysicianClientDistributionID, this);
+                        physicianClientDistribution.DistributionType = clientDistribution.SuggestedDistributionType;
+                        YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+                    }
+                }
+            }
+        }
     }
 }

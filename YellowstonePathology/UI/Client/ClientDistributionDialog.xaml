@@ -41,7 +41,8 @@
             <TextBlock Grid.Column="5" Margin="2,2,2,2" Text="{Binding Path=Client.AlternateDistributionType}" />
 
             <TextBlock Grid.Column="6" Margin="2,2,2,2">New DistributionType:</TextBlock>
-            <ComboBox Name="ComboboxDistributionTypes" Grid.Column="7" Margin="2,2,2,2" ItemsSource="{Binding Path=DistributionTypeList}" />
+            <ComboBox Name="ComboboxDistributionTypes" Grid.Column="7" Margin="2,2,2,2" ItemsSource="{Binding Path=DistributionTypeList}" 
+                      SelectedValue="{Binding Path=Client.DistributionType}" />
 
             <TextBlock Grid.Column="8" Margin="2,2,2,2">New Alt. Dist. Type:</TextBlock>
             <ComboBox Grid.Column="9" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=DistributionTypeList}"
@@ -64,7 +65,18 @@
             </ListView.View>
         </ListView>
 
-        <Button Name="ButtonShowDistributionChanges" Grid.Column="0" Grid.Row="2" Height="30" Width="120" Margin="2,2,2,2" HorizontalAlignment="Center" Click="ButtonShowDistributionChanges_Click">Change Disribution</Button>
-        <Button Name="ButtonOK" Grid.Column="0" Grid.Row="2" Height="30" Width="100" Margin="2,2,2,2" HorizontalAlignment="Right" Click="ButtonOK_Click">OK</Button>
+        <Grid  Grid.Column="0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="ButtonShowDistributionChanges"  Height="30" Width="120" Margin="2,2,10,2" HorizontalAlignment="Left" Click="ButtonShowDistributionChanges_Click">Show Changes</Button>
+                <Button Name="ButtonChangeDistribution" Grid.Column="0" Grid.Row="0" Height="30" Width="120" Margin="10,2,10,2" HorizontalAlignment="Right" Click="ButtonChangeDistribution_Click">Change Distribution</Button>
+            </StackPanel>
+            
+            <Button Name="ButtonOK" Grid.Column="1" Grid.Row="0" Height="30" Width="100" Margin="50,2,2,2" HorizontalAlignment="Right" Click="ButtonOK_Click">OK</Button>
+        </Grid>
     </Grid>
 </Window>

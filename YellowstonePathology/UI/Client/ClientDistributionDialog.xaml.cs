@@ -59,7 +59,7 @@ namespace YellowstonePathology.UI.Client
 
         private void FillClientDistributionCollection()
         {
-            this.m_ClientDistributionCollection  = Business.Gateway.PhysicianClientGateway.GetClientDistributionCollection(this.m_Client.ClientId);
+            this.m_ClientDistributionCollection = Business.Gateway.PhysicianClientGateway.GetClientDistributionCollection(this.m_Client.ClientId);
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -69,40 +69,39 @@ namespace YellowstonePathology.UI.Client
 
         private void ButtonShowDistributionChanges_Click(object sender, RoutedEventArgs e)
         {
-            if(this.ComboboxDistributionTypes.SelectedItem != null)
+            if (this.ComboboxDistributionTypes.SelectedItem != null)
             {
                 string distributionType = this.ComboboxDistributionTypes.SelectedItem.ToString();
-                if(distributionType != this.m_Client.DistributionType)
+                if (distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW)
                 {
-                    if (distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC ||
-                        distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX ||
-                        distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA ||
-                        distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH ||
-                        distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW)
+                    if (string.IsNullOrEmpty(this.m_SuggestedAlternateDistributionType) == false)
                     {
-                        if (string.IsNullOrEmpty(this.m_SuggestedAlternateDistributionType) == false)
-                        {
-                            this.m_ClientDistributionCollection.UpdateDistributionType(this.m_Client, distributionType, this.m_SuggestedAlternateDistributionType);
-                        }
-                        else
-                        {
-                            MessageBox.Show("The Alternate Distribution Type must be set when the Distribution Type is " + distributionType + ".");
-                        }
+                        this.m_ClientDistributionCollection.UpdateDistributionType(this.m_Client, distributionType, this.m_SuggestedAlternateDistributionType);
                     }
                     else
                     {
-                        this.m_ClientDistributionCollection.UpdateDistributionType(this.m_Client, distributionType, this.m_SuggestedAlternateDistributionType);
+                        MessageBox.Show("The Alternate Distribution Type must be set when the Distribution Type is " + distributionType + ".");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Choose a distribution type that is not the same as the client Distribution Type");
+                    this.m_ClientDistributionCollection.UpdateDistributionType(this.m_Client, distributionType, this.m_SuggestedAlternateDistributionType);
                 }
             }
             else
             {
                 MessageBox.Show("Choose a new distribution type");
             }
+        }
+
+
+        private void ButtonChangeDistribution_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_ClientDistributionCollection.SetDistributions();
         }
     }
 }
