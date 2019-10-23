@@ -76,27 +76,7 @@ namespace YellowstonePathology.UI.Client
         {
             if (this.CanSave() == true)
             {
-                /*if(this.HasDistributionTypeChanged() == true)
-                {
-                    MessageBoxResult result =  MessageBox.Show("The distribution type has changed." + Environment.NewLine +
-                        "The distributions for the client membership will be updated to reflect this changed." + Environment.NewLine +
-                        Environment.NewLine + "Press OK to continue or Cancel to return to the form.", "Distribution Change",
-                        MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
-                    if (result == MessageBoxResult.OK)
-                    {
-                        YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
-                        this.m_Client.ResetDistributions();
-                        Business.Logging.EmailExceptionHandler.HandleException(this.m_Client.ClientName + " distribution type has changed from " + this.m_ClientClone.DistributionType + " to " + this.m_Client.DistributionType);
-                    }
-                    else
-                    {
-                        e.Cancel = true;
-                    }
-                }
-                else
-                {*/
-                    YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
-                //}
+                YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
             }
             else e.Cancel = true;
         }
@@ -182,6 +162,12 @@ namespace YellowstonePathology.UI.Client
 		{            
             if(this.CanSave() == true)
             {
+                if(this.HasDistributionTypeChanged() == true)
+                {
+                    Business.Logging.EmailExceptionHandler.HandleException(this.m_Client.ClientName + " distribution type has changed from " + this.m_ClientClone.DistributionType + " to " + this.m_Client.DistributionType);
+                    ClientDistributionDialog dlg = new UI.Client.ClientDistributionDialog(this.m_Client);
+                    dlg.ShowDialog();
+                }
                 Close();
             }
 		}

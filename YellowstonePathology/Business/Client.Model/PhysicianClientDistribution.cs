@@ -1,12 +1,15 @@
 using System;
 using YellowstonePathology.Business.Persistence;
+using System.ComponentModel;
 
 namespace YellowstonePathology.Business.Client.Model
 {
 	[PersistentClass("tblPhysicianClientDistribution", "YPIDATA")]
-	public class PhysicianClientDistribution
+	public class PhysicianClientDistribution : INotifyPropertyChanged
 	{
-		private string m_ObjectId;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string m_ObjectId;
 		private int m_PhysicianClientDistributionID;
 		private string m_PhysicianClientID;
 		private string m_DistributionID;
@@ -25,7 +28,15 @@ namespace YellowstonePathology.Business.Client.Model
             this.m_DistributionType = distributionType;
 		}
 
-		[PersistentDocumentIdProperty()]
+        public void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        [PersistentDocumentIdProperty()]
 		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId
 		{
@@ -62,7 +73,14 @@ namespace YellowstonePathology.Business.Client.Model
         public string DistributionType
         {
             get { return this.m_DistributionType; }
-            set { this.m_DistributionType = value; }
+            set
+            {
+                if(this.m_DistributionType != value)
+                {
+                    this.m_DistributionType = value;
+                    this.NotifyPropertyChanged("DistributionType");
+                }
+            }
         }
     }
 }
