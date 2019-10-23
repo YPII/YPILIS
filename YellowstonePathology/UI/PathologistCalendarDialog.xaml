@@ -5,41 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI"
         mc:Ignorable="d"
-<<<<<<< HEAD
         Title="Pathologist Calendar" Height="500" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <ListView Name="ListViewCalendar" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" 
-                    ItemsSource="{Binding Path=PathologistCalendarCollection}">
-            <ListView.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Do It"></MenuItem>
-                </ContextMenu>
-            </ListView.ContextMenu>
-
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Path=Date}"/>
-                    <GridViewColumn Header="Bibbey" Width="100" DisplayMemberBinding="{Binding Path=Bibbey}"/>
-                    <GridViewColumn Header="Brown" Width="100" DisplayMemberBinding="{Binding Path=Brown}"/>
-                    <GridViewColumn Header="Durden" Width="100" DisplayMemberBinding="{Binding Path=Durden}"/>
-                    <GridViewColumn Header="Emerick" Width="100" DisplayMemberBinding="{Binding Path=Emerick}"/>
-                    <GridViewColumn Header="Luem" Width="100" DisplayMemberBinding="{Binding Path=Luem}"/>
-                    <GridViewColumn Header="Messner" Width="100" DisplayMemberBinding="{Binding Path=Messner}"/>
-                    <GridViewColumn Header="Nero" Width="100" DisplayMemberBinding="{Binding Path=Nero}"/>
-                    <GridViewColumn Header="Schneider" Width="100" DisplayMemberBinding="{Binding Path=Schneider}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-=======
-        Title="Pathologist Calendar" Height="800" Width="1100" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" FontSize="10">
-    
+ 
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -139,6 +106,5 @@
 
         <Button Name="ButtonAddMonth" Grid.Column="0" Grid.Row="2" Margin="5,5,5,5" Width="100" Height="30" HorizontalAlignment="Center" Click="ButtonAddMonth_Click">Add Month</Button>
         <Button Name="ButtonOK" Grid.Column="0" Grid.Row="2" Margin="5,5,5,5" Width="100" Height="30" HorizontalAlignment="Right" Click="ButtonOK_Click">OK</Button>
->>>>>>> 92a9298d26283fb9b336860bd807920c31fc886f
     </Grid>
 </Window>
