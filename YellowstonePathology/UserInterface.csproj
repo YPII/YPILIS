@@ -83,10 +83,6 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="AxInterop.AXISMEDIACONTROLLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\AxInterop.AXISMEDIACONTROLLib.dll</HintPath>
-    </Reference>
     <Reference Include="CefSharp.Wpf">
       <HintPath>..\packages\CefSharp.Wpf.57.0.0\CefSharp\x86\CefSharp.Wpf.dll</HintPath>
     </Reference>
@@ -211,12 +207,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AxisCamera.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AxisCamera.Designer.cs">
-      <DependentUpon>AxisCamera.cs</DependentUpon>
-    </Compile>
     <Compile Include="Business\Amendment.Model\Amendment.cs" />
     <Compile Include="Business\Amendment.Model\AmendmentCollection.cs" />
     <Compile Include="Business\ApplicationVersion.cs" />
@@ -4899,9 +4889,6 @@
       <DependentUpon>PatientWorkspace.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AxisCamera.resx">
-      <DependentUpon>AxisCamera.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>

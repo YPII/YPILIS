@@ -102,7 +102,6 @@
                     <MenuItem Name="MenuItemPolicies" Header="Policies" Click="MenuItemPolicyExplorer_Click"></MenuItem>
                     <MenuItem Name="MenuItemSpecimen" Header="Specimen" Click="MenuItemSpecimen_Click"></MenuItem>
                     <MenuItem Name="MenuItemHolidays" Header="Holidays" Click="MenuItemHolidays_Click"></MenuItem>
-                    <MenuItem Name="MenuItemAxis" Header="Axis Camera" Click="MenuItemAxisCamera_Click"></MenuItem>
                     <MenuItem Name="MenuItemPathologistCalendar" Header="Pathologist Calendar" Click="MenuItemPathologistCalendar_Click"></MenuItem>
                 </MenuItem>
 

@@ -138,16 +138,6 @@ namespace YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCa
         public override Audit.Model.AuditResult IsOkToSetPreviousResults(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
         {
             Audit.Model.AuditResult result = base.IsOkToSetPreviousResults(panelSetOrder, accessionOrder);
-            if (result.Status == Audit.Model.AuditStatusEnum.OK)
-            {
-                PDL122C3forEsophagealSquamousCellCarcinomaTestOrder testOrder = (PDL122C3forEsophagealSquamousCellCarcinomaTestOrder)panelSetOrder;
-                this.DoesFinalSummaryResultMatch(accessionOrder, testOrder.Result, result);
-                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
-                {
-                    result.Message += AskSetPreviousResults;
-                }
-            }
-
             return result;
         }
 
@@ -169,15 +159,6 @@ namespace YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCa
                 {
                     result.Status = Audit.Model.AuditStatusEnum.Failure;
                     result.Message = "The results cannot be accepted because the stain percent is not set.";
-                }
-            }
-
-            if (result.Status == Audit.Model.AuditStatusEnum.OK)
-            {
-                this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
-                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
-                {
-                    result.Message += AskAccept;
                 }
             }
 
@@ -205,27 +186,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCa
                 }
             }
 
-            if (result.Status == Audit.Model.AuditStatusEnum.OK)
-            {
-                this.DoesFinalSummaryResultMatch(accessionOrder, this.m_Result, result);
-                if (result.Status == Audit.Model.AuditStatusEnum.Warning)
-                {
-                    result.Message += AskFinal;
-                }
-            }
-
             return result;
-        }
-
-        private void DoesFinalSummaryResultMatch(AccessionOrder accessionOrder, string result, Audit.Model.AuditResult auditResult)
-        {
-            Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest egfrToALKReflexAnalysisTest = new EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTest();
-
-            if (accessionOrder.PanelSetOrderCollection.Exists(egfrToALKReflexAnalysisTest.PanelSetId) == true)
-            {
-                Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder egfrToALKReflexAnalysisTestOrder = (EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(egfrToALKReflexAnalysisTest.PanelSetId);
-                egfrToALKReflexAnalysisTestOrder.DoesPDL122C3forEsophagealSquamousCellCarcinomaResultMatch(result, auditResult);
-            }
         }
     }
 }

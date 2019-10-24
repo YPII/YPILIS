@@ -32,13 +32,8 @@ namespace YellowstonePathology.UI.Test
             this.m_EGFRToALKReflexPage = new EGFRToALKReflexPage(this.m_EGFRToALKReflexAnalysisTestOrder, this.m_AccessionOrder, this.m_SystemIdentity, this.m_BackButtonVisibility);
             this.m_EGFRToALKReflexPage.OrderALK += new EGFRToALKReflexPage.OrderALKEventHandler(EGFRToALKReflexPage_OrderALK);
             this.m_EGFRToALKReflexPage.OrderROS1 += new EGFRToALKReflexPage.OrderROS1EventHandler(EGFRToALKReflexPage_OrderROS1);            
-            this.m_EGFRToALKReflexPage.OrderPDL122C3 += EGFRToALKReflexPage_OrderPDL122C3;
             this.m_EGFRToALKReflexPage.OrderBRAF += new EGFRToALKReflexPage.OrderBRAFEventHandler(EGFRToALKReflexPage_OrderBRAF);
-            this.m_EGFRToALKReflexPage.OrderPDL122C3EsophagealSquamousCell += EGFRToALKReflexPage_OrderPDL122C3EsophagealSquamousCell;
-            this.m_EGFRToALKReflexPage.OrderPDL122C3GastricGEA += EGFRToALKReflexPage_OrderPDL122C3GastricGEA;
-            this.m_EGFRToALKReflexPage.OrderPDL122C3HeadandNeck += EGFRToALKReflexPage_OrderPDL122C3HeadandNeck;
             this.m_EGFRToALKReflexPage.OrderPDL122C3NonsmallCellLung += EGFRToALKReflexPage_OrderPDL122C3NonsmallCellLung;
-            this.m_EGFRToALKReflexPage.OrderPDL122C3Urothelial += EGFRToALKReflexPage_OrderPDL122C3Urothelial;
             this.m_EGFRToALKReflexPage.Finish +=new EGFRToALKReflexPage.FinishEventHandler(EGFRToALKReflexPage_Finish);
             this.m_EGFRToALKReflexPage.Back += new EGFRToALKReflexPage.BackEventHandler(EGFRToALKReflexPage_Back);
             this.m_PageNavigator.Navigate(this.m_EGFRToALKReflexPage);
@@ -49,12 +44,6 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTest brafMutationAnalysisTest = new Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTest();
             this.StartReportOrderPath(brafMutationAnalysisTest);
         }
-
-        private void EGFRToALKReflexPage_OrderPDL122C3(object sender, EventArgs e)
-        {
-            YellowstonePathology.Business.Test.PDL122C3.PDL122C3Test pdl122C3Test = new Business.Test.PDL122C3.PDL122C3Test();
-            this.StartReportOrderPath(pdl122C3Test);
-        }        
 
         private void EGFRToALKReflexPage_OrderALK(object sender, EventArgs e)
         {
@@ -68,34 +57,10 @@ namespace YellowstonePathology.UI.Test
             this.StartReportOrderPath(ros1ByFISHTest);
         }
 
-        private void EGFRToALKReflexPage_OrderPDL122C3EsophagealSquamousCell(object sender, EventArgs e)
-        {
-            YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest pdl122C3forEsophagealSquamousCellCarcinomaTest = new Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTest();
-            this.StartReportOrderPath(pdl122C3forEsophagealSquamousCellCarcinomaTest);
-        }
-
-        private void EGFRToALKReflexPage_OrderPDL122C3GastricGEA(object sender, EventArgs e)
-        {
-            YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest pdl122C3forGastricGEATest = new Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest();
-            this.StartReportOrderPath(pdl122C3forGastricGEATest);
-        }
-
-        private void EGFRToALKReflexPage_OrderPDL122C3HeadandNeck(object sender, EventArgs e)
-        {
-            YellowstonePathology.Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest pdl122C3forHeadandNeckTest = new Business.Test.PDL122C3forHeadandNeck.PDL122C3forHeadandNeckTest();
-            this.StartReportOrderPath(pdl122C3forHeadandNeckTest);
-        }
-
         private void EGFRToALKReflexPage_OrderPDL122C3NonsmallCellLung(object sender, EventArgs e)
         {
             YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest pdl122C3forNonsmallCellLungCancerTest = new Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTest();
             this.StartReportOrderPath(pdl122C3forNonsmallCellLungCancerTest);
-        }
-
-        private void EGFRToALKReflexPage_OrderPDL122C3Urothelial(object sender, EventArgs e)
-        {
-            YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest pdl122C3forUrothelialCarcinomaTest = new Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest();
-            this.StartReportOrderPath(pdl122C3forUrothelialCarcinomaTest);
         }
 
         private void EGFRToALKReflexPage_Back(object sender, EventArgs e)
