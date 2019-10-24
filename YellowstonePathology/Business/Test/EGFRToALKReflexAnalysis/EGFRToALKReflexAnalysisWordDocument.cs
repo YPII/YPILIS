@@ -98,15 +98,6 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                 this.DeleteRow("qns_statement");
             }
 
-            if (string.IsNullOrEmpty(egfrToALKReflexAnalysisTestOrder.PDL122C3forNonsmallCellLungCancerResult) == false)
-            {
-                base.ReplaceText("pdl122c3nsc_result", egfrToALKReflexAnalysisTestOrder.PDL122C3forNonsmallCellLungCancerResult);
-            }
-            else
-            {
-                this.DeleteRow("pdl122c3nsc_result");
-            }
-
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(egfrToALKReflexAnalysisTestOrder.ReportNo);
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();
             amendmentSection.SetAmendment(amendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, true);

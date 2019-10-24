@@ -152,9 +152,6 @@
                 <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (22C3) Result:</TextBlock>
                 <TextBox Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL122C3Result}" HorizontalAlignment="Stretch" />
 
-                <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (22C3)Non-small Cell Lung Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="10" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL122C3forNonsmallCellLungCancerResult}" HorizontalAlignment="Stretch" />
-
                 <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Tumor Nuclei Percentage:</TextBlock>
                 <TextBox Grid.Column="1" Grid.Row="12" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.TumorNucleiPercentage}" HorizontalAlignment="Stretch" />
 
