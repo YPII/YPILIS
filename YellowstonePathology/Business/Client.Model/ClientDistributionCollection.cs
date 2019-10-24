@@ -126,7 +126,7 @@ namespace YellowstonePathology.Business.Client.Model
             {
                 if(string.IsNullOrEmpty(clientDistribution.SuggestedDistributionType) == false)
                 {
-                    if(clientDistribution.SuggestedDistributionType != clientDistribution.ClientDistributionType)
+                    if(clientDistribution.SuggestedDistributionType != clientDistribution.PhysicianClientDistribution.DistributionType)
                     {
                         YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullPhysicianClientDistribution(clientDistribution.PhysicianClientDistribution.PhysicianClientDistributionID, this);
                         physicianClientDistribution.DistributionType = clientDistribution.SuggestedDistributionType;
