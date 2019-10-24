@@ -224,7 +224,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer
             if (accessionOrder.PanelSetOrderCollection.Exists(egfrToALKReflexAnalysisTest.PanelSetId) == true)
             {
                 Business.Test.EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder egfrToALKReflexAnalysisTestOrder = (EGFRToALKReflexAnalysis.EGFRToALKReflexAnalysisTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(egfrToALKReflexAnalysisTest.PanelSetId);
-                egfrToALKReflexAnalysisTestOrder.DoesPDL122C3forNonsmallCellLungCancerResultMatch(result, auditResult);
+                egfrToALKReflexAnalysisTestOrder.DoesPDL122C3ResultMatch(result, auditResult);
             }
         }
     }
