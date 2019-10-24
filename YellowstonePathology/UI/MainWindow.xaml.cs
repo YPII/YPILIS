@@ -1070,12 +1070,6 @@ namespace YellowstonePathology.UI
             dlg.ShowDialog();
         }
 
-        private void MenuItemAxisCamera_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.AxisCamera axisCamera = new AxisCamera();
-            axisCamera.Show();
-        }
-
         private void MenuItemPathologistCalendar_Click(object sender, RoutedEventArgs e)
         {
             PathologistCalendarDialog dlg = new UI.PathologistCalendarDialog();

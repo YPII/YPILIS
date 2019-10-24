@@ -61,20 +61,8 @@
             <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,3,0,0">
                 <Hyperlink Click="HyperLinkOrderBRAF_Click" FontSize="14">BRAF</Hyperlink>
             </TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,0">
-                <Hyperlink Click="HyperLinkOrderPDL122C3EsophagealSquamousCell_Click" FontSize="14">PD-L1 (22C3) Esoph. Squam. Cell</Hyperlink>
-            </TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="6" Margin="5,3,0,0">
-                <Hyperlink Click="HyperLinkOrderPDL122C3GastricGEA_Click" FontSize="14">PD-L1 (22C3) Gastric/GEA</Hyperlink>
-            </TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">
-                <Hyperlink Click="HyperLinkOrderPDL122C3HeadandNeck_Click" FontSize="14">PD-L1 (22C3) Head and Neck</Hyperlink>
-            </TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">
                 <Hyperlink Click="HyperLinkOrderPDL122C3NonsmallCellLung_Click" FontSize="14">PD-L1 (22C3) Non-small Cell Lung</Hyperlink>
-            </TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="9" Margin="5,3,0,0">
-                <Hyperlink Click="HyperLinkOrderPDL122C3Urothelial_Click" FontSize="14">PD-L1 (22C3) Urothelial</Hyperlink>
             </TextBlock>
 
             <TextBlock Grid.Column="0" Grid.Row="10" Margin="0,20,0,0" FontWeight="Bold" FontSize="16">Options</TextBlock>
@@ -164,20 +152,8 @@
                 <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (22C3) Result:</TextBlock>
                 <TextBox Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL122C3Result}" HorizontalAlignment="Stretch" />
 
-                <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (22C3)Esoph. Squam. Cell Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="7" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL122C3forEsophagealSquamousCellCarcinomaResult}" HorizontalAlignment="Stretch" />
-
-                <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (22C3)GastricGEA Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="8" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL122C3forGastricGEAResult}" HorizontalAlignment="Stretch" />
-
-                <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (22C3)Head and Neck Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="9" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL122C3forHeadandNeckResult}" HorizontalAlignment="Stretch" />
-
                 <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (22C3)Non-small Cell Lung Result:</TextBlock>
                 <TextBox Grid.Column="1" Grid.Row="10" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL122C3forNonsmallCellLungCancerResult}" HorizontalAlignment="Stretch" />
-
-                <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">PD-L1 (22C3)Urothelial Result:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="11" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.PDL122C3forUrothelialCarcinomaResult}" HorizontalAlignment="Stretch" />
 
                 <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">Tumor Nuclei Percentage:</TextBlock>
                 <TextBox Grid.Column="1" Grid.Row="12" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=EGFRToALKReflexAnalysisTestOrder.TumorNucleiPercentage}" HorizontalAlignment="Stretch" />

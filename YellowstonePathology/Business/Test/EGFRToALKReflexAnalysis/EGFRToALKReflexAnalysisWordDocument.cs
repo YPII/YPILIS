@@ -98,33 +98,6 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                 this.DeleteRow("qns_statement");
             }
 
-            if (string.IsNullOrEmpty(egfrToALKReflexAnalysisTestOrder.PDL122C3forEsophagealSquamousCellCarcinomaResult) == false)
-            {
-                base.ReplaceText("pdl122c3escc_result", egfrToALKReflexAnalysisTestOrder.PDL122C3forEsophagealSquamousCellCarcinomaResult);
-            }
-            else
-            {
-                this.DeleteRow("pdl122c3escc_result");
-            }
-
-            if (string.IsNullOrEmpty(egfrToALKReflexAnalysisTestOrder.PDL122C3forGastricGEAResult) == false)
-            {
-                base.ReplaceText("pdl122c3gg_result", egfrToALKReflexAnalysisTestOrder.PDL122C3forGastricGEAResult);
-            }
-            else
-            {
-                this.DeleteRow("pdl122c3gg_result");
-            }
-
-            if (string.IsNullOrEmpty(egfrToALKReflexAnalysisTestOrder.PDL122C3forHeadandNeckResult) == false)
-            {
-                base.ReplaceText("pdl122c3hn_result", egfrToALKReflexAnalysisTestOrder.PDL122C3forHeadandNeckResult);
-            }
-            else
-            {
-                this.DeleteRow("pdl122c3hn_result");
-            }
-
             if (string.IsNullOrEmpty(egfrToALKReflexAnalysisTestOrder.PDL122C3forNonsmallCellLungCancerResult) == false)
             {
                 base.ReplaceText("pdl122c3nsc_result", egfrToALKReflexAnalysisTestOrder.PDL122C3forNonsmallCellLungCancerResult);
@@ -132,15 +105,6 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             else
             {
                 this.DeleteRow("pdl122c3nsc_result");
-            }
-
-            if (string.IsNullOrEmpty(egfrToALKReflexAnalysisTestOrder.PDL122C3forUrothelialCarcinomaResult) == false)
-            {
-                base.ReplaceText("pdl122c3uc_result", egfrToALKReflexAnalysisTestOrder.PDL122C3forUrothelialCarcinomaResult);
-            }
-            else
-            {
-                this.DeleteRow("pdl122c3uc_result");
             }
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(egfrToALKReflexAnalysisTestOrder.ReportNo);

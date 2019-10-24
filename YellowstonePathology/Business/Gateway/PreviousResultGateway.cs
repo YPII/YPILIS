@@ -171,11 +171,7 @@ namespace YellowstonePathology.Business.Gateway
                 "' PDL1SP142: ', case when b.PDL1SP142Result is null then '' else b.PDL1SP142Result end, " +
                 "' PDL122C3: ', case when b.PDL122C3Result is null then '' else b.PDL122C3Result end, " +
                 "' BRAF: ', case when b.BRAFMutationAnalysisResult is null then '' else b.BRAFMutationAnalysisResult end, " +
-                "' PDL122C3 Esoph. Squam. Cell: ', case when b.PDL122C3forEsophagealSquamousCellCarcinomaResult is null then '' else b.PDL122C3forEsophagealSquamousCellCarcinomaResult end, " +
-                "' PDL122C3 Gastric/GEA: ', case when b.PDL122C3forGastricGEAResult is null then '' else b.PDL122C3forGastricGEAResult end, " +
-                "' PDL122C3 Head and Neck: ', case when b.PDL122C3forHeadandNeckResult is null then '' else b.PDL122C3forHeadandNeckResult end, " +
                 "' PDL122C3 Lung: ', case when b.PDL122C3forNonsmallCellLungCancerResult is null then '' else b.PDL122C3forNonsmallCellLungCancerResult end, " +
-                "' PDL122C3 Urothelial: ', case when b.PDL122C3forUrothelialCarcinomaResult is null then '' else b.PDL122C3forUrothelialCarcinomaResult end) `Result`, " +
                 "pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
                 "FROM tblAccessionOrder a " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
