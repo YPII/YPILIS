@@ -9,35 +9,34 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
     [PersistentClass("tblAuthorizationForVerbalTestRequestTestOrder", "tblPanelSetOrder", "YPIDATA")]
     public class AuthorizationForVerbalTestRequestTestOrder : YellowstonePathology.Business.Test.PanelSetOrder
     {
-        private string m_Comment;
+        private string m_AuthorizationTestName;
 
         public AuthorizationForVerbalTestRequestTestOrder()
         { }
 
         public AuthorizationForVerbalTestRequestTestOrder(string masterAccessionNo, string reportNo, string objectId,
             YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet,
-            YellowstonePathology.Business.Interface.IOrderTarget orderTarget,
             bool distribute)
-			: base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
+            : base(masterAccessionNo, reportNo, objectId, panelSet, distribute)
         { }
 
         [PersistentProperty()]
-        public string Comment
+        public string AuthorizationTestName
         {
-            get { return this.m_Comment; }
+            get { return this.m_AuthorizationTestName; }
             set
             {
-                if (this.m_Comment != value)
+                if (this.m_AuthorizationTestName != value)
                 {
-                    this.m_Comment = value;
-                    this.NotifyPropertyChanged("Comment");
+                    this.m_AuthorizationTestName = value;
+                    this.NotifyPropertyChanged("AuthorizationTestName");
                 }
             }
         }
 
         public override string ToResultString(Business.Test.AccessionOrder accessionOrder)
         {
-            string result = "Comment: " + this.Comment;
+            string result = "Authorization for : " + this.m_AuthorizationTestName;
             return result;
         }
     }

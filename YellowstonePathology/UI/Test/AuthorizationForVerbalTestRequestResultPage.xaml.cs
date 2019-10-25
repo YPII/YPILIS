@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Navigation;
+using System.IO;
 using System.ComponentModel;
 
 namespace YellowstonePathology.UI.Test
@@ -129,16 +129,50 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkShowDocument_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ComboBoxTestNeedsAuthorization.SelectedItem != null)
+            if (string.IsNullOrEmpty(this.PanelSetOrder.AuthorizationTestName) == false)
             {
                 YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
-                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder, panelSetOrder, Business.Document.ReportSaveModeEnum.Draft);
+                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft, panelSetOrder);
                 report.Render();
                 YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(report.SaveFileName);
+            }
+            else
+            {
+                MessageBox.Show("Select the test that requires authorization.");
+            }
+        }
+
+        private void HyperLinkPublish_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.PanelSetOrder.AuthorizationTestName) == false)
+            {
+                YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
+                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder,this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal, panelSetOrder);
+                report.Render();
+                report.Publish();
+            }
+            else
+            {
+                MessageBox.Show("Select the test that requires authorization.");
             }
         }
 
         private void HyperLinkSendFax_Click(object sender, RoutedEventArgs e)
+        {
+            Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
+            string tifPath = Business.Document.CaseDocument.GetCaseFileNameTifRequestForAuth(orderIdParser);
+            if (File.Exists(tifPath) == true)
+            {
+                YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
+                Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Authorization For Verbal Test Request", tifPath);
+            }
+            else
+            {
+                MessageBox.Show("Publish beore faxing.");
+            }
+        }
+
+        private void HyperlinkReceiveCompletedRequest_Click(object sender, RoutedEventArgs e)
         {
         }
     }
