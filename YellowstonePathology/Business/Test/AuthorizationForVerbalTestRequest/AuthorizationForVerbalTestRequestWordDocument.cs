@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using YellowstonePathology.Business.Document;
 
 namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
 {
     public class AuthorizationForVerbalTestRequestWordDocument : YellowstonePathology.Business.Document.CaseReportV2
 	{
-        public AuthorizationForVerbalTestRequestWordDocument(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Document.ReportSaveModeEnum reportSaveMode) 
+        private PanelSetOrder m_PanelSetOrderToAuthorize;
+
+        public AuthorizationForVerbalTestRequestWordDocument(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Document.ReportSaveModeEnum reportSaveMode, PanelSetOrder panelSetOrderToAuthorize) 
             : base(accessionOrder, panelSetOrder, reportSaveMode)
         {
-
+            this.m_PanelSetOrderToAuthorize = panelSetOrderToAuthorize;
         }
 
         public override void Render()
@@ -19,14 +18,13 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\AuthorizationForVerbalTestRequest.xml";
             base.OpenTemplate();
 
-            PanelSetOrder panelSetOrder = this.m_PanelSetOrder;
-            this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(363);
             AuthorizationForVerbalTestRequestTestOrder testOrder = (AuthorizationForVerbalTestRequestTestOrder)this.m_PanelSetOrder;
 
-            base.ReplaceText("pso_name", panelSetOrder.PanelSetName);
-            base.ReplaceText("order_date", panelSetOrder.OrderDate.Value.ToShortDateString());
+            string request = "Please perform " + this.m_PanelSetOrderToAuthorize.PanelSetName + " testing on the specimen for the patient described below.";
+            base.ReplaceText("pso_request", request);
+            base.ReplaceText("order_date", this.m_PanelSetOrderToAuthorize.OrderDate.Value.ToShortDateString());
             base.ReplaceText("pat_name", this.m_AccessionOrder.PatientDisplayName);
-            base.ReplaceText("pso_report_no", panelSetOrder.ReportNo);
+            base.ReplaceText("pso_report_no", this.m_PanelSetOrderToAuthorize.ReportNo);
             if (string.IsNullOrEmpty(this.m_AccessionOrder.PAddress1) == false)
             {
                 string address = this.m_AccessionOrder.PAddress1;
@@ -79,7 +77,17 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             //else 
             base.ReplaceText("ins_group", "__________________________________");
 
-            this.SaveReport();
+            YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
+            this.m_SaveFileName = Business.Document.CaseDocument.GetCaseFileNameXMLRequestForAuth(orderIdParser);
+            this.m_ReportXml.Save(this.m_SaveFileName);
+        }
+
+        public override void Publish()
+        {
+            YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
+            YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.AuthorizationForVerbalRequest, CaseDocumentFileTypeEnum.xml, CaseDocumentFileTypeEnum.doc);
+            YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.AuthorizationForVerbalRequest, CaseDocumentFileTypeEnum.doc, CaseDocumentFileTypeEnum.xps);
+            YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.AuthorizationForVerbalRequest, CaseDocumentFileTypeEnum.xps, CaseDocumentFileTypeEnum.tif);
         }
     }
 }
