@@ -5,9 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI"
         mc:Ignorable="d"
-        Title="Pathologist Calendar" Height="500" Width="800">
+        Title="Pathologist Calendar" Height="700" Width="1000" WindowStartupLocation="CenterScreen" WindowState="Maximized">
  
     <Grid Margin="10">
+        <Grid.Resources>
+            <Style TargetType="ListViewItem">
+                <Style.Triggers>
+                    <Trigger Property="ItemsControl.AlternationIndex"  Value="0">
+                        <Setter Property="Background" Value="#cbf4c8" />
+                    </Trigger>
+                    <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
+                        <Setter Property="Background" Value="Transparent" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <DataTemplate DataType="system:String">
+            </DataTemplate>
+        </Grid.Resources>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -23,8 +38,9 @@
             <TextBox Name="TextBoxStartDate" Margin="2,2,2,2" Width="200" Text="{Binding Path=StartDate, Converter={StaticResource ShortDateConverter}}" />
             <Button Name="ButtonGetCalendar" Margin="2,2,2,2" Height="27" Width="100" Click="ButtonGetCalendar_Click">Get Calendar</Button>
         </StackPanel>
-        
-        <ListView Name="ListViewPatholigistStatus" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" ItemsSource="{Binding Path=PathologistCalendarCollection}">
+
+        <ListView Name="ListViewPatholigistStatus" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2"  AlternationCount="2"
+                  ItemsSource="{Binding Path=PathologistCalendarCollection}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Path=CalendarDisplayDate}" />
@@ -32,7 +48,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[0].Status}"/>
+                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[0].Status}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -41,7 +57,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[1].Status}"/>
+                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[1].Status}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -50,7 +66,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[2].Status}"/>
+                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[2].Status}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -59,7 +75,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[3].Status}"/>
+                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[3].Status}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -68,7 +84,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[4].Status}"/>
+                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[4].Status}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -77,7 +93,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[5].Status}"/>
+                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[5].Status}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -86,7 +102,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[6].Status}"/>
+                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[6].Status}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -95,7 +111,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="100" Margin="1" Text="{Binding Path=CalendarPathologistCollection[7].Status}"/>
+                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[7].Status}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

@@ -18,7 +18,9 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet,
             bool distribute)
             : base(masterAccessionNo, reportNo, objectId, panelSet, distribute)
-        { }
+        {
+            this.m_NoCharge = true;
+        }
 
         [PersistentProperty()]
         public string AuthorizationTestName
