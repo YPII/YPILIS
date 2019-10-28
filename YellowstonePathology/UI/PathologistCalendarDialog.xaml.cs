@@ -19,11 +19,15 @@ namespace YellowstonePathology.UI
 
         private YellowstonePathology.Business.PathologistCalendarCollection m_PathologistCalendarCollection;
         private DateTime m_StartDate;
+        private List<string> m_CalendarStatusList;
 
         public PathologistCalendarDialog()
         {
             this.m_StartDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1));
             this.m_PathologistCalendarCollection = YellowstonePathology.Business.PathologistCalendarCollection.Load(this.m_StartDate, this.m_StartDate.AddMonths(1).AddDays(-1));
+            this.m_CalendarStatusList = new List<string>();
+            this.m_CalendarStatusList.Add("In");
+            this.m_CalendarStatusList.Add("Out");
 
             InitializeComponent();
             DataContext = this;
@@ -46,6 +50,11 @@ namespace YellowstonePathology.UI
         {
             get { return this.m_StartDate; }
             set { this.m_StartDate = value; }
+        }
+
+        public List<string> CalendarStatusList
+        {
+            get { return this.m_CalendarStatusList; }
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)

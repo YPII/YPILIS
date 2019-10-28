@@ -78,8 +78,15 @@ namespace YellowstonePathology.Business
             {
                 for(DateTime curDate = startDate; curDate <= endDate; curDate = curDate.AddDays(1))
                 {
-                    PathologistCalendar pathologistCalendar = new PathologistCalendar(curDate, this.m_Pathologists);
-                    pathologistCalendar.Save();
+                    if (curDate.DayOfWeek == DayOfWeek.Saturday || curDate.DayOfWeek == DayOfWeek.Sunday)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        PathologistCalendar pathologistCalendar = new PathologistCalendar(curDate, this.m_Pathologists);
+                        pathologistCalendar.Save();
+                    }
                 }
             }
         }
