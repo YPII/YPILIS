@@ -71,6 +71,9 @@ namespace YellowstonePathology.Business.Helper
                 case CaseDocumentTypeEnum.PreauthorizationRequest:
                     filePath = filePath + ".preauth";
                     break;
+                case CaseDocumentTypeEnum.AuthorizationForVerbalRequest:
+                    filePath = filePath + ".auth";
+                    break;
             }
 
             if (fromType == CaseDocumentFileTypeEnum.xml && toType == CaseDocumentFileTypeEnum.doc)
