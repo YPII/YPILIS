@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
 
             AuthorizationForVerbalTestRequestTestOrder testOrder = (AuthorizationForVerbalTestRequestTestOrder)this.m_PanelSetOrder;
 
-            string request = "Please perform " + this.m_PanelSetOrderToAuthorize.PanelSetName + " testing on the specimen for the patient described below.";
+            string request = "Please perform " + this.m_PanelSetOrderToAuthorize.PanelSetName + " testing on the specimen for the patient described above.";
             base.ReplaceText("pso_request", request);
             base.ReplaceText("order_date", this.m_PanelSetOrderToAuthorize.OrderDate.Value.ToShortDateString());
             base.ReplaceText("pat_name", this.m_AccessionOrder.PatientDisplayName);

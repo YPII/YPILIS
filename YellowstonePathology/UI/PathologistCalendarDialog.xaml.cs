@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace YellowstonePathology.UI
 {
     /// <summary>
     /// Interaction logic for PathologistCalendar.xaml
     /// </summary>
-    public partial class PathologistCalendarDialog : Window
+    public partial class PathologistCalendarDialog : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private YellowstonePathology.Business.PathologistCalendarCollection m_PathologistCalendarCollection;
         private DateTime m_StartDate;
 
@@ -29,6 +27,14 @@ namespace YellowstonePathology.UI
 
             InitializeComponent();
             DataContext = this;
+        }
+
+        public void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
         }
 
         public YellowstonePathology.Business.PathologistCalendarCollection PathologistCalendarCollection
@@ -55,7 +61,9 @@ namespace YellowstonePathology.UI
 
         private void ButtonGetCalendar_Click(object sender, RoutedEventArgs e)
         {
+            this.m_PathologistCalendarCollection.Save();
             this.m_PathologistCalendarCollection = YellowstonePathology.Business.PathologistCalendarCollection.Load(this.m_StartDate, this.m_StartDate.AddMonths(1).AddDays(-1));
+            this.NotifyPropertyChanged("PathologistCalendarCollection");
         }
     }
 }
