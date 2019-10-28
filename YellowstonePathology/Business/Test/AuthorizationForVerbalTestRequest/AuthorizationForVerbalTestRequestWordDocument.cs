@@ -19,6 +19,7 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             base.OpenTemplate();
 
             AuthorizationForVerbalTestRequestTestOrder testOrder = (AuthorizationForVerbalTestRequestTestOrder)this.m_PanelSetOrder;
+            YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
 
             string request = "Please perform " + this.m_PanelSetOrderToAuthorize.PanelSetName + " testing on the specimen for the patient described above.";
             base.ReplaceText("pso_request", request);
@@ -58,24 +59,45 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
                 base.ReplaceText("primary_insurance", this.m_AccessionOrder.PrimaryInsurance);
             else base.ReplaceText("primary_insurance", "______________________");
 
-            //if (string.IsNullOrEmpty(this.m_AccessionOrder.) == false) base.ReplaceText("prim_insu_address", this.m_AccessionOrder.);
-            //else
              base.ReplaceText("prim_insu_address", "____________________________");
 
-            //if (string.IsNullOrEmpty(this.m_AccessionOrder.) == false) base.ReplaceText("subscriber_name", this.m_AccessionOrder.);
-            //else 
             base.ReplaceText("subscriber_name", "_____________________________");
 
-            //if (string.IsNullOrEmpty(this.m_AccessionOrder.) == false) base.ReplaceText("subscriber_dob", this.m_AccessionOrder.);
-            //else 
             base.ReplaceText("subscriber_dob", "_______________________________");
 
             if (string.IsNullOrEmpty(this.m_AccessionOrder.InsurancePlan1) == false) base.ReplaceText("ins_id", this.m_AccessionOrder.InsurancePlan1);
             else base.ReplaceText("ins_id", "____________________________________");
 
-            //if (string.IsNullOrEmpty(this.m_AccessionOrder.I) == false) base.ReplaceText("ins_group", this.m_AccessionOrder.PSex);
-            //else 
             base.ReplaceText("ins_group", "__________________________________");
+
+            base.ReplaceText("provider_name", this.m_AccessionOrder.PhysicianName);
+
+            string clientAddress = string.Empty;
+            if (string.IsNullOrEmpty(client.Address) == false) clientAddress = client.Address;
+            if (string.IsNullOrEmpty(client.City) == false)
+            {
+                if (string.IsNullOrEmpty(clientAddress) == false) clientAddress += ", ";
+                clientAddress += client.City;
+            }
+            if (string.IsNullOrEmpty(client.State) == false)
+            {
+                if (string.IsNullOrEmpty(clientAddress) == false) clientAddress += ", ";
+                clientAddress += client.State;
+            }
+            if (string.IsNullOrEmpty(client.ZipCode) == false)
+            {
+                if (string.IsNullOrEmpty(clientAddress) == false) clientAddress += " ";
+                clientAddress += client.ZipCode;
+            }
+            if(string.IsNullOrEmpty(clientAddress) == false) base.ReplaceText("provider_address", clientAddress);
+            else base.ReplaceText("provider_address", "___________________________________________________________________");
+
+            string clientPhone = "___________________________________________________________________";
+            if (string.IsNullOrEmpty(client.Telephone) == false)
+            {
+                clientPhone = YellowstonePathology.Business.Helper.PhoneNumberHelper.FormatWithDashes(client.Telephone);
+            }
+            base.ReplaceText("provider_phone", clientPhone);
 
             YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
             this.m_SaveFileName = Business.Document.CaseDocument.GetCaseFileNameXMLRequestForAuth(orderIdParser);

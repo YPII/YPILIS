@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI"
         mc:Ignorable="d"
-        Title="Pathologist Calendar" Height="700" Width="1000" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Pathologist Calendar" Height="800" Width="940" WindowStartupLocation="CenterScreen">
  
     <Grid Margin="10">
         <Grid.Resources>
@@ -48,7 +48,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[0].Status}"/>
+                                    <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=CalendarPathologistCollection[0].Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -57,7 +57,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[1].Status}"/>
+                                    <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=CalendarPathologistCollection[1].Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -66,7 +66,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[2].Status}"/>
+                                    <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=CalendarPathologistCollection[2].Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -75,7 +75,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[3].Status}"/>
+                                    <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=CalendarPathologistCollection[3].Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -84,7 +84,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[4].Status}"/>
+                                    <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=CalendarPathologistCollection[4].Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -93,7 +93,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[5].Status}"/>
+                                    <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=CalendarPathologistCollection[5].Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -102,7 +102,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[6].Status}"/>
+                                    <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=CalendarPathologistCollection[6].Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -111,7 +111,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Width="90" BorderThickness="0" Background="Transparent" Text="{Binding Path=CalendarPathologistCollection[7].Status}"/>
+                                    <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=CalendarPathologistCollection[7].Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
