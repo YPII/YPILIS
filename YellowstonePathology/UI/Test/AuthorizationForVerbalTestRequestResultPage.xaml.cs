@@ -150,6 +150,7 @@ namespace YellowstonePathology.UI.Test
                 YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder,this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal, panelSetOrder);
                 report.Render();
                 report.Publish();
+                MessageBox.Show("The request has been published.");
             }
             else
             {
@@ -164,7 +165,15 @@ namespace YellowstonePathology.UI.Test
             if (File.Exists(tifPath) == true)
             {
                 YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
-                Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Authorization For Verbal Test Request", tifPath);
+                YellowstonePathology.Business.ReportDistribution.Model. DistributionResult distributionResult = Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Authorization For Verbal Test Request", tifPath);
+                if (distributionResult.IsComplete == false)
+                {
+                    MessageBox.Show(distributionResult.Message);
+                }
+                else
+                {
+                    MessageBox.Show("The request has been faxed.");
+                }
             }
             else
             {
