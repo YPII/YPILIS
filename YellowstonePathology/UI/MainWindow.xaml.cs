@@ -1064,15 +1064,9 @@ namespace YellowstonePathology.UI
             dlg.ShowDialog();
         }
 
-        private void MenuItemHolidays_Click(object sender, RoutedEventArgs e)
+        private void MenuItemCalendar_Click(object sender, RoutedEventArgs e)
         {
-            HolidayDialog dlg = new UI.HolidayDialog();
-            dlg.ShowDialog();
-        }
-
-        private void MenuItemPathologistCalendar_Click(object sender, RoutedEventArgs e)
-        {
-            PathologistCalendarDialog dlg = new UI.PathologistCalendarDialog();
+            Calendar.CalendarDialog dlg = new Calendar.CalendarDialog();
             dlg.ShowDialog();
         }
     }
