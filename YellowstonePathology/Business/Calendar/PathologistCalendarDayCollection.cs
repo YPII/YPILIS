@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Collections.ObjectModel;
 using System.Data;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 
-namespace YellowstonePathology.Business
+namespace YellowstonePathology.Business.Calendar
 {
-    public class PathologistCalendarCollection : ObservableCollection<PathologistCalendar>
+    public class PathologistCalendarDayCollection : ObservableCollection<PathologistCalendarDay>
     {
         private List<string> m_Pathologists;
 
-        public PathologistCalendarCollection()
+        public PathologistCalendarDayCollection()
         {
             this.m_Pathologists = new List<string>();
             this.m_Pathologists.Add("Dr Bibbey");
@@ -25,9 +26,9 @@ namespace YellowstonePathology.Business
             this.m_Pathologists.Add("Dr Schneider");
         }
 
-        public static PathologistCalendarCollection Load(DateTime startDate, DateTime endDate)
+        public static PathologistCalendarDayCollection Load(DateTime startDate, DateTime endDate)
         {
-            PathologistCalendarCollection result = new PathologistCalendarCollection();
+            PathologistCalendarDayCollection result = new PathologistCalendarDayCollection();
             MySqlCommand cmd = new MySqlCommand("Select JSONValue from tblPathologistCalendar where CalendarDate between @StartDate and @EndDate;");
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@StartDate", startDate);
@@ -41,13 +42,13 @@ namespace YellowstonePathology.Business
                 {
                     while (dr.Read())
                     {
-                        YellowstonePathology.Business.PathologistCalendar pathologistCalendar = JsonConvert.DeserializeObject<PathologistCalendar>(dr[0].ToString(), new JsonSerializerSettings
+                        PathologistCalendarDay pathologistCalendarDay = JsonConvert.DeserializeObject<PathologistCalendarDay>(dr[0].ToString(), new JsonSerializerSettings
                         {
                             TypeNameHandling = TypeNameHandling.All,
                             ObjectCreationHandling = ObjectCreationHandling.Replace,
                         });
 
-                        result.Add(pathologistCalendar);
+                        result.Add(pathologistCalendarDay);
                     }
                 }
             }
@@ -61,22 +62,22 @@ namespace YellowstonePathology.Business
 
         public void Save()
         {
-            foreach(PathologistCalendar pathologistCalendar in this)
+            foreach (PathologistCalendarDay pathologistCalendarDay in this)
             {
-                pathologistCalendar.Save();
+                pathologistCalendarDay.Save();
             }
         }
 
         public void AddMonth(DateTime startDate)
         {
-            if(startDate.Day != 1)
+            if (startDate.Day != 1)
             {
                 startDate = startDate.AddDays(-(startDate.Day - 1));
             }
             DateTime endDate = startDate.AddMonths(1).AddDays(-1);
             if (this.CanAddMonth(startDate, endDate) == true)
             {
-                for(DateTime curDate = startDate; curDate <= endDate; curDate = curDate.AddDays(1))
+                for (DateTime curDate = startDate; curDate <= endDate; curDate = curDate.AddDays(1))
                 {
                     if (curDate.DayOfWeek == DayOfWeek.Saturday || curDate.DayOfWeek == DayOfWeek.Sunday)
                     {
@@ -84,8 +85,8 @@ namespace YellowstonePathology.Business
                     }
                     else
                     {
-                        PathologistCalendar pathologistCalendar = new PathologistCalendar(curDate, this.m_Pathologists);
-                        pathologistCalendar.Save();
+                        PathologistCalendarDay pathologistCalendarDay = new PathologistCalendarDay(curDate);
+                        pathologistCalendarDay.Save();
                     }
                 }
             }
@@ -93,7 +94,7 @@ namespace YellowstonePathology.Business
 
         private bool CanAddMonth(DateTime startDate, DateTime endDate)
         {
-            PathologistCalendarCollection tmp = PathologistCalendarCollection.Load(startDate, endDate);
+            PathologistCalendarDayCollection tmp = PathologistCalendarDayCollection.Load(startDate, endDate);
             return tmp.Count > 0 ? false : true;
         }
     }

@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Data;
 using MySql.Data.MySqlClient;
 
-namespace YellowstonePathology.Business
+namespace YellowstonePathology.Business.Calendar
 {
     public class HolidayCollection : ObservableCollection<Holiday>
     {
@@ -31,7 +28,7 @@ namespace YellowstonePathology.Business
 
         public static HolidayCollection GetAll()
         {
-            HolidayCollection result = new Business.HolidayCollection();
+            HolidayCollection result = new HolidayCollection();
             DateTime startDate = new DateTime(2018, 1, 1);
             DateTime endDate = new DateTime(2120, 12, 31);
             result.Load(startDate, endDate);
@@ -40,7 +37,7 @@ namespace YellowstonePathology.Business
 
         public static HolidayCollection GetByDateRange(DateTime startDate, DateTime endDate)
         {
-            HolidayCollection result = new Business.HolidayCollection();
+            HolidayCollection result = new HolidayCollection();
             result.Load(startDate, endDate);
             return result;
         }
@@ -61,7 +58,7 @@ namespace YellowstonePathology.Business
                 {
                     while (dr.Read())
                     {
-                        Holiday ypHoliday = JsonConvert.DeserializeObject<Business.Holiday>(dr[0].ToString(), new JsonSerializerSettings
+                        Holiday ypHoliday = JsonConvert.DeserializeObject<Holiday>(dr[0].ToString(), new JsonSerializerSettings
                         {
                             TypeNameHandling = TypeNameHandling.All,
                             ObjectCreationHandling = ObjectCreationHandling.Replace
@@ -91,10 +88,10 @@ namespace YellowstonePathology.Business
         {
             bool result = false;
             DateTime dt = new DateTime(dateToCheck.Year, dateToCheck.Month, dateToCheck.Day);
-            if( this.Exists(dt) == true)
+            if (this.Exists(dt) == true)
             {
                 Holiday holiday = this.Get(dt);
-                if(holiday.IsAWorkDay == false)
+                if (holiday.IsAWorkDay == false)
                 {
                     result = true;
                 }

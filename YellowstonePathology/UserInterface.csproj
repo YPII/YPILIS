@@ -328,8 +328,11 @@
     <Compile Include="Business\Billing.Model\PropertyChanges.cs" />
     <Compile Include="Business\Billing.Model\SimulationSerializer.cs" />
     <Compile Include="Business\Billing.Model\SVHNoCDMMailMessage.cs" />
-    <Compile Include="Business\CalendarPathologist.cs" />
-    <Compile Include="Business\CalendarPathologistCollection.cs" />
+    <Compile Include="Business\Calendar\Holiday.cs" />
+    <Compile Include="Business\Calendar\HolidayCollection.cs" />
+    <Compile Include="Business\Calendar\PathologistCalendarDay.cs" />
+    <Compile Include="Business\Calendar\PathologistCalendarDayCollection.cs" />
+    <Compile Include="Business\Calendar\PathologistClanendarStatus.cs" />
     <Compile Include="Business\Client.Model\ClientDistribution.cs" />
     <Compile Include="Business\Client.Model\ClientDistributionCollection.cs" />
     <Compile Include="Business\Client.Model\HPV1618CompoundStandingOrderRule1.cs" />
@@ -1076,8 +1079,6 @@
     <Compile Include="Business\PanelSet.Model\PanelSetPMLRARAByFish.cs" />
     <Compile Include="Business\PanelSet.Model\ShipMaterialTest.cs" />
     <Compile Include="Business\ParseSpecimenOrderIdResult.cs" />
-    <Compile Include="Business\PathologistCalendar.cs" />
-    <Compile Include="Business\PathologistCalendarCollection.cs" />
     <Compile Include="Business\Patient.Model\Address.cs" />
     <Compile Include="Business\Persistence\BatchMaterialTrackingLogDocumentBuilder.cs" />
     <Compile Include="Business\Persistence\DocumentTestBuilders.cs" />
@@ -1353,8 +1354,6 @@
     <Compile Include="Business\WebService\WebServiceAccountView.cs" />
     <Compile Include="Business\WebService\WebServiceAccountCollection.cs" />
     <Compile Include="Business\WebService\WebServiceClientView.cs" />
-    <Compile Include="Business\Holiday.cs" />
-    <Compile Include="Business\HolidayCollection.cs" />
     <Compile Include="Policy\EditDirectoryDialog.xaml.cs">
       <DependentUpon>EditDirectoryDialog.xaml</DependentUpon>
     </Compile>
@@ -3195,6 +3194,9 @@
     <Compile Include="UI\BrowserWindow.xaml.cs">
       <DependentUpon>BrowserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Calendar\CalendarDialog.xaml.cs">
+      <DependentUpon>CalendarDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ChainExplorer.xaml.cs">
       <DependentUpon>ChainExplorer.xaml</DependentUpon>
     </Compile>
@@ -3230,9 +3232,6 @@
     <Compile Include="UI\Gross\DictationTemplateRedis.cs" />
     <Compile Include="UI\Gross\SpecimenSelectionPage.xaml.cs">
       <DependentUpon>SpecimenSelectionPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\PathologistCalendarDialog.xaml.cs">
-      <DependentUpon>PathologistCalendarDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SVHLabelDialog.xaml.cs">
       <DependentUpon>SVHLabelDialog.xaml</DependentUpon>
@@ -4697,9 +4696,6 @@
       <DependentUpon>XpsDocumentViewerPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\HolidayDialog.xaml.cs">
-      <DependentUpon>HolidayDialog.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\Billing\CodeSelection.cs" />
@@ -5233,6 +5229,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Calendar\CalendarDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\CellCounter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -5377,18 +5377,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\HolidayDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Resource Include="UI\GroupingListViewStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
-    <Page Include="UI\PathologistCalendarDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\SVHLabelDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

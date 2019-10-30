@@ -5,7 +5,7 @@ using Newtonsoft.Json.Serialization;
 using System.Data;
 using MySql.Data.MySqlClient;
 
-namespace YellowstonePathology.Business
+namespace YellowstonePathology.Business.Calendar
 {
     public class Holiday : INotifyPropertyChanged
     {
@@ -38,7 +38,7 @@ namespace YellowstonePathology.Business
             get { return this.m_HolidayDate; }
             set
             {
-                if(this.m_HolidayDate != value)
+                if (this.m_HolidayDate != value)
                 {
                     this.m_HolidayDate = value;
                     this.NotifyPropertyChanged("HolidayDate");

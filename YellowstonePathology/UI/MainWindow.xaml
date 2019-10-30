@@ -101,8 +101,7 @@
                     <MenuItem Name="MenuItemAutoComplete" Header="Auto Complete" Click="MenuItemAutoComplete_Click"></MenuItem>
                     <MenuItem Name="MenuItemPolicies" Header="Policies" Click="MenuItemPolicyExplorer_Click"></MenuItem>
                     <MenuItem Name="MenuItemSpecimen" Header="Specimen" Click="MenuItemSpecimen_Click"></MenuItem>
-                    <MenuItem Name="MenuItemHolidays" Header="Holidays" Click="MenuItemHolidays_Click"></MenuItem>
-                    <MenuItem Name="MenuItemPathologistCalendar" Header="Pathologist Calendar" Click="MenuItemPathologistCalendar_Click"></MenuItem>
+                    <MenuItem Name="MenuItemHolidays" Header="Calendar" Click="MenuItemCalendar_Click"></MenuItem>
                 </MenuItem>
 
                 <MenuItem Header="_Monitor" Name="MenuItemMonitor">
