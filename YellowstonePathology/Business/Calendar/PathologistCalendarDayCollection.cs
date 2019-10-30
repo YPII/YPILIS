@@ -97,5 +97,12 @@ namespace YellowstonePathology.Business.Calendar
             PathologistCalendarDayCollection tmp = PathologistCalendarDayCollection.Load(startDate, endDate);
             return tmp.Count > 0 ? false : true;
         }
+
+        /*public List<int> PatholoistsCountByLocationOnDate(string location, DateTime day)
+        {
+            int result = 0;
+
+            return result;
+        }*/
     }
 }

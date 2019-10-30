@@ -333,6 +333,7 @@
     <Compile Include="Business\Calendar\PathologistCalendarDay.cs" />
     <Compile Include="Business\Calendar\PathologistCalendarDayCollection.cs" />
     <Compile Include="Business\Calendar\PathologistClanendarStatus.cs" />
+    <Compile Include="Business\Calendar\PathologistsByLocation.cs" />
     <Compile Include="Business\Client.Model\ClientDistribution.cs" />
     <Compile Include="Business\Client.Model\ClientDistributionCollection.cs" />
     <Compile Include="Business\Client.Model\HPV1618CompoundStandingOrderRule1.cs" />
