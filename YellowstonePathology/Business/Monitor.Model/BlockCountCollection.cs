@@ -40,5 +40,23 @@ namespace YellowstonePathology.Business.Monitor.Model
             }
             return result;
         }
+
+        public int BlocksToTransfer(DateTime date)
+        {
+            int result = 0;
+            if(this.ExistsByDate(date) == true)
+            {
+                BlockCount blockCount = this.GetByDate(date);
+                Business.Calendar.PathologistsByLocation pathologistsByLocation = Business.Calendar.PathologistCalendarDayCollection.PathologistsCountByLocationOnDate(date);
+                int totalCountPer = (blockCount.YPIBlocks + blockCount.BozemanBlocks) / pathologistsByLocation.TotalCount;
+                int billingsCountPer = blockCount.YPIBlocks / pathologistsByLocation.BillingsCount;
+                int bozemanCountPer = blockCount.BozemanBlocks / pathologistsByLocation.BozemanCount;
+                if(billingsCountPer > totalCountPer)
+                {
+                    result = (billingsCountPer - totalCountPer) * pathologistsByLocation.BillingsCount;
+                }
+            }
+            return result;
+        }
     }
 }

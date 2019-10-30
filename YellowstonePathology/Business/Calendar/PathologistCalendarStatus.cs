@@ -6,17 +6,17 @@ using System.ComponentModel;
 
 namespace YellowstonePathology.Business.Calendar
 {
-    public class PathologistClanendarStatus : INotifyPropertyChanged
+    public class PathologistCalendarStatus : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string m_PathologistName;
         private string m_Status;
 
-        public PathologistClanendarStatus()
+        public PathologistCalendarStatus()
         { }
 
-        public PathologistClanendarStatus(string pathologistName, string status)
+        public PathologistCalendarStatus(string pathologistName, string status)
         {
             this.m_PathologistName = pathologistName;
             this.m_Status = status;

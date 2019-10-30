@@ -98,11 +98,37 @@ namespace YellowstonePathology.Business.Calendar
             return tmp.Count > 0 ? false : true;
         }
 
-        /*public List<int> PatholoistsCountByLocationOnDate(string location, DateTime day)
+        public static PathologistsByLocation PathologistsCountByLocationOnDate(DateTime day)
         {
-            int result = 0;
+            PathologistsByLocation result = new Calendar.PathologistsByLocation();
+            DateTime correctedDay = new DateTime(day.Year, day.Month, day.Day);
+            PathologistCalendarDayCollection pathologistCalendarDayCollection = PathologistCalendarDayCollection.Load(correctedDay, correctedDay);
+            foreach (PathologistCalendarDay pathologistCalendarDay in pathologistCalendarDayCollection)
+            {
+                List<PathologistCalendarStatus> statusList = new List<Calendar.PathologistCalendarStatus>();
+                statusList.Add(pathologistCalendarDay.DrBibbeyStatus);
+                statusList.Add(pathologistCalendarDay.DrBrownStatus);
+                statusList.Add(pathologistCalendarDay.DrDurdenStatus);
+                statusList.Add(pathologistCalendarDay.DrEmerickStatus);
+                statusList.Add(pathologistCalendarDay.DrLuemStatus);
+                statusList.Add(pathologistCalendarDay.DrMessnerStatus);
+                statusList.Add(pathologistCalendarDay.DrNeroStatus);
+                statusList.Add(pathologistCalendarDay.DrSchneiderStatus);
+
+                foreach (PathologistCalendarStatus pathologistCalendarStatus in statusList)
+                {
+                    if (pathologistCalendarStatus.Status == "Billings")
+                    {
+                        result.BillingsCount += 1;
+                    }
+                    else if (pathologistCalendarDay.DrBibbeyStatus.Status == "Bozeman")
+                    {
+                        result.BozemanCount += 1;
+                    }
+                }
+            }
 
             return result;
-        }*/
+        }
     }
 }
