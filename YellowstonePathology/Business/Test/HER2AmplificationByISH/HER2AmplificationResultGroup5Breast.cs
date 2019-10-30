@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 
         public HER2AmplificationResultGroup5Breast(PanelSetOrderCollection panelSetOrderCollection, HER2AmplificationByISHTestOrder panelSetOrder) : base(panelSetOrderCollection, panelSetOrder)
         {
-        }
+        }        
 
         public override bool IsAMatch()
         {
@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             {
                 if(this.m_AverageHer2Chr17SignalAsDouble.HasValue && this.m_AverageHer2NeuSignal.HasValue)
                 {
-                    if(this.m_AverageHer2Chr17SignalAsDouble < 2.0 && this.m_AverageHer2NeuSignal < 4.0)
+                    if(this.m_HER2AmplificationByISHTestOrder.AverageHer2Chr17SignalAsDouble < 2.0 && this.m_HER2AmplificationByISHTestOrder.AverageHer2NeuSignal < 4.0)
                     {
                         result = true;
                     }

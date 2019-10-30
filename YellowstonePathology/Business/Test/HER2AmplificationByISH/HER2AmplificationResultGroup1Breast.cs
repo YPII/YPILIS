@@ -19,9 +19,9 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             bool result = false;
             if (this.m_Indicator == HER2AmplificationByISHIndicatorCollection.BreastIndication)
             {
-                if(this.m_AverageHer2Chr17SignalAsDouble.HasValue && this.m_AverageHer2NeuSignal.HasValue)
+                if(this.m_HER2AmplificationByISHTestOrder.AverageHer2Chr17SignalAsDouble.HasValue && this.m_HER2AmplificationByISHTestOrder.AverageHer2NeuSignal.HasValue)
                 {
-                    if(this.m_AverageHer2Chr17SignalAsDouble >= 2.0 && this.m_AverageHer2NeuSignal >= 4.0)
+                    if(this.m_HER2AmplificationByISHTestOrder.AverageHer2Chr17SignalAsDouble >= 2.0 && this.m_HER2AmplificationByISHTestOrder.AverageHer2NeuSignal >= 4.0)
                     {
                         result = true;
                     }
