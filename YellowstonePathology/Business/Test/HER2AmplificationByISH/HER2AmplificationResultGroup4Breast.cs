@@ -29,9 +29,9 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             {
                 if( this.m_AverageHer2Chr17SignalAsDouble.HasValue && this.m_AverageHer2NeuSignal.HasValue)
                 {
-                    if(this.m_AverageHer2Chr17SignalAsDouble < 2.0)
+                    if(this.m_HER2AmplificationByISHTestOrder.AverageHer2Chr17SignalAsDouble < 2.0)
                     {
-                        if(this.m_AverageHer2NeuSignal >= 4.0 && this.m_AverageHer2NeuSignal < 6.0)
+                        if(this.m_HER2AmplificationByISHTestOrder.AverageHer2NeuSignal >= 4.0 && this.m_HER2AmplificationByISHTestOrder.AverageHer2NeuSignal < 6.0)
                         {
                             result = true;
                         }
@@ -66,7 +66,20 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             {
                 if (this.m_PanelSetOrderHer2AmplificationByIHC.Score.Contains("2+"))
                 {
-                    this.m_Result = HER2AmplificationByISH.HER2AmplificationResultEnum.Negative;
+                    if (this.m_AverageHer2NeuSignal >= 4.0 && this.m_AverageHer2NeuSignal < 6.0)
+                    {
+                        this.m_Result = HER2AmplificationByISH.HER2AmplificationResultEnum.Negative;
+                    }
+                    else
+                    {
+                        this.m_Result = HER2AmplificationByISH.HER2AmplificationResultEnum.Negative;
+                        this.m_InterpretiveComment = "It is uncertain whether patients with an average of < 4.0 human epidermal growth factor 2 " +
+                            "receptor(HER2) signals per cell and HER2 / chromosome enumeration probe 17(CEP17) ratio of < 2.0 benefit from HER2 - " +
+                            "targeted therapy in the absence of protein overexpression(immunohistochemistry[IHC] 3 +).  If the specimen test result is " +
+                            "close to the in situ hybridization (ISH)ratio threshold for positive, there is a higher likelihood that repeat testing will " +
+                            "result in different results by chance alone.  Therefore, when IHC results are not 3 + positive, it is recommended that the " +
+                            "sample be considered HER2 negative without additional testing on the same specimen.";
+                    }                        
                 }
             }
 

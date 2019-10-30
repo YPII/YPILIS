@@ -869,10 +869,13 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
         public void SetResults(AccessionOrder accessionOrder)
         {
             this.SetValues(accessionOrder);
+
             HER2AmplificationByISH.HER2AmplificationResultCollection her2AmplificationResultCollection = new HER2AmplificationByISH.HER2AmplificationResultCollection(accessionOrder.PanelSetOrderCollection, this);
             HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = accessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.OrderedOn, this.OrderedOnId);
             her2AmplificationResult.SetSummaryResults(specimenOrder);
+
+            this.NotifyPropertyChanged(string.Empty);
         }
 
         public override AuditResult IsOkToAccept(AccessionOrder accessionOrder)
@@ -964,13 +967,13 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
 
             if (accessionOrder.PanelSetOrderCollection.Exists(recountTest.PanelSetId, this.m_OrderedOnId, true) == true)
             {
+                this.m_RecountRequired = true;
                 HER2AmplificationRecount.HER2AmplificationRecountTestOrder recountTestOrder = (HER2AmplificationRecount.HER2AmplificationRecountTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(recountTest.PanelSetId, this.m_OrderedOnId, true);
                 this.m_CellsRecount = recountTestOrder.CellsCounted;
                 this.m_TotalChr17SignalsRecount = recountTestOrder.Chr17SignalsCounted;
-                this.m_TotalHer2SignalsRecount = recountTestOrder.Her2SignalsCounted;
-                this.m_RecountRequired = true;
+                this.m_TotalHer2SignalsRecount = recountTestOrder.Her2SignalsCounted;                                
             }
-
+            
             this.m_Distribute = true;
         }
 

@@ -33,8 +33,7 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
 			amendmentSection.SetAmendment(amendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, true);
 
 			base.ReplaceText("report_result", panelSetOrder.Result);
-			base.ReplaceText("report_score", panelSetOrder.Score);
-			base.ReplaceText("report_percent", panelSetOrder.IntenseCompleteMembraneStainingPercent);
+			base.ReplaceText("report_score", panelSetOrder.Score);			
 			base.ReplaceText("report_fixative", panelSetOrder.BreastTestingFixative);
 			base.ReplaceText("report_method", panelSetOrder.Method);
 			base.ReplaceText("report_interpretation", panelSetOrder.Interpretation);

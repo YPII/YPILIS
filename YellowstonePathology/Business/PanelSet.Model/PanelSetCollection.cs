@@ -387,6 +387,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
             //CHILDRENS HOSPITAL COLORADO
             panelSetCollection.Add(new YellowstonePathology.Business.Test.ChimerismStudyByDNAMarkers.ChimerismStudyByDNAMarkersTest());
 
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.FishAnalysis.FishAnalysisTest());
+
             PanelSetCollection result = new PanelSetCollection();
             IEnumerable<PanelSet> enumerable = panelSetCollection.OrderBy(i => i.PanelSetName);
             foreach (PanelSet item in enumerable)

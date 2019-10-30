@@ -38,6 +38,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 
         public HER2AmplificationResult(PanelSetOrderCollection panelSetOrderCollection, HER2AmplificationByISHTestOrder panelSetOrder)
         {
+            this.m_HER2AmplificationByISHTestOrder = (HER2AmplificationByISH.HER2AmplificationByISHTestOrder)panelSetOrderCollection.GetPanelSetOrder(46);
             Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new Her2AmplificationByIHC.Her2AmplificationByIHCTest();
             HER2AmplificationRecount.HER2AmplificationRecountTest her2AmplificationRecountTest = new HER2AmplificationRecount.HER2AmplificationRecountTest();
 
@@ -68,6 +69,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 
         public HER2AmplificationResult(PanelSetOrderCollection panelSetOrderCollection, HER2AnalysisSummary.HER2AnalysisSummaryTestOrder panelSetOrder)
         {
+            this.m_HER2AmplificationByISHTestOrder = (HER2AmplificationByISH.HER2AmplificationByISHTestOrder)panelSetOrderCollection.GetPanelSetOrder(46);
             Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new Her2AmplificationByIHC.Her2AmplificationByIHCTest();
             HER2AmplificationRecount.HER2AmplificationRecountTest her2AmplificationRecountTest = new HER2AmplificationRecount.HER2AmplificationRecountTest();
 
@@ -89,7 +91,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             if (panelSetOrderCollection.Exists(her2AmplificationRecountTest.PanelSetId) == true)
             {
                 this.m_IsHER2AmplificationRecountOrdered = true;
-                this.m_HER2AmplificationRecountTestOrder = (HER2AmplificationRecount.HER2AmplificationRecountTestOrder)panelSetOrderCollection.GetPanelSetOrder(her2AmplificationRecountTest.PanelSetId);
+                this.m_HER2AmplificationRecountTestOrder = (HER2AmplificationRecount.HER2AmplificationRecountTestOrder)panelSetOrderCollection.GetPanelSetOrder(her2AmplificationRecountTest.PanelSetId);                
             }
         }
 
