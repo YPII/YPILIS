@@ -33,8 +33,10 @@ namespace YellowstonePathology.Business.Billing.Model
 
 		public override void PostGlobal(string billTo, string billBy)
 		{
-			// Do nothing
-		}
+            base.PostManualEntriesTechnical(billTo, billBy);
+            BillableObjectStains billableObjectStains = new BillableObjectStains(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo);
+            billableObjectStains.PostTechnical(billTo, billBy);
+        }
 
 		public override void PostClientGCodes(YellowstonePathology.Business.Billing.Model.BillingComponentEnum billingComponent)
 		{
