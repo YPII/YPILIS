@@ -31,7 +31,7 @@ namespace YellowstonePathology.UI.Monitor
 
         private void LoadData()
         {
-            YellowstonePathology.Business.HolidayCollection holidays = YellowstonePathology.Business.HolidayCollection.GetByDateRange(new DateTime(DateTime.Today.AddYears(-1).Year, 1, 1), new DateTime(DateTime.Today.AddYears(1).Year, 12, 31));
+            YellowstonePathology.Business.Calendar.HolidayCollection holidays = YellowstonePathology.Business.Calendar.HolidayCollection.GetByDateRange(new DateTime(DateTime.Today.AddYears(-1).Year, 1, 1), new DateTime(DateTime.Today.AddYears(1).Year, 12, 31));
             YellowstonePathology.Business.Monitor.Model.PendingTestCollection pendingTestCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPendingTestCollection();
             pendingTestCollection.SetState(holidays);
             this.m_CriticalTestCollection = pendingTestCollection.GetCriticalTestsForMonitorPriority();

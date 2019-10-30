@@ -426,7 +426,7 @@ namespace YellowstonePathology.Business.Helper
             DateTime rollingDate = new DateTime(startDate.Year, startDate.Month, startDate.Day);
             TimeSpan timeSpanOneHour = new TimeSpan(1, 0, 0);
             TimeSpan timeSpanMatch = new TimeSpan();
-            YellowstonePathology.Business.HolidayCollection holidays = YellowstonePathology.Business.HolidayCollection.GetByDateRange(new DateTime(startDate.Year, 1, 1), new DateTime(startDate.Add(timeSpan).Year + 1, 12, 31));
+            YellowstonePathology.Business.Calendar.HolidayCollection holidays = YellowstonePathology.Business.Calendar.HolidayCollection.GetByDateRange(new DateTime(startDate.Year, 1, 1), new DateTime(startDate.Add(timeSpan).Year + 1, 12, 31));
             bool isHoliday = false;
             int dow = 0;
 
@@ -469,7 +469,7 @@ namespace YellowstonePathology.Business.Helper
 			return result;
 		}
 
-        public static TimeSpan GetHoursBetween(DateTime startDate, DateTime endDate, HolidayCollection holidays)
+        public static TimeSpan GetHoursBetween(DateTime startDate, DateTime endDate, Calendar.HolidayCollection holidays)
         {
             if (startDate >= endDate) throw new Exception("GetWeekendAndHolidayHoursBetween: startDate is >= endDate");
             TimeSpan result = new TimeSpan();
@@ -515,12 +515,12 @@ namespace YellowstonePathology.Business.Helper
             return dateAndTime;
         }
 
-        public static HolidayCollection GetHolidays(int year)
+        public static Calendar.HolidayCollection GetHolidays(int year)
         {
-            HolidayCollection holidays = new HolidayCollection();
+            Calendar.HolidayCollection holidays = new Calendar.HolidayCollection();
             //NEW YEARS
             DateTime newYearsDate = AdjustForWeekendHoliday(new DateTime(year, 1, 1).Date);
-            Holiday newYear = new Business.Holiday("New Years", newYearsDate, false);
+            Calendar.Holiday newYear = new Business.Calendar.Holiday("New Years", newYearsDate, false);
             holidays.Add(newYear);
 
             //MEMORIAL DAY  -- last monday in May
@@ -531,12 +531,12 @@ namespace YellowstonePathology.Business.Helper
                 memorialDay = memorialDay.AddDays(-1);
                 dayOfWeek = memorialDay.DayOfWeek;
             }
-            Holiday memorial = new Business.Holiday("Memorial Day", memorialDay.Date, false);
+            Calendar.Holiday memorial = new Business.Calendar.Holiday("Memorial Day", memorialDay.Date, false);
             holidays.Add(memorial);
 
             //INDEPENCENCE DAY
             DateTime independenceDay = AdjustForWeekendHoliday(new DateTime(year, 7, 4).Date);
-            Holiday july4 = new Business.Holiday("Independence Day", independenceDay, false);
+            Calendar.Holiday july4 = new Business.Calendar.Holiday("Independence Day", independenceDay, false);
             holidays.Add(july4);
 
             //LABOR DAY -- 1st Monday in September
@@ -547,7 +547,7 @@ namespace YellowstonePathology.Business.Helper
                 laborDay = laborDay.AddDays(1);
                 dayOfWeek = laborDay.DayOfWeek;
             }
-            Holiday labor = new Business.Holiday("Labor Day", laborDay.Date, false);
+            Calendar.Holiday labor = new Business.Calendar.Holiday("Labor Day", laborDay.Date, false);
             holidays.Add(labor);
 
             //THANKSGIVING DAY - 4th Thursday in November
@@ -555,12 +555,12 @@ namespace YellowstonePathology.Business.Helper
                                 where new DateTime(year, 11, day).DayOfWeek == DayOfWeek.Thursday
                                 select day).ElementAt(3);
             DateTime thanksgivingDay = new DateTime(year, 11, thanksgiving);
-            Holiday turkey = new Business.Holiday("Thanksgiving Day", thanksgivingDay.Date, false);
+            Calendar.Holiday turkey = new Business.Calendar.Holiday("Thanksgiving Day", thanksgivingDay.Date, false);
             holidays.Add(turkey);
 
             //CHRISTMAS December 25th
             DateTime christmasDay = AdjustForWeekendHoliday(new DateTime(year, 12, 25).Date);
-            Holiday christmas = new Business.Holiday("Christmas Day", christmasDay, false);
+            Calendar.Holiday christmas = new Business.Calendar.Holiday("Christmas Day", christmasDay, false);
             holidays.Add(christmas);
             return holidays;
         }
