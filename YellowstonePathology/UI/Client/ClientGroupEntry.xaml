@@ -32,8 +32,8 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2">Group Name</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=ClientGroup.GroupName}" HorizontalAlignment="Stretch"></TextBox>
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2">Group Name:</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=ClientGroup.GroupName}" HorizontalAlignment="Stretch"></TextBlock>
             </Grid>
 
             <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2">Group Members</TextBlock>
