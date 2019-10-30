@@ -29,25 +29,25 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             if (string.IsNullOrEmpty(this.m_AccessionOrder.PAddress1) == false)
             {
                 string address = this.m_AccessionOrder.PAddress1;
-                if (string.IsNullOrEmpty(this.m_AccessionOrder.PAddress2) == false) address += ", " + this.m_AccessionOrder.PAddress2;
+                if (string.IsNullOrEmpty(this.m_AccessionOrder.PAddress2) == false) address += " " + this.m_AccessionOrder.PAddress2;
                 base.ReplaceText("pat_address", address);
             }
             else
             {
-                base.ReplaceText("pat_address", "_____________________________");
+                base.ReplaceText("pat_address", "___________________________________");
             }
 
             if (string.IsNullOrEmpty(this.m_AccessionOrder.PCity) == false) base.ReplaceText("pat_city", this.m_AccessionOrder.PCity);
-            else base.ReplaceText("pat_city", "______________");
+            else base.ReplaceText("pat_city", "________________");
 
-            if (string.IsNullOrEmpty(this.m_AccessionOrder.PState) == false) base.ReplaceText("pat_state", this.m_AccessionOrder.PState);
-            else base.ReplaceText("pat_state", "______");
+            if (string.IsNullOrEmpty(this.m_AccessionOrder.PState) == false) base.ReplaceText("p_s", this.m_AccessionOrder.PState);
+            else base.ReplaceText("p_s", "___");
 
             if (string.IsNullOrEmpty(this.m_AccessionOrder.PZipCode) == false) base.ReplaceText("pat_zip", this.m_AccessionOrder.PZipCode);
-            else base.ReplaceText("pat_zip", "________");
+            else base.ReplaceText("pat_zip", "______");
 
             if (string.IsNullOrEmpty(this.m_AccessionOrder.PSSN) == false) base.ReplaceText("pat_ssn", this.m_AccessionOrder.PSSN);
-            else base.ReplaceText("pat_ssn", "________");
+            else base.ReplaceText("pat_ssn", "__________");
 
             if (string.IsNullOrEmpty(this.m_AccessionOrder.PSex) == false) base.ReplaceText("p_g", this.m_AccessionOrder.PSex);
             else base.ReplaceText("p_g", "(M) (F)");
@@ -55,20 +55,9 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             if (this.m_AccessionOrder.PBirthdate.HasValue == true) base.ReplaceText("pat_dob", this.m_AccessionOrder.PBirthdate.Value.ToShortDateString());
             else base.ReplaceText("pat_dob", "____________");
 
-            if (string.IsNullOrEmpty(this.m_AccessionOrder.PrimaryInsurance) == false && this.m_AccessionOrder.PrimaryInsurance != "Not Selected")
-                base.ReplaceText("primary_insurance", this.m_AccessionOrder.PrimaryInsurance);
-            else base.ReplaceText("primary_insurance", "______________________");
-
-             base.ReplaceText("prim_insu_address", "____________________________");
-
-            base.ReplaceText("subscriber_name", "_____________________________");
-
-            base.ReplaceText("subscriber_dob", "_______________________________");
-
-            if (string.IsNullOrEmpty(this.m_AccessionOrder.InsurancePlan1) == false) base.ReplaceText("ins_id", this.m_AccessionOrder.InsurancePlan1);
-            else base.ReplaceText("ins_id", "____________________________________");
-
-            base.ReplaceText("ins_group", "__________________________________");
+            if (string.IsNullOrEmpty(this.m_AccessionOrder.InsurancePlan1) == false && this.m_AccessionOrder.InsurancePlan1 != "Not Selected")
+                base.ReplaceText("primary_insurance", this.m_AccessionOrder.InsurancePlan1);
+            else base.ReplaceText("primary_insurance", "________________________________________________________________________");
 
             base.ReplaceText("provider_name", this.m_AccessionOrder.PhysicianName);
 
