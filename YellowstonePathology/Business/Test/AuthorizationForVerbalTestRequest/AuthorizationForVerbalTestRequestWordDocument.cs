@@ -7,6 +7,10 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
 	{
         private PanelSetOrder m_PanelSetOrderToAuthorize;
 
+        public AuthorizationForVerbalTestRequestWordDocument(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Document.ReportSaveModeEnum reportSaveMode)
+            : base(accessionOrder, panelSetOrder, reportSaveMode)
+        { }
+
         public AuthorizationForVerbalTestRequestWordDocument(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Document.ReportSaveModeEnum reportSaveMode, PanelSetOrder panelSetOrderToAuthorize) 
             : base(accessionOrder, panelSetOrder, reportSaveMode)
         {
@@ -99,6 +103,13 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.AuthorizationForVerbalRequest, CaseDocumentFileTypeEnum.xml, CaseDocumentFileTypeEnum.doc);
             YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.AuthorizationForVerbalRequest, CaseDocumentFileTypeEnum.doc, CaseDocumentFileTypeEnum.xps);
             YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.AuthorizationForVerbalRequest, CaseDocumentFileTypeEnum.xps, CaseDocumentFileTypeEnum.tif);
+        }
+
+        public override YellowstonePathology.Business.Rules.MethodResult DeleteCaseFiles(YellowstonePathology.Business.OrderIdParser orderIdParser)
+        {
+            YellowstonePathology.Business.Rules.MethodResult methodResult = new Rules.MethodResult();
+            methodResult.Success = true;
+            return methodResult;
         }
     }
 }
