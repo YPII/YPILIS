@@ -161,7 +161,7 @@ namespace YellowstonePathology.UI.Test
         private void HyperLinkSendFax_Click(object sender, RoutedEventArgs e)
         {
             Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            string tifPath = Business.Document.CaseDocument.GetCaseFileNameTifRequestForAuth(orderIdParser);
+            string tifPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.xml";
             if (File.Exists(tifPath) == true)
             {
                 YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
