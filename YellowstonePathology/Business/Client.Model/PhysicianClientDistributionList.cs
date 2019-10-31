@@ -34,19 +34,30 @@ namespace YellowstonePathology.Business.Client.Model
             paifPathIds.Add(910); //Tannenbaum
 
             if(paifPathIds.Contains(accessionOrder.PhysicianId) == true)
-            {
-                /*
-                int paifClientId = 1201;
-                Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(paifClientId);
-                PhysicianClientDistributionListItem physicianClientDistribution = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(client.DistributionType);
-                physicianClientDistribution.ClientId = client.ClientId;
-                physicianClientDistribution.ClientName = client.ClientName;
-                physicianClientDistribution.PhysicianId = 728;
-                physicianClientDistribution.PhysicianName = "Staff Pathologist";
-                physicianClientDistribution.DistributionType = "Fax";
-                physicianClientDistribution.FaxNumber = client.Fax;
-                this.Add(physicianClientDistribution);
-                */
+            { 
+                if(this.DoesStaffPathologistExist() == true)
+                {
+                    foreach (PhysicianClientDistributionListItem item in this)
+                    {
+                        if (item.PhysicianId == 728 && item.DistributionType != "Fax")
+                        {
+                            item.DistributionType = "Fax";
+                        }
+                    }
+                }
+                else
+                {
+                    int paifClientId = 1201;
+                    Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(paifClientId);
+                    PhysicianClientDistributionListItem physicianClientDistribution = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(client.DistributionType);
+                    physicianClientDistribution.ClientId = client.ClientId;
+                    physicianClientDistribution.ClientName = client.ClientName;
+                    physicianClientDistribution.PhysicianId = 728;
+                    physicianClientDistribution.PhysicianName = "Staff Pathologist";
+                    physicianClientDistribution.DistributionType = "Fax";
+                    physicianClientDistribution.FaxNumber = client.Fax;
+                    this.Add(physicianClientDistribution);
+                }                                                         
             }
         }
 
@@ -86,6 +97,20 @@ namespace YellowstonePathology.Business.Client.Model
             {
                 if (physicianClientDistributionListItem.DistributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC ||
                     physicianClientDistributionListItem.DistributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public bool DoesStaffPathologistExist()
+        {
+            bool result = false;
+            foreach (YellowstonePathology.Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistributionListItem in this)
+            {
+                if (physicianClientDistributionListItem.PhysicianId == 728)
                 {
                     result = true;
                     break;
