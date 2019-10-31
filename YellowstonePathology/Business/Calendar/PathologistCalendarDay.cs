@@ -14,14 +14,14 @@ namespace YellowstonePathology.Business.Calendar
         public event PropertyChangedEventHandler PropertyChanged;
 
         private DateTime m_CalendarDate;
-        private PathologistClanendarStatus m_DrBibbeyStatus;
-        private PathologistClanendarStatus m_DrBrownStatus;
-        private PathologistClanendarStatus m_DrDurdenStatus;
-        private PathologistClanendarStatus m_DrEmerickStatus;
-        private PathologistClanendarStatus m_DrLuemStatus;
-        private PathologistClanendarStatus m_DrMessnerStatus;
-        private PathologistClanendarStatus m_DrNeroStatus;
-        private PathologistClanendarStatus m_DrSchneiderStatus;
+        private PathologistCalendarStatus m_DrBibbeyStatus;
+        private PathologistCalendarStatus m_DrBrownStatus;
+        private PathologistCalendarStatus m_DrDurdenStatus;
+        private PathologistCalendarStatus m_DrEmerickStatus;
+        private PathologistCalendarStatus m_DrLuemStatus;
+        private PathologistCalendarStatus m_DrMessnerStatus;
+        private PathologistCalendarStatus m_DrNeroStatus;
+        private PathologistCalendarStatus m_DrSchneiderStatus;
 
         public PathologistCalendarDay()
         { }
@@ -29,14 +29,14 @@ namespace YellowstonePathology.Business.Calendar
         public PathologistCalendarDay(DateTime calendarDay)
         {
             this.m_CalendarDate = calendarDay;
-            this.m_DrBibbeyStatus = new Calendar.PathologistClanendarStatus("Dr Bibbey", "Billings");
-            this.m_DrBrownStatus = new Calendar.PathologistClanendarStatus("Dr Brown", "Billings");
-            this.m_DrDurdenStatus = new Calendar.PathologistClanendarStatus("Dr Durden", "Billings");
-            this.m_DrEmerickStatus = new Calendar.PathologistClanendarStatus("Dr Emerick", "Bozeman");
-            this.m_DrLuemStatus = new Calendar.PathologistClanendarStatus("Dr Luem", "Bozeman");
-            this.m_DrMessnerStatus = new Calendar.PathologistClanendarStatus("Dr Messner", "Billings");
-            this.m_DrNeroStatus = new Calendar.PathologistClanendarStatus("Dr Nero", "Bozeman");
-            this.m_DrSchneiderStatus = new Calendar.PathologistClanendarStatus("Dr Schneider", "Billings");
+            this.m_DrBibbeyStatus = new Calendar.PathologistCalendarStatus("Dr Bibbey", "Billings");
+            this.m_DrBrownStatus = new Calendar.PathologistCalendarStatus("Dr Brown", "Billings");
+            this.m_DrDurdenStatus = new Calendar.PathologistCalendarStatus("Dr Durden", "Billings");
+            this.m_DrEmerickStatus = new Calendar.PathologistCalendarStatus("Dr Emerick", "Bozeman");
+            this.m_DrLuemStatus = new Calendar.PathologistCalendarStatus("Dr Luem", "Bozeman");
+            this.m_DrMessnerStatus = new Calendar.PathologistCalendarStatus("Dr Messner", "Billings");
+            this.m_DrNeroStatus = new Calendar.PathologistCalendarStatus("Dr Nero", "Bozeman");
+            this.m_DrSchneiderStatus = new Calendar.PathologistCalendarStatus("Dr Schneider", "Billings");
         }
 
         public void NotifyPropertyChanged(String info)
@@ -65,7 +65,7 @@ namespace YellowstonePathology.Business.Calendar
             get { return this.m_CalendarDate.ToString("ddd MMM d"); }
         }
 
-        public PathologistClanendarStatus DrBibbeyStatus
+        public PathologistCalendarStatus DrBibbeyStatus
         {
             get { return this.m_DrBibbeyStatus; }
             set
@@ -78,7 +78,7 @@ namespace YellowstonePathology.Business.Calendar
             }
         }
 
-        public PathologistClanendarStatus DrBrownStatus
+        public PathologistCalendarStatus DrBrownStatus
         {
             get { return this.m_DrBrownStatus; }
             set
@@ -91,7 +91,7 @@ namespace YellowstonePathology.Business.Calendar
             }
         }
 
-        public PathologistClanendarStatus DrDurdenStatus
+        public PathologistCalendarStatus DrDurdenStatus
         {
             get { return this.m_DrDurdenStatus; }
             set
@@ -104,7 +104,7 @@ namespace YellowstonePathology.Business.Calendar
             }
         }
 
-        public PathologistClanendarStatus DrEmerickStatus
+        public PathologistCalendarStatus DrEmerickStatus
         {
             get { return this.m_DrEmerickStatus; }
             set
@@ -117,7 +117,7 @@ namespace YellowstonePathology.Business.Calendar
             }
         }
 
-        public PathologistClanendarStatus DrLuemStatus
+        public PathologistCalendarStatus DrLuemStatus
         {
             get { return this.m_DrLuemStatus; }
             set
@@ -130,7 +130,7 @@ namespace YellowstonePathology.Business.Calendar
             }
         }
 
-        public PathologistClanendarStatus DrMessnerStatus
+        public PathologistCalendarStatus DrMessnerStatus
         {
             get { return this.m_DrMessnerStatus; }
             set
@@ -143,7 +143,7 @@ namespace YellowstonePathology.Business.Calendar
             }
         }
 
-        public PathologistClanendarStatus DrNeroStatus
+        public PathologistCalendarStatus DrNeroStatus
         {
             get { return this.m_DrNeroStatus; }
             set
@@ -156,7 +156,7 @@ namespace YellowstonePathology.Business.Calendar
             }
         }
 
-        public PathologistClanendarStatus DrSchneiderStatus
+        public PathologistCalendarStatus DrSchneiderStatus
         {
             get { return this.m_DrSchneiderStatus; }
             set

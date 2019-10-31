@@ -11,6 +11,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -19,7 +21,12 @@
             <TextBlock Margin="10,10,10,10" FontSize="24" Text="{Binding Path=DashboardDate,Converter={StaticResource ShortDateTimeConverter}}"></TextBlock>
         </StackPanel>
 
-        <Grid Grid.Column="0" Grid.Row="1" Background="#e5fee7" Margin ="5, 5, 5, 5" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Margin="10,10,10,10" FontSize="24">Blocks to send to Bozeman</TextBlock>
+            <TextBlock Margin="10,10,10,10" FontSize="24" Text="{Binding Path=BlocksToTransfer}"></TextBlock>
+        </StackPanel>
+
+        <Grid Grid.Column="0" Grid.Row="2" Background="#e5fee7" Margin ="5, 5, 5, 5" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
