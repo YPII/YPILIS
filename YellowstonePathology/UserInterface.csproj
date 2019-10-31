@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>204</ApplicationRevision>
+    <ApplicationRevision>206</ApplicationRevision>
     <ApplicationVersion>10.1.15.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -5230,8 +5230,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Calendar\CalendarDialog.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\CellCounter.xaml">
       <SubType>Designer</SubType>

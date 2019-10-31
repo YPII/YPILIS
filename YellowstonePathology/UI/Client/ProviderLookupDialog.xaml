@@ -104,7 +104,7 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Path=ClientGroupId}" />
-                                <GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding Path=GroupName}" />                                
+                                <GridViewColumn Header="Name" Width="450" DisplayMemberBinding="{Binding Path=GroupName}" />                                
                             </GridView>
                         </ListView.View>
                     </ListView>
