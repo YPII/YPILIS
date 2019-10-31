@@ -1,5 +1,6 @@
 ﻿using System;
 using YellowstonePathology.Business.Document;
+using System.IO;
 
 namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
 {
@@ -19,6 +20,8 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
 
         public override void Render()
         {
+            if (this.m_PanelSetOrderToAuthorize == null) return;
+
             this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\AuthorizationForVerbalTestRequest.xml";
             base.OpenTemplate();
 
@@ -93,23 +96,23 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             base.ReplaceText("provider_phone", clientPhone);
 
             YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            this.m_SaveFileName = Business.Document.CaseDocument.GetCaseFileNameXMLRequestForAuth(orderIdParser);
+            this.m_SaveFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.xml";
             this.m_ReportXml.Save(this.m_SaveFileName);
         }
 
         public override void Publish()
         {
             YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.AuthorizationForVerbalRequest, CaseDocumentFileTypeEnum.xml, CaseDocumentFileTypeEnum.doc);
-            YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.AuthorizationForVerbalRequest, CaseDocumentFileTypeEnum.doc, CaseDocumentFileTypeEnum.xps);
-            YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.AuthorizationForVerbalRequest, CaseDocumentFileTypeEnum.xps, CaseDocumentFileTypeEnum.tif);
-        }
-
-        public override YellowstonePathology.Business.Rules.MethodResult DeleteCaseFiles(YellowstonePathology.Business.OrderIdParser orderIdParser)
-        {
-            YellowstonePathology.Business.Rules.MethodResult methodResult = new Rules.MethodResult();
-            methodResult.Success = true;
-            return methodResult;
+            string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.xml";
+            string docName = fileName.Substring(0, fileName.LastIndexOf(".xml")) + ".doc";
+            string xpsName = fileName.Substring(0, fileName.LastIndexOf(".xml")) + ".xps";
+            string tifName = fileName.Substring(0, fileName.LastIndexOf(".xml")) + ".tif";
+            YellowstonePathology.Business.Helper.FileConversionHelper.ConvertXMLToDoc(fileName, docName);
+            YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocToXPS(docName, xpsName);
+            YellowstonePathology.Business.Helper.FileConversionHelper.ConvertXPSToTIF(xpsName, tifName);
+            File.Delete(fileName);
+            File.Delete(docName);
+            File.Delete(xpsName);
         }
     }
 }

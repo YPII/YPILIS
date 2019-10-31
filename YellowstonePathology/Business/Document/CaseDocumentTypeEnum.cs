@@ -10,7 +10,6 @@ namespace YellowstonePathology.Business.Document
     {
         CaseReport,
         PreauthorizationRequest,
-        AdditionalTestingNotification,
-        AuthorizationForVerbalRequest
+        AdditionalTestingNotification
     }
 }

@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             this.m_AllowMultiplePerAccession = true;
 
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestTestOrder).AssemblyQualifiedName;
-            this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument).AssemblyQualifiedName;
+            this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
 
