@@ -388,18 +388,6 @@ namespace YellowstonePathology.Business.Document
             return fileName;
         }
 
-        public static string GetCaseFileNameXMLRequestForAuth(YellowstonePathology.Business.OrderIdParser orderIdParser)
-        {
-            string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.xml";
-            return fileName;
-        }
-
-        public static string GetCaseFileNameTifRequestForAuth(YellowstonePathology.Business.OrderIdParser orderIdParser)
-        {
-            string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.tif";
-            return fileName;
-        }
-
         public static string GetCaseFileNamePatientTif(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
 			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".Patient.tif";

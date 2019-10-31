@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             this.m_CaseType = YellowstonePathology.Business.CaseType.ALLCaseTypes;
             this.m_HasTechnicalComponent = false;
             this.m_HasProfessionalComponent = false;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.None;
+            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterI();
             this.m_Active = true;
             this.m_ReportAsAdditionalTesting = false;
@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             this.m_AllowMultiplePerAccession = true;
 
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestTestOrder).AssemblyQualifiedName;
-            this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument).AssemblyQualifiedName;
+            this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
 
