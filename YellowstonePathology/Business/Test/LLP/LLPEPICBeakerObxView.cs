@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Test.LLP
 
             if (panelSetOrder.FinalTime.HasValue == true)
             {
-                this.AddNextObxElementBeaker("E-signed ", panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
+                this.AddNextObxElementBeaker("E-signed", panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
             }
 
             if (amendmentCollection.Count != 0)

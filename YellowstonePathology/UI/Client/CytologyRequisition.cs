@@ -74,6 +74,7 @@ namespace YellowstonePathology.UI.Client
 
             if (this.m_ClientPhysicianView.ShowPhysiciansOnRequisition == true)
             {
+                y += 15;
                 foreach (YellowstonePathology.Business.Domain.Physician physician in this.m_ClientPhysicianView.Physicians)
                 {
                     e.Graphics.DrawString(physician.DisplayName, new System.Drawing.Font("Tahoma", 10), System.Drawing.Brushes.Black, new System.Drawing.PointF(x + 200, y));
