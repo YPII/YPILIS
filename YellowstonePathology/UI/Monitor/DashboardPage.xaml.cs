@@ -28,6 +28,7 @@ namespace YellowstonePathology.UI.Monitor
         public event PropertyChangedEventHandler PropertyChanged;
 
         private YellowstonePathology.Business.Monitor.Model.BlockCountCollection m_BlockCountColletion;
+        private int m_BlocksToTransfer;
 
         private Login.Receiving.LoginPageWindow m_LoginPageWindow;
 
@@ -43,6 +44,7 @@ namespace YellowstonePathology.UI.Monitor
             YellowstonePathology.Business.Gateway.AccessionOrderGateway.SetBillingsBlockCount();
             this.HandleBlockCountEmails();
             this.m_BlockCountColletion = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMonitorBlockCount();
+            this.m_BlocksToTransfer = this.m_BlockCountColletion.BlocksToTransfer(DateTime.Today);
             this.NotifyPropertyChanged("");
         }        
 
@@ -54,6 +56,11 @@ namespace YellowstonePathology.UI.Monitor
         public DateTime DashboardDate
         {
             get { return DateTime.Now; }
+        }
+
+        public int BlocksToTransfer
+        {
+            get { return this.m_BlocksToTransfer; }
         }
 
         public void NotifyPropertyChanged(String info)

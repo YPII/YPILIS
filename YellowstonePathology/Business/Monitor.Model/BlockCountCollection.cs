@@ -53,7 +53,10 @@ namespace YellowstonePathology.Business.Monitor.Model
                 int bozemanCountPer = blockCount.BozemanBlocks / pathologistsByLocation.BozemanCount;
                 if(billingsCountPer > totalCountPer)
                 {
-                    result = (billingsCountPer - totalCountPer) * pathologistsByLocation.BillingsCount;
+                    int excessBlocks = (billingsCountPer - bozemanCountPer) * pathologistsByLocation.BillingsCount;
+                    int excessBlocksPer = excessBlocks / pathologistsByLocation.TotalCount;
+                    int blocksToSend = excessBlocksPer * pathologistsByLocation.BozemanCount;
+                    result = blocksToSend > 10 ? blocksToSend : 0;
                 }
             }
             return result;

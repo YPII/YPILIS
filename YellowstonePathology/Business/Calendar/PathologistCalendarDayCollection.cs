@@ -121,7 +121,7 @@ namespace YellowstonePathology.Business.Calendar
                     {
                         result.BillingsCount += 1;
                     }
-                    else if (pathologistCalendarDay.DrBibbeyStatus.Status == "Bozeman")
+                    else if (pathologistCalendarStatus.Status == "Bozeman")
                     {
                         result.BozemanCount += 1;
                     }
