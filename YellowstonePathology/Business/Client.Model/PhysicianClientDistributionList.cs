@@ -16,12 +16,39 @@ namespace YellowstonePathology.Business.Client.Model
         public void SetDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             this.HandleReferringProvider(accessionOrder);
-            this.HandlePathGroup(accessionOrder);            
+            this.HandlePathGroup(accessionOrder);
+            this.HandlePAIF(accessionOrder);
             foreach (PhysicianClientDistributionListItem physicianClientDistribution in this)
             {
                 physicianClientDistribution.SetDistribution(panelSetOrder, accessionOrder);
             }            
-        }    
+        }
+
+        public void HandlePAIF(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        {
+            List<int> paifPathIds = new List<int>();
+            paifPathIds.Add(4315); //Haws
+            paifPathIds.Add(3333); //Daines
+            paifPathIds.Add(3563); //Ririe
+            paifPathIds.Add(2731); //Teerman
+            paifPathIds.Add(910); //Tannenbaum
+
+            if(paifPathIds.Contains(accessionOrder.PhysicianId) == true)
+            {
+                /*
+                int paifClientId = 1201;
+                Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(paifClientId);
+                PhysicianClientDistributionListItem physicianClientDistribution = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(client.DistributionType);
+                physicianClientDistribution.ClientId = client.ClientId;
+                physicianClientDistribution.ClientName = client.ClientName;
+                physicianClientDistribution.PhysicianId = 728;
+                physicianClientDistribution.PhysicianName = "Staff Pathologist";
+                physicianClientDistribution.DistributionType = "Fax";
+                physicianClientDistribution.FaxNumber = client.Fax;
+                this.Add(physicianClientDistribution);
+                */
+            }
+        }
 
         public void HandlePathGroup(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {

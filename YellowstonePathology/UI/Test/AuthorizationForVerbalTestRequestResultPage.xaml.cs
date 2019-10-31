@@ -132,7 +132,7 @@ namespace YellowstonePathology.UI.Test
             if (string.IsNullOrEmpty(this.PanelSetOrder.AuthorizationTestName) == false)
             {
                 YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
-                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft, panelSetOrder);
+                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft);
                 report.Render();
                 YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(report.SaveFileName);
             }
@@ -147,7 +147,7 @@ namespace YellowstonePathology.UI.Test
             if (string.IsNullOrEmpty(this.PanelSetOrder.AuthorizationTestName) == false)
             {
                 YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
-                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder,this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal, panelSetOrder);
+                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder,this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
                 report.Render();
                 report.Publish();
                 MessageBox.Show("The request has been published.");

@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             : base(masterAccessionNo, reportNo, objectId, panelSet, distribute)
         {
             this.m_NoCharge = true;
-        }
+        }        
 
         [PersistentProperty()]
         public string AuthorizationTestName

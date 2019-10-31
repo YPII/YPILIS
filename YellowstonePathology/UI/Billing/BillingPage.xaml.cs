@@ -444,5 +444,15 @@ namespace YellowstonePathology.UI.Billing
                 panelSetOrderCPTCode.Account = this.m_AccessionOrder.SvhAccount;
             }
         }
+
+        private void MenuItemUpdateMRNACCTBill_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewPanelSetOrderCPTCodeBill.SelectedItems.Count != 0)
+            {
+                YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill = (YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill)this.ListViewPanelSetOrderCPTCodeBill.SelectedItem;
+                panelSetOrderCPTCodeBill.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
+                panelSetOrderCPTCodeBill.Account = this.m_AccessionOrder.SvhAccount;
+            }
+        }
     }
 }
