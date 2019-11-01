@@ -377,13 +377,28 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                     view = new YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryEPICOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 338:
-                    view = new YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2.ThrombocytopeniaProfileV2EPICObxView(accessionOrder, reportNo, obxCount);
+                    if (beakerTesting)
+                    {
+                        view = new YellowstonePathology.Business.Test.LLP.LLPEPICBeakerObxView(accessionOrder, reportNo, obxCount);
+                        view = new YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2.ThrombocytopeniaProfileV2EPICBeakerObxView(accessionOrder, reportNo, obxCount);
+                    }
+                    else
+                    {
+                        view = new YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2.ThrombocytopeniaProfileV2EPICObxView(accessionOrder, reportNo, obxCount);
+                    }
                     break;
                 case 339:
                     view = new YellowstonePathology.Business.Test.ReticulatedPlateletAnalysisV2.ReticulatedPlateletAnalysisV2EPICOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 340:
-                    view = new YellowstonePathology.Business.Test.PlateletAssociatedAntibodiesV2.PlateletAssociatedAntibodiesV2EPICOBXView(accessionOrder, reportNo, obxCount);
+                    if (beakerTesting)
+                    {
+                        view = new YellowstonePathology.Business.Test.PlateletAssociatedAntibodiesV2.PlateletAssociatedAntibodiesV2EPICBeakerObxView(accessionOrder, reportNo, obxCount);
+                    }
+                    else
+                    {
+                        view = new YellowstonePathology.Business.Test.PlateletAssociatedAntibodiesV2.PlateletAssociatedAntibodiesV2EPICOBXView(accessionOrder, reportNo, obxCount);
+                    }
                     break;
                 case 365:
                     view = new YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3EsophSquamCellCarcinomaEPICOBXView(accessionOrder, reportNo, obxCount);
