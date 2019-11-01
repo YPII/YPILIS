@@ -47,15 +47,19 @@ namespace YellowstonePathology.Business.Monitor.Model
             foreach(BlockCount blockCount in this)
             {
                 Business.Calendar.PathologistsByLocation pathologistsByLocation = Business.Calendar.PathologistCalendarDayCollection.PathologistsCountByLocationOnDate(blockCount.BlockCountDate);
-                int totalCountPer = (blockCount.YPIBlocks + blockCount.BozemanBlocks) / pathologistsByLocation.TotalCount;
-                int billingsCountPer = blockCount.YPIBlocks / pathologistsByLocation.BillingsCount;
-                int bozemanCountPer = blockCount.BozemanBlocks / pathologistsByLocation.BozemanCount;
-                if (billingsCountPer > totalCountPer)
+                if (blockCount.YPIBlocks > 0 && blockCount.BozemanBlocks > 0 && pathologistsByLocation.BillingsCount > 0 && pathologistsByLocation.BozemanCount > 0)
                 {
-                    int excessBlocks = (billingsCountPer - bozemanCountPer) * pathologistsByLocation.BillingsCount;
-                    int excessBlocksPer = excessBlocks / pathologistsByLocation.TotalCount;
-                    int blocksToSend = excessBlocksPer * pathologistsByLocation.BozemanCount;
-                    result = blocksToSend > 10 ? blocksToSend : 0;
+                    int totalCountPer = (blockCount.YPIBlocks + blockCount.BozemanBlocks) / pathologistsByLocation.TotalCount;
+                    int billingsCountPer = blockCount.YPIBlocks / pathologistsByLocation.BillingsCount;
+                    int bozemanCountPer = blockCount.BozemanBlocks / pathologistsByLocation.BozemanCount;
+                    if (billingsCountPer > totalCountPer)
+                    {
+                        int excessBlocks = (billingsCountPer - bozemanCountPer) * pathologistsByLocation.BillingsCount;
+                        int excessBlocksPer = excessBlocks / pathologistsByLocation.TotalCount;
+                        int blocksToSend = excessBlocksPer * pathologistsByLocation.BozemanCount;
+                        blockCount.BlocksToSend = blocksToSend > 10 ? blocksToSend : 0;
+                        if(blockCount.BlockCountDate == DateTime.Today) result = blocksToSend > 10 ? blocksToSend : 0;
+                    }
                 }
             }                
             
