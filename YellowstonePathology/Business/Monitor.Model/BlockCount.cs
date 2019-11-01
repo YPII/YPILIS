@@ -16,6 +16,7 @@ namespace YellowstonePathology.Business.Monitor.Model
         private DateTime m_BlockCountDate;        
         private int m_YPIBlocks;        
         private int m_BozemanBlocks;
+        private int m_BlocksToSend;
 
         public BlockCount()
         {
@@ -65,6 +66,20 @@ namespace YellowstonePathology.Business.Monitor.Model
                 {
                     this.m_BozemanBlocks = value;
                     this.NotifyPropertyChanged("BozemanBlocks");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public int BlocksToSend
+        {
+            get { return this.m_BlocksToSend; }
+            set
+            {
+                if (this.m_BlocksToSend != value)
+                {
+                    this.m_BlocksToSend = value;
+                    this.NotifyPropertyChanged("BlocksToSend");
                 }
             }
         }
