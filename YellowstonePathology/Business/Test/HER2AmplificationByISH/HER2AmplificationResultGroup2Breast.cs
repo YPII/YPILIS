@@ -41,6 +41,23 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             return result;
         }
 
+        public override bool IsASummaryMatch()
+        {
+            bool result = false;
+            if (this.m_Indicator == HER2AmplificationByISH.HER2AmplificationByISHIndicatorCollection.BreastIndication)
+            {
+                if (this.m_HER2AnalysisSummaryTestOrder.AverageHer2Chr17SignalAsDouble.HasValue && this.m_HER2AnalysisSummaryTestOrder.AverageHer2NeuSignal.HasValue)
+                {
+                    if (this.m_HER2AnalysisSummaryTestOrder.AverageHer2Chr17SignalAsDouble >= 2.0 && this.m_HER2AnalysisSummaryTestOrder.AverageHer2NeuSignal < 4.0)
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public override void SetISHResults(Business.Specimen.Model.SpecimenOrder specimenOrder)
         {
             this.m_Result = HER2AmplificationResultEnum.Equivocal;

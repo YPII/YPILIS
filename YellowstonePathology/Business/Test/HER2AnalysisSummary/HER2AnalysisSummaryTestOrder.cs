@@ -557,31 +557,16 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
         public int CellCountToUse
         {
             get { return this.m_RecountRequired == true ? this.m_CellsRecount : this.m_CellsCounted; }
-            set
-            {
-                if (this.m_RecountRequired == true) this.CellsRecount = value;
-                else this.CellsCounted = value;
-            }
         }
 
         private int TotalHer2SignalsCountToUse
         {
             get { return this.m_RecountRequired == true ? this.m_TotalHer2SignalsRecount : this.m_TotalHer2SignalsCounted; }
-            set
-            {
-                if (this.m_RecountRequired == true) this.TotalHer2SignalsRecount = value;
-                else this.TotalHer2SignalsCounted = value;
-            }
         }
 
         private int TotalChr17SignalsCountToUse
         {
             get { return this.m_RecountRequired == true ? this.m_TotalChr17SignalsRecount : this.m_TotalChr17SignalsCounted; }
-            set
-            {
-                if (this.m_RecountRequired == true) this.TotalChr17SignalsRecount = value;
-                else this.TotalChr17SignalsCounted = value;
-            }
         }
 
         public Nullable<double> Her2Chr17Ratio
@@ -654,102 +639,6 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
                     dratio = ((double)TotalHer2SignalsCountToUse / (double)CellCountToUse) / ((double)TotalChr17SignalsCountToUse / (double)CellCountToUse);
                 }
                 return dratio;
-            }
-        }
-
-        public int TotalChr17SignalsCountedUI
-        {
-            get { return this.m_TotalChr17SignalsCounted; }
-            set
-            {
-                if (this.m_TotalChr17SignalsCounted != value)
-                {
-                    this.TotalChr17SignalsCounted = value;
-                    NotifyPropertyChanged("Her2Chr17Ratio");
-                    NotifyPropertyChanged("TotalChr17SignalsCountedUI");
-                    NotifyPropertyChanged("AverageChr17Signal");
-                    NotifyPropertyChanged("AverageHer2Chr17Signal");
-                }
-            }
-        }
-
-        public int TotalChr17SignalsRecountUI
-        {
-            get { return this.m_TotalChr17SignalsRecount; }
-            set
-            {
-                if (this.m_TotalChr17SignalsRecount != value)
-                {
-                    this.m_TotalChr17SignalsRecount = value;
-                    NotifyPropertyChanged("Her2Chr17Ratio");
-                    NotifyPropertyChanged("TotalChr17SignalsCountedUI");
-                    NotifyPropertyChanged("AverageChr17Signal");
-                    NotifyPropertyChanged("AverageHer2Chr17Signal");
-                }
-            }
-        }
-
-        public int TotalHer2SignalsRecountUI
-        {
-            get { return this.m_TotalHer2SignalsRecount; }
-            set
-            {
-                if (this.m_TotalHer2SignalsRecount != value)
-                {
-                    this.m_TotalHer2SignalsRecount = value;
-                    NotifyPropertyChanged("Her2Chr17Ratio");
-                    NotifyPropertyChanged("TotalHer2SignalsCountedUI");
-                    NotifyPropertyChanged("AverageHer2NeuSignal");
-                    NotifyPropertyChanged("AverageHer2Chr17Signal");
-                }
-            }
-        }
-
-        public int TotalHer2SignalsCountedUI
-        {
-            get { return this.m_TotalHer2SignalsCounted; }
-            set
-            {
-                if (this.m_TotalHer2SignalsCounted != value)
-                {
-                    this.TotalHer2SignalsCounted = value;
-                    NotifyPropertyChanged("Her2Chr17Ratio");
-                    NotifyPropertyChanged("TotalHer2SignalsCountedUI");
-                    NotifyPropertyChanged("AverageHer2NeuSignal");
-                    NotifyPropertyChanged("AverageHer2Chr17Signal");
-                }
-            }
-        }
-
-        public int CellsCountedUI
-        {
-            get { return this.m_CellsCounted; }
-            set
-            {
-                if (this.m_CellsCounted != value)
-                {
-                    this.CellsCounted = value;
-                    NotifyPropertyChanged("CellsCountedUI");
-                    NotifyPropertyChanged("AverageHer2NeuSignal");
-                    NotifyPropertyChanged("AverageChr17Signal");
-                    NotifyPropertyChanged("AverageHer2Chr17Signal");
-                }
-            }
-        }
-
-        public int CellsRecountUI
-        {
-            get { return this.m_CellsRecount; }
-            set
-            {
-                if (this.m_CellsRecount != value)
-                {
-                    this.m_CellsRecount = value;
-                    NotifyPropertyChanged("CellsCountedUI");
-                    NotifyPropertyChanged("AverageHer2NeuSignal");
-                    NotifyPropertyChanged("AverageChr17Signal");
-                    NotifyPropertyChanged("AverageHer2Chr17Signal");
-                }
             }
         }
 
@@ -840,13 +729,13 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
                         string whichCount = this.m_RecountRequired == true ? "The Total Her2 Signals Recount " : "The Total Her2 Signals Counted ";
                         result.Message += whichCount + "must be set before results can be set." + Environment.NewLine;
                     }
-                    if (this.m_TotalChr17SignalsCounted == 0)
+                    if (this.TotalChr17SignalsCountToUse == 0)
                     {
                         result.Status = AuditStatusEnum.Failure;
                         string whichCount = this.m_RecountRequired == true ? "The Total Chr17 Signals Recount " : "The Total Chr17 Signals Counted ";
                         result.Message += whichCount + "must be set before results can be set." + Environment.NewLine;
                     }
-                    if (this.m_CellsCounted == 0)
+                    if (this.CellCountToUse == 0)
                     {
                         result.Status = AuditStatusEnum.Failure;
                         string whichCount = this.m_RecountRequired == true ? "The Cells Recount " : "The Cells Counted ";
@@ -871,7 +760,7 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
             this.SetValues(accessionOrder);
 
             HER2AmplificationByISH.HER2AmplificationResultCollection her2AmplificationResultCollection = new HER2AmplificationByISH.HER2AmplificationResultCollection(accessionOrder.PanelSetOrderCollection, this);
-            HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
+            HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindSummaryMatch();
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = accessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.OrderedOn, this.OrderedOnId);
             her2AmplificationResult.SetSummaryResults(specimenOrder);
 

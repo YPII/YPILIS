@@ -148,7 +148,7 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.CellsCountedUI}" />
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.CellsCounted}" />
                         <TextBlock Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.CellsRecount}" Visibility="{Binding Path=RecountVisibility}" />
                     </Grid>
 
@@ -163,7 +163,7 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsCountedUI}" />
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsCounted}" />
                         <TextBlock Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsRecount}" Visibility="{Binding Path=RecountVisibility}" />
                     </Grid>
 
@@ -178,7 +178,7 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsCountedUI}" />
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsCounted}" />
                         <TextBlock Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsRecount}" Visibility="{Binding Path=RecountVisibility}" />
                     </Grid>
 
