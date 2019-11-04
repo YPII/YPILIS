@@ -40,5 +40,20 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             }
             return result;
         }
+
+        public HER2AmplificationResult FindSummaryMatch()
+        {
+            HER2AmplificationResult result = null;
+
+            foreach (HER2AmplificationResult her2AmplificationResult in this)
+            {
+                if (her2AmplificationResult.IsASummaryMatch() == true)
+                {
+                    result = her2AmplificationResult;
+                    break;
+                }
+            }
+            return result;
+        }
     }
 }

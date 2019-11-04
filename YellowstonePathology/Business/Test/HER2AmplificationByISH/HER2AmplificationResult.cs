@@ -100,6 +100,11 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             return false;
         }
 
+        public virtual bool IsASummaryMatch()
+        {
+            return false;
+        }
+
         public void NotifyPropertyChanged(String info)
         {
             if (PropertyChanged != null)
