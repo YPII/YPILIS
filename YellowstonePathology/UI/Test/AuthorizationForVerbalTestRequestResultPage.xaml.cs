@@ -165,15 +165,22 @@ namespace YellowstonePathology.UI.Test
             if (File.Exists(tifPath) == true)
             {
                 YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
-                YellowstonePathology.Business.ReportDistribution.Model. DistributionResult distributionResult = Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Authorization For Verbal Test Request", tifPath);
-                if (distributionResult.IsComplete == false)
+                if(string.IsNullOrEmpty(client.AdditionalTestingNotificationFax) == false)
                 {
-                    MessageBox.Show(distributionResult.Message);
+                    YellowstonePathology.Business.ReportDistribution.Model.DistributionResult distributionResult = Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Authorization For Verbal Test Request", tifPath);
+                    if (distributionResult.IsComplete == false)
+                    {
+                        MessageBox.Show(distributionResult.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show("The request has been faxed.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("The request has been faxed.");
-                }
+                    MessageBox.Show("The notification fax number for this client is not set.");
+                }            
             }
             else
             {

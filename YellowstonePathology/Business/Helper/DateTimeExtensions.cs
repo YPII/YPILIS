@@ -471,7 +471,11 @@ namespace YellowstonePathology.Business.Helper
 
         public static TimeSpan GetHoursBetween(DateTime startDate, DateTime endDate, Calendar.HolidayCollection holidays)
         {
-            if (startDate >= endDate) throw new Exception("GetWeekendAndHolidayHoursBetween: startDate is >= endDate");
+            if (startDate >= endDate)
+            {
+                return new TimeSpan(0);
+            }
+
             TimeSpan result = new TimeSpan();
             TimeSpan timeSpanOneHour = new TimeSpan(1, 0, 0);
             bool isHoliday = holidays.IsDateAHoliday(startDate);
