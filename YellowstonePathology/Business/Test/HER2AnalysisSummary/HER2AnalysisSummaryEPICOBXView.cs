@@ -12,6 +12,27 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
         public override void ToXml(XElement document)
         {
             HER2AnalysisSummaryTestOrder panelSetOrder = (HER2AnalysisSummaryTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+            HER2AmplificationByISH.HER2AmplificationResultCollection her2AmplificationResultCollection = new HER2AmplificationByISH.HER2AmplificationResultCollection(this.m_AccessionOrder.PanelSetOrderCollection, panelSetOrder);
+            HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindSummaryMatch();
+            YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest ishTest = new Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest();
+            YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder her2AmplificationByISHTestOrder = null;
+            YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest ihcTest = new Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest();
+            YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC panelSetOrderHer2AmplificationByIHC = null;
+            YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest recountTest = new Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
+            YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTestOrder her2AmplificationRecountTestOrder = null;
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(ishTest.PanelSetId, panelSetOrder.OrderedOnId, true) == true)
+            {
+                her2AmplificationByISHTestOrder = (Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(ishTest.PanelSetId, panelSetOrder.OrderedOnId, true);
+            }
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(ihcTest.PanelSetId, panelSetOrder.OrderedOnId, true) == true)
+            {
+                panelSetOrderHer2AmplificationByIHC = (Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(ihcTest.PanelSetId, panelSetOrder.OrderedOnId, true);
+            }
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(recountTest.PanelSetId, panelSetOrder.OrderedOnId, true) == true)
+            {
+                her2AmplificationRecountTestOrder = (Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(recountTest.PanelSetId, panelSetOrder.OrderedOnId, true);
+            }
+
             this.AddHeader(document, panelSetOrder, "HER2 Analysis Summary");
 
             this.AddNextObxElement("", document, "F");
@@ -35,15 +56,15 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
             this.AddNextObxElement("Chr17 Signals Counted:" + panelSetOrder.TotalChr17SignalsCounted.ToString(), document, "F");
             this.AddNextObxElement("", document, "F");
 
-            this.AddNextObxElement("HER2 by IHC:" + panelSetOrder.IHCScore, document, "F");
+            this.AddNextObxElement("HER2 by IHC:" + panelSetOrderHer2AmplificationByIHC.Score, document, "F");
             this.AddNextObxElement("", document, "F");
 
             if (panelSetOrder.RecountRequired == true)
             {
                 this.AddNextObxElement("HER2 By ISH Recount", document, "F");
-                this.AddNextObxElement("Cells Counted: " + panelSetOrder.CellsRecount.ToString(), document, "F");
-                this.AddNextObxElement("HER2 Signals Counted: " + panelSetOrder.TotalHer2SignalsRecount.ToString(), document, "F");
-                this.AddNextObxElement("Chr17 Signals Counted: " + panelSetOrder.TotalChr17SignalsRecount.ToString(), document, "F");
+                this.AddNextObxElement("Cells Counted: " + panelSetOrder.CellsCounted.ToString(), document, "F");
+                this.AddNextObxElement("HER2 Signals Counted: " + panelSetOrder.TotalHer2SignalsCounted.ToString(), document, "F");
+                this.AddNextObxElement("Chr17 Signals Counted: " + panelSetOrder.TotalChr17SignalsCounted.ToString(), document, "F");
                 this.AddNextObxElement("", document, "F");
             }
 
@@ -100,7 +121,7 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
             this.AddNextObxElement("Specimen fixation type: " + specimenOrder.LabFixation, document, "F");
             this.AddNextObxElement("Time to fixation: " + specimenOrder.TimeToFixationHourString, document, "F");
             this.AddNextObxElement("Duration of fixation: " + specimenOrder.FixationDurationString, document, "F");
-            this.AddNextObxElement("Sample adequacy: " + panelSetOrder.SampleAdequacy, document, "F");
+            this.AddNextObxElement("Sample adequacy: " + her2AmplificationByISHTestOrder.SampleAdequacy, document, "F");
             this.AddNextObxElement("Collection Date / Time: " + collectionDateTimeString, document, "F");
             this.AddNextObxElement("", document, "F");
 
@@ -159,7 +180,7 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
             this.HandleLongString(panelSetOrder.ReportReference, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
-            this.AddNextObxElement(panelSetOrder.ASRComment, document, "F");
+            this.AddNextObxElement(her2AmplificationByISHTestOrder.ASRComment, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();

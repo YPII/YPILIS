@@ -264,13 +264,5 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
 
             return result;
         }
-
-        public override FinalizeTestResult Finish(AccessionOrder accessionOrder)
-        {
-            HER2AnalysisSummary.HER2AnalysisSummaryTest test = new HER2AnalysisSummary.HER2AnalysisSummaryTest();
-            HER2AnalysisSummary.HER2AnalysisSummaryTestOrder testOrder = (HER2AnalysisSummary.HER2AnalysisSummaryTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_OrderedOnId, true);
-            testOrder.SetValues(accessionOrder);
-            return base.Finish(accessionOrder);
-        }
     }
 }
