@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
         public AuthorizationForVerbalTestRequestWordDocument(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Document.ReportSaveModeEnum reportSaveMode, PanelSetOrder panelSetOrderToAuthorize) 
             : base(accessionOrder, panelSetOrder, reportSaveMode)
         {
-            this.m_PanelSetOrderToAuthorize = null;
+            this.m_PanelSetOrderToAuthorize = panelSetOrderToAuthorize;
         }
 
         public override void Render()
