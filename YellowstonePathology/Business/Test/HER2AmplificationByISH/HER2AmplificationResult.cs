@@ -97,22 +97,16 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                 {
                     this.m_IsHER2AmplificationRecountOrdered = true;
                     this.m_HER2AmplificationRecountTestOrder = (HER2AmplificationRecount.HER2AmplificationRecountTestOrder)panelSetOrderCollection.GetPanelSetOrder(her2AmplificationRecountTest.PanelSetId);
-                    this.m_HER2AnalysisSummaryTestOrder.CellsCounted = this.m_HER2AmplificationRecountTestOrder.CellsCounted;
-                    this.m_HER2AnalysisSummaryTestOrder.TotalHer2SignalsCounted = this.m_HER2AmplificationRecountTestOrder.Her2SignalsCounted;
-                    this.m_HER2AnalysisSummaryTestOrder.TotalChr17SignalsCounted = this.m_HER2AmplificationRecountTestOrder.Chr17SignalsCounted;
+                    this.m_HER2AnalysisSummaryTestOrder.SetValues(this.m_HER2AmplificationRecountTestOrder.CellsCounted, this.m_HER2AmplificationRecountTestOrder.Her2SignalsCounted, this.m_HER2AmplificationRecountTestOrder.Chr17SignalsCounted);
                 }
                 else
                 {
-                    this.m_HER2AnalysisSummaryTestOrder.CellsCounted = 0;
-                    this.m_HER2AnalysisSummaryTestOrder.TotalHer2SignalsCounted = 0;
-                    this.m_HER2AnalysisSummaryTestOrder.TotalChr17SignalsCounted = 0;
+                    this.m_HER2AnalysisSummaryTestOrder.SetValues(0, 0, 0);
                 }
             }
             else
             {
-                this.m_HER2AnalysisSummaryTestOrder.CellsCounted = this.m_HER2AmplificationByISHTestOrder.CellsCounted;
-                this.m_HER2AnalysisSummaryTestOrder.TotalHer2SignalsCounted = this.m_HER2AmplificationByISHTestOrder.TotalHer2SignalsCounted;
-                this.m_HER2AnalysisSummaryTestOrder.TotalChr17SignalsCounted = this.m_HER2AmplificationByISHTestOrder.TotalChr17SignalsCounted;
+                this.m_HER2AnalysisSummaryTestOrder.SetValues(this.m_HER2AmplificationByISHTestOrder.CellsCounted, this.m_HER2AmplificationByISHTestOrder.TotalHer2SignalsCounted, this.m_HER2AmplificationByISHTestOrder.TotalChr17SignalsCounted);
             }
 
             this.m_Indicator = this.m_HER2AmplificationByISHTestOrder.Indicator;
@@ -275,21 +269,6 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                 YellowstonePathology.Business.Test.PanelOrder panelOrder = testOrder.PanelOrderCollection.GetLastAcceptedPanelOrder();
                 panelOrder.UnacceptResults();
             }
-        }
-
-        public int CellCountToUse
-        {
-            get { return this.m_IsHER2AmplificationRecountRequired == true && this.m_IsHER2AmplificationRecountOrdered == true ? this.m_CellsRecount : this.m_CellsCounted; }
-        }
-
-        private int TotalHer2SignalsCountToUse
-        {
-            get { return this.m_IsHER2AmplificationRecountRequired == true && this.m_IsHER2AmplificationRecountOrdered == true ? this.m_TotalHer2SignalsRecount : this.m_TotalHer2SignalsCounted; }
-        }
-
-        private int TotalChr17SignalsCountToUse
-        {
-            get { return this.m_IsHER2AmplificationRecountRequired == true && this.m_IsHER2AmplificationRecountOrdered == true ? this.m_TotalChr17SignalsRecount : this.m_TotalChr17SignalsCounted; }
         }
     }
 }

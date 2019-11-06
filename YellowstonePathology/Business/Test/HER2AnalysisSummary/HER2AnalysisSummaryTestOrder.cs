@@ -21,6 +21,13 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
         protected string m_ReportReference;
         protected bool m_RecountRequired;
 
+        private double? m_Her2Chr17Ratio;
+        private double? m_AverageHer2NeuSignal;
+        private string m_AverageChr17Signal;
+        private string m_AverageHer2Chr17Signal;
+        private double? m_AverageHer2Chr17SignalAsDouble;
+
+
         protected int m_CellsCounted;
         protected int m_TotalChr17SignalsCounted;
         protected int m_TotalHer2SignalsCounted;
@@ -164,91 +171,71 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
         public int CellsCounted
         {
             get { return this.m_CellsCounted; }
-            set { this.m_CellsCounted = value; }
         }
 
         public int TotalHer2SignalsCounted
         {
             get { return this.m_TotalHer2SignalsCounted; }
-            set { this.m_TotalHer2SignalsCounted = value; }
         }
 
         public int TotalChr17SignalsCounted
         {
             get { return this.m_TotalChr17SignalsCounted; }
-            set { this.m_TotalChr17SignalsCounted = value; }
         }
 
         public Nullable<double> Her2Chr17Ratio
         {
-            get
-            {
-                Nullable<double> ratio = null;
-                if (TotalHer2SignalsCounted > 0 && TotalChr17SignalsCounted > 0)
-                {
-                    double dratio = (double)TotalHer2SignalsCounted / (double)TotalChr17SignalsCounted;
-                    ratio = Convert.ToDouble(Math.Round((dratio), 2));
-                }
-                return ratio;
-            }
-            set { }
+            get { return this.m_Her2Chr17Ratio; }
         }
 
         public Nullable<double> AverageHer2NeuSignal
         {
-            get
-            {
-                Nullable<double> result = null;
-                if (TotalHer2SignalsCounted > 0 && this.m_CellsCounted > 0)
-                {
-                    double dratio = (double)TotalHer2SignalsCounted / (double)this.m_CellsCounted;
-                    result = Convert.ToDouble(Math.Round((dratio), 2));
-                }
-                return result;
-            }
-            set { }
+            get { return this.m_AverageHer2NeuSignal; }
         }
 
         public string AverageChr17Signal
         {
-            get
-            {
-                string ratio = "Unable to calculate";
-                if (TotalChr17SignalsCounted > 0 && this.m_CellsCounted > 0)
-                {
-                    double dratio = (double)TotalChr17SignalsCounted / (double)this.m_CellsCounted;
-                    ratio = Convert.ToString(Math.Round((dratio), 2));
-                }
-                return ratio;
-            }
-            set { }
+            get { return this.m_AverageChr17Signal; }
         }
 
         public string AverageHer2Chr17Signal
         {
-            get
-            {
-                string ratio = "Unable to calculate";
-                Nullable<double> dratio = this.AverageHer2Chr17SignalAsDouble;
-                if (dratio.HasValue)
-                {
-                    ratio = Convert.ToString(Math.Round((dratio.Value), 2));
-                }
-                return ratio;
-            }
-            set { }
+            get { return this.m_AverageHer2Chr17Signal; }
         }
 
         public Nullable<double> AverageHer2Chr17SignalAsDouble
         {
-            get
+            get { return this.m_AverageHer2Chr17SignalAsDouble; }
+        }
+
+        public void SetValues(int cellsCounted, int her2Signals, int chr17Signals)
+        {
+            this.m_CellsCounted = cellsCounted;
+            this.m_TotalHer2SignalsCounted = her2Signals;
+            this.m_TotalChr17SignalsCounted = chr17Signals;
+
+            this.m_Her2Chr17Ratio = null;
+            this.m_AverageHer2NeuSignal = null;
+            this.m_AverageChr17Signal = "Unable to calculate";
+            this.m_AverageHer2Chr17Signal = "Unable to calculate";
+            this.m_AverageHer2Chr17SignalAsDouble = null;
+
+            if (this.m_TotalHer2SignalsCounted > 0 && this.m_TotalChr17SignalsCounted > 0)
             {
-                Nullable<double> dratio = null;
-                if (TotalChr17SignalsCounted > 0 && TotalHer2SignalsCounted > 0 && this.m_CellsCounted > 0)
+                double dratio = (double)m_TotalHer2SignalsCounted / (double)m_TotalChr17SignalsCounted;
+                this.m_Her2Chr17Ratio = Convert.ToDouble(Math.Round((dratio), 2));
+
+                if (this.m_CellsCounted > 0)
                 {
-                    dratio = ((double)TotalHer2SignalsCounted / (double)this.m_CellsCounted) / ((double)TotalChr17SignalsCounted / (double)this.m_CellsCounted);
+                    this.m_AverageHer2Chr17SignalAsDouble = ((double)TotalHer2SignalsCounted / (double)this.m_CellsCounted) / ((double)TotalChr17SignalsCounted / (double)this.m_CellsCounted);
+                    this.m_AverageHer2Chr17Signal = Convert.ToString(Math.Round((this.m_AverageHer2Chr17SignalAsDouble.Value), 2));
+
+                    dratio = (double)m_TotalHer2SignalsCounted / (double)this.m_CellsCounted;
+                    this.m_AverageHer2NeuSignal = Convert.ToDouble(Math.Round((dratio), 2));
+
+                    dratio = (double)TotalChr17SignalsCounted / (double)this.m_CellsCounted;
+                    this.m_AverageChr17Signal = Convert.ToString(Math.Round((dratio), 2));
                 }
-                return dratio;
             }
         }
 
@@ -257,39 +244,6 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
             string result = "HER2 Amplification Summary: " + this.Result;
             return result;
         }
-
-        /*private bool HasISH(AccessionOrder accessionOrder)
-        {
-            bool result = false;
-            HER2AmplificationByISH.HER2AmplificationByISHTest ishTest = new HER2AmplificationByISH.HER2AmplificationByISHTest();
-            if (accessionOrder.PanelSetOrderCollection.Exists(ishTest.PanelSetId, this.OrderedOnId, true) == true)
-            {
-                result = true;
-            }
-            return result;
-        }
-
-        private bool HasIHC(AccessionOrder accessionOrder)
-        {
-            bool result = false;
-            Her2AmplificationByIHC.Her2AmplificationByIHCTest ihcTest = new Her2AmplificationByIHC.Her2AmplificationByIHCTest();
-            if (accessionOrder.PanelSetOrderCollection.Exists(ihcTest.PanelSetId, this.OrderedOnId, true) == true)
-            {
-                result = true;
-            }
-            return result;
-        }
-
-        private bool HasRecount(AccessionOrder accessionOrder)
-        {
-            bool result = false;
-            HER2AmplificationRecount.HER2AmplificationRecountTest recountTest = new HER2AmplificationRecount.HER2AmplificationRecountTest();
-            if (accessionOrder.PanelSetOrderCollection.Exists(recountTest.PanelSetId, this.OrderedOnId, true) == true)
-            {
-                result = true;
-            }
-            return result;
-        }*/
 
         public AuditResult IsOkToSetResults(AccessionOrder accessionOrder)
         {
