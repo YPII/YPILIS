@@ -36,6 +36,7 @@ namespace YellowstonePathology.UI.Test
             this.m_SystemIdentity = systemIdentity;
 
             this.m_PanelSetOrder = testOrder;
+
             this.m_PageHeaderText = "Authorization For Verbal Test Request For: " + this.m_AccessionOrder.PatientDisplayName;
 
 
@@ -45,6 +46,44 @@ namespace YellowstonePathology.UI.Test
 
             this.m_ControlsNotDisabledOnFinal.Add(this.ButtonNext);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalResults);
+
+            Loaded += AuthorizationForVerbalTestRequestResultPage_Loaded;
+        }
+
+        private void AuthorizationForVerbalTestRequestResultPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            string message = string.Empty;
+            YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
+            if(string.IsNullOrEmpty(this.m_PanelSetOrder.ContactName) == true)
+            {
+                this.m_PanelSetOrder.ContactName = client.ContactName;
+                if (string.IsNullOrEmpty(client.ContactName) == true)
+                {
+                    message = "The client Contact Name is not set.";
+                }
+            }
+
+            if (string.IsNullOrEmpty(this.m_PanelSetOrder.Fax) == true)
+            {
+                this.m_PanelSetOrder.Fax = client.AdditionalTestingNotificationFax;
+                if (string.IsNullOrEmpty(client.AdditionalTestingNotificationFax) == true)
+                {
+                    this.m_PanelSetOrder.Fax = client.AdditionalTestingNotificationFax;
+                    if (string.IsNullOrEmpty(client.AdditionalTestingNotificationFax) == true)
+                    {
+                        if (string.IsNullOrEmpty(message) == false)
+                        {
+                            message += Environment.NewLine;
+                        }
+                        message += "The notification fax number for this client is not set.";
+                    }
+                }
+            }
+
+            if(string.IsNullOrEmpty(message) == false)
+            {
+                MessageBox.Show(message);
+            }
         }
 
         public YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestTestOrder PanelSetOrder
@@ -129,7 +168,8 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkShowDocument_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(this.PanelSetOrder.AuthorizationTestName) == false)
+            YellowstonePathology.Business.Rules.MethodResult result = this.ValuesArePresent();
+            if (result.Success == true)
             {
                 YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
                 YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft, panelSetOrder);
@@ -138,13 +178,14 @@ namespace YellowstonePathology.UI.Test
             }
             else
             {
-                MessageBox.Show("Select the test that requires authorization.");
+                MessageBox.Show(result.Message);
             }
         }
 
         private void HyperLinkPublish_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(this.PanelSetOrder.AuthorizationTestName) == false)
+            YellowstonePathology.Business.Rules.MethodResult result = this.ValuesArePresent();
+            if (result.Success == true)
             {
                 YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
                 YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder,this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal, panelSetOrder);
@@ -154,20 +195,20 @@ namespace YellowstonePathology.UI.Test
             }
             else
             {
-                MessageBox.Show("Select the test that requires authorization.");
+                MessageBox.Show(result.Message);
             }
         }
 
         private void HyperLinkSendFax_Click(object sender, RoutedEventArgs e)
         {
-            Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            string tifPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.tif";
-            if (File.Exists(tifPath) == true)
+            YellowstonePathology.Business.Rules.MethodResult result = this.ValuesArePresent();
+            if (result.Success == true)
             {
-                YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
-                if(string.IsNullOrEmpty(client.AdditionalTestingNotificationFax) == false)
+                Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
+                string tifPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.tif";
+                if (File.Exists(tifPath) == true)
                 {
-                    YellowstonePathology.Business.ReportDistribution.Model.DistributionResult distributionResult = Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Authorization For Verbal Test Request", tifPath);
+                    YellowstonePathology.Business.ReportDistribution.Model.DistributionResult distributionResult = Business.ReportDistribution.Model.FaxSubmission.Submit(this.m_PanelSetOrder.Fax, "Authorization For Verbal Test Request", tifPath);
                     if (distributionResult.IsComplete == false)
                     {
                         MessageBox.Show(distributionResult.Message);
@@ -179,13 +220,53 @@ namespace YellowstonePathology.UI.Test
                 }
                 else
                 {
-                    MessageBox.Show("The notification fax number for this client is not set.");
-                }            
+                    MessageBox.Show("Publish beore faxing.");
+                }
             }
             else
             {
-                MessageBox.Show("Publish beore faxing.");
+                MessageBox.Show(result.Message);
             }
+        }
+
+        private YellowstonePathology.Business.Rules.MethodResult ValuesArePresent()
+        {
+            YellowstonePathology.Business.Rules.MethodResult result = new Business.Rules.MethodResult();
+
+            if (string.IsNullOrEmpty(this.PanelSetOrder.AuthorizationTestName) == true)
+            {
+                result.Success = false;
+                result.Message = "Select the test that requires authorization." + Environment.NewLine;
+            }
+
+            if(string.IsNullOrEmpty(this.PanelSetOrder.ContactName) == true)
+            {
+                result.Success = false;
+                result.Message += "The Contact Name is not set." + Environment.NewLine;
+            }
+
+            if (string.IsNullOrEmpty(this.PanelSetOrder.Fax) == true)
+            {
+                result.Success = false;
+                result.Message += "The Fax number is not set." + Environment.NewLine;
+            }
+            return result;
+        }
+
+        private bool MaskNumberIsValid(Xceed.Wpf.Toolkit.MaskedTextBox maskedTextBox)
+        {
+            bool result = false;
+            if (maskedTextBox.IsMaskFull == true && maskedTextBox.HasValidationError == false && maskedTextBox.HasParsingError == false)
+            {
+                result = true;
+            }
+            else if (maskedTextBox.IsMaskCompleted == false && maskedTextBox.HasValidationError == false && maskedTextBox.HasParsingError == false)
+            {
+                result = true;
+            }
+
+            if (result == false) MessageBox.Show("The Fax (or phone) number must be 10 digits or empty.");
+            return result;
         }
 
         private void HyperlinkReceiveCompletedRequest_Click(object sender, RoutedEventArgs e)

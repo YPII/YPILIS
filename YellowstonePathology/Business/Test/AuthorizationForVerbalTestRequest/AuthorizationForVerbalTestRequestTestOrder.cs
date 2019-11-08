@@ -10,6 +10,8 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
     public class AuthorizationForVerbalTestRequestTestOrder : YellowstonePathology.Business.Test.PanelSetOrder
     {
         private string m_AuthorizationTestName;
+        private string m_Fax;
+        private string m_ContactName;
 
         public AuthorizationForVerbalTestRequestTestOrder()
         { }
@@ -32,6 +34,48 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
                 {
                     this.m_AuthorizationTestName = value;
                     this.NotifyPropertyChanged("AuthorizationTestName");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string Fax
+        {
+            get { return this.m_Fax; }
+            set
+            {
+                if (this.m_Fax != value)
+                {
+                    this.m_Fax = value;
+                    this.NotifyPropertyChanged("Fax");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string ContactName
+        {
+            get { return this.m_ContactName; }
+            set
+            {
+                if (this.m_ContactName != value)
+                {
+                    this.m_ContactName = value;
+                    this.NotifyPropertyChanged("ContactName");
+                }
+            }
+        }
+
+        public string FaxProxy
+        {
+            get { return YellowstonePathology.Business.Helper.PhoneNumberHelper.CorrectPhoneNumber(this.m_Fax); }
+            set
+            {
+                if (this.m_Fax != value)
+                {
+                    this.m_Fax = value;
+                    this.NotifyPropertyChanged("Fax");
+                    this.NotifyPropertyChanged("FaxProxy");
                 }
             }
         }

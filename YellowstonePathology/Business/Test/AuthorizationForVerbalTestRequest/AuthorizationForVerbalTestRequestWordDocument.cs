@@ -30,6 +30,16 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
 
             string request = "Please perform " + this.m_PanelSetOrderToAuthorize.PanelSetName + " testing on the specimen for the patient described above.";
             base.ReplaceText("pso_request", request);
+
+            if (string.IsNullOrEmpty(testOrder.ContactName) == false)
+            {
+                base.ReplaceText("contact_name", testOrder.ContactName);
+            }
+            else
+            {
+                base.DeleteRow("contact_name");
+            }
+
             base.ReplaceText("order_date", this.m_PanelSetOrderToAuthorize.OrderDate.Value.ToShortDateString());
             base.ReplaceText("pat_name", this.m_AccessionOrder.PatientDisplayName);
             base.ReplaceText("pso_report_no", this.m_PanelSetOrderToAuthorize.ReportNo);
