@@ -14,6 +14,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
         private int m_CellsCounted;
         private int m_Chr17SignalsCounted;
         private int m_Her2SignalsCounted;
+        private int m_NumberOfObservers;
 
         public HER2AmplificationRecountTestOrder()
         {
@@ -27,6 +28,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
 		{
             this.m_Distribute = false;
             this.NoCharge = true;
+            this.m_NumberOfObservers = 3;
         }
 
         [PersistentProperty()]
@@ -70,6 +72,21 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
                 {
                     this.m_Her2SignalsCounted = value;
                     this.NotifyPropertyChanged("Her2SignalsCounted");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "11", "2", "int")]
+        public int NumberOfObservers
+        {
+            get { return this.m_NumberOfObservers; }
+            set
+            {
+                if (this.m_NumberOfObservers != value)
+                {
+                    this.m_NumberOfObservers = value;
+                    this.NotifyPropertyChanged("NumberOfObservers");
                 }
             }
         }
@@ -210,6 +227,11 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
                     result.Success = false;
                     result.Message += "Chr17 Signals Counted must be entered.";
                 }
+                if (this.m_NumberOfObservers == 0)
+                {
+                    result.Success = false;
+                    result.Message += "Number Of Observers must be entered.";
+                }
             }
             return result;
         }
@@ -263,14 +285,6 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
             }
 
             return result;
-        }
-
-        public override FinalizeTestResult Finish(AccessionOrder accessionOrder)
-        {
-            HER2AnalysisSummary.HER2AnalysisSummaryTest test = new HER2AnalysisSummary.HER2AnalysisSummaryTest();
-            HER2AnalysisSummary.HER2AnalysisSummaryTestOrder testOrder = (HER2AnalysisSummary.HER2AnalysisSummaryTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_OrderedOnId, true);
-            testOrder.SetValues(accessionOrder);
-            return base.Finish(accessionOrder);
         }
     }
 }
