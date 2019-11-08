@@ -11,15 +11,15 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
     [PersistentClass("tblHER2AmplificationSummaryTestOrder", "tblPanelSetOrder", "YPIDATA")]
     public class HER2AnalysisSummaryTestOrder : PanelSetOrder
     {
-        protected string m_Result;
-        protected int m_NumberOfObservers;
-        protected string m_CommentLabel;
-        protected string m_TechComment;
-        protected string m_ResultComment;
-        protected string m_InterpretiveComment;
-        protected string m_ResultDescription;
-        protected string m_ReportReference;
-        protected bool m_RecountRequired;
+        private string m_Result;
+        private int m_NumberOfObservers;
+        private string m_CommentLabel;
+        private string m_TechComment;
+        private string m_ResultComment;
+        private string m_InterpretiveComment;
+        private string m_ResultDescription;
+        private string m_ReportReference;
+        private bool m_RecountRequired;
 
         private double? m_Her2Chr17Ratio;
         private double? m_AverageHer2NeuSignal;
@@ -28,9 +28,9 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
         private double? m_AverageHer2Chr17SignalAsDouble;
 
 
-        protected int m_CellsCounted;
-        protected int m_TotalChr17SignalsCounted;
-        protected int m_TotalHer2SignalsCounted;
+        private int m_CellsCounted;
+        private int m_TotalChr17SignalsCounted;
+        private int m_TotalHer2SignalsCounted;
 
         public HER2AnalysisSummaryTestOrder()
         { }
@@ -41,20 +41,6 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
             bool distribute)
             : base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
         {
-        }
-
-        [PersistentProperty()]
-        public int NumberOfObservers
-        {
-            get { return this.m_NumberOfObservers; }
-            set
-            {
-                if (this.m_NumberOfObservers != value)
-                {
-                    this.m_NumberOfObservers = value;
-                    this.NotifyPropertyChanged("NumberOfObservers");
-                }
-            }
         }
 
         [PersistentProperty()]
@@ -208,11 +194,17 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
             get { return this.m_AverageHer2Chr17SignalAsDouble; }
         }
 
-        public void SetValues(int cellsCounted, int her2Signals, int chr17Signals)
+        public int NumberOfObservers
+        {
+            get { return this.m_NumberOfObservers; }
+        }
+
+        public void SetValues(int cellsCounted, int her2Signals, int chr17Signals, int numberOfObservers)
         {
             this.m_CellsCounted = cellsCounted;
             this.m_TotalHer2SignalsCounted = her2Signals;
             this.m_TotalChr17SignalsCounted = chr17Signals;
+            this.m_NumberOfObservers = numberOfObservers;
 
             this.m_Her2Chr17Ratio = null;
             this.m_AverageHer2NeuSignal = null;

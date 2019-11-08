@@ -102,26 +102,26 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                         {
                             this.m_IsHER2AmplificationRecountOrdered = true;
                             this.m_HER2AmplificationRecountTestOrder = (HER2AmplificationRecount.HER2AmplificationRecountTestOrder)panelSetOrderCollection.GetPanelSetOrder(her2AmplificationRecountTest.PanelSetId);
-                            this.m_HER2AnalysisSummaryTestOrder.SetValues(this.m_HER2AmplificationRecountTestOrder.CellsCounted, this.m_HER2AmplificationRecountTestOrder.Her2SignalsCounted, this.m_HER2AmplificationRecountTestOrder.Chr17SignalsCounted);
+                            this.m_HER2AnalysisSummaryTestOrder.SetValues(this.m_HER2AmplificationRecountTestOrder.CellsCounted, this.m_HER2AmplificationRecountTestOrder.Her2SignalsCounted, this.m_HER2AmplificationRecountTestOrder.Chr17SignalsCounted, this.m_HER2AmplificationRecountTestOrder.NumberOfObservers);
                         }
                         else
                         {
-                            this.m_HER2AnalysisSummaryTestOrder.SetValues(0, 0, 0);
+                            this.m_HER2AnalysisSummaryTestOrder.SetValues(0, 0, 0, 3);
                         }
                     }
                     else
                     {
-                        this.m_HER2AnalysisSummaryTestOrder.SetValues(this.m_HER2AmplificationByISHTestOrder.CellsCounted, this.m_HER2AmplificationByISHTestOrder.TotalHer2SignalsCounted, this.m_HER2AmplificationByISHTestOrder.TotalChr17SignalsCounted);
+                        this.m_HER2AnalysisSummaryTestOrder.SetValues(this.m_HER2AmplificationByISHTestOrder.CellsCounted, this.m_HER2AmplificationByISHTestOrder.TotalHer2SignalsCounted, this.m_HER2AmplificationByISHTestOrder.TotalChr17SignalsCounted, this.m_HER2AmplificationByISHTestOrder.NumberOfObservers);
                     }
                 }
                 else
                 {
-                    this.m_HER2AnalysisSummaryTestOrder.SetValues(0, 0, 0);
+                    this.m_HER2AnalysisSummaryTestOrder.SetValues(0, 0, 0, 3);
                 }
             }
             else
             {
-                this.m_HER2AnalysisSummaryTestOrder.SetValues(0, 0, 0);
+                this.m_HER2AnalysisSummaryTestOrder.SetValues(0, 0, 0, 3);
             }
 
             this.m_Indicator = this.m_HER2AmplificationByISHTestOrder.Indicator;
