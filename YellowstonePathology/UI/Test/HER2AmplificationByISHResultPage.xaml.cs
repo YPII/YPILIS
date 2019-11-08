@@ -149,6 +149,7 @@ namespace YellowstonePathology.UI.Test
                     canFinal = true;
                     YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest();
                     this.OrderATest(her2AmplificationByIHCTest);
+                    this.OrderRecountOnNeed();
                     YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest her2AmplificationSummaryTest = new Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest();
                     this.OrderATest(her2AmplificationSummaryTest);
                 }
@@ -280,6 +281,17 @@ namespace YellowstonePathology.UI.Test
             {
                 MessageBox.Show("Unable to order a " + test.PanelSetName + " as one already exists.");
             }*/
+        }
+
+        private void OrderRecountOnNeed()
+        {
+            YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest her2AmplificationRecountTest = new YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
+            YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest();
+            YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC panelSetOrderHer2AmplificationByIHC = (YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(her2AmplificationByIHCTest.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
+            if (panelSetOrderHer2AmplificationByIHC.Final == true && panelSetOrderHer2AmplificationByIHC.Score == "2+" && this.m_PanelSetOrder.Result == YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
+            {
+                this.OrderATest(her2AmplificationRecountTest);
+            }
         }
     }
 }

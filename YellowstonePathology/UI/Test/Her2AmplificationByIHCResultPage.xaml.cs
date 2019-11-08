@@ -164,16 +164,55 @@ namespace YellowstonePathology.UI.Test
             this.OrderATest(test);
         }
 
+        private YellowstonePathology.Business.Rules.MethodResult CanOrder()
+        {
+            YellowstonePathology.Business.Rules.MethodResult result = new Business.Rules.MethodResult();
+            result.Success = false;
+
+            YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest test = new Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest();
+            if(this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) == true)
+            {
+                YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder testOrder = (YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
+                if (testOrder.Final == true && testOrder.Result == YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
+                {
+                    result.Success = true;
+                }
+            }
+
+            if(result.Success == false)
+            {
+                result.Message = "A " + test.PanelSetName + " must be ordered and final before this test may be ordered.";
+            }
+
+            return result;
+        }
+
         private void HyperLinkOrderRecount_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest test = new Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
-            this.OrderATest(test);
+            YellowstonePathology.Business.Rules.MethodResult result = this.CanOrder();
+            if (result.Success == true)
+            {
+                YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest test = new Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
+                this.OrderATest(test);
+            }
+            else
+            {
+                MessageBox.Show(result.Message);
+            }
         }
 
         private void HyperLinkOrderHER2Summary_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest test = new Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest();
-            this.OrderATest(test);
+            YellowstonePathology.Business.Rules.MethodResult result = this.CanOrder();
+            if (result.Success == true)
+            {
+                YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest test = new Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest();
+                this.OrderATest(test);
+            }
+            else
+            {
+                MessageBox.Show(result.Message);
+            }
         }
 
         private void OrderATest(YellowstonePathology.Business.PanelSet.Model.PanelSet test)
