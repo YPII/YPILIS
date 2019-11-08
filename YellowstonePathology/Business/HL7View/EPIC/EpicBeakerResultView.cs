@@ -59,7 +59,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                 locationCode = "SVHNPATH";
             }
 
-            EPICMshView msh = new EPICMshView(client, messageType, locationCode);
+            EPICBeakerMshView msh = new EPICBeakerMshView(client, messageType, locationCode);
             msh.ToXml(document);
 
             EpicPidView pid = new EpicPidView(this.m_AccessionOrder.SvhMedicalRecord, this.m_AccessionOrder.PLastName, this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PBirthdate,
