@@ -256,8 +256,6 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
                 if (accessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_OrderedOnId, true) == true)
                 {
                     this.Distribute = false;
-                    HER2AnalysisSummary.HER2AnalysisSummaryTestOrder testOrder = (HER2AnalysisSummary.HER2AnalysisSummaryTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_OrderedOnId, true);
-                    testOrder.SetValues(accessionOrder);
                 }
             }
             return base.Finish(accessionOrder);
