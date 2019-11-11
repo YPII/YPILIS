@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>212</ApplicationRevision>
+    <ApplicationRevision>214</ApplicationRevision>
     <ApplicationVersion>10.1.15.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -392,6 +392,7 @@
     <Compile Include="Business\HL7View\EPIC\EpicHRHClient.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerResultView.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerObrView.cs" />
+    <Compile Include="Business\HL7View\EPIC\EpicBeakerMshView.cs" />
     <Compile Include="Business\Label.Model\HistologySlidePaperZPLLabelV3.cs" />
     <Compile Include="Business\Label.Model\StorageSlideLabel.cs" />
     <Compile Include="Business\Label.Model\HologicSlideLabelPrinter.cs" />
