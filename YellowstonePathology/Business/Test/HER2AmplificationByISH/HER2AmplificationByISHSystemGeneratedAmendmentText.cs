@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             string amendmentText = string.Empty;
             if (testOrder.Her2byIHCOrder == 1)
             {
-                amendmentText = "HER2 Amplification and immunohistochemistry were performed(see YPI report #" + testOrder.ReportNo + "), with the following results: \n\n" +
+                amendmentText = "HER2 Amplification and immunohistochemistry were performed (see YPI report #" + testOrder.ReportNo + "), with the following results: \n\n" +
                     "HER2 Amplification: " + testOrder.Result + "\n " +
                     testOrder.ResultDescription + "\n " +
                     "Average HER2 Copy Number = " + testOrder.AverageHer2NeuSignal.Value.ToString() + "\n" +
