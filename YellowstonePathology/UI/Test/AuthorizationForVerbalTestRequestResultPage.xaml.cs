@@ -23,6 +23,9 @@ namespace YellowstonePathology.UI.Test
         public delegate void NextEventHandler(object sender, EventArgs e);
         public event NextEventHandler Next;
 
+        public delegate void ShowDocumentEventHandler(object sender, EventArgs e);
+        public event ShowDocumentEventHandler ShowDocument;
+
         private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
         private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
         private string m_PageHeaderText;
@@ -45,45 +48,9 @@ namespace YellowstonePathology.UI.Test
             DataContext = this;
 
             this.m_ControlsNotDisabledOnFinal.Add(this.ButtonNext);
+            this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);
+            this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockPublishDocument);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalResults);
-
-            Loaded += AuthorizationForVerbalTestRequestResultPage_Loaded;
-        }
-
-        private void AuthorizationForVerbalTestRequestResultPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            string message = string.Empty;
-            YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
-            if(string.IsNullOrEmpty(this.m_PanelSetOrder.ContactName) == true)
-            {
-                this.m_PanelSetOrder.ContactName = client.ContactName;
-                if (string.IsNullOrEmpty(client.ContactName) == true)
-                {
-                    message = "The client Contact Name is not set.";
-                }
-            }
-
-            if (string.IsNullOrEmpty(this.m_PanelSetOrder.Fax) == true)
-            {
-                this.m_PanelSetOrder.Fax = client.AdditionalTestingNotificationFax;
-                if (string.IsNullOrEmpty(client.AdditionalTestingNotificationFax) == true)
-                {
-                    this.m_PanelSetOrder.Fax = client.AdditionalTestingNotificationFax;
-                    if (string.IsNullOrEmpty(client.AdditionalTestingNotificationFax) == true)
-                    {
-                        if (string.IsNullOrEmpty(message) == false)
-                        {
-                            message += Environment.NewLine;
-                        }
-                        message += "The notification fax number for this client is not set.";
-                    }
-                }
-            }
-
-            if(string.IsNullOrEmpty(message) == false)
-            {
-                MessageBox.Show(message);
-            }
         }
 
         public YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestTestOrder PanelSetOrder
@@ -168,34 +135,38 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkShowDocument_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Rules.MethodResult result = this.ValuesArePresent();
-            if (result.Success == true)
-            {
-                YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
-                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft, panelSetOrder);
-                report.Render();
-                YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(report.SaveFileName);
-            }
-            else
-            {
-                MessageBox.Show(result.Message);
-            }
+            this.ShowDocument(this, new EventArgs());
         }
 
         private void HyperLinkPublish_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Rules.MethodResult result = this.ValuesArePresent();
-            if (result.Success == true)
+            if (this.m_PanelSetOrder.Final == true)
             {
-                YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
-                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder,this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal, panelSetOrder);
-                report.Render();
-                report.Publish();
-                MessageBox.Show("The request has been published.");
+                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
+                YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
+                string xpsPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + this.m_PanelSetOrder.ReportNo + ".xps";
+                if (File.Exists(xpsPath) == true)
+                {
+                    YellowstonePathology.Business.Rules.MethodResult methodResult = caseDocument.DeleteCaseFiles(orderIdParser);
+                    if (methodResult.Success == true)
+                    {
+                        caseDocument.Render();
+                        caseDocument.Publish();
+                        MessageBox.Show("The document has been published.");
+                    }
+                    else
+                    {
+                        MessageBox.Show(methodResult.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("The reply has not been received: the document may not be published.");
+                }
             }
             else
             {
-                MessageBox.Show(result.Message);
+                MessageBox.Show("You cannot publish this case until it's final.");
             }
         }
 
@@ -220,7 +191,7 @@ namespace YellowstonePathology.UI.Test
                 }
                 else
                 {
-                    MessageBox.Show("Publish beore faxing.");
+                    MessageBox.Show("Create fax beore faxing.");
                 }
             }
             else
@@ -269,8 +240,37 @@ namespace YellowstonePathology.UI.Test
             return result;
         }
 
-        private void HyperlinkReceiveCompletedRequest_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkCreateFax_Click(object sender, RoutedEventArgs e)
         {
+            YellowstonePathology.Business.Rules.MethodResult result = this.ValuesArePresent();
+            if (result.Success == true)
+            {
+                YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
+                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal, panelSetOrder);
+                report.Render();
+                report.Publish();
+                MessageBox.Show("The fax has been created.");
+            }
+            else
+            {
+                MessageBox.Show(result.Message);
+            }
+        }
+
+        private void HyperLinkViewFax_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Rules.MethodResult result = this.ValuesArePresent();
+            if (result.Success == true)
+            {
+                YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ComboBoxTestNeedsAuthorization.SelectedItem;
+                YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument report = new Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestWordDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft, panelSetOrder);
+                report.Render();
+                YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(report.SaveFileName);
+            }
+            else
+            {
+                MessageBox.Show(result.Message);
+            }
         }
     }
 }

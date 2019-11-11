@@ -25,7 +25,20 @@ namespace YellowstonePathology.UI.Test
         {
             this.m_ResultPage = new AuthorizationForVerbalTestRequestResultPage(this.m_TestOrder, this.m_AccessionOrder, this.m_SystemIdentity);
             this.m_ResultPage.Next += ResultPage_Next;
+            this.m_ResultPage.ShowDocument += ResultPage_ShowDocument;
             this.m_PageNavigator.Navigate(this.m_ResultPage);
+        }
+
+        private void ResultPage_ShowDocument(object sender, EventArgs e)
+        {
+            PublishedDocumentResultPath documentPath = new Test.PublishedDocumentResultPath(this.m_TestOrder.ReportNo, this.m_AccessionOrder, this.m_PageNavigator, this.m_Window);
+            documentPath.Finish += DocumentPath_Finish;
+            documentPath.Start();
+        }
+
+        private void DocumentPath_Finish(object sender, EventArgs e)
+        {
+            this.ShowResultPage();
         }
 
         private void ResultPage_Next(object sender, EventArgs e)
