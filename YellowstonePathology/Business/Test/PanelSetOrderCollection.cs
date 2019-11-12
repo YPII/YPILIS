@@ -41,6 +41,40 @@ namespace YellowstonePathology.Business.Test
             if (result.Length == 0) result.AppendLine("No additional testing has been ordered at this time.");
             return result.ToString();
         }
+
+        public string GetAdditionalTestsDisplayString()
+        {
+            List<string> testNameList = new List<string>();
+            foreach(PanelSetOrder pso in this)
+            {
+                if(pso.TechnicalComponentFacilityId != "YPIBLGS")
+                {
+                    testNameList.Add(pso.PanelSetName);
+                }
+            }
+
+            if (testNameList.Count != 0)
+            {
+                String displayName = string.Empty;
+                foreach (string name in testNameList)
+                {
+                    displayName = displayName + name + ", ";
+                }
+                char[] trimChars = new char[] { ',',' ' };
+                displayName = displayName.TrimEnd(trimChars);
+                if(testNameList.Count >= 3)
+                {
+                    int lastCommaIndex = displayName.LastIndexOf(",");
+                    displayName = displayName.Remove(lastCommaIndex, 1);
+                    displayName = displayName.Insert(lastCommaIndex, " and");
+                }
+                return displayName;    
+            }
+            else
+            {
+                return "None";
+            }
+        }
         
         public bool HasUnfinaledTests(List<int> panelSetIdList)
         {

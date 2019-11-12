@@ -21,16 +21,12 @@ namespace YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2
 
             this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");
 
-            this.AddNextObxElementBeaker("Anti-Platelet Antibody - IgG", panelSetOrder.AntiPlateletAntibodyIgG, document, "F");
-            this.AddNextObxElementBeaker("Reference", panelSetOrder.AntiPlateletAntibodyIgGReference, document, "F");
-
-            this.AddNextObxElementBeaker("Anti-Platelet Antibody - IgM", panelSetOrder.AntiPlateletAntibodyIgM, document, "F");
-            this.AddNextObxElementBeaker("Reference", panelSetOrder.AntiPlateletAntibodyIgMReference, document, "F");
-
+            this.AddNextObxElementBeaker("Anti-Platelet Antibody - IgG", panelSetOrder.AntiPlateletAntibodyIgG, document, "F", "Negative");
+            this.AddNextObxElementBeaker("Anti-Platelet Antibody - IgM", panelSetOrder.AntiPlateletAntibodyIgM, document, "F", "Negative");
+            
             if (string.IsNullOrEmpty(panelSetOrder.ReticulatedPlateletAnalysis) == false)
             {
-                this.AddNextObxElementBeaker("Reticulated Platelet Analysis", panelSetOrder.ReticulatedPlateletAnalysis, document, "F");
-                this.AddNextObxElementBeaker("Reference Range", panelSetOrder.ReticulatedPlateletAnalysisReference, document, "F");
+                this.AddNextObxElementBeaker("Reticulated Platelet Analysis", panelSetOrder.ReticulatedPlateletAnalysis, document, "F", "Negative");
             }
 
             if (amendmentCollection.Count != 0)
