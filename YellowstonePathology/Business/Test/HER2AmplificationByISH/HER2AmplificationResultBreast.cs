@@ -36,8 +36,19 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
         public override void SetSummaryResults(Business.Specimen.Model.SpecimenOrder specimenOrder)
         {
             this.m_ResultComment = null;
-            this.m_ResultDescription = "Ratio = " + this.m_HER2AnalysisSummaryTestOrder.Her2Chr17Ratio;
+            this.m_ResultDescription = "Ratio = " + this.m_HER2AmplificationByISHTestOrder.Her2Chr17Ratio;
             base.SetSummaryResults(specimenOrder);
+        }
+
+        protected void SetInterpretiveCommentValues(string ratio, string cellsCounted, string status, double? her2Copy)
+        {
+            this.m_InterpretiveComment = this.m_InterpretiveComment.Replace("*RATIO*", ratio);
+            this.m_InterpretiveComment = this.m_InterpretiveComment.Replace("*CELLSCOUNTED*", cellsCounted);
+            this.m_InterpretiveComment = this.m_InterpretiveComment.Replace("*HER2STATUS*", status);
+            if (her2Copy.HasValue == true)
+            {
+                this.m_InterpretiveComment = this.m_InterpretiveComment.Replace("*HER2COPY*", her2Copy.Value.ToString());
+            }
         }
     }
 }

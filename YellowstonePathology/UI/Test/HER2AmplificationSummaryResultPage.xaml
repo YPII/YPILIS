@@ -122,134 +122,33 @@
                     <TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,5" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
 
                     <TextBlock Grid.Column="0" Grid.Row="1" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Status:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding Path=PanelSetOrder.Result}" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding Path=PanelSetOrder.Result}" VerticalAlignment="Center" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2" FontWeight="Bold" VerticalAlignment="Center">HER2 by ISH Ratio:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="2" Margin="2" Text="{Binding Path=PanelSetOrder.AverageHer2Chr17Signal}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2" FontWeight="Bold" VerticalAlignment="Center">HER2 by ISH Result:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.Result}" VerticalAlignment="Center" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2" FontWeight="Bold" VerticalAlignment="Center">HER2 by ISH Copy Number:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="3" Margin="2" Text="{Binding Path=PanelSetOrder.AverageHer2NeuSignal}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2" FontWeight="Bold" VerticalAlignment="Center">HER2 by ISH Ratio:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.AverageHer2Chr17Signal}" VerticalAlignment="Center" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2" FontWeight="Bold" VerticalAlignment="Center">HER2 by IHC:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="4" Margin="2" Text="{Binding Path=PanelSetOrderHer2AmplificationByIHC.Score}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2" FontWeight="Bold" VerticalAlignment="Center">HER2 by ISH Copy Number:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.AverageHer2NeuSignal}" VerticalAlignment="Center" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total Cells Counted:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="5" Margin="2" Text="{Binding Path=PanelSetOrder.CellsCounted}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2" FontWeight="Bold" VerticalAlignment="Center">HER2 by IHC:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Margin="2" Text="{Binding Path=PanelSetOrderHer2AmplificationByIHC.Score}" VerticalAlignment="Center" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="6" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total HER2 Signals Counted:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding Path=PanelSetOrder.TotalHer2SignalsCounted}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="0" Grid.Row="6" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Recount:</TextBlock>
 
-                    <TextBlock Grid.Column="0" Grid.Row="7" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total CHR17 Signals Counted:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="7" Margin="2" Text="{Binding Path=PanelSetOrder.TotalChr17SignalsCounted}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="0" Grid.Row="7" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total Cells Counted:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="7" Margin="2" Text="{Binding Path=CellsCounted}" VerticalAlignment="Center" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Number of observers:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="8" Margin="2" Text="{Binding Path=PanelSetOrder.NumberOfObservers}" />
+                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total HER2 Signals Counted:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="8" Margin="2" Text="{Binding Path=Her2SignalsCounted}" VerticalAlignment="Center" />
 
-                    <!--<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,5" FontWeight="Bold" VerticalAlignment="Center">Ordered On:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,5" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="9" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total CHR17 Signals Counted:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="9" Margin="2" Text="{Binding Path=Chr17SignalsCounted}" VerticalAlignment="Center" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding Path=PanelSetOrder.Result}" VerticalAlignment="Center" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Indication:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="3" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.Indicator}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Sample Adequacy:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="4" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.SampleAdequacy}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Probe Signal Intensity:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="5" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.ProbeSignalIntensity}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="6" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total Cells Counted:</TextBlock>
-
-                    <Grid Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.CellsCounted}" />
-                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=HER2AmplificationRecountTestOrder.CellsCounted}" Visibility="{Binding Path=RecountVisibility}" />
-                    </Grid>
-
-                    <TextBlock Grid.Column="0" Grid.Row="7" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total HER2 Signals Counted:</TextBlock>
-                    <Grid Grid.Column="1" Grid.Row="7">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.TotalHer2SignalsCounted}" />
-                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=HER2AmplificationRecountTestOrder.Her2SignalsCounted}" Visibility="{Binding Path=RecountVisibility}" />
-                    </Grid>
-
-                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Total CHR17 Signals Counted:</TextBlock>
-                    <Grid Grid.Column="1" Grid.Row="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.TotalChr17SignalsCounted}" />
-                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=HER2AmplificationRecountTestOrder.Chr17SignalsCounted}" Visibility="{Binding Path=RecountVisibility}" />
-                    </Grid>
-
-                    <TextBlock Grid.Column="0" Grid.Row="9" Margin="2" VerticalAlignment="Center" FontWeight="Bold">CHR17 Signal Range:</TextBlock>
-                    <Grid Grid.Column="1" Grid.Row="9">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="38"></ColumnDefinition>
-                            <ColumnDefinition Width="7"></ColumnDefinition>
-                            <ColumnDefinition Width="38"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0" Grid.Row="0" Margin="2" Width="30" Text="{Binding Path=HER2AmplificationByISHTestOrder.Chr17SignalRangeLow}" />
-                        <TextBlock Grid.Column="1" Grid.Row="0" Width="5" VerticalAlignment="Center">-</TextBlock>
-                        <TextBox Grid.Column="2" Grid.Row="0" Margin="2" Width="30" Text="{Binding Path=HER2AmplificationByISHTestOrder.Chr17SignalRangeHigh}" />
-                    </Grid>
-
-                    <TextBlock Grid.Column="0" Grid.Row="10" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2 Signal Range:</TextBlock>
-                    <Grid Grid.Column="1" Grid.Row="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="38"></ColumnDefinition>
-                            <ColumnDefinition Width="7"></ColumnDefinition>
-                            <ColumnDefinition Width="38"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0" Grid.Row="0"  Margin="2" Width="30" Text="{Binding Path=HER2AmplificationByISHTestOrder.Her2SignalRangeLow}" />
-                        <TextBlock Grid.Column="1" Grid.Row="0" Width="5" VerticalAlignment="Center">-</TextBlock>
-                        <TextBox Grid.Column="2" Grid.Row="0" Margin="2" Width="30" Text="{Binding Path=HER2AmplificationByISHTestOrder.Her2SignalRangeHigh}" />
-                    </Grid>
-
-                    <TextBlock Grid.Column="0" Grid.Row="11" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Number of observers:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="11" Margin="2" Text="{Binding Path=PanelSetOrder.NumberOfObservers}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="12" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Genetic Heterogeneity:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="12" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.GeneticHeterogeneity}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="13" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2/CHR17 ratio in cluster:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="13" Margin="2" Text="{Binding Path=HER2AmplificationByISHTestOrder.Her2Chr17ClusterRatio}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="14" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2 average copy number per nucleus:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="14" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.AverageHer2NeuSignal}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="15" Margin="2" VerticalAlignment="Center" FontWeight="Bold">CHR17 average copy number per nucleus:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="15" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.AverageChr17Signal}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="16" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Ratio of average HER2/CHR17 signals:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="16" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.AverageHer2Chr17Signal}" />
-
-                    <TextBlock Grid.Column="0" Grid.Row="17" Margin="2" VerticalAlignment="Center" FontWeight="Bold">HER2 IHC Score:</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="17" Margin="2" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrderHer2AmplificationByIHC.Score}" />-->
+                    <TextBlock Grid.Column="0" Grid.Row="10" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Number of Observers:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="10" Margin="2" Text="{Binding Path=NumberOfObservers}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="21" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result Comment:</TextBlock>
                     <TextBox Grid.Column="0" Grid.Row="22" Margin="2" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.ResultComment}" />
