@@ -13,8 +13,7 @@ namespace YellowstonePathology.Business.Test.Model
 
             this.m_List.Add((Business.Test.Model.ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("164")); // Vimentin());            
             this.m_List.Add((Business.Test.Model.ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("153")); // SmoothMuscleActin());
-            this.m_List.Add((Business.Test.Model.ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("92")); // Desmin());
-            this.m_List.Add(new FactorVIII());
+            this.m_List.Add((Business.Test.Model.ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("92")); // Desmin());            
             this.m_List.Add((Business.Test.Model.ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("101")); // FactorXIIIa());
             this.m_List.Add((Business.Test.Model.ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("62")); // CD117());
             this.m_List.Add((Business.Test.Model.ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("298")); // DOG1());

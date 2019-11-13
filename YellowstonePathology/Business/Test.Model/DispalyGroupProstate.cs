@@ -15,8 +15,7 @@ namespace YellowstonePathology.Business.Test.Model
             this.m_GroupName = "Prostate";
 
             this.m_List = new List<Test>();
-            this.m_List.Add(YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("355")); // NKX31());            
-            this.m_List.Add(YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("147")); // ProstaticAcidPhosphatase());            
+            this.m_List.Add(YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("355")); // NKX31());                        
             this.m_List.Add(YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("133")); // P504sRacemase());
         }
 

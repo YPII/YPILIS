@@ -15,8 +15,7 @@ namespace YellowstonePathology.Business.Test.Model
             this.m_List.Add((ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("144")); // ProgesteroneReceptor());
             this.m_List.Add((ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("267")); // HER2DISH());
             this.m_List.Add((ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("154")); // SmoothMuscleMyosin());
-            this.m_List.Add((ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("118")); // Mammaglobin());
-            this.m_List.Add(new GCDFP15());                        
+            this.m_List.Add((ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("118")); // Mammaglobin());            
         }
     }
 }

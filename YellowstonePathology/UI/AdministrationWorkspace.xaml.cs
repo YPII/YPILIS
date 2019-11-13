@@ -993,16 +993,7 @@ namespace YellowstonePathology.UI
         }
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
-        {
-            EventLog eventLog = new EventLog();
-            if (!System.Diagnostics.EventLog.SourceExists("MySource"))
-            {
-                System.Diagnostics.EventLog.CreateEventSource("MySource", "MyNewLog");
-            }
-            eventLog.Source = "MySource";
-            eventLog.Log = "MyNewLog";
-            eventLog.WriteEntry("You need community. It’s here and it’s waiting just for you. ", EventLogEntryType.Information);
-
+        {            
             //Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo("16-29808");
             //Business.Slide.Model.SlideOrder slideOrder = ao.SpecimenOrderCollection.GetSlideOrder("16-29808.2A2");            
             //Business.HL7View.VentanaStainOrder vo = new Business.HL7View.VentanaStainOrder();
