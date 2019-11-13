@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
 		public HER2AnalysisSummaryTest()
         {
             this.m_PanelSetId = 313;
-            this.m_PanelSetName = "HER2 Analyisis Summary";
+            this.m_PanelSetName = "HER2 Analysis Summary";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = false;
             this.m_HasProfessionalComponent = false;

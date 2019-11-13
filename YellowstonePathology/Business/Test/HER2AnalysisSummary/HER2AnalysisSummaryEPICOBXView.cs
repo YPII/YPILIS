@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
         {
             HER2AnalysisSummaryTestOrder panelSetOrder = (HER2AnalysisSummaryTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
             HER2AmplificationByISH.HER2AmplificationResultCollection her2AmplificationResultCollection = new HER2AmplificationByISH.HER2AmplificationResultCollection(this.m_AccessionOrder.PanelSetOrderCollection, panelSetOrder);
-            HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindSummaryMatch();
+            HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
             YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest ishTest = new Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest();
             YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder her2AmplificationByISHTestOrder = null;
             YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest ihcTest = new Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest();
@@ -42,29 +42,29 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
             if (result.ToUpper() == "NEGATIVE") result += " (see interpretation)";
             this.AddNextObxElement("HER2 Status: " + result, document, "F");
 
-            if (panelSetOrder.Her2Chr17Ratio.HasValue == true)
+            if (her2AmplificationByISHTestOrder.Her2Chr17Ratio.HasValue == true)
             {
                 this.AddNextObxElement("HER2 by ISH", document, "F");
-                this.AddNextObxElement("HER2/Chr17 Ratio = " + panelSetOrder.AverageHer2Chr17Signal, document, "F");
+                this.AddNextObxElement("HER2/Chr17 Ratio = " + her2AmplificationByISHTestOrder.AverageHer2Chr17Signal, document, "F");
             }
-            if (panelSetOrder.AverageHer2NeuSignal.HasValue == true)
+            if (her2AmplificationByISHTestOrder.AverageHer2NeuSignal.HasValue == true)
             {
-                this.AddNextObxElement("Average HER2 Copy Number = " + panelSetOrder.AverageHer2NeuSignal.Value.ToString(), document, "F");
+                this.AddNextObxElement("Average HER2 Copy Number = " + her2AmplificationByISHTestOrder.AverageHer2NeuSignal.Value.ToString(), document, "F");
             }
-            this.AddNextObxElement("Cells Counted:" + panelSetOrder.CellsCounted.ToString(), document, "F");
-            this.AddNextObxElement("HER2 Signals Counted:" + panelSetOrder.TotalHer2SignalsCounted.ToString(), document, "F");
-            this.AddNextObxElement("Chr17 Signals Counted:" + panelSetOrder.TotalChr17SignalsCounted.ToString(), document, "F");
+            this.AddNextObxElement("Cells Counted:" + her2AmplificationByISHTestOrder.CellsCounted.ToString(), document, "F");
+            this.AddNextObxElement("HER2 Signals Counted:" + her2AmplificationByISHTestOrder.TotalHer2SignalsCounted.ToString(), document, "F");
+            this.AddNextObxElement("Chr17 Signals Counted:" + her2AmplificationByISHTestOrder.TotalChr17SignalsCounted.ToString(), document, "F");
             this.AddNextObxElement("", document, "F");
 
             this.AddNextObxElement("HER2 by IHC:" + panelSetOrderHer2AmplificationByIHC.Score, document, "F");
             this.AddNextObxElement("", document, "F");
 
-            if (panelSetOrder.RecountRequired == true)
+            if (her2AmplificationByISHTestOrder.RecountRequired == true)
             {
                 this.AddNextObxElement("HER2 By ISH Recount", document, "F");
-                this.AddNextObxElement("Cells Counted: " + panelSetOrder.CellsCounted.ToString(), document, "F");
-                this.AddNextObxElement("HER2 Signals Counted: " + panelSetOrder.TotalHer2SignalsCounted.ToString(), document, "F");
-                this.AddNextObxElement("Chr17 Signals Counted: " + panelSetOrder.TotalChr17SignalsCounted.ToString(), document, "F");
+                this.AddNextObxElement("Cells Counted: " + her2AmplificationRecountTestOrder.CellsCounted.ToString(), document, "F");
+                this.AddNextObxElement("HER2 Signals Counted: " + her2AmplificationRecountTestOrder.Her2SignalsCounted.ToString(), document, "F");
+                this.AddNextObxElement("Chr17 Signals Counted: " + her2AmplificationRecountTestOrder.Chr17SignalsCounted.ToString(), document, "F");
                 this.AddNextObxElement("", document, "F");
             }
 
@@ -86,20 +86,20 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
 
 
             this.AddNextObxElement("Result Data", document, "F");
-            this.AddNextObxElement("Number of invasive tumor cells counted: " + panelSetOrder.CellsCounted.ToString(), document, "F");
-            this.AddNextObxElement("Number of observers: " + panelSetOrder.NumberOfObservers, document, "F");
-            if (panelSetOrder.AverageHer2NeuSignal.HasValue == true)
+            this.AddNextObxElement("Number of invasive tumor cells counted: " + her2AmplificationByISHTestOrder.CellsCounted.ToString(), document, "F");
+            this.AddNextObxElement("Number of observers: " + her2AmplificationByISHTestOrder.NumberOfObservers, document, "F");
+            if (her2AmplificationByISHTestOrder.AverageHer2NeuSignal.HasValue == true)
             {
-                this.AddNextObxElement("HER2 average copy number per nucleus: " + panelSetOrder.AverageHer2NeuSignal.Value.ToString(), document, "F");
+                this.AddNextObxElement("HER2 average copy number per nucleus: " + her2AmplificationByISHTestOrder.AverageHer2NeuSignal.Value.ToString(), document, "F");
             }
             else
             {
                 this.AddNextObxElement("HER2 average copy number per nucleus: Unable to calculate", document, "F");
             }
-            this.AddNextObxElement("Chr17 average copy number per nucleus: " + panelSetOrder.AverageChr17Signal, document, "F");
-            if (panelSetOrder.Her2Chr17Ratio.HasValue == true)
+            this.AddNextObxElement("Chr17 average copy number per nucleus: " + her2AmplificationByISHTestOrder.AverageChr17Signal, document, "F");
+            if (her2AmplificationByISHTestOrder.Her2Chr17Ratio.HasValue == true)
             {
-                this.AddNextObxElement("Ratio of average HER2 / Chr17 signals: " + panelSetOrder.Her2Chr17Ratio.Value.ToString(), document, "F");
+                this.AddNextObxElement("Ratio of average HER2 / Chr17 signals: " + her2AmplificationByISHTestOrder.Her2Chr17Ratio.Value.ToString(), document, "F");
             }
             else
             {

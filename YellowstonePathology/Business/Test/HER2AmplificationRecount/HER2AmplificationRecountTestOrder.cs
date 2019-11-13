@@ -217,6 +217,11 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
                     result.Success = false;
                     result.Message = "Cells Counted must be entered.";
                 }
+                if (this.m_CellsCounted < 20)
+                {
+                    result.Success = false;
+                    result.Message = "Cells Counted must be at least 20.";
+                }
                 if (this.m_Her2SignalsCounted == 0)
                 {
                     result.Success = false;

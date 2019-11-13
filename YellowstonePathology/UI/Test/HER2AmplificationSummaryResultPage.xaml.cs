@@ -21,7 +21,6 @@ namespace YellowstonePathology.UI.Test
         private YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder m_HER2AmplificationByISHTestOrder;
         private YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC m_PanelSetOrderHer2AmplificationByIHC;
         private YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTestOrder m_HER2AmplificationRecountTestOrder;
-        private YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResult m_HER2AmplificationResult;
 
         private YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHIndicatorCollection m_IndicatorCollection;
         private YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHSampleAdequacyCollection m_SampleAdequacyCollection;
@@ -30,7 +29,10 @@ namespace YellowstonePathology.UI.Test
         private string m_PageHeaderText;
         private string m_OrderedOnDescription;
 
-        private Visibility m_RecountVisibility;
+        private string m_CellsCounted;
+        private string m_Her2SignalsCounted;
+        private string m_Chr17SignalsCounted;
+        private string m_NumberOfObservers;
 
 
         public HER2AmplificationSummaryResultPage(YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTestOrder testOrder,
@@ -72,15 +74,18 @@ namespace YellowstonePathology.UI.Test
             if(this.m_AccessionOrder.PanelSetOrderCollection.Exists(recountTest.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) ==true)
             {
                 this.m_HER2AmplificationRecountTestOrder = (Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(recountTest.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
-                this.m_RecountVisibility = Visibility.Visible;
+                this.m_CellsCounted = this.m_HER2AmplificationRecountTestOrder.CellsCounted.ToString();
+                this.m_Her2SignalsCounted = this.m_HER2AmplificationRecountTestOrder.Her2SignalsCounted.ToString();
+                this.m_Chr17SignalsCounted = this.m_HER2AmplificationRecountTestOrder.Chr17SignalsCounted.ToString();
+                this.m_NumberOfObservers = this.m_HER2AmplificationRecountTestOrder.NumberOfObservers.ToString();
             }
             else
             {
-                this.m_RecountVisibility = Visibility.Collapsed;
+                this.m_CellsCounted = "NA";
+                this.m_Her2SignalsCounted = "NA";
+                this.m_Chr17SignalsCounted = "NA";
+                this.m_NumberOfObservers = "NA";
             }
-
-            YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection her2AmplificationResultCollection = new Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection(accessionOrder.PanelSetOrderCollection, this.m_PanelSetOrder);
-            this.m_HER2AmplificationResult = her2AmplificationResultCollection.FindSummaryMatch();
 
             InitializeComponent();
 
@@ -117,11 +122,6 @@ namespace YellowstonePathology.UI.Test
             get { return this.m_HER2AmplificationRecountTestOrder; }
         }
 
-        public YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResult HER2AmplificationResult
-        {
-            get { return this.m_HER2AmplificationResult; }
-        }
-
         public YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHIndicatorCollection IndicatorCollection
         {
             get { return this.m_IndicatorCollection; }
@@ -147,11 +147,6 @@ namespace YellowstonePathology.UI.Test
             get { return this.m_OrderedOnDescription; }
         }
 
-        public Visibility RecountVisibility
-        {
-            get { return this.m_RecountVisibility; }
-        }
-
         public void NotifyPropertyChanged(String info)
         {
             if (PropertyChanged != null)
@@ -163,6 +158,26 @@ namespace YellowstonePathology.UI.Test
         public string PageHeaderText
         {
             get { return this.m_PageHeaderText; }
+        }
+
+        public string CellsCounted
+        {
+            get { return this.m_CellsCounted; }
+        }
+
+        public string Her2SignalsCounted
+        {
+            get { return this.m_Her2SignalsCounted; }
+        }
+
+        public string Chr17SignalsCounted
+        {
+            get { return this.m_Chr17SignalsCounted; }
+        }
+
+        public string NumberOfObservers
+        {
+            get { return this.m_NumberOfObservers; }
         }
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
@@ -250,8 +265,15 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.Audit.Model.AuditResult result = this.m_PanelSetOrder.IsOkToSetResults(this.m_AccessionOrder);
             if(result.Status == Business.Audit.Model.AuditStatusEnum.OK)
             {
+                YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection her2AmplificationResultCollection = new Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection(this.m_AccessionOrder.PanelSetOrderCollection, this.m_PanelSetOrder);
+                YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
                 YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
-                this.m_HER2AmplificationResult.SetSummaryResults(specimenOrder);
+                her2AmplificationResult.SetSummaryResults(specimenOrder);
+
+                if(string.IsNullOrEmpty(this.m_PanelSetOrder.Result) == true)
+                {
+                    MessageBox.Show("The result needs to be determined by internal adjudication.");
+                }
             }
             else
             {
