@@ -36,6 +36,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
         protected string m_ResultComment;
         protected string m_ResultDescription;
         protected string m_ReportReference;
+
         protected string m_FixationOutOfBoundsComment = "The specimen fixation time does not meet ASCO CAP guidelines (6 to 72 hours), which " +
             "may cause false negative results.  Repeat testing on an alternate specimen that meets fixation time guidelines is recommended, " +
             "if available.";

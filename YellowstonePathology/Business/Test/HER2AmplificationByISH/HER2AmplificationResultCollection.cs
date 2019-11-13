@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.Add(new HER2AmplificationResultGroup4Breast(panelSetOrderCollection, panelSetOrder));
             this.Add(new HER2AmplificationResultGroup5Breast(panelSetOrderCollection, panelSetOrder));
         }
-
+        
         public HER2AmplificationResult FindMatch()
         {
             HER2AmplificationResult result = null;

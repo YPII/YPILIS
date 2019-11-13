@@ -27,7 +27,6 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
         private string m_AverageHer2Chr17Signal;
         private double? m_AverageHer2Chr17SignalAsDouble;
 
-
         private int m_CellsCounted;
         private int m_TotalChr17SignalsCounted;
         private int m_TotalHer2SignalsCounted;

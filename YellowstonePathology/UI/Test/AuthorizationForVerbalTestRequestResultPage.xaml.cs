@@ -37,11 +37,8 @@ namespace YellowstonePathology.UI.Test
         {
             this.m_AccessionOrder = accessionOrder;
             this.m_SystemIdentity = systemIdentity;
-
-            this.m_PanelSetOrder = testOrder;
-
+            this.m_PanelSetOrder = testOrder;     
             this.m_PageHeaderText = "Authorization For Verbal Test Request For: " + this.m_AccessionOrder.PatientDisplayName;
-
 
             InitializeComponent();
 
@@ -208,13 +205,7 @@ namespace YellowstonePathology.UI.Test
             {
                 result.Success = false;
                 result.Message = "Select the test that requires authorization." + Environment.NewLine;
-            }
-
-            if(string.IsNullOrEmpty(this.PanelSetOrder.ContactName) == true)
-            {
-                result.Success = false;
-                result.Message += "The Contact Name is not set." + Environment.NewLine;
-            }
+            }            
 
             if (string.IsNullOrEmpty(this.PanelSetOrder.Fax) == true)
             {
