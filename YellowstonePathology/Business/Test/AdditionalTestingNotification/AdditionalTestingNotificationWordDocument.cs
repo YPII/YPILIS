@@ -17,14 +17,18 @@ namespace YellowstonePathology.Business.Test.AdditionalTestingNotification
         }
 
         public override void Render()
-		{            
-            base.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\AdditionalTestingNotification.4.xml";
+		{
+            string statement = "The following additional testing has been ordered: additional_tests, please hold the billing window open for this encounter. Additional charges will follow within 30-45 days.";
+            base.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\AdditionalTestingNotification.5.xml";
 			base.OpenTemplate();
 			this.SetDemographicsV2();
-			this.SetXmlNodeData("test_name", this.m_PanelSetOrder.PanelSetName);
-            Business.Facility.Model.Facility facility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(this.m_PanelSetOrder.TechnicalComponentFacilityId);
-            this.SetXmlNodeData("facility_name", facility.FacilityName);
 
+            //this.SetXmlNodeData("test_name", this.m_PanelSetOrder.PanelSetName);
+            //Business.Facility.Model.Facility facility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(this.m_PanelSetOrder.TechnicalComponentFacilityId);
+            //this.SetXmlNodeData("facility_name", facility.FacilityName);
+
+            statement = statement.Replace("additional_tests", this.m_AccessionOrder.PanelSetOrderCollection.GetAdditionalTestsDisplayString());
+            this.SetXmlNodeData("test_statement", statement);
             if (string.IsNullOrEmpty(this.m_SendToName) == false)
             {
                 this.ReplaceText("send_to", this.m_SendToName);

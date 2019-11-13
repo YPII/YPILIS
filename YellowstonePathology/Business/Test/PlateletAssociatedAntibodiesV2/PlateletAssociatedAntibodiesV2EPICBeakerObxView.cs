@@ -18,12 +18,8 @@ namespace YellowstonePathology.Business.Test.PlateletAssociatedAntibodiesV2
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
             this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");
-
-            this.AddNextObxElementBeaker("Anti Platelet Antibody - IgG", testOrder.IgGResult, document, "F");
-            this.AddNextObxElementBeaker("Reference", testOrder.IgGReference, document, "F");
-            this.AddNextObxElementBeaker("Anti Platelet Antibody - IgM", testOrder.IgMResult, document, "F");
-            this.AddNextObxElementBeaker("Reference", testOrder.IgMReference, document, "F");
-
+            this.AddNextObxElementBeaker("Anti-Platelet Antibody - IgG", testOrder.IgGResult, document, "F", "Negative");
+            this.AddNextObxElementBeaker("Anti-Platelet Antibody - IgM", testOrder.IgMResult, document, "F", "Negative");
 
             if (amendmentCollection.Count != 0)
             {
