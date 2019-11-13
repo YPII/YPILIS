@@ -21,14 +21,9 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 
         public HER2AmplificationResultCollection(PanelSetOrderCollection panelSetOrderCollection, HER2AnalysisSummary.HER2AnalysisSummaryTestOrder panelSetOrder)
         {
-            //this.Add(new HER2AmplificationResultGroup2Breast(panelSetOrderCollection, panelSetOrder));
-            //this.Add(new HER2AmplificationResultGroup3Breast(panelSetOrderCollection, panelSetOrder));
-            //this.Add(new HER2AmplificationResultGroup4Breast(panelSetOrderCollection, panelSetOrder));            
-            this.Add(new HER2AmplificationResultGroup1Breast(panelSetOrderCollection, panelSetOrder));
             this.Add(new HER2AmplificationResultGroup2Breast(panelSetOrderCollection, panelSetOrder));
             this.Add(new HER2AmplificationResultGroup3Breast(panelSetOrderCollection, panelSetOrder));
-            this.Add(new HER2AmplificationResultGroup4Breast(panelSetOrderCollection, panelSetOrder));
-            this.Add(new HER2AmplificationResultGroup5Breast(panelSetOrderCollection, panelSetOrder));
+            this.Add(new HER2AmplificationResultGroup4Breast(panelSetOrderCollection, panelSetOrder));            
         }
 
         public HER2AmplificationResult FindMatch()
@@ -38,21 +33,6 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             foreach (HER2AmplificationResult her2AmplificationResult in this)
             {
                 if (her2AmplificationResult.IsAMatch() == true)
-                {
-                    result = her2AmplificationResult;
-                    break;
-                }
-            }
-            return result;
-        }
-
-        public HER2AmplificationResult FindSummaryMatch()
-        {
-            HER2AmplificationResult result = null;
-
-            foreach (HER2AmplificationResult her2AmplificationResult in this)
-            {
-                if (her2AmplificationResult.IsASummaryMatch() == true)
                 {
                     result = her2AmplificationResult;
                     break;
