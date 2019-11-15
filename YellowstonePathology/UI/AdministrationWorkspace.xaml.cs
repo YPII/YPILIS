@@ -993,15 +993,9 @@ namespace YellowstonePathology.UI
         }
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
-        {            
-            //Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo("16-29808");
-            //Business.Slide.Model.SlideOrder slideOrder = ao.SpecimenOrderCollection.GetSlideOrder("16-29808.2A2");            
-            //Business.HL7View.VentanaStainOrder vo = new Business.HL7View.VentanaStainOrder();
-            //vo.HandleOrder(ao, slideOrder);
-
-            //Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo("19-21372");
-            //Business.HL7View.EPIC.EPICBeakerResultView result = new Business.HL7View.EPIC.EPICBeakerResultView("19-21372.S", ao, true);
-            //result.Send(new Business.Rules.MethodResult());
+        {
+            YellowstonePathology.Store.RedisServerProd1.Instance.Subscriber.Publish("Please_Open_Gross_Camera_Dialog", "Thank You");
+                        
         }
 
         private void InsertADT()

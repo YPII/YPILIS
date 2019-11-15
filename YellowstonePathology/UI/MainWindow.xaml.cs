@@ -1069,5 +1069,11 @@ namespace YellowstonePathology.UI
             Calendar.CalendarDialog dlg = new Calendar.CalendarDialog();
             dlg.ShowDialog();
         }
+
+        private void MenuItemShowGrossCameraDialog_Click(object sender, RoutedEventArgs e)
+        {
+            AxisCameraDialog axisCameraDialog = new AxisCameraDialog();
+            axisCameraDialog.ShowDialog();
+        }
     }
 }

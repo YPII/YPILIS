@@ -17,12 +17,26 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
         { }
 
         public AuthorizationForVerbalTestRequestTestOrder(string masterAccessionNo, string reportNo, string objectId,
-            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet,
-            bool distribute)
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet, bool distribute)
             : base(masterAccessionNo, reportNo, objectId, panelSet, distribute)
         {
             this.m_NoCharge = true;
-        }        
+        }
+
+        public override void HandlePostCreationTasks(AccessionOrder accessionOrder)
+        {
+            Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(accessionOrder.ClientId);
+            if(string.IsNullOrEmpty(client.AdditionalTestingNotificationFax) == false)
+            {
+                this.m_Fax = client.AdditionalTestingNotificationFax;
+                this.m_ContactName = client.AdditionalTestingNotificationContact;
+            }
+            else
+            {
+                this.m_Fax = client.Fax;
+                this.m_ContactName = client.ContactName;
+            }            
+        }
 
         [PersistentProperty()]
         public string AuthorizationTestName

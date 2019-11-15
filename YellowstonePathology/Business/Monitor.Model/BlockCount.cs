@@ -14,9 +14,13 @@ namespace YellowstonePathology.Business.Monitor.Model
         public event PropertyChangedEventHandler PropertyChanged;
 
         private DateTime m_BlockCountDate;        
-        private int m_YPIBlocks;        
+        private int m_YPIBlocks;
+        private int m_YPIPaths;    
         private int m_BozemanBlocks;
+        private int m_BozemanPaths;
         private int m_BlocksToSend;
+        private int m_BlocksPerPath;
+        private int m_BlocksPerPathBozeman;
 
         public BlockCount()
         {
@@ -57,6 +61,20 @@ namespace YellowstonePathology.Business.Monitor.Model
         }
 
         [PersistentProperty()]
+        public int YPIPaths
+        {
+            get { return this.m_YPIPaths; }
+            set
+            {
+                if (this.m_YPIPaths != value)
+                {
+                    this.m_YPIPaths = value;
+                    this.NotifyPropertyChanged("YPIPaths");
+                }
+            }
+        }
+
+        [PersistentProperty()]
         public int BozemanBlocks
         {
             get { return this.m_BozemanBlocks; }
@@ -66,6 +84,48 @@ namespace YellowstonePathology.Business.Monitor.Model
                 {
                     this.m_BozemanBlocks = value;
                     this.NotifyPropertyChanged("BozemanBlocks");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public int BozemanPaths
+        {
+            get { return this.m_BozemanPaths; }
+            set
+            {
+                if (this.m_BozemanPaths != value)
+                {
+                    this.m_BozemanPaths = value;
+                    this.NotifyPropertyChanged("BozemanPaths");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public int BlocksPerPath
+        {
+            get { return this.m_BlocksPerPath; }
+            set
+            {
+                if (this.m_BlocksPerPath != value)
+                {
+                    this.m_BlocksPerPath = value;
+                    this.NotifyPropertyChanged("BlocksPerPath");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public int BlocksPerPathBozeman
+        {
+            get { return this.m_BlocksPerPathBozeman; }
+            set
+            {
+                if (this.m_BlocksPerPathBozeman != value)
+                {
+                    this.m_BlocksPerPathBozeman = value;
+                    this.NotifyPropertyChanged("BlocksPerPathBozeman");
                 }
             }
         }
@@ -82,6 +142,11 @@ namespace YellowstonePathology.Business.Monitor.Model
                     this.NotifyPropertyChanged("BlocksToSend");
                 }
             }
+        }
+
+        public int GetTotalBlockCount()
+        {
+            return this.m_YPIBlocks + this.m_BozemanBlocks;
         }
 
         public void NotifyPropertyChanged(String info)

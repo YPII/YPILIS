@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Calendar
         private int m_BozemanCount;
 
         public PathologistsByLocation()
-        { }
+        { }        
 
         public int TotalCount
         {

@@ -102,7 +102,19 @@ namespace YellowstonePathology.Business.Calendar
         {
             PathologistsByLocation result = new Calendar.PathologistsByLocation();
             DateTime correctedDay = new DateTime(day.Year, day.Month, day.Day);
-            PathologistCalendarDayCollection pathologistCalendarDayCollection = PathologistCalendarDayCollection.Load(correctedDay, correctedDay);
+
+            DateTime nextWorkDay = correctedDay.AddDays(1);
+            if(nextWorkDay.DayOfWeek == DayOfWeek.Saturday)
+            {
+                nextWorkDay = nextWorkDay.AddDays(2);
+            }
+            else if(nextWorkDay.DayOfWeek == DayOfWeek.Sunday)
+            {
+                nextWorkDay = nextWorkDay.AddDays(1);
+            }
+
+            PathologistCalendarDayCollection pathologistCalendarDayCollection = PathologistCalendarDayCollection.Load(nextWorkDay, nextWorkDay);
+
             foreach (PathologistCalendarDay pathologistCalendarDay in pathologistCalendarDayCollection)
             {
                 List<PathologistCalendarStatus> statusList = new List<Calendar.PathologistCalendarStatus>();

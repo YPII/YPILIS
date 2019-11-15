@@ -251,6 +251,11 @@ namespace YellowstonePathology.Business.Test
             this.m_AdditionalTestingEmailSent = false;
         }
 
+        public virtual void HandlePostCreationTasks(Business.Test.AccessionOrder accessionOrder)
+        {
+            //not implemented here.
+        }
+
         [PersistentDocumentIdProperty()]
 		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId

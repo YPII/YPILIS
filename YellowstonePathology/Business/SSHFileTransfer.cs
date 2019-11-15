@@ -52,7 +52,7 @@ namespace YellowstonePathology.Business
             {                
                 try
                 {
-                    this.SendStatusMessage("Connecting to PSA SSH.", count);
+                    this.SendStatusMessage("Connecting to PSA SSH.", count);                    
                     client.Connect();
                     foreach (string file in files)
                     {
@@ -60,7 +60,7 @@ namespace YellowstonePathology.Business
                         {
                             count = count + 1;
                             this.SendStatusMessage("Uploading File: " + file, count);
-                            string fileNameOnly = Path.GetFileName(file);
+                            string fileNameOnly = Path.GetFileName(file);                            
                             client.UploadFile(fs, fileNameOnly);
                             fs.Close();
                         }

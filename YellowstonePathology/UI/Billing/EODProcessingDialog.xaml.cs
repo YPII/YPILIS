@@ -452,6 +452,9 @@ namespace YellowstonePathology.UI.Billing
 
         private void TransferPSAFiles(object sender, System.ComponentModel.DoWorkEventArgs e)        
         {
+            this.m_BackgroundWorker.ReportProgress(1, "WARNING: Please don't forget to send the files to PSA.");
+
+            /*
             int rowCount = 0;
             this.m_BackgroundWorker.ReportProgress(1, "Starting transfer of PSA Files: " + DateTime.Now.ToLongTimeString());
             string configFilePath = @"C:\Program Files\Yellowstone Pathology Institute\psa-ssh-config.json";
@@ -490,6 +493,7 @@ namespace YellowstonePathology.UI.Billing
 
             this.m_BackgroundWorker.ReportProgress(1, "Finished with transfer of " + rowCount + " PSA Files: " + DateTime.Now.ToLongTimeString());
             Business.Gateway.BillingGateway.UpdateBillingEODProcess(this.m_PostDate, "TransferPSAFiles");
+            */
         }
 
         private void SshFileTransfer_Failed(object sender, string message)

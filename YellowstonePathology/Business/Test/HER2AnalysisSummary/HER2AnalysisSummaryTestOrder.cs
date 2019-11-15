@@ -15,20 +15,6 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
         private string m_ResultComment;
         private string m_InterpretiveComment;
         private string m_ReportReference;
-<<<<<<< HEAD
-        private bool m_RecountRequired;
-
-        private double? m_Her2Chr17Ratio;
-        private double? m_AverageHer2NeuSignal;
-        private string m_AverageChr17Signal;
-        private string m_AverageHer2Chr17Signal;
-        private double? m_AverageHer2Chr17SignalAsDouble;
-
-        private int m_CellsCounted;
-        private int m_TotalChr17SignalsCounted;
-        private int m_TotalHer2SignalsCounted;
-=======
->>>>>>> d7c2db1954b835f9ba408ad5244f4c9d6afb77b5
 
         public HER2AnalysisSummaryTestOrder()
         { }

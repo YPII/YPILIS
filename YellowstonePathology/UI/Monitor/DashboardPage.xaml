@@ -21,11 +21,6 @@
             <TextBlock Margin="10,10,10,10" FontSize="24" Text="{Binding Path=DashboardDate,Converter={StaticResource ShortDateTimeConverter}}"></TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock Margin="10,10,10,10" FontSize="24">Blocks to send to Bozeman</TextBlock>
-            <TextBlock Margin="10,10,10,10" FontSize="24" Text="{Binding Path=BlocksToTransfer}"></TextBlock>
-        </StackPanel>
-
         <Grid Grid.Column="0" Grid.Row="2" Background="#e5fee7" Margin ="5, 5, 5, 5" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -45,7 +40,11 @@
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=DateDisplayString}" Header="Date" Width="400"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=YPIBlocks}" Header="YPI" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=YPIPaths}" Header=" YPI Paths" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=BozemanBlocks}" Header="Bozeman" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=BozemanPaths}" Header="Bzm Paths" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=BlocksPerPath}" Header="Blcks/Path" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=BlocksPerPathBozeman}" Header="Blcks/Path/Bzm" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=BlocksToSend}" Header="Send" Width="100"/>
                     </GridView>
                 </ListView.View>

@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.Test.CarbonicAnhydraseIXCAIX
             this.m_PanelSetId = 318;
             this.m_PanelSetName = "Carbonic Anhydrase IX (CA IX)";
             this.m_Abbreviation = "CA IX";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

@@ -59,6 +59,7 @@
                     <MenuItem Header="Stain Status" Click="MenuItemStainStatus_Click" />
                     <MenuItem Header="PDF Transfer" Click="MenuItemPDFTransfer_Click" />
                     <MenuItem Header="Print SVH Labels" Click="MenuItemPrintSVHLabels_Click" />
+                    <MenuItem Header="Show Gross Camera Dialog" Click="MenuItemShowGrossCameraDialog_Click" />
                 </MenuItem>
 
                 <MenuItem Header="_Client" Name="MenuItemClient">

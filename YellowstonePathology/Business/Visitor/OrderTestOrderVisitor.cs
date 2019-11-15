@@ -192,6 +192,8 @@ namespace YellowstonePathology.Business.Visitor
                 this.m_AccessionOrder.UpdateCaseAssignment(this.m_PanelSetOrder);
 			    this.m_TestOrderInfo.PanelSetOrder = this.m_PanelSetOrder;            
             }
+
+            this.PanelSetOrder.HandlePostCreationTasks(this.m_AccessionOrder);
         }
 
         public virtual void HandlePanelOrders()

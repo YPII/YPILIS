@@ -503,6 +503,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.ShipMaterialTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.SlideTracking.SlideTrackingTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.MaterialRequestForResearch.MaterialRequestForResearchTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestTest());
             return panelSetCollection;
         }
 

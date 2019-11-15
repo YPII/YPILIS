@@ -47,20 +47,41 @@ namespace YellowstonePathology.Business.Monitor.Model
             foreach(BlockCount blockCount in this)
             {
                 Business.Calendar.PathologistsByLocation pathologistsByLocation = Business.Calendar.PathologistCalendarDayCollection.PathologistsCountByLocationOnDate(blockCount.BlockCountDate);
-                if (blockCount.YPIBlocks > 0 && blockCount.BozemanBlocks > 0 && pathologistsByLocation.BillingsCount > 0 && pathologistsByLocation.BozemanCount > 0)
+                int totalPaths = pathologistsByLocation.TotalCount;
+                int totalBlocks = blockCount.GetTotalBlockCount();
+
+                if(totalPaths != 0 && totalBlocks != 0)
                 {
-                    int totalCountPer = (blockCount.YPIBlocks + blockCount.BozemanBlocks) / pathologistsByLocation.TotalCount;
-                    int billingsCountPer = blockCount.YPIBlocks / pathologistsByLocation.BillingsCount;
-                    int bozemanCountPer = blockCount.BozemanBlocks / pathologistsByLocation.BozemanCount;
-                    if (billingsCountPer > totalCountPer)
+                    blockCount.YPIPaths = pathologistsByLocation.BillingsCount;
+                    blockCount.BozemanPaths = pathologistsByLocation.BozemanCount;
+                    blockCount.BlocksPerPath = totalBlocks / totalPaths;                    
+
+                    if(blockCount.BozemanBlocks != 0 && blockCount.BozemanPaths != 0)
                     {
-                        int excessBlocks = (billingsCountPer - bozemanCountPer) * pathologistsByLocation.BillingsCount;
-                        int excessBlocksPer = excessBlocks / pathologistsByLocation.TotalCount;
-                        int blocksToSend = excessBlocksPer * pathologistsByLocation.BozemanCount;
-                        blockCount.BlocksToSend = blocksToSend > 10 ? blocksToSend : 0;
-                        if(blockCount.BlockCountDate == DateTime.Today) result = blocksToSend > 10 ? blocksToSend : 0;
+                        blockCount.BlocksPerPathBozeman = blockCount.BozemanBlocks / blockCount.BozemanPaths;
+                        blockCount.BlocksToSend = blockCount.BlocksPerPath - blockCount.BlocksPerPathBozeman;
+                        if (blockCount.BlocksToSend < 10)
+                        {
+                            blockCount.BlocksToSend = 0;
+                        }                        
                     }
+                    else
+                    {
+                        if(blockCount.BozemanBlocks == 0)
+                        {                                                        
+                            blockCount.BlocksToSend = blockCount.BlocksPerPath * blockCount.BozemanPaths;
+                            if (blockCount.BlocksToSend < 10) blockCount.BlocksToSend = 0;
+                        }
+                        if(blockCount.BozemanPaths == 0)
+                        {
+                            blockCount.BlocksToSend = 0;
+                        }
+                    }                    
                 }
+                else
+                {
+                    blockCount.BlocksToSend = 0;
+                }                                
             }                
             
             return result;
