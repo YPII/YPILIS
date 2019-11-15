@@ -32,6 +32,11 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
                 this.HandleLongString("Diagnosis: " + surgicalSpecimen.Diagnosis, document, "F");
             }
 
+            if (string.IsNullOrEmpty(surgicalTestOrder.Comment) == false)
+            {
+                this.HandleLongString("Comment: " + surgicalTestOrder.Comment, document, "F");
+            }
+
             this.AddNextObxElement("", document, "F");
             this.AddAmendments(document);
 
