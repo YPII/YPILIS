@@ -1214,6 +1214,7 @@ namespace YellowstonePathology.Business.Test
             result.Add(359);
             result.Add(360);
             result.Add(361);
+            result.Add(363); //Authorization For Verbal Test Request
 
             return result;
         }
