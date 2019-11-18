@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BoneMarrowSummary.3.xml";
+            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BoneMarrowSummary.4.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();
@@ -65,6 +65,19 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
             else
             {
                 this.DeleteRow("surgical_comment");
+            }
+
+            if(amendmentCollection.Count == 0)
+            {
+                this.DeleteRow("has_amendment_row");
+                this.DeleteRow("has_no_amendment_row_1");
+                this.ReplaceText("has_no_amendment_row_2", string.Empty);
+            }
+            else
+            {
+                this.DeleteRow("has_no_amendment_row_1");
+                this.DeleteRow("has_no_amendment_row_2");
+                this.ReplaceText("has_amendment_row", string.Empty);
             }
 
             XmlNode testTableNode = this.m_ReportXml.SelectSingleNode("descendant::w:tbl[w:tr/w:tc/w:p/w:r/w:t='test_name']", this.m_NameSpaceManager);            
