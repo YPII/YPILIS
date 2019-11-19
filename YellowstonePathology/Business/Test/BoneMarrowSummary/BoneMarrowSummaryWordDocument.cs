@@ -58,22 +58,22 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
             surgicalTableNode.RemoveChild(descriptionRowNode);
             surgicalTableNode.RemoveChild(diagnosisRowNode);
 
-            if(string.IsNullOrEmpty(surgicalTestOrder.Comment) == false)
+            bool hasFinalAmendment = false;
+            foreach (YellowstonePathology.Business.Amendment.Model.Amendment amendment in amendmentCollection)
             {
-                this.ReplaceText("surgical_comment", surgicalTestOrder.Comment);
+                if (amendment.Final == true)
+                {
+                    hasFinalAmendment = true;
+                    break;
+                }
             }
-            else
-            {
-                this.DeleteRow("surgical_comment");
-            }
-
-            if(amendmentCollection.Count == 0)
+            if (hasFinalAmendment == false)
             {
                 this.DeleteRow("has_amendment_row");
                 this.DeleteRow("has_no_amendment_row_1");
                 this.ReplaceText("has_no_amendment_row_2", string.Empty);
             }
-            else
+            else if (hasFinalAmendment == true)
             {
                 this.DeleteRow("has_no_amendment_row_1");
                 this.DeleteRow("has_no_amendment_row_2");
