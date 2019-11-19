@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 
         private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
         private YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
-        private YellowstonePathology.Business.Domain.Physician m_OrderingPhysician;                
+        private YellowstonePathology.Business.Domain.Physician m_OrderingPhysician;
 
         public EPICBeakerResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool testing)
         {            
@@ -66,7 +66,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                 this.m_AccessionOrder.PSex, this.m_AccessionOrder.SvhAccount, this.m_AccessionOrder.PSSN);
             pid.ToXml(document);
 
-            EPICOrcView orc = new EPICOrcView(this.m_PanelSetOrder.ExternalOrderId, this.m_OrderingPhysician, this.m_AccessionOrder.MasterAccessionNo, OrderStatusEnum.Complete, this.m_AccessionOrder.SystemInitiatingOrder, this.m_SendUnsolicited);
+            EPICBeakerOrcView orc = new EPICBeakerOrcView(this.m_PanelSetOrder.ExternalOrderId, this.m_OrderingPhysician, this.m_AccessionOrder.MasterAccessionNo, OrderStatusEnum.Complete, this.m_AccessionOrder.SystemInitiatingOrder, this.m_SendUnsolicited);
             orc.ToXml(document);
 
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_PanelSetOrder.ReportNo);

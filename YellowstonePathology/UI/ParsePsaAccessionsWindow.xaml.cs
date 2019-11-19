@@ -44,15 +44,14 @@ namespace YellowstonePathology.UI
                     {
                         if(cols[0] != "NO ACC" && cols[0] != ".NO-" && cols[0] != "NO")
                         {
-                            string reportNo = cols[0].Insert(2, "-");
+                            string rectifiedCol0 = cols[0].Replace("-", string.Empty);
+                            string reportNo = rectifiedCol0.Insert(2, "-");
                             int indexOfFirstChar = this.FindFirstLetter(reportNo);
 
                             if(indexOfFirstChar == -1)
                             {
                                 reportNo = reportNo + "S";
-                                indexOfFirstChar = this.FindFirstLetter(reportNo);
-                                //MessageBox.Show("This report no sucks: " + reportNo);
-                                //return;
+                                indexOfFirstChar = this.FindFirstLetter(reportNo);                                
                             }
 
                             reportNo = reportNo.Insert(indexOfFirstChar, ".");

@@ -323,10 +323,7 @@ namespace YellowstonePathology.UI.Test
                     break;
                 case 250:
                     result = new FISH5p159q2215p22ResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
-                case 251:
-                    result = new LiposarcomaFusionProfileResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
+                    break;                
                 case 262:
                     result = new RetrospectiveResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
