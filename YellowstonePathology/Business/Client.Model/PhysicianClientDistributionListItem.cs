@@ -105,7 +105,7 @@ namespace YellowstonePathology.Business.Client.Model
             return result;
         }
 
-        public bool SetDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        private bool SetDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             bool result = true;
 
