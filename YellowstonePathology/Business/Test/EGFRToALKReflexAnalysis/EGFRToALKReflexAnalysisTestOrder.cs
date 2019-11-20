@@ -312,7 +312,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             if (panelSetOrderCollection.Exists(egfrMutationAnalysisTest.PanelSetId) == true)
             {
                 Test.EGFRMutationAnalysis.EGFRMutationAnalysisTestOrder egfrMutationAnalysisTestOrder = (EGFRMutationAnalysis.EGFRMutationAnalysisTestOrder)panelSetOrderCollection.GetPanelSetOrder(egfrMutationAnalysisTest.PanelSetId);
-                interpretation.AppendLine("EGFR: " + egfrMutationAnalysisTestOrder.Interpretation);
+                interpretation.AppendLine(egfrMutationAnalysisTestOrder.Interpretation);
                 references.AppendLine("EGFR: " + egfrMutationAnalysisTestOrder.ReportReferences);
                 method.AppendLine("EGFR: " + egfrMutationAnalysisTestOrder.Method);
                 this.m_EGFRMutationAnalysisResult = egfrMutationAnalysisTestOrder.Result;
@@ -326,7 +326,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
                 references.AppendLine("ALK: " + alkTestOrder.ReportReferences);
 
                 interpretation.AppendLine();
-                interpretation.AppendLine("ALK: " + alkTestOrder.Interpretation);
+                interpretation.AppendLine(alkTestOrder.Interpretation);
 
                 method.AppendLine();
                 method.AppendLine("ALK: " + alkTestOrder.Method);
@@ -342,7 +342,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             {
                 Test.ROS1ByFISH.ROS1ByFISHTestOrder ros1ByFISHTestOrder = (ROS1ByFISH.ROS1ByFISHTestOrder)panelSetOrderCollection.GetPanelSetOrder(ros1ByfishTest.PanelSetId);
                 interpretation.AppendLine();
-                interpretation.AppendLine("ROS1: " + ros1ByFISHTestOrder.Interpretation);
+                interpretation.AppendLine(ros1ByFISHTestOrder.Interpretation);
 
                 method.AppendLine();
                 method.AppendLine("ROS1: " + ros1ByFISHTestOrder.Method);
