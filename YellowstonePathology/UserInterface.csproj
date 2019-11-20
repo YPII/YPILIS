@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>226</ApplicationRevision>
+    <ApplicationRevision>234</ApplicationRevision>
     <ApplicationVersion>10.1.15.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -82,6 +82,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CefSharp.Wpf">
       <HintPath>..\packages\CefSharp.Wpf.57.0.0\CefSharp\x86\CefSharp.Wpf.dll</HintPath>
@@ -396,6 +399,7 @@
     <Compile Include="Business\HL7View\EPIC\EPICBeakerResultView.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerObrView.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicBeakerMshView.cs" />
+    <Compile Include="Business\HL7View\EPIC\EpicBeakerOrcView.cs" />
     <Compile Include="Business\Label.Model\HistologySlidePaperZPLLabelV3.cs" />
     <Compile Include="Business\Label.Model\StorageSlideLabel.cs" />
     <Compile Include="Business\Label.Model\HologicSlideLabelPrinter.cs" />
@@ -1458,10 +1462,6 @@
     <Compile Include="Business\Test\HPV1618SolidTumor\HPV1618SolidTumorWordDocument.cs" />
     <Compile Include="Business\Test\IDH1byIHC\IDH1byIHCTest.cs" />
     <Compile Include="Business\Test\IgHClonalityMRDByNGS\IgHClonalityMRDByNGSTest.cs" />
-    <Compile Include="Business\Test\LiposarcomaFusionProfile\LiposarcomaFusionProfileEPICOBXView.cs" />
-    <Compile Include="Business\Test\LiposarcomaFusionProfile\LiposarcomaFusionProfileTest.cs" />
-    <Compile Include="Business\Test\LiposarcomaFusionProfile\LiposarcomaFusionProfileTestOrder.cs" />
-    <Compile Include="Business\Test\LiposarcomaFusionProfile\LiposarcomaFusionProfileWordDocument.cs" />
     <Compile Include="Business\Test\LymphocyteSubsetPanel5\LymphocyteSubsetPanel5Test.cs" />
     <Compile Include="Business\Test\LymphocyteSubsetPanel7\LymphocyteSubsetPanel7Test.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LynchSyndromeEvaluationWPHOBXView.cs" />
@@ -3920,10 +3920,6 @@
       <DependentUpon>KRASExon23MutationResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Test\KRASExon23MutationResultPath.cs" />
-    <Compile Include="UI\Test\LiposarcomaFusionProfileResultPage.xaml.cs">
-      <DependentUpon>LiposarcomaFusionProfileResultPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Test\LiposarcomaFusionProfileResultPath.cs" />
     <Compile Include="UI\Test\MissingInformationResultPage.xaml.cs">
       <DependentUpon>MissingInformationResultPage.xaml</DependentUpon>
     </Compile>
@@ -5958,10 +5954,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Test\LiposarcomaFusionProfileResultPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\Test\MissingInformationResultPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -7233,12 +7225,12 @@
   <ItemGroup>
     <PublishFile Include="Microsoft.Exchange.WebServices">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

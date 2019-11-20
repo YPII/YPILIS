@@ -16,6 +16,7 @@ namespace YellowstonePathology.Business.XPSDocument.Result.ClientBillingDetailRe
         private string m_PFirstName;
         private string m_PLastName;
         private string m_PMiddleInitial;
+        private Nullable<DateTime> m_PBirthdate;
         private string m_ClientName;
         private string m_PhysicianName;
         private string m_SvhAccount;
@@ -67,6 +68,13 @@ namespace YellowstonePathology.Business.XPSDocument.Result.ClientBillingDetailRe
         {
             get { return this.m_PMiddleInitial; }
             set { this.m_PMiddleInitial = value; }
+        }
+
+        [PersistentProperty()]
+        public Nullable<DateTime> PBirthdate
+        {
+            get { return this.m_PBirthdate; }
+            set { this.m_PBirthdate = value; }
         }
 
         [PersistentProperty()]

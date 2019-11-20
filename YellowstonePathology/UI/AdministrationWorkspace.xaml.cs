@@ -994,7 +994,7 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Store.RedisServerProd1.Instance.Subscriber.Publish("Please_Open_Gross_Camera_Dialog", "Thank You");
+            
                         
         }
 

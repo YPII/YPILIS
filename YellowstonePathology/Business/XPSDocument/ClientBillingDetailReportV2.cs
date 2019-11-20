@@ -178,11 +178,11 @@ namespace YellowstonePathology.Document
             result.ColumnDefinitions.Add(colPatientDisplayString);
 
             StringBuilder patientDisplayString = new StringBuilder();
-            patientDisplayString.Append(YellowstonePathology.Business.Patient.Model.Patient.GetLastFirstDisplayName(clientBillingDetailReportDataAccessionOrder.PFirstName, clientBillingDetailReportDataAccessionOrder.PLastName));
+            patientDisplayString.Append(YellowstonePathology.Business.Patient.Model.Patient.GetLastFirstDOBDisplayName(clientBillingDetailReportDataAccessionOrder.PFirstName, clientBillingDetailReportDataAccessionOrder.PLastName, clientBillingDetailReportDataAccessionOrder.PBirthdate));
 
             if (string.IsNullOrEmpty(clientBillingDetailReportDataAccessionOrder.SvhAccount) == false)
             {
-                patientDisplayString.Append("(" + clientBillingDetailReportDataAccessionOrder.SvhAccount);
+                patientDisplayString.Append("  (" + clientBillingDetailReportDataAccessionOrder.SvhAccount);
                 if (string.IsNullOrEmpty(clientBillingDetailReportDataAccessionOrder.SvhMedicalRecord) == false)
                 {
                     patientDisplayString.Append("/");

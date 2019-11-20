@@ -140,11 +140,8 @@ namespace YellowstonePathology.UI.Surgical
         }
 
         private void MainWindowCommandButtonHandler_Save(object sender, EventArgs e)
-		{
-            if (this.m_PathologistUI.AccessionOrder != null)
-            {
-                this.ReleaseLock();
-            }
+		{            
+            this.ReleaseLock();            
         }
 
         private void ReleaseLock()
@@ -917,6 +914,8 @@ namespace YellowstonePathology.UI.Surgical
 
         private void ButtonCaseAssignment_Click(object sender, RoutedEventArgs e)
         {
+            this.ReleaseLock();            
+
             this.m_BarcodeScanPort.HistologySlideScanReceived -= HistologySlideScanReceived;
             this.m_BarcodeScanPort.ThinPrepSlideScanReceived -= BarcodeScanPort_ThinPrepSlideScanReceived;
             this.m_BarcodeScanPort.CytologySlideScanReceived -= CytologySlideScanReceived;            

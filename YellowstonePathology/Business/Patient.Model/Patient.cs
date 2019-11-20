@@ -75,5 +75,23 @@ namespace YellowstonePathology.Business.Patient.Model
             }
             return result.ToString();
         }
+
+        public static string GetLastFirstDOBDisplayName(string firstName, string lastName, Nullable<DateTime> pbirthdate)
+        {
+            StringBuilder result = new StringBuilder();
+            if (string.IsNullOrEmpty(lastName) == false)
+            {
+                result.Append(lastName);
+            }
+            if (string.IsNullOrEmpty(firstName) == false)
+            {
+                result.Append(", " + firstName);
+            }
+            if (pbirthdate.HasValue == true)
+            {
+                result.Append(" " + pbirthdate.Value.ToString("MM/dd/yyyy"));
+            }
+            return result.ToString();
+        }
     }
 }

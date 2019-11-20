@@ -132,8 +132,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.NeoTypeDiscoveryProfileTest());
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.NeoTypeEsophagealTumorProfileTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.AMLFavorableRisk.AMLFavorableRiskTest());            
-            panelSetCollection.Add(new YellowstonePathology.Business.Test.FISH5p159q2215p22.FISH5p159q2215p22Test());
-            panelSetCollection.Add(new YellowstonePathology.Business.Test.LiposarcomaFusionProfile.LiposarcomaFusionProfileTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.FISH5p159q2215p22.FISH5p159q2215p22Test());            
             panelSetCollection.Add(new YellowstonePathology.Business.Test.SoftTissueTumorProfile.SoftTissueTumorProfileTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.CXCR4MutationAnalysis.CXCR4MutationAnalysisTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.IgHClonalityMRDByNGS.IgHClonalityMRDByNGSTest());

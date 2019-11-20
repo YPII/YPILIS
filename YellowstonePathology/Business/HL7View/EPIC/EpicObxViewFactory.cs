@@ -357,10 +357,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                     break;
                 case 250:
                     view = new YellowstonePathology.Business.Test.FISH5p159q2215p22.FISH5p159q2215p22EPICOBXView(accessionOrder, reportNo, obxCount);
-                    break;
-                case 251:
-                    view = new YellowstonePathology.Business.Test.LiposarcomaFusionProfile.LiposarcomaFusionProfileEPICOBXView(accessionOrder, reportNo, obxCount);
-                    break;
+                    break;                
                 case 263:
                     view = new YellowstonePathology.Business.Test.BCellSubsetAnalysis.BCellSubsetAnalysisEPICOBXView(accessionOrder, reportNo, obxCount);
                     break;

@@ -36,7 +36,7 @@ namespace YellowstonePathology.UI
             this.m_PageHeaderText = "Amendment to surgical suggested For: " + this.m_AccessionOrder.PatientDisplayName;
 
             this.m_AmdendmentDesiredText = "If the diagnosis for this case has changed, an amendment to the surgical should be created.  " +
-                "Would you like to add an amendment to the surgical?";
+                "To add an amendment to the surgical click on the link in the left panel.";
             InitializeComponent();
 
             DataContext = this;
