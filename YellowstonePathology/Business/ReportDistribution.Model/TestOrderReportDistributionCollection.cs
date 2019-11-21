@@ -321,5 +321,43 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 
             return result;
         }
+
+        public bool IsDuplicate(TestOrderReportDistribution testOrderReportDistribution)
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution compareTestOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.ClientId == compareTestOrderReportDistribution.ClientId &&
+                    testOrderReportDistribution.ClientName == compareTestOrderReportDistribution.ClientName &&
+                    testOrderReportDistribution.DistributionType == compareTestOrderReportDistribution.DistributionType &&
+                    testOrderReportDistribution.FaxNumber == compareTestOrderReportDistribution.FaxNumber &&
+                    testOrderReportDistribution.PhysicianId == compareTestOrderReportDistribution.PhysicianId &&
+                    testOrderReportDistribution.PhysicianName == compareTestOrderReportDistribution.PhysicianName &&
+                    testOrderReportDistribution.Rescheduled == compareTestOrderReportDistribution.Rescheduled &&
+                    testOrderReportDistribution.ScheduledDistributionTime == compareTestOrderReportDistribution.ScheduledDistributionTime)
+                {
+                    result= true;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        public static TestOrderReportDistributionCollection GetUniqueDistributions(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        {
+            TestOrderReportDistributionCollection result = new TestOrderReportDistributionCollection();
+            foreach(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in accessionOrder.PanelSetOrderCollection)
+            {
+                foreach(TestOrderReportDistribution testOrderReportDistribution in panelSetOrder.TestOrderReportDistributionCollection)
+                {
+                    if(result.IsDuplicate(testOrderReportDistribution) == false)
+                    {
+                        result.Add(testOrderReportDistribution);
+                    }
+                }
+            }
+            return result;
+        }
     }
 }
