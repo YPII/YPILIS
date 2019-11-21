@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             }
             else
             {
-                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\WomensHealthProfileNoPap.1.xml";
+                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\WomensHealthProfileNoPap.2.xml";
                 this.OpenTemplate();
             }
 
@@ -40,6 +40,31 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(womensHealthProfileTestOrder.ReportNo);
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();
             amendmentSection.SetAmendment(amendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, true);
+
+            if (hasPap == false)
+            {
+                bool hasFinalAmendment = false;
+                foreach (YellowstonePathology.Business.Amendment.Model.Amendment amendment in amendmentCollection)
+                {
+                    if (amendment.Final == true)
+                    {
+                        hasFinalAmendment = true;
+                        break;
+                    }
+                }
+                if (hasFinalAmendment == false)
+                {
+                    this.DeleteRow("has_amendment_row");
+                    this.DeleteRow("has_no_amendment_row_1");
+                    this.ReplaceText("has_no_amendment_row_2", string.Empty);
+                }
+                else if (hasFinalAmendment == true)
+                {
+                    this.DeleteRow("has_no_amendment_row_1");
+                    this.DeleteRow("has_no_amendment_row_2");
+                    this.ReplaceText("has_amendment_row", string.Empty);
+                }
+            }
 
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByOrderTarget(womensHealthProfileTestOrder.OrderedOnId);
             this.SetXmlNodeData("specimen_source", specimenOrder.SpecimenSource);
