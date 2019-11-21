@@ -1720,7 +1720,7 @@ namespace YellowstonePathology.UI
             MessageBox.Show("Done");
         }*/
 
-        private void ButtonRedisToMySql_Click(object sender, RoutedEventArgs e)
+        private void ButtonWilliamTesting_Click(object sender, RoutedEventArgs e)
         {
             /*string message = string.Empty;
             YellowstonePathology.Business.Billing.Model.ICDCodeCollection myCollection = Business.Billing.Model.ICDCodeCollection.Load();
@@ -1756,6 +1756,11 @@ namespace YellowstonePathology.UI
                 panelSet.Save();
             }
             MessageBox.Show("Done");*/
+
+            YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("19-15701", this);
+            //YellowstonePathology.Business.Test.HPV.HPVTestOrder hpvTestOrder = (Business.Test.HPV.HPVTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(hpvTestOrder.ReportNo);
+            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection testOrderReportDistributionCollection = Business.ReportDistribution.Model.TestOrderReportDistributionCollection.GetUniqueDistributions(accessionOrder);
+            YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
         }
     }
 }
