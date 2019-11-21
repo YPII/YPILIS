@@ -993,5 +993,11 @@ namespace YellowstonePathology.UI.Login
             this.m_LoginPageWindow.Close();
             this.m_LoginPageWindow = null;
         }
+
+        private void MenuItemShowGrossCameraDialog_Click(object sender, RoutedEventArgs e)
+        {
+            Business.GrossCameraPubSubHandler grossCameraPubSubHandler = new Business.GrossCameraPubSubHandler();
+            grossCameraPubSubHandler.ShowDialog(this.m_LoginUI.AccessionOrder);
+        }
     }
 }

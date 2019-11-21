@@ -375,7 +375,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             {
                 Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTestOrder pdl122C3forNonsmallCellLungCancerTestOrder = (PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerTestOrder)panelSetOrderCollection.GetPanelSetOrder(pdl122C3forNonsmallCellLungCancerTest.PanelSetId);
                 interpretation.AppendLine();
-                interpretation.AppendLine(pdl122C3forNonsmallCellLungCancerTestOrder.PanelSetName + ": " + pdl122C3forNonsmallCellLungCancerTestOrder.Interpretation);
+                interpretation.AppendLine(pdl122C3forNonsmallCellLungCancerTestOrder.Interpretation);
 
                 method.AppendLine();
                 method.AppendLine(pdl122C3forNonsmallCellLungCancerTestOrder.PanelSetName + ": " + pdl122C3forNonsmallCellLungCancerTestOrder.Method);

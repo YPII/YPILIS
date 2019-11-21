@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>235</ApplicationRevision>
+    <ApplicationRevision>236</ApplicationRevision>
     <ApplicationVersion>10.1.15.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -394,6 +394,7 @@
     <Compile Include="Business\EthBlock.cs" />
     <Compile Include="Business\EthContract.cs" />
     <Compile Include="Business\EthContractCollection.cs" />
+    <Compile Include="Business\GrossCameraPubSubHandler.cs" />
     <Compile Include="Business\Helper\JSONHelper.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicHRHClient.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerResultView.cs" />

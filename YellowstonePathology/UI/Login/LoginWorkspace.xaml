@@ -68,13 +68,6 @@
                         </StackPanel>
                     </Button>
 
-                    <!--<Button Click="ButtonShowMasterLog_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Resources/Log.ico" Margin="2" Height="16"></Image>
-                            <TextBlock Margin="2" VerticalAlignment="Center">MasterLog</TextBlock>
-                        </StackPanel>
-                    </Button>-->
-
                     <Button Name="ButtonMasterLog" Margin="2">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Resources/Log.ico" Margin="2" Height="16"></Image>
@@ -156,6 +149,7 @@
                         <MenuItem Header="Show IT Audits" Click="MenuItemShowITAudits_Click"></MenuItem>
                         <MenuItem Header="Send Order To Panther" Click="MenuItemSendPantherOrder_Click"></MenuItem>
                         <MenuItem Header="Cancel Panther Order" Click="MenuItemCancelPantherOrder_Click"></MenuItem>
+                        <MenuItem Header="Show Gross Camera Dialog" Click="MenuItemShowGrossCameraDialog_Click"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
                         

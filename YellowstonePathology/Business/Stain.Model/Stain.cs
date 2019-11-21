@@ -192,15 +192,7 @@ namespace YellowstonePathology.Business.Stain.Model
                 string result = this.m_StainAbbreviation;
                 if (this.m_UseWetProtocol == true) result = result + "(W)";
                 return result;
-            }
-            /*set
-            {
-                if (this.m_HistologyDisplayString != value)
-                {
-                    this.m_HistologyDisplayString = value;
-                    this.NotifyPropertyChanged("HistologyDisplayString");
-                }
-            }*/
+            }           
         }
 
         public string StainerType
