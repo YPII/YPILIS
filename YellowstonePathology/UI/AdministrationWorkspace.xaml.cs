@@ -1758,8 +1758,7 @@ namespace YellowstonePathology.UI
             MessageBox.Show("Done");*/
 
             YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("19-15701", this);
-            //YellowstonePathology.Business.Test.HPV.HPVTestOrder hpvTestOrder = (Business.Test.HPV.HPVTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(hpvTestOrder.ReportNo);
-            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection testOrderReportDistributionCollection = Business.ReportDistribution.Model.TestOrderReportDistributionCollection.GetUniqueDistributions(accessionOrder);
+            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection testOrderReportDistributionCollection = accessionOrder.PanelSetOrderCollection.GetUniqueDistributions();
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
         }
     }

@@ -1274,5 +1274,21 @@ namespace YellowstonePathology.Business.Test
                 }
             }
         }
+
+        public YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection GetUniqueDistributions()
+        {
+            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection result = new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection();
+            foreach (PanelSetOrder panelSetOrder in this)
+            {
+                foreach (YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution in panelSetOrder.TestOrderReportDistributionCollection)
+                {
+                    if (result.IsDuplicate(testOrderReportDistribution) == false)
+                    {
+                        result.Add(testOrderReportDistribution);
+                    }
+                }
+            }
+            return result;
+        }
     }
 }
