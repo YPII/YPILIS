@@ -242,30 +242,7 @@ namespace YellowstonePathology.Business.Visitor
 
         public virtual void HandlDistribution()
         {
-            if (this.m_AccessionOrder.ClientId != 0 && this.m_AccessionOrder.PhysicianId != 0)
-            {
-                if (this.m_PanelSet.NeverDistribute == false)
-                {
-                    if (this.m_PanelSetOrder.Distribute == true)
-                    {
-                        YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection uniqueDistributions = this.m_AccessionOrder.PanelSetOrderCollection.GetUniqueDistributions();
-                        if (uniqueDistributions.Count == 0)
-                        {
-                            YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(this.m_AccessionOrder.PhysicianId, this.m_AccessionOrder.ClientId);
-                            Audit.Model.CanSetDistributionAudit canSetDistributionAudit = new Audit.Model.CanSetDistributionAudit(this.m_AccessionOrder, physicianClientDistributionCollection);
-                            canSetDistributionAudit.Run();
-                            if (canSetDistributionAudit.Status == Audit.Model.AuditStatusEnum.OK)
-                            {
-                                physicianClientDistributionCollection.SetDistribution(this.m_PanelSetOrder, this.m_AccessionOrder);
-                            }
-                        }
-                        else
-                        {
-                            this.m_PanelSetOrder.SetDistributionFromUnique(uniqueDistributions);
-                        }
-                    }
-                }
-            }
+            this.m_PanelSetOrder.HandleDistribution(this.m_AccessionOrder);
         }
 
         public virtual void HandlReflexTestingPlan()
