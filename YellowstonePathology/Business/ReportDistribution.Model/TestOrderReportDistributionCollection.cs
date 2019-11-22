@@ -340,5 +340,15 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 
             return result;
         }
+
+        public void SetDistributionFromUnique(Test.PanelSetOrder panelSetOrder, TestOrderReportDistributionCollection uniqueDistributions)
+        {
+            foreach (YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution in uniqueDistributions)
+            {
+                string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                this.AddNext(testOrderReportDistributionId, testOrderReportDistributionId, panelSetOrder.ReportNo, testOrderReportDistribution.PhysicianId, testOrderReportDistribution.PhysicianName,
+                        testOrderReportDistribution.ClientId, testOrderReportDistribution.ClientName, testOrderReportDistribution.DistributionType, testOrderReportDistribution.FaxNumber);
+            }
+        }
     }
 }
