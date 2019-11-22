@@ -2040,15 +2040,22 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        public void SetDistributionFromUnique(YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection uniqueDistributions)
+        public void HandleDistribution(AccessionOrder accessionOrder)
         {
-            foreach (YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution in uniqueDistributions)
+            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection uniqueDistributions = accessionOrder.PanelSetOrderCollection.GetUniqueDistributions();
+            if (uniqueDistributions.Count == 0)
             {
-                string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-                YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistributionToAdd =
-                    new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, this.ReportNo, testOrderReportDistribution.PhysicianId, testOrderReportDistribution.PhysicianName,
-                        testOrderReportDistribution.ClientId, testOrderReportDistribution.ClientName, testOrderReportDistribution.DistributionType, testOrderReportDistribution.FaxNumber);
-                this.TestOrderReportDistributionCollection.Add(testOrderReportDistributionToAdd);
+                YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(accessionOrder.PhysicianId, accessionOrder.ClientId);
+                Audit.Model.CanSetDistributionAudit canSetDistributionAudit = new Audit.Model.CanSetDistributionAudit(accessionOrder, physicianClientDistributionCollection);
+                canSetDistributionAudit.Run();
+                if (canSetDistributionAudit.Status == Audit.Model.AuditStatusEnum.OK)
+                {
+                    physicianClientDistributionCollection.SetDistribution(this, accessionOrder);
+                }
+            }
+            else
+            {
+                this.TestOrderReportDistributionCollection.SetDistributionFromUnique(this, uniqueDistributions);
             }
         }
     }
