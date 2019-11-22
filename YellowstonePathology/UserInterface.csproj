@@ -1262,6 +1262,7 @@
     <Compile Include="Business\Test\NeoTYPEMelanomaProfile\NeoTYPEMelanomaProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPEMyeloidDisordersProfile\NeoTYPEMyeloidDisordersProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPEOvarianTumorProfile\NeoTYPEOvarianTumorProfileTest.cs" />
+    <Compile Include="Business\Test\NeoTYPEPrecisionProfileForSolidTumors\NeoTYPEPrecisionProfileForSolidTumorsTest.cs" />
     <Compile Include="Business\Test\NGCT\NGCTEPICBeakerObxView.cs" />
     <Compile Include="Business\Test\NRASEXON4MutationAnalysis\NRASEXON4MutationAnalysisTest.cs" />
     <Compile Include="Business\Test\NTRKNGSFusionProfile\NTRKNGSFusionProfileTest.cs" />
