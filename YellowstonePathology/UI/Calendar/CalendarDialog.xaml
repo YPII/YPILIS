@@ -70,16 +70,7 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Path=CalendarDisplayDate}" />
-                                <GridViewColumn Header="Dr Bibbey">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrBibbeyStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="Dr Brown">
+                                <GridViewColumn Header="Brown">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -88,7 +79,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Dr Durden">
+                                <GridViewColumn Header="Durden">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -97,25 +88,25 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Dr Emerick">
+                                <GridViewColumn Header="Bibbey">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrEmerickStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrBibbeyStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Dr Luem">
+                                <GridViewColumn Header="Schneider">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrLuemStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrSchneiderStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Dr Messner">
+                                <GridViewColumn Header="Messner">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -124,7 +115,16 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Dr Nero">
+                                <GridViewColumn Header="Emerick">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrEmerickStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Nero">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -133,11 +133,11 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Dr Schneider">
+                                <GridViewColumn Header="Luem">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrSchneiderStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrLuemStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
