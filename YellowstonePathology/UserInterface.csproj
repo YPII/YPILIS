@@ -3169,6 +3169,12 @@
     <Compile Include="UI\Billing\ICDCodeListDialog.xaml.cs">
       <DependentUpon>ICDCodeListDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Billing\PanelSetOrderCPTCodeBillEditDialog.xaml.cs">
+      <DependentUpon>PanelSetOrderCPTCodeBillEditDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Billing\PanelSetOrderCPTCodeEditDialog.xaml.cs">
+      <DependentUpon>PanelSetOrderCPTCodeEditDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Billing\SimulationDialog.xaml.cs">
       <DependentUpon>SimulationDialog.xaml</DependentUpon>
     </Compile>
@@ -5190,6 +5196,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Billing\ICDCodeListDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Billing\PanelSetOrderCPTCodeBillEditDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Billing\PanelSetOrderCPTCodeEditDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

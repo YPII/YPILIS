@@ -196,6 +196,7 @@
                         <MenuItem Header="Change To 88342" Click="MenuItemChangeTo88342_Click"></MenuItem>
                         <MenuItem Header="Clear Post Date" Click="MenuItemClearPostDate_Click"></MenuItem>
                         <MenuItem Header="Update MRN/ACCT" Click="MenuItemUpdateMRNACCT_Click"></MenuItem>
+                        <MenuItem Header="Update CPTCode" Click="MenuItemUpdateCPTCode_Click"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>                    
@@ -225,6 +226,7 @@
                         <MenuItem Header="Add 1" Click="MenuItemAddOne_Click"></MenuItem>
                         <MenuItem Header="Send CDM" Click="MenuItemSendCDM_Click"></MenuItem>
                         <MenuItem Header="Update MRN/ACCT" Click="MenuItemUpdateMRNACCTBill_Click"></MenuItem>
+                        <MenuItem Header="Update Billing CPT Code" Click="UpdateBillingCPTCode_Click"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>
