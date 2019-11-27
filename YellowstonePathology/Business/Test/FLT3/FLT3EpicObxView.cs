@@ -16,9 +16,10 @@ namespace YellowstonePathology.Business.Test.FLT3
 		public override void ToXml(XElement document)
 		{
 			PanelSetOrderFLT3 panelSetOrder = (PanelSetOrderFLT3)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, panelSetOrder, "FLT3 Mutation Analysis");
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
+            this.AddHeader(document, panelSetOrder, panelSet.PanelSetName);
 
-			this.AddNextObxElement("", document, "F");
+            this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;
 			this.AddNextObxElement(result, document, "F");
 			result = "  ITD Mutation " + panelSetOrder.ITDMutation;

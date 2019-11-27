@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.CarbonicAnhydraseIXCAIX
         public CarbonicAnhydraseIXCAIXTest()
         {
             this.m_PanelSetId = 318;
-            this.m_PanelSetName = "Carbonic Anhydrase IX (CA IX)";
+            this.m_PanelSetName = "Carbonic Anhydrase IX (CA IX) (IHC)";
             this.m_Abbreviation = "CA IX";
             this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;

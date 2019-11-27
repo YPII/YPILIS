@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetConciseBrainTumorProfile()
 		{
 			this.m_PanelSetId = 117;
-			this.m_PanelSetName = "Concise Brain Tumor Profile";
+			this.m_PanelSetName = "NeoTYPE Brain Tumor Profile (FISH-Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
         public BRAFMutationAnalysisTest()
         {
             this.m_PanelSetId = 274;
-            this.m_PanelSetName = "BRAF Mutation Analysis";
+            this.m_PanelSetName = "BRAF Mutation Analysis  (Molecular)";
             this.m_Abbreviation = "BRAF";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

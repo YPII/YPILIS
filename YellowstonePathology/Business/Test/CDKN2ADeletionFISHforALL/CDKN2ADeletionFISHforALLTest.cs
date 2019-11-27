@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.CDKN2ADeletionFISHforALL
         public CDKN2ADeletionFISHforALLTest()
         {
             this.m_PanelSetId = 294;
-            this.m_PanelSetName = "CDKN2A (p16) Deletion FISH for ALL";
+            this.m_PanelSetName = "CDKN2A (p16) Deletion for ALL  (FISH)";
             this.m_Abbreviation = "CDKN2A";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;

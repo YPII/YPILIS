@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.CEBPA
 		public CEBPATest()
 		{
 			this.m_PanelSetId = 150;
-			this.m_PanelSetName = "CEBPA Mutation Analysis";
+			this.m_PanelSetName = "CEBPA Mutation Analysis (Molecular)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

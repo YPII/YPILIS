@@ -17,12 +17,15 @@ namespace YellowstonePathology.Business.Test.DeletionsForGlioma1p19q
 		{			
 			DeletionsForGlioma1p19qTestOrder testOrder = (DeletionsForGlioma1p19qTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\DeletionsForGlioma1p19q.2.xml";
+			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\DeletionsForGlioma1p19q.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();
 			this.SetReportDistribution();
 			this.SetCaseHistory();
+
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(this.m_PanelSetOrder.PanelSetId);
+            this.ReplaceText("report_title", panelSet.PanelSetName);
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();

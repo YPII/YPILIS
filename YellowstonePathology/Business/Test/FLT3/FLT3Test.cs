@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.FLT3
 		public FLT3Test()
 		{
 			this.m_PanelSetId = 153;
-			this.m_PanelSetName = "FLT3 Mutation Analysis";
+			this.m_PanelSetName = "FLT3 Mutation Analysis (Molecular)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

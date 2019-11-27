@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.BCRABLByPCR
 		public BCRABLByPCRTest()
 		{
 			this.m_PanelSetId = 162;            
-			this.m_PanelSetName = "BCR/ABL1, t(9;22) By PCR";
+			this.m_PanelSetName = "BCR-ABL1 Standard p210,p190 (Molecular)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = false;

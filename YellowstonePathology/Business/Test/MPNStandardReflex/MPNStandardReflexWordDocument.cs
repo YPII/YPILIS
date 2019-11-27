@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Test.MPNStandardReflex
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();
 			amendmentSection.SetAmendment(amendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, true);
 
-            this.ReplaceText("panelset_name", panelSetOrderMPNStandardReflex.PanelSetName);
+            this.ReplaceText("report_title", panelSetOrderMPNStandardReflex.PanelSetName);
             if (string.IsNullOrEmpty(panelSetOrderMPNStandardReflex.JAK2V617FResult) == false)
             {
                 this.ReplaceText("jak2v617f_result", panelSetOrderMPNStandardReflex.JAK2V617FResult);

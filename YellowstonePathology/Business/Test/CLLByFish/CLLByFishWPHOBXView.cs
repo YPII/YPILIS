@@ -17,7 +17,8 @@ namespace YellowstonePathology.Business.Test.CLLByFish
         public override void ToXml(XElement document)
         {
             CLLByFishTestOrder panelSetOrder = (CLLByFishTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, panelSetOrder, "CLL by FISH");
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
+            this.AddHeader(document, panelSetOrder, panelSet.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
             string result = "Result: " + panelSetOrder.Result;

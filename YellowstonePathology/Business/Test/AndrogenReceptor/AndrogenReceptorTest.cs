@@ -10,8 +10,8 @@ namespace YellowstonePathology.Business.Test.AndrogenReceptor
         public AndrogenReceptorTest()
 		{
 			this.m_PanelSetId = 205;
-			this.m_PanelSetName = "Androgen Receptor By IHC";
-            this.m_Abbreviation = "Androgen Receptor";
+			this.m_PanelSetName = "AR (IHC)";
+            this.m_Abbreviation = "AR (IHC)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

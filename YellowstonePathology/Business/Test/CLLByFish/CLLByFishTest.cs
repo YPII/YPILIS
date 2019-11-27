@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.CLLByFish
 		public CLLByFishTest()
 		{
 			this.m_PanelSetId = 151;
-			this.m_PanelSetName = "CLL By Fish";
+			this.m_PanelSetName = "CLL FISH Panel (FISH)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

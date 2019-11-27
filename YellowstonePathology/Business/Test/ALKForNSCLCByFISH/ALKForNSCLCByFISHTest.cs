@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.ALKForNSCLCByFISH
         public ALKForNSCLCByFISHTest()
 		{
 			this.m_PanelSetId = 131;
-			this.m_PanelSetName = "ALK for NSCLC by FISH";
+			this.m_PanelSetName = "ALK for NSCLC (FISH)";
             this.m_Abbreviation = "ALK";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			

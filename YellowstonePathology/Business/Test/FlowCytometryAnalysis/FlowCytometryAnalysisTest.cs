@@ -10,8 +10,8 @@ namespace YellowstonePathology.Business.Test.FlowCytometryAnalysis
         public FlowCytometryAnalysisTest()
 		{
 			this.m_PanelSetId = 248;
-			this.m_PanelSetName = "Flow Cytometry Analysis";
-            this.m_Abbreviation = "Flow Cytometry Analysis";
+			this.m_PanelSetName = "Flow Cytometry";
+            this.m_Abbreviation = "Flow Cytometry";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FlowCytometry;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

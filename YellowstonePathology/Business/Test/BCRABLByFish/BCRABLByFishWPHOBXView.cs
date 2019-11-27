@@ -17,7 +17,8 @@ namespace YellowstonePathology.Business.Test.BCRABLByFish
         public override void ToXml(XElement document)
         {
             BCRABLByFishTestOrder panelSetOrder = (BCRABLByFishTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, panelSetOrder, "BCR/ABL1/ASS1 Fish Analysis");
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
+            this.AddHeader(document, panelSetOrder, panelSet.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
             string result = "Result: " + panelSetOrder.Result;

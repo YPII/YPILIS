@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetCLLPrognosticPanel()
 		{
 			this.m_PanelSetId = 63;
-			this.m_PanelSetName = "NeoTYPE CLL Prognostic Profile";
+			this.m_PanelSetName = "NeoTYPE CLL Prognostic Profile (FISH-Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

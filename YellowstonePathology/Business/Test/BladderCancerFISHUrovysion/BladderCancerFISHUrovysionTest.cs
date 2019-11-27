@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.BladderCancerFISHUrovysion
 		public BladderCancerFISHUrovysionTest()
 		{
 			this.m_PanelSetId = 185;
-			this.m_PanelSetName = "Bladder Cancer FISH (Urovysion)";
+			this.m_PanelSetName = "Bladder Cancer  (FISH)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

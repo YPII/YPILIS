@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 		public Her2AmplificationByFishTest()
 		{
 			this.m_PanelSetId = 163;
-			this.m_PanelSetName = "HER2 Amplification by FISH";
+			this.m_PanelSetName = "HER2 Breast Cancer (FISH)";
             this.m_Abbreviation = "HER2FSH";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			

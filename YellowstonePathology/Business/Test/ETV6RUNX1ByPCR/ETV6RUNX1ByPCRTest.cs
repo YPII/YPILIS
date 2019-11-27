@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.ETV6RUNX1ByPCR
         public ETV6RUNX1ByPCRTest()
         {
             this.m_PanelSetId = 276;
-            this.m_PanelSetName = "ETV6RUNX1 By PCR";
+            this.m_PanelSetName = "ETV6-RUNX1 (TEL-AML1) Translocation, t(12;21) (Molecular)";
             this.m_Abbreviation = "ETV6RUNX1ByPCR";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.ABL1KinaseDomainMutation
         public ABL1KinaseDomainMutationTest()
         {
             this.m_PanelSetId = 135;
-            this.m_PanelSetName = "ABL1 Kinase Domain Mutation";
+            this.m_PanelSetName = "ABL1 Kinase Domain Mutation Analysis (Molecular)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = false;
