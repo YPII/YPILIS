@@ -96,12 +96,12 @@ namespace YellowstonePathology.Business.Persistence
         private void PushOne(Document document, object writer)
         {                                             
             if (document.WriterExists(writer) == true)
-            {                
+            {
                 document.RemoveWriter(writer);
-
                 if (document.Writers.Count == 0)
                 {                    
-                    document.ReleaseLock();                    
+                    document.ReleaseLock();   
+                                     
                     if (document.IsGlobal == false)
                     {
                         this.m_Documents.Remove(document);
@@ -123,7 +123,6 @@ namespace YellowstonePathology.Business.Persistence
 
             if (this.KeyTypeExists(documentId) == true)
             {
-
                 if(this.WriterTypeExistsOtherThanThis(documentId) == true)
                 {
                     Document otherDocument = this.GetWriterTypeOtherThanThis(documentId);
