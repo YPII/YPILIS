@@ -10,8 +10,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetFIP1L1()
 		{
 			this.m_PanelSetId = 88;
-			this.m_PanelSetName = "FIP1L1";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+			this.m_PanelSetName = "PDGFRA Rearrangement (FISH)";
+            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.PublishedDocument;
@@ -35,7 +35,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_ProfessionalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
-            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMOLEGEN());
+            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
 		}
 	}
 }

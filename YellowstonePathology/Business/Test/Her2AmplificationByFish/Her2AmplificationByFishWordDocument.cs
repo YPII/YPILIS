@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 
             if (panelSetOrderHer2AmplificationByFish.NonBreast == false)
             {
-                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByFish.1.xml";
+                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByFish.2.xml";
             }
             else
             {
@@ -33,7 +33,13 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 			this.SetReportDistribution();
 			this.SetCaseHistory();
 
-			if (this.m_AccessionOrder.OrderCancelled == false)
+            if (panelSetOrderHer2AmplificationByFish.NonBreast == false)
+            {
+                YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(this.m_PanelSetOrder.PanelSetId);
+                this.ReplaceText("report_title", panelSet.PanelSetName);
+            }
+
+            if (this.m_AccessionOrder.OrderCancelled == false)
 			{
                 YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
                 YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();

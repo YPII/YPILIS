@@ -16,7 +16,8 @@ namespace YellowstonePathology.Business.Test.ALLAdultByFISH
 		public override void ToXml(XElement document)
 		{
 			ALLAdultByFISHTestOrder panelSetOrder = (ALLAdultByFISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, panelSetOrder, "Fish Analysis ALL Adult");
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
+            this.AddHeader(document, panelSetOrder, panelSet.PanelSetName);
 
 			this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;

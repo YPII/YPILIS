@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.EGFRT790MLiquidBiopsy
         public EGFRT790MLiquidBiopsyTest()
         {
             this.m_PanelSetId = 287;
-            this.m_PanelSetName = "EGFR T790M Liquid Biopsy";
+            this.m_PanelSetName = "NeoLAB EGFR T790M Liquid Biopsy (Molecular)";
             this.m_Abbreviation = "EGFR T790M Liquid Biopsy";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

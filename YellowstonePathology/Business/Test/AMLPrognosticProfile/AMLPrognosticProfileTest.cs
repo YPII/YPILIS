@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.AMLPrognosticProfile
         public AMLPrognosticProfileTest()
         {
             this.m_PanelSetId = 237;
-            this.m_PanelSetName = "AML Prognostic Profile";
+            this.m_PanelSetName = "Neo TYPE AML Prognostic Profile";
             this.m_Abbreviation = "AML Prognostic Profile";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

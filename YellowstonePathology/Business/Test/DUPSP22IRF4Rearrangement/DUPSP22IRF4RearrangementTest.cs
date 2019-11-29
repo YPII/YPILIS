@@ -11,9 +11,9 @@ namespace YellowstonePathology.Business.Test.DUPSP22IRF4Rearrangement
         public DUPSP22IRF4RearrangementTest()
         {
             this.m_PanelSetId = 324;
-            this.m_PanelSetName = "DUPSP22-IRF4 Rearrangement";
-            this.m_Abbreviation = "DUPSP22-IRF4 Rearrangement";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_PanelSetName = "DUSP22-IRF4 Rearrangement (FISH)";
+            this.m_Abbreviation = "DUPSP22-IRF4";
+            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

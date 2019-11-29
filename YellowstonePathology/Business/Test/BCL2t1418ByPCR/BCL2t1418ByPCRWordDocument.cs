@@ -17,12 +17,15 @@ namespace YellowstonePathology.Business.Test.BCL2t1418ByPCR
 		{
             BCL2t1418ByPCRTestOrder panelSetOrder = (BCL2t1418ByPCRTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BCL2t1418ByPCR.2.xml";
+			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BCL2t1418ByPCR.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();
 			this.SetReportDistribution();
 			this.SetCaseHistory();
+
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(this.m_PanelSetOrder.PanelSetId);
+            this.ReplaceText("report_title", panelSet.PanelSetName);
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();

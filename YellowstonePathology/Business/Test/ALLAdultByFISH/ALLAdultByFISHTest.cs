@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.ALLAdultByFISH
 		public ALLAdultByFISHTest()
 		{
 			this.m_PanelSetId = 192;
-			this.m_PanelSetName = "ALL Adult by Fish";
+			this.m_PanelSetName = "ALL Adult FISH Panel (FISH)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

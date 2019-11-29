@@ -10,9 +10,9 @@ namespace YellowstonePathology.Business.Test.EWSR1
         public EWSR1Test()
         {
             this.m_PanelSetId = 264;
-            this.m_PanelSetName = "EWSR1 Breakapart";
+            this.m_PanelSetName = "EWSR1 (FISH)";
             this.m_Abbreviation = "EWSR1";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

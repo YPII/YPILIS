@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetCMVISH()
 		{
 			this.m_PanelSetId = 95;
-			this.m_PanelSetName = "CMV ISH";
+			this.m_PanelSetName = "CMV (Cytomegalovirus) (ISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

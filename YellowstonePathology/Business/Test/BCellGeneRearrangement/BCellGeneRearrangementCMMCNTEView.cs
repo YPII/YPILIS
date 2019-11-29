@@ -22,11 +22,12 @@ namespace YellowstonePathology.Business.Test.BCellGeneRearrangement
         public override void ToXml(XElement document)
         {
             BCellGeneRearrangementTestOrder panelSetOrder = (BCellGeneRearrangementTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
 
             this.AddCompanyHeader(document);
             this.AddBlankNteElement(document);
 
-            this.AddNextNteElement("B-Cell Gene Rearrangement", document);
+            this.AddNextNteElement(panelSet.PanelSetName, document);
             this.AddNextNteElement("Master Accession #: " + panelSetOrder.MasterAccessionNo, document);
             this.AddNextNteElement("Report #: " + panelSetOrder.ReportNo, document);
             this.AddBlankNteElement(document);

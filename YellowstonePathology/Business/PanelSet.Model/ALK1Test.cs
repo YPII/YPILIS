@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		public ALK1Test()
 		{
 			this.m_PanelSetId = 187;
-			this.m_PanelSetName = "ALK1 By IHC";
+			this.m_PanelSetName = "ALK-1 (for heme cases) (IHC)";
             this.m_Abbreviation = "ALK1";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			

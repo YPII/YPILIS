@@ -16,7 +16,8 @@ namespace YellowstonePathology.Business.Test.ABL1KinaseDomainMutation
 		public override void ToXml(XElement document)
 		{
 			ABL1KinaseDomainMutationTestOrder testOrder = (ABL1KinaseDomainMutationTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, testOrder, "ABL1 Kinase Domain Mutation");
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(testOrder.PanelSetId);
+            this.AddHeader(document, testOrder, panelSet.PanelSetName);
 
 			this.AddNextObxElement("", document, "F");
 			string result = "Result: " + testOrder.Result;

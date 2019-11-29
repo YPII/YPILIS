@@ -11,9 +11,9 @@ namespace YellowstonePathology.Business.Test.ETV6RUNX1ByFish
         public ETV6RUNX1ByFishTest()
         {
             this.m_PanelSetId = 275;
-            this.m_PanelSetName = "ETV6RUNX1 By Fish";
+            this.m_PanelSetName = "ETV6/RUNX1 (TEL/AML1) t(12;21) (FISH) (Probe can be ordered from ALL Pediatric FISH Panel)";
             this.m_Abbreviation = "ETV6RUNX1ByFish";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

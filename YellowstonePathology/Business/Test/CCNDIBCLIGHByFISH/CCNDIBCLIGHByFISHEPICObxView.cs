@@ -16,9 +16,10 @@ namespace YellowstonePathology.Business.Test.CCNDIBCLIGHByFISH
 		public override void ToXml(XElement document)
 		{
 			CCNDIBCLIGHByFISHTestOrder panelSetOrder = (CCNDIBCLIGHByFISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, panelSetOrder, "CCND1/IgH t(11;14) by FISH Analysis");
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
+            this.AddHeader(document, panelSetOrder, panelSet.PanelSetName);
 
-			this.AddNextObxElement("", document, "F");
+            this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;
 			this.AddNextObxElement(result, document, "F");
 

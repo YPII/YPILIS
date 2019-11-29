@@ -18,11 +18,12 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
         public override void ToXml(XElement document)
         {
             BRAFMutationAnalysisTestOrder testOrder = (BRAFMutationAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(testOrder.PanelSetId);
 
             this.AddCompanyHeader(document);
             this.AddBlankNteElement(document);
 
-            this.AddNextNteElement("BRAF Mutation Analysis", document);
+            this.AddNextNteElement(panelSet.PanelSetName, document);
             this.AddNextNteElement("Master Accession #: " + testOrder.MasterAccessionNo, document);
             this.AddNextNteElement("Report #: " + testOrder.ReportNo, document);
             this.AddBlankNteElement(document);

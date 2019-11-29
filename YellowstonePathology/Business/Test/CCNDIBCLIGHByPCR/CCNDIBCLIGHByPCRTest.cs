@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.CCNDIBCLIGHByPCR
         public CCNDIBCLIGHByPCRTest()
         {
             this.m_PanelSetId = 227;
-            this.m_PanelSetName = "CCNDI(BCL1)/IgH t(11;14) By PCR";
+            this.m_PanelSetName = "BCL1 Translocation, t(11;14) (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
         public override void Render()
         {
             YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTestOrder panelSetOrder = (YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisTestOrder)this.m_PanelSetOrder;
-            base.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BRAFMutationAnalysis.1.xml";
+            base.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BRAFMutationAnalysis.2.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();
@@ -28,6 +28,9 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
 
             this.SetXmlNodeData("report_result", brafResult);
             this.SetXmlNodeData("final_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate));
+
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(this.m_PanelSetOrder.PanelSetId);
+            this.ReplaceText("report_title", panelSet.PanelSetName);
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();

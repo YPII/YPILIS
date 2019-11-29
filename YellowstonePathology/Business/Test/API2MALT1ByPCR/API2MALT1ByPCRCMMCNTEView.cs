@@ -22,11 +22,12 @@ namespace YellowstonePathology.Business.Test.API2MALT1ByPCR
         public override void ToXml(XElement document)
         {
             API2MALT1ByPCRTestOrder panelSetOrder = (API2MALT1ByPCRTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
 
             this.AddCompanyHeader(document);
             this.AddBlankNteElement(document);
 
-            this.AddNextNteElement("API2/MALT1 t(11:18) By PCR", document);
+            this.AddNextNteElement(panelSet.PanelSetName, document);
             this.AddNextNteElement("Master Accession #: " + panelSetOrder.MasterAccessionNo, document);
             this.AddNextNteElement("Report #: " + panelSetOrder.ReportNo, document);
             this.AddBlankNteElement(document);

@@ -22,11 +22,12 @@ namespace YellowstonePathology.Business.Test.CEBPA
         public override void ToXml(XElement document)
         {
             PanelSetOrderCEBPA panelSetOrder = (PanelSetOrderCEBPA)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
 
             this.AddCompanyHeader(document);
             this.AddBlankNteElement(document);
 
-            this.AddNextNteElement("CEBPA Mutation Analysis", document);
+            this.AddNextNteElement(panelSet.PanelSetName, document);
             this.AddNextNteElement("Master Accession #: " + panelSetOrder.MasterAccessionNo, document);
             this.AddNextNteElement("Report #: " + panelSetOrder.ReportNo, document);
             this.AddBlankNteElement(document);

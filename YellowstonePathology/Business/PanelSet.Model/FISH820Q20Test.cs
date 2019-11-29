@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test
         public FISH820Q20Test()
 		{
 			this.m_PanelSetId = 200;
-			this.m_PanelSetName = "+8/20q-/-20";
+			this.m_PanelSetName = "Individual probes - +8 and 20q  from AML FISH Panel";
             this.m_Abbreviation = "FISH820Q20";            
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			

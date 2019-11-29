@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.EGFRMutationAnalysis
         public EGFRMutationAnalysisTest()
         {
             this.m_PanelSetId = 60;
-            this.m_PanelSetName = "EGFR Mutation Analysis";
+            this.m_PanelSetName = "EGFR Mutation Analysis (Molecular)";
             this.m_Abbreviation = "EGFR";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
@@ -29,10 +29,10 @@ namespace YellowstonePathology.Business.Test.EGFRMutationAnalysis
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);
 
-            string taskDescription = "Collect paraffin block from Histology and send to Neo.";
-            this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription));
-
             YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            string taskDescription = "Collect paraffin block from Histology and send to Neo.";
+            this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription, neogenomicsIrvine));
+
             this.m_TechnicalComponentFacility = neogenomicsIrvine;
             this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
