@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.CalcitoninByImmunohistochemistry
         public CalcitoninByImmunohistochemistryTest()
         {
             this.m_PanelSetId = 286;
-            this.m_PanelSetName = "Calcitonin By Immunohistochemistry";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_PanelSetName = "Calcitonin  (IHC)";
+            this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

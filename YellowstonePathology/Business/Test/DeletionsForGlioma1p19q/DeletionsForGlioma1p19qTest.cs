@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.DeletionsForGlioma1p19q
         public DeletionsForGlioma1p19qTest()
 		{
 			this.m_PanelSetId = 184;
-            this.m_PanelSetName = "Deletions For Glioma 1p/19q";
+            this.m_PanelSetName = "1p/19q Deletions for Glioma (FISH)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

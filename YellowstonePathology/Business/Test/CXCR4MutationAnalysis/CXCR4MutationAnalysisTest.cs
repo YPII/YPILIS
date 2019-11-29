@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.CXCR4MutationAnalysis
         public CXCR4MutationAnalysisTest()
         {
             this.m_PanelSetId = 253;
-            this.m_PanelSetName = "CXCR4 Mutation Analysis";
-            this.m_Abbreviation = "CXCR4 Mutation Analysis";
+            this.m_PanelSetName = "CSCR4 Mutation Analysis";
+            this.m_Abbreviation = "CSCR4";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.DNMT3AMutationAnalysis
         public DNMT3AMutationAnalysisTest()
         {
             this.m_PanelSetId = 310;
-            this.m_PanelSetName = "DNMT3A Mutation Analysis";
-            this.m_Abbreviation = "DNMT3A Mutation Analysis";
+            this.m_PanelSetName = "DNMT3A Mutation Analysis (Molecular)";
+            this.m_Abbreviation = "DNMT3A";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

@@ -17,7 +17,8 @@ namespace YellowstonePathology.Business.Test.CCNDIBCLIGHByPCR
         public override void ToXml(XElement document)
         {
             CCNDIBCLIGHByPCRTestOrder panelSetOrder = (CCNDIBCLIGHByPCRTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, panelSetOrder, "CCND1/IgH t(11;14) by PCR Analysis");
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
+            this.AddHeader(document, panelSetOrder, panelSet.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
             string result = "Result: " + panelSetOrder.Result;

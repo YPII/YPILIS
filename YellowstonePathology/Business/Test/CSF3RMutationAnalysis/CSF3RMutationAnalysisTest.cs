@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.CSF3RMutationAnalysis
         public CSF3RMutationAnalysisTest()
         {
             this.m_PanelSetId = 233;
-            this.m_PanelSetName = "CSF3R Mutation Analysis";
+            this.m_PanelSetName = "CSF3R Mutation Analysis (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

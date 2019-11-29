@@ -17,7 +17,8 @@ namespace YellowstonePathology.Business.Test.EGFRMutationAnalysis
         public override void ToXml(XElement document)
         {
             EGFRMutationAnalysisTestOrder egfrMutationAnalysisTestOrder = (EGFRMutationAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, egfrMutationAnalysisTestOrder, "EGFR Mutation Analysis");
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(egfrMutationAnalysisTestOrder.PanelSetId);
+            this.AddHeader(document, egfrMutationAnalysisTestOrder, panelSet.PanelSetName);
 
             this.AddNextObxElement("", document, "F");            
             this.AddNextObxElement("Result:", document, "F");

@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YellowstonePathology.Business.Test.EGFRAmplification
+namespace YellowstonePathology.Business.Test.NeoTYPEPrecisionProfileForSolidTumors
 {
-    public class EGFRAmplificationTest : YellowstonePathology.Business.PanelSet.Model.PanelSet
+    public class NeoTYPEPrecisionProfileForSolidTumorsTest : YellowstonePathology.Business.PanelSet.Model.PanelSet
     {
-        public EGFRAmplificationTest()
+        public NeoTYPEPrecisionProfileForSolidTumorsTest()
         {
-            this.m_PanelSetId = 322;
-            this.m_PanelSetName = "EGFR Amplification (FISH)";
-            this.m_Abbreviation = "EGFR Amplification";
+            this.m_PanelSetId = 371;
+            this.m_PanelSetName = "NeoTYPE Precision Profile for Solid Tumors";
+            this.m_Abbreviation = "NeoTYPE Prcsn Prfl Sld Tmrs";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
@@ -35,9 +35,6 @@ namespace YellowstonePathology.Business.Test.EGFRAmplification
 
             this.m_ProfessionalComponentFacility = neogenomicsIrvine;
             this.m_ProfessionalComponentBillingFacility = neogenomicsIrvine;
-
-            YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode1 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81235", null), 1);
-            this.m_PanelSetCptCodeCollection.Add(panelSetCptCode1);
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
         }

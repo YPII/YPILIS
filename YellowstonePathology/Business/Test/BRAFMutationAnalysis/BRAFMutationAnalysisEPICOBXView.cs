@@ -15,7 +15,8 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
         {
             BRAFMutationAnalysisTestOrder panelSetOrder = (BRAFMutationAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
 
-            this.AddHeader(document, panelSetOrder, "BRAF Mutation Analysis");
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
+            this.AddHeader(document, panelSetOrder, panelSet.PanelSetName);
             this.AddNextObxElement("", document, "F");
 
             this.AddNextObxElement("Result: " + panelSetOrder.Result, document, "F");

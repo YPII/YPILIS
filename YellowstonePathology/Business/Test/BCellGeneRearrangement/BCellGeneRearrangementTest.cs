@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.BCellGeneRearrangement
 		public BCellGeneRearrangementTest()
 		{
 			this.m_PanelSetId = 177;
-			this.m_PanelSetName = "B-Cell Gene Rearrangement";            
+			this.m_PanelSetName = "B-Cell Gene Rearrangement (Molecular)";            
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

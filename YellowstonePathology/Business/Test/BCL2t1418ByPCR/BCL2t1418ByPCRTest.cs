@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.BCL2t1418ByPCR
         public BCL2t1418ByPCRTest()
 		{
 			this.m_PanelSetId = 225;
-			this.m_PanelSetName = "BCL2 t(14;18) By PCR";
+			this.m_PanelSetName = "BCL2 Translocation, t(14;18)  (Molecular)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

@@ -16,9 +16,10 @@ namespace YellowstonePathology.Business.Test.DeletionsForGlioma1p19q
 		public override void ToXml(XElement document)
 		{
 			DeletionsForGlioma1p19qTestOrder testOrder = (DeletionsForGlioma1p19qTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, testOrder, "CLL by FISH");
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(testOrder.PanelSetId);
+            this.AddHeader(document, testOrder, panelSet.PanelSetName);
 
-			this.AddNextObxElement("", document, "F");
+            this.AddNextObxElement("", document, "F");
 			string result = testOrder.Result;
 			if (string.IsNullOrEmpty(testOrder.ResultDescription) == false) result = testOrder.ResultDescription;
 			this.AddNextObxElement("Result: " + result, document, "F");

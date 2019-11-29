@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.API2MALT1ByPCR
         public API2MALT1ByPCRTest()
         {
             this.m_PanelSetId = 228;
-            this.m_PanelSetName = "API2/MALT1 t(11;18) By PCR";
+            this.m_PanelSetName = "API2/MALT1 t(11;18) (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

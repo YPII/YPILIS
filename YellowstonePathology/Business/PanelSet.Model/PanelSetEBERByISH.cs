@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetEBERByISH()
 		{
 			this.m_PanelSetId = 119;
-			this.m_PanelSetName = "EBER (ISH)";
+			this.m_PanelSetName = "EBER (Epstein-Barr Virus) (ISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

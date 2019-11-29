@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.EosinophiliaByFISH
         public EosinophiliaByFISHTest()
 		{
             this.m_PanelSetId = 172;
-            this.m_PanelSetName = "Eosinophilia By FISH";
+            this.m_PanelSetName = "Eosinophilia FISH Panel (FISH)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

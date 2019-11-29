@@ -454,5 +454,25 @@ namespace YellowstonePathology.UI.Billing
                 panelSetOrderCPTCodeBill.Account = this.m_AccessionOrder.SvhAccount;
             }
         }
+
+        private void MenuItemUpdateCPTCode_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewPanelSetOrderCPTCode.SelectedItem != null)
+            {
+                YellowstonePathology.Business.Test.PanelSetOrderCPTCode panelSetOrderCPTCode = (YellowstonePathology.Business.Test.PanelSetOrderCPTCode)this.ListViewPanelSetOrderCPTCode.SelectedItem;
+                PanelSetOrderCPTCodeEditDialog dlg = new Billing.PanelSetOrderCPTCodeEditDialog(panelSetOrderCPTCode, this.m_AccessionOrder.ClientName);
+                dlg.ShowDialog();
+            }
+        }
+
+        private void UpdateBillingCPTCode_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewPanelSetOrderCPTCodeBill.SelectedItem != null)
+            {
+                YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill = (YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill)this.ListViewPanelSetOrderCPTCodeBill.SelectedItem;
+                PanelSetOrderCPTCodeBillEditDialog dlg = new Billing.PanelSetOrderCPTCodeBillEditDialog(panelSetOrderCPTCodeBill, this.m_AccessionOrder.ClientName);
+                dlg.ShowDialog();
+            }
+        }
     }
 }

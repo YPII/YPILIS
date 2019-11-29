@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.CCNDIBCLIGHByFISH
 		public CCNDIBCLIGHByFISHTest()
 		{
 			this.m_PanelSetId = 148;
-            this.m_PanelSetName = "CCND1/IgH t(11;14) By FISH";
+            this.m_PanelSetName = "CCND1(BCL1)/IgH t(11;14) (FISH)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.ALLPediatricFISHPanel
         public ALLPediatricFISHPanelTest()
         {
             this.m_PanelSetId = 295;
-            this.m_PanelSetName = "ALL Pediatric FISH Panel";
+            this.m_PanelSetName = "ALL Pediatric FISH Panel (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
@@ -33,7 +33,7 @@ namespace YellowstonePathology.Business.Test.ALLPediatricFISHPanel
             this.m_ProfessionalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
             this.m_ProfessionalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
-            string taskDescription = "Collect paraffin block from Histology and send to Neo.";
+            string taskDescription = "Collect (Peripheral blood: 5 mL in EDTA tube ONLY; Bone marrow: 2 mL in EDTA tube ONLY; Fresh unfixed tissue in RPMI) and send to Neogenomics.";
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Transcription, taskDescription, neogenomicsIrvine));
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMOLEGEN());

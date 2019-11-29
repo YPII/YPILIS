@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.AMLFavorableRisk
         public AMLFavorableRiskTest()
         {
             this.m_PanelSetId = 246;
-            this.m_PanelSetName = "AML Favorable Risk";
+            this.m_PanelSetName = "AML Favorable-Risk Panel (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.CBFBinv16
         public CBFBinv16Test()
 		{
 			this.m_PanelSetId = 208;
-            this.m_PanelSetName = "CBFB inv 16";
+            this.m_PanelSetName = "CBFB inv(16) (Molecular)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

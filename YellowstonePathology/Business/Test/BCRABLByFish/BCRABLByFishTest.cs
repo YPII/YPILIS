@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.BCRABLByFish
 		public BCRABLByFishTest()
 		{
 			this.m_PanelSetId = 156;
-			this.m_PanelSetName = "BCR/ABL t(9:22) By FISH";
+			this.m_PanelSetName = "BCR/ABL1 t(9;22)  (FISH)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;

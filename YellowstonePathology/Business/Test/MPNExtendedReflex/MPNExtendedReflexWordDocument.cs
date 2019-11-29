@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.Test.MPNExtendedReflex
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();
 			amendmentSection.SetAmendment(amendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, true);
 
-            this.ReplaceText("panelset_name", panelSetOrderMPNExtendedReflex.PanelSetName);
+            this.ReplaceText("report_title", panelSetOrderMPNExtendedReflex.PanelSetName);
 
             if(string.IsNullOrEmpty(panelSetOrderMPNExtendedReflex.JAK2V617FResult) == false)
             {
