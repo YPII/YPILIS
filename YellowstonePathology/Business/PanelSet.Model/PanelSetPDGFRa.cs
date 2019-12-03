@@ -10,8 +10,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetPDGFRa()
 		{
 			this.m_PanelSetId = 87;
-			this.m_PanelSetName = "PDGFRa";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+			this.m_PanelSetName = "PDGFRA Rearrangement (FISH)";
+            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.PublishedDocument;

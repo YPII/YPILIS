@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPEColorectalTumorProfile
         public NeoTYPEColorectalTumorProfileTest()
         {
             this.m_PanelSetId = 281;
-            this.m_PanelSetName = "Neo TYPE Colorectal Tumor Profile";
-            this.m_Abbreviation = "Neo TYPE Colorectal Tumor Profile";
+            this.m_PanelSetName = "NeoTYPE Colorectal Tumor Profile (FISH-Molecular)";
+            this.m_Abbreviation = "NTColorectalTumor";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

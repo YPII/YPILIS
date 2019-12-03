@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.IgHMFABByFish
         public override void ToXml(XElement document)
         {
             IgHMFABByFishTestOrder testOrder = (IgHMFABByFishTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, testOrder, "IgH / MFAB by FISH");
+            this.AddHeader(document, testOrder, testOrder.PanelSetName);
             this.AddNextObxElement("", document, "F");
 
             this.AddNextObxElement("Result: " + testOrder.Result, document, "F");

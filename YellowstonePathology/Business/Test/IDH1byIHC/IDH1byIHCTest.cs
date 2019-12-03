@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.IDH1byIHC
         public IDH1byIHCTest()
         {
             this.m_PanelSetId = 273;
-            this.m_PanelSetName = "IDH1 by IHC";
+            this.m_PanelSetName = "IDH1 IHC)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = false;

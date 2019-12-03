@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPELiverBiliaryTumorProfile
         public NeoTYPELiverBiliaryTumorProfileTest()
         {
             this.m_PanelSetId = 327;
-            this.m_PanelSetName = "Neo TYPE Liver/Biliary Tumor Profile";
-            this.m_Abbreviation = "Neo TYPE Liver/Biliary Tumor Profile";
+            this.m_PanelSetName = "NeoTYPE Liver/Biliary Tumor Profile (FISH-Molecular)";
+            this.m_Abbreviation = "NTLiver/BiliaryTumor";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

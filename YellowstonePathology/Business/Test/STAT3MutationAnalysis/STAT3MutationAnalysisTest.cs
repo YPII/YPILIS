@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.STAT3MutationAnalysis
         public STAT3MutationAnalysisTest()
         {
             this.m_PanelSetId = 261;
-            this.m_PanelSetName = "STAT3 Mutation Analysis";
+            this.m_PanelSetName = "STAT3 Mutation Analysis (Molecular)";
             this.m_Abbreviation = "STAT3 Mutation Analysis";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

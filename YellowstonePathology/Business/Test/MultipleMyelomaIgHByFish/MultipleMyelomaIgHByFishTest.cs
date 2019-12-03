@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.MultipleMyelomaIgHByFish
 		public MultipleMyelomaIgHByFishTest()
 		{
 			this.m_PanelSetId = 161;
-            this.m_PanelSetName = "Multiple Myeloma IgH Complex By Fish";
+            this.m_PanelSetName = "Plasma Cell Myeloma IgH Complex FISH Panel (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;

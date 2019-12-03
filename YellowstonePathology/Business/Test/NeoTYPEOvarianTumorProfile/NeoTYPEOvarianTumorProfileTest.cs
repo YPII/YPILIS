@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.NeoTypeOvarianTumorProfile
         public NeoTypeOvarianTumorProfileTest()
         {
             this.m_PanelSetId = 305;
-            this.m_PanelSetName = "NeoTYPE Ovarian Tumor Profile";
+            this.m_PanelSetName = "NeoTYPE Ovarian Tumor Profile (FISH-Molecular)";
             this.m_Abbreviation = "NeoTYPE Ovarian Tumor Profile";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.SoftTissueTumorProfile
         public SoftTissueTumorProfileTest()
         {
             this.m_PanelSetId = 252;
-            this.m_PanelSetName = "Soft Tissue Tumor Profile";
+            this.m_PanelSetName = "NeoTYPE Soft Tissue Tumor Profile (FISH-Molecular)";
             this.m_Abbreviation = "Soft Tissue Tumor Profile";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

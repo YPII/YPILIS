@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.HER2BreastEquivocalFISHPanel
         public HER2BreastEquivocalFISHPanelTest()
         {
             this.m_PanelSetId = 271;
-            this.m_PanelSetName = "HER2 Breast Equivocal FISH Panel";
+            this.m_PanelSetName = "HER2 Breast Equivocal FISH (FISH)";
             this.m_Abbreviation = "HER2 Breast Equivocal FISH Panel";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

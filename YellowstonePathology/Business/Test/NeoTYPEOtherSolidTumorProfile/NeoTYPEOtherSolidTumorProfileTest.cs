@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPEOtherSolidTumorProfile
         public NeoTYPEOtherSolidTumorProfileTest()
         {
             this.m_PanelSetId = 266;
-            this.m_PanelSetName = "Neo TYPE Other Solid Tumor Profile";
-            this.m_Abbreviation = "Neo TYPE Other Solid Tumor Profile";
+            this.m_PanelSetName = "NeoTYPE Other Solid Tumor Profile  (FISH-Molecular)";
+            this.m_Abbreviation = "NTOtherSolidTumor";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

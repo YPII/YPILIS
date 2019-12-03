@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.NonHodgkinsLymphomaFISHPanel
 		public override void ToXml(XElement document)
 		{
 			NonHodgkinsLymphomaFISHPanelTestOrder panelSetOrder = (NonHodgkinsLymphomaFISHPanelTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, panelSetOrder, "NonHodgkins Lymphoma FISH Panel");
+			this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
 			this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;

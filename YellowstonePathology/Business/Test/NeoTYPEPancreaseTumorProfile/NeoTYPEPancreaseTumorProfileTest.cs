@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPEPancreaseTumorProfile
         public NeoTYPEPancreaseTumorProfileTest()
         {
             this.m_PanelSetId = 288;
-            this.m_PanelSetName = "Neo TYPE Pancrease Tumor Profile";
-            this.m_Abbreviation = "Neo TYPE Pancrease Tumor Profile";
+            this.m_PanelSetName = "NeoTYPE Pancreas Tumor Profile (FISH-Molecular)";
+            this.m_Abbreviation = "TYPEPancreaseTumor";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

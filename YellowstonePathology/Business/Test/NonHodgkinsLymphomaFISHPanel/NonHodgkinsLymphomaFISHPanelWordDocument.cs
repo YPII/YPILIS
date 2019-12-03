@@ -15,12 +15,14 @@ namespace YellowstonePathology.Business.Test.NonHodgkinsLymphomaFISHPanel
 
         public override void Render()
 		{
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\NonHodgkinsLymphomaFISHPanel.2.xml";
+			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\NonHodgkinsLymphomaFISHPanel.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();
 			this.SetReportDistribution();
 			this.SetCaseHistory();
+
+            this.ReplaceText("report_title", this.m_PanelSetOrder.PanelSetName);
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();

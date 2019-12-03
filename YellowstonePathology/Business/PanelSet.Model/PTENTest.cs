@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		public PTENTest()
 		{
 			this.m_PanelSetId = 195;
-			this.m_PanelSetName = "PTEN";
+			this.m_PanelSetName = "PTEN (FISH)";
             this.m_Abbreviation = "PTEN";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			

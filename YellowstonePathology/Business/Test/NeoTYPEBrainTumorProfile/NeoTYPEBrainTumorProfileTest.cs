@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPEBrainTumorProfile
         public NeoTYPEBrainTumorProfileTest()
         {
             this.m_PanelSetId = 317;
-            this.m_PanelSetName = "Neo TYPE Brain Tumor Profile";
-            this.m_Abbreviation = "Neo TYPE Brain Tumor Profile";
+            this.m_PanelSetName = "NeoTYPE Brain Tumor Profile (FISH-Molecular)";
+            this.m_Abbreviation = "NTBrainTumor";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

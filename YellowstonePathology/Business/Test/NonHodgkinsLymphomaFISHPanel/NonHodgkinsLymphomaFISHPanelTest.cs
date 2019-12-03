@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.NonHodgkinsLymphomaFISHPanel
 		public NonHodgkinsLymphomaFISHPanelTest()
         {
             this.m_PanelSetId = 170;
-            this.m_PanelSetName = "Non-Hodgkins Lymphoma Panel by FISH";
+            this.m_PanelSetName = "Non-Hodgkins Lymphoma (NHL) FISH Panel (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

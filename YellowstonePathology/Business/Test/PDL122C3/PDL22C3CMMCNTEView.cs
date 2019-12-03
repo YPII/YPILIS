@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3
             this.AddCompanyHeader(document);
             this.AddBlankNteElement(document);
 
-            this.AddNextNteElement("PD-L1 (22C3) Analysis", document);
+            this.AddNextNteElement(panelSetOrder.PanelSetName, document);
 
             this.AddBlankNteElement(document);
             this.AddNextNteElement("Stain Percent: " + panelSetOrder.StainPercent, document);

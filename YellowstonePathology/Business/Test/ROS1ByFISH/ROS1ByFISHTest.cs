@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.ROS1ByFISH
         public ROS1ByFISHTest()
 		{
 			this.m_PanelSetId = 204;
-			this.m_PanelSetName = "ROS1 By FISH";
+			this.m_PanelSetName = "ROS1 (FISH)";
             this.m_Abbreviation = "ROS1";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			

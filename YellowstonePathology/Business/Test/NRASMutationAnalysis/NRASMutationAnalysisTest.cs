@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.NRASMutationAnalysis
         public NRASMutationAnalysisTest()
 		{
 			this.m_PanelSetId = 179;
-			this.m_PanelSetName = "NRAS Mutation Analysis";            
+			this.m_PanelSetName = "NRAS Mutation Analysis (Molecular)";            
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

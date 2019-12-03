@@ -17,12 +17,14 @@ namespace YellowstonePathology.Business.Test.MDSByFish
 		{			
 			PanelSetOrderMDSByFish panelSetOrderMDSByFish = (PanelSetOrderMDSByFish)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\MDSByFish.3.xml";
+			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\MDSByFish.4.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();
 			this.SetReportDistribution();
 			this.SetCaseHistory();
+
+            this.ReplaceText("report_title", this.m_PanelSetOrder.PanelSetName);
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();

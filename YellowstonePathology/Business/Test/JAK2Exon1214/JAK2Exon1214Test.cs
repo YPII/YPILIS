@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
 		public JAK2Exon1214Test()
 		{
 			this.m_PanelSetId = 141;
-			this.m_PanelSetName = "JAK2 Exon 12-14";
+			this.m_PanelSetName = "JAK2 Exon 12-14 Mutation Analysis (Molecular)";
             this.m_Abbreviation = "J2X1214";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			

@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.RASRAFPanel
         public RASRAFPanelTest()
         {
             this.m_PanelSetId = 218;
-            this.m_PanelSetName = "RAS/RAF Panel";
+            this.m_PanelSetName = "RAS/RAF Panel (Molecular)";
             this.m_Abbreviation = "RAS/RAF";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

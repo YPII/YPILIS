@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.PlasmaCellMyelomaPrognosticFISHPane
         public PlasmaCellMyelomaPrognosticFISHPanelTest()
         {
             this.m_PanelSetId = 277;
-            this.m_PanelSetName = "Plasma Cell Myeloma Prognostic FISH Panel";
+            this.m_PanelSetName = "Plasma Cell Myeloma Prognostic FISH Panel (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = false;

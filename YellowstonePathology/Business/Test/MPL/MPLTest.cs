@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.MPL
 		public MPLTest()
 		{
 			this.m_PanelSetId = 159;
-			this.m_PanelSetName = "MPL Mutation Analysis";
+			this.m_PanelSetName = "MPL Mutation Analysis (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = false;

@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetIgHBCL2ByFish()
 		{
 			this.m_PanelSetId = 99;
-			this.m_PanelSetName = "IgH/BCL2 by FISH";
+			this.m_PanelSetName = "IgH/BCL2 t(14;18) (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;			

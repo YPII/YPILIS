@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.NeoLABMyeloidDisordersProfile
         public NeoLABMyeloidDisordersProfileTest()
         {
             this.m_PanelSetId = 304;
-            this.m_PanelSetName = "NeoLAB Myeloid Disorders Profile";
+            this.m_PanelSetName = "NeoLAB Myeloid Disorders Profile-Liquid Biopsy (Molecular)";
             this.m_Abbreviation = "NeoLAB Myeloid Disorders Profile";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

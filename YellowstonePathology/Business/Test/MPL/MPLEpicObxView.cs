@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.MPL
 		public override void ToXml(XElement document)
 		{
 			PanelSetOrderMPL panelSetOrder = (PanelSetOrderMPL)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, panelSetOrder, "MPL Mutation Analysis");
+			this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
 			this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;

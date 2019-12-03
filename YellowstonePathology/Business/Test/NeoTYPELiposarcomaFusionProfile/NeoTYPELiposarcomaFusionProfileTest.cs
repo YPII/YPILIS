@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPELiposarcomaFusionProfile
         public NeoTYPELiposarcomaFusionProfileTest()
         {
             this.m_PanelSetId = 321;
-            this.m_PanelSetName = "Neo TYPE Liposarcoma Fusion Profile";
-            this.m_Abbreviation = "Neo TYPE Liposarcoma Fusion Profile";
+            this.m_PanelSetName = "NeoTYPE Liposarcoma Fusion Profile (FISH-Molecular)";
+            this.m_Abbreviation = "NeoTYPE Liposarcoma Fusion Profile";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetIgHMAFByFish()
 		{
 			this.m_PanelSetId = 166;
-			this.m_PanelSetName = "IgH/MAF by FISH";
+			this.m_PanelSetName = "IgH/MAF t(14;16) (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;			

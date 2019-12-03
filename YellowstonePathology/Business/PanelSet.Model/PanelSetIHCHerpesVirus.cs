@@ -10,8 +10,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetIHCHerpesVirus()
 		{
 			this.m_PanelSetId = 154;
-			this.m_PanelSetName = "IHC Herpes virus (HSV I&II)";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+			this.m_PanelSetName = "HSV I/II (IHC)";
+            this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.PublishedDocument;

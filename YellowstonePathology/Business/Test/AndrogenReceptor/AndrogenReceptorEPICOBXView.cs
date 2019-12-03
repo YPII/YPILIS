@@ -13,8 +13,7 @@ namespace YellowstonePathology.Business.Test.AndrogenReceptor
         public override void ToXml(XElement document)
         {
             AndrogenReceptorTestOrder testOrder = (AndrogenReceptorTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(testOrder.PanelSetId);
-            this.AddHeader(document, testOrder, panelSet.PanelSetName);
+            this.AddHeader(document, testOrder, testOrder.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
             string result = "Result: " + testOrder.Result;

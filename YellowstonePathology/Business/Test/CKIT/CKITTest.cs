@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.CKIT
 		public CKITTest()
 		{
 			this.m_PanelSetId = 181;
-			this.m_PanelSetName = "KIT (c-KIT) Mutation Analysis";
+			this.m_PanelSetName = "KIT (c-KIT) Mutation Analysis (Molecular)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

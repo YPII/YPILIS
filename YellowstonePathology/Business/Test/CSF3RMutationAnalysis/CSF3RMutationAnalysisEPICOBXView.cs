@@ -17,8 +17,7 @@ namespace YellowstonePathology.Business.Test.CSF3RMutationAnalysis
         public override void ToXml(XElement document)
         {
             CSF3RMutationAnalysisTestOrder testOrder = (CSF3RMutationAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(testOrder.PanelSetId);
-            this.AddHeader(document, testOrder, panelSet.PanelSetName);
+            this.AddHeader(document, testOrder, testOrder.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
             string result = "Result: " + testOrder.Result;
