@@ -24,6 +24,8 @@ namespace YellowstonePathology.Business.Test.CKIT
 			this.SetReportDistribution();
 			this.SetCaseHistory();
 
+            this.ReplaceText("report_title", this.m_PanelSetOrder.PanelSetName);
+
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();
 			amendmentSection.SetAmendment(amendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, true);

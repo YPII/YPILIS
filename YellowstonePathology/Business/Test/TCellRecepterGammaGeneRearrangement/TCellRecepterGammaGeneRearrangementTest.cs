@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.TCellRecepterGammaGeneRearrangement
 		public TCellRecepterGammaGeneRearrangementTest()
 		{
 			this.m_PanelSetId = 152;
-			this.m_PanelSetName = "T-Cell Recepter Gamma Gene Rearrangement";
+			this.m_PanelSetName = "T-Cell Receptor Gamma Gene Rearrangement (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

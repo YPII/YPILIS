@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.Test.MultipleMyelomaMGUSByFish
         public override void ToXml(XElement document)
         {
             MultipleMyelomaMGUSByFishTestOrder panelSetOrder = (MultipleMyelomaMGUSByFishTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, panelSetOrder, "Plasma Cell Myeloma FISH Panel");
+            this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
             string result = "Result: " + panelSetOrder.Result;

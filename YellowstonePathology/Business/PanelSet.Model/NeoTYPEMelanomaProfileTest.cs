@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		public NeoTYPEMelanomaProfile()
 		{
 			this.m_PanelSetId = 193;
-			this.m_PanelSetName = "NeoType Melanoma Profile";
+			this.m_PanelSetName = "NeoTYPE Melanoma Profile (FISH-Molecular)";
             this.m_Abbreviation = "NEOTYPEMLPRFL";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			

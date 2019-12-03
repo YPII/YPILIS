@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetNeoTypeAMLPrognosticPanel()
 		{
 			this.m_PanelSetId = 108;
-			this.m_PanelSetName = "Neo Type AML Prognostic Panel";            
+			this.m_PanelSetName = "NeoTYPE AML Prognostic Profile (Molecular)";            
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

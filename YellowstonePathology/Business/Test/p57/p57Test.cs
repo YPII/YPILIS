@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.p57
         public p57Test()
         {
             this.m_PanelSetId = 311;
-            this.m_PanelSetName = "p57";
+            this.m_PanelSetName = "p57 (Kip 2, CDKN 1 C) (IHC)";
             this.m_Abbreviation = "p57";
             this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;

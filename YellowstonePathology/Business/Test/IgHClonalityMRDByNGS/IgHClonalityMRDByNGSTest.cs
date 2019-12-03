@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.IgHClonalityMRDByNGS
         public IgHClonalityMRDByNGSTest()
         {
             this.m_PanelSetId = 255;
-            this.m_PanelSetName = "IgH Clonality/MRD by NGS";
+            this.m_PanelSetName = "IgH Clonality/MRD by NGS (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

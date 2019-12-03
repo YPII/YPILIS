@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPEMDSCMMLProfile
         public NeoTYPEMDSCMMLProfileTest()
         {
             this.m_PanelSetId = 280;
-            this.m_PanelSetName = "Neo TYPE MDS/CMML Profile";
-            this.m_Abbreviation = "NeoTYPE MDS/CMML Profile";
+            this.m_PanelSetName = "NeoTYPE MDS/CMML Profile (Molecular)";
+            this.m_Abbreviation = "NT MDS/CMML";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

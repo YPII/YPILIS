@@ -11,9 +11,9 @@ namespace YellowstonePathology.Business.Test.SS18SYT
         public SS18SYTTest()
         {
             this.m_PanelSetId = 267;
-            this.m_PanelSetName = "SS18(SYT)";
+            this.m_PanelSetName = "SS18 (SYT) (FISH)";
             this.m_Abbreviation = "SS18(SYT)";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

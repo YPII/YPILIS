@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.KRASExon4Mutation
 		public KRASExon4MutationTest()
 		{
 			this.m_PanelSetId = 175;
-			this.m_PanelSetName = "KRAS Exon 4 Mutation Analysis";
+			this.m_PanelSetName = "KRAS Exon 4 Mutation Analysis (Molecular)";
             this.m_Abbreviation = "KRASX4";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;

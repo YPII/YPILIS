@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.MDSExtendedByFish
         public MDSExtendedByFishTest()
 		{
 			this.m_PanelSetId = 164;
-            this.m_PanelSetName = "MDS Extended By FISH";
+            this.m_PanelSetName = "MDS Extended FISH Panel (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

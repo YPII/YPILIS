@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.CKIT
 		public override void ToXml(XElement document)
 		{
 			CKITTestOrder panelSetOrder = (CKITTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, panelSetOrder, "KIT (c-KIT) Mutation Analysis");
+			this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
 			this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;

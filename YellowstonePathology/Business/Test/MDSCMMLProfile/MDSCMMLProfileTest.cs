@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.MDSCMMLProfile
         public MDSCMMLProfileTest()
 		{
 			this.m_PanelSetId = 206;
-            this.m_PanelSetName = "MDS/CMML Profile";
+            this.m_PanelSetName = "NeoTYPE MDS/CMML Profile  (Molecular)";
             this.m_Abbreviation = "MDS/CMML";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			

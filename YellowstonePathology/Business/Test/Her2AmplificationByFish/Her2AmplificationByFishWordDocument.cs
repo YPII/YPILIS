@@ -35,8 +35,7 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 
             if (panelSetOrderHer2AmplificationByFish.NonBreast == false)
             {
-                YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(this.m_PanelSetOrder.PanelSetId);
-                this.ReplaceText("report_title", panelSet.PanelSetName);
+                this.ReplaceText("report_title", this.m_PanelSetOrder.PanelSetName);
             }
 
             if (this.m_AccessionOrder.OrderCancelled == false)

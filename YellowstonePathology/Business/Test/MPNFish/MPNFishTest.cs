@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.MPNFish
 		public MPNFishTest()
 		{
 			this.m_PanelSetId = 157;
-			this.m_PanelSetName = "MPN FISH Panel";
+			this.m_PanelSetName = "MPN FISH Panel (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;

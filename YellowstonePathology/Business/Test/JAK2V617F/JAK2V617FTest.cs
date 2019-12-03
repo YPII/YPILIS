@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
 		public JAK2V617FTest()
         {
 			this.m_PanelSetId = 1;
-			this.m_PanelSetName = "JAK2 V617F";
+			this.m_PanelSetName = "JAK2 V617F Mutation Analysis (Molecular)";
             this.m_Abbreviation = "J2V617F";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;            
@@ -42,7 +42,7 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
             YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81270", null), 1);
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);
 			
-            string taskDescription = "Gather materials and send to Neo.";
+            string taskDescription = "Gather materials and semd to Neo.";
 			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription, neogenomicsIrvine));
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceJAK2());

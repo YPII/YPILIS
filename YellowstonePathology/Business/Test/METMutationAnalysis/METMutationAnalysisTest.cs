@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.METMutationAnalysis
         public METMutationAnalysisTest()
         {
             this.m_PanelSetId = 259;
-            this.m_PanelSetName = "MET Mutation Analysis";
+            this.m_PanelSetName = "MET (c-MET) Mutation Analysis (Molecular)";
             this.m_Abbreviation = "MET Mutation";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

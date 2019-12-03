@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.KRASExon4Mutation
 		public override void ToXml(XElement document)
 		{
 			KRASExon4MutationTestOrder panelSetOrder = (KRASExon4MutationTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, panelSetOrder, "KRAS Exon 4 Mutation Analysis");
+			this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
 			this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;

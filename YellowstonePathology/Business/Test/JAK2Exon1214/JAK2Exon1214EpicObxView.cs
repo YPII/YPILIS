@@ -16,9 +16,9 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
 		public override void ToXml(XElement document)
 		{
 			JAK2Exon1214TestOrder panelSetOrder = (JAK2Exon1214TestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, panelSetOrder, "JAK2 Exon 12-14 Mutation Analysis");
+            this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
-			this.AddNextObxElement("", document, "F");
+            this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;
 			this.AddNextObxElement(result, document, "F");
 

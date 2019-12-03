@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPEBreastTumorProfile
         public NeoTYPEBreastTumorProfileTest()
         {
             this.m_PanelSetId = 299;
-            this.m_PanelSetName = "Neo TYPE Breast Tumor Profile";
-            this.m_Abbreviation = "Neo TYPE Breast Tumor Profile";
+            this.m_PanelSetName = "NeoTYPE Breast Tumor Profile (FISH-Molecuar)";
+            this.m_Abbreviation = "NTBreastTumor";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

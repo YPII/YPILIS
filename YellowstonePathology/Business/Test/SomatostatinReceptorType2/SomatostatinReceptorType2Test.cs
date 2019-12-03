@@ -11,9 +11,9 @@ namespace YellowstonePathology.Business.Test.SomatostatinReceptorType2
         public SomatostatinReceptorType2Test()
         {
             this.m_PanelSetId = 307;
-            this.m_PanelSetName = "Somatostatin (Receptor Type 2)";
+            this.m_PanelSetName = "Somatostatin (IHC)";
             this.m_Abbreviation = "Somatostatin (Receptor Type 2)";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

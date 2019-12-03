@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3
         public PDL122C3Test()
 		{
 			this.m_PanelSetId = 245;
-            this.m_PanelSetName = "PD-L1 (22C3)";
+            this.m_PanelSetName = "PD-L1 22C3 FDA (KEYTRUDA) (IHC)";
             this.m_Abbreviation = "PD-L1 (22C3)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
 			this.m_HasTechnicalComponent = true;			

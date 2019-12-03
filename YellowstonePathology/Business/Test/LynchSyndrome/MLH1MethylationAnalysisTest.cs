@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 		public MLH1MethylationAnalysisTest()
 		{
 			this.m_PanelSetId = 144;
-            this.m_PanelSetName = "MLH1 Methylation Analysis";
+            this.m_PanelSetName = "MLH1 Promoter Methylation Analysis";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;            
             this.m_HasProfessionalComponent = false;

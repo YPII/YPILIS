@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
 		public Her2AmplificationByIHCTest()
 		{
 			this.m_PanelSetId = 171;
-			this.m_PanelSetName = "HER2 Amplification by IHC";
+			this.m_PanelSetName = "HER2 Breast (IHC)";
             this.m_Abbreviation = "HER2IHC";
             this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
 			this.m_HasTechnicalComponent = true;			

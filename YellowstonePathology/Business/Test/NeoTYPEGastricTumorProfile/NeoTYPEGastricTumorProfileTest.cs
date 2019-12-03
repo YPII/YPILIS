@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPEGastricTumorProfile
         public NeoTYPEGastricTumorProfileTest()
         {
             this.m_PanelSetId = 319;
-            this.m_PanelSetName = "Neo TYPE GastricTumor Profile";
-            this.m_Abbreviation = "Neo TYPE GastricTumor Profile";
+            this.m_PanelSetName = "NeoTYPE Gastric Tumor Profile (FISH-Molecular)";
+            this.m_Abbreviation = "NTGastricTumor";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

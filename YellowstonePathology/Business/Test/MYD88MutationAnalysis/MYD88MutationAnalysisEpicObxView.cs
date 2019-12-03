@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.MYD88MutationAnalysis
 		public override void ToXml(XElement document)
 		{
 			MYD88MutationAnalysisTestOrder testOrder = (MYD88MutationAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, testOrder, "MYD88 Mutation Analysis");
+			this.AddHeader(document, testOrder, testOrder.PanelSetName);
 
 			this.AddNextObxElement("", document, "F");
 			string result = "Result: " + testOrder.Result;

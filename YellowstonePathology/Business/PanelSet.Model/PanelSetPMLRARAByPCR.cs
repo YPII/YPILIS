@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetPMLRARAByPCR()
 		{
 			this.m_PanelSetId = 86;
-			this.m_PanelSetName = "PML-RARA By PCR";
+			this.m_PanelSetName = "PML-RARA Translocation, t(15;17) (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;            
 			this.m_HasProfessionalComponent = false;            

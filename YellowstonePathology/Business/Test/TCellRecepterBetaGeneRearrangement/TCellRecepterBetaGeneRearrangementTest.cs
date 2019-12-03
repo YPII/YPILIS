@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.TCellRecepterBetaGeneRearrangement
 		public TCellRecepterBetaGeneRearrangementTest()
 		{
 			this.m_PanelSetId = 234;
-			this.m_PanelSetName = "T-Cell Recepter Beta Gene Rearrangement";
+			this.m_PanelSetName = "T-Cell Receptor Beta Gene Rearrangement (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

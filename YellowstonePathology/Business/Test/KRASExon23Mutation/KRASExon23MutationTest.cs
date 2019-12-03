@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.KRASExon23Mutation
 		public KRASExon23MutationTest()
 		{
 			this.m_PanelSetId = 217;
-			this.m_PanelSetName = "KRAS Exon 2,3 Mutation Analysis";
+			this.m_PanelSetName = "KRAS Exon 2 and 3 Mutation Analysis (Molecular)";
             this.m_Abbreviation = "KRASX23";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;

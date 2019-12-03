@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.HighGradeLargeBCellLymphoma
 		public HighGradeLargeBCellLymphomaTest()
 		{
 			this.m_PanelSetId = 149;
-			this.m_PanelSetName = "High Grade/Large B-Cell Lymphoma Panel";
+			this.m_PanelSetName = "High-Grade/Large B-Cell Lymphoma Panel (FISH)";
 			this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;
@@ -26,7 +26,6 @@ namespace YellowstonePathology.Business.Test.HighGradeLargeBCellLymphoma
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.CMMC);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WPH);
 
             string task1Description = "Cut H&E slide and give to pathologist to circle tumor for tech only. Give the paraffin block to Flow so they can send to NEO.";

@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
             this.AddCompanyHeader(document);
             this.AddBlankNteElement(document);
 
-            this.AddNextNteElement("JAK2 Mutation V617F", document);
+            this.AddNextNteElement(panelSetOrder.PanelSetName, document);
             this.AddNextNteElement("Report #: " + panelSetOrder.ReportNo, document);
             this.AddBlankNteElement(document);
 

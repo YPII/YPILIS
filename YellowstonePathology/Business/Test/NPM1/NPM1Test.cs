@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.NPM1
 		public NPM1Test()
 		{
 			this.m_PanelSetId = 155;
-            this.m_PanelSetName = "NPM1 Mutation Analysis";
+            this.m_PanelSetName = "NPM1 Mutation Analysis (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

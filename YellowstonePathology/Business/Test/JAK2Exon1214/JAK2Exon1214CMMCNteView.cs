@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
             this.AddCompanyHeader(document);
             this.AddBlankNteElement(document);
 
-            this.AddNextNteElement("JAK2 Exon 12-14 Mutation Analysis", document);
+            this.AddNextNteElement(panelSetOrder.PanelSetName, document);
             this.AddNextNteElement("Report #: " + panelSetOrder.ReportNo, document);
             this.AddBlankNteElement(document);
 
