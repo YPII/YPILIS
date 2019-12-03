@@ -14,7 +14,7 @@ namespace YellowstonePathology.Business.Test.HighGradeLargeBCellLymphoma
         public override void ToXml(XElement document)
         {
             PanelSetOrderHighGradeLargeBCellLymphoma panelSetOrder = (PanelSetOrderHighGradeLargeBCellLymphoma)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, panelSetOrder, "High-Grade/Large B-Cell Lymphoma");
+            this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
             string result = "Result: " + panelSetOrder.Result;

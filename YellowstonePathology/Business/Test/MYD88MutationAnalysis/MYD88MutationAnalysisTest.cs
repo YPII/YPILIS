@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.MYD88MutationAnalysis
         public MYD88MutationAnalysisTest()
 		{
 			this.m_PanelSetId = 178;
-            this.m_PanelSetName = "MYD88 Mutation Analysis";
+            this.m_PanelSetName = "MYD88 Mutation Analysis (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = false;

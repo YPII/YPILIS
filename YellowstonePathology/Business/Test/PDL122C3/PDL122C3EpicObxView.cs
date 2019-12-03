@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3
         public override void ToXml(XElement document)
         {
             PDL122C3TestOrder panelSetOrder = (PDL122C3TestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, panelSetOrder, "PD-L1 (22C3) Analysis");
+            this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
             this.AddNextObxElement("Stain Percent: " + panelSetOrder.StainPercent, document, "F");

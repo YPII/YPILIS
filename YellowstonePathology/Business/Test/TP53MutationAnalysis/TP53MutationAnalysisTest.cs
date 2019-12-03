@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.TP53MutationAnalysis
         public TP53MutationAnalysisTest()
         {
             this.m_PanelSetId = 309;
-            this.m_PanelSetName = "TP53 Mutation Analysis";
+            this.m_PanelSetName = "TP53 Mutation Analysis (Molecular)";
             this.m_Abbreviation = "TP53 Mutation Analysis";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

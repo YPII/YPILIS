@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.ZAP70LymphoidPanel
         public ZAP70LymphoidPanelTest()
 		{
 			this.m_PanelSetId = 143;
-            this.m_PanelSetName = "ZAP 70 Lymphoid Panel";
+            this.m_PanelSetName = "ZAP-70 Lymphoid Panel (Flow Cytometry)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FlowCytometry;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

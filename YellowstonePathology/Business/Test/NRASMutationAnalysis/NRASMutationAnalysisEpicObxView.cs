@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.NRASMutationAnalysis
 		public override void ToXml(XElement document)
 		{
 			NRASMutationAnalysisTestOrder panelSetOrder = (NRASMutationAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, panelSetOrder, "NRAS Mutation Analysis");
+			this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
 			this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;

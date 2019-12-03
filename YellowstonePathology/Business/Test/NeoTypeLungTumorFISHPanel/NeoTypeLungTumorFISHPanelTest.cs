@@ -12,8 +12,8 @@ namespace YellowstonePathology.Business.Test.NeoTypeLungTumorFISHPanel
         public NeoTypeLungTumorFISHPanelTest()
         {
             this.m_PanelSetId = 308;
-            this.m_PanelSetName = "NeoType Lung Tumor FISH Panel";
-            this.m_Abbreviation = "NeoType Lung Tumor FISH Panel";
+            this.m_PanelSetName = "NeoTYPE Lung Tumor FISH Panel";
+            this.m_Abbreviation = "NeoTYPE Lung Tumor FISH Panel";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

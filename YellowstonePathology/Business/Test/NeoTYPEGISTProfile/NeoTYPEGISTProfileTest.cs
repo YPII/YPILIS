@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPEGISTProfile
         public NeoTYPEGISTProfileTest()
         {
             this.m_PanelSetId = 292;
-            this.m_PanelSetName = "Neo TYPE GIST Profile";
-            this.m_Abbreviation = "Neo TYPE GIST Profile";
+            this.m_PanelSetName = "NeoTYPE GIST Profile (Molecular)";
+            this.m_Abbreviation = "NTGIST";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

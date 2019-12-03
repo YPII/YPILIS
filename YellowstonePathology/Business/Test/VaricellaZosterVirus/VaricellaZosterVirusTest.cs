@@ -11,9 +11,9 @@ namespace YellowstonePathology.Business.Test.VaricellaZosterVirus
         public VaricellaZosterVirusTest()
         {
             this.m_PanelSetId = 323;
-            this.m_PanelSetName = "Varicella Zoster Virus";
+            this.m_PanelSetName = "Varicella Zoster Virus (VZV) (IHC)";
             this.m_Abbreviation = "Varicella Zoster";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public NeoTypeEsophagealTumorProfileTest()
         {
             this.m_PanelSetId = 243;
-            this.m_PanelSetName = "NeoType Esophageal Tumor Profile";
+            this.m_PanelSetName = "NeoTYPE Esophageal Tumor Profile (FISH-Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.RUNX1RUNX1T1AML1ETOTranslocation
         public override void ToXml(XElement document)
         {
             RUNX1RUNX1T1AML1ETOTranslocationTestOrder testOrder = (RUNX1RUNX1T1AML1ETOTranslocationTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, testOrder, "RUNX1-RUNX1T1 (AML1-ETO) Translocation, t(8;21)");
+            this.AddHeader(document, testOrder, testOrder.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
             string result = "Result: " + testOrder.Result;

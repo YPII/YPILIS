@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetIGVH()
 		{
 			this.m_PanelSetId = 92;
-            this.m_PanelSetName = "IgVH Mutation Analysis";
+            this.m_PanelSetName = "IgVH Mutation Analysis (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;

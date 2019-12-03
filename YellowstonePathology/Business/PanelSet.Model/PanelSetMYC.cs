@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetMYC()
 		{
 			this.m_PanelSetId = 65;
-            this.m_PanelSetName = "MYC(8q24)";
+            this.m_PanelSetName = "MYC(8q24)(FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

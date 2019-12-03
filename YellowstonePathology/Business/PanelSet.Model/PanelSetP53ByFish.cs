@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetP53ByFish()
 		{
 			this.m_PanelSetId = 167;
-			this.m_PanelSetName = "p53 by FISH";
+			this.m_PanelSetName = "Individual probe-p53 (17p13.1) from CLL FISH Panel (FISH)";
             this.m_Abbreviation = "p53";
 
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;

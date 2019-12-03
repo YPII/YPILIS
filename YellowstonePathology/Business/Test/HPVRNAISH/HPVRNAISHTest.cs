@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.HPVRNAISH
         public HPVRNAISHTest()
         {
             this.m_PanelSetId = 320;
-            this.m_PanelSetName = "HPV RNA ISH";
+            this.m_PanelSetName = "HPV RNA ISH (ISH)";
             this.m_Abbreviation = "HPV RNA ISH";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

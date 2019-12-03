@@ -10,8 +10,8 @@ namespace YellowstonePathology.Business.Test.NeoARRAYSNPCytogeneticProfileTest
         public NeoARRAYSNPCytogeneticProfileTest()
 		{
             this.m_PanelSetId = 174;
-            this.m_PanelSetName = "NeoARRAY SNP/Cytogenetic Profile";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Cytogenetics;
+            this.m_PanelSetName = "NeoARRAY SNP/Cytogenetic Profile (Molecular)";
+            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;

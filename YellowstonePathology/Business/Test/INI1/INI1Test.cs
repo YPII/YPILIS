@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.INI1
         public INI1Test()
         {
             this.m_PanelSetId = 312;
-            this.m_PanelSetName = "INI1";
+            this.m_PanelSetName = "INI1 (IHC)";
             this.m_Abbreviation = "INI1";
             this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;

@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.NeoTYPEMyeloidDisordersProfile
         public NeoTYPEMyeloidDisordersProfileTest()
         {
             this.m_PanelSetId = 336;
-            this.m_PanelSetName = "Neo TYPE Myeloid Disorders Profile";
+            this.m_PanelSetName = "NeoTYPE Myeloid Disorders Profile (Molecular)";
             this.m_Abbreviation = "Neo TYPE Myeloid Disorders Profile";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;

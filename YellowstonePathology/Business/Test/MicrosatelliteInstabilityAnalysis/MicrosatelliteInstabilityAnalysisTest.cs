@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 		public MicrosatelliteInstabilityAnalysisTest()
 		{
 			this.m_PanelSetId = 132;
-            this.m_PanelSetName = "Microsatellite Instability Analysis";
+            this.m_PanelSetName = "Microstellite Instability Analysis (MIS) (Molecular)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = false;

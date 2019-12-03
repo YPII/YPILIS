@@ -11,9 +11,9 @@ namespace YellowstonePathology.Business.Test.RUNX1RUNX1T1AML1ETOTranslocation
         public RUNX1RUNX1T1AML1ETOTranslocationTest()
         {
             this.m_PanelSetId = 231;
-            this.m_PanelSetName = "RUNX1-RUNX1T1 (AML1-ETO) Translocation, t(8;21)";
+            this.m_PanelSetName = "RUNX1-RUNX1T1 (AML1-ETO) Translocation, t(8;21) (FISH)";
             this.m_Abbreviation = "RUNX1-RUNX1T1 (AML1-ETO) Translocation, t(8;21)";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;

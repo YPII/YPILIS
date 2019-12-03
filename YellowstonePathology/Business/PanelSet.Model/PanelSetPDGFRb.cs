@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetPDGFRb()
 		{
 			this.m_PanelSetId = 90;
-			this.m_PanelSetName = "PDGFRb";
+			this.m_PanelSetName = "PDGFRB (5q33) Individual probe from Eosinophilia FISH Panel (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

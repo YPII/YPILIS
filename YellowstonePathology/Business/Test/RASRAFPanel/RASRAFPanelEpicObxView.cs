@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.RASRAFPanel
         public override void ToXml(XElement document)
         {
             RASRAFPanelTestOrder panelSetOrder = (RASRAFPanelTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, panelSetOrder, "RAS/RAF Panel");
+            this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
             this.AddNextObxElement("BRAF Result: " + panelSetOrder.BRAFResult, document, "F");

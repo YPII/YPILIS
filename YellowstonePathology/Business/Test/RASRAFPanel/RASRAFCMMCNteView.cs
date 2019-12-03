@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.Test.RASRAFPanel
             this.AddCompanyHeader(document);
             this.AddBlankNteElement(document);
 
-            this.AddNextNteElement("RAS/RAF Panel", document);            
+            this.AddNextNteElement(panelSetOrder.PanelSetName, document);            
             this.AddNextNteElement("Master Accession #: " + panelSetOrder.MasterAccessionNo, document);
             this.AddNextNteElement("Report #: " + panelSetOrder.ReportNo, document);
             this.AddBlankNteElement(document);

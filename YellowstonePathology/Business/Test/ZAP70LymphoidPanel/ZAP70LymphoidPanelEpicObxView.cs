@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.ZAP70LymphoidPanel
 		public override void ToXml(XElement document)
 		{
 			ZAP70LymphoidPanelTestOrder panelSetOrder = (ZAP70LymphoidPanelTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddHeader(document, panelSetOrder, "ZAP 70 Lymphoid Panel");
+			this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
 			this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;

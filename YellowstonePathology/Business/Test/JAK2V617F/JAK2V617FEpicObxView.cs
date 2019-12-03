@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
         public override void ToXml(XElement document)
         {
 			JAK2V617FTestOrder panelSetOrder = (JAK2V617FTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, panelSetOrder, "JAK2 Mutation V617F");
+            this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
             this.AddNextObxElement("", document, "F");
 
             this.AddNextObxElement("Result: " + panelSetOrder.Result, document, "F");

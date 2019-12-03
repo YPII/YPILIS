@@ -11,9 +11,9 @@ namespace YellowstonePathology.Business.Test.Spirochete
         public SpirocheteTest()
         {
             this.m_PanelSetId = 284;
-            this.m_PanelSetName = "Spirochete";
+            this.m_PanelSetName = "Spirochete (IHC)";
             this.m_Abbreviation = "Spirochete";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

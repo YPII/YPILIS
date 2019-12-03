@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		public PanelSetPMLRARAByFish()
 		{
 			this.m_PanelSetId = 79;
-			this.m_PanelSetName = "PML/RARA t(15;17) By FISH";
+			this.m_PanelSetName = "PML/RARA t(15;17) (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

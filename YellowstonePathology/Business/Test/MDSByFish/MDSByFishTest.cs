@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.MDSByFish
 		public MDSByFishTest()
 		{
 			this.m_PanelSetId = 158;
-            this.m_PanelSetName = "MDS By FISH";
+            this.m_PanelSetName = "MDS Standard FISH Panel (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;

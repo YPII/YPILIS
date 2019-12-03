@@ -17,9 +17,9 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
 		{
 			PanelSetOrderHer2AmplificationByIHC panelSetOrder = (PanelSetOrderHer2AmplificationByIHC)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
 
-            this.AddHeader(document, panelSetOrder, "HER2 Amplification by IHC");
+            this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
 
-			this.AddNextObxElement("", document, "F");
+            this.AddNextObxElement("", document, "F");
 			string result = "Result: " + panelSetOrder.Result;
 			this.AddNextObxElement(result, document, "F");
 			result = "  Score: " + panelSetOrder.Score;

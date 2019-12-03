@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public NeoTypeDiscoveryProfileTest()
         {
             this.m_PanelSetId = 239;
-            this.m_PanelSetName = "NeoType Discovery Profile";
+            this.m_PanelSetName = "NeoTYPE Discovery Profile for Solid Tumors (FISH-Molecular)esop";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

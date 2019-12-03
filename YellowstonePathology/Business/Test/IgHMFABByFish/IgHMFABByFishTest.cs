@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.IgHMFABByFish
         public IgHMFABByFishTest()
         {
             this.m_PanelSetId = 180;
-            this.m_PanelSetName = "IgH/MFAB by FISH";
+            this.m_PanelSetName = "IgH/ MAFB t(14;20) (FISH)";
             this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

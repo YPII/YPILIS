@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.WholeExomeSequencing
         public WholeExomeSequencingTest()
         {
             this.m_PanelSetId = 298;
-            this.m_PanelSetName = "Whole Exome Sequencing";
+            this.m_PanelSetName = "Whole Exome Sequencing (Molecualr)";
             this.m_Abbreviation = "Whole Exome Sequencing";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
