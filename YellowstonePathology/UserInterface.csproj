@@ -43,8 +43,8 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>241</ApplicationRevision>
-    <ApplicationVersion>10.1.15.%2a</ApplicationVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>10.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -1330,6 +1330,7 @@
     <Compile Include="Business\Test\ReticulatedPlateletAnalysisV2\ReticulatedPlateletAnalysisV2WordDocument.cs" />
     <Compile Include="Business\Test\RibosomalRNA16S\RibosomalRNA16STest.cs" />
     <Compile Include="Business\Test\SomatostatinReceptorType2\SomatostatinReceptorType2Test.cs" />
+    <Compile Include="Business\Test\STAT6\STAT6Test.cs" />
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationTest.cs" />
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationTestOrder.cs" />
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationWordDocument.cs" />

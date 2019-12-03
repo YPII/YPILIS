@@ -7,8 +7,8 @@ namespace YellowstonePathology.Business.Label.Model
 {
     public class CassettePrinter
     {        
-        public static string TECHPRINTERPATH = @"\\10.1.1.75\Jobs";
-        public static string PATHPRINTERPATH = @"\\10.1.1.84\Jobs\";
+        public static string TECHPRINTERPATH = @"\\10.1.1.84\Jobs";
+        public static string PATHPRINTERPATH = @"\\10.1.1.75\Jobs\";
         public static string HOBBITPRINTERPATH = @"\\gross-hobbit\Jobs";
         public static string CODYPRINTERPATH = @"\\10.33.33.57\CassettePrinter\";
 

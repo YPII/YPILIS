@@ -130,42 +130,40 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Barcode Label Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="0" Name="ComboBoxConainerLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name" Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.ContainerLabelPrinter}" IsEditable="True">
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.ContainerLabelPrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Histology Slide Label Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="1" Name="ComboBoxHistologySlideLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.HistologySlideLabelPrinter}" IsEditable="True">
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.HistologySlideLabelPrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Cytology Slide Label Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="2" Name="ComboBoxCytologySlideLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CytologySlideLabelPrinter}" IsEditable="True">
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CytologySlideLabelPrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Requisition Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="3" Name="ComboBoxRequisitionLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.RequisitionPrinter}" IsEditable="True">
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.RequisitionPrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Stain Acknowledgement Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="4" Name="ComboBoxStainAcknowledgementPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.SpecialStainAcknowledgementPrinter}" IsEditable="True">
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.SpecialStainAcknowledgementPrinter}" IsEditable="True">
                     </ComboBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Molecular Label Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="5" Name="ComboBoxMolecularLabelPrinter" Margin="2,2,2,2" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name" 
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.MolecularLabelPrinter}" IsEditable="True" />
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.MolecularLabelPrinter}" IsEditable="True" />
 
                     <TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Molecular Label Format:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="6" Name="ComboBoxMolecularLabelFormat" Margin="2,2,2,2" ItemsSource="{Binding Path=MolecularLabelFormatCollection}"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.MolecularLabelFormat}" IsEditable="True" />
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.MolecularLabelFormat}" IsEditable="True" />
 
                     <TextBlock Grid.Column="0" Grid.Row="7" Margin="2" VerticalAlignment="Center" TextAlignment="Right">Cassette Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="7" ItemsSource="{Binding Path=CassettePrinterCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
@@ -183,30 +181,20 @@
 
                     <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Thermo Fisher Slide Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="10" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
-                  HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.ThermoFisherSlidePrinter}" IsEditable="True">
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.ThermoFisherSlidePrinter}" IsEditable="True">
                     </ComboBox>
 
-                    <TextBlock Grid.Column="0" Grid.Row="11" Margin="2" VerticalAlignment="Center" TextAlignment="Right">Laser Cassette Printer:</TextBlock>
-                    <ComboBox Grid.Column="1" Grid.Row="11" Name="ComboBoxLaserCassettePrinter" Margin="2"
-                  IsEditable="True" Text="{Binding Path=UserPreference.LaserCassettePrinter}" HorizontalAlignment="Stretch">
-                        <ComboBoxItem>\\10.1.1.92\pulsar\</ComboBoxItem>
-                    </ComboBox>
-
-                    <TextBlock Grid.Column="0" Grid.Row="12" Margin="2" VerticalAlignment="Center" TextAlignment="Right">FedEx Label Printer:</TextBlock>
-                    <ComboBox Grid.Column="1" Grid.Row="12" Name="ComboBoxFedExLabelPrinter" Margin="2"
-                  IsEditable="True" Text="{Binding Path=UserPreference.FedExLabelPrinter}" HorizontalAlignment="Stretch">
+                    <TextBlock Grid.Column="0" Grid.Row="11" Margin="2" VerticalAlignment="Center" TextAlignment="Right">FedEx Label Printer:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="11" Name="ComboBoxFedExLabelPrinter" Margin="2"
+                            IsEditable="True" Text="{Binding Path=UserPreference.FedExLabelPrinter}" HorizontalAlignment="Stretch">
                         <ComboBoxItem>10.1.1.20</ComboBoxItem>
                         <ComboBoxItem>10.1.1.33</ComboBoxItem>
                     </ComboBox>
 
-                    <TextBlock Grid.Column="0" Grid.Row="13" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Use Laser Cassette Printer:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="13" Margin="2,2,2,2" IsChecked="{Binding Path=UserPreference.UseLaserCassettePrinter}" HorizontalAlignment="Stretch"></CheckBox>
+                    <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Use Laser Cassette Printer:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="12" Margin="2,2,2,2" IsChecked="{Binding Path=UserPreference.UseLaserCassettePrinter}" HorizontalAlignment="Stretch"></CheckBox>
 
                 </Grid>
-
-            </TabItem>
-
-            <TabItem Header="Other">
 
             </TabItem>
         </TabControl>

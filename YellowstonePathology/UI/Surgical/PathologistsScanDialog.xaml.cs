@@ -14,11 +14,13 @@ namespace YellowstonePathology.UI.Surgical
     public partial class PathologistsScanDialog : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private System.ComponentModel.BackgroundWorker m_BackgroundWorker;
 
         private YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort m_BarcodeScanPort;
         private YellowstonePathology.Business.Surgical.AssignmentScanCollection m_AssignmentScanCollection;
 
         private string m_PersistanceContext = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+        private string m_StatusMessage;
 
         public PathologistsScanDialog()
         {
@@ -41,6 +43,19 @@ namespace YellowstonePathology.UI.Surgical
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        public string StatusMessage
+        {
+            get { return this.m_StatusMessage; }
+            set
+            {
+                if (this.m_StatusMessage != value)
+                {
+                    this.m_StatusMessage = value;
+                    this.NotifyPropertyChanged("StatusMessage");
+                }
             }
         }
 
@@ -136,10 +151,39 @@ namespace YellowstonePathology.UI.Surgical
 
         private void ButtonAssign_Click(object sender, RoutedEventArgs e)
         {
-            foreach(YellowstonePathology.Business.Surgical.AssignmentScan assignmentScan in this.m_AssignmentScanCollection)
-            {
+            this.ButtonOK.IsEnabled = false;
+            this.m_BackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.m_BackgroundWorker.WorkerSupportsCancellation = false;
+            this.m_BackgroundWorker.WorkerReportsProgress = true;
+            this.m_BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
+            this.m_BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(Assign);
+            this.m_BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
+            this.m_BackgroundWorker.RunWorkerAsync();
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            this.ButtonOK.IsEnabled = true;
+            this.m_StatusMessage = "All done.";
+            this.NotifyPropertyChanged("StatusMessage");
+        }
+
+        private void BackgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Input, new System.Threading.ThreadStart(delegate ()
+            {                
+                this.m_StatusMessage = (string)e.UserState;                
+                this.NotifyPropertyChanged("StatusMessage");
+            }));
+        }
+
+        private void Assign(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            foreach (YellowstonePathology.Business.Surgical.AssignmentScan assignmentScan in this.m_AssignmentScanCollection)
+            {                
                 YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(assignmentScan.ScanId);
                 string masterAccessionNo = orderIdParser.MasterAccessionNo;
+                this.m_BackgroundWorker.ReportProgress(100, "Assigning Case: " + masterAccessionNo);
                 YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_PersistanceContext);
                 accessionOrder.SetCaseOwnerId();
                 assignmentScan.MasterAccessionNo = masterAccessionNo;
@@ -162,7 +206,7 @@ namespace YellowstonePathology.UI.Surgical
         private void AddTestSlides()
         {
             this.m_BarcodeScanPort.SimulateScanReceived("HSLD19-32076.1A1");
-            this.m_BarcodeScanPort.SimulateScanReceived("HSLD19-32092.1A1");
+            this.m_BarcodeScanPort.SimulateScanReceived("HSLD19-32092.1A1");            
             this.NotifyPropertyChanged(string.Empty);
         }
     }
