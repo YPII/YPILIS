@@ -95,7 +95,22 @@ namespace YellowstonePathology.Business.Client.Model
             }
         }
 
-        public bool SetDistribution(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public bool SetDistributions(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        {
+            bool result = true;
+            if (this.m_DistributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MTDOH ||
+                this.m_DistributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WYDOH)
+            {
+                result = this.SetDistribution(panelSetOrder, accessionOrder);
+            }
+            else
+            {
+                result = this.SetDistribution(accessionOrder);
+            }
+            return result;
+        }
+
+        private bool SetDistribution(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             bool result = true;
             foreach(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in accessionOrder.PanelSetOrderCollection)
