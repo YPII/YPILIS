@@ -98,8 +98,8 @@ namespace YellowstonePathology.Business.Client.Model
         public bool SetDistributions(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             bool result = true;
-            if (this.m_DistributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MTDOH ||
-                this.m_DistributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WYDOH)
+            YellowstonePathology.Business.ReportDistribution.Model.RestrictedDistributionTypeList restrictedDistributionTypeList = new ReportDistribution.Model.RestrictedDistributionTypeList();
+            if (restrictedDistributionTypeList.Contains(this.m_DistributionType) == true)
             {
                 result = this.SetDistribution(panelSetOrder, accessionOrder);
             }
