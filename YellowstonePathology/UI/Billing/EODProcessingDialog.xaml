@@ -28,6 +28,7 @@
                     <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Stretch">
                         <Menu Name="MainMenu" DockPanel.Dock="Top" Margin="0,0,0,0" HorizontalAlignment="Stretch">
                             <MenuItem Header="Actions" Name="MenuItemActions">
+                                <MenuItem Header="Check For Problems" Click="MenuItemCheckForProblems_Click"></MenuItem>
                                 <MenuItem Header="Update MRN/ACT" Click="MenuItemUpdateMRNACT_Click"></MenuItem>
                                 <MenuItem Header="Match SVH ADT" Click="MenuItemMatchSVHADT_Click"></MenuItem>
                                 <MenuItem Header="Process PSA Files" Click="MenuItemProcessPSAFiles_Click"></MenuItem>
