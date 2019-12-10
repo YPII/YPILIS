@@ -37,6 +37,15 @@ namespace YellowstonePathology.Business.Visitor
         {
             if (aliquotOrder.TestOrderCollection.ExistsByTestOrderId(this.m_TestOrderId) == true)
             {
+                for (int idx = aliquotOrder.SlideOrderCollection.Count - 1; idx > -1; idx--)
+                {
+                    if(aliquotOrder.SlideOrderCollection[idx].TestOrderId == this.m_TestOrderId)
+                    {
+                        Slide.Model.SlideOrder slideOrder = aliquotOrder.SlideOrderCollection[idx] as Slide.Model.SlideOrder;
+                        RemoveSlideOrderVisitor removeSlideOrderVisitor = new RemoveSlideOrderVisitor(slideOrder);
+                        removeSlideOrderVisitor.Visit(aliquotOrder);
+                    }
+                }
                 aliquotOrder.TestOrderCollection.Remove(this.m_TestOrderId);
             }
         }
