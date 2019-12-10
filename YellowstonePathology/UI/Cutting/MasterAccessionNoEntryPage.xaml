@@ -25,12 +25,12 @@
         <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Stroke="LightBlue" Margin="2,2,2,2"></Rectangle>
         <TextBlock Name="TextMasterAccessionNo" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="5,5,5,5" FontSize="24" HorizontalAlignment="Stretch"></TextBlock>
 
-        <Button Grid.Column="0" Grid.Row="1" Margin="5" FontSize="18" Click="ButtonYear_Click">18-</Button>
+        <Button Grid.Column="0" Grid.Row="1" Margin="5" FontSize="18" Click="ButtonYear_Click" Content="{Binding Path=LastYear}" />
         <Button Grid.Column="1" Grid.Row="1" Margin="5" FontSize="18" Click="ButtonNumber_Click">1</Button>
         <Button Grid.Column="2" Grid.Row="1" Margin="5" FontSize="18" Click="ButtonNumber_Click">2</Button>
         <Button Grid.Column="3" Grid.Row="1" Margin="5" FontSize="18" Click="ButtonNumber_Click">3</Button>
 
-        <Button Grid.Column="0" Grid.Row="2" Margin="5" FontSize="18" Click="ButtonYear_Click">17-</Button>
+        <Button Grid.Column="0" Grid.Row="2" Margin="5" FontSize="18" Click="ButtonYear_Click" Content="{Binding Path=TwoYearsAgo}" />
         <Button Grid.Column="1" Grid.Row="2" Margin="5" FontSize="18" Click="ButtonNumber_Click">4</Button>
         <Button Grid.Column="2" Grid.Row="2" Margin="5" FontSize="18" Click="ButtonNumber_Click">5</Button>
         <Button Grid.Column="3" Grid.Row="2" Margin="5" FontSize="18" Click="ButtonNumber_Click">6</Button>        

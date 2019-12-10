@@ -32,6 +32,16 @@ namespace YellowstonePathology.UI.Cutting
 			DataContext = this;            
 		}
 
+        public string LastYear
+        {
+            get { return DateTime.Today.AddYears(-1).Year.ToString().Substring(2) + "-"; }
+        }
+
+        public string TwoYearsAgo
+        {
+            get { return DateTime.Today.AddYears(-2).Year.ToString().Substring(2) + "-"; }
+        }
+
         private void ButtonNumber_Click(object sender, RoutedEventArgs e)
         {
             if (this.TextMasterAccessionNo.Text.Length < 11)

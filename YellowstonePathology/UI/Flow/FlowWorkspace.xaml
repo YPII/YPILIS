@@ -780,26 +780,27 @@
                                 </ComboBox>
                                 <TextBlock Margin="3">Year</TextBlock>
                                 <ComboBox Name="comboBoxYear" Width="100" Margin="3">
-                                    <ComboBoxItem>2000</ComboBoxItem>
-                                    <ComboBoxItem>2001</ComboBoxItem>
-                                    <ComboBoxItem>2002</ComboBoxItem>
-                                    <ComboBoxItem>2003</ComboBoxItem>
-                                    <ComboBoxItem>2004</ComboBoxItem>
-                                    <ComboBoxItem>2005</ComboBoxItem>
-                                    <ComboBoxItem>2006</ComboBoxItem>
-                                    <ComboBoxItem>2007</ComboBoxItem>
-                                    <ComboBoxItem>2008</ComboBoxItem>
-                                    <ComboBoxItem>2009</ComboBoxItem>
-                                    <ComboBoxItem>2010</ComboBoxItem>
-                                    <ComboBoxItem>2011</ComboBoxItem>
-                                    <ComboBoxItem>2012</ComboBoxItem>
-                                    <ComboBoxItem>2013</ComboBoxItem>
-                                    <ComboBoxItem>2014</ComboBoxItem>
-                                    <ComboBoxItem>2015</ComboBoxItem>
-                                    <ComboBoxItem>2016</ComboBoxItem>
-                                    <ComboBoxItem>2017</ComboBoxItem>
-                                    <ComboBoxItem>2018</ComboBoxItem>
+                                    <ComboBoxItem>2020</ComboBoxItem>
                                     <ComboBoxItem>2019</ComboBoxItem>
+                                    <ComboBoxItem>2018</ComboBoxItem>
+                                    <ComboBoxItem>2017</ComboBoxItem>
+                                    <ComboBoxItem>2016</ComboBoxItem>
+                                    <ComboBoxItem>2015</ComboBoxItem>
+                                    <ComboBoxItem>2014</ComboBoxItem>
+                                    <ComboBoxItem>2013</ComboBoxItem>
+                                    <ComboBoxItem>2012</ComboBoxItem>
+                                    <ComboBoxItem>2011</ComboBoxItem>
+                                    <ComboBoxItem>2010</ComboBoxItem>
+                                    <ComboBoxItem>2009</ComboBoxItem>
+                                    <ComboBoxItem>2008</ComboBoxItem>
+                                    <ComboBoxItem>2007</ComboBoxItem>
+                                    <ComboBoxItem>2006</ComboBoxItem>
+                                    <ComboBoxItem>2005</ComboBoxItem>
+                                    <ComboBoxItem>2004</ComboBoxItem>
+                                    <ComboBoxItem>2003</ComboBoxItem>
+                                    <ComboBoxItem>2002</ComboBoxItem>
+                                    <ComboBoxItem>2001</ComboBoxItem>
+                                    <ComboBoxItem>2000</ComboBoxItem>
                                 </ComboBox>
                             </StackPanel>
                         </StackPanel>

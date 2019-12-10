@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Trisomy21ByFISH
 			this.m_PanelSetId = 224;
             this.m_PanelSetName = "Trisomy 21 By FISH";
             this.m_Abbreviation = "+21 By FISH";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;
 			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

@@ -47,6 +47,18 @@ namespace YellowstonePathology.UI
                         }
                     }
 
+                    Business.Test.Model.TestOrderCollection testOrders = panelSetOrder.GetTestOrders();
+                    for (int idx = testOrders.Count - 1; idx > -1; idx--)
+                    {
+                        Business.Test.Model.TestOrder testOrder = (Business.Test.Model.TestOrder)testOrders[idx];
+                        for (int dx = testOrder.SlideOrderCollection.Count - 1; dx > -1; dx--)
+                        {
+                            YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder = accessionOrder.SpecimenOrderCollection.GetSlideOrder(testOrder.SlideOrderCollection[dx].SlideOrderId);
+                            YellowstonePathology.Business.Visitor.RemoveSlideOrderVisitor removeSlideOrderVisitor = new Business.Visitor.RemoveSlideOrderVisitor(slideOrder);
+                            accessionOrder.TakeATrip(removeSlideOrderVisitor);
+                        }
+                    }
+
                     accessionOrder.PanelSetOrderCollection.Remove(panelSetOrder);
                     accessionOrder.TaskOrderCollection.RemoveTaskOrdersForDeletedTestOrder(reportNo);
                     YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(accessionOrder, writer);

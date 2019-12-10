@@ -33,14 +33,14 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" Text="Report No:" />
         <TextBlock Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderCPTCode.ReportNo}" />
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" Text="Client:" />
-        <TextBlock Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=ClientName}" />
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" Text="Client Id:" />
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderCPTCode.ClientId}" />
 
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" Text="Medical Record:" />
-        <TextBlock Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderCPTCode.MedicalRecord}" />
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderCPTCode.MedicalRecord}" />
 
         <TextBlock Grid.Row="3" Grid.Column="0" Margin="2,2,2,2" Text="Account:" />
-        <TextBlock Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderCPTCode.Account}" />
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderCPTCode.Account}" />
 
         <TextBlock Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" Text="Reference Id:" />
         <TextBox Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrderCPTCode.ReferenceId}" />
