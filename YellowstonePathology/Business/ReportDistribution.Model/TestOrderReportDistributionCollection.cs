@@ -325,16 +325,24 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         public bool IsDuplicate(TestOrderReportDistribution testOrderReportDistribution)
         {
             bool result = false;
-            foreach (TestOrderReportDistribution compareTestOrderReportDistribution in this)
+            YellowstonePathology.Business.ReportDistribution.Model.RestrictedDistributionTypeList restrictedDistributionTypeList = new Model.RestrictedDistributionTypeList();
+            if (restrictedDistributionTypeList.Contains(testOrderReportDistribution.DistributionType) == true)
             {
-                if (testOrderReportDistribution.ClientId == compareTestOrderReportDistribution.ClientId &&
-                    testOrderReportDistribution.ClientName == compareTestOrderReportDistribution.ClientName &&
-                    testOrderReportDistribution.DistributionType == compareTestOrderReportDistribution.DistributionType &&
-                    testOrderReportDistribution.PhysicianId == compareTestOrderReportDistribution.PhysicianId &&
-                    testOrderReportDistribution.PhysicianName == compareTestOrderReportDistribution.PhysicianName)
+                result = true;
+            }
+            else
+            {
+                foreach (TestOrderReportDistribution compareTestOrderReportDistribution in this)
                 {
-                    result= true;
-                    break;
+                    if (testOrderReportDistribution.ClientId == compareTestOrderReportDistribution.ClientId &&
+                        testOrderReportDistribution.ClientName == compareTestOrderReportDistribution.ClientName &&
+                        testOrderReportDistribution.DistributionType == compareTestOrderReportDistribution.DistributionType &&
+                        testOrderReportDistribution.PhysicianId == compareTestOrderReportDistribution.PhysicianId &&
+                        testOrderReportDistribution.PhysicianName == compareTestOrderReportDistribution.PhysicianName)
+                    {
+                        result = true;
+                        break;
+                    }
                 }
             }
 

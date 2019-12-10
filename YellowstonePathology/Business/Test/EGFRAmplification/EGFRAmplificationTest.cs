@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.Test.EGFRAmplification
             this.m_PanelSetId = 322;
             this.m_PanelSetName = "EGFR Amplification (FISH)";
             this.m_Abbreviation = "EGFR Amplification";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

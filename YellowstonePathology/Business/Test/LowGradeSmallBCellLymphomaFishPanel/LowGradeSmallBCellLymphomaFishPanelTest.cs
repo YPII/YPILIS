@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.Test.LowGradeSmallBCellLymphomaFishPanel
             this.m_PanelSetId = 293;
             this.m_PanelSetName = "Low-Grade/Small B-Cell Lymphoma FISH Panel (FISH)";
             this.m_Abbreviation = "Low Grade Small B-Cell Lymphoma Fish Panel";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;

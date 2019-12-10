@@ -1108,6 +1108,7 @@
     <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerNoWHP.cs" />
     <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerWHPHold.cs" />
     <Compile Include="Business\ReportDistribution.Model\PrintDistribution.cs" />
+    <Compile Include="Business\ReportDistribution.Model\RestrictedDistributionTypeList.cs" />
     <Compile Include="Business\Slide.Model\VantageSlide.cs" />
     <Compile Include="Business\Slide.Model\VantageSlideScan.cs" />
     <Compile Include="Business\Slide.Model\VantageSlideScanCollection.cs" />

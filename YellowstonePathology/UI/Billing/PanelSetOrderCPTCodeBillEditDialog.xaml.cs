@@ -20,18 +20,16 @@ namespace YellowstonePathology.UI.Billing
     public partial class PanelSetOrderCPTCodeBillEditDialog : Window
     {
         private YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill m_PanelSetOrderCPTCodeBill;
-        private string m_ClientName;
         private Dictionary<string, string> m_Modifiers;
         private Dictionary<YellowstonePathology.Business.Billing.Model.CPTCodeTypeEnum, string> m_CodeTypes;
 
 
-        public PanelSetOrderCPTCodeBillEditDialog(YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill, string clientName)
+        public PanelSetOrderCPTCodeBillEditDialog(YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill)
         {
             this.m_PanelSetOrderCPTCodeBill = panelSetOrderCPTCodeBill;
-            this.m_ClientName = clientName;
 
             this.m_Modifiers = new Dictionary<string, string>();
-            this.m_Modifiers.Add("None", null);
+            this.m_Modifiers.Add(string.Empty, null);
             this.m_Modifiers.Add(YellowstonePathology.Business.Billing.Model.CPTCodeModifier.TwentySix, YellowstonePathology.Business.Billing.Model.CPTCodeModifier.TwentySix);
             this.m_Modifiers.Add(YellowstonePathology.Business.Billing.Model.CPTCodeModifier.TechnicalComponent, YellowstonePathology.Business.Billing.Model.CPTCodeModifier.TechnicalComponent);
 
@@ -49,10 +47,6 @@ namespace YellowstonePathology.UI.Billing
         public YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill PanelSetOrderCPTCodeBill
         {
             get { return this.m_PanelSetOrderCPTCodeBill; }
-        }
-        public string ClientName
-        {
-            get { return this.m_ClientName; }
         }
 
         public Dictionary<string, string> Modifiers

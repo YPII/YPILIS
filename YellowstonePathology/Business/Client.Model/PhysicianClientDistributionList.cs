@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Client.Model
             this.HandlePAIF(accessionOrder);
             foreach (PhysicianClientDistributionListItem physicianClientDistribution in this)
             {
-                physicianClientDistribution.SetDistribution(accessionOrder);
+                physicianClientDistribution.SetDistributions(panelSetOrder, accessionOrder);
             }
         }
 
