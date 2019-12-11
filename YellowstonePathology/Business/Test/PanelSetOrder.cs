@@ -2043,20 +2043,19 @@ namespace YellowstonePathology.Business.Test
         public void HandleDistribution(AccessionOrder accessionOrder)
         {
             YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection uniqueDistributions = accessionOrder.PanelSetOrderCollection.GetUniqueDistributions();
-            if (uniqueDistributions.Count == 0)
+            YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(accessionOrder.PhysicianId, accessionOrder.ClientId);
+            Audit.Model.CanSetDistributionAudit canSetDistributionAudit = new Audit.Model.CanSetDistributionAudit(accessionOrder, physicianClientDistributionCollection);
+            canSetDistributionAudit.Run();
+            if (canSetDistributionAudit.Status == Audit.Model.AuditStatusEnum.OK)
             {
-                YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(accessionOrder.PhysicianId, accessionOrder.ClientId);
-                Audit.Model.CanSetDistributionAudit canSetDistributionAudit = new Audit.Model.CanSetDistributionAudit(accessionOrder, physicianClientDistributionCollection);
-                canSetDistributionAudit.Run();
-                if (canSetDistributionAudit.Status == Audit.Model.AuditStatusEnum.OK)
-                {
-                    physicianClientDistributionCollection.SetDistribution(this, accessionOrder);
-                }
+                physicianClientDistributionCollection.SetDistribution(this, accessionOrder);
             }
-            else
-            {
-                this.TestOrderReportDistributionCollection.SetDistributionFromUnique(this, uniqueDistributions);
-            }
+            this.TestOrderReportDistributionCollection.SetDistributionFromUnique(this, uniqueDistributions);
+        }
+
+        public bool IsDistributionTypeImplemented(PanelSet.Model.PanelSet panelSet, string distributionType)
+        {
+            return this.TestOrderReportDistributionCollection.IsDistributionTypeImplemented(panelSet, distributionType);
         }
     }
 }

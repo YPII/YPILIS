@@ -9,7 +9,7 @@ namespace YellowstonePathology.Business.Client.Model
 {
     public class PhysicianClientDistributionListItem
     {
-		protected int m_PhysicianId;
+        protected int m_PhysicianId;
         protected string m_PhysicianName;
         protected int m_ClientId;
         protected string m_ClientName;
@@ -32,7 +32,7 @@ namespace YellowstonePathology.Business.Client.Model
         }
 
         [PersistentProperty()]
-		public int PhysicianId
+        public int PhysicianId
         {
             get { return this.m_PhysicianId; }
             set { this.m_PhysicianId = value; }
@@ -95,25 +95,10 @@ namespace YellowstonePathology.Business.Client.Model
             }
         }
 
-        public bool SetDistributions(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public bool SetDistribution(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             bool result = true;
-            YellowstonePathology.Business.ReportDistribution.Model.RestrictedDistributionTypeList restrictedDistributionTypeList = new ReportDistribution.Model.RestrictedDistributionTypeList();
-            if (restrictedDistributionTypeList.Contains(this.m_DistributionType) == true)
-            {
-                result = this.SetDistribution(panelSetOrder, accessionOrder);
-            }
-            else
-            {
-                result = this.SetDistribution(accessionOrder);
-            }
-            return result;
-        }
-
-        private bool SetDistribution(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
-        {
-            bool result = true;
-            foreach(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in accessionOrder.PanelSetOrderCollection)
+            foreach (YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in accessionOrder.PanelSetOrderCollection)
             {
                 result = SetDistribution(panelSetOrder, accessionOrder);
             }
@@ -165,7 +150,7 @@ namespace YellowstonePathology.Business.Client.Model
                     throw new Exception("Not implemented");
             }
 
-            this.CheckDistributionsAreImplemented(panelSetOrder);
+            //this.CheckDistributionsAreImplemented(panelSetOrder);
             return result;
         }
 
@@ -176,7 +161,7 @@ namespace YellowstonePathology.Business.Client.Model
                 new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, panelSetOrder.ReportNo, physicianId, physicianName,
                     clientId, clientName, distributionType, faxNumber);
             panelSetOrder.TestOrderReportDistributionCollection.Add(testOrderReportDistribution);
-        }        
+        }
 
         private bool HandleAddFaxDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder)
         {
@@ -270,7 +255,7 @@ namespace YellowstonePathology.Business.Client.Model
                 {
                     this.HandleAddFaxDistribution(panelSetOrder);
                 }
-            }            
+            }
             return result;
         }
 
@@ -321,7 +306,7 @@ namespace YellowstonePathology.Business.Client.Model
             return result;
         }
 
-        private void CheckDistributionsAreImplemented(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder)
+        /*private void CheckDistributionsAreImplemented(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder)
         {
             YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
             YellowstonePathology.Business.Rules.MethodResult result = panelSetOrder.TestOrderReportDistributionCollection.AreDistributionTypesHandled(panelSet);
@@ -330,6 +315,6 @@ namespace YellowstonePathology.Business.Client.Model
                 panelSetOrder.HoldDistribution = true;
                 YellowstonePathology.Business.Logging.EmailExceptionHandler.HandleException(result.Message);
             }
-        }
+        }*/
     }
 }

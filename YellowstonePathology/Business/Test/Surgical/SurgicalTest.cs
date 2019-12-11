@@ -31,6 +31,8 @@ namespace YellowstonePathology.Business.Test.Surgical
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WPH);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.CMMC);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.ECW);
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.MDOH);
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WDOH);
 
             this.m_RequiresAssignment = false;
 
