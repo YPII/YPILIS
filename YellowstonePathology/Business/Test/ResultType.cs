@@ -13,5 +13,7 @@ namespace YellowstonePathology.Business.Test
         public const string CMMC = "CMMC";
         public const string WPH = "WPH";
         public const string ECW = "ECW";
+        public const string MDOH = "MDOH";
+        public const string WDOH = "WDOH";
     }
 }
