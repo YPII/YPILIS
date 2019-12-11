@@ -184,7 +184,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             if (canAddDistribution == true)
             {
                 this.ResetDistributionWhenIncompatible(e.PhysicianClientDistribution);
-                e.PhysicianClientDistribution.SetDistributions(this.m_PanelSetOrder, this.m_AccessionOrder);
+                e.PhysicianClientDistribution.SetDistribution(this.m_AccessionOrder);
             }
 
             this.m_PageNavigator.Navigate(this);
