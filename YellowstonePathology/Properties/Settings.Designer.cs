@@ -159,7 +159,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\\\\\cfileserver\\\\Documents\\\\SpecimenLog\\\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\\\\\cfileserver\\\\documents\\\\SpecimenLog\\\\")]
         public string SpecimenLogScannedDocumentFilePath {
             get {
                 return ((string)(this["SpecimenLogScannedDocumentFilePath"]));

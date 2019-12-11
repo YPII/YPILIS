@@ -48,7 +48,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
                         if (lseRule.IncludeInIHCCollection(panelSetOrderLynchSyndromeIHC) == true)
                         {
                             result.Add(lseRule);
-                        }
+                        }                        
                     }
                     else
                     {
