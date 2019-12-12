@@ -121,10 +121,10 @@ namespace YellowstonePathology.Business.Stain.Model
             return result;
         }
         
-        static public StainCollection Refresh()
+        public static void Refresh()
         {
-            instance = null;
-            return Instance;
+            instance = Load();
+            YellowstonePathology.Business.Test.Model.TestCollectionInstance.Reload();
         }
     }
 }

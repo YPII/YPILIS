@@ -270,8 +270,7 @@ namespace YellowstonePathology.UI.Client
                 {
                     foreach(YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistributionItem in physicianClientDistributionCollection)
                     {
-                        YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullPhysicianClientDistribution(physicianClientDistributionItem.PhysicianClientDistributionID, this);
-                        YellowstonePathology.Business.Persistence.DocumentGateway.Instance.DeleteDocument(physicianClientDistribution, this);
+                        YellowstonePathology.Business.Persistence.DocumentGateway.Instance.DeleteDocument(physicianClientDistributionItem, this);
                     }
                 }
                 else
