@@ -83,7 +83,6 @@ namespace YellowstonePathology.UI.Stain
 
         public void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
-            bool isNewStain = string.IsNullOrEmpty(this.m_Stain.StainId);
             YellowstonePathology.Business.Rules.MethodResult methodResult = this.CanSave();
             if (methodResult.Success == true)
             {
@@ -93,8 +92,6 @@ namespace YellowstonePathology.UI.Stain
             if (methodResult.Success == true)
             {
                 this.m_Stain.Save();
-                string stainText = this.m_Stain.ToJSON();
-                YellowstonePathology.Business.Stain.Model.StainCollection.Refresh();
                 Close();
             }
             else

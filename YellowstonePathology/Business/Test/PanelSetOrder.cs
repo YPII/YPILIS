@@ -2052,10 +2052,5 @@ namespace YellowstonePathology.Business.Test
             }
             this.TestOrderReportDistributionCollection.SetDistributionFromUnique(this, uniqueDistributions);
         }
-
-        public bool IsDistributionTypeImplemented(PanelSet.Model.PanelSet panelSet, string distributionType)
-        {
-            return this.TestOrderReportDistributionCollection.IsDistributionTypeImplemented(panelSet, distributionType);
-        }
     }
 }

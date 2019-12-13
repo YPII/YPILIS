@@ -78,7 +78,7 @@ namespace YellowstonePathology.Business.Stain.Model
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
             }
-            Test.Model.TestCollectionInstance.Reload();
+            YellowstonePathology.Business.Stain.Model.StainCollection.Refresh();
         }
 
         public string StainId
