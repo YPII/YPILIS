@@ -715,17 +715,24 @@ namespace YellowstonePathology.UI.Billing
             this.m_BackgroundWorker.WorkerSupportsCancellation = false;
             this.m_BackgroundWorker.WorkerReportsProgress = true;
             this.m_BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
-            this.m_BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(CheckForTifDoc);
+            this.m_BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(CheckForProblems);
             this.m_BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
             this.m_BackgroundWorker.RunWorkerAsync();
         }
 
+        private void CheckForProblems(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            this.CheckForTifDoc(sender, e);
+            this.CheckSVHCDMFiles(sender, e);
+        }
+
         private void CheckForTifDoc(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            this.m_BackgroundWorker.ReportProgress(1, "Start Checking for TIF Files");
             Business.ReportNoCollection reportNoCollection = Business.Gateway.AccessionOrderGateway.GetReportNumbersByPostDate(this.m_PostDate);
             foreach(Business.ReportNo reportNo in reportNoCollection)
             {
-                this.m_BackgroundWorker.ReportProgress(1, "Looking for TIF for ReportNo: " + reportNo.Value);
+                this.m_BackgroundWorker.ReportProgress(1, "Checking ReportNo: " + reportNo.Value);
                 bool result = Business.Document.CaseDocument.DoesCaseDocTifExist(reportNo.Value);
                 if(result == false)
                 {
@@ -739,6 +746,56 @@ namespace YellowstonePathology.UI.Billing
                     caseDocument.Render();
                     caseDocument.Publish();
                 }
+            }
+        }
+
+        private void CheckSVHCDMFiles(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            this.m_BackgroundWorker.ReportProgress(1, "Starting checking SVH CDM files.");
+            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection hrhGroup = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("2");
+            YellowstonePathology.Business.ReportNoCollection reportNoCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetReportNumbersBySVHProcess(this.m_PostDate);
+
+            int rowCount = 0;
+            foreach (YellowstonePathology.Business.ReportNo reportNo in reportNoCollection)
+            {
+                this.m_BackgroundWorker.ReportProgress(1, "Checking: " + reportNo.Value);
+
+                string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo.Value);
+                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this);
+
+                YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo.Value);
+                foreach (Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill in panelSetOrder.PanelSetOrderCPTCodeBillCollection)
+                {
+                    if (panelSetOrderCPTCodeBill.BillTo == "Client" && panelSetOrderCPTCodeBill.PostDate == this.m_PostDate)
+                    {
+                        if (YellowstonePathology.Business.Billing.Model.CDMCollection.Instance.Exists(panelSetOrderCPTCodeBill.CPTCode, "SVH") == true)
+                        {
+                            if (panelSetOrderCPTCodeBill.PostedToClient == false)
+                            {
+                                if (string.IsNullOrEmpty(panelSetOrderCPTCodeBill.MedicalRecord) == false && string.IsNullOrEmpty(panelSetOrderCPTCodeBill.Account) == false)
+                                {
+                                    if (panelSetOrderCPTCodeBill.MedicalRecord.StartsWith("V") == true || panelSetOrderCPTCodeBill.MedicalRecord.StartsWith("R") == true)
+                                    {
+                                        rowCount += 1;
+                                    }
+                                    else
+                                    {
+                                        this.m_BackgroundWorker.ReportProgress(1, "The MRN for this charge doesn't start with a V: " + reportNo.Value + " - " + panelSetOrderCPTCodeBill.CPTCode);
+                                    }
+                                }
+                                else
+                                {
+                                    this.m_BackgroundWorker.ReportProgress(1, "This MRN or ACCT is null:" + reportNo.Value + " - " + panelSetOrderCPTCodeBill.CPTCode);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            this.m_BackgroundWorker.ReportProgress(1, "There is no CDM for ReportNo/Code: " + reportNo.Value + " - " + panelSetOrderCPTCodeBill.CPTCode);
+                        }
+                    }
+                }
+                YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
             }
         }
     }
