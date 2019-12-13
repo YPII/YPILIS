@@ -711,19 +711,25 @@ namespace YellowstonePathology.UI.Billing
         private void MenuItemCheckForProblems_Click(object sender, RoutedEventArgs e)
         {
             this.m_StatusMessageList.Clear();
-            this.CheckForTifDoc();
-            MessageBox.Show("All Done.");
+            this.m_BackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.m_BackgroundWorker.WorkerSupportsCancellation = false;
+            this.m_BackgroundWorker.WorkerReportsProgress = true;
+            this.m_BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
+            this.m_BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(CheckForTifDoc);
+            this.m_BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
+            this.m_BackgroundWorker.RunWorkerAsync();
         }
 
-        private void CheckForTifDoc()
+        private void CheckForTifDoc(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             Business.ReportNoCollection reportNoCollection = Business.Gateway.AccessionOrderGateway.GetReportNumbersByPostDate(this.m_PostDate);
             foreach(Business.ReportNo reportNo in reportNoCollection)
             {
+                this.m_BackgroundWorker.ReportProgress(1, "Looking for TIF for ReportNo: " + reportNo.Value);
                 bool result = Business.Document.CaseDocument.DoesCaseDocTifExist(reportNo.Value);
                 if(result == false)
                 {
-                    this.m_StatusMessageList.Add("No TIF for ReportNo: " + reportNo.Value);
+                    this.m_BackgroundWorker.ReportProgress(1, "No TIF for ReportNo: " + reportNo.Value);
 
                     Business.OrderIdParser orderIdParser = new Business.OrderIdParser(reportNo.Value);
                     Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(orderIdParser.MasterAccessionNo, this);
