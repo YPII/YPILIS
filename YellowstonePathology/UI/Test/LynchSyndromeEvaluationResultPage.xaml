@@ -118,12 +118,9 @@
                               SelectedValue="{Binding Path=PanelSetOrder.LynchSyndromeEvaluationType}" SelectionChanged="ComboBoxLSEType_SelectionChanged" />
                     
                     <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold">Ordered On:</TextBlock>
-					<TextBlock Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
 
-					<!--<TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Order Status:</TextBlock>
-					<TextBlock Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=LSEResultStatus.Status}"></TextBlock>-->
-
-					<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" FontWeight="Bold" Margin="2,5,2,2">Results:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" FontWeight="Bold" Margin="2,5,2,2">Results:</TextBlock>
 
                     <ListView Name="ListViewResults" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Margin="2,2,2,2" ItemsSource="{Binding Path=LSERuleCollection}">
                         <ListView.View>

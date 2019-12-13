@@ -271,6 +271,18 @@ namespace YellowstonePathology.Business.Document
             return path;
         }
 
+        public static bool DoesCaseDocTifExist(string reportNo)
+        {
+            bool result = false;
+            OrderIdParser orderIdParser = new OrderIdParser(reportNo);
+            string path = GetCaseFileNameTif(orderIdParser);
+            if(System.IO.File.Exists(path) == true)
+            {
+                result = true;
+            }
+            return result;
+        }
+
         public static string GetCaseDocumentFullPath(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
 			string filePath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);

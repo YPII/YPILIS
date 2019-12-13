@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>10.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -1113,6 +1113,8 @@
     <Compile Include="Business\Slide.Model\VantageSlideScanCollection.cs" />
     <Compile Include="Business\Slide.Model\VantageSlideView.cs" />
     <Compile Include="Business\Slide.Model\VantageSlideViewCollection.cs" />
+    <Compile Include="Business\Specimen.Model\AliquotOrderHold.cs" />
+    <Compile Include="Business\Specimen.Model\AliquotOrderHoldCollection.cs" />
     <Compile Include="Business\Specimen.Model\Container.cs" />
     <Compile Include="Business\Specimen.Model\ContainerCollection.cs" />
     <Compile Include="Business\SSHFileTransfer.cs" />

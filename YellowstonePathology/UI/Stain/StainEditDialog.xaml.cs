@@ -25,7 +25,6 @@ namespace YellowstonePathology.UI.Stain
         private List<string> m_StainerTypes;
         private List<string> m_StainTypes;
 
-
         public StainEditDialog(Business.Stain.Model.Stain stain)
         {
             this.m_Stain = stain;

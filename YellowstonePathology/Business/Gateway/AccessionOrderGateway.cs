@@ -343,11 +343,14 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        public static YellowstonePathology.Business.Test.AliquotOrderCollection GetAliquotOrderHoldCollection()
+        public static YellowstonePathology.Business.Specimen.Model.AliquotOrderHoldCollection GetAliquotOrderHoldCollection()
         {
-            YellowstonePathology.Business.Test.AliquotOrderCollection result = new Test.AliquotOrderCollection();
+            YellowstonePathology.Business.Specimen.Model.AliquotOrderHoldCollection result = new Specimen.Model.AliquotOrderHoldCollection();
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "Select * from tblAliquotOrder where Status = 'Hold';";
+            cmd.CommandText = "Select ao.AliquotOrderId, ao.AliquotType, ao.Status, ao.EmbeddingInstructions, so.Description from tblAliquotOrder ao " +
+                "join tblSpecimenOrder so on ao.SpecimenOrderId = so.SpecimenOrderId " +
+                "where Status = 'Hold'; ";
+
             cmd.CommandType = CommandType.Text;
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
@@ -358,10 +361,10 @@ namespace YellowstonePathology.Business.Gateway
                 {
                     while (dr.Read())
                     {
-                        YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = new Test.AliquotOrder();
-                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(aliquotOrder, dr);
+                        YellowstonePathology.Business.Specimen.Model.AliquotOrderHold aliquotOrderHold = new Specimen.Model.AliquotOrderHold();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(aliquotOrderHold, dr);
                         sqlDataReaderPropertyWriter.WriteProperties();
-                        result.Add(aliquotOrder);
+                        result.Add(aliquotOrderHold);
                     }
                 }
             }
