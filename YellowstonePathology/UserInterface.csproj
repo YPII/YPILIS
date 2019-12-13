@@ -1114,6 +1114,8 @@
     <Compile Include="Business\Slide.Model\VantageSlideScanCollection.cs" />
     <Compile Include="Business\Slide.Model\VantageSlideView.cs" />
     <Compile Include="Business\Slide.Model\VantageSlideViewCollection.cs" />
+    <Compile Include="Business\Specimen.Model\AliquotOrderHold.cs" />
+    <Compile Include="Business\Specimen.Model\AliquotOrderHoldCollection.cs" />
     <Compile Include="Business\Specimen.Model\Container.cs" />
     <Compile Include="Business\Specimen.Model\ContainerCollection.cs" />
     <Compile Include="Business\SSHFileTransfer.cs" />

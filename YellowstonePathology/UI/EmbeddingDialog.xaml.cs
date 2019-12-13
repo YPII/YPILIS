@@ -26,7 +26,7 @@ namespace YellowstonePathology.UI
         private DateTime m_WorkDate;        
 
         private YellowstonePathology.Business.BarcodeScanning.EmbeddingScanCollection m_EmbeddingScanCollection;
-        private YellowstonePathology.Business.Test.AliquotOrderCollection m_AliquotOrderHoldCollection;
+        private YellowstonePathology.Business.Specimen.Model.AliquotOrderHoldCollection m_AliquotOrderHoldCollection;
         private EmbeddingNotScannedList m_EmbeddingNotScannedList;
         private YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort m_BarcodeScanPort;
         private YellowstonePathology.Business.Surgical.ProcessorRunCollection m_ProcessorRunCollection;
@@ -266,7 +266,7 @@ namespace YellowstonePathology.UI
             get { return this.m_EmbeddingScanCollection; }
         }            
 
-        public YellowstonePathology.Business.Test.AliquotOrderCollection AliquotOrderHoldCollection
+        public YellowstonePathology.Business.Specimen.Model.AliquotOrderHoldCollection AliquotOrderHoldCollection
         {
             get { return this.m_AliquotOrderHoldCollection; }
         }        

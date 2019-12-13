@@ -32,15 +32,6 @@
                     <Image Source="/Resources/Next.ico" Margin="2" Height="16"></Image>
                 </StackPanel>
             </Button>
-
-            <!--<Button Grid.Column="0" Grid.Row="0" Content="●" Background="Transparent" Foreground="Black" Click="ButtonScanId_Click" HorizontalAlignment="Left" VerticalAlignment="Center"
-                            FontFamily="Tw Cen MT Condensed" Margin="5,5,2,2" Width="20" Height="20" BorderBrush="Transparent" BorderThickness="0">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <ContentPresenter Content="{TemplateBinding Content}"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>-->
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right">
@@ -77,6 +68,7 @@
                             <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Path=AliquotOrderId}" />
                             <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Path=AliquotType}" />
                             <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Path=Status}" />
+                            <GridViewColumn Header="Description" Width="300" DisplayMemberBinding="{Binding Path=Description}" />
                             <GridViewColumn Header="Instructions" Width="300" DisplayMemberBinding="{Binding Path=EmbeddingInstructions}" />
                         </GridView>
                     </ListView.View>
