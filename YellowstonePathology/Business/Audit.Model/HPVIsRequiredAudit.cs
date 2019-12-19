@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Audit.Model
         {            
 			this.IsMarkedOnWomensHealthProfile(this.m_AccessionOrder);
             this.IsRequiredByReflexOrder(this.m_AccessionOrder);
-            this.IsRequiredByStandingOrder(this.m_AccessionOrder);
+            //this.IsRequiredByStandingOrder(this.m_AccessionOrder);
         }
 
 		private void IsMarkedOnWomensHealthProfile(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
@@ -38,7 +38,7 @@ namespace YellowstonePathology.Business.Audit.Model
             }
         }
 
-        private void IsRequiredByStandingOrder(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        /*private void IsRequiredByStandingOrder(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
 			YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTest womensHealthProfileTest = new YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTest();
 			if (accessionOrder.PanelSetOrderCollection.Exists(womensHealthProfileTest.PanelSetId) == true)
@@ -55,7 +55,7 @@ namespace YellowstonePathology.Business.Audit.Model
                     }
                 }
             }
-        }
+        }*/
 
         private void IsRequiredByReflexOrder(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
