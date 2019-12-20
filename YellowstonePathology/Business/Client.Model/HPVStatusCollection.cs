@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace YellowstonePathology.Business.Client.Model
 {
-    public class HPVStatusCollection : ObservableCollection<HPVStatus>
+    public class HPVStatusCollection : Collection<HPVStatus>
     {
     }
 }

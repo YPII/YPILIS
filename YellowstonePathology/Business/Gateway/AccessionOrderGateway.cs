@@ -3571,18 +3571,17 @@ namespace YellowstonePathology.Business.Gateway
 
         }
 
-        public static YellowstonePathology.Business.Client.Model.HPVStatusCollection GetRecentCytologyAccessionNos(DateTime startDate, DateTime endDate)
+        public static Collection<YellowstonePathology.Business.Client.Model.HPVStatus> GetRecentCytologyAccessionNos(DateTime startDate)
         {
-            YellowstonePathology.Business.Client.Model.HPVStatusCollection result = new Client.Model.HPVStatusCollection();
+            Collection<YellowstonePathology.Business.Client.Model.HPVStatus> result = new Collection<Client.Model.HPVStatus>();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "Select pso.MasterAccessionNo, p.HPVStandingOrderCode, ao.ClientName, ao.PhysicianName from tblPanelSetOrder pso " +
                 "join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
                 "join tblPhysician p on p.PhysicianId = ao.PhysicianId " +
                 "where pso.PanelSetId = 116 and pso.Final = 1 " +
-                "and pso.FinalDate between @StartDate and @EndDate;";
+                "and pso.FinalDate = @StartDate;";
             cmd.Parameters.AddWithValue("@StartDate", startDate);
-            cmd.Parameters.AddWithValue("@EndDate", endDate);
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {

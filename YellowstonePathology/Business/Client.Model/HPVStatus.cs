@@ -19,6 +19,16 @@ namespace YellowstonePathology.Business.Client.Model
         public HPVStatus()
         { }
 
+        public HPVStatus(HPVStatus input)
+        {
+            this.m_MasterAccessionNo = input.m_MasterAccessionNo;
+            this.m_HPVStandingOrderCode = input.HPVStandingOrderCode;
+            this.m_ClientName = input.ClientName;
+            this.m_PhysicianName = input.PhysicianName;
+            this.m_HPVRequired = input.HPVRequired;
+            this.m_HPVOrdered = input.HPVOrdered;
+        }
+
         [PersistentProperty()]
         public string MasterAccessionNo
         {
