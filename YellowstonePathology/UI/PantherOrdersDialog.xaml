@@ -321,11 +321,10 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <ListView Grid.Column="0" Grid.Row="1" Name="ListViewStandingOrders" Margin="2,2,2,2" ItemsSource="{Binding Path=StandingOrderDictionary}">
+                    <ListView Grid.Column="0" Grid.Row="1" Name="ListViewStandingOrders" Margin="2,2,2,2" ItemsSource="{Binding Path=StandingOrderResults}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Accession No" DisplayMemberBinding="{Binding Path=Key}" Width="100" />
-                                <GridViewColumn Header="Standing Order" DisplayMemberBinding="{Binding Path=Value}" Width="330" />
+                                <GridViewColumn Header="HPV Status" DisplayMemberBinding="{Binding Path=.}" Width="430" />
                             </GridView>
                         </ListView.View>
                     </ListView>
