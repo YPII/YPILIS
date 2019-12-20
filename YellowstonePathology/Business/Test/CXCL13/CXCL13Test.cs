@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YellowstonePathology.Business.Test.CSCL13
+namespace YellowstonePathology.Business.Test.CXCL13
 {
-    public class CSCL13Test : YellowstonePathology.Business.PanelSet.Model.PanelSet
+    public class CXCL13Test : YellowstonePathology.Business.PanelSet.Model.PanelSet
     {
-        public CSCL13Test()
+        public CXCL13Test()
         {
             this.m_PanelSetId = 374;
-            this.m_PanelSetName = "CSCL13";
-            this.m_Abbreviation = "CSCL13";
+            this.m_PanelSetName = "CXCL13";
+            this.m_Abbreviation = "CXCL13";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
