@@ -29,7 +29,7 @@ namespace YellowstonePathology.UI
         private YellowstonePathology.Business.Test.PantherOrderList m_PantherPreviouslyRunList;
         private YellowstonePathology.Business.Test.PantherAliquotList m_PantherAliquotList;
 
-        private ObservableCollection<string> m_StandingOrderResults;
+        private YellowstonePathology.Business.Client.Model.HPVStatusCollection m_HPVStatusCollection;
 
         private Login.Receiving.LoginPageWindow m_LoginPageWindow;
 
@@ -43,7 +43,7 @@ namespace YellowstonePathology.UI
             this.m_PantherPreviouslyRunList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPantherOrdersPreviouslyRun();
             this.m_PantherWHPOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPantherOrdersNotFinalWHP();
 
-            this.m_StandingOrderResults = new ObservableCollection<string>();
+            this.m_HPVStatusCollection = new Business.Client.Model.HPVStatusCollection();
 
             InitializeComponent();
             this.DataContext = this;
@@ -91,9 +91,9 @@ namespace YellowstonePathology.UI
             get { return this.m_PantherAliquotList; }
         }
 
-        public ObservableCollection<string> StandingOrderResults
+        public YellowstonePathology.Business.Client.Model.HPVStatusCollection HPVStatusCollection
         {
-            get { return this.m_StandingOrderResults; }
+            get { return this.m_HPVStatusCollection; }
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -483,41 +483,44 @@ namespace YellowstonePathology.UI
 
         private void GetRecentCytologyOrdersWithSandingOrderandNoHPV()
         {
-            this.m_StandingOrderResults.Clear();
+            this.m_HPVStatusCollection.Clear();
 
-            Dictionary<string, string> masterAccessionNos = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetRecentCytologyAccessionNosWithNoHPV(DateTime.Today.AddDays(-2), DateTime.Today);
-            foreach(KeyValuePair<string, string> item in masterAccessionNos)
+            this.m_HPVStatusCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetRecentCytologyAccessionNos(DateTime.Today.AddDays(-2), DateTime.Today);
+            foreach(YellowstonePathology.Business.Client.Model.HPVStatus hpvStatus in this.m_HPVStatusCollection)
             {
-                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(item.Key, this);
+                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(hpvStatus.MasterAccessionNo, this);
                 YellowstonePathology.Business.Test.HPV.HPVTest hpvTest = new Business.Test.HPV.HPVTest();
                 YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest thinPrepPapTest = new Business.Test.ThinPrepPap.ThinPrepPapTest();
                 if (accessionOrder.PanelSetOrderCollection.Exists(thinPrepPapTest.PanelSetId) == true)
                 {
-                    if (accessionOrder.PanelSetOrderCollection.Exists(hpvTest.PanelSetId) == true)
+                    YellowstonePathology.Business.Client.Model.StandingOrder standingOrder = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(hpvStatus.HPVStandingOrderCode);
+                    if (standingOrder.IsRequired(accessionOrder) == true)
                     {
-                        this.m_StandingOrderResults.Add(item.Key + "\t HPV ordered");
-
+                        hpvStatus.HPVRequired = true;
                     }
                     else
                     {
-                        YellowstonePathology.Business.Client.Model.StandingOrder standingOrder = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(item.Value);
-                        if (standingOrder.IsRequired(accessionOrder) == true)
-                        {
-                            this.m_StandingOrderResults.Add(item.Key + "\t HPV SHOULD BE ORDERED");
-                        }
-                        else
-                        {
-                            this.m_StandingOrderResults.Add(item.Key + "\t HPV not required");
-                        }
+                        hpvStatus.HPVRequired = false;
+                    }
+
+                    if (accessionOrder.PanelSetOrderCollection.Exists(hpvTest.PanelSetId) == true)
+                    {
+                        hpvStatus.HPVOrdered = true;
+                    }
+                    else
+                    {
+                        hpvStatus.HPVOrdered = false;
                     }
                 }
                 else
                 {
-                    this.m_StandingOrderResults.Add(item.Key + "\t No Thin Prep Pap, HPV not required");
+                    hpvStatus.HPVOrdered = false;
+                    hpvStatus.HPVRequired = false;
                 }
 
                 YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
             }
+            this.NotifyPropertyChanged("HPVStatusCollection");
         }
     }
 }

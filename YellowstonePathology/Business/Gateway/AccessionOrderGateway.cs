@@ -3571,18 +3571,16 @@ namespace YellowstonePathology.Business.Gateway
 
         }
 
-        public static Dictionary<string, string> GetRecentCytologyAccessionNosWithNoHPV(DateTime startDate, DateTime endDate)
+        public static YellowstonePathology.Business.Client.Model.HPVStatusCollection GetRecentCytologyAccessionNos(DateTime startDate, DateTime endDate)
         {
-            Dictionary<string, string> result = new Dictionary<string, string>();
+            YellowstonePathology.Business.Client.Model.HPVStatusCollection result = new Client.Model.HPVStatusCollection();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "Select pso.MasterAccessionNo, p.HPVStandingOrderCode from tblPanelSetOrder pso " +
+            cmd.CommandText = "Select pso.MasterAccessionNo, p.HPVStandingOrderCode, ao.ClientName, ao.PhysicianName from tblPanelSetOrder pso " +
                 "join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
                 "join tblPhysician p on p.PhysicianId = ao.PhysicianId " +
                 "where pso.PanelSetId = 116 and pso.Final = 1 " +
-                "and pso.FinalDate between @StartDate and @EndDate " +
-                "and p.HPVStandingOrderCode <> 'STNDNONE' " +
-                "and p.HPVStandingOrderCode <> 'STNDNOTSET';";
+                "and pso.FinalDate between @StartDate and @EndDate;";
             cmd.Parameters.AddWithValue("@StartDate", startDate);
             cmd.Parameters.AddWithValue("@EndDate", endDate);
 
@@ -3594,7 +3592,10 @@ namespace YellowstonePathology.Business.Gateway
                 {
                     while (dr.Read())
                     {
-                        result.Add(dr[0].ToString(), dr[1].ToString());
+                        YellowstonePathology.Business.Client.Model.HPVStatus hpvStatus = new Client.Model.HPVStatus();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(hpvStatus, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(hpvStatus);
                     }
                 }
             }
