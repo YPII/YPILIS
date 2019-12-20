@@ -17,6 +17,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             PanelSetCollection panelSetCollection = new PanelSetCollection();
             //NEO
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.PIK3CALDT.PIK3CALDTTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.STAT6.STAT6Test());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.FlowCytometryAnalysis.FlowCytometryAnalysisTest());
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.PanelSetHer2AmplificationByFishRetired3()); 

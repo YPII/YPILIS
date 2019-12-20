@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>10.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -1314,6 +1314,7 @@
     <Compile Include="Business\Test\PDL122C3\PDL22C3CMMCNTEView.cs" />
     <Compile Include="Business\Test\PDL1288\PDL1288Test.cs" />
     <Compile Include="Business\Test\PDL1SP142FDA\PDL1SP142FDATest.cs" />
+    <Compile Include="Business\Test\PIK3CALDT\PIK3CALDT.cs" />
     <Compile Include="Business\Test\PlateletAssociatedAntibodiesV2\PlateletAssociatedAntibodiesV2EPICBeakerObxView.cs" />
     <Compile Include="Business\Test\PlateletAssociatedAntibodiesV2\PlateletAssociatedAntibodiesV2EPICOBXView.cs" />
     <Compile Include="Business\Test\PlateletAssociatedAntibodiesV2\PlateletAssociatedAntibodiesV2Test.cs" />

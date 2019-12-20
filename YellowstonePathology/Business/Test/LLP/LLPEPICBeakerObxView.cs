@@ -47,7 +47,8 @@ namespace YellowstonePathology.Business.Test.LLP
                 this.AddNextObxElementBeaker("Amendments", amendments.ToString(), document, "F");
             }
 
-            this.AddNextObxElementBeaker("Cell Population Of Interest", panelSetOrder.CellPopulationOfInterest, document, "F");
+            
+            this.AddNextObxElementBeaker("Cell Population Of Interest", panelSetOrder.FlowMarkerCollection.CellPopulationsOfInterest[0].Description, document, "F");
 
             StringBuilder markers = new StringBuilder();
             foreach (YellowstonePathology.Business.Flow.FlowMarkerItem flowMarkerItem in panelSetOrder.FlowMarkerCollection)
@@ -88,7 +89,7 @@ namespace YellowstonePathology.Business.Test.LLP
                 StringBuilder blastPercent = new StringBuilder();
                 blastPercent.AppendLine("CD34  " + blastCD34Percent);
                 blastPercent.AppendLine("CD117 " + blastCD117Percent);
-                this.AddNextObxElementBeaker("Blast Marker Percentages (as % of nucleated cells):", blastPercent.ToString(), document, "F");
+                this.AddNextObxElementBeaker("Blast Marker Percentages", blastPercent.ToString(), document, "F");
             }
 
             if (string.IsNullOrEmpty(panelSetOrder.SpecimenViabilityPercent) == false && panelSetOrder.SpecimenViabilityPercent != "0")
