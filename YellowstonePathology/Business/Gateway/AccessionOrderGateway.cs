@@ -3570,5 +3570,39 @@ namespace YellowstonePathology.Business.Gateway
             return result;
 
         }
+
+        public static Dictionary<string, string> GetRecentCytologyAccessionNosWithNoHPV(DateTime startDate, DateTime endDate)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select pso.MasterAccessionNo, p.HPVStandingOrderCode from tblPanelSetOrder pso " +
+                "join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
+                "join tblPhysician p on p.PhysicianId = ao.PhysicianId " +
+                "where pso.PanelSetId = 15 and pso.Final = 1 " +
+                "and pso.FinalDate between @StartDate and @EndDate " +
+                "and pso.MasterAccessionNo not in " +
+                "(Select MasterAccessionNo from tblPanelSetOrder where PanelSetId = 14 " +
+                "and OrderDate > adddate(@StartDate, -6)) " +
+                "and p.HPVStandingOrderCode <> 'STNDNONE' " +
+                "and p.HPVStandingOrderCode <> 'STNDNOTSET';";
+            cmd.Parameters.AddWithValue("@StartDate", startDate);
+            cmd.Parameters.AddWithValue("@EndDate", endDate);
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        result.Add(dr[0].ToString(), dr[1].ToString());
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }

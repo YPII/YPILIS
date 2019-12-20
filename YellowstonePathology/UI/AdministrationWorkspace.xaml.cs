@@ -1757,9 +1757,8 @@ namespace YellowstonePathology.UI
             }
             MessageBox.Show("Done");*/
 
-            YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("19-15701", this);
-            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection testOrderReportDistributionCollection = accessionOrder.PanelSetOrderCollection.GetUniqueDistributions();
-            YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+            YellowstonePathology.UI.PantherOrdersDialog dlg = new UI.PantherOrdersDialog();
+            dlg.ShowDialog();
         }
     }
 }

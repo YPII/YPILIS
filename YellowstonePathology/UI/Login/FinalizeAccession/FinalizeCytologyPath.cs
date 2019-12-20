@@ -122,7 +122,8 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void ProviderDistributionPage_Next(object sender, EventArgs e)
         {
-            this.ShowStandingOrderPage();
+            this.ShowICDEntryPage();
+            //this.ShowStandingOrderPage();
         }
 
         private void ProviderDistributionPage_Back(object sender, EventArgs e)
@@ -130,13 +131,13 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             this.ShowPatientLinkingPage();
         }				
 
-		private void ShowStandingOrderPage()
+		/*private void ShowStandingOrderPage()
 		{									
 			Test.StandingOrderPage standingOrderPage = new Test.StandingOrderPage(this.m_AccessionOrder);
 			standingOrderPage.Next += new Test.StandingOrderPage.NextEventHandler(StandingOrderPage_Next);
 			standingOrderPage.Back += new Test.StandingOrderPage.BackEventHandler(StandingOrderPage_Back);
 			this.m_PageNavigator.Navigate(standingOrderPage);						
-		}
+		}*/
 
 		private void StandingOrderPage_Back(object sender, EventArgs e)
 		{
@@ -158,7 +159,8 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
 		public void ICDEntryPage_Back(object sender, EventArgs e)
         {
-            this.ShowStandingOrderPage();
+            this.ShowProviderDistributionPage();
+            //this.ShowStandingOrderPage();
         }
 
         private void ICDEntryPage_Next(object sender, EventArgs e)
