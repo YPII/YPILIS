@@ -321,15 +321,31 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <ListView Grid.Column="0" Grid.Row="1" Name="ListViewStandingOrders" Margin="2,2,2,2" ItemsSource="{Binding Path=StandingOrderResults}">
+                    <ListView Grid.Column="0" Grid.Row="1" Name="ListViewStandingOrders" Margin="2,2,2,2" ItemsSource="{Binding Path=HPVStatusCollection}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="HPV Status" DisplayMemberBinding="{Binding Path=.}" Width="430" />
+                                <GridViewColumn Header="Accession No" DisplayMemberBinding="{Binding Path=MasterAccessionNo}" Width="90" />
+                                <GridViewColumn Header="HPV Required by Standing Order" Width="180">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path=HPVRequired}" HorizontalAlignment="Center"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="HPV Ordered" Width="80">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path=HPVOrdered}" HorizontalAlignment="Center"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Client" DisplayMemberBinding="{Binding Path=ClientName}" Width="300" />
+                                <GridViewColumn Header="Provider" DisplayMemberBinding="{Binding Path=PhysicianName}" Width="250" />
                             </GridView>
                         </ListView.View>
                     </ListView>
 
-                    <Button Grid.Column="1" Grid.Row="0" Margin="10,2,10,2" VerticalAlignment="Top" Click="ButtonFindStandingOrderHPV_Click">Find HPV from Standing Order</Button>
+                    <Button Grid.Column="1" Grid.Row="0" Margin="9.8,0,10,0" Height="30" VerticalAlignment="Top" Click="ButtonFindStandingOrderHPV_Click">Find HPV from Standing Order</Button>
                 </Grid>
 
             </TabItem>
