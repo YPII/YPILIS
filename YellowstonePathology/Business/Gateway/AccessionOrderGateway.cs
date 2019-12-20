@@ -3579,11 +3579,8 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandText = "Select pso.MasterAccessionNo, p.HPVStandingOrderCode from tblPanelSetOrder pso " +
                 "join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
                 "join tblPhysician p on p.PhysicianId = ao.PhysicianId " +
-                "where pso.PanelSetId = 15 and pso.Final = 1 " +
+                "where pso.PanelSetId = 116 and pso.Final = 1 " +
                 "and pso.FinalDate between @StartDate and @EndDate " +
-                "and pso.MasterAccessionNo not in " +
-                "(Select MasterAccessionNo from tblPanelSetOrder where PanelSetId = 14 " +
-                "and OrderDate > adddate(@StartDate, -6)) " +
                 "and p.HPVStandingOrderCode <> 'STNDNONE' " +
                 "and p.HPVStandingOrderCode <> 'STNDNOTSET';";
             cmd.Parameters.AddWithValue("@StartDate", startDate);
