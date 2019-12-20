@@ -4251,9 +4251,6 @@
     </Compile>
     <Compile Include="UI\Test\MLH1MethalationAnalysisResultPath.cs" />
     <Compile Include="UI\Test\StandingOrderHandler.cs" />
-    <Compile Include="UI\Test\StandingOrderPage.xaml.cs">
-      <DependentUpon>StandingOrderPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\TumerRegistryDistributionDialog.xaml.cs">
       <DependentUpon>TumerRegistryDistributionDialog.xaml</DependentUpon>
     </Compile>
@@ -6270,10 +6267,6 @@
     <Page Include="UI\Test\MLH1MethalationAnalysisResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Test\StandingOrderPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\TumerRegistryDistributionDialog.xaml">
       <SubType>Designer</SubType>

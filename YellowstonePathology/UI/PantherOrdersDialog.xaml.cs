@@ -28,6 +28,8 @@ namespace YellowstonePathology.UI
         private YellowstonePathology.Business.Test.PantherOrderList m_PantherPreviouslyRunList;
         private YellowstonePathology.Business.Test.PantherAliquotList m_PantherAliquotList;
 
+        private Dictionary<string, string> m_StandingOrderDictionary;
+
         private Login.Receiving.LoginPageWindow m_LoginPageWindow;
 
         public PantherOrdersDialog()
@@ -84,6 +86,11 @@ namespace YellowstonePathology.UI
         public YellowstonePathology.Business.Test.PantherAliquotList PantherAliquotList
         {
             get { return this.m_PantherAliquotList; }
+        }
+
+        public Dictionary<string, string> StandingOrderDictionary
+        {
+            get { return this.m_StandingOrderDictionary; }
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -464,6 +471,27 @@ namespace YellowstonePathology.UI
                 }
                 this.NotifyPropertyChanged("PantherTrichomonasOrderList");
             }
-        }        
+        }
+
+        private void ButtonFindStandingOrderHPV_Click(object sender, RoutedEventArgs e)
+        {
+            this.GetRecentCytologyOrdersWithSandingOrderandNoHPV();
+        }
+
+        private void GetRecentCytologyOrdersWithSandingOrderandNoHPV()
+        {
+            Dictionary<string, string> masterAccessionNos = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetRecentCytologyAccessionNosWithNoHPV(DateTime.Today.AddDays(-2), DateTime.Today);
+            foreach(KeyValuePair<string, string> item in masterAccessionNos)
+            {
+                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(item.Key, this);
+                YellowstonePathology.Business.Client.Model.StandingOrder standingOrder = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(item.Value);
+                if (standingOrder.IsRequired(accessionOrder) == true)
+                {
+                    this.m_StandingOrderDictionary.Add(item.Key, standingOrder.Description);
+                }
+
+                YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+            }
+        }
     }
 }
