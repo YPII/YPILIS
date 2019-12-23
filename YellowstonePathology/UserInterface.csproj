@@ -387,7 +387,6 @@
     <Compile Include="Business\Client.Model\PlaceOfService.cs" />
     <Compile Include="Business\Client.Model\PlaceOfServiceCollection.cs" />
     <Compile Include="Business\Client.Model\HPVStatus.cs" />
-    <Compile Include="Business\Client.Model\HPVStatusCollection.cs" />
     <Compile Include="Business\ClientOrder.Model\ExternalOrderIds.cs" />
     <Compile Include="Business\ClientOrder.Model\ExternalOrderIdsCollection.cs" />
     <Compile Include="Business\Common\Block.cs" />

@@ -368,6 +368,20 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
+                                <GridViewColumn Header="HPV 1618 Required" Width="110">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path=HPV1618Required}" HorizontalAlignment="Center"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="HPV 1618 Ordered" Width="110">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path=HPV1618Ordered}" HorizontalAlignment="Center"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                                 <GridViewColumn Header="Client" DisplayMemberBinding="{Binding Path=ClientName}" Width="350" />
                                 <GridViewColumn Header="Provider" DisplayMemberBinding="{Binding Path=PhysicianName}" Width="300" />
                             </GridView>

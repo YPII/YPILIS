@@ -523,34 +523,7 @@ namespace YellowstonePathology.UI
             {
                 YellowstonePathology.Business.Client.Model.HPVStatus hpvStatus = new Business.Client.Model.HPVStatus(hpvStatusResult);
                 YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(hpvStatus.MasterAccessionNo, this);
-                YellowstonePathology.Business.Test.HPV.HPVTest hpvTest = new Business.Test.HPV.HPVTest();
-                YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest thinPrepPapTest = new Business.Test.ThinPrepPap.ThinPrepPapTest();
-                if (accessionOrder.PanelSetOrderCollection.Exists(thinPrepPapTest.PanelSetId) == true)
-                {
-                    YellowstonePathology.Business.Client.Model.StandingOrder standingOrder = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(hpvStatus.HPVStandingOrderCode);
-                    if (standingOrder.IsRequired(accessionOrder) == true)
-                    {
-                        hpvStatus.HPVRequired = true;
-                    }
-                    else
-                    {
-                        hpvStatus.HPVRequired = false;
-                    }
-
-                    if (accessionOrder.PanelSetOrderCollection.Exists(hpvTest.PanelSetId) == true)
-                    {
-                        hpvStatus.HPVOrdered = true;
-                    }
-                    else
-                    {
-                        hpvStatus.HPVOrdered = false;
-                    }
-                }
-                else
-                {
-                    hpvStatus.HPVOrdered = false;
-                    hpvStatus.HPVRequired = false;
-                }
+                hpvStatus.SetRequiredAndOrdered(accessionOrder);
 
                 YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
                 this.m_BackgroundWorker.ReportProgress(1, hpvStatus);
