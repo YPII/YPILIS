@@ -29,7 +29,9 @@ namespace YellowstonePathology.UI
         private YellowstonePathology.Business.Test.PantherOrderList m_PantherPreviouslyRunList;
         private YellowstonePathology.Business.Test.PantherAliquotList m_PantherAliquotList;
 
-        private YellowstonePathology.Business.Client.Model.HPVStatusCollection m_HPVStatusCollection;
+        private ObservableCollection<YellowstonePathology.Business.Client.Model.HPVStatus> m_HPVStatusCollection;
+        private DateTime m_HPVDate;
+        private System.ComponentModel.BackgroundWorker m_BackgroundWorker;
 
         private Login.Receiving.LoginPageWindow m_LoginPageWindow;
 
@@ -43,7 +45,8 @@ namespace YellowstonePathology.UI
             this.m_PantherPreviouslyRunList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPantherOrdersPreviouslyRun();
             this.m_PantherWHPOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPantherOrdersNotFinalWHP();
 
-            this.m_HPVStatusCollection = new Business.Client.Model.HPVStatusCollection();
+            this.m_HPVStatusCollection = new ObservableCollection<Business.Client.Model.HPVStatus>();
+            this.m_HPVDate = DateTime.Today;
 
             InitializeComponent();
             this.DataContext = this;
@@ -91,9 +94,19 @@ namespace YellowstonePathology.UI
             get { return this.m_PantherAliquotList; }
         }
 
-        public YellowstonePathology.Business.Client.Model.HPVStatusCollection HPVStatusCollection
+        public ObservableCollection<Business.Client.Model.HPVStatus> HPVStatusCollection
         {
             get { return this.m_HPVStatusCollection; }
+        }
+
+        public DateTime HPVDate
+        {
+            get { return this.m_HPVDate; }
+            set
+            {
+                this.m_HPVDate = value;
+                this.NotifyPropertyChanged("HPVDate");
+            }
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -476,18 +489,39 @@ namespace YellowstonePathology.UI
             }
         }
 
-        private void ButtonFindStandingOrderHPV_Click(object sender, RoutedEventArgs e)
+        private void ButtonHPVDateBack_Click(object sender, RoutedEventArgs e)
         {
-            this.GetRecentCytologyOrdersWithSandingOrderandNoHPV();
+            this.HPVDate = this.m_HPVDate.AddDays(-1);
         }
 
-        private void GetRecentCytologyOrdersWithSandingOrderandNoHPV()
+        private void ButtonHPVDateForward_Click(object sender, RoutedEventArgs e)
+        {
+            this.HPVDate = this.m_HPVDate.AddDays(1);
+        }
+
+        private void ButtonFindStandingOrderHPV_Click(object sender, RoutedEventArgs e)
         {
             this.m_HPVStatusCollection.Clear();
+            this.StartHPVBackgroundWorker();
+        }
 
-            this.m_HPVStatusCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetRecentCytologyAccessionNos(DateTime.Today.AddDays(-2), DateTime.Today);
-            foreach(YellowstonePathology.Business.Client.Model.HPVStatus hpvStatus in this.m_HPVStatusCollection)
+        private void StartHPVBackgroundWorker()
+        {
+            this.m_BackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.m_BackgroundWorker.WorkerSupportsCancellation = false;
+            this.m_BackgroundWorker.WorkerReportsProgress = true;
+            this.m_BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
+            this.m_BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(GetRecentCytologyOrders);
+            this.m_BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
+            this.m_BackgroundWorker.RunWorkerAsync();
+        }
+        private void GetRecentCytologyOrders(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+            Collection<YellowstonePathology.Business.Client.Model.HPVStatus> statusCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetRecentCytologyAccessionNos(this.m_HPVDate);
+            foreach(YellowstonePathology.Business.Client.Model.HPVStatus hpvStatusResult in statusCollection)
             {
+                YellowstonePathology.Business.Client.Model.HPVStatus hpvStatus = new Business.Client.Model.HPVStatus(hpvStatusResult);
                 YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(hpvStatus.MasterAccessionNo, this);
                 YellowstonePathology.Business.Test.HPV.HPVTest hpvTest = new Business.Test.HPV.HPVTest();
                 YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest thinPrepPapTest = new Business.Test.ThinPrepPap.ThinPrepPapTest();
@@ -519,8 +553,22 @@ namespace YellowstonePathology.UI
                 }
 
                 YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+                this.m_BackgroundWorker.ReportProgress(1, hpvStatus);
             }
-            this.NotifyPropertyChanged("HPVStatusCollection");
+        }
+
+        private void BackgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Input, new System.Threading.ThreadStart(delegate ()
+            {
+                this.m_HPVStatusCollection.Insert(0, (YellowstonePathology.Business.Client.Model.HPVStatus)e.UserState);
+                this.NotifyPropertyChanged("HPVSatusCollection");
+            }));
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+           this.m_BackgroundWorker.Dispose();
         }
     }
 }

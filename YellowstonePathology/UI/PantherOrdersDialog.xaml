@@ -315,17 +315,46 @@
                 <Grid Margin="10,10,10,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center">Date</TextBlock>
+                        <TextBox Name="TextBoxHPVDate" Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=HPVDate,Converter={StaticResource ShortDateConverter}}" VerticalAlignment="Center" />
+
+                        <Button Grid.Column="2" Grid.Row="0" Click="ButtonHPVDateBack_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Resources/Previous.ico" Margin="2" Height="22"></Image>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Column="3" Grid.Row="0" Click="ButtonHPVDateForward_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Resources/Next.ico" Margin="2" Height="22"></Image>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Column="4" Grid.Row="0" Margin="20,2,2,2" Height="30" VerticalAlignment="Top" Click="ButtonFindStandingOrderHPV_Click">HPV Status from Standing Order</Button>
+
+                    </Grid>
+                    
                     <ListView Grid.Column="0" Grid.Row="1" Name="ListViewStandingOrders" Margin="2,2,2,2" ItemsSource="{Binding Path=HPVStatusCollection}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Accession No" DisplayMemberBinding="{Binding Path=MasterAccessionNo}" Width="90" />
-                                <GridViewColumn Header="HPV Required by Standing Order" Width="180">
+                                <GridViewColumn Header="HPV Required" Width="80">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <CheckBox IsChecked="{Binding Path=HPVRequired}" HorizontalAlignment="Center"></CheckBox>
@@ -339,13 +368,12 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Client" DisplayMemberBinding="{Binding Path=ClientName}" Width="300" />
-                                <GridViewColumn Header="Provider" DisplayMemberBinding="{Binding Path=PhysicianName}" Width="250" />
+                                <GridViewColumn Header="Client" DisplayMemberBinding="{Binding Path=ClientName}" Width="350" />
+                                <GridViewColumn Header="Provider" DisplayMemberBinding="{Binding Path=PhysicianName}" Width="300" />
                             </GridView>
                         </ListView.View>
                     </ListView>
 
-                    <Button Grid.Column="1" Grid.Row="0" Margin="9.8,0,10,0" Height="30" VerticalAlignment="Top" Click="ButtonFindStandingOrderHPV_Click">Find HPV from Standing Order</Button>
                 </Grid>
 
             </TabItem>
