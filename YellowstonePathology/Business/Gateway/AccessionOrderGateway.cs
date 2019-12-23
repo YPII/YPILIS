@@ -3580,7 +3580,9 @@ namespace YellowstonePathology.Business.Gateway
                 "join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
                 "join tblPhysician p on p.PhysicianId = ao.PhysicianId " +
                 "where pso.PanelSetId = 116 and pso.Final = 1 " +
-                "and pso.FinalDate = @StartDate;";
+                "and pso.FinalDate = @StartDate " +
+                "and p.HPVStandingOrderCode <> 'STNDNONE' " +
+                "and p.HPVStandingOrderCode <> 'STNDNOTSET';";
             cmd.Parameters.AddWithValue("@StartDate", startDate);
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
