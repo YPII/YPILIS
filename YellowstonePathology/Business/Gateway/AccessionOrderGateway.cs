@@ -3576,13 +3576,14 @@ namespace YellowstonePathology.Business.Gateway
             Collection<YellowstonePathology.Business.Client.Model.HPVStatus> result = new Collection<Client.Model.HPVStatus>();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "Select pso.MasterAccessionNo, p.HPVStandingOrderCode, ao.ClientName, ao.PhysicianName from tblPanelSetOrder pso " +
-                "join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
+            cmd.CommandText = "Select pso.MasterAccessionNo, p.HPVStandingOrderCode, p.HPV1618StandingOrderCode, ao.ClientName, ao.PhysicianName " +
+                "from tblPanelSetOrder pso join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
                 "join tblPhysician p on p.PhysicianId = ao.PhysicianId " +
                 "where pso.PanelSetId = 116 and pso.Final = 1 " +
-                "and pso.FinalDate = @StartDate " +
-                "and p.HPVStandingOrderCode <> 'STNDNONE' " +
-                "and p.HPVStandingOrderCode <> 'STNDNOTSET';";
+                "and pso.FinalDate >= @StartDate " +
+                "and (p.HPVStandingOrderCode not in('STNDNONE', 'STNDNOTSET') " +
+                "or p.HPV1618StandingOrderCode not in('STNDNONE', 'STNDNOTSET', 'HPV1618NONE')) " +
+                "order by ao.PhysicianName, ao.ClientName, pso.MasterAccessionNo;";
             cmd.Parameters.AddWithValue("@StartDate", startDate);
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
