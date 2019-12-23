@@ -96,19 +96,8 @@ namespace YellowstonePathology.Business.Client.Model
 
         public void SetRequiredAndOrdered(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
-            YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest thinPrepPapTest = new Business.Test.ThinPrepPap.ThinPrepPapTest();
-            if (accessionOrder.PanelSetOrderCollection.Exists(thinPrepPapTest.PanelSetId) == true)
-            {
-                this.SetHPVRequiredAndOrdered(accessionOrder);
-                this.SetHPV1618RequiredAndOrdered(accessionOrder);
-            }
-            else
-            {
-                this.m_HPVOrdered = false;
-                this.m_HPVRequired = false;
-                this.m_HPV1618Ordered = false;
-                this.m_HPV1618Required = false;
-            }
+            this.SetHPVRequiredAndOrdered(accessionOrder);
+            this.SetHPV1618RequiredAndOrdered(accessionOrder);
         }
 
         private void SetHPVRequiredAndOrdered(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
