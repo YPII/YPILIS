@@ -1756,9 +1756,6 @@ namespace YellowstonePathology.UI
                 panelSet.Save();
             }
             MessageBox.Show("Done");*/
-
-            YellowstonePathology.UI.PantherOrdersDialog dlg = new UI.PantherOrdersDialog();
-            dlg.ShowDialog();
         }
     }
 }

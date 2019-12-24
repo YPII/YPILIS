@@ -3583,7 +3583,7 @@ namespace YellowstonePathology.Business.Gateway
                 "and pso.FinalDate >= @StartDate " +
                 "and (p.HPVStandingOrderCode not in('STNDNONE', 'STNDNOTSET') " +
                 "or p.HPV1618StandingOrderCode not in('STNDNONE', 'STNDNOTSET', 'HPV1618NONE')) " +
-                "order by ao.PhysicianName, ao.ClientName, pso.MasterAccessionNo;";
+                "order by ao.PhysicianName desc, ao.ClientName desc, pso.MasterAccessionNo desc;";
             cmd.Parameters.AddWithValue("@StartDate", startDate);
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))

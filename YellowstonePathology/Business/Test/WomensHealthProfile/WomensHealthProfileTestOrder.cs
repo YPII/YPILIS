@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
         private string m_HPV1618StandingOrderCode;
         private string m_HPV1618ReflexOrderCode;
         private string m_Comment;
-        private bool m_MangePerASCCPRule;
+        private bool m_MangePerASCCP;
 
 
         public WomensHealthProfileTestOrder() 
@@ -180,15 +180,15 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
         }
 
         [PersistentProperty()]
-        public bool MangePerASCCPRule
+        public bool MangePerASCCP
         {
-            get { return this.m_MangePerASCCPRule; }
+            get { return this.m_MangePerASCCP; }
             set
             {
-                if (this.m_MangePerASCCPRule != value)
+                if (this.m_MangePerASCCP != value)
                 {
-                    this.m_MangePerASCCPRule = value;
-                    this.NotifyPropertyChanged("MangePerASCCPRule");
+                    this.m_MangePerASCCP = value;
+                    this.NotifyPropertyChanged("MangePerASCCP");
                 }
             }
         }

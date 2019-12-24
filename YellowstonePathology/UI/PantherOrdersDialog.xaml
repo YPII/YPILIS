@@ -351,6 +351,15 @@
                     </Grid>
                     
                     <ListView Grid.Column="0" Grid.Row="1" Name="ListViewStandingOrders" Margin="2,2,2,2" ItemsSource="{Binding Path=HPVStatusCollection}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=RequiredNotOrdered}" Value="True">
+                                        <Setter Property="Background" Value="#f8b3be"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Accession No" DisplayMemberBinding="{Binding Path=MasterAccessionNo}" Width="90" />
