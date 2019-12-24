@@ -56,9 +56,9 @@ namespace YellowstonePathology.Business.Monitor.Model
                     blockCount.BozemanPaths = pathologistsByLocation.BozemanCount;
                     blockCount.BlocksPerPath = totalBlocks / totalPaths;                    
 
-                    if(blockCount.BozemanBlocks != 0 && blockCount.BozemanPaths != 0)
+                    if(blockCount.BozemanBlocks.HasValue && blockCount.BozemanBlocks != 0 && blockCount.BozemanPaths != 0)
                     {
-                        blockCount.BlocksPerPathBozeman = blockCount.BozemanBlocks / blockCount.BozemanPaths;
+                        blockCount.BlocksPerPathBozeman = blockCount.BozemanBlocks.Value / blockCount.BozemanPaths;
                         blockCount.BlocksToSend = blockCount.BlocksPerPath - blockCount.BlocksPerPathBozeman;
                         if (blockCount.BlocksToSend < 10)
                         {
@@ -67,7 +67,7 @@ namespace YellowstonePathology.Business.Monitor.Model
                     }
                     else
                     {
-                        if(blockCount.BozemanBlocks == 0)
+                        if(blockCount.BozemanBlocks.HasValue && blockCount.BozemanBlocks.Value == 0)
                         {                                                        
                             blockCount.BlocksToSend = blockCount.BlocksPerPath * blockCount.BozemanPaths;
                             if (blockCount.BlocksToSend < 10) blockCount.BlocksToSend = 0;
@@ -80,7 +80,7 @@ namespace YellowstonePathology.Business.Monitor.Model
                 }
                 else
                 {
-                    blockCount.BlocksToSend = 0;
+                    blockCount.BlocksToSend = null;
                 }                                
             }                
             
