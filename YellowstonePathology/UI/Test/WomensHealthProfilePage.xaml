@@ -169,8 +169,8 @@
 					<ComboBox Name="ComboBoxStandingOrderDescription" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="15" Margin="2,2,2,2" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=HPV1618StandingOrderCollection}" SelectedValuePath="StandingOrderCode" DisplayMemberPath="Description"
 									SelectedValue="{Binding Path=WomensHealthProfileTestOrder.HPV1618StandingOrderCode}" IsEnabled="False"/>
 
-                    <TextBlock Grid.Column="0" Grid.Row="16" Margin="2,2,2,2" FontWeight="Bold">Mange Per ASCCP Rule:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="16" IsChecked="{Binding Path=WomensHealthProfileTestOrder.MangePerASCCPRule}" Margin="2,3,2,2"></CheckBox>
+                    <TextBlock Grid.Column="0" Grid.Row="16" Margin="2,2,2,2" FontWeight="Bold">Mange Per ASCCP:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="16" IsChecked="{Binding Path=WomensHealthProfileTestOrder.MangePerASCCP}" Margin="2,3,2,2"></CheckBox>
 
                     <TextBlock Grid.Column="0" Grid.Row="17" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
 					<CheckBox Grid.Column="1" Grid.Row="17" IsChecked="{Binding Path=WomensHealthProfileTestOrder.Distribute}" Margin="2,3,2,2"></CheckBox>

@@ -18,6 +18,7 @@ namespace YellowstonePathology.Business.Client.Model
         private bool m_HPVOrdered;
         private bool m_HPV1618Required;
         private bool m_HPV1618Ordered;
+        private bool m_RequiredNotOrdered;
 
         public HPVStatus()
         { }
@@ -92,6 +93,11 @@ namespace YellowstonePathology.Business.Client.Model
         {
             get { return this.m_HPV1618Ordered; }
             set { this.m_HPV1618Ordered = value; }
+        }
+
+        public bool RequiredNotOrdered
+        {
+            get { return (this.m_HPVRequired && !this.m_HPVOrdered) || (this.m_HPV1618Required && !this.HPV1618Ordered); }
         }
 
         public void SetRequiredAndOrdered(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
