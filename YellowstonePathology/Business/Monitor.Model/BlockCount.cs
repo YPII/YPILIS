@@ -16,9 +16,9 @@ namespace YellowstonePathology.Business.Monitor.Model
         private DateTime m_BlockCountDate;        
         private int m_YPIBlocks;
         private int m_YPIPaths;    
-        private int m_BozemanBlocks;
+        private int? m_BozemanBlocks;
         private int m_BozemanPaths;
-        private int m_BlocksToSend;
+        private int? m_BlocksToSend;
         private int m_BlocksPerPath;
         private int m_BlocksPerPathBozeman;
 
@@ -75,7 +75,7 @@ namespace YellowstonePathology.Business.Monitor.Model
         }
 
         [PersistentProperty()]
-        public int BozemanBlocks
+        public int? BozemanBlocks
         {
             get { return this.m_BozemanBlocks; }
             set
@@ -131,7 +131,7 @@ namespace YellowstonePathology.Business.Monitor.Model
         }
 
         [PersistentProperty()]
-        public int BlocksToSend
+        public int? BlocksToSend
         {
             get { return this.m_BlocksToSend; }
             set
@@ -146,7 +146,7 @@ namespace YellowstonePathology.Business.Monitor.Model
 
         public int GetTotalBlockCount()
         {
-            return this.m_YPIBlocks + this.m_BozemanBlocks;
+            return this.m_YPIBlocks + (this.m_BozemanBlocks.HasValue ? this.m_BozemanBlocks.Value : 0);
         }
 
         public void NotifyPropertyChanged(String info)
