@@ -221,6 +221,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma.PDL122C3forUrothelialCarcinomaTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.ALLFusionProfile.ALLFusionProfileTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.NeoTYPEPrecisionProfileForSolidTumors.NeoTYPEPrecisionProfileForSolidTumorsTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.CXCL13.CXCL13Test());
 
             //ARUP
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.PanelSetArupBraf());
