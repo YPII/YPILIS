@@ -51,7 +51,6 @@
 				    <MenuItem Header="Login" Click="MenuItemLogin_Click" />
                     <MenuItem Header="Material Tracking" Click="MenuItemMaterialTracking_Click" />
                     <MenuItem Header="Panther Orders" Click="MenuItemPantherOrders_Click" />
-                    <MenuItem Header="Panther Storage" Click="MenuItemPantherStorage_Click" />
                     <MenuItem Header="Acid Wash Orders" Click="MenuItemAcidWashOrders_Click" />
                     <MenuItem Header="Embedding" Click="MenuItemEmbedding_Click" />
                     <MenuItem Header="Retrospective Reviews" Click="MenuItemRetrospectiveReviews_Click" />

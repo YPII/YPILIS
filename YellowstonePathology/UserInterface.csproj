@@ -348,7 +348,7 @@
     <Compile Include="Business\Client.Model\HPVCompoundStandingOrderRule8.cs" />
     <Compile Include="Business\Client.Model\HPVCompoundStandingOrderRule7.cs" />
     <Compile Include="Business\Client.Model\HPVCompoundStandingOrderRule6.cs" />
-    <Compile Include="Business\Client.Model\HPVReflexOrderRuleMangePerASCCP.cs" />
+    <Compile Include="Business\Client.Model\MangePerASCCP.cs" />
     <Compile Include="Business\Client.Model\HPVReflexOrderRule141.cs" />
     <Compile Include="Business\Client.Model\HPVReflexOrderRule17.cs" />
     <Compile Include="Business\Client.Model\HPVReflexOrderRule18.cs" />
@@ -3567,9 +3567,6 @@
       <DependentUpon>PantherOrdersDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\PantherAliquotReport.cs" />
-    <Compile Include="UI\PantherStorageDialog.xaml.cs">
-      <DependentUpon>PantherStorageDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\ReportDistribution\ReportDistributionWorkspace.xaml.cs">
       <DependentUpon>ReportDistributionWorkspace.xaml</DependentUpon>
     </Compile>
@@ -5582,10 +5579,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\PantherOrdersDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\PantherStorageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
