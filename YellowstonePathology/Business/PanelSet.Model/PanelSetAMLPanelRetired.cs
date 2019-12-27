@@ -18,8 +18,10 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
-
             this.m_AllowMultiplePerAccession = true;
+
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             this.m_Active = false;
 
             string taskDescription = "Gather materials (Peripheral blood: 2-5 mL in sodium heparin tube and 2x5 mL in EDTA tube or " +

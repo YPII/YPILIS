@@ -23,6 +23,8 @@ namespace YellowstonePathology.Business.Test.PrealbuminTTR
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
+
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
             this.m_ExpectedDuration = TimeSpan.FromDays(5);
 
             string taskDescription = "Gather materials and send out to Neo.";
