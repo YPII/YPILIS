@@ -16,9 +16,6 @@ namespace YellowstonePathology.Business.Test
         public const string MDOH = "MDOH";
         public const string WDOH = "WDOH";
 
-<<<<<<< HEAD
-
-=======
         public static bool IsDistributionTypeImplemented(int panelSetId, string distributionType)
         {
             bool result = true;
@@ -72,6 +69,5 @@ namespace YellowstonePathology.Business.Test
 
             return result;
         }
->>>>>>> 79380102601c0b28d16e94fe4d12fdb67540cf94
     }
 }
