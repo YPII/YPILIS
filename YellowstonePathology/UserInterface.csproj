@@ -395,7 +395,6 @@
     <Compile Include="Business\EthContract.cs" />
     <Compile Include="Business\EthContractCollection.cs" />
     <Compile Include="Business\GrossCameraPubSubHandler.cs" />
-    <Compile Include="Business\Helper\DistributionTypeMap.cs" />
     <Compile Include="Business\Helper\JSONHelper.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicHRHClient.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerResultView.cs" />

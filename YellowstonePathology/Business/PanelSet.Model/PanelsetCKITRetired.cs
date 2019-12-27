@@ -21,6 +21,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
             this.m_AllowMultiplePerAccession = true;
 
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             string taskDescription = "Gather materials (Peripheral blood: 5 mL in EDTA tube or Bone marrow: 2 mL in EDTA tube) and send out to Neo.";
 
             YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");

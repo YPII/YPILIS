@@ -23,6 +23,8 @@ namespace YellowstonePathology.Business.Test.MGMTPromoterMethylationAnalysis
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
 
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             string task2Description = "Collect slide from pathologist and paraffin block from histology and send to Neogenomics.";
             YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, task2Description, neogenomicsIrvine));

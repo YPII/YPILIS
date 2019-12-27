@@ -22,6 +22,9 @@ namespace YellowstonePathology.Business.PanelSet.Model
 			this.m_SurgicalAmendmentRequired = true;
 			            
 			this.m_AllowMultiplePerAccession = true;
+
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             this.m_ExpectedDuration = new TimeSpan(120, 0, 0);            
 
             this.m_TechnicalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");

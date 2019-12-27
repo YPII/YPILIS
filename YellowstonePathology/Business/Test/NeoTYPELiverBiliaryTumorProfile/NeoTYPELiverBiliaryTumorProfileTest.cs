@@ -25,6 +25,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPELiverBiliaryTumorProfile
             this.m_AllowMultiplePerAccession = true;
             this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             string taskDescription = "Gather materials and send out to Neo.";
 
             YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");

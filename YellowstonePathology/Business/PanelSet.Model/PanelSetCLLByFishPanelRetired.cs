@@ -21,6 +21,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
             this.m_AllowMultiplePerAccession = true;
 
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             string taskDescription = "Gather materials (Peripheral blood (preferred): 2 EDTA tubes, 5 mL each, Bone marrow: Minimum 1 mL in EDTA, 1-3 mL preferred," +
                 "or Fresh lymph node tissue: 0.5 - 1 cm3 in RPMI) and send out to Neo.";
 

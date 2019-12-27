@@ -25,6 +25,8 @@ namespace YellowstonePathology.Business.Test.MDSCMMLProfile
             this.m_ExpectedDuration = TimeSpan.FromDays(5);
             //changed by MS and TK
 
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             string taskDescription = "Gather materials (Peripheral blood: 2-5 mL in sodium heparin tube and 2x5 mL in EDTA tube or " +
             "Bone marrow: 1-2 mL in sodium heparin tube and 2 mL in EDTA tube or Fresh unfixed tissue in RPMI) and send out to Neo.";
 

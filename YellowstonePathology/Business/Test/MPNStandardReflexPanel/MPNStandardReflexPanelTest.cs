@@ -19,7 +19,9 @@ namespace YellowstonePathology.Business.Test.MPNStandardReflexPanel
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
             
-			this.m_AllowMultiplePerAccession = true;            
+			this.m_AllowMultiplePerAccession = true;
+
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
             string taskDescription = "Collect specimen and send to Neo.";

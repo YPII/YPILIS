@@ -20,10 +20,9 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_Active = true;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
-            this.m_AllowMultiplePerAccession = true;            
+            this.m_AllowMultiplePerAccession = true;
 
-            
-			
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Gather materials and send out to Neo.";
 

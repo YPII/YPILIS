@@ -26,6 +26,8 @@ namespace YellowstonePathology.Business.Test.ChimerismStudyByDNAMarkers
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
 
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             string taskDescription = "Gather materials and send to Children’s Hospital Colorado Laboratory.";
 
             YellowstonePathology.Business.Facility.Model.Facility childrensFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("CHHOSCO");

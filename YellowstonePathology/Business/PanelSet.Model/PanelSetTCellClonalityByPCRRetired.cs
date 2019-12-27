@@ -20,6 +20,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
 
             this.m_AllowMultiplePerAccession = true;
+
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
             this.m_Active = false;
 
             string taskDescription = "Gather materials (Peripheral blood: 5 mL in EDTA tube. Bone marrow: 2 mL in EDTA tube. " +

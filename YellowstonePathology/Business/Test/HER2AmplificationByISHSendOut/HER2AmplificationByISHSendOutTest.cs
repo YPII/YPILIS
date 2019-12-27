@@ -26,6 +26,8 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISHSendOut
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
 
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             YellowstonePathology.Business.Facility.Model.Facility mayo = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("MAYO");
             this.m_TechnicalComponentFacility = mayo;
             this.m_TechnicalComponentBillingFacility = mayo;

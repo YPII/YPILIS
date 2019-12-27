@@ -20,7 +20,9 @@ namespace YellowstonePathology.Business.Test.MicrosatelliteInstabilityAnalysis
 
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
-			this.m_AllowMultiplePerAccession = true;            
+			this.m_AllowMultiplePerAccession = true;
+
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Collect paraffin block from Histology(normal tissue and tumor) and send out to Neo.";
 
