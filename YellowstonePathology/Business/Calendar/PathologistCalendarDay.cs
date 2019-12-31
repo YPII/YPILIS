@@ -18,8 +18,7 @@ namespace YellowstonePathology.Business.Calendar
         private PathologistCalendarStatus m_DrBrownStatus;
         private PathologistCalendarStatus m_DrDurdenStatus;
         private PathologistCalendarStatus m_DrEmerickStatus;
-        private PathologistCalendarStatus m_DrLuemStatus;
-        private PathologistCalendarStatus m_DrMessnerStatus;
+        private PathologistCalendarStatus m_DrLuemStatus;        
         private PathologistCalendarStatus m_DrNeroStatus;
         private PathologistCalendarStatus m_DrSchneiderStatus;
 
@@ -33,8 +32,7 @@ namespace YellowstonePathology.Business.Calendar
             this.m_DrBrownStatus = new Calendar.PathologistCalendarStatus("Dr Brown", "Billings");
             this.m_DrDurdenStatus = new Calendar.PathologistCalendarStatus("Dr Durden", "Billings");
             this.m_DrEmerickStatus = new Calendar.PathologistCalendarStatus("Dr Emerick", "Bozeman");
-            this.m_DrLuemStatus = new Calendar.PathologistCalendarStatus("Dr Luem", "Bozeman");
-            this.m_DrMessnerStatus = new Calendar.PathologistCalendarStatus("Dr Messner", "Billings");
+            this.m_DrLuemStatus = new Calendar.PathologistCalendarStatus("Dr Luem", "Bozeman");            
             this.m_DrNeroStatus = new Calendar.PathologistCalendarStatus("Dr Nero", "Bozeman");
             this.m_DrSchneiderStatus = new Calendar.PathologistCalendarStatus("Dr Schneider", "Billings");
         }
@@ -128,20 +126,7 @@ namespace YellowstonePathology.Business.Calendar
                     this.NotifyPropertyChanged("DrLuemStatus");
                 }
             }
-        }
-
-        public PathologistCalendarStatus DrMessnerStatus
-        {
-            get { return this.m_DrMessnerStatus; }
-            set
-            {
-                if (value != this.m_DrMessnerStatus)
-                {
-                    this.m_DrMessnerStatus = value;
-                    this.NotifyPropertyChanged("DrMessnerStatus");
-                }
-            }
-        }
+        }        
 
         public PathologistCalendarStatus DrNeroStatus
         {

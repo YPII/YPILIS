@@ -122,8 +122,7 @@ namespace YellowstonePathology.Business.Calendar
                 statusList.Add(pathologistCalendarDay.DrBrownStatus);
                 statusList.Add(pathologistCalendarDay.DrDurdenStatus);
                 statusList.Add(pathologistCalendarDay.DrEmerickStatus);
-                statusList.Add(pathologistCalendarDay.DrLuemStatus);
-                statusList.Add(pathologistCalendarDay.DrMessnerStatus);
+                statusList.Add(pathologistCalendarDay.DrLuemStatus);                
                 statusList.Add(pathologistCalendarDay.DrNeroStatus);
                 statusList.Add(pathologistCalendarDay.DrSchneiderStatus);
 

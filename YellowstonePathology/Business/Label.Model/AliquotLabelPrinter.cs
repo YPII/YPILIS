@@ -62,7 +62,7 @@ namespace YellowstonePathology.Business.Label.Model
         }
 
         private void PrintRow(Business.Label.Model.AliquotPaperZPLLabel label)
-        {            
+        {
             StringBuilder result = new StringBuilder();
             int xOffset = 0;
             
@@ -74,7 +74,7 @@ namespace YellowstonePathology.Business.Label.Model
             }
 
             result.Append("^XZ");
-
+            
             Business.Label.Model.ZPLPrinterTCP printer = new ZPLPrinterTCP("10.1.1.21");
             printer.Print(result.ToString());
         }        
