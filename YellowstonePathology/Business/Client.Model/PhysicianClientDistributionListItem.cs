@@ -95,200 +95,20 @@ namespace YellowstonePathology.Business.Client.Model
             }
         }
 
-        public bool SetDistribution(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public void SetDistribution(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
-            bool result = true;
             foreach (YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in accessionOrder.PanelSetOrderCollection)
             {
-                result = SetDistribution(panelSetOrder, accessionOrder);
-            }
-            return result;
-        }
-
-        private bool SetDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
-        {
-            bool result = true;
-
-            switch (this.DistributionType)
-            {
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WEBSERVICEANDFAX:
-                    this.HandleAddWebServiceDistribution(panelSetOrder);
-                    this.HandleAddFaxDistribution(panelSetOrder);
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX:
-                    this.HandleAddEPICDistribution(panelSetOrder, accessionOrder);
-                    this.HandleAddFaxDistribution(panelSetOrder);
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC:
-                    this.HandleAddEPICDistribution(panelSetOrder, accessionOrder);
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.FAX:
-                    this.HandleAddFaxDistribution(panelSetOrder);
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WEBSERVICE:
-                    this.HandleAddWebServiceDistribution(panelSetOrder);
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.PRINT:
-                    this.AddTestOrderReportDistribution(panelSetOrder, this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.PRINT, this.FaxNumber);
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MTDOH:
-                    this.HandleAddMTDOHDistribution(panelSetOrder);
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WYDOH:
-                    this.HandleAddWYDOHDistribution(panelSetOrder);
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW:
-                    this.HandleAddECWDistribution(panelSetOrder, accessionOrder);
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA:
-                    this.HandleAddAthenaDistribution(panelSetOrder, accessionOrder);
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH:
-                    this.HandleAddMEDITECHDistribution(panelSetOrder, accessionOrder);
-                    break;
-                default:
-                    throw new Exception("Not implemented");
-            }
-
-            return result;
-        }
-
-        private void AddTestOrderReportDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, int physicianId, string physicianName, int clientId, string clientName, string distributionType, string faxNumber)
-        {
-            string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution =
-                new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, panelSetOrder.ReportNo, physicianId, physicianName,
-                    clientId, clientName, distributionType, faxNumber);
-            panelSetOrder.TestOrderReportDistributionCollection.Add(testOrderReportDistribution);
-        }
-
-        private bool HandleAddFaxDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder)
-        {
-            bool result = true;
-            if (string.IsNullOrEmpty(this.m_FaxNumber) == false)
-            {
-                if (panelSetOrder.TestOrderReportDistributionCollection.Exists(this.m_PhysicianId, this.m_ClientId, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.FAX) == false)
+                YellowstonePathology.Business.Test.DistributionSetter distributtionSetter = new Test.DistributionSetter(panelSetOrder,
+                    this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName,
+                    this.m_DistributionType, this.m_FaxNumber, accessionOrder.SvhAccount, accessionOrder.SvhMedicalRecord);
+                List<Business.ReportDistribution.Model.TestOrderReportDistribution> testOrderReportDistributions = distributtionSetter.GetDistributionResult();
+                foreach(Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution in testOrderReportDistributions)
+                if (testOrderReportDistribution != null)
                 {
-                    this.AddTestOrderReportDistribution(panelSetOrder, this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.FAX, this.FaxNumber);
+                    panelSetOrder.TestOrderReportDistributionCollection.Add(testOrderReportDistribution);
                 }
             }
-            else
-            {
-                //MessageBox.Show("Unable to add a fax distribution because the fax number is blank.");
-                result = false;
-            }
-            return result;
-        }
-
-        private bool HandleAddEPICDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
-        {
-            bool result = true;
-            if (panelSetOrder.TestOrderReportDistributionCollection.DistributionTypeExists(YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC) == false)
-            {
-                if(Business.Test.ResultType.IsDistributionTypeImplemented(panelSetOrder.PanelSetId, this.m_DistributionType) == true)
-                {
-                    this.AddTestOrderReportDistribution(panelSetOrder, accessionOrder.PhysicianId, accessionOrder.PhysicianName, accessionOrder.ClientId, accessionOrder.ClientName, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC, this.FaxNumber);
-                }
-                else
-                {
-                    this.HandleAddFaxDistribution(panelSetOrder);
-                }
-            }
-            return result;
-        }
-
-        private bool HandleAddWebServiceDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder)
-        {
-            bool result = true;
-            if (panelSetOrder.TestOrderReportDistributionCollection.Exists(this.m_PhysicianId, this.m_ClientId, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WEBSERVICE) == false)
-            {
-                this.AddTestOrderReportDistribution(panelSetOrder, this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WEBSERVICE, this.FaxNumber);
-            }
-            return result;
-        }
-
-        private bool HandleAddMTDOHDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder)
-        {
-            bool result = true;
-            if (panelSetOrder.PanelSetId == 13)
-            {
-                if (panelSetOrder.TestOrderReportDistributionCollection.Exists(this.m_PhysicianId, this.m_ClientId, this.m_DistributionType) == false)
-                {
-                    this.AddTestOrderReportDistribution(panelSetOrder, this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MTDOH, this.FaxNumber);
-                }
-            }
-            return result;
-        }
-
-        private bool HandleAddWYDOHDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder)
-        {
-            bool result = true;
-            if (panelSetOrder.PanelSetId == 13)
-            {
-                if (panelSetOrder.TestOrderReportDistributionCollection.Exists(this.m_PhysicianId, this.m_ClientId, this.m_DistributionType) == false)
-                {
-                    this.AddTestOrderReportDistribution(panelSetOrder, this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WYDOH, this.FaxNumber);
-                }
-            }
-            return result;
-        }
-
-        private bool HandleAddAthenaDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
-        {
-            bool result = true;
-            if (panelSetOrder.TestOrderReportDistributionCollection.DistributionTypeExists(YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA) == false)
-            {
-                if (Business.Test.ResultType.IsDistributionTypeImplemented(panelSetOrder.PanelSetId, this.m_DistributionType) == true)
-                {
-                    this.AddTestOrderReportDistribution(panelSetOrder, this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA, this.FaxNumber);
-                }
-                else
-                {
-                    this.HandleAddFaxDistribution(panelSetOrder);
-                }
-            }
-            return result;
-        }
-
-        private bool HandleAddECWDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
-        {
-            bool result = true;
-            if (panelSetOrder.TestOrderReportDistributionCollection.DistributionTypeExists(YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW) == false)
-            {
-                if (Business.Test.ResultType.IsDistributionTypeImplemented(panelSetOrder.PanelSetId, this.m_DistributionType) == true)
-                {
-                    this.AddTestOrderReportDistribution(panelSetOrder, accessionOrder.PhysicianId, accessionOrder.PhysicianName, accessionOrder.ClientId, accessionOrder.ClientName, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW, this.FaxNumber);
-                }
-                else
-                {
-                    this.HandleAddFaxDistribution(panelSetOrder);
-                }
-            }
-            return result;
-        }
-
-        private bool HandleAddMEDITECHDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
-        {
-            bool result = true;
-            if (panelSetOrder.TestOrderReportDistributionCollection.DistributionTypeExists(YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH) == false)
-            {
-                if (string.IsNullOrEmpty(accessionOrder.SvhAccount) == true || string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
-                {
-                    this.HandleAddFaxDistribution(panelSetOrder);
-                }
-                else
-                {
-                    if (Business.Test.ResultType.IsDistributionTypeImplemented(panelSetOrder.PanelSetId, this.m_DistributionType) == true)
-                    {
-                        this.AddTestOrderReportDistribution(panelSetOrder, accessionOrder.PhysicianId, accessionOrder.PhysicianName, accessionOrder.ClientId, accessionOrder.ClientName, YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH, this.FaxNumber);
-                    }
-                    else
-                    {
-                        this.HandleAddFaxDistribution(panelSetOrder);
-                    }
-                }
-            }
-            return result;
         }
     }
 }

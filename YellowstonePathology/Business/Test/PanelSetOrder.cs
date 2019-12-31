@@ -2050,7 +2050,7 @@ namespace YellowstonePathology.Business.Test
             {
                 physicianClientDistributionCollection.SetDistribution(this, accessionOrder);
             }
-            this.TestOrderReportDistributionCollection.SetDistributionFromUnique(this, uniqueDistributions);
+            this.TestOrderReportDistributionCollection.SetDistributionFromUnique(this, accessionOrder, uniqueDistributions);
         }
     }
 }
