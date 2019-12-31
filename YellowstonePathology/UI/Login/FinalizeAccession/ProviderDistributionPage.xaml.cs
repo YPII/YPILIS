@@ -177,8 +177,15 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 YellowstonePathology.Business.Rules.MethodResult methodResult = this.CanAddEpicDistribution(e.PhysicianClientDistribution);
                 if (methodResult.Success == false)
                 {
-                    canAddDistribution = false;
-                    MessageBox.Show(methodResult.Message);
+                    if (e.PhysicianClientDistribution.DistributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX)
+                    {
+                        e.PhysicianClientDistribution.DistributionType = YellowstonePathology.Business.ReportDistribution.Model.DistributionType.FAX;
+                    }
+                    else
+                    {
+                        canAddDistribution = false;
+                        MessageBox.Show(methodResult.Message);
+                    }
                 }
             }
             if (canAddDistribution == true)

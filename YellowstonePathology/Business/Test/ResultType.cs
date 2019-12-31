@@ -93,9 +93,9 @@ namespace YellowstonePathology.Business.Test
                     }
                 case ReportDistribution.Model.DistributionType.MTDOH:
                     {
+                        result.DistributionTypeToSet = result.DistributionTypeToCheck;
                         if (result.PanelSet.ImplementedResultTypes.Contains(ResultType.MDOH) == true)
                         {
-                            result.DistributionTypeToSet = result.DistributionTypeToCheck;
                             result.CanSetProvidedDistributionType = true;
                         }
                         else
@@ -106,9 +106,9 @@ namespace YellowstonePathology.Business.Test
                     }
                 case ReportDistribution.Model.DistributionType.WYDOH:
                     {
+                        result.DistributionTypeToSet = result.DistributionTypeToCheck;
                         if (result.PanelSet.ImplementedResultTypes.Contains(ResultType.WDOH) == true)
                         {
-                            result.DistributionTypeToSet = result.DistributionTypeToCheck;
                             result.CanSetProvidedDistributionType = true;
                         }
                         else
