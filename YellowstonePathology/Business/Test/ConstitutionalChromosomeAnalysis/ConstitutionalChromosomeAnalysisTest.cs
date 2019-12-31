@@ -24,6 +24,8 @@ namespace YellowstonePathology.Business.Test.ConstitutionalChromosomeAnalysis
 
             this.m_AllowMultiplePerAccession = true;
 
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             this.m_SurgicalAmendmentRequired = true;
 
             YellowstonePathology.Business.Facility.Model.Facility facility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCNSHVLL");

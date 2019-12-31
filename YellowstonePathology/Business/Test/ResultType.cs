@@ -15,25 +15,145 @@ namespace YellowstonePathology.Business.Test
         public const string ECW = "ECW";
         public const string MDOH = "MDOH";
         public const string WDOH = "WDOH";
+        public const string REFLAB = "REFLAB";
 
-        public static bool IsDistributionTypeImplemented(int panelSetId, string distributionType)
+        public static void GetImplementedDistributionType(CanSetDistributionResult result)
         {
-            bool result = false;
-            string resultType = Business.Helper.DistributionTypeMap.ResultTypeFromDistributionType(distributionType);
-            if(resultType == string.Empty)
+            switch (result.DistributionTypeToCheck)
             {
-                result = true;
+                case ReportDistribution.Model.DistributionType.EPIC:
+                    {
+                        if (result.PanelSet.ImplementedResultTypes.Contains(ResultType.EPIC) == true)
+                        {
+                            result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                            result.CanSetProvidedDistributionType = true;
+                        }
+                        else
+                        {
+                            result.DistributionTypeToSet = ReportDistribution.Model.DistributionType.FAX;
+                            result.CanSetProvidedDistributionType = false;
+                        }
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.EPICANDFAX:
+                    {
+                        if (result.PanelSet.ImplementedResultTypes.Contains(ResultType.EPIC) == true)
+                        {
+                            result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                            result.CanSetProvidedDistributionType = true;
+                        }
+                        else
+                        {
+                            result.DistributionTypeToSet = ReportDistribution.Model.DistributionType.FAX;
+                            result.CanSetProvidedDistributionType = false;
+                        }
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.MEDITECH:
+                    {
+                        if (result.PanelSet.ImplementedResultTypes.Contains(ResultType.WPH) == true)
+                        {
+                            result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                            result.CanSetProvidedDistributionType = true;
+                        }
+                        else
+                        {
+                            result.DistributionTypeToSet = ReportDistribution.Model.DistributionType.FAX;
+                            result.CanSetProvidedDistributionType = false;
+                        }
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.ATHENA:
+                    {
+                        if (result.PanelSet.ImplementedResultTypes.Contains(ResultType.CMMC) == true)
+                        {
+                            result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                            result.CanSetProvidedDistributionType = true;
+                        }
+                        else
+                        {
+                            result.DistributionTypeToSet = ReportDistribution.Model.DistributionType.FAX;
+                            result.CanSetProvidedDistributionType = false;
+                        }
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.ECW:
+                    {
+                        if (result.PanelSet.ImplementedResultTypes.Contains(ResultType.ECW) == true)
+                        {
+                            result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                            result.CanSetProvidedDistributionType = true;
+                        }
+                        else
+                        {
+                            result.DistributionTypeToSet = ReportDistribution.Model.DistributionType.FAX;
+                            result.CanSetProvidedDistributionType = false;
+                        }
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.MTDOH:
+                    {
+                        result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                        if (result.PanelSet.ImplementedResultTypes.Contains(ResultType.MDOH) == true)
+                        {
+                            result.CanSetProvidedDistributionType = true;
+                        }
+                        else
+                        {
+                            result.CanSetProvidedDistributionType = true;
+                        }
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.WYDOH:
+                    {
+                        result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                        if (result.PanelSet.ImplementedResultTypes.Contains(ResultType.WDOH) == true)
+                        {
+                            result.CanSetProvidedDistributionType = true;
+                        }
+                        else
+                        {
+                            result.CanSetProvidedDistributionType = true;
+                        }
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.FAX:
+                    {
+                        result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                        result.CanSetProvidedDistributionType = true;
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.MAIL:
+                    {
+                        result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                        result.CanSetProvidedDistributionType = true;
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.PRINT:
+                    {
+                        result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                        result.CanSetProvidedDistributionType = true;
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.WEBSERVICE:
+                    {
+                        result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                        result.CanSetProvidedDistributionType = true;
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.WEBSERVICEANDFAX:
+                    {
+                        result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                        result.CanSetProvidedDistributionType = true;
+                        break;
+                    }
+                case ReportDistribution.Model.DistributionType.DONOTDISTRIBUTE:
+                    {
+                        result.DistributionTypeToSet = result.DistributionTypeToCheck;
+                        result.CanSetProvidedDistributionType = true;
+                        break;
+                    }
             }
-            else
-            {
-                Business.PanelSet.Model.PanelSet panelSet = Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetId);
-                if (panelSet.ImplementedResultTypes.Contains(resultType) == true)
-                {
-                    result = true;
-                }
-            }
-
-            return result;
         }
     }
 }
