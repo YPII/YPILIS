@@ -18,12 +18,7 @@ namespace YellowstonePathology.Business.Calendar
         private PathologistCalendarStatus m_DrBrownStatus;
         private PathologistCalendarStatus m_DrDurdenStatus;
         private PathologistCalendarStatus m_DrEmerickStatus;
-<<<<<<< HEAD
         private PathologistCalendarStatus m_DrLuemStatus;        
-=======
-        private PathologistCalendarStatus m_DrLuemStatus;
-        //private PathologistCalendarStatus m_DrMessnerStatus;
->>>>>>> bbc07e7bdf2b6592e4623d82467f1328f1f5268f
         private PathologistCalendarStatus m_DrNeroStatus;
         private PathologistCalendarStatus m_DrSchneiderStatus;
 
@@ -37,12 +32,7 @@ namespace YellowstonePathology.Business.Calendar
             this.m_DrBrownStatus = new Calendar.PathologistCalendarStatus("Dr Brown", "Billings");
             this.m_DrDurdenStatus = new Calendar.PathologistCalendarStatus("Dr Durden", "Billings");
             this.m_DrEmerickStatus = new Calendar.PathologistCalendarStatus("Dr Emerick", "Bozeman");
-<<<<<<< HEAD
-            this.m_DrLuemStatus = new Calendar.PathologistCalendarStatus("Dr Luem", "Bozeman");            
-=======
             this.m_DrLuemStatus = new Calendar.PathologistCalendarStatus("Dr Luem", "Bozeman");
-            //this.m_DrMessnerStatus = new Calendar.PathologistCalendarStatus("Dr Messner", "Billings");
->>>>>>> bbc07e7bdf2b6592e4623d82467f1328f1f5268f
             this.m_DrNeroStatus = new Calendar.PathologistCalendarStatus("Dr Nero", "Bozeman");
             this.m_DrSchneiderStatus = new Calendar.PathologistCalendarStatus("Dr Schneider", "Billings");
         }
@@ -136,24 +126,7 @@ namespace YellowstonePathology.Business.Calendar
                     this.NotifyPropertyChanged("DrLuemStatus");
                 }
             }
-<<<<<<< HEAD
         }        
-=======
-        }
-
-        /*public PathologistCalendarStatus DrMessnerStatus
-        {
-            get { return this.m_DrMessnerStatus; }
-            set
-            {
-                if (value != this.m_DrMessnerStatus)
-                {
-                    this.m_DrMessnerStatus = value;
-                    this.NotifyPropertyChanged("DrMessnerStatus");
-                }
-            }
-        }*/
->>>>>>> bbc07e7bdf2b6592e4623d82467f1328f1f5268f
 
         public PathologistCalendarStatus DrNeroStatus
         {

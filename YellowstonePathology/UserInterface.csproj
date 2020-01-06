@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>10.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -396,11 +396,13 @@
     <Compile Include="Business\EthContractCollection.cs" />
     <Compile Include="Business\GrossCameraPubSubHandler.cs" />
     <Compile Include="Business\Helper\JSONHelper.cs" />
+    <Compile Include="Business\HL7View\EPIC\EPICBeakerNTEView.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicHRHClient.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerResultView.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerObrView.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicBeakerMshView.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicBeakerOrcView.cs" />
+    <Compile Include="Business\HL7View\EPIC\EpicBeakerObxView.cs" />
     <Compile Include="Business\Label.Model\HistologySlidePaperZPLLabelV3.cs" />
     <Compile Include="Business\Label.Model\StorageSlideLabel.cs" />
     <Compile Include="Business\Label.Model\HologicSlideLabelPrinter.cs" />
@@ -1197,6 +1199,7 @@
     <Compile Include="Business\Test\INI1\INI1Test.cs" />
     <Compile Include="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelEPICOBXView.cs" />
     <Compile Include="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelWPHOBXView.cs" />
+    <Compile Include="Business\Test\JAK2V617F\JAK2V617FEPICNTEView.cs" />
     <Compile Include="Business\Test\LLP\LLPEPICBeakerObxView.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEColonBRAFMeth.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEColonSendOut.cs" />
@@ -7248,12 +7251,12 @@
   <ItemGroup>
     <PublishFile Include="Microsoft.Exchange.WebServices">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

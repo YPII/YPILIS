@@ -106,18 +106,6 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-<<<<<<< HEAD
-=======
-                                <!--<GridViewColumn Header="Messner">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrMessnerStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>-->
->>>>>>> bbc07e7bdf2b6592e4623d82467f1328f1f5268f
                                 <GridViewColumn Header="Emerick">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
