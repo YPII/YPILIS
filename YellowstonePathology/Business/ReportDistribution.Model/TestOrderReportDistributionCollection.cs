@@ -275,106 +275,6 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             }
         }
 
-        /*public YellowstonePathology.Business.Rules.MethodResult AreDistributionTypesHandled(YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet)
-        {
-            YellowstonePathology.Business.Rules.MethodResult result = new Rules.MethodResult();
-            result.Success = true;
-
-            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
-            {
-                switch (testOrderReportDistribution.DistributionType)
-                {
-                    case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC:
-                        if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.EPIC) == false)
-                        {
-                            result.Success = false;
-                        }
-                        break;
-                    case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH:
-                        if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.WPH) == false)
-                        {
-                            result.Success = false;
-                        }
-                        break;
-                    case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA:
-                        if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.CMMC) == false)
-                        {
-                            result.Success = false;
-                        }
-                        break;
-                    case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW:
-                        if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.ECW) == false)
-                        {
-                            result.Success = false;
-                        }
-                        break;
-                }
-
-                if(result.Success == false)
-                {
-                    result.Message = "Report No " + testOrderReportDistribution.ReportNo + " Distribution Type " + 
-                        testOrderReportDistribution.DistributionType + " not implemented for " + panelSet.PanelSetName + 
-                        " - id " + panelSet.PanelSetId.ToString();
-                    break;
-                }
-            }
-
-            return result;
-        }*/
-
-        public bool IsDistributionTypeImplemented(YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet, string distributionType)
-        {
-            bool result = true;
-
-            switch (distributionType)
-            {
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC:
-                    if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.EPIC) == false)
-                    {
-                        result = false;
-                    }
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX:
-                    if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.EPIC) == false)
-                    {
-                        result = false;
-                    }
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH:
-                    if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.WPH) == false)
-                    {
-                        result = false;
-                    }
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA:
-                    if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.CMMC) == false)
-                    {
-                        result = false;
-                    }
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW:
-                    if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.ECW) == false)
-                    {
-                        result = false;
-                    }
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MTDOH:
-                    if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.MDOH) == false)
-                    {
-                        result = false;
-                    }
-                    break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WYDOH:
-                    if (panelSet.ImplementedResultTypes.Contains(YellowstonePathology.Business.Test.ResultType.WDOH) == false)
-                    {
-                        result = false;
-                    }
-                    break;
-            }
-
-            return result;
-        }
-
         public bool IsDuplicate(TestOrderReportDistribution testOrderReportDistribution)
         {
             bool result = false;
@@ -394,18 +294,25 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             return result;
         }
 
-        public void SetDistributionFromUnique(Test.PanelSetOrder panelSetOrder, TestOrderReportDistributionCollection uniqueDistributions)
+        public void SetDistributionFromUnique(Test.PanelSetOrder panelSetOrder, Test.AccessionOrder accessionOrder, TestOrderReportDistributionCollection uniqueDistributions)
         {
-            Business.PanelSet.Model.PanelSet panelSet = Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
-            foreach (YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution in uniqueDistributions)
+            foreach (TestOrderReportDistribution testOrderReportDistribution in uniqueDistributions)
             {
-                if (this.IsDuplicate(testOrderReportDistribution) == false)
+                Test.DistributionSetter distributionSetter = new Test.DistributionSetter(panelSetOrder,
+                    testOrderReportDistribution.PhysicianId, testOrderReportDistribution.PhysicianName, testOrderReportDistribution.ClientId, testOrderReportDistribution.ClientName,
+                    testOrderReportDistribution.DistributionType, testOrderReportDistribution.FaxNumber, accessionOrder.SvhAccount, accessionOrder.SvhMedicalRecord);
+                List<TestOrderReportDistribution> testOrderReportDistributionToAdds = distributionSetter.GetDistributionResult();
+                foreach (TestOrderReportDistribution testOrderReportDistributionToAdd in testOrderReportDistributionToAdds)
                 {
-                    if (this.IsDistributionTypeImplemented(panelSet, testOrderReportDistribution.DistributionType) == true)
+                    if (testOrderReportDistributionToAdd != null)
                     {
-                        string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-                        this.AddNext(testOrderReportDistributionId, testOrderReportDistributionId, panelSetOrder.ReportNo, testOrderReportDistribution.PhysicianId, testOrderReportDistribution.PhysicianName,
-                                testOrderReportDistribution.ClientId, testOrderReportDistribution.ClientName, testOrderReportDistribution.DistributionType, testOrderReportDistribution.FaxNumber);
+                        if (this.IsDuplicate(testOrderReportDistributionToAdd) == false)
+                        {
+                            if (distributionSetter.CanSetDistribution == true)
+                            {
+                                this.Add(testOrderReportDistributionToAdd);
+                            }
+                        }
                     }
                 }
             }

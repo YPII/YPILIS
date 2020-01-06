@@ -23,6 +23,8 @@ namespace YellowstonePathology.Business.Test.TechnicalOnly
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.TechnicalOnly.TechnicalOnlyTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 			this.m_AllowMultiplePerAccession = true;
+
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
             this.m_NeverDistribute = true;            
 			this.m_AcceptOnFinal = true;
             this.m_HasNoOrderTarget = true;

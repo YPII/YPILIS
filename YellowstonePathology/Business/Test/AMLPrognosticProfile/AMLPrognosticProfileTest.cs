@@ -25,6 +25,8 @@ namespace YellowstonePathology.Business.Test.AMLPrognosticProfile
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.AMLPrognosticProfile.AMLPrognosticProfileTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+
             string taskDescription = "Collect paraffin block from Histology and send to Neo.";
 
             YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");

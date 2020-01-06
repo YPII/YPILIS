@@ -28,20 +28,10 @@ namespace YellowstonePathology.Business.Rules.Cytology
 		}
 
         private void IsModulusNotZero()
-        {
-			int reportNoInt;
-			int modValue = 12;
-
-			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelOrderToFinal.ReportNo);
-			if (orderIdParser.IsLegacyReportNo == true)
-			{
-				reportNoInt = orderIdParser.ReportNoNumber.Value;
-			}
-			else
-			{
-				reportNoInt = orderIdParser.MasterAccessionNoNumber.Value;
-				modValue = 11;
-			}
+        {			
+			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelOrderToFinal.ReportNo);			
+			int reportNoInt = orderIdParser.MasterAccessionNoNumber.Value;
+			int modValue = 12;			
 
 			if (reportNoInt % modValue != 0)
 			{
