@@ -13,6 +13,20 @@ namespace YellowstonePathology.Business.Gateway
 {
     public class AccessionOrderGateway
     {
+        public static void DeletePhysicianClientDistribution(int physicianClientDistributionId)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "Delete from tblPhysicianClientDistribution where physicianClientDistributionId = " + physicianClientDistributionId.ToString();
+            cmd.CommandType = CommandType.Text;
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public static void SetTodaysBlockCountRow()
         {
             MySqlCommand cmd = new MySqlCommand();

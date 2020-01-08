@@ -102,9 +102,9 @@ namespace YellowstonePathology.Business.Client.Model
                 YellowstonePathology.Business.Test.DistributionSetter distributtionSetter = new Test.DistributionSetter(panelSetOrder,
                     this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName,
                     this.m_DistributionType, this.m_FaxNumber, accessionOrder.SvhAccount, accessionOrder.SvhMedicalRecord);
+
                 List<Business.ReportDistribution.Model.TestOrderReportDistribution> testOrderReportDistributions = distributtionSetter.GetDistributionResult();
-                foreach(Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution in testOrderReportDistributions)
-                if (testOrderReportDistribution != null)
+                foreach(Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution in testOrderReportDistributions)                
                 {
                     panelSetOrder.TestOrderReportDistributionCollection.Add(testOrderReportDistribution);
                 }

@@ -59,7 +59,7 @@ namespace YellowstonePathology.Business.Monitor.Model
                     if(blockCount.BozemanBlocks.HasValue && blockCount.BozemanBlocks != 0 && blockCount.BozemanPaths != 0)
                     {
                         blockCount.BlocksPerPathBozeman = blockCount.BozemanBlocks.Value / blockCount.BozemanPaths;
-                        blockCount.BlocksToSend = blockCount.BlocksPerPath - blockCount.BlocksPerPathBozeman;
+                        blockCount.BlocksToSend = (blockCount.BlocksPerPath - blockCount.BlocksPerPathBozeman) * blockCount.BozemanPaths;
                         if (blockCount.BlocksToSend < 10)
                         {
                             blockCount.BlocksToSend = 0;

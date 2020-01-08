@@ -156,7 +156,7 @@
 					<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Members:" />
 
                     <ListBox Name="ListBoxPhysicians" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Stretch" BorderThickness="1" IsTabStop="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-							 ItemsSource="{Binding Path=Physicians}">
+							 ItemsSource="{Binding Path=Physicians}" MouseDoubleClick="ShowPhysicianEntry_MouseDoubleClick">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">

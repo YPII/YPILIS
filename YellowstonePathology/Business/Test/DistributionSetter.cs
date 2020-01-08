@@ -40,7 +40,6 @@ namespace YellowstonePathology.Business.Test
             ResultType.GetImplementedDistributionType(canSetDistributionResult);
             this.m_CanSetDistribution = canSetDistributionResult.CanSetProvidedDistributionType;
             List<ReportDistribution.Model.TestOrderReportDistribution> result = this.GetDistributionResult(canSetDistributionResult);
-
             return result;
         }
 

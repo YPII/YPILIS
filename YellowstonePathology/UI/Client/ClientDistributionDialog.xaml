@@ -51,6 +51,11 @@
 
         <ListView Grid.Column="0" Grid.Row="1" Margin="2,2,5,2" Name="ListViewClientDistributions"
 				  ItemsSource="{Binding Path=ClientDistributionCollection}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete Distribution" Click="MenuItemDeleteDistribution_Click" />
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianClientDistribution.PhysicianClientDistributionID}" Width="80" Header="PCDist Id" />

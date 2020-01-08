@@ -479,5 +479,15 @@ namespace YellowstonePathology.UI.Client
             ClientDistributionDialog dlg = new UI.Client.ClientDistributionDialog(this.m_Client);
             dlg.ShowDialog();
         }
+
+        private void ShowPhysicianEntry_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (this.ListBoxPhysicians.SelectedItem != null)
+            {
+                YellowstonePathology.Business.Domain.Physician physician = (YellowstonePathology.Business.Domain.Physician)this.ListBoxPhysicians.SelectedItem;                
+                ProviderEntry providerEntry = new ProviderEntry(physician);
+                providerEntry.ShowDialog();
+            }
+        }
     }
 }

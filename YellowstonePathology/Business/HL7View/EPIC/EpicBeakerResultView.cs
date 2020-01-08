@@ -82,9 +82,28 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                 panelSetOrder.FinalTime, this.m_OrderingPhysician, resultStatus, universalService, this.m_SendUnsolicited, this.m_AccessionOrder.SystemInitiatingOrder);
             obr.ToXml(document);
             
-            EPICObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, true);
-            epicObxView.ToXml(document);
-            this.m_ObxCount = epicObxView.ObxCount;                            
+            switch(panelSetOrder.PanelSetId)
+            {
+                case 1:
+                    EPICBeakerNarrativeOBXView.AddElement(document);                    
+                    Business.Test.JAK2V617F.JAK2V617FEPICNTEView jak2v617fEPICNTEView = new Test.JAK2V617F.JAK2V617FEPICNTEView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                    jak2v617fEPICNTEView.ToXml(document);
+                    break;
+                case 145:
+                    EPICBeakerNarrativeOBXView.AddElement(document);
+                    Business.Test.ChromosomeAnalysis.ChromosomeAnalysisEPICNTEView chromosomeAnalysisEPICNTEView = new Test.ChromosomeAnalysis.ChromosomeAnalysisEPICNTEView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                    chromosomeAnalysisEPICNTEView.ToXml(document);
+                    break;
+                default:
+                    EPICObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, true);
+                    epicObxView.ToXml(document);
+                    this.m_ObxCount = epicObxView.ObxCount;
+                    break;
+            }
+
+            //EPICObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, true);
+            //epicObxView.ToXml(document);
+            //this.m_ObxCount = epicObxView.ObxCount;                            
 
             return document;
         }

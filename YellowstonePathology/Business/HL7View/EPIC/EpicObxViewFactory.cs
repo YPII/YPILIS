@@ -13,16 +13,8 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             switch (panelSetId)
             {
                 case 1:
-                    if (beakerTesting)
-                    {
-                        //view = new YellowstonePathology.Business.Test.JAK2V617F.JAK2V617FEPICNTEView(accessionOrder, reportNo, obxCount);
-                        break;
-                    }
-                    else
-                    {
-                        view = new YellowstonePathology.Business.Test.JAK2V617F.JAK2V617FEPICObxView(accessionOrder, reportNo, obxCount);
-                        break;
-                    }               
+                    view = new YellowstonePathology.Business.Test.JAK2V617F.JAK2V617FEPICObxView(accessionOrder, reportNo, obxCount);
+                    break;            
                 case 3:
                     if (beakerTesting)
                     {

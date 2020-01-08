@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>20</ApplicationRevision>
     <ApplicationVersion>10.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -398,6 +398,7 @@
     <Compile Include="Business\EthContractCollection.cs" />
     <Compile Include="Business\GrossCameraPubSubHandler.cs" />
     <Compile Include="Business\Helper\JSONHelper.cs" />
+    <Compile Include="Business\HL7View\EPIC\EPICBeakerNarrativeOBXView.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerNTEView.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicHRHClient.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerResultView.cs" />
@@ -1152,6 +1153,7 @@
     <Compile Include="Business\Test\CarbonicAnhydraseIXCAIX\CarbonicAnhydraseIXCAIXTest.cs" />
     <Compile Include="Business\Test\CheckResultsActionEnum.cs" />
     <Compile Include="Business\Test\ChimerismStudyByDNAMarkers\ChimerismStudyByDNAMarkersTest.cs" />
+    <Compile Include="Business\Test\ChromosomeAnalysis\ChromosomeAnalysisEPICNTEView.cs" />
     <Compile Include="Business\Test\CXCL13\CXCL13Test.cs" />
     <Compile Include="Business\Test\DistributionSetter.cs" />
     <Compile Include="Business\Test\DNMT3AMutationAnalysis\DNMT3AMutationAnalysisTest.cs" />

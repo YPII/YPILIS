@@ -9,6 +9,8 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.ComponentModel;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace YellowstonePathology.UI.Client
 {
@@ -17,6 +19,7 @@ namespace YellowstonePathology.UI.Client
     /// </summary>
     public partial class ClientDistributionDialog : Window
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private YellowstonePathology.Business.Client.Model.Client m_Client;
         private YellowstonePathology.Business.Client.Model.ClientDistributionCollection m_ClientDistributionCollection;
         private Business.ReportDistribution.Model.DistributionTypeList m_DistributionTypeList;
@@ -27,7 +30,7 @@ namespace YellowstonePathology.UI.Client
             this.m_Client = client;
             this.m_SuggestedAlternateDistributionType = this.m_Client.AlternateDistributionType;
             this.m_DistributionTypeList = new YellowstonePathology.Business.ReportDistribution.Model.DistributionTypeList();
-            this.FillClientDistributionCollection();
+            this.m_ClientDistributionCollection = Business.Gateway.PhysicianClientGateway.GetClientDistributionCollection(this.m_Client.ClientId);
 
             InitializeComponent();
 
@@ -53,12 +56,7 @@ namespace YellowstonePathology.UI.Client
         {
             get { return this.m_SuggestedAlternateDistributionType; }
             set { this.m_SuggestedAlternateDistributionType = value; }
-        }
-
-        private void FillClientDistributionCollection()
-        {
-            this.m_ClientDistributionCollection = Business.Gateway.PhysicianClientGateway.GetClientDistributionCollection(this.m_Client.ClientId);
-        }
+        }        
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
@@ -100,6 +98,28 @@ namespace YellowstonePathology.UI.Client
         private void ButtonChangeDistribution_Click(object sender, RoutedEventArgs e)
         {
             this.m_ClientDistributionCollection.SetDistributions();
+        }
+
+        private void MenuItemDeleteDistribution_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.ListViewClientDistributions.SelectedItems.Count != 0)
+            {
+                foreach (YellowstonePathology.Business.Client.Model.ClientDistribution clientDistribution in this.ListViewClientDistributions.SelectedItems)
+                {
+                    Business.Gateway.AccessionOrderGateway.DeletePhysicianClientDistribution(clientDistribution.PhysicianClientDistribution.PhysicianClientDistributionID);
+                }
+
+                this.m_ClientDistributionCollection = Business.Gateway.PhysicianClientGateway.GetClientDistributionCollection(this.m_Client.ClientId);
+                this.NotifyPropertyChanged(string.Empty);
+            }            
+        }
+
+        public void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
         }
     }
 }
