@@ -13,6 +13,24 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 
         }
 
+        public void AddPrimaryDistribution(Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution, string reportNo)
+        {
+            string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution =
+                new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, reportNo, physicianClientDistribution.PhysicianId, physicianClientDistribution.PhysicianName,
+                    physicianClientDistribution.ClientId, physicianClientDistribution.ClientName, physicianClientDistribution.DistributionType, physicianClientDistribution.FaxNumber);
+            this.Add(testOrderReportDistribution);
+        }
+
+        public void AddAlternateDistribution(Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution, string reportNo)
+        {
+            string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution =
+                new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, reportNo, physicianClientDistribution.PhysicianId, physicianClientDistribution.PhysicianName,
+                    physicianClientDistribution.ClientId, physicianClientDistribution.ClientName, physicianClientDistribution.AlternateDistributionType, physicianClientDistribution.FaxNumber);
+            this.Add(testOrderReportDistribution);
+        }
+
         public void RemoveDeleted(IEnumerable<XElement> elements)
         {
             for (int i = this.Count - 1; i > -1; i--)

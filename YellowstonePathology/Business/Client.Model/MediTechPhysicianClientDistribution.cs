@@ -12,8 +12,7 @@ namespace YellowstonePathology.Business.Client.Model
 
         public override void From(PhysicianClientDistributionListItem physicianClientDistribution)
         {
-            base.From(physicianClientDistribution);
-            this.m_DistributionType = MEDITECH;
+            base.From(physicianClientDistribution);            
         }
 
         public override void SetDistribution(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
@@ -25,9 +24,7 @@ namespace YellowstonePathology.Business.Client.Model
                 {
                     if (string.IsNullOrEmpty(accessionOrder.SvhAccount) == true || string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
                     {
-                        WebServicePhysicianClientDistribution webServiceDistribution = new WebServicePhysicianClientDistribution();
-                        webServiceDistribution.From(this);
-                        webServiceDistribution.SetDistribution(panelSetOrder, accessionOrder);
+                        panelSetOrder.TestOrderReportDistributionCollection.AddAlternateDistribution(this, panelSetOrder.ReportNo);
                     }
                     else
                     {
@@ -35,21 +32,17 @@ namespace YellowstonePathology.Business.Client.Model
                         YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
                         if (panelSet.ResultDocumentSource == YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
                         {
-                            this.AddTestOrderReportDistribution(panelSetOrder, accessionOrder.PhysicianId, accessionOrder.PhysicianName, accessionOrder.ClientId, accessionOrder.ClientName, YellowstonePathology.Business.Client.Model.MediTechPhysicianClientDistribution.MEDITECH, this.FaxNumber);
+                            panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
                         }
                         else
                         {
-                            WebServicePhysicianClientDistribution webServiceDistribution = new WebServicePhysicianClientDistribution();
-                            webServiceDistribution.From(this);
-                            webServiceDistribution.SetDistribution(panelSetOrder, accessionOrder);
+                            panelSetOrder.TestOrderReportDistributionCollection.AddAlternateDistribution(this, panelSetOrder.ReportNo);
                         }
                     }
                 }
                 else
                 {
-                    WebServicePhysicianClientDistribution webServiceDistribution = new WebServicePhysicianClientDistribution();
-                    webServiceDistribution.From(this);
-                    webServiceDistribution.SetDistribution(panelSetOrder, accessionOrder);
+                    panelSetOrder.TestOrderReportDistributionCollection.AddAlternateDistribution(this, panelSetOrder.ReportNo);
                 }
             }
         }

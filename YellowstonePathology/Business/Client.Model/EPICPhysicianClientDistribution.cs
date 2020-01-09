@@ -12,8 +12,7 @@ namespace YellowstonePathology.Business.Client.Model
 
         public override void From(PhysicianClientDistributionListItem physicianClientDistribution)
         {
-            base.From(physicianClientDistribution);
-            this.m_DistributionType = EPIC;
+            base.From(physicianClientDistribution);            
         }
 
         public override void SetDistribution(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
@@ -29,9 +28,7 @@ namespace YellowstonePathology.Business.Client.Model
                 {
                     if (string.IsNullOrEmpty(accessionOrder.SvhAccount) == true || string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
                     {
-                        FaxPhysicianClientDistribution faxDistribution = new FaxPhysicianClientDistribution();
-                        faxDistribution.From(this);
-                        faxDistribution.SetDistribution(panelSetOrder, accessionOrder);
+                        panelSetOrder.TestOrderReportDistributionCollection.AddAlternateDistribution(this, panelSetOrder.ReportNo);
                     }
                     else
                     {
@@ -39,21 +36,17 @@ namespace YellowstonePathology.Business.Client.Model
                         YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
                         if (panelSet.ResultDocumentSource == YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
                         {
-                            this.AddTestOrderReportDistribution(panelSetOrder, accessionOrder.PhysicianId, accessionOrder.PhysicianName, accessionOrder.ClientId, accessionOrder.ClientName, YellowstonePathology.Business.Client.Model.EPICPhysicianClientDistribution.EPIC, this.FaxNumber);
+                            panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
                         }
                         else
                         {
-                            FaxPhysicianClientDistribution faxDistribution = new FaxPhysicianClientDistribution();
-                            faxDistribution.From(this);
-                            faxDistribution.SetDistribution(panelSetOrder, accessionOrder);
+                            panelSetOrder.TestOrderReportDistributionCollection.AddAlternateDistribution(this, panelSetOrder.ReportNo);
                         }
                     }
                 }
                 else
                 {
-                    FaxPhysicianClientDistribution faxDistribution = new FaxPhysicianClientDistribution();
-                    faxDistribution.From(this);
-                    faxDistribution.SetDistribution(panelSetOrder, accessionOrder);
+                    panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
                 }
             }
         }

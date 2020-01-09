@@ -14,6 +14,7 @@ namespace YellowstonePathology.Business.Client.Model
         protected int m_ClientId;
         protected string m_ClientName;
         protected string m_DistributionType;
+        protected string m_AlternateDistributionType;
         protected string m_FaxNumber;
 
         public PhysicianClientDistributionListItem()
@@ -29,6 +30,7 @@ namespace YellowstonePathology.Business.Client.Model
             this.m_PhysicianName = physicianClientDistribution.m_PhysicianName;
             this.m_FaxNumber = physicianClientDistribution.FaxNumber;
             this.m_DistributionType = physicianClientDistribution.DistributionType;
+            this.m_AlternateDistributionType = physicianClientDistribution.AlternateDistributionType;
         }
 
         [PersistentProperty()]
@@ -67,6 +69,13 @@ namespace YellowstonePathology.Business.Client.Model
         }
 
         [PersistentProperty()]
+        public string AlternateDistributionType
+        {
+            get { return this.m_AlternateDistributionType; }
+            set { this.m_AlternateDistributionType = value; }
+        }
+
+        [PersistentProperty()]
         public string FaxNumber
         {
             get { return this.m_FaxNumber; }
@@ -98,15 +107,6 @@ namespace YellowstonePathology.Business.Client.Model
         public virtual void SetDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             throw new Exception("SetDistribution is Not Implemented Here.");
-        }
-
-        protected void AddTestOrderReportDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, int physicianId, string physicianName, int clientId, string clientName, string distributionType, string faxNumber)
-        {
-            string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution =
-                new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, panelSetOrder.ReportNo, physicianId, physicianName,
-                    clientId, clientName, distributionType, faxNumber);
-            panelSetOrder.TestOrderReportDistributionCollection.Add(testOrderReportDistribution);
-        }                                             
+        }                
     }
 }

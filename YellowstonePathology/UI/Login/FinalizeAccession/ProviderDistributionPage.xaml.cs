@@ -169,8 +169,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         }
 
         private void CopyTo_PhysicianClientSearchPage_Next(object sender, CustomEventArgs.PhysicianClientDistributionReturnEventArgs e)
-        {
-            //e.PhysicianClientDistribution.SetDistribution(this.m_PanelSetOrder, this.m_AccessionOrder);
+        {            
             this.m_AccessionOrder.SetDistribution(e.PhysicianClientDistribution);
             this.m_PageNavigator.Navigate(this);
         }

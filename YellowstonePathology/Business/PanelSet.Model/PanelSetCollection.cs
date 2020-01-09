@@ -17,6 +17,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             PanelSetCollection panelSetCollection = new PanelSetCollection();
             //NEO
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.BCL2ByFISH.BCL2ByFISHTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.PIK3CALDT.PIK3CALDTTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.STAT6.STAT6Test());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.FlowCytometryAnalysis.FlowCytometryAnalysisTest());
@@ -224,6 +225,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.CXCL13.CXCL13Test());
 
             //ARUP
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.SDHB.SDHBTest());
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.PanelSetArupBraf());
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.PanelSetDNAContent());
             panelSetCollection.Add(new YellowstonePathology.Business.PanelSet.Model.PanelSetArupCysticFibrosis());

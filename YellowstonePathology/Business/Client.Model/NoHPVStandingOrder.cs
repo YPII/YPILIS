@@ -11,8 +11,7 @@ namespace YellowstonePathology.Business.Client.Model
         {
             this.m_StandingOrderCode = "STNDHPVNONE";
             this.m_ReflexOrder = new ReflexOrderNone();
-            this.m_Description = "No standing order.";
-          
+            this.m_Description = "No standing order.";          
         }        
     }
 }

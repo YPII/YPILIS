@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>20</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>10.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -339,6 +339,7 @@
     <Compile Include="Business\Calendar\PathologistCalendarDayCollection.cs" />
     <Compile Include="Business\Calendar\PathologistCalendarStatus.cs" />
     <Compile Include="Business\Calendar\PathologistsByLocation.cs" />
+    <Compile Include="Business\Client.Model\DoNotDistributePhysicianClientDistribution.cs" />
     <Compile Include="Business\Client.Model\PrintPhysicianClientDistribution.cs" />
     <Compile Include="Business\Client.Model\WYDOHPhysicianClientDistribution.cs" />
     <Compile Include="Business\Client.Model\MTDOHPhysicianClientDistribution.cs" />
@@ -1148,6 +1149,7 @@
     <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestTest.cs" />
     <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestTestOrder.cs" />
     <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestWordDocument.cs" />
+    <Compile Include="Business\Test\BCL2ByFISH\BCL2ByFISH.cs" />
     <Compile Include="Business\Test\CancerTYPEID\CancerTYPEIDTest.cs" />
     <Compile Include="Business\Test\CanSetDistributionResult.cs" />
     <Compile Include="Business\Test\CarbonicAnhydraseIXCAIX\CarbonicAnhydraseIXCAIXTest.cs" />
@@ -1333,6 +1335,7 @@
     <Compile Include="Business\Test\PrealbuminTTR\PrealbuminTTRTest.cs" />
     <Compile Include="Business\Test\AmyloidAandAmyloidP\AmyloidAandAmyloidPTest.cs" />
     <Compile Include="Business\Test\ResultType.cs" />
+    <Compile Include="Business\Test\SDHB\SDHB.cs" />
     <Compile Include="Business\Test\SF3B1MutationAnalysis\SF3B1MutationAnalysisTest.cs" />
     <Compile Include="Business\Test\RASRAFPanel\RASRAFPanelWPHOBXView.cs" />
     <Compile Include="Business\Test\RBCBand3ProteinReduction\RBCBand3ProteinReductionTest.cs" />

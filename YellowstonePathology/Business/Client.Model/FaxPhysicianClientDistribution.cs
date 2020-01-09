@@ -12,8 +12,7 @@ namespace YellowstonePathology.Business.Client.Model
 
         public override void From(PhysicianClientDistributionListItem physicianClientDistribution)
         {
-            base.From(physicianClientDistribution);
-            this.m_DistributionType = FAX;
+            base.From(physicianClientDistribution);            
         }
 
         public override void SetDistribution(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
@@ -22,14 +21,9 @@ namespace YellowstonePathology.Business.Client.Model
             {
                 if (panelSetOrder.TestOrderReportDistributionCollection.Exists(this.m_PhysicianId, this.m_ClientId, YellowstonePathology.Business.Client.Model.FaxPhysicianClientDistribution.FAX) == false)
                 {
-                    this.AddTestOrderReportDistribution(panelSetOrder, this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName, YellowstonePathology.Business.Client.Model.FaxPhysicianClientDistribution.FAX, this.FaxNumber);
+                    panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
                 }
-            }
-            else
-            {
-                //MessageBox.Show("Unable to add a fax distribution because the fax number is blank.");
-                //result = false;
-            }
+            }            
         }
     }
 }

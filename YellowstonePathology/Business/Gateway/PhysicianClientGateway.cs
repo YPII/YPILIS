@@ -618,7 +618,7 @@ namespace YellowstonePathology.Business.Gateway
             Business.Client.Model.PhysicianClientDistributionList result = new Client.Model.PhysicianClientDistributionList();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select c.ClientId, c.ClientName, ph.PhysicianId, ph.DisplayName PhysicianName, c.DistributionType, " +
-                "c.Fax FaxNumber " +
+                "c.Fax FaxNumber, c.AlternateDistributionType  " +
                  "from tblClient c " +
                  "join tblPhysicianClient pp on c.ClientId = pp.ClientId " +
                  "Join tblPhysician ph on pp.ProviderId = ph.ObjectId " +
@@ -651,7 +651,7 @@ namespace YellowstonePathology.Business.Gateway
             Business.Client.Model.PhysicianClientDistributionList result = new Client.Model.PhysicianClientDistributionList();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select c.ClientId, c.ClientName, ph.PhysicianId, ph.DisplayName PhysicianName, c.DistributionType, " +
-                "c.Fax FaxNumber " +
+                "c.Fax FaxNumber, c.AlternateDistributionType " +
                  "from tblClient c " +
                  "join tblPhysicianClient pp on c.ClientId = pp.ClientId " +
                  "Join tblPhysician ph on pp.ProviderId = ph.ObjectId " +
@@ -672,7 +672,9 @@ namespace YellowstonePathology.Business.Gateway
                         Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution = new Business.Client.Model.PhysicianClientDistributionListItem();
                         YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(physicianClientDistribution, dr);
                         sqlDataReaderPropertyWriter.WriteProperties();
-                        result.Add(physicianClientDistribution);
+                        Business.Client.Model.PhysicianClientDistributionListItem listItem = Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(physicianClientDistribution.DistributionType);
+                        listItem.From(physicianClientDistribution);
+                        result.Add(listItem);
                     }
                 }
             }
@@ -684,7 +686,7 @@ namespace YellowstonePathology.Business.Gateway
             Business.Client.Model.PhysicianClientDistributionList result = new Client.Model.PhysicianClientDistributionList();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select c.ClientId, c.ClientName, ph.PhysicianId, ph.DisplayName PhysicianName, c.DistributionType, " +
-                "c.Fax FaxNumber " +
+                "c.Fax FaxNumber, c.AlternateDistributionType " +
                  "from tblClient c " +
                  "join tblPhysicianClient pp on c.ClientId = pp.ClientId " +
                  "Join tblPhysician ph on pp.ProviderId = ph.ObjectId " +
@@ -705,7 +707,9 @@ namespace YellowstonePathology.Business.Gateway
                         Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution = new Business.Client.Model.PhysicianClientDistributionListItem();
                         YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(physicianClientDistribution, dr);
                         sqlDataReaderPropertyWriter.WriteProperties();
-                        result.Add(physicianClientDistribution);
+                        Business.Client.Model.PhysicianClientDistributionListItem listItem = Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(physicianClientDistribution.DistributionType);
+                        listItem.From(physicianClientDistribution);
+                        result.Add(listItem);
                     }
                 }
             }
@@ -717,7 +721,7 @@ namespace YellowstonePathology.Business.Gateway
             Business.Client.Model.PhysicianClientDistributionList result = new Client.Model.PhysicianClientDistributionList();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select c.ClientId, c.ClientName, ph.PhysicianId, ph.DisplayName PhysicianName, c.DistributionType, " +
-                "c.Fax FaxNumber " +
+                "c.Fax FaxNumber, c.AlternateDistributionType " +
                  "from tblClient c " +
                  "join tblPhysicianClient pp on c.ClientId = pp.ClientId " +
                  "Join tblPhysician ph on pp.ProviderId = ph.ObjectId " +
@@ -736,7 +740,9 @@ namespace YellowstonePathology.Business.Gateway
                         Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution = new Business.Client.Model.PhysicianClientDistributionListItem();
                         YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(physicianClientDistribution, dr);
                         sqlDataReaderPropertyWriter.WriteProperties();
-                        result.Add(physicianClientDistribution);
+                        Business.Client.Model.PhysicianClientDistributionListItem listItem = Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(physicianClientDistribution.DistributionType);
+                        listItem.From(physicianClientDistribution);
+                        result.Add(listItem);
                     }
                 }
             }

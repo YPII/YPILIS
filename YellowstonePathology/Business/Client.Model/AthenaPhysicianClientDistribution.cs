@@ -12,8 +12,7 @@ namespace YellowstonePathology.Business.Client.Model
 
         public override void From(PhysicianClientDistributionListItem physicianClientDistribution)
         {
-            base.From(physicianClientDistribution);
-            this.m_DistributionType = ATHENA;
+            base.From(physicianClientDistribution);            
         }
 
         public override void SetDistribution(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
@@ -25,16 +24,18 @@ namespace YellowstonePathology.Business.Client.Model
                 if (panelSet.ResultDocumentSource == YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
                 {
                     YellowstonePathology.Business.Client.Model.ClientGroupClientCollection cmmcGroup = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("3");
-                    if (cmmcGroup.ClientIdExists(this.ClientId) == true)
+                    if (cmmcGroup.ClientIdExists(accessionOrder.ClientId) == true)
                     {
-                        this.AddTestOrderReportDistribution(panelSetOrder, this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName, YellowstonePathology.Business.Client.Model.AthenaPhysicianClientDistribution.ATHENA, this.FaxNumber);
+                        panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
+                    }
+                    else
+                    {
+                        panelSetOrder.TestOrderReportDistributionCollection.AddAlternateDistribution(this, panelSetOrder.ReportNo);
                     }
                 }
                 else
                 {
-                    WebServicePhysicianClientDistribution webServiceDistribution = new WebServicePhysicianClientDistribution();
-                    webServiceDistribution.From(this);
-                    webServiceDistribution.SetDistribution(panelSetOrder, accessionOrder);
+                    panelSetOrder.TestOrderReportDistributionCollection.AddAlternateDistribution(this, panelSetOrder.ReportNo);
                 }
             }
         }

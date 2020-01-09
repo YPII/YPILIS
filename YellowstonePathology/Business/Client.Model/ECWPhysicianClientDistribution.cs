@@ -12,8 +12,7 @@ namespace YellowstonePathology.Business.Client.Model
 
         public override void From(PhysicianClientDistributionListItem physicianClientDistribution)
         {
-            base.From(physicianClientDistribution);
-            this.m_DistributionType = ECW;
+            base.From(physicianClientDistribution);            
         }
 
         public override void SetDistribution(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
@@ -22,8 +21,8 @@ namespace YellowstonePathology.Business.Client.Model
             {
                 if (accessionOrder.ClientId == 1203)
                 {
-                    this.AddTestOrderReportDistribution(panelSetOrder, accessionOrder.PhysicianId, accessionOrder.PhysicianName, accessionOrder.ClientId, accessionOrder.ClientName, YellowstonePathology.Business.Client.Model.ECWPhysicianClientDistribution.ECW, this.FaxNumber);
-                }
+                    panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
+                }                
             }
         }
     }

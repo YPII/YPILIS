@@ -45,6 +45,9 @@ namespace YellowstonePathology.Business.Client.Model
                 case YellowstonePathology.Business.Client.Model.PrintPhysicianClientDistribution.PRINT:
                     physicianClientDistribution = new PrintPhysicianClientDistribution();
                     break;
+                case YellowstonePathology.Business.Client.Model.DoNotDistributePhysicianClientDistribution.DONOTDISTRIBUTE:
+                    physicianClientDistribution = new DoNotDistributePhysicianClientDistribution();
+                    break;
             }
             return physicianClientDistribution;
         }
