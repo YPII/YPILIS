@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
 			this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             YellowstonePathology.Business.Facility.Model.Facility facility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("ARUPSPD");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(Business.Task.Model.TaskAssignment.Molecular, "Gather materials and send to ARUP for testing.", facility));

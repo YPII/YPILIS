@@ -12,26 +12,38 @@ namespace YellowstonePathology.Business.Client.Model
             PhysicianClientDistributionListItem physicianClientDistribution = null;
             switch (distributionType)
             {
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.FAX:
+                case YellowstonePathology.Business.Client.Model.FaxPhysicianClientDistribution.FAX:
                     physicianClientDistribution = new FaxPhysicianClientDistribution();
                     break;                                                       
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW:
+                case YellowstonePathology.Business.Client.Model.ECWPhysicianClientDistribution.ECW:
                     physicianClientDistribution = new ECWPhysicianClientDistribution();
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA:
+                case YellowstonePathology.Business.Client.Model.AthenaPhysicianClientDistribution.ATHENA:
                     physicianClientDistribution = new AthenaPhysicianClientDistribution();
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC:
+                case YellowstonePathology.Business.Client.Model.EPICPhysicianClientDistribution.EPIC:
                     physicianClientDistribution = new EPICPhysicianClientDistribution();
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH:
+                case YellowstonePathology.Business.Client.Model.MediTechPhysicianClientDistribution.MEDITECH:
                     physicianClientDistribution = new MediTechPhysicianClientDistribution();
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX:
+                case YellowstonePathology.Business.Client.Model.EPICAndFaxPhysicianClientDistribution.EPICANDFAX:
                     physicianClientDistribution = new EPICAndFaxPhysicianClientDistribution();
-                    break;                                                
-                default:
-                    physicianClientDistribution = new PhysicianClientDistributionListItem();
+                    break;
+                case YellowstonePathology.Business.Client.Model.WYDOHPhysicianClientDistribution.WYDOH:
+                    physicianClientDistribution = new WYDOHPhysicianClientDistribution();
+                    break;
+                case YellowstonePathology.Business.Client.Model.MTDOHPhysicianClientDistribution.MTDOH:
+                    physicianClientDistribution = new MTDOHPhysicianClientDistribution();
+                    break;
+                case YellowstonePathology.Business.Client.Model.WebServicePhysicianClientDistribution.WEBSERVICE:
+                    physicianClientDistribution = new WebServicePhysicianClientDistribution();
+                    break;
+                case YellowstonePathology.Business.Client.Model.WebServiceAndFaxPhysicianClientDistribution.WEBSERVICEANDFAX:
+                    physicianClientDistribution = new WebServiceAndFaxPhysicianClientDistribution();
+                    break;
+                case YellowstonePathology.Business.Client.Model.PrintPhysicianClientDistribution.PRINT:
+                    physicianClientDistribution = new PrintPhysicianClientDistribution();
                     break;
             }
             return physicianClientDistribution;

@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Test.KappaLambdaByISH
             this.m_AllowMultiplePerAccession = true;
             this.m_NeverDistribute = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Gather materials (Bone Marrow Aspirate: 1-2 mL sodium heparin tube. EDTA tube is acceptable. " +
                 "Peripheral Blood: 2-5 mL sodium heparin tube. EDTA tube is acceptable." +

@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Test.ConstitutionalChromosomeAnalysis
 
             this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             this.m_SurgicalAmendmentRequired = true;
 

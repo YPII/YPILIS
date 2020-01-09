@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysisBreakage
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             YellowstonePathology.Business.Facility.Model.Facility facility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("ARUPSPD");
             string taskDescription = "Collect material and send to ARUP.";

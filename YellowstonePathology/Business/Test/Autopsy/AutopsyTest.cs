@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.Autopsy
 			
 			this.m_AllowMultiplePerAccession = false;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.Autopsy.AutopsyTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;            
 

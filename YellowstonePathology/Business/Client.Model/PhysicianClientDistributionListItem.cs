@@ -93,22 +93,20 @@ namespace YellowstonePathology.Business.Client.Model
                 }
 
             }
-        }
+        }                
 
-        public void SetDistribution(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public virtual void SetDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
-            foreach (YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in accessionOrder.PanelSetOrderCollection)
-            {
-                YellowstonePathology.Business.Test.DistributionSetter distributtionSetter = new Test.DistributionSetter(panelSetOrder,
-                    this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName,
-                    this.m_DistributionType, this.m_FaxNumber, accessionOrder.SvhAccount, accessionOrder.SvhMedicalRecord);
-
-                List<Business.ReportDistribution.Model.TestOrderReportDistribution> testOrderReportDistributions = distributtionSetter.GetDistributionResult();
-                foreach(Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution in testOrderReportDistributions)                
-                {
-                    panelSetOrder.TestOrderReportDistributionCollection.Add(testOrderReportDistribution);
-                }
-            }
+            throw new Exception("SetDistribution is Not Implemented Here.");
         }
+
+        protected void AddTestOrderReportDistribution(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, int physicianId, string physicianName, int clientId, string clientName, string distributionType, string faxNumber)
+        {
+            string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution =
+                new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, panelSetOrder.ReportNo, physicianId, physicianName,
+                    clientId, clientName, distributionType, faxNumber);
+            panelSetOrder.TestOrderReportDistributionCollection.Add(testOrderReportDistribution);
+        }                                             
     }
 }

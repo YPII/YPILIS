@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
             this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
             this.m_Active = false;
 
             string taskDescription = "Gather materials (Bone marrow aspirate: 1-2 mL sodium heparin tube. EDTA tube is acceptable. " +

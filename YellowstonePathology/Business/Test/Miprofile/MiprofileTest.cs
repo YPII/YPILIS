@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.Miprofile
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Collect paraffin block from Histology and send to Caris Life Sciences.";
 

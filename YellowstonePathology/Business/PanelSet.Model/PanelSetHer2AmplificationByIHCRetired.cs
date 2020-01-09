@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
             this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
             this.m_Active = false;
 
             string taskDescription = "Gather materials (Cut Slides: 3 cut slides. Cut sections at 3-4 microns, and place tissue at the center bottom of the slide" +

@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Test.BartonellaSpeciesByPCR
 
             this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Gather materials and send to ARUP.";
 

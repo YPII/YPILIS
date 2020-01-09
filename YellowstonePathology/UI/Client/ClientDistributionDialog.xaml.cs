@@ -68,11 +68,11 @@ namespace YellowstonePathology.UI.Client
             if (this.ComboboxDistributionTypes.SelectedItem != null)
             {
                 string distributionType = this.ComboboxDistributionTypes.SelectedItem.ToString();
-                if (distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC ||
-                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX ||
-                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA ||
-                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH ||
-                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW)
+                if (distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionTypes.EPIC ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionTypes.EPICANDFAX ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionTypes.ATHENA ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionTypes.MEDITECH ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionTypes.ECW)
                 {
                     if (string.IsNullOrEmpty(this.m_SuggestedAlternateDistributionType) == false)
                     {

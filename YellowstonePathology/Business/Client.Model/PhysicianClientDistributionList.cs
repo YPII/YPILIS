@@ -18,9 +18,10 @@ namespace YellowstonePathology.Business.Client.Model
             this.HandleReferringProvider(accessionOrder);
             this.HandlePathGroup(accessionOrder);
             this.HandlePAIF(accessionOrder);
+
             foreach (PhysicianClientDistributionListItem physicianClientDistribution in this)
             {
-                physicianClientDistribution.SetDistribution(accessionOrder);
+                physicianClientDistribution.SetDistribution(panelSetOrder, accessionOrder);
             }
         }
 
@@ -95,8 +96,8 @@ namespace YellowstonePathology.Business.Client.Model
             bool result = false;
             foreach (YellowstonePathology.Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistributionListItem in this)
             {
-                if (physicianClientDistributionListItem.DistributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC ||
-                    physicianClientDistributionListItem.DistributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX)
+                if (physicianClientDistributionListItem.DistributionType == YellowstonePathology.Business.Client.Model.EPICPhysicianClientDistribution.EPIC ||
+                    physicianClientDistributionListItem.DistributionType == YellowstonePathology.Business.Client.Model.EPICAndFaxPhysicianClientDistribution.EPICANDFAX)
                 {
                     result = true;
                     break;

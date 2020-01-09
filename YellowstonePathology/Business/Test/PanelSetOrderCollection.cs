@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Test
 		public PanelSetOrderCollection()
 		{
 			m_PathologistTestOrderItemList = new PathologistTestOrderItemList();
-		}        
+		}                
 
         public string GetAdditionalTestingString(string currentReportNo)
         {
@@ -1278,6 +1278,8 @@ namespace YellowstonePathology.Business.Test
         public YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection GetUniqueDistributions()
         {
             YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection result = new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection();
+            throw new Exception("This needs help");
+            /*
             foreach (PanelSetOrder panelSetOrder in this)
             {
                 foreach (YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution in panelSetOrder.TestOrderReportDistributionCollection)
@@ -1288,6 +1290,7 @@ namespace YellowstonePathology.Business.Test
                     }
                 }
             }
+            */
             return result;
         }
     }

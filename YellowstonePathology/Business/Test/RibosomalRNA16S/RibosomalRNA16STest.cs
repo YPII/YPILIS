@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Test.RibosomalRNA16S
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             YellowstonePathology.Business.Facility.Model.Facility uwFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("UWRLS");
             string taskDescription = "Collect material from Histology and send to University Of Washington Medical Center.";

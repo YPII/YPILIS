@@ -1916,5 +1916,22 @@ namespace YellowstonePathology.Business.Test
             }
             this.m_AmendmentCollection.Remove(amendment);
         }
+
+        public void SetDistribution()
+        {
+            YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(this.PhysicianId, this.ClientId);
+            foreach (PanelSetOrder panelSetOrder in this.PanelSetOrderCollection)
+            {                
+                physicianClientDistributionCollection.SetDistribution(panelSetOrder, this);
+            }
+        }
+
+        public void SetDistribution(Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution)
+        {
+            foreach (PanelSetOrder panelSetOrder in this.PanelSetOrderCollection)
+            {
+                physicianClientDistribution.SetDistribution(panelSetOrder, this);
+            }
+        }
     }
 }

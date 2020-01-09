@@ -2,15 +2,56 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using YellowstonePathology.Business.Test;
 
 namespace YellowstonePathology.Business.Client.Model
 {
     public class MediTechPhysicianClientDistribution : PhysicianClientDistributionListItem
     {
+        public const string MEDITECH = "Meditech";
+
         public override void From(PhysicianClientDistributionListItem physicianClientDistribution)
         {
             base.From(physicianClientDistribution);
-            this.m_DistributionType = YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH;
-        }        
+            this.m_DistributionType = MEDITECH;
+        }
+
+        public override void SetDistribution(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
+        {
+            if (panelSetOrder.TestOrderReportDistributionCollection.DistributionTypeExists(YellowstonePathology.Business.Client.Model.MediTechPhysicianClientDistribution.MEDITECH) == false)
+            {
+                YellowstonePathology.Business.Client.Model.ClientGroupClientCollection westParkHospitalGroup = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("36");
+                if (westParkHospitalGroup.ClientIdExists(accessionOrder.ClientId) == true)
+                {
+                    if (string.IsNullOrEmpty(accessionOrder.SvhAccount) == true || string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
+                    {
+                        WebServicePhysicianClientDistribution webServiceDistribution = new WebServicePhysicianClientDistribution();
+                        webServiceDistribution.From(this);
+                        webServiceDistribution.SetDistribution(panelSetOrder, accessionOrder);
+                    }
+                    else
+                    {
+                        YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+                        YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
+                        if (panelSet.ResultDocumentSource == YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
+                        {
+                            this.AddTestOrderReportDistribution(panelSetOrder, accessionOrder.PhysicianId, accessionOrder.PhysicianName, accessionOrder.ClientId, accessionOrder.ClientName, YellowstonePathology.Business.Client.Model.MediTechPhysicianClientDistribution.MEDITECH, this.FaxNumber);
+                        }
+                        else
+                        {
+                            WebServicePhysicianClientDistribution webServiceDistribution = new WebServicePhysicianClientDistribution();
+                            webServiceDistribution.From(this);
+                            webServiceDistribution.SetDistribution(panelSetOrder, accessionOrder);
+                        }
+                    }
+                }
+                else
+                {
+                    WebServicePhysicianClientDistribution webServiceDistribution = new WebServicePhysicianClientDistribution();
+                    webServiceDistribution.From(this);
+                    webServiceDistribution.SetDistribution(panelSetOrder, accessionOrder);
+                }
+            }
+        }
     }
 }

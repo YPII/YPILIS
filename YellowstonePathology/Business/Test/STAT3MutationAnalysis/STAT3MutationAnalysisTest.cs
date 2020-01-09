@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.STAT3MutationAnalysis
             this.m_AllowMultiplePerAccession = true;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Collect materials and send to Neo.";
 

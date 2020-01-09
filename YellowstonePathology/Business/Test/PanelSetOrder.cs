@@ -2038,19 +2038,6 @@ namespace YellowstonePathology.Business.Test
                     this.m_ProfessionalComponentBillingFacilityId = "YPIBLGS";
                 }
             }
-        }
-
-        public void HandleDistribution(AccessionOrder accessionOrder)
-        {
-            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistributionCollection uniqueDistributions = accessionOrder.PanelSetOrderCollection.GetUniqueDistributions();
-            YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(accessionOrder.PhysicianId, accessionOrder.ClientId);
-            Audit.Model.CanSetDistributionAudit canSetDistributionAudit = new Audit.Model.CanSetDistributionAudit(accessionOrder, physicianClientDistributionCollection);
-            canSetDistributionAudit.Run();
-            if (canSetDistributionAudit.Status == Audit.Model.AuditStatusEnum.OK)
-            {
-                physicianClientDistributionCollection.SetDistribution(this, accessionOrder);
-            }
-            this.TestOrderReportDistributionCollection.SetDistributionFromUnique(this, accessionOrder, uniqueDistributions);
-        }
+        }        
     }
 }

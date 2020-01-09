@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.Test.PanTRK
             this.m_AllowMultiplePerAccession = true;
             this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Gather materials and send out to Neo.";
 

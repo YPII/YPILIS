@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.Test.FumarateHydrataseByIHC
             this.m_AllowMultiplePerAccession = true;
             this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             YellowstonePathology.Business.Facility.Model.Facility arup = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("ARUPSPD");
             string taskDescription = "Collect material from Histology and send to ARUP.";

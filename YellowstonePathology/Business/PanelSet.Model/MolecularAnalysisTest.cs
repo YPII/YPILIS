@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Test.MolecularAnalysis
 
             this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.MolecularAnalysis.MolecularAnalysisTestOrder).AssemblyQualifiedName;
             string taskDescription = "Gather materials and send out to Neo.";

@@ -235,6 +235,7 @@ namespace YellowstonePathology.UI.Client
 
 		private void ButtonAddToDistribution_Click(object sender, RoutedEventArgs e)
 		{
+            /*
 			if (this.ListBoxNewDistributionSelection.SelectedItem != null)
 			{
 				YellowstonePathology.Business.Client.Model.Client clientToAdd = (YellowstonePathology.Business.Client.Model.Client)this.ListBoxNewDistributionSelection.SelectedItem;
@@ -267,14 +268,15 @@ namespace YellowstonePathology.UI.Client
 					this.NotifyPropertyChanged("PhysicianClientDistributionViewList");
 				}
 			}
+            */
 		}
 
-        private bool AreDistributionTypesIncompatible(string existingDistributionType, string distributionTypeToAdd)
-        {
-            YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection incompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
-            bool result = incompatibleDistributionTypeCollection.TypesAreIncompatible(existingDistributionType, distributionTypeToAdd);
-            return result;
-        }
+        //private bool AreDistributionTypesIncompatible(string existingDistributionType, string distributionTypeToAdd)
+        //{
+        //    YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection incompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
+        //    bool result = incompatibleDistributionTypeCollection.TypesAreIncompatible(existingDistributionType, distributionTypeToAdd);
+        //    return result;
+        //}
 
         private void ButtonRemoveFromDistribution_Click(object sender, RoutedEventArgs e)
 		{

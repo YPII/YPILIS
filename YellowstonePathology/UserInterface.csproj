@@ -254,7 +254,6 @@
     <Compile Include="Business\Audit.Model\HPVReflexRuleRequiresCheck.cs" />
     <Compile Include="Business\Audit.Model\IntraoperativeConsultationCorrelationAudit.cs" />
     <Compile Include="Business\Audit.Model\IntraoperativeConsultationFinalAudit.cs" />
-    <Compile Include="Business\Audit.Model\IsOkToAddToDistributionAudit.cs" />
     <Compile Include="Business\Audit.Model\IsOKToAdjustWHPExpectedFinalTimeAuditCollection.cs" />
     <Compile Include="Business\Audit.Model\IsWHPAllDoneAuditCollection.cs" />
     <Compile Include="Business\Audit.Model\LSETypeIsNotSetAudit.cs" />
@@ -340,8 +339,11 @@
     <Compile Include="Business\Calendar\PathologistCalendarDayCollection.cs" />
     <Compile Include="Business\Calendar\PathologistCalendarStatus.cs" />
     <Compile Include="Business\Calendar\PathologistsByLocation.cs" />
-    <Compile Include="Business\Client.Model\ClientDistribution.cs" />
-    <Compile Include="Business\Client.Model\ClientDistributionCollection.cs" />
+    <Compile Include="Business\Client.Model\PrintPhysicianClientDistribution.cs" />
+    <Compile Include="Business\Client.Model\WYDOHPhysicianClientDistribution.cs" />
+    <Compile Include="Business\Client.Model\MTDOHPhysicianClientDistribution.cs" />
+    <Compile Include="Business\Client.Model\WebServiceAndFaxPhysicianClientDistribution.cs" />
+    <Compile Include="Business\Client.Model\WebServicePhysicianClientDistribution.cs" />
     <Compile Include="Business\Client.Model\HPV1618CompoundStandingOrderRule1.cs" />
     <Compile Include="Business\Client.Model\HPV1618ReflexOrderPAPNormalHPVPositive.cs" />
     <Compile Include="Business\Client.Model\HPVCompoundStandingOrderRule9.cs" />
@@ -1107,8 +1109,6 @@
     <Compile Include="Business\Persistence\WebServiceAccountDocumentBuilder.cs" />
     <Compile Include="Business\PreviousResult.cs" />
     <Compile Include="Business\PreviousResultCollection.cs" />
-    <Compile Include="Business\ReportDistribution.Model\IncompatibleDistributionType.cs" />
-    <Compile Include="Business\ReportDistribution.Model\IncompatibleDistributionTypeCollection.cs" />
     <Compile Include="Business\ReportDistribution.Model\MeditechDistribution.cs" />
     <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerNoWHP.cs" />
     <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerWHPHold.cs" />
@@ -1155,7 +1155,6 @@
     <Compile Include="Business\Test\ChimerismStudyByDNAMarkers\ChimerismStudyByDNAMarkersTest.cs" />
     <Compile Include="Business\Test\ChromosomeAnalysis\ChromosomeAnalysisEPICNTEView.cs" />
     <Compile Include="Business\Test\CXCL13\CXCL13Test.cs" />
-    <Compile Include="Business\Test\DistributionSetter.cs" />
     <Compile Include="Business\Test\DNMT3AMutationAnalysis\DNMT3AMutationAnalysisTest.cs" />
     <Compile Include="Business\Test\DUPSP22IRF4Rearrangement\DUPSP22IRF4RearrangementTest.cs" />
     <Compile Include="Business\Test\EGFRAmplification\EGFRAmplificationTest.cs" />
@@ -1333,10 +1332,10 @@
     <Compile Include="Business\Test\PNH\PNHWPHOBXView.cs" />
     <Compile Include="Business\Test\PrealbuminTTR\PrealbuminTTRTest.cs" />
     <Compile Include="Business\Test\AmyloidAandAmyloidP\AmyloidAandAmyloidPTest.cs" />
+    <Compile Include="Business\Test\ResultType.cs" />
     <Compile Include="Business\Test\SF3B1MutationAnalysis\SF3B1MutationAnalysisTest.cs" />
     <Compile Include="Business\Test\RASRAFPanel\RASRAFPanelWPHOBXView.cs" />
     <Compile Include="Business\Test\RBCBand3ProteinReduction\RBCBand3ProteinReductionTest.cs" />
-    <Compile Include="Business\Test\ResultType.cs" />
     <Compile Include="Business\Test\ReticulatedPlateletAnalysisV2\ReticulatedPlateletAnalysisV2EPICOBXView.cs" />
     <Compile Include="Business\Test\ReticulatedPlateletAnalysisV2\ReticulatedPlateletAnalysisV2Test.cs" />
     <Compile Include="Business\Test\ReticulatedPlateletAnalysisV2\ReticulatedPlateletAnalysisV2TestOrder.cs" />
@@ -3228,9 +3227,6 @@
     </Compile>
     <Compile Include="UI\ChainExplorer.xaml.cs">
       <DependentUpon>ChainExplorer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Client\ClientDistributionDialog.xaml.cs">
-      <DependentUpon>ClientDistributionDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Client\ClientFedxDialog.xaml.cs">
       <DependentUpon>ClientFedxDialog.xaml</DependentUpon>
@@ -5277,10 +5273,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ClientOrderWorkspace.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Client\ClientDistributionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

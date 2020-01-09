@@ -7,15 +7,12 @@ using System.Collections.ObjectModel;
 namespace YellowstonePathology.Business.Client.Model
 {
     public class ClientDistributionCollection : ObservableCollection<ClientDistribution>
-    {
-        YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection m_IncompatibleDistributionTypeCollection;
-
+    {        
         public ClientDistributionCollection()
         { }
 
         public void UpdateDistributionType(Client clientWithChangedDistributionType, string distributionType, string suggestedAlternativeDistributionType)
-        {
-            this.m_IncompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
+        {            
             List<string> pcids = this.GetUniquePhysicianClientIds();
             foreach (string pcId in pcids)
             {
@@ -95,11 +92,11 @@ namespace YellowstonePathology.Business.Client.Model
             else
             {
                 if (clientDistribution.DistributionClientDistributionType == distributionType &&
-                    (distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC ||
-                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPICANDFAX ||
-                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW ||
-                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA ||
-                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH))
+                    (distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionTypes.EPIC ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionTypes.EPICANDFAX ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionTypes.ECW ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionTypes.ATHENA ||
+                    distributionType == YellowstonePathology.Business.ReportDistribution.Model.DistributionTypes.MEDITECH))
                 {
                     clientDistribution.SuggestedDistributionType = this.IsEmptySuggestedAlternativeDistributionType(distributionType, suggestedAlternativeDistributionType);
                 }

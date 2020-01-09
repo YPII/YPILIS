@@ -507,31 +507,31 @@ namespace YellowstonePathology.UI.ReportDistribution
             
             switch (testOrderReportDistribution.DistributionType)
             {
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.FAX:
+                case YellowstonePathology.Business.Client.Model.FaxPhysicianClientDistribution.FAX:
                     result = this.HandleFaxDistribution(testOrderReportDistribution);
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.EPIC:
+                case YellowstonePathology.Business.Client.Model.EPICPhysicianClientDistribution.EPIC:
                     result = this.HandleEPICDistribution(testOrderReportDistribution, accessionOrder, panelSetOrder);
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ECW:
+                case YellowstonePathology.Business.Client.Model.ECWPhysicianClientDistribution.ECW:
                     result = this.HandleECWDistribution(testOrderReportDistribution, accessionOrder);
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.ATHENA:
+                case YellowstonePathology.Business.Client.Model.AthenaPhysicianClientDistribution.ATHENA:
                     result = this.HandleATHENADistribution(testOrderReportDistribution.ReportNo, accessionOrder);
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MEDITECH:
+                case YellowstonePathology.Business.Client.Model.MediTechPhysicianClientDistribution.MEDITECH:
                     result = this.HandleMeditechDistribution(testOrderReportDistribution.ReportNo, accessionOrder);
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WEBSERVICE:
+                case YellowstonePathology.Business.Client.Model.WebServicePhysicianClientDistribution.WEBSERVICE:
                     result = this.HandleWebServiceDistribution(testOrderReportDistribution);
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.PRINT:
+                case YellowstonePathology.Business.Client.Model.PrintPhysicianClientDistribution.PRINT:
                     result = this.HandlePrintDistribution(testOrderReportDistribution);
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.MTDOH:
+                case YellowstonePathology.Business.Client.Model.MTDOHPhysicianClientDistribution.MTDOH:
                     result = this.HandleMTDOHDistribution(testOrderReportDistribution.ReportNo, accessionOrder);
                     break;
-                case YellowstonePathology.Business.ReportDistribution.Model.DistributionType.WYDOH:
+                case YellowstonePathology.Business.Client.Model.WYDOHPhysicianClientDistribution.WYDOH:
                     result = this.HandleWYDOHDistribution(testOrderReportDistribution.ReportNo, accessionOrder);
                     break;
                 default:

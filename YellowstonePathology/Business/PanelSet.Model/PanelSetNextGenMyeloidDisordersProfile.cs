@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
             this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string task1Description = "Gather materials (FFPE solid tumor tissue: Paraffin block is preferred. " +
                 "Alternatively, send 1 H&E slide plus 5-10 unstained slides cut at 5 or more microns.Take materials to transcription for send out to Neo";

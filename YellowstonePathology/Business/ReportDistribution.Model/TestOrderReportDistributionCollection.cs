@@ -6,12 +6,12 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.ReportDistribution.Model
 {
-	public class TestOrderReportDistributionCollection : ObservableCollection<TestOrderReportDistribution>
-	{        
+    public class TestOrderReportDistributionCollection : ObservableCollection<TestOrderReportDistribution>
+    {
         public TestOrderReportDistributionCollection()
         {
-            
-		}
+
+        }
 
         public void RemoveDeleted(IEnumerable<XElement> elements)
         {
@@ -52,25 +52,25 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             }
         }
 
-		public void AddNext(string testOrderReportDistributionId, string objectId, string reportNo, int physicianId, string physicianName, int clientId, string clientName, string distributionType)
+        public void AddNext(string testOrderReportDistributionId, string objectId, string reportNo, int physicianId, string physicianName, int clientId, string clientName, string distributionType)
         {
             this.AddNext(testOrderReportDistributionId, objectId, reportNo, physicianId, physicianName, clientId, clientName, distributionType, null);
         }
 
-		public void AddNext(string testOrderReportDistributionId, string objectId, string reportNo, int physicianId, string physicianName, int clientId, string clientName, string distributionType, string faxNumber)
-        {            
+        public void AddNext(string testOrderReportDistributionId, string objectId, string reportNo, int physicianId, string physicianName, int clientId, string clientName, string distributionType, string faxNumber)
+        {
             YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution = new TestOrderReportDistribution(testOrderReportDistributionId, objectId, reportNo,
                 physicianId, physicianName, clientId, clientName, distributionType, faxNumber);
             this.Add(testOrderReportDistribution);
         }
 
-		public bool Exists(int physicianId, int clientId, string distributionType)
+        public bool Exists(int physicianId, int clientId, string distributionType)
         {
             bool result = false;
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
-                if (testOrderReportDistribution.PhysicianId == physicianId && 
-                    testOrderReportDistribution.ClientId == clientId && 
+                if (testOrderReportDistribution.PhysicianId == physicianId &&
+                    testOrderReportDistribution.ClientId == clientId &&
                     testOrderReportDistribution.DistributionType == distributionType)
                 {
                     result = true;
@@ -86,20 +86,6 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
                 if (testOrderReportDistribution.TestOrderReportDistributionId == testOrderReportDistributionId)
-                {
-                    result = testOrderReportDistribution;
-                    break;
-                }
-            }
-            return result;
-        }
-
-        public TestOrderReportDistribution GetFirstEclinical()
-        {
-            TestOrderReportDistribution result = null;
-            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
-            {
-                if (testOrderReportDistribution.DistributionType == "Eclinical Works")
                 {
                     result = testOrderReportDistribution;
                     break;
@@ -210,11 +196,11 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         }
 
         public void MarkAllAsNotDistributed()
-        {            
+        {
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
                 testOrderReportDistribution.Distributed = false;
-            }         
+            }
         }
 
         public void UnscheduleAll()
@@ -222,7 +208,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
                 testOrderReportDistribution.ScheduledDistributionTime = null;
-            }         
+            }
         }
 
         public void Sync(DataTable dataTable, string reportNo)
@@ -254,6 +240,20 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             }
         }
 
+        public TestOrderReportDistribution GetFirstEclinical()
+        {
+            TestOrderReportDistribution result = null;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType == "Eclinical Works")
+                {
+                    result = testOrderReportDistribution;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public void RemoveDeleted(DataTable dataTable)
         {
             for (int i = this.Count - 1; i > -1; i--)
@@ -271,49 +271,6 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
                 if (found == false)
                 {
                     this.RemoveItem(i);
-                }
-            }
-        }
-
-        public bool IsDuplicate(TestOrderReportDistribution testOrderReportDistribution)
-        {
-            bool result = false;
-            foreach (TestOrderReportDistribution compareTestOrderReportDistribution in this)
-            {
-                if (testOrderReportDistribution.ClientId == compareTestOrderReportDistribution.ClientId &&
-                    testOrderReportDistribution.ClientName == compareTestOrderReportDistribution.ClientName &&
-                    testOrderReportDistribution.DistributionType == compareTestOrderReportDistribution.DistributionType &&
-                    testOrderReportDistribution.PhysicianId == compareTestOrderReportDistribution.PhysicianId &&
-                    testOrderReportDistribution.PhysicianName == compareTestOrderReportDistribution.PhysicianName)
-                {
-                    result = true;
-                    break;
-                }
-            }
-
-            return result;
-        }
-
-        public void SetDistributionFromUnique(Test.PanelSetOrder panelSetOrder, Test.AccessionOrder accessionOrder, TestOrderReportDistributionCollection uniqueDistributions)
-        {
-            foreach (TestOrderReportDistribution testOrderReportDistribution in uniqueDistributions)
-            {
-                Test.DistributionSetter distributionSetter = new Test.DistributionSetter(panelSetOrder,
-                    testOrderReportDistribution.PhysicianId, testOrderReportDistribution.PhysicianName, testOrderReportDistribution.ClientId, testOrderReportDistribution.ClientName,
-                    testOrderReportDistribution.DistributionType, testOrderReportDistribution.FaxNumber, accessionOrder.SvhAccount, accessionOrder.SvhMedicalRecord);
-                List<TestOrderReportDistribution> testOrderReportDistributionToAdds = distributionSetter.GetDistributionResult();
-                foreach (TestOrderReportDistribution testOrderReportDistributionToAdd in testOrderReportDistributionToAdds)
-                {
-                    if (testOrderReportDistributionToAdd != null)
-                    {
-                        if (this.IsDuplicate(testOrderReportDistributionToAdd) == false)
-                        {
-                            if (distributionSetter.CanSetDistribution == true)
-                            {
-                                this.Add(testOrderReportDistributionToAdd);
-                            }
-                        }
-                    }
                 }
             }
         }

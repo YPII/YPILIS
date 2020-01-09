@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.FlowCytometryAnalysis
             
 			this.m_AllowMultiplePerAccession = true;
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
             string taskDescription = "Collect specimen and send to Neo.";

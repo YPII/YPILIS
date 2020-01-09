@@ -242,7 +242,8 @@ namespace YellowstonePathology.Business.Visitor
 
         public virtual void HandlDistribution()
         {
-            this.m_PanelSetOrder.HandleDistribution(this.m_AccessionOrder);
+            YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(this.m_AccessionOrder.PhysicianId, this.m_AccessionOrder.ClientId);
+            physicianClientDistributionCollection.SetDistribution(this.m_PanelSetOrder, this.m_AccessionOrder);
         }
 
         public virtual void HandlReflexTestingPlan()

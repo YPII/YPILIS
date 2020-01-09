@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.CBFBinv16
             this.m_AllowMultiplePerAccession = true;
             this.m_ExpectedDuration = TimeSpan.FromDays(4);
 
-            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Collect (Peripheral blood: 2-5 mL in sodium heparin tube, 2x5 mL in EDTA tube; " +
             "Bone marrow: 1-2 mL in sodium heparin tube or 2 mL in EDTA tube; Fresh unfixed tissue in RPMI) and send to Neogenomics.";
