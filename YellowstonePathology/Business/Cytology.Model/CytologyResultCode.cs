@@ -6,7 +6,24 @@ using System.Text;
 namespace YellowstonePathology.Business.Cytology.Model
 {
 	public static class CytologyResultCode
-	{
+	{                
+        public static string GetResultCode(Business.Cytology.Model.SpecimenAdequacy specimenAdequacy, 
+            Business.Cytology.Model.ScreeningImpression screeningImpression,
+            bool reactive)
+        {
+            string result = "5" + specimenAdequacy.ResultCode.Substring(0,1);
+            if(reactive == true)
+            {
+                result += "1";
+            }
+            else
+            {
+                result += "0";
+            }
+            result += screeningImpression.ResultCode;
+            return result;
+        }
+
         public static bool IsDiagnosisAscusAgusLsilHsil(string resultCode)
         {
             bool result = false;
@@ -42,7 +59,7 @@ namespace YellowstonePathology.Business.Cytology.Model
             return result;
         }
 
-        public static bool IsResultCodeNormal(string resultCode)
+        public static bool IsResultCodeNILM(string resultCode)
         {
             bool result = false;
             if (string.IsNullOrEmpty(resultCode) == false)

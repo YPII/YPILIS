@@ -10,28 +10,29 @@ using YellowstonePathology.Business.Persistence;
 
 namespace YellowstonePathology.Business.Cytology.Model
 {
-    public partial class SpecimenAdequacy : INotifyPropertyChanged
+    public partial class OrderType : INotifyPropertyChanged
 	{
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string m_ResultCode;
+        private string m_OrderCode;
         private string m_Description;        
 
-        public SpecimenAdequacy()
-        {  
-                      
+        public OrderType(string orderCode, string description)
+        {
+            this.m_OrderCode = orderCode;
+            this.m_Description = description;
         }
 
 		[PersistentProperty()]
-        public string ResultCode
+        public string OrderCode
         {
-            get { return this.m_ResultCode; }
+            get { return this.m_OrderCode; }
             set
             {
-                if (this.m_ResultCode != value)
+                if (this.m_OrderCode != value)
                 {
-                    this.m_ResultCode = value;
-                    this.NotifyPropertyChanged("ResultCode");
+                    this.m_OrderCode = value;
+                    this.NotifyPropertyChanged("OrderCode");
                 }
             }
         }
@@ -52,7 +53,7 @@ namespace YellowstonePathology.Business.Cytology.Model
 
         public string DisplayString
         {
-            get { return this.m_ResultCode + " - " + this.m_Description; }
+            get { return this.m_OrderCode + " - " + this.m_Description; }
         }
 
         public void NotifyPropertyChanged(String info)

@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Client.Model
 
         public override void SetDistribution(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
         {
-            if (panelSetOrder.TestOrderReportDistributionCollection.DistributionTypeExists(YellowstonePathology.Business.Client.Model.AthenaPhysicianClientDistribution.ATHENA) == false)
+            if (panelSetOrder.TestOrderReportDistributionCollection.AthenaDistributionTypeExists() == false)
             {
                 YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
                 YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);

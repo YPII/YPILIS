@@ -58,7 +58,6 @@
                     <MenuItem Header="Stain Status" Click="MenuItemStainStatus_Click" />
                     <MenuItem Header="PDF Transfer" Click="MenuItemPDFTransfer_Click" />
                     <MenuItem Header="Print SVH Labels" Click="MenuItemPrintSVHLabels_Click" />
-                    <MenuItem Header="Show Gross Camera Dialog" Click="MenuItemShowGrossCameraDialog_Click" />
                 </MenuItem>
 
                 <MenuItem Header="_Client" Name="MenuItemClient">
@@ -102,6 +101,7 @@
                     <MenuItem Name="MenuItemPolicies" Header="Policies" Click="MenuItemPolicyExplorer_Click"></MenuItem>
                     <MenuItem Name="MenuItemSpecimen" Header="Specimen" Click="MenuItemSpecimen_Click"></MenuItem>
                     <MenuItem Name="MenuItemHolidays" Header="Calendar" Click="MenuItemCalendar_Click"></MenuItem>
+                    <MenuItem Name="MenuItemASCCP" Header="ASCCP Rules" Click="MenuItemASCCP_Click"></MenuItem>
                 </MenuItem>
 
                 <MenuItem Header="_Monitor" Name="MenuItemMonitor">

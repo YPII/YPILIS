@@ -6,9 +6,9 @@ using YellowstonePathology.Business.Test;
 
 namespace YellowstonePathology.Business.Client.Model
 {
-    public class ECWPhysicianClientDistribution : PhysicianClientDistributionListItem
+    public class PrintPhysicianClientDistribution : PhysicianClientDistributionListItem
     {
-        public const string ECW = "Eclinical Works";
+        public const string PRINT = "Print";
 
         public override void From(PhysicianClientDistributionListItem physicianClientDistribution)
         {
@@ -17,13 +17,7 @@ namespace YellowstonePathology.Business.Client.Model
 
         public override void SetDistribution(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
         {
-            if (panelSetOrder.TestOrderReportDistributionCollection.ECWDistributionTypeExists() == false)
-            {
-                if (accessionOrder.ClientId == 1203)
-                {
-                    panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
-                }                
-            }
+            panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
         }
     }
 }

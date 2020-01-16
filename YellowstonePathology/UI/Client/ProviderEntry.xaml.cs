@@ -234,8 +234,7 @@ namespace YellowstonePathology.UI.Client
 		}
 
 		private void ButtonAddToDistribution_Click(object sender, RoutedEventArgs e)
-		{
-            /*
+		{            
 			if (this.ListBoxNewDistributionSelection.SelectedItem != null)
 			{
 				YellowstonePathology.Business.Client.Model.Client clientToAdd = (YellowstonePathology.Business.Client.Model.Client)this.ListBoxNewDistributionSelection.SelectedItem;
@@ -255,10 +254,10 @@ namespace YellowstonePathology.UI.Client
 					}
 
                     string distributionType = clientToAdd.DistributionType;
-                    if (AreDistributionTypesIncompatible(clientExisting.DistributionType, clientToAdd.DistributionType) == true)
-                    {
-                        distributionType = clientToAdd.AlternateDistributionType;
-                    }
+                    //if (AreDistributionTypesIncompatible(clientExisting.DistributionType, clientToAdd.DistributionType) == true)
+                    //{
+                    //    distributionType = clientToAdd.AlternateDistributionType;
+                    //}
 
                     string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 					YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = new Business.Client.Model.PhysicianClientDistribution(objectId, this.m_PhysicianClientId, physicianClientId, distributionType);
@@ -267,8 +266,7 @@ namespace YellowstonePathology.UI.Client
 					this.m_PhysicianClientDistributionViewList = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionsV2(this.m_PhysicianClientId);
 					this.NotifyPropertyChanged("PhysicianClientDistributionViewList");
 				}
-			}
-            */
+			}         
 		}
 
         //private bool AreDistributionTypesIncompatible(string existingDistributionType, string distributionTypeToAdd)

@@ -37,6 +37,9 @@ namespace YellowstonePathology.Business.Test.MaterialRequestForResearch
             YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;
             this.m_TechnicalComponentBillingFacility = ypi;
+
+            YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode1 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("99000", null), 4);
+            this.m_PanelSetCptCodeCollection.Add(panelSetCptCode1);
         }
     }
 }

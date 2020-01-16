@@ -28,8 +28,10 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             throw new Exception("Not implemented in the base.");
         }
 
-        public void AddNextNTEElement(string value, XElement document)
+        public void AddNextNTEElement(string text, XElement document)
         {
+            string normalizedText = StringHelper.ReplaceSpecialCharacters(text) + @"\.br\";
+
             XElement nteElement = new XElement("NTE");
             document.Add(nteElement);
 
@@ -41,7 +43,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             nteElement.Add(nte02Element);
 
             XElement nte03Element = new XElement("NTE.3");
-            XElement nte0301Element = new XElement("NTE.3.1", value);
+            XElement nte0301Element = new XElement("NTE.3.1", normalizedText);
             nte03Element.Add(nte0301Element);
             nteElement.Add(nte03Element);
             
@@ -60,19 +62,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             nte01Element.Add(nte0101Element);
 
             this.m_NTECount += 1;
-        }
-
-        public void HandleLongString(string value, XElement document)
-        {
-            if (string.IsNullOrEmpty(value) == false)
-            {
-                string[] textSplit = value.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string text in textSplit)
-                {
-                    this.AddNextNTEElement(text.Trim(), document);
-                }
-            }
-        }
+        }        
 
         public virtual void AddAmendments(XElement document, YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
@@ -82,7 +72,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                 if (amendment.Final == true)
                 {
                     this.AddNextNTEElement(amendment.AmendmentType + ": " + amendment.AmendmentDate.Value.ToString("MM/dd/yyyy"), document);
-                    this.HandleLongString(amendment.Text, document);
+                    this.AddNextNTEElement(amendment.Text, document);
                     if (amendment.RequirePathologistSignature == true)
                     {
                         this.AddNextNTEElement("Signature: " + amendment.PathologistSignature, document);

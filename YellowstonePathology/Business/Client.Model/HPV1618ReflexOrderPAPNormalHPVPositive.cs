@@ -28,7 +28,7 @@ namespace YellowstonePathology.Business.Client.Model
                 if (panelsetOrderCytology.Final == true)
                 {
                     string papResultCode = panelsetOrderCytology.ResultCode;
-					if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNormal(papResultCode) == true || YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeReactive(papResultCode) == true)
+					if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(papResultCode) == true || YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeReactive(papResultCode) == true)
                     {
                         if (accessionOrder.PanelSetOrderCollection.Exists(panelSetHPV.PanelSetId) == true)
                         {

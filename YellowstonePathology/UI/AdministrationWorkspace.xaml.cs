@@ -994,8 +994,17 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            
-                        
+            Business.PanelSet.Model.PanelSetCollection panelSets = Business.PanelSet.Model.PanelSetCollection.GetAllActive();
+            foreach(Business.PanelSet.Model.PanelSet panelSet in panelSets)
+            {
+                if(panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
+                {
+                    if(panelSet.HasTechnicalComponent == true && panelSet.TechnicalComponentFacility.FacilityId != "YPIBLGS")
+                    {
+                        Console.WriteLine(panelSet.PanelSetName);
+                    }                    
+                }
+            }                                    
         }
 
         private void InsertADT()

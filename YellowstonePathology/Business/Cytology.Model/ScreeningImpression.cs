@@ -65,6 +65,11 @@ namespace YellowstonePathology.Business.Cytology.Model
             }
         }
 
+        public string DisplayString
+        {
+            get { return this.m_ResultCode + " - " + this.m_Description; }
+        }
+
         public void NotifyPropertyChanged(String info)
         {
             if (PropertyChanged != null)

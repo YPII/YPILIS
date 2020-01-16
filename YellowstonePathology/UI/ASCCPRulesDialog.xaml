@@ -1,0 +1,108 @@
+﻿<Window x:Class="YellowstonePathology.UI.ASCCPRulesDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI"
+        mc:Ignorable="d"
+        Title="Rule Dialog" Height="600" Width="1300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" Margin="2,2,2,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Margin="2,2,2,2" Grid.Column="0" Grid.Row="0">Order Type:</TextBlock>
+            <ComboBox Name="ComboBoxRules" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=RuleCollection}" DisplayMemberPath="Description" Margin="2,2,2,2"></ComboBox>
+
+            <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Click="ButtonCreateWoman_Click" Width="100" Height="60" Margin="2,2,2,2">Run Sim</Button>
+        </Grid>
+
+        <ListView Name="ListViewWoman" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" 
+							 ItemsSource="{Binding Path=WomanCollection}" SelectionChanged="ListViewWoman_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Age" Width="60" DisplayMemberBinding="{Binding Path=Age}"/>
+                    <GridViewColumn Header="Match" Width="60" DisplayMemberBinding="{Binding Path=RuleIsMatch}"/>
+                    <GridViewColumn Header="Cotesting" Width="60" DisplayMemberBinding="{Binding Path=Cotesting}"/>
+                    <GridViewColumn Header="Specimen Adequacy" Width="250" DisplayMemberBinding="{Binding Path=SpecimenAdequacy.Description}"/>
+                    <GridViewColumn Header="Screening Impression" Width="250" DisplayMemberBinding="{Binding Path=ScreeningImpression.Description}"/>
+                    <GridViewColumn Header="HPV Ordered" Width="100" DisplayMemberBinding="{Binding Path=HPVIsOrdered}"/>
+                    <GridViewColumn Header="HPV Result" Width="100" DisplayMemberBinding="{Binding Path=HPVResult}"/>
+                    <GridViewColumn Header="Genotyping Ordered" Width="120" DisplayMemberBinding="{Binding Path=GenotypingIsOrdered}"/>
+                    <GridViewColumn Header="Genotyping Result" Width="120" DisplayMemberBinding="{Binding Path=GenotypingResult}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Grid.Column="0" Grid.Row="2" Margin="2,2,2,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Name: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=CurrentWoman.Name}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Order Type: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=CurrentWoman.OrderType.Description}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Specimen Adequacy: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=CurrentWoman.SpecimenAdequacy.DisplayString}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Screening Impression: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=CurrentWoman.ScreeningImpression.DisplayString}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="Age: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Path=CurrentWoman.Age}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="5" Text="HPV Is Ordered: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Path=CurrentWoman.HPVIsOrdered}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="6" Text="HPV Result: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding Path=CurrentWoman.HPVResult}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="7" Text="Genotyping Is Ordered: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding Path=CurrentWoman.GenotypingIsOrdered}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="8" Text="Genotyping Result: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding Path=CurrentWoman.GenotypingResult}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="9" Text="Management Recomendation: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding Path=CurrentWoman.ManagementRecomendation}" Margin="2,2,2,2"></TextBlock>
+        </Grid>
+
+    </Grid>
+</Window>

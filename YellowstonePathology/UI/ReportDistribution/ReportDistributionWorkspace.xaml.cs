@@ -463,43 +463,7 @@ namespace YellowstonePathology.UI.ReportDistribution
             }                
 
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
-        }
-
-        /*
-        private void HandleNotificationEmail(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder)
-        {
-            YellowstonePathology.Business.Domain.Physician physician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByMasterAccessionNo(panelSetOrder.MasterAccessionNo);
-            if (physician.SendPublishNotifications == true)
-            {
-                if (panelSetOrder.Distribute == true)
-                {                    
-                    string subject = "You have a result ready for review: " + panelSetOrder.PanelSetName;
-                    string body = "You have a patient report ready. You can review the report by using YPI Connect.  If you don't have access to YPI Connect please call us at (406)238-6360.";
-                    
-                    System.Net.Mail.MailAddress from = new System.Net.Mail.MailAddress("Results@YPII.com");
-                    System.Net.Mail.MailAddress to = new System.Net.Mail.MailAddress(physician.PublishNotificationEmailAddress);
-                    //System.Net.Mail.MailAddress bcc = new System.Net.Mail.MailAddress("Results@YPII.com");
-
-                    System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage(from, to);
-                    message.Subject = subject;
-                    message.Body = body;
-                    //message.Bcc.Add(bcc);
-                    
-                    System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.111");
-
-                    Uri uri = new Uri("http://tempuri.org/");
-                    System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;
-                    System.Net.NetworkCredential credential = credentials.GetCredential(uri, "Basic");
-
-                    client.Credentials = credential;
-                    client.Send(message);
-
-                    panelSetOrder.TimeOfLastPublishNotification = DateTime.Now;
-                    panelSetOrder.PublishNotificationSent = true;                 
-                }
-            }
-        }
-        */
+        }        
 
         private YellowstonePathology.Business.ReportDistribution.Model.DistributionResult Distribute(YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution, Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder)
         {
@@ -508,9 +472,13 @@ namespace YellowstonePathology.UI.ReportDistribution
             switch (testOrderReportDistribution.DistributionType)
             {
                 case YellowstonePathology.Business.Client.Model.FaxPhysicianClientDistribution.FAX:
+                case "EPIC->Fax":
+                case "Meditech->Fax":
+                case "Athena->Fax":
+                case "ECW->Fax":
                     result = this.HandleFaxDistribution(testOrderReportDistribution);
                     break;
-                case YellowstonePathology.Business.Client.Model.EPICPhysicianClientDistribution.EPIC:
+                case YellowstonePathology.Business.Client.Model.EPICPhysicianClientDistribution.EPIC:                
                     result = this.HandleEPICDistribution(testOrderReportDistribution, accessionOrder, panelSetOrder);
                     break;
                 case YellowstonePathology.Business.Client.Model.ECWPhysicianClientDistribution.ECW:

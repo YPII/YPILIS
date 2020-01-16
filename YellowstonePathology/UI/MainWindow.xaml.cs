@@ -1064,10 +1064,10 @@ namespace YellowstonePathology.UI
             dlg.ShowDialog();
         }
 
-        private void MenuItemShowGrossCameraDialog_Click(object sender, RoutedEventArgs e)
+        private void MenuItemASCCP_Click(object sender, RoutedEventArgs e)
         {
-            AxisCameraDialog axisCameraDialog = new AxisCameraDialog();
-            axisCameraDialog.ShowDialog();
+            ASCCPRulesDialog asccpDialog = new ASCCPRulesDialog();
+            asccpDialog.Show();
         }
     }
 }

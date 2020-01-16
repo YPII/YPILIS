@@ -24,10 +24,11 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 
         public void AddAlternateDistribution(Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution, string reportNo)
         {
+            string distType = physicianClientDistribution.DistributionType + "->" + physicianClientDistribution.AlternateDistributionType;
             string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution =
                 new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, reportNo, physicianClientDistribution.PhysicianId, physicianClientDistribution.PhysicianName,
-                    physicianClientDistribution.ClientId, physicianClientDistribution.ClientName, physicianClientDistribution.AlternateDistributionType, physicianClientDistribution.FaxNumber);
+                    physicianClientDistribution.ClientId, physicianClientDistribution.ClientName,  distType, physicianClientDistribution.FaxNumber);
             this.Add(testOrderReportDistribution);
         }
 
@@ -98,6 +99,20 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             return result;
         }
 
+        public bool FaxNumberExists(string faxNumber)
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType == "Fax" && testOrderReportDistribution.FaxNumber == faxNumber)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public TestOrderReportDistribution Get(string testOrderReportDistributionId)
         {
             TestOrderReportDistribution result = null;
@@ -118,6 +133,62 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
                 if (testOrderReportDistribution.DistributionType == distributionType)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public bool EPICDistributionTypeExists()
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType == "EPIC" || testOrderReportDistribution.DistributionType == "EPIC->Fax")
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public bool MeditechDistributionTypeExists()
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType == "Meditech" || testOrderReportDistribution.DistributionType == "Meditech->Fax")
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public bool AthenaDistributionTypeExists()
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType == "Athena Health" || testOrderReportDistribution.DistributionType == "Athena Health->Fax")
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public bool ECWDistributionTypeExists()
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType == "Eclinical Works" || testOrderReportDistribution.DistributionType == "Eclinical Works->Fax")
                 {
                     result = true;
                     break;

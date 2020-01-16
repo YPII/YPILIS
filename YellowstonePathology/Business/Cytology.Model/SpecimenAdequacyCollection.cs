@@ -10,6 +10,21 @@ namespace YellowstonePathology.Business.Cytology.Model
 	{
 		public SpecimenAdequacyCollection()
 		{
+
 		}
+
+        public SpecimenAdequacy Get(string code)
+        {
+            SpecimenAdequacy result = null;
+            foreach(SpecimenAdequacy specimenAdequacy in this)
+            {
+                if(specimenAdequacy.ResultCode == code)
+                {
+                    result = specimenAdequacy;
+                    break;
+                }
+            }
+            return result;
+        }
 	}
 }

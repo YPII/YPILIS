@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>29</ApplicationRevision>
+    <ApplicationRevision>36</ApplicationRevision>
     <ApplicationVersion>10.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -210,12 +210,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AxisCameraDialog.xaml.cs">
-      <DependentUpon>AxisCameraDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Business\Amendment.Model\Amendment.cs" />
     <Compile Include="Business\Amendment.Model\AmendmentCollection.cs" />
     <Compile Include="Business\ApplicationVersion.cs" />
+    <Compile Include="Business\ASCCPRule\InstructionResult.cs" />
+    <Compile Include="Business\ASCCPRule\BaseRule.cs" />
+    <Compile Include="Business\ASCCPRule\NoMatchingRule.cs" />
+    <Compile Include="Business\ASCCPRule\Rule2.cs" />
+    <Compile Include="Business\ASCCPRule\UnsatWitCotest.cs" />
+    <Compile Include="Business\ASCCPRule\Woman.cs" />
+    <Compile Include="Business\ASCCPRule\NILMECTZAbsent.cs" />
+    <Compile Include="Business\ASCCPRule\RuleCollection.cs" />
+    <Compile Include="Business\ASCCPRule\Unsat.cs" />
+    <Compile Include="Business\ASCCPRule\WomanCollection.cs" />
     <Compile Include="Business\Audit.Model\AccessionOrderAudit.cs" />
     <Compile Include="Business\Audit.Model\AccountNoAudit.cs" />
     <Compile Include="Business\Audit.Model\AliquotAndStainOrderAuditCollection.cs" />
@@ -394,6 +401,8 @@
     <Compile Include="Business\ClientOrder.Model\ExternalOrderIds.cs" />
     <Compile Include="Business\ClientOrder.Model\ExternalOrderIdsCollection.cs" />
     <Compile Include="Business\Common\Block.cs" />
+    <Compile Include="Business\Cytology.Model\OrderType.cs" />
+    <Compile Include="Business\Cytology.Model\OrderTypeCollectionCollection.cs" />
     <Compile Include="Business\Document\CaseDocumentFileTypeEnum.cs" />
     <Compile Include="Business\Document\CaseDocumentTypeEnum.cs" />
     <Compile Include="Business\EthBlock.cs" />
@@ -409,6 +418,7 @@
     <Compile Include="Business\HL7View\EPIC\EpicBeakerMshView.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicBeakerOrcView.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicBeakerObxView.cs" />
+    <Compile Include="Business\HL7View\EPIC\StringHelper.cs" />
     <Compile Include="Business\Label.Model\HistologySlidePaperZPLLabelV3.cs" />
     <Compile Include="Business\Label.Model\StorageSlideLabel.cs" />
     <Compile Include="Business\Label.Model\HologicSlideLabelPrinter.cs" />
@@ -3163,6 +3173,9 @@
     <Compile Include="UI\AppMessaging\LockRequestResponseRecievedPage.xaml.cs">
       <DependentUpon>LockRequestResponseRecievedPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ASCCPRulesDialog.xaml.cs">
+      <DependentUpon>ASCCPRulesDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\AutoCompleteTest.xaml.cs">
       <DependentUpon>AutoCompleteTest.xaml</DependentUpon>
     </Compile>
@@ -5087,10 +5100,6 @@
     <Content Include="dll\Interop.FAXCOMEXLib.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="AxisCameraDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Business\Document\CaseReportFooter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -5174,6 +5183,10 @@
     <Page Include="UI\AppMessaging\LockRequestResponseRecievedPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\ASCCPRulesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\AutoCompleteTest.xaml">
       <SubType>Designer</SubType>
@@ -7236,12 +7249,12 @@
   <ItemGroup>
     <PublishFile Include="Microsoft.Exchange.WebServices">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

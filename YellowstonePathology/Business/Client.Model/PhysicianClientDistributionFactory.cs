@@ -22,6 +22,10 @@ namespace YellowstonePathology.Business.Client.Model
                     physicianClientDistribution = new AthenaPhysicianClientDistribution();
                     break;
                 case YellowstonePathology.Business.Client.Model.EPICPhysicianClientDistribution.EPIC:
+                case "EPIC->Fax":
+                case "Eclinical Works->Fax":
+                case "Athena Health->Fax":
+                case "Meditech->Fax":
                     physicianClientDistribution = new EPICPhysicianClientDistribution();
                     break;
                 case YellowstonePathology.Business.Client.Model.MediTechPhysicianClientDistribution.MEDITECH:

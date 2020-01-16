@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Client.Model
                 YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology panelSetOrderCytology = (YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetThinPrep.PanelSetId);
                 if (panelSetOrderCytology.Final == true)
                 {
-                    if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNormal(panelSetOrderCytology.ResultCode) == true ||
+                    if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(panelSetOrderCytology.ResultCode) == true ||
                         YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeReactive(panelSetOrderCytology.ResultCode) == true)
                     {
                         if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeTZoneAbsent(panelSetOrderCytology.ResultCode) == true)

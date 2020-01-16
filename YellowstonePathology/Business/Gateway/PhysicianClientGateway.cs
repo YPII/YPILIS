@@ -707,9 +707,9 @@ namespace YellowstonePathology.Business.Gateway
                         Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution = new Business.Client.Model.PhysicianClientDistributionListItem();
                         YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(physicianClientDistribution, dr);
                         sqlDataReaderPropertyWriter.WriteProperties();
-                        Business.Client.Model.PhysicianClientDistributionListItem listItem = Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(physicianClientDistribution.DistributionType);
+                        Business.Client.Model.PhysicianClientDistributionListItem listItem = Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(physicianClientDistribution.DistributionType);                        
                         listItem.From(physicianClientDistribution);
-                        result.Add(listItem);
+                        result.Add(listItem);                        
                     }
                 }
             }

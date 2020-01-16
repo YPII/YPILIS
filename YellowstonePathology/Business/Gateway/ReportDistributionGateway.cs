@@ -74,7 +74,7 @@ namespace YellowstonePathology.Business.Gateway
             if (physicianId > 0 && clientId > 0)
             {
                 string sql = "Select c.ClientId, c.ClientName, ph.PhysicianId, ph.DisplayName PhysicianName, pcd.DistributionType, " +
-                  "c.Fax FaxNumber " +
+                  "c.Fax FaxNumber, c.AlternateDistributionType " +
                   "from tblPhysicianClient pc " +
                   "join tblPhysicianClientDistribution pcd on pc.PhysicianClientId = pcd.PhysicianClientId " +
                   "join tblPhysicianClient pc2 on pcd.DistributionId = pc2.PhysicianClientId " +

@@ -33,7 +33,8 @@ namespace YellowstonePathology.UI.Login
 
         private Billing.BillingPath m_BillingPath;
 
-        private Login.Receiving.LoginPageWindow m_LoginPageWindow;        
+        private Login.Receiving.LoginPageWindow m_LoginPageWindow;
+        private Business.GrossCameraPubSubHandler m_GrossCameraPubSubHandler;      
 
         public LoginWorkspace(MainWindowCommandButtonHandler mainWindowCommandButtonHandler, TabItem writer)
         {
@@ -41,6 +42,7 @@ namespace YellowstonePathology.UI.Login
             this.m_LoadedHasRun = false;
             this.m_Writer = writer;
 
+            this.m_GrossCameraPubSubHandler = new Business.GrossCameraPubSubHandler();
             this.m_LoginUI = new LoginUIV2(this.m_Writer);
             this.m_DocumentViewer = new DocumentWorkspace();
 
@@ -283,6 +285,7 @@ namespace YellowstonePathology.UI.Login
         public void GetCase(string masterAccessionNo, string reportNo)
         {
             this.m_LoginUI.GetAccessionOrder(masterAccessionNo, reportNo);
+            this.m_GrossCameraPubSubHandler.CaseAquired(this.m_LoginUI.AccessionOrder);
             this.m_DocumentViewer.ClearContent();
 
             if (string.IsNullOrEmpty(this.m_LoginUI.AccessionOrder.SvhAccount) == false)
@@ -994,10 +997,9 @@ namespace YellowstonePathology.UI.Login
             this.m_LoginPageWindow = null;
         }
 
-        private void MenuItemShowGrossCameraDialog_Click(object sender, RoutedEventArgs e)
+        private void ButtonShowCamera_Click(object sender, RoutedEventArgs e)
         {
-            Business.GrossCameraPubSubHandler grossCameraPubSubHandler = new Business.GrossCameraPubSubHandler();
-            grossCameraPubSubHandler.ShowDialog(this.m_LoginUI.AccessionOrder);
+            this.m_GrossCameraPubSubHandler.ShowDialog();
         }
     }
 }

@@ -22,7 +22,6 @@ namespace YellowstonePathology.Business.Test.ABL1KinaseDomainMutation
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.ABL1KinaseDomainMutation.ABL1KinaseDomainMutationWordDocument).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
 
-
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);
 
@@ -37,7 +36,7 @@ namespace YellowstonePathology.Business.Test.ABL1KinaseDomainMutation
             YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode1 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81170", null), 1);
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode1);
 
-            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMOLEGEN());
+            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
         }
     }
 }

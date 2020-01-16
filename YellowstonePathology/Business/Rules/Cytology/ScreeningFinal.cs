@@ -85,7 +85,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
         private void HandleScreeningError()
         {
             YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology panelOrderCytology = this.m_PanelSetOrderCytology.PanelOrderCollection.GetPrimaryScreening();            
-            if(YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNormal(panelOrderCytology.ResultCode) == true)
+            if(YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(panelOrderCytology.ResultCode) == true)
             {
                 if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisThreeOrBetter(this.m_PanelSetOrderCytology.ResultCode))
                 {
@@ -257,7 +257,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
         {
             if (this.m_PanelOrderToFinal.ScreeningType.ToUpper() == "PATHOLOGIST REVIEW")
             {
-				bool pathologistReviewResultIsNormal = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNormal(this.m_PanelOrderToFinal.ResultCode);
+				bool pathologistReviewResultIsNormal = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(this.m_PanelOrderToFinal.ResultCode);
 				if (pathologistReviewResultIsNormal == true)
 				{
 					this.m_PanelOrderToFinal.NoCharge = true;
@@ -269,7 +269,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
 		{
             if (this.m_PanelOrderToFinal.ScreeningType.ToUpper() == "PATHOLOGIST REVIEW")
             {
-				bool pathologistReviewResultIsNormal = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNormal(this.m_PanelOrderToFinal.ResultCode);
+				bool pathologistReviewResultIsNormal = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(this.m_PanelOrderToFinal.ResultCode);
 				string endoComment = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("44").Comment;
 				
 				if (pathologistReviewResultIsNormal == false && 
@@ -373,7 +373,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
                 if (this.m_PanelOrderToFinal.ScreeningType.ToUpper() != "PRIMARY SCREENING")
                 {
                     YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology primaryScreening = (YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology)this.m_PanelSetOrderCytology.PanelOrderCollection.GetPrimaryScreening();
-					bool primaryScreeningIsNormal = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNormal(primaryScreening.ResultCode);
+					bool primaryScreeningIsNormal = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(primaryScreening.ResultCode);
                     if (primaryScreeningIsNormal == true)
                     {
                         YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology cytotechReview = (YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology)this.m_PanelOrderToFinal;

@@ -8,7 +8,8 @@ namespace YellowstonePathology.Business.HL7View.EPIC
     public class EPICUniversalSerivceIdDictionary : Dictionary<string, string>
     {
         public EPICUniversalSerivceIdDictionary()
-        {            
+        {
+            this.Add("MISCYPI", "MISCELLANEOUS PATHOLOGY");
             this.Add("SRGCL", "Surgical Pathology");
             this.Add("JAK2MUT", "JAK2 Mutation V617F");
             this.Add("CTGC", "Chlamydia trachomatis/ Neisseria gonorrhoeae Screen by PCR");

@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Client.Model
 
         public override void SetDistribution(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
         {
-            if (panelSetOrder.TestOrderReportDistributionCollection.DistributionTypeExists(YellowstonePathology.Business.Client.Model.EPICPhysicianClientDistribution.EPIC) == false)
+            if (panelSetOrder.TestOrderReportDistributionCollection.EPICDistributionTypeExists() == false)
             {
                 List<string> clientGroupIds = new List<string>();
                 clientGroupIds.Add("1");

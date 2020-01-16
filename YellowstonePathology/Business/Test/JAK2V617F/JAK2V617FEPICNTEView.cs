@@ -37,16 +37,16 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
             this.AddAmendments(document, panelSetOrder, this.m_AccessionOrder);
 
             this.AddNextNTEElement("Interpretation: ", document);
-            this.HandleLongString(panelSetOrder.Interpretation, document);
+            this.AddNextNTEElement(panelSetOrder.Interpretation, document);
             this.AddNextNTEElement("", document);
 
             this.AddNextNTEElement("Method: ", document);
 			string method = panelSetOrder.Method;
-            this.HandleLongString(method, document);
+            this.AddNextNTEElement(method, document);
             this.AddNextNTEElement("", document);
 
             this.AddNextNTEElement("References: ", document);            
-            this.HandleLongString(panelSetOrder.Reference, document);
+            this.AddNextNTEElement(panelSetOrder.Reference, document);
             this.AddNextNTEElement("", document);
 
             this.AddNextNTEElement(panelSetOrder.Disclosure, document);

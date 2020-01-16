@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Client.Model
         {
             if (string.IsNullOrEmpty(this.m_FaxNumber) == false)
             {
-                if (panelSetOrder.TestOrderReportDistributionCollection.Exists(this.m_PhysicianId, this.m_ClientId, YellowstonePathology.Business.Client.Model.FaxPhysicianClientDistribution.FAX) == false)
+                if (panelSetOrder.TestOrderReportDistributionCollection.FaxNumberExists(this.FaxNumber) == false)
                 {
                     panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
                 }
