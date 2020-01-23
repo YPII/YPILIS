@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
 
             if (panelSetOrderHer2AmplificationByFish.NonBreast == false)
             {
-                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByFish.2.xml";
+                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByFish.7.xml";
             }
             else
             {

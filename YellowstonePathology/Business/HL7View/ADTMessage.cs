@@ -25,6 +25,7 @@ namespace YellowstonePathology.Business.HL7View
         protected string m_AccountNo;
         protected string m_MedicalRecordNo;
         protected string m_MessageType;
+        protected string m_PHomePhone;
         protected Business.Patient.Model.Address m_Address;        
 
         public ADTMessage()
@@ -96,6 +97,7 @@ namespace YellowstonePathology.Business.HL7View
                 {
                     this.m_PIDSegment.FromHL7(lines[i]);
                     this.m_Address = this.m_PIDSegment.Address;
+                    this.m_PHomePhone = this.m_PIDSegment.HomePhoneNumber;
                 }                
             }            
         }        
@@ -161,6 +163,13 @@ namespace YellowstonePathology.Business.HL7View
         {
             get { return this.m_MessageType; }
             set { this.m_MessageType = value; }
+        }
+
+        [PersistentProperty()]
+        public string PHomePhone
+        {
+            get { return this.m_PHomePhone; }
+            set { this.m_PHomePhone = value; }
         }
 
         public string MessageTypeComment

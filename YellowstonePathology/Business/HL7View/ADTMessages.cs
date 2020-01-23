@@ -81,7 +81,8 @@ namespace YellowstonePathology.Business.HL7View
             accessionOrder.PAddress2 = result.PatientAddress.PAddress2;
             accessionOrder.PCity = result.PatientAddress.PCity;
             accessionOrder.PState = result.PatientAddress.PState;
-            accessionOrder.PZipCode = result.PatientAddress.PZipCode;               
+            accessionOrder.PZipCode = result.PatientAddress.PZipCode;
+            accessionOrder.PPhoneNumberHome = result.PHomePhone;
         }        
 
         public Business.Patient.Model.Address GetPatientAddress()
