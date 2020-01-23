@@ -8,7 +8,8 @@ namespace YellowstonePathology.Business.Search
     {
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private string m_MasterAccessionNo;
+        private string m_HasComment;
+        private string m_MasterAccessionNo;
 		private string m_ReportNo;
 		private Nullable<DateTime> m_AccessionDate;
 		private int m_PanelSetId;
@@ -36,7 +37,8 @@ namespace YellowstonePathology.Business.Search
 
         public ReportSearchItem()
 		{
-		}
+            this.m_HasComment = "?";
+        }
 
 		public void NotifyPropertyChanged(String info)
 		{
@@ -45,6 +47,19 @@ namespace YellowstonePathology.Business.Search
 				PropertyChanged(this, new PropertyChangedEventArgs(info));
 			}
 		}
+        
+        public string HasComment
+        {
+            get { return this.m_HasComment; }
+            set
+            {
+                if (value != this.m_HasComment)
+                {
+                    this.m_HasComment = value;
+                    this.NotifyPropertyChanged("HasComment");
+                }
+            }
+        }
 
         [PersistentProperty()]
 		public string MasterAccessionNo

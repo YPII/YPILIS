@@ -52,6 +52,9 @@ namespace YellowstonePathology.Business.Client.Model
                 case YellowstonePathology.Business.Client.Model.DoNotDistributePhysicianClientDistribution.DONOTDISTRIBUTE:
                     physicianClientDistribution = new DoNotDistributePhysicianClientDistribution();
                     break;
+                default:
+                    physicianClientDistribution = new NotSetPhysicianClientDistribution();
+                    break;
             }
             return physicianClientDistribution;
         }

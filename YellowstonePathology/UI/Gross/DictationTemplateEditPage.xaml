@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="6*" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -30,7 +30,12 @@
         </ScrollViewer>
 
         <TextBlock Grid.Column="0" Grid.Row="3" Margin="2" HorizontalAlignment="Right">Specimen:</TextBlock>
-        <ListView Grid.Column="0" Grid.Row="4" Margin="2" Grid.ColumnSpan="2" ItemsSource="{Binding Path=DictationTemplate.SpecimenCollection}">
+        <ListView Name="ListViewSpecimen" Grid.Column="0" Grid.Row="4" Margin="2" Grid.ColumnSpan="2" ItemsSource="{Binding Path=DictationTemplate.SpecimenCollection}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete" Click="MenuItemDelete_Click" Tag="{Binding}"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.View>
             <GridView>
                 <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=SpecimenName}" Width="330"/>

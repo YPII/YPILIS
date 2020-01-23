@@ -90,10 +90,13 @@ namespace YellowstonePathology.Document
 
         public static string GetPath(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-            if (orderIdParser.IsLegacyReportNo == true) 
-                return GetLegacyPath(orderIdParser.ReportNo);
+            if (orderIdParser.IsLegacyReportNo == true)
+            {
+                string legacyReportNo = GetLegacyPath(orderIdParser.ReportNo);
+                return legacyReportNo;
+            }                
 
-            string strPath = @"\\CFileServer\AccessionDocuments\20" + orderIdParser.MasterAccessionNoYear.Value.ToString();
+            string strPath = @"\\CFileServer\AccessionDocuments\20" + orderIdParser.MasterAccessionNoYear.Value.ToString();            
             string number = orderIdParser.MasterAccessionNoNumber.Value.ToString();
             int length = number.Length;
 

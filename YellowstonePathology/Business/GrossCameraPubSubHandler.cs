@@ -39,6 +39,7 @@ namespace YellowstonePathology.Business
 
         private string GetMessage(Business.Test.AccessionOrder accessionOrder)
         {
+            /*
             Business.OrderIdParser orderIdParser = new Business.OrderIdParser(accessionOrder.MasterAccessionNo);
             string caseDocumentPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
             caseDocumentPath = caseDocumentPath.Replace(@"\", @"\\");
@@ -52,6 +53,8 @@ namespace YellowstonePathology.Business
             result.Append(",\"caseDocumentPath\": \"" + caseDocumentPath + "\"");
             result.Append("}");
             return result.ToString();
+            */
+            return "hello";
         }
     }
 }

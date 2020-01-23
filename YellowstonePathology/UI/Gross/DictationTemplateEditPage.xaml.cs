@@ -151,5 +151,13 @@ namespace YellowstonePathology.UI.Gross
                 this.Close();
             }
         }
+
+        private void MenuItemDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.ListViewSpecimen.SelectedItem != null)
+            {
+
+            }
+        }
     }
 }

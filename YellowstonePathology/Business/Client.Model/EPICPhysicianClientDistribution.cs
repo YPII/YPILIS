@@ -46,7 +46,7 @@ namespace YellowstonePathology.Business.Client.Model
                 }
                 else
                 {
-                    panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
+                    panelSetOrder.TestOrderReportDistributionCollection.AddAlternateDistribution(this, panelSetOrder.ReportNo);
                 }
             }
         }

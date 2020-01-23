@@ -248,23 +248,31 @@
                     <CheckBox Grid.Column="1" Grid.Row="12" IsChecked="{Binding Path=SurgicalTestOrder.NoCharge}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2"></CheckBox>
 
                     <TextBlock Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBlockHeaderRight}">Address 1:</TextBlock>
-                    <TextBox Grid.Column="3" Grid.Row="2" Text="{Binding Path=AccessionOrder.PAddress1, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Name="TextBoxPAddress1" Grid.Column="3" Grid.Row="2" Text="{Binding Path=AccessionOrder.PAddress1, UpdateSourceTrigger=PropertyChanged}"
 							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
 
                     <TextBlock Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBlockHeaderRight}">Address 2:</TextBlock>
-                    <TextBox Name="TextBoxAddress2" Grid.Column="3" Grid.Row="3" Text="{Binding Path=AccessionOrder.PAddress2, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Name="TextBoxPAddress2" Grid.Column="3" Grid.Row="3" Text="{Binding Path=AccessionOrder.PAddress2, UpdateSourceTrigger=PropertyChanged}"
 							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
 
                     <TextBlock Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBlockHeaderRight}">City:</TextBlock>
-                    <TextBox Grid.Column="3" Grid.Row="4" Text="{Binding Path=AccessionOrder.PCity, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Name="TextBoxPCity" Grid.Column="3" Grid.Row="4" Text="{Binding Path=AccessionOrder.PCity, UpdateSourceTrigger=PropertyChanged}"
 							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
 
                     <TextBlock Grid.Column="2" Grid.Row="5" Style="{StaticResource TextBlockHeaderRight}">State:</TextBlock>
-                    <TextBox Grid.Column="3" Grid.Row="5" Text="{Binding Path=AccessionOrder.PState, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Name="TextBoxPState" Grid.Column="3" Grid.Row="5" Text="{Binding Path=AccessionOrder.PState, UpdateSourceTrigger=PropertyChanged}"
 							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
 
                     <TextBlock Grid.Column="2" Grid.Row="6" Style="{StaticResource TextBlockHeaderRight}">Zip Code:</TextBlock>
-                    <TextBox Grid.Column="3" Grid.Row="6" Text="{Binding Path=AccessionOrder.PZipCode, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Name="TextBoxPZipCode" Grid.Column="3" Grid.Row="6" Text="{Binding Path=AccessionOrder.PZipCode, UpdateSourceTrigger=PropertyChanged}"
+							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+
+                    <TextBlock Grid.Column="2" Grid.Row="7" Style="{StaticResource TextBlockHeaderRight}">Home Phone:</TextBlock>
+                    <TextBox Name="TextBoxPPhoneNumberHome" Grid.Column="3" Grid.Row="7" Text="{Binding Path=AccessionOrder.PPhoneNumberHome, UpdateSourceTrigger=PropertyChanged}"
+							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
+
+                    <TextBlock Grid.Column="2" Grid.Row="8" Style="{StaticResource TextBlockHeaderRight}">Business Phone:</TextBlock>
+                    <TextBox Name="TextBoxPPhoneNumberBusiness" Grid.Column="3" Grid.Row="8" Text="{Binding Path=AccessionOrder.PPhoneNumberBusiness, UpdateSourceTrigger=PropertyChanged}"
 							 Style="{StaticResource NewTextBox}" Width="200" HorizontalAlignment="Left" IsEnabled="{Binding Path=FieldEnabler.IsUnprotectedEnabled}"></TextBox>
                 </Grid>
             </TabItem>

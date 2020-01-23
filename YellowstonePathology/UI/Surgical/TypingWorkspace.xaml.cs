@@ -391,7 +391,8 @@ namespace YellowstonePathology.UI.Surgical
         
         public void CheckBoxAccepted_Click(object sender, RoutedEventArgs args)
         {                        
-            YellowstonePathology.Business.Rules.MethodResult methodResult = this.DoTypingFinalChecks();
+            YellowstonePathology.Business.Rules.MethodResult methodResult = this.DoTypingFinalChecks();            
+
             if (methodResult.Success == true)
             {
 				if (this.m_TypingUI.SurgicalTestOrder != null)
@@ -404,7 +405,7 @@ namespace YellowstonePathology.UI.Surgical
 						if (this.m_TypingUI.SurgicalTestOrder.SurgicalSpecimenCollection.HasDuplicateStains() == true)
 						{
 							System.Windows.MessageBox.Show("Duplicate stains were found, please check to see if any need to be no charged.");
-						}         
+						}                        
                     }
 					else
 					{
@@ -768,6 +769,23 @@ namespace YellowstonePathology.UI.Surgical
 
 		private void CheckBoxAudit_Click(object sender, RoutedEventArgs e)
         {
+            List<TextBox> addressInfoTextboxes = new List<TextBox>();
+            addressInfoTextboxes.Add(this.TextBoxPAddress1);
+            addressInfoTextboxes.Add(this.TextBoxPAddress2);
+            addressInfoTextboxes.Add(this.TextBoxPCity);
+            addressInfoTextboxes.Add(this.TextBoxPState);
+            addressInfoTextboxes.Add(this.TextBoxPZipCode);
+            addressInfoTextboxes.Add(this.TextBoxPPhoneNumberBusiness);
+            addressInfoTextboxes.Add(this.TextBoxPPhoneNumberHome);
+
+            foreach(TextBox textbox in addressInfoTextboxes)
+            {
+                if(string.IsNullOrEmpty(textbox.Text) == true)
+                {
+                    textbox.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#F6FF33"));
+                }
+            }            
+
             YellowstonePathology.Business.Rules.MethodResult methodResult = this.DoTypingFinalChecks();
             if (methodResult.Success == false)
             {
