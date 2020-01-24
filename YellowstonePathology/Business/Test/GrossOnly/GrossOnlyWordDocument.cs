@@ -6,9 +6,7 @@ using System.Text;
 namespace YellowstonePathology.Business.Test.GrossOnly
 {
     public class GrossOnlyWordDocument : YellowstonePathology.Business.Document.CaseReportV2
-    {
-        private YellowstonePathology.Business.Document.NativeDocumentFormatEnum m_NativeDocumentFormat;
-
+    {     
         public GrossOnlyWordDocument(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Document.ReportSaveModeEnum reportSaveMode)
             : base(accessionOrder, panelSetOrder, reportSaveMode)
         {
@@ -42,17 +40,11 @@ namespace YellowstonePathology.Business.Test.GrossOnly
             base.Publish();
         }
 
-		public YellowstonePathology.Business.Rules.MethodResult DeleteCaseFiles(YellowstonePathology.Business.OrderIdParser orderIdParser)
+		public override YellowstonePathology.Business.Rules.MethodResult DeleteCaseFiles(YellowstonePathology.Business.OrderIdParser orderIdParser)
 		{
             YellowstonePathology.Business.Rules.MethodResult methodResult = new Rules.MethodResult();
             methodResult.Success = true;
             return methodResult;
-        }
-
-        public YellowstonePathology.Business.Document.NativeDocumentFormatEnum NativeDocumentFormat
-        {
-            get { return this.m_NativeDocumentFormat; }
-            set { this.m_NativeDocumentFormat = value; }
-        }
+        }        
     }
 }

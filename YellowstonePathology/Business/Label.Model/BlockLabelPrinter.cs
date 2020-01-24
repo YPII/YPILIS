@@ -7,7 +7,7 @@ namespace YellowstonePathology.Business.Label.Model
 {
     public class BlockLabelPrinter
     {
-        private System.Drawing.Printing.PrintDocument m_PrintDocument;        
+        //private System.Drawing.Printing.PrintDocument m_PrintDocument;        
         private Queue<Business.Label.Model.HistologyBlockPaperZPLLabel> m_BlockLabelQueue;        
 
         public BlockLabelPrinter(YellowstonePathology.Business.Test.AliquotOrderCollection aliquotOrderCollection, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)

@@ -25,8 +25,7 @@ namespace YellowstonePathology.UI.Test
         {
             this.m_ResultPage = new ALKForNSCLCByFISHResultPage(this.m_TestOrder, this.m_AccessionOrder, this.m_SystemIdentity);
             this.m_ResultPage.Next += new ALKForNSCLCByFISHResultPage.NextEventHandler(ResultPage_Next);
-            this.m_ResultPage.CPTCode += ResultPage_CPTCode;
-            this.RegisterCancelATest(this.m_ResultPage);
+            this.m_ResultPage.CPTCode += ResultPage_CPTCode;            
             this.m_PageNavigator.Navigate(this.m_ResultPage);
         }
 

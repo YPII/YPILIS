@@ -33,7 +33,6 @@ using MongoDB.Bson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Grpc.Core;
-using System.Data;
 using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.UI

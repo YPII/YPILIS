@@ -8,17 +8,15 @@ using System.ComponentModel;
 namespace YellowstonePathology.Business.Flow
 {
     public class FlowMarkerCollection : ObservableCollection<Flow.FlowMarkerItem>, INotifyPropertyChanged
-    {
-        public delegate void PropertyChangedNotificationHandler(String info);
-        public event PropertyChangedEventHandler PropertyChanged;
-
+    {        
         public const string PREFIXID = "FM";
         public CellPopulationsOfInterest m_CellPopulationsOfInterest;
         private Flow.FlowMarkerCollection m_CurrentMarkerPanel;
 
         public FlowMarkerCollection()
         {
-            
+            this.m_CellPopulationsOfInterest = new CellPopulationsOfInterest();
+            this.m_CurrentMarkerPanel = new FlowMarkerCollection();   
         }
 
         public void RemovePanel(int cellPopulationId)
@@ -47,15 +45,14 @@ namespace YellowstonePathology.Business.Flow
 
         public void SetCurrentMarkerPanel(int cellPopulationId)
         {
-            this.m_CurrentMarkerPanel = new FlowMarkerCollection();
+            this.m_CurrentMarkerPanel.Clear();
             foreach (FlowMarkerItem item in this)
             {
                 if(item.CellPopulationId == cellPopulationId)
                 {
                     this.m_CurrentMarkerPanel.Add(item);
                 }
-            }
-            this.NotifyPropertyChanged("CurrentMarkerPanel");
+            }            
         }
 
         public FlowMarkerCollection GetMarkerPanel(int cellPopulationId)
@@ -73,7 +70,7 @@ namespace YellowstonePathology.Business.Flow
 
         public void SetFirstMarkerPanelIfExists()
         {
-            this.m_CurrentMarkerPanel = new FlowMarkerCollection();
+            this.m_CurrentMarkerPanel.Clear();
             Nullable<int> firstId = this.m_CellPopulationsOfInterest.GetFirstId();
             if(firstId.HasValue == true)
             {
@@ -84,21 +81,19 @@ namespace YellowstonePathology.Business.Flow
                         this.m_CurrentMarkerPanel.Add(item);
                     }
                 }
-            }            
-            this.NotifyPropertyChanged("CurrentMarkerPanel");
+            }                        
         }
 
         public void SetCellPopulationsOfInterest()
         {
-            this.m_CellPopulationsOfInterest = new CellPopulationsOfInterest();
+            this.m_CellPopulationsOfInterest.Clear();
             foreach(Flow.FlowMarkerItem item in this)
             {
                 if(this.m_CellPopulationsOfInterest.Exists(item.CellPopulationId) == false)
                 {
                     this.m_CellPopulationsOfInterest.Add(new CellPopulationOfInterest(item.CellPopulationId, item.CellPopulationOfInterest, item.PanelName));
                 }
-            }
-            this.NotifyPropertyChanged("CellPopulationsOfInterest");
+            }            
         }
 
         public int GetNextCellPopulationId()
@@ -334,14 +329,6 @@ namespace YellowstonePathology.Business.Flow
                     this.RemoveItem(i);
                 }
             }
-        }
-
-        public void NotifyPropertyChanged(String info)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
-        }
+        }        
     }
 }

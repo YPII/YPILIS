@@ -24,11 +24,8 @@ namespace YellowstonePathology.UI.Test
         protected override void ShowResultPage()
         {
             this.m_ResultPage = new HER2AmplificationByISHResultPage(this.m_PanelSetOrder, this.m_AccessionOrder, this.m_SystemIdentity, this.m_PageNavigator);
-            this.m_ResultPage.Next += new HER2AmplificationByISHResultPage.NextEventHandler(ResultPage_Next);
-            this.m_ResultPage.SpecimenDetail += new HER2AmplificationByISHResultPage.SpecimenDetailEventHandler(ResultPage_SpecimenDetail);
-            this.m_ResultPage.OrderTest += ResultPage_OrderTest;
-
-            this.RegisterCancelATest(this.m_ResultPage);
+            this.m_ResultPage.Next += new HER2AmplificationByISHResultPage.NextEventHandler(ResultPage_Next);            
+            this.m_ResultPage.OrderTest += ResultPage_OrderTest;            
             this.m_PageNavigator.Navigate(this.m_ResultPage);
         }
 

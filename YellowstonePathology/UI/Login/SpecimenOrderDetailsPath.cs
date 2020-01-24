@@ -11,7 +11,7 @@ namespace YellowstonePathology.UI.Login
         public event FinishEventHandler Finish;
 
 		private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
-		private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;		
+		//private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;		
 		
 		private YellowstonePathology.Business.Specimen.Model.SpecimenOrder m_SpecimenOrder;
         private YellowstonePathology.UI.Navigation.PageNavigator m_PageNavigator;

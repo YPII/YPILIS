@@ -16,11 +16,9 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.UI.Test
 {
-	public partial class ALKForNSCLCByFISHResultPage : ResultControl, INotifyPropertyChanged, IResultPage
+	public partial class ALKForNSCLCByFISHResultPage : ResultControl, INotifyPropertyChanged
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
-
-        public event YellowstonePathology.UI.CustomEventArgs.EventHandlerDefinitions.CancelTestEventHandler CancelTest;   
+		public event PropertyChangedEventHandler PropertyChanged;        
 
 		public delegate void NextEventHandler(object sender, EventArgs e);
 		public event NextEventHandler Next;
@@ -175,14 +173,7 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkCancelInsufficient_Click(object sender, RoutedEventArgs e)
         {
-            if (this.m_PanelSetOrder.Accepted == false)
-            {
-                this.CancelTest(this, new CustomEventArgs.CancelTestEventArgs(this.m_PanelSetOrder, this.m_AccessionOrder, "Insufficient tissue to perform test.", this));
-            }
-            else
-            {
-                MessageBox.Show("This test cannot be canceled because it has been accepted.");
-            }
+            
         }
 
         private void HyperLinkCPTCodes_Click(object sender, RoutedEventArgs e)

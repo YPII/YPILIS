@@ -20,8 +20,8 @@ namespace YellowstonePathology.UI
     /// </summary>
     public partial class TestWindow : Window
     {
-        private IDatabase m_DB;
-        private ISubscriber m_SUB;
+        //private IDatabase m_DB;
+        //private ISubscriber m_SUB;
 
         public TestWindow()
         {
@@ -35,19 +35,23 @@ namespace YellowstonePathology.UI
 
         private void Button_SubscribeClick(object sender, RoutedEventArgs e)
         {
+            /*
             this.m_SUB.Subscribe("Messages", (channel, message) =>
             {
                 MessageBox.Show((string)message);
             });
+            */
         }
 
         private void Button_PublishClick(object sender, RoutedEventArgs e)
         {
+            /*
             string masterAccessionno = "16-12345";
             YellowstonePathology.Business.User.SystemUser user = YellowstonePathology.Business.User.SystemIdentity.Instance.User;
             UI.AppMessaging.AccessionLockMessage message = new AppMessaging.AccessionLockMessage(masterAccessionno, System.Environment.MachineName, user.UserName, AppMessaging.AccessionLockMessageIdEnum.ASK);
             string messageJSON = message.ToJSON();
             this.m_SUB.Publish(masterAccessionno, messageJSON);        
+            */
         }
 
         private void Button_GetTestClick(object sender, RoutedEventArgs e)

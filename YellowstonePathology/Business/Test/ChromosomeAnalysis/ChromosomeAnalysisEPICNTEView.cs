@@ -9,8 +9,7 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 	public class ChromosomeAnalysisEPICNTEView : YellowstonePathology.Business.HL7View.EPIC.EPICBeakerNTEView
 	{
         private Business.Test.AccessionOrder m_AccessionOrder;
-        private string m_ReportNo;
-        private int m_NTECount;
+        private string m_ReportNo;        
 
 		public ChromosomeAnalysisEPICNTEView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int nteCount)
 		{
@@ -19,7 +18,7 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
             this.m_NTECount = nteCount;
 		}
 
-		public void ToXml(XElement document)
+		public override void ToXml(XElement document)
 		{
 			ChromosomeAnalysisTestOrder panelSetOrder = (ChromosomeAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
 			this.AddCompanyHeader(document);

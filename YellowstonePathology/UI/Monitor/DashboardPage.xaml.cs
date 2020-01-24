@@ -28,9 +28,7 @@ namespace YellowstonePathology.UI.Monitor
         public event PropertyChangedEventHandler PropertyChanged;
 
         private YellowstonePathology.Business.Monitor.Model.BlockCountCollection m_BlockCountColletion;
-        private int m_BlocksToTransfer;
-
-        private Login.Receiving.LoginPageWindow m_LoginPageWindow;
+        private int m_BlocksToTransfer;        
 
         public DashboardPage()
         {                        
@@ -73,7 +71,7 @@ namespace YellowstonePathology.UI.Monitor
 
         private void ResultPathFactory_Finished(object sender, EventArgs e)
         {
-            this.m_LoginPageWindow.Close();
+            
         }        
 
         public void HandleBlockCountEmails()

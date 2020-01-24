@@ -19,8 +19,8 @@ namespace YellowstonePathology.UI.Login
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-		public delegate void CloseEventHandler(object sender, EventArgs e);
-		public event CloseEventHandler Close;
+		//public delegate void CloseEventHandler(object sender, EventArgs e);
+		//public event CloseEventHandler Close;
 
         private string m_PageHeaderText = "Accession Label Page";
 

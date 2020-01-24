@@ -14,6 +14,8 @@ namespace YellowstonePathology.UI.Login.Receiving
 
         public BarcodeReassignmentPath()
         {
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
+            this.m_ClientOrder = null;
         }        
 
         public void Start()
@@ -21,9 +23,7 @@ namespace YellowstonePathology.UI.Login.Receiving
             this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();
             this.ShowPatientNameLookupPage();
 			this.m_LoginPageWindow.ShowDialog();
-        }
-
-        
+        }        
 
 		private void ShowPatientNameLookupPage()
 		{			

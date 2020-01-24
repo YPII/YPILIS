@@ -7,7 +7,7 @@ namespace YellowstonePathology.Business.Billing.Model
 {
     public class BillableObjectNeoFlowCytometry : BillableObject
     {        
-        YellowstonePathology.Business.Billing.Model.PanelSetCptCodeCollection m_PanelSetCptCodeCollection;
+        //YellowstonePathology.Business.Billing.Model.PanelSetCptCodeCollection m_PanelSetCptCodeCollection;
 
         public BillableObjectNeoFlowCytometry(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo) 
             : base(accessionOrder, reportNo)

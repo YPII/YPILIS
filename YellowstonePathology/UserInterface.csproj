@@ -43,8 +43,8 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>40</ApplicationRevision>
-    <ApplicationVersion>10.2.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>11.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -97,11 +97,6 @@
       <HintPath>..\packages\Grpc.Core.1.1.0\lib\net45\Grpc.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Interop.AXISMEDIACONTROLLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>bin\Debug\Interop.AXISMEDIACONTROLLib.dll</HintPath>
-    </Reference>
     <Reference Include="Interop.FAXCOMEXLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8aa395087185f434, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -116,12 +111,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files\Microsoft\Exchange\Web Services\2.0\Microsoft.Exchange.WebServices.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Outlook" />
-    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Word.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson, Version=1.7.0.4714, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -3335,9 +3334,7 @@
     <Compile Include="UI\CustomEventArgs\AddPQRSCodeReturnEventArgs.cs" />
     <Compile Include="UI\CustomEventArgs\AliquotOrderAccessionOrderReturnEventArgs.cs" />
     <Compile Include="UI\CustomEventArgs\AliquotOrderReturnEventArgs.cs" />
-    <Compile Include="UI\CustomEventArgs\CancelTestEventArgs.cs" />
     <Compile Include="UI\CustomEventArgs\BarcodReturnEventArgs.cs" />
-    <Compile Include="UI\CustomEventArgs\EventHandlerDefinitions.cs" />
     <Compile Include="UI\CustomEventArgs\AccessionLockMessageReturnEventArgs.cs" />
     <Compile Include="UI\CustomEventArgs\TypingShortcutReturnEventArgs.cs" />
     <Compile Include="UI\CustomEventArgs\TestOrderAliquotOrderReturnEventArgs.cs" />
@@ -3891,7 +3888,6 @@
     <Compile Include="UI\Test\AccessionLabelDialog.xaml.cs">
       <DependentUpon>AccessionLabelDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Test\CancelATestPath.cs" />
     <Compile Include="UI\Test\CSF3RMutationAnalysisResultPage.xaml.cs">
       <DependentUpon>CSF3RMutationAnalysisResultPage.xaml</DependentUpon>
     </Compile>
@@ -3977,7 +3973,6 @@
     <Compile Include="UI\Test\ROS1ResultPage.xaml.cs">
       <DependentUpon>ROS1ResultPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Test\ICancelATest.cs" />
     <Compile Include="UI\Test\IHCQCResultPath.cs" />
     <Compile Include="UI\Test\IHCQCResultPage.xaml.cs">
       <DependentUpon>IHCQCResultPage.xaml</DependentUpon>
@@ -4133,9 +4128,6 @@
       <DependentUpon>ReviewForAdditionalTestingResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Test\ReviewForAdditionalTestingResultPath.cs" />
-    <Compile Include="UI\Test\CancelTestWarningPage.xaml.cs">
-      <DependentUpon>CancelTestWarningPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Test\RUNX1RUNX1T1AML1ETOTranslocationResultPage.xaml.cs">
       <DependentUpon>RUNX1RUNX1T1AML1ETOTranslocationResultPage.xaml</DependentUpon>
     </Compile>
@@ -5098,7 +5090,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\MaterialTracking.Model\FedexSearchLocationRequest.v1.xml" />
-    <Content Include="dll\Interop.FAXCOMEXLib.dll" />
+    <None Include="dll\Interop.FAXCOMEXLib.dll" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Business\Document\CaseReportFooter.xaml">
@@ -6158,10 +6150,6 @@
     <Page Include="UI\Test\ReviewForAdditionalTestingResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Test\CancelTestWarningPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Test\RUNX1RUNX1T1AML1ETOTranslocationResultPage.xaml">
       <SubType>Designer</SubType>
@@ -7266,25 +7254,6 @@
     <Resource Include="Resources\TwoDBarcode.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>5</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Office">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>5</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Tasks.png" />
   </ItemGroup>
   <ItemGroup>
@@ -7308,14 +7277,14 @@
     <Content Include="UI\CEFSharp\avcodec-54.dll" />
     <Content Include="UI\CEFSharp\avformat-54.dll" />
     <Content Include="UI\CEFSharp\avutil-51.dll" />
-    <Content Include="UI\CEFSharp\CefSharp.dll" />
-    <Content Include="UI\CEFSharp\CefSharp.Example.dll" />
-    <Content Include="UI\CEFSharp\CefSharp.WinForms.dll" />
-    <Content Include="UI\CEFSharp\CefSharp.WinForms.Example.exe" />
-    <Content Include="UI\CEFSharp\CefSharp.WinForms.Example.vshost.exe" />
-    <Content Include="UI\CEFSharp\CefSharp.Wpf.dll" />
-    <Content Include="UI\CEFSharp\CefSharp.Wpf.Example.exe" />
-    <Content Include="UI\CEFSharp\CefSharp.Wpf.Example.vshost.exe" />
+    <None Include="UI\CEFSharp\CefSharp.dll" />
+    <None Include="UI\CEFSharp\CefSharp.Example.dll" />
+    <None Include="UI\CEFSharp\CefSharp.WinForms.dll" />
+    <None Include="UI\CEFSharp\CefSharp.WinForms.Example.exe" />
+    <None Include="UI\CEFSharp\CefSharp.WinForms.Example.vshost.exe" />
+    <None Include="UI\CEFSharp\CefSharp.Wpf.dll" />
+    <None Include="UI\CEFSharp\CefSharp.Wpf.Example.exe" />
+    <None Include="UI\CEFSharp\CefSharp.Wpf.Example.vshost.exe" />
     <Content Include="Hunspellx64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -7329,21 +7298,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="Resources\Restore.png" />
-    <Resource Include="UI\CEFSharp\CefSharp.Wpf.xml" />
-    <Resource Include="UI\CEFSharp\CefSharp.xml" />
-    <Content Include="UI\CEFSharp\icudt.dll" />
-    <Content Include="UI\CEFSharp\libcef.dll" />
-    <Content Include="UI\CEFSharp\libEGL.dll" />
-    <Content Include="UI\CEFSharp\libGLESv2.dll" />
-    <Content Include="UI\CEFSharp\nunit.framework.dll" />
-    <Content Include="dll\MongoDB.Bson.dll" />
-    <Content Include="dll\WPFToolkit.dll" />
-    <Content Include="dll\WPFToolkit.Extended.dll" />
-    <Content Include="dll\Xceed.Wpf.DataGrid.dll" />
-    <Content Include="dll\Xceed.Wpf.Toolkit.dll" />
+    <None Include="UI\CEFSharp\CefSharp.Wpf.xml" />
+    <None Include="UI\CEFSharp\CefSharp.xml" />
+    <None Include="UI\CEFSharp\icudt.dll" />
+    <None Include="UI\CEFSharp\libcef.dll" />
+    <None Include="UI\CEFSharp\libEGL.dll" />
+    <None Include="UI\CEFSharp\libGLESv2.dll" />
+    <None Include="UI\CEFSharp\nunit.framework.dll" />
+    <None Include="dll\MongoDB.Bson.dll" />
+    <None Include="dll\WPFToolkit.dll" />
+    <None Include="dll\WPFToolkit.Extended.dll" />
+    <None Include="dll\Xceed.Wpf.DataGrid.dll" />
+    <None Include="dll\Xceed.Wpf.Toolkit.dll" />
     <Resource Include="Resources\out2.png" />
-    <Resource Include="dll\MongoDB.Bson.xml" />
-    <Content Include="dll\MongoDB.Driver.dll" />
+    <None Include="dll\MongoDB.Bson.xml" />
+    <None Include="dll\MongoDB.Driver.dll" />
     <Resource Include="dll\MongoDB.Driver.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -7351,6 +7320,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\Redis\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

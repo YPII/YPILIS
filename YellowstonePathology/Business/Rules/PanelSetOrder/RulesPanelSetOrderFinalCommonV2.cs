@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Rules.PanelSetOrder
         protected YellowstonePathology.Business.Rules.ExecutionStatus m_ExecutionStatus;
         protected YellowstonePathology.Business.Rules.Rule m_Rule;
 		private YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
-		private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
+		//private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
 		private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
 		private bool m_Unsigning;
 
