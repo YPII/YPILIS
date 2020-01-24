@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Stain.Model
         private string m_StainAbbreviation;
         private string m_AliquotType;
         private string m_DefaultResult;
-        private string m_HistologyDisplayString;
+        //private string m_HistologyDisplayString;
         private string m_StainerType;
         private string m_VentanaBenchMarkProtocolName;
         private string m_CPTCode;

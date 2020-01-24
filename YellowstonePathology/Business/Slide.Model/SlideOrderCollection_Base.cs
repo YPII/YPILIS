@@ -96,7 +96,7 @@ namespace YellowstonePathology.Business.Slide.Model
             }
         }
 
-        public void RemoveDeleted(IEnumerable<XElement> elements)
+        public virtual void RemoveDeleted(IEnumerable<XElement> elements)
         {
             for (int i = this.Count - 1; i > -1; i--)
             {

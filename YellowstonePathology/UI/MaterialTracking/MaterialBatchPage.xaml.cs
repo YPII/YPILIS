@@ -29,8 +29,8 @@ namespace YellowstonePathology.UI.MaterialTracking
         public delegate void FinishEventHandler(object sender, EventArgs e);
         public event FinishEventHandler Finish;
 
-        public delegate void ShowFedXTrackingPageEventHandler(object sender, EventArgs e);
-        public event ShowFedXTrackingPageEventHandler ShowFedXTrackingPage;
+        //public delegate void ShowFedXTrackingPageEventHandler(object sender, EventArgs e);
+        //public event ShowFedXTrackingPageEventHandler ShowFedXTrackingPage;
 
         public delegate void ShowTrackingDocumentEventHandler(object sender, YellowstonePathology.UI.CustomEventArgs.MaterialTrackingBatchEventArgs e);
         public event ShowTrackingDocumentEventHandler ShowTrackingDocument;

@@ -7,6 +7,6 @@ namespace YellowstonePathology.UI.Test
 {
     public interface IResultPage
     {        
-        event YellowstonePathology.UI.CustomEventArgs.EventHandlerDefinitions.CancelTestEventHandler CancelTest;        
+        //event YellowstonePathology.UI.CustomEventArgs.EventHandlerDefinitions.CancelTestEventHandler CancelTest;        
     }    
 }

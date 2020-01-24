@@ -72,7 +72,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 			accessionOrderPage.ShowSurgicalGrossDescription += new AccessionOrderPage.ShowSurgicalGrossDescriptionEventHandler(AccessionOrderPage_ShowSurgicalGrossDescription);
 			accessionOrderPage.StartAccessionedSpecimenPath += new AccessionOrderPage.StartAccessionedSpecimenPathHandler(AccessionOrderPage_StartSpecimenOrderDetailsPath);
             accessionOrderPage.ShowResultPage += new AccessionOrderPage.ShowResultPageEventHandler(AccessionOrderPage_ShowResultPage);
-            accessionOrderPage.ShowMissingInformationPage += AccessionOrderPage_ShowMissingInformationPage;            
+            //accessionOrderPage.ShowMissingInformationPage += AccessionOrderPage_ShowMissingInformationPage;            
 			this.m_PageNavigator.Navigate(accessionOrderPage);                
         }        
 

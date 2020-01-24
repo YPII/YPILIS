@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.View
     {
         private Test.AccessionOrder m_AccessionOrder;
         private Test.PanelSetOrder m_PanelSetOrder;
-        private Amendment.Model.AmendmentCollection m_AmendmentCollection;
+        //private Amendment.Model.AmendmentCollection m_AmendmentCollection;
 
         public PanelSetOrderAmendmentView(Test.AccessionOrder accessionOrder, Test.PanelSetOrder panelSetOrder)
         {

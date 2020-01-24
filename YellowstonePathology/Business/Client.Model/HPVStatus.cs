@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Client.Model
         private bool m_HPVOrdered;
         private bool m_HPV1618Required;
         private bool m_HPV1618Ordered;
-        private bool m_RequiredNotOrdered;
+        //private bool m_RequiredNotOrdered;
 
         public HPVStatus()
         { }

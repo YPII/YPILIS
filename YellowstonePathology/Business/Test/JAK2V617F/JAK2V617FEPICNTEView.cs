@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
     {
         private Business.Test.AccessionOrder m_AccessionOrder;
         private string m_ReportNo;
-        private int m_NTECount;
+        //private int m_NTECount;
 
         public JAK2V617FEPICNTEView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int nteCount) 
 		{

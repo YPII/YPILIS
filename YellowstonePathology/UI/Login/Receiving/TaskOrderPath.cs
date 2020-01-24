@@ -13,7 +13,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         public delegate void CloseEventHandler(object sender, EventArgs e);
         public event CloseEventHandler Close;
 
-		private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
+		//private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
 		private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
 		private YellowstonePathology.Business.Task.Model.TaskOrder m_TaskOrder;
 		private YellowstonePathology.UI.Navigation.PageNavigator m_PageNavigator;

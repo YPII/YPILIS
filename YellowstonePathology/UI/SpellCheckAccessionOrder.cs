@@ -11,7 +11,7 @@ namespace YellowstonePathology.UI
     public class SpellCheckAccessionOrder
     {
         private List<SpellCheckProperty> m_PropertyList;
-        private System.Text.RegularExpressions.MatchCollection m_Matches;
+        //private System.Text.RegularExpressions.MatchCollection m_Matches;
         private System.Text.RegularExpressions.Regex m_Regex;        
         private int m_CurrentPropertyListIndex;
        

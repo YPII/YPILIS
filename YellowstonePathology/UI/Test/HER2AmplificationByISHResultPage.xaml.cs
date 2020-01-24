@@ -18,14 +18,9 @@ namespace YellowstonePathology.UI.Test
     /// <summary>
     /// Interaction logic for HER2AmplificationByISHResultPage.xaml
     /// </summary>
-    public partial class HER2AmplificationByISHResultPage : ResultControl, INotifyPropertyChanged , IResultPage
+    public partial class HER2AmplificationByISHResultPage : ResultControl, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public event YellowstonePathology.UI.CustomEventArgs.EventHandlerDefinitions.CancelTestEventHandler CancelTest;
-
-		public delegate void SpecimenDetailEventHandler(object sender, EventArgs e);
-		public event SpecimenDetailEventHandler SpecimenDetail;
+        public event PropertyChangedEventHandler PropertyChanged;        
 
         public delegate void OrderTestEventHandler(object sender, CustomEventArgs.PanelSetReturnEventArgs e);
         public event OrderTestEventHandler OrderTest;
@@ -68,7 +63,6 @@ namespace YellowstonePathology.UI.Test
             InitializeComponent();
 
             DataContext = this;
-
             
             this.m_ControlsNotDisabledOnFinal.Add(this.ButtonNext);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);

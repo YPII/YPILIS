@@ -127,7 +127,7 @@ namespace YellowstonePathology.Business.Billing.Model
             return result;
         }
 
-        public int GetBillableISHCount()
+        public override int GetBillableISHCount()
         {
             int result = 0;
             foreach (Business.Test.Model.TestOrder testOrder in this.m_TestOrderCollection)

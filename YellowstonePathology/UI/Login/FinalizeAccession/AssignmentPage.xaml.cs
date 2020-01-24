@@ -22,7 +22,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 		public delegate void ReturnEventHandler(object sender, UI.Navigation.PageNavigationReturnEventArgs e);
 		public event ReturnEventHandler Return;
 
-        private bool m_IsLoaded;
+        //private bool m_IsLoaded;
 		private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
 		private string m_PageHeaderText = "Case Asssignment Page";
 		private YellowstonePathology.Business.User.SystemUserCollection m_PathologistUsers;
@@ -30,7 +30,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
 		public AssignmentPage(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
 		{
-            this.m_IsLoaded = false;
+            //this.m_IsLoaded = false;
 			this.m_AccessionOrder = accessionOrder;
             this.m_FacilityCollection = Business.Facility.Model.FacilityCollection.Instance;
 
@@ -45,7 +45,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void AssignmentPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.m_IsLoaded = true;
+            //this.m_IsLoaded = true;
         }
 
         private void AssignmentPage_Unloaded(object sender, RoutedEventArgs e)
