@@ -43,13 +43,8 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-<<<<<<< HEAD
-    <ApplicationRevision>42</ApplicationRevision>
-    <ApplicationVersion>10.2.0.%2a</ApplicationVersion>
-=======
     <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>11.0.0.%2a</ApplicationVersion>
->>>>>>> dotnetcore
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
