@@ -24,27 +24,14 @@ namespace YellowstonePathology.Business.ASCCPRule
             Business.Cytology.Model.OrderTypeCollection orderTypeCollection = new OrderTypeCollection();
             Business.Cytology.Model.ScreeningImpression noImpression = Business.Gateway.AccessionOrderGateway.GetScreeningImpressionByResultCode("00");
             Business.Cytology.Model.ScreeningImpression nilm = Business.Gateway.AccessionOrderGateway.GetScreeningImpressionByResultCode("01");
-
-            for (int i=28; i<=32; i++)
-            {
-                Woman woman = new Woman();
-                woman.Name = "WMN" + i;
-                woman.Age = i;                
-                woman.OrderType = orderTypeCollection.Get("10");                
-
-                this.FinalizePap(woman, unsat, noImpression);
-                this.FinalizeHPV(woman, "Unknown");
-                this.FinalizeGenotyping(woman, "Unknown");
-                result.Add(woman);               
-            }
-
+            
             for (int i = 28; i <= 32; i++)
             {
                 Woman woman = new Woman();
                 woman.Name = "WMN" + i;
                 woman.Age = i;
                 woman.OrderType = orderTypeCollection.Get("11");
-                woman.HPVIsOrdered = true;
+                woman.PerformHPV = true;
 
                 this.FinalizePap(woman, unsat, noImpression);
                 this.FinalizeHPV(woman, "Negative");
@@ -58,27 +45,13 @@ namespace YellowstonePathology.Business.ASCCPRule
                 woman.Name = "WMN" + i;
                 woman.Age = i;
                 woman.OrderType = orderTypeCollection.Get("11");
-                woman.HPVIsOrdered = true;
+                woman.PerformHPV = true;
 
                 this.FinalizePap(woman, unsat, noImpression);
                 this.FinalizeHPV(woman, "Positive");
                 this.FinalizeGenotyping(woman, "Unknown");
                 result.Add(woman);
-            }
-
-            for (int i = 28; i <= 32; i++)
-            {
-                Woman woman = new Woman();
-                woman.Name = "WMN" + i;
-                woman.Age = i;
-                woman.OrderType = orderTypeCollection.Get("10");
-                woman.HPVIsOrdered = true;
-
-                this.FinalizePap(woman, satNoecc, nilm);
-                this.FinalizeHPV(woman, "Unknown");
-                this.FinalizeGenotyping(woman, "Unknown");
-                result.Add(woman);
-            }
+            }            
             return result;
         }
 
@@ -90,13 +63,7 @@ namespace YellowstonePathology.Business.ASCCPRule
             if (specimenAdequacy.ResultCode == "25")
             {
                 this.m_IsMatch = true;
-                woman.RuleIsMatch = true;                
-
-                if (woman.OrderType.OrderCode == "10")
-                {                    
-                    this.m_RepeatTestingInterval = "2-4 months";
-                    woman.ManagementRecomendation = "Recomend repeat cytology in 2-4 months.";                  
-                }                                                
+                woman.RuleIsMatch = true;                                
             }            
         }
 

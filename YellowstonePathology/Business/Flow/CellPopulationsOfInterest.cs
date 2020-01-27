@@ -13,9 +13,9 @@ namespace YellowstonePathology.Business.Flow
         public bool Exists(int cellPopulationId)
         {
             bool result = false;
-            foreach(CellPopulationOfInterest item in this)
+            foreach (CellPopulationOfInterest item in this)
             {
-                if(item.Id == cellPopulationId)
+                if (item.Id == cellPopulationId)
                 {
                     result = true;
                     break;

@@ -15,9 +15,9 @@ namespace YellowstonePathology.Business.ASCCPRule
         private Business.Cytology.Model.ScreeningImpression m_ScreeningImpression;
         private Business.Cytology.Model.SpecimenAdequacy m_SpecimenAdequacy;
         private bool m_Reactive;
-        private bool m_HPVIsOrdered;
+        private bool m_PerformHPV;
         private string m_HPVResult;
-        private bool m_GenotypingIsOrdered;
+        private bool m_ReflexToHPVGenotypes;
         private string m_GenotypingResult;
         private string m_ManagementRecomendation;        
 
@@ -85,10 +85,10 @@ namespace YellowstonePathology.Business.ASCCPRule
             set { this.m_Reactive = value; }
         }
 
-        public bool HPVIsOrdered
+        public bool PerformHPV
         {
-            get { return this.m_HPVIsOrdered; }
-            set { this.m_HPVIsOrdered = value; }
+            get { return this.m_PerformHPV; }
+            set { this.m_PerformHPV = value; }
         }
 
         public string HPVResult
@@ -97,10 +97,10 @@ namespace YellowstonePathology.Business.ASCCPRule
             set { this.m_HPVResult = value; }
         }
 
-        public bool GenotypingIsOrdered
+        public bool ReflexToHPVGenotypes
         {
-            get { return this.m_GenotypingIsOrdered; }
-            set { this.m_GenotypingIsOrdered = value; }
+            get { return this.m_ReflexToHPVGenotypes; }
+            set { this.m_ReflexToHPVGenotypes = value; }
         }
 
         public string GenotypingResult

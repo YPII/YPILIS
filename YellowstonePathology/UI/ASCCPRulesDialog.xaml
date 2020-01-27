@@ -39,13 +39,12 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Age" Width="60" DisplayMemberBinding="{Binding Path=Age}"/>
-                    <GridViewColumn Header="Match" Width="60" DisplayMemberBinding="{Binding Path=RuleIsMatch}"/>
-                    <GridViewColumn Header="Cotesting" Width="60" DisplayMemberBinding="{Binding Path=Cotesting}"/>
                     <GridViewColumn Header="Specimen Adequacy" Width="250" DisplayMemberBinding="{Binding Path=SpecimenAdequacy.Description}"/>
+                    <GridViewColumn Header="Cotesting" Width="60" DisplayMemberBinding="{Binding Path=Cotesting}"/>
                     <GridViewColumn Header="Screening Impression" Width="250" DisplayMemberBinding="{Binding Path=ScreeningImpression.Description}"/>
-                    <GridViewColumn Header="HPV Ordered" Width="100" DisplayMemberBinding="{Binding Path=HPVIsOrdered}"/>
+                    <GridViewColumn Header="Perform HPV" Width="100" DisplayMemberBinding="{Binding Path=PerformHPV}"/>
                     <GridViewColumn Header="HPV Result" Width="100" DisplayMemberBinding="{Binding Path=HPVResult}"/>
-                    <GridViewColumn Header="Genotyping Ordered" Width="120" DisplayMemberBinding="{Binding Path=GenotypingIsOrdered}"/>
+                    <GridViewColumn Header="Reflext to Genotyping" Width="120" DisplayMemberBinding="{Binding Path=ReflexToHPVGenotypes}"/>
                     <GridViewColumn Header="Genotyping Result" Width="120" DisplayMemberBinding="{Binding Path=GenotypingResult}"/>
                 </GridView>
             </ListView.View>
@@ -88,14 +87,14 @@
             <TextBlock Grid.Column="0" Grid.Row="4" Text="Age: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Path=CurrentWoman.Age}" Margin="2,2,2,2"></TextBlock>
 
-            <TextBlock Grid.Column="0" Grid.Row="5" Text="HPV Is Ordered: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Path=CurrentWoman.HPVIsOrdered}" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="5" Text="Perform HPV: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Path=CurrentWoman.PerformHPV}" Margin="2,2,2,2"></TextBlock>
 
             <TextBlock Grid.Column="0" Grid.Row="6" Text="HPV Result: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding Path=CurrentWoman.HPVResult}" Margin="2,2,2,2"></TextBlock>
 
-            <TextBlock Grid.Column="0" Grid.Row="7" Text="Genotyping Is Ordered: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding Path=CurrentWoman.GenotypingIsOrdered}" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="7" Text="Reflex to Genotyping: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding Path=CurrentWoman.ReflexToHPVGenotypes}" Margin="2,2,2,2"></TextBlock>
 
             <TextBlock Grid.Column="0" Grid.Row="8" Text="Genotyping Result: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding Path=CurrentWoman.GenotypingResult}" Margin="2,2,2,2"></TextBlock>

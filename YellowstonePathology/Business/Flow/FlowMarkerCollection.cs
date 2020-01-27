@@ -8,29 +8,31 @@ using System.ComponentModel;
 namespace YellowstonePathology.Business.Flow
 {
     public class FlowMarkerCollection : ObservableCollection<Flow.FlowMarkerItem>, INotifyPropertyChanged
-    {        
+    {
+        public delegate void PropertyChangedNotificationHandler(String info);
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public const string PREFIXID = "FM";
         public CellPopulationsOfInterest m_CellPopulationsOfInterest;
         private Flow.FlowMarkerCollection m_CurrentMarkerPanel;
 
         public FlowMarkerCollection()
         {
-            this.m_CellPopulationsOfInterest = new CellPopulationsOfInterest();
-            this.m_CurrentMarkerPanel = new FlowMarkerCollection();   
+
         }
 
         public void RemovePanel(int cellPopulationId)
         {
             for (int i = this.Count - 1; i > -1; i--)
             {
-                if(this[i].CellPopulationId == cellPopulationId)
+                if (this[i].CellPopulationId == cellPopulationId)
                 {
                     this.Remove(this[i]);
                 }
             }
 
             this.SetCellPopulationsOfInterest();
-            this.SetFirstMarkerPanelIfExists();            
+            this.SetFirstMarkerPanelIfExists();
         }
 
         public FlowMarkerCollection CurrentMarkerPanel
@@ -45,14 +47,15 @@ namespace YellowstonePathology.Business.Flow
 
         public void SetCurrentMarkerPanel(int cellPopulationId)
         {
-            this.m_CurrentMarkerPanel.Clear();
+            this.m_CurrentMarkerPanel = new FlowMarkerCollection();
             foreach (FlowMarkerItem item in this)
             {
-                if(item.CellPopulationId == cellPopulationId)
+                if (item.CellPopulationId == cellPopulationId)
                 {
                     this.m_CurrentMarkerPanel.Add(item);
                 }
-            }            
+            }
+            this.NotifyPropertyChanged("CurrentMarkerPanel");
         }
 
         public FlowMarkerCollection GetMarkerPanel(int cellPopulationId)
@@ -70,9 +73,9 @@ namespace YellowstonePathology.Business.Flow
 
         public void SetFirstMarkerPanelIfExists()
         {
-            this.m_CurrentMarkerPanel.Clear();
+            this.m_CurrentMarkerPanel = new FlowMarkerCollection();
             Nullable<int> firstId = this.m_CellPopulationsOfInterest.GetFirstId();
-            if(firstId.HasValue == true)
+            if (firstId.HasValue == true)
             {
                 foreach (FlowMarkerItem item in this)
                 {
@@ -81,25 +84,27 @@ namespace YellowstonePathology.Business.Flow
                         this.m_CurrentMarkerPanel.Add(item);
                     }
                 }
-            }                        
+            }
+            this.NotifyPropertyChanged("CurrentMarkerPanel");
         }
 
         public void SetCellPopulationsOfInterest()
         {
-            this.m_CellPopulationsOfInterest.Clear();
-            foreach(Flow.FlowMarkerItem item in this)
+            this.m_CellPopulationsOfInterest = new CellPopulationsOfInterest();
+            foreach (Flow.FlowMarkerItem item in this)
             {
-                if(this.m_CellPopulationsOfInterest.Exists(item.CellPopulationId) == false)
+                if (this.m_CellPopulationsOfInterest.Exists(item.CellPopulationId) == false)
                 {
                     this.m_CellPopulationsOfInterest.Add(new CellPopulationOfInterest(item.CellPopulationId, item.CellPopulationOfInterest, item.PanelName));
                 }
-            }            
+            }
+            this.NotifyPropertyChanged("CellPopulationsOfInterest");
         }
 
         public int GetNextCellPopulationId()
         {
             int highestCellPopulationId = 0;
-            foreach(Flow.FlowMarkerItem item in this)
+            foreach (Flow.FlowMarkerItem item in this)
             {
                 if (item.CellPopulationId > highestCellPopulationId) highestCellPopulationId = item.CellPopulationId;
             }
@@ -139,12 +144,12 @@ namespace YellowstonePathology.Business.Flow
         }
 
         public YellowstonePathology.Business.Flow.FlowMarkerItem GetNextItem(string reportNo, string name, int cellPopulationId, string cellPopulationOfInterest, string panelName)
-		{
-			string flowMarkerId = this.GetNextId(reportNo);
-			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-			FlowMarkerItem flowMarker = new FlowMarkerItem(flowMarkerId, objectId, reportNo, name, cellPopulationId, cellPopulationOfInterest, panelName);
-			return flowMarker;
-		}
+        {
+            string flowMarkerId = this.GetNextId(reportNo);
+            string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+            FlowMarkerItem flowMarker = new FlowMarkerItem(flowMarkerId, objectId, reportNo, name, cellPopulationId, cellPopulationOfInterest, panelName);
+            return flowMarker;
+        }
 
         public YellowstonePathology.Business.Flow.FlowMarkerItem GetMarkerByName(string markerName)
         {
@@ -190,74 +195,74 @@ namespace YellowstonePathology.Business.Flow
 
         //WHC MOVE TO ORDERIDPARSER
         public string GetNextId(string reportNo)
-		{
-			int largestId = 0;
-			foreach (FlowMarkerItem flowMarker in this)
-			{
-				int thisId = this.ParseId(flowMarker.FlowMarkerId, PREFIXID);
-				if (thisId > largestId)
-				{
-					largestId = thisId;
-				}
-			}
-			return reportNo + "." + PREFIXID + (largestId + 1).ToString();
-		}
-		
-		public int ParseId(string id, string prefix)
-		{
-			int startIndex = id.IndexOf(prefix) + prefix.Length;
-			int result = Convert.ToInt32(id.Substring(startIndex));
-			return result;
-		}
-
-		public void Add(string reportNo, MarkerItem item, int cellPopulationId, string cellPopulationOfInterest, string panelName)
         {
-			FlowMarkerItem flowMarker = this.GetNextItem(reportNo, item.MarkerName, cellPopulationId, cellPopulationOfInterest, panelName);
-			this.Add(flowMarker);
+            int largestId = 0;
+            foreach (FlowMarkerItem flowMarker in this)
+            {
+                int thisId = this.ParseId(flowMarker.FlowMarkerId, PREFIXID);
+                if (thisId > largestId)
+                {
+                    largestId = thisId;
+                }
+            }
+            return reportNo + "." + PREFIXID + (largestId + 1).ToString();
+        }
+
+        public int ParseId(string id, string prefix)
+        {
+            int startIndex = id.IndexOf(prefix) + prefix.Length;
+            int result = Convert.ToInt32(id.Substring(startIndex));
+            return result;
+        }
+
+        public void Add(string reportNo, MarkerItem item, int cellPopulationId, string cellPopulationOfInterest, string panelName)
+        {
+            FlowMarkerItem flowMarker = this.GetNextItem(reportNo, item.MarkerName, cellPopulationId, cellPopulationOfInterest, panelName);
+            this.Add(flowMarker);
         }
 
         public bool HasQuestionMarks()
         {
-			bool result = false;
-			foreach (FlowMarkerItem flowMarkerItem in this)
-			{
-				if (flowMarkerItem.HasQuestionMarks() == true)
-				{
-					result = true;
-					break;
-				}
-			}
-			return result;
-		}
+            bool result = false;
+            foreach (FlowMarkerItem flowMarkerItem in this)
+            {
+                if (flowMarkerItem.HasQuestionMarks() == true)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
 
-		public void Insert(FlowMarkerCollection panelMarkers, string reportNo, int cellPopulationId, string cellPopulationOfInterest, string panelName)
-		{
-			foreach (FlowMarkerItem panelMarkerItem in panelMarkers)
-			{
-				FlowMarkerItem flowMarker = this.GetNextItem(reportNo, panelMarkerItem.Name, cellPopulationId, cellPopulationOfInterest, panelName);
-				flowMarker.Intensity = panelMarkerItem.Intensity;
-				flowMarker.Interpretation = panelMarkerItem.Interpretation;
-				flowMarker.MarkerUsed = panelMarkerItem.MarkerUsed;
+        public void Insert(FlowMarkerCollection panelMarkers, string reportNo, int cellPopulationId, string cellPopulationOfInterest, string panelName)
+        {
+            foreach (FlowMarkerItem panelMarkerItem in panelMarkers)
+            {
+                FlowMarkerItem flowMarker = this.GetNextItem(reportNo, panelMarkerItem.Name, cellPopulationId, cellPopulationOfInterest, panelName);
+                flowMarker.Intensity = panelMarkerItem.Intensity;
+                flowMarker.Interpretation = panelMarkerItem.Interpretation;
+                flowMarker.MarkerUsed = panelMarkerItem.MarkerUsed;
                 flowMarker.CellPopulationId = cellPopulationId;
                 flowMarker.CellPopulationOfInterest = cellPopulationOfInterest;
                 flowMarker.PanelName = panelName;
                 this.Add(flowMarker);
-			}
+            }
             this.SetCellPopulationsOfInterest();
-		}
+        }
 
-		public int CountOfUsedMarkers()
-		{
-			int result = 0;
-			foreach (FlowMarkerItem flowMarker in this)
-			{
-				if(flowMarker.MarkerUsed == true)
-				{
-					result++;
-				}
-			}
-			return result;
-		}
+        public int CountOfUsedMarkers()
+        {
+            int result = 0;
+            foreach (FlowMarkerItem flowMarker in this)
+            {
+                if (flowMarker.MarkerUsed == true)
+                {
+                    result++;
+                }
+            }
+            return result;
+        }
 
         public int CountOfBillableMarkers()
         {
@@ -267,12 +272,12 @@ namespace YellowstonePathology.Business.Flow
             foreach (FlowMarkerItem flowMarker in this)
             {
                 if (flowMarker.MarkerUsed == true)
-                {                    
-                    if(!markerNames.Contains(flowMarker.Name))
+                {
+                    if (!markerNames.Contains(flowMarker.Name))
                     {
                         markerNames.Add(flowMarker.Name);
                         result++;
-                    }                    
+                    }
                 }
             }
 
@@ -329,6 +334,14 @@ namespace YellowstonePathology.Business.Flow
                     this.RemoveItem(i);
                 }
             }
-        }        
+        }
+
+        public void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
     }
 }

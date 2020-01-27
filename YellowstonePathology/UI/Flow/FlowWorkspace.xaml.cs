@@ -21,11 +21,11 @@ namespace YellowstonePathology.UI.Flow
     /// </summary>
 
     public partial class FlowWorkspace : System.Windows.Controls.UserControl
-    {        
-        private YellowstonePathology.Business.Flow.FlowUI m_FlowUI;        
+    {
+        private YellowstonePathology.Business.Flow.FlowUI m_FlowUI;
         private UI.DocumentWorkspace m_DocumentViewer;
 
-		private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
+        private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
         private Login.Receiving.LoginPageWindow m_LoginPageWindow;
         private MainWindowCommandButtonHandler m_MainWindowCommandButtonHandler;
         private TabItem m_Writer;
@@ -44,12 +44,12 @@ namespace YellowstonePathology.UI.Flow
 
             this.DataContext = this.m_FlowUI;
 
-            this.tabItemDocumentViewer.Content = this.m_DocumentViewer;            
+            this.tabItemDocumentViewer.Content = this.m_DocumentViewer;
             this.tabControlFlow.SelectionChanged += new SelectionChangedEventHandler(tabControlFlow_SelectionChanged);
 
             this.Loaded += new RoutedEventHandler(FlowWorkspace_Loaded);
             this.Unloaded += new RoutedEventHandler(FlowWorkspace_Unloaded);
-            this.PreviewLostKeyboardFocus += FlowWorkspace_PreviewLostKeyboardFocus;            
+            this.PreviewLostKeyboardFocus += FlowWorkspace_PreviewLostKeyboardFocus;
         }
 
         private void FlowWorkspace_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -98,13 +98,13 @@ namespace YellowstonePathology.UI.Flow
         }
 
         private void MainWindowCommandButtonHandler_ShowAmendmentDialog(object sender, EventArgs e)
-        {            
-            if(((TabItem)this.Parent).IsSelected && this.m_FlowUI.AccessionOrder != null)
+        {
+            if (((TabItem)this.Parent).IsSelected && this.m_FlowUI.AccessionOrder != null)
             {
                 YellowstonePathology.UI.AmendmentPageController amendmentPageController = new AmendmentPageController(this.m_FlowUI.AccessionOrder, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma);
                 amendmentPageController.ShowDialog();
                 this.m_FlowUI.GetAccessionOrder(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.ReportNo, this.m_FlowUI.AccessionOrder.MasterAccessionNo);
-            }            
+            }
         }
 
         private void MainWindowCommandButtonHandler_StartProviderDistributionPath(object sender, EventArgs e)
@@ -176,25 +176,25 @@ namespace YellowstonePathology.UI.Flow
             UI.AppMessaging.MessagingPath.Instance.LockAquiredActionList.Remove(this.m_FlowUI.SetAccess);
 
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Save();
-        }        
+        }
 
         public void GatingCount_LostFocus(object sender, RoutedEventArgs args)
         {
-			((YellowstonePathology.Business.Test.LLP.PanelSetOrderLeukemiaLymphoma)this.m_FlowUI.PanelSetOrderLeukemiaLymphoma).RefreshGatingPercent();
+            ((YellowstonePathology.Business.Test.LLP.PanelSetOrderLeukemiaLymphoma)this.m_FlowUI.PanelSetOrderLeukemiaLymphoma).RefreshGatingPercent();
         }
 
         public void ListViewFlowMarkers_MouseDoubleClick(object sender, RoutedEventArgs args)
         {
             if (this.listViewFlowMarkers.SelectedItems.Count != 0)
             {
-                if(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.CurrentMarkerPanel.Count != 0)
+                if (this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.CurrentMarkerPanel.Count != 0)
                 {
                     YellowstonePathology.Business.Flow.MarkerItem item = (YellowstonePathology.Business.Flow.MarkerItem)this.listViewFlowMarkers.SelectedItem;
                     int cellPopulationId = this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.CurrentMarkerPanel[0].CellPopulationId;
                     string cellPopulationOfInterest = this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.CurrentMarkerPanel[0].CellPopulationOfInterest;
                     string panelName = this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.CurrentMarkerPanel[0].PanelName;
                     this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.Add(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.ReportNo, item, cellPopulationId, cellPopulationOfInterest, panelName);
-                }                
+                }
             }
         }
 
@@ -220,7 +220,7 @@ namespace YellowstonePathology.UI.Flow
             else
             {
                 MessageBox.Show(methodResult.Message);
-            }        
+            }
         }
 
         public void ButtonTechUnfinal_Click(object sender, RoutedEventArgs args)
@@ -327,7 +327,7 @@ namespace YellowstonePathology.UI.Flow
         public void SaveData(object target, ExecutedRoutedEventArgs args)
         {
             MessageBox.Show("The Flow Workspace has been saved.");
-        }       
+        }
 
         public void ListViewFlowCaseList_SelectionChanged(object sender, RoutedEventArgs args)
         {
@@ -351,23 +351,23 @@ namespace YellowstonePathology.UI.Flow
         {
             this.m_FlowUI.GetAccessionOrder(reportNo, masterAccessionNo);
             YellowstonePathology.Business.Document.CaseDocument requisition = this.m_FlowUI.CaseDocumentCollection.GetFirstRequisition();
-            this.m_DocumentViewer.ShowDocument(requisition);            
-            
-            this.m_FlowUI.ICD9BillingCodeCollection = this.m_FlowUI.AccessionOrder.ICD9BillingCodeCollection.GetReportCollection(reportNo);            
+            this.m_DocumentViewer.ShowDocument(requisition);
+
+            this.m_FlowUI.ICD9BillingCodeCollection = this.m_FlowUI.AccessionOrder.ICD9BillingCodeCollection.GetReportCollection(reportNo);
         }
 
         public void ButtonCreateComment_Click(object sender, RoutedEventArgs args)
         {
             List<YellowstonePathology.Business.Interface.IFlowMarker> flowMarkers = this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.ToList<YellowstonePathology.Business.Interface.IFlowMarker>();
 
-			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_FlowUI.AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.OrderedOn, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.OrderedOnId);
-			YellowstonePathology.Business.Helper.FlowCommentHelper comment = new YellowstonePathology.Business.Helper.FlowCommentHelper(specimenOrder.Description, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma);
+            YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_FlowUI.AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.OrderedOn, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.OrderedOnId);
+            YellowstonePathology.Business.Helper.FlowCommentHelper comment = new YellowstonePathology.Business.Helper.FlowCommentHelper(specimenOrder.Description, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma);
             comment.SetInterpretiveComment();
         }
 
         private void textBoxSearchReportNo_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Return)
+            if (e.Key == Key.Return)
             {
                 this.Search();
             }
@@ -421,7 +421,7 @@ namespace YellowstonePathology.UI.Flow
             if (this.radioButtonSearchReportNo.IsChecked == true)
             {
                 String reportNo = this.ReportNoFromText(this.textBoxSearchReportNo.Text);
-                if(string.IsNullOrEmpty(reportNo) ==false && reportNo != this.textBoxSearchReportNo.Text)
+                if (string.IsNullOrEmpty(reportNo) == false && reportNo != this.textBoxSearchReportNo.Text)
                 {
                     this.textBoxSearchReportNo.Text = reportNo;
                 }
@@ -454,7 +454,7 @@ namespace YellowstonePathology.UI.Flow
             }
 
             this.tabControlBottomLeftPane.SelectedIndex = 0;
-            this.ListViewFlowCaseList.SelectedIndex = -1;        
+            this.ListViewFlowCaseList.SelectedIndex = -1;
         }
 
         private string ReportNoFromText(string text)
@@ -478,19 +478,19 @@ namespace YellowstonePathology.UI.Flow
         public void ListViewComments_MouseDoubleClick(object sender, RoutedEventArgs args)
         {
             List<YellowstonePathology.Business.Interface.IFlowMarker> flowMarkers = this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.ToList<YellowstonePathology.Business.Interface.IFlowMarker>();
-			YellowstonePathology.Business.Helper.FlowCommentHelper comment = new YellowstonePathology.Business.Helper.FlowCommentHelper(this.m_FlowUI.AccessionOrder.SpecimenOrderCollection[0].Description, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma);
+            YellowstonePathology.Business.Helper.FlowCommentHelper comment = new YellowstonePathology.Business.Helper.FlowCommentHelper(this.m_FlowUI.AccessionOrder.SpecimenOrderCollection[0].Description, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma);
             YellowstonePathology.Business.Flow.FlowCommentItem item = (YellowstonePathology.Business.Flow.FlowCommentItem)this.listViewComments.SelectedItem;
             comment.AddComment(item.Category, item.Impression, item.Comment);
         }
 
         public void ButtonAddMarkerPanel_Click(object sender, RoutedEventArgs args)
-        {                        
+        {
             if (this.comboBoxMarkerPanel.SelectedItem != null)
-            {                
+            {
                 Business.Flow.FlowPanelListItem panelItem = (Business.Flow.FlowPanelListItem)this.comboBoxMarkerPanel.SelectedItem;
                 string cellPopulationOfInterest = (string)this.comboBoxCellPopulationOfInterest.Text;
                 this.m_FlowUI.AddMarkerPanel(panelItem.PanelId, cellPopulationOfInterest, panelItem.PanelName);
-            }            
+            }
         }
 
         public void ButtonAddMarker_Click(object sender, RoutedEventArgs args)
@@ -505,8 +505,8 @@ namespace YellowstonePathology.UI.Flow
                     string panelName = this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.CurrentMarkerPanel[0].PanelName;
                     this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.Add(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.ReportNo, item, cellPopulationId, cellPopulationOfInterest, panelName);
                     this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.SetCurrentMarkerPanel(cellPopulationId);
-                }                
-            }            
+                }
+            }
         }
 
         public void ButtonRemoveMarker_Click(object sender, RoutedEventArgs arts)
@@ -535,7 +535,7 @@ namespace YellowstonePathology.UI.Flow
                             this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.Finish(this.m_FlowUI.AccessionOrder);
                             YellowstonePathology.Business.Audit.Model.CheckSuggestedOrdersOnFlowFinalAudit checkAudit = new Business.Audit.Model.CheckSuggestedOrdersOnFlowFinalAudit(this.m_FlowUI.AccessionOrder, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma);
                             checkAudit.Run();
-                            if(checkAudit.Status == Business.Audit.Model.AuditStatusEnum.Failure)
+                            if (checkAudit.Status == Business.Audit.Model.AuditStatusEnum.Failure)
                             {
                                 MessageBox.Show(checkAudit.Message.ToString());
                             }
@@ -548,7 +548,7 @@ namespace YellowstonePathology.UI.Flow
                     else
                     {
                         Business.Rules.MethodResult methodResult = this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.IsOkToUnfinalize();
-                        if(methodResult.Success == true)
+                        if (methodResult.Success == true)
                         {
                             this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.Unfinalize();
                         }
@@ -581,7 +581,7 @@ namespace YellowstonePathology.UI.Flow
         {
             if (this.m_FlowUI.AccessionOrder != null)
             {
-				YellowstonePathology.Business.Test.LLP.LeukemiaLymphomaWordDocument report = new YellowstonePathology.Business.Test.LLP.LeukemiaLymphomaWordDocument(this.m_FlowUI.AccessionOrder, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma, Business.Document.ReportSaveModeEnum.Normal);
+                YellowstonePathology.Business.Test.LLP.LeukemiaLymphomaWordDocument report = new YellowstonePathology.Business.Test.LLP.LeukemiaLymphomaWordDocument(this.m_FlowUI.AccessionOrder, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma, Business.Document.ReportSaveModeEnum.Normal);
                 report.Render();
             }
         }
@@ -604,7 +604,7 @@ namespace YellowstonePathology.UI.Flow
             {
                 binding.UpdateTarget();
             }
-        }        
+        }
 
         public void ButtonRemoveICDCode_Click(object sender, RoutedEventArgs args)
         {
@@ -656,20 +656,20 @@ namespace YellowstonePathology.UI.Flow
         }
 
         private void ShowAmendmentDialog(object target, ExecutedRoutedEventArgs args)
-        {   
-            if(this.m_FlowUI.AccessionOrder != null)
+        {
+            if (this.m_FlowUI.AccessionOrder != null)
             {
                 YellowstonePathology.UI.AmendmentPageController amendmentPageController = new AmendmentPageController(this.m_FlowUI.AccessionOrder, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma);
                 amendmentPageController.ShowDialog();
                 this.m_FlowUI.GetAccessionOrder(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.ReportNo, this.m_FlowUI.AccessionOrder.MasterAccessionNo);
-            }     	            
+            }
         }
 
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this.m_Writer);
             this.m_FlowUI.Search();
-        }                
+        }
 
         public void ListViewPatientHistory_SelectionChanged(object sender, RoutedEventArgs args)
         {
@@ -717,13 +717,13 @@ namespace YellowstonePathology.UI.Flow
         private void ButtonPatientLinking_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Patient.Model.PatientLinker patientLinker = new Business.Patient.Model.PatientLinker(this.m_FlowUI.AccessionOrder.MasterAccessionNo,
-				this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.ReportNo,
+                this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.ReportNo,
                 this.m_FlowUI.AccessionOrder.PFirstName,
-				this.m_FlowUI.AccessionOrder.PLastName,
-				this.m_FlowUI.AccessionOrder.PMiddleInitial,
-				this.m_FlowUI.AccessionOrder.PSSN,
+                this.m_FlowUI.AccessionOrder.PLastName,
+                this.m_FlowUI.AccessionOrder.PMiddleInitial,
+                this.m_FlowUI.AccessionOrder.PSSN,
                 this.m_FlowUI.AccessionOrder.PatientId,
-				this.m_FlowUI.AccessionOrder.PBirthdate);
+                this.m_FlowUI.AccessionOrder.PBirthdate);
 
             if (patientLinker.IsOkToLink.IsValid == true)
             {
@@ -785,7 +785,7 @@ namespace YellowstonePathology.UI.Flow
                 this.m_FlowUI.AccessionOrder.CollectionDate = splitDateTime.Date;
                 this.m_FlowUI.AccessionOrder.CollectionTime = splitDateTime.Time;
             }
-        }                      
+        }
 
         private void OrderTargetSelectionPage_TargetSelected(object sender, CustomEventArgs.TestOrderInfoEventArgs e)
         {
@@ -802,7 +802,7 @@ namespace YellowstonePathology.UI.Flow
         private void SpecimenOrderDetailsPage_Next(object sender, EventArgs e)
         {
             this.m_LoginPageWindow.Close();
-        }        
+        }
 
         private void ButtonReceiveSpecimen_Click(object sender, RoutedEventArgs e)
         {
@@ -823,7 +823,7 @@ namespace YellowstonePathology.UI.Flow
         }
 
         private void SearchReportNoPage_Return(object sender, UI.Navigation.PageNavigationReturnEventArgs e)
-        {                
+        {
             switch (e.PageNavigationDirectionEnum)
             {
                 case UI.Navigation.PageNavigationDirectionEnum.Next:
@@ -834,22 +834,22 @@ namespace YellowstonePathology.UI.Flow
                 case UI.Navigation.PageNavigationDirectionEnum.Back:
                     this.m_LoginPageWindow.Close();
                     break;
-            }            
+            }
         }
 
         private void ShowReportOrderDialog(string reportNo)
         {
             string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo);
-			YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
+            YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
             if (accessionOrder != null)
             {
                 YellowstonePathology.Business.Gateway.ClientOrderGateway clientOrderGateway = new Business.Gateway.ClientOrderGateway();
                 YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(accessionOrder.MasterAccessionNo);
                 if (clientOrderCollection.Count == 1)
-                {                                        
-					Login.Receiving.AccessionOrderPath accessionOrderPath = new Login.Receiving.AccessionOrderPath(accessionOrder, clientOrderCollection[0], PageNavigationModeEnum.Standalone);
-					accessionOrderPath.Start();
-				}
+                {
+                    Login.Receiving.AccessionOrderPath accessionOrderPath = new Login.Receiving.AccessionOrderPath(accessionOrder, clientOrderCollection[0], PageNavigationModeEnum.Standalone);
+                    accessionOrderPath.Start();
+                }
                 else
                 {
                     MessageBox.Show("We are not able to show the Report Order Dialog for ReportNo: " + reportNo);
@@ -865,8 +865,8 @@ namespace YellowstonePathology.UI.Flow
         {
             if (this.m_FlowUI.AccessionOrder != null)
             {
-				YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.ReportNo);
-				string folderPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+                YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.ReportNo);
+                string folderPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Explorer.exe", folderPath);
@@ -894,8 +894,8 @@ namespace YellowstonePathology.UI.Flow
         }
 
         private void ButtonReportOrder_Click(object sender, RoutedEventArgs e)
-        {            
-        	if(this.m_FlowUI.AccessionOrder != null)
+        {
+            if (this.m_FlowUI.AccessionOrder != null)
             {
                 YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_FlowUI.AccessionOrder.MasterAccessionNo);
                 if (clientOrderCollection.Count != 0)
@@ -908,7 +908,7 @@ namespace YellowstonePathology.UI.Flow
                 {
                     MessageBox.Show("No Client Order was found.  Please contact IT.");
                 }
-            }        	
+            }
         }
 
         private void ListICDCode_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -917,14 +917,14 @@ namespace YellowstonePathology.UI.Flow
             if (this.ListViewICDCodes.SelectedItem != null)
             {
                 ListBox listBox = (ListBox)sender;
-                Business.Billing.Model.ICDCode icdCode = (Business.Billing.Model.ICDCode)listBox.SelectedItem;                
+                Business.Billing.Model.ICDCode icdCode = (Business.Billing.Model.ICDCode)listBox.SelectedItem;
                 this.m_FlowUI.AddICD10Code(icdCode.Code);
-            }            
+            }
         }
 
         private void ListViewCellPopulationsOfInterest_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(this.listViewCellPopulationsOfInterest.SelectedItem != null)
+            if (this.listViewCellPopulationsOfInterest.SelectedItem != null)
             {
                 Business.Flow.CellPopulationOfInterest item = (Business.Flow.CellPopulationOfInterest)this.listViewCellPopulationsOfInterest.SelectedItem;
                 this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.SetCurrentMarkerPanel(item.Id);
@@ -951,7 +951,7 @@ namespace YellowstonePathology.UI.Flow
 
         private void ButtonSetCodes_Click(object sender, RoutedEventArgs e)
         {
-            if(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.IsPosted == false)
+            if (this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.IsPosted == false)
             {
                 YellowstonePathology.Business.Billing.Model.BillableObject billableObject = Business.Billing.Model.BillableObjectFactory.GetBillableObject(this.m_FlowUI.AccessionOrder, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.ReportNo);
                 YellowstonePathology.Business.Rules.MethodResult methodResult = billableObject.Set();
@@ -963,7 +963,7 @@ namespace YellowstonePathology.UI.Flow
             else
             {
                 MessageBox.Show("The CPT Codes cannot be set because the Billing has been posted.");
-            }            
+            }
         }
 
         private void HyperLinkShowSpecimenDialog_Click(object sender, RoutedEventArgs e)

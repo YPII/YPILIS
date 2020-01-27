@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>11.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -214,9 +214,10 @@
     <Compile Include="Business\ApplicationVersion.cs" />
     <Compile Include="Business\ASCCPRule\InstructionResult.cs" />
     <Compile Include="Business\ASCCPRule\BaseRule.cs" />
+    <Compile Include="Business\ASCCPRule\NILMECTZAbsentWithCotest.cs" />
     <Compile Include="Business\ASCCPRule\NoMatchingRule.cs" />
     <Compile Include="Business\ASCCPRule\Rule2.cs" />
-    <Compile Include="Business\ASCCPRule\UnsatWitCotest.cs" />
+    <Compile Include="Business\ASCCPRule\UnsatWithCotest.cs" />
     <Compile Include="Business\ASCCPRule\Woman.cs" />
     <Compile Include="Business\ASCCPRule\NILMECTZAbsent.cs" />
     <Compile Include="Business\ASCCPRule\RuleCollection.cs" />

@@ -7,11 +7,11 @@ using YellowstonePathology.Business.Cytology.Model;
 
 namespace YellowstonePathology.Business.ASCCPRule
 {
-    public class NILMECTZAbsent : BaseRule
+    public class NILMECTZAbsentWithCotest : BaseRule
     {        
-        public NILMECTZAbsent()
+        public NILMECTZAbsentWithCotest()
         {            
-            this.m_Description = "Cytology NILM but EC/TZ Absent/Insufficient";            
+            this.m_Description = "Cytology NILM but EC/TZ Absent/Insufficient - with cotest";            
         }
 
         public override WomanCollection RunSimulation()
@@ -23,14 +23,13 @@ namespace YellowstonePathology.Business.ASCCPRule
 
             Business.Cytology.Model.OrderTypeCollection orderTypeCollection = new OrderTypeCollection();
             Business.Cytology.Model.ScreeningImpression noImpression = Business.Gateway.AccessionOrderGateway.GetScreeningImpressionByResultCode("00");
-            Business.Cytology.Model.ScreeningImpression nilm = Business.Gateway.AccessionOrderGateway.GetScreeningImpressionByResultCode("01");
-
-            //PAP Screening Only
+            Business.Cytology.Model.ScreeningImpression nilm = Business.Gateway.AccessionOrderGateway.GetScreeningImpressionByResultCode("01");            
+            
             for (int i = 28; i <= 32; i++)
             {
-                Woman woman = new Woman();                
+                Woman woman = new Woman();
                 woman.Age = i;
-                woman.OrderType = orderTypeCollection.Get("10");
+                woman.OrderType = orderTypeCollection.Get("11");
 
                 this.FinalizePap(woman, satNoecc, nilm);
                 this.FinalizeHPV(woman, "Positive");
@@ -42,7 +41,7 @@ namespace YellowstonePathology.Business.ASCCPRule
             {
                 Woman woman = new Woman();
                 woman.Age = i;
-                woman.OrderType = orderTypeCollection.Get("10");
+                woman.OrderType = orderTypeCollection.Get("11");
 
                 this.FinalizePap(woman, satNoecc, nilm);
                 this.FinalizeHPV(woman, "Positive");
@@ -54,13 +53,14 @@ namespace YellowstonePathology.Business.ASCCPRule
             {
                 Woman woman = new Woman();
                 woman.Age = i;
-                woman.OrderType = orderTypeCollection.Get("10");
+                woman.OrderType = orderTypeCollection.Get("11");
 
                 this.FinalizePap(woman, satNoecc, nilm);
                 this.FinalizeHPV(woman, "Negative");
                 this.FinalizeGenotyping(woman, "Unknown");
                 result.Add(woman);
-            }            
+            }
+
             return result;
         }
 
@@ -71,20 +71,10 @@ namespace YellowstonePathology.Business.ASCCPRule
 
             if (screeningImpression.ResultCode == "01" || screeningImpression.ResultCode == "02")
             {
-                if (woman.SpecimenAdequacy.ResultCode == "10")
+                if(woman.SpecimenAdequacy.ResultCode == "11")
                 {
-                    this.m_IsMatch = true;
-                    if (woman.Age <= 29)
-                    {
-                        woman.PerformHPV = false;
-                        woman.ReflexToHPVGenotypes = false;
-                        woman.ManagementRecomendation = "No further testing is recommended.";
-                    }
-                    else if (woman.Age >= 30)
-                    {
-                        woman.PerformHPV = true;                                                                        
-                    }
-                }                 
+
+                }
             }
         }
 

@@ -12,7 +12,9 @@ namespace YellowstonePathology.Business.ASCCPRule
         public RuleCollection()
         {
             this.Add(new Unsat());
+            this.Add(new UnsatWithCotest());
             this.Add(new NILMECTZAbsent());
+            this.Add(new NILMECTZAbsentWithCotest());
             this.Add(new Rule2());
             this.Add(new NoMatchingRule());
         }  

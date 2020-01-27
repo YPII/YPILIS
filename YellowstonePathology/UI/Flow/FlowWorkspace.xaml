@@ -52,13 +52,9 @@
                                      Text="{Binding Path=AccessionOrder.SpecimenOrderCollection[0].DateReceived, Converter={StaticResource MilitaryDateTimeConverter}}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-
                             <TextBlock Style="{StaticResource HeadingTextBlock}" VerticalAlignment="Center">Specimen:</TextBlock>
-
                             <Button Name="ButtonShowSpecimenDialog" Width="100" Height="30" Margin="2,2,2,2" Click="ButtonShowSpecimenDialog_Click">Details</Button>
-
                             <Button Name="ButtonShowSelectSpecimenDialog" Width="100" Height="30" Margin="2,2,2,2" Click="ButtonShowSelectSpecimenDialog_Click">Selection</Button>
-
                         </StackPanel>-->
 
                         <StackPanel Orientation="Horizontal">
