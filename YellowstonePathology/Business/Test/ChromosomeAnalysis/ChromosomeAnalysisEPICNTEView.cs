@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 {
-	public class ChromosomeAnalysisEPICNTEView : YellowstonePathology.Business.HL7View.EPIC.EPICBeakerNTEView
+	public class ChromosomeAnalysisEPICNTEView : Business.HL7View.EPIC.EPICBeakerNTEView
 	{
         private Business.Test.AccessionOrder m_AccessionOrder;
         private string m_ReportNo;        

@@ -48,7 +48,7 @@ namespace YellowstonePathology.Business.Persistence
             }
             else
             {
-                throw new Exception("You are trying to release the lock on a document that is not in the stack.");
+                Business.Logging.EmailExceptionHandler.HandleException("You are trying to release the lock on a document that is not in the stack: " + accessionOrder.MasterAccessionNo);
             }         
         }        
 

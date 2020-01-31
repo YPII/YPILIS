@@ -131,10 +131,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                     break;
                 case 66:
 					view = new YellowstonePathology.Business.Test.TestCancelled.TestCancelledEPICObxView(accessionOrder, reportNo, obxCount);
-                    break;
-                //case 79:
-                //    view = new YellowstonePathology.Business.Test.PMLRARAByFish.PMLRARAByFishEPICOBXView(accessionOrder, reportNo, obxCount);
-                //    break;
+                    break;                
                 case 100:
 					view = new YellowstonePathology.Business.Test.BCL1t1114.BCL1t1114EPICObxView(accessionOrder, reportNo, obxCount);
 					break;
@@ -384,9 +381,9 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                         view = new YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2.ThrombocytopeniaProfileV2EPICObxView(accessionOrder, reportNo, obxCount);
                     }
                     break;
-                case 339:
+                case 339:                    
                     view = new YellowstonePathology.Business.Test.ReticulatedPlateletAnalysisV2.ReticulatedPlateletAnalysisV2EPICOBXView(accessionOrder, reportNo, obxCount);
-                    break;
+                    break;                    
                 case 340:
                     if (beakerTesting)
                     {

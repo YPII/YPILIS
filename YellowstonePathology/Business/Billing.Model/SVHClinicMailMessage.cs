@@ -20,6 +20,8 @@ namespace YellowstonePathology.Business.Billing.Model
             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("support@ypii.com", "sid.harder@ypii.com", System.Windows.Forms.SystemInformation.UserName, messageBody.ToString());
             message.To.Add("rebecca.ricci@sclhealth.org");
             message.To.Add("cheryl.stoltz@sclhealth.org");
+            message.To.Add("amanda.wiederien@sclhealth.org");
+            message.To.Add("edie.gonitzke@sclhealth.org");
             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.111");
 
             Uri uri = new Uri("http://tempuri.org/");

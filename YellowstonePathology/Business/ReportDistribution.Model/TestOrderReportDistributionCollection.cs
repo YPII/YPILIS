@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
                 new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, reportNo, physicianClientDistribution.PhysicianId, physicianClientDistribution.PhysicianName,
                     physicianClientDistribution.ClientId, physicianClientDistribution.ClientName,  distType, physicianClientDistribution.FaxNumber);
             this.Add(testOrderReportDistribution);
-        }
+        }        
 
         public void RemoveDeleted(IEnumerable<XElement> elements)
         {

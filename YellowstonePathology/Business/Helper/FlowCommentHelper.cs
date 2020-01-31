@@ -74,11 +74,35 @@ namespace YellowstonePathology.Business.Helper
 
         private string GetNormalComment()
         {
-            string text = "Immunophenotypic analysis of the received specimen (" + this.m_SpecimenDescription + ") indicates that " +
-				 this.m_PanelSetOrderLeukemiaLymphoma.LymphocyteCountPercent.ToString("p") + " of the " + this.m_PanelSetOrderLeukemiaLymphoma.GatingPopulationV2 + " are lymphocytes, " +
-				 this.m_PanelSetOrderLeukemiaLymphoma.MonocyteCountPercent.ToString("p") + " are monocytes, " +
-				 this.m_PanelSetOrderLeukemiaLymphoma.MyeloidCountPercent.ToString("p") + " are mature myeloid cells, " +
-				 this.m_PanelSetOrderLeukemiaLymphoma.DimCD45ModSSCountPercent.ToString("p") + " have dim CD45 expression and moderate side scatter. ";
+            //string text = "Immunophenotypic analysis of the received specimen (" + this.m_SpecimenDescription + ") indicates that " +
+            //	 this.m_PanelSetOrderLeukemiaLymphoma.LymphocyteCountPercent.ToString("p") + " of the " + this.m_PanelSetOrderLeukemiaLymphoma.GatingPopulationV2 + " are lymphocytes, " +
+            //	 this.m_PanelSetOrderLeukemiaLymphoma.MonocyteCountPercent.ToString("p") + " are monocytes, " +
+            //	 this.m_PanelSetOrderLeukemiaLymphoma.MyeloidCountPercent.ToString("p") + " are mature myeloid cells, " +
+            //	 this.m_PanelSetOrderLeukemiaLymphoma.DimCD45ModSSCountPercent.ToString("p") + " have dim CD45 expression and moderate side scatter. ";
+
+            List<string> stringList = new List<string>();
+            string text = "Immunophenotypic analysis of the received specimen (" + this.LoserCaseFirstLetter(this.m_SpecimenDescription) + ") indicates that ";
+            if (this.m_PanelSetOrderLeukemiaLymphoma.LymphocyteCountPercent != 0)
+            {
+                stringList.Add(this.m_PanelSetOrderLeukemiaLymphoma.LymphocyteCountPercent.ToString("p") + " of the " + this.m_PanelSetOrderLeukemiaLymphoma.GatingPopulationV2 + " are lymphocytes");                
+            }
+            
+            if(this.m_PanelSetOrderLeukemiaLymphoma.MonocyteCountPercent != 0)
+            {
+                stringList.Add(this.m_PanelSetOrderLeukemiaLymphoma.MonocyteCountPercent.ToString("p") + " are monocytes");                
+            }
+
+            if(this.m_PanelSetOrderLeukemiaLymphoma.MyeloidCountPercent != 0)
+            {
+                stringList.Add(this.m_PanelSetOrderLeukemiaLymphoma.MyeloidCountPercent.ToString("p") + " are mature myeloid cells");                
+            }
+
+            if(this.m_PanelSetOrderLeukemiaLymphoma.DimCD45ModSSCountPercent != 0)
+            {
+                stringList.Add(this.m_PanelSetOrderLeukemiaLymphoma.DimCD45ModSSCountPercent.ToString("p") + " have dim CD45 expression and moderate side scatter");                
+            }
+
+            text += this.ConcatStringList(stringList);
             return text;			
         }
 
@@ -125,8 +149,15 @@ namespace YellowstonePathology.Business.Helper
                 if (marker.Name != "Kappa" & marker.Name != "Lambda")
                 {
                     if (marker.Expresses == 1)
-                    {
-                        expressesFragment += marker.Name + ", ";
+                    {                        
+                        if(marker.Predictive == true)
+                        {
+                            expressesFragment += marker.Intensity + " " + marker.Name + ", ";
+                        }
+                        else
+                        {
+                            expressesFragment += marker.Name + ", ";
+                        }
                     }
                 }                
             }
@@ -241,6 +272,41 @@ namespace YellowstonePathology.Business.Helper
             {
                 sentences.Add(equivocalSentence);
             }
+        }
+
+        private string LoserCaseFirstLetter(string text)
+        {
+            if (text != string.Empty && char.IsUpper(text[0]))
+            {
+                text = char.ToLower(text[0]) + text.Substring(1);
+            }
+            return text;
+        }
+
+        private string ConcatStringList(List<string> stringList)
+        {            
+            StringBuilder result = new StringBuilder();
+            for(int i=0; i<stringList.Count; i++)
+            {
+                if (stringList.Count == 1)
+                {
+                    result.Append(stringList[i] + ". ");
+                }                
+                else if (stringList.Count >= 2 && i == stringList.Count - 1)
+                {
+                    result.Append(" and ");
+                    result.Append(stringList[i] + ". ");
+                }
+                else
+                {
+                    result.Append(stringList[i]);
+                    if (stringList.Count > 2 && i < stringList.Count - 2)
+                    {
+                        result.Append(", ");
+                    }
+                }                
+            }            
+            return result.ToString();
         }
     }
 }

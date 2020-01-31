@@ -94,6 +94,11 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                     Business.Test.ChromosomeAnalysis.ChromosomeAnalysisEPICNTEView chromosomeAnalysisEPICNTEView = new Test.ChromosomeAnalysis.ChromosomeAnalysisEPICNTEView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
                     chromosomeAnalysisEPICNTEView.ToXml(document);
                     break;
+                case 339:
+                    EPICBeakerNarrativeOBXView.AddElement(document);
+                    Business.Test.ReticulatedPlateletAnalysisV2.ReticulatedPlateletAnalysisV2EPICNTEView reticulatedPlateletAnalysisV2EPICNTEView = new Test.ReticulatedPlateletAnalysisV2.ReticulatedPlateletAnalysisV2EPICNTEView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                    reticulatedPlateletAnalysisV2EPICNTEView.ToXml(document);
+                    break;
                 default:
                     EPICObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, true);
                     epicObxView.ToXml(document);

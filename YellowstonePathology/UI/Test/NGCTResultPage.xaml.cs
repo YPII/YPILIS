@@ -125,7 +125,12 @@ namespace YellowstonePathology.UI.Test
 
 				this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
 
-                if (this.m_AccessionOrder.PanelSetOrderCollection.WomensHealthProfileExists() == true)
+				if (this.m_PanelSetOrder.NeisseriaGonorrhoeaeResult == "Positive" || this.m_PanelSetOrder.ChlamydiaTrachomatisResult == "Positive")
+				{
+					Business.ReportDistribution.Model.DepartmentOfHealthHandler.HandleDistribution(this.m_AccessionOrder, this.m_PanelSetOrder);
+				}
+
+				if (this.m_AccessionOrder.PanelSetOrderCollection.WomensHealthProfileExists() == true)
                 {
                     this.m_AccessionOrder.PanelSetOrderCollection.GetWomensHealthProfile().SetExptectedFinalTime(this.m_AccessionOrder);
                 }

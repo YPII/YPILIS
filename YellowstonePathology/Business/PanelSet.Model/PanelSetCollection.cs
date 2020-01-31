@@ -16,6 +16,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public static PanelSetCollection GetAll()
         {
             PanelSetCollection panelSetCollection = new PanelSetCollection();
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.Electrophoresis.ElectrophoresisTest());
             //NEO
             panelSetCollection.Add(new YellowstonePathology.Business.Test.BCL2ByFISH.BCL2ByFISHTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.PIK3CALDT.PIK3CALDTTest());
@@ -509,6 +510,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.SlideTracking.SlideTrackingTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.MaterialRequestForResearch.MaterialRequestForResearchTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.Electrophoresis.ElectrophoresisTest());
             return panelSetCollection;
         }
 

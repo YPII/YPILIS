@@ -46,16 +46,6 @@
                             </TextBox>
 
                         </StackPanel>
-                        <!--<StackPanel Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource HeadingTextBlock}">Date/Time Received:</TextBlock>
-                            <TextBox Name="textBoxDateTimeReceived" IsEnabled="{Binding Path=IsWorkspaceEnabled}" Style="{StaticResource BoundTextBox}"
-                                     Text="{Binding Path=AccessionOrder.SpecimenOrderCollection[0].DateReceived, Converter={StaticResource MilitaryDateTimeConverter}}"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource HeadingTextBlock}" VerticalAlignment="Center">Specimen:</TextBlock>
-                            <Button Name="ButtonShowSpecimenDialog" Width="100" Height="30" Margin="2,2,2,2" Click="ButtonShowSpecimenDialog_Click">Details</Button>
-                            <Button Name="ButtonShowSelectSpecimenDialog" Width="100" Height="30" Margin="2,2,2,2" Click="ButtonShowSelectSpecimenDialog_Click">Selection</Button>
-                        </StackPanel>-->
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Style="{StaticResource HeadingTextBlock}">Clinical History:</TextBlock>
@@ -352,13 +342,6 @@
                                 <TextBlock Style="{StaticResource GatingTextBox}" Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.OtherCountPercent, Converter={StaticResource PercentConverter}}"></TextBlock>
                             </StackPanel>
                         </StackPanel>
-                        <!--<StackPanel HorizontalAlignment="Left" Name="stackPanelSpecimenViaboility" Grid.Column="1" Grid.Row="1">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource GatingTextBlock}">Specimen Viability</TextBlock>
-                                <TextBox Width="50" IsEnabled="{Binding Path=IsWorkspaceEnabled}" GotFocus="TextBoxSelect_GotFocus"
-                                            Text="{Binding Path=PanelSetOrderLeukemiaLymphoma.SpecimenViabilityPercent, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                            </StackPanel>
-                        </StackPanel>-->
                     </Grid>
                 </TabItem>
                 <TabItem Header="Markers" Name="tabItemFlowCaseMarkers">
@@ -442,10 +425,10 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Predictive">
+                                    <GridViewColumn Header="Report Intensity">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <CheckBox IsChecked="{Binding Path=Predictive}" Width="50" HorizontalAlignment="Center"></CheckBox>
+                                                <CheckBox IsChecked="{Binding Path=Predictive}" Width="55" HorizontalAlignment="Center"></CheckBox>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
