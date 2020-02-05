@@ -283,6 +283,42 @@ namespace YellowstonePathology.Business.Document
             return result;
         }
 
+        public static bool DoesCaseDocPdfExist(string reportNo)
+        {
+            bool result = false;
+            OrderIdParser orderIdParser = new OrderIdParser(reportNo);            
+            string path = GetCaseFileNamePDF(orderIdParser);
+            if (System.IO.File.Exists(path) == true)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        public static bool DoesCaseDocXPSExist(string reportNo)
+        {
+            bool result = false;
+            OrderIdParser orderIdParser = new OrderIdParser(reportNo);
+            string path = GetCaseFileNameXPS(orderIdParser);
+            if (System.IO.File.Exists(path) == true)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        public static bool DoesCaseDocDOCExist(string reportNo)
+        {
+            bool result = false;
+            OrderIdParser orderIdParser = new OrderIdParser(reportNo);
+            string path = GetCaseFileNameDoc(orderIdParser);
+            if (System.IO.File.Exists(path) == true)
+            {
+                result = true;
+            }
+            return result;
+        }
+
         public static string GetCaseDocumentFullPath(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
 			string filePath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);

@@ -333,4 +333,14 @@ namespace YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefini
             this.m_ApplicationName = UniversalServiceApplicationNameEnum.EPIC;
         }
     }
+
+    public class UniversalServiceSMP : UniversalService
+    {
+        public UniversalServiceSMP()
+        {
+            this.m_UniversalServiceId = "SMP";
+            this.m_ServiceName = "PERIPHERAL SMEAR REVIEW BY PATHOLOGIST";
+            this.m_ApplicationName = UniversalServiceApplicationNameEnum.EPIC;
+        }
+    }
 }

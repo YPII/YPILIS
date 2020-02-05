@@ -723,28 +723,34 @@ namespace YellowstonePathology.UI.Billing
         private void CheckForProblems(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             this.CheckForTifDoc(sender, e);
-            this.CheckSVHAcctNoStartsWithVorR(sender, e);
+            //this.CheckSVHAcctNoStartsWithVorR(sender, e);
         }
 
         private void CheckForTifDoc(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             this.m_BackgroundWorker.ReportProgress(1, "Start Checking for TIF Files.");
-            Business.ReportNoCollection reportNoCollection = Business.Gateway.AccessionOrderGateway.GetReportNumbersByPostDate(this.m_PostDate);
+            Business.ReportNoCollection reportNoCollection = Business.Gateway.AccessionOrderGateway.GetReportNumbersByFinalDate(this.m_PostDate);
             foreach(Business.ReportNo reportNo in reportNoCollection)
             {
-                this.m_BackgroundWorker.ReportProgress(1, "Checking: " + reportNo.Value);
-                bool result = Business.Document.CaseDocument.DoesCaseDocTifExist(reportNo.Value);
-                if(result == false)
+                //this.m_BackgroundWorker.ReportProgress(1, "Checking: " + reportNo.Value);
+                if(Business.Document.CaseDocument.DoesCaseDocTifExist(reportNo.Value) == false ||                     
+                    Business.Document.CaseDocument.DoesCaseDocPdfExist(reportNo.Value) == false ||
+                    Business.Document.CaseDocument.DoesCaseDocDOCExist(reportNo.Value) == false ||
+                    Business.Document.CaseDocument.DoesCaseDocXPSExist(reportNo.Value) == false)
                 {
-                    this.m_BackgroundWorker.ReportProgress(1, "No TIF for ReportNo: " + reportNo.Value);
-
                     Business.OrderIdParser orderIdParser = new Business.OrderIdParser(reportNo.Value);
                     Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(orderIdParser.MasterAccessionNo, this);
                     Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo.Value);
-                    YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(accessionOrder, panelSetOrder, Business.Document.ReportSaveModeEnum.Normal);                    
-                    YellowstonePathology.Business.Rules.MethodResult methodResult = caseDocument.DeleteCaseFiles(orderIdParser);
-                    caseDocument.Render();
-                    caseDocument.Publish();
+
+                    if (panelSetOrder.HoldDistribution == false)
+                    {
+                        this.m_BackgroundWorker.ReportProgress(1, "One or more case documents is missing for ReportNo: " + reportNo.Value);
+                    }
+
+                    //YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(accessionOrder, panelSetOrder, Business.Document.ReportSaveModeEnum.Normal);                    
+                    //YellowstonePathology.Business.Rules.MethodResult methodResult = caseDocument.DeleteCaseFiles(orderIdParser);
+                    //caseDocument.Render();
+                    //caseDocument.Publish();                
                 }
             }
         }

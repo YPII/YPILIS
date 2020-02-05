@@ -94,6 +94,8 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Text="Panel Set Name:" />
@@ -191,6 +193,12 @@
 
                 <TextBlock Grid.Column="0" Grid.Row="20" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Text="Expected Final Time:" />
                 <TextBox Grid.Column="1" Grid.Row="20" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=PanelSetOrder.ExpectedFinalTime}"/>
+
+                <TextBlock Grid.Column="0" Grid.Row="21" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Text="Universal Service Id (PSO):" />
+                <TextBox Grid.Column="1" Grid.Row="21" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=PanelSetOrder.UniversalServiceId}"/>
+
+                <TextBlock Grid.Column="0" Grid.Row="22" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Text="Universal Service Id (AO):" />
+                <TextBox Grid.Column="1" Grid.Row="22" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=AccessionOrder.UniversalServiceId}"/>
 
             </Grid>
 

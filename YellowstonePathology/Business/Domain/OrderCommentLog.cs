@@ -118,7 +118,7 @@ namespace YellowstonePathology.Business.Domain
 			result.AppendLine("Lab Event Id:" + this.m_OrderCommentId.ToString());
 			result.AppendLine("Specimen Log Id: " + this.m_SpecimenLogId.ToString());
 			result.AppendLine("Master Accession No: " + this.m_MasterAccessionNo);
-			result.AppendLine("Aliquot Order Id: " + this.m_AliquotOrderId.ToString());
+			result.AppendLine("Aliquot Order Id: " + this.m_AliquotOrderId);
 			result.AppendLine("Client Id: " + this.m_ClientId.ToString());
 
 			string comment = string.Empty;

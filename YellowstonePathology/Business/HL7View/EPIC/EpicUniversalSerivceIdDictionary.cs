@@ -36,7 +36,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.Add("THROMPRO", "Thrombocytopenia Profile (Platelet Antibody & Reticulated Platelet)");            
             this.Add("STEMCE", "Stem Cell Enumeration");            
             this.Add("EPPR", "Estrogen Receptor/Progesterone Receptor (IHC)");
-            this.Add("SMP", "Peripheral Smear");
+            this.Add("SMP", "PERIPHERAL SMEAR REVIEW BY PATHOLOGIST");
             this.Add("EGFR", "EGFR");
             this.Add("FNA", "Fine Needle Aspirate");
             this.Add("BM", "Bone Marrow");

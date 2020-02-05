@@ -571,7 +571,7 @@
 				<Button Grid.Row="14" Background="#FFADBB" Click="ButtonClearCase_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Clear Screening</Button>
                 <Button Grid.Row="15" Background="#FFADBB" Click="ButtonDeleteItem_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Delete Item</Button>
 
-				<Button Grid.Row="16" Background="#FFADBB" Click="ButtonWomensHealthProfile_Click">Reflex Testing</Button>
+                <Button Grid.Row="16" Background="#FFADBB" Click="ButtonWomensHealthProfile_Click">Woman's Health Profile</Button>
 
             </Grid>
 		</Border>

@@ -1454,6 +1454,32 @@ namespace YellowstonePathology.Business.Gateway
             return reportNoCollection;
         }
 
+        public static ReportNoCollection GetReportNumbersByFinalDate(DateTime finalDate)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select Distinct pso.ReportNo from tblPanelSetOrder pso where pso.FinalDate = @FinalDate";
+            cmd.Parameters.AddWithValue("@FinalDate", finalDate);
+
+            YellowstonePathology.Business.ReportNoCollection reportNoCollection = new ReportNoCollection();
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.ReportNo reportNo = new ReportNo(dr.GetString(0));
+                        reportNoCollection.Add(reportNo);
+                    }
+                }
+            }
+
+            return reportNoCollection;
+        }
+
         public static ReportNoCollection GetReportNumbersBySVHProcess(DateTime postDate)
         {
             MySqlCommand cmd = new MySqlCommand();

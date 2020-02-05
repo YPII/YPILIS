@@ -1344,6 +1344,7 @@
     <Compile Include="Business\Test\PlateletAssociatedAntibodiesV2\PlateletAssociatedAntibodiesV2Test.cs" />
     <Compile Include="Business\Test\PlateletAssociatedAntibodiesV2\PlateletAssociatedAntibodiesV2TestOrder.cs" />
     <Compile Include="Business\Test\PlateletAssociatedAntibodiesV2\PlateletAssociatedAntibodiesV2WordDocument.cs" />
+    <Compile Include="Business\Test\PNH\PNHEPICNTEView.cs" />
     <Compile Include="Business\Test\PNH\PNHWPHOBXView.cs" />
     <Compile Include="Business\Test\PrealbuminTTR\PrealbuminTTRTest.cs" />
     <Compile Include="Business\Test\AmyloidAandAmyloidP\AmyloidAandAmyloidPTest.cs" />

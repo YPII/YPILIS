@@ -30,7 +30,6 @@ namespace YellowstonePathology.UI.Cytology
 		private YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort m_BarcodeScanPort;
 		private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
 
-        private YellowstonePathology.UI.LabEventsControlTab m_LabEventsControlTab;
         private MainWindowCommandButtonHandler m_MainWindowCommandButtonHandler;
         private TabItem m_Writer;
 
@@ -61,8 +60,6 @@ namespace YellowstonePathology.UI.Cytology
             this.Unloaded += new RoutedEventHandler(CytologyWorkspace_Unloaded);
 
             this.ResultsGrid.Children.Add(this.m_CytologyResultsWorkspace);
-            this.m_LabEventsControlTab = new LabEventsControlTab(this.m_SystemIdentity);
-            this.TabControlLeft.Items.Add(this.m_LabEventsControlTab);
         }
 
         private void CytologyWorkspace_Loaded(object sender, RoutedEventArgs e)
@@ -228,8 +225,7 @@ namespace YellowstonePathology.UI.Cytology
 		{
 			this.m_CytologyResultsWorkspace.TextBoxReportNoSearch.Text = this.m_CytologyUI.PanelSetOrderCytology.ReportNo;
 			YellowstonePathology.Business.Document.CaseDocumentCollection caseDocumentCollection = new Business.Document.CaseDocumentCollection(this.m_CytologyUI.AccessionOrder, this.m_CytologyUI.PanelSetOrderCytology.ReportNo);
-			this.m_DocumentViewer.ShowDocument(caseDocumentCollection.GetFirstRequisition());			
-			this.m_LabEventsControlTab.SetCurrentOrder(this.m_CytologyUI.AccessionOrder);
+            this.m_DocumentViewer.ShowDocument(caseDocumentCollection.GetFirstRequisition());
             this.m_CytologyResultsWorkspace.SelectAppropriatePanel();
 		}
 
