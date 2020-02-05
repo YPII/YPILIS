@@ -34,38 +34,6 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        public static Domain.OrderCommentLogCollection OrderCommentLogCollectionFromCaseNotesKeys(Domain.CaseNotesKeyCollection caseNotesKeyCollection)
-        {
-            Domain.OrderCommentLogCollection result = new Domain.OrderCommentLogCollection();
-            foreach (Domain.CaseNotesKey caseNotesKey in caseNotesKeyCollection)
-            {
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.CommandType = System.Data.CommandType.Text;
-                switch (caseNotesKey.CaseNotesKeyName)
-                {
-                    case Domain.CaseNotesKeyNameEnum.MasterAccessionNo:
-                        cmd.CommandText = "SELECT * from tblOrderCommentLog where MasterAccessionNo = '" + caseNotesKey.Key + "' order by LogDate;";
-                        break;
-                    case Domain.CaseNotesKeyNameEnum.ClientOrderId:
-                        cmd.CommandText = "SELECT * from tblOrderCommentLog where ClientOrderId = '" + caseNotesKey.Key + "' order by LogDate;";
-                        break;
-                    case Domain.CaseNotesKeyNameEnum.ContainerId:
-                        cmd.CommandText = "SELECT * from tblOrderCommentLog where ContainerId = '" + caseNotesKey.Key + "' order by LogDate;";
-                        break;
-                    case Domain.CaseNotesKeyNameEnum.SpecimenLogId:
-                        cmd.CommandText = "SELECT * from tblOrderCommentLog where SpecimenLogId = " + caseNotesKey.Key + " order by LogDate;";
-                        break;
-                }
-
-                Domain.OrderCommentLogCollection midCollection1 = BuildOrderCommentLogCollection(cmd);
-                foreach (Domain.OrderCommentLog orderCommentLog in midCollection1)
-                {
-                    result.AddUnique(orderCommentLog);
-                }
-            }
-            return result;
-        }
-
         private static YellowstonePathology.Business.Domain.OrderCommentLogCollection BuildOrderCommentLogCollection(MySqlCommand cmd)
         {
             Domain.OrderCommentLogCollection result = new Domain.OrderCommentLogCollection();

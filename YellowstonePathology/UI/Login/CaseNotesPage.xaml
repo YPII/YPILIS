@@ -14,15 +14,14 @@
 
 		<Grid.Resources>
 			<DataTemplate x:Key="ExpanderStretchableHeaderTemplate">
-				<Border BorderThickness="0" Loaded="BorderPanelSetOrderHeader_Loaded">
+				<Border BorderThickness="0">
 					<ContentPresenter Content="{TemplateBinding Content}"></ContentPresenter>
 				</Border>
 			</DataTemplate>
 
 			<DataTemplate x:Key="LabEventTemplate">
 				<Grid>
-					<Expander IsExpanded="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
-                          HeaderTemplate="{StaticResource ExpanderStretchableHeaderTemplate}">
+                    <Expander IsExpanded="true" HeaderTemplate="{StaticResource ExpanderStretchableHeaderTemplate}">
 						<Expander.Header>
 							<Border BorderThickness="1" Margin="0,0,0,0" CornerRadius="5">
 								<Grid Name="PanelOrderHeaderGrid" Margin="2,2,2,2" HorizontalAlignment="Stretch">
@@ -64,14 +63,11 @@
 								<TextBlock Grid.Column="1" Grid.Row="0" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" FontWeight="Bold">Log Date:</TextBlock>
 								<TextBlock Grid.Column="2" Grid.Row="0" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding Path=LogDate}" TextWrapping="Wrap" />
 
-								<TextBlock Grid.Column="1" Grid.Row="1" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" FontWeight="Bold">Comment ID:</TextBlock>
-								<TextBlock Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding Path=OrderCommentId}" TextWrapping="Wrap" />
+                                <TextBlock Grid.Column="1" Grid.Row="1" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" FontWeight="Bold" >Category:</TextBlock>
+								<TextBlock Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding Path=Category}" TextWrapping="Wrap" />
 
-								<TextBlock Grid.Column="1" Grid.Row="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" FontWeight="Bold" >Description:</TextBlock>
-								<TextBlock Grid.Column="2" Grid.Row="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding Path=Description}" TextWrapping="Wrap" />
-
-								<TextBlock Grid.Column="1" Grid.Row="3" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" FontWeight="Bold" >Logged By:</TextBlock>
-								<TextBlock Grid.Column="2" Grid.Row="3" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding Path=LoggedBy}" />
+								<TextBlock Grid.Column="1" Grid.Row="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" FontWeight="Bold" >Logged By:</TextBlock>
+								<TextBlock Grid.Column="2" Grid.Row="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding Path=LoggedBy}" />
 							</Grid>
 						</Grid>
 					</Expander>
@@ -118,14 +114,15 @@
 					 ItemsSource="{Binding Path=OrderCommentLogCollection}" ItemContainerStyle="{StaticResource LabEventStyle}">
 			</ListBox>
 			
-			<StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="5,30,5,5">
-				<Button Width="100" Height="40" Margin="10" Content="Edit" Click="ButtonEditComment_Click" />
-				<Button Width="100" Height="40" Margin="10" Content="Add" Click="ButtonAddComment_Click" />
-				<Button Width="100" Height="40" Margin="10" Content="Delete" Click="ButtonDeleteComment_Click" />
+			<StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="5,5,5,5">
+				<Button Width="200" Height="40" Margin="2,2,2,2" Content="Edit" Click="ButtonEditComment_Click" />
+				<Button Width="200" Height="40" Margin="2,2,2,2" Content="Add" Click="ButtonAddComment_Click" />
+                <Button Width="200" Height="40" Margin="2,2,2,2" Content="Add Quality Improvement" Click="ButtonAddQualityImprovement_Click" />
+				<Button Width="200" Height="40" Margin="2,2,2,2" Content="Delete" Click="ButtonDeleteComment_Click" />
 			</StackPanel>			
 		</Grid>
         
 		<Border Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
-		<Button Name="ButtonBack" Grid.Row="2" Margin="5,5,5,5" Click="ButtonBack_Click" Width="100" Height="40" HorizontalAlignment="Left">&lt; Back</Button>
-	</Grid>
+        <Button Name="ButtonDone" Grid.Row="2" Margin="5,5,5,5" Click="ButtonDone_Click" Width="100" Height="40" HorizontalAlignment="Right">Done</Button>
+    </Grid>
 </UserControl>

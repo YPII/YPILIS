@@ -300,6 +300,13 @@ namespace YellowstonePathology.UI.Login
         {
             this.m_LoginUI.GetReportSearchListByPendingTests();
             Window.GetWindow(this).Close();
-        }        
+        }
+
+        private void ButtonQualityImprovementCases_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListByQICases();
+            Window.GetWindow(this).Close();
+
+        }
     }
 }

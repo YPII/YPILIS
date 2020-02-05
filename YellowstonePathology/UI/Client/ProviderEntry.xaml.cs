@@ -28,15 +28,8 @@ namespace YellowstonePathology.UI.Client
 		private YellowstonePathology.Business.Client.Model.ClientCollection m_ClientCollection;
 		private List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> m_PhysicianClientDistributionViewList;
         private YellowstonePathology.Business.Client.Model.HPVStandingOrderCollection m_HPVStandingOrderCollection;
-        private YellowstonePathology.Business.Client.Model.HPVStandingOrder m_HPVStandingOrder;
-
-        private YellowstonePathology.Business.Client.Model.HPVRuleCollection m_HPVRuleAgeCollection;
-        private YellowstonePathology.Business.Client.Model.HPVRuleCollection m_HPVRulePAPResultCollection;
-        private YellowstonePathology.Business.Client.Model.HPVRuleCollection m_HPVRulePreviousTestingCollection;
-        private YellowstonePathology.Business.Client.Model.HPVRuleCollection m_HPVRuleEndocervicalCollection;
-
-        private string m_PhysicianClientId;
         private Window m_ParentWindow;
+        private string m_PhysicianClientId;
         private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
 
         public ProviderEntry(YellowstonePathology.Business.Domain.Physician physician)
@@ -49,12 +42,7 @@ namespace YellowstonePathology.UI.Client
 			this.m_HPV1618StandingOrderCollection = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetHPV1618StandingOrders();
 			this.m_ClientCollection = new YellowstonePathology.Business.Client.Model.ClientCollection();
             this.m_HPVStandingOrderCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetHPVStandingOrderCollectionByPhysicianId(this.m_Physician.PhysicianId);
-
-            this.m_HPVRuleAgeCollection = Business.Client.Model.HPVRuleCollection.GetHPVRuleAgeCollection();
-            this.m_HPVRulePAPResultCollection = Business.Client.Model.HPVRuleCollection.GetHPVRulePAPResultCollection();
-            this.m_HPVRulePreviousTestingCollection = Business.Client.Model.HPVRuleCollection.GetHPVRulePreviousTestingCollection();
-            this.m_HPVRuleEndocervicalCollection = Business.Client.Model.HPVRuleCollection.GetHPVRuleEndocervicalCollection();
-
+            
             InitializeComponent();
 
             this.m_ParentWindow = Window.GetWindow(this);
@@ -118,31 +106,6 @@ namespace YellowstonePathology.UI.Client
         public YellowstonePathology.Business.Client.Model.HPVStandingOrderCollection HPVStandingOrderCollection
         {
             get { return this.m_HPVStandingOrderCollection; }
-        }
-
-        public YellowstonePathology.Business.Client.Model.HPVStandingOrder HPVStandingOrder
-        {
-            get { return this.m_HPVStandingOrder; }
-        }
-
-        public YellowstonePathology.Business.Client.Model.HPVRuleCollection HPVRuleAgeCollection
-        {
-            get { return this.m_HPVRuleAgeCollection; }
-        }
-
-        public YellowstonePathology.Business.Client.Model.HPVRuleCollection HPVRulePAPResultCollection
-        {
-            get { return this.m_HPVRulePAPResultCollection; }
-        }
-
-        public YellowstonePathology.Business.Client.Model.HPVRuleCollection HPVRulePreviousTestingCollection
-        {
-            get { return this.m_HPVRulePreviousTestingCollection; }
-        }
-
-        public YellowstonePathology.Business.Client.Model.HPVRuleCollection HPVRuleEndocervicalCollection
-        {
-            get { return this.m_HPVRuleEndocervicalCollection; }
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -268,13 +231,6 @@ namespace YellowstonePathology.UI.Client
 				}
 			}         
 		}
-
-        //private bool AreDistributionTypesIncompatible(string existingDistributionType, string distributionTypeToAdd)
-        //{
-        //    YellowstonePathology.Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection incompatibleDistributionTypeCollection = new Business.ReportDistribution.Model.IncompatibleDistributionTypeCollection();
-        //    bool result = incompatibleDistributionTypeCollection.TypesAreIncompatible(existingDistributionType, distributionTypeToAdd);
-        //    return result;
-        //}
 
         private void ButtonRemoveFromDistribution_Click(object sender, RoutedEventArgs e)
 		{

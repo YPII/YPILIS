@@ -37,6 +37,7 @@ namespace YellowstonePathology.Business.Domain
 
 		public OrderCommentLog()
 		{
+
 		}
 
 		public OrderCommentLog(string orderCommentLogId)
@@ -70,15 +71,12 @@ namespace YellowstonePathology.Business.Domain
 			}
 		}
 
-		public static void LogEvent(int specimenLogId, string masterAccessionNo, string comment,
-			YellowstonePathology.Business.User.SystemUser systemUser, YellowstonePathology.Business.Domain.OrderCommentEnum eventEnum)		
+		public static void LogEvent(int specimenLogId, string masterAccessionNo, string comment, YellowstonePathology.Business.User.SystemUser systemUser)		
         {
 			OrderCommentLogCollection orderCommentLogCollection = new OrderCommentLogCollection();
-			YellowstonePathology.Business.Interface.IOrderComment eventInfo = YellowstonePathology.Business.Domain.OrderCommentFactory.GetOrderComment(eventEnum);
 
 			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 			OrderCommentLog eventLog = new OrderCommentLog(objectId);
-            eventLog.FromEvent(eventInfo);
             eventLog.SpecimenLogId = specimenLogId;
             eventLog.MasterAccessionNo = masterAccessionNo;
             eventLog.Comment = comment;
@@ -89,15 +87,12 @@ namespace YellowstonePathology.Business.Domain
 			orderCommentLogCollection.Add(eventLog);
         }
 
-		public static void LogEvent(string clientOrderId, string comment,
-			YellowstonePathology.Business.User.SystemUser systemUser, YellowstonePathology.Business.Domain.OrderCommentEnum eventEnum)
+		public static void LogEvent(string clientOrderId, string comment, YellowstonePathology.Business.User.SystemUser systemUser)
 		{
 			OrderCommentLogCollection orderCommentLogCollection = new OrderCommentLogCollection();
-			YellowstonePathology.Business.Interface.IOrderComment eventInfo = YellowstonePathology.Business.Domain.OrderCommentFactory.GetOrderComment(eventEnum);
 			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 
 			OrderCommentLog eventLog = new OrderCommentLog(objectId);
-			eventLog.FromEvent(eventInfo);
 			eventLog.ClientOrderId = clientOrderId;
 			eventLog.Comment = comment;
 			eventLog.LoggedById = systemUser.UserId;

@@ -288,8 +288,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 			switch ((FinalizeAccessionCommandTypeEnum)e.Data)
 			{
 				case FinalizeAccessionCommandTypeEnum.ShowCaseNotes:
-					YellowstonePathology.Business.Domain.CaseNotesKeyCollection caseNotesKeyCollection = new YellowstonePathology.Business.Domain.CaseNotesKeyCollection(this.m_AccessionOrder);
-					CaseNotesPath caseNotesPath = new CaseNotesPath(this.m_PageNavigator, caseNotesKeyCollection);
+					CaseNotesPath caseNotesPath = new CaseNotesPath(this.m_PageNavigator, this.m_AccessionOrder);
 					caseNotesPath.Return += new CaseNotesPath.ReturnEventHandler(CaseNotesPath_PatientDetailsPage_Return);
 					caseNotesPath.Start();
 					break;
@@ -301,8 +300,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 			switch ((FinalizeAccessionCommandTypeEnum)e.Data)
 			{
 				case FinalizeAccessionCommandTypeEnum.ShowCaseNotes:
-					YellowstonePathology.Business.Domain.CaseNotesKeyCollection caseNotesKeyCollection = new YellowstonePathology.Business.Domain.CaseNotesKeyCollection(this.m_AccessionOrder);
-					CaseNotesPath caseNotesPath = new CaseNotesPath(this.m_PageNavigator, caseNotesKeyCollection);
+					CaseNotesPath caseNotesPath = new CaseNotesPath(this.m_PageNavigator, this.m_AccessionOrder);
 					caseNotesPath.Return += new CaseNotesPath.ReturnEventHandler(CaseNotesPath_PatientLinkingPage_Return);
 					caseNotesPath.Start();
 					break;
@@ -314,8 +312,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 			switch ((FinalizeAccessionCommandTypeEnum)e.Data)
 			{
 				case FinalizeAccessionCommandTypeEnum.ShowCaseNotes:
-					YellowstonePathology.Business.Domain.CaseNotesKeyCollection caseNotesKeyCollection = new YellowstonePathology.Business.Domain.CaseNotesKeyCollection(this.m_AccessionOrder);
-					CaseNotesPath caseNotesPath = new CaseNotesPath(this.m_PageNavigator, caseNotesKeyCollection);
+					CaseNotesPath caseNotesPath = new CaseNotesPath(this.m_PageNavigator, this.m_AccessionOrder);
 					caseNotesPath.Return += new CaseNotesPath.ReturnEventHandler(CaseNotesPath_ProviderDetailPage_Return);
 					caseNotesPath.Start();
 					break;

@@ -27,15 +27,15 @@ namespace YellowstonePathology.UI.Login
 		private YellowstonePathology.UI.Navigation.PageNavigator m_PageNavigator;
 		private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
 		private YellowstonePathology.Business.Domain.OrderCommentLogCollection m_OrderCommentLogCollection;
-		private YellowstonePathology.Business.Domain.CaseNotesKeyCollection m_CaseNotesKeyCollection;
+		private Business.Test.AccessionOrder m_AccessionOrder;
 		private string m_PageHeaderText = "Case Notes";		
 
-		public CaseNotesPage(YellowstonePathology.UI.Navigation.PageNavigator pageNavigator, YellowstonePathology.Business.Domain.CaseNotesKeyCollection caseNotesKeyCollection)
+		public CaseNotesPage(YellowstonePathology.UI.Navigation.PageNavigator pageNavigator, Business.Test.AccessionOrder accessionOrder)
 		{
 			this.m_PageNavigator = pageNavigator;
+			this.m_AccessionOrder = accessionOrder;
             this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
-			this.m_CaseNotesKeyCollection = caseNotesKeyCollection;
-			this.FillOrderCommentLog();
+			this.m_OrderCommentLogCollection = YellowstonePathology.Business.Gateway.OrderCommentGateway.GetOrderCommentLogCollectionByMasterAccessionNo(this.m_AccessionOrder.MasterAccessionNo);
 
 			InitializeComponent();
 			DataContext = this;
@@ -59,29 +59,9 @@ namespace YellowstonePathology.UI.Login
 			get { return this.m_OrderCommentLogCollection; }
 		}
 
-		private void BorderPanelSetOrderHeader_Loaded(object sender, RoutedEventArgs e)
+		private void AddComment(string category)
 		{
-
-		}
-
-		private void FillOrderCommentLog()
-		{
-			this.m_OrderCommentLogCollection = YellowstonePathology.Business.Gateway.OrderCommentGateway.OrderCommentLogCollectionFromCaseNotesKeys(this.m_CaseNotesKeyCollection);			
-		}
-
-		private void AddComment()
-		{
-			if (this.m_CaseNotesKeyCollection.HasId(YellowstonePathology.Business.Domain.CaseNotesKeyNameEnum.MasterAccessionNo))
-			{
-				string masterAccessionNo = this.m_CaseNotesKeyCollection.GetId(YellowstonePathology.Business.Domain.CaseNotesKeyNameEnum.MasterAccessionNo);
-				this.m_OrderCommentLogCollection.Add(Business.Domain.OrderCommentEnum.ClientOrderAccessioned, this.m_SystemIdentity.User, masterAccessionNo, 0, string.Empty, string.Empty);
-			}
-			else if (this.m_CaseNotesKeyCollection.HasId(YellowstonePathology.Business.Domain.CaseNotesKeyNameEnum.ClientOrderId))
-			{
-				string clientOrderId = this.m_CaseNotesKeyCollection.GetId(YellowstonePathology.Business.Domain.CaseNotesKeyNameEnum.ClientOrderId);
-				this.m_OrderCommentLogCollection.Add(Business.Domain.OrderCommentEnum.ClientOrderAccessioned, this.m_SystemIdentity.User, string.Empty, 0, clientOrderId, string.Empty);
-			}
-
+			this.m_OrderCommentLogCollection.Add(this.m_SystemIdentity.User, this.m_AccessionOrder.MasterAccessionNo, this.m_AccessionOrder.ClientId, string.Empty, category);
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.InsertDocument(this.m_OrderCommentLogCollection[this.m_OrderCommentLogCollection.Count - 1], this);
 
             this.NotifyPropertyChanged("OrderCommentLogCollection");
@@ -125,7 +105,7 @@ namespace YellowstonePathology.UI.Login
 
 		private void ButtonAddComment_Click(object sender, RoutedEventArgs e)
 		{
-			this.AddComment();
+			this.AddComment(null);
 		}
 
 		private void ButtonDeleteComment_Click(object sender, RoutedEventArgs e)
@@ -138,10 +118,15 @@ namespace YellowstonePathology.UI.Login
             }
 		}
 
-		private void ButtonBack_Click(object sender, RoutedEventArgs e)
+		private void ButtonAddQualityImprovement_Click(object sender, RoutedEventArgs e)
+		{
+			this.AddComment("Quality Improvement");
+		}
+
+		private void ButtonDone_Click(object sender, RoutedEventArgs e)
 		{
 			UI.Navigation.PageNavigationReturnEventArgs args = new UI.Navigation.PageNavigationReturnEventArgs(UI.Navigation.PageNavigationDirectionEnum.Back, null);
 			this.Return(this, args);
-		}		
+		}
 	}
 }

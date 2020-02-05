@@ -44,17 +44,15 @@ namespace YellowstonePathology.Business.Domain
 			return result;
 		}
 
-		public void Add(YellowstonePathology.Business.Domain.OrderCommentEnum orderCommentEnum, YellowstonePathology.Business.User.SystemUser eventUser, string masterAccessionNo, int clientId, string clientOrderId, string comment)
+		public void Add(YellowstonePathology.Business.User.SystemUser eventUser, string masterAccessionNo, int clientId, string clientOrderId, string category)
 		{
 			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 			YellowstonePathology.Business.Domain.OrderCommentLog orderCommentLog = new Business.Domain.OrderCommentLog(objectId);
-			YellowstonePathology.Business.Interface.IOrderComment orderComment = YellowstonePathology.Business.Domain.OrderCommentFactory.GetOrderComment(orderCommentEnum);
 			orderCommentLog.SetDefaultValues(eventUser);
-			orderCommentLog.FromEvent(orderComment);
 			orderCommentLog.MasterAccessionNo = masterAccessionNo;
 			orderCommentLog.ClientId = clientId;
-			orderCommentLog.Description = orderComment.Description;
 			orderCommentLog.ClientOrderId = clientOrderId;
+			orderCommentLog.Category = category;
 			this.Add(orderCommentLog);
 		}
 

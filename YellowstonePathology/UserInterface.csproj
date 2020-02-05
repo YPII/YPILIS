@@ -790,8 +790,6 @@
     <Compile Include="Business\Domain\MaterialLocationCollection.cs" />
     <Compile Include="Business\Domain\OrderComment.cs" />
     <Compile Include="Business\Domain\OrderCommentCollection.cs" />
-    <Compile Include="Business\Domain\OrderCommentEnum.cs" />
-    <Compile Include="Business\Domain\OrderCommentFactory.cs" />
     <Compile Include="Business\Domain\OrderCommentLog.cs" />
     <Compile Include="Business\Domain\OrderCommentLogCollection.cs" />
     <Compile Include="Business\Domain\OrderLogCollection.cs" />

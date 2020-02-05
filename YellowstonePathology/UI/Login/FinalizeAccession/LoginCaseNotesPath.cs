@@ -19,7 +19,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 		{
 			this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();
             YellowstonePathology.Business.Domain.CaseNotesKeyCollection caseNotesKeyCollection = new YellowstonePathology.Business.Domain.CaseNotesKeyCollection(this.m_AccessionOrder);
-            CaseNotesPage caseNotesPage = new CaseNotesPage(this.m_LoginPageWindow.PageNavigator, caseNotesKeyCollection);
+            CaseNotesPage caseNotesPage = new CaseNotesPage(this.m_LoginPageWindow.PageNavigator, this.m_AccessionOrder);
             caseNotesPage.Return += new CaseNotesPage.ReturnEventHandler(CaseNotesPage_Return);
             this.m_LoginPageWindow.PageNavigator.Navigate(caseNotesPage);
             this.m_LoginPageWindow.ShowDialog();
