@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI"
         mc:Ignorable="d"
-        Title="Spell Checking" Height="500" Width="800" WindowStyle="ToolWindow">
+        Title="Spell Checking" Height="700" Width="1200" WindowStyle="ToolWindow">
     <Grid Margin="10,10,10,10">
         
         <Grid.ColumnDefinitions>

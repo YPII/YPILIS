@@ -302,11 +302,23 @@
 			</StatusBarItem>
 
 			<StatusBarItem HorizontalAlignment="Right">
-				<TextBlock Margin="2,2,2,2">
-                    <Hyperlink Click="HyperLinkOpenDocumentFolder_Click">
-                        <TextBlock Text="Open Document Folder"></TextBlock>
-                    </Hyperlink>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="2,2,5,2">
+						<Hyperlink Click="HyperLinkShowSpellChecker_Click">
+							<TextBlock Text="Spell Checker"></TextBlock>
+						</Hyperlink>
+					</TextBlock>
+                    <TextBlock Margin="2,2,5,2">
+						<Hyperlink Click="HyperLinkShowCaseNotes_Click">
+							<TextBlock Text="Show Case Notes"></TextBlock>
+						</Hyperlink>
+					</TextBlock>
+                    <TextBlock Margin="2,2,2,2">
+						<Hyperlink Click="HyperLinkOpenDocumentFolder_Click">
+							<TextBlock Text="Open Document Folder"></TextBlock>
+						</Hyperlink>
                 </TextBlock>
+                </StackPanel>
 			</StatusBarItem>
 		</StatusBar>
 	</Grid>

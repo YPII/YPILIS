@@ -924,6 +924,21 @@ namespace YellowstonePathology.UI.Surgical
             this.m_BarcodeScanPort.HistologySlideScanReceived += HistologySlideScanReceived;
             this.m_BarcodeScanPort.ThinPrepSlideScanReceived += BarcodeScanPort_ThinPrepSlideScanReceived;
             this.m_BarcodeScanPort.CytologySlideScanReceived += CytologySlideScanReceived;            
-        }        
-    }
+        }
+
+		private void HyperLinkShowCaseNotes_Click(object sender, RoutedEventArgs e)
+		{
+			UI.Login.FinalizeAccession.LoginCaseNotesPath loginCaseNotesPath = new UI.Login.FinalizeAccession.LoginCaseNotesPath(this.m_PathologistUI.AccessionOrder);
+			loginCaseNotesPath.Start();
+		}
+
+		private void HyperLinkShowSpellChecker_Click(object sender, RoutedEventArgs e)
+		{
+			if (this.m_PathologistUI.AccessionOrder != null)
+			{
+				YellowstonePathology.UI.NHunspell nhunspell = new NHunspell(this.m_PathologistUI.AccessionOrder);
+				nhunspell.ShowDialog();
+			}
+		}
+	}
 }
