@@ -11,7 +11,7 @@ namespace YellowstonePathology.UI
     public class SpellCheckAccessionOrder
     {
         private List<SpellCheckProperty> m_PropertyList;
-        //private System.Text.RegularExpressions.MatchCollection m_Matches;
+
         private System.Text.RegularExpressions.Regex m_Regex;        
         private int m_CurrentPropertyListIndex;
        
@@ -105,7 +105,12 @@ namespace YellowstonePathology.UI
 
         public SpellCheckProperty GetCurrentProperty()
         {
-            return this.m_PropertyList[this.m_CurrentPropertyListIndex];
+            SpellCheckProperty result = null;
+            if(this.m_CurrentPropertyListIndex > 0)
+            {
+                result = this.m_PropertyList[this.m_CurrentPropertyListIndex];
+            }
+            return result;
         }
 
         public void SetCurrentProperty(int index)

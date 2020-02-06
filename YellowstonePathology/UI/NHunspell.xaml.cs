@@ -79,7 +79,10 @@ namespace YellowstonePathology.UI
 
         private void ButtonNextProperty_Click(object sender, RoutedEventArgs e)
         {
-            if(this.m_SpellCheckAccessionOrder.HasNextProperty() == true)
+            SpellCheckProperty currentProperty = this.m_SpellCheckAccessionOrder.GetCurrentProperty();
+            if(currentProperty != null) currentProperty.Reset(this.m_Text);
+
+            if (this.m_SpellCheckAccessionOrder.HasNextProperty() == true)
             {
                 SpellCheckProperty spellCheckProperty = this.GetNextProperty();                
                 this.CheckSpelling(spellCheckProperty);
@@ -158,7 +161,7 @@ namespace YellowstonePathology.UI
 
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if(this.ListViewSuggestedWordList.SelectedItems.Count != 0)
+            if (this.ListViewSuggestedWordList.SelectedItems.Count != 0)
             {
                 string selectedWord = (string)this.ListViewSuggestedWordList.SelectedItem;                
                 this.m_Text = this.m_Text.Remove(this.m_CurrentSelectionStart, this.m_CurrentSelectionLength);
@@ -178,6 +181,9 @@ namespace YellowstonePathology.UI
         {
             if(this.ListViewProperties.SelectedItem != null)
             {
+                SpellCheckProperty currentProperty = this.m_SpellCheckAccessionOrder.GetCurrentProperty();
+                if (currentProperty != null) currentProperty.Reset(this.m_Text);
+
                 SpellCheckProperty spellCheckProperty = (SpellCheckProperty)this.ListViewProperties.SelectedItem;
                 this.m_SpellCheckAccessionOrder.SetCurrentProperty(this.ListViewProperties.SelectedIndex);
 
@@ -188,6 +194,8 @@ namespace YellowstonePathology.UI
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
+            SpellCheckProperty currentProperty = this.m_SpellCheckAccessionOrder.GetCurrentProperty();
+            if (currentProperty != null) currentProperty.Reset(this.m_Text);
             this.Close();         
         }
 

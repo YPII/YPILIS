@@ -84,7 +84,10 @@ namespace YellowstonePathology.UI
         public void Reset(string text)
         {
             this.m_Property.SetValue(this.m_O, text);
-            this.m_Matches = this.m_Regex.Matches(this.m_Property.GetValue(this.m_O).ToString());
+            string propertyValue = string.Empty;
+            if(this.m_Property.GetValue(this.m_O) != null)
+                propertyValue = this.m_Property.GetValue(this.m_O).ToString();
+            this.m_Matches = this.m_Regex.Matches(propertyValue);
         }
 
         public void SetErrorCount(Hunspell hunspell)
