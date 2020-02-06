@@ -131,6 +131,7 @@ namespace YellowstonePathology.UI
             appDirectories.Add(YellowstonePathology.Properties.Settings.Default.MonitoredPropertyFolder);
             appDirectories.Add(@"C:\ProgramData\ypi\");
             appDirectories.Add(@"C:\ProgramData\ypi\drafts\");
+            appDirectories.Add(@"C:\ProgramData\ypi\dictionary\");
 
             foreach (string appDir in appDirectories)
             {

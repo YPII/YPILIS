@@ -12,7 +12,7 @@ namespace YellowstonePathology.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -98,7 +98,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\Yellowstone Pathology Institute\\ypi-custom.dic")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\ProgramData\\ypi\\dictionary\\ypi-custom.dic")]
         public string LocalDICFile {
             get {
                 return ((string)(this["LocalDICFile"]));
@@ -107,7 +107,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\Yellowstone Pathology Institute\\ypi-custom.aff")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\ProgramData\\ypi\\dictionary\\ypi-custom.aff")]
         public string LocalAFFFile {
             get {
                 return ((string)(this["LocalAFFFile"]));

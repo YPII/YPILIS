@@ -27,10 +27,10 @@
       <Value Profile="(Default)">Histology Slide Label Printer</Value>
     </Setting>
     <Setting Name="LocalDICFile" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\ypi-custom.dic</Value>
+      <Value Profile="(Default)">C:\ProgramData\ypi\dictionary\ypi-custom.dic</Value>
     </Setting>
     <Setting Name="LocalAFFFile" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\ypi-custom.aff</Value>
+      <Value Profile="(Default)">C:\ProgramData\ypi\dictionary\ypi-custom.aff</Value>
     </Setting>
     <Setting Name="ServerDICFile" Type="System.String" Scope="Application">
       <Value Profile="(Default)">\\ypiidc\YPIILIS\Dictionary\ypi-custom.dic</Value>
