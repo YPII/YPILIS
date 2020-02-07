@@ -106,7 +106,7 @@ namespace YellowstonePathology.UI
         public SpellCheckProperty GetCurrentProperty()
         {
             SpellCheckProperty result = null;
-            if(this.m_CurrentPropertyListIndex > 0)
+            if(this.m_CurrentPropertyListIndex >= 0)
             {
                 result = this.m_PropertyList[this.m_CurrentPropertyListIndex];
             }

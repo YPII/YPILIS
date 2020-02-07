@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using NHunspell;
+using System.ComponentModel;
 
 namespace YellowstonePathology.UI
 {
-    public class SpellCheckProperty
+    public class SpellCheckProperty: INotifyPropertyChanged
     {
+        public delegate void PropertyChangedNotificationHandler(String info);
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private string m_Description;
         private PropertyInfo m_Property;
         private object m_O;
@@ -101,6 +105,15 @@ namespace YellowstonePathology.UI
                 }
             }
             this.m_ErrorCount = errorCount;
+            this.NotifyPropertyChanged("ErrorCount");
+        }
+
+        public void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
         }
     }
 }

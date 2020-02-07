@@ -302,11 +302,14 @@ namespace YellowstonePathology.UI.Login
             Window.GetWindow(this).Close();
         }
 
-        private void ButtonQualityImprovementCases_Click(object sender, RoutedEventArgs e)
+        private void ButtonCasesWithNotes_Click(object sender, RoutedEventArgs e)
         {
-            this.m_LoginUI.GetReportSearchListByQICases();
-            Window.GetWindow(this).Close();
-
+            if(this.ComboboxCasesWithNotesYear.SelectedItem != null)
+            {
+                ComboBoxItem cbi = (ComboBoxItem)this.ComboboxCasesWithNotesYear.SelectedItem;
+                this.m_LoginUI.GetReportSearchListByQICases(cbi.Content.ToString());
+                Window.GetWindow(this).Close();
+            }   
         }
     }
 }

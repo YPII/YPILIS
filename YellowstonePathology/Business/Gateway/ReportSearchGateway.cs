@@ -112,21 +112,22 @@ namespace YellowstonePathology.Business.Gateway
             return reportSearchList;
         }
 
-        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByQICases()
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByCasesWithNotes(string year)
         {
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT distinct pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
                 "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
-                "'' ForeignAccessionNo, pso.IsPosted " +
+                "'' ForeignAccessionNo, pso.IsPosted, ocl.LogDate " +
                 "FROM tblAccessionOrder a " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "join tblOrderCommentLog ocl on a.MasterAccessionno = ocl.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
-                "where ocl.Category = 'Quality Improvement' " +
-                "Order By pso.FinalTime, pso.PanelSetId, a.AccessionTime;";
+                "where year(ocl.LogDate) >= @Year " +
+                "Order By ocl.LogDate desc;";
 
+            cmd.Parameters.AddWithValue("@Year", year);
             Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
             return reportSearchList;
         }

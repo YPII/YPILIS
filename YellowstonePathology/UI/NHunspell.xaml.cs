@@ -80,7 +80,11 @@ namespace YellowstonePathology.UI
         private void ButtonNextProperty_Click(object sender, RoutedEventArgs e)
         {
             SpellCheckProperty currentProperty = this.m_SpellCheckAccessionOrder.GetCurrentProperty();
-            if(currentProperty != null) currentProperty.Reset(this.m_Text);
+            if (currentProperty != null)
+            {
+                currentProperty.Reset(this.m_Text);
+                currentProperty.SetErrorCount(this.m_Hunspell);
+            }
 
             if (this.m_SpellCheckAccessionOrder.HasNextProperty() == true)
             {
@@ -173,6 +177,7 @@ namespace YellowstonePathology.UI
 
                 SpellCheckProperty spellCheckProperty = this.m_SpellCheckAccessionOrder.GetCurrentProperty();
                 spellCheckProperty.Reset(this.m_Text);
+                spellCheckProperty.SetErrorCount(this.m_Hunspell);
                 this.CheckSpelling(spellCheckProperty);
             }            
         }        
@@ -182,7 +187,11 @@ namespace YellowstonePathology.UI
             if(this.ListViewProperties.SelectedItem != null)
             {
                 SpellCheckProperty currentProperty = this.m_SpellCheckAccessionOrder.GetCurrentProperty();
-                if (currentProperty != null) currentProperty.Reset(this.m_Text);
+                if (currentProperty != null)
+                {
+                    currentProperty.Reset(this.m_Text);
+                    currentProperty.SetErrorCount(this.m_Hunspell);
+                }
 
                 SpellCheckProperty spellCheckProperty = (SpellCheckProperty)this.ListViewProperties.SelectedItem;
                 this.m_SpellCheckAccessionOrder.SetCurrentProperty(this.ListViewProperties.SelectedIndex);

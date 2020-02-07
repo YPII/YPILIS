@@ -54,8 +54,13 @@
                     <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Text="Pending Tests:" />
                     <Button Grid.Column="2" Grid.Row="7" Width="75" Height="25" Margin="2,2,2,2" Click="ButtonPendingTests_Click">Search</Button>
 
-                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Text="Quality Improvement Cases:" />
-                    <Button Grid.Column="2" Grid.Row="8" Width="75" Height="25" Margin="2,2,2,2" Click="ButtonQualityImprovementCases_Click">Search</Button>
+                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Text="Cases with Notes:" />
+                    <ComboBox Name="ComboboxCasesWithNotesYear" Grid.Column="1" Grid.Row="8" Margin="2,2,2,2">
+                        <ComboBoxItem IsSelected="True">2020</ComboBoxItem>
+                        <ComboBoxItem>2019</ComboBoxItem>
+                        <ComboBoxItem>2018</ComboBoxItem>
+                    </ComboBox>
+                    <Button Grid.Column="2" Grid.Row="8" Width="75" Height="25" Margin="2,2,2,2" Click="ButtonCasesWithNotes_Click">Search</Button>
 
                 </Grid>
             </TabItem>            
