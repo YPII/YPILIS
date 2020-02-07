@@ -17,7 +17,6 @@ namespace YellowstonePathology.Business.Audit.Model
         {            
 			this.IsMarkedOnWomensHealthProfile(this.m_AccessionOrder);
             this.IsRequiredByReflexOrder(this.m_AccessionOrder);
-            //this.IsRequiredByStandingOrder(this.m_AccessionOrder);
         }
 
 		private void IsMarkedOnWomensHealthProfile(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)

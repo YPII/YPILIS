@@ -33,9 +33,9 @@ namespace YellowstonePathology.Business.ASCCPRule
                 woman.OrderType = orderTypeCollection.Get("11");
                 woman.PerformHPV = true;
 
-                this.FinalizePap(woman, unsat, noImpression);
-                this.FinalizeHPV(woman, "Negative");
-                this.FinalizeGenotyping(woman, "Unknown");
+                //this.FinalizePap(woman, unsat, noImpression);
+                //this.FinalizeHPV(woman, "Negative");
+                //this.FinalizeGenotyping(woman, "Unknown");
                 result.Add(woman);
             }
 
@@ -47,35 +47,31 @@ namespace YellowstonePathology.Business.ASCCPRule
                 woman.OrderType = orderTypeCollection.Get("11");
                 woman.PerformHPV = true;
 
-                this.FinalizePap(woman, unsat, noImpression);
-                this.FinalizeHPV(woman, "Positive");
-                this.FinalizeGenotyping(woman, "Unknown");
+                //this.FinalizePap(woman, unsat, noImpression);
+                //this.FinalizeHPV(woman, "Positive");
+                //this.FinalizeGenotyping(woman, "Unknown");
                 result.Add(woman);
             }            
             return result;
         }
 
-        public override void FinalizePap(Woman woman, SpecimenAdequacy specimenAdequacy, ScreeningImpression screeningImpression)
+        public override void FinalizePap(Woman woman)
         {
-            woman.SpecimenAdequacy = specimenAdequacy;
-            woman.ScreeningImpression = screeningImpression;
-
-            if (specimenAdequacy.ResultCode == "25")
+            if (woman.SpecimenAdequacy.ResultCode == "25")
             {
                 this.m_IsMatch = true;
                 woman.RuleIsMatch = true;                                
             }            
         }
 
-        public override void FinalizeHPV(Woman woman, string result)
+        public override void FinalizeHPV(Woman woman)
         {
-            woman.HPVResult = result;
             if (woman.OrderType.OrderCode == "11")
             {                
                 this.m_RepeatTestingInterval = "2-4 months.";
                 if(woman.Age >= 30)
                 {
-                    switch (result)
+                    switch (woman.HPVResult)
                     {
                         case "Negative":
                             woman.ManagementRecomendation = "Recomend repeat cytology in 2-4 months.";
@@ -94,9 +90,8 @@ namespace YellowstonePathology.Business.ASCCPRule
             }
         }
 
-        public override void FinalizeGenotyping(Woman woman, string result)
+        public override void FinalizeGenotyping(Woman woman)
         {
-            woman.GenotypingResult = result;
             //Do nothing
         }
     }

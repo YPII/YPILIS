@@ -32,20 +32,17 @@ namespace YellowstonePathology.Business.ASCCPRule
                 woman.Age = i;                
                 woman.OrderType = orderTypeCollection.Get("10");                
 
-                this.FinalizePap(woman, unsat, noImpression);
-                this.FinalizeHPV(woman, "Unknown");
-                this.FinalizeGenotyping(woman, "Unknown");
+                this.FinalizePap(woman);
+                //this.FinalizeHPV(woman, "Unknown");
+                //this.FinalizeGenotyping(woman, "Unknown");
                 result.Add(woman);               
             }                       
             return result;
         }
 
-        public override void FinalizePap(Woman woman, SpecimenAdequacy specimenAdequacy, ScreeningImpression screeningImpression)
+        public override void FinalizePap(Woman woman)
         {
-            woman.SpecimenAdequacy = specimenAdequacy;
-            woman.ScreeningImpression = screeningImpression;
-
-            if (specimenAdequacy.ResultCode == "25")
+            if (woman.SpecimenAdequacy.ResultCode == "25")
             {
                 this.m_IsMatch = true;
                 woman.RuleIsMatch = true;                
@@ -58,15 +55,13 @@ namespace YellowstonePathology.Business.ASCCPRule
             }            
         }
 
-        public override void FinalizeHPV(Woman woman, string result)
+        public override void FinalizeHPV(Woman woman)
         {
-            woman.HPVResult = result;
             //Do nothing
         }
 
-        public override void FinalizeGenotyping(Woman woman, string result)
+        public override void FinalizeGenotyping(Woman woman)
         {
-            woman.GenotypingResult = result;
             //Do nothing
         }
     }

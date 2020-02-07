@@ -1,0 +1,75 @@
+﻿<Window x:Class="YellowstonePathology.UI.ASCCPWomanViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI"
+        mc:Ignorable="d"
+        Title="ASCCP Rule Viewer (Unsat/Unsat with cotest rules only)" Height="400" Width="1100">
+    <Grid Margin="5,5,5,5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Patient Name:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Name}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Age:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=Age}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Specimen Adequacy:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=SpecimenAdequacy.Description}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Screening Impression:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=ScreeningImpression.Description}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">EC/TZ Absent:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Path=ECTZAbsent}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Reactive:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Path=Reactive}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Perform HPV:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding Path=PerformHPV}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">HPV Result:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding Path=HPVResult}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Reflex To HPV Genotypes:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding Path=ReflexToHPVGenotypes}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">HPV Genotypes Result:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding Path=HPVGenotypesResult}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Management Recomendation:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="10" Text="{Binding Path=ManagementRecomendation}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Order Type:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="11" Text="{Binding Path=OrderType.Description}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Rule Is Match:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="12" Text="{Binding Path=RuleIsMatch}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="13" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Reminder:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="13" Text="{Binding Path=Reminder}" Margin="2,2,2,2"></TextBlock>
+
+    </Grid>
+</Window>

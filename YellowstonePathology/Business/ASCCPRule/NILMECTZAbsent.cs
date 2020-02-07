@@ -32,9 +32,9 @@ namespace YellowstonePathology.Business.ASCCPRule
                 woman.Age = i;
                 woman.OrderType = orderTypeCollection.Get("10");
 
-                this.FinalizePap(woman, satNoecc, nilm);
-                this.FinalizeHPV(woman, "Positive");
-                this.FinalizeGenotyping(woman, "Negative");
+                //this.FinalizePap(woman, satNoecc, nilm);
+                //this.FinalizeHPV(woman, "Positive");
+                //this.FinalizeGenotyping(woman, "Negative");
                 result.Add(woman);
             }
 
@@ -44,9 +44,9 @@ namespace YellowstonePathology.Business.ASCCPRule
                 woman.Age = i;
                 woman.OrderType = orderTypeCollection.Get("10");
 
-                this.FinalizePap(woman, satNoecc, nilm);
-                this.FinalizeHPV(woman, "Positive");
-                this.FinalizeGenotyping(woman, "Positive");
+                //this.FinalizePap(woman, satNoecc, nilm);
+                //this.FinalizeHPV(woman, "Positive");
+                //this.FinalizeGenotyping(woman, "Positive");
                 result.Add(woman);
             }
 
@@ -56,20 +56,17 @@ namespace YellowstonePathology.Business.ASCCPRule
                 woman.Age = i;
                 woman.OrderType = orderTypeCollection.Get("10");
 
-                this.FinalizePap(woman, satNoecc, nilm);
-                this.FinalizeHPV(woman, "Negative");
-                this.FinalizeGenotyping(woman, "Unknown");
+                //this.FinalizePap(woman, satNoecc, nilm);
+                //this.FinalizeHPV(woman, "Negative");
+                //this.FinalizeGenotyping(woman, "Unknown");
                 result.Add(woman);
             }            
             return result;
         }
 
-        public override void FinalizePap(Woman woman, SpecimenAdequacy specimenAdequacy, ScreeningImpression screeningImpression)
+        public override void FinalizePap(Woman woman)
         {
-            woman.SpecimenAdequacy = specimenAdequacy;
-            woman.ScreeningImpression = screeningImpression;
-
-            if (screeningImpression.ResultCode == "01" || screeningImpression.ResultCode == "02")
+            if (woman.ScreeningImpression.ResultCode == "01" || woman.ScreeningImpression.ResultCode == "02")
             {
                 if (woman.SpecimenAdequacy.ResultCode == "10")
                 {
@@ -88,17 +85,16 @@ namespace YellowstonePathology.Business.ASCCPRule
             }
         }
 
-        public override void FinalizeHPV(Woman woman, string result)
+        public override void FinalizeHPV(Woman woman)
         {            
             if(woman.PerformHPV == true)
             {
-                woman.HPVResult = result;
-                if (result == "Positive")
+                if (woman.HPVResult == "Positive")
                 {
                     woman.ReflexToHPVGenotypes = true;
                     woman.ManagementRecomendation = "Recommend colposcopy.";
                 }
-                else if(result == "Negative")
+                else if(woman.HPVResult == "Negative")
                 {
                     woman.ReflexToHPVGenotypes = false;
                     woman.ManagementRecomendation = "Recommend repeat cotesting in 3 years.";
@@ -106,16 +102,15 @@ namespace YellowstonePathology.Business.ASCCPRule
             }            
         }
 
-        public override void FinalizeGenotyping(Woman woman, string result)
+        public override void FinalizeGenotyping(Woman woman)
         {
             if (woman.ReflexToHPVGenotypes == true)
             {
-                woman.GenotypingResult = result;
-                if (result == "Positive")
+                if (woman.HPVResult == "Positive")
                 {
                     woman.ManagementRecomendation = "Recommend colposcopy.";
                 }
-                else if (result == "Negative")
+                else if (woman.HPVResult == "Negative")
                 {
                     woman.ManagementRecomendation = "Recommend repeat cotesting in 1 year.";
                 }

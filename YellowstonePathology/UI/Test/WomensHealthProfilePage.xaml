@@ -40,7 +40,8 @@
 				<RowDefinition Height="*"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
-				<RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
 			</Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,5,0,0" FontWeight="Bold" FontSize="16">Order</TextBlock>
@@ -75,6 +76,10 @@
                     <Hyperlink Click="HyperLinkNext_Click">Next</Hyperlink>
             </TextBlock>
 
+            <TextBlock Name="TextBlockASCCPCheck" Grid.Column="0" Grid.Row="11" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkASCCPCheck_Click">ASCCP Check</Hyperlink>
+            </TextBlock>
+            
 			<TextBlock Grid.Column="0" Grid.Row="12" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkUnacceptResults_Click">Unaccept Results</Hyperlink>
 				</TextBlock>
@@ -126,7 +131,6 @@
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
-						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="*"></RowDefinition>
 					</Grid.RowDefinitions>
 
@@ -158,27 +162,23 @@
                     <ComboBox Name="ComboboxHPVReflex" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9" Margin="2,2,2,2" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=HPVReflexOrderCollection}" SelectedValuePath="ReflexOrderCode" DisplayMemberPath="Description"
 									SelectedValue="{Binding Path=WomensHealthProfileTestOrder.HPVReflexOrderCode}" SelectionChanged="ComboBoxHPVReflexOrderCode_SelectionChanged" />
                     
-                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" FontWeight="Bold" Margin="2,5,2,2">HPV Standing Order</TextBlock>
-					<TextBox Name="TextBlockStandingOrderDescription" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=HPVStandingOrderDescription}" TextWrapping="Wrap" IsEnabled="False"></TextBox>                              
-                
 					<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="12" Margin="2,2,2,2" FontWeight="Bold">HPV 16/18 Reflex Order:</TextBlock>
 					<ComboBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13" Margin="2,2,2,2" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=HPV1618ReflexOrderCollection}" SelectedValuePath="ReflexOrderCode" DisplayMemberPath="Description"
 						SelectedValue="{Binding Path=WomensHealthProfileTestOrder.HPV1618ReflexOrderCode}" SelectionChanged="ComboBoxHPV1618ReflexOrderCode_SelectionChanged"/>
-
-					<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="14" Margin="2,2,2,2" FontWeight="Bold">HPV 16/18 Standing Order:</TextBlock>
-					<ComboBox Name="ComboBoxStandingOrderDescription" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="15" Margin="2,2,2,2" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=HPV1618StandingOrderCollection}" SelectedValuePath="StandingOrderCode" DisplayMemberPath="Description"
-									SelectedValue="{Binding Path=WomensHealthProfileTestOrder.HPV1618StandingOrderCode}" IsEnabled="False"/>
-
+                    
                     <TextBlock Grid.Column="0" Grid.Row="16" Margin="2,2,2,2" FontWeight="Bold">Mange Per ASCCP:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="16" IsChecked="{Binding Path=WomensHealthProfileTestOrder.MangePerASCCP}" Margin="2,3,2,2"></CheckBox>
+                    <CheckBox Name="CheckBoxManagePerASCCP" Grid.Column="1" Grid.Row="16" IsChecked="{Binding Path=WomensHealthProfileTestOrder.ManagePerASCCP}" Margin="2,3,2,2"></CheckBox>
 
-                    <TextBlock Grid.Column="0" Grid.Row="17" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
-					<CheckBox Grid.Column="1" Grid.Row="17" IsChecked="{Binding Path=WomensHealthProfileTestOrder.Distribute}" Margin="2,3,2,2"></CheckBox>
+                    <TextBlock Grid.Column="0" Grid.Row="17" Margin="2,2,2,2" FontWeight="Bold">Mange Per ASCCP With Cotest:</TextBlock>
+                    <CheckBox Name="CheckBoxManagePerASCCPWithCotest" Grid.Column="1" Grid.Row="17" IsChecked="{Binding Path=WomensHealthProfileTestOrder.ManagePerASCCPWithCotest}" Margin="2,3,2,2"></CheckBox>
 
-					<TextBlock Grid.Column="0" Grid.Row="18" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
-					<CheckBox Grid.Column="1" Grid.Row="18" Margin="2,2,2,2" IsChecked="{Binding Path=WomensHealthProfileTestOrder.NoCharge}"></CheckBox>
+                    <TextBlock Grid.Column="0" Grid.Row="18" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
+					<CheckBox Grid.Column="1" Grid.Row="18" IsChecked="{Binding Path=WomensHealthProfileTestOrder.Distribute}" Margin="2,3,2,2"></CheckBox>
 
-					<Grid Grid.Column="0" Grid.Row="19" Grid.ColumnSpan="2">
+					<TextBlock Grid.Column="0" Grid.Row="19" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
+					<CheckBox Grid.Column="1" Grid.Row="19" Margin="2,2,2,2" IsChecked="{Binding Path=WomensHealthProfileTestOrder.NoCharge}"></CheckBox>
+
+					<Grid Grid.Column="0" Grid.Row="20" Grid.ColumnSpan="2">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto"></ColumnDefinition>
 							<ColumnDefinition Width="*"></ColumnDefinition>

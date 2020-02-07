@@ -13,6 +13,20 @@ namespace YellowstonePathology.Business.Cytology.Model
 
 		}
 
+        public SpecimenAdequacy GetFromPAPResultCode(string papResultCode)
+        {
+            SpecimenAdequacy result = null;
+            foreach (SpecimenAdequacy specimenAdequacy in this)
+            {
+                if (specimenAdequacy.ResultCode == papResultCode.Substring(1, 2))
+                {
+                    result = specimenAdequacy;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public SpecimenAdequacy Get(string code)
         {
             SpecimenAdequacy result = null;

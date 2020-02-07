@@ -88,18 +88,19 @@ namespace YellowstonePathology.UI.Test
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalize);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockNext);
+            this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockASCCPCheck);
+            this.m_ControlsNotDisabledOnFinal.Add(this.CheckBoxManagePerASCCP);
+            this.m_ControlsNotDisabledOnFinal.Add(this.CheckBoxManagePerASCCPWithCotest);
 
             this.m_ControlsNotEnabledOnUnFinal.Add(this.CheckBoxAccepted);
             this.m_ControlsNotEnabledOnUnFinal.Add(this.CheckBoxFinal);
-            this.m_ControlsNotEnabledOnUnFinal.Add(this.ComboBoxStandingOrderDescription);
             this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBlockLastHPVDate);
             this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBlockPatientAge);
             this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBlockScreeningImpression);
-            this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBlockStandingOrderDescription);
             this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBoxAcceptedBy);
             this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBoxAcceptedTime);
             this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBoxFinalTime);
-            this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBoxSignaure);            
+            this.m_ControlsNotEnabledOnUnFinal.Add(this.TextBoxSignaure);      
         }        
 
         public string HPVStandingOrderDescription
@@ -454,6 +455,23 @@ namespace YellowstonePathology.UI.Test
         private void HyperLinkNext_Click(object sender, RoutedEventArgs e)
         {
             this.GoNext();
+        }
+
+        private void HyperLinkASCCPCheck_Click(object sender, RoutedEventArgs e)
+        {
+            Business.Audit.Model.ASCCPAudit audit = new Business.Audit.Model.ASCCPAudit(this.m_AccessionOrder);
+            audit.Run();
+
+            if(audit.IsOkToRunAudit == true)
+            {
+                UI.ASCCPWomanViewer asccpWomanViewer = new ASCCPWomanViewer(audit.Woman);
+                asccpWomanViewer.Show();
+
+            }
+            else
+            {
+                MessageBox.Show("The Woman's Health Profile needs to be final before running this rule.");
+            }
         }
     }
 }

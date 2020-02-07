@@ -14,6 +14,14 @@ namespace YellowstonePathology.Business.Cytology.Model
             this.Add(new OrderType("11", "ThinPrep Pap with High Risk HPV screen (Co-test, preferred use in ages 30 and above) with management of abnormal screening results per ASCCP preferred guidelines."));
         }
 
+        public OrderType Get(Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder womensHealthProfileTestOrder)
+        {
+            OrderType result = null;
+            if (womensHealthProfileTestOrder.ManagePerASCCP == true) result = Get("10");
+            if (womensHealthProfileTestOrder.ManagePerASCCPWithCotest == true) result = Get("11");
+            return result;
+        }
+
         public OrderType Get(string orderCode)
         {
             OrderType result = null;

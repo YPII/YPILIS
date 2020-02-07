@@ -217,6 +217,7 @@
     <Compile Include="Business\ASCCPRule\NILMECTZAbsentWithCotest.cs" />
     <Compile Include="Business\ASCCPRule\NoMatchingRule.cs" />
     <Compile Include="Business\ASCCPRule\Rule2.cs" />
+    <Compile Include="Business\ASCCPRule\RuleFactory.cs" />
     <Compile Include="Business\ASCCPRule\UnsatWithCotest.cs" />
     <Compile Include="Business\ASCCPRule\Woman.cs" />
     <Compile Include="Business\ASCCPRule\NILMECTZAbsent.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Business\Audit.Model\AccessionOrderAudit.cs" />
     <Compile Include="Business\Audit.Model\AccountNoAudit.cs" />
     <Compile Include="Business\Audit.Model\AliquotAndStainOrderAuditCollection.cs" />
+    <Compile Include="Business\Audit.Model\ASCCPAudit.cs" />
     <Compile Include="Business\Audit.Model\BoneMarrowSummaryAudit.cs" />
     <Compile Include="Business\Audit.Model\CanSaveFacilityAudit.cs" />
     <Compile Include="Business\Audit.Model\CanSetDistributionAudit.cs" />
@@ -3179,6 +3181,9 @@
     <Compile Include="UI\ASCCPRulesDialog.xaml.cs">
       <DependentUpon>ASCCPRulesDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ASCCPWomanViewer.xaml.cs">
+      <DependentUpon>ASCCPWomanViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\AutoCompleteTest.xaml.cs">
       <DependentUpon>AutoCompleteTest.xaml</DependentUpon>
     </Compile>
@@ -5181,6 +5186,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\ASCCPRulesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ASCCPWomanViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

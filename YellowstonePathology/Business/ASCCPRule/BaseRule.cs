@@ -25,18 +25,17 @@ namespace YellowstonePathology.Business.ASCCPRule
             throw new Exception("Not implemented here.");
         }        
         
-        public virtual void FinalizePap(Woman woman, Business.Cytology.Model.SpecimenAdequacy specimenAdequacy, 
-            Business.Cytology.Model.ScreeningImpression screeningImpression)
+        public virtual void FinalizePap(Woman woman)
         {
             throw new Exception("Not implemented here.");
         }
 
-        public virtual void FinalizeHPV(Woman woman, string result)
+        public virtual void FinalizeHPV(Woman woman)
         {
             throw new Exception("Not implemented here.");
         }
 
-        public virtual void FinalizeGenotyping(Woman woman, string result)
+        public virtual void FinalizeGenotyping(Woman woman)
         {
             throw new Exception("Not implemented here.");
         }        

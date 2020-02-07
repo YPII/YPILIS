@@ -14,31 +14,61 @@ namespace YellowstonePathology.Business.ASCCPRule
         private int m_Age;        
         private Business.Cytology.Model.ScreeningImpression m_ScreeningImpression;
         private Business.Cytology.Model.SpecimenAdequacy m_SpecimenAdequacy;
+        private bool m_ECTZAbsent;
         private bool m_Reactive;
         private bool m_PerformHPV;
         private string m_HPVResult;
         private bool m_ReflexToHPVGenotypes;
-        private string m_GenotypingResult;
-        private string m_ManagementRecomendation;        
+        private string m_HPV16Result;
+        private string m_HPV18Result;
+
+        private string m_ManagementRecomendation;
+        private string m_Reminder;
 
         public Woman()
         {
-            this.m_HPVResult = "Unknown";
-            this.m_GenotypingResult = "Unknown";
-            this.m_ManagementRecomendation = "Unknown";
-        }
 
-        public Woman(string name, Business.Cytology.Model.OrderType orderType, int age, Business.Cytology.Model.SpecimenAdequacy specimenAdequacy, 
-            Business.Cytology.Model.ScreeningImpression screeningImpression, bool reactive)
+        }
+        
+        public void FromAccessionOrder(Business.Test.AccessionOrder accessionOrder)
         {
-            this.m_Name = name;
-            this.m_OrderType = orderType;
-            this.m_Age = age;
-            this.m_ScreeningImpression = screeningImpression;
-            this.m_SpecimenAdequacy = specimenAdequacy;
-            this.m_Reactive = reactive;            
-            this.m_ManagementRecomendation = "Unknown";            
-        }      
+            Business.Cytology.Model.OrderTypeCollection orderTypeCollection = new Cytology.Model.OrderTypeCollection();
+            Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder womansHealthProfileTestOrder = (Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)accessionOrder.PanelSetOrderCollection.GetWomensHealthProfile();
+            Business.Test.ThinPrepPap.PanelSetOrderCytology panelSetOrderCytology = (Business.Test.ThinPrepPap.PanelSetOrderCytology)accessionOrder.PanelSetOrderCollection.GetThinPrepPap();
+            Business.Cytology.Model.ScreeningImpressionCollection screeningImpressions = Business.Gateway.AccessionOrderGateway.GetScreeningImpressions();
+            Business.Cytology.Model.SpecimenAdequacyCollection specimenAdequacies = Business.Gateway.AccessionOrderGateway.GetSpecimenAdequacy();
+
+            this.m_Name = accessionOrder.PatientDisplayName;
+            this.m_OrderType = orderTypeCollection.Get(womansHealthProfileTestOrder);
+            this.m_Age = YellowstonePathology.Business.Helper.PatientHelper.GetAge(accessionOrder.PBirthdate.Value);
+            this.m_ScreeningImpression = screeningImpressions.Get(panelSetOrderCytology.ResultCode);
+            this.m_SpecimenAdequacy = specimenAdequacies.GetFromPAPResultCode(panelSetOrderCytology.ResultCode);
+            this.m_Reactive = Business.Cytology.Model.CytologyResultCode.IsResultCodeReactive(panelSetOrderCytology.ResultCode);
+            this.m_ECTZAbsent = Business.Cytology.Model.CytologyResultCode.IsResultCodeTZoneAbsent(panelSetOrderCytology.ResultCode);
+            this.m_ManagementRecomendation = "Unknown";
+            
+            if(accessionOrder.PanelSetOrderCollection.Exists(14) == true)
+            {
+                Business.Test.HPV.HPVTestOrder hpvTestOrder = (Business.Test.HPV.HPVTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(14);
+                this.m_HPVResult = hpvTestOrder.Result;
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(62) == true)
+            {
+                Business.Test.HPV1618.PanelSetOrderHPV1618 hpv1618TestOrder = (Business.Test.HPV1618.PanelSetOrderHPV1618)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(62);
+                this.m_HPV16Result = hpv1618TestOrder.HPV16Result;
+                this.m_HPV18Result = hpv1618TestOrder.HPV18Result;
+            }
+
+            if (this.OrderType != null && this.OrderType.OrderCode == "11")
+            {
+                this.m_PerformHPV = true;
+                if(accessionOrder.PanelSetOrderCollection.Exists(14) == false)
+                {
+                    this.m_Reminder = "An HPV is required and has not been ordered.";
+                }
+            }
+        }
         
         public bool Cotesting
         {
@@ -85,6 +115,12 @@ namespace YellowstonePathology.Business.ASCCPRule
             set { this.m_Reactive = value; }
         }
 
+        public bool ECTZAbsent
+        {
+            get { return this.m_ECTZAbsent; }
+            set { this.m_ECTZAbsent = value; }
+        }
+
         public bool PerformHPV
         {
             get { return this.m_PerformHPV; }
@@ -103,10 +139,16 @@ namespace YellowstonePathology.Business.ASCCPRule
             set { this.m_ReflexToHPVGenotypes = value; }
         }
 
-        public string GenotypingResult
+        public string HPV16Result
         {
-            get { return this.m_GenotypingResult; }
-            set { this.m_GenotypingResult = value; }
+            get { return this.m_HPV16Result; }
+            set { this.m_HPV16Result = value; }
+        }
+
+        public string HPV18Result
+        {
+            get { return this.m_HPV18Result; }
+            set { this.m_HPV18Result = value; }
         }
 
         public Business.Cytology.Model.ScreeningImpression ScreeningImpression
@@ -126,5 +168,12 @@ namespace YellowstonePathology.Business.ASCCPRule
             get { return this.m_ManagementRecomendation; }
             set { this.m_ManagementRecomendation = value; }
         }
+
+        public string Reminder
+        {
+            get { return this.m_Reminder; }
+            set { this.m_Reminder = value; }
+        }
+
     }
 }
