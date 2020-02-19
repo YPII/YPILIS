@@ -36,11 +36,12 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Top">                
-                <Button Name="ButtonScan" Margin="2,2,2,2" Height="50" Click="ButtonScan_Click">Scan</Button>                                                
+            <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" Orientation="Vertical">
+                <Button Name="ButtonScan" Margin="2,2,2,2" Height="50" Click="ButtonScan_Click">Scan Req</Button>
             </StackPanel>
 
             <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom">
+                <Button Name="ButtonScanCaseReport" Margin="2,2,2,2" Height="50" Click="ButtonScanCaseReport_Click">Scan Report</Button>
                 <Button Margin="2,2,2,2" Height="50" Click="ButtonPrint_Click">Print</Button>
                 <Button Margin="2,2,2,2" Height="50" Click="ButtonDelete_Click">Delete</Button>
             </StackPanel>

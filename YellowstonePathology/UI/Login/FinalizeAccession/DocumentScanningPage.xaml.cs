@@ -34,8 +34,11 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         private List<Image> m_ImageList;                
         private string m_FileName;
 
+        private bool m_ScanAsCaseTIF;
+
         public DocumentScanningPage(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
+            this.m_ScanAsCaseTIF = false;
             this.m_AccessionOrder = accessionOrder;
             this.m_PageHeaderText = "Master Accession: " + accessionOrder.MasterAccessionNo;
 			this.m_PageScannerCollection = new Business.Common.PageScannerCollection();
@@ -72,10 +75,20 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         {
             IsEnabled = true;
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_AccessionOrder.MasterAccessionNo);            
-            this.m_FileName = YellowstonePathology.Business.Requisition.GetNextFileName(orderIdParser);
+
+            if(this.m_ScanAsCaseTIF == false)
+            {
+                this.m_FileName = YellowstonePathology.Business.Requisition.GetNextFileName(orderIdParser);
+            }
+            else
+            {
+                string reportNo = this.m_AccessionOrder.PanelSetOrderCollection[0].ReportNo;
+                Business.OrderIdParser orderIdParserRN = new Business.OrderIdParser(reportNo);
+                this.m_FileName = YellowstonePathology.Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParserRN);
+            }
+            
             this.NotifyPropertyChanged("FileName");
             YellowstonePathology.Business.Requisition.Save(this.m_FileName, this.m_ImageList);
-            //this.SavePNG();
         }
 
         private void SavePNG()
@@ -189,6 +202,21 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             p.StartInfo = info;
             p.StartInfo.Verb = "print";
             p.Start(); 
-        }        
-	}
+        }
+
+        private void ButtonScanCaseReport_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_ScanAsCaseTIF = true;
+            try
+            {
+                YellowstonePathology.Business.Common.PageScanner pageScanner = this.m_PageScannerCollection.SelectedPageScanner;
+                this.m_Twain.SelectSource(pageScanner.ScannerName);
+                this.m_Twain.StartScanning(pageScanner.ScanSettings);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }         
+        }
+    }
 }

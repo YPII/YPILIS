@@ -28,9 +28,26 @@ namespace YellowstonePathology.Business.Cytology.Model
         {
             bool result = false;
             if (IsDiagnosisASCUS(resultCode) == true) result = true;
-            if (IsDiagnosisAGUS(resultCode) == true) result = true;
+            if (IsDiagnosisAGC(resultCode) == true) result = true;
             if (IsDiagnosisLSIL(resultCode) == true) result = true;
-            if (IsDiagnosisHGSIL(resultCode) == true) result = true;
+            if (IsDiagnosisHSIL(resultCode) == true) result = true;
+            return result;
+        }
+
+        public static bool IsDiagnosisAschAgcHsil(string resultCode)
+        {
+            bool result = false;
+            if (IsDiagnosisASCH(resultCode) == true) result = true;
+            if (IsDiagnosisAGC(resultCode) == true) result = true;            
+            if (IsDiagnosisHSIL(resultCode) == true) result = true;
+            return result;
+        }
+
+        public static bool IsDiagnosisAscusOrLsil(string resultCode)
+        {
+            bool result = false;
+            if (IsDiagnosisASCUS(resultCode) == true) result = true;            
+            if (IsDiagnosisLSIL(resultCode) == true) result = true;            
             return result;
         }
 
@@ -39,7 +56,7 @@ namespace YellowstonePathology.Business.Cytology.Model
             bool result = false;
             if (IsDiagnosisASCUS(resultCode) == true) result = true;            
             if (IsDiagnosisLSIL(resultCode) == true) result = true;
-            if (IsDiagnosisHGSIL(resultCode) == true) result = true;
+            if (IsDiagnosisHSIL(resultCode) == true) result = true;
             return result;
         }
 
@@ -55,7 +72,7 @@ namespace YellowstonePathology.Business.Cytology.Model
         {
             bool result = false;            
             if (IsDiagnosisASCUS(resultCode) == true) result = true;
-            if (IsDiagnosisAGUS(resultCode) == true) result = true;            
+            if (IsDiagnosisAGC(resultCode) == true) result = true;            
             return result;
         }
 
@@ -166,7 +183,7 @@ namespace YellowstonePathology.Business.Cytology.Model
 			return result;
 		}
 
-		public static bool IsDiagnosisHGSIL(string resultCode)
+		public static bool IsDiagnosisHSIL(string resultCode)
 		{
 			bool result = false;
             if (string.IsNullOrEmpty(resultCode) == false)
@@ -180,7 +197,7 @@ namespace YellowstonePathology.Business.Cytology.Model
 			return result;
 		}
 
-		public static bool IsDiagnosisAGUS(string resultCode)
+		public static bool IsDiagnosisAGC(string resultCode)
 		{
 			bool result = false;
             if (string.IsNullOrEmpty(resultCode) == false)
@@ -201,6 +218,20 @@ namespace YellowstonePathology.Business.Cytology.Model
             {
                 int diagnosisPart = Convert.ToInt16(resultCode.Substring(3, 2));
                 if (diagnosisPart > 3 && diagnosisPart <= 11)
+                {
+                    result = true;
+                }
+            }
+            return result;
+        }
+
+        public static bool IsDiagnosisLsilOrHigher(string resultCode)
+        {
+            bool result = false;
+            if (string.IsNullOrEmpty(resultCode) == false)
+            {
+                int diagnosisPart = Convert.ToInt16(resultCode.Substring(3, 2));
+                if (diagnosisPart >= 5 && diagnosisPart <= 11)
                 {
                     result = true;
                 }

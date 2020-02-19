@@ -29,6 +29,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Text="Report No:" />
@@ -61,6 +62,9 @@
                         <ComboBoxItem>2018</ComboBoxItem>
                     </ComboBox>
                     <Button Grid.Column="2" Grid.Row="8" Width="75" Height="25" Margin="2,2,2,2" Click="ButtonCasesWithNotes_Click">Search</Button>
+
+                    <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Text="ASCCP Cases:" />
+                    <Button Grid.Column="2" Grid.Row="9" Width="75" Height="25" Margin="2,2,2,2" Click="ButtonASCCPCases_Click">Search</Button>
 
                 </Grid>
             </TabItem>            

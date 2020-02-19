@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             bool hasPap = this.m_AccessionOrder.PanelSetOrderCollection.Exists(thinPrepPapTest.PanelSetId);
             if (hasPap)
             {
-                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\WomensHealthProfile.1.xml";
+                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\WomensHealthProfile.2.xml";
                 this.OpenTemplate();
                 this.SetCurrentPapResults();
             }
@@ -115,6 +115,17 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 			{
 				this.DeleteRow("Other Conditions");
 				this.DeleteRow("other_conditions");
+			}
+
+			WomensHealthProfileTestOrder womensHealthProfileTestOrder = (WomensHealthProfileTestOrder)this.m_PanelSetOrder;
+			if(string.IsNullOrEmpty(womensHealthProfileTestOrder.ManagementRecommendation) == false)
+			{
+				this.SetXMLNodeParagraphData("management_recommendation", womensHealthProfileTestOrder.ManagementRecommendation);
+			}
+			else
+			{
+				this.DeleteRow("Management Recommendation");
+				this.DeleteRow("management_recommendation");
 			}
 
 			string resultComment = panelSetOrderCytology.ReportComment;

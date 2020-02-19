@@ -68,15 +68,13 @@ namespace YellowstonePathology.Business.Specimen.Model
             return result;
         }
 
-        public static SpecimenCollection GetSkins()
+        public SpecimenCollection GetActive()
         {
             SpecimenCollection result = new SpecimenCollection();
-            result.Add(SpecimenCollection.Instance.GetSpecimen("SKEXOSPCMN")); // new SpecimenDefinition.SkinExcisionOrientedBiopsy());
-            result.Add(SpecimenCollection.Instance.GetSpecimen("SKEXUOSPCMN")); // new SpecimenDefinition.SkinExcisionUnorientedBiopsy());
-            result.Add(SpecimenCollection.Instance.GetSpecimen("SKEXOCSPCMN")); // new SpecimenDefinition.SkinExcisionOrientedwithCurettingsBiopsy());
-            result.Add(SpecimenCollection.Instance.GetSpecimen("SKEXUOCSPCMN")); // new SpecimenDefinition.SkinExcisionUnorientedwithCurettingsBiopsy());
-            result.Add(SpecimenCollection.Instance.GetSpecimen("SKSHPHMSSPCMN")); // new SpecimenDefinition.SkinShavePunchMiscBiopsy());
-            result.Add(SpecimenCollection.Instance.GetSpecimen("SKSHCSPCMN")); // new SpecimenDefinition.SkinShavewithCurettingsBiopsy());            
+            foreach(Specimen specimen in this)
+            {
+                if (specimen.Active == true) result.Add(specimen);
+            }
             return Sort(result);
         }
 

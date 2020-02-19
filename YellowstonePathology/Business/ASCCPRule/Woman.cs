@@ -22,8 +22,9 @@ namespace YellowstonePathology.Business.ASCCPRule
         private string m_HPV16Result;
         private string m_HPV18Result;
 
-        private string m_ManagementRecomendation;
+        private string m_ManagementRecommendation;
         private string m_Reminder;
+        private string m_RuleName;
 
         public Woman()
         {
@@ -41,11 +42,10 @@ namespace YellowstonePathology.Business.ASCCPRule
             this.m_Name = accessionOrder.PatientDisplayName;
             this.m_OrderType = orderTypeCollection.Get(womansHealthProfileTestOrder);
             this.m_Age = YellowstonePathology.Business.Helper.PatientHelper.GetAge(accessionOrder.PBirthdate.Value);
-            this.m_ScreeningImpression = screeningImpressions.Get(panelSetOrderCytology.ResultCode);
+            if(string.IsNullOrEmpty(panelSetOrderCytology.ResultCode) == false) this.m_ScreeningImpression = screeningImpressions.Get(panelSetOrderCytology.ResultCode);
             this.m_SpecimenAdequacy = specimenAdequacies.GetFromPAPResultCode(panelSetOrderCytology.ResultCode);
             this.m_Reactive = Business.Cytology.Model.CytologyResultCode.IsResultCodeReactive(panelSetOrderCytology.ResultCode);
             this.m_ECTZAbsent = Business.Cytology.Model.CytologyResultCode.IsResultCodeTZoneAbsent(panelSetOrderCytology.ResultCode);
-            this.m_ManagementRecomendation = "Unknown";
             
             if(accessionOrder.PanelSetOrderCollection.Exists(14) == true)
             {
@@ -163,16 +163,32 @@ namespace YellowstonePathology.Business.ASCCPRule
             set { this.m_SpecimenAdequacy = value; }
         }
 
-        public string ManagementRecomendation
+        public string ManagementRecommendation
         {
-            get { return this.m_ManagementRecomendation; }
-            set { this.m_ManagementRecomendation = value; }
+            get { return this.m_ManagementRecommendation; }
+            set { this.m_ManagementRecommendation = value; }
         }
 
         public string Reminder
         {
             get { return this.m_Reminder; }
             set { this.m_Reminder = value; }
+        }
+
+        public string RuleName
+        {
+            get { return this.m_RuleName; }
+            set { this.m_RuleName = value; }
+        }
+
+        public bool IsGenotypesPositive()
+        {
+            bool result = false;
+            if(this.m_HPV16Result == "Positive" || this.m_HPV18Result == "Positive")
+            {
+                result = true;
+            }
+            return result;
         }
 
     }

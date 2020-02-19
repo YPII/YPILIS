@@ -17,20 +17,16 @@ namespace YellowstonePathology.Business.Billing.Model
         protected FeeScheduleEnum m_FeeSchedule;
         protected bool m_HasTechnicalComponent;
         protected bool m_HasProfessionalComponent;
-        protected CptCodeModifier m_Modifier;
+        protected string m_Modifier;
         protected bool m_IsBillable;
         protected string m_GCode;
         protected bool m_HasMedicareQuantityLimit;
         protected int m_MedicareQuantityLimit;
         protected CPTCodeTypeEnum m_CodeType;
 
-        protected List<CptCodeModifier> m_Modifiers;
-
-
         public CptCode()
         {            
             this.m_HasMedicareQuantityLimit = false;
-            this.m_Modifiers = new List<CptCodeModifier>();
         }
 
         public string DisplayCode
@@ -40,9 +36,9 @@ namespace YellowstonePathology.Business.Billing.Model
                 string result = this.m_Code;
                 if(this.m_Modifier != null)
                 {
-                    if(string.IsNullOrEmpty(this.m_Modifier.Modifier) == false)
+                    if(string.IsNullOrEmpty(this.m_Modifier) == false)
                     {
-                        result += " - " + this.m_Modifier.Modifier;
+                        result += " - " + this.m_Modifier;
                     }
                 }
                 return result;
@@ -64,7 +60,7 @@ namespace YellowstonePathology.Business.Billing.Model
         }
 
         [PersistentProperty()]
-        public CptCodeModifier Modifier
+        public string Modifier
         {
             get { return this.m_Modifier; }
             set { this.m_Modifier = value; }
@@ -126,17 +122,10 @@ namespace YellowstonePathology.Business.Billing.Model
             set { this.m_MedicareQuantityLimit = value; }
         }
 
-        [PersistentProperty()]
-        public List<CptCodeModifier> Modifiers
-        {
-            get { return this.m_Modifiers; }
-            set { this.m_Modifiers = value; }
-        }
-
         public bool HasBillableProfessionalComponent()
         {
             bool result = true;
-            if (this.Modifier != null && this.Modifier.Modifier == "26") result = true;
+            if (this.Modifier != null && this.Modifier == "26") result = true;
             else if (this.m_HasProfessionalComponent == true)
             {
                 result = true;
@@ -147,7 +136,7 @@ namespace YellowstonePathology.Business.Billing.Model
         public bool HasBillableTechnicalComponent()
         {
             bool result = false;
-            if (this.Modifier != null && this.Modifier.Modifier == "TC") result = true;
+            if (this.Modifier != null && this.Modifier == "TC") result = true;
             else if (this.m_HasTechnicalComponent == true)
             {
                 result = true;
@@ -163,7 +152,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 case BillingComponentEnum.Professional:
                     if (this.m_HasTechnicalComponent == true && this.m_HasProfessionalComponent == true)
                     {
-                        result = YellowstonePathology.Business.Billing.Model.CPTCodeModifier.TwentySix;
+                        result = "26";
                     }
                     else if (this.m_HasTechnicalComponent == false && this.m_HasProfessionalComponent == true)
                     {
@@ -178,7 +167,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 case BillingComponentEnum.Technical:
                     if (this.m_HasTechnicalComponent == true && this.m_HasProfessionalComponent == true)
                     {
-                        result = YellowstonePathology.Business.Billing.Model.CPTCodeModifier.TechnicalComponent;
+                        result = "TC";
                     }
                     else if (this.m_HasTechnicalComponent == true && this.m_HasProfessionalComponent == false)
                     {
@@ -199,17 +188,7 @@ namespace YellowstonePathology.Business.Billing.Model
         public virtual CptCode Clone(CptCode cptCodeIn)
         {
             return (CptCode)cptCodeIn.MemberwiseClone();
-        }
-
-        public virtual void SetModifier(string modifier)
-        {
-            if (string.IsNullOrEmpty(modifier) == false)
-            {
-                CptCodeModifier cptCodeModifier = new CptCodeModifier();
-                cptCodeModifier.Modifier = modifier;
-                this.Modifier = cptCodeModifier;
-            }
-        }
+        }        
 
         public string ToJSON()
         {

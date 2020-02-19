@@ -389,7 +389,12 @@ namespace YellowstonePathology.UI.Test
                 this.m_WomensHealthProfileTestOrder.Finish(this.m_AccessionOrder);
                 this.m_AuditCollection.Run();
                 this.NotifyPropertyChanged("");
-            }                        
+            }      
+            
+            if(this.m_WomensHealthProfileTestOrder.ManagePerASCCP == true || this.m_WomensHealthProfileTestOrder.ManagePerASCCPWithCotest == true)
+            {
+                Business.Logging.EmailExceptionHandler.HandleException("The following ASCCP WHP was finalized: " + this.m_AccessionOrder.MasterAccessionNo);
+            }
         }        
 
         private void HyperLinkUnfinalize_Click(object sender, RoutedEventArgs e)
@@ -459,19 +464,15 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkASCCPCheck_Click(object sender, RoutedEventArgs e)
         {
-            Business.Audit.Model.ASCCPAudit audit = new Business.Audit.Model.ASCCPAudit(this.m_AccessionOrder);
-            audit.Run();
+            Business.ASCCPRule.Woman woman = new Business.ASCCPRule.Woman();
+            woman.FromAccessionOrder(this.m_AccessionOrder);
 
-            if(audit.IsOkToRunAudit == true)
-            {
-                UI.ASCCPWomanViewer asccpWomanViewer = new ASCCPWomanViewer(audit.Woman);
-                asccpWomanViewer.Show();
+            Business.ASCCPRule.RuleCollection ruleCollection = new Business.ASCCPRule.RuleCollection();
+            Business.ASCCPRule.BaseRule matchingRule = ruleCollection.GetMatchingRule(woman);
+            matchingRule.Finalize(woman);
 
-            }
-            else
-            {
-                MessageBox.Show("The Woman's Health Profile needs to be final before running this rule.");
-            }
+            UI.ASCCPWomanViewer asccpWomanViewer = new ASCCPWomanViewer(woman, this.m_WomensHealthProfileTestOrder);
+            asccpWomanViewer.Show();
         }
     }
 }

@@ -192,7 +192,46 @@ namespace YellowstonePathology.Business.Test
             YellowstonePathology.Business.User.SystemIdentity systemIdentity)
         {
             if (string.IsNullOrEmpty(accessionOrder.SpecialInstructions) == false)
-            {                
+            {
+                string asccpManagement = "Test->ThinPrep Pap test screen (acceptable for ages 21 and above) with management of abnormal screening results per ASCCP preferred guidelines";
+                string asccpManagementWithCotest = "Test->ThinPrep Pap with High Risk HPV screen (Co-test, preferred use in ages 30 and above) with management of abnormal screening results per ASCCP preferred guidelines";
+
+                if(accessionOrder.SpecialInstructions.Contains(asccpManagement) == true)
+                {
+                    YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder womensHealthProfileTestOrder = null;
+                    if (this.HasWomensHealthProfileOrder() == false)
+                    {
+                        YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTest womensHealthProfileTest = new YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTest();
+                        string reportNo = accessionOrder.GetNextReportNo(womensHealthProfileTest);
+                        string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                        womensHealthProfileTestOrder = new YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder(accessionOrder.MasterAccessionNo, reportNo, objectId, womensHealthProfileTest, accessionOrder.SpecimenOrderCollection[0], false);
+                        accessionOrder.PanelSetOrderCollection.Add(womensHealthProfileTestOrder);
+                    }
+                    else
+                    {
+                        womensHealthProfileTestOrder = (YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(116);
+                    }
+                    womensHealthProfileTestOrder.ManagePerASCCP = true;
+                }
+
+                if (accessionOrder.SpecialInstructions.Contains(asccpManagementWithCotest) == true)
+                {
+                    YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder womensHealthProfileTestOrder = null;
+                    if (this.HasWomensHealthProfileOrder() == false)
+                    {
+                        YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTest womensHealthProfileTest = new YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTest();
+                        string reportNo = accessionOrder.GetNextReportNo(womensHealthProfileTest);
+                        string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                        womensHealthProfileTestOrder = new YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder(accessionOrder.MasterAccessionNo, reportNo, objectId, womensHealthProfileTest, accessionOrder.SpecimenOrderCollection[0], false);
+                        accessionOrder.PanelSetOrderCollection.Add(womensHealthProfileTestOrder);
+                    }
+                    else
+                    {
+                        womensHealthProfileTestOrder = (YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(116);
+                    }
+                    womensHealthProfileTestOrder.ManagePerASCCPWithCotest = true;
+                }
+
                 string reflexInstruction11A = "Test->Pap Test with High Risk HPV with reflex to HPV 16/18 Genotyping (only if PAP neg/HPV Pos)";
                 string reflexInstruction11B = "Test->HPV Screen with Reflex to 16/18 if HPV positive";
                 string reflexInstruction12 = "Test->Pap Test with High Risk HPV with reflex to HPV Genotyping (only if PAP neg/HPV Pos)";

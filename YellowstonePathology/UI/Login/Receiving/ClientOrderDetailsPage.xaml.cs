@@ -131,7 +131,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
         public YellowstonePathology.Business.Specimen.Model.SpecimenCollection SpecimenCollection
         {
-            get { return YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance; }
+            get { return YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance.GetActive(); }
         }
 
         public string SpecialInstructions

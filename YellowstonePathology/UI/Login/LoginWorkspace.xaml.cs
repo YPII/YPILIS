@@ -285,7 +285,6 @@ namespace YellowstonePathology.UI.Login
         public void GetCase(string masterAccessionNo, string reportNo)
         {
             this.m_LoginUI.GetAccessionOrder(masterAccessionNo, reportNo);
-            this.m_GrossCameraPubSubHandler.CaseAquired(this.m_LoginUI.AccessionOrder);
             this.m_DocumentViewer.ClearContent();
 
             if (string.IsNullOrEmpty(this.m_LoginUI.AccessionOrder.SvhAccount) == false)
@@ -999,7 +998,10 @@ namespace YellowstonePathology.UI.Login
 
         private void ButtonShowCamera_Click(object sender, RoutedEventArgs e)
         {
-            this.m_GrossCameraPubSubHandler.ShowDialog();
+            if(this.m_LoginUI.AccessionOrder != null)
+            {
+                this.m_GrossCameraPubSubHandler.CaseAquired(this.m_LoginUI.AccessionOrder);
+            }
         }
     }
 }

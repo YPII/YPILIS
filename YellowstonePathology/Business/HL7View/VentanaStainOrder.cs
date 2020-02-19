@@ -21,8 +21,8 @@ namespace YellowstonePathology.Business.HL7View
                 Business.Stain.Model.Stain stain = Business.Stain.Model.StainCollection.Instance.GetStainByTestId(slideOrder.TestId);
                 if (slideOrder.PerformedByHand == false || stain.PerformedByHand == false)
                 {
-                    if (slideOrder.OrderSentToVentana == false)
-                    {
+                    //if (slideOrder.OrderSentToVentana == false)
+                    //{
                         if (this.CanBuild(accessionOrder, slideOrder.TestOrderId, slideOrder.SlideOrderId) == true)
                         {
                             string result = this.Build(accessionOrder, slideOrder.TestOrderId, slideOrder.SlideOrderId);
@@ -35,7 +35,7 @@ namespace YellowstonePathology.Business.HL7View
                             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
                             System.IO.File.WriteAllText(@"\\10.1.2.31\ChannelData\Outgoing\Ventana\" + objectId + ".hl7", result);
                         }
-                    }
+                    //}
                 }
                 else
                 {

@@ -311,5 +311,11 @@ namespace YellowstonePathology.UI.Login
                 Window.GetWindow(this).Close();
             }   
         }
+
+        private void ButtonASCCPCases_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListByASCCPCases();
+            Window.GetWindow(this).Close();
+        }
     }
 }

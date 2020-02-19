@@ -23,7 +23,7 @@
         </StackPanel>
 
         <ScrollViewer Grid.Column="0" Grid.Row="1" Margin="10,10,10,10">
-            <TextBox VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Path=SpecimenString}" TextWrapping="Wrap" />
+            <TextBox VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Path=SpecimenString}" TextWrapping="Wrap" AcceptsReturn="True"/>
         </ScrollViewer>
 
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">

@@ -24,10 +24,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         public event OrderPanelSetEventHandler OrderPanelSet;
 
         public delegate void ShowSurgicalDiagnosisEventHandler(object sender, EventArgs e);
-        public event ShowSurgicalDiagnosisEventHandler ShowSurgicalDiagnosis;
-
-        //public delegate void ShowAliquotsAndStainsEventHandler(object sender, EventArgs e);
-        //public event ShowAliquotsAndStainsEventHandler ShowAliquotsAndStains;
+        public event ShowSurgicalDiagnosisEventHandler ShowSurgicalDiagnosis;        
 
         public delegate void ShowSurgicalGrossDescriptionEventHandler(object sender, EventArgs e);
         public event ShowSurgicalGrossDescriptionEventHandler ShowSurgicalGrossDescription;        
@@ -45,10 +42,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         public event CloseEventHandler Close;
 
         public delegate void ShowResultPageEventHandler(object sender, YellowstonePathology.UI.CustomEventArgs.PanelSetOrderReturnEventArgs e);
-        public event ShowResultPageEventHandler ShowResultPage;
-
-        //public delegate void ShowMissingInformationPageEventHandler(object sender, EventArgs e);
-        //public event ShowMissingInformationPageEventHandler ShowMissingInformationPage;
+        public event ShowResultPageEventHandler ShowResultPage;        
 		
 		private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
 		private YellowstonePathology.Business.ClientOrder.Model.ClientOrder m_ClientOrder;		

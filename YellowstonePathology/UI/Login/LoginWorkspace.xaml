@@ -109,7 +109,7 @@
                     <Button Margin="2" Click="ButtonShowCamera_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Resources/Surgical.png" Height="22" Width="22"></Image>
-                            <TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Show Camera</TextBlock>
+                            <TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Show Gross Camera</TextBlock>
                         </StackPanel>
                     </Button>
                 

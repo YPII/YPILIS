@@ -106,10 +106,10 @@ namespace YellowstonePathology.UI.Stain
             string id = this.DetermineStainId();
             if (this.m_Stain.PerformedByHand == false)
             {
-                if (this.m_Stain.VentanaBenchMarkId == null || this.m_Stain.VentanaBenchMarkId.Value == 0)
+                if (String.IsNullOrEmpty(this.m_Stain.VentanaBenchMarkId))
                 {
                     result.Success = false;
-                    result.Message = "The Ventana BenchMark Id must be a number greater than 0.";
+                    result.Message = "The Ventana BenchMark Id cannot be null.";
                 }
             }
 

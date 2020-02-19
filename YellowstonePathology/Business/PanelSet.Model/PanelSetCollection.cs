@@ -15,8 +15,11 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
         public static PanelSetCollection GetAll()
         {
-            PanelSetCollection panelSetCollection = new PanelSetCollection();
-            panelSetCollection.Add(new YellowstonePathology.Business.Test.Electrophoresis.ElectrophoresisTest());
+            PanelSetCollection panelSetCollection = new PanelSetCollection();            
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.IEP.IEPTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.SPEP.SPEPTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.UPEP.UPEPTest());
+
             //NEO
             panelSetCollection.Add(new YellowstonePathology.Business.Test.BCL2ByFISH.BCL2ByFISHTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.PIK3CALDT.PIK3CALDTTest());
@@ -510,7 +513,9 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.SlideTracking.SlideTrackingTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.MaterialRequestForResearch.MaterialRequestForResearchTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest.AuthorizationForVerbalTestRequestTest());
-            panelSetCollection.Add(new YellowstonePathology.Business.Test.Electrophoresis.ElectrophoresisTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.SPEP.SPEPTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.IEP.IEPTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.UPEP.UPEPTest());
             return panelSetCollection;
         }
 

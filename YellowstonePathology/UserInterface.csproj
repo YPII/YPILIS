@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationRevision>45</ApplicationRevision>
     <ApplicationVersion>11.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -212,17 +212,26 @@
     <Compile Include="Business\Amendment.Model\Amendment.cs" />
     <Compile Include="Business\Amendment.Model\AmendmentCollection.cs" />
     <Compile Include="Business\ApplicationVersion.cs" />
+    <Compile Include="Business\ASCCPRule\AbnormalWithCotestSimulation.cs" />
+    <Compile Include="Business\ASCCPRule\AbnormalWithCotestRule.cs" />
     <Compile Include="Business\ASCCPRule\InstructionResult.cs" />
     <Compile Include="Business\ASCCPRule\BaseRule.cs" />
-    <Compile Include="Business\ASCCPRule\NILMECTZAbsentWithCotest.cs" />
+    <Compile Include="Business\ASCCPRule\ManagementRecomendation.cs" />
+    <Compile Include="Business\ASCCPRule\NormalWithCotestSimulation.cs" />
+    <Compile Include="Business\ASCCPRule\NormalWithCotestRule.cs" />
     <Compile Include="Business\ASCCPRule\NoMatchingRule.cs" />
-    <Compile Include="Business\ASCCPRule\Rule2.cs" />
-    <Compile Include="Business\ASCCPRule\RuleFactory.cs" />
-    <Compile Include="Business\ASCCPRule\UnsatWithCotest.cs" />
+    <Compile Include="Business\ASCCPRule\AbnormalRule.cs" />
+    <Compile Include="Business\ASCCPRule\SimulationCollection.cs" />
+    <Compile Include="Business\ASCCPRule\NormalSimulation.cs" />
+    <Compile Include="Business\ASCCPRule\AbnormalSimulation.cs" />
+    <Compile Include="Business\ASCCPRule\UnsatWithCotestSimulation.cs" />
+    <Compile Include="Business\ASCCPRule\UnsatSimulation.cs" />
+    <Compile Include="Business\ASCCPRule\Simulation.cs" />
+    <Compile Include="Business\ASCCPRule\UnsatRuleWithCotest.cs" />
     <Compile Include="Business\ASCCPRule\Woman.cs" />
-    <Compile Include="Business\ASCCPRule\NILMECTZAbsent.cs" />
+    <Compile Include="Business\ASCCPRule\NormalRule.cs" />
     <Compile Include="Business\ASCCPRule\RuleCollection.cs" />
-    <Compile Include="Business\ASCCPRule\Unsat.cs" />
+    <Compile Include="Business\ASCCPRule\UnsatRule.cs" />
     <Compile Include="Business\ASCCPRule\WomanCollection.cs" />
     <Compile Include="Business\Audit.Model\AccessionOrderAudit.cs" />
     <Compile Include="Business\Audit.Model\AccountNoAudit.cs" />
@@ -1124,6 +1133,7 @@
     <Compile Include="Business\ReportDistribution.Model\DepartmentOfHealthHandler.cs" />
     <Compile Include="Business\ReportDistribution.Model\MeditechDistribution.cs" />
     <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerNoWHP.cs" />
+    <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerASCCPHold.cs" />
     <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerWHPHold.cs" />
     <Compile Include="Business\ReportDistribution.Model\PrintDistribution.cs" />
     <Compile Include="Business\Slide.Model\VantageSlide.cs" />
@@ -1174,7 +1184,6 @@
     <Compile Include="Business\Test\EGFRAmplification\EGFRAmplificationTest.cs" />
     <Compile Include="Business\Test\EGFRMutationAnalysisPreliminary\EGFRMutationAnalysisPreliminaryTest.cs" />
     <Compile Include="Business\Test\EGFRToALKReflexAnalysis\EGFRToALKReflexAnalysisBRAFResult.cs" />
-    <Compile Include="Business\Test\Electrophoresis\ElectrophoresisTest.cs" />
     <Compile Include="Business\Test\ErPrSemiQuantitative\ErPrSemiQuantitativeWPHOBXView.cs" />
     <Compile Include="Business\Test\ETV6F\ETV6FTest.cs" />
     <Compile Include="Business\Test\ExtractAndHoldForMolecular\ExtractAndHoldForMolecularTestRetired.cs" />
@@ -1214,6 +1223,7 @@
     <Compile Include="Business\Test\HPV1618\HPV1618WPHOBXView.cs" />
     <Compile Include="Business\Test\HPVRNAISH\HPVRNAISHTest.cs" />
     <Compile Include="Business\Test\HPV\HPVEPICBeakerObxView.cs" />
+    <Compile Include="Business\Test\IEP\IEPTest.cs" />
     <Compile Include="Business\Test\INI1\INI1Test.cs" />
     <Compile Include="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelEPICOBXView.cs" />
     <Compile Include="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelWPHOBXView.cs" />
@@ -1360,6 +1370,7 @@
     <Compile Include="Business\Test\ReticulatedPlateletAnalysisV2\ReticulatedPlateletAnalysisV2WordDocument.cs" />
     <Compile Include="Business\Test\RibosomalRNA16S\RibosomalRNA16STest.cs" />
     <Compile Include="Business\Test\SomatostatinReceptorType2\SomatostatinReceptorType2Test.cs" />
+    <Compile Include="Business\Test\SPEP\SPEPTest.cs" />
     <Compile Include="Business\Test\STAT6\STAT6Test.cs" />
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationTest.cs" />
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationTestOrder.cs" />
@@ -1381,6 +1392,7 @@
     <Compile Include="Business\Test\TP53MutationAnalysis\TP53MutationAnalysisTest.cs" />
     <Compile Include="Business\Test\Trichomonas\TrichomonasEPICBeakerObxView.cs" />
     <Compile Include="Business\Test\Trichomonas\TrichomonasWPHOBXView.cs" />
+    <Compile Include="Business\Test\UPEP\UPEPTest.cs" />
     <Compile Include="Business\Test\VaricellaZosterVirus\VaricellaZosterVirusTest.cs" />
     <Compile Include="Business\Test\WholeExomeSequencing\WholeExomeSequencingTest.cs" />
     <Compile Include="Business\Test\WomensHealthProfile\WomensHealthProfileEPICBeakerObxView.cs" />

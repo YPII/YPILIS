@@ -13,7 +13,12 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             if (accessionOrder.PanelSetOrderCollection.HasWomensHealthProfileOrder() == true)
             {                
                 YellowstonePathology.Business.Domain.Physician physician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(accessionOrder.PhysicianId);
-                if (physician != null && physician.DistributeWHPOnly == true)
+                YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder whpTestOrder = (YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)accessionOrder.PanelSetOrderCollection.GetWomensHealthProfile();
+                if(whpTestOrder.ManagePerASCCP == true || whpTestOrder.ManagePerASCCPWithCotest == true)
+                {
+                    result = new MultiTestDistributionHandlerASCCPHold(accessionOrder);
+                }
+                else if (physician != null && physician.DistributeWHPOnly == true)
                 {
                     result = new MultiTestDistributionHandlerWHPOnly(accessionOrder);
                 }

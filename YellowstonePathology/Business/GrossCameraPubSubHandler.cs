@@ -8,38 +8,22 @@ namespace YellowstonePathology.Business
 {
     public class GrossCameraPubSubHandler
     {
-        private Business.Test.AccessionOrder m_AccessionOrder;
-
         public GrossCameraPubSubHandler()
         {
-            
-        }
 
-        public void ShowDialog()
-        {         
-            YellowstonePathology.Store.RedisServerProd1.Instance.Subscriber.Publish("gross_camera_show_dialog", "Hello");
         }
-
-        public void CloseDialog()
-        {            
-            YellowstonePathology.Store.RedisServerProd1.Instance.Subscriber.Publish("gross_camera_hide_dialog", "Goodbye");
-        }
-
+        
         public void CaseAquired(Business.Test.AccessionOrder accessionOrder)
         {
-            this.m_AccessionOrder = accessionOrder;
-            string message = GetMessage(this.m_AccessionOrder);
-            YellowstonePathology.Store.RedisServerProd1.Instance.Subscriber.Publish("gross_camera_case_aquired", this.GetMessage(accessionOrder));
-        }
-
-        public void CaseReleased()
-        {            
-            YellowstonePathology.Store.RedisServerProd1.Instance.Subscriber.Publish("gross_camera_case_released", "Case Released");
+            if(accessionOrder != null)
+            {
+                string message = GetMessage(accessionOrder);
+                YellowstonePathology.Store.RedisServerProd1.Instance.Subscriber.Publish("gross_camera_case_aquired", this.GetMessage(accessionOrder));
+            }
         }
 
         private string GetMessage(Business.Test.AccessionOrder accessionOrder)
         {
-            /*
             Business.OrderIdParser orderIdParser = new Business.OrderIdParser(accessionOrder.MasterAccessionNo);
             string caseDocumentPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
             caseDocumentPath = caseDocumentPath.Replace(@"\", @"\\");
@@ -52,9 +36,7 @@ namespace YellowstonePathology.Business
             result.Append("\"" + accessionOrder.PatientDisplayName + "\"");
             result.Append(",\"caseDocumentPath\": \"" + caseDocumentPath + "\"");
             result.Append("}");
-            return result.ToString();
-            */
-            return "hello";
+            return result.ToString();    
         }
     }
 }

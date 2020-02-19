@@ -64,7 +64,7 @@ namespace YellowstonePathology.UI.Surgical
             YellowstonePathology.Business.Test.PanelSetOrderCPTCode panelSetOrderCPTCode = this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.GetNextItem(this.m_PanelSetOrder.ReportNo);
             panelSetOrderCPTCode.Quantity = 1;
             panelSetOrderCPTCode.CPTCode = pqrsCode.Code;
-            panelSetOrderCPTCode.Modifier = pqrsCode.Modifier == null ? null : pqrsCode.Modifier.Modifier;
+            panelSetOrderCPTCode.Modifier = pqrsCode.Modifier == null ? null : pqrsCode.Modifier;
             panelSetOrderCPTCode.CodeableDescription = "PQRS Code";
             panelSetOrderCPTCode.CodeableType = "PQRS";
             panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;

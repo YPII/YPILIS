@@ -20,6 +20,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
         private string m_Comment;
         private bool m_ManagePerASCCP;
         private bool m_ManagePerASCCPWithCotest;
+        private string m_ManagementRecommendation;
 
         public WomensHealthProfileTestOrder() 
         {
@@ -205,6 +206,21 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                 {
                     this.m_ManagePerASCCPWithCotest = value;
                     this.NotifyPropertyChanged("ManagePerASCCPWithCotest");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
+        public string ManagementRecommendation
+        {
+            get { return this.m_ManagementRecommendation; }
+            set
+            {
+                if (this.m_ManagementRecommendation != value)
+                {
+                    this.m_ManagementRecommendation = value;
+                    this.NotifyPropertyChanged("ManagementRecomendation");
                 }
             }
         }

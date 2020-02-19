@@ -402,12 +402,15 @@ namespace YellowstonePathology.UI.Billing
             bool result = true;
             if(this.m_SVHClients.Exists(m_AccessionOrder.ClientId) == true)
             {
-                if(string.IsNullOrEmpty(this.m_AccessionOrder.SvhAccount) == true ||
-                    string.IsNullOrEmpty(this.m_AccessionOrder.SvhMedicalRecord) == true)
+                if(this.m_PanelSetOrder.IsMRNACCTRequired() == true)
                 {
-                    result = false;
-                    MessageBox.Show("This case must have the MRN and Account Number before it can be set", "Missing MRN or Account No.");
-                }
+                    if (string.IsNullOrEmpty(this.m_AccessionOrder.SvhAccount) == true ||
+                                        string.IsNullOrEmpty(this.m_AccessionOrder.SvhMedicalRecord) == true)
+                    {
+                        result = false;
+                        MessageBox.Show("This case must have the MRN and Account Number before it can be set", "Missing MRN or Account No.");
+                    }
+                }                
             }
             return result;
         }

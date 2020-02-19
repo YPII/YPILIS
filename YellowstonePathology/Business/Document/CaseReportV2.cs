@@ -392,8 +392,11 @@ namespace YellowstonePathology.Business.Document
         public void DeleteRow(string field)
         {
             XmlNode parentNode = m_ReportXml.SelectSingleNode("descendant::w:tbl[w:tr/w:tc/w:p/w:r/w:t='" + field + "']", this.m_NameSpaceManager);
-            XmlNode childNode = parentNode.SelectSingleNode("descendant::w:tr[w:tc/w:p/w:r/w:t='" + field + "']", this.m_NameSpaceManager);
-            parentNode.RemoveChild(childNode);
+            if(parentNode != null)
+            {
+                XmlNode childNode = parentNode.SelectSingleNode("descendant::w:tr[w:tc/w:p/w:r/w:t='" + field + "']", this.m_NameSpaceManager);
+                parentNode.RemoveChild(childNode);
+            }
         }
 
         public void SaveReport()

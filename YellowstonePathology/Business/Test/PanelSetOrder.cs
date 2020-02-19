@@ -256,6 +256,16 @@ namespace YellowstonePathology.Business.Test
             //not implemented here.
         }
 
+        public bool IsMRNACCTRequired()
+        {
+            bool result = true;
+            if (this.m_HasProfessionalComponent == true && this.m_HasTechnicalComponent == false)
+            {
+                result = false;
+            }
+            return result;
+        }
+
         [PersistentDocumentIdProperty()]
 		[PersistentDataColumnProperty(true, "50", "null", "varchar")]
 		public string ObjectId

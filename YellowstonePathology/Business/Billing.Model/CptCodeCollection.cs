@@ -48,7 +48,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 if (cptCode.Code == code)
                 {
                     CptCode result = cptCode.Clone(cptCode);
-                    result.SetModifier(modifier);
+                    result.Modifier = modifier;
                     this.Add(result);
                     break;
                 }
@@ -63,7 +63,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 if(cptCode.Code == code)
                 {
                     result = cptCode.Clone(cptCode);
-                    result.SetModifier(modifier);
+                    result.Modifier = modifier;
                     break;
                 }
             }

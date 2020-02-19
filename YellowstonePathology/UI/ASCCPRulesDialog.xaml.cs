@@ -22,18 +22,17 @@ namespace YellowstonePathology.UI
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        Business.ASCCPRule.WomanCollection m_WomanCollection;
-        Business.ASCCPRule.Woman m_CurrentWoman;
-        Business.ASCCPRule.RuleCollection m_RuleCollection;
+        Business.ASCCPRule.SimulationCollection m_SimulationCollection;
+        Business.ASCCPRule.Simulation m_CurrentSimulation;
+        Business.ASCCPRule.Woman m_CurrentWoman;        
 
         Business.Cytology.Model.SpecimenAdequacyCollection m_SpecimenAdequacyCollection;
         Business.Cytology.Model.ScreeningImpressionCollection m_ScreeningImpressionCollection;
         Business.Cytology.Model.OrderTypeCollection m_OrderTypeCollection;
 
         public ASCCPRulesDialog()
-        {
-            this.m_RuleCollection = new Business.ASCCPRule.RuleCollection();
-            this.m_WomanCollection = new Business.ASCCPRule.WomanCollection();
+        {            
+            this.m_SimulationCollection = new Business.ASCCPRule.SimulationCollection();
             this.m_OrderTypeCollection = new Business.Cytology.Model.OrderTypeCollection();
             this.m_SpecimenAdequacyCollection = Business.Gateway.AccessionOrderGateway.GetSpecimenAdequacy();
             this.m_ScreeningImpressionCollection = Business.Gateway.AccessionOrderGateway.GetScreeningImpressions();            
@@ -42,9 +41,9 @@ namespace YellowstonePathology.UI
             this.DataContext = this;            
         }
 
-        public Business.ASCCPRule.RuleCollection RuleCollection
+        public Business.ASCCPRule.SimulationCollection SimulationCollection
         {
-            get { return this.m_RuleCollection; }
+            get { return this.m_SimulationCollection; }
         }
 
         public Business.Cytology.Model.OrderTypeCollection OrderTypeCollection
@@ -64,6 +63,19 @@ namespace YellowstonePathology.UI
             set { this.m_SpecimenAdequacyCollection = value; }
         }
 
+        public Business.ASCCPRule.Simulation CurrentSimulation
+        {
+            get { return this.m_CurrentSimulation; }
+            set
+            {
+                if (this.m_CurrentSimulation != value)
+                {
+                    this.m_CurrentSimulation = value;
+                    this.NotifyPropertyChanged("CurrentSimulation");
+                }
+            }
+        }
+
         public Business.ASCCPRule.Woman CurrentWoman
         {
             get { return this.m_CurrentWoman; }
@@ -75,12 +87,7 @@ namespace YellowstonePathology.UI
                     this.NotifyPropertyChanged("CurrentWoman");
                 }                
             }
-        }
-
-        public Business.ASCCPRule.WomanCollection WomanCollection
-        {
-            get { return this.m_WomanCollection; }
-        }
+        }        
 
         public void NotifyPropertyChanged(String info)
         {
@@ -92,10 +99,10 @@ namespace YellowstonePathology.UI
 
         private void ButtonCreateWoman_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ComboBoxRules.SelectedItem != null)
+            if (this.ComboBoxSimulation.SelectedItem != null)
             {
-                Business.ASCCPRule.BaseRule rule = (Business.ASCCPRule.BaseRule)this.ComboBoxRules.SelectedItem;
-                this.m_WomanCollection = rule.RunSimulation();
+                this.m_CurrentSimulation = (Business.ASCCPRule.Simulation)this.ComboBoxSimulation.SelectedItem;
+                this.m_CurrentSimulation.Run();
                 this.NotifyPropertyChanged(string.Empty);
             }
         }

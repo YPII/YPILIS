@@ -15,7 +15,8 @@ namespace YellowstonePathology.Business.Cytology.Model
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string m_ResultCode;
-        private string m_Description;        
+        private string m_Description;
+        private string m_Abbreviation;
 
         public SpecimenAdequacy()
         {  
@@ -46,6 +47,20 @@ namespace YellowstonePathology.Business.Cytology.Model
                 {
                     this.m_Description = value;
                     this.NotifyPropertyChanged("Description");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string Abbreviation
+        {
+            get { return this.m_Abbreviation; }
+            set
+            {
+                if (this.m_Abbreviation != value)
+                {
+                    this.m_Abbreviation = value;
+                    this.NotifyPropertyChanged("Abbreviation");
                 }
             }
         }

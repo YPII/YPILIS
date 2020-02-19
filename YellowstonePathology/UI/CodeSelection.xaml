@@ -36,7 +36,7 @@
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>
 					<GridViewColumn DisplayMemberBinding="{Binding Path=CptCode.Code}" Header="Code" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=CptCode.Modifier.Modifier}" Header="Modifier" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CptCode.Modifier}" Header="Modifier" Width="100"/>
                 </GridView>
 			</ListView.View>
 		</ListView>

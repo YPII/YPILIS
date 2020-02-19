@@ -27,8 +27,8 @@ namespace YellowstonePathology.Business.Stain.Model
         private string m_GCode;
         private string m_SubsequentGCode;
         private string m_VentanaBenchMarkWetProtocolName;
-        private int? m_VentanaBenchMarkId;
-        private int? m_VentanaBenchMarkWetId;
+        private string m_VentanaBenchMarkId;
+        private string m_VentanaBenchMarkWetId;
         private int m_StainResultGroupId;
         private bool m_IsBillable;
         private bool m_HasGCode;
@@ -286,7 +286,7 @@ namespace YellowstonePathology.Business.Stain.Model
             }
         }
 
-        public int? VentanaBenchMarkId
+        public string VentanaBenchMarkId
         {
             get { return this.m_VentanaBenchMarkId; }
             set
@@ -299,7 +299,7 @@ namespace YellowstonePathology.Business.Stain.Model
             }
         }
 
-        public int? VentanaBenchMarkWetId
+        public string VentanaBenchMarkWetId
         {
             get { return this.m_VentanaBenchMarkWetId; }
             set

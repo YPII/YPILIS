@@ -45,6 +45,11 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     papTest.AppendLine("Comment: " + panelSetOrderCytology.ReportComment);
                 }
 
+                if (string.IsNullOrEmpty(womensHealthProfileTestOrder.ManagementRecommendation) == false)
+                {
+                    papTest.AppendLine("Management Recommendation: " + womensHealthProfileTestOrder.ManagementRecommendation);
+                }
+
                 YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology screeningPanelOrder = null;
                 YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology reviewPanelOrder = null;
 

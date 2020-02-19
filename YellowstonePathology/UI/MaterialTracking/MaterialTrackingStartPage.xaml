@@ -79,13 +79,6 @@
 
 
                 <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2">Location Billings</TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2">
-				    <Hyperlink Click="HyperlinkSendMaterialToDrClegg_Click">Send Material to Dr. Clegg</Hyperlink>
-                </TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2">
-				    <Hyperlink Click="HyperlinkReceiveMaterialFromDrClegg_Click">Receive Material From Dr. Clegg</Hyperlink>
-                </TextBlock>
-
                 <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2">
 				    <Hyperlink Click="HyperlinkSendMaterialToDrKurtzman_Click">Send Material to Dr. Kurtzman</Hyperlink>
                 </TextBlock>
@@ -101,11 +94,12 @@
                 </TextBlock>
 
                 <TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,2">
-				    <Hyperlink Click="HyperlinkSendMaterialToDrMatthews_Click">Send Material to Dr. Matthews</Hyperlink>
+				    <Hyperlink Click="HyperlinkSendMaterialToNeo_Click">Send Material to Neo</Hyperlink>
                 </TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="15" Margin="2,2,2,2">
-				    <Hyperlink Click="HyperlinkReceiveMaterialFromDrMatthews_Click">Receive Material From Dr. Matthews</Hyperlink>
+				    <Hyperlink Click="HyperlinkReceiveMaterialFromNeo_Click">Receive Material From Neo</Hyperlink>
                 </TextBlock>
+                
                 <TextBlock Grid.Column="0" Grid.Row="17" Margin="2,2,2,2">
 				    <Hyperlink Click="HyperlinkSendMaterialToOnsiteStorage_Click">Send material to onsite storage</Hyperlink>
                 </TextBlock>

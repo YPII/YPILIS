@@ -11,12 +11,13 @@ namespace YellowstonePathology.Business.ASCCPRule
     {
         public RuleCollection()
         {
-            this.Add(new Unsat());
-            this.Add(new UnsatWithCotest());
-            this.Add(new NILMECTZAbsent());
-            this.Add(new NILMECTZAbsentWithCotest());
-            this.Add(new Rule2());
-            this.Add(new NoMatchingRule());
+            this.Add(new UnsatRule());
+            this.Add(new UnsatRuleWithCotest());
+            this.Add(new NormalRule());
+            this.Add(new NormalWithCotestRule());
+            this.Add(new AbnormalRule());
+            this.Add(new AbnormalWithCotestRule());
+            this.Add(new NoMatchingRule());            
         }  
 
         public BaseRule GetNoMatchingRule()
@@ -34,26 +35,20 @@ namespace YellowstonePathology.Business.ASCCPRule
             return result;
         }
         
-        public BaseRule GetMatchingRule()
+        public BaseRule GetMatchingRule(Woman woman)
         {
             BaseRule result = null;
             foreach(BaseRule rule in this)
             {
-                if(rule.IsMatch == true)
+                if(rule.IsMatch(woman) == true)
                 {
                     result = rule;
+                    woman.RuleName = rule.Description;
+                    woman.RuleIsMatch = true;
                     break;
                 }
-            }            
-            
-            if(result == null)
-            {
-                return this.GetNoMatchingRule();
             }
-            else
-            {
-                return result;
-            }            
+            return result;
         }
     }
 }

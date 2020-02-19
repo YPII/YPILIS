@@ -102,7 +102,7 @@ namespace YellowstonePathology.UI.Login
 
         public YellowstonePathology.Business.Specimen.Model.SpecimenCollection SpecimenCollection
         {
-            get { return YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance; }
+            get { return YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance.GetActive(); }
         }
 
 		public string PageHeaderText

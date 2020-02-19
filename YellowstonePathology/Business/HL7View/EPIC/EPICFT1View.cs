@@ -96,7 +96,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 
             if(this.m_CptCode.Modifier != null)
             {
-                XElement ft126Element = new XElement("FT1.26", this.m_CptCode.Modifier.Modifier);
+                XElement ft126Element = new XElement("FT1.26", this.m_CptCode.Modifier);
                 ft1Element.Add(ft126Element);
             }            
         }

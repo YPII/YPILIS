@@ -28,24 +28,26 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TextBlock Margin="2,2,2,2" Grid.Column="0" Grid.Row="0">Order Type:</TextBlock>
-            <ComboBox Name="ComboBoxRules" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=RuleCollection}" DisplayMemberPath="Description" Margin="2,2,2,2"></ComboBox>
+            <TextBlock Margin="2,2,2,2" Grid.Column="0" Grid.Row="0">Simulation:</TextBlock>
+            <ComboBox Name="ComboBoxSimulation" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=SimulationCollection}" DisplayMemberPath="Rule.Description" Margin="2,2,2,2"></ComboBox>
 
             <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Click="ButtonCreateWoman_Click" Width="100" Height="60" Margin="2,2,2,2">Run Sim</Button>
         </Grid>
 
         <ListView Name="ListViewWoman" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" 
-							 ItemsSource="{Binding Path=WomanCollection}" SelectionChanged="ListViewWoman_SelectionChanged">
+							 ItemsSource="{Binding Path=CurrentSimulation.WomanCollection}" SelectionChanged="ListViewWoman_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Age" Width="60" DisplayMemberBinding="{Binding Path=Age}"/>
-                    <GridViewColumn Header="Specimen Adequacy" Width="250" DisplayMemberBinding="{Binding Path=SpecimenAdequacy.Description}"/>
                     <GridViewColumn Header="Cotesting" Width="60" DisplayMemberBinding="{Binding Path=Cotesting}"/>
-                    <GridViewColumn Header="Screening Impression" Width="250" DisplayMemberBinding="{Binding Path=ScreeningImpression.Description}"/>
+                    <GridViewColumn Header="EC/TZ Absent" Width="100" DisplayMemberBinding="{Binding Path=ECTZAbsent}"/>
+                    <GridViewColumn Header="Specimen Adequacy" Width="150" DisplayMemberBinding="{Binding Path=SpecimenAdequacy.Abbreviation}"/>
+                    <GridViewColumn Header="Screening Impression" Width="150" DisplayMemberBinding="{Binding Path=ScreeningImpression.Abbreviation}"/>
                     <GridViewColumn Header="Perform HPV" Width="100" DisplayMemberBinding="{Binding Path=PerformHPV}"/>
                     <GridViewColumn Header="HPV Result" Width="100" DisplayMemberBinding="{Binding Path=HPVResult}"/>
                     <GridViewColumn Header="Reflext to Genotyping" Width="120" DisplayMemberBinding="{Binding Path=ReflexToHPVGenotypes}"/>
-                    <GridViewColumn Header="Genotyping Result" Width="120" DisplayMemberBinding="{Binding Path=GenotypingResult}"/>
+                    <GridViewColumn Header="HPV 16 Result" Width="120" DisplayMemberBinding="{Binding Path=HPV16Result}"/>
+                    <GridViewColumn Header="HPV 18 Result" Width="120" DisplayMemberBinding="{Binding Path=HPV18Result}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -96,11 +98,14 @@
             <TextBlock Grid.Column="0" Grid.Row="7" Text="Reflex to Genotyping: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding Path=CurrentWoman.ReflexToHPVGenotypes}" Margin="2,2,2,2"></TextBlock>
 
-            <TextBlock Grid.Column="0" Grid.Row="8" Text="Genotyping Result: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding Path=CurrentWoman.GenotypingResult}" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="8" Text="HPV 16 Result: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding Path=CurrentWoman.HPV16Result}" Margin="2,2,2,2"></TextBlock>
 
-            <TextBlock Grid.Column="0" Grid.Row="9" Text="Management Recomendation: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding Path=CurrentWoman.ManagementRecomendation}" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="9" Text="HPV 18 Result: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding Path=CurrentWoman.HPV18Result}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="10" Text="Management Recomendation: " FontWeight="Bold" Margin="2,2,2,2"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="10" Text="{Binding Path=CurrentWoman.ManagementRecomendation}" TextWrapping="Wrap" Margin="2,2,2,2"></TextBlock>
         </Grid>
 
     </Grid>

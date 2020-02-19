@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YellowstonePathology.Business.Test.Electrophoresis
+namespace YellowstonePathology.Business.Test.UPEP
 {
-    public class ElectrophoresisTest : YellowstonePathology.Business.PanelSet.Model.PanelSet
+    public class UPEPTest : YellowstonePathology.Business.PanelSet.Model.PanelSet
     {
-        public ElectrophoresisTest()
+        public UPEPTest()
         {
-            this.m_PanelSetId = 377;
-            this.m_PanelSetName = "Electrophoresis";
-            this.m_Abbreviation = "Electrophoresis";
+            this.m_PanelSetId = 380;
+            this.m_PanelSetName = "Urine Protein Electrophoresis";
+            this.m_Abbreviation = "UPEP";
             this.m_CaseType = YellowstonePathology.Business.CaseType.Surgical;
-            this.m_HasTechnicalComponent = true;
+            this.m_HasTechnicalComponent = false;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
@@ -27,12 +27,11 @@ namespace YellowstonePathology.Business.Test.Electrophoresis
             this.m_ExpectedDuration = TimeSpan.FromDays(6);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
-
-            YellowstonePathology.Business.Facility.Model.Facility svh = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("STVNCNT");
+            
             YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
-            this.m_TechnicalComponentFacility = svh;
-            this.m_TechnicalComponentBillingFacility = svh;
+            YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("84165", "26"), 1);
+            this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);            
 
             this.m_ProfessionalComponentFacility = ypi;
             this.m_ProfessionalComponentBillingFacility = ypi;            

@@ -55,7 +55,14 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     this.AddNextObxElement("", document, "F");
                 }
 
-                YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology screeningPanelOrder = null;
+				if (string.IsNullOrEmpty(womensHealthProfileTestOrder.ManagementRecommendation) == false)
+				{
+					this.AddNextObxElement("Management Recommendation:", document, "F");
+					this.HandleLongString(womensHealthProfileTestOrder.ManagementRecommendation, document, "F");
+					this.AddNextObxElement("", document, "F");					
+				}
+
+				YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology screeningPanelOrder = null;
                 YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology reviewPanelOrder = null;
 
                 foreach (YellowstonePathology.Business.Interface.IPanelOrder panelOrder in panelSetOrderCytology.PanelOrders)

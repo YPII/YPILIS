@@ -24,6 +24,7 @@ namespace YellowstonePathology.Business.Specimen.Model
         protected string m_LabFixation;        
         protected string m_ProcessorRunId;
         protected bool m_RequiresGrossExamination;
+        protected bool m_Active;
         
 
         public Specimen()
@@ -98,6 +99,13 @@ namespace YellowstonePathology.Business.Specimen.Model
         {
             get { return this.m_ProcessorRunId; }
             set { this.m_ProcessorRunId = value; }
+        }
+
+        [PersistentProperty()]
+        public bool Active
+        {
+            get { return this.m_Active; }
+            set { this.m_Active = value; }
         }
 
         public string ToJSON()

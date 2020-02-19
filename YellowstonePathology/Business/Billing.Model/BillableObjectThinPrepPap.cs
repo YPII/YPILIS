@@ -125,11 +125,11 @@ namespace YellowstonePathology.Business.Billing.Model
             {                
                 icd10Code = "R87.612";
             }
-            else if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisHGSIL(resultCode) == true)
+            else if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisHSIL(resultCode) == true)
             {             
                 icd10Code = "R87.613";
             }
-            else if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisAGUS(resultCode) == true)
+            else if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisAGC(resultCode) == true)
             {                
                 icd10Code = "R87.619";
             }            
@@ -171,7 +171,7 @@ namespace YellowstonePathology.Business.Billing.Model
 				panelSetOrderCPTCode.Quantity = 1;
 				panelSetOrderCPTCode.CPTCode = cptCode.Code;
                 panelSetOrderCPTCode.CodeType = cptCode.CodeType.ToString();
-				panelSetOrderCPTCode.Modifier = cptCode.Modifier == null ? null : cptCode.Modifier.Modifier;
+				panelSetOrderCPTCode.Modifier = cptCode.Modifier == null ? null : cptCode.Modifier;
 				panelSetOrderCPTCode.CodeableDescription = "Primary Screening (" + panelOrderCytology.ScreenedByName + ")";
 				panelSetOrderCPTCode.CodeableType = "CytologyPrimaryScreening";
 				panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;

@@ -106,6 +106,16 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.NothingToPublishReport).AssemblyQualifiedName;
 		}
 
+        public bool IsMRNACCTRequired()
+        {
+            bool result = true;
+            if(this.m_HasProfessionalComponent == true && this.m_HasTechnicalComponent == false)
+            {                                
+                result = false;                
+            }
+            return result;
+        }
+
         public List<string> ImplementedResultTypes
         {
             get { return this.m_ImplementedResultTypes; }

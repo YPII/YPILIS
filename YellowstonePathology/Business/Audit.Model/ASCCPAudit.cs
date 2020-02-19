@@ -19,30 +19,7 @@ namespace YellowstonePathology.Business.Audit.Model
 
         public override void Run()
         {
-            Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder womansHealthProfileTestOrder = (Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetWomensHealthProfile();
-            if(womansHealthProfileTestOrder.Final == true)
-            {
-                this.m_IsOkToRunAudit = true;
-                Business.Cytology.Model.OrderTypeCollection orderTypeCollection = new Cytology.Model.OrderTypeCollection();
-                this.m_Woman = new ASCCPRule.Woman();
-                this.m_Woman.FromAccessionOrder(this.m_AccessionOrder);
-
-                if(this.m_Woman.OrderType != null)
-                {
-                    Business.ASCCPRule.BaseRule baseRule = Business.ASCCPRule.RuleFactory.GetUnsatRule(this.m_Woman);
-                    baseRule.FinalizePap(this.m_Woman);
-                    baseRule.FinalizeHPV(this.m_Woman);
-                    baseRule.FinalizeGenotyping(this.m_Woman);
-                }
-                else
-                {
-                    this.m_Woman.RuleIsMatch = false;
-                }
-            }
-            else
-            {
-                this.m_IsOkToRunAudit = false;
-            }
+            
         }
 
         public bool IsOkToRunAudit
