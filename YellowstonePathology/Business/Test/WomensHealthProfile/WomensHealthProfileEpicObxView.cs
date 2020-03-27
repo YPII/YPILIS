@@ -205,6 +205,11 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 			this.HandleLongString(womensHealthProfileResult.References, document, "F");
 			this.AddNextObxElement("", document, "F");
 
+			string papStmt = "This Pap test is only a screening test. A negative result does not definitively rule out the presence of disease. Women should, therefore, in consultation with their physician, have this test performed at mutually agreed intervals.";
+			this.HandleLongString(papStmt, document, "F");
+			this.AddNextObxElement("", document, "F");
+
+
 			string locationPerformed = womensHealthProfileTestOrder.GetLocationPerformedComment();
 			this.HandleLongString(locationPerformed, document, "F");
 			this.AddNextObxElement(string.Empty, document, "F");

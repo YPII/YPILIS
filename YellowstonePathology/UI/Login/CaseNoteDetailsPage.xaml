@@ -27,6 +27,7 @@
 
             <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" Text="Category:" />
             <ComboBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Text="{Binding Path=OrderCommentLog.Category}">
+                <ComboBoxItem>General</ComboBoxItem>
                 <ComboBoxItem>Quality Improvement</ComboBoxItem>
             </ComboBox>
             <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" Text="Comment:" />

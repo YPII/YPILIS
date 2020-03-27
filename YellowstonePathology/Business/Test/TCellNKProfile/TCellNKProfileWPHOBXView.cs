@@ -34,12 +34,6 @@ namespace YellowstonePathology.Business.Test.TCellNKProfile
             this.AddNextObxElement("NK cells Absolute Count: " + panelSetOrder.CD16CD56NKCount, document, "F");
 
             this.AddNextObxElement("", document, "F");
-            this.AddNextObxElement("Pathologist: " + panelSetOrder.Signature, document, "F");
-            if (panelSetOrder.FinalTime.HasValue == true)
-            {
-                this.AddNextObxElement("E-signed " + panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
-            }
-            this.AddNextObxElement("", document, "F");
             this.AddAmendments(document);
 
             this.AddNextObxElement("", document, "F");

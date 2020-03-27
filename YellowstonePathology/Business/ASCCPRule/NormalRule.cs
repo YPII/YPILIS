@@ -36,10 +36,12 @@ namespace YellowstonePathology.Business.ASCCPRule
         {                        
             if (woman.Age >= 30 && woman.ECTZAbsent == true)
             {
+                // Seen this one
                 woman.PerformHPV = true;
             }
             else
             {
+                // Seen this one
                 woman.PerformHPV = false;
                 woman.ReflexToHPVGenotypes = false;
                 woman.ManagementRecommendation = ManagementRecomendation.GetRoutineScreening();
@@ -56,6 +58,7 @@ namespace YellowstonePathology.Business.ASCCPRule
                 }
                 else if(woman.HPVResult == "Negative")
                 {
+                    // Seen this one
                     woman.ReflexToHPVGenotypes = false;
                     woman.ManagementRecommendation = ManagementRecomendation.GetRoutineScreening();
                 }                
@@ -71,8 +74,8 @@ namespace YellowstonePathology.Business.ASCCPRule
                     woman.ManagementRecommendation = ManagementRecomendation.GetColposcopy();
                 }
                 else
-                {
-                    woman.ManagementRecommendation = ManagementRecomendation.GetRepeatIn1Year();
+                {                    
+                    woman.ManagementRecommendation = ManagementRecomendation.GetRepeatInOneYear(woman.OrderType.OrderCode);
                 }
             }
         }

@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
 
             this.AddNextObxElement(string.Empty, document, "F");
 
-            this.AddNextObxElement("Other Conditions:", document, "F");
+            this.HandleLongString("Other Conditions:", document, "F");
             string otherConditions = panelSetOrderCytology.OtherConditions;
             if (string.IsNullOrEmpty(otherConditions) == true)
             {
@@ -54,14 +54,22 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             this.AddNextObxElement(panelSetOrderCytology.SpecimenAdequacy, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
-            this.AddNextObxElement("Comment:", document, "F");
+            this.HandleLongString("Comment:", document, "F");
             string reportComment = panelSetOrderCytology.ReportComment;
             if (string.IsNullOrEmpty(reportComment) == false)
             {
                 this.HandleLongString(reportComment, document, "F");
                 this.AddNextObxElement(string.Empty, document, "F");
-            }                      
-                    
+            }
+
+            this.HandleLongString("Clinical History:", document, "F");
+            string clinicalHistory = this.m_AccessionOrder.ClinicalHistory;
+            if (string.IsNullOrEmpty(clinicalHistory) == false)
+            {
+                this.HandleLongString(clinicalHistory, document, "F");
+                this.AddNextObxElement(string.Empty, document, "F");
+            }
+
             this.AddNextObxElement(string.Empty, document, "F");            
 
             this.AddNextObxElement("Finaled By: " + panelSetOrderCytology.Signature, document, "F");
@@ -72,20 +80,20 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             this.AddNextObxElement(string.Empty, document, "F");
             this.AddAmendments(document);
 
-            this.AddNextObxElement("Screening Method: ", document, "F");
+            this.HandleLongString("Screening Method: ", document, "F");
             this.AddNextObxElement(panelSetOrderCytology.Method, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
-            this.AddNextObxElement("References: ", document, "F");
+            this.HandleLongString("References: ", document, "F");
             this.AddNextObxElement(panelSetOrderCytology.ReportReferences, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
             string disclaimer = "This Pap test is only a screening test. A negative result does not definitively rule out the presence of disease. Women should, therefore, in consultation with their physician, have this test performed at mutually agreed intervals.";            
-            this.AddNextObxElement(disclaimer, document, "F");
+            this.HandleLongString(disclaimer, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
             string locationPerformed = panelSetOrderCytology.GetLocationPerformedComment();
-            this.AddNextObxElement(locationPerformed, document, "F");
+            this.HandleLongString(locationPerformed, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 		}        		
 	}

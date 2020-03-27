@@ -39,7 +39,7 @@ namespace YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2
             this.AddAmendments(document);
 
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
-            this.AddNextObxElement("Specimen Description: " + specimenOrder.Description, document, "F");
+            this.HandleLongString("Specimen Description: " + specimenOrder.Description, document, "F");
             this.AddNextObxElement("", document, "F");
 
             this.AddNextObxElement("Method", document, "F");

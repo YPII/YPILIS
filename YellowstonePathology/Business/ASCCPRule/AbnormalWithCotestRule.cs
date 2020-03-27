@@ -36,7 +36,7 @@ namespace YellowstonePathology.Business.ASCCPRule
                 if (woman.ScreeningImpression.ResultCode == "03" ||
                     woman.ScreeningImpression.ResultCode == "05")
                 {                    
-                    woman.ManagementRecommendation = ManagementRecomendation.GetRepeatIn1Year();
+                    woman.ManagementRecommendation = ManagementRecomendation.GetRepeatInOneYear(woman.OrderType.OrderCode);
                 }
                 else if (woman.ScreeningImpression.ResultCode == "04" ||
                     woman.ScreeningImpression.ResultCode == "07" ||

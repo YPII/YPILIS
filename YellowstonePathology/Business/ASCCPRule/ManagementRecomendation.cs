@@ -28,11 +28,22 @@ namespace YellowstonePathology.Business.ASCCPRule
         public static string GetColposcopy()
         {
             return BASECOMMENT.Replace("*RECOMMENDATION*", "colposcopy");
-        }
+        }        
 
-        public static string GetRepeatIn1Year()
+        public static string GetRepeatInOneYear(string orderType)
         {
-            return BASECOMMENT.Replace("*RECOMMENDATION*", "repeat cytology in 1 year");
+            if(orderType == "10")
+            {
+                return BASECOMMENT.Replace("*RECOMMENDATION*", "repeat cytology in one year");
+            }
+            else if(orderType == "11")
+            {
+                return BASECOMMENT.Replace("*RECOMMENDATION*", "repeat cotesting in one year");
+            }
+            else
+            {
+                throw new Exception("Order Type Not Handled: " + orderType);
+            }
         }
     }
 }

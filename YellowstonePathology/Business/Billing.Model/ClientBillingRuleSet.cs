@@ -63,6 +63,16 @@ namespace YellowstonePathology.Business.Billing.Model
             billingRule4.BillingType = BillingTypeEnum.Global;
             this.m_BillingRuleCollection.Add(billingRule4);
 
+            BillingRule billingRule41 = new BillingRule();
+            billingRule41.BillingRuleSetId = this.m_BillingRuleSetId;
+            billingRule41.Priority = 4;
+            billingRule41.PatientType = new RuleValueAny();
+            billingRule41.PrimaryInsurance = new RuleValueString("Governmental");
+            billingRule41.SecondaryInsurance = new RuleValueAny();
+            billingRule41.PostDischarge = new RuleValueAny();
+            billingRule41.BillingType = BillingTypeEnum.Global;
+            this.m_BillingRuleCollection.Add(billingRule41);
+
             BillingRule billingRule5 = new BillingRule();
             billingRule5.BillingRuleSetId = this.m_BillingRuleSetId;
             billingRule5.Priority = 5;            
@@ -91,17 +101,7 @@ namespace YellowstonePathology.Business.Billing.Model
             billingRule7.SecondaryInsurance = new RuleValueString("Medicaid");
             billingRule7.PostDischarge = new RuleValueAny();
             billingRule7.BillingType = BillingTypeEnum.Global;
-            this.m_BillingRuleCollection.Add(billingRule7);
-
-            //this.m_BillingRuleCollection.Add(new BillingRule("CLNT", 0, "Any", "Any", "Any", "Any", YellowstonePathology.Business.Billing.Model.BillingTypeEnum.Client, "All Codes", allCptCodes));
-            //this.m_BillingRuleCollection.Add(new BillingRule("CLNT", 1, "Any", "Commercial", "Any", "Any", YellowstonePathology.Business.Billing.Model.BillingTypeEnum.Global, "All Codes", allCptCodes));
-            //this.m_BillingRuleCollection.Add(new BillingRule("CLNT", 2, "Any", "BCHP", "Any", "Any", YellowstonePathology.Business.Billing.Model.BillingTypeEnum.Global, "All Codes", allCptCodes));
-            //this.m_BillingRuleCollection.Add(new BillingRule("CLNT", 3, "Any", "Medicare", "Any", "Any", YellowstonePathology.Business.Billing.Model.BillingTypeEnum.Global, "All Codes", allCptCodes));
-            //this.m_BillingRuleCollection.Add(new BillingRule("CLNT", 4, "Any", "Medicaid", "Any", "Any", YellowstonePathology.Business.Billing.Model.BillingTypeEnum.Global, "All Codes", allCptCodes));
-            //this.m_BillingRuleCollection.Add(new BillingRule("CLNT", 5, "Any", "Any", "BCHP", "Any", YellowstonePathology.Business.Billing.Model.BillingTypeEnum.Global, "All Codes", allCptCodes));
-            //this.m_BillingRuleCollection.Add(new BillingRule("CLNT", 6, "Any", "Any", "Medicare", "Any", YellowstonePathology.Business.Billing.Model.BillingTypeEnum.Global, "All Codes", allCptCodes));                        
-            //this.m_BillingRuleCollection.Add(new BillingRule("CLNT", 7, "Any", "Any", "Medicaid", "Any", YellowstonePathology.Business.Billing.Model.BillingTypeEnum.Global, "All Codes", allCptCodes));
-            
+            this.m_BillingRuleCollection.Add(billingRule7);            
         }
     }
 }

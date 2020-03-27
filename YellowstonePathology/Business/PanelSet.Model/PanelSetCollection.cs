@@ -20,7 +20,12 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.SPEP.SPEPTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.UPEP.UPEPTest());
 
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.JAK29P241.JAK29P241Test());
+            panelSetCollection.Add(new Business.Test.ElaneSequenceAnalysis.ElaneSequenceAnalysisTest());
             //NEO
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.BRCA12MutationAnalysis.BRCA12MutationAnalysisTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.NeoTYPEHeadAndNeckTumorProfile.NeoTYPEHeadAndNeckTumorProfileTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.TPS63Rearrangement.TPS63RearrangementTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.BCL2ByFISH.BCL2ByFISHTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.PIK3CALDT.PIK3CALDTTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.STAT6.STAT6Test());

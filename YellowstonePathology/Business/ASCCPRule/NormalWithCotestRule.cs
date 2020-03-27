@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.ASCCPRule
     {        
         public NormalWithCotestRule()
         {            
-            this.m_Description = "Normal Cytology - with cotest";            
+            this.m_Description = "Normal Cytology - with cotest";
         }
 
         public override bool IsMatch(Woman woman)
@@ -42,7 +42,7 @@ namespace YellowstonePathology.Business.ASCCPRule
         {            
             if(woman.PerformHPV == true)
             {
-                if (woman.Age >= 30 && woman.ECTZAbsent == true && woman.HPVResult == "Positive")
+                if (woman.Age >= 30 && woman.HPVResult == "Positive")
                 {
                     woman.ReflexToHPVGenotypes = true;                    
                 }
@@ -64,7 +64,7 @@ namespace YellowstonePathology.Business.ASCCPRule
                 }
                 else
                 {
-                    woman.ManagementRecommendation = ManagementRecomendation.GetRepeatIn1Year();
+                    woman.ManagementRecommendation = ManagementRecomendation.GetRepeatInOneYear(woman.OrderType.OrderCode);
                 }                
             }
         }

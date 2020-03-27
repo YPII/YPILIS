@@ -77,6 +77,8 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
             {
                 this.AddNextObxElement("E-signed " + panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
             }
+
+            this.HandleLongString(panelSetOrder.GetLocationPerformedComment(), document, "F");
         }
     }
 }

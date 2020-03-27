@@ -35,17 +35,17 @@ namespace YellowstonePathology.Business.Test.NGCT
             this.AddNextObxElement("", document, "F");
 
             this.AddNextObxElement("Method:", document, "F");
-            this.AddNextObxElement(testOrder.Method, document, "F");
+            this.HandleLongString(testOrder.Method, document, "F");
             this.AddNextObxElement("", document, "F");
 
             this.AddNextObxElement("References:", document, "F");
-            this.AddNextObxElement(testOrder.ReportReferences, document, "F");
+            this.HandleLongString(testOrder.ReportReferences, document, "F");
             this.AddNextObxElement("", document, "F");
 
-            this.AddNextObxElement(testOrder.TestInformation, document, "F");
+            this.HandleLongString(testOrder.TestInformation, document, "F");
 
             string locationPerformed = testOrder.GetLocationPerformedComment();
-            this.AddNextObxElement(locationPerformed, document, "F");
+            this.HandleLongString(locationPerformed, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
         }
     }

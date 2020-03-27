@@ -70,7 +70,7 @@ namespace YellowstonePathology.UI.Billing
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
-        {
+        {                     
             YellowstonePathology.Business.Rules.MethodResult result = this.CanSave();
             if(result.Success == true)
             {
@@ -81,7 +81,7 @@ namespace YellowstonePathology.UI.Billing
             else
             {
                 MessageBox.Show(result.Message);
-            }
+            }            
         }
 
         private YellowstonePathology.Business.Rules.MethodResult CanSave()

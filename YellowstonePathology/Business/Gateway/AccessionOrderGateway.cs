@@ -2275,12 +2275,57 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
+        public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetTaskOrderCollectionByTrackingNumber(string acknowledgementType, string trackingNumber)
+        {
+            MySqlCommand cmd = new MySqlCommand("select * from tblTaskOrder t " +
+                "join tblTaskOrderDetail tod on t.TaskOrderId = tod.TaskOrderId " +
+                "join tblTaskOrderDetailFedexShipment fedex on tod.TaskOrderDetailId = fedex.TaskOrderDetailId " +
+                "where fedex.TrackingNumber like '" + trackingNumber + "%'; " +
+                "select * from tblTaskOrderDetail tod " +
+                "join tblTaskOrderDetailFedexShipment todf on tod.TaskOrderDetailId = todf.TaskOrderDetailId " +
+                "where todf.TrackingNumber like '" + trackingNumber + "%';");
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@AcknowledgementType", acknowledgementType);
+            YellowstonePathology.Business.Task.Model.TaskOrderCollection result = BuildTaskOrderCollection(cmd);
+            return result;
+        }
+
         public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetDailyTaskOrderCollection()
         {
             YellowstonePathology.Business.Task.Model.TaskOrderCollection result = new YellowstonePathology.Business.Task.Model.TaskOrderCollection();
             string sql = "Select * from tblTaskOrder where AcknowledgementType = 'Daily' " +
                 "and Acknowledged = 0 " +
                 "and TaskDate <= now() order by TaskDate desc;";
+            MySqlCommand cmd = new MySqlCommand(sql);
+            cmd.CommandType = CommandType.Text;
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read() == true)
+                    {
+                        YellowstonePathology.Business.Task.Model.TaskOrder taskOrder = new Task.Model.TaskOrder();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(taskOrder, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(taskOrder);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetDailyTaskOrderCollectionByTrackingNumber(string trackingNumber)
+        {
+            YellowstonePathology.Business.Task.Model.TaskOrderCollection result = new YellowstonePathology.Business.Task.Model.TaskOrderCollection();
+            string sql = "Select t.* " +
+                "from tblTaskOrder t " +
+                "join tblTaskOrderDetail tod on t.TaskOrderId = tod.TaskOrderId " +
+                "join tblTaskOrderDetailFedexShipment fedex on tod.TaskOrderDetailId = fedex.TaskOrderDetailId " +
+                "where fedex.TrackingNumber like '" + trackingNumber + "%'";
             MySqlCommand cmd = new MySqlCommand(sql);
             cmd.CommandType = CommandType.Text;
 

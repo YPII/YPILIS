@@ -31,7 +31,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 		private string m_PageHeaderText = "Specimen Details Page";
         private ObservableCollection<string> m_FixationTypeCollection;
-        private string m_SpecialInstructions;        
+        //private string m_SpecialInstructions;        
 
 		private YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort m_BarcodeScanPort;
         private ObservableCollection<string> m_TimeToFixationTypeCollection;
@@ -43,7 +43,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 		{
 			this.m_PageNavigator = pageNavigator;
             this.m_ClientOrderDetail = clientOrderDetail;
-            this.m_SpecialInstructions = clientOrderDetail.SpecialInstructions;
+            //this.m_SpecialInstructions = clientOrderDetail.SpecialInstructions;
             this.m_ClientOrder = clientOrder;        
 
             this.m_TimeToFixationTypeCollection = YellowstonePathology.Business.Specimen.Model.TimeToFixationType.GetTimeToFixationTypeCollection();
@@ -134,11 +134,13 @@ namespace YellowstonePathology.UI.Login.Receiving
             get { return YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance.GetActive(); }
         }
 
+        /*
         public string SpecialInstructions
         {
             get { return this.m_SpecialInstructions; }
             set { this.m_SpecialInstructions = value; }
         }
+        */
 
         public ObservableCollection<string> FixationTypeCollection
         {
@@ -153,9 +155,14 @@ namespace YellowstonePathology.UI.Login.Receiving
 		public YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetail ClientOrderDetail
 		{
 			get { return this.m_ClientOrderDetail; }
-		}		
-        
-		private void ButtonBack_Click(object sender, RoutedEventArgs e)
+		}
+
+        public YellowstonePathology.Business.ClientOrder.Model.ClientOrder ClientOrder
+        {
+            get { return this.m_ClientOrder; }
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
 		{			
             if(this.Back != null) this.Back(this, new EventArgs());
 		}

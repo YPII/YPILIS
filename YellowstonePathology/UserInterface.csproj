@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>45</ApplicationRevision>
+    <ApplicationRevision>69</ApplicationRevision>
     <ApplicationVersion>11.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -217,6 +217,7 @@
     <Compile Include="Business\ASCCPRule\InstructionResult.cs" />
     <Compile Include="Business\ASCCPRule\BaseRule.cs" />
     <Compile Include="Business\ASCCPRule\ManagementRecomendation.cs" />
+    <Compile Include="Business\ASCCPRule\Mask.cs" />
     <Compile Include="Business\ASCCPRule\NormalWithCotestSimulation.cs" />
     <Compile Include="Business\ASCCPRule\NormalWithCotestRule.cs" />
     <Compile Include="Business\ASCCPRule\NoMatchingRule.cs" />
@@ -1172,6 +1173,7 @@
     <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestTestOrder.cs" />
     <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestWordDocument.cs" />
     <Compile Include="Business\Test\BCL2ByFISH\BCL2ByFISH.cs" />
+    <Compile Include="Business\Test\BRCA12MutationAnalysis\BRCA12MutationAnalysisTest.cs" />
     <Compile Include="Business\Test\CancerTYPEID\CancerTYPEIDTest.cs" />
     <Compile Include="Business\Test\CanSetDistributionResult.cs" />
     <Compile Include="Business\Test\CarbonicAnhydraseIXCAIX\CarbonicAnhydraseIXCAIXTest.cs" />
@@ -1184,6 +1186,7 @@
     <Compile Include="Business\Test\EGFRAmplification\EGFRAmplificationTest.cs" />
     <Compile Include="Business\Test\EGFRMutationAnalysisPreliminary\EGFRMutationAnalysisPreliminaryTest.cs" />
     <Compile Include="Business\Test\EGFRToALKReflexAnalysis\EGFRToALKReflexAnalysisBRAFResult.cs" />
+    <Compile Include="Business\Test\ElaneSequenceAnalysis\ElaneSequenceAnalysisTest.cs" />
     <Compile Include="Business\Test\ErPrSemiQuantitative\ErPrSemiQuantitativeWPHOBXView.cs" />
     <Compile Include="Business\Test\ETV6F\ETV6FTest.cs" />
     <Compile Include="Business\Test\ExtractAndHoldForMolecular\ExtractAndHoldForMolecularTestRetired.cs" />
@@ -1227,6 +1230,7 @@
     <Compile Include="Business\Test\INI1\INI1Test.cs" />
     <Compile Include="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelEPICOBXView.cs" />
     <Compile Include="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelWPHOBXView.cs" />
+    <Compile Include="Business\Test\JAK29P241\JAK29P241Test.cs" />
     <Compile Include="Business\Test\JAK2V617F\JAK2V617FEPICNTEView.cs" />
     <Compile Include="Business\Test\LLP\LLPEPICBeakerObxView.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEColonBRAFMeth.cs" />
@@ -1291,6 +1295,7 @@
     <Compile Include="Business\Test\NeoTYPEBreastTumorProfile\NeoTYPEBreastTumorProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPEGastricTumorProfile\NeoTYPEGastricTumorProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPEGISTProfile\NeoTYPEGISTProfileTest.cs" />
+    <Compile Include="Business\Test\NeoTYPEHeadAndNeckTumorProfile\NeoTYPEHeadAndNeckTumorProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPELiposarcomaFusionProfile\NeoTYPELiposarcomaFusionProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPELiverBiliaryTumorProfile\NeoTYPELiverBiliaryTumorProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPELymphomaProfile\NeoTYPELymphomaProfileTest.cs" />
@@ -1390,6 +1395,7 @@
     <Compile Include="Business\Test\ThrombocytopeniaProfile\ThrombocytopeniaProfileCMMCNTEView.cs" />
     <Compile Include="Business\Test\DNACellCycleAnalysis\DNACellCycleAnalysisTest.cs" />
     <Compile Include="Business\Test\TP53MutationAnalysis\TP53MutationAnalysisTest.cs" />
+    <Compile Include="Business\Test\TPS63Rearrangement\TPS63RearrangmentTest.cs" />
     <Compile Include="Business\Test\Trichomonas\TrichomonasEPICBeakerObxView.cs" />
     <Compile Include="Business\Test\Trichomonas\TrichomonasWPHOBXView.cs" />
     <Compile Include="Business\Test\UPEP\UPEPTest.cs" />

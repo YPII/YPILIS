@@ -104,6 +104,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
@@ -120,6 +121,9 @@
                                         ValueDataType="{x:Type sys:String}" Mask="(000) 000\-0000" Value="{Binding Path=PanelSetOrder.FaxProxy}">
                     </wpfx:MaskedTextBox>
 
+                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold">Notes:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Notes}" AcceptsReturn="True"/>
+                    
                     <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
                     <CheckBox Grid.Column="1" Grid.Row="11" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}" IsEnabled="False"></CheckBox>
 

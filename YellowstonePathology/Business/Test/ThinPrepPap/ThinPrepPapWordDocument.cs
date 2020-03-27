@@ -141,14 +141,14 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             }
             this.SetXmlNodeData("screened_by", screenedBy);
 
-            string finalDate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(this.m_PanelSetOrderCytology.FinalDate);
-            string cytoTechFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(screeningPanelOrder.AcceptedDate);
+            string finalDate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(this.m_PanelSetOrderCytology.FinalTime);
+            string cytoTechFinal = screeningPanelOrder.AcceptedTime.Value.ToString("MM/dd/yyyy HH:mm");
             this.SetXmlNodeData("cytotech_final", cytoTechFinal);
 
             if (reviewPanelOrder != null)
             {
                 string reviewedBy = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
-                string reviewedByFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(reviewPanelOrder.AcceptedDate);
+                string reviewedByFinal = reviewPanelOrder.AcceptedTime.Value.ToString("MM/dd/yyyy HH:mm");
 
                 if (reviewedBy.IndexOf("MD") >= 0)
                 {
@@ -191,9 +191,6 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrderCytology.ReportNo);
             YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.CaseReport, CaseDocumentFileTypeEnum.xml, CaseDocumentFileTypeEnum.pdf);
             YellowstonePathology.Business.Helper.FileConversionHelper.ConvertDocumentTo(orderIdParser, CaseDocumentTypeEnum.CaseReport, CaseDocumentFileTypeEnum.xps, CaseDocumentFileTypeEnum.tif);
-
-            //YellowstonePathology.Business.Document.CaseDocument.SaveXMLAsPDF(orderIdParser);
-            //YellowstonePathology.Business.Helper.FileConversionHelper.SaveXpsReportToTiff(this.m_PanelSetOrderCytology.ReportNo);
         }
 
         public void OpenTemplate()

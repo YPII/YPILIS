@@ -106,7 +106,7 @@ namespace YellowstonePathology.UI.Gross
                 }
             }
         }
-
+        
         [PersistentProperty()]
         public bool UseAppendInitials
         {
@@ -272,7 +272,7 @@ namespace YellowstonePathology.UI.Gross
             }
             else
             {
-                result = "No sections are submitted for microscopic examination";
+                result = "Cassette(s): None (gross examination only)";
             }
             result = text.Replace("[representativesectionsagerestricted]", result);
             return result;

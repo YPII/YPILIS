@@ -60,6 +60,8 @@
                         </StackPanel>
                     </Button>
 
+                    <TextBox Name="TextBoxTrackingNumber" Margin="2" KeyUp="TextBoxTrackingNumber_KeyUp" Width="100" BorderBrush="AliceBlue" BorderThickness="1" />
+
                 </ToolBar>
 
             </ToolBarTray>

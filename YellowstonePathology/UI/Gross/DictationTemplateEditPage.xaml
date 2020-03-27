@@ -13,24 +13,28 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" HorizontalAlignment="Right">Name:</TextBlock>
         <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=DictationTemplate.TemplateName}" />
 
-        <TextBlock Grid.Column="0" Grid.Row="1" Margin="2" HorizontalAlignment="Right">Text:</TextBlock>
-        <ScrollViewer Grid.Column="0" Grid.Row="2" Margin="2" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Disabled">
+        <TextBlock Grid.Column="0" Grid.Row="1" Margin="2" HorizontalAlignment="Right">Use Append Initials:</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding Path=DictationTemplate.UseAppendInitials}" />
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Margin="2" HorizontalAlignment="Right">Text:</TextBlock>
+        <ScrollViewer Grid.Column="0" Grid.Row="3" Margin="2" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Disabled">
             <TextBox  Text="{Binding Path=DictationTemplate.Text}" AcceptsReturn="True" TextWrapping="Wrap" />
         </ScrollViewer>
 
-        <TextBlock Grid.Column="0" Grid.Row="3" Margin="2" HorizontalAlignment="Right">Specimen:</TextBlock>
-        <ListView Name="ListViewSpecimen" Grid.Column="0" Grid.Row="4" Margin="2" Grid.ColumnSpan="2" ItemsSource="{Binding Path=DictationTemplate.SpecimenCollection}">
+        <TextBlock Grid.Column="0" Grid.Row="4" Margin="2" HorizontalAlignment="Right">Specimen:</TextBlock>
+        <ListView Name="ListViewSpecimen" Grid.Column="0" Grid.Row="5" Margin="2" Grid.ColumnSpan="2" ItemsSource="{Binding Path=DictationTemplate.SpecimenCollection}">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Delete" Click="MenuItemDelete_Click" Tag="{Binding}"></MenuItem>
@@ -44,8 +48,8 @@
             </ListView.View>
         </ListView>
         
-        <Button Name="ButtonAddSpecimen" Grid.Column="0" Grid.Row="5" Margin="2" Width="80" Height="30" Click="ButtonAddSpecimen_Click">Add</Button>
-        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button Name="ButtonAddSpecimen" Grid.Column="0" Grid.Row="6" Margin="2" Width="80" Height="30" Click="ButtonAddSpecimen_Click">Add</Button>
+        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Name="ButtonCancel" Margin="2" Width="80" Height="30" HorizontalAlignment="Right" Click="ButtonCancel_Click">Cancel</Button>
             <Button Name="ButtonOk" Margin="2" Width="80" Height="30" HorizontalAlignment="Right" Click="ButtonOk_Click">OK</Button>
         </StackPanel>

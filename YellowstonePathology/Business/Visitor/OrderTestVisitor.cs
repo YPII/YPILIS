@@ -178,6 +178,8 @@ namespace YellowstonePathology.Business.Visitor
             this.m_AliquotOrder.SetLabelPrefix(testOrder, true);
             this.m_AliquotOrder.HandleAddFrozen(testOrder);
 			this.m_AliquotOrder.TestOrderCollection.Add(this.m_TestOrder);
+
+            if (this.m_Test.IsBillable == false) testOrder.NoCharge = true;
         }        
 
         private void HandleSlideOrder()

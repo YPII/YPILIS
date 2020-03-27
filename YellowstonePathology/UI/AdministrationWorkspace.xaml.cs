@@ -993,17 +993,24 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            Business.PanelSet.Model.PanelSetCollection panelSets = Business.PanelSet.Model.PanelSetCollection.GetAllActive();
-            foreach(Business.PanelSet.Model.PanelSet panelSet in panelSets)
+            string path = @"c:\temp\mask.txt";            
+            using (StreamReader sr = File.OpenText(path))
             {
-                if(panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
+                string s = "";
+                while ((s = sr.ReadLine()) != null)
                 {
-                    if(panelSet.HasTechnicalComponent == true && panelSet.TechnicalComponentFacility.FacilityId != "YPIBLGS")
+                    string sql = "Insert tblASCCPMask (mask) value ('" + s + "')";
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = sql;
+                    cmd.CommandType = CommandType.Text;
+                    using (MySqlConnection cnl = new MySqlConnection("Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis; Pooling=True;"))
                     {
-                        Console.WriteLine(panelSet.PanelSetName);
-                    }                    
+                        cnl.Open();
+                        cmd.Connection = cnl;
+                        cmd.ExecuteNonQuery();
+                    }
                 }
-            }                                    
+            }
         }
 
         private void InsertADT()

@@ -22,23 +22,18 @@ namespace YellowstonePathology.Business.Test.TCellNKProfile
             this.AddNextObxElement("Lympocyte Percentage: " + panelSetOrder.LymphocytePercentage.ToString().StringAsPercent(), document, "F");
             this.AddNextObxElement("", document, "F");
             this.AddNextObxElement("T - cells % of Lymphocytes: " + panelSetOrder.CD3TPercent.ToString().StringAsPercent(), document, "F");
-            this.AddNextObxElement("T - cells Absolute Count: " + panelSetOrder.CD3TCount, document, "F");
+            this.AddNextObxElement("T - cells Absolute Count: " + panelSetOrder.CD3TCount + "uL", document, "F");
             this.AddNextObxElement("", document, "F");
             this.AddNextObxElement("CD4 + T - helper % of Lymphocytes: " + panelSetOrder.CD4TPercent.ToString().StringAsPercent(), document, "F");
-            this.AddNextObxElement("CD4 + T - helper Absolute Count: " + panelSetOrder.CD4TCount, document, "F");
+            this.AddNextObxElement("CD4 + T - helper Absolute Count: " + panelSetOrder.CD4TCount + "uL", document, "F");
             this.AddNextObxElement("", document, "F");
             this.AddNextObxElement("CD8 + T - suppressor % of Lymphocytes: " + panelSetOrder.CD8TPercent.ToString().StringAsPercent(), document, "F");
-            this.AddNextObxElement("CD8 + T - suppressor Absolute Count: " + panelSetOrder.CD8TCount, document, "F");
+            this.AddNextObxElement("CD8 + T - suppressor Absolute Count: " + panelSetOrder.CD8TCount + "uL", document, "F");
             this.AddNextObxElement("", document, "F");
             this.AddNextObxElement("NK cells % of Lymphocytes: " + panelSetOrder.CD16CD56NKPercent.ToString().StringAsPercent(), document, "F");
-            this.AddNextObxElement("NK cells Absolute Count: " + panelSetOrder.CD16CD56NKCount, document, "F");
+            this.AddNextObxElement("NK cells Absolute Count: " + panelSetOrder.CD16CD56NKCount + "uL", document, "F");
+            this.AddNextObxElement("CD4/CD8 Ratio: " + panelSetOrder.CD4CD8Ratio, document, "F");
 
-            this.AddNextObxElement("", document, "F");
-            this.AddNextObxElement("Pathologist: " + panelSetOrder.Signature, document, "F");
-            if (panelSetOrder.FinalTime.HasValue == true)
-            {
-                this.AddNextObxElement("E-signed " + panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
-            }
             this.AddNextObxElement("", document, "F");
             this.AddAmendments(document);
 

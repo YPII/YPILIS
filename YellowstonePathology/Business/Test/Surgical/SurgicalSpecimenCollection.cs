@@ -142,6 +142,19 @@ namespace YellowstonePathology.Business.Test.Surgical
             return result;
         }
 
+        public bool SpecimenOrderIdExists(string specimenOrderId)
+        {
+            bool result = false;
+            foreach (SurgicalSpecimen surgicalSpecimen in this)
+            {
+                if (surgicalSpecimen.SpecimenOrderId == specimenOrderId)
+                {
+                    result = true;
+                }
+            }
+            return result;
+        }
+
         public SurgicalSpecimen GetBySpecimenOrderId(string specimenOrderId)
 		{
 			foreach (SurgicalSpecimen surgicalSpecimen in this)

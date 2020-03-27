@@ -138,7 +138,7 @@ namespace YellowstonePathology.Business.HL7View
             orderRequest.Pv1 = new Ventana.pv1();
             orderRequest.Pv1.RequestingPhysicianFirstname = orderedBy.FirstName;
             orderRequest.Pv1.RequestingPhysicianLastname = orderedBy.LastName;
-            orderRequest.Pv1.RequestingPhysicianNpi = string.IsNullOrEmpty(orderedBy.NationalProviderId) ? "NOTAPPLICABLE" : orderedBy.NationalProviderId;
+            orderRequest.Pv1.RequestingPhysicianNpi = string.IsNullOrEmpty(orderedBy.NationalProviderId) ? Business.User.SystemIdentity.Instance.User.UserId.ToString() : orderedBy.NationalProviderId;
 
             orderRequest.Sac = new Ventana.sac();
             orderRequest.Sac.RegistrationDateTime = accessionOrder.AccessionTime.Value.ToString("yyyyMMddHHmm");

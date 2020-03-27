@@ -28,10 +28,20 @@ namespace YellowstonePathology.Business.Billing.Model
             }
         }
 
+        public void UpdateCDMId()
+        {
+            foreach(CDM cdm in this)
+            {
+                string bsonId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                cdm.CDMId = bsonId;
+                cdm.Save();
+            }
+        }
+
         private static CDMCollection Load()
         {
             CDMCollection result = new CDMCollection();
-            MySqlCommand cmd = new MySqlCommand("Select CDMCode, CPTCode, ProcedureName, CDMClient from tblCDM;");
+            MySqlCommand cmd = new MySqlCommand("Select CDMCode, CPTCode, ProcedureName, CDMClient from tblCDM order by CDMCode;");
             cmd.CommandType = CommandType.Text;
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))

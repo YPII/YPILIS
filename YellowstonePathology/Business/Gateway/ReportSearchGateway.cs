@@ -144,7 +144,7 @@ namespace YellowstonePathology.Business.Gateway
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "join tblClientOrder co on a.MasterAccessionNo = co.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
-                "where co.SpecialInstructions like '%management of abnormal%' and a.AccessionDate >= '2020-01-01' Order by a.AccessionDate desc";
+                "where co.SpecialInstructions like '%management of abnormal%' and a.AccessionDate >= '2020-01-01' and pso.panelsetid = 116 Order by a.AccessionDate desc";
             Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
             return reportSearchList;
         }

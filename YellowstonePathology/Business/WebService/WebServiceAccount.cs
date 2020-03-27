@@ -42,6 +42,7 @@ namespace YellowstonePathology.Business.WebService
         private string m_Signature;
         private string m_FacilityId;
         private string m_ObjectId;
+        private string m_PublicAddress;
 
         public WebServiceAccount()
         {
@@ -445,6 +446,20 @@ namespace YellowstonePathology.Business.WebService
                 {
                     this.m_ObjectId = value;
                     this.NotifyPropertyChanged("ObjectId");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string PublicAddress
+        {
+            get { return this.m_PublicAddress; }
+            set
+            {
+                if (this.m_PublicAddress != value)
+                {
+                    this.m_PublicAddress = value;
+                    this.NotifyPropertyChanged("PublicAddress");
                 }
             }
         }

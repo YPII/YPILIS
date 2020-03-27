@@ -37,7 +37,7 @@ namespace YellowstonePathology.Business.Test.MultipleMyelomaMGUSByFish
 
             this.AddNextObxElement("Specimen Information:", document, "F");
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
-            this.AddNextObxElement("Specimen Identification: " + specimenOrder.Description, document, "F");
+            this.HandleLongString("Specimen Identification: " + specimenOrder.Description, document, "F");
             string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");
 
@@ -59,7 +59,7 @@ namespace YellowstonePathology.Business.Test.MultipleMyelomaMGUSByFish
 
             this.AddNextObxElement("", document, "F");
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-            this.AddNextObxElement(locationPerformed, document, "F");
+            this.HandleLongString(locationPerformed, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
         }
     }

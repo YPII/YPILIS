@@ -249,5 +249,16 @@ namespace YellowstonePathology.UI
                 this.m_TaskUI.GetTaskOrderViewList();
             }
         }
+
+        private void TextBoxTrackingNumber_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (this.TextBoxTrackingNumber.Text.Length >= 4)
+                {
+                    this.m_TaskUI.GetTaskOrderViewListByTrackingNumber(this.TextBoxTrackingNumber.Text);
+                }
+            }
+        }
     }
 }

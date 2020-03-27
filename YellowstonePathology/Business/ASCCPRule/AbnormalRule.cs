@@ -28,11 +28,12 @@ namespace YellowstonePathology.Business.ASCCPRule
         {
             if(woman.Age >= 21 && woman.Age <= 24)
             {
+                // Seen 21 - 24 ASCUS
                 if (woman.ScreeningImpression.ResultCode == "03" ||
                     woman.ScreeningImpression.ResultCode == "05")
                 {
                     woman.PerformHPV = false;
-                    woman.ManagementRecommendation = ManagementRecomendation.GetRepeatIn1Year();
+                    woman.ManagementRecommendation = ManagementRecomendation.GetRepeatInOneYear(woman.OrderType.OrderCode);
                 }
                 else if (woman.ScreeningImpression.ResultCode == "04" ||
                     woman.ScreeningImpression.ResultCode == "07" ||

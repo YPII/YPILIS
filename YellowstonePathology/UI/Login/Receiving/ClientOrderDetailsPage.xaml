@@ -339,7 +339,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Margin="2,2,2,2">Special Instructions:</TextBlock>
-                <TextBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=SpecialInstructions}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" IsEnabled="False"></TextBox>
+                <TextBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=ClientOrder.SpecialInstructions}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" IsEnabled="False"></TextBox>
 
                 <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Margin="2,2,2,2">Immediate Exam Instructions:</TextBlock>
                 <TextBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=ClientOrderDetail.ImmediateExamInstructions, Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="False"></TextBox>

@@ -95,7 +95,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.HandleLongString(panelSetOrder.InterpretiveComment, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
-            this.AddNextObxElement("Reference Range: " + referenceRange, document, "F");
+            this.HandleLongString("Reference Range: " + referenceRange, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
             if (string.IsNullOrEmpty(specimenOrder.FixationComment) == false)
@@ -116,7 +116,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextObxElement(string.Empty, document, "F");
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-            this.AddNextObxElement(locationPerformed, document, "F");
+            this.HandleLongString(locationPerformed, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
         }
 
@@ -189,11 +189,11 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.HandleLongString(panelSetOrder.ReportReference, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
-            this.AddNextObxElement(panelSetOrder.ASRComment, document, "F");
+            this.HandleLongString(panelSetOrder.ASRComment, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-            this.AddNextObxElement(locationPerformed, document, "F");
+            this.HandleLongString(locationPerformed, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
         }
 
@@ -270,7 +270,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextObxElement(string.Empty, document, "F");
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-            this.AddNextObxElement(locationPerformed, document, "F");
+            this.HandleLongString(locationPerformed, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
         }
 
@@ -332,11 +332,11 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
-            this.AddNextObxElement("Interpretation: ", document, "F");
+            this.HandleLongString("Interpretation: ", document, "F");
             this.HandleLongString(panelSetOrder.InterpretiveComment, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
-            this.AddNextObxElement("Reference Range: " + referenceRange, document, "F");
+            this.HandleLongString("Reference Range: " + referenceRange, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
             if (string.IsNullOrEmpty(specimenOrder.FixationComment) == false)
@@ -357,7 +357,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextObxElement(string.Empty, document, "F");
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-            this.AddNextObxElement(locationPerformed, document, "F");
+            this.HandleLongString(locationPerformed, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
         }
     }

@@ -15,8 +15,10 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 
         public override void Set()
         {
-            YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder whpTestOrder = (YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetWomensHealthProfile();
-            whpTestOrder.HoldDistribution = true;
+            foreach(Business.Test.PanelSetOrder panelSetOrder in this.m_AccessionOrder.PanelSetOrderCollection)
+            {
+                panelSetOrder.HoldDistribution = true;
+            }
         }
     }
 }

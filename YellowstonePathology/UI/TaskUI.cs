@@ -93,6 +93,12 @@ namespace YellowstonePathology.UI
             this.NotifyPropertyChanged("TaskOrderViewList");
         }
 
+        public void GetTaskOrderViewListByTrackingNumber(string trackingNumber)
+        {
+            this.m_TaskOrderViewList = new Business.Task.Model.TaskOrderViewList(YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetTaskOrderCollectionByTrackingNumber(YellowstonePathology.Business.Task.Model.TaskAcknowledgementType.Immediate, trackingNumber));
+            this.NotifyPropertyChanged("TaskOrderViewList");
+        }
+
         public void GetTasksNotAcknowledged()
         {
             string assignedTo = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.AcknowledgeTasksFor;
@@ -103,6 +109,12 @@ namespace YellowstonePathology.UI
         public void GetDailyTaskOrderCollection()
         {
             this.m_DailyTaskOrderCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetDailyTaskOrderCollection();
+            this.NotifyPropertyChanged("DailyTaskOrderCollection");
+        }
+
+        public void GetDailyTaskOrderCollectionByTrackingNumber(string trackingNumber)
+        {
+            this.m_DailyTaskOrderCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetDailyTaskOrderCollectionByTrackingNumber(trackingNumber);
             this.NotifyPropertyChanged("DailyTaskOrderCollection");
         }
 

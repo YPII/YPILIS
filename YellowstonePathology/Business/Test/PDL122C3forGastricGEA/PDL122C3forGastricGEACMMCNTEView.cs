@@ -40,7 +40,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3forGastricGEA
             }
 
             this.AddBlankNteElement(document);
-            this.AddNextNteElement("Pathologist: " + panelSetOrder.Signature, document);
+            this.AddNextNteElement("Pathologist: " + panelSetOrder.ReferenceLabSignature, document);
             if (panelSetOrder.FinalTime.HasValue == true)
             {
                 this.AddNextNteElement("E-signed " + panelSetOrder.FinalDate.Value.ToString("MM/dd/yyyy HH:mm"), document);

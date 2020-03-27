@@ -67,6 +67,12 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkFinalize_Click(object sender, RoutedEventArgs e)
         {
+            if(IsSpecimenAdequacySet() == false)
+            {
+                MessageBox.Show("You must set the specimen adequacy before this case can be finalized.");
+                return;
+            }
+
             YellowstonePathology.Business.Rules.MethodResult methodResult = this.m_PanelSetOrder.IsOkToFinalize();
             if (methodResult.Success == true)
             {
@@ -76,6 +82,14 @@ namespace YellowstonePathology.UI.Test
             {
                 MessageBox.Show(methodResult.Message);
             }
+        }
+
+        private bool IsSpecimenAdequacySet()
+        {
+            bool result = true;
+            Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOnId);
+            if (string.IsNullOrEmpty(specimenOrder.SpecimenAdequacy) == true) result = false;
+            return result;
         }
 
         private void HyperLinkUnfinalResults_Click(object sender, RoutedEventArgs e)

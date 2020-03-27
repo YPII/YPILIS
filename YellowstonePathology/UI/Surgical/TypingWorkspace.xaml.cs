@@ -1095,12 +1095,15 @@ namespace YellowstonePathology.UI.Surgical
                     Business.Specimen.Model.Specimen specimen = Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen(specimenOrder.SpecimenId);
                     if (specimen.CPTCode != null)
                     {
-                        Business.Test.PanelSetOrder panelSetOrder = this.m_TypingUI.AccessionOrder.PanelSetOrderCollection.GetSurgical();
-                        if (panelSetOrder.PanelSetOrderCPTCodeCollection.Exists(specimen.CPTCode.Code, specimenOrder.SpecimenOrderId) == false)
+                        Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_TypingUI.AccessionOrder.PanelSetOrderCollection.GetSurgical();
+                        if(surgicalTestOrder.SurgicalSpecimenCollection.SpecimenOrderIdExists(specimenOrder.SpecimenOrderId) == true)
                         {
-                            string comment = "Specimen " + specimenOrder.SpecimenNumber + ": " + specimen.SpecimenName;
-                            string modifier = specimen.CPTCode.Modifier == null ? null : specimen.CPTCode.Modifier;
-                            AddCPTCode(specimenOrder, specimen.CPTCode.Code, modifier, specimen.CPTCode.CodeType.ToString(), panelSetOrder, specimen.CPTCodeQuantity, comment);
+                            if (surgicalTestOrder.PanelSetOrderCPTCodeCollection.Exists(specimen.CPTCode.Code, specimenOrder.SpecimenOrderId) == false)
+                            {
+                                string comment = "Specimen " + specimenOrder.SpecimenNumber + ": " + specimen.SpecimenName;
+                                string modifier = specimen.CPTCode.Modifier == null ? null : specimen.CPTCode.Modifier;
+                                AddCPTCode(specimenOrder, specimen.CPTCode.Code, modifier, specimen.CPTCode.CodeType.ToString(), surgicalTestOrder, specimen.CPTCodeQuantity, comment);
+                            }
                         }
                     }
                 }
@@ -1248,6 +1251,12 @@ namespace YellowstonePathology.UI.Surgical
             gView.Columns[0].Width = workingWidth * col1;
             gView.Columns[1].Width = workingWidth * col2;
             gView.Columns[2].Width = workingWidth * col3;
+        }
+
+        private void HyperLinkShowCaseNotes_Click(object sender, RoutedEventArgs e)
+        {
+            UI.Login.FinalizeAccession.LoginCaseNotesPath loginCaseNotesPath = new UI.Login.FinalizeAccession.LoginCaseNotesPath(this.m_TypingUI.AccessionOrder);
+            loginCaseNotesPath.Start();
         }
     }
 }

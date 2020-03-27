@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\FetalHemoglobinV2.1.xml";
+            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\FetalHemoglobinV2.2.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();
@@ -38,7 +38,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
             this.SetXmlNodeData("hbf_percent", testOrder.HbFPercent);
             this.SetXmlNodeData("hbfreference_range", testOrder.HbFReferenceRange);
             this.SetXmlNodeData("fetal_maternal_bleed", testOrder.FetalBleed);
-            this.SetXmlNodeData("reference_range", testOrder.FetalBleedReferenceRange);
+            this.SetXmlNodeData("fmbreference_range", testOrder.FetalBleedReferenceRange);
             this.SetXmlNodeData("rh_immune_globulin", testOrder.RhImmuneGlobulin);            
             this.SetXmlNodeData("report_comment", testOrder.ReportComment);
             this.SetXmlNodeData("asr_comment", testOrder.ASRComment);

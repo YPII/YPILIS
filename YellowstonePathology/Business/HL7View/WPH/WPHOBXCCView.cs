@@ -41,7 +41,7 @@ namespace YellowstonePathology.Business.HL7View.WPH
             string result = null;
             foreach(string ccName in ccNames)
             {
-                result += ccNames + ";";
+                result += ccName + ";";
             }
 
             if(string.IsNullOrEmpty(result) == false)

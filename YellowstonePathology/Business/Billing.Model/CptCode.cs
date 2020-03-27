@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Billing.Model
         protected string m_GCode;
         protected bool m_HasMedicareQuantityLimit;
         protected int m_MedicareQuantityLimit;
-        protected CPTCodeTypeEnum m_CodeType;
+        protected CPTCodeTypeEnum m_CodeType;        
 
         public CptCode()
         {            
@@ -121,6 +121,8 @@ namespace YellowstonePathology.Business.Billing.Model
             get { return this.m_MedicareQuantityLimit; }
             set { this.m_MedicareQuantityLimit = value; }
         }
+
+        
 
         public bool HasBillableProfessionalComponent()
         {

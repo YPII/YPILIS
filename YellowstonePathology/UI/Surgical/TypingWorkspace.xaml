@@ -870,6 +870,11 @@
                     <TextBlock Margin="2,2,2,2">
                         <Hyperlink Click="HyperLinkShowGossTemplate_Click">Gross Templates</Hyperlink>
                     </TextBlock>
+                    <TextBlock Margin="2,2,5,2">
+						<Hyperlink Click="HyperLinkShowCaseNotes_Click">
+							<TextBlock Text="Show Case Notes"></TextBlock>
+						</Hyperlink>
+					</TextBlock>
                 </StackPanel>
             </StatusBarItem>
 

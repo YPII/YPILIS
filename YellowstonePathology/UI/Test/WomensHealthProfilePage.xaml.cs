@@ -210,6 +210,7 @@ namespace YellowstonePathology.UI.Test
             int ngctPanelSetId = 3;
             if (this.m_AccessionOrder.PanelSetOrderCollection.HasPanelSetBeenOrdered(ngctPanelSetId) == false)
             {
+                HandleAddOnWarning();
                 YellowstonePathology.Business.Interface.IOrderTarget orderTarget = this.m_AccessionOrder.SpecimenOrderCollection.GetOrderTarget(this.m_WomensHealthProfileTestOrder.OrderedOnId);
                 YellowstonePathology.Business.Test.NGCT.NGCTTest ngctTest = new YellowstonePathology.Business.Test.NGCT.NGCTTest();
                 YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new Business.Test.TestOrderInfo(ngctTest, orderTarget, true);                
@@ -228,11 +229,21 @@ namespace YellowstonePathology.UI.Test
             }
         }
 
+        private void HandleAddOnWarning()
+        {
+            DateTime yesterday = DateTime.Today.Subtract(new TimeSpan(1, 0, 0, 0));
+            if (this.m_PanelSetOrderCytology.OrderDate.Value <= yesterday)
+            {
+                MessageBox.Show("It's likely that this test cannot be performed.  Please contact Cytology or FLow Cytometry to make sure the test can be completed.");
+            }
+        }
+
         private void HyperLinkOrderTrich_Click(object sender, RoutedEventArgs e)
         {
             int trhichomonasPanelSetId = 61;
             if (this.m_AccessionOrder.PanelSetOrderCollection.HasPanelSetBeenOrdered(trhichomonasPanelSetId) == false)
             {
+                HandleAddOnWarning();
                 YellowstonePathology.Business.Interface.IOrderTarget orderTarget = this.m_AccessionOrder.SpecimenOrderCollection.GetOrderTarget(this.m_WomensHealthProfileTestOrder.OrderedOnId);
                 YellowstonePathology.Business.Test.Trichomonas.TrichomonasTest trichomonasTest = new YellowstonePathology.Business.Test.Trichomonas.TrichomonasTest();
                 YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new Business.Test.TestOrderInfo(trichomonasTest, orderTarget, true);                
@@ -471,7 +482,7 @@ namespace YellowstonePathology.UI.Test
             Business.ASCCPRule.BaseRule matchingRule = ruleCollection.GetMatchingRule(woman);
             matchingRule.Finalize(woman);
 
-            UI.ASCCPWomanViewer asccpWomanViewer = new ASCCPWomanViewer(woman, this.m_WomensHealthProfileTestOrder);
+            UI.ASCCPWomanViewer asccpWomanViewer = new ASCCPWomanViewer(woman, this.m_WomensHealthProfileTestOrder, this.m_AccessionOrder);
             asccpWomanViewer.Show();
         }
     }

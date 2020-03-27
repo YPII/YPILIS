@@ -158,7 +158,7 @@ namespace YellowstonePathology.UI.ReportOrder
                 MessageBox.Show("This report cannot be finalized here.");            
             }
 
-            if (this.HasCaseBeenPublished() == false && panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument)
+            if (panelSet.NeverDistribute == false && this.HasCaseBeenPublished() == false && panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument)
             {
                 result = false;
                 MessageBox.Show("This report cannot be finalized until it has been published.");

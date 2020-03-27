@@ -30,6 +30,11 @@ namespace YellowstonePathology.Business.ASCCPRule
         {
 
         }
+
+        public void FromMask(string mask)
+        {
+
+        }
         
         public void FromAccessionOrder(Business.Test.AccessionOrder accessionOrder)
         {
@@ -69,7 +74,7 @@ namespace YellowstonePathology.Business.ASCCPRule
                 }
             }
         }
-        
+                
         public bool Cotesting
         {
             get
@@ -82,8 +87,8 @@ namespace YellowstonePathology.Business.ASCCPRule
                 {
                     return true;
                 }
-            }
-        }  
+            }            
+        }          
 
         public bool RuleIsMatch
         {

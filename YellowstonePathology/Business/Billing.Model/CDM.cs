@@ -13,6 +13,7 @@ namespace YellowstonePathology.Business.Billing.Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private string m_CDMId;
         private string m_CDMCode;
         private string m_CPTCode;
         private string m_ProcedureName;
@@ -22,6 +23,20 @@ namespace YellowstonePathology.Business.Billing.Model
         { }
 
         [PersistentPrimaryKeyProperty(false)]
+        public string CDMId
+        {
+            get { return this.m_CDMId; }
+            set
+            {
+                if (this.m_CDMId != value)
+                {
+                    this.m_CDMId = value;
+                    this.NotifyPropertyChanged("CDMId");
+                }
+            }
+        }
+
+        [PersistentProperty(false)]
         public string CDMCode
         {
             get { return this.m_CDMCode; }
@@ -87,9 +102,9 @@ namespace YellowstonePathology.Business.Billing.Model
 
         public void Save()
         {
-            MySqlCommand cmd = new MySqlCommand("Insert tblCDM (CDMCode, CPTCode, ProcedureName, CDMClient) values (@CDMCode, @CPTCode, @ProcedureName, @CDMClient) " +
-                "ON DUPLICATE KEY UPDATE CDMCode = @CDMCode, CPTCode = @CPTCode, ProcedureName = @ProcedureName, CDMClient = @CDMClient;");
+            MySqlCommand cmd = new MySqlCommand("UPDATE tblCDM set CDMCode = @CDMCode, CPTCode = @CPTCode, ProcedureName = @ProcedureName, CDMClient = @CDMClient where CDMCode = @CDMCode;");
             cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@CDMId", this.m_CDMId);
             cmd.Parameters.AddWithValue("@CDMCode", this.m_CDMCode);
             cmd.Parameters.AddWithValue("@CPTCode", this.m_CPTCode);
             cmd.Parameters.AddWithValue("@ProcedureName", this.m_ProcedureName);

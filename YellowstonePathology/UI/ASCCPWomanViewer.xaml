@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI"
         mc:Ignorable="d"
-        Title="ASCCP Rule Viewer" Height="400" Width="1100">
+        Title="ASCCP Rule Viewer" Height="500" Width="1100">
     <Grid Margin="5,5,5,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -57,26 +58,33 @@
         <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Reflex To HPV Genotypes:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding Path=ReflexToHPVGenotypes}" Margin="2,2,2,2"></TextBlock>
 
-        <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">HPV Genotypes Result:</TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding Path=HPVGenotypesResult}" Margin="2,2,2,2"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">HPV 16 Result:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding Path=HPV16Result}" Margin="2,2,2,2"></TextBlock>
 
-        <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Management Recommendation:</TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="10" Text="{Binding Path=ManagementRecommendation}" Margin="2,2,2,2" TextWrapping="Wrap"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">HPV 18 Result:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="10" Text="{Binding Path=HPV18Result}" Margin="2,2,2,2"></TextBlock>
 
-        <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Order Type:</TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="11" Text="{Binding Path=OrderType.Description}" Margin="2,2,2,2" TextWrapping="Wrap"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Management Recommendation:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="11" Text="{Binding Path=ManagementRecommendation}" Margin="2,2,2,2" TextWrapping="Wrap"></TextBlock>
 
-        <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Rule Is Match:</TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="12" Text="{Binding Path=RuleIsMatch}" Margin="2,2,2,2"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Order Type:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="12" Text="{Binding Path=OrderType.Description}" Margin="2,2,2,2" TextWrapping="Wrap"></TextBlock>
 
-        <TextBlock Grid.Column="0" Grid.Row="13" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Reminder:</TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="13" Text="{Binding Path=Reminder}" Margin="2,2,2,2"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="13" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Rule Is Match:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="13" Text="{Binding Path=RuleIsMatch}" Margin="2,2,2,2"></TextBlock>
 
-        <TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Rule Name:</TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="14" Text="{Binding Path=RuleName}" Margin="2,2,2,2"></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Reminder:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="14" Text="{Binding Path=Reminder}" Margin="2,2,2,2"></TextBlock>
 
-        <TextBlock Grid.Column="1" Grid.Row="15" Margin="2,2,2,2">
+        <TextBlock Grid.Column="0" Grid.Row="15" Margin="2,2,2,2" FontWeight="Bold" TextAlignment="Right">Rule Name:</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="15" Text="{Binding Path=RuleName}" Margin="2,2,2,2"></TextBlock>
+
+        <TextBlock Grid.Column="1" Grid.Row="16" Margin="2,2,2,2">
             <Hyperlink Click="HyperLinkUpdateWHP_Click">Set WHP Management Recommendation</Hyperlink>
+        </TextBlock>
+
+        <TextBlock Grid.Column="1" Grid.Row="16" Margin="2,2,2,2" HorizontalAlignment="Right">
+            <Hyperlink Click="HyperLinkRemoveHold_Click">Remove Hold</Hyperlink>
         </TextBlock>
 
     </Grid>

@@ -26,9 +26,9 @@ namespace YellowstonePathology.Business.Test.ReticulatedPlateletAnalysisV2
         {
             this.m_ResultReference = "0-0.37%";
             this.m_Method = "Quantitative Flow Cytometry";
-            this.m_ASRComment = "Tests utilizing Analytic Specific Reagents (ASR’s) were developed and performance characteristics " +
+            this.m_ASRComment = "Tests utilizing Analytic Specific Reagents (ASR's) were developed and performance characteristics " +
                 "determined by Yellowstone Pathology Institute, Inc.  They have not been cleared or approved by the U.S. Food and Drug " +
-                "Administration.  The FDA has determined that such clearance or approval is not necessary.  ASR’s may be used for clinical " +
+                "Administration.  The FDA has determined that such clearance or approval is not necessary.  ASR's may be used for clinical " +
                 "purposes and should not be regarded as investigational or for research.  This laboratory is certified under the Clinical " +
                 "Laboratory Improvement Amendments of 1988 (CLIA-88) as qualified to perform high complexity clinical laboratory testing.";
         }

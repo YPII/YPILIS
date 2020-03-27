@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			this.AddNextObxElement(result, document, "F");
 
 			this.AddNextObxElement("", document, "F");
-			this.AddNextObxElement("Pathologist: " + panelSetOrder.Signature, document, "F");
+			this.AddNextObxElement("Pathologist: " + panelSetOrder.ReferenceLabSignature, document, "F");
 			if (panelSetOrder.FinalTime.HasValue == true)
 			{
 				this.AddNextObxElement("E-signed " + panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
@@ -50,12 +50,12 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 
 			this.AddNextObxElement("", document, "F");
 			this.AddNextObxElement("Test Details:", document, "F");
-			this.AddNextObxElement("  Metaphases Counted   : " + panelSetOrder.MetaphasesCounted, document, "F");
-			this.AddNextObxElement("  Metaphases Analyzed   : " + panelSetOrder.MetaphasesAnalyzed, document, "F");
-			this.AddNextObxElement("  Metaphases Karyotyped   : " + panelSetOrder.MetaphasesKaryotyped, document, "F");
-			this.AddNextObxElement("  Culture Type   : " + panelSetOrder.CultureType, document, "F");
-			this.AddNextObxElement("  Banding Technique   : " + panelSetOrder.BandingTechnique, document, "F");
-			this.AddNextObxElement("  Banding Resolution   : " + panelSetOrder.BandingResolution, document, "F");
+			this.AddNextObxElement("  Metaphases Counted: " + panelSetOrder.MetaphasesCounted, document, "F");
+			this.AddNextObxElement("  Metaphases Analyzed: " + panelSetOrder.MetaphasesAnalyzed, document, "F");
+			this.AddNextObxElement("  Metaphases Karyotyped: " + panelSetOrder.MetaphasesKaryotyped, document, "F");
+			this.AddNextObxElement("  Culture Type: " + panelSetOrder.CultureType, document, "F");
+			this.AddNextObxElement("  Banding Technique: " + panelSetOrder.BandingTechnique, document, "F");
+			this.AddNextObxElement("  Banding Resolution: " + panelSetOrder.BandingResolution, document, "F");
 
             this.AddNextObxElement("", document, "F");
             this.AddNextObxElement(panelSetOrder.ASR, document, "F");

@@ -12,6 +12,7 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
         private string m_AuthorizationTestName;
         private string m_Fax;
         private string m_ContactName;
+        private string m_Notes;
 
         public AuthorizationForVerbalTestRequestTestOrder()
         { }
@@ -76,6 +77,20 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
                 {
                     this.m_ContactName = value;
                     this.NotifyPropertyChanged("ContactName");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string Notes
+        {
+            get { return this.m_Notes; }
+            set
+            {
+                if (this.m_Notes != value)
+                {
+                    this.m_Notes = value;
+                    this.NotifyPropertyChanged("Notes");
                 }
             }
         }

@@ -21,11 +21,14 @@ namespace YellowstonePathology.UI
     {
         Business.ASCCPRule.Woman m_Woman;
         Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder m_WomensHealthProfileTestOrder;
+        Business.Test.AccessionOrder m_AccessionOrder;
 
-        public ASCCPWomanViewer(Business.ASCCPRule.Woman woman, Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder womensHealthProfileTestOrder)
+        public ASCCPWomanViewer(Business.ASCCPRule.Woman woman, Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder womensHealthProfileTestOrder,
+            Business.Test.AccessionOrder accessionOrder)
         {
             this.m_Woman = woman;
             this.m_WomensHealthProfileTestOrder = womensHealthProfileTestOrder;
+            this.m_AccessionOrder = accessionOrder;
             InitializeComponent();
             this.DataContext = woman;
         }
@@ -38,6 +41,15 @@ namespace YellowstonePathology.UI
         private void HyperLinkUpdateWHP_Click(object sender, RoutedEventArgs e)
         {
             this.m_WomensHealthProfileTestOrder.ManagementRecommendation = this.m_Woman.ManagementRecommendation;
+        }
+
+        private void HyperLinkRemoveHold_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(Business.Test.PanelSetOrder pso in this.m_AccessionOrder.PanelSetOrderCollection)
+            {
+                pso.HoldDistribution = false;
+                pso.Distribute = true;
+            }
         }
     }
 }

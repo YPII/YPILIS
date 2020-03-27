@@ -485,7 +485,8 @@ namespace YellowstonePathology.UI.Client
         {
             if (this.ListBoxPhysicians.SelectedItem != null)
             {
-                YellowstonePathology.Business.Domain.Physician physician = (YellowstonePathology.Business.Domain.Physician)this.ListBoxPhysicians.SelectedItem;                
+                YellowstonePathology.Business.Domain.Physician selectedPhysician = (YellowstonePathology.Business.Domain.Physician)this.ListBoxPhysicians.SelectedItem;
+                YellowstonePathology.Business.Domain.Physician physician = Business.Persistence.DocumentGateway.Instance.PullPhysician(selectedPhysician.PhysicianId, this);
                 ProviderEntry providerEntry = new ProviderEntry(physician);
                 providerEntry.ShowDialog();
             }
