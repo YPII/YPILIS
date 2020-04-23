@@ -64,9 +64,12 @@ namespace YellowstonePathology.Business.Client.Model
 
         public void HandlePathGroup(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
-            Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(accessionOrder.ClientId);
+            Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(accessionOrder.ClientId);            
+
             if(client.PathologyGroupId != "YPBLGS")
             {
+                if (IsPAOIFWH(accessionOrder, client) == true) return;
+
                 Business.Facility.Model.Facility pathFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(client.PathologyGroupId);
                 Business.Client.Model.Client pathClient = Business.Gateway.PhysicianClientGateway.GetClientByClientId(pathFacility.ClientId);
 
@@ -79,6 +82,19 @@ namespace YellowstonePathology.Business.Client.Model
                 physicianClientDistribution.FaxNumber = pathClient.Fax;
                 this.Add(physicianClientDistribution);                
             }
+        }
+
+        private bool IsPAOIFWH(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, Business.Client.Model.Client client)
+        {
+            bool result = false;
+            if(accessionOrder.PanelSetOrderCollection.HasWomensHealthProfileOrder() == true)
+            {
+                if(client.PathologyGroupId == "PAOIF")
+                {
+                    result = true;
+                }
+            }
+            return result;
         }
         
         private void HandleReferringProvider(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)

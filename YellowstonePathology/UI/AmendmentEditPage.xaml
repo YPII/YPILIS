@@ -154,7 +154,8 @@
 			</StackPanel>
 
 			<StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
-				<Button Name="ButtonFinalize" Margin="5,5,30,5" Click="ButtonFinalize_Click" Width="100" Height="40">Finalize</Button>
+                <Button Name="ButtonUnfinalize" Margin="5,5,30,5" Click="ButtonUnfinalize_Click" Width="100" Height="40">Unfinalize</Button>
+                <Button Name="ButtonFinalize" Margin="5,5,30,5" Click="ButtonFinalize_Click" Width="100" Height="40">Finalize</Button>
 				<Button Name="ButtonClose" Margin="5,5,5,5" Click="ButtonClose_Click" Width="100" Height="40">Close</Button>
 			</StackPanel>
 		</Grid>

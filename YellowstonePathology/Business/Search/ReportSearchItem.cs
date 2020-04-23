@@ -32,6 +32,7 @@ namespace YellowstonePathology.Business.Search
 		private bool m_Verified;
 		private bool m_Finalized;
         private bool m_IsPosted;
+		private bool m_HoldDistribution;
         private bool m_IsLockAquiredByMe;
         private bool m_LockAquired;
 
@@ -353,7 +354,18 @@ namespace YellowstonePathology.Business.Search
             }
         }
 
-        public bool IsLockAquiredByMe
+		[PersistentProperty()]
+		public bool HoldDistribution
+		{
+			get { return this.m_HoldDistribution; }
+			set
+			{
+				this.m_HoldDistribution = value;
+				this.NotifyPropertyChanged("HoldDistribution");
+			}
+		}
+
+		public bool IsLockAquiredByMe
         {
             get { return this.m_IsLockAquiredByMe; }
             set

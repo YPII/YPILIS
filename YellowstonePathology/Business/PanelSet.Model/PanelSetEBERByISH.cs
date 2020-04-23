@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
             this.m_AllowMultiplePerAccession = true;
 
-this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
             this.m_NeverDistribute = true;
 
             string taskDescription1 = "Cut H&E slide and give to pathologist to circle tumor for tech only. Give the paraffin block to Flow so they can send to NEO.";
@@ -34,6 +34,9 @@ this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             this.m_TechnicalComponentFacility = neogenomicsIrvine;
             this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+
+            this.m_ProfessionalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
+            this.m_ProfessionalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
 

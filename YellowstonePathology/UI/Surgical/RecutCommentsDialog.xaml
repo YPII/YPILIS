@@ -16,37 +16,22 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" Margin="2,2,2,2">Clinical Reasons</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" Margin="2,2,2,2">CLINICAL REASONS</TextBlock>
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="5,5,5,5" HorizontalAlignment="Center">
-            <RadioButton GroupName="Comment" Content="Better evaluation of possible carcinoma" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Clinical need to look for viable tissue deeper in block" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Deeper - no correlation with cytology" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Evaluate for folliculitis/rupture" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Evaluating for invasive carcinoma" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Levels to evaluate the melanocytic proliferation" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Looking deeper for goblet cells" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Looking for a mass" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Looking for dysplasia" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Looking for lesion" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Looking for reson for hypopigmentation" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Looking for viral inclusions" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Needed to assess margins" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Clinical" Content="Need to assess deeper tissue" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Clinical" Content="Recut for our records" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Clinical" Content="To have slides available for review (consultation case for Patient transferring to Billings for medical care)" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Clinical" Content="Need to assess additional/deeper tissue for thorough histologic examination" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Content="Looking for polyp/dysplasia/lesion " Margin="2,2,2,2"/>
+            <RadioButton GroupName="Clinical" Content="Recut for YPI records" Margin="2,2,2,2"/>
         </StackPanel>
 
-        <TextBlock Grid.Column="1" Grid.Row="0" FontWeight="Bold" Margin="2,2,2,2">Technical Reasons</TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="0" FontWeight="Bold" Margin="2,2,2,2">TECHNICAL REASONS</TextBlock>
         <StackPanel Name="StackPanelTechnical" Grid.Column="1" Grid.Row="1" Margin="5,5,5,5">
             <RadioButton GroupName="Comment" Content="Poor fixation " Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Need to see complete sections of epidermis" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Need a complete cross section of the fallopian tube" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Need to see transition zone" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="No urothelium present" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Not seeing lesion/just getting into lesion" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Specimen orientation" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Content="Tissue defect - hole" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Clinical" Content="Tissue folding" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Content="Epidermis is incomplete" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Content="Incomplete cross section of fallopian tube" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Content="Transformation zone not visible" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Content="Not deep enough/just getting into lesion" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Content="Additional sections needed due to suboptimal specimen orientation" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Content="Folds, chatter, or defects limit histologic examination" Margin="2,2,2,2"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">

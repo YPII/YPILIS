@@ -28,14 +28,14 @@ namespace YellowstonePathology.Business.Test.ElaneSequenceAnalysis
 
             string taskDescription = "Collect material and send to Quest Labs.";
 
-            YellowstonePathology.Business.Facility.Model.Facility questLabs = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("QSTDGNSTS");
+            YellowstonePathology.Business.Facility.Model.Facility questLabs = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("QSTDGNSTCS");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription, questLabs));
 
             this.m_TechnicalComponentFacility = questLabs;
-            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("QSTDGNSTS");
+            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("QSTDGNSTCS");
 
-            this.m_ProfessionalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("QSTDGNSTS");
-            this.m_ProfessionalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("QSTDGNSTS");
+            this.m_ProfessionalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("QSTDGNSTCS");
+            this.m_ProfessionalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("QSTDGNSTCS");
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMOLEGEN());
         }

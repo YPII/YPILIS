@@ -21,8 +21,8 @@ namespace YellowstonePathology.Business.Calendar
             this.m_Pathologists.Add("Dr Durden");
             this.m_Pathologists.Add("Dr Emerick");
             this.m_Pathologists.Add("Dr Luem");
-            this.m_Pathologists.Add("Dr Messner");
             this.m_Pathologists.Add("Dr Nero");
+            this.m_Pathologists.Add("Dr Rozelle");
             this.m_Pathologists.Add("Dr Schneider");
         }
 

@@ -8,7 +8,7 @@ namespace YellowstonePathology.Business.ASCCPRule
 {
     public class ManagementRecomendation
     {
-        public const string BASECOMMENT = "Based on the patient’s age and test results, the ASCCP Clinical Management Guidelines recommend *RECOMMENDATION*.  Deviation from recommendations is anticipated, as there may be extenuating clinical circumstances and all treatment and screening decisions should be made between the patient and clinical provider.";
+        public const string BASECOMMENT = "Based on the patient’s age and test results, the 2012 ASCCP Clinical Management Guidelines recommend *RECOMMENDATION*.  Deviation from recommendations is anticipated, as there may be extenuating clinical circumstances and all treatment and screening decisions should be made between the patient and clinical provider.";
 
         public static string GetRepeatTwoToFour()
         {

@@ -97,6 +97,15 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
+                                <GridViewColumn Header="Rozelle">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrRozelleStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                                 <GridViewColumn Header="Schneider">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>

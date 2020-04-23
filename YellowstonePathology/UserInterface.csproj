@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>69</ApplicationRevision>
+    <ApplicationRevision>88</ApplicationRevision>
     <ApplicationVersion>11.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -1027,7 +1027,6 @@
     <Compile Include="Business\Label.Model\Cassette.cs" />
     <Compile Include="Business\Label.Model\CassettePrinter.cs" />
     <Compile Include="Business\Label.Model\CassettePrinterCollection.cs" />
-    <Compile Include="Business\Label.Model\CassettePrinterGrossCody.cs" />
     <Compile Include="Business\Label.Model\CassettePrinterGrossHobbit.cs" />
     <Compile Include="Business\Label.Model\CassettePrinterGrossPath.cs" />
     <Compile Include="Business\Label.Model\CassettePrinterGrossTech.cs" />
@@ -1306,6 +1305,7 @@
     <Compile Include="Business\Test\NeoTYPEOvarianTumorProfile\NeoTYPEOvarianTumorProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPEPrecisionProfileForSolidTumors\NeoTYPEPrecisionProfileForSolidTumorsTest.cs" />
     <Compile Include="Business\Test\NGCT\NGCTEPICBeakerObxView.cs" />
+    <Compile Include="Business\Test\NGSComprehensiveSarcomaFusion\NGSComprehensiveSarcomaFusion.cs" />
     <Compile Include="Business\Test\NRASEXON4MutationAnalysis\NRASEXON4MutationAnalysisTest.cs" />
     <Compile Include="Business\Test\NTRKNGSFusionProfile\NTRKNGSFusionProfileTest.cs" />
     <Compile Include="Business\Test\NUT\NUTTest.cs" />
@@ -1375,6 +1375,7 @@
     <Compile Include="Business\Test\ReticulatedPlateletAnalysisV2\ReticulatedPlateletAnalysisV2WordDocument.cs" />
     <Compile Include="Business\Test\RibosomalRNA16S\RibosomalRNA16STest.cs" />
     <Compile Include="Business\Test\SomatostatinReceptorType2\SomatostatinReceptorType2Test.cs" />
+    <Compile Include="Business\Test\SOX11\SOX11Test.cs" />
     <Compile Include="Business\Test\SPEP\SPEPTest.cs" />
     <Compile Include="Business\Test\STAT6\STAT6Test.cs" />
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationTest.cs" />
@@ -3300,6 +3301,7 @@
     <Compile Include="UI\Gross\SpecimenSelectionPage.xaml.cs">
       <DependentUpon>SpecimenSelectionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ImportADRData.cs" />
     <Compile Include="UI\SVHLabelDialog.xaml.cs">
       <DependentUpon>SVHLabelDialog.xaml</DependentUpon>
     </Compile>

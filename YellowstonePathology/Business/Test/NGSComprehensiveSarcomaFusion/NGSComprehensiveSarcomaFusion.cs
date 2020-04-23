@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YellowstonePathology.Business.Test.STAT6
+namespace YellowstonePathology.Business.Test.NGSComprehensiveSarcomaFusion
 {
-    public class STAT6Test : YellowstonePathology.Business.PanelSet.Model.PanelSet
+    public class NGSComprehensiveSarcomaFusion : YellowstonePathology.Business.PanelSet.Model.PanelSet
     {
-        public STAT6Test()
+        public NGSComprehensiveSarcomaFusion()
         {
-            this.m_PanelSetId = 372;
-            this.m_PanelSetName = "STAT6";
-            this.m_Abbreviation = "STAT6";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
+            this.m_PanelSetId = 349;
+            this.m_PanelSetName = "NGS Comprehensive Sarcoma Fusion Profile";
+            this.m_Abbreviation = "NGS Comprehensive Sarcoma Fusion Profile";
+            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
             this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.STAT6
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
-            this.m_ExpectedDuration = TimeSpan.FromDays(5);
+            this.m_ExpectedDuration = TimeSpan.FromDays(12);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
@@ -36,7 +36,7 @@ namespace YellowstonePathology.Business.Test.STAT6
             this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             this.m_ProfessionalComponentFacility = neogenomicsIrvine;
-            this.m_ProfessionalComponentBillingFacility = neogenomicsIrvine;            
+            this.m_ProfessionalComponentBillingFacility = neogenomicsIrvine;
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
         }

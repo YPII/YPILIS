@@ -67,7 +67,7 @@ namespace YellowstonePathology.UI
 
             this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
 
-            this.m_TabItemFlow = new TabItem();
+            this.m_TabItemFlow = new TabItem();            
             this.m_TabItemFlow.Header = SetHeader("Flow", "Flow.ico");
 			this.m_TabItemFlow.Tag = "Flow";            
 

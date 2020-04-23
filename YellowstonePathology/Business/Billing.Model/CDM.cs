@@ -20,7 +20,14 @@ namespace YellowstonePathology.Business.Billing.Model
         private string m_CDMClient;
 
         public CDM()
-        { }
+        { 
+
+        }
+
+        public CDM(string cdmId)
+        {
+            this.m_CDMId = cdmId;
+        }
 
         [PersistentPrimaryKeyProperty(false)]
         public string CDMId
@@ -100,9 +107,9 @@ namespace YellowstonePathology.Business.Billing.Model
             }
         }
 
-        public void Save()
+        public void Insert()
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE tblCDM set CDMCode = @CDMCode, CPTCode = @CPTCode, ProcedureName = @ProcedureName, CDMClient = @CDMClient where CDMCode = @CDMCode;");
+            MySqlCommand cmd = new MySqlCommand("Insert into tblCDM (CDMId, CDMCode, CPTCode, ProcedureName, CDMClient) values (@CDMId, @CDMCode, @CPTCode, @ProcedureName, @CDMClient)");
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@CDMId", this.m_CDMId);
             cmd.Parameters.AddWithValue("@CDMCode", this.m_CDMCode);
@@ -116,6 +123,11 @@ namespace YellowstonePathology.Business.Billing.Model
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        public void Save()
+        {
+            
         }
     }
 }

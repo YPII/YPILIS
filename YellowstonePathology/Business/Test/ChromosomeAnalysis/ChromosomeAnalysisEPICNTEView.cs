@@ -31,10 +31,10 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			this.AddNextNTEElement(result, document);
 
 			this.AddNextNTEElement("", document);
-			this.AddNextNTEElement("Pathologist: " + panelSetOrder.Signature, document);
+			this.AddNextNTEElement("Pathologist: " + panelSetOrder.ReferenceLabSignature, document);
 			if (panelSetOrder.FinalTime.HasValue == true)
 			{
-				this.AddNextNTEElement("E-signed " + panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document);
+				this.AddNextNTEElement("E-signed " + panelSetOrder.ReferenceLabFinalDate.Value.ToString("MM/dd/yyyy HH:mm"), document);
 			}
 
 			this.AddNextNTEElement("", document);

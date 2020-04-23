@@ -166,5 +166,14 @@ namespace YellowstonePathology.UI
         {
             this.m_AmendmentUI.SelectedAmendment.ReportNo = this.m_AmendmentUI.PanelSetOrder.ReportNo;
         }
-    }
+
+		private void ButtonUnfinalize_Click(object sender, RoutedEventArgs e)
+		{
+			if(this.SelectedAmendment.Final == true)
+			{
+				this.SelectedAmendment.Unfinalize();
+				NotifyPropertyChanged("SelectedAmendment");
+			}
+		}
+	}
 }

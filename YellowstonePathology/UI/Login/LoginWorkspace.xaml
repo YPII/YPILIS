@@ -169,6 +169,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Report" Width="170"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=FinalTime, Converter={StaticResource MilitaryDateTimeConverter}}" Header="Final" Width="150"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=IsPosted}" Header="Billed" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=HoldDistribution}" Header="Hold" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Client" Width="200"/>
                     </GridView>
                 </ListView.View>

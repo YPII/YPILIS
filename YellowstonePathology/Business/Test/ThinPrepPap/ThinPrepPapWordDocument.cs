@@ -148,7 +148,11 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             if (reviewPanelOrder != null)
             {
                 string reviewedBy = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
-                string reviewedByFinal = reviewPanelOrder.AcceptedTime.Value.ToString("MM/dd/yyyy HH:mm");
+                string reviewedByFinal = "";
+                if (reviewPanelOrder.AcceptedTime.HasValue == true)
+                {
+                    reviewedByFinal = reviewPanelOrder.AcceptedTime.Value.ToString("MM/dd/yyyy HH:mm");
+                }
 
                 if (reviewedBy.IndexOf("MD") >= 0)
                 {

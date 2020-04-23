@@ -43,9 +43,6 @@ namespace YellowstonePathology.Business.View
             YellowstonePathology.Business.View.ClientLocationView yellowstoneUrology = new Business.View.ClientLocationView(184, 54, "St. Vincent Healthcare Urology", "Medical Records");
             result.Add(yellowstoneUrology);
 
-            YellowstonePathology.Business.View.ClientLocationView westParkHospital = new Business.View.ClientLocationView(553, 205, "West Park Hospital", "Medical Records");
-            result.Add(westParkHospital);
-
             YellowstonePathology.Business.View.ClientLocationView billingsObgyn = new Business.View.ClientLocationView(54, 8, "Billings OB/GYN Associates", "Medical Records");
             result.Add(billingsObgyn);            
 

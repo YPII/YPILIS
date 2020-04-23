@@ -218,5 +218,10 @@ namespace YellowstonePathology.UI.Surgical
         {
             this.AddPeerReview(5150);
         }
+
+        private void HyperLinkAddDrRozelle_Click(object sender, RoutedEventArgs e)
+        {
+            this.AddPeerReview(5153);
+        }
     }
 }

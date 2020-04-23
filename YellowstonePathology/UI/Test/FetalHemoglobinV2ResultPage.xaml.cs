@@ -143,5 +143,15 @@ namespace YellowstonePathology.UI.Test
                 MessageBox.Show(result.Message);
             }
         }
+
+        private void HyperLinkSetResults_Click(object sender, RoutedEventArgs e)
+        {
+            this.PanelSetOrder.HandleHeightConverstion();
+            this.PanelSetOrder.HandleWeightConversion();
+            this.PanelSetOrder.SetMothersBloodVolume();
+            this.m_PanelSetOrder.SetFetalBleed();
+            this.m_PanelSetOrder.SetRecommendedNumberOfVials();
+            this.m_PanelSetOrder.SetMethod();
+        }
     }
 }

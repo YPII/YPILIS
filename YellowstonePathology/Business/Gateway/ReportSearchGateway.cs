@@ -139,12 +139,13 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
                 "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
                 "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
-                "'' ForeignAccessionNo, pso.IsPosted " +
+                "'' ForeignAccessionNo, pso.IsPosted, pso.HoldDistribution " +
                 "FROM tblAccessionOrder a " +
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
-                "join tblClientOrder co on a.MasterAccessionNo = co.MasterAccessionNo " +
+                "join tblWomensHealthProfileTestOrder whp on pso.ReportNo = whp.ReportNo " + 
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
-                "where co.SpecialInstructions like '%management of abnormal%' and a.AccessionDate >= '2020-01-01' and pso.panelsetid = 116 Order by a.AccessionDate desc";
+                "where a.AccessionDate >= '2020-01-01' and (whp.ManagePerASCCP = 1 or whp.ManagePerASCCPWithCotest = 1) " +
+                "Order by a.AccessionDate desc";
             Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
             return reportSearchList;
         }

@@ -19,6 +19,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
             panelSetCollection.Add(new YellowstonePathology.Business.Test.IEP.IEPTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.SPEP.SPEPTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.UPEP.UPEPTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.SOX11.SOX11Test());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.NGSComprehensiveSarcomaFusion.NGSComprehensiveSarcomaFusion());
 
             panelSetCollection.Add(new YellowstonePathology.Business.Test.JAK29P241.JAK29P241Test());
             panelSetCollection.Add(new Business.Test.ElaneSequenceAnalysis.ElaneSequenceAnalysisTest());

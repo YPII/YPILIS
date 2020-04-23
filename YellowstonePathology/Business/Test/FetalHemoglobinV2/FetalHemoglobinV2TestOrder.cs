@@ -15,14 +15,17 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
         private string m_HbFReferenceRange;
         private string m_MothersHeightFeet;
         private string m_MothersHeightInches;
+        private string m_MothersHeightCM;
         private string m_MothersWeight;
+        private string m_MothersWeightKG;
         private string m_MothersBloodVolume;
+        private bool m_HeightWeightNotProvided;
         private string m_FetalBleed;
         private string m_FetalBleedReferenceRange;
         private string m_RhImmuneGlobulin;
         private string m_ReportComment;
         private string m_ASRComment;
-
+        private string m_Method;
 
         public FetalHemoglobinV2TestOrder()
         { }
@@ -50,7 +53,6 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
                 if (this.m_HbFPercent != value)
                 {
                     this.m_HbFPercent = value;
-                    CalculateFetalBleed();
                     NotifyPropertyChanged("HbFPercent");
                 }
             }
@@ -66,6 +68,20 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
                 {
                     this.m_ReportComment = value;
                     NotifyPropertyChanged("ReportComment");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string Method
+        {
+            get { return this.m_Method; }
+            set
+            {
+                if (this.m_Method != value)
+                {
+                    this.m_Method = value;
+                    NotifyPropertyChanged("Method");
                 }
             }
         }
@@ -121,7 +137,6 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
                 if (this.m_MothersHeightFeet != value)
                 {
                     this.m_MothersHeightFeet = value;
-                    this.CalculateMothersBloodVolume();
                     NotifyPropertyChanged("MothersHeightFeet");
                 }
             }
@@ -136,8 +151,21 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
                 if (this.m_MothersHeightInches != value)
                 {
                     this.m_MothersHeightInches = value;
-                    this.CalculateMothersBloodVolume();
                     NotifyPropertyChanged("MothersHeightInches");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string MothersHeightCM
+        {
+            get { return this.m_MothersHeightCM; }
+            set
+            {
+                if (this.m_MothersHeightCM != value)
+                {
+                    this.m_MothersHeightCM = value;
+                    NotifyPropertyChanged("MothersHeightCM");
                 }
             }
         }
@@ -151,12 +179,40 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
                 if (this.m_MothersWeight != value)
                 {
                     this.m_MothersWeight = value;
-                    this.CalculateMothersBloodVolume();
                     NotifyPropertyChanged("MothersWeight");
                 }
             }
         }
 
+        [PersistentProperty()]
+        public string MothersWeightKG
+        {
+            get { return this.m_MothersWeightKG; }
+            set
+            {
+                if (this.m_MothersWeightKG != value)
+                {
+                    this.m_MothersWeightKG = value;
+                    NotifyPropertyChanged("MothersWeightKG");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public bool HeightWeightNotProvided
+        {
+            get { return this.m_HeightWeightNotProvided; }
+            set
+            {
+                if (this.m_HeightWeightNotProvided != value)
+                {
+                    this.m_HeightWeightNotProvided = value;
+                    NotifyPropertyChanged("HeightWeightNotProvided");
+                }
+            }
+        }
+
+        [PersistentProperty()]
         public string MothersBloodVolume
         {
             get { return this.m_MothersBloodVolume; }
@@ -165,12 +221,12 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
                 if (this.m_MothersBloodVolume != value)
                 {
                     this.m_MothersBloodVolume = value;
-                    this.CalculateFetalBleed();
                     NotifyPropertyChanged("MothersBloodVolume");
                 }
             }
         }
 
+        [PersistentProperty()]
         public string FetalBleed
         {
             get { return this.m_FetalBleed; }
@@ -179,12 +235,12 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
                 if (this.m_FetalBleed != value)
                 {
                     this.m_FetalBleed = value;
-                    CalculateRecommendedNumberOfVials();
                     NotifyPropertyChanged("FetalBleed");
                 }
             }
         }
 
+        [PersistentProperty()]
         public string RhImmuneGlobulin
         {
             get { return this.m_RhImmuneGlobulin; }
@@ -198,7 +254,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
             }
         }
 
-        private void CalculateMothersBloodVolume()
+        public void SetMothersBloodVolume()
         {
             if (string.IsNullOrEmpty(this.m_MothersWeight) == true ||
                 string.IsNullOrEmpty(this.m_MothersHeightFeet) == true) this.MothersBloodVolume = "5000";
@@ -218,15 +274,15 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
                     double weightInLbs = double.Parse(mothersWeightCleaned);
 
                     double bloodVolume = ((0.005835 * totalInches * totalInches * totalInches) + (15 * weightInLbs)) + 183;
-                    this.MothersBloodVolume = Math.Round(bloodVolume).ToString();
+                    this.m_MothersBloodVolume = Math.Round(bloodVolume).ToString();
+                    this.NotifyPropertyChanged("MothersBloodVolume");
                 }
             }
         }
 
-        private void CalculateFetalBleed()
+        public void SetFetalBleed()
         {
-            if (string.IsNullOrEmpty(this.m_MothersWeight) == true ||
-                string.IsNullOrEmpty(this.m_MothersHeightFeet) == true)
+            if (this.m_HeightWeightNotProvided == true)
             {
                 this.m_MothersBloodVolume = "5000";
                 this.NotifyPropertyChanged("MothersBloodVolume");
@@ -251,7 +307,76 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
             }
         }
 
-        private void CalculateRecommendedNumberOfVials()
+        public void HandleHeightConverstion()
+        {
+            // 1 in = 2.54 cm
+
+            if (this.m_HeightWeightNotProvided == false)
+            {
+                if (string.IsNullOrEmpty(this.m_MothersHeightFeet) == true)
+                {
+                    if (string.IsNullOrEmpty(this.m_MothersHeightCM) == false)
+                    {
+                        Double totalInches = Convert.ToDouble(this.m_MothersHeightCM) / 2.54;
+                        int feet = Convert.ToInt32(totalInches / 12);
+                        int inches = Convert.ToInt32(totalInches % 12);
+                        this.m_MothersHeightFeet = feet.ToString();
+                        this.m_MothersHeightInches = inches.ToString();
+                        this.NotifyPropertyChanged("MothersHeightFeet");
+                        this.NotifyPropertyChanged("MothersHeightInches");
+                    }
+                }
+                else if (string.IsNullOrEmpty(this.m_MothersHeightCM) == true)
+                {
+                    if(string.IsNullOrEmpty(this.m_MothersHeightFeet) == false)
+                    {
+                        double totalCM = (Convert.ToDouble(this.m_MothersHeightFeet) * 12 + Convert.ToDouble(this.m_MothersHeightInches)) * 2.54;
+                        this.m_MothersHeightCM = totalCM.ToString();
+                        this.NotifyPropertyChanged("MothersHeightCM");
+                    }
+                }
+            }
+            else
+            {
+                this.m_MothersHeightFeet = null;
+                this.m_MothersHeightInches = null;
+                this.m_MothersHeightCM = null;
+                this.NotifyPropertyChanged(string.Empty);
+            }
+        }
+
+        public void HandleWeightConversion()
+        {
+            if (this.m_HeightWeightNotProvided == false)
+            {
+                if (string.IsNullOrEmpty(this.m_MothersWeight) == true)
+                {
+                    if (string.IsNullOrEmpty(this.m_MothersWeightKG) == false)
+                    {
+                        double lbs = Convert.ToDouble(this.m_MothersWeightKG) * 2.20462;
+                        this.m_MothersWeight = lbs.ToString();
+                        this.NotifyPropertyChanged("MothersWeight");
+                    }
+                }
+                else if (string.IsNullOrEmpty(this.m_MothersWeightKG) == true)
+                {
+                    if (string.IsNullOrEmpty(this.m_MothersWeight) == false)
+                    {
+                        double kg = Convert.ToDouble(this.m_MothersWeight) / 2.20462;
+                        this.m_MothersWeightKG = Math.Round(kg, 2).ToString();
+                        this.NotifyPropertyChanged("MothersWeightKG");
+                    }
+                }
+            }
+            else
+            {
+                this.m_MothersWeightKG = null;
+                this.m_MothersWeight = null;
+                this.NotifyPropertyChanged(string.Empty);
+            }
+        }
+
+        public void SetRecommendedNumberOfVials()
         {
             if (string.IsNullOrEmpty(this.m_FetalBleed) == false)
             {
@@ -270,6 +395,42 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
             {
                 this.RhImmuneGlobulin = null;
             }
+        }
+
+        public void SetMethod()
+        {
+            string method = "Quantitative Flow Cytometry" + Environment.NewLine + "Sensitivity for Hb - F is <= 0.02 %." + Environment.NewLine;
+            string comment = "";
+
+            if(this.m_HeightWeightNotProvided == false)
+            {
+                method = "Patient blood volume, Fetal - Maternal Bleed quantity and Rh Immune Globulin(RhIg) dosing are calculated from patient height and weight data submitted with the test request.  If height and weight data are not received, then a default patient blood volume of 5000 mL is used for the Fetal-Maternal Bleed quantity and RhIg dose. " + Environment.NewLine +
+                    "Patient Height: [HEIGHTCM] cm " + Environment.NewLine +
+                    "Patient Weight: [WEIGHTKG] kg " + Environment.NewLine +
+                    "Patient calculated blood volume: [BLOODVOLUME] mL";
+                method = method.Replace("[HEIGHTCM]", this.m_MothersHeightCM);
+                method = method.Replace("[WEIGHTKG]", this.m_MothersWeightKG);
+                method = method.Replace("[BLOODVOLUME]", this.MothersBloodVolume);
+
+                comment = "Fetal-Maternal Bleed quantity and RhIg dose recommendation are based on the following patient data provided with the test request:  Height [HEIGHTCM] cm, Weight [WEIGHTKG] kg.  Patient calculated blood volume is [BLOODVOLUME] mL.";
+                comment = comment.Replace("[HEIGHTCM]", this.m_MothersHeightCM);
+                comment = comment.Replace("[WEIGHTKG]", this.m_MothersWeightKG);
+                comment = comment.Replace("[BLOODVOLUME]", this.m_MothersBloodVolume);
+            }
+            else
+            {
+                method = "Patient blood volume, Fetal-Maternal Bleed quantity and Rh Immune Globulin (RhIg) dosing are calculated from patient height and weight data submitted with the test request.  If height and weight data are not received, then a default patient blood volume of 5000 mL is used for the Fetal-Maternal Bleed quantity and RhIg dose. " + Environment.NewLine +
+                    "Patient Height: None submitted" + Environment.NewLine +
+                    "Patient Weight: None submitted" + Environment.NewLine +
+                    "Patient default blood volume: 5000 mL";
+                comment = "Specific patient height and weight information was not provided for this patient, and therefore the patient’s specific blood volume cannot be calculated.  A default blood volume of 5000 mL was used as the basis of the RhIg dose recommendation.  Please complete a patient specific calculation for more precise dosing, if necessary.";
+            }
+
+            this.m_Method = method;
+            this.m_ReportComment = comment;
+
+            this.NotifyPropertyChanged("Method");
+            this.NotifyPropertyChanged("ReportComment");
         }
 
         private string CleanInputForParse(string input)

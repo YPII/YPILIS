@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YellowstonePathology.Business.Test.STAT6
+namespace YellowstonePathology.Business.Test.SOX11
 {
-    public class STAT6Test : YellowstonePathology.Business.PanelSet.Model.PanelSet
+    public class SOX11Test : YellowstonePathology.Business.PanelSet.Model.PanelSet
     {
-        public STAT6Test()
+        public SOX11Test()
         {
-            this.m_PanelSetId = 372;
-            this.m_PanelSetName = "STAT6";
-            this.m_Abbreviation = "STAT6";
+            this.m_PanelSetId = 386;
+            this.m_PanelSetName = "SOX11";
+            this.m_Abbreviation = "SOX11";
             this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;

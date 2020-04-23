@@ -993,7 +993,23 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            string path = @"c:\temp\mask.txt";            
+            //UI.ImportADRData import = new ImportADRData();
+            //import.Run();
+
+            Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("20-7152", this);
+            Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder pso = (Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)ao.PanelSetOrderCollection.GetPanelSetOrder("20-7152.M1");
+            string text = Business.Test.HER2AmplificationByISH.HER2AmplificationByISHSystemGeneratedAmendmentText.AmendmentText(pso);
+
+            //Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("20-8177", this);
+            //Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder pso = (Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder)ao.PanelSetOrderCollection.GetPanelSetOrder("20-8177.R1");
+            //string text = Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEASystemGeneratedAmendmentText.AmendmentText(pso);
+
+        }
+
+
+        private void ASCCP()
+        {
+            string path = @"c:\temp\mask.txt";
             using (StreamReader sr = File.OpenText(path))
             {
                 string s = "";

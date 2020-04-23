@@ -9,7 +9,8 @@ namespace YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCa
     public class PDL122C3EsophSquamCellCarcinomaSysGenAmendmentText
     {
         public PDL122C3EsophSquamCellCarcinomaSysGenAmendmentText()
-        { }
+        {
+        }
 
         public static string AmendmentText(PDL122C3forEsophagealSquamousCellCarcinoma.PDL122C3forEsophagealSquamousCellCarcinomaTestOrder testOrder)
         {
@@ -17,8 +18,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCa
                 "PD-L1 expression are associated with better response to PD-1 antagonists.  For full details, refer to separate report.";
 
             StringBuilder result = new StringBuilder();
-            result.Append("PD-L1 immunohistochemical stain was performed on the specimen see YPI report # ");
-            result.Append(testOrder.ReportNo);
+            result.Append("PD-L1 immunohistochemical stain was performed (YPI report # " + testOrder.ReportNo + ")");
             result.AppendLine(", which yielded the following result:");
             result.AppendLine();
             result.AppendLine(testOrder.Interpretation);

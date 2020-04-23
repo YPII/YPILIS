@@ -127,13 +127,13 @@
                 </TextBlock>
 
                 <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">                    
-                    <Hyperlink Click="HyperLinkAddDrMessner_Click">Dr. Messner</Hyperlink>
-                </TextBlock>
-                
-                <TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkAddDrNero_Click">Dr. Nero</Hyperlink>
 				</TextBlock>
 
+                <TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkAddDrRozelle_Click">Dr. Rozelle</Hyperlink>
+                </TextBlock>
+                
                 <TextBlock Grid.Column="0" Grid.Row="9" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkAddDrSchneider_Click">Dr. Schneider</Hyperlink>
                 </TextBlock>

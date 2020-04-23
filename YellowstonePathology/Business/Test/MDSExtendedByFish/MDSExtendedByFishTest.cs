@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.Test.MDSExtendedByFish
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WPH);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.CMMC);
 
-            string taskDescription = "Gather materials (Peripheral blood: 2-5 mL in sodium heparin tube and 2x5 mL in EDTA tube or" +
+            string taskDescription = "Gather materials (Peripheral blood: 2-5 mL in sodium heparin tube and 2x5 mL in EDTA tube or " +
             "Bone marrow: 1-2 mL in sodium heparin tube and 2 mL in EDTA tube or Fresh unfixed tissue in RPMI) and send out to Neo.";
 
             YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");

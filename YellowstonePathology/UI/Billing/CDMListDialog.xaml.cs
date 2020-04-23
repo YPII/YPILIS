@@ -65,8 +65,10 @@ namespace YellowstonePathology.UI.Billing
 
         private void ButtonNewCDM_Click(object sender, RoutedEventArgs e)
         {
-            this.m_SelectedCDM = new Business.Billing.Model.CDM();
-            NotifyPropertyChanged("SelectedCDM");
+            string bsonId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+            //this.m_SelectedCDM = new Business.Billing.Model.CDM(bsonId);
+            //this.m_SelectedCDM.Insert();
+            //NotifyPropertyChanged("SelectedCDM");
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)

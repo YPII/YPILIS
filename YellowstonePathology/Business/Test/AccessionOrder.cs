@@ -1610,7 +1610,7 @@ namespace YellowstonePathology.Business.Test
                 }
                 else if(this.m_ClientId == 579)
                 {
-                    panelSetOrder.AssignedToId = 5088;  //tallman cases to Emerick
+                    panelSetOrder.AssignedToId = 5153;  //tallman cases to Emerick
                 }                              
             }
             else if (this.m_CaseOwnerId != 0)

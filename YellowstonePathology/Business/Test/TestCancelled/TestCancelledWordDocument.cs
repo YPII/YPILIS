@@ -32,6 +32,19 @@ namespace YellowstonePathology.Business.Test.TestCancelled
             this.ReplaceText("test_cancelled_comment",  reportOrderTestCancelled.Comment);
             this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.Signature);
 
+            YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByOrderTarget(this.m_PanelSetOrder.OrderedOnId);
+            if(specimenOrder != null)
+            {
+                this.ReplaceText("specimen_description", specimenOrder.Description);
+                string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+                this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
+            }
+            else
+            {
+                this.ReplaceText("specimen_description", string.Empty);
+                this.SetXmlNodeData("date_time_collected", string.Empty);
+            }
+
             string finalDate = YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate) + " - " + YellowstonePathology.Business.BaseData.GetMillitaryTimeString(this.m_PanelSetOrder.FinalTime);
             this.SetXmlNodeData("final_date", finalDate);
 
@@ -42,7 +55,7 @@ namespace YellowstonePathology.Business.Test.TestCancelled
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();
             amendmentSection.SetAmendment(amendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, true);
 
-			this.SaveReport();
+            this.SaveReport();
 		}
 
         public override void Publish()

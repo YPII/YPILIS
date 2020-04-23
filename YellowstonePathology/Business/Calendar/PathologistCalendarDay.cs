@@ -20,6 +20,7 @@ namespace YellowstonePathology.Business.Calendar
         private PathologistCalendarStatus m_DrEmerickStatus;
         private PathologistCalendarStatus m_DrLuemStatus;        
         private PathologistCalendarStatus m_DrNeroStatus;
+        private PathologistCalendarStatus m_DrRozelleStatus;
         private PathologistCalendarStatus m_DrSchneiderStatus;
 
         public PathologistCalendarDay()
@@ -34,6 +35,7 @@ namespace YellowstonePathology.Business.Calendar
             this.m_DrEmerickStatus = new Calendar.PathologistCalendarStatus("Dr Emerick", "Bozeman");
             this.m_DrLuemStatus = new Calendar.PathologistCalendarStatus("Dr Luem", "Bozeman");
             this.m_DrNeroStatus = new Calendar.PathologistCalendarStatus("Dr Nero", "Bozeman");
+            this.m_DrRozelleStatus = new Calendar.PathologistCalendarStatus("Dr Rozelle", "Billings");
             this.m_DrSchneiderStatus = new Calendar.PathologistCalendarStatus("Dr Schneider", "Billings");
         }
 
@@ -137,6 +139,19 @@ namespace YellowstonePathology.Business.Calendar
                 {
                     this.m_DrNeroStatus = value;
                     this.NotifyPropertyChanged("DrNeroStatus");
+                }
+            }
+        }
+
+        public PathologistCalendarStatus DrRozelleStatus
+        {
+            get { return this.m_DrRozelleStatus; }
+            set
+            {
+                if (value != this.m_DrRozelleStatus)
+                {
+                    this.m_DrRozelleStatus = value;
+                    this.NotifyPropertyChanged("DrRozelleStatus");
                 }
             }
         }

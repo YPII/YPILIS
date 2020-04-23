@@ -28,6 +28,12 @@ namespace YellowstonePathology.Business.Test.TestCancelled
             this.AddNextObxElement("", document, "F");
             this.HandleLongString("Comment: " + testCancelledTestOrder.Comment, document, "F");
             this.AddNextObxElement("", document, "F");
+
+            this.AddNextObxElement("Specimen Description:", document, "F");
+            YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(testCancelledTestOrder.OrderedOn, testCancelledTestOrder.OrderedOnId);
+            this.HandleLongString(specimenOrder.Description, document, "F");
+            this.AddNextObxElement(string.Empty, document, "F");
+
             this.AddAmendments(document);
             this.AddNextObxElement("", document, "F");
         }

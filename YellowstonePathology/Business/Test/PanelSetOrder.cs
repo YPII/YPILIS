@@ -1771,7 +1771,7 @@ namespace YellowstonePathology.Business.Test
 				else if (this.HasProfessionalComponent == true && this.HasTechnicalComponent == true)
 				{
 					result.Append("Technical and professional component(s) performed at ");
-					result.Append(professionalComponentFacility.GetCLIAAddressString());
+					result.Append(technicalComponentFacility.GetCLIAAddressString());
 				}
 			}
 			else

@@ -31,6 +31,7 @@ namespace YellowstonePathology.UI.Calendar
         {
             this.m_StartDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1));
             this.m_PathologistCalendarDayCollection = YellowstonePathology.Business.Calendar.PathologistCalendarDayCollection.Load(this.m_StartDate, this.m_StartDate.AddMonths(1).AddDays(-1));
+
             this.m_CalendarStatusList = new List<string>();
             this.m_CalendarStatusList.Add("Billings");
             this.m_CalendarStatusList.Add("Bozeman");
@@ -126,6 +127,12 @@ namespace YellowstonePathology.UI.Calendar
         {
             this.m_PathologistCalendarDayCollection.Save();
             this.m_PathologistCalendarDayCollection = YellowstonePathology.Business.Calendar.PathologistCalendarDayCollection.Load(this.m_StartDate, this.m_StartDate.AddMonths(1).AddDays(-1));
+
+            foreach (Business.Calendar.PathologistCalendarDay day in this.m_PathologistCalendarDayCollection)
+            {
+                //day.DrRozelleStatus = new Business.Calendar.PathologistCalendarStatus("Dr Rozelle", "Billings");
+            }
+
             this.NotifyPropertyChanged("PathologistCalendarDayCollection");
         }
 
