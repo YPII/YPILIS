@@ -9,6 +9,8 @@ namespace YellowstonePathology.Business.HL7View.EPIC
     public class EPICBeakerObxView
     {
         protected int m_ObxCount;
+        protected int m_NTECount;        
+
         protected YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
         protected string m_DateFormat = "yyyyMMddHHmm";
         protected string m_ReportNo;    
@@ -18,11 +20,17 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.m_AccessionOrder = accessionOrder;
 			this.m_ReportNo = reportNo;
 			this.m_ObxCount = obxCount;
-        }
+            this.m_NTECount = 1;
+        }        
 
         public int ObxCount
         {
             get { return this.m_ObxCount; }
+        }
+
+        public int NTECount
+        {
+            get { return this.m_NTECount; }
         }
 
         public virtual void ToXml(XElement document)
@@ -67,7 +75,37 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.AddNextObxElement("DOB: " + this.m_AccessionOrder.PBirthdate.Value.ToString("MM/dd/yyyy"), document, "F");
             this.AddNextObxElement("Provider: " + this.m_AccessionOrder.PhysicianName, document, "F");
             this.AddNextObxElement("Location: " + this.m_AccessionOrder.ClientName, document, "F");
-        }        
+        }
+
+        protected void AddCompanyHeaderNTE(XElement document)
+        {
+            this.AddNextNTEElement("Yellowstone Pathology Institute, Inc", document);
+            this.AddNextNTEElement("2900 12th Ave. North, Ste. 295W", document);
+            this.AddNextNTEElement("Billings, Mt 59101", document);
+            this.AddNextNTEElement("(406)238-6360", document);
+        }
+
+        public void AddNextNTEElement(string text, XElement document)
+        {
+            string normalizedText = StringHelper.ReplaceSpecialCharacters(text) + @"\.br\";
+
+            XElement nteElement = new XElement("NTE");
+            document.Add(nteElement);
+
+            XElement nte01Element = new XElement("NTE.1");
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("NTE.1.1", this.m_NTECount.ToString(), nte01Element);
+            nteElement.Add(nte01Element);
+
+            XElement nte02Element = new XElement("NTE.2");
+            nteElement.Add(nte02Element);
+
+            XElement nte03Element = new XElement("NTE.3");
+            XElement nte0301Element = new XElement("NTE.3.1", normalizedText);
+            nte03Element.Add(nte0301Element);
+            nteElement.Add(nte03Element);
+
+            this.m_NTECount += 1;
+        }
 
         protected void AddNextObxElement(string value, XElement document, string observationResultStatus)
         {            
@@ -231,12 +269,45 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             string result = fieldValue;
             if (string.IsNullOrEmpty(fieldValue) == false)
             {
-                result = fieldValue.Replace(System.Environment.NewLine, @"\.br\");
+                result = result.Trim();
+                result = result.Replace("\r\n", @"\.br\").Replace("\n", @"\.br\").Replace("\r", @"\.br\");
                 result = result.Replace("&", @"\T\");
                 result = result.Replace("~", @"\R\");
                 result = result.Replace("^", @"\S\");
             }
             return result;
+        }
+
+        public virtual void AddAmendmentsNTE(XElement document, YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        {
+            YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = accessionOrder.AmendmentCollection.GetAmendmentsForReport(panelSetOrder.ReportNo);
+            foreach (YellowstonePathology.Business.Amendment.Model.Amendment amendment in amendmentCollection)
+            {
+                if (amendment.Final == true)
+                {
+                    this.AddNextNTEElement(amendment.AmendmentType + ": " + amendment.AmendmentDate.Value.ToString("MM/dd/yyyy"), document);
+                    this.AddNextNTEElement(amendment.Text, document);
+                    if (amendment.RequirePathologistSignature == true)
+                    {
+                        this.AddNextNTEElement("Signature: " + amendment.PathologistSignature, document);
+                    }
+                    this.AddBlankNteElement(document);
+                }
+            }
+        }
+
+        public void AddBlankNteElement(XElement document)
+        {
+            XElement nteElement = new XElement("NTE");
+            document.Add(nteElement);
+
+            XElement nte01Element = new XElement("NTE.1");
+            nteElement.Add(nte01Element);
+
+            XElement nte0101Element = new XElement("NTE.1.1", this.m_NTECount.ToString());
+            nte01Element.Add(nte0101Element);
+
+            this.m_NTECount += 1;
         }
     }
 }

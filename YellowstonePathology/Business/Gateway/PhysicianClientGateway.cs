@@ -35,6 +35,15 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
+        public static YellowstonePathology.Business.Client.Model.ProviderClientCollection GetHomeBaseProviderClientListByMissingNPI()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "Select * from tblPhysician where npi is null and physicianId in (Select physicianId from tblAccessionOrder where accessionDate >= '2018-01-01') ";                
+            cmd.CommandType = CommandType.Text;            
+            YellowstonePathology.Business.Client.Model.ProviderClientCollection result = BuildProviderClientCollection(cmd);
+            return result;
+        }
+
         public static Domain.Physician GetPhysicianByPhysicianId(int physicianId)
         {
             MySqlCommand cmd = new MySqlCommand();

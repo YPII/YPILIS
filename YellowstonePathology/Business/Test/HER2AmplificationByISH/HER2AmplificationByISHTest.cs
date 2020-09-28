@@ -50,7 +50,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             string task3Description = "Please check to make sure the Fixation is entered correctly for this case.";
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, task3Description));
 
-            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
+            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceHERAMP());
 
             HER2AmplificationByISHPanel her2AmplificationByISHPanel = new HER2AmplificationByISHPanel();
             this.m_PanelCollection.Add(her2AmplificationByISHPanel);

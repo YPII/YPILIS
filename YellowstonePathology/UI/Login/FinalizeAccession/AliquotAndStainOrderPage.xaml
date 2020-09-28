@@ -392,6 +392,7 @@
                         <ComboBoxItem>YPIBLGS</ComboBoxItem>
                         <ComboBoxItem>YPICDY</ComboBoxItem>
                         <ComboBoxItem>YPCDY</ComboBoxItem>
+                        <ComboBoxItem>YPHVR</ComboBoxItem>
                     </ComboBox>
                     
                 </Grid>                
@@ -572,7 +573,7 @@
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" ></RowDefinition>
 						<RowDefinition Height="Auto" ></RowDefinition>
-						<RowDefinition Height="125" ></RowDefinition>
+						<RowDefinition Height="100" ></RowDefinition>
                         <RowDefinition Height="*" ></RowDefinition>
 					</Grid.RowDefinitions>
 

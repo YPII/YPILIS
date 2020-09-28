@@ -18,7 +18,8 @@ namespace YellowstonePathology.Business.HL7View.EPIC
         private YellowstonePathology.Business.Domain.Physician m_OrderingPhysician;                
 
         public EPICResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool testing)
-        {            
+        {
+            throw new Exception("EPIC Result view should not be used.");
             this.m_Testing = testing;
             this.m_AccessionOrder = accessionOrder;
             this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);                        
@@ -82,7 +83,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                 panelSetOrder.FinalTime, this.m_OrderingPhysician, resultStatus, universalService, this.m_SendUnsolicited);
             obr.ToXml(document);
             
-            EPICObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, false);
+            EPICBeakerObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, this.m_SendUnsolicited, this.m_Testing);
             epicObxView.ToXml(document);
             this.m_ObxCount = epicObxView.ObxCount;                            
 
@@ -95,9 +96,13 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
 			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;
-            string interfaceFileName = @"\\YPIIInterface1\ChannelData\Outgoing\1002\" + this.m_PanelSetOrder.ReportNo + fileExtension;
-            //if (this.m_Testing == true) interfaceFileName = @"\\YPIIInterface1\ChannelData\Outgoing\1002\Test\" + this.m_PanelSetOrder.ReportNo + fileExtension;            
-            if (this.m_Testing == true) interfaceFileName = @"\\YPIIInterface1\ChannelData\Outgoing\1002\BeakerTesting\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+            string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\SCLHealth\wait\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+
+            if (this.m_Testing == true)
+            {
+                throw new Exception("Test sending svh results is not implemented right now.");
+                interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\1002\BeakerTesting\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+            }
 
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(serverFileName))
             {

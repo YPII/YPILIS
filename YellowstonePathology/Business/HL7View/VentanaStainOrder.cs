@@ -21,21 +21,18 @@ namespace YellowstonePathology.Business.HL7View
                 Business.Stain.Model.Stain stain = Business.Stain.Model.StainCollection.Instance.GetStainByTestId(slideOrder.TestId);
                 if (slideOrder.PerformedByHand == false || stain.PerformedByHand == false)
                 {
-                    //if (slideOrder.OrderSentToVentana == false)
-                    //{
-                        if (this.CanBuild(accessionOrder, slideOrder.TestOrderId, slideOrder.SlideOrderId) == true)
-                        {
-                            string result = this.Build(accessionOrder, slideOrder.TestOrderId, slideOrder.SlideOrderId);
-                            slideOrder.OrderSentToVentana = true;
+                    if (this.CanBuild(accessionOrder, slideOrder.TestOrderId, slideOrder.SlideOrderId) == true)
+                    {
+                        string result = this.Build(accessionOrder, slideOrder.TestOrderId, slideOrder.SlideOrderId);
+                        slideOrder.OrderSentToVentana = true;
 
-                            YellowstonePathology.Business.Test.Model.TestOrder testOrder = accessionOrder.PanelSetOrderCollection.GetTestOrderByTestOrderId(slideOrder.TestOrderId);
-                            testOrder.TestStatus = "CUTTING";
-                            testOrder.TestStatusUpdateTime = DateTime.Now;
+                        YellowstonePathology.Business.Test.Model.TestOrder testOrder = accessionOrder.PanelSetOrderCollection.GetTestOrderByTestOrderId(slideOrder.TestOrderId);
+                        testOrder.TestStatus = "CUTTING";
+                        testOrder.TestStatusUpdateTime = DateTime.Now;
 
-                            string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-                            System.IO.File.WriteAllText(@"\\10.1.2.31\ChannelData\Outgoing\Ventana\" + objectId + ".hl7", result);
-                        }
-                    //}
+                        string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                        System.IO.File.WriteAllText(@"\\10.1.2.31\ChannelData\Outgoing\Ventana\" + objectId + ".hl7", result);
+                    }
                 }
                 else
                 {

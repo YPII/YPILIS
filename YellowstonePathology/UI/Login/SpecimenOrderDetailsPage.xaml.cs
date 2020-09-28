@@ -269,6 +269,8 @@ namespace YellowstonePathology.UI.Login
                 if(aliquotOrder.AliquotType == "Block")
                 {
                     aliquotOrder.Status = "Hold";
+                    aliquotOrder.ReadyToProcess = false;
+                    aliquotOrder.ProcessorStartDate = null;
                 }                
             }
 

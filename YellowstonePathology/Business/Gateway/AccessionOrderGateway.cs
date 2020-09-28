@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace YellowstonePathology.Business.Gateway
 {
@@ -204,13 +207,42 @@ namespace YellowstonePathology.Business.Gateway
             return rowCount;
         }
 
-        public static YellowstonePathology.Business.HL7View.ADTMessages GetADTMessages(string mrn)
+        public static YellowstonePathology.Business.HL7View.ADTMessages GetADTMessagesZ(string mrn)
         {
             YellowstonePathology.Business.HL7View.ADTMessages result = new HL7View.ADTMessages();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "select * from tblADT where MedicalRecordNo = @MRN order by DateReceived desc";
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@MRN", mrn);
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.HL7View.ADTMessage item = new HL7View.ADTMessage();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(item, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        item.ParseHL7();
+                        result.Messages.Add(item);
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static YellowstonePathology.Business.HL7View.ADTMessages GetADTMessagesByPatientNameDOB(string firstName, string lastName, DateTime birthDate)
+        {
+            YellowstonePathology.Business.HL7View.ADTMessages result = new HL7View.ADTMessages();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select * from tblADT where pFirstName = @FirstName and plastName = @LastName and pbirthdate = @BirthDate order by DateReceived desc";
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@LastName", lastName);
+            cmd.Parameters.AddWithValue("@FirstName", firstName);
+            cmd.Parameters.AddWithValue("@BirthDate", birthDate.ToString("yyyy-MM-dd"));
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
@@ -1251,7 +1283,7 @@ namespace YellowstonePathology.Business.Gateway
             "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
             "JOIN tblSpecimenOrder so on a.MasterAccessionNo = so.MasterAccessionNo " +
             "LEFT OUTER JOIN tblAliquotOrder ao on so.SpecimenOrderId = ao.SpecimenOrderId " +
-            "WHERE AccessionDate = @ReportDate and pso.PanelSetId = 31 and a.ClientId = 587 and ao.Status <> 'Hold' " +
+            "WHERE AccessionDate = @ReportDate and pso.PanelSetId = 13 and a.ClientId = 587 and ao.Status <> 'Hold' " +
             "group by a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, " +
             "a.PBirthdate, a.PhysicianName, a.ClientName " +
             "Order By AccessionTime; " +
@@ -1406,7 +1438,7 @@ namespace YellowstonePathology.Business.Gateway
 
         public static ReportNoCollection GetReportNumbers()
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT MIN(ReportNo) `ReportNo` FROM tblPanelSetOrder where orderdate > '2018-06-01' GROUP BY PanelSetId;");
+            MySqlCommand cmd = new MySqlCommand("select distinct pso.masterAccessionNo from tblTestOrderReportDistribution tord join tblPanelSetOrder pso on tord.ReportNo = pso.reportNo where physicianid = 3435;");
             cmd.CommandType = CommandType.Text;
 
             YellowstonePathology.Business.ReportNoCollection reportNoCollection = new ReportNoCollection();
@@ -3114,6 +3146,29 @@ namespace YellowstonePathology.Business.Gateway
 
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select MasterAccessionNo from tblAccessionOrder where AccessionDate = '" + accessionDate.ToString() + "';";
+            cmd.CommandType = CommandType.Text;
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Business.MasterAccessionNo man = Business.MasterAccessionNo.Parse(dr[0].ToString(), true);
+                        result.Add(man);
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static List<Business.MasterAccessionNo> GetMasterAccessionNoListBySQL()
+        {
+            List<Business.MasterAccessionNo> result = new List<Business.MasterAccessionNo>();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select distinct pso.masterAccessionNo from tblTestOrderReportDistribution tord join tblPanelSetOrder pso on tord.ReportNo = pso.reportNo where physicianid = 3435;";
             cmd.CommandType = CommandType.Text;
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {

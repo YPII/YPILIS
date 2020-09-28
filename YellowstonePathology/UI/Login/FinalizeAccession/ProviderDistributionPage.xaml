@@ -220,6 +220,8 @@
                     <ListView.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Convert To Fax" Click="MenuItemConvertToFax_Click"></MenuItem>
+                            <MenuItem Header="Send SVH Unsolicted" Click="MenuItemSendSVHUnsolicted_Click"></MenuItem>
+                            <MenuItem Header="Convert To NMH" Click="MenuItemConvertToNMH_Click"></MenuItem>
                         </ContextMenu>
                     </ListView.ContextMenu>
                     <ListView.View>

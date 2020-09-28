@@ -7,8 +7,9 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.HPV
 {
-    public class HPVEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICObxView
+    public class HPVEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICBeakerObxView
     {
+
         public HPVEPICBeakerObxView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount) 
             : base(accessionOrder, reportNo, obxCount)
 		{
@@ -17,11 +18,13 @@ namespace YellowstonePathology.Business.Test.HPV
 
         public override void ToXml(XElement document)
         {
+            string observationResultStatus = "F";
+
             HPVTestOrder panelSetOrder = (HPVTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
-            this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");            
-            this.AddNextObxElementBeaker("HPV Result", "Positive", document, "F", "Negative");
+            this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, observationResultStatus);            
+            this.AddNextObxElementBeaker("HPV Result", panelSetOrder.Result, document, observationResultStatus, "Negative");
 
             if (amendmentCollection.Count != 0)
             {
@@ -40,19 +43,19 @@ namespace YellowstonePathology.Business.Test.HPV
                     }
                 }
                 amendments.AppendLine();
-                this.AddNextObxElementBeaker("Amendments", amendments.ToString(), document, "F");
+                this.AddNextObxElementBeaker("Amendments", amendments.ToString(), document, observationResultStatus);
             }
 
-            this.AddNextObxElementBeaker("Specimen", "ThinPrep fluid", document, "F");
+            this.AddNextObxElementBeaker("Specimen", "ThinPrep fluid", document, observationResultStatus);
 
-            this.AddNextObxElementBeaker("Test Information", panelSetOrder.TestInformation, document, "F");
+            this.AddNextObxElementBeaker("Test Information", panelSetOrder.TestInformation, document, observationResultStatus);
 
-            this.AddNextObxElementBeaker("References", panelSetOrder.ReportReferences, document, "F");
+            this.AddNextObxElementBeaker("References", panelSetOrder.ReportReferences, document, observationResultStatus);
 
-            this.AddNextObxElementBeaker("ASR", panelSetOrder.ASRComment, document, "F");
+            this.AddNextObxElementBeaker("ASR", panelSetOrder.ASRComment, document, observationResultStatus);
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-            this.AddNextObxElementBeaker("Location Performed", locationPerformed, document, "F");
+            this.AddNextObxElementBeaker("Location Performed", locationPerformed, document, observationResultStatus);            
         }
     }
 }

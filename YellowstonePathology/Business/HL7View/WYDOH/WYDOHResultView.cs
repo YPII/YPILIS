@@ -61,7 +61,7 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
 			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + ".Mirth.xml";
 
-            string mirthFileName = mirthFileName = @"\\YPIIInterface1\ChannelData\Outgoing\WYCDC\" + this.m_PanelSetOrder.ReportNo + ".Mirth.xml";
+            string mirthFileName = mirthFileName = @"\\YPIIInterface2\ChannelData\Outgoing\WYCDC\" + this.m_PanelSetOrder.ReportNo + ".Mirth.xml";
 
             System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(serverFileName, false, new ASCIIEncoding());
             this.m_Document.Save(streamWriter);

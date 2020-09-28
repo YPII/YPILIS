@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "221";
 			this.m_TestName = "KRAS Mutation Analysis";
             this.m_TestAbbreviation = "KRAS";
-            this.m_Active = true;
+            this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

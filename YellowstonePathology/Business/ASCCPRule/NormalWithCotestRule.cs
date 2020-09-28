@@ -19,14 +19,17 @@ namespace YellowstonePathology.Business.ASCCPRule
             bool result = false;
             if(woman.OrderType.OrderCode == "11")
             {
-                if (woman.SpecimenAdequacy.ResultCode == "10" ||
+                if(woman.SpecimenAdequacy != null)
+                {
+                    if (woman.SpecimenAdequacy.ResultCode == "10" ||
                     woman.SpecimenAdequacy.ResultCode == "11" ||
                     woman.SpecimenAdequacy.ResultCode == "15")
-                {
-                    if (woman.ScreeningImpression.ResultCode == "01" || 
-                        woman.ScreeningImpression.ResultCode == "02")
                     {
-                        result = true;
+                        if (woman.ScreeningImpression.ResultCode == "01" ||
+                            woman.ScreeningImpression.ResultCode == "02")
+                        {
+                            result = true;
+                        }
                     }
                 }
             }            

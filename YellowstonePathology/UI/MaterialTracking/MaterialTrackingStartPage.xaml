@@ -55,16 +55,18 @@
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
@@ -130,10 +132,18 @@
 				    <Hyperlink Click="HyperlinkReceiveMaterialFromBozeman_Click">Receive Material From Bozeman</Hyperlink>
                 </TextBlock>
 
+                <TextBlock Grid.Column="0" Grid.Row="29" Margin="2,2,2,2">Location Havre</TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="30" Margin="2,2,2,2">
+				    <Hyperlink Click="HyperlinkSendMaterialFromBillingsToHavre_Click">Send Material to Havre</Hyperlink>
+                </TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="31" Margin="2,2,2,2">
+				    <Hyperlink Click="HyperlinkReceiveMaterialFromHavre_Click">Receive Material From Havre</Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="33" Margin="2,2,2,2">
 				    <Hyperlink Click="HyperlinkViewSelectedBatch_Click">View Selected Batch</Hyperlink>
                 </TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="32" Margin="2,2,2,2">
+                <TextBlock Grid.Column="0" Grid.Row="34" Margin="2,2,2,2">
 				    <Hyperlink Click="HyperlinkDeleteSelectedBatch_Click">Delete Selected Batch</Hyperlink>
                 </TextBlock>
 

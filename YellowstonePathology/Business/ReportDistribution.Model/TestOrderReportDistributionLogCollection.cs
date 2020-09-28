@@ -36,6 +36,21 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             }
         }
 
+        public bool Exists(int physicianId, int clientId)
+        {
+            bool result = false;
+            foreach (TestOrderReportDistributionLog testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.PhysicianId == physicianId &&
+                    testOrderReportDistribution.ClientId == clientId)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public bool Exists(string testOrderReportDistributionLogId)
         {
             bool result = false;

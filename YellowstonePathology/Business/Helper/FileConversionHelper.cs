@@ -104,6 +104,7 @@ namespace YellowstonePathology.Business.Helper
 
             oWord = new Microsoft.Office.Interop.Word.Application();
             oWord.Visible = false;
+            oWord.DisplayAlerts = Microsoft.Office.Interop.Word.WdAlertLevel.wdAlertsNone;
 
             try
             {
@@ -140,8 +141,9 @@ namespace YellowstonePathology.Business.Helper
 
             oWord = new Microsoft.Office.Interop.Word.Application();
             oWord.Visible = false;
+            oWord.DisplayAlerts = Microsoft.Office.Interop.Word.WdAlertLevel.wdAlertsNone;
 
-            if(File.Exists(docFileName.ToString()))
+            if (File.Exists(docFileName.ToString()))
             {              
                 try
                 {
@@ -180,6 +182,7 @@ namespace YellowstonePathology.Business.Helper
 
             oWord = new Microsoft.Office.Interop.Word.Application();
             oWord.Visible = false;
+            oWord.DisplayAlerts = Microsoft.Office.Interop.Word.WdAlertLevel.wdAlertsNone;
 
             string currentPrinter = oWord.ActivePrinter;
             oWord.ActivePrinter = "Microsoft XPS Document Writer";           
@@ -309,6 +312,7 @@ namespace YellowstonePathology.Business.Helper
 
             oWord = new Microsoft.Office.Interop.Word.Application();
             oWord.Visible = false;
+            oWord.DisplayAlerts = Microsoft.Office.Interop.Word.WdAlertLevel.wdAlertsNone;
 
             try
             {

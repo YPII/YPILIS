@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "259";
 			this.m_TestName = "B-Cell Clonality";
             this.m_TestAbbreviation = "B-Cell";
-			this.m_Active = true;
+			this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

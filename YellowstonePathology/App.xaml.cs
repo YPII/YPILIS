@@ -76,7 +76,8 @@ namespace YellowstonePathology.UI
 
             string startUpWindow = string.Empty;
 
-            if (System.Environment.MachineName.ToUpper() == "CUTTINGA" || System.Environment.MachineName.ToUpper() == "CUTTINGB" || System.Environment.MachineName.ToUpper() == "CUTTINGC")// || System.Environment.MachineName.ToUpper() == "COMPILE")
+            if (System.Environment.MachineName.ToUpper() == "CUTTINGA" || System.Environment.MachineName.ToUpper() == "CUTTINGB" 
+                || System.Environment.MachineName.ToUpper() == "NMHC" || System.Environment.MachineName.ToUpper() == "CUTTINGC") // || System.Environment.MachineName.ToUpper() == "COMPILE")
             {
                 YellowstonePathology.UI.Cutting.CuttingStationPath cuttingStationPath = new Cutting.CuttingStationPath();
                 cuttingStationPath.Start();

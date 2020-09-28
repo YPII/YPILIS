@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "222";
 			this.m_TestName = "BRAF";
             this.m_TestAbbreviation = "BRAF";
-			this.m_Active = true;
+			this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

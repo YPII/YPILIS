@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "181";
 			this.m_TestName = "Pan-melanoma cocktail";
             this.m_TestAbbreviation = "Pan-melanoma cocktail";
-			this.m_Active = true;
+			this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

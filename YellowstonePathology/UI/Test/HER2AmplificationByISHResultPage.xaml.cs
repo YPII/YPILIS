@@ -287,5 +287,13 @@ namespace YellowstonePathology.UI.Test
                 this.OrderATest(her2AmplificationRecountTest);
             }
         }
+
+        private void HyperLinkSpecimenDetails_Click(object sender, RoutedEventArgs e)
+        {
+            //Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
+            //UI.Login.SpecimenOrderDetailsPage specimenOrderDetailsPage = new Login.SpecimenOrderDetailsPage(this.m_AccessionOrder, specimenOrder);
+
+            //UI.Login.SpecimenOrderDetailsPath specimenOrderDetailsPath = new Login.SpecimenOrderDetailsPath(specimenOrder, this.m_AccessionOrder, )
+        }
     }
 }

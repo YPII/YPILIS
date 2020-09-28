@@ -388,6 +388,13 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
             multiTestDistributionHandler.Set();
 
+            //this.m_AuditCollection.Run();
+            //if (this.m_AuditCollection.ActionRequired == true)
+            //{
+            //    MessageBoxResult messageBoxResult = MessageBox.Show(this.m_AuditCollection.Message);
+            //    return;
+            //}
+
             YellowstonePathology.Business.Audit.Model.CanWomensHealthProfileBeFinaledAudit canWomensHealthProfileBeFinaledAudit = new Business.Audit.Model.CanWomensHealthProfileBeFinaledAudit(this.m_AccessionOrder);
             canWomensHealthProfileBeFinaledAudit.Run();
 
@@ -404,7 +411,21 @@ namespace YellowstonePathology.UI.Test
             
             if(this.m_WomensHealthProfileTestOrder.ManagePerASCCP == true || this.m_WomensHealthProfileTestOrder.ManagePerASCCPWithCotest == true)
             {
-                Business.Logging.EmailExceptionHandler.HandleException("The following ASCCP WHP was finalized: " + this.m_AccessionOrder.MasterAccessionNo);
+                Business.ASCCPRule.Woman woman = new Business.ASCCPRule.Woman();
+                woman.FromAccessionOrder(this.m_AccessionOrder);
+
+                Business.ASCCPRule.RuleCollection ruleCollection = new Business.ASCCPRule.RuleCollection();
+                Business.ASCCPRule.BaseRule matchingRule = ruleCollection.GetMatchingRule(woman);
+                matchingRule.Finalize(woman);
+
+                if(woman.Age >= 30 && this.m_WomensHealthProfileTestOrder.ManagePerASCCP == true)
+                {
+                    Business.Logging.EmailExceptionHandler.HandleException("The following ASCCP WHP was finalized: " + this.m_AccessionOrder.MasterAccessionNo);
+                }
+                else if(Business.Cytology.Model.CytologyResultCode.IsDiagnosisGreaterThanThree(this.m_PanelSetOrderCytology.ResultCode) == true)
+                {
+                    Business.Logging.EmailExceptionHandler.HandleException("The following ASCCP WHP was finalized: " + this.m_AccessionOrder.MasterAccessionNo);
+                }
             }
         }        
 

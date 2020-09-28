@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "192";
 			this.m_TestName = "Naphthol AS-D chloroacetate esterase";
             this.m_TestAbbreviation = "Naphthol AS-D chloroacetate esterase";
-			this.m_Active = true;
+			this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

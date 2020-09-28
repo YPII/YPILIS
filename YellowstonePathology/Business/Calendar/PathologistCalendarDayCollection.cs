@@ -124,6 +124,7 @@ namespace YellowstonePathology.Business.Calendar
                 statusList.Add(pathologistCalendarDay.DrEmerickStatus);
                 statusList.Add(pathologistCalendarDay.DrLuemStatus);
                 statusList.Add(pathologistCalendarDay.DrNeroStatus);
+                statusList.Add(pathologistCalendarDay.DrRozelleStatus);
                 statusList.Add(pathologistCalendarDay.DrSchneiderStatus);
 
                 foreach (PathologistCalendarStatus pathologistCalendarStatus in statusList)

@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "168";
 			this.m_TestName = "Bartonella henselae (Cat Scratch)";
             this.m_TestAbbreviation = "Cat Scratch";
-			this.m_Active = true;
+			this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

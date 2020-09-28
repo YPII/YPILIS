@@ -109,7 +109,8 @@ namespace YellowstonePathology.Business.Facility.Model
                     facility.FacilityId == "YPIBLGS" || //YellowstonePathologyInstituteBillings
                     facility.FacilityId == "YPCDY" ||   //YellowstonePathologistCody
                     facility.FacilityId == "YPICDY" ||  //YellowstonePathologyInstituteCody
-                    facility.FacilityId == "YPBZMN" )   //YellowstonePathologistBozeman
+                    facility.FacilityId == "YPBZMN" ||   //YellowstonePathologistBozeman
+                    facility.FacilityId == "YPIHVR" )   //YellowstonePathologyHavre
                 {
                     result.Add(facility);
                 }
@@ -126,7 +127,8 @@ namespace YellowstonePathology.Business.Facility.Model
                 facility.FacilityId == "YPIBLGS" || //YellowstonePathologyInstituteBillings
                 facility.FacilityId == "YPCDY" ||   //YellowstonePathologistCody
                 facility.FacilityId == "YPICDY" ||  //YellowstonePathologyInstituteCody
-                facility.FacilityId == "YPBZMN")   //YellowstonePathologistBozeman
+                facility.FacilityId == "YPBZMN" ||
+                facility.FacilityId == "YPIHVR")   //YellowstonePathologistBozeman
             {
                 result = true;
             }

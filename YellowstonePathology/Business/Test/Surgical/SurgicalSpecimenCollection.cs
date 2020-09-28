@@ -69,6 +69,34 @@ namespace YellowstonePathology.Business.Test.Surgical
             return result;
         }
 
+        public bool HasIntereopeativeConsulation()
+        {
+            bool result = false;
+            foreach (SurgicalSpecimen surgicalSpecimen in this)
+            {
+                if(surgicalSpecimen.IntraoperativeConsultationResultCollection.Count > 0)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public IntraoperativeConsultationResult GetFirstIntereopeativeConsulation()
+        {
+            IntraoperativeConsultationResult result = null;
+            foreach (SurgicalSpecimen surgicalSpecimen in this)
+            {
+                if (surgicalSpecimen.IntraoperativeConsultationResultCollection.Count > 0)
+                {
+                    result = surgicalSpecimen.IntraoperativeConsultationResultCollection[0];
+                    break;
+                }
+            }
+            return result;
+        }
+
         public YellowstonePathology.Business.SpecialStain.StainResultItem GetStainResult(string testOrderId)
         {
             YellowstonePathology.Business.SpecialStain.StainResultItem result = null;

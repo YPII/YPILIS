@@ -137,8 +137,8 @@ namespace YellowstonePathology.UI.Monitor
                 if (this.m_EODProcessStatus.ProcessPSAFiles.HasValue == false) this.ProcessPSAFiles(sender, e);
                 else this.m_BackgroundWorker.ReportProgress(1, "Process PSA Files Already Performed: " + this.m_EODProcessStatus.ProcessPSAFiles.Value.ToLongTimeString());
 
-                if (this.m_EODProcessStatus.TransferPSAFiles.HasValue == false) this.TransferPSAFiles(sender, e);
-                else this.m_BackgroundWorker.ReportProgress(1, "Transfer PSA Files Already Performed: " + this.m_EODProcessStatus.TransferPSAFiles.Value.ToLongTimeString());
+                if (this.m_EODProcessStatus.TransferAPSFiles.HasValue == false) this.TransferAPSFiles(sender, e);
+                else this.m_BackgroundWorker.ReportProgress(1, "Transfer APS Files Already Performed: " + this.m_EODProcessStatus.TransferPSAFiles.Value.ToLongTimeString());
 
                 if (this.m_EODProcessStatus.FaxTheReport.HasValue == false) this.FaxTheReport(sender, e);
                 else this.m_BackgroundWorker.ReportProgress(1, "Fax The Report Already Performed: " + this.m_EODProcessStatus.FaxTheReport.Value.ToLongTimeString());
@@ -191,7 +191,7 @@ namespace YellowstonePathology.UI.Monitor
         {
             int rowCount = 0;
             this.m_BackgroundWorker.ReportProgress(1, "Starting Transfer of SVH Files: " + DateTime.Now.ToLongTimeString());
-            string destinationFolder = @"\\ypiiinterface1\ChannelData\Outgoing\1002";
+            string destinationFolder = @"\\YPIIInterface2\ChannelData\Outgoing\1002";
 
             string workingFolder = System.IO.Path.Combine(this.m_BaseWorkingFolderPathSVH, this.m_PostDate.ToString("MMddyyyy"), "ft1");
             string[] files = System.IO.Directory.GetFiles(workingFolder);
@@ -359,10 +359,10 @@ namespace YellowstonePathology.UI.Monitor
             }
         }
 
-        private void TransferPSAFiles(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void TransferAPSFiles(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             int rowCount = 0;
-            this.m_BackgroundWorker.ReportProgress(1, "Starting transfer of PSA Files: " + DateTime.Now.ToLongTimeString());
+            this.m_BackgroundWorker.ReportProgress(1, "Starting transfer of APS Files: " + DateTime.Now.ToLongTimeString());
             string configFilePath = @"C:\Program Files\Yellowstone Pathology Institute\psa-ssh-config.json";
 
             if (System.IO.File.Exists(configFilePath) == true)
@@ -384,7 +384,7 @@ namespace YellowstonePathology.UI.Monitor
                     sshFileTransfer.Failed += SshFileTransfer_Failed;
 
                     sshFileTransfer.StatusMessage += SSHFileTransfer_StatusMessage;
-                    sshFileTransfer.UploadFilesToPSA(files);
+                    sshFileTransfer.UploadFilesToAPS(files);
                     rowCount += 1;
                 }
                 else

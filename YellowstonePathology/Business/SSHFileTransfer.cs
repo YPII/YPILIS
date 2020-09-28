@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business
             this.m_Password = password;
         }
 
-        public void UploadFilesToPSA(string[] files)
+        public void UploadFilesToAPS(string[] files)
         {
             int count = 1;
             var keyFile = new PrivateKeyFile(SSH_KEY_PATH);
@@ -52,7 +52,7 @@ namespace YellowstonePathology.Business
             {                
                 try
                 {
-                    this.SendStatusMessage("Connecting to PSA SSH.", count);                    
+                    this.SendStatusMessage("Connecting to APS SSH.", count);                    
                     client.Connect();
                     foreach (string file in files)
                     {
@@ -67,7 +67,7 @@ namespace YellowstonePathology.Business
                     }
 
                     client.Disconnect();
-                    this.SendStatusMessage("Disconnecting from PSA SSH.", count);
+                    this.SendStatusMessage("Disconnecting from APS SSH.", count);
                     this.SendStatusMessage("Finished transferring files.", count);
                 }   
                 catch(Exception connectException)

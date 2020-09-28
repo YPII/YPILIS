@@ -80,14 +80,27 @@ namespace YellowstonePathology.Business.Client.Model
                 physicianClientDistribution.PhysicianName = "Staff Pathologist";
                 physicianClientDistribution.DistributionType = pathClient.DistributionType;
                 physicianClientDistribution.FaxNumber = pathClient.Fax;
-                this.Add(physicianClientDistribution);                
+                this.Add(physicianClientDistribution);  
+                
+                if(client.PathologyGroupId == "PAOIF")
+                {
+                    PhysicianClientDistributionListItem physicianClientDistributionFax = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(client.DistributionType);
+                    physicianClientDistributionFax.ClientId = pathClient.ClientId;
+                    physicianClientDistributionFax.ClientName = pathClient.ClientName;
+                    physicianClientDistributionFax.PhysicianId = 728;
+                    physicianClientDistributionFax.PhysicianName = "Staff Pathologist";
+                    physicianClientDistributionFax.DistributionType = "Fax";
+                    physicianClientDistributionFax.FaxNumber = pathClient.Fax;
+                    this.Add(physicianClientDistributionFax);
+                }
             }
         }
 
         private bool IsPAOIFWH(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, Business.Client.Model.Client client)
         {
             bool result = false;
-            if(accessionOrder.PanelSetOrderCollection.HasWomensHealthProfileOrder() == true)
+            if(accessionOrder.PanelSetOrderCollection.HasWomensHealthProfileOrder() == true || 
+                accessionOrder.PanelSetOrderCollection.HasThinPrepPapOrder() == true)
             {
                 if(client.PathologyGroupId == "PAOIF")
                 {

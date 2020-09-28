@@ -537,11 +537,15 @@ namespace YellowstonePathology.UI.Gross
                 if(aliquotOrder.Status == "Hold")
                 {
                     aliquotOrder.Status = null;
-                }
+					aliquotOrder.ReadyToProcess = true;
+					aliquotOrder.ProcessorStartDate = DateTime.Now;
+				}
                 else
                 {
                     aliquotOrder.Status = "Hold";
-                }
+					aliquotOrder.ReadyToProcess = false;
+					aliquotOrder.ProcessorStartDate = null;
+				}
             }
             this.GrossBlockManagementView = new Business.View.GrossBlockManagementView(this.m_AccessionOrder, this.m_CaseNotesDocument, this.m_SpecimenOrder);
             this.SetupSpecimenView();

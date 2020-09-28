@@ -170,9 +170,8 @@
                         HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CassettePrinter}" IsEditable="True">
                     </ComboBox>
 
-                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">SlideMate Printer Path:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="8" Margin="2,2,2,2" Text="{Binding Path=UserPreference.SlideMatePrinterPath}" HorizontalAlignment="Stretch"></TextBox>
-                    <Button Grid.Column="2" Grid.Row="8" Width="30" Margin="2,2,2,2" Click="ButtonSlideMatePrinterPathBrowse_Click">...</Button>
+                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Slide Printer:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="8" Margin="2,2,2,2" Text="{Binding Path=UserPreference.ThermoFisherSlidePrinter}" HorizontalAlignment="Stretch"></TextBox>
 
                     <!--<TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Cytology Slide Printer:</TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="9" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"

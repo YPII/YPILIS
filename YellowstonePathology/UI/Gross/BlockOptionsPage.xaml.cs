@@ -146,11 +146,16 @@ namespace YellowstonePathology.UI.Gross
             if(this.m_AliquotOrder.Status == "Hold")
             {
                 this.m_AliquotOrder.Status = "Created";
+                this.m_AliquotOrder.ReadyToProcess = true;
+                this.m_AliquotOrder.ProcessorStartDate = DateTime.Now;
             }
             else
             {
                 this.m_AliquotOrder.Status = "Hold";
+                this.m_AliquotOrder.ReadyToProcess = false;
+                this.m_AliquotOrder.ProcessorStartDate = null;
             }            
+
             CustomEventArgs.SpecimenOrderReturnEventArgs specimenOrderReturnEventArgs = new CustomEventArgs.SpecimenOrderReturnEventArgs(this.m_SpecimenOrder);
             this.Next(this, specimenOrderReturnEventArgs);
         }

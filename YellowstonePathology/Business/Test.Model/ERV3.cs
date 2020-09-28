@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "29";
             this.m_TestName = "ERV3";
             this.m_TestAbbreviation = "ERV3";
-			this.m_Active = true;
+			this.m_Active = false;
             this.m_NeedsAcknowledgement = false;
 		}
 	}

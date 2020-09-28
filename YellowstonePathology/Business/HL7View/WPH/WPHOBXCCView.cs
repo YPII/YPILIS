@@ -18,26 +18,29 @@ namespace YellowstonePathology.Business.HL7View.WPH
 
         private string GetCCNames()
         {
-            List<string> ccNames = new List<string>();            
-            var rows = System.Text.RegularExpressions.Regex.Split(this.m_ClientOrder.SpecialInstructions, "\r\n|\r|\n");
-            if (rows.Length > 0)
+            List<string> ccNames = new List<string>();   
+            if(string.IsNullOrEmpty(this.m_ClientOrder.SpecialInstructions) == false)
             {
-                foreach (string s in rows)
+                var rows = System.Text.RegularExpressions.Regex.Split(this.m_ClientOrder.SpecialInstructions, "\r\n|\r|\n");
+                if (rows.Length > 0)
                 {
-                    if(s.Length >= 7)
+                    foreach (string s in rows)
                     {
-                        if (s.Substring(0, 7) == "PATH.CC")
+                        if (s.Length >= 7)
                         {
-                            string[] colonSplit = s.Split(':');
-                            if (colonSplit.Length > 0)
+                            if (s.Substring(0, 7) == "PATH.CC")
                             {
-                                ccNames.Add(colonSplit[colonSplit.Length - 1].Trim());
+                                string[] colonSplit = s.Split(':');
+                                if (colonSplit.Length > 0)
+                                {
+                                    ccNames.Add(colonSplit[colonSplit.Length - 1].Trim());
+                                }
                             }
                         }
-                    }                    
+                    }
                 }
             }
-
+            
             string result = null;
             foreach(string ccName in ccNames)
             {

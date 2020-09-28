@@ -8,8 +8,8 @@ namespace YellowstonePathology.Business.Patient.Model
 {
     public class SVHImportFolder
     {
-        private const string FolderPath = @"\\ypiiinterface1\FTPData\SVBBilling";
-        private const string ProcessedFolderPath = @"\\ypiiinterface1\FTPData\SVBBilling\Processed";
+        private const string FolderPath = @"\\ypiiinterface2\FTPData\SVBBilling";
+        private const string ProcessedFolderPath = @"\\ypiiinterface2\FTPData\SVBBilling\Processed";
 		private List<string> m_FileList;
 
         public SVHImportFolder()

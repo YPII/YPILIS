@@ -528,10 +528,14 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 if (aliquotOrder.Status == "Hold")
                 {
                     aliquotOrder.Status = "Created";
+                    aliquotOrder.ReadyToProcess = true;
+                    aliquotOrder.ProcessorStartDate = DateTime.Now;
                 }
                 else
                 {
                     aliquotOrder.Status = "Hold";
+                    aliquotOrder.ReadyToProcess = false;
+                    aliquotOrder.ProcessorStartDate = null;
                 }
             }
 

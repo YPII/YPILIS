@@ -12,6 +12,20 @@ namespace YellowstonePathology.Business.Client.Model
         {
 
         } 
+
+        public bool IsInGroup(int clientId, string clientGroupId)
+        {
+            bool result = false;
+            foreach (ClientGroupClient clientGroupClient in this)
+            {
+                if (clientGroupClient.ClientId == clientId && clientGroupClient.ClientGroupId == clientGroupId)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
         
         public bool ClientIdExists(int clientId)
         {

@@ -191,8 +191,9 @@ namespace YellowstonePathology.Business.Document
             oWord = new Microsoft.Office.Interop.Word.Application();
             string currentPrinter = oWord.ActivePrinter;            
             oWord.Visible = false;
+            oWord.DisplayAlerts = Microsoft.Office.Interop.Word.WdAlertLevel.wdAlertsNone;
 
-			Object oFile = CaseDocument.GetCaseFileNameDoc(orderIdParser);
+            Object oFile = CaseDocument.GetCaseFileNameDoc(orderIdParser);
             Microsoft.Office.Interop.Word.Document doc = oWord.Documents.Open(ref oFile, ref oMissing, ref oMissing,
                  ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
                  ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing);

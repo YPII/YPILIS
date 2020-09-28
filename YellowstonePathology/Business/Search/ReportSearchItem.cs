@@ -35,6 +35,8 @@ namespace YellowstonePathology.Business.Search
 		private bool m_HoldDistribution;
         private bool m_IsLockAquiredByMe;
         private bool m_LockAquired;
+		private string m_SVHMedicalRecord;
+		private string m_PatientId;
 
         public ReportSearchItem()
 		{
@@ -132,7 +134,35 @@ namespace YellowstonePathology.Business.Search
 			}
 		}
 
-        [PersistentProperty()]
+		[PersistentProperty()]
+		public string SVHMedicalRecord
+		{
+			get { return this.m_SVHMedicalRecord; }
+			set
+			{
+				if (value != this.m_SVHMedicalRecord)
+				{
+					this.m_SVHMedicalRecord = value;
+					this.NotifyPropertyChanged("SVHMedicalRecord");
+				}
+			}
+		}
+
+		[PersistentProperty()]
+		public string PatientId
+		{
+			get { return this.m_PatientId; }
+			set
+			{
+				if (value != this.m_PatientId)
+				{
+					this.m_PatientId = value;
+					this.NotifyPropertyChanged("m_PatientId");
+				}
+			}
+		}
+
+		[PersistentProperty()]
         public string PLastName
 		{
 			get { return this.m_PLastName; }

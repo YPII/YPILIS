@@ -17,8 +17,10 @@ namespace YellowstonePathology.Business.ASCCPRule
             this.Add(new NormalWithCotestRule());
             this.Add(new AbnormalRule());
             this.Add(new AbnormalWithCotestRule());
-            this.Add(new NoMatchingRule());            
-        }  
+            this.Add(new NoResultWithCotestRule());
+            this.Add(new NoResultRule());
+            this.Add(new NoMatchingRule());
+        }
 
         public BaseRule GetNoMatchingRule()
         {

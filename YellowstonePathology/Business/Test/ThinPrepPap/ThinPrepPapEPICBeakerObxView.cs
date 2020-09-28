@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.ThinPrepPap
 {
-    public class ThinPrepPapEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICObxView
+    public class ThinPrepPapEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICBeakerObxView
     {
         public ThinPrepPapEPICBeakerObxView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount) 
             : base(accessionOrder, reportNo, obxCount)

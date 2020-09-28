@@ -75,6 +75,7 @@
 				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -166,7 +167,17 @@
 					  SelectionChanged="ComboBoxFinaledBy_SelectionChanged" 
 					  Margin="2,2,2,2" MinWidth="150" HorizontalAlignment="Stretch">
 			</ComboBox>
-		</Grid>
+
+            <TextBlock Grid.Column="0" Grid.Row="11" Style="{StaticResource LogTextBlock}">Facility:</TextBlock>
+            <ComboBox Name="ComboBoxFacility" Grid.Column="1" Grid.Row="11" VerticalContentAlignment="Center" 
+					  Text="{Binding Path=IntraoperativeConsultation.FacilityId}" 
+					  Margin="2,2,2,2" MinWidth="150" HorizontalAlignment="Stretch">
+                <ComboBoxItem>YPIBLGS</ComboBoxItem>
+                <ComboBoxItem>YPICDY</ComboBoxItem>
+                <ComboBoxItem>YPIHVR</ComboBoxItem>
+                <ComboBoxItem>YPIHRH</ComboBoxItem>
+            </ComboBox>
+        </Grid>
 
 		<Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
 		<Button Grid.Row="2" Grid.Column="1" Margin="2,10,2,2" HorizontalAlignment="Right" Height="35" Width="70" Click="ButtonOk_Click">OK</Button>

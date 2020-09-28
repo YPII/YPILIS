@@ -27,8 +27,8 @@ namespace YellowstonePathology.Business.HL7View.CMMC
             this.CreateDocument();
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
 			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + ".HL7.xml";
-            string mirthFileName = @"\\YPIIInterface1\ChannelData\Outgoing\1003\" + this.m_PanelSetOrder.ReportNo + ".HL7.xml";
-            //string mirthFileName = @"\\YPIIInterface1\ChannelData\Outgoing\Testing\" + this.m_ReportNo + ".HL7.xml";
+            string mirthFileName = @"\\YPIIInterface2\ChannelData\Outgoing\1003\" + this.m_PanelSetOrder.ReportNo + ".HL7.xml";
+            //string mirthFileName = @"\\YPIIInterface2\ChannelData\Outgoing\Testing\" + this.m_ReportNo + ".HL7.xml";
 
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(serverFileName))
             {

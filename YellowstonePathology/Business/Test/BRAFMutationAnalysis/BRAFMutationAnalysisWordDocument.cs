@@ -20,6 +20,10 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
             base.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BRAFMutationAnalysis.2.xml";
             base.OpenTemplate();
 
+            this.ReplaceText("report_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.ReferenceLabFinalDate));
+            this.ReplaceText("report_time", YellowstonePathology.Business.BaseData.GetShortTimeString(this.m_PanelSetOrder.ReferenceLabFinalDate));
+            this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.ReferenceLabSignature);
+
             this.SetDemographicsV2();
             this.SetReportDistribution();
             this.SetCaseHistory();
@@ -58,10 +62,6 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
 
             string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
-
-            this.ReplaceText("report_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.ReferenceLabFinalDate));
-            this.ReplaceText("report_time", YellowstonePathology.Business.BaseData.GetShortTimeString(this.m_PanelSetOrder.ReferenceLabFinalDate));
-            this.ReplaceText("pathologist_signature", this.m_PanelSetOrder.ReferenceLabSignature);
 
             this.SaveReport();
         }

@@ -18,8 +18,8 @@ namespace YellowstonePathology.UI.Billing
 {    
     public partial class SVHBillingDataImportDialog : Window, INotifyPropertyChanged
     {
-        private const string ImportFolderPath = @"\\ypiiinterface1\FTPData\SVBBilling";
-        private const string ProcessedFolderPath = @"\\ypiiinterface1\FTPData\SVBBilling\Processed";
+        private const string ImportFolderPath = @"\\ypiiinterface2\FTPData\SVBBilling";
+        private const string ProcessedFolderPath = @"\\ypiiinterface2\FTPData\SVBBilling\Processed";
 
         public event PropertyChangedEventHandler PropertyChanged;
         private YellowstonePathology.Business.Patient.Model.SVHImportFolder m_SVHImportFolder;

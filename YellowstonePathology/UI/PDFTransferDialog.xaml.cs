@@ -25,7 +25,7 @@ namespace YellowstonePathology.UI
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private static string NEO_FILE_PATH = @"\\ypiiinterface1\ChannelData\Incoming\Neogenomics";
+        private static string NEO_FILE_PATH = @"\\YPIIInterface2\ChannelData\Incoming\Neogenomics";
         private static string COPIER_MISC_FILE_PATH = @"\\cfileserver\documents\scanning\misc";
 
         private Business.Test.AccessionOrder m_AccessionOrder;

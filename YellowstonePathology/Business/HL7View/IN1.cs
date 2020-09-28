@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace YellowstonePathology.Business.HL7View
 {
@@ -13,7 +16,11 @@ namespace YellowstonePathology.Business.HL7View
         private string m_InsurancePlanId;
         private string m_InsuranceCompanyId;
         private string m_InsuranceName;
-        private string m_InsuranceAddress;
+        private string m_InsuranceAddressLine1;
+        private string m_InsuranceAddressLine2;
+        private string m_InsuranceCity;
+        private string m_InsuranceState;
+        private string m_InsuranceZip;
         private string m_InsurancePhoneNumber;
         private string m_GroupNumber;
         private string m_GroupName;
@@ -33,10 +40,13 @@ namespace YellowstonePathology.Business.HL7View
 
             string[] split = in1Segment.Split('|');
             this.m_SetId = Convert.ToInt32(split[1]);
-            this.m_InsurancePlanId = split[2];
+
+            string[] insurancePlanIdSplit = split[2].Split('^');
+            this.m_InsurancePlanId = insurancePlanIdSplit[0];
+
             this.m_InsuranceCompanyId = split[3];
             this.m_InsuranceName = split[4];
-            this.m_InsurancePhoneNumber = split[7];
+            this.m_InsurancePhoneNumber = this.GetPhoneNumber(split[7]);
             this.m_GroupNumber = split[8];
             this.m_GroupName = split[9];
             this.m_InusuredsGroupEmployerName = split[11];
@@ -51,15 +61,25 @@ namespace YellowstonePathology.Business.HL7View
             if (string.IsNullOrEmpty(split[5]) == false)
             {
                 string[] subAddressSubfields = split[5].Split('^');
-                foreach(string s in subAddressSubfields)
-                {
-                    if (string.IsNullOrEmpty(this.m_InsuranceAddress) == false)
-                        this.m_InsuranceAddress += " ,";
-                    this.m_InsuranceAddress += s;
-                }                
+                this.m_InsuranceAddressLine1 = subAddressSubfields[0];
+                this.m_InsuranceAddressLine2 = subAddressSubfields[1];
+                this.m_InsuranceCity = subAddressSubfields[2];
+                this.m_InsuranceState = subAddressSubfields[3];
+                this.m_InsuranceZip = subAddressSubfields[4];
             }
 
             if (split.Length >= 36) this.m_PolicyNumber = split[36];            
+        }
+
+        private string GetPhoneNumber(string hl7Value)
+        {
+            string result = null;
+            string[] caretSplit = hl7Value.Split('^');
+            if(caretSplit.Length != 0)
+            {
+                result = caretSplit[0];
+            }
+            return result;
         }
 
         public int SetId
@@ -86,10 +106,34 @@ namespace YellowstonePathology.Business.HL7View
             set { this.m_InsuranceName = value; }
         }
 
-        public string InsuranceAddress
+        public string InsuranceAddressLine1
         {
-            get { return this.m_InsuranceAddress; }
-            set { this.m_InsuranceAddress = value; }
+            get { return this.m_InsuranceAddressLine1; }
+            set { this.m_InsuranceAddressLine1 = value; }
+        }
+
+        public string InsuranceAddressLine2
+        {
+            get { return this.m_InsuranceAddressLine2; }
+            set { this.m_InsuranceAddressLine2 = value; }
+        }
+
+        public string InsuranceCity
+        {
+            get { return this.m_InsuranceCity; }
+            set { this.m_InsuranceCity = value; }
+        }
+
+        public string InsuranceState
+        {
+            get { return this.m_InsuranceState; }
+            set { this.m_InsuranceState = value; }
+        }
+
+        public string InsuranceZip
+        {
+            get { return this.m_InsuranceZip; }
+            set { this.m_InsuranceZip = value; }
         }
 
         public string PolicyNumber
@@ -149,6 +193,26 @@ namespace YellowstonePathology.Business.HL7View
                 return result;
             }
         }
+
+        public JObject ToJson()
+        {
+            return new JObject(
+                new JProperty("groupName", Business.Helper.JSONHelper.HandleValue(this.m_GroupName)),
+                new JProperty("groupNumber", Business.Helper.JSONHelper.HandleValue(this.GroupNumber)),
+                new JProperty("insuranceAddressLine1", Business.Helper.JSONHelper.HandleValue(this.m_InsuranceAddressLine1)),
+                new JProperty("insuranceAddressLine2", Business.Helper.JSONHelper.HandleValue(this.m_InsuranceAddressLine2)),
+                new JProperty("insuranceAddressCity", Business.Helper.JSONHelper.HandleValue(this.m_InsuranceCity)),
+                new JProperty("insuranceAddressState", Business.Helper.JSONHelper.HandleValue(this.m_InsuranceState)),
+                new JProperty("insuranceAddressZip", Business.Helper.JSONHelper.HandleValue(this.m_InsuranceZip)),
+                new JProperty("insuranceCompanyId", Business.Helper.JSONHelper.HandleValue(this.m_InsuranceCompanyId)),
+                new JProperty("insuranceName", Business.Helper.JSONHelper.HandleValue(this.m_InsuranceName)),
+                new JProperty("insurancePhoneNumber", Business.Helper.JSONHelper.HandleValue(this.m_InsurancePhoneNumber)),
+                new JProperty("insurancePlanId", Business.Helper.JSONHelper.HandleValue(this.m_InsurancePlanId)),
+                new JProperty("insuranceInsuredsGroupEmployerName", Business.Helper.JSONHelper.HandleValue(this.m_InusuredsGroupEmployerName)),
+                new JProperty("nameOfInsured", Business.Helper.JSONHelper.HandleValue(this.m_NameOfInsured)),
+                new JProperty("policyNumber", Business.Helper.JSONHelper.HandleValue(this.m_PolicyNumber))                
+            );
+        }
         
         public string DisplayString
         {
@@ -158,7 +222,7 @@ namespace YellowstonePathology.Business.HL7View
                 result.AppendLine("Priority: " + this.InsurancePriority);
                 result.AppendLine("Date Received: " + this.m_DateReceived.ToShortDateString());
                 result.AppendLine(this.m_InsuranceName);
-                result.AppendLine(this.m_InsuranceAddress);
+                result.AppendLine(this.m_InsuranceAddressLine1 + " " + this.m_InsuranceCity + ", " + this.m_InsuranceState + " " + this.m_InsuranceZip);
                 result.AppendLine("Phone Number: " + this.m_InsurancePhoneNumber);
                 result.AppendLine("Plan Id: " + this.m_InsurancePlanId);
                 result.AppendLine("Policy Number: " + this.m_PolicyNumber);                

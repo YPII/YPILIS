@@ -107,10 +107,7 @@ namespace YellowstonePathology.Business.HL7View.CMMC
                     break;
                 case 218:
                     view = new YellowstonePathology.Business.Test.RASRAFPanel.RASRAFCMMCNTEView(accessionOrder, reportNo);
-                    break;
-                case 222:
-                    view = new YellowstonePathology.Business.Test.BCellEnumeration.BCellEnumerationCMMCNTEView(accessionOrder, reportNo);
-                    break;
+                    break;                
                 case 226:
                     view = new YellowstonePathology.Business.Test.BCL2t1418ByFISH.BCL2t1418ByFISHCMMCNTEView(accessionOrder, reportNo);
                     break;

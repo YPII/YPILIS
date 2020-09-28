@@ -48,11 +48,15 @@ namespace YellowstonePathology.Business.ASCCPRule
             this.m_OrderType = orderTypeCollection.Get(womansHealthProfileTestOrder);
             this.m_Age = YellowstonePathology.Business.Helper.PatientHelper.GetAge(accessionOrder.PBirthdate.Value);
             if(string.IsNullOrEmpty(panelSetOrderCytology.ResultCode) == false) this.m_ScreeningImpression = screeningImpressions.Get(panelSetOrderCytology.ResultCode);
-            this.m_SpecimenAdequacy = specimenAdequacies.GetFromPAPResultCode(panelSetOrderCytology.ResultCode);
-            this.m_Reactive = Business.Cytology.Model.CytologyResultCode.IsResultCodeReactive(panelSetOrderCytology.ResultCode);
-            this.m_ECTZAbsent = Business.Cytology.Model.CytologyResultCode.IsResultCodeTZoneAbsent(panelSetOrderCytology.ResultCode);
-            
-            if(accessionOrder.PanelSetOrderCollection.Exists(14) == true)
+
+            if (string.IsNullOrEmpty(panelSetOrderCytology.ResultCode) == false)
+            {
+                this.m_SpecimenAdequacy = specimenAdequacies.GetFromPAPResultCode(panelSetOrderCytology.ResultCode);
+                this.m_Reactive = Business.Cytology.Model.CytologyResultCode.IsResultCodeReactive(panelSetOrderCytology.ResultCode);
+                this.m_ECTZAbsent = Business.Cytology.Model.CytologyResultCode.IsResultCodeTZoneAbsent(panelSetOrderCytology.ResultCode);
+            }
+
+            if (accessionOrder.PanelSetOrderCollection.Exists(14) == true)
             {
                 Business.Test.HPV.HPVTestOrder hpvTestOrder = (Business.Test.HPV.HPVTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(14);
                 this.m_HPVResult = hpvTestOrder.Result;

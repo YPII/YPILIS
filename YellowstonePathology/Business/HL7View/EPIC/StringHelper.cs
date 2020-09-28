@@ -13,7 +13,8 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             string result = fieldValue;
             if (string.IsNullOrEmpty(fieldValue) == false)
             {
-                result = fieldValue.Replace(System.Environment.NewLine, @"\.br\");
+                result = result.Trim();
+                result = result.Replace("\r\n", @"\.br\").Replace("\n", @"\.br\").Replace("\r", @"\.br\");
                 result = result.Replace("&", @"\T\");
                 result = result.Replace("~", @"\R\");
                 result = result.Replace("^", @"\S\");

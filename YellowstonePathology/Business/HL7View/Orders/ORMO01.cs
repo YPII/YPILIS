@@ -37,7 +37,7 @@ namespace YellowstonePathology.Business.HL7View.Orders
             orc.ToXml(document);
 
 			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_AccessionOrder.PanelSetOrderCollection[0].ReportNo + ".HL7.xml";
-            string mirthFileName = @"\\YPIIInterface1\ChannelData\Outgoing\Testing\" + this.m_AccessionOrder.PanelSetOrderCollection[0].ReportNo + ".HL7.xml";
+            string mirthFileName = @"\\YPIIInterface2\ChannelData\Outgoing\Testing\" + this.m_AccessionOrder.PanelSetOrderCollection[0].ReportNo + ".HL7.xml";
 
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(serverFileName))
             {

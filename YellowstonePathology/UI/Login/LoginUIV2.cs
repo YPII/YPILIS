@@ -223,7 +223,7 @@ namespace YellowstonePathology.UI.Login
         {
             this.m_ReportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListByAliquotOrderId(aliquotOrderId);
             this.NotifyPropertyChanged("ReportSearchList");
-        }
+        }        
 
         public void GetReportSearchListByITAudit(YellowstonePathology.Business.Test.ITAuditPriorityEnum itAuditPriority)
         {

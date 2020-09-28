@@ -14,6 +14,7 @@ namespace YellowstonePathology.Business.Label.Model
             this.Add(new CassettePrinterGrossTech());
             this.Add(new CassettePrinterGrossPath());
             this.Add(new CassettePrinterGrossHobbit());
+            this.Add(new CassettePrinterHavre());
         }
 
         public CassettePrinter GetPrinter(string name)

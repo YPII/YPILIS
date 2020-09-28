@@ -38,7 +38,7 @@
 					</ListView>
 
 					<Button Name="ButtonNewProvider" Grid.Row="2" Grid.Column="0" Margin="5" Height="30" Width="100" HorizontalAlignment="Left" Content="New" Click="ButtonNewProvider_Click" />
-                    <Button Grid.Row="2" Grid.Column="1" Margin="5" Height="30" Width="100" HorizontalAlignment="Left" Content="Delete" Click="ButtonDeleteProvider_Click" />
+                    <Button Grid.Row="2" Grid.Column="1" Margin="5" Height="30" Width="100" HorizontalAlignment="Left" Content="NPI Check" Click="ButtonNPICheck_Click" />
                     <Button Grid.Row="2" Grid.Column="1" Margin="5" Height="30" Width="100" HorizontalAlignment="Right" Content="OK" Click="ButtonOK_Click" />
 				</Grid>
 			</TabItem>

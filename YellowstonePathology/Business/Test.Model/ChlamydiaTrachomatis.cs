@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "26";
             this.m_TestName = "Chlamydia trachomatis";
             this.m_TestAbbreviation = "Chlamydia trachomatis";
-			this.m_Active = true;
+			this.m_Active = false;
             this.m_NeedsAcknowledgement = false;
 		}
 	}

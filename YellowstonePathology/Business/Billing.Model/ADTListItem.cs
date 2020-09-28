@@ -18,6 +18,7 @@ namespace YellowstonePathology.Business.Billing.Model
         private string m_MedicalRecord;
         private string m_Account;
         private DateTime m_DateReceived;
+        private string m_YPIPatientId;
 
         public ADTListItem()
         {
@@ -104,6 +105,20 @@ namespace YellowstonePathology.Business.Billing.Model
                 {
                     this.m_DateReceived = value;
                     this.NotifyPropertyChanged("DateReceived");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string YPIPatientId
+        {
+            get { return this.m_YPIPatientId; }
+            set
+            {
+                if (this.m_YPIPatientId != value)
+                {
+                    this.m_YPIPatientId = value;
+                    this.NotifyPropertyChanged("YPIPatientId");
                 }
             }
         }

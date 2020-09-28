@@ -1448,6 +1448,7 @@ namespace YellowstonePathology.Business.Test
             this.m_FinalTime = DateTime.Now;
             this.m_FinaledById = Business.User.SystemIdentity.Instance.User.UserId;
             this.m_Signature = Business.User.SystemIdentity.Instance.User.Signature;
+
             if (panelSet.HasProfessionalComponent)
             {                
                 // if there is a reference lab signature then don't change th professional billing
@@ -1795,7 +1796,7 @@ namespace YellowstonePathology.Business.Test
                 result.AppendLine();
                 result.AppendLine();
                 result.Append("Randall Shannon, M.D. is not affiliated with Yellowstone Pathology Institute, Inc.  Dr. Shannon is an independent provider who is not an employee or agent of Yellowstone Pathology Institute, Inc. Yellowstone Pathology Institute, Inc. shall not be liable for any action taken by or service provided by Dr. Shannon.");
-            }
+            }            
 
 			return result.ToString();
 		}

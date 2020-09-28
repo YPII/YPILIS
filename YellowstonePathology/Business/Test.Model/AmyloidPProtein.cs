@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "54";
 			this.m_TestName = "Amyloid P Protein";
             this.m_TestAbbreviation = "Amyloid P Protein";
-			this.m_Active = true;
+			this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

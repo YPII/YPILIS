@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "162";
 			this.m_TestName = "Tyrosinase";
             this.m_TestAbbreviation = "Tyrosinase";
-			this.m_Active = true;
+			this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

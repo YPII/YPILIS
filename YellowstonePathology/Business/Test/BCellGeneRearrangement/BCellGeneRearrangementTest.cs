@@ -45,9 +45,9 @@ namespace YellowstonePathology.Business.Test.BCellGeneRearrangement
             this.m_ProfessionalComponentBillingFacility = neogenomicsIrvine;
 
             Business.Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81479", null), 1);
-            this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);            
-            
-            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceFLOWYPI());
-		}
+            this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);
+
+            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
+        }
 	}
 }

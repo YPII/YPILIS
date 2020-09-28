@@ -10,6 +10,21 @@ namespace YellowstonePathology.Business.Amendment.Model
 
 		public AmendmentCollection()
         {
+
+        }
+
+        public bool HasFinalAmendments()
+        {
+            bool result = false;
+            foreach(Amendment amendment in this)
+            {
+                if(amendment.Final == true)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
         }
 
 		public Amendment GetNextItem(string masterAccessionNo, string reportNo, string amendmentId)

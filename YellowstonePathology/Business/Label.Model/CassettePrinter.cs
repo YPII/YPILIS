@@ -6,7 +6,8 @@ using System.Text;
 namespace YellowstonePathology.Business.Label.Model
 {
     public class CassettePrinter
-    {        
+    {
+        public static string HAVREPRINTERPATH = @"\\10.88.88.50\Jobs";
         public static string TECHPRINTERPATH = @"\\10.1.1.84\Jobs";
         public static string PATHPRINTERPATH = @"\\10.1.1.75\Jobs\";
         public static string HOBBITPRINTERPATH = @"\\gross-hobbit\Jobs";

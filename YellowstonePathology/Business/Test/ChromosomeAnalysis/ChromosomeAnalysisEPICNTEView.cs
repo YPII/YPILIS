@@ -6,25 +6,25 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 {
-	public class ChromosomeAnalysisEPICNTEView : Business.HL7View.EPIC.EPICBeakerNTEView
-	{
-        private Business.Test.AccessionOrder m_AccessionOrder;
-        private string m_ReportNo;        
-
-		public ChromosomeAnalysisEPICNTEView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int nteCount)
+	public class ChromosomeAnalysisEPICNTEView : Business.HL7View.EPIC.EPICBeakerObxView
+	{           
+		public ChromosomeAnalysisEPICNTEView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int nteCount) 
+			: base(accessionOrder, reportNo, nteCount)
 		{
-            this.m_AccessionOrder = accessionOrder;
-            this.m_ReportNo = reportNo;
-            this.m_NTECount = nteCount;
+            
 		}
 
 		public override void ToXml(XElement document)
 		{
-			ChromosomeAnalysisTestOrder panelSetOrder = (ChromosomeAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-			this.AddCompanyHeader(document);
-            this.AddNextNTEElement("Cytogenetic Chromosome Analysis", document);
+			//Add the first element as narrative for Nikki to see.
+			Business.HL7View.EPIC.EPICBeakerNarrativeOBXView.AddElement(document);
 
-            this.AddNextNTEElement("", document);
+			ChromosomeAnalysisTestOrder panelSetOrder = (ChromosomeAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+			this.AddCompanyHeaderNTE(document);
+            this.AddNextNTEElement(panelSetOrder.PanelSetName, document);
+			this.AddNextNTEElement("Report No: " + panelSetOrder.ReportNo, document);
+
+			this.AddNextNTEElement("", document);
 			string result = "Result: " + panelSetOrder.Result;
 			this.AddNextNTEElement(result, document);
 			result = "  Karyotype : " + panelSetOrder.Karyotype;
@@ -38,7 +38,7 @@ namespace YellowstonePathology.Business.Test.ChromosomeAnalysis
 			}
 
 			this.AddNextNTEElement("", document);
-            this.AddAmendments(document, panelSetOrder, this.m_AccessionOrder);
+            this.AddAmendmentsNTE(document, panelSetOrder, this.m_AccessionOrder);
 
             this.AddNextNTEElement("Specimen Information:", document);
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);

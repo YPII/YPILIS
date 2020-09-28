@@ -16,7 +16,9 @@ namespace YellowstonePathology.Business.Billing.Model
         private DateTime? m_TransferSVHFiles;
         private DateTime? m_SendSVHClinicEmail;
         private DateTime? m_ProcessPSAFiles;
+        private DateTime? m_ProcessAPSFiles;
         private DateTime? m_TransferPSAFiles;
+        private DateTime? m_TransferAPSFiles;
         private DateTime? m_FaxTheReport;
 
         public EODProcessStatus()
@@ -72,11 +74,26 @@ namespace YellowstonePathology.Business.Billing.Model
         }
 
         [PersistentProperty()]
+        public DateTime? ProcessAPSFiles
+        {
+            get { return this.m_ProcessAPSFiles; }
+            set { this.m_ProcessAPSFiles = value; }
+        }
+
+        [PersistentProperty()]
         public DateTime? TransferPSAFiles
         {
             get { return this.m_TransferPSAFiles; }
             set { this.m_TransferPSAFiles = value; }
         }
+
+        [PersistentProperty()]
+        public DateTime? TransferAPSFiles
+        {
+            get { return this.m_TransferAPSFiles; }
+            set { this.m_TransferAPSFiles = value; }
+        }
+
 
         [PersistentProperty()]
         public DateTime? FaxTheReport

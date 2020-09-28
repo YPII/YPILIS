@@ -15,7 +15,16 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
         public static PanelSetCollection GetAll()
         {
-            PanelSetCollection panelSetCollection = new PanelSetCollection();            
+            PanelSetCollection panelSetCollection = new PanelSetCollection();
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.FGFRCDX.FGFRCDXTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.PlateletAggregation.PlateletAggregationTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.SolidTumorLiquidBiopsy.SolidTumorLiquidBiopsyTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.PTENIHC.PTENIHCTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.HPVDNATissueTyping.HPVDNATissueTypingTest());
+
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.SimianVirus40.SimianVirus40Test());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.ThyroSeq.ThyroSeqTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.MDM2.MDM2Test());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.IEP.IEPTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.SPEP.SPEPTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.UPEP.UPEPTest());

@@ -13,12 +13,15 @@ namespace YellowstonePathology.Business.Audit.Model
         private bool m_HasIndication;
         private bool m_HasCLLByFish;
         private bool m_HasIGVH;
+        private bool m_HasNeotypeCLLPrognosticPanel;
         private bool m_IsNewDiagnosis;
         private bool m_UseFCCRule;
         private bool m_UseTCIRule;
+        private bool m_UseNMHRule;
 
         private List<int> m_FCCClients;
         private List<int> m_TCIClients;
+        private List<int> m_NMHClients;
 
         public CheckSuggestedOrdersOnFlowFinalAudit(YellowstonePathology.Business.Test.AccessionOrder accessionOrder,
             YellowstonePathology.Business.Test.LLP.PanelSetOrderLeukemiaLymphoma panelSetOrder)
@@ -49,6 +52,14 @@ namespace YellowstonePathology.Business.Audit.Model
             this.m_TCIClients.Add(1552);
             this.m_TCIClients.Add(1558);
             this.m_TCIClients.Add(1615);
+
+            this.m_NMHClients = new List<int>();
+            this.m_NMHClients.Add(587);
+            this.m_NMHClients.Add(588);
+            this.m_NMHClients.Add(1607);
+            this.m_NMHClients.Add(1604);
+            this.m_NMHClients.Add(1608);
+            this.m_NMHClients.Add(1699);
         }
 
         public override void Run()
@@ -78,6 +89,7 @@ namespace YellowstonePathology.Business.Audit.Model
             {
                 if (this.m_FCCClients.IndexOf(this.m_AccessionOrder.ClientId) > -1) this.m_UseFCCRule = true;
                 else if (this.m_TCIClients.IndexOf(this.m_AccessionOrder.ClientId) > -1) this.m_UseTCIRule = true;
+                else if (this.m_NMHClients.IndexOf(this.m_AccessionOrder.ClientId) > -1) this.m_UseNMHRule = true;
             }
         }
 
@@ -102,6 +114,7 @@ namespace YellowstonePathology.Business.Audit.Model
 
             if (this.m_UseFCCRule == true && this.m_HasIndication == true) CreateFCCResult();
             else if (this.m_UseTCIRule == true && this.m_HasIndication == true) CreateTetonCancerResult();
+            else if (this.m_UseNMHRule == true&& this.m_HasIndication == true) CreateNMHResult();
         }
 
         private void CreateFCCResult()
@@ -146,6 +159,14 @@ namespace YellowstonePathology.Business.Audit.Model
                     this.Message.AppendLine("Please order IgVH mutation analysis as here is a CLL Panel by FISH, and document in the interpretive comment in the flow report.");
                 }
             }
+        }
+
+        private void CreateNMHResult()
+        {                           
+            this.m_Status = AuditStatusEnum.Failure;
+            this.m_Message.AppendLine("The client has requested that all new diagnoses of CLL have a Neotype CLL Prognostic Panel reflexively ordered.");
+            this.m_Message.AppendLine();
+            this.m_Message.AppendLine("Please order Neotype CLL Prognostic Panel, and document in the interpretive comment in the flow report.");                
         }
 
         private void IsNewDiagnosis()

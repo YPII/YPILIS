@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.NGCT
 {
-    public class NGCTEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICObxView
+    public class NGCTEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICBeakerObxView
     {
         public NGCTEPICBeakerObxView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount) 
             : base(accessionOrder, reportNo, obxCount)
@@ -13,13 +13,13 @@ namespace YellowstonePathology.Business.Test.NGCT
         }
 
         public override void ToXml(XElement document)
-        {
+        {            
             NGCTTestOrder testOrder = (NGCTTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
             this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");
-            this.AddNextObxElementBeaker("Chlamydia trachomatis result", testOrder.ChlamydiaTrachomatisResult, document, "F", "Negative");            
-            this.AddNextObxElementBeaker("Neisseria gonorrhoeae result", testOrder.NeisseriaGonorrhoeaeResult, document, "F", "Negative");            
+            this.AddNextObxElementBeaker("Chlamydia trachomatis result", testOrder.ChlamydiaTrachomatisResult, document, "F", "Negative");
+            this.AddNextObxElementBeaker("Neisseria gonorrhoeae result", testOrder.NeisseriaGonorrhoeaeResult, document, "F", "Negative");
 
             if (amendmentCollection.Count != 0)
             {
@@ -47,7 +47,7 @@ namespace YellowstonePathology.Business.Test.NGCT
             this.AddNextObxElementBeaker("Test Information", testOrder.TestInformation, document, "F");
 
             string locationPerformed = testOrder.GetLocationPerformedComment();
-            this.AddNextObxElementBeaker("Location Performed", locationPerformed, document, "F");
-        }
+            this.AddNextObxElementBeaker("Location Performed", locationPerformed, document, "F");            
+        }        
     }
 }

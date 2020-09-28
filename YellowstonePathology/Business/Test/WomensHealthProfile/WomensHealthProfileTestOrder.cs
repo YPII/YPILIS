@@ -236,7 +236,23 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             }
         }
 
-		public override string ToResultString(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public override FinalizeTestResult Finish(AccessionOrder accessionOrder)
+        {
+            if (this.ManagePerASCCP == true || this.ManagePerASCCPWithCotest == true)
+            {
+                Business.ASCCPRule.Woman woman = new ASCCPRule.Woman();
+                woman.FromAccessionOrder(accessionOrder);
+
+                Business.ASCCPRule.RuleCollection ruleCollection = new Business.ASCCPRule.RuleCollection();
+                Business.ASCCPRule.BaseRule matchingRule = ruleCollection.GetMatchingRule(woman);
+                matchingRule.Finalize(woman);
+
+                this.ManagementRecommendation = woman.ManagementRecommendation;
+            }
+            return base.Finish(accessionOrder);
+        }
+
+        public override string ToResultString(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
 		{
 			StringBuilder result = new StringBuilder();
 			YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest panelSetThinPrepPap = new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest();

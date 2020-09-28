@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.WomensHealthProfile
 {
-    class WomensHealthProfileEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICObxView
+    class WomensHealthProfileEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICBeakerObxView
     {
         public WomensHealthProfileEPICBeakerObxView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount) 
             : base(accessionOrder, reportNo, obxCount)
@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             ThinPrepPap.ThinPrepPapTest thinPrepPapTest = new ThinPrepPap.ThinPrepPapTest();
             bool hasPap = this.m_AccessionOrder.PanelSetOrderCollection.Exists(thinPrepPapTest.PanelSetId);
 
-            this.AddNextObxElementBeaker("Report No: ", this.m_ReportNo, document, "F");
+            this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");
 
             if (hasPap == true)
             {
@@ -87,7 +87,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                 }
 
                 string cytoTechFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(screeningPanelOrder.AcceptedDate);
-                papTest.AppendLine("E-Signed " + cytoTechFinal);
+                papTest.AppendLine("E-Signed: " + cytoTechFinal);
 
                 if (reviewPanelOrder != null)
                 {
@@ -103,7 +103,8 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                         papTest.AppendLine("Reviewed By: " + reviewedBy + " " + reviewedByFinal);
                     }
                 }
-                this.AddNextObxElementBeaker("PAP TEST RESULT: ", papTest.ToString(), document, "F");
+
+                this.AddNextObxElementBeaker("PAP TEST RESULT", papTest.ToString(), document, "F");
             }
 
             if (amendmentCollection.Count != 0)
@@ -118,7 +119,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                         if (amendment.RequirePathologistSignature == true)
                         {
                             amendments.AppendLine("Signature: " + amendment.PathologistSignature);
-                            amendments.AppendLine("E-signed " + amendment.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"));
+                            amendments.AppendLine("E-signed: " + amendment.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"));
                         }
                     }
                 }
@@ -185,21 +186,22 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     testsPerformed.AppendLine("Date Finalized: " + hpvFinal);
                 }
             }
+
             this.AddNextObxElementBeaker("CURRENT MOLECULAR TEST SUMMARY", testsPerformed.ToString(), document, "F");
 
-            this.AddNextObxElementBeaker("Specimen Description: ", "Thin Prep Fluid", document, "F");
-            this.AddNextObxElementBeaker("Specimen Source: ", this.m_AccessionOrder.SpecimenOrderCollection[0].SpecimenSource, document, "F");
+            this.AddNextObxElementBeaker("Specimen Description", "Thin Prep Fluid", document, "F");
+            this.AddNextObxElementBeaker("Specimen Source", this.m_AccessionOrder.SpecimenOrderCollection[0].SpecimenSource, document, "F");
             string collectionDateTimeString = this.m_AccessionOrder.SpecimenOrderCollection[0].GetCollectionDateTimeString();
-            this.AddNextObxElementBeaker("Collection Date/Time: ", collectionDateTimeString, document, "F");
+            this.AddNextObxElementBeaker("Collection Date/Time", collectionDateTimeString, document, "F");
 
-            this.AddNextObxElementBeaker("Clinical History: ", this.m_AccessionOrder.ClinicalHistory, document, "F");
+            this.AddNextObxElementBeaker("Clinical History", this.m_AccessionOrder.ClinicalHistory, document, "F");
 
-            this.AddNextObxElementBeaker("Method: ", womensHealthProfileResult.Method, document, "F");
+            this.AddNextObxElementBeaker("Method", womensHealthProfileResult.Method, document, "F");
 
-            this.AddNextObxElementBeaker("References: ", womensHealthProfileResult.References, document, "F");
+            this.AddNextObxElementBeaker("References", womensHealthProfileResult.References, document, "F");
 
             string locationPerformed = womensHealthProfileTestOrder.GetLocationPerformedComment();
-            this.AddNextObxElementBeaker("Location Performed: ", locationPerformed, document, "F");
+            this.AddNextObxElementBeaker("Location Performed", locationPerformed, document, "F");
 
             StringBuilder priorTests = new StringBuilder();
 

@@ -119,9 +119,9 @@ namespace YellowstonePathology.Business.HL7View.WPH
 
             YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
 			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;
-            string interfaceFileName = @"\\YPIIInterface1\ChannelData\Outgoing\WestParkHospital\Prod\" + this.m_PanelSetOrder.ReportNo + fileExtension;
-            if (this.m_Testing == true) interfaceFileName = @"\\YPIIInterface1\ChannelData\Outgoing\WestParkHospital\Testing\" + this.m_PanelSetOrder.ReportNo + fileExtension;            
-            
+            string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\WestParkHospital\Prod\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+            if (this.m_Testing == true) interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\WestParkHospital\Testing\" + this.m_PanelSetOrder.ReportNo + fileExtension;                                   
+
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(serverFileName))
             {
                 document.Save(sw);

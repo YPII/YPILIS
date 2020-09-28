@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "260";
 			this.m_TestName = "KRAS BRAF Reflex";
             this.m_TestAbbreviation = "KRAS BRAF Reflex";
-			this.m_Active = true;
+			this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

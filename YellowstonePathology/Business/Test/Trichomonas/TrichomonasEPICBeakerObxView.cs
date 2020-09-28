@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.Trichomonas
 {
-    public class TrichomonasEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICObxView
+    public class TrichomonasEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICBeakerObxView
     {
         public TrichomonasEPICBeakerObxView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount) 
             : base(accessionOrder, reportNo, obxCount)

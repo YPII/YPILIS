@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
         private Nullable<DateTime> m_CollectionDate;
         private Nullable<DateTime> m_FinalTime;
         private bool m_SendUnsolicited;
-        private string m_SystemInitiatingOrder;
+        private string m_SystemInitiatingOrder;        
 
         YellowstonePathology.Business.Domain.Physician m_OrderingPhysician;
         YellowstonePathology.Business.ClientOrder.Model.UniversalService m_UniversalService;
@@ -40,7 +40,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.m_ObservationResultStatus = observationResultStatus;
             this.m_UniversalService = universalService;
             this.m_SendUnsolicited = sendUnsolicited;
-            this.m_SystemInitiatingOrder = systemInitiatingOrder;
+            this.m_SystemInitiatingOrder = systemInitiatingOrder;            
         }               
 
         public void ToXml(XElement document)
@@ -61,10 +61,12 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 
             XElement obr03Element = new XElement("OBR.3");            
             string obr3Value = "";
-            if(string.IsNullOrEmpty(this.m_SecondaryExternalOrderId) == false)
+
+            if(this.m_SendUnsolicited == false && string.IsNullOrEmpty(this.m_SecondaryExternalOrderId) == false)
             {
                 obr3Value = this.m_SecondaryExternalOrderId + "^Beaker~";
             }
+
             obr3Value += this.m_ReportNo + "^YPILIS";
             obr03Element.Value = obr3Value;
             obrElement.Add(obr03Element);
@@ -100,7 +102,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.16.13", "NPI", obr16Element);                                    
             obrElement.Add(obr16Element);
 
-            if(this.m_SystemInitiatingOrder == "Beaker")
+            if(this.m_SystemInitiatingOrder == "Beaker" && this.m_SendUnsolicited == false)
             {
                 XElement obr18Element = new XElement("OBR.18");
                 YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.18.1", "Beaker", obr18Element);
@@ -112,7 +114,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             obrElement.Add(obr22Element);            
 
             XElement obr25Element = new XElement("OBR.25");
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.25.1", this.m_ObservationResultStatus, obr25Element);            
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.25.1", this.m_ObservationResultStatus, obr25Element);                        
             obrElement.Add(obr25Element);            
         }
 

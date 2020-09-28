@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
         {			
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelOrderToFinal.ReportNo);			
 			int reportNoInt = orderIdParser.MasterAccessionNoNumber.Value;
-			int modValue = 12;			
+			int modValue = 11;
 
 			if (reportNoInt % modValue != 0)
 			{

@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.PDL1288
         public PDL1288Test()
         {
             this.m_PanelSetId = 315;
-            this.m_PanelSetName = "Pd-L1 28-8 FDA (OPDIVO) (IHC)";
+            this.m_PanelSetName = "PD-L1 28-8 FDA (OPDIVO) (IHC)";
             this.m_Abbreviation = "PD-L1 28-8";
             this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;

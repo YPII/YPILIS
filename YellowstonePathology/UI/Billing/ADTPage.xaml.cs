@@ -33,7 +33,7 @@ namespace YellowstonePathology.UI.Billing
         public ADTPage(Business.Test.AccessionOrder accessionOrder)
 		{
             this.m_AccessionOrder = accessionOrder;
-            this.m_ADTMessages = Business.Gateway.AccessionOrderGateway.GetADTMessages(accessionOrder.SvhMedicalRecord);
+            this.m_ADTMessages = Business.Gateway.AccessionOrderGateway.GetADTMessagesByPatientNameDOB(accessionOrder.PFirstName, accessionOrder.PLastName, accessionOrder.PBirthdate.Value);
 
 			InitializeComponent();			
 			DataContext = this;

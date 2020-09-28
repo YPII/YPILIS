@@ -1059,7 +1059,7 @@ namespace YellowstonePathology.UI.Surgical
             {
                 if(string.IsNullOrEmpty(this.m_TypingUI.AccessionOrder.SvhMedicalRecord) == false)
                 {
-                    Business.HL7View.ADTMessages adtMessages = Business.Gateway.AccessionOrderGateway.GetADTMessages(this.m_TypingUI.AccessionOrder.SvhMedicalRecord);
+                    Business.HL7View.ADTMessages adtMessages = Business.Gateway.AccessionOrderGateway.GetADTMessagesByPatientNameDOB(this.m_TypingUI.AccessionOrder.PFirstName, this.m_TypingUI.AccessionOrder.PLastName, this.m_TypingUI.AccessionOrder.PBirthdate.Value);
                     if(adtMessages.Messages.Count > 0)
                     {
                         adtMessages.SetCurrentAddress(this.m_TypingUI.AccessionOrder);

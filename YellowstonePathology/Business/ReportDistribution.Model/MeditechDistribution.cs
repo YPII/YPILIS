@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         public const string DistributionType = "Meditech";
 
         public const string WestParkHospitalIPAddress = "165.136.181.151";        
-        public const string ProductionFolderPath = @"\\YPIIInterface1\ChannelData\Outgoing\WestParkHospital";
+        public const string ProductionFolderPath = @"\\YPIIInterface2\ChannelData\Outgoing\WestParkHospital";
         public const string UserName = @"WPHD\YPII";
         public const string Password = @"yellowstone";
 

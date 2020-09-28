@@ -45,10 +45,7 @@ namespace YellowstonePathology.Business.Test.BRAFV600EK
             YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81210", null), 1);
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);
 
-            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceBRAFMANAL());
-
-            //BRAFV600EKPanel brafV600EKPanel = new BRAFV600EKPanel();
-            //this.m_PanelCollection.Add(brafV600EKPanel);
+            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceBRAFMANAL());            
 		}
 	}
 }

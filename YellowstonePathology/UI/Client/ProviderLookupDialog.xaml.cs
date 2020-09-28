@@ -466,5 +466,11 @@ namespace YellowstonePathology.UI.Client
                 MessageBox.Show("No Facility is selected.");
             }
         }
+
+        private void ButtonNPICheck_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_ProviderCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetHomeBaseProviderClientListByMissingNPI();
+            this.NotifyPropertyChanged(string.Empty);
+        }
     }
 }

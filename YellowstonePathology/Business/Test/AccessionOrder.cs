@@ -106,7 +106,8 @@ namespace YellowstonePathology.Business.Test
         private bool m_HoldBilling;
         private int m_ITAuditPriority;
         private string m_CaseDialog;
-        private string m_PlaceOfService;              
+        private string m_PlaceOfService;
+		private bool m_HoldSVHDistribution;
 
 		public AccessionOrder()
         {
@@ -1252,7 +1253,22 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
-        [PersistentProperty()]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+		public bool HoldSVHDistribution
+		{
+			get { return this.m_HoldSVHDistribution; }
+			set
+			{
+				if (this.m_HoldSVHDistribution != value)
+				{
+					this.m_HoldSVHDistribution = value;
+					this.NotifyPropertyChanged("HoldSVHDistribution");
+				}
+			}
+		}
+
+		[PersistentProperty()]
         [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
         public bool ITAuditRequired
         {
@@ -1400,6 +1416,13 @@ namespace YellowstonePathology.Business.Test
 					this.PhysicianName = physician.DisplayName;
 				}
 			}
+
+			Business.Client.Model.ClientGroupClientCollection clientGroupClientColletion = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollection();
+			if(clientGroupClientColletion.IsInGroup(this.m_ClientId, "1"))
+			{
+				this.HoldSVHDistribution = true;
+			}
+
             if (ShouldBillingBeHeld() == true) this.m_HoldBilling = true;
 		}  
         

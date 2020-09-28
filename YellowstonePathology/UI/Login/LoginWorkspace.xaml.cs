@@ -66,6 +66,7 @@ namespace YellowstonePathology.UI.Login
                 this.m_BarcodeScanPort.HistologySlideScanReceived += new Business.BarcodeScanning.BarcodeScanPort.HistologySlideScanReceivedHandler(BarcodeScanPort_HistologySlideScanReceived);
                 this.m_BarcodeScanPort.AliquotOrderIdReceived += BarcodeScanPort_AliquotOrderIdReceived;
                 this.m_BarcodeScanPort.VantageSlideScanReceived += BarcodeScanPort_VantageSlideScanReceived;
+                this.m_BarcodeScanPort.HistologyBlockScanReceived += BarcodeScanPort_HistologyBlockScanReceived;
 
                 this.m_MainWindowCommandButtonHandler.StartProviderDistributionPath += MainWindowCommandButtonHandler_StartProviderDistributionPath;
                 this.m_MainWindowCommandButtonHandler.Save += MainWindowCommandButtonHandler_Save;
@@ -79,6 +80,16 @@ namespace YellowstonePathology.UI.Login
             }
 
             this.m_LoadedHasRun = true;
+        }
+
+        private void BarcodeScanPort_HistologyBlockScanReceived(Business.BarcodeScanning.Barcode barcode)
+        {
+            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Input, new System.Threading.ThreadStart(delegate ()
+            {                
+                this.m_BarcodeScanPort.HistologyBlockScanReceived -= BarcodeScanPort_HistologyBlockScanReceived;
+                this.m_LoginUI.GetReportSearchListByAliquotOrderId(barcode.ID);                
+                this.m_BarcodeScanPort.HistologyBlockScanReceived += BarcodeScanPort_HistologyBlockScanReceived;
+            }));
         }
 
         private void MainWindowCommandButtonHandler_ShowCaseDocument(object sender, EventArgs e)

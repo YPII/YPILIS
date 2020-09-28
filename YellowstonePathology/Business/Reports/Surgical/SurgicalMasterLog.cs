@@ -63,8 +63,9 @@ namespace YellowstonePathology.Business.Reports.Surgical
             List<string> accessioningLocations = new List<string>();
             accessioningLocations.Add("Billings");
             accessioningLocations.Add("Cody");
+			accessioningLocations.Add("Havre");
 
-			foreach(string location in accessioningLocations)
+			foreach (string location in accessioningLocations)
 			{
                 XmlNode nodeNewLocation = nodeTemplateFacility.Clone();
 				this.ReplaceTextInRowNode(nodeNewLocation, "accessioning_location", "Accessioning Location: " + location);

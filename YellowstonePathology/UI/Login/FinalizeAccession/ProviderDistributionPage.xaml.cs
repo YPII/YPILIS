@@ -597,7 +597,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void HyperLinkShowHl7Result_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.HL7View.IResultView resultView = YellowstonePathology.Business.HL7View.ResultViewFactory.GetResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, this.m_AccessionOrder.ClientId, false);
+            YellowstonePathology.Business.HL7View.IResultView resultView = YellowstonePathology.Business.HL7View.ResultViewFactory.GetResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, this.m_AccessionOrder.ClientId, false, false);
             if (resultView != null)
             {
                 System.Xml.Linq.XElement document = resultView.GetDocument();
@@ -612,17 +612,16 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void HyperLinkSendHL7Result_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.HL7View.IResultView resultView = YellowstonePathology.Business.HL7View.ResultViewFactory.GetResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, this.m_AccessionOrder.ClientId, false);
+            YellowstonePathology.Business.HL7View.IResultView resultView = Business.HL7View.ResultViewFactory.GetResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, this.m_AccessionOrder.ClientId, false, false);
             YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
-            resultView.Send(methodResult);
+            resultView.Send(methodResult);               
         }
 
         private void HyperLinkSendHL7ResultTest_Click(object sender, RoutedEventArgs e)
         {
-            //YellowstonePathology.Business.HL7View.IResultView resultView = YellowstonePathology.Business.HL7View.ResultViewFactory.GetResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, this.m_AccessionOrder.ClientId, true);
-            YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true);
+            YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true);
             YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
-            resultView.Send(methodResult);            
+            resultView.Send(methodResult);
         }
 
         private void HyperLinkSendHL7Order_Click(object sender, RoutedEventArgs e)
@@ -650,6 +649,40 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 this.m_PanelSetOrder.TestOrderReportDistributionLogCollection.Remove(rdl);
                 this.NotifyPropertyChanged("TestOrderReportDistributionLogCollection");
             }
+        }
+
+        private void MenuItemSendSVHUnsolicted_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.ListViewTestOrderReportDistribution.SelectedItem != null)
+            {
+                Business.ReportDistribution.Model.TestOrderReportDistribution rd = (Business.ReportDistribution.Model.TestOrderReportDistribution)this.ListViewTestOrderReportDistribution.SelectedItem;
+                if(rd.DistributionType == "EPIC")
+                {
+                    YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true, false);
+                    YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+                    resultView.Send(methodResult);
+                    MessageBox.Show("The result was sent unsolicted to EPIC");
+                }
+                else
+                {
+                    MessageBox.Show("Cannot send this unsolicted because it is not an EPIC distribution.");
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Please select a distribution to send.");
+            }
+            
         }        
+
+        private void MenuItemConvertToNMH_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewTestOrderReportDistribution.SelectedItem != null)
+            {
+                YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution = (YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution)this.ListViewTestOrderReportDistribution.SelectedItem;
+                testOrderReportDistribution.DistributionType = "Meditech";
+            }
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.Add("MTHFRM", "MTHFR Mutation Analysis");
             this.Add("AUTOPSY", "Autopsy");
             this.Add("BCELLCLON", "B-Cell Clonality");
+            this.Add("520083", "B-Cell Enumeration");
             this.Add("KRAS", "KRAS");
             this.Add("THINPREP", "ThinPrep Pap");
             this.Add("CYTO", "Cytology, Non-GYN");
@@ -35,7 +36,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.Add("RETICPLATE", "Reticulated Platelet");
             this.Add("THROMPRO", "Thrombocytopenia Profile (Platelet Antibody & Reticulated Platelet)");            
             this.Add("STEMCE", "Stem Cell Enumeration");            
-            this.Add("EPPR", "Estrogen Receptor/Progesterone Receptor (IHC)");
+            this.Add("ERPR", "Estrogen Receptor/Progesterone Receptor (IHC)");
             this.Add("SMP", "PERIPHERAL SMEAR REVIEW BY PATHOLOGIST");
             this.Add("EGFR", "EGFR");
             this.Add("FNA", "Fine Needle Aspirate");
@@ -53,7 +54,8 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.Add("ONCFISH", "Oncology Fish");
             this.Add("MOLEONC", "Molecular Oncology");
             this.Add("MOLEGEN", "Molecular Genetics");
-            this.Add("PHARMCOG", "Pharmacogenetics");                                    
+            this.Add("PHARMCOG", "Pharmacogenetics");
+            this.Add("FHGB", "Fetal Hemoglobin");
         }
     }
 }

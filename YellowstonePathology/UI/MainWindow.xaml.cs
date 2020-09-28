@@ -1069,5 +1069,11 @@ namespace YellowstonePathology.UI
             ASCCPRulesDialog asccpDialog = new ASCCPRulesDialog();
             asccpDialog.Show();
         }
+
+        private void MenuItemADTLinking_Click(object sender, RoutedEventArgs e)
+        {
+            Billing.ADTLinkingDialog adtLinkingDialog = new Billing.ADTLinkingDialog();
+            adtLinkingDialog.ShowDialog();
+        }
     }
 }

@@ -44,6 +44,15 @@ namespace YellowstonePathology.Business.Helper
                 }                
             }			
 
+            if(this.m_PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.MarkerExists("CD19") == true)
+            {
+                Business.Flow.FlowMarkerItem flowMarker = this.m_PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.GetByMarkerName("CD19");
+                if(flowMarker.Interpretation == "Negative")
+                {
+                    result = result.Replace(" and the B-cells appear to be polytypic", "");
+                }
+            }
+
             this.m_PanelSetOrderLeukemiaLymphoma.InterpretiveComment = result.ToString();
         }
 

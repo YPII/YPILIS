@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\FetalHemoglobinV2.3.xml";
+            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\FetalHemoglobinV2.4.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();
@@ -35,14 +35,15 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
             string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 
-            this.SetXmlNodeData("hbf_percent", testOrder.HbFPercent);
+            this.SetXmlNodeData("hbf_percent", testOrder.HbFPercent + "%");
             this.SetXmlNodeData("hbfreference_range", testOrder.HbFReferenceRange);
             this.SetXmlNodeData("fetal_maternal_bleed", testOrder.FetalBleed);
             this.SetXmlNodeData("fmbreference_range", testOrder.FetalBleedReferenceRange);
             this.SetXmlNodeData("rh_immune_globulin", testOrder.RhImmuneGlobulin);            
-            this.SetXmlNodeData("report_comment", testOrder.ReportComment);
-            this.SetXmlNodeData("asr_comment", testOrder.ASRComment);
-            this.SetXmlNodeData("report_method", testOrder.Method);
+            this.SetXMLNodeParagraphData("report_comment", testOrder.ReportComment);
+            this.SetXMLNodeParagraphData("asr_comment", testOrder.ASRComment);
+            this.SetXMLNodeParagraphData("report_method", testOrder.Method);
+            this.SetXMLNodeParagraphData("notification_comment", testOrder.NotificationComment);
 
             this.SaveReport();
         }

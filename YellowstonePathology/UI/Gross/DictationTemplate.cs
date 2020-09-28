@@ -329,13 +329,16 @@ namespace YellowstonePathology.UI.Gross
         protected string ReplaceCurettingsSubmitted(string text, YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder)
         {
             string result = text;
-            if (specimenOrder.AliquotOrderCollection.Count == 1)
+            if(specimenOrder.AliquotOrderCollection.Count > 0)
             {
-                result = result.Replace("[curettingssubmitted]", "Entirely submitted in cassette \"" + specimenOrder.AliquotOrderCollection[0].Label + "\"");
-            }
-            else
-            {
-                result = result.Replace("[curettingssubmitted]", "Shave [procedure] and submitted in cassette \"" + specimenOrder.SpecimenNumber + "A\".  " + "The curettings are filtered through a fine mesh bag and entirely submitted in cassette \"" + specimenOrder.AliquotOrderCollection.GetLastBlock().Label + "\"");
+                if (specimenOrder.AliquotOrderCollection.Count == 1)
+                {
+                    result = result.Replace("[curettingssubmitted]", "Entirely submitted in cassette \"" + specimenOrder.AliquotOrderCollection[0].Label + "\"");
+                }
+                else
+                {
+                    result = result.Replace("[curettingssubmitted]", "Shave [procedure] and submitted in cassette \"" + specimenOrder.SpecimenNumber + "A\".  " + "The curettings are filtered through a fine mesh bag and entirely submitted in cassette \"" + specimenOrder.AliquotOrderCollection.GetLastBlock().Label + "\"");
+                }
             }            
             return result;
         }
@@ -461,7 +464,7 @@ namespace YellowstonePathology.UI.Gross
                         initials = grossedByInitials + "/" + typedByInitials;
                     }
                     
-                    result = result + initials;
+                    result = result + "  " + initials;
                 }
             }            
             return result;
@@ -484,7 +487,7 @@ namespace YellowstonePathology.UI.Gross
 
         public void Save()
         {
-            string jString = this.ToJSON();
+            string jString = this.ToJSON();            
             MySqlCommand cmd = new MySqlCommand("Insert tblDictationTemplate(TemplateId, JSONValue) values(@TemplateId, @JSONValue) ON DUPLICATE KEY UPDATE TemplateId = @TemplateId, JSONValue = @JSONValue;");
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@TemplateId", this.m_TemplateId);

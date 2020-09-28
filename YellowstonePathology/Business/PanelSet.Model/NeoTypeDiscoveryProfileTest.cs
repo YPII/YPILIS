@@ -47,7 +47,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode4);
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode5);
 
-            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceFLOWYPI());
+            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
         }
     }
 }

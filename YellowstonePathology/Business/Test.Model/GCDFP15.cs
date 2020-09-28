@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "103";
 			this.m_TestName = "GCDFP-15";
             this.m_TestAbbreviation = "GCDFP-15";
-			this.m_Active = true;
+			this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

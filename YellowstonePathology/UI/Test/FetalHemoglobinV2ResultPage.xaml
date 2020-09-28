@@ -95,6 +95,8 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,5" FontWeight="Bold">Ordered On:</TextBlock>
@@ -158,16 +160,19 @@
                     <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,5" FontWeight="Bold">Method:</TextBlock>
                     <TextBox Grid.Column="0" Grid.Row="13" Margin="2,2,2,5" Grid.ColumnSpan="3" Text="{Binding Path=PanelSetOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,5" FontWeight="Bold">ASR Comment:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="15" Margin="2,2,2,5" Grid.ColumnSpan="3" Text="{Binding Path=PanelSetOrder.ASRComment}" TextWrapping="Wrap" AcceptsReturn="True" />
+                    <TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,5" FontWeight="Bold">Notification Comment:</TextBlock>
+                    <TextBox x:Name="TextBoxNotificationComment" Grid.Column="0" Grid.Row="15" Margin="2,2,2,5" Grid.ColumnSpan="3" Text="{Binding Path=PanelSetOrder.NotificationComment}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="16" Margin="2,2,2,2" FontWeight="Bold" VerticalAlignment="Center">Distribute:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="16" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="0" Grid.Row="16" Margin="2,2,2,5" FontWeight="Bold">ASR Comment:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="17" Margin="2,2,2,5" Grid.ColumnSpan="3" Text="{Binding Path=PanelSetOrder.ASRComment}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="17" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="17" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.NoCharge}"></CheckBox>
+                    <TextBlock Grid.Column="0" Grid.Row="18" Margin="2,2,2,2" FontWeight="Bold" VerticalAlignment="Center">Distribute:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="18" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}" VerticalAlignment="Center" />
 
-                    <Grid Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="3">
+                    <TextBlock Grid.Column="0" Grid.Row="19" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="19" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.NoCharge}"></CheckBox>
+
+                    <Grid Grid.Column="0" Grid.Row="20" Grid.ColumnSpan="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>

@@ -34,7 +34,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.m_AccessionTime = accessionTime;
             this.m_FinalTime = finalTime;
             this.m_OrderingPhysician = orderingPhysician;
-            this.m_ObservationResultStatus = observationResultStatus;
+            this.m_ObservationResultStatus = observationResultStatus;            
             this.m_UniversalService = universalService;
             this.m_SendUnsolicited = sendUnsolicited;
         }               
@@ -96,8 +96,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             obrElement.Add(obr22Element);            
 
             XElement obr25Element = new XElement("OBR.25");
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.25.1", this.m_ObservationResultStatus, obr25Element);
-            //YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.25.1", "F", obr25Element);
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.25.1", m_ObservationResultStatus, obr25Element);            
             obrElement.Add(obr25Element);            
         }
 

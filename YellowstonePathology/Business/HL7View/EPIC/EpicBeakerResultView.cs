@@ -17,16 +17,17 @@ namespace YellowstonePathology.Business.HL7View.EPIC
         private YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
         private YellowstonePathology.Business.Domain.Physician m_OrderingPhysician;
 
-        public EPICBeakerResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool testing)
-        {            
+        public EPICBeakerResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool sendUnsolicted, bool testing)
+        {
+            this.m_SendUnsolicited = sendUnsolicted;
             this.m_Testing = testing;
             this.m_AccessionOrder = accessionOrder;
             this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);                        
 
-            if(string.IsNullOrEmpty(this.m_PanelSetOrder.ExternalOrderId) == true)
-            {
-                this.m_SendUnsolicited = true;
-            }
+            //if(string.IsNullOrEmpty(this.m_PanelSetOrder.ExternalOrderId) == true)
+            //{
+            //    this.m_SendUnsolicited = true;
+            //}
 
             this.m_OrderingPhysician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);           
 		}        
@@ -81,7 +82,18 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             EPICBeakerObrView obr = new EPICBeakerObrView(this.m_PanelSetOrder.ExternalOrderId, this.m_AccessionOrder.SecondaryExternalOrderId, this.m_AccessionOrder.MasterAccessionNo, this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder.SpecimenOrderCollection[0].CollectionDate, this.m_AccessionOrder.SpecimenOrderCollection[0].CollectionTime, this.m_AccessionOrder.AccessionDateTime,
                 panelSetOrder.FinalTime, this.m_OrderingPhysician, resultStatus, universalService, this.m_SendUnsolicited, this.m_AccessionOrder.SystemInitiatingOrder);
             obr.ToXml(document);
-            
+
+            EPICBeakerObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, this.m_SendUnsolicited, false);
+            if (epicObxView != null)
+            {
+                epicObxView.ToXml(document);
+            }
+            else
+            {                
+                throw new Exception(this.m_PanelSetOrder.PanelSetName + " needs to be build. " + this.m_PanelSetOrder.ReportNo);
+            }
+
+            /*
             switch(panelSetOrder.PanelSetId)
             {
                 case 1:
@@ -89,31 +101,34 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                     Business.Test.JAK2V617F.JAK2V617FEPICNTEView jak2v617fEPICNTEView = new Test.JAK2V617F.JAK2V617FEPICNTEView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
                     jak2v617fEPICNTEView.ToXml(document);
                     break;
+                case 13:
+                    Business.Test.Surgical.SurgicalEPICBeakerObxView surgicalEPICBeakerObxView = new Test.Surgical.SurgicalEPICBeakerObxView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                    surgicalEPICBeakerObxView.ToXml(document);
+                    break;
+                case 14:
+                    Business.Test.HPV.HPVEPICBeakerObxView hpvEPICBeakerObxView = new Test.HPV.HPVEPICBeakerObxView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                    hpvEPICBeakerObxView.ToXml(document);
+                    break;
+                case 62:
+                    Business.Test.HPV1618.HPV1618EPICBeakerObxView hpv1618EPICBeakerObxView = new Test.HPV1618.HPV1618EPICBeakerObxView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                    hpv1618EPICBeakerObxView.ToXml(document);
+                    break;
+                case 15:                
+                    Business.Test.ThinPrepPap.ThinPrepPapEPICBeakerObxView thinPrepPapEPICBeakerObxView = new Test.ThinPrepPap.ThinPrepPapEPICBeakerObxView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                    thinPrepPapEPICBeakerObxView.ToXml(document);
+                    break;
                 case 145:
                     EPICBeakerNarrativeOBXView.AddElement(document);
                     Business.Test.ChromosomeAnalysis.ChromosomeAnalysisEPICNTEView chromosomeAnalysisEPICNTEView = new Test.ChromosomeAnalysis.ChromosomeAnalysisEPICNTEView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
                     chromosomeAnalysisEPICNTEView.ToXml(document);
-                    break;
-                case 339:
-                    EPICBeakerNarrativeOBXView.AddElement(document);
-                    Business.Test.ReticulatedPlateletAnalysisV2.ReticulatedPlateletAnalysisV2EPICNTEView reticulatedPlateletAnalysisV2EPICNTEView = new Test.ReticulatedPlateletAnalysisV2.ReticulatedPlateletAnalysisV2EPICNTEView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
-                    reticulatedPlateletAnalysisV2EPICNTEView.ToXml(document);
-                    break;
-                case 19:
-                    EPICBeakerNarrativeOBXView.AddElement(document);
-                    Business.Test.PNH.PNHEPICNTEView pnhEPICNTEView = new Test.PNH.PNHEPICNTEView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
-                    pnhEPICNTEView.ToXml(document);
-                    break;
+                    break;                                
                 default:
-                    EPICObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, true);
-                    epicObxView.ToXml(document);
-                    this.m_ObxCount = epicObxView.ObxCount;
-                    break;
+                    //EPICObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, true);
+                    //epicObxView.ToXml(document);
+                    //this.m_ObxCount = epicObxView.ObxCount;
+                    throw new Exception("Distribution for this test needs validation.");
             }
-
-            //EPICObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, true);
-            //epicObxView.ToXml(document);
-            //this.m_ObxCount = epicObxView.ObxCount;                            
+            */
 
             return document;
         }
@@ -123,10 +138,8 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             string fileExtension = ".HL7.xml";
 
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;
-            //string interfaceFileName = @"\\YPIIInterface1\ChannelData\Outgoing\1002\" + this.m_PanelSetOrder.ReportNo + fileExtension;
-            //if (this.m_Testing == true) interfaceFileName = @"\\YPIIInterface1\ChannelData\Outgoing\1002\Test\" + this.m_PanelSetOrder.ReportNo + fileExtension;            
-            string interfaceFileName = @"\\YPIIInterface1\ChannelData\Outgoing\1002\BeakerTesting\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;            
+            string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\SCLHealth\" + this.m_PanelSetOrder.ReportNo + fileExtension;            
 
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(serverFileName))
             {

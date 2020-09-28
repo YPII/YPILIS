@@ -228,7 +228,26 @@ namespace YellowstonePathology.Business.Document
 			return caseDocumentCollection;
 		}
 
-        public CaseDocumentCollection GetBillingDetailFiles(string reportNo)
+		public CaseDocumentCollection GetAPSFiles(string reportNo, string masterAccessionNo)
+		{
+			CaseDocumentCollection caseDocumentCollection = new CaseDocumentCollection();
+			foreach (CaseDocument item in this)
+			{
+				if (item.FileName.ToUpper().Contains("REQ") ||
+					this.FileIs1000s(item.FileName) ||
+					item.FileName.ToUpper() == masterAccessionNo.ToUpper() + ".PATIENT.TIF" ||
+					item.FileName.ToUpper() == masterAccessionNo.ToUpper() + ".INSURANCE.TIF" ||
+					item.FileName.ToUpper() == reportNo.ToUpper() + ".BILLINGDETAILS.JSON" ||
+					item.FileName.ToUpper() == reportNo.ToUpper() + ".TIF")
+				{
+					caseDocumentCollection.Add(item);
+				}
+			}
+
+			return caseDocumentCollection;
+		}
+
+		public CaseDocumentCollection GetBillingDetailFiles(string reportNo)
         {
             CaseDocumentCollection caseDocumentCollection = new CaseDocumentCollection();
             foreach (CaseDocument item in this)

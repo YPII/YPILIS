@@ -10,13 +10,15 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         public static MultiTestDistributionHandler GetHandler(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             MultiTestDistributionHandler result = null;
+            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection clientGroupStVincent = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("1");
+
             if (accessionOrder.PanelSetOrderCollection.HasWomensHealthProfileOrder() == true)
-            {                
+            {
                 YellowstonePathology.Business.Domain.Physician physician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(accessionOrder.PhysicianId);
-                YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder whpTestOrder = (YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)accessionOrder.PanelSetOrderCollection.GetWomensHealthProfile();
-                if(whpTestOrder.ManagePerASCCP == true || whpTestOrder.ManagePerASCCPWithCotest == true)
+
+                if (accessionOrder.PhysicianId == 185) //Dian Nagy
                 {
-                    result = new MultiTestDistributionHandlerASCCPHold(accessionOrder);
+                    result = new MultiTestDistributionHandlerNoWHP(accessionOrder);
                 }
                 else if (physician != null && physician.DistributeWHPOnly == true)
                 {
@@ -28,14 +30,9 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
                 }
                 else
                 {
-                    YellowstonePathology.Business.Client.Model.ClientGroupClientCollection clientGroupStVincent = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("1");
-                    if(accessionOrder.ClientId == 1565) //Midwifery
+                    if (clientGroupStVincent.ClientIdExists(accessionOrder.ClientId) == true)
                     {
-                        result = new MultiTestDistributionHandlerNoWHP(accessionOrder);
-                    }
-                    else if (clientGroupStVincent.ClientIdExists(accessionOrder.ClientId) == true)
-                    {
-                        result = new MultiTestDistributionHandlerWHPSVH(accessionOrder);
+                        result = new MultiTestDistributionHandlerWHPHold(accessionOrder);
                     }
                     else
                     {

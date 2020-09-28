@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace YellowstonePathology.Business.HL7View
 {
@@ -28,7 +31,18 @@ namespace YellowstonePathology.Business.HL7View
             this.m_InsuredEmployerId = split[1];
             this.m_InsuredSSN = split[2];
             if(split.Length >= 44) this.m_InsuredMaritalStatus = split[43];
-            if (split.Length >= 63) this.m_InsuredPhoneNumber = split[63];
+            if (split.Length >= 63) this.m_InsuredPhoneNumber = this.GetPhoneNumber(split[63]);
+        }
+
+        private string GetPhoneNumber(string hl7Value)
+        {
+            string result = null;
+            string[] caretSplit = hl7Value.Split('^');
+            if (caretSplit.Length != 0)
+            {
+                result = caretSplit[0];
+            }
+            return result;
         }
 
         public string InsuredEmployerId
@@ -59,6 +73,16 @@ namespace YellowstonePathology.Business.HL7View
         {
             get { return this.m_DateReceived; }
             set { this.m_DateReceived = value; }
+        }
+
+        public JObject ToJson()
+        {
+            return new JObject(
+                new JProperty("insuredSSN", this.m_InsuredSSN),
+                new JProperty("insuredEmployerId", this.m_InsuredEmployerId),
+                new JProperty("insuredMaritalStatus", this.m_InsuredMaritalStatus),
+                new JProperty("insuredPhoneNumber", this.m_InsuredPhoneNumber)                
+            );
         }
 
         public string DisplayString

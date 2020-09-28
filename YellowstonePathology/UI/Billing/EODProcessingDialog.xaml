@@ -1,7 +1,7 @@
 ﻿<Window x:Class="YellowstonePathology.UI.Billing.EODProcessingDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Height="500" Width="850" WindowStyle="ToolWindow">
+        Height="500" Width="950" WindowStyle="ToolWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -32,13 +32,14 @@
                                 <MenuItem Header="Update MRN/ACT" Click="MenuItemUpdateMRNACT_Click"></MenuItem>
                                 <MenuItem Header="Match SVH ADT" Click="MenuItemMatchSVHADT_Click"></MenuItem>
                                 <MenuItem Header="Process PSA Files" Click="MenuItemProcessPSAFiles_Click"></MenuItem>
-                                <MenuItem Header="Transfer PSA Files" Click="MenuItemTransferPSAFiles_Click"></MenuItem>
-                                <MenuItem Header="Process SVH Files" Click="MenuItemProcessSVHFiles_Click"></MenuItem>
+                                <MenuItem Header="Process APS Files" Click="MenuItemProcessAPSFiles_Click"></MenuItem>
                                 <MenuItem Header="Transfer SVH Files" Click="MenuItemTransferSVHFiles_Click"></MenuItem>
+                                <MenuItem Header="Transfer APS Files" Click="MenuItemTransferAPSFiles_Click"></MenuItem>
                                 <MenuItem Header="Send Clinic Case Email" Click="MenuItemSendClinicCaseEmail_Click"></MenuItem>
                                 <MenuItem Header="Fax Report" Click="MenuItemFaxReport_Click"></MenuItem>
                                 <MenuItem Header="Open PSA Folder" Click="MenuItemOpenPSAFolder_Click"></MenuItem>
                                 <MenuItem Header="Open SVH Folder" Click="MenuItemOpenSVHFolder_Click"></MenuItem>
+                                <MenuItem Header="Open APS Folder" Click="MenuItemOpenAPSFolder_Click"></MenuItem>
                             </MenuItem>
                         </Menu>
                     </StackPanel>
@@ -60,7 +61,6 @@
                         <Button Grid.Column="2" Grid.Row="0" Width="25" Height="20" Margin="1,1,1,1" Click="ButtonBack_Click">&lt;</Button>
                         <Button Grid.Column="3" Grid.Row="0" Width="25" Height="20" Margin="1,1,1,1" Click="ButtonForward_Click">&gt;</Button>
                         <TextBlock Grid.Column="4" Grid.Row="0" Name="TextBlockStatusCount" Margin="2,2,2,2" Text="{Binding Path=StatusCountMessage}" HorizontalAlignment="Right"></TextBlock>
-            
                     </Grid>
 
                     <ListView Name="ListViewStatus" Grid.Column="0" Grid.Row="2" ItemsSource="{Binding Path=StatusMessageList}" Margin="2,2,2,2">
@@ -97,7 +97,8 @@
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=TransferSVHFilesTime}" Header="SVH Files" Width="70"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=SendSVHClinicEmailTime}" Header="SVH Clinic Email" Width="90"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessPSAFilesTime}" Header="Process PSA" Width="70"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=TransferPSAFilesTime}" Header="Transfer PSA" Width="70"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessAPSFilesTime}" Header="Process APS" Width="70"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=TransferAPSFilesTime}" Header="Transfer PSA" Width="70"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=FaxTheReportTime}" Header="Fax The Report" Width="90"/>
                             </GridView>
                         </ListView.View>

@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "198";
             this.m_TestName = "Paroxysmal Nocturnal Hemoglobinuria";
             this.m_TestAbbreviation = "PNH";
-            this.m_Active = true;
+            this.m_Active = false;
 			this.m_NeedsAcknowledgement = false;
 
 			this.m_ResultItemCollection.Add(new YellowstonePathology.Test.Model.ResultItem(27, "Negative (No evidence of paroxysmal nocturnal hemoglobinuria)"));

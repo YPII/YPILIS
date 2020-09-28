@@ -7,16 +7,17 @@ using YellowstonePathology.Business.Persistence;
 
 namespace YellowstonePathology.Business.HL7View
 {
+    [PersistentClass("tblADT", "YPIDATA")]
     public class ADTMessage
     {
         List<Business.HL7View.IN1> m_IN1Segments;
         List<Business.HL7View.IN2> m_IN2Segments;
 
-        Business.HL7View.GT1 m_Gt1Segment;
+        Business.HL7View.GT1 m_GT1Segment;
         Business.HL7View.PV1 m_PV1Segment;
         Business.HL7View.PID m_PIDSegment;
 
-        protected string m_MessageId;
+        protected string m_MessageId;        
         protected DateTime m_DateReceived;
         protected string m_Message;
         protected string m_PLastName;
@@ -33,7 +34,7 @@ namespace YellowstonePathology.Business.HL7View
             this.m_IN1Segments = new List<HL7View.IN1>();
             this.m_IN2Segments = new List<HL7View.IN2>();
 
-            this.m_Gt1Segment = new HL7View.GT1();
+            this.m_GT1Segment = null;
             this.m_PV1Segment = new PV1();
             this.m_PIDSegment = new PID();
         }
@@ -41,6 +42,11 @@ namespace YellowstonePathology.Business.HL7View
         public PID PIDSegment
         {
             get { return this.m_PIDSegment; }
+        }
+
+        public GT1 GT1Segment
+        {
+            get { return this.m_GT1Segment; }
         }
 
         public Business.Patient.Model.Address PatientAddress
@@ -85,7 +91,8 @@ namespace YellowstonePathology.Business.HL7View
 
                 if (fields[0] == "GT1")
                 {
-                    this.m_Gt1Segment.FromHL7(lines[i]);                    
+                    this.m_GT1Segment = new GT1();
+                    this.m_GT1Segment.FromHL7(lines[i]);                    
                 }
 
                 if (fields[0] == "PV1")
@@ -107,7 +114,7 @@ namespace YellowstonePathology.Business.HL7View
         {
             get { return this.m_MessageId; }
             set { this.m_MessageId = value; }
-        }
+        }        
 
         [PersistentProperty()]
         public DateTime DateReceived

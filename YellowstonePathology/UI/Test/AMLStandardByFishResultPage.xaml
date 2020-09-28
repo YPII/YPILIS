@@ -57,6 +57,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,3,0,0">
                     <Hyperlink Click="HyperLinkNormal_Click">Normal</Hyperlink>
 				</TextBlock>
+                
 				<TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,5">
                     <Hyperlink Click="HyperLinkAbnormal_Click">Abnormal</Hyperlink>
 				</TextBlock>

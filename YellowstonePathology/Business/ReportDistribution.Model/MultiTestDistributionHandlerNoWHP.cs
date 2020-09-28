@@ -24,6 +24,13 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             this.m_HoldNGCT = false;
             this.m_HoldTrich = false;
             this.m_HoldWHP = false;
+
+            YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder whpTestOrder = (YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)accessionOrder.PanelSetOrderCollection.GetWomensHealthProfile();
+            if (whpTestOrder.ManagePerASCCP == true || whpTestOrder.ManagePerASCCPWithCotest == true)
+            {
+                this.m_DistributeWHP = true;
+                this.m_HoldWHP = false;
+            }
         }
     }
 }

@@ -51,7 +51,9 @@ namespace YellowstonePathology.UI.Test
             this.m_ControlsNotDisabledOnFinal.Add(this.ButtonNext);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalResults);
-        }
+			this.m_ControlsNotDisabledOnFinal.Add(this.TextBoxMethod);
+			this.m_ControlsNotDisabledOnFinal.Add(this.TextBoxReference);
+		}
 
         public YellowstonePathology.Business.Test.JAK2V617F.JAK2V617FTestOrder PanelSetOrder
 		{

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.Business.HL7View
 {
@@ -19,6 +20,40 @@ namespace YellowstonePathology.Business.HL7View
         public ObservableCollection<ADTMessage> Messages
         {
             get { return this.m_Messages; }
+        }
+
+        public static ADTMessages GetPatientNameDOB(string firstName, string lastName, string dateOfBirth)
+        {
+            ADTMessages result = new ADTMessages();
+
+            return result;
+        }
+
+        public static ObservableCollection<ADTMessage> GetADTByPatientNameDOB(string lastName, string firstName, DateTime dateOfBirth)
+        {
+            ObservableCollection<ADTMessage> result = new ObservableCollection<ADTMessage>();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "select * from tblADT where pLastName = @LastName and pFirstName = @FirstName and pBirthDate = @DateOfBirth;";
+            cmd.Parameters.AddWithValue("@LastName", lastName);
+            cmd.Parameters.AddWithValue("@FirstName", firstName);
+            cmd.Parameters.AddWithValue("@DateOfBirth", dateOfBirth);
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        ADTMessage adtMessage = new ADTMessage();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(adtMessage, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(adtMessage);
+                    }
+                }
+            }
+            return result;
         }
 
         public string GetPrimaryInsurance()
@@ -76,13 +111,20 @@ namespace YellowstonePathology.Business.HL7View
 
         public void SetCurrentAddress(Business.Test.AccessionOrder accessionOrder)
         {
-            var result = this.m_Messages.OrderByDescending(t => t.DateReceived).First();
-            accessionOrder.PAddress1 = result.PatientAddress.PAddress1;
-            accessionOrder.PAddress2 = result.PatientAddress.PAddress2;
-            accessionOrder.PCity = result.PatientAddress.PCity;
-            accessionOrder.PState = result.PatientAddress.PState;
-            accessionOrder.PZipCode = result.PatientAddress.PZipCode;
-            accessionOrder.PPhoneNumberHome = result.PHomePhone;
+            foreach(ADTMessage adtMessage in this.m_Messages)
+            {
+                //var result = this.m_Messages.OrderByDescending(t => t.DateReceived).First();
+                if(string.IsNullOrEmpty(adtMessage.PIDSegment.Address.PAddress1) == false)
+                {
+                    accessionOrder.PAddress1 = adtMessage.PatientAddress.PAddress1;
+                    accessionOrder.PAddress2 = adtMessage.PatientAddress.PAddress2;
+                    accessionOrder.PCity = adtMessage.PatientAddress.PCity;
+                    accessionOrder.PState = adtMessage.PatientAddress.PState;
+                    accessionOrder.PZipCode = adtMessage.PatientAddress.PZipCode;
+                    accessionOrder.PPhoneNumberHome = adtMessage.PHomePhone;
+                    break;
+                }
+            }            
         }        
 
         public Business.Patient.Model.Address GetPatientAddress()
@@ -116,6 +158,20 @@ namespace YellowstonePathology.Business.HL7View
                 }
             }
             return result;
-        }        
+        }
+
+        public GT1 GetFirstGT1Segment()
+        {
+            GT1 result = null;
+            foreach (ADTMessage adtMessage in this.m_Messages)
+            {
+                if(adtMessage.GT1Segment != null)
+                {
+                    result = adtMessage.GT1Segment;
+                    break;
+                }
+            }
+            return result;
+        }
     }
 }

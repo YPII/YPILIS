@@ -46,6 +46,8 @@ namespace YellowstonePathology.Business.Test
         protected bool m_Decal;
         protected DateTime? m_LocationTime;
         private string m_Location;
+        protected Nullable<DateTime> m_ProcessorStartDate;
+        protected bool m_ReadyToProcess;
 
         public AliquotOrder_Base()
         {
@@ -514,6 +516,36 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "3", "null", "datetime")]
+        public Nullable<DateTime> ProcessorStartDate
+        {
+            get { return this.m_ProcessorStartDate; }
+            set
+            {
+                if (this.m_ProcessorStartDate != value)
+                {
+                    this.m_ProcessorStartDate = value;
+                    this.NotifyPropertyChanged("ProcessorStartDate");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+        public bool ReadyToProcess
+        {
+            get { return this.m_ReadyToProcess; }
+            set
+            {
+                if (this.m_ReadyToProcess != value)
+                {
+                    this.m_ReadyToProcess = value;
+                    this.NotifyPropertyChanged("ReadyToProcess");
+                }
+            }
+        }
+
         public bool IsNotIntraoperative
         {
             get
@@ -660,12 +692,19 @@ namespace YellowstonePathology.Business.Test
                 this.GrossVerified = true;
                 this.GrossVerifiedById = systemUser.UserId;
                 this.GrossVerifiedDate = DateTime.Now;
-                this.GrossVerifiedBy = systemUser.UserName;
+                this.GrossVerifiedBy = systemUser.UserName;                
 
-                if(this.Status != "Hold")
+                if (this.Status != "Hold")
                 {
                     this.Status = "Grossed";
-                }                
+                    this.ProcessorStartDate = null;
+                    this.ReadyToProcess = false;
+                }        
+                else
+                {
+                    this.ProcessorStartDate = DateTime.Now;
+                    this.ReadyToProcess = true;
+                }
             }
         }
 
@@ -676,8 +715,7 @@ namespace YellowstonePathology.Business.Test
                 this.EmbeddingVerified = true;
                 this.EmbeddingVerifiedById = systemUser.UserId;
                 this.EmbeddingVerifiedDate = DateTime.Now;
-                this.EmbeddingVerifiedBy = systemUser.UserName;
-                //this.Status = "Validated";
+                this.EmbeddingVerifiedBy = systemUser.UserName;                
                 this.Status = "Embedded";
             }
         }

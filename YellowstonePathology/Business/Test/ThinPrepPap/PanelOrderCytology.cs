@@ -28,6 +28,9 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
 		private bool m_ECCCheckPerformed;
 		private bool m_ScreeningError;
         private bool m_Reconciled;
+		private bool m_ManualReview;
+		private string m_ManualReviewComment;
+		private bool m_EducationalReview;
 
 		public PanelOrderCytology()
 		{
@@ -248,7 +251,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
 				if (this.m_OrderComment != value)
 				{
 					this.m_OrderComment = value;
-					this.NotifyPropertyChanged("ProfessionalComponentFacilityId");
+					this.NotifyPropertyChanged("OrderComment");
 				}
 			}
 		}
@@ -373,7 +376,52 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             }
         }
 
-        public void AppendReportComment(string comment)
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+		public bool EducationalReview
+		{
+			get { return this.m_EducationalReview; }
+			set
+			{
+				if (this.m_EducationalReview != value)
+				{
+					this.m_EducationalReview = value;
+					this.NotifyPropertyChanged("EducationalReview");
+				}
+			}
+		}
+
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+		public bool ManualReview
+		{
+			get { return this.m_ManualReview; }
+			set
+			{
+				if (this.m_ManualReview != value)
+				{
+					this.m_ManualReview = value;
+					this.NotifyPropertyChanged("ManualReview");
+				}
+			}
+		}
+
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
+		public string ManualReviewComment
+		{
+			get { return this.m_ManualReviewComment; }
+			set
+			{
+				if (this.m_ManualReviewComment != value)
+				{
+					this.m_ManualReviewComment = value;
+					this.NotifyPropertyChanged("ManualReviewComment");
+				}
+			}
+		}
+
+		public void AppendReportComment(string comment)
         {
             if (string.IsNullOrEmpty(this.m_ReportComment) == true)
             {

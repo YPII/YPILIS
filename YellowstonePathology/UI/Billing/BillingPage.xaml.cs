@@ -352,7 +352,7 @@ namespace YellowstonePathology.UI.Billing
 
         private void CreateInsuranceCard()
         {
-            Business.HL7View.ADTMessages adtMessages = Business.Gateway.AccessionOrderGateway.GetADTMessages(this.m_AccessionOrder.SvhMedicalRecord);
+            Business.HL7View.ADTMessages adtMessages = Business.Gateway.AccessionOrderGateway.GetADTMessagesByPatientNameDOB(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, this.m_AccessionOrder.PBirthdate.Value);
             if (adtMessages.Messages.Count > 0)
             {
                 Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_AccessionOrder.MasterAccessionNo);
@@ -426,7 +426,7 @@ namespace YellowstonePathology.UI.Billing
 
         private void MenuItemSendCDM_Click(object sender, RoutedEventArgs e)
         {
-            string destinationFolder = @"\\ypiiinterface1\ChannelData\Outgoing\1002\In\";            
+            string destinationFolder = @"d:\testing\";            
             if (this.ListViewPanelSetOrderCPTCodeBill.SelectedItems.Count != 0)
             {
                 YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill = (YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill)this.ListViewPanelSetOrderCPTCodeBill.SelectedItem;

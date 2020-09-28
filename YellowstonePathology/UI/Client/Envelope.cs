@@ -33,6 +33,7 @@ namespace YellowstonePathology.UI.Client
 
 			oWord = new Microsoft.Office.Interop.Word.Application();
 			oWord.Visible = false;
+			oWord.DisplayAlerts = Microsoft.Office.Interop.Word.WdAlertLevel.wdAlertsNone;
 
 			Microsoft.Office.Interop.Word.Document doc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
 			object oAddress = line1 + line2 + line3;

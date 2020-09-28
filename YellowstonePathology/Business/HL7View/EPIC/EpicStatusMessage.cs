@@ -32,7 +32,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
         
         public void Publish()
         {
-            string fileName = System.IO.Path.Combine(@"\\ypiiinterface1\ChannelData\Outgoing\1002", this.m_ClientOrder.ClientOrderId + ".hl7.xml");
+            string fileName = System.IO.Path.Combine(@"\\YPIIInterface2\ChannelData\Outgoing\1002", this.m_ClientOrder.ClientOrderId + ".hl7.xml");
             this.PublishDocument(fileName);
         }        
 
@@ -73,10 +73,10 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             obx.ToXml(document);
             this.m_ObxCount = obx.ObxCount;                                
             
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(fileName))
-            {
-                document.Save(sw);
-            }
+            //using (System.IO.StreamWriter sw = new System.IO.StreamWriter(fileName))
+            //{
+            //    document.Save(sw);
+            //}
         }        
     }
 }

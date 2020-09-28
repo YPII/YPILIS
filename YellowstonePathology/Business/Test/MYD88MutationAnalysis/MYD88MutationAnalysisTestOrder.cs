@@ -16,6 +16,7 @@ namespace YellowstonePathology.Business.Test.MYD88MutationAnalysis
 		
 		public MYD88MutationAnalysisTestOrder()
         {
+
         }
 
 		public MYD88MutationAnalysisTestOrder(string masterAccessionNo, string reportNo, string objectId,
@@ -24,6 +25,7 @@ namespace YellowstonePathology.Business.Test.MYD88MutationAnalysis
 			bool distribute)
 			: base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
 		{
+			this.m_TestDevelopment = "The performance characteristics of this test have been determined by NeoGenomics Laboratories. This test has not been approved by the FDA. The FDA has determined such clearance or approval is not necessary. This laboratory is CLIA certified to perform high complexity clinical testing.";
 		}
 
 		[PersistentProperty()]

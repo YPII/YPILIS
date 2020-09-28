@@ -16,7 +16,8 @@ namespace YellowstonePathology.Business.ASCCPRule
         public override bool IsMatch(Woman woman)
         {
             bool result = false;
-            if( int.Parse(woman.ScreeningImpression.ResultCode) >= 3 &&
+            if(woman.ScreeningImpression != null && 
+                int.Parse(woman.ScreeningImpression.ResultCode) >= 3 &&
                 woman.OrderType.OrderCode == "10")                
             {
                 result = true;
@@ -68,7 +69,7 @@ namespace YellowstonePathology.Business.ASCCPRule
             }
             else
             {
-                throw new Exception("Not handled.");
+                //throw new Exception("Not handled.");
             }
         }
 
@@ -90,7 +91,7 @@ namespace YellowstonePathology.Business.ASCCPRule
                     }
                     else
                     {
-                        throw new Exception("Not handled.");
+                        //throw new Exception("Not handled.");
                     }
                 }                
             }

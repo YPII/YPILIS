@@ -154,6 +154,7 @@ namespace YellowstonePathology.Business.Visitor
             ClientOrder.Model.ExternalOrderIdsCollection externalOrderIdsCollection = ClientOrder.Model.ExternalOrderIdsCollection.FromFormattedValue(this.m_AccessionOrder.ExternalOrderId);
             string externalOrderId = externalOrderIdsCollection.GetExternalOrderId(this.m_PanelSet.PanelSetId);
             string universalServiceId = externalOrderIdsCollection.GetUniversalServiceId(this.m_PanelSet.PanelSetId);
+            if (this.m_AccessionOrder.UniversalServiceId == "SMP") universalServiceId = "SMP"; //this per SVH
 
             this.m_ReportNo = this.m_AccessionOrder.GetNextReportNo(this.m_PanelSet);
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();

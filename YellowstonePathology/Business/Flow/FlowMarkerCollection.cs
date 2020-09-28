@@ -179,12 +179,40 @@ namespace YellowstonePathology.Business.Flow
             return result;
         }
 
+        public bool MarkerExists(string markerName)
+        {
+            bool result = false;
+            foreach (FlowMarkerItem flowMarker in this)
+            {
+                if (flowMarker.Name == markerName)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public YellowstonePathology.Business.Flow.FlowMarkerItem Get(string flowMarkerId)
         {
             YellowstonePathology.Business.Flow.FlowMarkerItem result = null;
             foreach (FlowMarkerItem flowMarker in this)
             {
                 if (flowMarker.FlowMarkerId == flowMarkerId)
+                {
+                    result = flowMarker;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public YellowstonePathology.Business.Flow.FlowMarkerItem GetByMarkerName(string markerName)
+        {
+            YellowstonePathology.Business.Flow.FlowMarkerItem result = null;
+            foreach (FlowMarkerItem flowMarker in this)
+            {
+                if (flowMarker.Name == markerName)
                 {
                     result = flowMarker;
                     break;

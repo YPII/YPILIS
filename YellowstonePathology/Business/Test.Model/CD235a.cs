@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Test.Model
 			this.m_TestId = "175";
 			this.m_TestName = "CD235a (Glycophorin A)";
             this.m_TestAbbreviation = "CD235a";
-			this.m_Active = true;
+			this.m_Active = false;
 			this.m_NeedsAcknowledgement = true;
 		}
 	}

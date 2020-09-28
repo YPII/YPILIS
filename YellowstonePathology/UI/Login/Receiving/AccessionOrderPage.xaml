@@ -147,6 +147,7 @@
                 <ComboBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.AccessioningFacilityId}" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
                     <ComboBoxItem>YPIBLGS</ComboBoxItem>
                     <ComboBoxItem>YPICDY</ComboBoxItem>
+                    <ComboBoxItem>YPIHVR</ComboBoxItem>
                 </ComboBox>
 
 				<TextBlock Grid.Column="0" Grid.Row="1" FontSize="12" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Master Accession No:</TextBlock>

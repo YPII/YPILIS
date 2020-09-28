@@ -300,15 +300,22 @@ namespace YellowstonePathology.UI.Client
 
 		private void ButtonNewSupplyOrder_Click(object sender, RoutedEventArgs e)
 		{
-			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-			YellowstonePathology.Business.Client.Model.ClientSupplyOrder clientSupplyOrder = new Business.Client.Model.ClientSupplyOrder(objectId, this.m_Client);
+            if(this.m_Client.Inactive == false)
+            {
+                string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                YellowstonePathology.Business.Client.Model.ClientSupplyOrder clientSupplyOrder = new Business.Client.Model.ClientSupplyOrder(objectId, this.m_Client);
 
-            YellowstonePathology.Business.Persistence.DocumentGateway.Instance.InsertDocument(clientSupplyOrder, this);
+                YellowstonePathology.Business.Persistence.DocumentGateway.Instance.InsertDocument(clientSupplyOrder, this);
 
-            ClientSupplyOrderDialog clientSupplyOrderDialog = new ClientSupplyOrderDialog(clientSupplyOrder.ClientSupplyOrderId);
-			clientSupplyOrderDialog.ShowDialog();
-			this.m_ClientSupplyOrderCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientSupplyOrderCollectionByClientId(this.m_Client.ClientId);
-            this.NotifyPropertyChanged("ClientSupplyOrderCollection");
+                ClientSupplyOrderDialog clientSupplyOrderDialog = new ClientSupplyOrderDialog(clientSupplyOrder.ClientSupplyOrderId);
+                clientSupplyOrderDialog.ShowDialog();
+                this.m_ClientSupplyOrderCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientSupplyOrderCollectionByClientId(this.m_Client.ClientId);
+                this.NotifyPropertyChanged("ClientSupplyOrderCollection");
+            }
+            else
+            {
+                MessageBox.Show("This client is marked inactive.");
+            }
 		}
 
 		private void ButtonDeleteSupplyOrder_Click(object sender, RoutedEventArgs e)

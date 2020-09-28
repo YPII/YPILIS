@@ -70,6 +70,7 @@ namespace YellowstonePathology.UI.Billing
                 
         private void HandlePrimaryInsuranceSimulation()
         {
+            /*
             foreach (SimulationListItem item in this.m_SimulationList)
             {
                 Business.HL7View.ADTMessages adtMessages = new Business.HL7View.ADTMessages();
@@ -86,6 +87,7 @@ namespace YellowstonePathology.UI.Billing
                     item.PrimaryInsuranceSim = insuranceMap.MapsTo;
                 }
             }
+            */
         }
 
         private void UpdateMapping()

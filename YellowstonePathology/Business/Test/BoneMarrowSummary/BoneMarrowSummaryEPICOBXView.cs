@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.BoneMarrowSummary
 {
-    public class BoneMarrowSummaryEPICOBXView : YellowstonePathology.Business.HL7View.EPIC.EPICObxView
+    public class BoneMarrowSummaryEPICOBXView : YellowstonePathology.Business.HL7View.EPIC.EPICBeakerObxView
     {
         public BoneMarrowSummaryEPICOBXView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount)
             : base(accessionOrder, reportNo, obxCount)
@@ -18,30 +18,33 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
         public override void ToXml(XElement document)
         {
             PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            this.AddHeader(document, panelSetOrder, "Bone Marrow Summary");
-            this.AddNextObxElement("", document, "F");
+            //Add the first element as narrative for Nikki to see.
+            Business.HL7View.EPIC.EPICBeakerNarrativeOBXView.AddElement(document);
 
-            this.AddNextObxElement("SURGICAL PATHOLOGY DIAGNOSIS: ", document, "F");
+            this.AddNextNTEElement("Bone Marrow Summary", document);
+            this.AddNextNTEElement("", document);
+
+            this.AddNextNTEElement("SURGICAL PATHOLOGY DIAGNOSIS: ", document);
 
             YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
-            this.AddNextObxElement("Reference Report No: " + surgicalTestOrder.ReportNo, document, "F");
+            this.AddNextNTEElement("Reference Report No: " + surgicalTestOrder.ReportNo, document);
 
             foreach (YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen in surgicalTestOrder.SurgicalSpecimenCollection)
             {
-                this.HandleLongString("Specimen: " + surgicalSpecimen.DiagnosisIdFormatted + "  " + surgicalSpecimen.SpecimenOrder.Description, document, "F");
-                this.HandleLongString("Diagnosis: " + surgicalSpecimen.Diagnosis, document, "F");
+                this.AddNextNTEElement("Specimen: " + surgicalSpecimen.DiagnosisIdFormatted + "  " + surgicalSpecimen.SpecimenOrder.Description, document);
+                this.AddNextNTEElement("Diagnosis: " + surgicalSpecimen.Diagnosis, document);
             }
 
             if (string.IsNullOrEmpty(surgicalTestOrder.Comment) == false)
             {
-                this.HandleLongString("Comment: " + surgicalTestOrder.Comment, document, "F");
+                this.AddNextNTEElement("Comment: " + surgicalTestOrder.Comment, document);
             }
 
-            this.AddNextObxElement("", document, "F");
-            this.AddAmendments(document);
+            this.AddNextNTEElement("", document);
+            this.AddAmendmentsNTE(document, panelSetOrder, this.m_AccessionOrder);
 
-            this.AddNextObxElement("", document, "F");
-            this.AddNextObxElement("TESTING SUMMARY:", document, "F");
+            this.AddNextNTEElement("", document);
+            this.AddNextNTEElement("TESTING SUMMARY:", document);
 
             List<Business.Test.PanelSetOrder> testingSummaryList = this.m_AccessionOrder.PanelSetOrderCollection.GetBoneMarrowAccessionSummaryList(panelSetOrder.ReportNo, true);
             int surgicalPanelSetId = new Test.Surgical.SurgicalTest().PanelSetId;
@@ -51,8 +54,8 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
                 Business.Test.PanelSetOrder pso = testingSummaryList[idx];
                 if (pso.PanelSetId != surgicalPanelSetId)
                 {
-                    this.AddNextObxElement("Reference Report No: " + pso.ReportNo, document, "F");
-                    this.AddNextObxElement("Test Name: " + pso.PanelSetName, document, "F");
+                    this.AddNextNTEElement("Reference Report No: " + pso.ReportNo, document);
+                    this.AddNextNTEElement("Test Name: " + pso.PanelSetName, document);
                     string result = pso.ToResultString(this.m_AccessionOrder);
                     if (result == "The result string for this test has not been implemented.")
                     {
@@ -65,17 +68,17 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
                             result = "Result reported separately.";
                         }
                     }
-                    this.HandleLongString(result, document, "F");
-                    this.AddNextObxElement("", document, "F");
+                    this.AddNextNTEElement(result, document);
+                    this.AddNextNTEElement("", document);
                 }
             }
 
-            this.AddNextObxElement("", document, "F");
-            this.AddNextObxElement("Pathologist: " + panelSetOrder.Signature, document, "F");
+            this.AddNextNTEElement("", document);
+            this.AddNextNTEElement("Pathologist: " + panelSetOrder.Signature, document);
 
             if (panelSetOrder.FinalTime.HasValue == true)
             {
-                this.AddNextObxElement("E-signed " + panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document, "F");
+                this.AddNextNTEElement("E-signed " + panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"), document);
             }
         }
     }

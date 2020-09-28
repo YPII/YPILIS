@@ -172,8 +172,8 @@
                     <TextBlock Grid.Column="2" Grid.Row="1" Margin="2,2,2,2" TextAlignment="Right" VerticalAlignment="Center" FontWeight="Bold">Use Billing Agent:</TextBlock>
                     <CheckBox Grid.Column="3" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=AccessionOrder.UseBillingAgent}" />
 
-                    <TextBlock Grid.Column="2" Grid.Row="2" Margin="2,2,2,2" TextAlignment="Right" VerticalAlignment="Center" FontWeight="Bold">Research Testing:</TextBlock>
-                    <CheckBox Grid.Column="3" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=PanelSetOrder.ResearchTesting}" />
+                    <TextBlock Grid.Column="2" Grid.Row="2" Margin="2,2,2,2" TextAlignment="Right" VerticalAlignment="Center" FontWeight="Bold">Audited:</TextBlock>
+                    <CheckBox Grid.Column="3" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=PanelSetOrder.Audited}" />
                     
                 </Grid>
                 

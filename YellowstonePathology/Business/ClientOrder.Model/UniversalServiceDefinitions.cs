@@ -324,6 +324,26 @@ namespace YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefini
         }
 	}
 
+    public class UniversalServiceFHGB : UniversalService
+    {
+        public UniversalServiceFHGB()
+        {
+            this.m_UniversalServiceId = "FHGB";
+            this.m_ServiceName = "Fetal Hemoglobin";
+            this.m_ApplicationName = UniversalServiceApplicationNameEnum.EPIC;
+        }
+    }
+
+    public class UniversalServicBCELEnumeration : UniversalService
+    {
+        public UniversalServicBCELEnumeration()
+        {
+            this.m_UniversalServiceId = "520083";
+            this.m_ServiceName = "B-Cell Enumeration";
+            this.m_ApplicationName = UniversalServiceApplicationNameEnum.EPIC;
+        }
+    }
+
     public class UniversalServicePlacenta : UniversalService
     {
         public UniversalServicePlacenta()

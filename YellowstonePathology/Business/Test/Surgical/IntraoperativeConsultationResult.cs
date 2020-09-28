@@ -29,6 +29,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 		private string m_FinaledBy;
         private bool m_ComplexCase;
         private string m_Comment;
+		private string m_FacilityId;
 
 		public IntraoperativeConsultationResult()
         {
@@ -159,6 +160,21 @@ namespace YellowstonePathology.Business.Test.Surgical
 				{
 					this.m_Correlation = value;
 					this.NotifyPropertyChanged("Correlation");
+				}
+			}
+		}
+
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "'YPIBLGS'", "varchar")]
+		public string FacilityId
+		{
+			get { return this.m_FacilityId; }
+			set
+			{
+				if (this.m_FacilityId != value)
+				{
+					this.m_FacilityId = value;
+					this.NotifyPropertyChanged("FacilityId");
 				}
 			}
 		}

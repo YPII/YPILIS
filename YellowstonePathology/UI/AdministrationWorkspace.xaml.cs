@@ -31,9 +31,11 @@ using YellowstonePathology.Business.Helper;
 using System.Collections.ObjectModel;
 using MongoDB.Bson;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Grpc.Core;
 using MySql.Data.MySqlClient;
+
 
 namespace YellowstonePathology.UI
 {
@@ -978,7 +980,7 @@ namespace YellowstonePathology.UI
         private void WriteCDM()
         {
             Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo("19-13926");
-            
+
             Business.Billing.Model.CptCode cptCode = Store.AppDataStore.Instance.CPTCodeCollection.GetCPTCode("88305");
             Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill = ao.PanelSetOrderCollection[0].PanelSetOrderCPTCodeBillCollection.GetNextItem("19-13926.S");
             panelSetOrderCPTCodeBill.Quantity = -1;
@@ -988,22 +990,71 @@ namespace YellowstonePathology.UI
             panelSetOrderCPTCodeBill.Account = ao.SvhAccount;
             Business.HL7View.EPIC.EPICFT1ResultView result = new Business.HL7View.EPIC.EPICFT1ResultView(ao, panelSetOrderCPTCodeBill);
             result.Publish("d:\\testing");
-            ao.PanelSetOrderCollection[0].PanelSetOrderCPTCodeBillCollection.Add(panelSetOrderCPTCodeBill);        
+            ao.PanelSetOrderCollection[0].PanelSetOrderCPTCodeBillCollection.Add(panelSetOrderCPTCodeBill);
         }
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            //UI.ImportADRData import = new ImportADRData();
-            //import.Run();
+            /*
+            List <Business.MasterAccessionNo> masterAccessionNos = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL();
+            foreach(Business.MasterAccessionNo ma in masterAccessionNos)
+            {
+                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(ma.Value, this);
+                foreach(Business.Test.PanelSetOrder panelSetOrder in ao.PanelSetOrderCollection)
+                {
+                    if(panelSetOrder.Distribute == true)
+                    {
+                        bool etterSurgeryExists = panelSetOrder.TestOrderReportDistributionLogCollection.Exists(3435, 1543);
+                        if(etterSurgeryExists == false)
+                        {
+                            Business.ReportDistribution.Model.TestOrderReportDistributionLog ndl = new Business.ReportDistribution.Model.TestOrderReportDistributionLog();                                       
+                            ndl.TestOrderReportDistributionLogId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                            ndl.ReportNo = panelSetOrder.ReportNo;
+                            ndl.ClientId = 1543;
+                            ndl.ClientName = "Etter Surgery";
+                            ndl.PhysicianId = 3435;
+                            ndl.PhysicianName = "Thomas Etter, D.O.";
+                            ndl.DistributionType = "Web Service";
+                            ndl.CaseDistributed = true;
+                            ndl.ObjectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 
-            Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("20-7152", this);
-            Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder pso = (Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)ao.PanelSetOrderCollection.GetPanelSetOrder("20-7152.M1");
-            string text = Business.Test.HER2AmplificationByISH.HER2AmplificationByISHSystemGeneratedAmendmentText.AmendmentText(pso);
+                            panelSetOrder.TestOrderReportDistributionLogCollection.Add(ndl);
+                        }
+                    }                    
+                }
+                Business.Persistence.DocumentGateway.Instance.Push(ao, this);
+            }
+            */
 
-            //Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("20-8177", this);
-            //Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder pso = (Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATestOrder)ao.PanelSetOrderCollection.GetPanelSetOrder("20-8177.R1");
-            //string text = Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEASystemGeneratedAmendmentText.AmendmentText(pso);
+            //Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo("20-17322");
+            //YellowstonePathology.Business.Billing.Model.APSBillingDocument apsBillingDocument = new YellowstonePathology.Business.Billing.Model.APSBillingDocument(ao, "20-17322.P");
+            //apsBillingDocument.Build();
+            //return;
+            
+            string path = @"\\CFileServer\Documents\Billing\APS\09082020";
+            string[] files = System.IO.Directory.GetFiles(path);
 
+            int totalCount = 0;
+            int guarantorCount = 0;
+
+            foreach(string file in files)
+            {
+                if(file.EndsWith(".json") == true)
+                {
+                    totalCount += 1;
+                    string fileText = System.IO.File.ReadAllText(file);
+                    if(fileText.Contains("guarantor") == true)
+                    {
+                        guarantorCount += 1;
+                        //JObject fileJson = JObject.Parse(fileText);
+                        //string l2 = fileJson["insurance"][0]["insuranceAddressLine2"].ToString();
+                        //if(string.IsNullOrEmpty(l2) == false)
+                        //{
+                        //    Console.WriteLine(l2);
+                        //}                           
+                    }                    
+                }
+            }             
         }
 
 

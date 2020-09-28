@@ -99,6 +99,21 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             return result;
         }
 
+        public bool Exists(int physicianId, int clientId)
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.PhysicianId == physicianId &&
+                    testOrderReportDistribution.ClientId == clientId)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public bool FaxNumberExists(string faxNumber)
         {
             bool result = false;

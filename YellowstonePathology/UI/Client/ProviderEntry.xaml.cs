@@ -217,10 +217,6 @@ namespace YellowstonePathology.UI.Client
 					}
 
                     string distributionType = clientToAdd.DistributionType;
-                    //if (AreDistributionTypesIncompatible(clientExisting.DistributionType, clientToAdd.DistributionType) == true)
-                    //{
-                    //    distributionType = clientToAdd.AlternateDistributionType;
-                    //}
 
                     string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 					YellowstonePathology.Business.Client.Model.PhysicianClientDistribution physicianClientDistribution = new Business.Client.Model.PhysicianClientDistribution(objectId, this.m_PhysicianClientId, physicianClientId, distributionType);

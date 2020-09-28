@@ -119,7 +119,9 @@
 									<RowDefinition></RowDefinition>
 									<RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
-								</Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
 
 								<TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Right">Result Code:</TextBlock>
 								<TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="2,2,2,2" Text="{Binding Path=ResultCode}"></TextBlock>
@@ -172,6 +174,23 @@
 
                                 <TextBlock Grid.Column="0" Grid.Row="9" FontWeight="Bold" Margin="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center">Reconciled:</TextBlock>
                                 <CheckBox Grid.Column="1" Grid.Row="9" Margin="2,2,2,2" IsChecked="{Binding Path=Reconciled}"></CheckBox>
+
+                                <TextBlock Grid.Column="0" Grid.Row="10" FontWeight="Bold" Margin="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center">Manual Review:</TextBlock>
+                                <StackPanel Grid.Column="1" Grid.Row="10" Orientation="Horizontal">
+									<CheckBox Margin="2,2,2,2" IsChecked="{Binding Path=ManualReview}"></CheckBox>
+                                    <ComboBox Name="ComboBoxManualReviewComment" Width="200" Margin="2,2,2,2" IsEditable="True" Text="{Binding Path=ManualReviewComment}" HorizontalAlignment="Stretch" 
+                                              BorderBrush="LightGray" BorderThickness="1">
+                                        <ComboBoxItem>Acid Wash</ComboBoxItem>
+                                        <ComboBoxItem>Atypia</ComboBoxItem>
+                                        <ComboBoxItem>ECC Review</ComboBoxItem>
+                                        <ComboBoxItem>Obscured View</ComboBoxItem>
+                                        <ComboBoxItem>High Risk History</ComboBoxItem>
+                                        <ComboBoxItem>Other</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <TextBlock Grid.Column="0" Grid.Row="11" FontWeight="Bold" Margin="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center">Educational Review:</TextBlock>
+                                <CheckBox Grid.Column="1" Grid.Row="11" Margin="2,2,2,2" IsChecked="{Binding Path=EducationalReview}"></CheckBox>
 
                             </Grid>
 						</Border>

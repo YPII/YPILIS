@@ -156,21 +156,7 @@ namespace YellowstonePathology.Business.Test
                 }
 			}
 			return result;
-		}
-
-		// WHC this is not currently used
-		public void VerifyGross(string aliquotOrderId, int verifyingUserId)
-		{
-			foreach (AliquotOrder item in this)
-			{
-				if (item.AliquotOrderId == aliquotOrderId)
-				{
-					item.GrossVerified = true;
-					item.GrossVerifiedById = verifyingUserId;
-					item.GrossVerifiedDate = DateTime.Now;
-				}
-			}
-		}
+		}		
 
 		public AliquotOrder AddBlock(YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, string aliquotLabelType, DateTime accessionDate)
 		{

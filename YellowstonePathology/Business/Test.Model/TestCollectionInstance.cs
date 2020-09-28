@@ -94,24 +94,12 @@ namespace YellowstonePathology.Business.Test.Model
             result.Add(new BCellClonality());
             result.Add(new IntraoperativeConsultation());
             result.Add(new HER2Amplification());
-
-            //Cytochemical For Microorganisms
             result.Add(new Giemsa());
-            //result.Add(new Gout());
-            //result.Add(new HuckerTwort());
-
-            //Cytochemical
-            //result.Add(new Melanin());
-            //result.Add(new Mucin());
-            //result.Add(new OilRedO());
             result.Add(new AlphaNaphthylAcetateEsterase());
             result.Add(new NaphtholASDChloroacetateEsterase());
-            //result.Add(new CopperRhodanine());
-            //result.Add(new Fites());
             result.Add(new Alk());
 
             //IHC
-            result.Add(new ALK1());
             result.Add(new AmyloidAProtein());
             result.Add(new AmyloidPProtein());
             result.Add(new CD138Quantitative());
@@ -123,17 +111,14 @@ namespace YellowstonePathology.Business.Test.Model
             result.Add(new EGFR());
             result.Add(new FactorVIII());
             result.Add(new GCDFP15());
-            //result.Add(new HER2Neu());
             result.Add(new Lysozyme());
             result.Add(new MuscleSpecificActin());
             result.Add(new NSE());
             result.Add(new TRAP());
             result.Add(new Tyrosinase());
             result.Add(new Villin());
-
             result.Add(new BartonellaHenselae());
             result.Add(new Uroplakin());
-
             result.Add(new Surfactant());
             result.Add(new PAX2());
             result.Add(new CD235a());
@@ -160,7 +145,13 @@ namespace YellowstonePathology.Business.Test.Model
             {
                 Test test = TestFactory.TestFromStain(stain);
                 result.Add(test);
+
+                if(test.HistologyDisplayString == "PSA")
+                {
+                    Console.WriteLine(test.HistologyDisplayString);
+                }
             }
+
             return result;
         }
 

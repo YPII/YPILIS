@@ -90,10 +90,11 @@ namespace YellowstonePathology.UI.Converter
             {
                 clinical = clinical.Replace("rt ", "Routine. ");
             }
-            value = PutSlashes(clinical);
+            value = clinical;
 			return value;
 		}
 
+		/*
 		private string PutSlashes(string text)
 		{
 			int intCount = 0;
@@ -129,5 +130,6 @@ namespace YellowstonePathology.UI.Converter
 			}
 			return answer;
 		}
+		*/
 	}
 }

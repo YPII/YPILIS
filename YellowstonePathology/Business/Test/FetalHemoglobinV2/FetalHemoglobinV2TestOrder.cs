@@ -26,6 +26,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
         private string m_ReportComment;
         private string m_ASRComment;
         private string m_Method;
+        private string m_NotificationComment;
 
         public FetalHemoglobinV2TestOrder()
         { }
@@ -254,26 +255,39 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
             }
         }
 
+        [PersistentProperty()]
+        public string NotificationComment
+        {
+            get { return this.m_NotificationComment; }
+            set
+            {
+                if (this.m_NotificationComment != value)
+                {
+                    this.m_NotificationComment = value;
+                    NotifyPropertyChanged("NotificationComment");
+                }
+            }
+        }
+
         public void SetMothersBloodVolume()
         {
-            if (string.IsNullOrEmpty(this.m_MothersWeight) == true ||
-                string.IsNullOrEmpty(this.m_MothersHeightFeet) == true) this.MothersBloodVolume = "5000";
+            if (string.IsNullOrEmpty(this.m_MothersWeight) == true || string.IsNullOrEmpty(this.m_MothersHeightFeet) == true)
+            {
+                this.MothersBloodVolume = "5000";
+            }
             else
             {
-                string inches = string.IsNullOrEmpty(this.m_MothersHeightInches) ? "0" : this.m_MothersHeightInches;
-                string mothersWeightCleaned = this.CleanInputForParse(this.m_MothersWeight);
-                string mothersHeightFeetCleaned = this.CleanInputForParse(this.m_MothersHeightFeet);
-                string mothersHeightInchesCleaned = this.CleanInputForParse(inches);
-                if (string.IsNullOrEmpty(mothersWeightCleaned) == false &&
-                    string.IsNullOrEmpty(mothersHeightFeetCleaned) == false &&
-                    string.IsNullOrEmpty(mothersHeightInchesCleaned) == false)
+                if (string.IsNullOrEmpty(this.m_MothersWeight) == false &&
+                    string.IsNullOrEmpty(this.m_MothersHeightFeet) == false &&
+                    string.IsNullOrEmpty(this.m_MothersHeightInches) == false)
                 {
-                    double heightFeet = double.Parse(mothersHeightFeetCleaned);
-                    double heightInches = double.Parse(mothersHeightInchesCleaned);
+                    double heightFeet = float.Parse(this.m_MothersHeightFeet);
+                    double heightInches = float.Parse(this.m_MothersHeightInches);
                     double totalInches = heightFeet * 12 + heightInches;
-                    double weightInLbs = double.Parse(mothersWeightCleaned);
+                    double weightInLbs = float.Parse(this.m_MothersWeight);
 
-                    double bloodVolume = ((0.005835 * totalInches * totalInches * totalInches) + (15 * weightInLbs)) + 183;
+                    double bloodVolume = 2370.0 * Math.Pow(((totalInches * weightInLbs) / 3131.0), .5);
+                    
                     this.m_MothersBloodVolume = Math.Round(bloodVolume).ToString();
                     this.NotifyPropertyChanged("MothersBloodVolume");
                 }
@@ -289,14 +303,11 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
             }
 
             if (string.IsNullOrEmpty(this.m_HbFPercent) == false)
-            {
-                string hbFPercentCleaned = this.CleanInputForParse(this.m_HbFPercent);
-                string mothersBloodVolumeCleaned = this.CleanInputForParse(this.m_MothersBloodVolume);
-
-                if (string.IsNullOrEmpty(hbFPercentCleaned) == false && string.IsNullOrEmpty(mothersBloodVolumeCleaned) == false)
+            {               
+                if (string.IsNullOrEmpty(this.m_HbFPercent) == false && string.IsNullOrEmpty(this.m_MothersBloodVolume) == false)
                 {
-                    double percentFetalCells = double.Parse(hbFPercentCleaned);
-                    double mothersBloodVolume = double.Parse(mothersBloodVolumeCleaned);
+                    double percentFetalCells = double.Parse(this.m_HbFPercent);
+                    double mothersBloodVolume = double.Parse(this.m_MothersBloodVolume);
                     double fetalBleed = percentFetalCells * mothersBloodVolume * 0.01;
                     this.FetalBleed = Math.Round(fetalBleed, 2).ToString();
                 }
@@ -318,8 +329,8 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
                     if (string.IsNullOrEmpty(this.m_MothersHeightCM) == false)
                     {
                         Double totalInches = Convert.ToDouble(this.m_MothersHeightCM) / 2.54;
-                        int feet = Convert.ToInt32(totalInches / 12);
-                        int inches = Convert.ToInt32(totalInches % 12);
+                        double feet = Math.Floor(totalInches / 12);
+                        double inches = Convert.ToInt32(totalInches % 12);
                         this.m_MothersHeightFeet = feet.ToString();
                         this.m_MothersHeightInches = inches.ToString();
                         this.NotifyPropertyChanged("MothersHeightFeet");
@@ -380,16 +391,12 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
         {
             if (string.IsNullOrEmpty(this.m_FetalBleed) == false)
             {
-                string fetalBleedCleaned = this.CleanInputForParse(this.m_FetalBleed);
-                if (string.IsNullOrEmpty(fetalBleedCleaned) == false)
-                {
-                    double fetalbleed = double.Parse(fetalBleedCleaned);
-                    double vials = fetalbleed / 30;
-                    double partialValue = vials - Math.Truncate(vials);
-                    int additionalVials = partialValue >= 0.5 ? 2 : 1;
-                    int recommendedNumberOfVials = (int)Math.Truncate(vials) + additionalVials;
-                    this.RhImmuneGlobulin = recommendedNumberOfVials.ToString();
-                }
+                double fetalBleed = Convert.ToDouble(this.m_FetalBleed);                                                    
+                double vials = fetalBleed / 30;
+                double partialValue = vials - Math.Truncate(vials);
+                int additionalVials = partialValue >= 0.5 ? 2 : 1;
+                int recommendedNumberOfVials = (int)Math.Truncate(vials) + additionalVials;
+                this.RhImmuneGlobulin = recommendedNumberOfVials.ToString();                
             }
             else
             {
@@ -404,7 +411,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
 
             if(this.m_HeightWeightNotProvided == false)
             {
-                method = "Patient blood volume, Fetal - Maternal Bleed quantity and Rh Immune Globulin(RhIg) dosing are calculated from patient height and weight data submitted with the test request.  If height and weight data are not received, then a default patient blood volume of 5000 mL is used for the Fetal-Maternal Bleed quantity and RhIg dose. " + Environment.NewLine +
+                method += "Patient blood volume, Fetal - Maternal Bleed quantity and Rh Immune Globulin(RhIg) dosing are calculated from patient height and weight data submitted with the test request.  If height and weight data are not received, then a default patient blood volume of 5000 mL is used for the Fetal-Maternal Bleed quantity and RhIg dose. " + Environment.NewLine +
                     "Patient Height: [HEIGHTCM] cm " + Environment.NewLine +
                     "Patient Weight: [WEIGHTKG] kg " + Environment.NewLine +
                     "Patient calculated blood volume: [BLOODVOLUME] mL";
@@ -419,7 +426,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
             }
             else
             {
-                method = "Patient blood volume, Fetal-Maternal Bleed quantity and Rh Immune Globulin (RhIg) dosing are calculated from patient height and weight data submitted with the test request.  If height and weight data are not received, then a default patient blood volume of 5000 mL is used for the Fetal-Maternal Bleed quantity and RhIg dose. " + Environment.NewLine +
+                method += "Patient blood volume, Fetal-Maternal Bleed quantity and Rh Immune Globulin (RhIg) dosing are calculated from patient height and weight data submitted with the test request.  If height and weight data are not received, then a default patient blood volume of 5000 mL is used for the Fetal-Maternal Bleed quantity and RhIg dose. " + Environment.NewLine +
                     "Patient Height: None submitted" + Environment.NewLine +
                     "Patient Weight: None submitted" + Environment.NewLine +
                     "Patient default blood volume: 5000 mL";
@@ -431,30 +438,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
 
             this.NotifyPropertyChanged("Method");
             this.NotifyPropertyChanged("ReportComment");
-        }
-
-        private string CleanInputForParse(string input)
-        {
-            string result = string.Empty;
-            bool haveDecimal = false;
-            foreach(char c in input)
-            {
-                if (char.IsNumber(c) == true)
-                {
-                    result = result + c;
-                }
-                else if(c == '.' && haveDecimal == false)
-                {
-                    haveDecimal = true;
-                    result = result + c;
-                }
-            }
-
-            double testValue = 0;
-            bool canParse = double.TryParse(result, out testValue);
-
-            return canParse == true ? result : string.Empty;
-        }
+        }        
 
         public override string ToResultString(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {

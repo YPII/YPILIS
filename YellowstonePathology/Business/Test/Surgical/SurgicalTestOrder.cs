@@ -82,6 +82,19 @@ namespace YellowstonePathology.Business.Test.Surgical
             this.m_PQRSIsIndicated = false;
         }
 
+        public override string GetLocationPerformedComment()
+        {
+            string result = base.GetLocationPerformedComment();
+            if(this.m_SurgicalSpecimenCollection.HasIntereopeativeConsulation() == true)
+            {
+                IntraoperativeConsultationResult ic = this.m_SurgicalSpecimenCollection.GetFirstIntereopeativeConsulation();                
+                Business.Facility.Model.FacilityCollection facilities = Business.Facility.Model.FacilityCollection.GetAllYPFacilities();
+                Business.Facility.Model.Facility facility = facilities.GetByFacilityId(ic.FacilityId);                
+                result += " The immediate assessment was performed at " + facility.GetCLIAAddressString();
+            }
+            return result;
+        }
+
         public void HandleNewAmendment(YellowstonePathology.Business.Amendment.Model.Amendment amendment)
         {
             SurgicalAudit surgicalAudit = this.m_SurgicalAuditCollection.GetNextItem(amendment.AmendmentId, this, this.m_AssignedToId, this.AssignedToId);

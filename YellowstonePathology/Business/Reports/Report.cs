@@ -79,6 +79,7 @@ namespace YellowstonePathology.Business.Reports
 
             oWord = new Microsoft.Office.Interop.Word.Application();
             oWord.Visible = false;
+            oWord.DisplayAlerts = Microsoft.Office.Interop.Word.WdAlertLevel.wdAlertsNone;
 
             string activePrinter = oWord.ActivePrinter;
             if (string.IsNullOrEmpty(this.m_PrinterName) == false)

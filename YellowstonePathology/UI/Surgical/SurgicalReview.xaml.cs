@@ -309,6 +309,7 @@ namespace YellowstonePathology.UI.Surgical
         {
             if(this.m_PathologistUI.AccessionOrder.ClientId == 1203)
             {
+                Business.Logging.EmailExceptionHandler.HandleException("A Big Sky Dermatology Amendment was just signed: " + this.m_PathologistUI.AccessionOrder.MasterAccessionNo);
                 MessageBox.Show("Warning!!! Big Sky Dermatology has a problem with their system.  When amendments are sent across the interface the providers are not notified of the new report.  We are working with E-Clinical Works to resolve this issue.  If the changes in this amendment will affect how a patient is going to be treated, it is best that you contact the provider and communicate the changes directly with them.");                
                 Business.Test.PanelSetOrder psoSurgical = this.m_PathologistUI.AccessionOrder.PanelSetOrderCollection.GetSurgical();
                 Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution = psoSurgical.TestOrderReportDistributionCollection.GetFirstEclinical();

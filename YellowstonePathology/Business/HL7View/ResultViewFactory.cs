@@ -7,7 +7,7 @@ namespace YellowstonePathology.Business.HL7View
 {
     public class ResultViewFactory
     {
-        public static IResultView GetResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, int clientId, bool testing)
+        public static IResultView GetResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, int clientId, bool sendUnsoliceted, bool testing)
         {            
             IResultView resultView = null;
             switch (clientId)
@@ -58,7 +58,9 @@ namespace YellowstonePathology.Business.HL7View
                 case 162:
                 case 1707:
                 case 1731:
-                    resultView = new Business.HL7View.EPIC.EPICResultView(reportNo, accessionOrder, testing);                    
+                case 1732:
+                case 1668:
+                    resultView = new Business.HL7View.EPIC.EPICBeakerResultView(reportNo, accessionOrder, sendUnsoliceted, testing);                    
                     break;
                 case 203: //Richard Taylor
                 case 1177: //Spring Creek
@@ -90,8 +92,16 @@ namespace YellowstonePathology.Business.HL7View
                 case 1399:
                 case 1508:
                 case 1319:
-                case 1338:
+                case 1338:                
                     resultView = new HL7View.WPH.WPHResultView(reportNo, accessionOrder, testing);
+                    break;
+                case 587: //NMH                    
+                case 588:
+                case 1604:
+                case 1607:
+                case 1608:
+                case 1699:
+                    resultView = new HL7View.NMH.NMHResultView(reportNo, accessionOrder, testing);
                     break;
                 case 1622:
                     resultView = new HL7View.CMMC.CMMCResultView(reportNo, accessionOrder);

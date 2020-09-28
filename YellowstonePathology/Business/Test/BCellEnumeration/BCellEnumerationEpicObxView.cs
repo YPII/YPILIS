@@ -47,17 +47,17 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
             this.AddAmendments(document);
 
 			this.AddNextObxElement("CD 19+ Lymphocyte  Reference Ranges : Percentage (Absolute Count/uL)", document, "F");
-			this.AddNextObxElement("0 – 36 Months, minimum: 11 (430), maximum: 45 (3300)", document, "F");
-			this.AddNextObxElement("3 – 17 Years, minimum: 9 (200), maximum: 29 (1300)", document, "F");
+			this.AddNextObxElement("0 - 36 Months, minimum: 11 (430), maximum: 45 (3300)", document, "F");
+			this.AddNextObxElement("3 - 17 Years, minimum: 9 (200), maximum: 29 (1300)", document, "F");
 			this.AddNextObxElement("Adult, minimum:  4 (32), maximum: 17 (341)", document, "F");
 			this.AddNextObxElement("", document, "F");
 
 			this.AddNextObxElement("CD 20+ Lymphocyte  Reference Ranges : Percentage (Absolute Count/uL)", document, "F");
-			this.AddNextObxElement("0 – 1 Year, minimum: 17.5(773), maximum: 39(1990)", document, "F");
+			this.AddNextObxElement("0 - 1 Year, minimum: 17.5(773), maximum: 39(1990)", document, "F");
 			this.AddNextObxElement("2 - 3 Years, minimum: 15.7(529), maximum: 35.6(1930)", document, "F");
 			this.AddNextObxElement("4 - 5 Years, minimum: 11(323), maximum: 26(1000)", document, "F");
 			this.AddNextObxElement("6 - 10 Years, minimum: 7.7(212), maximum: 24.3(796)", document, "F");
-			this.AddNextObxElement("11 - 18 Years, minimum: 7.1(163), maximum: 27(559)", document, "F");
+			this.AddNextObxElement("11 - 18 Years, minimum: 7.1(163), maximum: 23.8(600)", document, "F");
 			this.AddNextObxElement("Adult, minimum: 3(0), maximum: 27(559)", document, "F");
 			this.AddNextObxElement("", document, "F");
 

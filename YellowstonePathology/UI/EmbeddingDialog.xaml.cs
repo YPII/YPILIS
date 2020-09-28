@@ -203,7 +203,10 @@ namespace YellowstonePathology.UI
         private bool IsProcessorStartTimeValid()
         {
             bool result = false;
-            if (this.m_ProcessorStartTime.HasValue == true) result = true;
+            if (this.m_ProcessorStartTime.HasValue == true)
+            {
+                return true;
+            }            
             return result;
         } 
         
