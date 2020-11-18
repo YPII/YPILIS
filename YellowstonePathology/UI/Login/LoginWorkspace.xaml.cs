@@ -1014,5 +1014,21 @@ namespace YellowstonePathology.UI.Login
                 this.m_GrossCameraPubSubHandler.CaseAquired(this.m_LoginUI.AccessionOrder);
             }
         }
+
+        private void ButtonShowCOVIDCases_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListByCOVIDCases();
+        }
+
+        private void ButtonShowYPICOVIDCases_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListByYPICOVIDCases();
+        }
+
+        private void ButtonShowSCLCOVIDCases_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListBySCLCOVIDCases();
+        }
+
     }
 }

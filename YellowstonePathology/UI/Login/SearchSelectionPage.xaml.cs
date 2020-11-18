@@ -32,6 +32,11 @@ namespace YellowstonePathology.UI.Login
         private DateTime m_SVHPostDate;
         private DateTime m_HPyloriStartDate;
         private DateTime m_HPyloriEndDate;
+
+        private DateTime m_ClientStartDate;
+        private DateTime m_ClientEndDate;
+        private string m_ClientId;
+
         private LoginUIV2 m_LoginUI;
         private DateTime m_TestStartDate;
         private DateTime m_TestEndDate;
@@ -50,6 +55,9 @@ namespace YellowstonePathology.UI.Login
             TimeSpan oneMonth = new TimeSpan(30,0,0,0,0);
             this.m_HPyloriStartDate = DateTime.Today.Subtract(oneMonth);
             this.m_HPyloriEndDate = DateTime.Today;
+
+            this.m_ClientStartDate = DateTime.Today.Subtract(oneMonth);
+            this.m_ClientEndDate = DateTime.Today;
 
             this.m_KeyWordStartDate = DateTime.Today.AddDays(-30);
             this.m_KeyWordEndDate = DateTime.Today;
@@ -126,6 +134,24 @@ namespace YellowstonePathology.UI.Login
         {
             get { return this.m_HPyloriEndDate; }
             set { this.m_HPyloriEndDate = value; }
+        }
+
+        public DateTime ClientStartDate
+        {
+            get { return this.m_ClientStartDate; }
+            set { this.m_ClientStartDate = value; }
+        }
+
+        public DateTime ClientEndDate
+        {
+            get { return this.m_ClientEndDate; }
+            set { this.m_ClientEndDate = value; }
+        }
+
+        public string ClientId
+        {
+            get { return this.m_ClientId; }
+            set { this.m_ClientId = value; }
         }
 
         public YellowstonePathology.Business.PanelSet.Model.PanelSetCollection PanelSetCollection
@@ -316,6 +342,15 @@ namespace YellowstonePathology.UI.Login
         {
             this.m_LoginUI.GetReportSearchListByASCCPCases();
             Window.GetWindow(this).Close();
+        }
+
+        private void ButtonClientSearch_Click(object sender, RoutedEventArgs e)
+        {
+            if(string.IsNullOrEmpty(this.m_ClientId) == false && this.m_ClientStartDate != null && this.m_ClientEndDate != null)
+            {
+                this.m_LoginUI.GetReportSearchListByClientId(this.m_ClientId, this.m_ClientStartDate, this.m_ClientEndDate);
+                Window.GetWindow(this).Close();
+            }            
         }
     }
 }

@@ -56,6 +56,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.Add("MOLEGEN", "Molecular Genetics");
             this.Add("PHARMCOG", "Pharmacogenetics");
             this.Add("FHGB", "Fetal Hemoglobin");
+            this.Add("COVYPI", "SARS-Co-V2");
         }
     }
 }

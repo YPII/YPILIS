@@ -35,7 +35,7 @@ namespace YellowstonePathology.UI.WebService
 
         private void WebServiceAccountClientEditDialog_Loaded(object sender, RoutedEventArgs e)
         {
-                this.ListViewWebServiceClientViews.SelectedIndex = -1;
+            this.ListViewWebServiceClientViews.SelectedIndex = -1;
         }
 
         public List<YellowstonePathology.Business.WebService.WebServiceClientView> WebServiceClientViews

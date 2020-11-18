@@ -663,6 +663,13 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                     resultView.Send(methodResult);
                     MessageBox.Show("The result was sent unsolicted to EPIC");
                 }
+                else if (rd.DistributionType == "Meditech")
+                {
+                    YellowstonePathology.Business.HL7View.WPH.WPHResultView resultView = new Business.HL7View.WPH.WPHResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true, false);
+                    YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+                    resultView.Send(methodResult);
+                    MessageBox.Show("The result was sent unsolicted to EPIC");
+                }
                 else
                 {
                     MessageBox.Show("Cannot send this unsolicted because it is not an EPIC distribution.");

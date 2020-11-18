@@ -19,21 +19,18 @@ namespace YellowstonePathology.Business.HL7View.WPH
         private YellowstonePathology.Business.User.SystemUser m_SigningPathologist;
         private Business.ClientOrder.Model.ClientOrder m_ClientOrder;
 
-        public WPHResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool testing)
+        public WPHResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool testing, bool unsolicted)
         {
             this.m_Testing = testing;
+            this.m_SendUnsolicited = unsolicted;
+
             this.m_AccessionOrder = accessionOrder;
             this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);            
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrders = Business.Gateway.ClientOrderGateway.GetClientOrdersByExternalOrderId(this.m_AccessionOrder.ExternalOrderId);
             if (clientOrders.Count > 0)
             {
                 this.m_ClientOrder = clientOrders[0];
-            }  
-
-            if (string.IsNullOrEmpty(this.m_AccessionOrder.IncomingHL7) == true)
-            {
-                this.m_SendUnsolicited = true;
-            }
+            }             
 
 			this.m_OrderingPhysician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);
             this.m_SigningPathologist = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(this.m_PanelSetOrder.FinaledById);
@@ -79,7 +76,7 @@ namespace YellowstonePathology.Business.HL7View.WPH
 
             WPHOBRView obr = new WPHOBRView(this.m_AccessionOrder.ExternalOrderId, this.m_AccessionOrder.MasterAccessionNo, this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder.SpecimenOrderCollection[0].CollectionDate, this.m_AccessionOrder.SpecimenOrderCollection[0].CollectionTime, this.m_AccessionOrder.AccessionDateTime,
                 panelSetOrder.FinalTime, this.m_OrderingPhysician, this.m_SigningPathologist, this.GetResultStatus(), universalService, this.m_SendUnsolicited);
-            obr.ToXml(document);
+            obr.ToXml(document);            
 
             WPHOBXView wphObxView = WPHOBXViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
             wphObxView.ToXml(document);

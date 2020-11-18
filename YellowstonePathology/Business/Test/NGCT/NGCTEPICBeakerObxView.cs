@@ -18,8 +18,8 @@ namespace YellowstonePathology.Business.Test.NGCT
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
             this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");
-            this.AddNextObxElementBeaker("Chlamydia trachomatis result", testOrder.ChlamydiaTrachomatisResult, document, "F", "Negative");
-            this.AddNextObxElementBeaker("Neisseria gonorrhoeae result", testOrder.NeisseriaGonorrhoeaeResult, document, "F", "Negative");
+            this.AddNextObxElementBeaker("Chlamydia trachomatis result", testOrder.ChlamydiaTrachomatisResult, document, "F", "Negative", false);
+            this.AddNextObxElementBeaker("Neisseria gonorrhoeae result", testOrder.NeisseriaGonorrhoeaeResult, document, "F", "Negative", false);
 
             if (amendmentCollection.Count != 0)
             {

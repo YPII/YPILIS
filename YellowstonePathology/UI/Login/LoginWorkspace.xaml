@@ -106,13 +106,45 @@
 
                     <TextBox Name="TextBoxMasterAccessionNo" Margin="2" KeyUp="TextBoxMasterAccessionNo_KeyUp" Width="100" BorderBrush="AliceBlue" BorderThickness="1" />
 
-                    <Button Margin="2" Click="ButtonShowCamera_Click">
+                    <!--
+                    <Button Margin="2" Click="ButtonShowCOVIDCases_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Resources/Surgical.png" Height="22" Width="22"></Image>
-                            <TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Show Gross Camera</TextBlock>
+                            <TextBlock Margin="2,0,0,0" VerticalAlignment="Center">COIVD Cases</TextBlock>
                         </StackPanel>
                     </Button>
-                
+                    -->
+                    
+                    <Button Name="ButtonCOVIDTests" Margin="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Surgical.png" Margin="2" Height="16"></Image>
+                            <TextBlock Margin="2" VerticalAlignment="Center">COIVD Cases</TextBlock>
+                        </StackPanel>
+                        <Button.ContextMenu>
+                            <ContextMenu x:Name="COVIDTestingContextMenu" PlacementRectangle="{Binding RelativeSource={RelativeSource Self}}">
+                                <MenuItem Header="All" Click="ButtonShowCOVIDCases_Click" />
+                                <MenuItem Header="YPI" Click="ButtonShowYPICOVIDCases_Click" />
+                                <MenuItem Header="SCL" Click="ButtonShowSCLCOVIDCases_Click"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+
+                        <Button.Triggers>
+                            <EventTrigger SourceName="ButtonCOVIDTests" RoutedEvent="Button.Click">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="COVIDTestingContextMenu" Storyboard.TargetProperty="(ContextMenu.IsOpen)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <sys:Boolean>true</sys:Boolean>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+
                 </ToolBar>
             </ToolBarTray>
             <ListView Name="ListViewAccessionOrders" Margin="3" Grid.Row="1" ItemsSource="{Binding Path=ReportSearchList}" 

@@ -21,12 +21,12 @@ namespace YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2
 
             this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");
 
-            this.AddNextObxElementBeaker("Anti-Platelet Antibody - IgG", panelSetOrder.AntiPlateletAntibodyIgG, document, "F", "Negative");
-            this.AddNextObxElementBeaker("Anti-Platelet Antibody - IgM", panelSetOrder.AntiPlateletAntibodyIgM, document, "F", "Negative");
+            this.AddNextObxElementBeaker("Anti-Platelet Antibody - IgG", panelSetOrder.AntiPlateletAntibodyIgG, document, "F", "Negative", false);
+            this.AddNextObxElementBeaker("Anti-Platelet Antibody - IgM", panelSetOrder.AntiPlateletAntibodyIgM, document, "F", "Negative", false);
             
             if (string.IsNullOrEmpty(panelSetOrder.ReticulatedPlateletAnalysis) == false)
             {
-                this.AddNextObxElementBeaker("Reticulated Platelet Analysis", panelSetOrder.ReticulatedPlateletAnalysis, document, "F", "Negative");
+                this.AddNextObxElementBeaker("Reticulated Platelet Analysis", panelSetOrder.ReticulatedPlateletAnalysis, document, "F", "Negative", false);
             }
 
             if (amendmentCollection.Count != 0)

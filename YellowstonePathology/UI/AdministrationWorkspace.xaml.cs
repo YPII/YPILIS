@@ -995,66 +995,78 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            List <Business.MasterAccessionNo> masterAccessionNos = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL();
-            foreach(Business.MasterAccessionNo ma in masterAccessionNos)
+            string sql = "select distinct pso.masterAccessionNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where pso.PanelSetId = 400 and ao.ClientId in (1759)";
+            List<Business.MasterAccessionNo> manList = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(sql);
+            foreach (Business.MasterAccessionNo man in manList)
             {
-                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(ma.Value, this);
-                foreach(Business.Test.PanelSetOrder panelSetOrder in ao.PanelSetOrderCollection)
+                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(man.Value, this);
+                Business.Test.SARSCoV2.SARSCoV2TestOrder sars = (Business.Test.SARSCoV2.SARSCoV2TestOrder)ao.PanelSetOrderCollection.GetPanelSetOrder(400);
+                foreach(Business.ReportDistribution.Model.TestOrderReportDistribution tord in sars.TestOrderReportDistributionCollection)
                 {
-                    if(panelSetOrder.Distribute == true)
+                    if(tord.DistributionType == "EPIC->Fax")
                     {
-                        bool etterSurgeryExists = panelSetOrder.TestOrderReportDistributionLogCollection.Exists(3435, 1543);
-                        if(etterSurgeryExists == false)
-                        {
-                            Business.ReportDistribution.Model.TestOrderReportDistributionLog ndl = new Business.ReportDistribution.Model.TestOrderReportDistributionLog();                                       
-                            ndl.TestOrderReportDistributionLogId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-                            ndl.ReportNo = panelSetOrder.ReportNo;
-                            ndl.ClientId = 1543;
-                            ndl.ClientName = "Etter Surgery";
-                            ndl.PhysicianId = 3435;
-                            ndl.PhysicianName = "Thomas Etter, D.O.";
-                            ndl.DistributionType = "Web Service";
-                            ndl.CaseDistributed = true;
-                            ndl.ObjectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-
-                            panelSetOrder.TestOrderReportDistributionLogCollection.Add(ndl);
-                        }
-                    }                    
-                }
-                Business.Persistence.DocumentGateway.Instance.Push(ao, this);
+                        tord.DistributionType = "EPIC";
+                        tord.Distributed = false;
+                        tord.TimeOfLastDistribution = null;
+                    }
+                }                
             }
-            */
+            Business.Persistence.DocumentGateway.Instance.Push(this);
+        }
 
-            //Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo("20-17322");
-            //YellowstonePathology.Business.Billing.Model.APSBillingDocument apsBillingDocument = new YellowstonePathology.Business.Billing.Model.APSBillingDocument(ao, "20-17322.P");
-            //apsBillingDocument.Build();
-            //return;
-            
-            string path = @"\\CFileServer\Documents\Billing\APS\09082020";
-            string[] files = System.IO.Directory.GetFiles(path);
-
-            int totalCount = 0;
-            int guarantorCount = 0;
-
-            foreach(string file in files)
+        private void BillStuff()
+        {
+            //string sql = "select distinct pso.masterAccessionNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where pso.final = 1 and pso.PanelSetId = 400 and ao.ClientId = 1759 and isposted = false";
+            //string sql = "select distinct pso.masterAccessionNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where pso.final = 1 and pso.PanelSetId = 400 and ao.ClientId = 1758 and isposted = false";
+            string sql = "select distinct pso.masterAccessionNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where pso.final = 1 and pso.PanelSetId = 400 and ao.ClientId in (280,1134) and isposted = false";
+            List<Business.MasterAccessionNo> manList = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(sql);
+            foreach (Business.MasterAccessionNo man in manList)
             {
-                if(file.EndsWith(".json") == true)
+
+                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(man.Value, this);
+                Business.Test.SARSCoV2.SARSCoV2TestOrder sars = (Business.Test.SARSCoV2.SARSCoV2TestOrder)ao.PanelSetOrderCollection.GetPanelSetOrder(400);
+
+                YellowstonePathology.Business.Billing.Model.BillableObject billableObject = Business.Billing.Model.BillableObjectFactory.GetBillableObject(ao, sars.ReportNo);
+                YellowstonePathology.Business.Rules.MethodResult methodResult = billableObject.Set();
+                if (methodResult.Success == false)
                 {
-                    totalCount += 1;
-                    string fileText = System.IO.File.ReadAllText(file);
-                    if(fileText.Contains("guarantor") == true)
-                    {
-                        guarantorCount += 1;
-                        //JObject fileJson = JObject.Parse(fileText);
-                        //string l2 = fileJson["insurance"][0]["insuranceAddressLine2"].ToString();
-                        //if(string.IsNullOrEmpty(l2) == false)
-                        //{
-                        //    Console.WriteLine(l2);
-                        //}                           
-                    }                    
+                    MessageBox.Show(methodResult.Message);
                 }
-            }             
+
+                //YellowstonePathology.Business.Billing.Model.BillableObject billableObject = Business.Billing.Model.BillableObjectFactory.GetBillableObject(ao, sars.ReportNo);
+                YellowstonePathology.Business.Rules.MethodResult methodResult2 = billableObject.Post();
+                if (methodResult2.Success == false)
+                {
+                    MessageBox.Show(methodResult2.Message);
+                }
+            }
+            Business.Persistence.DocumentGateway.Instance.Push(this);
+        }
+
+        private void Publish()
+        {
+            
+            List<Business.MasterAccessionNo> manList = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(string.Empty);
+            foreach (Business.MasterAccessionNo man in manList)
+            {
+                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(man.Value);
+                foreach (Business.Test.PanelSetOrder pso in ao.PanelSetOrderCollection)
+                {
+                    if (pso.Final == true)
+                    {
+                        string caseDocFileName = Business.Document.CaseDocument.GetCaseFileNameDoc(new Business.OrderIdParser(pso.ReportNo));
+                        if (System.IO.File.Exists(caseDocFileName) == false)
+                        {
+                            if (pso.ResultDocumentSource == YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase.ToString())
+                            {
+                                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(ao, pso, Business.Document.ReportSaveModeEnum.Normal);
+                                caseDocument.Render();
+                                caseDocument.Publish();
+                            }
+                        }
+                    }
+                }
+            }
         }
 
 

@@ -79,6 +79,22 @@ namespace YellowstonePathology.Business.ClientOrder.Model
         private string m_ElectronicOrderType;
         private string m_PlaceOfService;
 
+        private bool m_FirstTest;
+        private bool m_EmployedInHealthcare;
+        private bool m_Symptomatic;
+        private Nullable<DateTime> m_DateOfSymptomaticOnset;
+        private bool m_Hospitalized;
+        private bool m_ICU;
+        private bool m_ResidentInCongregateCare;
+        private bool m_Pregnant;
+        private string m_SurgeryLocation;
+        private string m_SurgeryType;
+        private Nullable<DateTime> m_SurgeryDate;
+        private string m_AsymptomaticType;
+        private string m_SymptomaticType;
+        private string m_PatientCategory;
+        private bool m_HighPriority;
+
         public ClientOrder()
         {
             this.m_ClientOrderDetailCollection = new ClientOrderDetailCollection();
@@ -969,6 +985,232 @@ namespace YellowstonePathology.Business.ClientOrder.Model
                 {
                     this.m_PlaceOfService = value;
                     this.NotifyPropertyChanged("PlaceOfService");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public bool FirstTest
+        {
+            get { return this.m_FirstTest; }
+            set
+            {
+                if (this.m_FirstTest != value)
+                {
+                    this.m_FirstTest = value;
+                    this.NotifyPropertyChanged("FirstTest");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "tinyint")]
+        public bool Symptomatic
+        {
+            get { return this.m_Symptomatic; }
+            set
+            {
+                if (this.m_Symptomatic != value)
+                {
+                    this.m_Symptomatic = value;
+                    this.NotifyPropertyChanged("Symptomatic");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
+
+        public Nullable<DateTime> DateOfSymptomaticOnset
+        {
+            get { return this.m_DateOfSymptomaticOnset; }
+            set
+            {
+                if (this.m_DateOfSymptomaticOnset != value)
+                {
+                    this.m_DateOfSymptomaticOnset = value;
+                    this.NotifyPropertyChanged("DateOfSymptomaticOnset");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "tinyint")]
+        public bool EmployedInHealthcare
+        {
+            get { return this.m_EmployedInHealthcare; }
+            set
+            {
+                if (this.m_EmployedInHealthcare != value)
+                {
+                    this.m_EmployedInHealthcare = value;
+                    this.NotifyPropertyChanged("EmployedInHealthcare");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "tinyint")]
+        public bool Hospitalized
+        {
+            get { return this.m_Hospitalized; }
+            set
+            {
+                if (this.m_Hospitalized != value)
+                {
+                    this.m_Hospitalized = value;
+                    this.NotifyPropertyChanged("Hospitalized");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "tinyint")]
+        public bool ICU
+        {
+            get { return this.m_ICU; }
+            set
+            {
+                if (this.m_ICU != value)
+                {
+                    this.m_ICU = value;
+                    this.NotifyPropertyChanged("ICU");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "tinyint")]
+        public bool ResidentInCongregateCare
+        {
+            get { return this.m_ResidentInCongregateCare; }
+            set
+            {
+                if (this.m_ResidentInCongregateCare != value)
+                {
+                    this.m_ResidentInCongregateCare = value;
+                    this.NotifyPropertyChanged("ResidentInCongregateCare");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(false, "1", "0", "tinyint")]
+        public bool Pregnant
+        {
+            get { return this.m_Pregnant; }
+            set
+            {
+                if (this.m_Pregnant != value)
+                {
+                    this.m_Pregnant = value;
+                    this.NotifyPropertyChanged("Pregnant");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public string SurgeryLocation
+        {
+            get { return this.m_SurgeryLocation; }
+            set
+            {
+                if (this.m_SurgeryLocation != value)
+                {
+                    this.m_SurgeryLocation = value;
+                    this.NotifyPropertyChanged("SurgeryLocation");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public string SurgeryType
+        {
+            get { return this.m_SurgeryType; }
+            set
+            {
+                if (this.m_SurgeryType != value)
+                {
+                    this.m_SurgeryType = value;
+                    this.NotifyPropertyChanged("SurgeryType");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public Nullable<DateTime> SurgeryDate
+        {
+            get { return this.m_SurgeryDate; }
+            set
+            {
+                if (this.m_SurgeryDate != value)
+                {
+                    this.m_SurgeryDate = value;
+                    this.NotifyPropertyChanged("SurgeryDate");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public string AsymptomaticType
+        {
+            get { return this.m_AsymptomaticType; }
+            set
+            {
+                if (this.m_AsymptomaticType != value)
+                {
+                    this.m_AsymptomaticType = value;
+                    this.NotifyPropertyChanged("AsymptomaticType");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public string SymptomaticType
+        {
+            get { return this.m_SymptomaticType; }
+            set
+            {
+                if (this.m_SymptomaticType != value)
+                {
+                    this.m_SymptomaticType = value;
+                    this.NotifyPropertyChanged("SymptomaticType");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public string PatientCategory
+        {
+            get { return this.m_PatientCategory; }
+            set
+            {
+                if (this.m_PatientCategory != value)
+                {
+                    this.m_PatientCategory = value;
+                    this.NotifyPropertyChanged("PatientCategory");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+        public bool HighPriority
+        {
+            get { return this.m_HighPriority; }
+            set
+            {
+                if (this.m_HighPriority != value)
+                {
+                    this.m_HighPriority = value;
+                    this.NotifyPropertyChanged("HighPriority");
                 }
             }
         }

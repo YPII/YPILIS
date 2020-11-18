@@ -203,7 +203,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.m_ObxCount += 1;
         }
 
-        protected void AddNextObxElementBeaker(string fieldName, string fieldValue, XElement document, string observationResultStatus, string referenceRange)
+        protected void AddNextObxElementBeaker(string fieldName, string fieldValue, XElement document, string observationResultStatus, string referenceRange, bool isCritical)
         {
             string escapedString = this.ReplaceSpecialCharacters(fieldValue);
 
@@ -237,6 +237,10 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             obxElement.Add(obx07Element);
 
             XElement obx08Element = new XElement("OBX.8");
+            if(isCritical == true)
+            {
+                YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBX.8.1", "A", obx08Element);
+            }            
             obxElement.Add(obx08Element);
 
             XElement obx09Element = new XElement("OBX.9");

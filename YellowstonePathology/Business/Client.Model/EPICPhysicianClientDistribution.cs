@@ -24,9 +24,10 @@ namespace YellowstonePathology.Business.Client.Model
                 clientGroupIds.Add("2");
 
                 YellowstonePathology.Business.Client.Model.ClientGroupClientCollection stVincentAndHRHGroup = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId(clientGroupIds);
-                if (stVincentAndHRHGroup.ClientIdExists(accessionOrder.ClientId) == true)
+                if (stVincentAndHRHGroup.ClientIdExists(accessionOrder.ClientId) == true || accessionOrder.ClientId == 1759)
                 {
-                    if (string.IsNullOrEmpty(accessionOrder.SvhAccount) == true || string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
+                    //if (string.IsNullOrEmpty(accessionOrder.SvhAccount) == true || string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
+                    if (string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
                     {
                         panelSetOrder.TestOrderReportDistributionCollection.AddAlternateDistribution(this, panelSetOrder.ReportNo);
                     }

@@ -226,7 +226,7 @@ namespace YellowstonePathology.Business.Billing.Model
 
 		public override void SetPanelSetOrderCPTCodes()
         {
-			if (this.IsOkToSet() == true)
+			if (this.IsOkToSet() == true )
 			{
                 this.SetERPRPQRSCodes();
 
@@ -251,7 +251,7 @@ namespace YellowstonePathology.Business.Billing.Model
                                 panelSetOrderCPTCode.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
                                 panelSetOrderCPTCode.Account = this.m_AccessionOrder.SvhAccount;
 
-                                if (this.m_PanelSetOrder.PanelSetId != 31 && this.m_PanelSetOrder.PanelSetId != 201 && this.m_PanelSetOrder.PanelSetId != 289) //Not technical only
+                                if (this.m_PanelSetOrder.PanelSetId != 31 && this.m_PanelSetOrder.PanelSetId != 201 && this.m_PanelSetOrder.PanelSetId != 289 && this.m_PanelSetOrder.PanelSetId != 203) //Not technical only
                                 {
 									YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder panelSetOrderSurgical = (YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder)this.m_PanelSetOrder;
                                     if (panelSetOrderSurgical.SurgicalSpecimenCollection.HasStainResult(testOrder.TestOrderId) == true)

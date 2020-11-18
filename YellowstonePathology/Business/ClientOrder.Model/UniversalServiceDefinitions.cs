@@ -165,6 +165,16 @@ namespace YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefini
         }
 	}
 
+    public class UniversalServiceSARSCOV2 : UniversalService
+    {
+        public UniversalServiceSARSCOV2()
+        {
+            this.m_UniversalServiceId = "COVYPI";
+            this.m_ServiceName = "SARSCoV2";
+            this.m_ApplicationName = UniversalServiceApplicationNameEnum.EPIC;
+        }
+    }
+
     public class UniversalServiceBCELLCLON : UniversalService
 	{
         public UniversalServiceBCELLCLON()

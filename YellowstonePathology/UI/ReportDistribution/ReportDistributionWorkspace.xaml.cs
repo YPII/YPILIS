@@ -196,7 +196,7 @@ namespace YellowstonePathology.UI.ReportDistribution
                                         accessionOrder.PhysicianName, accessionOrder.ClientName, reason);
 
                                     System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("Support@ypii.com", "Support@ypii.com", System.Windows.Forms.SystemInformation.UserName, reason + ": " + panelSetOrder.ReportNo);
-                                    System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.111");
+                                    System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
 
                                     Uri uri = new Uri("http://tempuri.org/");
                                     System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;
@@ -345,7 +345,7 @@ namespace YellowstonePathology.UI.ReportDistribution
                                 null, null, "Not able to delete files prior to publishing.");
 
                 System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("Support@ypii.com", "Support@ypii.com", System.Windows.Forms.SystemInformation.UserName, "Not able to delete files prior to publishing: " + panelSetOrder.ReportNo);
-                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.111");
+                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
 
                 Uri uri = new Uri("http://tempuri.org/");
                 System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;
@@ -380,7 +380,7 @@ namespace YellowstonePathology.UI.ReportDistribution
             List<YellowstonePathology.Business.Test.PanelSetOrderView> caseList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetNextCasesToPublish();            
 
             int maxProcessCount = 2;
-            if (caseList.Count >= 10) maxProcessCount = 10;
+            if (caseList.Count >= 10) maxProcessCount = 50;
 
             int processCount = 0;
 
@@ -436,7 +436,7 @@ namespace YellowstonePathology.UI.ReportDistribution
                                                 testOrderReportDistribution.PhysicianName, testOrderReportDistribution.ClientName, distributionResult.Message);
 
                                             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("Sid.Harder@ypii.com", "Sid.Harder@ypii.com", System.Windows.Forms.SystemInformation.UserName, distributionResult.Message);
-                                            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.111");
+                                            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
 
                                             Uri uri = new Uri("http://tempuri.org/");
                                             System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;

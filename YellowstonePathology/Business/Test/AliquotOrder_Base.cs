@@ -697,13 +697,13 @@ namespace YellowstonePathology.Business.Test
                 if (this.Status != "Hold")
                 {
                     this.Status = "Grossed";
-                    this.ProcessorStartDate = null;
-                    this.ReadyToProcess = false;
+                    this.ProcessorStartDate = DateTime.Now;                    
+                    this.ReadyToProcess = true;
                 }        
                 else
                 {
-                    this.ProcessorStartDate = DateTime.Now;
-                    this.ReadyToProcess = true;
+                    this.ProcessorStartDate = null;
+                    this.ReadyToProcess = false;
                 }
             }
         }

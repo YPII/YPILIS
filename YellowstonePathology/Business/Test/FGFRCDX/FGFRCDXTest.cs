@@ -19,6 +19,7 @@ namespace YellowstonePathology.Business.Test.FGFRCDX
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
             this.m_ExpectedDuration = TimeSpan.FromDays(12);
+            this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
             this.m_AllowMultiplePerAccession = true;                        
 

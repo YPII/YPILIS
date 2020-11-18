@@ -98,7 +98,7 @@ namespace YellowstonePathology.Business.Persistence
                             cn.Close();
                         }
                         throw(ex);
-                    }
+                    }                
                 }
             }
             return result;
@@ -111,7 +111,7 @@ namespace YellowstonePathology.Business.Persistence
                 MySqlCommand cmd = sqlCommandQueue.Dequeue();
                 cmd.Connection = cn;
                 cmd.Transaction = trans;
-                cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();                
             }
         }
 
@@ -122,7 +122,7 @@ namespace YellowstonePathology.Business.Persistence
                 MySqlCommand cmd = sqlCommandStack.Pop();
                 cmd.Connection = cn;
                 cmd.Transaction = trans;
-                cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();                
             }
         }
 

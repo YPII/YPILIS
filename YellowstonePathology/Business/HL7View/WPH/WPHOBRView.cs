@@ -50,13 +50,16 @@ namespace YellowstonePathology.Business.HL7View.WPH
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.1.1", "1", obr01Element);            
             obrElement.Add(obr01Element);
             
-
-            if(string.IsNullOrEmpty(this.m_ExternalOrderId) == false)
+            if(string.IsNullOrEmpty(this.m_ExternalOrderId) == false && this.m_SendUnsolicited == false)
             {
                 XElement obr02Element = new XElement("OBR.2");
                 YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.2.1", this.m_ExternalOrderId, obr02Element);
                 obrElement.Add(obr02Element);
-            }            
+            }
+            else
+            {
+                Business.Logging.EmailExceptionHandler.HandleException($"WPH doesn't have external order id: {this.m_OrderingPhysician}");
+            }
 
             XElement obr03Element = new XElement("OBR.3");
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.3.1", this.m_ReportNo, obr03Element);

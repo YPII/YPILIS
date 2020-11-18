@@ -97,7 +97,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
                 }
             }
             return result;
-        }
+        }        
 
         public bool Exists(int physicianId, int clientId)
         {

@@ -141,6 +141,9 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;            
             string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\SCLHealth\" + this.m_PanelSetOrder.ReportNo + fileExtension;            
 
+            if(this.m_Testing == true)
+                interfaceFileName = @"\\ypiiinterface2\ChannelData\Outgoing\1002.OLD\BeakerTesting\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(serverFileName))
             {
                 document.Save(sw);

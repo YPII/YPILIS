@@ -170,7 +170,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 					//view = new YellowstonePathology.Business.Test.MPL.MPLEPICObxView(accessionOrder, reportNo, obxCount);
 					break;
 				case 160:
-					//view = new YellowstonePathology.Business.Test.MultipleFISHProbe.MultipleFISHProbeEPICObxView(accessionOrder, reportNo, obxCount);
+					view = new YellowstonePathology.Business.Test.MultipleFISHProbe.MultipleFISHProbeEPICNTEView(accessionOrder, reportNo, obxCount);
 					break;
 				case 161:
 					view = new YellowstonePathology.Business.Test.MultipleMyelomaIgHByFish.MultipleMyelomaIgHByFishEPICNTEView(accessionOrder, reportNo, obxCount);
@@ -221,7 +221,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                     //view = new YellowstonePathology.Business.Test.IgHMFABByFish.IgHMFABByFishEPICOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 181:
-					//view = new YellowstonePathology.Business.Test.CKIT.CKITEPICObxView(accessionOrder, reportNo, obxCount);
+					view = new YellowstonePathology.Business.Test.CKIT.CKITEPICNTEView(accessionOrder, reportNo, obxCount);
 					break;
 				case 183:
 					//view = new YellowstonePathology.Business.Test.CysticFibrosis.CysticFibrosisEPICObxView(accessionOrder, reportNo, obxCount);
@@ -339,7 +339,10 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                     break;
                 case 369:
                     view = new YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer.PDL122C3forNonsmallCellLungCancerEPICNTEView(accessionOrder, reportNo, obxCount);
-                    break;                
+                    break;
+                case 400:
+                    view = new YellowstonePathology.Business.Test.SARSCoV2.SARSCoV2EPICOBXView(accessionOrder, reportNo, obxCount);
+                    break;
             }
             return view;
         }

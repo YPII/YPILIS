@@ -362,7 +362,7 @@ namespace YellowstonePathology.UI.Flow
 
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_FlowUI.AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.OrderedOn, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.OrderedOnId);
             YellowstonePathology.Business.Helper.FlowCommentHelper comment = new YellowstonePathology.Business.Helper.FlowCommentHelper(specimenOrder.Description, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma);
-            comment.SetInterpretiveComment();
+            comment.SetInterpretiveComment();            
         }
 
         private void textBoxSearchReportNo_KeyUp(object sender, KeyEventArgs e)
@@ -481,6 +481,19 @@ namespace YellowstonePathology.UI.Flow
             YellowstonePathology.Business.Helper.FlowCommentHelper comment = new YellowstonePathology.Business.Helper.FlowCommentHelper(this.m_FlowUI.AccessionOrder.SpecimenOrderCollection[0].Description, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma);
             YellowstonePathology.Business.Flow.FlowCommentItem item = (YellowstonePathology.Business.Flow.FlowCommentItem)this.listViewComments.SelectedItem;
             comment.AddComment(item.Category, item.Impression, item.Comment);
+            this.HandleBCellComment();
+        }
+
+        public void HandleBCellComment()
+        {            
+            if (this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.MarkerExists("CD19") == true)
+            {
+                Business.Flow.FlowMarkerItem flowMarker = this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.FlowMarkerCollection.GetByMarkerName("CD19");
+                if (flowMarker.Interpretation == "Negative")
+                {
+                    this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.InterpretiveComment = this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.InterpretiveComment.Replace(" and the B-cells appear to be polytypic", "");
+                }
+            }            
         }
 
         public void ButtonAddMarkerPanel_Click(object sender, RoutedEventArgs args)
@@ -760,7 +773,7 @@ namespace YellowstonePathology.UI.Flow
                 System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;
                 System.Net.NetworkCredential credential = credentials.GetCredential(uri, "Basic");
 
-                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.111");
+                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
                 client.Credentials = credential;
                 client.Send(mailMessage);
 

@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 			this.m_IsReflexPanel = true;
             this.m_AllowMultiplePerAccession = false;            
             this.m_IsBillable = false;
-            this.m_NeverDistribute = true;
+            this.m_NeverDistribute = false;
             this.m_ShowResultPageOnOrder = true;            
             this.m_ExpectedDuration = TimeSpan.FromDays(6);
             this.m_MonitorPriority = PanelSet.Model.PanelSet.MonitorPriorityNormal;

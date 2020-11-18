@@ -1074,6 +1074,12 @@ namespace YellowstonePathology.UI
         {
             Billing.ADTLinkingDialog adtLinkingDialog = new Billing.ADTLinkingDialog();
             adtLinkingDialog.ShowDialog();
+        }                
+
+        private void MenuItemCOVIDTestingDialog_Click(object sender, RoutedEventArgs e)
+        {
+            COVID.COVIDTestingDialog covidTestingDialog = new COVID.COVIDTestingDialog();
+            covidTestingDialog.ShowDialog();
         }
     }
 }

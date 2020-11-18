@@ -145,7 +145,8 @@ namespace YellowstonePathology.Business.Billing.Model
             {
                 result = new BillableObjectLeukemiaLymphoma(accessionOrder, reportNo);
             }
-            else if (panelSet is YellowstonePathology.Business.Test.TechnicalOnly.TechnicalOnlyTest == true || panelSet is YellowstonePathology.Business.Test.IHCQC.IHCQCTest == true)
+            else if (panelSet is YellowstonePathology.Business.Test.TechnicalOnly.TechnicalOnlyTest == true || 
+                panelSet is YellowstonePathology.Business.Test.IHCQC.IHCQCTest == true || panelSet.PanelSetId == 203)
             {                
                 result = new BillableObjectTechnicalOnly(accessionOrder, reportNo);
             }

@@ -51,6 +51,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
             result.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceSMP());
             result.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServicBCELEnumeration());
             result.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceFHGB());
+            result.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceSARSCOV2());
             return result;
         }
 

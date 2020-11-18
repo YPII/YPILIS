@@ -15,6 +15,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
         CTNR,
 		DCMT,
 		CLNT,     
+        RPTN,
         SLDSTRG,
         BLKSTRG,   
         UNDEFINED,

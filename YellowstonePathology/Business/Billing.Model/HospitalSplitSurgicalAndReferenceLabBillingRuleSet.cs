@@ -26,6 +26,7 @@ namespace YellowstonePathology.Business.Billing.Model
             billingRule0.BillingType = BillingTypeEnum.Split;
             billingRule0.ReferenceLab = new RuleValueAny();
             billingRule0.PanelSetIncludeOnlyList.Add(13);
+            billingRule0.PanelSetIncludeOnlyList.Add(400);
             this.m_BillingRuleCollection.Add(billingRule0);            
 
             BillingRule billingRule01 = new BillingRule();
@@ -49,6 +50,7 @@ namespace YellowstonePathology.Business.Billing.Model
             billingRule1.BillingType = BillingTypeEnum.Global;
             billingRule1.ReferenceLab = new RuleValueBoolean(false);
             billingRule1.PanelSetExcludeList.Add(13);
+            billingRule1.PanelSetExcludeList.Add(400);
             this.m_BillingRuleCollection.Add(billingRule1);            
 
             BillingRule billingRule2 = new BillingRule();

@@ -53,7 +53,7 @@ namespace YellowstonePathology.UI
                             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
 
                             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("support@ypii.com", "Sid.Harder@ypii.com", System.Windows.Forms.SystemInformation.UserName, "A lock was cleared on case: " + accessionOrder.MasterAccessionNo + " by " + YellowstonePathology.Business.User.SystemIdentity.Instance.User.DisplayName);
-                            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.111");
+                            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
 
                             Uri uri = new Uri("http://tempuri.org/");
                             System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;

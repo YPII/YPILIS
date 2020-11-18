@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.Trichomonas
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
             this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, "F");
-            this.AddNextObxElementBeaker("Trich Result", panelSetOrder.Result, document, "F", "Negative");            
+            this.AddNextObxElementBeaker("Trich Result", panelSetOrder.Result, document, "F", "Negative", false);            
 
             if (amendmentCollection.Count != 0)
             {

@@ -42,7 +42,7 @@ namespace YellowstonePathology.Business.Surgical
             DateTime yesterdayAt500 = DateTime.Parse(DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd") + "T17:00");
             DateTime todayAtNoon = DateTime.Parse(DateTime.Today.ToString("yyyy-MM-dd") + "T12:00");
             DateTime fridayAt2100 = DateTime.Parse(lastFriday.ToString("yyyy-MM-dd") + "T21:00");
-            DateTime todayAt1430 = DateTime.Parse(lastFriday.ToString("yyyy-MM-dd") + "T14:30");
+            DateTime todayAt1430 = DateTime.Parse(DateTime.Today.ToString("yyyy-MM-dd") + "T14:30");
 
             result.Add(new ProcessorRun("Chong, Overnight", yesterdayAt500, new TimeSpan(2, 30, 0)));
             result.Add(new ProcessorRun("Cheech, Overnight", yesterdayAt500, new TimeSpan(3, 10, 0)));

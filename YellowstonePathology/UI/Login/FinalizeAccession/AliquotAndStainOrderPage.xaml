@@ -299,6 +299,9 @@
                         <TextBlock Margin="2,2,5,2" HorizontalAlignment="Right">
                             <Hyperlink Click="HyperLinkPrintAllPaperSlides_Click">Print All Paper Slides</Hyperlink>
                         </TextBlock>
+                        <TextBlock Margin="2,2,5,2" HorizontalAlignment="Right">
+                            <Hyperlink Click="HyperLinkPrintCovidLabel_Click">Print COVID Label</Hyperlink>
+                        </TextBlock>
                     </StackPanel>
 
                 </Grid>

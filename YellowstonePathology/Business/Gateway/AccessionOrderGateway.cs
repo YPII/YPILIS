@@ -3163,12 +3163,12 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        public static List<Business.MasterAccessionNo> GetMasterAccessionNoListBySQL()
+        public static List<Business.MasterAccessionNo> GetMasterAccessionNoListBySQL(string sql)
         {
             List<Business.MasterAccessionNo> result = new List<Business.MasterAccessionNo>();
 
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "select distinct pso.masterAccessionNo from tblTestOrderReportDistribution tord join tblPanelSetOrder pso on tord.ReportNo = pso.reportNo where physicianid = 3435;";
+            cmd.CommandText = sql;
             cmd.CommandType = CommandType.Text;
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {

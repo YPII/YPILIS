@@ -75,6 +75,7 @@ namespace YellowstonePathology.Business.HL7View.NMH
                     YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.4.2", "PATH", obr04Element);
                     YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.4.3", "Pathology", obr04Element);
                     break;
+                case 3:
                 case 15:
                 case 14:
                 case 62:

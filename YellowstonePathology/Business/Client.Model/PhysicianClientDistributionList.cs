@@ -18,11 +18,57 @@ namespace YellowstonePathology.Business.Client.Model
             this.HandleReferringProvider(accessionOrder);
             this.HandlePathGroup(accessionOrder);
             this.HandlePAIF(accessionOrder);
+            this.HandleSurgeonDistribution(accessionOrder);
+            
+            if(this.Count > 0)
+            {
+                this.HandleWebDistribution(accessionOrder);
+            }
 
             foreach (PhysicianClientDistributionListItem physicianClientDistribution in this)
             {
                 physicianClientDistribution.SetDistribution(panelSetOrder, accessionOrder);
+            }            
+        }
+
+        public void HandleSurgeonDistribution(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        {
+            if(accessionOrder.PanelSetOrderCollection.DoesPanelSetExist(400) == true)
+            {
+                if(string.IsNullOrEmpty(accessionOrder.ReportCopyTo) == false)
+                {
+                    string[] commaSplit = accessionOrder.ReportCopyTo.Split(',');
+                    if(commaSplit.Length == 2)
+                    {
+                        int clientId = Convert.ToInt32(commaSplit[0]);
+                        int physicianId = Convert.ToInt32(commaSplit[1]);
+                        Domain.Physician physician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(physicianId);
+                        Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(clientId);
+
+                        PhysicianClientDistributionListItem physicianClientDistribution = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution("Web Service");
+                        physicianClientDistribution.ClientId = client.ClientId;
+                        physicianClientDistribution.ClientName = client.ClientName;
+                        physicianClientDistribution.PhysicianId = physician.PhysicianId;
+                        physicianClientDistribution.PhysicianName = physician.DisplayName;
+                        physicianClientDistribution.DistributionType = client.DistributionType;
+                        this.Add(physicianClientDistribution);
+                    }
+                }
             }
+        }
+
+        public void HandleWebDistribution(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        {            
+            if(this.DoesWebServiceDistributionExist() == false)
+            {
+                PhysicianClientDistributionListItem physicianClientDistribution = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution("Web Service");
+                physicianClientDistribution.ClientId = accessionOrder.ClientId;
+                physicianClientDistribution.ClientName = accessionOrder.ClientName;
+                physicianClientDistribution.PhysicianId = accessionOrder.PhysicianId;
+                physicianClientDistribution.PhysicianName = accessionOrder.PhysicianName;
+                physicianClientDistribution.DistributionType = "Web Service";                    
+                this.Add(physicianClientDistribution);                    
+            }            
         }
 
         public void HandlePAIF(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
@@ -127,6 +173,20 @@ namespace YellowstonePathology.Business.Client.Model
             {
                 if (physicianClientDistributionListItem.DistributionType == YellowstonePathology.Business.Client.Model.EPICPhysicianClientDistribution.EPIC ||
                     physicianClientDistributionListItem.DistributionType == YellowstonePathology.Business.Client.Model.EPICAndFaxPhysicianClientDistribution.EPICANDFAX)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public bool DoesWebServiceDistributionExist()
+        {
+            bool result = false;
+            foreach (YellowstonePathology.Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistributionListItem in this)
+            {
+                if (physicianClientDistributionListItem.DistributionType == "Web Service")
                 {
                     result = true;
                     break;

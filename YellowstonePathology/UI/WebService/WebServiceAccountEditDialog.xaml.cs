@@ -100,7 +100,7 @@ namespace YellowstonePathology.UI.WebService
                     }
                 }
 
-                YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
+                YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);                
                 Close();
             }
             else
@@ -165,6 +165,39 @@ namespace YellowstonePathology.UI.WebService
             }
             this.m_WebServiceAccount.Password = pw;
             this.NotifyPropertyChanged(string.Empty);
+        }        
+
+        private void HyperLinkImpersonateSid_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.m_WebServiceAccount.WebServiceAccountId == 1091)
+            {
+                this.m_WebServiceAccount.SetAsYPI();
+                
+            }
+            else
+            {
+                Business.WebService.WebServiceAccount sidHarder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(1091, this);
+                sidHarder.Impersonate(this.m_WebServiceAccount);                
+            }
+
+            Business.Persistence.DocumentGateway.Instance.Push(this);
+            this.Close();
+        }
+
+        private void HyperLinkImpersonateKevin_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.m_WebServiceAccount.WebServiceAccountId == 1090)
+            {
+                this.m_WebServiceAccount.SetAsYPI();
+            }
+            else
+            {
+                Business.WebService.WebServiceAccount sidHarder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(1090, this);
+                sidHarder.Impersonate(this.m_WebServiceAccount);                
+            }
+
+            Business.Persistence.DocumentGateway.Instance.Push(this);
+            this.Close();            
         }
     }
 }

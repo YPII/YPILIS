@@ -70,6 +70,34 @@ namespace YellowstonePathology.Business.Search
             }            
         }
 
+        public ReportSearchItem GetByReportNo(string reportNo)
+        {
+            ReportSearchItem result = null;
+            foreach(ReportSearchItem item in this)
+            {
+                if(item.ReportNo == reportNo)
+                {
+                    result = item;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public bool ReportNoExists(string reportNo)
+        {
+            bool result = false;
+            foreach (ReportSearchItem item in this)
+            {
+                if (item.ReportNo == reportNo)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public bool EndOfList
         {
             get { return this.m_EndOfList; }

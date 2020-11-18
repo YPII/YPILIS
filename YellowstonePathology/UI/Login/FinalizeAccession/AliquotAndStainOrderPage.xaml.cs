@@ -934,5 +934,11 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
             MessageBox.Show("The order has been sent.");
         }
+
+        private void HyperLinkPrintCovidLabel_Click(object sender, RoutedEventArgs e)
+        {
+            Business.Label.Model.ReportNoLabel reportNoLabel = new Business.Label.Model.ReportNoLabel(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder.HighPriority);
+            Business.Label.Model.ReportNoLabelPrinter.Print(reportNoLabel, Business.User.UserPreferenceInstance.Instance.UserPreference.CytologySlideLabelPrinter, 2);
+        }
     }
 }

@@ -61,7 +61,18 @@ namespace YellowstonePathology.UI.Cutting
         
         private void ButtonPrintSlide_Click(object sender, RoutedEventArgs e)
         {
-            this.PrintSlide(this, new CustomEventArgs.SlideOrderReturnEventArgs(this.m_SlideOrder));
+            if(this.m_SlideOrder.Printed == false)
+            {
+                this.PrintSlide(this, new CustomEventArgs.SlideOrderReturnEventArgs(this.m_SlideOrder));
+            }
+            else
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("This slide has already been printed, are you sure you want to print it again.", "Print Slide Again?", MessageBoxButton.OKCancel);
+                if(messageBoxResult == MessageBoxResult.OK)
+                {
+                    this.PrintSlide(this, new CustomEventArgs.SlideOrderReturnEventArgs(this.m_SlideOrder));
+                }
+            }
         }
 
         private void ButtonPrintPaperLabel_Click(object sender, RoutedEventArgs e)

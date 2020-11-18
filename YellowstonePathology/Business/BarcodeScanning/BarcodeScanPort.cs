@@ -28,6 +28,9 @@ namespace YellowstonePathology.Business.BarcodeScanning
         public event ContainerScanReceivedHandler ContainerScanReceived;
         public delegate void ContainerScanReceivedHandler(ContainerBarcode containerBarcode);
 
+        public event ReportNoScanReceivedHandler ReportNoScanReceived;
+        public delegate void ReportNoScanReceivedHandler(Barcode barcode);
+
         public event SvhAccountNoReceiveHandler SvhAccountNoReceived;
         public delegate void SvhAccountNoReceiveHandler(string svhAccountNo);
 
@@ -146,6 +149,9 @@ namespace YellowstonePathology.Business.BarcodeScanning
                     break;
                 case BarcodePrefixEnum.CLNT:                    
                     if (ClientScanReceived != null) ClientScanReceived(barcode);
+                    break;
+                case BarcodePrefixEnum.RPTN:
+                    if (ReportNoScanReceived != null) ReportNoScanReceived(barcode);
                     break;
                 case BarcodePrefixEnum.UNDEFINED:
                     this.HandleSpecialScans(scanData);

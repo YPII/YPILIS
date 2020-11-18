@@ -263,6 +263,12 @@ namespace YellowstonePathology.Business.Test
             {
                 result = false;
             }
+
+            if (this.m_PanelSetId == 400)
+            {
+                result = false;
+            }
+
             return result;
         }
 
@@ -1404,7 +1410,7 @@ namespace YellowstonePathology.Business.Test
             YellowstonePathology.Business.Audit.Model.AuditCollection auditCollection = new Audit.Model.AuditCollection();
             auditCollection.Add(new Audit.Model.FinalizedAudit(this));
             auditCollection.Add(new Audit.Model.MRNAudit(accessionOrder));
-            auditCollection.Add(new Audit.Model.AccountNoAudit(accessionOrder));
+            //auditCollection.Add(new Audit.Model.AccountNoAudit(accessionOrder));
             auditCollection.Add(new Audit.Model.DistributionAvailableAudit(accessionOrder));
             auditCollection.Add(new Audit.Model.DistributionNotSetAudit(this));
             result = auditCollection.Run2();

@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>247</ApplicationRevision>
+    <ApplicationRevision>317</ApplicationRevision>
     <ApplicationVersion>11.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -452,6 +452,8 @@
     <Compile Include="Business\HL7View\NMH\NMHResultView.cs" />
     <Compile Include="Business\Label.Model\CassettePrinterHavre.cs" />
     <Compile Include="Business\Label.Model\HistologySlidePaperZPLLabelV3.cs" />
+    <Compile Include="Business\Label.Model\ReportNoLabelPrinter.cs" />
+    <Compile Include="Business\Label.Model\ReportNoLabel.cs" />
     <Compile Include="Business\Label.Model\StorageSlideLabel.cs" />
     <Compile Include="Business\Label.Model\HologicSlideLabelPrinter.cs" />
     <Compile Include="Business\Label.Model\HologicSlideLabel.cs" />
@@ -1133,6 +1135,7 @@
     <Compile Include="Business\Patient.Model\Address.cs" />
     <Compile Include="Business\Persistence\BatchMaterialTrackingLogDocumentBuilder.cs" />
     <Compile Include="Business\Persistence\DocumentTestBuilders.cs" />
+    <Compile Include="Business\Persistence\MappingAttribute.cs" />
     <Compile Include="Business\Persistence\PersistentDataColumnProperty.cs" />
     <Compile Include="Business\Persistence\MonitorProperty.cs" />
     <Compile Include="Business\Persistence\ProtobufWriter.cs" />
@@ -1172,6 +1175,18 @@
     <Compile Include="Business\Test.Model\TestFactory.cs" />
     <Compile Include="Business\Test.Model\TestOrderStatusView.cs" />
     <Compile Include="Business\Test.Model\TestOrderStatusViewCollection.cs" />
+    <Compile Include="Business\Test\HCGbeta\HCGbetaTest.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2EPICOBXView.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2NotDetectedResult.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2DetectedResult.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2Result.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2ResultCollection.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2Test.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2TestOrder.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2WordDocument.cs" />
+    <Compile Include="Business\Test\MUC4\MUC4Test.cs" />
+    <Compile Include="Business\Test\CDK4\CDK4Test.cs" />
+    <Compile Include="Business\Test\TLE1\TLE1.cs" />
     <Compile Include="Business\Test\Adenovirus\AdenovirusTest.cs" />
     <Compile Include="Business\Test\ALLFusionProfile\ALLFusionProfileTest.cs" />
     <Compile Include="Business\Test\ALLPediatricFISHPanel\ALLPediatricFISHPanelTest.cs" />
@@ -2367,7 +2382,7 @@
     <Compile Include="Business\Test\ChromosomeAnalysis\ChromosomeAnalysisTestOrder.cs" />
     <Compile Include="Business\Test\ChromosomeAnalysis\ChromosomeAnalysisWordDocument.cs" />
     <Compile Include="Business\Test\CKIT\CKITDetectedResult.cs" />
-    <Compile Include="Business\Test\CKIT\CKITEpicObxView.cs" />
+    <Compile Include="Business\Test\CKIT\CKITEpicNTEView.cs" />
     <Compile Include="Business\Test\CKIT\CKITNotDetectedResult.cs" />
     <Compile Include="Business\Test\CKIT\CKITResultCollection.cs" />
     <Compile Include="Business\Test\CKIT\CKITTest.cs" />
@@ -2728,7 +2743,7 @@
     <Compile Include="Business\Test\MPNStandardReflex\MPNStandardReflexTest.cs" />
     <Compile Include="Business\Test\MPNStandardReflex\MPNStandardReflexWordDocument.cs" />
     <Compile Include="Business\Test\MPNStandardReflex\PanelSetOrderMPNStandardReflex.cs" />
-    <Compile Include="Business\Test\MultipleFISHProbe\MultipleFISHProbeEpicObxView.cs" />
+    <Compile Include="Business\Test\MultipleFISHProbe\MultipleFISHProbeEPICNTEView.cs" />
     <Compile Include="Business\Test\MultipleFISHProbe\MultipleFISHProbeNormalResult.cs" />
     <Compile Include="Business\Test\MultipleFISHProbe\MultipleFISHProbePanelResult.cs" />
     <Compile Include="Business\Test\MultipleFISHProbe\MultipleFISHProbeTest.cs" />
@@ -3311,6 +3326,16 @@
     <Compile Include="UI\Common\UserPreferencesList.xaml.cs">
       <DependentUpon>UserPreferencesList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\COVID\LC96SampleCollection.cs" />
+    <Compile Include="UI\COVID\LC96Sample.cs" />
+    <Compile Include="UI\COVID\COVIDResult.cs" />
+    <Compile Include="UI\COVID\COVIDResultCollection.cs" />
+    <Compile Include="UI\COVID\COVIDTestingDialog.xaml.cs">
+      <DependentUpon>COVIDTestingDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\COVID\COVIDCase.cs" />
+    <Compile Include="UI\COVID\COVIDCaseCollection.cs" />
+    <Compile Include="UI\COVID\SampleMapRows.cs" />
     <Compile Include="UI\Cytology\EQCLabelPage.xaml.cs">
       <DependentUpon>EQCLabelPage.xaml</DependentUpon>
     </Compile>
@@ -3870,6 +3895,10 @@
       <DependentUpon>HER2AmplificationSummaryResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Test\HER2AmplificationSummaryResultPath.cs" />
+    <Compile Include="UI\Test\SARSCoV2ResultPage.xaml.cs">
+      <DependentUpon>SARSCoV2ResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\SARSCoV2ResultPath.cs" />
     <Compile Include="UI\Test\PDL122C3forEsophagealSquamousCellCarcinomaResultPage.xaml.cs">
       <DependentUpon>PDL122C3forEsophagealSquamousCellCarcinomaResultPage.xaml</DependentUpon>
     </Compile>
@@ -5381,6 +5410,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\COVID\COVIDTestingDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Cutting\AliquotOrderSelectionPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -5900,6 +5933,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Test\HER2AmplificationSummaryResultPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Test\SARSCoV2ResultPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

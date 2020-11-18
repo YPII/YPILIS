@@ -390,6 +390,9 @@ namespace YellowstonePathology.UI.Test
                 case 369:
                     result = new PDL122C3forNonsmallCellLungCancerResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
+                case 400:
+                    result = new SARSCoV2ResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
             }
 
             if (result == null)

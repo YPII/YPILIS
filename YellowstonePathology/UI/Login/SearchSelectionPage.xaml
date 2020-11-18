@@ -141,7 +141,34 @@
                     <Button Grid.Column="2" Grid.Row="2" Width="75" Height="25" Margin="2,2,2,2" Click="ButtonPositiveHPyloriSearch_Click" HorizontalAlignment="Right">Search</Button>
 
                 </Grid>
-            </TabItem>            
+            </TabItem>      
+            <TabItem Header="Client">
+                <Grid Grid.Column="0" Grid.Row="1" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>                        
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Text="Client:" />
+                    <TextBox Name="TextBoxClientId" Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=ClientId}"/>
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Text="Start Date:" />
+                    <TextBox Name="TextBoxClientStartDate" Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=ClientStartDate, Converter={StaticResource ShortDateConverter}}"/>
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" Text="End Date:" />
+                    <TextBox Name="TextBoxClientEndDate" Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=ClientEndDate, Converter={StaticResource ShortDateConverter}}"/>
+
+                    <Button Grid.Column="2" Grid.Row="3" Width="75" Height="25" Margin="2,2,2,2" Click="ButtonClientSearch_Click" HorizontalAlignment="Right">Search</Button>
+
+                </Grid>
+            </TabItem>   
             <TabItem Header="Billing">
                 <Grid Grid.Column="0" Grid.Row="1" Margin="10">
                     <Grid.ColumnDefinitions>

@@ -262,7 +262,7 @@ namespace YellowstonePathology.UI.Cutting
             this.m_ListBoxSlidesMouseDownTimer.Stop();
             if (this.ListBoxSlideOrderCollection.SelectedItems.Count != 0)
             {
-                YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder = (YellowstonePathology.Business.Slide.Model.SlideOrder)this.ListBoxSlideOrderCollection.SelectedItem;                
+                YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder = (YellowstonePathology.Business.Slide.Model.SlideOrder)this.ListBoxSlideOrderCollection.SelectedItem;
                 if (slideOrder.Status == YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Created.ToString())
                 {
                     if (slideOrder.LabelType == YellowstonePathology.Business.Slide.Model.SlideLabelTypeEnum.DirectPrint.ToString())
@@ -277,9 +277,9 @@ namespace YellowstonePathology.UI.Cutting
                         slideOrder.Printed = true;
 
                         YellowstonePathology.Business.Label.Model.HistologySlidePaperLabel histologySlidePaperLabel = new Business.Label.Model.HistologySlidePaperLabel(slideOrder.SlideOrderId, slideOrder.ReportNo, slideOrder.Label, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
-                        this.m_HistologySlidePaperLabelPrinter.Queue.Enqueue(histologySlidePaperLabel);                                                                  
+                        this.m_HistologySlidePaperLabelPrinter.Queue.Enqueue(histologySlidePaperLabel);
                         this.ShowTestOrderSelectionPage(this, new CustomEventArgs.AliquotOrderReturnEventArgs(this.m_AliquotOrder));
-                    }                    
+                    }
                 }
                 else if (slideOrder.Status == YellowstonePathology.Business.Slide.Model.SlideStatusEnum.ClientAccessioned.ToString())
                 {
@@ -290,7 +290,7 @@ namespace YellowstonePathology.UI.Cutting
                 ventanaStainOrder.HandleOrder(this.m_AccessionOrder, slideOrder);
                 this.NotifyPropertyChanged(string.Empty);
             }
-        }                    
+        }
 
         private void PrintSlide(YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder)
         {			                        

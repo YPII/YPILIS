@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Data;
 using YellowstonePathology.Business.Persistence;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
+using MongoDB;
 
 namespace YellowstonePathology.Business.WebService
 {
@@ -461,6 +466,35 @@ namespace YellowstonePathology.Business.WebService
                     this.m_PublicAddress = value;
                     this.NotifyPropertyChanged("PublicAddress");
                 }
+            }
+        }
+
+        public void SetAsYPI()
+        {
+            this.m_PrimaryClientId = 1134;
+            this.m_WebServiceAccountClientCollection.Clear();
+            int id = YellowstonePathology.Business.Gateway.WebServiceGateway.GetNextWebServiceAccountClientId();
+            
+            Business.WebService.WebServiceAccountClient newWebServiceAccountClient = new Business.WebService.WebServiceAccountClient();
+            newWebServiceAccountClient.WebServiceAccountClientId = id;
+            newWebServiceAccountClient.WebServiceAccountId = this.m_WebServiceAccountId;
+            newWebServiceAccountClient.ClientId = 1134;
+            this.WebServiceAccountClientCollection.Add(newWebServiceAccountClient);            
+        }
+
+        public void Impersonate(WebServiceAccount accountToImpersonate)
+        {
+            this.m_PrimaryClientId = accountToImpersonate.m_PrimaryClientId;
+            this.m_WebServiceAccountClientCollection.Clear();
+            int id = YellowstonePathology.Business.Gateway.WebServiceGateway.GetNextWebServiceAccountClientId();
+            foreach (WebServiceAccountClient webServiceAccountClient in accountToImpersonate.m_WebServiceAccountClientCollection)
+            {                
+                Business.WebService.WebServiceAccountClient newWebServiceAccountClient = new Business.WebService.WebServiceAccountClient();
+                newWebServiceAccountClient.WebServiceAccountClientId = id;
+                newWebServiceAccountClient.WebServiceAccountId = this.m_WebServiceAccountId;
+                newWebServiceAccountClient.ClientId = webServiceAccountClient.ClientId;                
+                this.WebServiceAccountClientCollection.Add(newWebServiceAccountClient);
+                id += 1;
             }
         }
     }

@@ -165,6 +165,24 @@ namespace YellowstonePathology.UI.Login
             this.NotifyPropertyChanged("ReportSearchList");
         }
 
+        public void GetReportSearchListByCOVIDCases()
+        {
+            this.m_ReportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListByCOVIDCases();
+            this.NotifyPropertyChanged("ReportSearchList");
+        }
+
+        public void GetReportSearchListByYPICOVIDCases()
+        {
+            this.m_ReportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListByYPICOVIDCases();
+            this.NotifyPropertyChanged("ReportSearchList");
+        }
+
+        public void GetReportSearchListBySCLCOVIDCases()
+        {
+            this.m_ReportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListBySCLCOVIDCases();
+            this.NotifyPropertyChanged("ReportSearchList");
+        }
+
         public void GetReportSearchListByQICases(string year)
         {
             this.m_ReportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListByCasesWithNotes(year);
@@ -252,6 +270,12 @@ namespace YellowstonePathology.UI.Login
         public void GetReportSearchListByPendingTests()
         {
             this.m_ReportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListByPendingTests();
+            this.NotifyPropertyChanged("ReportSearchList");
+        }
+
+        public void GetReportSearchListByClientId(string clientId, DateTime startDate, DateTime endDate)
+        {
+            this.m_ReportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListByClient(clientId, startDate, endDate);
             this.NotifyPropertyChanged("ReportSearchList");
         }
 

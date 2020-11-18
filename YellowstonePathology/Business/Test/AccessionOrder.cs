@@ -108,6 +108,8 @@ namespace YellowstonePathology.Business.Test
         private string m_CaseDialog;
         private string m_PlaceOfService;
 		private bool m_HoldSVHDistribution;
+		private bool m_HighPriority;
+		private string m_ReportCopyTo;
 
 		public AccessionOrder()
         {
@@ -1269,6 +1271,36 @@ namespace YellowstonePathology.Business.Test
 		}
 
 		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+		public bool HighPriority
+		{
+			get { return this.m_HighPriority; }
+			set
+			{
+				if (this.m_HighPriority != value)
+				{
+					this.m_HighPriority = value;
+					this.NotifyPropertyChanged("HighPriority");
+				}
+			}
+		}
+
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+		public string ReportCopyTo
+		{
+			get { return this.m_ReportCopyTo; }
+			set
+			{
+				if (this.m_ReportCopyTo != value)
+				{
+					this.m_ReportCopyTo = value;
+					this.NotifyPropertyChanged("ReportCopyTo");
+				}
+			}
+		}
+
+		[PersistentProperty()]
         [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
         public bool ITAuditRequired
         {
@@ -1345,6 +1377,9 @@ namespace YellowstonePathology.Business.Test
 			this.SvhMedicalRecord = clientOrder.SvhMedicalRecord;
             this.PlaceOfService = clientOrder.PlaceOfService;
 
+			this.HighPriority = clientOrder.HighPriority;
+			if (clientOrder.ClientId == 1759) this.HighPriority = true;
+
             switch(clientOrder.PatientType)
             {
                 case "IN":
@@ -1384,6 +1419,7 @@ namespace YellowstonePathology.Business.Test
                 this.ExternalOrderId = clientOrder.ExternalOrderId;
             }
 
+			this.ReportCopyTo = clientOrder.ReportCopyTo;
             this.SecondaryExternalOrderId = clientOrder.SecondaryExternalOrderId;
             this.IncomingHL7 = clientOrder.IncomingHL7;
 			this.OrderedByFirstName = clientOrder.OrderedByFirstName;
