@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Billing.Model
 			BillableObjectStains billableObjectStains = new BillableObjectStains(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo);
 			billableObjectStains.SetPanelSetOrderCPTCodes();
         }
-
+		
 		public override void PostTechnical(string billTo, string billBy)
 		{
             base.PostManualEntriesTechnical(billTo, billBy);

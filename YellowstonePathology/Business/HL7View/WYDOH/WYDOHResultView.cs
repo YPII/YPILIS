@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
             this.m_AccessionOrder = accessionOrder;            
             this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
 
-            this.m_OrderingPhysician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);           
+            this.m_OrderingPhysician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);           
 		}
 
         public void Send(YellowstonePathology.Business.Rules.MethodResult result)
@@ -59,7 +59,7 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
             this.m_ObxCount = obx.ObxCount;
 
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + ".Mirth.xml";
+			string serverFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + ".Mirth.xml";
 
             string mirthFileName = mirthFileName = @"\\YPIIInterface2\ChannelData\Outgoing\WYCDC\" + this.m_PanelSetOrder.ReportNo + ".Mirth.xml";
 

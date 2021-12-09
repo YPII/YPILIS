@@ -63,7 +63,7 @@ namespace YellowstonePathology.UI.MaterialTracking
             YellowstonePathology.Business.Facility.Model.Facility toFacility = new YellowstonePathology.Business.Facility.Model.Facility();
 
             YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string fromLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string fromLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
 			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 			YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, null, fromFacility, fromLocation, toFacility, null, this.m_MasterAccessionNo);
@@ -89,9 +89,9 @@ namespace YellowstonePathology.UI.MaterialTracking
         private void HyperlinkSendMaterialToDrClegg_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string fromLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string fromLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
-            YellowstonePathology.Business.Facility.Model.Facility toFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPCDY");
+            YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPCDY");
 
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
@@ -103,10 +103,10 @@ namespace YellowstonePathology.UI.MaterialTracking
 
         private void HyperlinkSendMaterialFromCodyToBillings_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility fromFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPCDY");
-            string fromLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPCDY");
+            string fromLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
-            YellowstonePathology.Business.Facility.Model.Facility toFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
 			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 			YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Send material to Billings", fromFacility, fromLocation, toFacility, null, this.m_MasterAccessionNo);
@@ -117,10 +117,10 @@ namespace YellowstonePathology.UI.MaterialTracking
 
         private void HyperlinkReceiveMaterialFromBillings_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility fromFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
-            YellowstonePathology.Business.Facility.Model.Facility toFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPICDY");
-            string toLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPICDY");
+            string toLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 			YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Receive material from Billings", fromFacility, null, toFacility, toLocation, this.m_MasterAccessionNo);
@@ -132,9 +132,9 @@ namespace YellowstonePathology.UI.MaterialTracking
         private void HyperlinkSendMaterialToDrKurtzman_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string fromLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string fromLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
-            YellowstonePathology.Business.Facility.Model.Facility toFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("MTDPTJC");
+            YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("MTDPTJC");
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Send material to Dr. Kurtzman", fromFacility, fromLocation, toFacility, null, this.m_MasterAccessionNo);
@@ -145,10 +145,10 @@ namespace YellowstonePathology.UI.MaterialTracking
 
         private void HyperlinkReceiveMaterialFromDrKurtzman_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility fromFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("MTDPTJC");
+            YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("MTDPTJC");
 
             YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string toLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string toLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Receive material from Dr. Kurtzman", fromFacility, null, toFacility, toLocation, this.m_MasterAccessionNo);
@@ -161,9 +161,9 @@ namespace YellowstonePathology.UI.MaterialTracking
         private void HyperlinkSendMaterialToDrShannon_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string fromLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string fromLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
-            YellowstonePathology.Business.Facility.Model.Facility toFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("BTTPTHLGY");
+            YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("BTTPTHLGY");
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Send material to Dr. Shannon", fromFacility, fromLocation, toFacility, null, this.m_MasterAccessionNo);
@@ -174,10 +174,10 @@ namespace YellowstonePathology.UI.MaterialTracking
 
         private void HyperlinkReceiveMaterialFromDrShannon_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility fromFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("BTTPTHLGY");
+            YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("BTTPTHLGY");
 
             YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string toLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string toLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Receive material from Dr. Shannon", fromFacility, null, toFacility, toLocation, this.m_MasterAccessionNo);
@@ -190,9 +190,9 @@ namespace YellowstonePathology.UI.MaterialTracking
         {
 
             YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string fromLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string fromLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
-            YellowstonePathology.Business.Facility.Model.Facility toFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Send material to Neogenomics", fromFacility, fromLocation, toFacility, null, this.m_MasterAccessionNo);
@@ -203,10 +203,10 @@ namespace YellowstonePathology.UI.MaterialTracking
 
         private void HyperlinkReceiveMaterialFromNeo_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility fromFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
 
             YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string toLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string toLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Receive material from Neogenomics", fromFacility, null, toFacility, toLocation, this.m_MasterAccessionNo);
@@ -218,10 +218,10 @@ namespace YellowstonePathology.UI.MaterialTracking
 
         private void HyperlinkReceiveMaterialFromDrMatthews_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility fromFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("BLGSCLNC");
+            YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("BLGSCLNC");
 
             YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string toLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string toLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Receive material from Dr. Matthews", fromFacility, null, toFacility, toLocation, this.m_MasterAccessionNo);
@@ -233,9 +233,9 @@ namespace YellowstonePathology.UI.MaterialTracking
         private void HyperlinkSendMaterialFromBillingsToBozeman_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string fromLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string fromLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
-            YellowstonePathology.Business.Facility.Model.Facility toFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBZMN");
+            YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBZMN");
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Send material to Bozeman.", fromFacility, fromLocation, toFacility, null, this.m_MasterAccessionNo);
@@ -246,10 +246,10 @@ namespace YellowstonePathology.UI.MaterialTracking
 
         private void HyperlinkReceiveMaterialFromBozeman_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility fromFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBZMN");
+            YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBZMN");
 
             YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string toLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string toLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Receive material from Bozeman", fromFacility, null, toFacility, toLocation, this.m_MasterAccessionNo);
@@ -268,15 +268,15 @@ namespace YellowstonePathology.UI.MaterialTracking
             if (this.ListBoxMaterialTrackingBatch.SelectedItem != null)
             {
                 string materialTrackingBatchId = ((YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch)this.ListBoxMaterialTrackingBatch.SelectedItem).MaterialTrackingBatchId;
-                YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullMaterialTrackingBatch(materialTrackingBatchId, Window.GetWindow(this));
+                YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = Business.Persistence.DocumentGateway.Instance.PullMaterialTrackingBatch(materialTrackingBatchId, Window.GetWindow(this));
 
                 if (this.m_UseMasterAccessionNo == true)
                 {
-                    materialTrackingBatch = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullMaterialTrackingBatchWithMasterAccessionNo(materialTrackingBatchId, this.m_MasterAccessionNo, Window.GetWindow(this));
+                    materialTrackingBatch = Business.Persistence.DocumentGateway.Instance.PullMaterialTrackingBatchWithMasterAccessionNo(materialTrackingBatchId, this.m_MasterAccessionNo, Window.GetWindow(this));
                 }
                 else
                 {
-                   materialTrackingBatch = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullMaterialTrackingBatch(materialTrackingBatchId, Window.GetWindow(this));
+                   materialTrackingBatch = Business.Persistence.DocumentGateway.Instance.PullMaterialTrackingBatch(materialTrackingBatchId, Window.GetWindow(this));
                 }
 
                 this.ViewBatch(this, new CustomEventArgs.MaterialTrackingBatchEventArgs(materialTrackingBatch));
@@ -315,29 +315,29 @@ namespace YellowstonePathology.UI.MaterialTracking
             }
         }
 
-        private void HyperlinkSendMaterialToOnsiteStorage_Click(object sender, RoutedEventArgs e)
+        private void HyperlinkSendMaterialToBSD_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string fromLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string fromLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
-            YellowstonePathology.Business.Facility.Model.Facility toFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("PNSTSTRG");
+            YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("BGSKDRMTLGY");
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-            YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Send material to onsite storage.", fromFacility, fromLocation, toFacility, null, this.m_MasterAccessionNo);
+            YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Send material to Big Sky Dermatology.", fromFacility, fromLocation, toFacility, null, this.m_MasterAccessionNo);
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.InsertDocument(materialTrackingBatch, Window.GetWindow(this));
 
             this.ViewBatch(this, new YellowstonePathology.UI.CustomEventArgs.MaterialTrackingBatchEventArgs(materialTrackingBatch));
         }
 
-        private void HyperlinkReceiveMaterialFromOnsiteStorage_Click(object sender, RoutedEventArgs e)
+        private void HyperlinkReceiveMaterialFromBSD_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility fromFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("PNSTSTRG");
+            YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("BGSKDRMTLGY");
 
             YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string toLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string toLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-            YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Receive material from onsite storage.", fromFacility, null, toFacility, toLocation, this.m_MasterAccessionNo);
+            YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Receive material from Big Sky Dermatology.", fromFacility, null, toFacility, toLocation, this.m_MasterAccessionNo);
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.InsertDocument(materialTrackingBatch, Window.GetWindow(this));
 
             this.ViewBatch(this, new YellowstonePathology.UI.CustomEventArgs.MaterialTrackingBatchEventArgs(materialTrackingBatch));
@@ -346,9 +346,9 @@ namespace YellowstonePathology.UI.MaterialTracking
         private void HyperlinkSendMaterialToOffsiteStorage_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string fromLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string fromLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
-            YellowstonePathology.Business.Facility.Model.Facility toFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("PFFSTSTRG");
+            YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("PFFSTSTRG");
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Send material to offsite storage.", fromFacility, fromLocation, toFacility, null, this.m_MasterAccessionNo);
@@ -359,10 +359,10 @@ namespace YellowstonePathology.UI.MaterialTracking
 
         private void HyperlinkReceiveMaterialFromOffsiteStorage_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility fromFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("PFFSTSTRG");
+            YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("PFFSTSTRG");
 
             YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string toLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string toLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Receive material from offsite storage.", fromFacility, null, toFacility, toLocation, this.m_MasterAccessionNo);
@@ -374,9 +374,9 @@ namespace YellowstonePathology.UI.MaterialTracking
         private void HyperlinkSendMaterialFromBillingsToHavre_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string fromLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string fromLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
-            YellowstonePathology.Business.Facility.Model.Facility toFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIHVR");
+            YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIHVR");
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Send material to Havre.", fromFacility, fromLocation, toFacility, null, this.m_MasterAccessionNo);
@@ -387,10 +387,10 @@ namespace YellowstonePathology.UI.MaterialTracking
 
         private void HyperlinkReceiveMaterialFromHavre_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility fromFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIHVR");
+            YellowstonePathology.Business.Facility.Model.Facility fromFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIHVR");
 
             YellowstonePathology.Business.Facility.Model.Facility toFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string toLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string toLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch(objectId, "Receive material from Havre", fromFacility, null, toFacility, toLocation, this.m_MasterAccessionNo);

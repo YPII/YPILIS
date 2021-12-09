@@ -98,7 +98,7 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
             int surgicalPanelSetId = new Test.Surgical.SurgicalTest().PanelSetId;
             foreach (Business.Test.PanelSetOrder pso in testingSummaryList)
             {
-                if (pso.PanelSetId != surgicalPanelSetId)
+                if (pso.PanelSetId != surgicalPanelSetId && pso.IncludeOnSummaryReport == true)
                 {
                     string result = pso.ToResultString(this.m_AccessionOrder);
                     if (result == "The result string for this test has not been implemented.")

@@ -240,6 +240,16 @@ namespace YellowstonePathology.Business.Gateway
                 "and pso.OrderDate between @StartDate and @EndDate " +
                 "and pso.final = 1 order by pso.FinalDate desc;";
             this.m_TableDictionary.Add("tblPDL122C3forUrothelialCarcinomaTestOrder", pdl122C3forUrothelialCarcinomaTestOrder);
+
+            string pdl122C3forTNBCBreastTestOrder = "Select b.Result, pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.FinalDate,  pso.PanelSetId " +
+                "FROM tblAccessionOrder a " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "join tblPDL122C3forTNBCBreastTestOrder b on pso.ReportNo = b.ReportNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId  =  @PanelSetId " +
+                "and pso.OrderDate between @StartDate and @EndDate " +
+                "and pso.final = 1 order by pso.FinalDate desc;";
+            this.m_TableDictionary.Add("tblPDL122C3forTNBCBreastTestOrder", pdl122C3forTNBCBreastTestOrder);
         }
 
         public YellowstonePathology.Business.PreviousResultCollection GetPreviousResultsByTestFinal(int panelSetId, DateTime startDate, DateTime endDate, string tableName)

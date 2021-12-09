@@ -43,7 +43,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>317</ApplicationRevision>
+    <ApplicationRevision>630</ApplicationRevision>
     <ApplicationVersion>11.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -89,9 +89,11 @@
     <Reference Include="CefSharp.Wpf">
       <HintPath>..\packages\CefSharp.Wpf.57.0.0\CefSharp\x86\CefSharp.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Protobuf, Version=3.2.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.2.0\lib\net45\Google.Protobuf.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="EPPlus, Version=5.7.5.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.7.5\lib\net45\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.14.0\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
       <HintPath>..\packages\Grpc.Core.1.1.0\lib\net45\Grpc.Core.dll</HintPath>
@@ -111,6 +113,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files\Microsoft\Exchange\Web Services\2.0\Microsoft.Exchange.WebServices.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -121,6 +126,15 @@
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.Rendering-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.RtfRendering-gdi.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson, Version=1.7.0.4714, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -138,16 +152,33 @@
     <Reference Include="NHunspell">
       <HintPath>dll\NHunspell.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp.Charting-gdi.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Luna" />
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net46\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -161,10 +192,22 @@
       <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Speech">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Threading.Tasks, Version=4.0.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
@@ -211,6 +254,8 @@
     </ApplicationDefinition>
     <Compile Include="Business\Amendment.Model\Amendment.cs" />
     <Compile Include="Business\Amendment.Model\AmendmentCollection.cs" />
+    <Compile Include="Business\APIRequestHelper.cs" />
+    <Compile Include="Business\APIResult.cs" />
     <Compile Include="Business\ApplicationVersion.cs" />
     <Compile Include="Business\ASCCPRule\AbnormalWithCotestSimulation.cs" />
     <Compile Include="Business\ASCCPRule\AbnormalWithCotestRule.cs" />
@@ -241,6 +286,7 @@
     <Compile Include="Business\Audit.Model\AliquotAndStainOrderAuditCollection.cs" />
     <Compile Include="Business\Audit.Model\ASCCPAudit.cs" />
     <Compile Include="Business\Audit.Model\BoneMarrowSummaryAudit.cs" />
+    <Compile Include="Business\Audit.Model\GISTAudit.cs" />
     <Compile Include="Business\Audit.Model\CanSaveFacilityAudit.cs" />
     <Compile Include="Business\Audit.Model\CanSetDistributionAudit.cs" />
     <Compile Include="Business\Audit.Model\CellBlockWarningAudit.cs" />
@@ -258,6 +304,7 @@
     <Compile Include="Business\Audit.Model\CaseHasUnfinaledPeerReviewAudit.cs" />
     <Compile Include="Business\Audit.Model\CCCPAudit.cs" />
     <Compile Include="Business\Audit.Model\CheckSuggestedOrdersOnFlowFinalAudit.cs" />
+    <Compile Include="Business\Audit.Model\DistributeToPatientAudit.cs" />
     <Compile Include="Business\Audit.Model\ClientNotSetAudit.cs" />
     <Compile Include="Business\Audit.Model\CodyCassetteColorAudit.cs" />
     <Compile Include="Business\Audit.Model\ComprehensiveColonCancerProfileFinalAudit.cs" />
@@ -335,6 +382,7 @@
     <Compile Include="Business\BaseListItem.cs" />
     <Compile Include="Business\Billing.Model\ADTListItem.cs" />
     <Compile Include="Business\Billing.Model\BillableObjectNeoFlowCytometry.cs" />
+    <Compile Include="Business\Billing.Model\BillableObjectCOVID.cs" />
     <Compile Include="Business\Billing.Model\CDM.cs" />
     <Compile Include="Business\Billing.Model\CDMCollection.cs" />
     <Compile Include="Business\Billing.Model\CptCodeFactory.cs" />
@@ -361,6 +409,8 @@
     <Compile Include="Business\Calendar\PathologistCalendarDayCollection.cs" />
     <Compile Include="Business\Calendar\PathologistCalendarStatus.cs" />
     <Compile Include="Business\Calendar\PathologistsByLocation.cs" />
+    <Compile Include="Business\Client.Model\ECWRiverstonePhysicianClientDistribution.cs" />
+    <Compile Include="Business\Client.Model\MediTechNMHPhysicianClientDistribution.cs" />
     <Compile Include="Business\Client.Model\NotSetPhysicianClientDistribution.cs" />
     <Compile Include="Business\Client.Model\DoNotDistributePhysicianClientDistribution.cs" />
     <Compile Include="Business\Client.Model\PrintPhysicianClientDistribution.cs" />
@@ -416,6 +466,7 @@
     <Compile Include="Business\Client.Model\HPVStatus.cs" />
     <Compile Include="Business\ClientOrder.Model\ExternalOrderIds.cs" />
     <Compile Include="Business\ClientOrder.Model\ExternalOrderIdsCollection.cs" />
+    <Compile Include="Business\ClientOrder.Model\UniversalServiceCollectionRiverstone.cs" />
     <Compile Include="Business\Common\Block.cs" />
     <Compile Include="Business\Cytology.Model\OrderType.cs" />
     <Compile Include="Business\Cytology.Model\OrderTypeCollectionCollection.cs" />
@@ -424,9 +475,13 @@
     <Compile Include="Business\EthBlock.cs" />
     <Compile Include="Business\EthContract.cs" />
     <Compile Include="Business\EthContractCollection.cs" />
+    <Compile Include="Business\Gateway\MangementReportsGateway.cs" />
     <Compile Include="Business\GrossCameraPubSubHandler.cs" />
     <Compile Include="Business\Helper\JSONHelper.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerNarrativeOBXView.cs" />
+    <Compile Include="Business\HL7View\EPIC\EPICBeakerObrViewPDF.cs" />
+    <Compile Include="Business\HL7View\EPIC\EpicBeakerObxViewPDF.cs" />
+    <Compile Include="Business\HL7View\EPIC\EPICBeakerResultViewPDF.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicHRHClient.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerResultView.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerObrView.cs" />
@@ -450,13 +505,32 @@
     <Compile Include="Business\HL7View\NMH\NMHPIDView.cs" />
     <Compile Include="Business\HL7View\NMH\NMHResultStatsusEnum.cs" />
     <Compile Include="Business\HL7View\NMH\NMHResultView.cs" />
+    <Compile Include="Business\HL7View\Panther\PantherAssayCOVID.cs" />
+    <Compile Include="Business\HL7View\Panther\PantherAssayFactory.cs" />
+    <Compile Include="Business\HL7View\Riverstone\RiverstoneHl7Client.cs" />
+    <Compile Include="Business\HL7View\Riverstone\RiverstoneMSHView.cs" />
+    <Compile Include="Business\HL7View\Riverstone\RiverstoneOBRView.cs" />
+    <Compile Include="Business\HL7View\Riverstone\RiverstoneOBXView.cs" />
+    <Compile Include="Business\HL7View\Riverstone\RiverstoneOBXViewFactory.cs" />
+    <Compile Include="Business\HL7View\Riverstone\RiverstoneORCView.cs" />
+    <Compile Include="Business\HL7View\Riverstone\RiverstonePIDView.cs" />
+    <Compile Include="Business\HL7View\Riverstone\RiverstoneResultView.cs" />
+    <Compile Include="Business\HL7View\VentanaStainOrder.cs" />
+    <Compile Include="Business\HL7View\WYDOH\WYDOHMSHViewV2.cs" />
+    <Compile Include="Business\HL7View\WYDOH\WYDOHPIDViewV2.cs" />
+    <Compile Include="Business\HL7View\WYDOH\WYDOHResultViewV2.cs" />
     <Compile Include="Business\Label.Model\CassettePrinterHavre.cs" />
     <Compile Include="Business\Label.Model\HistologySlidePaperZPLLabelV3.cs" />
+    <Compile Include="Business\Label.Model\ProstateBiopsyKitCollection.cs" />
     <Compile Include="Business\Label.Model\ReportNoLabelPrinter.cs" />
     <Compile Include="Business\Label.Model\ReportNoLabel.cs" />
     <Compile Include="Business\Label.Model\StorageSlideLabel.cs" />
     <Compile Include="Business\Label.Model\HologicSlideLabelPrinter.cs" />
     <Compile Include="Business\Label.Model\HologicSlideLabel.cs" />
+    <Compile Include="Business\PanelSet.Model\NeoTYPEFISH.cs" />
+    <Compile Include="Business\PanelSet.Model\NeoTYPEHRDProfile.cs" />
+    <Compile Include="Business\PanelSet.Model\IgG4ByIHC.cs" />
+    <Compile Include="Business\PanelSet.Model\IgGByIHC.cs" />
     <Compile Include="Business\PanelSet.Model\FISHTest.cs" />
     <Compile Include="Business\Flow\CytoplasmicMarkerMapping.cs" />
     <Compile Include="Business\Flow\CytoplasmicMarkerMappingCollection.cs" />
@@ -985,7 +1059,7 @@
     <Compile Include="Business\HL7View\ResultStatusEnum.cs" />
     <Compile Include="Business\HL7View\ResultViewFactory.cs" />
     <Compile Include="Business\HL7View\SurgicalObxView.cs" />
-    <Compile Include="Business\HL7View\VentanaStainOrder.cs" />
+    <Compile Include="Business\HL7View\VentanaStainOrderOld.cs" />
     <Compile Include="Business\HL7View\WPH\WPHHl7Client.cs" />
     <Compile Include="Business\HL7View\WPH\WPHMSHView.cs" />
     <Compile Include="Business\HL7View\WPH\WPHOBRView.cs" />
@@ -1127,9 +1201,13 @@
     <Compile Include="Business\Monitor.Model\PendingTest.cs" />
     <Compile Include="Business\Monitor.Model\PendingTestCollection.cs" />
     <Compile Include="Business\Panel.Model\HAndEPanel.cs" />
+    <Compile Include="Business\PanelSet.Model\BCRABL1NonStandardp230.cs" />
+    <Compile Include="Business\PanelSet.Model\KMT2AMLL11q23.cs" />
     <Compile Include="Business\PanelSet.Model\NeoTypeEsophagealTumorProfileTest.cs" />
     <Compile Include="Business\PanelSet.Model\NeoTypeDiscoveryProfileTest.cs" />
+    <Compile Include="Business\PanelSet.Model\LEF1Test.cs" />
     <Compile Include="Business\PanelSet.Model\PanelSetPMLRARAByFish.cs" />
+    <Compile Include="Business\PanelSet.Model\PanelSetElctronMicroscopy.cs" />
     <Compile Include="Business\PanelSet.Model\ShipMaterialTest.cs" />
     <Compile Include="Business\ParseSpecimenOrderIdResult.cs" />
     <Compile Include="Business\Patient.Model\Address.cs" />
@@ -1147,6 +1225,10 @@
     <Compile Include="Business\PreviousResult.cs" />
     <Compile Include="Business\PreviousResultCollection.cs" />
     <Compile Include="Business\ReportDistribution.Model\DepartmentOfHealthHandler.cs" />
+    <Compile Include="Business\ReportDistribution.Model\MeditechNMHDistribution.cs" />
+    <Compile Include="Business\ReportDistribution.Model\TextAndEmailSubmission.cs" />
+    <Compile Include="Business\ReportDistribution.Model\TextSubmission.cs" />
+    <Compile Include="Business\ReportDistribution.Model\EmailSubmission.cs" />
     <Compile Include="Business\ReportDistribution.Model\MeditechDistribution.cs" />
     <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerNoWHP.cs" />
     <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerWHPHold.cs" />
@@ -1158,6 +1240,7 @@
     <Compile Include="Business\Slide.Model\VantageSlideViewCollection.cs" />
     <Compile Include="Business\Specimen.Model\AliquotOrderHold.cs" />
     <Compile Include="Business\Specimen.Model\AliquotOrderHoldCollection.cs" />
+    <Compile Include="Business\Specimen.Model\CSSlide.cs" />
     <Compile Include="Business\Specimen.Model\Container.cs" />
     <Compile Include="Business\Specimen.Model\ContainerCollection.cs" />
     <Compile Include="Business\SSHFileTransfer.cs" />
@@ -1167,14 +1250,53 @@
     <Compile Include="Business\Billing.Model\SVHClinicMailMessage.cs" />
     <Compile Include="Business\Surgical\AssignmentScan.cs" />
     <Compile Include="Business\Surgical\AssignmentScanCollection.cs" />
+    <Compile Include="Business\Surgical\PQRSMeasure249.cs" />
+    <Compile Include="Business\Surgical\PQRSMeasure250.cs" />
+    <Compile Include="Business\Surgical\PQRSMeasure440.cs" />
     <Compile Include="Business\Task.Model\TaskBlockMaterialAlert.cs" />
     <Compile Include="Business\Task.Model\TaskSendBlockToFrontierCancer.cs" />
     <Compile Include="Business\Task.Model\TaskOrderView.cs" />
     <Compile Include="Business\Task.Model\TaskOrderViewList.cs" />
+    <Compile Include="Business\Test.Model\CrystallographyTest.cs" />
+    <Compile Include="Business\Test.Model\SpecificCptCodeTest.cs" />
     <Compile Include="Business\Test.Model\TestCollectionInstance.cs" />
     <Compile Include="Business\Test.Model\TestFactory.cs" />
     <Compile Include="Business\Test.Model\TestOrderStatusView.cs" />
     <Compile Include="Business\Test.Model\TestOrderStatusViewCollection.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2InvalidResult.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2PositiveResult.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2NegativeResult.cs" />
+    <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultEndometrial.cs" />
+    <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultGeneric.cs" />
+    <Compile Include="Business\Test\HPV\HPVRiverstoneObxView.cs" />
+    <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastSystemGeneratedAmendmentText.cs" />
+    <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastWordDocument.cs" />
+    <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastTestOrder.cs" />
+    <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastTest.cs" />
+    <Compile Include="Business\Test\POCChromosomeAnalysis\POCChromosomeAnalysisTest.cs" />
+    <Compile Include="Business\Test\JAK2Exon1214\JAK2Exon1214EPICOBXView.cs" />
+    <Compile Include="Business\Test\JAK2V617F\JAK2V617FEPICObxView.cs" />
+    <Compile Include="Business\Test\HER2Other\HER2OtherTest.cs" />
+    <Compile Include="Business\Test\NGCT\NGCTCTNotPerformedResult.cs" />
+    <Compile Include="Business\Test\NGCT\NGCTRiverstoneOBXView.cs" />
+    <Compile Include="Business\Test\PDGFRaMutationAnalysis\PDGFRaMutationAnalysisTest.cs" />
+    <Compile Include="Business\Test\NeotypeEndometrialTumorProfile\Neotype Endometrial Tumor ProfileTest.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2DetectedResult.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2EPICOBXView.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2NotDetectedResult.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2PDF.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2Result.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2ResultCollection.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2RiverstoneOBXView.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2Test.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2TestOrder.cs" />
+    <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2WordDocument.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2RiverstoneOBXView.cs" />
+    <Compile Include="Business\Test\Surgical\SurgicalRiverstoneOBXView.cs" />
+    <Compile Include="Business\Test\ALLFISHPanel\ALLFISHPanelTest.cs" />
+    <Compile Include="Business\Test\ThinPrepPap\ThinPrepPapRiverstoneOBXView.cs" />
+    <Compile Include="Business\Test\ThyroidNGSFusionPanel\ThyroidNGSFusionPanelTest.cs" />
+    <Compile Include="Business\Test\MammaprintBlueprint\MammaprintBlueprintTest.cs" />
     <Compile Include="Business\Test\HCGbeta\HCGbetaTest.cs" />
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2EPICOBXView.cs" />
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2NotDetectedResult.cs" />
@@ -1183,6 +1305,7 @@
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2ResultCollection.cs" />
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2Test.cs" />
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2TestOrder.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2PDF.cs" />
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2WordDocument.cs" />
     <Compile Include="Business\Test\MUC4\MUC4Test.cs" />
     <Compile Include="Business\Test\CDK4\CDK4Test.cs" />
@@ -1449,6 +1572,7 @@
     <Compile Include="Business\Test\UPEP\UPEPTest.cs" />
     <Compile Include="Business\Test\VaricellaZosterVirus\VaricellaZosterVirusTest.cs" />
     <Compile Include="Business\Test\WholeExomeSequencing\WholeExomeSequencingTest.cs" />
+    <Compile Include="Business\Test\WomensHealthProfile\WomensHealthProfileRiverstoneOBXView.cs" />
     <Compile Include="Business\Test\WomensHealthProfile\WomensHealthProfileEPICBeakerObxView.cs" />
     <Compile Include="Business\Test\WT1MutationAnalsysis\WT1MutationAnalsysisTest.cs" />
     <Compile Include="Business\User\SystemRoleView.cs" />
@@ -1470,6 +1594,27 @@
     <Compile Include="Policy\Directory.cs" />
     <Compile Include="Policy\DirectoryCollection.cs" />
     <Compile Include="Policy\IPFS.cs" />
+    <Compile Include="UI\ManagementReports\DepartmentOfHealthDailyCOVID.xaml.cs">
+      <DependentUpon>DepartmentOfHealthDailyCOVID.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ManagementReports\ManagementReport.cs" />
+    <Compile Include="UI\ManagementReports\ManagementReportCollection.cs" />
+    <Compile Include="UI\ManagementReports\ReportSelection.xaml.cs">
+      <DependentUpon>ReportSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProstateBiopsyKitDialog.xaml.cs">
+      <DependentUpon>ProstateBiopsyKitDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TestEnvironment.cs" />
+    <Compile Include="UI\Test\PDL122C3forTNBCBreastResultPath.cs" />
+    <Compile Include="UI\Test\PDL122C3forTNBCBreastResultPage.xaml.cs">
+      <DependentUpon>PDL122C3forTNBCBreastResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\APTIMASARSCoV2ResultPage.xaml.cs">
+      <DependentUpon>APTIMASARSCoV2ResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\APTIMASARSCoV2ResultPath.cs" />
+    <Compile Include="WorkingReportNo.cs" />
     <Compile Include="Store\AppDataStore.cs" />
     <Compile Include="Business\Reports\BlocksSentNotReturnedReport.cs" />
     <Compile Include="Business\Reports\RetrospectiveReviewReport.xaml.cs">
@@ -3110,8 +3255,6 @@
     <Compile Include="Business\View\AccessionSlideOrderViewCollection.cs" />
     <Compile Include="Business\View\BillingSpecimenView .cs" />
     <Compile Include="Business\View\BillingSpecimenViewCollection.cs" />
-    <Compile Include="Business\View\ClientLocationView.cs" />
-    <Compile Include="Business\View\ClientLocationViewCollection.cs" />
     <Compile Include="Business\View\ClientPhysicianView.cs" />
     <Compile Include="Business\View\ClientSearchView.cs" />
     <Compile Include="Business\View\ClientSearchViewItem.cs" />
@@ -3326,6 +3469,8 @@
     <Compile Include="UI\Common\UserPreferencesList.xaml.cs">
       <DependentUpon>UserPreferencesList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\COVID\LC480Sample.cs" />
+    <Compile Include="UI\COVID\LC480SampleCollection.cs" />
     <Compile Include="UI\COVID\LC96SampleCollection.cs" />
     <Compile Include="UI\COVID\LC96Sample.cs" />
     <Compile Include="UI\COVID\COVIDResult.cs" />
@@ -3428,7 +3573,7 @@
     <Compile Include="UI\CustomEventArgs\NeogenomicsResultReturnEventArgs.cs" />
     <Compile Include="UI\CustomEventArgs\SpecimenOrderAliquotOrderReturnEventArgs.cs" />
     <Compile Include="UI\CustomEventArgs\SpecimenOrderReturnEventArgs.cs" />
-    <Compile Include="UI\CustomEventArgs\TaskOrderCollectionReturnEventArgs.cs" />
+    <Compile Include="UI\CustomEventArgs\TaskOrderViewListReturnEventArgs.cs" />
     <Compile Include="UI\Cutting\AliquotOrderSelectionPage.xaml.cs">
       <DependentUpon>AliquotOrderSelectionPage.xaml</DependentUpon>
     </Compile>
@@ -3792,6 +3937,9 @@
       <DependentUpon>TaskWorkspace.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\TemplateSelector\TaskOrderDetailTemplateSelector.cs" />
+    <Compile Include="UI\TestX.xaml.cs">
+      <DependentUpon>TestX.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Test\ABL1KinaseDomainMutationResultPage.xaml.cs">
       <DependentUpon>ABL1KinaseDomainMutationResultPage.xaml</DependentUpon>
     </Compile>
@@ -5510,6 +5658,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Page Include="UI\ManagementReports\DepartmentOfHealthDailyCOVID.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ManagementReports\ReportSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProstateBiopsyKitDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\SVHLabelDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -5835,6 +5995,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\TestX.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Test\ABL1KinaseDomainMutationResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -5933,6 +6097,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Test\HER2AmplificationSummaryResultPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Test\PDL122C3forTNBCBreastResultPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Test\APTIMASARSCoV2ResultPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -7442,4 +7614,8 @@
     <Error Condition="!Exists('..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets'))" />
   </Target>
   <Import Project="..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

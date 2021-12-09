@@ -34,7 +34,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             string specimenDescription = specimenOrder.Description + ", Block " + aliquotOrder.Label;
             this.ReplaceText("specimen_description", specimenDescription);            
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 
             this.SetXmlNodeData("mlh1_result", panelSetOrder.MLH1Result);

@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             base.OpenTemplate();
 
             AuthorizationForVerbalTestRequestTestOrder testOrder = (AuthorizationForVerbalTestRequestTestOrder)this.m_PanelSetOrder;
-            YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
+            YellowstonePathology.Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
 
             string request = "Please perform " + this.m_PanelSetOrderToAuthorize.PanelSetName + " testing on the specimen for the patient described above.";
             base.ReplaceText("pso_request", request);
@@ -101,19 +101,19 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
             string clientPhone = "___________________________________________________________________";
             if (string.IsNullOrEmpty(client.Telephone) == false)
             {
-                clientPhone = YellowstonePathology.Business.Helper.PhoneNumberHelper.FormatWithDashes(client.Telephone);
+                clientPhone = Business.Helper.PhoneNumberHelper.FormatWithDashes(client.Telephone);
             }
             base.ReplaceText("provider_phone", clientPhone);
 
             YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            this.m_SaveFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.xml";
+            this.m_SaveFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.xml";
             this.m_ReportXml.Save(this.m_SaveFileName);
         }
 
         public override void Publish()
         {
             YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.xml";
+            string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.xml";
             string docName = fileName.Substring(0, fileName.LastIndexOf(".xml")) + ".doc";
             string xpsName = fileName.Substring(0, fileName.LastIndexOf(".xml")) + ".xps";
             string tifName = fileName.Substring(0, fileName.LastIndexOf(".xml")) + ".tif";

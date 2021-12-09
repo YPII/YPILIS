@@ -113,11 +113,11 @@ namespace YellowstonePathology.Business.Test.Model
             string result = null;
             if (orderedAsDual == false)
             {
-                result = YellowstonePathology.Business.Billing.Model.CodeableType.IHCSINGLE;
+                result = Business.Billing.Model.CodeableType.IHCSINGLE;
             }
             else
             {
-                result = YellowstonePathology.Business.Billing.Model.CodeableType.IHCDUAL;
+                result = Business.Billing.Model.CodeableType.IHCDUAL;
             }
             return result;
         }

@@ -37,7 +37,7 @@ namespace YellowstonePathology.UI.Surgical
 
 			this.m_PageHeaderText = "Peer Review for: " + this.m_AccessionOrder.PatientDisplayName;
             this.m_ProspectiveReviewTestOrderCollection = this.m_AccessionOrder.PanelSetOrderCollection.GetProspectiveReviewCollection();
-            this.m_PathologistUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
+            this.m_PathologistUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
 
 			InitializeComponent();            
 
@@ -93,7 +93,7 @@ namespace YellowstonePathology.UI.Surgical
                 YellowstonePathology.Business.Test.ProspectiveReview.ProspectiveReviewTestOrder peerReviewTestOrder = new YellowstonePathology.Business.Test.ProspectiveReview.ProspectiveReviewTestOrder(this.m_AccessionOrder.MasterAccessionNo, reportNo, objectId, peerReviewTest, null, false);
                 peerReviewTestOrder.AssignedToId = pathologistId;
                 peerReviewTestOrder.HoldForProspectiveReview = true;
-                peerReviewTestOrder.ProspectiveReviewRequestType = YellowstonePathology.Business.Test.ProspectiveReview.ProspectiveReviewTypeEnum.Mandatory.ToString();
+                peerReviewTestOrder.ProspectiveReviewRequestType = Business.Test.ProspectiveReview.ProspectiveReviewTypeEnum.Mandatory.ToString();
                 this.m_AccessionOrder.PanelSetOrderCollection.Add(peerReviewTestOrder);
                 this.m_ProspectiveReviewTestOrderCollection = this.m_AccessionOrder.PanelSetOrderCollection.GetProspectiveReviewCollection();
                 this.NotifyPropertyChanged("ProspectiveReviewTestOrderCollection");                
@@ -169,7 +169,7 @@ namespace YellowstonePathology.UI.Surgical
             Hyperlink hyperlink = (Hyperlink)sender;
             YellowstonePathology.Business.Test.ProspectiveReview.ProspectiveReviewTestOrder prospectiveReviewTestOrder = (YellowstonePathology.Business.Test.ProspectiveReview.ProspectiveReviewTestOrder)hyperlink.Tag;            
             
-            if (prospectiveReviewTestOrder.AssignedToId == YellowstonePathology.Business.User.SystemIdentity.Instance.User.UserId)
+            if (prospectiveReviewTestOrder.AssignedToId == Business.User.SystemIdentity.Instance.User.UserId)
             {
                 prospectiveReviewTestOrder.Accept();
                 prospectiveReviewTestOrder.Finish(this.m_AccessionOrder);

@@ -16,6 +16,7 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
         private DateTime? m_FinalDate;
         private string m_SummaryReportNo;
         private int m_PanelSetId;
+        private bool m_IncludeOnSummaryReport;
 
         public OtherReportView() { }
 
@@ -107,6 +108,20 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
                 {
                     this.m_PanelSetId = value;
                     this.NotifyPropertyChanged("PanelSetId");
+                }
+            }
+        }
+
+        [PersistentProperty(true)]
+        public bool IncludeOnSummaryReport
+        {
+            get { return this.m_IncludeOnSummaryReport; }
+            set
+            {
+                if (this.m_IncludeOnSummaryReport != value)
+                {
+                    this.m_IncludeOnSummaryReport = value;
+                    this.NotifyPropertyChanged("IncludeOnSummaryReport");
                 }
             }
         }

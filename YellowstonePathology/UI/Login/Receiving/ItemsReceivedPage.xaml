@@ -118,12 +118,8 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>            
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-
-            <TextBlock Name="TextBlockSlideTracking" Grid.Column="0" Grid.Row="0" Margin="5,3,0,0" HorizontalAlignment="Left">
-                <Hyperlink Click="ButtonAddSlideTrackingSpecimen_Click">Add Slide Tracking Specimen</Hyperlink>
-            </TextBlock>
 
             <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="0" Margin="5,3,0,0" HorizontalAlignment="Right">
                 <Hyperlink Click="ButtonBarcodeWontScan_Click">Barcode Won't Scan</Hyperlink>

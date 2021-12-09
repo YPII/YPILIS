@@ -9,7 +9,7 @@ namespace YellowstonePathology.Business.Persistence
 
         public AODocumentBuilder(string masterAccessionNo, bool obtainLock)
         {                        
-            YellowstonePathology.Business.User.SystemIdentity systemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            YellowstonePathology.Business.User.SystemIdentity systemIdentity = Business.User.SystemIdentity.Instance;
 
             this.m_SQLCommand = new MySqlCommand();
             this.m_SQLCommand.CommandText = "prcGetAccessionOrder_4";

@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Surgical
 		{
 			this.Clear();
 
-			SurgicalMasterLogList list = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalMasterLogList(reportDate);
+			SurgicalMasterLogList list = Business.Gateway.AccessionOrderGateway.GetSurgicalMasterLogList(reportDate);
 			if (list != null)
 			{
 				foreach (SurgicalMasterLogItem item in list) this.Add(item);
@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.Surgical
         {
             this.Clear();
 
-            SurgicalMasterLogList list = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetNorthernMtTechOnlyMasterLogList(reportDate);
+            SurgicalMasterLogList list = Business.Gateway.AccessionOrderGateway.GetNorthernMtTechOnlyMasterLogList(reportDate);
             if (list != null)
             {
                 foreach (SurgicalMasterLogItem item in list) this.Add(item);

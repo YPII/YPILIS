@@ -113,6 +113,8 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
@@ -311,13 +313,22 @@
                     </TextBox.Style>
                 </TextBox>
 
-                <TextBlock Grid.Column="0" Grid.Row="15" Margin="2" FontSize="14" HorizontalAlignment="Right">Requires Gross:</TextBlock>
-                <CheckBox Name="CheckBoxRequiresGrossExamination" Grid.Column="1" Grid.Row="15" Margin="2,2,2,2" IsChecked="{Binding Path=ClientOrderDetail.RequiresGrossExamination}" FontSize="14"></CheckBox>
+                <TextBlock Grid.Column="0" Grid.Row="15" Margin="2" FontSize="14" HorizontalAlignment="Right">Collection Location:</TextBlock>
+                <ComboBox Name="ComboBoxCollectionLocation" Grid.Column="1" Grid.Row="15" Margin="2,2,2,2" IsEditable="True" Text="{Binding Path=ClientOrderDetail.CollectionLocation}" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
+                    <ComboBoxItem>Client</ComboBoxItem>
+                    <ComboBoxItem>YPICOVID</ComboBoxItem>
+                </ComboBox>
+                
+                <TextBlock Grid.Column="0" Grid.Row="16" Margin="2" FontSize="14" HorizontalAlignment="Right">Requires Gross:</TextBlock>
+                <CheckBox Name="CheckBoxRequiresGrossExamination" Grid.Column="1" Grid.Row="16" Margin="2,2,2,2" IsChecked="{Binding Path=ClientOrderDetail.RequiresGrossExamination}" FontSize="14"></CheckBox>
 
-                <TextBlock Grid.Column="0" Grid.Row="16" Margin="2" FontSize="14" HorizontalAlignment="Right">YPI Accessioned:</TextBlock>
-                <CheckBox Name="CheckBoxAccession" Grid.Column="1" Grid.Row="16" Margin="2,2,2,2" IsChecked="{Binding Path=ClientOrderDetail.Accessioned}" FontSize="14"></CheckBox>
+                <TextBlock Grid.Column="0" Grid.Row="17" Margin="2" FontSize="14" HorizontalAlignment="Right">YPI Accessioned:</TextBlock>
+                <CheckBox Name="CheckBoxAccession" Grid.Column="1" Grid.Row="17" Margin="2,2,2,2" IsChecked="{Binding Path=ClientOrderDetail.Accessioned}" FontSize="14"></CheckBox>
 
-                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="18" Orientation="Horizontal">
+                <TextBlock Grid.Column="0" Grid.Row="18" Margin="2" FontSize="14" HorizontalAlignment="Right">Received:</TextBlock>
+                <CheckBox Name="CheckBoxReceived" Grid.Column="1" Grid.Row="18" Margin="2,2,2,2" IsChecked="{Binding Path=ClientOrderDetail.Received}" FontSize="14"></CheckBox>
+                
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="20" Orientation="Horizontal">
                     <CheckBox Margin="2,2,2,2" IsChecked="{Binding Path=ClientOrderDetail.FixationStartTimeManuallyEntered}" FontSize="12"></CheckBox>
                     <TextBlock Margin="2,2,2,2" FontSize="12">Manually enter fixation start time</TextBlock>
                 </StackPanel>

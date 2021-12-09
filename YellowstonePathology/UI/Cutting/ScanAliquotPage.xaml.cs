@@ -47,7 +47,7 @@ namespace YellowstonePathology.UI.Cutting
         {
             this.m_AccessionOrder = accessionOrder;
             this.m_LastMasterAccessionNo = lastMasterAccessionNo;            
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;			
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;			
 
 			InitializeComponent();
 

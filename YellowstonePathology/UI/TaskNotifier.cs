@@ -7,7 +7,7 @@ namespace YellowstonePathology.UI
 {
     public class TaskNotifier
     {
-        public delegate void AlertEventHandler(object sender, CustomEventArgs.TaskOrderCollectionReturnEventArgs e);
+        public delegate void AlertEventHandler(object sender, CustomEventArgs.TaskOrderViewListReturnEventArgs e);
         public event AlertEventHandler Alert;
 
         private static TaskNotifier TaskNotifierInstance;
@@ -37,7 +37,7 @@ namespace YellowstonePathology.UI
         public void Start()
         {
             this.m_WavPlayer = new System.Media.SoundPlayer();
-            this.m_WavPlayer.SoundLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.AlertWaveFileName;
+            this.m_WavPlayer.SoundLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.AlertWaveFileName;
             this.m_WavPlayer.LoadAsync();
             this.StartTimer();
         }
@@ -58,13 +58,13 @@ namespace YellowstonePathology.UI
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            string assignedTo = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.AcknowledgeTasksFor;
-			YellowstonePathology.Business.Task.Model.TaskOrderCollection taskOrderCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetTasksNotAcknowledged(assignedTo, YellowstonePathology.Business.Task.Model.TaskAcknowledgementType.Immediate);
-            if (taskOrderCollection.Count != 0)
+            string assignedTo = Business.User.UserPreferenceInstance.Instance.UserPreference.AcknowledgeTasksFor;
+			Business.Task.Model.TaskOrderViewList taskOrderViewList = Business.Gateway.AccessionOrderGateway.GetTasksNotAcknowledged(assignedTo, YellowstonePathology.Business.Task.Model.TaskAcknowledgementType.Immediate);
+            if (taskOrderViewList.Count != 0)
             {
                 this.m_WavPlayer.Play();
                 this.m_Timer.Interval = ShortIntervalTicks;
-                if(this.Alert != null) this.Alert(this, new CustomEventArgs.TaskOrderCollectionReturnEventArgs(taskOrderCollection));
+                if(this.Alert != null) this.Alert(this, new CustomEventArgs.TaskOrderViewListReturnEventArgs(taskOrderViewList));
             }
             else
             {

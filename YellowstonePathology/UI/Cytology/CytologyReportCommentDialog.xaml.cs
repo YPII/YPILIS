@@ -22,7 +22,7 @@ namespace YellowstonePathology.UI.Cytology
 
         public CytologyReportCommentDialog()
         {
-			this.m_CytologyReportComments = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportComments();
+			this.m_CytologyReportComments = Business.Gateway.AccessionOrderGateway.GetCytologyReportComments();
 
             InitializeComponent();
 

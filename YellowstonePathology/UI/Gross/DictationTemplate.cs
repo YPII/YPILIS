@@ -222,11 +222,11 @@ namespace YellowstonePathology.UI.Gross
         protected string ReplaceIdentifier(string text, YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             string identifier = "Specimen " + specimenOrder.SpecimenNumber + " ";
-            if (string.IsNullOrEmpty(specimenOrder.ClientFixation) == false && specimenOrder.ClientFixation != YellowstonePathology.Business.Specimen.Model.FixationType.Fresh)
+            if (string.IsNullOrEmpty(specimenOrder.ClientFixation) == false && specimenOrder.ClientFixation != Business.Specimen.Model.FixationType.Fresh)
             {                
                 identifier += "is received in a " + specimenOrder.ClientFixation + " filled container labeled \"" + accessionOrder.PatientDisplayName + " - [description]\"";
             }
-            else if (specimenOrder.ClientFixation == YellowstonePathology.Business.Specimen.Model.FixationType.Fresh)
+            else if (specimenOrder.ClientFixation == Business.Specimen.Model.FixationType.Fresh)
             {
                 identifier += "is received fresh in a container labeled \"" + accessionOrder.PatientDisplayName + " - [description]\"";
             }
@@ -239,11 +239,11 @@ namespace YellowstonePathology.UI.Gross
         protected string ReplaceIdentifierNoDescription(string text, YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             string identifier = "Specimen " + specimenOrder.SpecimenNumber + " ";
-            if (string.IsNullOrEmpty(specimenOrder.ClientFixation) == false && specimenOrder.ClientFixation != YellowstonePathology.Business.Specimen.Model.FixationType.Fresh)
+            if (string.IsNullOrEmpty(specimenOrder.ClientFixation) == false && specimenOrder.ClientFixation != Business.Specimen.Model.FixationType.Fresh)
             {
                 identifier += "is received in a " + specimenOrder.ClientFixation + " filled container labeled \"" + accessionOrder.PatientDisplayName + "\"";
             }
-            else if (specimenOrder.ClientFixation == YellowstonePathology.Business.Specimen.Model.FixationType.Fresh)
+            else if (specimenOrder.ClientFixation == Business.Specimen.Model.FixationType.Fresh)
             {
                 identifier += "is received fresh in a container labeled \"" + accessionOrder.PatientDisplayName + "\"";
             }
@@ -399,7 +399,7 @@ namespace YellowstonePathology.UI.Gross
 
         protected string ReplaceClientNameAddress(string text, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {            
-            YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(accessionOrder.ClientId);
+            YellowstonePathology.Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(accessionOrder.ClientId);
             string result = text.Replace("[clientname]", client.ClientName);
             result = result.Replace("[clientcitystate]", client.City + ", " + client.State);
             return result;
@@ -442,14 +442,14 @@ namespace YellowstonePathology.UI.Gross
 
                     if (grossVerifiedById != 0)
                     {
-                        YellowstonePathology.Business.User.SystemUser grossedBy = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(grossVerifiedById);
+                        YellowstonePathology.Business.User.SystemUser grossedBy = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(grossVerifiedById);
                         grossedByInitials = grossedBy.Initials.ToUpper();
                     }
 
                     string supervisedByInitials = "[??]";         
                     if(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.GPathologistId.HasValue == true)
                     {
-                        YellowstonePathology.Business.User.SystemUser supervisedBy = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.GPathologistId.Value);
+                        YellowstonePathology.Business.User.SystemUser supervisedBy = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.GPathologistId.Value);
                         supervisedByInitials = supervisedBy.Initials.ToUpper();
                     }                               
 

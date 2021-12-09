@@ -104,7 +104,7 @@ namespace YellowstonePathology.Business.Test.LLP
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
             this.AddNextObxElementBeaker("Specimen", specimenOrder.Description, document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElementBeaker("Collection Date/Time", collectionDateTimeString, document, "F");
 
             this.AddNextObxElementBeaker("Specimen Adequacy", specimenOrder.SpecimenAdequacy, document, "F");

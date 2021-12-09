@@ -47,7 +47,7 @@ namespace YellowstonePathology.UI
         {
             /*
             string masterAccessionno = "16-12345";
-            YellowstonePathology.Business.User.SystemUser user = YellowstonePathology.Business.User.SystemIdentity.Instance.User;
+            YellowstonePathology.Business.User.SystemUser user = Business.User.SystemIdentity.Instance.User;
             UI.AppMessaging.AccessionLockMessage message = new AppMessaging.AccessionLockMessage(masterAccessionno, System.Environment.MachineName, user.UserName, AppMessaging.AccessionLockMessageIdEnum.ASK);
             string messageJSON = message.ToJSON();
             this.m_SUB.Publish(masterAccessionno, messageJSON);        
@@ -56,7 +56,7 @@ namespace YellowstonePathology.UI
 
         private void Button_GetTestClick(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Stain.Model.StainCollection stainCollection = YellowstonePathology.Business.Stain.Model.StainCollection.Instance;
+            YellowstonePathology.Business.Stain.Model.StainCollection stainCollection = Business.Stain.Model.StainCollection.Instance;
         }
     }
 }

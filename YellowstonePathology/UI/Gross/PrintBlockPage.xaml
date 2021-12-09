@@ -129,7 +129,8 @@
 					<RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-					<RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 
@@ -138,19 +139,10 @@
 				<Button Grid.Row="2" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Delete" Click="ButtonDelete_Click" />
 				<Button Grid.Row="3" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="History" Click="ButtonHistory_Click" />
                 <Button Grid.Row="4" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Stains" Click="ButtonStains_Click" />
-                <Button Grid.Row="5" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Hold All" Click="ButtonHoldAll_Click" />
-                <Button Grid.Row="6" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Next" Click="ButtonNext_Click" />
-
-                <!--<Button Content="●" Background="Transparent" Foreground="Black" Click="ButtonEnterAliquotOrderId_Click" HorizontalAlignment="Center" VerticalAlignment="Center"
-								FontFamily="Tw Cen MT Condensed" Margin="5,5,2,2" Width="20" Height="20" BorderBrush="Transparent" BorderThickness="0"
-                        Grid.Row="7">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <ContentPresenter Content="{TemplateBinding Content}"/>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>-->
-
+                <Button Grid.Row="5" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Take Picture" Click="ButtonTakePicture_Click" />
+                <Button Grid.Row="6" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Hold All" Click="ButtonHoldAll_Click" />
+                <Button Grid.Row="7" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Next" Click="ButtonNext_Click" />
+                
             </Grid>
 		</Grid>
 

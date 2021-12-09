@@ -210,11 +210,11 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
 
                 if (this.Result.ToUpper().Contains("NOT DETECTED"))
                 {
-                    brafResult = YellowstonePathology.Business.Test.TestResult.NotDetected;
+                    brafResult = Business.Test.TestResult.NotDetected;
                 }
                 else if (this.Result.ToUpper().Contains("DETECTED"))
                 {
-                    brafResult = YellowstonePathology.Business.Test.TestResult.Detected;
+                    brafResult = Business.Test.TestResult.Detected;
                 }
             }
             return brafResult;
@@ -229,11 +229,11 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
 
                 if (this.Result.ToUpper().Contains("NOT DETECTED"))
                 {
-                    lSERule.BRAFResult = YellowstonePathology.Business.Test.LynchSyndrome.LSEResultEnum.NotDetected;
+                    lSERule.BRAFResult = Business.Test.LynchSyndrome.LSEResultEnum.NotDetected;
                 }
                 else if (this.Result.ToUpper().Contains("DETECTED"))
                 {
-                    lSERule.BRAFResult = YellowstonePathology.Business.Test.LynchSyndrome.LSEResultEnum.Detected;
+                    lSERule.BRAFResult = Business.Test.LynchSyndrome.LSEResultEnum.Detected;
                 }
             }
         }*/

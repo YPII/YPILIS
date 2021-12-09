@@ -89,18 +89,26 @@ namespace YellowstonePathology.UI.Login.Receiving
                 YellowstonePathology.Business.View.SpecimenSurgicalDiagnosisView specimenSurgicalDiagnosisView = (YellowstonePathology.Business.View.SpecimenSurgicalDiagnosisView)this.ListViewSpecimenSurgicalDiagnosis.SelectedItem;
                 if (specimenSurgicalDiagnosisView.SurgicalDiagnosisIsOrdered == true)
                 {
-                    if (string.IsNullOrEmpty(specimenSurgicalDiagnosisView.SurgicalSpecimen.Diagnosis) == true)
-                    {
-						YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder panelSetOrderSurgical = this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
-						panelSetOrderSurgical.SurgicalSpecimenCollection.Remove(specimenSurgicalDiagnosisView.SurgicalSpecimen);
-                        this.m_SpecimenSurgicalDiagnosisViewCollection.Refresh(this.m_AccessionOrder);
-                        this.NotifyPropertyChanged("SpecimenSurgicalDiagnosisViewCollection");
-                        MessageBox.Show("The surgical diagnosis has been removed.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("The diagnosis cannot be removed because it has text in it.");
-                    }
+                    //bool hasCptCodes = AccessionOrder.PanelSetOrderCollection.DoesSpecimenHavCPTCodes(specimenSurgicalDiagnosisView.SpecimenOrder.SpecimenOrderId);                        
+                    //if(hasCptCodes == false)
+                    //{
+                        if (string.IsNullOrEmpty(specimenSurgicalDiagnosisView.SurgicalSpecimen.Diagnosis) == true)
+                        {
+                            YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder panelSetOrderSurgical = this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
+                            panelSetOrderSurgical.SurgicalSpecimenCollection.Remove(specimenSurgicalDiagnosisView.SurgicalSpecimen);
+                            this.m_SpecimenSurgicalDiagnosisViewCollection.Refresh(this.m_AccessionOrder);
+                            this.NotifyPropertyChanged("SpecimenSurgicalDiagnosisViewCollection");
+                            MessageBox.Show("The surgical diagnosis has been removed.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("The diagnosis cannot be removed because it has text in it.");
+                        }
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("The diagnosis cannot be removed because the specimen has CPT Codes.");
+                    //}
                 }
                 else
                 {

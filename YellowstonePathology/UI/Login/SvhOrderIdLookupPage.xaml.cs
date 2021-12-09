@@ -57,7 +57,7 @@ namespace YellowstonePathology.UI.Login
 		{
 			if (string.IsNullOrEmpty(this.TextBoxSvhAccountNo.Text) == false)
 			{
-				YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersBySvhAccountNo(this.TextBoxSvhAccountNo.Text);
+				YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersBySvhAccountNo(this.TextBoxSvhAccountNo.Text);
                 if (clientOrderCollection.Count == 1)
                 {
                     UI.Navigation.PageNavigationReturnEventArgs args = new UI.Navigation.PageNavigationReturnEventArgs(UI.Navigation.PageNavigationDirectionEnum.Next, clientOrderCollection[0]);

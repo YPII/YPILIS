@@ -30,7 +30,7 @@ namespace YellowstonePathology.UI.Common
             this.m_PathologistHistoryList = new YellowstonePathology.Business.Surgical.PathologistHistoryList();
 			if (this.m_AccessionOrder.PatientId != "0")
             {
-				this.m_PathologistHistoryList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPathologistPatientHistory(this.m_AccessionOrder.PatientId);
+				this.m_PathologistHistoryList = Business.Gateway.AccessionOrderGateway.GetPathologistPatientHistory(this.m_AccessionOrder.PatientId);
             }
             InitializeComponent();
             this.DataContext = this;
@@ -47,7 +47,7 @@ namespace YellowstonePathology.UI.Common
             {
                 YellowstonePathology.Business.Surgical.PathologistHistoryItem pathologistHistoryItem = (YellowstonePathology.Business.Surgical.PathologistHistoryItem)this.listViewCaseHistoryList.SelectedItem;
 				YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(pathologistHistoryItem.ReportNo);                
-				string path = YellowstonePathology.Business.Document.CaseDocument.GetCaseFileNameDoc(orderIdParser);
+				string path = Business.Document.CaseDocument.GetCaseFileNameDoc(orderIdParser);
 				YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(path);
             }
         }
@@ -56,7 +56,7 @@ namespace YellowstonePathology.UI.Common
 		{
 			this.m_AccessionOrder = accessionOrder;
 			this.m_PathologistHistoryList.Clear();
-			YellowstonePathology.Business.Surgical.PathologistHistoryList list = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPathologistPatientHistory(this.m_AccessionOrder.PatientId);
+			YellowstonePathology.Business.Surgical.PathologistHistoryList list = Business.Gateway.AccessionOrderGateway.GetPathologistPatientHistory(this.m_AccessionOrder.PatientId);
 			if (list != null)
 			{
 				foreach (YellowstonePathology.Business.Surgical.PathologistHistoryItem item in list)

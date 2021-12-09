@@ -26,6 +26,17 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
+        public void DelayDistributionLocksHeldBy(string lockHeldBy)
+        {
+            foreach (Business.Test.AccessionLock accessionLock in this)
+            {
+                if (accessionLock.Address == lockHeldBy)
+                {
+                    //accessionLock.ReleaseLock();
+                }
+            }
+        }
+
         public void Refresh()
         {
             this.ClearItems();

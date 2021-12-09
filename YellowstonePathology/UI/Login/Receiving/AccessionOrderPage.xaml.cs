@@ -49,8 +49,8 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 		private string m_PageHeaderText = "Report Order page";		
         
-        private YellowstonePathology.Business.PanelSet.Model.PanelSetCollection m_PanelSetCollectionView;
-        private YellowstonePathology.Business.Facility.Model.FacilityCollection m_FacilityCollection;
+        private Business.PanelSet.Model.PanelSetCollection m_PanelSetCollectionView;
+        private Business.Facility.Model.FacilityCollection m_FacilityCollection;
         private OrderPageCaseTypeList m_CaseTypeList;
 
         private PageNavigationModeEnum m_PageNavigationMode;
@@ -94,7 +94,7 @@ namespace YellowstonePathology.UI.Login.Receiving
             this.m_ClientOrder = clientOrderReceivingHandler.ClientOrder;            
 
             this.m_PanelSetCollectionView = Business.PanelSet.Model.PanelSetCollection.GetHistologyPanelSets();
-            this.m_FacilityCollection = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance;
+            this.m_FacilityCollection = Business.Facility.Model.FacilityCollection.Instance;
 
             this.m_CaseTypeList = new OrderPageCaseTypeList();
             this.m_OrderAsResearchTesting = false;
@@ -236,33 +236,33 @@ namespace YellowstonePathology.UI.Login.Receiving
                 switch(caseType)
                 {
                     case "Histology":
-                        this.m_PanelSetCollectionView = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetHistologyPanelSets();
+                        this.m_PanelSetCollectionView = Business.PanelSet.Model.PanelSetCollection.GetHistologyPanelSets();
                         break;
                     case "Flow Cytometry":                        
                         this.m_PanelSetCollectionView =  YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetByCaseType("Flow Cytometry");
                         break;
                     case "Molecular Genetics":
-                        this.m_PanelSetCollectionView = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetByCaseType("Molecular");
+                        this.m_PanelSetCollectionView = Business.PanelSet.Model.PanelSetCollection.GetByCaseType("Molecular");
                         break;
                     case "FISH":
-                        this.m_PanelSetCollectionView = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetByCaseType("FISH");
+                        this.m_PanelSetCollectionView = Business.PanelSet.Model.PanelSetCollection.GetByCaseType("FISH");
                         break;
                     case "Neogenomics":
-                        YellowstonePathology.Business.Facility.Model.Facility neo = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
-                        this.m_PanelSetCollectionView = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetByFacility(neo);
+                        YellowstonePathology.Business.Facility.Model.Facility neo = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+                        this.m_PanelSetCollectionView = Business.PanelSet.Model.PanelSetCollection.GetByFacility(neo);
                         break;
                     case "ARUP":
-                        YellowstonePathology.Business.Facility.Model.Facility arup = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("ARUPSPD");
-                        this.m_PanelSetCollectionView = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetByFacility(arup);
+                        YellowstonePathology.Business.Facility.Model.Facility arup = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("ARUPSPD");
+                        this.m_PanelSetCollectionView = Business.PanelSet.Model.PanelSetCollection.GetByFacility(arup);
                         break;
 					case "Reflex Testing":
-						this.m_PanelSetCollectionView = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetReflexTestingPanelSets();
+						this.m_PanelSetCollectionView = Business.PanelSet.Model.PanelSetCollection.GetReflexTestingPanelSets();
 						break;
                     case "Pathologist":
-                        this.m_PanelSetCollectionView = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetPathologistPanelSets();
+                        this.m_PanelSetCollectionView = Business.PanelSet.Model.PanelSetCollection.GetPathologistPanelSets();
                         break;
                     case "All Orders":
-                        this.m_PanelSetCollectionView = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAllActive();
+                        this.m_PanelSetCollectionView = Business.PanelSet.Model.PanelSetCollection.GetAllActive();
                         break;                        
                 }                
                 
@@ -398,9 +398,9 @@ namespace YellowstonePathology.UI.Login.Receiving
             if (this.m_AccessionOrder.PanelSetOrderCollection.Count > 0)
             {
                 Business.Persistence.DocumentGateway.Instance.Save();
-                //YellowstonePathology.Document.Result.Data.AccessionOrderDataSheetData accessionOrderDataSheetData = YellowstonePathology.Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
+                //YellowstonePathology.Document.Result.Data.AccessionOrderDataSheetData accessionOrderDataSheetData = Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
                 //YellowstonePathology.Document.Result.Xps.AccessionOrderDataSheet accessionOrderDataSheet = new Document.Result.Xps.AccessionOrderDataSheet(accessionOrderDataSheetData);
-                YellowstonePathology.Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2 accessionOrderDataSheetData = YellowstonePathology.Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
+                YellowstonePathology.Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2 accessionOrderDataSheetData = Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
                 YellowstonePathology.Document.Result.Xps.AccessionOrderDataSheetV2 accessionOrderDataSheet = new Document.Result.Xps.AccessionOrderDataSheetV2(accessionOrderDataSheetData);
                 System.Printing.PrintQueue printQueue = new System.Printing.LocalPrintServer().DefaultPrintQueue;
 

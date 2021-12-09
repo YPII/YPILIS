@@ -49,7 +49,7 @@ namespace YellowstonePathology.Business.Gateway
                 "'' ForeignAccessionNo, pso.IsPosted " +
                 "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
-                "WHERE pso.Final = 1 and pso.panelsetid <> 400 and pso.IsPosted = 0 and pso.OrderDate >= '2014-1-1' and pso.IsBillable = 1 " +
+                "WHERE pso.Final = 1 and pso.panelsetid not in (400,415) and pso.IsPosted = 0 and pso.OrderDate >= '2014-1-1' and pso.IsBillable = 1 " +
                 "Order By pso.FinalDate, pso.PanelSetId, a.AccessionTime;";
             Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
             return reportSearchList;
@@ -158,6 +158,40 @@ namespace YellowstonePathology.Business.Gateway
                 "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
                 "WHERE pso.PanelSetId = 400 and a.clientId in (558) Order By a.AccessionTime desc;";
+
+            Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
+            return reportSearchList;
+        }
+
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByCOVIDPatientDistributionCases()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT distinct pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
+                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "'' ForeignAccessionNo, pso.IsPosted " +
+                "FROM tblAccessionOrder a  " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId = 400 and a.DistributeToPatient = 1 Order By a.AccessionTime desc;";
+
+            Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
+            return reportSearchList;
+        }
+
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByDurdenCOVIDCases()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT distinct pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
+                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "'' ForeignAccessionNo, pso.IsPosted " +
+                "FROM tblAccessionOrder a  " +
+                "JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.PanelSetId = 400 and a.PhysicianId = 2797 and a.DistributeToPatient = 0 Order By a.AccessionTime desc;";
 
             Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
             return reportSearchList;
@@ -317,7 +351,7 @@ namespace YellowstonePathology.Business.Gateway
 
 		public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByAccessionDate(DateTime accessionDate, List<int> panelSetIdList)
         {
-            string panelSetIdString = YellowstonePathology.Business.Helper.IdListHelper.ToIdString(panelSetIdList);
+            string panelSetIdString = Business.Helper.IdListHelper.ToIdString(panelSetIdList);
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
@@ -732,6 +766,89 @@ namespace YellowstonePathology.Business.Gateway
                 "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
                 "WHERE a.clientId = '" + clientId + "' and a.AccessionDate >= '" + startDate.ToString("yyyy-MM-dd") + "' and a.AccessionDate <= '" + endDate.ToString("yyyy-MM-dd") + "' order by pso.PanelSetId, pso.ReportNo;";
+            Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
+            return reportSearchList;
+        }
+
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByBillingDelayed()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, pso.IsPosted, " +
+                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "'' ForeignAccessionNo " +
+                "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.BillingDelayed = 1;";
+            Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
+            return reportSearchList;
+        }
+
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByDistributionDelayed()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, pso.IsPosted, " +
+                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "'' ForeignAccessionNo " +
+                "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE pso.DistributionDelayed = 1;";
+            Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
+            return reportSearchList;
+        }
+
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListBySVHNotFinalMultipleOrders()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT a.ITAudited, pso.MasterAccessionNo, pso.HoldDistribution, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, pso.IsPosted, " +
+                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "'' ForeignAccessionNo " +
+                "from tblAccessionOrder a " +                
+                "join tblPanelSetOrder pso on a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "where pso.final = 0 and patientId in " +
+                "(select ao.PatientId " +
+                "from tblAccessionOrder ao " +
+                "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.masterAccessionNo " +
+                "where pso.final = 0 and ao.ClientId in (select clientId from tblClientGroupClient where clientGroupId = 1)  " +
+                "group by ao.PatientId having count(*) > 1) order by a.PatientId;";
+            Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
+            return reportSearchList;
+        }
+
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByProvationFinal(DateTime finalDate)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT distinct a.ITAudited, pso.MasterAccessionNo, pso.HoldDistribution, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, pso.IsPosted, " +
+                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, null as OrderedBy, " +
+                "'' ForeignAccessionNo " +
+                "from tblAccessionOrder a " +                
+                "join tblPanelSetOrder pso on a.MasterAccessionNo = pso.masterAccessionNo " +
+                "where a.clientId in (54) " +
+                //$"and a.AccessionDate >= '{finalDate.ToString("yyyy-MM-dd")}';";
+                $"and pso.FinalDate = '{finalDate.ToString("yyyy-MM-dd")}';";
+            Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
+            return reportSearchList;
+        }
+
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByNMHFinal(DateTime finalDate)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT distinct a.ITAudited, pso.MasterAccessionNo, pso.HoldDistribution, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, pso.IsPosted, " +
+                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, null as OrderedBy, " +
+                "'' ForeignAccessionNo " +
+                "from tblAccessionOrder a " +                
+                "join tblPanelSetOrder pso on a.MasterAccessionNo = pso.masterAccessionNo " +
+                $"where pso.FinalDate >= '{finalDate.ToString("yyyy-MM-dd")}' and a.ClientId in (select clientid from tblClientGroupClient where clientGroupId = 42)";
             Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
             return reportSearchList;
         }

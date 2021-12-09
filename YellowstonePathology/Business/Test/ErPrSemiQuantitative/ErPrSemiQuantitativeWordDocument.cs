@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 		{            
 			ErPrSemiQuantitativeTestOrder panelSetOrderErPrSemiQuantitative = (ErPrSemiQuantitativeTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ERPRSemiQuantitative.1.xml";
+			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ERPRSemiQuantitative.2.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();
@@ -37,9 +37,18 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 			this.ReplaceText("report_references", panelSetOrderErPrSemiQuantitative.ReportReferences);
 			this.ReplaceText("report_method", panelSetOrderErPrSemiQuantitative.Method);
 
+			if(string.IsNullOrEmpty(panelSetOrderErPrSemiQuantitative.Ki67Result) == false)
+			{
+				this.ReplaceText("ki67_result", panelSetOrderErPrSemiQuantitative.Ki67Result);
+			}
+			else
+			{
+				this.ReplaceText("ki67_result", "Not Performed.");
+			}
+			
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByOrderTarget(panelSetOrderErPrSemiQuantitative.OrderedOnId);
             if(specimenOrder == null) specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection[0];
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);            
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);            
 
             this.ReplaceText("specimen_description", specimenOrder.Description);
 			this.ReplaceText("specimen_fixation_type", specimenOrder.LabFixation);

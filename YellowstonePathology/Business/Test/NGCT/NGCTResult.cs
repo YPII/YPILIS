@@ -9,8 +9,10 @@ namespace YellowstonePathology.Business.Test.NGCT
 	{
         public static string PositiveResult = "Positive";
         public static string NegativeResult = "Negative";
+        public static string NotPerformedResult = "Not Performed";
         public static string NGPositiveResultCode = "NGPSTV";
         public static string NGNegativeResultCode = "NGNGTV";
+        public static string NGNotPerformedResultCode = "NTPRFRMD";
         public static string CTPositiveResultCode = "CTPSTV";
         public static string CTNegativeResultCode = "CTNGTV";
         public static string InvalidResultCode = "NVLD";

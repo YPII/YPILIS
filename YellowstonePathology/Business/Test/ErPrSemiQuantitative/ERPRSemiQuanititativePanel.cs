@@ -13,11 +13,14 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
             this.m_PanelName = "Estrogen/Progesterone Receptor, Semi-Quantitative";
             this.m_AcknowledgeOnOrder = true;
 
-            YellowstonePathology.Business.Test.Model.Test er = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("99"); // EstrogenReceptorSemiquant();
+            YellowstonePathology.Business.Test.Model.Test er = Business.Test.Model.TestCollectionInstance.GetClone("99"); // EstrogenReceptorSemiquant();
             this.m_TestCollection.Add(er);
 
-            YellowstonePathology.Business.Test.Model.Test pr = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("145"); // ProgesteroneReceptorSemiquant();
+            YellowstonePathology.Business.Test.Model.Test pr = Business.Test.Model.TestCollectionInstance.GetClone("145"); // ProgesteroneReceptorSemiquant();
             this.m_TestCollection.Add(pr);
+
+            YellowstonePathology.Business.Test.Model.Test ki67 = Business.Test.Model.TestCollectionInstance.GetClone("349"); 
+            this.m_TestCollection.Add(ki67);
         }        
     }
 }

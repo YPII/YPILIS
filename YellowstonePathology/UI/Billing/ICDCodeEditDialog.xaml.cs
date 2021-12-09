@@ -66,7 +66,7 @@ namespace YellowstonePathology.UI.Billing
             {
                 if (this.m_HoldToCompareString != this.m_ICDCodeString)
                 {
-                    YellowstonePathology.Business.Billing.Model.ICDCode codeToSave = YellowstonePathology.Business.Billing.Model.ICDCodeFactory.FromJson(this.m_ICDCodeString);
+                    YellowstonePathology.Business.Billing.Model.ICDCode codeToSave = Business.Billing.Model.ICDCodeFactory.FromJson(this.m_ICDCodeString);
                     codeToSave.Save();
                     this.DialogResult = true;
                 }
@@ -85,7 +85,7 @@ namespace YellowstonePathology.UI.Billing
 
         private Business.Rules.MethodResult CanSave()
         {
-            Business.Rules.MethodResult result = YellowstonePathology.Business.Helper.JSONHelper.IsValidJSONString(this.m_ICDCodeString);
+            Business.Rules.MethodResult result = Business.Helper.JSONHelper.IsValidJSONString(this.m_ICDCodeString);
 
             if (result.Success == true)
             {

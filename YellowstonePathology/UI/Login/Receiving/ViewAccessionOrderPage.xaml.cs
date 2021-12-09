@@ -40,9 +40,9 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 		public void ViewAccessionOrderPage_Loaded(object sender, RoutedEventArgs e)
 		{
-            //YellowstonePathology.Document.Result.Data.AccessionOrderDataSheetData accessionOrderDataSheetData = YellowstonePathology.Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
+            //YellowstonePathology.Document.Result.Data.AccessionOrderDataSheetData accessionOrderDataSheetData = Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
             //YellowstonePathology.Document.Result.Xps.AccessionOrderDataSheet accessionOrderDataSheet = new Document.Result.Xps.AccessionOrderDataSheet(accessionOrderDataSheetData);
-            YellowstonePathology.Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2 accessionOrderDataSheetData = YellowstonePathology.Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
+            YellowstonePathology.Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2 accessionOrderDataSheetData = Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
             YellowstonePathology.Document.Result.Xps.AccessionOrderDataSheetV2 accessionOrderDataSheet = new Document.Result.Xps.AccessionOrderDataSheetV2(accessionOrderDataSheetData);
             this.DocumentViewer.Document = accessionOrderDataSheet.FixedDocument;
 		}

@@ -34,7 +34,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\Yellowstone Pathology Institute\\Dictation\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\program data\\ypi\\dictation\\")]
         public string LocalDictationFolder {
             get {
                 return ((string)(this["LocalDictationFolder"]));
@@ -134,7 +134,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis; Pooling=True" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis; Pooling=True; Connection Timeout=1000" +
             ";")]
         public string CurrentConnectionString {
             get {

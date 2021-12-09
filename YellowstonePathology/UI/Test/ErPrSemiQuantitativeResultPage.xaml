@@ -92,6 +92,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
@@ -111,13 +112,13 @@
 
 					<TextBlock Grid.Column="0" Grid.Row="1" Margin="3" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Text="ER Intensity:" />
 					<ComboBox Grid.Column="1" Grid.Row="1" Margin="3" Text="{Binding Path=PanelSetOrder.ErIntensity}">
-						<ComboBoxItem>0+</ComboBoxItem>
-						<ComboBoxItem>Weak, 1+</ComboBoxItem>
-						<ComboBoxItem>Moderate, 2+</ComboBoxItem>
-						<ComboBoxItem>Strong, 3+</ComboBoxItem>
+                        <ComboBoxItem>0+</ComboBoxItem>
+                        <ComboBoxItem>Weak, 1+</ComboBoxItem>
+                        <ComboBoxItem>Moderate, 2+</ComboBoxItem>
+                        <ComboBoxItem>Strong, 3+</ComboBoxItem>
                         <ComboBoxItem>N/A</ComboBoxItem>
-						<ComboBoxItem>Not Performed</ComboBoxItem>
-					</ComboBox>
+                        <ComboBoxItem>Not Performed</ComboBoxItem>
+                    </ComboBox>
 
 					<TextBlock Grid.Column="0" Grid.Row="2" Margin="3" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Text="ER Percentage Of Cells:" />
 					<TextBox Grid.Column="1" Grid.Row="2" Margin="3" Text="{Binding Path=PanelSetOrder.ErPercentageOfCells}" />
@@ -158,39 +159,42 @@
 						<ComboBoxItem>React appropriately</ComboBoxItem>
 					</ComboBox>
 
-					<TextBlock Grid.Column="0" Grid.Row="9" Margin="3" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left" Text="Interpretation:" />
-					<TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.Interpretation}"
+                    <TextBlock Grid.Column="0" Grid.Row="9" Margin="3" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Text="Ki-67 Percentage:" />
+                    <TextBox Grid.Column="1" Grid.Row="9" Margin="3" Text="{Binding Path=PanelSetOrder.Ki67Result}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="10" Margin="3" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left" Text="Interpretation:" />
+					<TextBox x:Name="TextBoxInterpretation" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.Interpretation}"
 												 TextWrapping="Wrap" AcceptsReturn="True"/>
 
-					<TextBlock Grid.Column="0" Grid.Row="11" Margin="3" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Text="Result Comment:" />
-					<TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="12" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.ResultComment}" 
+					<TextBlock Grid.Column="0" Grid.Row="12" Margin="3" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Text="Result Comment:" />
+					<TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.ResultComment}" 
 												 TextWrapping="Wrap" AcceptsReturn="True"/>
 
-					<TextBlock Grid.Column="0" Grid.Row="13" Margin="3" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Text="Specimen Site And Type:" />
-					<TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="14" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.SpecimenSiteAndType}" 
+					<TextBlock Grid.Column="0" Grid.Row="14" Margin="3" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Text="Specimen Site And Type:" />
+					<TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="15" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.SpecimenSiteAndType}" 
 												 TextWrapping="Wrap" AcceptsReturn="True"/>
 
-					<TextBlock Grid.Column="0" Grid.Row="15" Margin="3" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Text="Specimen Identification:" />
-					<TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="16" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.SpecimenIdentification}" 
+					<TextBlock Grid.Column="0" Grid.Row="16" Margin="3" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Text="Specimen Identification:" />
+					<TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="17" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.SpecimenIdentification}" 
 												 TextWrapping="Wrap" AcceptsReturn="True"/>
 
-					<TextBlock Grid.Column="0" Grid.Row="17" Margin="3" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left" Text="Method:" />
-					<TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="18" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.Method}" 
+					<TextBlock Grid.Column="0" Grid.Row="18" Margin="3" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left" Text="Method:" />
+					<TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="19" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PanelSetOrder.Method}" 
 												 TextWrapping="Wrap" AcceptsReturn="True"/>
 
-                    <TextBlock Grid.Column="0" Grid.Row="19" FontWeight="Bold" Margin="2" VerticalAlignment="Center">Fixation Comment:</TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="20" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="2" AcceptsReturn="True" VerticalAlignment="Center" Text="{Binding Path=SpecimenOrder.FixationComment}" />
+                    <TextBlock Grid.Column="0" Grid.Row="20" FontWeight="Bold" Margin="2" VerticalAlignment="Center">Fixation Comment:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="21" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="2" AcceptsReturn="True" VerticalAlignment="Center" Text="{Binding Path=SpecimenOrder.FixationComment}" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="21" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">References:</TextBlock>
-					<TextBox Grid.Column="0" Grid.Row="22" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True" />
+                    <TextBlock Grid.Column="0" Grid.Row="22" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left">References:</TextBlock>
+					<TextBox Grid.Column="0" Grid.Row="23" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportReferences}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-					<TextBlock Grid.Column="0" Grid.Row="23" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
-					<CheckBox Grid.Column="1" Grid.Row="23" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}"></CheckBox>
+					<TextBlock Grid.Column="0" Grid.Row="24" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
+					<CheckBox Grid.Column="1" Grid.Row="24" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}"></CheckBox>
 
-					<TextBlock Grid.Column="0" Grid.Row="24" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
-					<CheckBox Grid.Column="1" Grid.Row="24" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.NoCharge}"></CheckBox>
+					<TextBlock Grid.Column="0" Grid.Row="25" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
+					<CheckBox Grid.Column="1" Grid.Row="26" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.NoCharge}"></CheckBox>
 
-					<Grid Grid.Column="0" Grid.Row="25" Grid.ColumnSpan="2">
+					<Grid Grid.Column="0" Grid.Row="26" Grid.ColumnSpan="2">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto"></ColumnDefinition>
 							<ColumnDefinition Width="*"></ColumnDefinition>

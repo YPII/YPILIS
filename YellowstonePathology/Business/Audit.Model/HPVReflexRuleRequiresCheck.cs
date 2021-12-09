@@ -28,7 +28,7 @@ namespace YellowstonePathology.Business.Audit.Model
                 hpvAudit.Run();
                 if (hpvAudit.ActionRequired == false)
                 {
-                    YellowstonePathology.Business.Client.Model.ReflexOrder reflexOrder = YellowstonePathology.Business.Client.Model.ReflexOrderCollection.GetByReflexByOrderCode(womensHealthProfileTestOrder.HPVReflexOrderCode);
+                    YellowstonePathology.Business.Client.Model.ReflexOrder reflexOrder = Business.Client.Model.ReflexOrderCollection.GetByReflexByOrderCode(womensHealthProfileTestOrder.HPVReflexOrderCode);
                     if (reflexOrder.MeetsBaseRequirements(this.m_AccessionOrder) == true)
                     {
                         if (reflexOrder.HasNoPositiveHPVInLastYear(this.m_AccessionOrder) == false)

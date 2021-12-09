@@ -28,12 +28,17 @@ namespace YellowstonePathology.Business.Test.Model
         }
 
         public override YellowstonePathology.Business.Billing.Model.CptCode GetCptCode(bool isTechnicalOnly)
-        {
-            YellowstonePathology.Business.Billing.Model.CptCode result = Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88312", null);
-            if (isTechnicalOnly == true)
+        {            
+            YellowstonePathology.Business.Billing.Model.CptCode result = Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88312", null);            
+            if(this.m_PerformedByHand == true)
             {
-                result = Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88312", "TC");
+                Business.Stain.Model.Stain stain = Business.Stain.Model.StainCollection.Instance.GetStainByTestId(this.m_TestId);
+                result = Store.AppDataStore.Instance.CPTCodeCollection.GetClone(stain.CPTCode, "TC");
             }
+            else if (isTechnicalOnly == true)
+            {                
+                result = Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88312", "TC");                
+            }            
             return result;   
         }
 

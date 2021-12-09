@@ -33,6 +33,7 @@ namespace YellowstonePathology.Business.Test
         protected string m_PanelSetName;
         protected string m_MasterAccessionNo;
         protected string m_ExternalOrderId;
+        protected string m_SecondaryExternalOrderId;
         protected int m_FinaledById;
         protected bool m_Final;
         protected Nullable<DateTime> m_FinalDate;
@@ -50,6 +51,10 @@ namespace YellowstonePathology.Business.Test
         protected int m_AssignedToId;
         protected int m_TemplateId;
         protected bool m_HoldBilling;
+        protected bool m_BillingDelayed;
+        protected string m_BillingDelayedComment;
+        protected bool m_DistributionDelayed;
+        protected string m_DistributionDelayedComment;
         protected bool m_Audited;
         protected int m_AuditedById;
         protected Nullable<DateTime> m_AuditedDate;
@@ -102,6 +107,8 @@ namespace YellowstonePathology.Business.Test
         protected bool m_ResearchTesting;
         protected string m_SummaryReportNo;
         protected string m_SummaryComment;
+        private string m_HoldBillingComment;
+        protected bool m_IncludeOnSummaryReport;
 
         protected YellowstonePathology.Business.Document.CaseDocumentCollection m_CaseDocumentCollection;
 
@@ -109,7 +116,7 @@ namespace YellowstonePathology.Business.Test
 		protected string m_OrderedOnDescription;
 
 		public PanelSetOrder()
-		{
+		{            
 			this.m_PanelOrderCollection = new PanelOrderCollection();
 			this.m_PanelSetOrderCPTCodeCollection = new PanelSetOrderCPTCodeCollection();
 			this.m_PanelSetOrderCPTCodeBillCollection = new PanelSetOrderCPTCodeBillCollection();
@@ -149,7 +156,7 @@ namespace YellowstonePathology.Business.Test
 
             this.m_ResultDocumentSource = panelSet.ResultDocumentSource.ToString();
 			this.m_IsBillable = panelSet.IsBillable;
-            this.m_ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetEndDate(this.m_OrderTime.Value, panelSet.ExpectedDuration);
+            this.m_ExpectedFinalTime = Business.Helper.DateTimeExtensions.GetEndDate(this.m_OrderTime.Value, panelSet.ExpectedDuration);
 
 			this.m_Distribute = distribute;
 			if (panelSet.NeverDistribute == true)
@@ -217,7 +224,7 @@ namespace YellowstonePathology.Business.Test
                 this.m_ProfessionalComponentBillingFacilityId = panelSet.ProfessionalComponentBillingFacility.FacilityId;
             }
 
-            this.m_ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetExpectedFinalTime(this.m_OrderTime.Value, panelSet.ExpectedDuration);
+            this.m_ExpectedFinalTime = Business.Helper.DateTimeExtensions.GetExpectedFinalTime(this.m_OrderTime.Value, panelSet.ExpectedDuration);
 			this.m_IsBillable = panelSet.IsBillable;
 			this.m_ResultDocumentSource = panelSet.ResultDocumentSource.ToString();
 
@@ -363,6 +370,21 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string SecondaryExternalOrderId
+        {
+            get { return this.m_SecondaryExternalOrderId; }
+            set
+            {
+                if (this.m_SecondaryExternalOrderId != value)
+                {
+                    this.m_SecondaryExternalOrderId = value;
+                    this.NotifyPropertyChanged("SecondaryExternalOrderId");
+                }
+            }
+        }
+
+        [PersistentProperty()]
         [PersistentDataColumnProperty(false, "11", "0", "int")]
         public int FinaledById
         {
@@ -450,7 +472,7 @@ namespace YellowstonePathology.Business.Test
                     this.NotifyPropertyChanged("Accepted");
                 }
             }
-        }
+        }        
 
         [PersistentProperty()]
         [PersistentDataColumnProperty(true, "3", "null", "datetime")]
@@ -663,6 +685,66 @@ namespace YellowstonePathology.Business.Test
         }
 
         [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+        public bool BillingDelayed
+        {
+            get { return this.m_BillingDelayed; }
+            set
+            {
+                if (this.m_BillingDelayed != value)
+                {
+                    this.m_BillingDelayed = value;
+                    this.NotifyPropertyChanged("BillingDelayed");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
+        public string BillingDelayedComment
+        {
+            get { return this.m_BillingDelayedComment; }
+            set
+            {
+                if (this.m_BillingDelayedComment != value)
+                {
+                    this.m_BillingDelayedComment = value;
+                    this.NotifyPropertyChanged("BillingDelayedComment");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+        public bool DistributionDelayed
+        {
+            get { return this.m_DistributionDelayed; }
+            set
+            {
+                if (this.m_DistributionDelayed != value)
+                {
+                    this.m_DistributionDelayed = value;
+                    this.NotifyPropertyChanged("DistributionDelayed");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
+        public string DistributionDelayedComment
+        {
+            get { return this.m_DistributionDelayedComment; }
+            set
+            {
+                if (this.m_DistributionDelayedComment != value)
+                {
+                    this.m_DistributionDelayedComment = value;
+                    this.NotifyPropertyChanged("DistributionDelayedComment");
+                }
+            }
+        }
+
+        [PersistentProperty()]
         [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string ResultDocumentSource
         {
@@ -860,6 +942,23 @@ namespace YellowstonePathology.Business.Test
                 }
             }
         }
+
+        [MonitorProperty(true)]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "5000", "null", "varchar")]
+        public string HoldBillingComment
+        {
+            get { return this.m_HoldBillingComment; }
+            set
+            {
+                if (this.m_HoldBillingComment != value)
+                {
+                    this.m_HoldBillingComment = value;
+                    this.NotifyPropertyChanged("HoldBillingComment");
+                }
+            }
+        }
+
 
         [MonitorProperty(true)]
         [PersistentProperty()]
@@ -1373,6 +1472,21 @@ namespace YellowstonePathology.Business.Test
             }
         }
 
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+        public bool IncludeOnSummaryReport
+        {
+            get { return this.m_IncludeOnSummaryReport; }
+            set
+            {
+                if (this.m_IncludeOnSummaryReport != value)
+                {
+                    this.m_IncludeOnSummaryReport = value;
+                    this.NotifyPropertyChanged("IncludeOnSummaryReport");
+                }
+            }
+        }
+
         public virtual void DeleteChildren()
 		{
 
@@ -1391,7 +1505,7 @@ namespace YellowstonePathology.Business.Test
 				if (this.m_PublishedDocument == null)
 				{
 					YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_ReportNo);
-					string publishedDocumentName = YellowstonePathology.Business.Document.CaseDocument.GetCaseFileNameXPS(orderIdParser);
+					string publishedDocumentName = Business.Document.CaseDocument.GetCaseFileNameXPS(orderIdParser);
 					if (System.IO.File.Exists(publishedDocumentName) == true)
 					{
 						XpsDocument xpsDocument = new XpsDocument(publishedDocumentName, System.IO.FileAccess.Read);
@@ -1446,7 +1560,7 @@ namespace YellowstonePathology.Business.Test
 
         public virtual FinalizeTestResult Finish(Business.Test.AccessionOrder accessionOrder)        
         {
-            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
 			YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(this.PanelSetId);
 
             this.m_Final = true;
@@ -1493,7 +1607,7 @@ namespace YellowstonePathology.Business.Test
 			this.FinaledById = 0;
 			this.Signature = null;
 
-			YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+			YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
 			YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(this.PanelSetId);
 
 			if (panelSet.AcceptOnFinal == true)
@@ -1646,7 +1760,7 @@ namespace YellowstonePathology.Business.Test
 				string signature = string.Empty;
 				if (Final && FinaledById > 0)
 				{
-					YellowstonePathology.Business.User.SystemUser systemUserItem = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(FinaledById);
+					YellowstonePathology.Business.User.SystemUser systemUserItem = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(FinaledById);
 					signature = systemUserItem.Signature;
 				}
 				return signature;
@@ -1847,7 +1961,7 @@ namespace YellowstonePathology.Business.Test
 		public bool IsReferenceLabTest()
 		{
 			bool result = false;
-			YellowstonePathology.Business.Facility.Model.FacilityCollection allYPIFacilities = YellowstonePathology.Business.Facility.Model.FacilityCollection.GetAllYPFacilities();
+			YellowstonePathology.Business.Facility.Model.FacilityCollection allYPIFacilities = Business.Facility.Model.FacilityCollection.GetAllYPFacilities();
 			if (this.HasProfessionalComponent == true && allYPIFacilities.Exists(this.ProfessionalComponentFacilityId) == false) result = true;
 			if (this.HasTechnicalComponent == true && allYPIFacilities.Exists(this.TechnicalComponentFacilityId) == false) result = true;
 			return result;
@@ -1998,7 +2112,7 @@ namespace YellowstonePathology.Business.Test
                 result.Message += UnableToSetPreviousResults;
             }
             return result;
-        }
+        }        
 
         protected virtual string NotFilledMessage(string name)
         {

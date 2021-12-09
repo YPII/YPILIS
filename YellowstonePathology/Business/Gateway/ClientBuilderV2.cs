@@ -37,8 +37,7 @@ namespace YellowstonePathology.Business.Gateway
                         {
                             YellowstonePathology.Business.Client.Model.ClientLocation clientLocation = new YellowstonePathology.Business.Client.Model.ClientLocation();
                             Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(clientLocation, dr);
-                            sqlDataReaderPropertyWriter.WriteProperties();
-                            this.m_Client.ClientLocationCollection.Add(clientLocation);
+                            sqlDataReaderPropertyWriter.WriteProperties();                            
                         }
                     }
                 }

@@ -39,9 +39,14 @@ namespace YellowstonePathology.Business.Test.Model
                         result = new DualStain(stain);
                         break;
                     }
+                case "Crystallography":
+                    {
+                        result = new CrystalographyTest(stain);
+                        break;
+                    }
             }
             return result;
 
         }
-}
+    }
 }

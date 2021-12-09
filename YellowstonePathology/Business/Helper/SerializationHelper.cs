@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Helper
             System.Xml.XmlTextWriter xmlTextWriter = new System.Xml.XmlTextWriter(memoryStream, Encoding.UTF8);            
             xs.Serialize(xmlTextWriter, pObject);
             memoryStream = (System.IO.MemoryStream)xmlTextWriter.BaseStream;
-			XmlizedString = YellowstonePathology.Business.Helper.SerializationHelper.UTF8ByteArrayToString(memoryStream.ToArray());
+			XmlizedString = Business.Helper.SerializationHelper.UTF8ByteArrayToString(memoryStream.ToArray());
             return XmlizedString.Substring(1, XmlizedString.Length - 1);            
         }
 

@@ -58,7 +58,7 @@ namespace YellowstonePathology.Business.Helper
         public static void ConvertDocumentTo(YellowstonePathology.Business.OrderIdParser orderIdParser, CaseDocumentTypeEnum caseDocumentType,
             CaseDocumentFileTypeEnum fromType, CaseDocumentFileTypeEnum toType)
         {            
-            string filePath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo;
+            string filePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo;
 
             switch (caseDocumentType)
             {
@@ -260,7 +260,7 @@ namespace YellowstonePathology.Business.Helper
 		public static void SaveXpsAsMultiPageTif(string reportNo, object visual)
 		{
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(reportNo);
-			string outputFileName = YellowstonePathology.Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParser);
+			string outputFileName = Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParser);
 			FrameworkElement frameworkElement = (FrameworkElement)visual;
 
 			RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)frameworkElement.ActualWidth,
@@ -339,6 +339,47 @@ namespace YellowstonePathology.Business.Helper
             CaseDocument.ReleaseComObject(doc);
             oWord.Quit(ref oFalse, ref oMissing, ref oMissing);
             CaseDocument.ReleaseComObject(oWord);
+        }
+
+        public static void publishCaseDocs(string filePath, string reportNo)
+        {            
+            Microsoft.Office.Interop.Word.Application oWord;
+            Object oMissing = System.Reflection.Missing.Value;
+            Object oTrue = true;
+            Object oFalse = false;
+
+            oWord = new Microsoft.Office.Interop.Word.Application();
+            oWord.Visible = false;
+            oWord.DisplayAlerts = Microsoft.Office.Interop.Word.WdAlertLevel.wdAlertsNone;
+
+            string currentPrinter = oWord.ActivePrinter;
+            oWord.ActivePrinter = "Microsoft XPS Document Writer";
+
+            Object fileFormat = "wdFormatDocument";
+
+            object xmlFile = $"{filePath}.xml";
+            if (System.IO.File.Exists(xmlFile.ToString()) == true)
+            {
+                Microsoft.Office.Interop.Word.Document doc = oWord.Documents.Open(ref xmlFile, ref oMissing, ref oMissing,
+                        ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                        ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+                object oOutputFileXps = $"{filePath}.xps";
+                doc.PrintOut(ref oFalse, ref oFalse, ref oMissing, ref oOutputFileXps, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                    ref oTrue, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+                object oFmt = Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF;
+                object oOutputFilePdf = $"{filePath}.pdf";
+                doc.SaveAs(ref oOutputFilePdf, ref oFmt, ref oMissing, ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+                string outputFileTif = $"{filePath}.tif";
+                FileConversionHelper.ConvertXPSToTIF(oOutputFileXps.ToString(), outputFileTif);
+            }
+
+            oWord.ActivePrinter = currentPrinter;
+            oWord.Quit(ref oFalse, ref oMissing, ref oMissing);
         }
     }
 }

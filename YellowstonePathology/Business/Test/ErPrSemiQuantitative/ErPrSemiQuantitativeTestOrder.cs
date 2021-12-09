@@ -25,6 +25,7 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 		private string m_SpecimenSiteAndType;
 		private string m_SpecimenIdentification;
 		private string m_Method;
+		private string m_Ki67Result;
 
 		public ErPrSemiQuantitativeTestOrder()
 		{
@@ -246,6 +247,21 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 				{
 					this.m_Method = value;
 					this.NotifyPropertyChanged("Method");
+				}
+			}
+		}
+
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
+		public string Ki67Result
+		{
+			get { return this.m_Ki67Result; }
+			set
+			{
+				if (this.m_Ki67Result != value)
+				{
+					this.m_Ki67Result = value;
+					this.NotifyPropertyChanged("Ki67Result");
 				}
 			}
 		}

@@ -32,7 +32,7 @@ namespace YellowstonePathology.UI.Surgical
 		{
             this.m_Writer = writer;
 			this.m_MainWindowCommandButtonHandler = mainWindowCommandButtonHandler;
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 
 			m_Loaded = false;
 			this.m_PathologistUI = new PathologistUI(writer);
@@ -44,7 +44,7 @@ namespace YellowstonePathology.UI.Surgical
 			this.Loaded += new RoutedEventHandler(PathologistWorkspace_Loaded);
 			this.Unloaded += new RoutedEventHandler(PathologistWorkspace_Unloaded);
 
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 			this.m_BarcodeScanPort.CytologySlideScanReceived += new YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.CytologySlideScanReceivedHandler(CytologySlideScanReceived);
 			this.m_BarcodeScanPort.HistologySlideScanReceived += new Business.BarcodeScanning.BarcodeScanPort.HistologySlideScanReceivedHandler(HistologySlideScanReceived);
 			this.m_BarcodeScanPort.HistologyBlockScanReceived += new Business.BarcodeScanning.BarcodeScanPort.HistologyBlockScanReceivedHandler(BarcodeScanPort_HistologyBlockScanReceived);
@@ -489,21 +489,19 @@ namespace YellowstonePathology.UI.Surgical
                     this.m_CytologyResultsWorkspace.CytologyUI.WHPOpened += CytologyUI_WHPOpened;
                     this.m_CytologyResultsWorkspace.CytologyUI.WHPClosed += CytologyUI_WHPClosed;
 
-                    YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_PathologistUI.AccessionOrder.MasterAccessionNo);
-					this.m_CytologyResultsWorkspace.CytologyUI.DataLoadResult.DataLoadStatusEnum = YellowstonePathology.Business.Domain.DataLoadStatusEnum.Successful;
-					switch (clientOrderCollection.Count)
+                    YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_PathologistUI.AccessionOrder.MasterAccessionNo);
+					this.m_CytologyResultsWorkspace.CytologyUI.DataLoadResult.DataLoadStatusEnum = Business.Domain.DataLoadStatusEnum.Successful;
+					if (clientOrderCollection.Count == 0)
 					{
-						case 0:
-							this.m_CytologyResultsWorkspace.CytologyUI.ClientOrder = null;
-							this.m_CytologyResultsWorkspace.CytologyUI.DataLoaded();
-							break;
-						case 1:
-						case 2:
-                        case 3:
-							this.m_CytologyResultsWorkspace.CytologyUI.ClientOrder = clientOrderCollection[0];
-							this.m_CytologyResultsWorkspace.CytologyUI.DataLoaded();
-							break;
-					}
+
+						this.m_CytologyResultsWorkspace.CytologyUI.ClientOrder = null;
+						this.m_CytologyResultsWorkspace.CytologyUI.DataLoaded();
+					} 
+					else
+					{
+						this.m_CytologyResultsWorkspace.CytologyUI.ClientOrder = clientOrderCollection[0];
+						this.m_CytologyResultsWorkspace.CytologyUI.DataLoaded();
+					}													
 
 					this.ContentControlReview.Content = this.m_CytologyResultsWorkspace;
 					this.m_CytologyResultsWorkspace.SelectAppropriatePanel();
@@ -707,7 +705,7 @@ namespace YellowstonePathology.UI.Surgical
 		private void ButtonReportOrder_Click(object sender, RoutedEventArgs e)
 		{
 			YellowstonePathology.Business.Test.AccessionOrder accessionOrder = this.m_PathologistUI.AccessionOrder;
-			YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(accessionOrder.MasterAccessionNo);
+			YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(accessionOrder.MasterAccessionNo);
 
 			if (clientOrderCollection.Count != 0)
 			{
@@ -725,7 +723,7 @@ namespace YellowstonePathology.UI.Surgical
 			if (this.m_PathologistUI.AccessionOrder != null)
 			{
 				YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PathologistUI.ReportNo);
-				string folderPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+				string folderPath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
 				System.Diagnostics.Process process = new System.Diagnostics.Process();
 				System.Diagnostics.Process p = new System.Diagnostics.Process();
 				System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Explorer.exe", folderPath);

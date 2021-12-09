@@ -47,24 +47,32 @@ namespace YellowstonePathology.Business.HL7View.NMH
             XElement pidElement = new XElement("PID");
             document.Add(pidElement);
 
-            string[] pipeSplit = this.m_SecondaryExternalOrderId.Split('|');
-            if(pipeSplit.Length >= 0)
+            if(string.IsNullOrEmpty(this.m_SecondaryExternalOrderId) == false)
             {
-                XElement pid02Element = new XElement("PID.2");
-                YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.3.1", pipeSplit[0], pid02Element);
-                YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid02Element);
-            }            
+                string[] pipeSplit = this.m_SecondaryExternalOrderId.Split('|');
+                if (pipeSplit.Length >= 0)
+                {
+                    XElement pid02Element = new XElement("PID.2");
+                    YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.3.1", pipeSplit[0], pid02Element);
+                    YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid02Element);
+                }
+            }
+            
 
             XElement pid03Element = new XElement("PID.3");
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.3.1", this.m_PatientId, pid03Element);            
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid03Element);
 
-            if (pipeSplit.Length >= 2)
+            if (string.IsNullOrEmpty(this.m_SecondaryExternalOrderId) == false)
             {
-                XElement pid04Element = new XElement("PID.4");
-                YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.4.1", pipeSplit[1], pid04Element);
-                YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid04Element);
-            }
+                string[] pipeSplit = this.m_SecondaryExternalOrderId.Split('|');
+                if (pipeSplit.Length >= 2)
+                {
+                    XElement pid04Element = new XElement("PID.4");
+                    YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.4.1", pipeSplit[1], pid04Element);
+                    YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid04Element);
+                }
+            }            
 
             XElement pid05Element = new XElement("PID.5");
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.5.1", this.m_LastName, pid05Element);

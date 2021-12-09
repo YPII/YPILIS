@@ -79,7 +79,7 @@ namespace YellowstonePathology.Business.Slide.Model
             this.m_OrderedFrom = Environment.MachineName;
             this.m_OrderedAsDual = testOrder.OrderedAsDual;
             this.m_FacilityId = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId).FacilityId;
-            this.m_Location = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            this.m_Location = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
             this.m_LocationTime = DateTime.Now;
         }
 
@@ -90,13 +90,13 @@ namespace YellowstonePathology.Business.Slide.Model
             this.m_ValidatedById = systemIdentity.User.UserId;
             this.m_ValidationDate = DateTime.Now;
             this.m_Validated = true;
-            this.m_Status = YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Validated.ToString();
+            this.m_Status = Business.Slide.Model.SlideStatusEnum.Validated.ToString();
             this.NotifyPropertyChanged(string.Empty);
         }
 
         public void SetAsPrinted(YellowstonePathology.Business.User.SystemIdentity systemIdentity)
         {
-            if (this.m_Status != YellowstonePathology.Business.Slide.Model.SlideStatusEnum.ClientAccessioned.ToString())
+            if (this.m_Status != Business.Slide.Model.SlideStatusEnum.ClientAccessioned.ToString())
             {
                 this.m_PrintStation = System.Environment.MachineName;
                 this.m_PrintedBy = systemIdentity.User.UserName;
@@ -106,7 +106,7 @@ namespace YellowstonePathology.Business.Slide.Model
 
                 if (this.m_Validated == false)
                 {
-                    this.m_Status = YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Printed.ToString();
+                    this.m_Status = Business.Slide.Model.SlideStatusEnum.Printed.ToString();
                 }
             }
 

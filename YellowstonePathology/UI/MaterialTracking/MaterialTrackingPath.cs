@@ -52,7 +52,7 @@ namespace YellowstonePathology.UI.MaterialTracking
 
 		private void ShowMaterialTrackingCasePage()
 		{            
-			YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingLogCollection materialTrackingLogCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetMaterialTrackingLogCollectionByMasterAccessionNo(this.m_AccessionOrder.MasterAccessionNo);
+			YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingLogCollection materialTrackingLogCollection = Business.Gateway.SlideAccessionGateway.GetMaterialTrackingLogCollectionByMasterAccessionNo(this.m_AccessionOrder.MasterAccessionNo);
 			MaterialTrackingCasePage materialTrackingCasePage = new MaterialTrackingCasePage(this.m_AccessionOrder, materialTrackingLogCollection);
 			this.m_LoginPageWindow.PageNavigator.Navigate(materialTrackingCasePage);
 		}
@@ -64,12 +64,12 @@ namespace YellowstonePathology.UI.MaterialTracking
 
             if (this.m_UseMasterAccessionNo == true)
             {
-                materialTrackingBatchCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetMaterialTrackingBatchCollectionByMasterAccessionNo(this.m_MasterAccessionNo);
+                materialTrackingBatchCollection = Business.Gateway.SlideAccessionGateway.GetMaterialTrackingBatchCollectionByMasterAccessionNo(this.m_MasterAccessionNo);
                 materialTrackingStartPage = new MaterialTrackingStartPage(materialTrackingBatchCollection, this.m_MasterAccessionNo);            
             }
             else
             {
-                materialTrackingBatchCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetMaterialTrackingBatchCollection();
+                materialTrackingBatchCollection = Business.Gateway.SlideAccessionGateway.GetMaterialTrackingBatchCollection();
                 materialTrackingStartPage = new MaterialTrackingStartPage(materialTrackingBatchCollection);            
             }
             

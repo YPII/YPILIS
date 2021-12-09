@@ -40,7 +40,7 @@ namespace YellowstonePathology.UI.Test
             this.m_NextButtonVisibility = nextButtonVisibility;
             this.m_CloseButtonVisibility = closeButtonVisibility;
 
-            this.m_UserPreference = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference;			
+            this.m_UserPreference = Business.User.UserPreferenceInstance.Instance.UserPreference;			
             this.BuildFileList();
 
 			InitializeComponent();

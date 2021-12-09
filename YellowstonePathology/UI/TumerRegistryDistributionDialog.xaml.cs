@@ -71,7 +71,7 @@ namespace YellowstonePathology.UI
 
         private void ButtonGetDistributions_Click(object sender, RoutedEventArgs e)
         {
-            this.m_TestOrderReportDistributionCollection = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetReportDistributionCollectionByDateRangeTumorRegistry(this.m_StartDate.Value, this.m_EndDate.Value, this.m_DistributionType);
+            this.m_TestOrderReportDistributionCollection = Business.Gateway.ReportDistributionGateway.GetReportDistributionCollectionByDateRangeTumorRegistry(this.m_StartDate.Value, this.m_EndDate.Value, this.m_DistributionType);
             this.NotifyPropertyChanged("TestOrderReportDistributionCollection");
         }
 
@@ -96,7 +96,7 @@ namespace YellowstonePathology.UI
                     foreach (YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution in this.m_TestOrderReportDistributionCollection)
                     {
 						YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(testOrderReportDistribution.ReportNo);
-						string filePath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+						string filePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
                         string localReportNoDirectoryPath = localFolderName + @"\" + testOrderReportDistribution.ReportNo;
                         System.IO.Directory.CreateDirectory(localReportNoDirectoryPath);
 

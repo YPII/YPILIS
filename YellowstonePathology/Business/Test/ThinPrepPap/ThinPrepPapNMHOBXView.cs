@@ -30,7 +30,8 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
         //LOC      -Location Performed
 
         public override void ToXml(XElement document)
-        {
+        {                        
+            /*
             YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology panelSetOrderCytology = (YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
 
@@ -78,7 +79,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
                     }
                 }
                 amendments.AppendLine();
-                this.AddNextOBXElement("AMEND", "Amendments", amendments.ToString(), document, "F");
+                this.AddNextOBXElement("AMEND", "Amendments", amendments.ToString(), document, "C");
             }
 
             this.AddNextOBXElement("SCREEN", "Screening Method", panelSetOrderCytology.Method, document, "F");
@@ -90,6 +91,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
 
             string locationPerformed = panelSetOrderCytology.GetLocationPerformedComment();
             this.AddNextOBXElement("LOC", "Location Performed", locationPerformed, document, "F");
+            */
         }
     }
 }

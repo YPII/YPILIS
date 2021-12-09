@@ -36,10 +36,10 @@ namespace YellowstonePathology.UI
             this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 
 			this.m_AccessionSlideOrderViewCollection = new Business.View.AccessionSlideOrderViewCollection();
-			this.m_MaterialLocationCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetMaterialLocationCollection();
-			this.m_MaterialTrackingBatchCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetMaterialTrackingBatchCollection();
+			this.m_MaterialLocationCollection = Business.Gateway.SlideAccessionGateway.GetMaterialLocationCollection();
+			this.m_MaterialTrackingBatchCollection = Business.Gateway.SlideAccessionGateway.GetMaterialTrackingBatchCollection();
 
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;            
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;            
             this.m_BarcodeScanPort.HistologySlideScanReceived += HistologySlideScanReceived;
 			this.m_SlideTrackingLogCollection = new YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingLogCollection();
 
@@ -83,7 +83,7 @@ namespace YellowstonePathology.UI
 							{
                                 if (this.m_AccessionSlideOrderViewCollection.Exists(barcode.ID) == false)
                                 {
-                                    YellowstonePathology.Business.View.AccessionSlideOrderView accessionSlideOrderView = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetAccessionSlideOrderViewBySlideOrderId(barcode.ID);
+                                    YellowstonePathology.Business.View.AccessionSlideOrderView accessionSlideOrderView = Business.Gateway.SlideAccessionGateway.GetAccessionSlideOrderViewBySlideOrderId(barcode.ID);
 									if (accessionSlideOrderView != null)
 									{
 										this.m_AccessionSlideOrderViewCollection.Add(accessionSlideOrderView);
@@ -138,7 +138,7 @@ namespace YellowstonePathology.UI
 			bool? result = materialTrackingBatchDialog.ShowDialog();
 			if (result.HasValue && result.Value == true)
 			{
-				this.m_MaterialTrackingBatchCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetMaterialTrackingBatchCollection();
+				this.m_MaterialTrackingBatchCollection = Business.Gateway.SlideAccessionGateway.GetMaterialTrackingBatchCollection();
 				NotifyPropertyChanged("MaterialTrackingBatchCollection");
 			}
 		}
@@ -204,7 +204,7 @@ namespace YellowstonePathology.UI
 			if (this.ListBoxMaterialTrackingBatch.SelectedItem != null)
 			{
 				YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch materialTrackingBatch = (YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingBatch)this.ListBoxMaterialTrackingBatch.SelectedItem;
-				this.m_AccessionSlideOrderViewCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetAccessionSlideOrderViewCollectionByBatchId(materialTrackingBatch.MaterialTrackingBatchId);
+				this.m_AccessionSlideOrderViewCollection = Business.Gateway.SlideAccessionGateway.GetAccessionSlideOrderViewCollectionByBatchId(materialTrackingBatch.MaterialTrackingBatchId);
                 this.SlideCount = this.m_AccessionSlideOrderViewCollection.Count;
 				this.m_LocationId = this.GetLocationId(materialTrackingBatch.Description);
 				NotifyPropertyChanged("AccessionSlideOrderViewCollection");

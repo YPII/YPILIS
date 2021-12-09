@@ -104,15 +104,53 @@ namespace YellowstonePathology.Business.Test.Model
         public int GetBillableCytochemicalStainCount()
         {
             int result = 0;
-            YellowstonePathology.Business.Test.Model.TestCollection cytochemicalTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetCytochemicalTests();
+            YellowstonePathology.Business.Test.Model.TestCollection cytochemicalTestCollection = Business.Test.Model.TestCollectionInstance.GetCytochemicalTests();
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
             {
                 if (testOrder.NoCharge == false)
                 {
                     if (cytochemicalTestCollection.Exists(testOrder.TestId) == true)
                     {
-                        result += 1;
+                        Test test = cytochemicalTestCollection.GetTest(testOrder.TestId);
+                        if (test.PerformedByHand == false)
+                        {
+                            result += 1;
+                        };
                     }
+                }
+            }
+            return result;
+        }
+
+        public int GetBillableCrystallographyStainCount()
+        {
+            int result = 0;
+            YellowstonePathology.Business.Test.Model.TestCollection cytochemicalTestCollection = Business.Test.Model.TestCollectionInstance.GetCrystallographyTests();
+            foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
+            {
+                if (testOrder.NoCharge == false)
+                {
+                    if (cytochemicalTestCollection.Exists(testOrder.TestId) == true)
+                    {
+                        Test test = cytochemicalTestCollection.GetTest(testOrder.TestId);
+                        if (test.PerformedByHand == false)
+                        {
+                            result += 1;
+                        };
+                    }
+                }
+            }
+            return result;
+        }
+
+        public int GetBillablePerformedByHandStainCount()
+        {
+            int result = 0;            
+            foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
+            {
+                if (testOrder.NoCharge == false && testOrder.PerformedByHand == true)
+                {                    
+                    result += 1;                    
                 }
             }
             return result;
@@ -121,15 +159,29 @@ namespace YellowstonePathology.Business.Test.Model
         public int GetCytochemicalForMicroorganismsStainCount()
         {
             int result = 0;
-            YellowstonePathology.Business.Test.Model.TestCollection cytochemicalForMicroorganismsTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetCytochemicalForMicroorganismsTests();
+            YellowstonePathology.Business.Test.Model.TestCollection cytochemicalForMicroorganismsTestCollection = Business.Test.Model.TestCollectionInstance.GetCytochemicalForMicroorganismsTests();
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
             {
                 if (testOrder.NoCharge == false)
                 {
                     if (cytochemicalForMicroorganismsTestCollection.Exists(testOrder.TestId) == true)
                     {
-                        result += 1;
+                        Test test = cytochemicalForMicroorganismsTestCollection.GetTest(testOrder.TestId);                        
+                        result += 1;                        
                     }
+                }
+            }
+            return result;
+        }
+
+        public int GetWrightsStainCount()
+        {
+            int result = 0;
+            foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
+            {
+                if (testOrder.NoCharge == false && testOrder.TestId == "205")
+                {                    
+                    result += 1;                    
                 }
             }
             return result;
@@ -138,7 +190,7 @@ namespace YellowstonePathology.Business.Test.Model
         public int GetBillableGradeStainCount(bool includeOrderedAsDual)
         {
             int result = 0;
-            YellowstonePathology.Business.Test.Model.TestCollection gradedTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetGradedTests();
+            YellowstonePathology.Business.Test.Model.TestCollection gradedTestCollection = Business.Test.Model.TestCollectionInstance.GetGradedTests();
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
             {

@@ -282,7 +282,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 				foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResult in surgicalSpecimen.StainResultItemCollection)
 				{
 					string stainType = stainResult.StainType;
-					if (stainType == "Immunohistochemical" || stainType == "Cytolochemical") result.Add(stainResult);
+					if (stainType == "Immunohistochemical" || stainType == "Cytochemical") result.Add(stainResult);
 				}
 			}
 			return result;
@@ -297,7 +297,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 				foreach (YellowstonePathology.Business.SpecialStain.StainResultItem stainResult in surgicalSpecimen.StainResultItemCollection)
 				{
 					if (stainResult.StainType == "Immunohistochemical" ||
-						stainResult.StainType == "Cytolochemical")
+						stainResult.StainType == "Cytochemical")
 					{
 						string procedureName = stainResult.ProcedureName;
 						if (procedureNames.Contains(procedureName) == false)

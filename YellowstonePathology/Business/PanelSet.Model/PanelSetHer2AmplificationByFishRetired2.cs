@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		{
 			this.m_PanelSetId = 12;
 			this.m_PanelSetName = "HER2 Amplification by FISH - Retired(2)";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
+            this.m_CaseType = Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.YPIDatabase;

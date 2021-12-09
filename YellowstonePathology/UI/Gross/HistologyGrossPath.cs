@@ -60,7 +60,7 @@ namespace YellowstonePathology.UI.Gross
 
 		private void ScanSecurityBadgePage_AuthentificationSuccessful(object sender, EventArgs e)
         {
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;			
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;			
 			this.ShowScanContainerPage();
         }
 
@@ -90,10 +90,10 @@ namespace YellowstonePathology.UI.Gross
 
         private void ScanAliquotPage_UseThisAliquotOrderId(object sender, string aliquotOrderId)
         {            
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromAliquotOrderId(aliquotOrderId);
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromAliquotOrderId(aliquotOrderId);
             if (string.IsNullOrEmpty(masterAccessionNo) == false)
             {
-                this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, m_HistologyGrossDialog);
+                this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, m_HistologyGrossDialog);
                 this.m_SpecimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByAliquotOrderId(aliquotOrderId);
                 if (this.m_AccessionOrder == null)
                 {
@@ -137,10 +137,10 @@ namespace YellowstonePathology.UI.Gross
 
         private void ScanContainerPage_UseThisContainer(object sender, string containerId)
         {            
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromContainerId(containerId);
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromContainerId(containerId);
             if(string.IsNullOrEmpty(masterAccessionNo) == false)
             {
-                this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, m_HistologyGrossDialog);
+                this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, m_HistologyGrossDialog);
                 this.m_SpecimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByContainerId(containerId);
 
                 if (this.m_AccessionOrder == null)
@@ -224,7 +224,7 @@ namespace YellowstonePathology.UI.Gross
             if(specimenOrder != null)
             {
                 YellowstonePathology.Business.Facility.Model.Facility thisFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-                string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+                string thisLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
                 string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
                 YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingLog materialTrackingLog = new Business.MaterialTracking.Model.MaterialTrackingLog(objectId, specimenOrder.SpecimenOrderId, null, thisFacility.FacilityId, thisFacility.FacilityName,
@@ -253,8 +253,8 @@ namespace YellowstonePathology.UI.Gross
                 
 		private void BarcodeManualEntryPage_Return(object sender, string containerId)
 		{
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromContainerId(containerId);
-            this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, m_HistologyGrossDialog);
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromContainerId(containerId);
+            this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, m_HistologyGrossDialog);
 
             if (this.m_AccessionOrder == null)
             {

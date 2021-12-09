@@ -32,7 +32,7 @@ namespace YellowstonePathology.UI.Login
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    YellowstonePathology.Business.BarcodeScanning.IScanable scannable = YellowstonePathology.Business.BarcodeScanning.ScanableFactory.GetScanable(barcodePrefix);
+                    YellowstonePathology.Business.BarcodeScanning.IScanable scannable = Business.BarcodeScanning.ScanableFactory.GetScanable(barcodePrefix);
                     scannable.FromGuid();
                     this.m_ScannableQueue.Enqueue(scannable);
                 }                

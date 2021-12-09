@@ -28,7 +28,7 @@ namespace YellowstonePathology.Business.Reports
 			Domain.XElementFromSql xElementFromSql = new YellowstonePathology.Business.Domain.XElementFromSql();
 			if (panelOrderIds.Length > 0)
 			{
-				xElementFromSql = YellowstonePathology.Business.Gateway.XmlGateway.GetXmlOrdersToAcknowledge(panelOrderIds);
+				xElementFromSql = Business.Gateway.XmlGateway.GetXmlOrdersToAcknowledge(panelOrderIds);
 				int seq = 1;
 				foreach (XElement accession in xElementFromSql.Document.Elements("AccessionOrder"))
 				{

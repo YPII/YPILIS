@@ -91,7 +91,7 @@ namespace YellowstonePathology.Business.Document
 			//if (string.IsNullOrEmpty(referenceId) == false)
 			//{
 				//YellowstonePathology.Business.Domain.Dna.DnaReference dnaReference = this.m_Repository.GetAllDnaReferenceById(Convert.ToInt32(referenceId));
-				//YellowstonePathology.Business.Domain.Dna.DnaReference dnaReference = YellowstonePathology.Business.Gateway.LocalDataGateway.GetDnaReferenceById(Convert.ToInt32(referenceId));
+				//YellowstonePathology.Business.Domain.Dna.DnaReference dnaReference = Business.Gateway.LocalDataGateway.GetDnaReferenceById(Convert.ToInt32(referenceId));
 				//this.SetData("ReportReferences", dnaReference.Reference);
 			//}
 
@@ -150,7 +150,7 @@ namespace YellowstonePathology.Business.Document
 		private void SetHistogram(YellowstonePathology.DocumentCreator.DocumentPart pageBody)
         {
 			YellowstonePathology.Domain.OrderIdParser orderIdParser = new YellowstonePathology.Domain.OrderIdParser(this.m_PanelSetOrderItem.ReportNo);
-			string histogramPath = YellowstonePathology.Business.Document.CaseDocument.GetFlowHistogramFileName(orderIdParser);
+			string histogramPath = Business.Document.CaseDocument.GetFlowHistogramFileName(orderIdParser);
 			foreach (YellowstonePathology.DocumentCreator.DocumentRow documentRow in pageBody.DocumentRowCollection)
             {
                 if (documentRow.Name == "CommentRow")

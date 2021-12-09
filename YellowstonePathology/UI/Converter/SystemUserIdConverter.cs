@@ -17,7 +17,7 @@ namespace YellowstonePathology.UI.Converter
                 int systemUserId = (int)value;
                 if (systemUserId != 0)
                 {
-					YellowstonePathology.Business.User.SystemUserCollection systemUserCollection = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection;                    
+					YellowstonePathology.Business.User.SystemUserCollection systemUserCollection = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection;                    
 					YellowstonePathology.Business.User.SystemUser user = systemUserCollection.GetSystemUserById(systemUserId);
 					result = user.DisplayName;
                 }

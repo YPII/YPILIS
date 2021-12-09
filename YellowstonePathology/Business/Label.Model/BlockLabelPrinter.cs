@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Label.Model
             {
                 if (aliquotOrder.IsBlock() == true)
                 {
-                    if (aliquotOrder.LabelType == YellowstonePathology.Business.Specimen.Model.AliquotLabelType.PaperLabel == true)
+                    if (aliquotOrder.LabelType == Business.Specimen.Model.AliquotLabelType.PaperLabel == true)
                     {
                         YellowstonePathology.Business.OrderIdParser orderIdParser = new OrderIdParser(accessionOrder.MasterAccessionNo);
                         if (orderIdParser.IsLegacyMasterAccessionNo == false)

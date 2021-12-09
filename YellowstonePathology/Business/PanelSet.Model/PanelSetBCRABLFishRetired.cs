@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		{
 			this.m_PanelSetId = 74;
 			this.m_PanelSetName = "BCR/ABL FISH - Retired";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.FISH;
+            this.m_CaseType = Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.PublishedDocument;
@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
             string taskDescription = "Gather materials and send to Neogenomics.";
 
-            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription, neogenomicsIrvine));
 
             Business.Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88367", null), 3);

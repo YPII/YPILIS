@@ -29,7 +29,8 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 		private bool m_Submitted;
 		private Nullable<DateTime> m_OrderDate;
 		private Nullable<DateTime> m_OrderTime;
-		private string m_OrderedBy;
+        private Nullable<DateTime> m_DateOrderReceived;
+        private string m_OrderedBy;
 		private string m_PFirstName;
 		private string m_PLastName;
 		private string m_PMiddleInitial;
@@ -94,6 +95,19 @@ namespace YellowstonePathology.Business.ClientOrder.Model
         private string m_SymptomaticType;
         private string m_PatientCategory;
         private bool m_HighPriority;
+
+        private bool m_DistributeToPatient;
+        private string m_PatientDistributionType;
+        private string m_EmailAddress;
+        private string m_PPhone;
+
+        private string m_ProviderSignature;
+        private Nullable<DateTime> m_DateSigned;
+        private bool m_Reconciled;
+        private string m_CollectionFacilityId;
+        private string m_ICD10Code;
+        private string m_PaymentType;
+        private string m_PatientPaymentInstructions;
 
         public ClientOrder()
         {
@@ -205,6 +219,22 @@ namespace YellowstonePathology.Business.ClientOrder.Model
                 {
                     this.m_OrderTime = value;
                     this.NotifyPropertyChanged("OrderTime");
+                }
+            }
+        }
+
+        [DataMember]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
+        public Nullable<DateTime> DateOrderReceived
+        {
+            get { return this.m_DateOrderReceived; }
+            set
+            {
+                if (this.m_DateOrderReceived != value)
+                {
+                    this.m_DateOrderReceived = value;
+                    this.NotifyPropertyChanged("DateOrderReceived");
                 }
             }
         }
@@ -946,6 +976,22 @@ namespace YellowstonePathology.Business.ClientOrder.Model
         [DataMember]
         [PersistentProperty()]
         [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string CollectionFacilityId
+        {
+            get { return this.m_CollectionFacilityId; }
+            set
+            {
+                if (this.m_CollectionFacilityId != value)
+                {
+                    this.m_CollectionFacilityId = value;
+                    this.NotifyPropertyChanged("CollectionFacilityId");
+                }
+            }
+        }
+
+        [DataMember]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
         public string PatientType
         {
             get { return this.m_PatientType; }
@@ -1211,6 +1257,158 @@ namespace YellowstonePathology.Business.ClientOrder.Model
                 {
                     this.m_HighPriority = value;
                     this.NotifyPropertyChanged("HighPriority");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+        public bool DistributeToPatient
+        {
+            get { return this.m_DistributeToPatient; }
+            set
+            {
+                if (this.m_DistributeToPatient != value)
+                {
+                    this.m_DistributeToPatient = value;
+                    this.NotifyPropertyChanged("DistributeToPatient");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public string PatientDistributionType
+        {
+            get { return this.m_PatientDistributionType; }
+            set
+            {
+                if (this.m_PatientDistributionType != value)
+                {
+                    this.m_PatientDistributionType = value;
+                    this.NotifyPropertyChanged("PatientDistributionType");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public string EmailAddress
+        {
+            get { return this.m_EmailAddress; }
+            set
+            {
+                if (this.m_EmailAddress != value)
+                {
+                    this.m_EmailAddress = value;
+                    this.NotifyPropertyChanged("EmailAddress");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public string PPhone
+        {
+            get { return this.m_PPhone; }
+            set
+            {
+                if (this.m_PPhone != value)
+                {
+                    this.m_PPhone = value;
+                    this.NotifyPropertyChanged("PPhone");
+                }
+            }
+        }
+
+        [DataMember]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "3", "null", "datetime")]
+        public Nullable<DateTime> DateSigned
+        {
+            get { return this.m_DateSigned; }
+            set
+            {
+                if (this.m_DateSigned != value)
+                {
+                    this.m_DateSigned = value;
+                    this.NotifyPropertyChanged("DateSigned");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "250", "null", "varchar")]
+        public string ProviderSignature
+        {
+            get { return this.m_ProviderSignature; }
+            set
+            {
+                if (this.m_ProviderSignature != value)
+                {
+                    this.m_ProviderSignature = value;
+                    this.NotifyPropertyChanged("ProviderSignature");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "45", "null", "varchar")]
+        public string ICD10Code
+        {
+            get { return this.m_ICD10Code; }
+            set
+            {
+                if (this.m_ICD10Code != value)
+                {
+                    this.m_ICD10Code = value;
+                    this.NotifyPropertyChanged("ICD10Code");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+        public bool Reconciled
+        {
+            get { return this.m_Reconciled; }
+            set
+            {
+                if (this.m_Reconciled != value)
+                {
+                    this.m_Reconciled = value;
+                    this.NotifyPropertyChanged("Reconciled");
+                }
+            }
+        }
+
+        [DataMember]
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
+        public string PaymentType
+        {
+            get { return this.m_PaymentType; }
+            set
+            {
+                if (this.m_PaymentType != value)
+                {
+                    this.m_PaymentType = value;
+                    this.NotifyPropertyChanged("PaymentType");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
+        public string PatientPaymentInstructions
+        {
+            get { return this.m_PatientPaymentInstructions; }
+            set
+            {
+                if (this.m_PatientPaymentInstructions != value)
+                {
+                    this.m_PatientPaymentInstructions = value;
+                    this.NotifyPropertyChanged("PatientPaymentInstructions");
                 }
             }
         }

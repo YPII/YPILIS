@@ -21,6 +21,9 @@ namespace YellowstonePathology.Business.HL7View.Panther
 
             PantherAssay trich = new PantherAssayTrich();
             this.Add(trich);
+
+            PantherAssay covid = new PantherAssayCOVID();
+            this.Add(covid);
         }
     }
 }

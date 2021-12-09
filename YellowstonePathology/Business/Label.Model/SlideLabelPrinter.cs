@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Label.Model
             {
                 if (aliquotOrder.IsSlide() == true)
                 {
-                    if (aliquotOrder.LabelType == YellowstonePathology.Business.Specimen.Model.AliquotLabelType.PaperLabel == true)
+                    if (aliquotOrder.LabelType == Business.Specimen.Model.AliquotLabelType.PaperLabel == true)
                     {
                         SlideLabel slideLabel = new SlideLabel(aliquotOrder, this.m_AccessionOrder);                        
                         this.m_SlideLabelQueue.Enqueue(slideLabel);

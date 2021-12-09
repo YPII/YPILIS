@@ -99,7 +99,7 @@ namespace YellowstonePathology.Business.Test
         public PanelSetOrderCPTCode GetNextItem(string reportNo)
         {
 			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-            string panelSetOrderCPTCodeId = YellowstonePathology.Business.OrderIdParser.GetNextPanelSetOrderCPTCodeId(this, reportNo);
+            string panelSetOrderCPTCodeId = Business.OrderIdParser.GetNextPanelSetOrderCPTCodeId(this, reportNo);
 			PanelSetOrderCPTCode panelSetOrderCPTCode = new PanelSetOrderCPTCode(reportNo, objectId, panelSetOrderCPTCodeId);
             return panelSetOrderCPTCode;
         }
@@ -258,7 +258,7 @@ namespace YellowstonePathology.Business.Test
         {
             for(int i=this.Count-1; i>-1; i--)
             {
-                if (this[i].EntryType == YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated)
+                if (this[i].EntryType == Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated)
                 {
                     if (this[i].PostDate.HasValue == false || this[i].PostDate == DateTime.Today)
                     {
@@ -499,7 +499,7 @@ namespace YellowstonePathology.Business.Test
                     panelSetOrderCPTCode.Quantity = 1;
                     panelSetOrderCPTCode.CPTCode = cpt88305.Code;
                     panelSetOrderCPTCode.CodeType = cpt88305.CodeType.ToString();
-                    panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;
+                    panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;
                     panelSetOrderCPTCode.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + specimenOrder.Description;
                     panelSetOrderCPTCode.SpecimenOrderId = specimenOrder.SpecimenOrderId;
                     panelSetOrderCPTCode.ClientId = clientId;

@@ -50,7 +50,7 @@ namespace YellowstonePathology.UI
         private bool IsValid()
         {
             bool result = true;
-            string formattedDateString = YellowstonePathology.Business.Helper.DateTimeExtensions.FormatDateTimeString(this.m_MilitaryDateTimeTextBox.Text);
+            string formattedDateString = Business.Helper.DateTimeExtensions.FormatDateTimeString(this.m_MilitaryDateTimeTextBox.Text);
             if (YellowstonePathology.Business.Helper.DateTimeExtensions.IsCorrectFormat(formattedDateString) == true)
             {
                 this.m_MilitaryDateTimeTextBox.Text = formattedDateString;

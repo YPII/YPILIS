@@ -33,8 +33,8 @@ namespace YellowstonePathology.UI.Surgical
             this.m_SystemIdentity = systemIdentity;
 
             this.m_SurgicalTestOrder = (YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
-			this.m_PathologistUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
-			this.m_UserPreference = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference;
+			this.m_PathologistUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
+			this.m_UserPreference = Business.User.UserPreferenceInstance.Instance.UserPreference;
 
 			InitializeComponent();
             this.Loaded += DictationTemplatePage_Loaded;

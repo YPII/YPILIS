@@ -28,12 +28,12 @@ namespace YellowstonePathology.Business.ReflexTestingPlan.Model
                 if (panelSetOrderBraf.Final == true)
                 {
                     this.m_IsStepComplete = true;
-					if (panelSetOrderBraf.Result == YellowstonePathology.Business.Test.BRAFV600EK.BRAFResult.Detected)
+					if (panelSetOrderBraf.Result == Business.Test.BRAFV600EK.BRAFResult.Detected)
                     {
                         this.m_Stop = true;
                         this.m_IsStepComplete = true;
                     }
-					else if (panelSetOrderBraf.Result == YellowstonePathology.Business.Test.BRAFV600EK.BRAFResult.NotDetected)
+					else if (panelSetOrderBraf.Result == Business.Test.BRAFV600EK.BRAFResult.NotDetected)
                     {
                         this.m_NextStep = new LynchMLH1ByPCRStep();
                     }

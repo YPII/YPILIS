@@ -38,7 +38,7 @@ namespace YellowstonePathology.UI
         public void MenuItemEditRule_Click(object sender, RoutedEventArgs args)
         {
             YellowstonePathology.Business.Rules.RulesClassItem rulesClassItem = (YellowstonePathology.Business.Rules.RulesClassItem)this.listViewRules.SelectedItem;
-            YellowstonePathology.Business.Rules.BaseRules baseRules = YellowstonePathology.Business.Rules.BaseRules.CreateRuleSetInstance(rulesClassItem.ClassType);
+            YellowstonePathology.Business.Rules.BaseRules baseRules = Business.Rules.BaseRules.CreateRuleSetInstance(rulesClassItem.ClassType);
             baseRules.EditRuleSet();
         }
 

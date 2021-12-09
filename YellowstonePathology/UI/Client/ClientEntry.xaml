@@ -4,7 +4,7 @@
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:validationRules="clr-namespace:YellowstonePathology.UI.ValidationRules"
-        Title="Client Entry" Height="650"  Width="900" FontSize="14"
+        Title="Client Entry" Height="770"  Width="900" FontSize="14"
 		WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
 
 	<Grid>
@@ -28,6 +28,7 @@
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
@@ -42,6 +43,7 @@
 						<RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
@@ -136,6 +138,28 @@
                                         RestrictToAscii="False" AllowPromptAsInput="False" IncludeLiteralsInValue="False" IncludePromptInValue="False" 
                                         ValueDataType="{x:Type sys:String}" Mask="(000) 000\-0000" Value="{Binding Path=Client.AdditionalTestingNotificationFaxProxy}">
                     </wpfx:MaskedTextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="21" Margin="2,2,2,2"  VerticalAlignment="Bottom" HorizontalAlignment="Right">COVID Billing:</TextBlock>
+                    <ComboBox Name="ComboBoxCOVIDBillingType" Grid.Column="1" Grid.Row="21" Margin="2,2,2,2" IsEditable="True" Text="{Binding Path=Client.COVIDBillingType}" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
+                        <ComboBoxItem>Client</ComboBoxItem>
+                        <ComboBoxItem>Patient</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="22" Margin="2,2,2,2"  VerticalAlignment="Bottom" HorizontalAlignment="Right">COVID Travel Billing:</TextBlock>
+                    <ComboBox Name="ComboBoxCOVIDTravelBillingType" Grid.Column="1" Grid.Row="22" Margin="2,2,2,2" IsEditable="True" Text="{Binding Path=Client.COVIDTravelBillingType}" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
+                        <ComboBoxItem>Client</ComboBoxItem>
+                        <ComboBoxItem>Patient</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="23" Margin="2,2,2,2"  VerticalAlignment="Bottom" HorizontalAlignment="Right">Order Type:</TextBlock>
+                    <ComboBox Name="ComboBoxOrderType" Grid.Column="1" Grid.Row="23" Margin="2,2,2,2" IsEditable="True" Text="{Binding Path=Client.OrderType}" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
+                        <ComboBoxItem>ECLINICALWORKS</ComboBoxItem>
+                        <ComboBoxItem>ECWRIVERSTONE</ComboBoxItem>
+                        <ComboBoxItem>EPIC</ComboBoxItem>
+                        <ComboBoxItem>MEDITECH</ComboBoxItem>
+                        <ComboBoxItem>REQUISITION</ComboBoxItem>
+                        <ComboBoxItem>YPICONNECT</ComboBoxItem>
+                    </ComboBox>
                 </Grid>
 			</TabItem>
 			
@@ -250,58 +274,27 @@
             </TabItem>
 
             <TabItem Header="Supply Order">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*"></ColumnDefinition>
-						<ColumnDefinition Width="Auto"></ColumnDefinition>
-					</Grid.ColumnDefinitions>
-					
-					<StackPanel  Grid.Column="1" Orientation="Vertical" Margin="10">
-						<Button Grid.Row="0" Margin="5,5,5,5" Width="120" Height="30" Content="New" Click="ButtonNewSupplyOrder_Click"/>
-						<Button Grid.Row="4" Margin="5,5,5,5" Width="120" Height="30" Content="Delete" Click="ButtonDeleteSupplyOrder_Click"/>
-					</StackPanel>
-					
-					<ListView Grid.Column="0" Grid.Row="0" Name="ListViewOrderDetails" Margin="10" ItemsSource="{Binding Path=ClientSupplyOrderCollection}" MouseDoubleClick="ListViewOrderDetails_MouseDoubleClick">
-						<ListView.View>
-							<GridView>
-								<GridViewColumn Header="Order Date" DisplayMemberBinding="{Binding Path=OrderDate, Converter={StaticResource ShortDateConverter}}" Width="100" />
-								<GridViewColumn Header="Date Sent Out" DisplayMemberBinding="{Binding Path=DateOrderSent, Converter={StaticResource ShortDateConverter}}" Width="100" />
-							</GridView>
-						</ListView.View>
-					</ListView>
-				</Grid>
-			</TabItem>
-
-            <TabItem Header="Locations">
-
-                <Grid Margin="2,5,2,2">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <ListView Name="ListViewClientLocations" Grid.Column="0" Grid.Row="0" Margin="5,5,5,5" ItemsSource="{Binding Path=Client.ClientLocationCollection}">
+                    <StackPanel  Grid.Column="1" Orientation="Vertical" Margin="10">
+                        <Button Grid.Row="0" Margin="5,5,5,5" Width="120" Height="30" Content="New" Click="ButtonNewSupplyOrder_Click"/>
+                        <Button Grid.Row="4" Margin="5,5,5,5" Width="120" Height="30" Content="Delete" Click="ButtonDeleteSupplyOrder_Click"/>
+                    </StackPanel>
+
+                    <ListView Grid.Column="0" Grid.Row="0" Name="ListViewOrderDetails" Margin="10" ItemsSource="{Binding Path=ClientSupplyOrderCollection}" MouseDoubleClick="ListViewOrderDetails_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Class" Width="100" DisplayMemberBinding="{Binding Path=PatientClass}" />
-                                <GridViewColumn Header="Location" Width="100" DisplayMemberBinding="{Binding Path=PatientLocationCode}" />
-                                <GridViewColumn Header="POS" Width="100" DisplayMemberBinding="{Binding Path=PlaceOfServiceCode}" />
-                                <GridViewColumn Header="Location" Width="100" DisplayMemberBinding="{Binding Path=Location}" />
-                                <GridViewColumn Header="Order Type" Width="100" DisplayMemberBinding="{Binding Path=OrderType}" />
-                                <GridViewColumn Header="Tracking Initiated" Width="100" DisplayMemberBinding="{Binding Path=SpecimenTrackingInitiated}" />
+                                <GridViewColumn Header="Order Date" DisplayMemberBinding="{Binding Path=OrderDate, Converter={StaticResource ShortDateConverter}}" Width="100" />
+                                <GridViewColumn Header="Date Sent Out" DisplayMemberBinding="{Binding Path=DateOrderSent, Converter={StaticResource ShortDateConverter}}" Width="100" />
                             </GridView>
                         </ListView.View>
                     </ListView>
-
-                    <StackPanel Grid.Row="0" Grid.Column="1">
-                        <Button Margin="15,15,15,5" Height="30" Width="140" VerticalAlignment="Top" Content="Add Requisition" Click="ButtonAddClientLocationReq_Click" />
-                        <Button Margin="15,15,15,5" Height="30" Width="140" VerticalAlignment="Top" Content="Add EPIC" Click="ButtonAddClientLocationEPIC_Click" />
-                    </StackPanel>
-
                 </Grid>
-
             </TabItem>
-
         </TabControl>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" Orientation="Horizontal">

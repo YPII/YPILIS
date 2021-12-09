@@ -46,9 +46,9 @@ namespace YellowstonePathology.UI.Login.Receiving
             //this.m_SpecialInstructions = clientOrderDetail.SpecialInstructions;
             this.m_ClientOrder = clientOrder;        
 
-            this.m_TimeToFixationTypeCollection = YellowstonePathology.Business.Specimen.Model.TimeToFixationType.GetTimeToFixationTypeCollection();
-            this.m_FixationTypeCollection = YellowstonePathology.Business.Specimen.Model.FixationType.GetFixationTypeCollection();
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+            this.m_TimeToFixationTypeCollection = Business.Specimen.Model.TimeToFixationType.GetTimeToFixationTypeCollection();
+            this.m_FixationTypeCollection = Business.Specimen.Model.FixationType.GetFixationTypeCollection();
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 
             this.DataContext = this;
 			InitializeComponent();
@@ -342,50 +342,50 @@ namespace YellowstonePathology.UI.Login.Receiving
 
         private void HyperLinkReceivedFresh_Click(object sender, RoutedEventArgs e)
         {            
-            this.m_ClientOrderDetail.ClientFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.Fresh;
-            this.m_ClientOrderDetail.LabFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.Formalin;            
+            this.m_ClientOrderDetail.ClientFixationBinding = Business.Specimen.Model.FixationType.Fresh;
+            this.m_ClientOrderDetail.LabFixationBinding = Business.Specimen.Model.FixationType.Formalin;            
             this.m_ClientOrderDetail.SetFixationStartTime();
         }
 
         private void HyperLinkReceivedInFormalin_Click(object sender, RoutedEventArgs e)
         {            
-            this.m_ClientOrderDetail.ClientFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.Formalin;
-            this.m_ClientOrderDetail.LabFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.Formalin;
+            this.m_ClientOrderDetail.ClientFixationBinding = Business.Specimen.Model.FixationType.Formalin;
+            this.m_ClientOrderDetail.LabFixationBinding = Business.Specimen.Model.FixationType.Formalin;
             this.m_ClientOrderDetail.SetFixationStartTime();
         }
 
         private void HyperLinkReceivedInBPlus_Click(object sender, RoutedEventArgs e)
         {
-            this.m_ClientOrderDetail.ClientFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.BPlusFixative;
-            this.m_ClientOrderDetail.LabFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.Formalin;
+            this.m_ClientOrderDetail.ClientFixationBinding = Business.Specimen.Model.FixationType.BPlusFixative;
+            this.m_ClientOrderDetail.LabFixationBinding = Business.Specimen.Model.FixationType.Formalin;
             this.m_ClientOrderDetail.SetFixationStartTime();
         }
 
         private void HyperLinkReceivedInCytolyt_Click(object sender, RoutedEventArgs e)
         {
-            this.m_ClientOrderDetail.ClientFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.Cytolyt;
-            this.m_ClientOrderDetail.LabFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.PreservCyt;
+            this.m_ClientOrderDetail.ClientFixationBinding = Business.Specimen.Model.FixationType.Cytolyt;
+            this.m_ClientOrderDetail.LabFixationBinding = Business.Specimen.Model.FixationType.PreservCyt;
             this.m_ClientOrderDetail.SetFixationStartTime();
         }
 
         private void HyperLinkReceived95PercentIPA_Click(object sender, RoutedEventArgs e)
         {
-            this.m_ClientOrderDetail.ClientFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.NinetyFivePercentIPA;
-            this.m_ClientOrderDetail.LabFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.NinetyFivePercentIPA;
+            this.m_ClientOrderDetail.ClientFixationBinding = Business.Specimen.Model.FixationType.NinetyFivePercentIPA;
+            this.m_ClientOrderDetail.LabFixationBinding = Business.Specimen.Model.FixationType.NinetyFivePercentIPA;
             this.m_ClientOrderDetail.SetFixationStartTime();
         }
 
         private void HyperLinkReceivedInNotApplicable_Click(object sender, RoutedEventArgs e)
         {
-            this.m_ClientOrderDetail.ClientFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.NotApplicable;
-            this.m_ClientOrderDetail.LabFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.NotApplicable;
+            this.m_ClientOrderDetail.ClientFixationBinding = Business.Specimen.Model.FixationType.NotApplicable;
+            this.m_ClientOrderDetail.LabFixationBinding = Business.Specimen.Model.FixationType.NotApplicable;
             this.m_ClientOrderDetail.SetFixationStartTime();
         }
 
         private void HyperLinkReceivedInPreservCyt_Click(object sender, RoutedEventArgs e)
         {
-            this.m_ClientOrderDetail.ClientFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.PreservCyt;
-            this.m_ClientOrderDetail.LabFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.PreservCyt;
+            this.m_ClientOrderDetail.ClientFixationBinding = Business.Specimen.Model.FixationType.PreservCyt;
+            this.m_ClientOrderDetail.LabFixationBinding = Business.Specimen.Model.FixationType.PreservCyt;
             this.m_ClientOrderDetail.SetFixationStartTime();
         }   
 
@@ -394,10 +394,10 @@ namespace YellowstonePathology.UI.Login.Receiving
             this.TextBoxFixationStartTime.IsEnabled = false;
             this.m_ClientOrderDetail.FixationStartTimeBinding = null;
 
-            this.m_ClientOrderDetail.ClientFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.Formalin;
+            this.m_ClientOrderDetail.ClientFixationBinding = Business.Specimen.Model.FixationType.Formalin;
             this.ComboBoxReceivedIn.IsEnabled = false;
 
-            this.m_ClientOrderDetail.LabFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.Formalin;
+            this.m_ClientOrderDetail.LabFixationBinding = Business.Specimen.Model.FixationType.Formalin;
             this.ComboBoxProcessedIn.IsEnabled = false;            
         }
 

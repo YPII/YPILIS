@@ -13,7 +13,8 @@ namespace YellowstonePathology.Business.Monitor.Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private DateTime m_BlockCountDate;        
+        private DateTime m_BlockCountDate;
+        private int m_NMHBlocks;
         private int m_YPIBlocks;
         private int m_YPIPaths;    
         private int? m_BozemanBlocks;
@@ -44,6 +45,20 @@ namespace YellowstonePathology.Business.Monitor.Model
         public string DateDisplayString
         {
             get { return BlockCountDate.DayOfWeek.ToString() + "-" + BlockCountDate.Month + "/" + BlockCountDate.Day;  }
+        }
+
+        [PersistentProperty()]
+        public int NMHBlocks
+        {
+            get { return this.m_NMHBlocks; }
+            set
+            {
+                if (this.m_NMHBlocks != value)
+                {
+                    this.m_NMHBlocks = value;
+                    this.NotifyPropertyChanged("NMHBlocks");
+                }
+            }
         }
 
         [PersistentProperty()]

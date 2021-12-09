@@ -13,10 +13,10 @@ namespace YellowstonePathology.Business.Test.SPEP
             this.m_PanelSetId = 379;
             this.m_PanelSetName = "Serum Protein Electrophoresis";
             this.m_Abbreviation = "SPEP";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Surgical;
+            this.m_CaseType = Business.CaseType.Surgical;
             this.m_HasTechnicalComponent = false;
             this.m_HasProfessionalComponent = true;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
             this.m_AttemptOrderTargetLookup = true;
@@ -29,8 +29,8 @@ namespace YellowstonePathology.Business.Test.SPEP
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
-            YellowstonePathology.Business.Facility.Model.Facility yp = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility yp = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("84165", "26"), 1);
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);            

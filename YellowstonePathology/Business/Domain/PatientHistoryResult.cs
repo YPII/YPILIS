@@ -20,6 +20,7 @@ namespace YellowstonePathology.Business.Domain
         private DateTime m_AccessionDate;
         private string m_PanelSetName;
         private Nullable<DateTime> m_FinalDate;
+        private string m_ResultCode;
 
         public PatientHistoryResult()
         {
@@ -111,5 +112,16 @@ namespace YellowstonePathology.Business.Domain
 				NotifyPropertyChanged("FinalDate");
 			}
 		}
+
+        [PersistentProperty()]
+        public string ResultCode
+        {
+            get { return this.m_ResultCode; }
+            set
+            {
+                this.m_ResultCode = value;
+                NotifyPropertyChanged("ResultCode");
+            }
+        }
     }
 }

@@ -36,11 +36,11 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 			this.m_AccessionOrder = accessionOrder;
 
             this.m_ProcessorRunCollection = Business.Surgical.ProcessorRunCollection.GetAll();
-            this.m_FixationTypeCollection = YellowstonePathology.Business.Specimen.Model.FixationType.GetFixationTypeCollection();
+            this.m_FixationTypeCollection = Business.Specimen.Model.FixationType.GetFixationTypeCollection();
 
-            this.m_TimeToFixationTypeCollection = YellowstonePathology.Business.Specimen.Model.TimeToFixationType.GetTimeToFixationTypeCollection();
+            this.m_TimeToFixationTypeCollection = Business.Specimen.Model.TimeToFixationType.GetTimeToFixationTypeCollection();
 
-			YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_AccessionOrder.MasterAccessionNo);			
+			YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_AccessionOrder.MasterAccessionNo);			
 			this.m_PageHeaderText = this.m_AccessionOrder.MasterAccessionNo + ": " + this.m_AccessionOrder.PFirstName + " " + this.m_AccessionOrder.PLastName;            
 
 			InitializeComponent();

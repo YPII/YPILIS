@@ -12,10 +12,10 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
         {
             this.m_PanelSetId = 314;
             this.m_PanelSetName = "HER2 Amplification Recount";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = false;
             this.m_HasProfessionalComponent = false;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterM();
             this.m_Active = true;
             this.IsBillable = false;
@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationRecount
             this.m_AllowMultiplePerAccession = true;
             this.m_ExpectedDuration = TimeSpan.FromDays(4);
 
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;
             this.m_TechnicalComponentBillingFacility = ypi;
 

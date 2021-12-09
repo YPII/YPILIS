@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Facility.Model
             {
                 if (instance == null)
                 {
-                    instance = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetAllFacilities();
+                    instance = Business.Gateway.PhysicianClientGateway.GetAllFacilities();
                     instance.Insert(0, new Facility());
                 }
                 return instance;

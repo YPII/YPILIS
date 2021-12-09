@@ -31,7 +31,7 @@ namespace YellowstonePathology.UI.Monitor
 
         private void LoadData()
         {
-            YellowstonePathology.Business.Monitor.Model.MissingInformationCollection missingInformationCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMissingInformationCollection();
+            YellowstonePathology.Business.Monitor.Model.MissingInformationCollection missingInformationCollection = Business.Gateway.AccessionOrderGateway.GetMissingInformationCollection();
             missingInformationCollection.SetState();            
             this.m_MissingInformationCollection = missingInformationCollection;
             this.NotifyPropertyChanged("");
@@ -60,7 +60,7 @@ namespace YellowstonePathology.UI.Monitor
             if(this.ListViewMissingInformation.SelectedItem != null)
             {
                 YellowstonePathology.Business.Monitor.Model.MissingInformation missingInformation = (YellowstonePathology.Business.Monitor.Model.MissingInformation)this.ListViewMissingInformation.SelectedItem;
-                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(missingInformation.MasterAccessionNo, Window.GetWindow(this));                
+                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(missingInformation.MasterAccessionNo, Window.GetWindow(this));                
 
                 YellowstonePathology.Business.User.SystemIdentity systemIdentity = Business.User.SystemIdentity.Instance;
                 this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();

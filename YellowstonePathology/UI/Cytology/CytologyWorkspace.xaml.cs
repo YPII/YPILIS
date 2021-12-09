@@ -36,8 +36,8 @@ namespace YellowstonePathology.UI.Cytology
         public CytologyWorkspace(MainWindowCommandButtonHandler mainWindowCommandButtonHandler, TabItem writer)
         {
             this.m_MainWindowCommandButtonHandler = mainWindowCommandButtonHandler;
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
-            this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
+            this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 
             this.m_Writer = writer;
             this.m_CytologyUI = new CytologyUI(this.m_Writer);

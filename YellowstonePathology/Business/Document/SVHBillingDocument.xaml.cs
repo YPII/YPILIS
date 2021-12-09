@@ -57,7 +57,7 @@ namespace YellowstonePathology.Business.Document
 
 		public void SaveAsTIF(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-			string filename = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+			string filename = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
             filename += orderIdParser.MasterAccessionNo + ".Patient.tif";
             YellowstonePathology.Business.Helper.FileConversionHelper.SaveFixedDocumentAsTiff(this.Document, filename);
         }

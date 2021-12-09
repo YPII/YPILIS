@@ -112,8 +112,8 @@ namespace YellowstonePathology.Business.Test.MDSExtendedByFish
 			result.AppendLine("Interpretation: " + this.m_Interpretation);
 			result.AppendLine();
 
-			result.AppendLine("Probeset Detail: " + this.m_ProbeSetDetail);
-			result.AppendLine();
+			//result.AppendLine("Probeset Detail: " + this.m_ProbeSetDetail);
+			//result.AppendLine();
 
 			result.AppendLine("Nuclei Scored: " + this.m_NucleiScored);
 			result.AppendLine();

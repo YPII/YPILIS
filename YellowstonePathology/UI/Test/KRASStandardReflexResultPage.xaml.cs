@@ -52,8 +52,8 @@ namespace YellowstonePathology.UI.Test
 			this.m_PageNavigator = pageNavigator;
 			this.m_BackButtonVisibility = backButtonVisibility;
 
-            this.m_IndicationCollection = YellowstonePathology.Business.Test.IndicationCollection.GetAll();
-            this.m_KRASStandardReflexResult = YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResultFactory.GetResult(this.m_KRASStandardReflexTestOrder.ReportNo, this.m_AccessionOrder);
+            this.m_IndicationCollection = Business.Test.IndicationCollection.GetAll();
+            this.m_KRASStandardReflexResult = Business.Test.KRASStandardReflex.KRASStandardReflexResultFactory.GetResult(this.m_KRASStandardReflexTestOrder.ReportNo, this.m_AccessionOrder);
 
             this.m_PageHeaderText = "KRAS Standard Reflex Results For: " + this.m_AccessionOrder.PatientDisplayName + " (" + krasStandardReflexTestOrder.ReportNo + ")";
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetByAliquotOrderId(this.m_KRASStandardReflexTestOrder.OrderedOnId);
@@ -125,7 +125,7 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkFinalize_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResult.IsOkToFinal(this.m_KRASStandardReflexResult);
+			YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.KRASStandardReflex.KRASStandardReflexResult.IsOkToFinal(this.m_KRASStandardReflexResult);
 			if (methodResult.Success == true)
 			{
 				this.m_KRASStandardReflexResult.FinalizeResults(this.m_KRASStandardReflexResult.KRASStandardReflexTestOrder);
@@ -138,7 +138,7 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkUnfinalResults_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResult.IsOkToUnFinalize(this.m_KRASStandardReflexResult);
+			YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.KRASStandardReflex.KRASStandardReflexResult.IsOkToUnFinalize(this.m_KRASStandardReflexResult);
 			if (methodResult.Success == true)
 			{
 				this.m_KRASStandardReflexResult.UnFinalizeResults(this.m_KRASStandardReflexResult.KRASStandardReflexTestOrder);
@@ -163,7 +163,7 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkOrderBRAFV600EK_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResult.IsOkToOrderBRAF(this.m_KRASStandardReflexResult);
+			YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.KRASStandardReflex.KRASStandardReflexResult.IsOkToOrderBRAF(this.m_KRASStandardReflexResult);
 			if (methodResult.Success == true)
 			{
 				this.OrderBRAF(this, new EventArgs());
@@ -176,7 +176,7 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkSetResults_Click(object sender, RoutedEventArgs e)
         {            
-            YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResult krasStandardReflexResult = YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResultFactory.GetResult(this.m_KRASStandardReflexTestOrder.ReportNo, this.m_AccessionOrder);
+            YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResult krasStandardReflexResult = Business.Test.KRASStandardReflex.KRASStandardReflexResultFactory.GetResult(this.m_KRASStandardReflexTestOrder.ReportNo, this.m_AccessionOrder);
             krasStandardReflexResult.SetResults();
         }
 

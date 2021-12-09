@@ -29,10 +29,7 @@ namespace YellowstonePathology.Business.View
             result.Add(svhGICenter);
 
             YellowstonePathology.Business.View.ClientLocationView bigSkyDerm = new Business.View.ClientLocationView(1203, 580, "Big Sky Dermatology", "Medical Records");
-            result.Add(bigSkyDerm);
-
-            YellowstonePathology.Business.View.ClientLocationView cmmc = new Business.View.ClientLocationView(219, 84, "CMMC - Laboratory", "Medical Records");
-            result.Add(cmmc);
+            result.Add(bigSkyDerm);            
 
             YellowstonePathology.Business.View.ClientLocationView ysc = new Business.View.ClientLocationView(660, 276, "Yellowstone Surgery Center", "Medical Records");
             result.Add(ysc);
@@ -55,7 +52,7 @@ namespace YellowstonePathology.Business.View
             YellowstonePathology.Business.View.ClientLocationView buttePathology = new Business.View.ClientLocationView(1446, 136, "St. James Healthcare -- Lab", "Medical Records");
             result.Add(buttePathology);
 
-            YellowstonePathology.Business.View.ClientLocationView tallman = new Business.View.ClientLocationView(579, 223, "Tallman Dermatology", "Medical Records");
+            YellowstonePathology.Business.View.ClientLocationView tallman = new Business.View.ClientLocationView(579, 223, "Billings Dermatology and Aesthetics", "Medical Records");
             result.Add(tallman);
 
             YellowstonePathology.Business.View.ClientLocationView bozemanHealth = new Business.View.ClientLocationView(573, 220, "Bozeman Health Deaconess Hospital-Pathology", "Medical Records");
@@ -72,6 +69,14 @@ namespace YellowstonePathology.Business.View
 
             YellowstonePathology.Business.View.ClientLocationView nm = new Business.View.ClientLocationView(587, 228, "Northern Montana Healthcare", "Medical Records");
             result.Add(nm);
+
+            YellowstonePathology.Business.View.ClientLocationView nrs = new Business.View.ClientLocationView(225, 89, "Northern Rockies Surgery Center", "Medical Records");
+            result.Add(nrs);
+
+            YellowstonePathology.Business.View.ClientLocationView ws = new Business.View.ClientLocationView(1046, 446, "Northern Wyoming Surgical Center", "Medical Records");
+            result.Add(ws);
+
+            //Northern Rockies Surg Center and Northern Wyoming Surg Center
 
             return Sort(result);
         }

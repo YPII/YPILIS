@@ -174,7 +174,7 @@ namespace YellowstonePathology.Business.Billing.Model
 				panelSetOrderCPTCode.Modifier = cptCode.Modifier == null ? null : cptCode.Modifier;
 				panelSetOrderCPTCode.CodeableDescription = "Primary Screening (" + panelOrderCytology.ScreenedByName + ")";
 				panelSetOrderCPTCode.CodeableType = "CytologyPrimaryScreening";
-				panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+				panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
 				panelSetOrderCPTCode.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 				panelSetOrderCPTCode.ClientId = this.m_AccessionOrder.ClientId;
                 panelSetOrderCPTCode.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
@@ -200,7 +200,7 @@ namespace YellowstonePathology.Business.Billing.Model
 					panelSetOrderCPTCode.Modifier = null;
 					panelSetOrderCPTCode.CodeableDescription = "Physician Interpretation (" + panelOrderCytology.ScreenedByName + ")";
 					panelSetOrderCPTCode.CodeableType = "CytologyPrimaryScreening";
-					panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+					panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
 					panelSetOrderCPTCode.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 					panelSetOrderCPTCode.ClientId = this.m_AccessionOrder.ClientId;
                     panelSetOrderCPTCode.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;

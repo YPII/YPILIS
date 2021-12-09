@@ -51,21 +51,27 @@ namespace YellowstonePathology.Business.HL7View
             this.m_GroupName = split[9];
             this.m_InusuredsGroupEmployerName = split[11];
                         
-            string [] subNameOfInsuredFields = split[16].Split('^');
-            this.m_NameOfInsured = subNameOfInsuredFields[0];
-            if(subNameOfInsuredFields.Length >= 2)
+            if(split.Length >= 17)
             {
-                this.m_NameOfInsured = this.m_NameOfInsured + ", " + subNameOfInsuredFields[1];
-            }                          
+                string[] subNameOfInsuredFields = split[16].Split('^');
+                this.m_NameOfInsured = subNameOfInsuredFields[0];
+                if (subNameOfInsuredFields.Length >= 2)
+                {
+                    this.m_NameOfInsured = this.m_NameOfInsured + ", " + subNameOfInsuredFields[1];
+                }
+            }            
 
             if (string.IsNullOrEmpty(split[5]) == false)
             {
                 string[] subAddressSubfields = split[5].Split('^');
                 this.m_InsuranceAddressLine1 = subAddressSubfields[0];
-                this.m_InsuranceAddressLine2 = subAddressSubfields[1];
-                this.m_InsuranceCity = subAddressSubfields[2];
-                this.m_InsuranceState = subAddressSubfields[3];
-                this.m_InsuranceZip = subAddressSubfields[4];
+                if(subAddressSubfields.Length >= 5)
+                {
+                    this.m_InsuranceAddressLine2 = subAddressSubfields[1];
+                    this.m_InsuranceCity = subAddressSubfields[2];
+                    this.m_InsuranceState = subAddressSubfields[3];
+                    this.m_InsuranceZip = subAddressSubfields[4];
+                }                
             }
 
             if (split.Length >= 36) this.m_PolicyNumber = split[36];            

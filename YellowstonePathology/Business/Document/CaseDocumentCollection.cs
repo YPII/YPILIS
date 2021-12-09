@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Document
         {
             this.m_ReportNo = reportNo;
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(reportNo);
-			string filePath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);			
+			string filePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);			
 			if (!Directory.Exists(filePath))
 			{
 				filePath = @"\\CFileServer\Documents";
@@ -46,6 +46,19 @@ namespace YellowstonePathology.Business.Document
         {
             get { return this.m_ReportNo; }
         }
+
+		public CaseDocumentCollection GetImages()
+		{
+			CaseDocumentCollection result = new CaseDocumentCollection();
+			foreach(CaseDocument caseDocument in this)
+			{
+				if(caseDocument.Extension.ToUpper() == "JPG")
+				{
+					result.Add(caseDocument);
+				}
+			}
+			return result;
+		}
 
 		public CaseDocumentCollection(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo) : this(reportNo)
 		{
@@ -321,7 +334,7 @@ namespace YellowstonePathology.Business.Document
 		{
 			foreach (YellowstonePathology.Business.ClientOrder.Model.ClientOrderMedia clientOrderMedia in clientOrderMediaCollection)
 			{
-				if (clientOrderMedia.ClientOrderMediaEnum == YellowstonePathology.Business.ClientOrder.Model.ClientOrderMediaEnum.Requisition)
+				if (clientOrderMedia.ClientOrderMediaEnum == Business.ClientOrder.Model.ClientOrderMediaEnum.Requisition)
 				{
 					bool found = false;
 					foreach (CaseDocument caseDocument in this)
@@ -364,7 +377,7 @@ namespace YellowstonePathology.Business.Document
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_ReportNo);
 			CaseDocument nextRequisition = new CaseDocument();
             nextRequisition.CaseDocumentType = "Physical Document";
-			nextRequisition.FullFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_ReportNo + ".REQ." + this.GetNextRequisitionNumber().ToString() + ".TIF";
+			nextRequisition.FullFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_ReportNo + ".REQ." + this.GetNextRequisitionNumber().ToString() + ".TIF";
             return nextRequisition;
         }
 	}

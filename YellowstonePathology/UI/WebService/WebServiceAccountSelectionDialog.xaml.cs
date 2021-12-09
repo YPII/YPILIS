@@ -22,11 +22,14 @@ namespace YellowstonePathology.UI.WebService
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private List<YellowstonePathology.Business.WebService.WebServiceAccountView> m_WebServiceAccountViewList;
-        private List<YellowstonePathology.Business.WebService.WebServiceAccountView> m_LimitedWebServiceAccountViewList;
+        private List<Business.WebService.WebServiceAccountView> m_WebServiceAccountViewList;
+        private List<Business.WebService.WebServiceAccountView> m_LimitedWebServiceAccountViewList;
+
+        private Business.WebService.WebServiceAccount m_CopiedWebServiceAccount;
+
         public WebServiceAccountSelectionDialog()
         {
-            this.m_WebServiceAccountViewList = YellowstonePathology.Business.Gateway.WebServiceGateway.GetWebServiceAccountViewList();
+            this.m_WebServiceAccountViewList = Business.Gateway.WebServiceGateway.GetWebServiceAccountViewList();
             this.m_LimitedWebServiceAccountViewList = this.m_WebServiceAccountViewList;
             DataContext = this;
 
@@ -53,7 +56,7 @@ namespace YellowstonePathology.UI.WebService
                 YellowstonePathology.Business.WebService.WebServiceAccountView webServiceAccountView = (YellowstonePathology.Business.WebService.WebServiceAccountView)this.ListViewWebServiceAccounts.SelectedItem;
                 WebServiceAccountEditDialog dlg = new WebService.WebServiceAccountEditDialog(webServiceAccountView.WebServiceAccountId);
                 dlg.ShowDialog();
-                this.m_WebServiceAccountViewList = YellowstonePathology.Business.Gateway.WebServiceGateway.GetWebServiceAccountViewList();
+                this.m_WebServiceAccountViewList = Business.Gateway.WebServiceGateway.GetWebServiceAccountViewList();
                 this.RefreshLimitedWebServiceAccountViewList();
             }
         }
@@ -62,7 +65,7 @@ namespace YellowstonePathology.UI.WebService
         {
             WebServiceAccountEditDialog dlg = new WebService.WebServiceAccountEditDialog(0);
             dlg.ShowDialog();
-            this.m_WebServiceAccountViewList = YellowstonePathology.Business.Gateway.WebServiceGateway.GetWebServiceAccountViewList();
+            this.m_WebServiceAccountViewList = Business.Gateway.WebServiceGateway.GetWebServiceAccountViewList();
             this.RefreshLimitedWebServiceAccountViewList();
         }
 
@@ -72,9 +75,57 @@ namespace YellowstonePathology.UI.WebService
         }
 
         private void ButtonUpdate_Click(object sender, RoutedEventArgs e)
+        {            
+            //YellowstonePathology.Business.Gateway.WebServiceGateway.UpDateSqlServerFromMySQL();
+            //MessageBox.Show("MS Sql Server Updated from MySql tables WebServiceAccount and WebServiceAccountClient.");
+
+            /*
+            foreach(Business.WebService.WebServiceAccountView accountView in this.ListViewWebServiceAccounts.SelectedItems)
+            {
+                Business.Client.Model.ClientGroupClientCollection clientGroupClientCollection = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientId(accountView.PrimaryClientId.ToString());
+                if(clientGroupClientCollection.Count > 0)
+                {                    
+                    FixWebServiceAccount(clientGroupClientCollection, accountView.WebServiceAccountId);                    
+                }
+                else
+                {
+                   FixWebServiceAccount(accountView.PrimaryClientId, accountView.WebServiceAccountId);
+                }                
+            }
+            */
+        }
+
+        private void FixWebServiceAccount(int clientId, int webServiceAccountId)
         {
-            YellowstonePathology.Business.Gateway.WebServiceGateway.UpDateSqlServerFromMySQL();
-            MessageBox.Show("MS Sql Server Updated from MySql tables WebServiceAccount and WebServiceAccountClient.");
+            Business.WebService.WebServiceAccount account = Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(webServiceAccountId, this);            
+            account.WebServiceAccountClientCollection.Clear();
+
+            Business.WebService.WebServiceAccountClient newWebServiceAccountClient = new Business.WebService.WebServiceAccountClient();
+            int id = Business.Gateway.WebServiceGateway.GetNextWebServiceAccountClientId();
+            newWebServiceAccountClient.WebServiceAccountClientId = id;
+            newWebServiceAccountClient.WebServiceAccountId = webServiceAccountId;
+            newWebServiceAccountClient.ClientId = clientId;
+            account.WebServiceAccountClientCollection.Add(newWebServiceAccountClient);            
+            Business.Persistence.DocumentGateway.Instance.Push(this);
+        }
+
+        private void FixWebServiceAccount(Business.Client.Model.ClientGroupClientCollection clientGroupClientCollection, int webServiceAccountId)
+        {
+            Business.WebService.WebServiceAccount account = Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(webServiceAccountId, this);
+            account.WebServiceAccountClientCollection.Clear();
+            int id = Business.Gateway.WebServiceGateway.GetNextWebServiceAccountClientId();
+
+            foreach (Business.Client.Model.ClientGroupClient clientGroupClient in clientGroupClientCollection)
+            {
+                Business.WebService.WebServiceAccountClient newWebServiceAccountClient = new Business.WebService.WebServiceAccountClient();                
+                newWebServiceAccountClient.WebServiceAccountClientId = id;
+                newWebServiceAccountClient.WebServiceAccountId = webServiceAccountId;
+                newWebServiceAccountClient.ClientId = clientGroupClient.ClientId;
+                account.WebServiceAccountClientCollection.Add(newWebServiceAccountClient);
+                id += 1;
+            }
+            
+            Business.Persistence.DocumentGateway.Instance.Push(this);
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
@@ -82,9 +133,9 @@ namespace YellowstonePathology.UI.WebService
             if (this.ListViewWebServiceAccounts.SelectedItem != null)
             {
                 YellowstonePathology.Business.WebService.WebServiceAccountView webServiceAccountView = (YellowstonePathology.Business.WebService.WebServiceAccountView)this.ListViewWebServiceAccounts.SelectedItem;
-                YellowstonePathology.Business.WebService.WebServiceAccount webServiceAccount = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(webServiceAccountView.WebServiceAccountId, this);
+                YellowstonePathology.Business.WebService.WebServiceAccount webServiceAccount = Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(webServiceAccountView.WebServiceAccountId, this);
                 YellowstonePathology.Business.Persistence.DocumentGateway.Instance.DeleteDocument(webServiceAccount, this);
-                this.m_WebServiceAccountViewList = YellowstonePathology.Business.Gateway.WebServiceGateway.GetWebServiceAccountViewList();
+                this.m_WebServiceAccountViewList = Business.Gateway.WebServiceGateway.GetWebServiceAccountViewList();
                 this.RefreshLimitedWebServiceAccountViewList();
             }
         }
@@ -134,6 +185,34 @@ namespace YellowstonePathology.UI.WebService
                 }
             }
             return result;
+        }
+
+        private void MenuItemCopyClients_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.ListViewWebServiceAccounts.SelectedItem != null)
+            {
+                Business.WebService.WebServiceAccountView webServiceAccountView = (Business.WebService.WebServiceAccountView)this.ListViewWebServiceAccounts.SelectedItem;
+                this.m_CopiedWebServiceAccount = Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(webServiceAccountView.WebServiceAccountId, this);
+                MessageBox.Show($"The web service account for {this.m_CopiedWebServiceAccount.DisplayName} has been copied to the clipboard.");
+            }
+        }
+
+        private void MenuItemPasteClients_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.m_CopiedWebServiceAccount != null)
+            {
+                foreach(Business.WebService.WebServiceAccountView webServiceAccountView in this.ListViewWebServiceAccounts.SelectedItems)
+                {                    
+                    Business.WebService.WebServiceAccount thisAccount = Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(webServiceAccountView.WebServiceAccountId, this);                    
+                    thisAccount.CopyClients(this.m_CopiedWebServiceAccount);
+                    Business.Persistence.DocumentGateway.Instance.Push(this);                    
+                }
+                MessageBox.Show("All done.");
+            }
+            else
+            {
+                MessageBox.Show("You must copy a Web Service Account to the clipboard before performing this action.");
+            }
         }
     }
 }

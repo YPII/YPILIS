@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Logging
 		public ScanLogger(YellowstonePathology.Business.User.SystemIdentity systemIdentity)
         {
             this.m_SystemIdentity = systemIdentity;
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
         }
 
         public void Start()

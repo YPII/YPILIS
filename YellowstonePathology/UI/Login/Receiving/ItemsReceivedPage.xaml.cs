@@ -45,7 +45,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
         public ItemsReceivedPage(YellowstonePathology.UI.Login.Receiving.ClientOrderReceivingHandler clientOrderReceivingHandler)
 		{
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
             this.m_ClientOrderReceivingHandler = clientOrderReceivingHandler;
 
             this.m_ClientOrderMediaCollection = new Business.ClientOrder.Model.ClientOrderMediaCollection();
@@ -81,7 +81,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
         private void ButtonEnterNewContainerId_Click(object sender, RoutedEventArgs e)
         {
-			YellowstonePathology.Business.BarcodeScanning.ContainerBarcode containerBarcode = YellowstonePathology.Business.BarcodeScanning.ContainerBarcode.Parse();
+			YellowstonePathology.Business.BarcodeScanning.ContainerBarcode containerBarcode = Business.BarcodeScanning.ContainerBarcode.Parse();
 			this.ContainerScanReceived(containerBarcode);            
         }        
 		
@@ -168,12 +168,6 @@ namespace YellowstonePathology.UI.Login.Receiving
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
-        }
-
-        private void ButtonAddSlideTrackingSpecimen_Click(object sender, RoutedEventArgs e)
-        {
-            YellowstonePathology.Business.BarcodeScanning.ContainerBarcode containerBarcode = YellowstonePathology.Business.BarcodeScanning.ContainerBarcode.Parse();
-            this.AddSlideTrackingSpecimen(this, containerBarcode);
-        }
+        }        
     }
 }

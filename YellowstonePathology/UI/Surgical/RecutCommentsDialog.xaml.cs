@@ -43,7 +43,7 @@ namespace YellowstonePathology.UI.Surgical
             {
                 if (radioButton.IsChecked == true)
                 {
-                    result = radioButton.Content.ToString();
+                    result = $"{radioButton.Tag.ToString()}: {radioButton.Content.ToString()}";
                     break;
                 }                    
             }

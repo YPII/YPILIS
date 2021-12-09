@@ -85,7 +85,7 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkSufficientTissue_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingResult.IsOkToSetResults(this.m_TestOrder);
+			YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingResult.IsOkToSetResults(this.m_TestOrder);
 			if (methodResult.Success == true)
 			{
                 YellowstonePathology.Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingSufficientTissueResult result = new YellowstonePathology.Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingSufficientTissueResult();
@@ -99,7 +99,7 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkInsufficientTissue_Click(object sender, RoutedEventArgs e)
         {
-			YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingResult.IsOkToSetResults(this.m_TestOrder);
+			YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingResult.IsOkToSetResults(this.m_TestOrder);
 			if (methodResult.Success == true)
 			{
                 YellowstonePathology.Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingInsufficientTissueResult result = new YellowstonePathology.Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingInsufficientTissueResult();

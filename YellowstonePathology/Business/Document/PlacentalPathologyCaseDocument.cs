@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Document
 
 		public override void Show(System.Windows.Controls.ContentControl contentControl, object writer)
 		{
-			/*YellowstonePathology.Document.Result.Data.PlacentalPathologyQuestionnaireData placentalPathologyData = YellowstonePathology.Business.Gateway.XmlGateway.GetPlacentalPathologyQuestionnaire(this.m_PlacentalClientOrderId, writer);
+			/*YellowstonePathology.Document.Result.Data.PlacentalPathologyQuestionnaireData placentalPathologyData = Business.Gateway.XmlGateway.GetPlacentalPathologyQuestionnaire(this.m_PlacentalClientOrderId, writer);
 			if (placentalPathologyData != null)
 			{
 				YellowstonePathology.Document.PlacentalPathologyQuestionnaire placentalPathologyQuestionnare = new YellowstonePathology.Document.PlacentalPathologyQuestionnaire(placentalPathologyData);
@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Document
 				contentControl.Content = documentViewer;
 			}*/
 
-            YellowstonePathology.Business.XPSDocument.Result.Data.PlacentalPathologyQuestionnaireDataV2 placentalPathologyData = YellowstonePathology.Business.Gateway.XmlGateway.GetPlacentalPathologyQuestionnaire1(this.m_PlacentalClientOrderId, writer);
+            YellowstonePathology.Business.XPSDocument.Result.Data.PlacentalPathologyQuestionnaireDataV2 placentalPathologyData = Business.Gateway.XmlGateway.GetPlacentalPathologyQuestionnaire1(this.m_PlacentalClientOrderId, writer);
             if (placentalPathologyData != null)
             {
                 YellowstonePathology.Business.XPSDocument.PlacentalPathologyQuestionnaireV2 placentalPathologyQuestionnare = new YellowstonePathology.Business.XPSDocument.PlacentalPathologyQuestionnaireV2(placentalPathologyData);

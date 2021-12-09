@@ -15,11 +15,11 @@ namespace YellowstonePathology.UI.COVID
 
         }
 
-        public static void UpdateResults(COVIDResultCollection covidResultCollection, System.Windows.Window context)
+        public static void UpdateLC480Results(COVIDResultCollection covidResultCollection, System.Windows.Window context)
         {
             foreach (COVIDResult covidResult in covidResultCollection)
             {
-                if(covidResult.CombinedResult != "Invalid")
+                if(covidResult.Excluded == "Unchecked" && covidResult.CombinedResult != "Invalid")
                 {
                     string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(covidResult.SampleName);
                     if (string.IsNullOrEmpty(masterAccessionNo) != true)

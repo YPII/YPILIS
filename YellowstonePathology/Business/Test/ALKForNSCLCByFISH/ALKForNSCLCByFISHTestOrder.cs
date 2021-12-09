@@ -253,8 +253,8 @@ namespace YellowstonePathology.Business.Test.ALKForNSCLCByFISH
 			result.AppendLine("Interpretation: " + this.m_Interpretation);
 			result.AppendLine();
 
-			result.AppendLine("Probeset Detail: " + this.m_ProbeSetDetail);
-			result.AppendLine();
+			//result.AppendLine("Probeset Detail: " + this.m_ProbeSetDetail);
+			//result.AppendLine();
 
             result.AppendLine("Method: " + this.m_Method);
             result.AppendLine();

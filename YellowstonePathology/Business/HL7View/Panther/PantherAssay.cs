@@ -43,5 +43,32 @@ namespace YellowstonePathology.Business.HL7View.Panther
             get { return this.YPITestId; }
             set { this.m_YPITestId = value; }
         }
+
+        public virtual Business.Rules.MethodResult CanSendOrder(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder)
+        {
+            Business.Rules.MethodResult result = new Rules.MethodResult();
+            result.Success = true;
+
+            if (accessionOrder.SpecimenOrderCollection.HasThinPrepFluidSpecimen() == false)
+            {             
+                result.Success = false;
+                result.Message = "No Thin Prep Fluid Specimen Found.";
+            }
+
+            YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = accessionOrder.SpecimenOrderCollection.GetThinPrep();
+            if (specimenOrder.AliquotOrderCollection.HasPantherAliquot() == false)
+            {
+                result.Success = false;
+                result.Message = "No Panther aliquot found.";
+            }
+            return result;
+        }   
+        
+        public virtual string GetOrderedOnId(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder)
+        {            
+            Business.Specimen.Model.SpecimenOrder specimenOrder = accessionOrder.SpecimenOrderCollection.GetThinPrep();
+            Business.Test.AliquotOrder aliquotOrder = specimenOrder.AliquotOrderCollection.GetPantherAliquot();
+            return aliquotOrder.AliquotOrderId;
+        }
     }
 }

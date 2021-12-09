@@ -23,7 +23,7 @@ namespace YellowstonePathology.UI.Client
 		{
             this.m_PrintDocument = new System.Drawing.Printing.PrintDocument();
             this.m_ClientId = clientId;
-			this.m_ClientPhysicianView = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientPhysicianViewByClientIdV2(this.m_ClientId);
+			this.m_ClientPhysicianView = Business.Gateway.PhysicianClientGateway.GetClientPhysicianViewByClientIdV2(this.m_ClientId);
 			this.m_ClientBarcode = new Business.BarcodeScanning.BarcodeVersion1(Business.BarcodeScanning.BarcodePrefixEnum.CLNT, this.m_ClientId.ToString());            
 		}
 
@@ -68,7 +68,7 @@ namespace YellowstonePathology.UI.Client
             }
                 
             e.Graphics.DrawString(cityStateZip.ToString(), new System.Drawing.Font("Tahoma", 10), System.Drawing.Brushes.Black, new System.Drawing.PointF(x + 50, y + 30));
-            string formattedTelephone = YellowstonePathology.Business.Helper.PhoneNumberHelper.FormatWithDashes(this.m_ClientPhysicianView.Telephone);
+            string formattedTelephone = Business.Helper.PhoneNumberHelper.FormatWithDashes(this.m_ClientPhysicianView.Telephone);
             e.Graphics.DrawString(formattedTelephone, new System.Drawing.Font("Tahoma", 10), System.Drawing.Brushes.Black, new System.Drawing.PointF(x + 50, y + 45));                
             
             this.m_CopiesPrinted += 1;

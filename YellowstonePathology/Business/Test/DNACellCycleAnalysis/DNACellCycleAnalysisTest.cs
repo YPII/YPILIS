@@ -13,8 +13,8 @@ namespace YellowstonePathology.Business.Test.DNACellCycleAnalysis
             this.m_PanelSetName = "DNA Content and Cell Cycle Analysis - Retired";            
 			this.m_AllowMultiplePerAccession = true;
             this.m_ExpectedDuration = TimeSpan.FromHours(24);
-            this.m_CaseType = this.m_CaseType = YellowstonePathology.Business.CaseType.FlowCytometry;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
+            this.m_CaseType = this.m_CaseType = Business.CaseType.FlowCytometry;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
@@ -23,11 +23,11 @@ namespace YellowstonePathology.Business.Test.DNACellCycleAnalysis
             string taskDescription = "Perform DNA Content and Cell Cycle Analysis testing.";
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription));
 
-            YellowstonePathology.Business.Facility.Model.Facility ypiPro = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypiPro = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
             this.m_ProfessionalComponentBillingFacility = ypiPro;
             this.m_ProfessionalComponentFacility = ypiPro;
 
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;
             this.m_TechnicalComponentBillingFacility = ypi;
 

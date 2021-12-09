@@ -267,7 +267,7 @@ namespace YellowstonePathology.Business.Document
 
         public static string GetNotificationDocumentFilePath(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-            string path = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+            string path = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
             path = path + orderIdParser.ReportNo + ".notify.xps";
             return path;
         }
@@ -322,7 +322,7 @@ namespace YellowstonePathology.Business.Document
 
         public static string GetCaseDocumentFullPath(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-			string filePath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+			string filePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
             string[] files = Directory.GetFiles(filePath);
             string fullFileName = string.Empty;
 
@@ -364,13 +364,13 @@ namespace YellowstonePathology.Business.Document
 
 		public static string GetCaseFileNameDoc(YellowstonePathology.Business.OrderIdParser orderIdParser)
 		{
-			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".doc";
+			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".doc";
 			return fileName;
 		}
 
 		public static string GetCaseFileNameXml(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".xml";
+			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".xml";
             return fileName;
         }
 
@@ -379,11 +379,11 @@ namespace YellowstonePathology.Business.Document
             string fileName = string.Empty;
             if (isDOCX == true)
             {
-				fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".docx";
+				fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".docx";
             }
             else
             {
-				fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".doc";
+				fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".doc";
             }
             
             return fileName;
@@ -391,67 +391,67 @@ namespace YellowstonePathology.Business.Document
 
 		public static string GetCaseFileNameDOCX(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".docx";
+			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".docx";
             return fileName;
         }
 
 		public static string GetCaseFileNameXPS(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".xps";            
+			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".xps";            
             return fileName;
         }
 
 		public static string GetCaseFileNamePDF(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".pdf";            
+			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".pdf";            
             return fileName;
         }
 
 		public static string GetCaseFileNameTif(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".tif";            
+			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".tif";            
             return fileName;
         }
 
         public static string GetCaseFileNameTifNotify(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-            string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".notify.tif";
+            string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".notify.tif";
             return fileName;
         }
 
         public static string GetCaseFileNameXMLNotify(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-            string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".notify.xml";
+            string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".notify.xml";
             return fileName;
         }
 
         public static string GetCaseFileNameTifPreAuth(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-            string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".preauth.tif";
+            string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".preauth.tif";
             return fileName;
         }
 
         public static string GetCaseFileNameXMLPreAuth(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-            string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".preauth.xml";
+            string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".preauth.xml";
             return fileName;
         }
 
         public static string GetCaseFileNamePatientTif(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".Patient.tif";
+			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".Patient.tif";
             return fileName;
         }
 
 		public static string GetFirstRequisitionFileName(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".REQ.1.TIF";
+			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".REQ.1.TIF";
             return fileName;
         }
 
 		public static string GetFlowHistogramFileName(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".HST.1.JPG";
+			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".HST.1.JPG";
             return fileName;
         }
 

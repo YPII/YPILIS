@@ -17,6 +17,7 @@ namespace YellowstonePathology.UI
         private YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection m_OrderBrowserListItemCollection;
         private string m_SelectedItemCount;
         private object m_Writer;
+        private string m_ScanSimulation;
 
         public ClientOrderUI(object writer)
         {
@@ -42,6 +43,19 @@ namespace YellowstonePathology.UI
         public YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection OrderBrowserListItemCollection
         {
             get { return this.m_OrderBrowserListItemCollection; }
+        }
+
+        public string ScanSimulation
+        {
+            get { return this.m_ScanSimulation; }
+            set
+            {
+                if (this.m_ScanSimulation != value)
+                {
+                    this.m_ScanSimulation = value;
+                    this.NotifyPropertyChanged("ScanSimulation");
+                }
+            }
         }
 
         public YellowstonePathology.Business.Test.AccessionOrder AccessionOrder
@@ -71,25 +85,37 @@ namespace YellowstonePathology.UI
 
         public void GetClientOrderList()
         {
-            this.m_OrderBrowserListItemCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByOrderDate(this.m_ClientOrderDate);
+            this.m_OrderBrowserListItemCollection = Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByOrderDate(this.m_ClientOrderDate);
+            this.NotifyPropertyChanged("OrderBrowserListItemCollection");
+        }
+
+        public void GetSVHCOVIDClientOrderList()
+        {
+            this.m_OrderBrowserListItemCollection = Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByOrderDateSVHCOVID(this.m_ClientOrderDate);
             this.NotifyPropertyChanged("OrderBrowserListItemCollection");
         }
 
         public void GetClientOrderListByMasterAccessionNo(string masterAccessionNo)
         {
-            this.m_OrderBrowserListItemCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByMasterAccessionNo(masterAccessionNo);
+            this.m_OrderBrowserListItemCollection = Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByMasterAccessionNo(masterAccessionNo);
             this.NotifyPropertyChanged("OrderBrowserListItemCollection");
         }
 
         public void GetClientOrderListByPatientName(YellowstonePathology.Business.PatientName patientName)
         {
-            this.m_OrderBrowserListItemCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByPatientName(patientName.LastName, patientName.FirstName);
+            this.m_OrderBrowserListItemCollection = Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByPatientName(patientName.LastName, patientName.FirstName);
+            this.NotifyPropertyChanged("OrderBrowserListItemCollection");
+        }
+
+        public void GetClientOrderListByContainerId(string containerId)
+        {
+            this.m_OrderBrowserListItemCollection = Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByContainerId(containerId);
             this.NotifyPropertyChanged("OrderBrowserListItemCollection");
         }
 
         public void GetHoldList()
         {
-            this.m_OrderBrowserListItemCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByHoldStatus();
+            this.m_OrderBrowserListItemCollection = Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByHoldStatus();
             this.NotifyPropertyChanged("OrderBrowserListItemCollection");
         }
 

@@ -28,7 +28,7 @@ namespace YellowstonePathology.Business.Test.PlateletAssociatedAntibodies
 			string finalDate = string.Empty;
 			if (panelSetOrderLeukemiaLymphoma.FinalTime.HasValue)
 			{
-				finalDate = YellowstonePathology.Business.Document.CaseReportV2.ReportDateTimeFormat(panelSetOrderLeukemiaLymphoma.FinalTime.Value);
+				finalDate = Business.Document.CaseReportV2.ReportDateTimeFormat(panelSetOrderLeukemiaLymphoma.FinalTime.Value);
 			}
             this.SetXmlNodeData("final_date", finalDate);
 
@@ -41,7 +41,7 @@ namespace YellowstonePathology.Business.Test.PlateletAssociatedAntibodies
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrderLeukemiaLymphoma.OrderedOn, panelSetOrderLeukemiaLymphoma.OrderedOnId);
             this.SetXmlNodeData("specimen_description", specimenOrder.Description);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(panelSetOrderLeukemiaLymphoma.ReportNo);

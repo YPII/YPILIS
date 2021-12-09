@@ -22,9 +22,9 @@ namespace YellowstonePathology.Business.Document
 
 		public override void Show(System.Windows.Controls.ContentControl contentControl, object writer)
 		{
-			//YellowstonePathology.Document.Result.Data.AccessionOrderDataSheetData accessionOrderDataSheetData = YellowstonePathology.Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.MasterAccessionNo);
+			//YellowstonePathology.Document.Result.Data.AccessionOrderDataSheetData accessionOrderDataSheetData = Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.MasterAccessionNo);
 			//YellowstonePathology.Document.Result.Xps.AccessionOrderDataSheet accessionOrderDataSheet = new YellowstonePathology.Document.Result.Xps.AccessionOrderDataSheet(accessionOrderDataSheetData);
-            YellowstonePathology.Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2 accessionOrderDataSheetData = YellowstonePathology.Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.MasterAccessionNo);
+            YellowstonePathology.Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2 accessionOrderDataSheetData = Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.MasterAccessionNo);
             YellowstonePathology.Document.Result.Xps.AccessionOrderDataSheetV2 accessionOrderDataSheet = new YellowstonePathology.Document.Result.Xps.AccessionOrderDataSheetV2(accessionOrderDataSheetData);
             System.Windows.Controls.DocumentViewer documentViewer = new System.Windows.Controls.DocumentViewer();
 			documentViewer.Loaded += new System.Windows.RoutedEventHandler(DocumentViewer_Loaded);

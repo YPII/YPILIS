@@ -12,10 +12,10 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
 			this.m_PanelSetId = 1;
 			this.m_PanelSetName = "JAK2 V617F Mutation Analysis (Molecular)";
             this.m_Abbreviation = "J2V617F";
-			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+			this.m_CaseType = Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;            
             this.m_HasProfessionalComponent = true;
-			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
 
@@ -30,12 +30,12 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
 
             this.m_ExpectedDuration = TimeSpan.FromDays(5);
 
-            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
             this.m_TechnicalComponentFacility = neogenomicsIrvine;
-            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             this.m_ProfessionalComponentFacility = neogenomicsIrvine;
-            this.m_ProfessionalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_ProfessionalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             this.m_HasSplitCPTCode = true;            
 
@@ -45,7 +45,7 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
             string taskDescription = "Gather materials and semd to Neo.";
 			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription, neogenomicsIrvine));
 
-            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
+            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceJAK2());
         }
 	}
 }

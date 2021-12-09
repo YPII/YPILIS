@@ -34,7 +34,7 @@ namespace YellowstonePathology.UI.Flow
         {
             this.m_MainWindowCommandButtonHandler = mainWindowCommandButtonHandler;
             this.m_Writer = writer;
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 
             this.m_DocumentViewer = new DocumentWorkspace();
 
@@ -640,7 +640,7 @@ namespace YellowstonePathology.UI.Flow
             {
                 if (this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.PanelSetId != 19 && this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.PanelSetId != 20)
                 {
-                    YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(this.m_FlowUI.AccessionOrder, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma, Business.Document.ReportSaveModeEnum.Draft);
+                    YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_FlowUI.AccessionOrder, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma, Business.Document.ReportSaveModeEnum.Draft);
                     caseDocument.Render();
 
                     YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(caseDocument.SaveFileName);
@@ -663,7 +663,7 @@ namespace YellowstonePathology.UI.Flow
 
         private void MainWindowCommandButtonHandler_ShowCaseDocument(object sender, EventArgs e)
         {
-            YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(this.m_FlowUI.AccessionOrder, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma, Business.Document.ReportSaveModeEnum.Draft);
+            YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_FlowUI.AccessionOrder, this.m_FlowUI.PanelSetOrderLeukemiaLymphoma, Business.Document.ReportSaveModeEnum.Draft);
             caseDocument.Render();
             YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(caseDocument.SaveFileName);
         }
@@ -852,12 +852,12 @@ namespace YellowstonePathology.UI.Flow
 
         private void ShowReportOrderDialog(string reportNo)
         {
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo);
-            YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo);
+            YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
             if (accessionOrder != null)
             {
                 YellowstonePathology.Business.Gateway.ClientOrderGateway clientOrderGateway = new Business.Gateway.ClientOrderGateway();
-                YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(accessionOrder.MasterAccessionNo);
+                YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(accessionOrder.MasterAccessionNo);
                 if (clientOrderCollection.Count == 1)
                 {
                     Login.Receiving.AccessionOrderPath accessionOrderPath = new Login.Receiving.AccessionOrderPath(accessionOrder, clientOrderCollection[0], PageNavigationModeEnum.Standalone);
@@ -879,7 +879,7 @@ namespace YellowstonePathology.UI.Flow
             if (this.m_FlowUI.AccessionOrder != null)
             {
                 YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.ReportNo);
-                string folderPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+                string folderPath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Explorer.exe", folderPath);
@@ -910,7 +910,7 @@ namespace YellowstonePathology.UI.Flow
         {
             if (this.m_FlowUI.AccessionOrder != null)
             {
-                YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_FlowUI.AccessionOrder.MasterAccessionNo);
+                YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_FlowUI.AccessionOrder.MasterAccessionNo);
                 if (clientOrderCollection.Count != 0)
                 {
                     Login.Receiving.AccessionOrderPath accessionOrderPath = new Login.Receiving.AccessionOrderPath(this.m_FlowUI.AccessionOrder, clientOrderCollection[0], PageNavigationModeEnum.Standalone);
@@ -998,7 +998,7 @@ namespace YellowstonePathology.UI.Flow
             if (this.m_FlowUI.PanelSetOrderLeukemiaLymphoma != null)
             {
                 YellowstonePathology.Business.Interface.IOrderTarget orderTarget = this.m_FlowUI.AccessionOrder.SpecimenOrderCollection.GetOrderTarget(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.OrderedOnId);
-                YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+                YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
                 YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(this.m_FlowUI.PanelSetOrderLeukemiaLymphoma.PanelSetId);
                 YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new Business.Test.TestOrderInfo(panelSet, orderTarget, false);
                 Login.Receiving.SpecimenSelectionPage specimenSelectionPage = new Login.Receiving.SpecimenSelectionPage(this.m_FlowUI.AccessionOrder, testOrderInfo);

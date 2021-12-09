@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
 		{			
 			JAK2Exon1214TestOrder panelSetOrder = (JAK2Exon1214TestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\JAK2Exon1214.3.xml";
+			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\JAK2Exon1213.4.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();
@@ -37,7 +37,7 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
 			base.ReplaceText("specimen_description", specimenOrder.Description);
 
-			string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+			string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
 			this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 
 			this.ReplaceText("report_date", YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.ReferenceLabFinalDate));

@@ -12,10 +12,10 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
 			this.m_PanelSetId = 15;
 			this.m_PanelSetName = "Thin Prep Pap";
             this.m_Abbreviation = "PAP";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Cytology;
+            this.m_CaseType = Business.CaseType.Cytology;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = false;
-			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterP();
             this.m_Active = true;
 
@@ -37,15 +37,15 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             this.m_AddAliquotOnOrder = true;
             this.m_AliquotToAddOnOrder = new YellowstonePathology.Business.Specimen.Model.ThinPrepSlide();
 
-            this.m_TechnicalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
-            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceTHINPREP());
 
             YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapScreeningPanel thinPrepPapScreeningPanel = new Test.ThinPrepPap.ThinPrepPapScreeningPanel();
             this.m_PanelCollection.Add(thinPrepPapScreeningPanel);
 
-            YellowstonePathology.Business.Specimen.Model.Specimen thinPrepFluid = YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNTHNPRPFLD"); // Definition.ThinPrepFluid();
+            YellowstonePathology.Business.Specimen.Model.Specimen thinPrepFluid = Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNTHNPRPFLD"); // Definition.ThinPrepFluid();
             this.OrderTargetTypeCollectionRestrictions.Add(thinPrepFluid);
 		}
 	}

@@ -132,7 +132,7 @@ namespace YellowstonePathology.UI.Surgical
 		{
 			this.m_ReviewContent = null;
 			object historyContent = null;
-			YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(this.PanelSetOrder.PanelSetId);
+			YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(this.PanelSetOrder.PanelSetId);
             if (panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument ||
                 panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.RetiredTestDocument || panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.None)
 			{

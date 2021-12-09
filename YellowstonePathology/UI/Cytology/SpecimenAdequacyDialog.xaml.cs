@@ -23,8 +23,8 @@ namespace YellowstonePathology.UI.Cytology
 
         public SpecimenAdequacyDialog()
         {
-			this.m_SpecimenAdequacyCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSpecimenAdequacy();
-			this.m_SpecimenAdequacyCommentCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSpecimenAdequacyComments();
+			this.m_SpecimenAdequacyCollection = Business.Gateway.AccessionOrderGateway.GetSpecimenAdequacy();
+			this.m_SpecimenAdequacyCommentCollection = Business.Gateway.AccessionOrderGateway.GetSpecimenAdequacyComments();
 
             InitializeComponent();
 

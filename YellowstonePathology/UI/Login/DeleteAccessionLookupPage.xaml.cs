@@ -65,7 +65,7 @@ namespace YellowstonePathology.UI.Login
                 if (textSearchObject is YellowstonePathology.Business.MasterAccessionNo)
                 {
                     YellowstonePathology.Business.MasterAccessionNo masterAccessionNo = (YellowstonePathology.Business.MasterAccessionNo)textSearchObject;
-                    YellowstonePathology.Business.Search.ReportSearchList reportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListByMasterAccessionNo(masterAccessionNo.Value);
+                    YellowstonePathology.Business.Search.ReportSearchList reportSearchList = Business.Gateway.ReportSearchGateway.GetReportSearchListByMasterAccessionNo(masterAccessionNo.Value);
 
                     if (reportSearchList.Count > 0)
                     {

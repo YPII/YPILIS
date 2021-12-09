@@ -23,8 +23,8 @@ namespace YellowstonePathology.Business.Client.Model
                 clientGroupIds.Add("1");
                 clientGroupIds.Add("2");
 
-                YellowstonePathology.Business.Client.Model.ClientGroupClientCollection stVincentAndHRHGroup = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId(clientGroupIds);
-                if (stVincentAndHRHGroup.ClientIdExists(accessionOrder.ClientId) == true || accessionOrder.ClientId == 1759)
+                YellowstonePathology.Business.Client.Model.ClientGroupClientCollection stVincentAndHRHGroup = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId(clientGroupIds);
+                if (stVincentAndHRHGroup.ClientIdExists(accessionOrder.ClientId) == true || accessionOrder.ClientId == 1759 || accessionOrder.ClientId == 54)
                 {
                     //if (string.IsNullOrEmpty(accessionOrder.SvhAccount) == true || string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
                     if (string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
@@ -33,9 +33,9 @@ namespace YellowstonePathology.Business.Client.Model
                     }
                     else
                     {
-                        YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+                        YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
                         YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
-                        if (panelSet.ResultDocumentSource == YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
+                        if (panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
                         {
                             panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
                         }

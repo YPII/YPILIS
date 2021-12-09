@@ -100,20 +100,20 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     }
                 }
 
-                YellowstonePathology.Business.User.SystemUser systemUser = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(screeningPanelOrder.ScreenedById);
+                YellowstonePathology.Business.User.SystemUser systemUser = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(screeningPanelOrder.ScreenedById);
                 if (string.IsNullOrEmpty(systemUser.Signature) == false)
                 {
                     this.AddNextNteElement("Screened By: " + systemUser.Signature, document);
                 }
 
-                string cytoTechFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(screeningPanelOrder.AcceptedTime);
+                string cytoTechFinal = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(screeningPanelOrder.AcceptedTime);
                 this.AddNextNteElement("*** E-Signed " + cytoTechFinal + " ***", document);
                 this.AddBlankNteElement(document);
 
                 if (reviewPanelOrder != null)
                 {
-                    string reviewedBy = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
-                    string reviewedByFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(reviewPanelOrder.AcceptedDate);
+                    string reviewedBy = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
+                    string reviewedByFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(reviewPanelOrder.AcceptedDate);
 
                     if (reviewedBy.IndexOf("MD") >= 0)
                     {
@@ -151,7 +151,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 					YellowstonePathology.Business.Test.HPV.HPVTestOrder hpvTestOrder = (YellowstonePathology.Business.Test.HPV.HPVTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetHPV.PanelSetId);
 					this.AddNextNteElement("High Risk HPV: " + hpvTestOrder.Result, document);
 					this.AddNextNteElement("Reference: Negative", document);
-					string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(hpvTestOrder.FinalTime);
+					string hpvFinal = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(hpvTestOrder.FinalTime);
 					this.AddNextNteElement("Date Finalized: " + hpvFinal, document);
 					this.AddBlankNteElement(document);
 				}
@@ -164,7 +164,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 
 					this.AddNextNteElement("HPV type 18: " + panelSetOrderHPV1618.HPV18Result, document);
 					this.AddNextNteElement("Reference: Negative", document);
-					string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(panelSetOrderHPV1618.FinalTime);
+					string hpvFinal = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(panelSetOrderHPV1618.FinalTime);
 					this.AddNextNteElement("Date Finalized: " + hpvFinal, document);
 					this.AddBlankNteElement(document);
 				}
@@ -178,7 +178,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 
 					this.AddNextNteElement("Neisseria gonorrhoeae: " + panelSetOrderNGCT.NeisseriaGonorrhoeaeResult, document);
 					this.AddNextNteElement("Reference: Negative", document);
-					string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(panelSetOrderNGCT.FinalTime);
+					string hpvFinal = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(panelSetOrderNGCT.FinalTime);
 					this.AddNextNteElement("Date Finalized: " + hpvFinal, document);
 					this.AddBlankNteElement(document);
 				}
@@ -189,7 +189,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 					YellowstonePathology.Business.Test.Trichomonas.TrichomonasTestOrder reportOrderTrichomonas = (YellowstonePathology.Business.Test.Trichomonas.TrichomonasTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetTrichomonas.PanelSetId);
 					this.AddNextNteElement("Trichomonas vaginalis: " + reportOrderTrichomonas.Result, document);
 					this.AddNextNteElement("Reference: Negative", document);
-					string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(reportOrderTrichomonas.FinalTime);
+					string hpvFinal = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(reportOrderTrichomonas.FinalTime);
 					this.AddNextNteElement("Date Finalized: " + hpvFinal, document);
 					this.AddBlankNteElement(document);
 				}
@@ -221,7 +221,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 			YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest panelSetThinPrepPap = new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest();
 			DateTime cutoffDate = this.m_AccessionOrder.AccessionDate.Value.AddYears(-5);
 
-			YellowstonePathology.Business.Domain.PatientHistory patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(this.m_AccessionOrder.PatientId);
+			YellowstonePathology.Business.Domain.PatientHistory patientHistory = Business.Gateway.AccessionOrderGateway.GetPatientHistory(this.m_AccessionOrder.PatientId);
 			YellowstonePathology.Business.Domain.PatientHistory priorPapRelatedHistory = patientHistory.GetPriorPapRelatedHistory(this.m_AccessionOrder.MasterAccessionNo, cutoffDate);
 
 			if (priorPapRelatedHistory.Count == 0)
@@ -233,7 +233,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 			{
 				foreach (YellowstonePathology.Business.Domain.PatientHistoryResult patientHistoryResult in priorPapRelatedHistory)
 				{
-					YellowstonePathology.Business.Test.AccessionOrder patientHistoryAccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(patientHistoryResult.MasterAccessionNo);
+					YellowstonePathology.Business.Test.AccessionOrder patientHistoryAccessionOrder = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(patientHistoryResult.MasterAccessionNo);
 					foreach (YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in patientHistoryAccessionOrder.PanelSetOrderCollection)
 					{
 						string reportNo = null;
@@ -246,7 +246,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 							panelSetOrder.PanelSetId == panelSetTrichomonas.PanelSetId)
 						{
 							reportNo = panelSetOrder.ReportNo;
-							string finaldate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrder.FinalDate);
+							string finaldate = Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrder.FinalDate);
 							result = panelSetOrder.GetResultWithTestName();
 							this.AddNextNteElement("Test: " + panelSetOrder.PanelSetName + " Report No: " + reportNo + " Result: " + result + " Final Date: " + finaldate, document);
 							this.AddBlankNteElement(document);

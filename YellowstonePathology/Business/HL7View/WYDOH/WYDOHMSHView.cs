@@ -9,6 +9,7 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
 	public class WYDOHMSHView
 	{
         public static string CLIANUMBER = "27D0946844";
+        public static string OID = "2.16.840.1.113883.3.9286.1";
 
         Hl7Client m_Client;
         Hl7MessageType m_MessageType;
@@ -39,7 +40,8 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
             mshElement.Add(msh03Element);
 
             XElement msh04Element = new XElement("MSH.4");
-            XElement msh0401Element = new XElement("MSH.4.1", "YPIBILLINGS");
+            XElement msh0401Element = new XElement("MSH.4.1", "YPILIS");
+            //XElement msh0402Element = new XElement("MSH.4.2", OID);
             XElement msh0402Element = new XElement("MSH.4.2", MshView.CLIANUMBER);
             XElement msh0403Element = new XElement("MSH.4.3", "CLIA");
             msh04Element.Add(msh0401Element);

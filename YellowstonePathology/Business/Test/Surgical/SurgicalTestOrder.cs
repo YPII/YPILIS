@@ -640,7 +640,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 
         public override void SetFacilityIds(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
-            this.ProfessionalComponentFacilityId = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId;
+            this.ProfessionalComponentFacilityId = Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId;
             if (accessionOrder.IsDermatologyClient() == true)
             {
                 if ((accessionOrder.ClientId == 1260 || accessionOrder.ClientId == 1511) && this.AssignedToId == 5132) // Dr. Shannon

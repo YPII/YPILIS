@@ -80,19 +80,19 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     }
                 }
 
-                YellowstonePathology.Business.User.SystemUser systemUser = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(screeningPanelOrder.ScreenedById);
+                YellowstonePathology.Business.User.SystemUser systemUser = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(screeningPanelOrder.ScreenedById);
                 if (string.IsNullOrEmpty(systemUser.Signature) == false)
                 {
                     papTest.AppendLine("Screened By: " + systemUser.Signature);
                 }
 
-                string cytoTechFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(screeningPanelOrder.AcceptedDate);
+                string cytoTechFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(screeningPanelOrder.AcceptedDate);
                 papTest.AppendLine("E-Signed: " + cytoTechFinal);
 
                 if (reviewPanelOrder != null)
                 {
-                    string reviewedBy = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
-                    string reviewedByFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(reviewPanelOrder.AcceptedDate);
+                    string reviewedBy = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
+                    string reviewedByFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(reviewPanelOrder.AcceptedDate);
 
                     if (reviewedBy.IndexOf("MD") >= 0)
                     {
@@ -147,7 +147,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     YellowstonePathology.Business.Test.HPV.HPVTestOrder hpvTestOrder = (YellowstonePathology.Business.Test.HPV.HPVTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetHPV.PanelSetId);
                     testsPerformed.AppendLine("High Risk HPV: " + hpvTestOrder.Result);
                     testsPerformed.AppendLine("Reference: Negative");
-                    string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(hpvTestOrder.FinalDate);
+                    string hpvFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(hpvTestOrder.FinalDate);
                     testsPerformed.AppendLine("Date Finalized: " + hpvFinal);
                 }
 
@@ -159,7 +159,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 
                     testsPerformed.AppendLine("HPV type 18: " + panelSetOrderHPV1618.HPV18Result);
                     testsPerformed.AppendLine("Reference: Negative");
-                    string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderHPV1618.FinalDate);
+                    string hpvFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderHPV1618.FinalDate);
                     testsPerformed.AppendLine("Date Finalized: " + hpvFinal);
                 }
 
@@ -172,7 +172,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 
                     testsPerformed.AppendLine("Neisseria gonorrhoeae: " + panelSetOrderNGCT.NeisseriaGonorrhoeaeResult);
                     testsPerformed.AppendLine("Reference: Negative");
-                    string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderNGCT.FinalDate);
+                    string hpvFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderNGCT.FinalDate);
                     testsPerformed.AppendLine("Date Finalized: " + hpvFinal);
                 }
 
@@ -182,7 +182,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     YellowstonePathology.Business.Test.Trichomonas.TrichomonasTestOrder reportOrderTrichomonas = (YellowstonePathology.Business.Test.Trichomonas.TrichomonasTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetTrichomonas.PanelSetId);
                     testsPerformed.AppendLine("Trichomonas vaginalis: " + reportOrderTrichomonas.Result);
                     testsPerformed.AppendLine("Reference: Negative");
-                    string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(reportOrderTrichomonas.FinalDate);
+                    string hpvFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(reportOrderTrichomonas.FinalDate);
                     testsPerformed.AppendLine("Date Finalized: " + hpvFinal);
                 }
             }
@@ -208,7 +208,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest panelSetThinPrepPap = new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest();
             DateTime cutoffDate = this.m_AccessionOrder.AccessionDate.Value.AddYears(-5);
 
-            YellowstonePathology.Business.Domain.PatientHistory patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(this.m_AccessionOrder.PatientId);
+            YellowstonePathology.Business.Domain.PatientHistory patientHistory = Business.Gateway.AccessionOrderGateway.GetPatientHistory(this.m_AccessionOrder.PatientId);
             YellowstonePathology.Business.Domain.PatientHistory priorPapRelatedHistory = patientHistory.GetPriorPapRelatedHistory(this.m_AccessionOrder.MasterAccessionNo, cutoffDate);
 
             if (priorPapRelatedHistory.Count == 0)
@@ -219,7 +219,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             {
                 foreach (YellowstonePathology.Business.Domain.PatientHistoryResult patientHistoryResult in priorPapRelatedHistory)
                 {
-                    YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(patientHistoryResult.MasterAccessionNo);
+                    YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(patientHistoryResult.MasterAccessionNo);
                     foreach (YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in accessionOrder.PanelSetOrderCollection)
                     {
                         string reportNo = null;
@@ -232,7 +232,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                             panelSetOrder.PanelSetId == panelSetTrichomonas.PanelSetId)
                         {
                             reportNo = panelSetOrder.ReportNo;
-                            string finaldate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrder.FinalDate);
+                            string finaldate = Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrder.FinalDate);
                             result = panelSetOrder.GetResultWithTestName();
                             priorTests.AppendLine("Test: " + panelSetOrder.PanelSetName + " Report No: " + reportNo + " Result: " + result + " Final Date: " + finaldate);
                         }

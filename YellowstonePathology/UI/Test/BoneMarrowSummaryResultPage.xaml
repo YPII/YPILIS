@@ -88,14 +88,33 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="2,2,2,2" FontWeight="Bold">Reports included from this accession:</TextBlock>
-                    <ListView Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="2,2,2,2" Width="300" HorizontalAlignment="Left" ItemsSource="{Binding Path=AccessionReportsIncluded}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="80"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Report Type" Width="200"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+
+                    <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <ListView x:Name="ListViewAccessionReports" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" Width="500" HorizontalAlignment="Left" ItemsSource="{Binding Path=AccessionReportsIncluded}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="80"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Report Type" Width="200"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=IncludeOnSummaryReport}" Header="Include" Width="200"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Height="250">
+                            <TextBlock VerticalAlignment="Center" Margin="5,100,5,5">                    
+                                <Hyperlink Click="HyperLinkExcludeSelectedReport_Click">Exclude from Summary</Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock VerticalAlignment="Center" Margin="5,5,5,5">                    
+                                <Hyperlink Click="HyperLinkIncludeSelectedReport_Click">Include in Summary</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
 
                     <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="2,2,2,2" FontWeight="Bold">Previous Accessions:</TextBlock>
                     <Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">

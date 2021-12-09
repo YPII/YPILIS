@@ -11,10 +11,10 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
 		{
 			this.m_PanelSetId = 125;
 			this.m_PanelSetName = "Invasive Breast Panel";
-			this.m_CaseType = YellowstonePathology.Business.CaseType.Surgical;
+			this.m_CaseType = Business.CaseType.Surgical;
 			this.m_HasTechnicalComponent = true;
 			this.m_HasProfessionalComponent = true;
-			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
 			this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterY();
 			this.m_Active = true;
 
@@ -38,7 +38,7 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
             YellowstonePathology.Business.Task.Model.TaskUnstainedSlideWithAfterSlidePreparation unstainedSlidePreparation = new YellowstonePathology.Business.Task.Model.TaskUnstainedSlideWithAfterSlidePreparation();
 			YellowstonePathology.Business.Task.Model.TaskPerformInhouseMolecularTesting taskPerformInhouseMolecularTesting = new YellowstonePathology.Business.Task.Model.TaskPerformInhouseMolecularTesting(this.m_PanelSetName);
 
-            string task1Description = "Prepare 2 unstained slides with 1 H&E after slide for D-ISH and deliver to Molecular. Prepare ER and PR IHC and deliver to pathologist.";
+            string task1Description = "Prepare 2 unstained slides with 1 H&E after slide for D-ISH and deliver to Molecular. Prepare KI-67, ER and PR IHC and deliver to pathologist.";
 			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Histology, task1Description));
 
             string task2Description = "Receive material from Histology and perform D-ISH testing.";
@@ -47,11 +47,11 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
             string task3Description = "Please check to make sure the Fixation is entered correctly for this case.";
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, task3Description));
 
-            this.m_TechnicalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
-			this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+			this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
-			this.m_ProfessionalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
-			this.m_ProfessionalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+			this.m_ProfessionalComponentFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
+			this.m_ProfessionalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServicePathSummary());
 

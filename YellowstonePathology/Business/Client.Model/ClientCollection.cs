@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Client.Model
         public ClientCollection()
         {
 
-        }        
+        }               
 
         public bool Exists(int clientId)
         {

@@ -14,7 +14,7 @@ namespace YellowstonePathology.Business.Test
 		public SearchEngine()
 		{
 			m_Parameters = new List<object>();
-			m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.None;
+			m_SearchFillEnum = Business.Search.ReportSearchFillEnum.None;
 			this.m_ReportSearchList = new YellowstonePathology.Business.Search.ReportSearchList();
             this.m_AutomatedOrderList = new YellowstonePathology.Business.AutomatedOrderList();
 		}
@@ -74,7 +74,7 @@ namespace YellowstonePathology.Business.Test
 			this.m_Parameters.Add(startDate);
 			this.m_Parameters.Add(endDate);
 			this.m_Parameters.Add(panelSetId);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByDateRange;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByDateRange;
 		}
 
 		public void SetFillByLastMonth(int panelSetId)
@@ -89,7 +89,7 @@ namespace YellowstonePathology.Business.Test
 			this.m_Parameters.Add(startDate);
 			this.m_Parameters.Add(endDate);
 			this.m_Parameters.Add(panelSetId);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByDateRange;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByDateRange;
 		}
 
 		public void SetFillByToday(int panelSetId)
@@ -100,7 +100,7 @@ namespace YellowstonePathology.Business.Test
 			this.m_Parameters.Add(startDate);
 			this.m_Parameters.Add(endDate);
 			this.m_Parameters.Add(panelSetId);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByDateRange;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByDateRange;
 		}
 
 		public void SetFillByYesterday(int panelSetId)
@@ -111,34 +111,34 @@ namespace YellowstonePathology.Business.Test
 			this.m_Parameters.Add(startDate);
 			this.m_Parameters.Add(endDate);
 			this.m_Parameters.Add(panelSetId);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByDateRange;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByDateRange;
 		}
 
 		public void SetFillByReportNo(string reportNo)
 		{
 			this.m_Parameters.Clear();
 			this.m_Parameters.Add(reportNo);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByReportNo;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByReportNo;
 		}
 
 		public void SetFillByNotDistributed(int panelId)
 		{
 			this.m_Parameters.Clear();
 			this.m_Parameters.Add(panelId);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByNotDistributed;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByNotDistributed;
 		}
 
 		public void SetFillByNotFinal(int panelId)
 		{
 			this.m_Parameters.Clear();
 			this.m_Parameters.Add(panelId);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByNotFinalPanelId;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByNotFinalPanelId;
 		}
 
         public void SetFillByInHouseMolecularPending()
         {
             this.m_Parameters.Clear();
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByInHouseMolecularPending;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByInHouseMolecularPending;
         }
 
 		public void SetFillByPatientName(YellowstonePathology.Business.PatientName patientName)
@@ -146,21 +146,21 @@ namespace YellowstonePathology.Business.Test
 			this.m_Parameters.Clear();
 			this.m_Parameters.Add(patientName.LastName);
 			this.m_Parameters.Add(patientName.FirstName);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByPatientName;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByPatientName;
 		}
 
 		public void SetFillByMasterAccessionNo(string masterAccessionNo)
 		{
 			this.m_Parameters.Clear();
 			this.m_Parameters.Add(masterAccessionNo);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByMasterAccessionNo;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByMasterAccessionNo;
 		}
 
 		public void SetFillByNotAudited(string caseType)
 		{
 			this.m_Parameters.Clear();
 			this.m_Parameters.Add(caseType);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByNotAudited;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByNotAudited;
 		}
 
         public void SetFillByPanelSetId(int panelSetId)
@@ -168,14 +168,14 @@ namespace YellowstonePathology.Business.Test
             this.m_Parameters.Clear();
             this.m_Parameters.Add(panelSetId);
             this.m_Parameters.Add(DateTime.Today.AddMonths(-3));
-            this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByPanelSetId;
+            this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByPanelSetId;
         }
 
         public void SetFillByPatientId(string patientId)
 		{
 			this.m_Parameters.Clear();
 			this.m_Parameters.Add(patientId);
-			this.m_SearchFillEnum = YellowstonePathology.Business.Search.ReportSearchFillEnum.ByPatientId;
+			this.m_SearchFillEnum = Business.Search.ReportSearchFillEnum.ByPatientId;
 		}
 
         public YellowstonePathology.Business.AutomatedOrderList AutomatedOrderList

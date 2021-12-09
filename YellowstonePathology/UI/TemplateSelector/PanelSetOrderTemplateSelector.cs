@@ -14,7 +14,7 @@ namespace YellowstonePathology.UI.TemplateSelector
 			if (item != null)
 			{
 				YellowstonePathology.UI.MainWindow mainWindow = Application.Current.MainWindow as YellowstonePathology.UI.MainWindow;
-				YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(((YellowstonePathology.Business.Test.PanelSetOrder)item).PanelSetId);
+				YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(((YellowstonePathology.Business.Test.PanelSetOrder)item).PanelSetId);
                 if (panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument ||
                     panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.RetiredTestDocument)
 				{

@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.HPV
 {
-    public class HPVEPICBeakerObxView : YellowstonePathology.Business.HL7View.EPIC.EPICBeakerObxView
+    public class HPVEPICBeakerObxView : Business.HL7View.EPIC.EPICBeakerObxView
     {
 
         public HPVEPICBeakerObxView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount) 

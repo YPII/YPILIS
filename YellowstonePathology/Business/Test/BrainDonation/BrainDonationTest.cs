@@ -12,10 +12,10 @@ namespace YellowstonePathology.Business.Test.BrainDonation
             this.m_PanelSetId = 242;
             this.m_PanelSetName = "Brain Donation";
             this.m_Abbreviation = "Brain Donation";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = false;
             this.m_HasProfessionalComponent = false;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
             this.m_IsBillable = false;
@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Test.BrainDonation
 
 this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;
             this.m_TechnicalComponentBillingFacility = ypi;
 

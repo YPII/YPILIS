@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
                 new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, reportNo, physicianClientDistribution.PhysicianId, physicianClientDistribution.PhysicianName,
                     physicianClientDistribution.ClientId, physicianClientDistribution.ClientName, physicianClientDistribution.DistributionType, physicianClientDistribution.FaxNumber);
             this.Add(testOrderReportDistribution);
-        }
+        }        
 
         public void AddAlternateDistribution(Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution, string reportNo)
         {
@@ -212,6 +212,20 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             return result;
         }
 
+        public bool ECWRiverstoneDistributionTypeExists()
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType == "Riverstone ECW" || testOrderReportDistribution.DistributionType == "Riverstone ECW->Fax")
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public bool Exists(string testOrderReportDistributionId)
         {
             bool result = false;
@@ -260,6 +274,34 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
                 if (testOrderReportDistribution.Distributed == true)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public bool HasTextDistribution()
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType == "Text")
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public bool HasEPICDistribution()
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType.Contains("EPIC") == true)
                 {
                     result = true;
                     break;
@@ -353,6 +395,19 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
                 {
                     result = testOrderReportDistribution;
                     break;
+                }
+            }
+            return result;
+        }
+
+        public TestOrderReportDistributionCollection GetFaxes()
+        {
+            TestOrderReportDistributionCollection result = new TestOrderReportDistributionCollection();
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType.Contains("Fax") == true)
+                {
+                    result.Add(testOrderReportDistribution);                    
                 }
             }
             return result;

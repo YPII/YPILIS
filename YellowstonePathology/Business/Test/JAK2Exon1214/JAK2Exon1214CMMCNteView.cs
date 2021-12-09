@@ -46,7 +46,7 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
             this.AddNextNteElement("Specimen Information:", document);
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
             this.AddNextNteElement("Specimen Identification: " + specimenOrder.Description, document);
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextNteElement("Collection Date/Time: " + collectionDateTimeString, document);
 
             this.AddBlankNteElement(document);

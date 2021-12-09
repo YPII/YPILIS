@@ -20,8 +20,8 @@ namespace YellowstonePathology.Business.Audit.Model
         {
             this.m_Status = AuditStatusEnum.OK;
             YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
-            YellowstonePathology.Business.Surgical.PQRSMeasureCollection pqrsCollection = YellowstonePathology.Business.Surgical.PQRSMeasureCollection.GetAll();
-            int patientAge = YellowstonePathology.Business.Helper.PatientHelper.GetAge(this.m_AccessionOrder.PBirthdate.Value);
+            YellowstonePathology.Business.Surgical.PQRSMeasureCollection pqrsCollection = Business.Surgical.PQRSMeasureCollection.GetAll();
+            int patientAge = Business.Helper.PatientHelper.GetAge(this.m_AccessionOrder.PBirthdate.Value);
             foreach (YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen in surgicalTestOrder.SurgicalSpecimenCollection)
             {
                 foreach (YellowstonePathology.Business.Surgical.PQRSMeasure pqrsMeasure in pqrsCollection)

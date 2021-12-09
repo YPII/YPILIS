@@ -221,15 +221,15 @@ namespace YellowstonePathology.UI.Monitor
             int rowCount = 0;
             this.m_BackgroundWorker.ReportProgress(1, "Starting processing PSA Files: " + DateTime.Now.ToLongTimeString());
 
-            YellowstonePathology.Business.ReportNoCollection reportNoCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetReportNumbersByPostDate(this.m_PostDate);
+            YellowstonePathology.Business.ReportNoCollection reportNoCollection = Business.Gateway.AccessionOrderGateway.GetReportNumbersByPostDate(this.m_PostDate);
             string workingFolder = System.IO.Path.Combine(m_BaseWorkingFolderPathPSA, this.m_PostDate.ToString("MMddyyyy"));
             if (Directory.Exists(workingFolder) == false)
                 Directory.CreateDirectory(workingFolder);
 
             foreach (YellowstonePathology.Business.ReportNo reportNo in reportNoCollection)
             {
-                string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo.Value);
-                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(masterAccessionNo);
+                string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo.Value);
+                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(masterAccessionNo);
                 YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo.Value);
 
                 if (accessionOrder.UseBillingAgent == true)
@@ -257,8 +257,8 @@ namespace YellowstonePathology.UI.Monitor
         private void ProcessSVHCDMFiles(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             this.m_BackgroundWorker.ReportProgress(1, "Starting processing SVH CDM files.");
-            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection hrhGroup = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("2");
-            YellowstonePathology.Business.ReportNoCollection reportNoCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetReportNumbersBySVHProcess(this.m_PostDate);
+            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection hrhGroup = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("2");
+            YellowstonePathology.Business.ReportNoCollection reportNoCollection = Business.Gateway.AccessionOrderGateway.GetReportNumbersBySVHProcess(this.m_PostDate);
             string workingFolder = System.IO.Path.Combine(this.m_BaseWorkingFolderPathSVH, this.m_PostDate.ToString("MMddyyyy"));
             if (Directory.Exists(workingFolder) == false)
             {
@@ -274,8 +274,8 @@ namespace YellowstonePathology.UI.Monitor
             {
                 this.m_BackgroundWorker.ReportProgress(1, "Processing: " + reportNo.Value);
 
-                string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo.Value);
-                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this);
+                string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo.Value);
+                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this);
 
                 YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo.Value);
                 foreach (Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill in panelSetOrder.PanelSetOrderCPTCodeBillCollection)
@@ -327,16 +327,16 @@ namespace YellowstonePathology.UI.Monitor
             psaBillingDocument.Build();
 
             YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(reportNo);
-            string filePath = System.IO.Path.Combine(YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser), reportNo + ".BillingDetails.xml");
+            string filePath = System.IO.Path.Combine(Business.Document.CaseDocumentPath.GetPath(orderIdParser), reportNo + ".BillingDetails.xml");
             psaBillingDocument.Save(filePath);
         }
 
         private void CopyFiles(string reportNo, string masterAccessionNo, string workingFolder)
         {
-            YellowstonePathology.Business.Document.CaseDocumentCollection caseDocumentCollection = new YellowstonePathology.Business.Document.CaseDocumentCollection(reportNo);
-            YellowstonePathology.Business.Document.CaseDocumentCollection billingCaseDocumentCollection = caseDocumentCollection.GetPsaFiles(reportNo, masterAccessionNo);
+            Business.Document.CaseDocumentCollection caseDocumentCollection = new Business.Document.CaseDocumentCollection(reportNo);
+            Business.Document.CaseDocumentCollection billingCaseDocumentCollection = caseDocumentCollection.GetPsaFiles(reportNo, masterAccessionNo);
 
-            foreach (YellowstonePathology.Business.Document.CaseDocument caseDocument in billingCaseDocumentCollection)
+            foreach (Business.Document.CaseDocument caseDocument in billingCaseDocumentCollection)
             {
                 string sourceFile = caseDocument.FullFileName;
                 string destinationFile = System.IO.Path.Combine(workingFolder, System.IO.Path.GetFileName(sourceFile));
@@ -346,7 +346,7 @@ namespace YellowstonePathology.UI.Monitor
 
         private void CreatePatientTifFile(string reportNo)
         {
-            List<YellowstonePathology.Business.Patient.Model.SVHBillingData> sVHBillingDataList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientImportDataList(reportNo);
+            List<Business.Patient.Model.SVHBillingData> sVHBillingDataList = Business.Gateway.AccessionOrderGateway.GetPatientImportDataList(reportNo);
             if (sVHBillingDataList.Count != 0)
             {
                 YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(reportNo);
@@ -425,11 +425,11 @@ namespace YellowstonePathology.UI.Monitor
             Application.Current.Dispatcher.Invoke((Action)delegate
             {
                 this.m_BackgroundWorker.ReportProgress(1, "Starting faxing report: " + DateTime.Now.ToLongTimeString());
-                Business.XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportData clientBillingDetailReportData = YellowstonePathology.Business.Gateway.XmlGateway.GetClientBillingDetailReport(this.m_PostDate, this.m_PostDate, "1");
+                Business.XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportData clientBillingDetailReportData = Business.Gateway.XmlGateway.GetClientBillingDetailReport(this.m_PostDate, this.m_PostDate, "1");
                 YellowstonePathology.Document.ClientBillingDetailReportV2 clientBillingDetailReport = new Document.ClientBillingDetailReportV2(clientBillingDetailReportData, this.m_PostDate, this.m_PostDate);
                 string tifPath = @"C:\ProgramData\ypi\SVH_BILLING_" + this.m_PostDate.Year + "_" + this.m_PostDate.Month + "_" + this.m_PostDate.Day + ".tif";
                 Business.Helper.FileConversionHelper.SaveFixedDocumentAsTiff(clientBillingDetailReport.FixedDocument, tifPath);
-                Business.ReportDistribution.Model.FaxSubmission.Submit("4062378090", "SVH Billing Report", tifPath);
+                Business.ReportDistribution.Model.FaxSubmission.Submit("4062378090", "SVH Billing Report", tifPath, $"SVH Billing: {DateTime.Now.ToLongTimeString()}");
                 this.m_BackgroundWorker.ReportProgress(1, "Completed faxing report: " + DateTime.Now.ToLongTimeString());
                 Business.Gateway.BillingGateway.UpdateBillingEODProcess(this.m_PostDate, "FaxTheReport");
             });
@@ -482,7 +482,7 @@ namespace YellowstonePathology.UI.Monitor
         private void HandleProcessStatus()
         {
             YellowstonePathology.Business.Gateway.BillingGateway.CreateBillingEODProcess(this.m_PostDate);
-            this.m_EODProcessStatus = YellowstonePathology.Business.Gateway.BillingGateway.GetBillingEODProcessStatus(this.m_PostDate);
+            this.m_EODProcessStatus = Business.Gateway.BillingGateway.GetBillingEODProcessStatus(this.m_PostDate);
         }
 
         private void SetButtonVisibility()

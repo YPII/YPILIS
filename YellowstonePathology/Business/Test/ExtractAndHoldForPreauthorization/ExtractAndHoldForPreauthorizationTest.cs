@@ -13,10 +13,10 @@ namespace YellowstonePathology.Business.Test.ExtractAndHoldForPreauthorization
             this.m_PanelSetId = 300;
             this.m_PanelSetName = "Extract And Hold For Preauthorization";
             this.m_Abbreviation = "Extract And Hold For Preauthorization";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.FlowCytometry;
+            this.m_CaseType = Business.CaseType.FlowCytometry;
             this.m_HasTechnicalComponent = false;
             this.m_HasProfessionalComponent = false;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.None;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.None;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterT();
             this.m_Active = true;
             this.m_NeverDistribute = true;
@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.Test.ExtractAndHoldForPreauthorization
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
             this.m_MonitorPriority = MonitorPriorityNormal;
 
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;
             this.m_TechnicalComponentBillingFacility = ypi;            
         }

@@ -34,8 +34,8 @@ namespace YellowstonePathology.UI.Login
 		{
 			this.m_PageNavigator = pageNavigator;
 			this.m_AccessionOrder = accessionOrder;
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
-			this.m_OrderCommentLogCollection = YellowstonePathology.Business.Gateway.OrderCommentGateway.GetOrderCommentLogCollectionByMasterAccessionNo(this.m_AccessionOrder.MasterAccessionNo);
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
+			this.m_OrderCommentLogCollection = Business.Gateway.OrderCommentGateway.GetOrderCommentLogCollectionByMasterAccessionNo(this.m_AccessionOrder.MasterAccessionNo);
 
 			InitializeComponent();
 			DataContext = this;
@@ -97,7 +97,7 @@ namespace YellowstonePathology.UI.Login
 		{
 			if (SelectedOrderCommentLog != null)
 			{
-                YellowstonePathology.Business.Domain.OrderCommentLog orderCommentLog = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullOrderCommentLog(this.SelectedOrderCommentLog.OrderCommentLogId, this);
+                YellowstonePathology.Business.Domain.OrderCommentLog orderCommentLog = Business.Persistence.DocumentGateway.Instance.PullOrderCommentLog(this.SelectedOrderCommentLog.OrderCommentLogId, this);
                 this.m_OrderCommentLogCollection[this.ListViewOrderCommentList.SelectedIndex] = orderCommentLog;
                 this.ShowCaseNoteDetailsPage(orderCommentLog);
 			}

@@ -27,7 +27,7 @@ namespace YellowstonePathology.UI.Common
 
         public UserPreferencesList()
         {
-            this.m_UserPreferenceList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetAllUserPreferences();
+            this.m_UserPreferenceList = Business.Gateway.AccessionOrderGateway.GetAllUserPreferences();
             InitializeComponent();
             this.DataContext = this;
         }
@@ -51,7 +51,7 @@ namespace YellowstonePathology.UI.Common
             bool? result = dlg.ShowDialog();
             if (result.HasValue && result.Value == true)
             {
-                this.m_UserPreferenceList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetAllUserPreferences();
+                this.m_UserPreferenceList = Business.Gateway.AccessionOrderGateway.GetAllUserPreferences();
                 this.NotifyPropertyChanged("UserPreferenceList");
             }
         }
@@ -69,7 +69,7 @@ namespace YellowstonePathology.UI.Common
                 UserPreferences dlg = new Common.UserPreferences(userPreference);
                 dlg.ShowDialog();
 
-                this.m_UserPreferenceList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetAllUserPreferences();
+                this.m_UserPreferenceList = Business.Gateway.AccessionOrderGateway.GetAllUserPreferences();
                 this.NotifyPropertyChanged("UserPreferenceList");
             }
         }

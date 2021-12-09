@@ -63,7 +63,7 @@ namespace YellowstonePathology.Business.Test.Model
         public int GetChargeableIHCTestOrderCount()
         {
             int result = 0;
-            YellowstonePathology.Business.Test.Model.TestCollection ihcTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetIHCTests();
+            YellowstonePathology.Business.Test.Model.TestCollection ihcTestCollection = Business.Test.Model.TestCollectionInstance.GetIHCTests();
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
             {
@@ -81,7 +81,7 @@ namespace YellowstonePathology.Business.Test.Model
         public int GetOrderedAsDualCount()
         {
             int result = 0;
-            YellowstonePathology.Business.Test.Model.TestCollection ihcTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetIHCTests();
+            YellowstonePathology.Business.Test.Model.TestCollection ihcTestCollection = Business.Test.Model.TestCollectionInstance.GetIHCTests();
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
             {
@@ -112,7 +112,7 @@ namespace YellowstonePathology.Business.Test.Model
         public int GetBillableGradedDualStainCount()
         {
             int result = 0;            
-            YellowstonePathology.Business.Test.Model.TestCollection gradedTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetGradedTests();
+            YellowstonePathology.Business.Test.Model.TestCollection gradedTestCollection = Business.Test.Model.TestCollectionInstance.GetGradedTests();
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
             {
@@ -128,7 +128,7 @@ namespace YellowstonePathology.Business.Test.Model
         public YellowstonePathology.Business.Test.Model.TestOrderCollection GetBillableGradeStains(bool includeOrderedAsDual)
         {
             YellowstonePathology.Business.Test.Model.TestOrderCollection result = new TestOrderCollection();
-            YellowstonePathology.Business.Test.Model.TestCollection gradedTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetGradedTests();
+            YellowstonePathology.Business.Test.Model.TestCollection gradedTestCollection = Business.Test.Model.TestCollectionInstance.GetGradedTests();
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
             {
@@ -144,7 +144,7 @@ namespace YellowstonePathology.Business.Test.Model
         public YellowstonePathology.Business.Test.Model.TestOrderCollection GetBillableCytochemicalStains(bool includeOrderedAsDual)
         {
             YellowstonePathology.Business.Test.Model.TestOrderCollection result = new TestOrderCollection();
-            YellowstonePathology.Business.Test.Model.TestCollection resultTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetCytochemicalTests();
+            YellowstonePathology.Business.Test.Model.TestCollection resultTestCollection = Business.Test.Model.TestCollectionInstance.GetCytochemicalTests();
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
             {
@@ -160,7 +160,7 @@ namespace YellowstonePathology.Business.Test.Model
         public YellowstonePathology.Business.Test.Model.TestOrderCollection GetBillableCytochemicalStainsForMicroorganisms(bool includeOrderedAsDual)
         {
             YellowstonePathology.Business.Test.Model.TestOrderCollection result = new TestOrderCollection();
-            YellowstonePathology.Business.Test.Model.TestCollection resultTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetCytochemicalForMicroorganismsTests();
+            YellowstonePathology.Business.Test.Model.TestCollection resultTestCollection = Business.Test.Model.TestCollectionInstance.GetCytochemicalForMicroorganismsTests();
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
             {
@@ -180,7 +180,7 @@ namespace YellowstonePathology.Business.Test.Model
             exclusions.Add("361"); //Lambda ISH
 
             YellowstonePathology.Business.Test.Model.TestOrderCollection result = new TestOrderCollection();
-            YellowstonePathology.Business.Test.Model.TestCollection ihcTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetIHCTests();
+            YellowstonePathology.Business.Test.Model.TestCollection ihcTestCollection = Business.Test.Model.TestCollectionInstance.GetIHCTests();
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this)
             {                
@@ -211,7 +211,7 @@ namespace YellowstonePathology.Business.Test.Model
 
 		public YellowstonePathology.Business.Test.Model.TestOrder GetNextItem(string panelOrderId, string objectId, string aliquotOrderId, YellowstonePathology.Business.Test.Model.Test test, string comment)
 		{
-			string testOrderId = YellowstonePathology.Business.OrderIdParser.GetNextTestOrderId(this, panelOrderId);
+			string testOrderId = Business.OrderIdParser.GetNextTestOrderId(this, panelOrderId);
 			YellowstonePathology.Business.Test.Model.TestOrder testOrder = new TestOrder(testOrderId, objectId, panelOrderId, aliquotOrderId, test, comment);			
 			return testOrder;
 		}
@@ -248,7 +248,7 @@ namespace YellowstonePathology.Business.Test.Model
             bool result = false;
             foreach (TestOrder testOrder in this)
             {
-                YellowstonePathology.Business.Test.Model.Test test = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone(testOrder.TestId);
+                YellowstonePathology.Business.Test.Model.Test test = Business.Test.Model.TestCollectionInstance.GetClone(testOrder.TestId);
                 if (test.NeedsAcknowledgement == true)
                 {
                     result = true;

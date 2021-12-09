@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Test.NGCT
 			result.Add(new NGCTNGPositiveResult());
 			result.Add(new NGCTNGNegativeResult());
             result.Add(new NGCTInvalidResult());
-			result.Add(new NGCTNoResult());
+			result.Add(new NGCTNoResult());			
 
 			return result;
 		}
@@ -31,6 +31,7 @@ namespace YellowstonePathology.Business.Test.NGCT
 			result.Add(new NGCTNGPositiveResult());
             result.Add(new NGCTInvalidResult());
             result.Add(new NGCTNoResult());
+			result.Add(new NGCTCTNotPerformedResult());
 
 			return result;
 		}

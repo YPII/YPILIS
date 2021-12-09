@@ -128,7 +128,7 @@ namespace YellowstonePathology.Document
                         string billTo = XMLHelper.GetString(panelSetOrderCPTCodeBillElement, "BillTo");
                         if (billTo == "Client")
                         {                            
-                            string noCharge = YellowstonePathology.Document.XMLHelper.GetString(panelSetOrderElement, "NoCharge");
+                            string noCharge = Document.XMLHelper.GetString(panelSetOrderElement, "NoCharge");
                             if (noCharge == "0")
                             {
                                 result = true;
@@ -144,7 +144,7 @@ namespace YellowstonePathology.Document
         private bool HasCLNTMedicareCodes(List<XElement> medicareCodeElements)
         {
             bool result = false;
-            YellowstonePathology.Business.Billing.Model.MedicareCodeCollection medicareCodeCollection = YellowstonePathology.Business.Billing.Model.MedicareCodeCollection.GetAll();
+            YellowstonePathology.Business.Billing.Model.MedicareCodeCollection medicareCodeCollection = Business.Billing.Model.MedicareCodeCollection.GetAll();
             foreach (XElement medicareCodeElement in medicareCodeElements)
             {
                 string cptCode = medicareCodeElement.Element("CPTCode").Value;

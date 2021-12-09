@@ -57,6 +57,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.Add("PHARMCOG", "Pharmacogenetics");
             this.Add("FHGB", "Fetal Hemoglobin");
             this.Add("COVYPI", "SARS-Co-V2");
+            this.Add("520288", "JAK2 Mutation Xeon 12-13");
         }
     }
 }

@@ -37,6 +37,7 @@ namespace YellowstonePathology.Business.Search
         private bool m_LockAquired;
 		private string m_SVHMedicalRecord;
 		private string m_PatientId;
+		private bool m_ITAudited;
 
         public ReportSearchItem()
 		{
@@ -383,6 +384,17 @@ namespace YellowstonePathology.Business.Search
                 this.NotifyPropertyChanged("IsPosted");
             }
         }
+
+		[PersistentProperty()]
+		public bool ITAudited
+		{
+			get { return this.m_ITAudited; }
+			set
+			{
+				this.m_ITAudited = value;
+				this.NotifyPropertyChanged("ITAudited");
+			}
+		}
 
 		[PersistentProperty()]
 		public bool HoldDistribution

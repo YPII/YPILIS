@@ -50,12 +50,12 @@ namespace YellowstonePathology.Business.Typing
             this.m_FluidSpecimenList.Add(fluid);
             this.m_FluidSpecimenList.Add(urine);
 
-            this.m_TypingUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Typing, true);
+            this.m_TypingUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Typing, true);
 
             this.m_SurgicalOrderList = new YellowstonePathology.Business.Surgical.SurgicalOrderList();
             this.m_SurgicalOrderList.FillByAccessionDate(DateTime.Today);
 
-            this.m_PathologistUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
+            this.m_PathologistUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
             YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.AddAllToUserList(this.PathologistUsers, true);
 
             this.m_BillingSpecimenViewCollection = new View.BillingSpecimenViewCollection();
@@ -66,10 +66,10 @@ namespace YellowstonePathology.Business.Typing
 
         public void GetAccessionOrder(string reportNo)
         {
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo);
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo);
             if (string.IsNullOrEmpty(masterAccessionNo) == false)
             {
-                this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
+                this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
 
                 if (this.m_AccessionOrder != null)
                 {

@@ -49,7 +49,7 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
             for (int idx = testingSummaryList.Count - 1; idx > -1; idx--)
             {
                 Business.Test.PanelSetOrder pso = testingSummaryList[idx];
-                if (pso.PanelSetId != surgicalPanelSetId)
+                if (pso.PanelSetId != surgicalPanelSetId && pso.IncludeOnSummaryReport == true)
                 {
                     this.AddNextObxElement("Reference Report No: " + pso.ReportNo, document, "F");
                     this.AddNextObxElement("Test Name: " + pso.PanelSetName, document, "F");

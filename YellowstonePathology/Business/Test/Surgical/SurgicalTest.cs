@@ -12,10 +12,10 @@ namespace YellowstonePathology.Business.Test.Surgical
 			this.m_PanelSetId = 13;
 			this.m_PanelSetName = "Surgical Pathology";
             this.m_Abbreviation = "SRGCL";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Surgical;
+            this.m_CaseType = Business.CaseType.Surgical;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;
-			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterS();
             this.m_Active = true;
             this.m_CanHaveMultipleOrderTargets = true;
@@ -36,13 +36,13 @@ namespace YellowstonePathology.Business.Test.Surgical
 
             this.m_RequiresAssignment = false;
 
-            this.m_TechnicalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
-            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
-            this.m_ProfessionalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
-            this.m_ProfessionalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_ProfessionalComponentFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
+            this.m_ProfessionalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
-            YellowstonePathology.Business.Specimen.Model.Specimen thinPrepSpecimen = YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNTHNPRPFLD");
+            YellowstonePathology.Business.Specimen.Model.Specimen thinPrepSpecimen = Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNTHNPRPFLD");
             this.m_OrderTargetTypeCollectionExclusions.Add(thinPrepSpecimen);
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceYPI());
 		}

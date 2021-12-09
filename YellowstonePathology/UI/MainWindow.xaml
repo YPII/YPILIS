@@ -29,6 +29,7 @@
                     <MenuItem Header="Locked Cases" Click="MenuItemLockedCases_Click"></MenuItem>
                     <MenuItem Header="Update Spelling Dictionary" Click="MenuItemUpdateSpellDictionary_Click"></MenuItem>
                     <MenuItem Header="Delete Test" Click="MenuItemDelete_Click"></MenuItem>
+                    <MenuItem Header="Sync Test" Click="MenuItemSyncTest_Click"></MenuItem>
                 </MenuItem>			
         
 			    <MenuItem Header="_Surgical" Name="MenuItemSurgical">
@@ -59,6 +60,7 @@
                     <MenuItem Header="PDF Transfer" Click="MenuItemPDFTransfer_Click" />
                     <MenuItem Header="Print SVH Labels" Click="MenuItemPrintSVHLabels_Click" />
                     <MenuItem Header="COVID Testing Dialog" Click="MenuItemCOVIDTestingDialog_Click" />
+                    <MenuItem Header="Prostate Biopsy Kits" Click="MenuItemProstateBiopsyKit_Click" />
                 </MenuItem>
 
                 <MenuItem Header="_Client" Name="MenuItemClient">
@@ -104,6 +106,7 @@
                     <MenuItem Name="MenuItemSpecimen" Header="Specimen" Click="MenuItemSpecimen_Click"></MenuItem>
                     <MenuItem Name="MenuItemHolidays" Header="Calendar" Click="MenuItemCalendar_Click"></MenuItem>
                     <MenuItem Name="MenuItemASCCP" Header="ASCCP Rules" Click="MenuItemASCCP_Click"></MenuItem>
+                    <MenuItem Name="MenuItemManagementReports" Header="Management Reports" Click="MenuItemManagementReports_Click"></MenuItem>
                 </MenuItem>
 
                 <MenuItem Header="_Monitor" Name="MenuItemMonitor">

@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Test.EosinophiliaByFISH
         public override void ToXml(XElement document)
         {
             EosinophiliaByFISHTestOrder panelSetOrder = (EosinophiliaByFISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
 
             this.AddCompanyHeader(document);
             this.AddBlankNteElement(document);
@@ -48,7 +48,7 @@ namespace YellowstonePathology.Business.Test.EosinophiliaByFISH
             this.AddNextNteElement("Specimen Information:", document);
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
             this.AddNextNteElement("Specimen Identification: " + specimenOrder.Description, document);
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextNteElement("Collection Date/Time: " + collectionDateTimeString, document);
 
             this.AddBlankNteElement(document);

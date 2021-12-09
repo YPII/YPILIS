@@ -98,8 +98,8 @@ namespace YellowstonePathology.Business.View
             }
             
 			string status = "Created";
-			if(aliquotOrder.StatusDepricated == YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Printed) status = "Printed";
-            if(aliquotOrder.StatusDepricated == YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Validated) status = "Validated";
+			if(aliquotOrder.StatusDepricated == Business.Slide.Model.SlideStatusEnum.Printed) status = "Printed";
+            if(aliquotOrder.StatusDepricated == Business.Slide.Model.SlideStatusEnum.Validated) status = "Validated";
 
             string decal = null;
             if (aliquotOrder.Decal == true) decal = "Decal";

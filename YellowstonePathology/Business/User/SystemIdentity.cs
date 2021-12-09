@@ -26,10 +26,10 @@ namespace YellowstonePathology.Business.User
 
         private SystemIdentity()
         {
-            this.m_User = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserByUserName(System.Windows.Forms.SystemInformation.UserName);
+            this.m_User = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserByUserName(System.Windows.Forms.SystemInformation.UserName);
             this.m_IsKnown = true;
 
-            this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+            this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
             this.m_BarcodeScanPort.SecurityBadgeScanReceived += new Business.BarcodeScanning.BarcodeScanPort.SecurityBadgeScanReceivedHandler(BarcodeScanPort_SecurityBadgeScanReceived);
         }
 
@@ -39,11 +39,11 @@ namespace YellowstonePathology.Business.User
 
             if (this.m_User.UserId == systemUserId)
             {
-                this.m_User = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserByUserName(System.Windows.Forms.SystemInformation.UserName);
+                this.m_User = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserByUserName(System.Windows.Forms.SystemInformation.UserName);
             }
             else
             {
-                this.m_User = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(systemUserId);
+                this.m_User = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(systemUserId);
             }
 
             this.NotifyPropertyChanged("User");
@@ -78,7 +78,7 @@ namespace YellowstonePathology.Business.User
 
         public void SetToLoggedInUser()
         {
-            this.m_User = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserByUserName(System.Windows.Forms.SystemInformation.UserName);
+            this.m_User = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserByUserName(System.Windows.Forms.SystemInformation.UserName);
             this.m_IsKnown = true;
             this.NotifyPropertyChanged("");            
         }             

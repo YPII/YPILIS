@@ -49,7 +49,7 @@ namespace YellowstonePathology.Business.XPSDocument.Result.Data
                 this.m_CollectionTime = dateTimeJoiner.DisplayString;
             }
             
-            this.m_DateReceived = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(specimenOrder.DateReceived);                        
+            this.m_DateReceived = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(specimenOrder.DateReceived);                        
             this.m_ReceivedIn = string.IsNullOrEmpty(specimenOrder.ClientFixation) == false ? specimenOrder.ClientFixation : string.Empty;
             this.m_ProcessedIn = string.IsNullOrEmpty(specimenOrder.LabFixation) == false ? specimenOrder.LabFixation : string.Empty;
             this.m_AccessionTime = specimenOrder.AccessionTime.HasValue ? specimenOrder.AccessionTime.Value.ToShortDateString() + " " + specimenOrder.AccessionTime.Value.ToShortTimeString() : string.Empty;

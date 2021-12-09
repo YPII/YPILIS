@@ -108,7 +108,7 @@ namespace YellowstonePathology.UI.Test
                 {
                     if(string.IsNullOrEmpty(accessionLabelQuantity.AccessionLabel.MasterAccessionNo) == false)
                     {
-						YellowstonePathology.Business.Test.AccessionOrderView accessionOrderView = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetAccessionOrderView(accessionLabelQuantity.AccessionLabel.MasterAccessionNo);
+						YellowstonePathology.Business.Test.AccessionOrderView accessionOrderView = Business.Gateway.AccessionOrderGateway.GetAccessionOrderView(accessionLabelQuantity.AccessionLabel.MasterAccessionNo);
                         if (accessionOrderView != null)
                         {
                             accessionLabelQuantity.AccessionLabel.PatientFirstName = accessionOrderView.PFirstName;

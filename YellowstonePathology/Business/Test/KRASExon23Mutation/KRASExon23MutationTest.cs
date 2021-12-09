@@ -12,10 +12,10 @@ namespace YellowstonePathology.Business.Test.KRASExon23Mutation
 			this.m_PanelSetId = 217;
 			this.m_PanelSetName = "KRAS Exon 2 and 3 Mutation Analysis (Molecular)";
             this.m_Abbreviation = "KRASX23";
-			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+			this.m_CaseType = Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;
 			this.m_HasProfessionalComponent = false;
-			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
 			this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
 			this.m_Active = true;
 
@@ -30,11 +30,11 @@ namespace YellowstonePathology.Business.Test.KRASExon23Mutation
 
             string taskDescription = "Collect paraffin block from Histology and send out to Neo.";
 
-            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Transcription, taskDescription, neogenomicsIrvine));
 
             this.m_TechnicalComponentFacility = neogenomicsIrvine;
-			this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+			this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
 			YellowstonePathology.Business.Task.Model.TaskSendBlockToNeogenomics taskSendBlockToNeogenomics = new YellowstonePathology.Business.Task.Model.TaskSendBlockToNeogenomics();
 			this.m_TaskCollection.Add(taskSendBlockToNeogenomics);

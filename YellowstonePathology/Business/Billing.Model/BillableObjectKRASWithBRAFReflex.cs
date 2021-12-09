@@ -40,7 +40,7 @@ namespace YellowstonePathology.Business.Billing.Model
 						panelSetOrderCPTCode.Modifier = null;
 						panelSetOrderCPTCode.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + this.m_PanelSetOrder.PanelSetName;
 						panelSetOrderCPTCode.CodeableType = "BillableTest";
-						panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+						panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
 						panelSetOrderCPTCode.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 						panelSetOrderCPTCode.ClientId = this.m_AccessionOrder.ClientId;
                         panelSetOrderCPTCode.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;

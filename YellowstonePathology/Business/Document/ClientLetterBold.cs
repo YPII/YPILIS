@@ -33,7 +33,7 @@ namespace YellowstonePathology.Business.Document
 			this.ReplaceText("provider_name", providerName);
 			this.SetXMLNodeParagraphData("letter_body", letterBody);
 
-			string xmlDocumentFileName = YellowstonePathology.Properties.Settings.Default.ClientMissingInformationLetterFileName.Replace("doc", "xml");
+			string xmlDocumentFileName = Properties.Settings.Default.ClientMissingInformationLetterFileName.Replace("doc", "xml");
 			xmlDocument.Save(xmlDocumentFileName);
 
             Business.Helper.FileConversionHelper.ConvertXMLToDoc(xmlDocumentFileName, xmlDocumentFileName.Replace(".xml", ".doc"));

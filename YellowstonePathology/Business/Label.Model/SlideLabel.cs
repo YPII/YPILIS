@@ -51,7 +51,7 @@ namespace YellowstonePathology.Business.Label.Model
             options.BackColor = System.Drawing.Color.White;
             options.ForeColor = System.Drawing.Color.Black;
 
-			string barcodeId = YellowstonePathology.Business.BarcodeScanning.BarcodePrefixEnum.HBLK + this.m_AliquotOrder.AliquotOrderId;
+			string barcodeId = Business.BarcodeScanning.BarcodePrefixEnum.HBLK + this.m_AliquotOrder.AliquotOrderId;
             System.Drawing.Bitmap barcodeBitmap = encoder.EncodeImage(barcodeId, options);
 
             int xOffset = 5;

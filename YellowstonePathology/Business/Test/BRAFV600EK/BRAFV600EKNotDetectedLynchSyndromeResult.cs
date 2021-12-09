@@ -17,9 +17,9 @@ namespace YellowstonePathology.Business.Test.BRAFV600EK
 			"MLH1 associated with Lynch syndrome.  BRAF mutations are highly correlated with sporadic MLH1 methylation and have not been seen in Lynch associated colon " +
 			"cancers.  Therefore, the BRAF gene in the tumor was tested.  The result is negative for BRAF V600E mutation in the tumor. The tumor should be tested for MLH1 " +
 			"methylation to rule out Lynch syndrome.";
-			this.m_Method = YellowstonePathology.Business.Test.BRAFV600EK.BRAFResult.Method;
+			this.m_Method = Business.Test.BRAFV600EK.BRAFResult.Method;
 			this.m_Comment = "Recommend testing for MLH1 methylation.";
-			this.m_References = YellowstonePathology.Business.Test.LynchSyndrome.LSERule.LSEColonReferences;
+			this.m_References = Business.Test.LynchSyndrome.LSERule.LSEColonReferences;
 		}
 	}
 }

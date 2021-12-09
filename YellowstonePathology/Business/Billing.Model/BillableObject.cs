@@ -26,8 +26,8 @@ namespace YellowstonePathology.Business.Billing.Model
 
         public virtual void SetBillingType()
         {
-			YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
-            YellowstonePathology.Business.Billing.Model.BillingRuleSet billingRuleSet = YellowstonePathology.Business.Billing.Model.BillingRuleSetCollection.GetRuleSetByRuleSetId(client.BillingRuleSetId2);
+			YellowstonePathology.Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
+            YellowstonePathology.Business.Billing.Model.BillingRuleSet billingRuleSet = Business.Billing.Model.BillingRuleSetCollection.GetRuleSetByRuleSetId(client.BillingRuleSetId2);
 
             Business.Facility.Model.Facility technicalComponentFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(this.m_PanelSetOrder.TechnicalComponentFacilityId);
 
@@ -55,7 +55,7 @@ namespace YellowstonePathology.Business.Billing.Model
         {
             if (this.IsOkToSet() == true)
             {
-                YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+                YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
                 YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(this.m_PanelSetOrder.PanelSetId);
 				YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByOrderTarget(this.m_PanelSetOrder.OrderedOnId);
 
@@ -69,7 +69,7 @@ namespace YellowstonePathology.Business.Billing.Model
                         panelSetOrderCPTCode.Modifier = panelSetCptCode.CptCode.Modifier;
 						panelSetOrderCPTCode.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + this.m_PanelSetOrder.PanelSetName;
                         panelSetOrderCPTCode.CodeableType = "BillableTest";
-                        panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+                        panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
 						panelSetOrderCPTCode.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 						panelSetOrderCPTCode.ClientId = this.m_AccessionOrder.ClientId;
                         panelSetOrderCPTCode.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
@@ -274,7 +274,7 @@ namespace YellowstonePathology.Business.Billing.Model
         }
 
 
-        public YellowstonePathology.Business.Rules.MethodResult Set()
+        public virtual YellowstonePathology.Business.Rules.MethodResult Set()
         {
             YellowstonePathology.Business.Rules.MethodResult methodResult = new Rules.MethodResult();
             if (this.m_PanelSetOrder.HoldBilling == false)
@@ -290,9 +290,9 @@ namespace YellowstonePathology.Business.Billing.Model
                 methodResult.Message = "This case cannot be set because it is on hold.";
             }
             return methodResult;
-        }
+        }        
 
-        private void HandleUseBillingAgent()
+        public void HandleUseBillingAgent()
         {
             YellowstonePathology.Business.Billing.Model.FeeScheduleCosmetic feeScheduleCosmetic = new YellowstonePathology.Business.Billing.Model.FeeScheduleCosmetic();
             if (this.m_AccessionOrder.FeeSchedule == feeScheduleCosmetic.Name)
@@ -305,9 +305,9 @@ namespace YellowstonePathology.Business.Billing.Model
             }
         }
 
-        public YellowstonePathology.Business.Rules.MethodResult Post()
+        public virtual Business.Rules.MethodResult Post()
         {
-            YellowstonePathology.Business.Rules.MethodResult methodResult = new Rules.MethodResult();
+            Business.Rules.MethodResult methodResult = new Rules.MethodResult();
             if (this.m_PanelSetOrder.HoldBilling == false)
             {
                 this.PostPQRICodes();
@@ -315,12 +315,12 @@ namespace YellowstonePathology.Business.Billing.Model
                 BillingComponent billingComponent = BillingComponent.GetBillingComponent(this.m_PanelSetOrder);
                 billingComponent.Post(this);
 
-                this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.SetPostDate(DateTime.Today);                
+                this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.SetPostDate(DateTime.Today);                                
                 if (this.IsOkToSetPostDate() == true)
                 {
-                    this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.SetPostDate(DateTime.Today);                                        
+                    this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.SetPostDate(DateTime.Today);                   
                 }
-                                                
+
                 this.m_PanelSetOrder.IsPosted = true;                
                 methodResult.Success = true;
             }

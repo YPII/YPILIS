@@ -13,10 +13,10 @@ namespace YellowstonePathology.Business.Test.ChimerismStudyByDNAMarkers
             this.m_PanelSetId = 302;
             this.m_PanelSetName = "Chimerism Study By DNA Markers";
             this.m_Abbreviation = "Chimerism Study By DNA Markers";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
             this.m_IsBillable = true;
@@ -30,7 +30,7 @@ this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Gather materials and send to Children’s Hospital Colorado Laboratory.";
 
-            YellowstonePathology.Business.Facility.Model.Facility childrensFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("CHHOSCO");
+            YellowstonePathology.Business.Facility.Model.Facility childrensFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("CHHOSCO");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription, childrensFacility));
 
             this.m_TechnicalComponentFacility = childrensFacility;

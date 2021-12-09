@@ -259,7 +259,7 @@ namespace YellowstonePathology.Business.Billing.Model
 
 		public void Add(string testId, CptBillingCodeItem cptBillingCodeItem)
 		{
-			YellowstonePathology.Business.Test.Model.StainTest stainTest = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetStainTestByTestId(testId);
+			YellowstonePathology.Business.Test.Model.StainTest stainTest = Business.Gateway.AccessionOrderGateway.GetStainTestByTestId(testId);
 			if (stainTest != null)
 			{
                 cptBillingCodeItem.CptCode = stainTest.CptCode;

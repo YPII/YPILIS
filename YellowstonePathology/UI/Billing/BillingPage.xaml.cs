@@ -66,9 +66,9 @@ namespace YellowstonePathology.UI.Billing
 			this.m_AccessionOrder = accessionOrder;
             this.m_ReportNo = reportNo;
 
-            this.m_FacilityCollection = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance;
+            this.m_FacilityCollection = Business.Facility.Model.FacilityCollection.Instance;
             this.m_FacilityCollection.Insert(0, new Business.Facility.Model.Facility());
-            this.m_SVHClients = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientCollectionByClientGroupId("1");
+            this.m_SVHClients = Business.Gateway.PhysicianClientGateway.GetClientCollectionByClientGroupId("1");
 
             this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
             this.m_PanelSetOrderCPTCodeCollection = this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection;

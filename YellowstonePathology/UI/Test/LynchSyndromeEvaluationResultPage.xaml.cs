@@ -300,7 +300,7 @@ namespace YellowstonePathology.UI.Test
 
         private void FillLSERuleCollection()
         {
-            this.m_LSERuleCollection = YellowstonePathology.Business.Test.LynchSyndrome.LSERuleCollection.GetMatchCollection(this.m_AccessionOrder, this.m_PanelSetOrderLynchSyndromeEvaluation);
+            this.m_LSERuleCollection = Business.Test.LynchSyndrome.LSERuleCollection.GetMatchCollection(this.m_AccessionOrder, this.m_PanelSetOrderLynchSyndromeEvaluation);
         }
     }
 }

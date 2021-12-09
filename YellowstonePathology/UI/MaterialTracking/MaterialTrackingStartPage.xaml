@@ -103,10 +103,10 @@
                 </TextBlock>
                 
                 <TextBlock Grid.Column="0" Grid.Row="17" Margin="2,2,2,2">
-				    <Hyperlink Click="HyperlinkSendMaterialToOnsiteStorage_Click">Send material to onsite storage</Hyperlink>
+				    <Hyperlink Click="HyperlinkSendMaterialToBSD_Click">Send material to BSD</Hyperlink>
                 </TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="18" Margin="2,2,2,2">
-				    <Hyperlink Click="HyperlinkReceiveMaterialFromOnsiteStorage_Click">Receive material from onsite storage</Hyperlink>
+				    <Hyperlink Click="HyperlinkReceiveMaterialFromBSD_Click">Receive material from BSD</Hyperlink>
                 </TextBlock>
 
                 <TextBlock Grid.Column="0" Grid.Row="20" Margin="2,2,2,2">

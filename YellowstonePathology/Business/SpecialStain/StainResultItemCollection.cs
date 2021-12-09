@@ -135,7 +135,7 @@ namespace YellowstonePathology.Business.SpecialStain
 			StainResultItemCollection result = new StainResultItemCollection();
 			foreach (StainResultItem stainresult in this)
 			{
-                if (stainresult.StainType == "Cytochemical" && stainresult.ClientAccessioned == false)
+                if (stainresult.StainType.Contains("Cytochemical") && stainresult.ClientAccessioned == false)
                 {
                     result.Add(stainresult);
                 }
@@ -183,7 +183,7 @@ namespace YellowstonePathology.Business.SpecialStain
 			foreach (StainResultItem stainresult in this)
 			{
 				YellowstonePathology.Business.Test.Model.TestOrder testOrder = testOrderCollection.Get(stainresult.TestOrderId);
-				YellowstonePathology.Business.Test.Model.GradedTest gradedTest = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone(testOrder.TestId) as YellowstonePathology.Business.Test.Model.GradedTest;
+				YellowstonePathology.Business.Test.Model.GradedTest gradedTest = Business.Test.Model.TestCollectionInstance.GetClone(testOrder.TestId) as YellowstonePathology.Business.Test.Model.GradedTest;
 				if (gradedTest != null) result.Add(stainresult);
 			}
 			return result;

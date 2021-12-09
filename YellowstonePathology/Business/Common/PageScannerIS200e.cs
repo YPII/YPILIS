@@ -14,6 +14,7 @@ namespace YellowstonePathology.Business.Common
 
 		protected override void SetScanSettings()
 		{
+			this.ScanSettings.UseDuplex = true;
 		}
 	}
 }

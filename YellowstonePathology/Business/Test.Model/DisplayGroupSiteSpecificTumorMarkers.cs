@@ -11,6 +11,7 @@ namespace YellowstonePathology.Business.Test.Model
         {
             this.m_GroupName = "Site Specific Tumor Markers";
 
+            this.m_List.Add((ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("391")); // Arginase());            
             this.m_List.Add((ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("270")); // NapsinA());            
             this.m_List.Add((ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("161")); // TTF1());
             this.m_List.Add((ImmunoHistochemistryTest)YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("59")); // CA199());            

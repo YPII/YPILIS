@@ -41,7 +41,7 @@ namespace YellowstonePathology.Business.Gateway
 
         public static YellowstonePathology.Business.XPSDocument.Result.Data.PlacentalPathologyQuestionnaireDataV2 GetPlacentalPathologyQuestionnaire1(string clientOrderId, object writer)
         {
-            YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullClientOrder(clientOrderId, writer);
+            YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = Business.Persistence.DocumentGateway.Instance.PullClientOrder(clientOrderId, writer);
             YellowstonePathology.Business.XPSDocument.Result.Data.PlacentalPathologyQuestionnaireDataV2 result = new YellowstonePathology.Business.XPSDocument.Result.Data.PlacentalPathologyQuestionnaireDataV2(clientOrder);
             return result;
         }
@@ -113,7 +113,7 @@ namespace YellowstonePathology.Business.Gateway
         public static Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2 GetAccessionOrderDataSheetData(string masterAccessionNo)
         {
             Test.AccessionOrder accessionOrder = GetAccessionOrder(masterAccessionNo);
-            ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(masterAccessionNo);
+            ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(masterAccessionNo);
             Domain.OrderCommentLogCollection orderCommentLogCollection = Gateway.OrderCommentGateway.GetOrderCommentLogCollectionByMasterAccessionNo(masterAccessionNo);
             Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2 accessionOrderDataSheetData = new Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2(accessionOrder, clientOrderCollection, orderCommentLogCollection);
             return accessionOrderDataSheetData;
@@ -239,5 +239,92 @@ namespace YellowstonePathology.Business.Gateway
 
             return result;
         }
+
+        public static XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportData GetClientBillingDetailReportSVHANumbers(DateTime postDateStart, DateTime postDateEnd, string clientGroupId)
+        {
+            XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportData result = new XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportData();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "prcGetClientBillingDetailReportSVHANumbers_2";
+            cmd.Parameters.AddWithValue("StartDate", postDateStart);
+            cmd.Parameters.AddWithValue("EndDate", postDateEnd);
+            cmd.Parameters.AddWithValue("ClientGroupId", clientGroupId);
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportDataAccessionOrder clientBillingDetailReportDataAccessionOrder = new XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportDataAccessionOrder();
+                        Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(clientBillingDetailReportDataAccessionOrder, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(clientBillingDetailReportDataAccessionOrder);
+                    }
+                    dr.NextResult();
+
+                    while (dr.Read())
+                    {
+                        XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportDataReport clientBillingDetailReportDataReport = new XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportDataReport();
+                        Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(clientBillingDetailReportDataReport, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        foreach (XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportDataAccessionOrder clientBillingDetailReportDataAccessionOrder in result)
+                        {
+                            if (clientBillingDetailReportDataReport.MasterAccessionNo == clientBillingDetailReportDataAccessionOrder.MasterAccessionNo)
+                            {
+                                clientBillingDetailReportDataAccessionOrder.ClientBillingDetailReportDataReports.Add(clientBillingDetailReportDataReport);
+                                break;
+                            }
+
+                        }
+                    }
+                    dr.NextResult();
+
+                    while (dr.Read())
+                    {
+                        Test.PanelSetOrderCPTCode panelSetOrderCPTCode = new Test.PanelSetOrderCPTCode();
+                        Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(panelSetOrderCPTCode, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        foreach (XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportDataAccessionOrder clientBillingDetailReportDataAccessionOrder in result)
+                        {
+                            bool added = false;
+                            foreach (XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportDataReport clientBillingDetailReportDataReport in clientBillingDetailReportDataAccessionOrder.ClientBillingDetailReportDataReports)
+                                if (panelSetOrderCPTCode.ReportNo == clientBillingDetailReportDataReport.ReportNo)
+                                {
+                                    clientBillingDetailReportDataReport.PanelSetOrderCPTCodes.Add(panelSetOrderCPTCode);
+                                    added = true;
+                                    break;
+                                }
+                            if (added) break;
+                        }
+                    }
+                    dr.NextResult();
+
+                    while (dr.Read())
+                    {
+                        Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill = new Test.PanelSetOrderCPTCodeBill();
+                        Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(panelSetOrderCPTCodeBill, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        foreach (XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportDataAccessionOrder clientBillingDetailReportDataAccessionOrder in result)
+                        {
+                            bool added = false;
+                            foreach (XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportDataReport clientBillingDetailReportDataReport in clientBillingDetailReportDataAccessionOrder.ClientBillingDetailReportDataReports)
+                                if (panelSetOrderCPTCodeBill.ReportNo == clientBillingDetailReportDataReport.ReportNo)
+                                {
+                                    clientBillingDetailReportDataReport.PanelSetOrderCPTCodeBills.Add(panelSetOrderCPTCodeBill);
+                                    added = true;
+                                    break;
+                                }
+                            if (added) break;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
     }
 }

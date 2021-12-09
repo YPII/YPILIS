@@ -27,14 +27,14 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
             this.AddNextNTEElement($"Report No: {panelSetOrder.ReportNo}", document);
             this.AddNextNTEElement($"Result: {panelSetOrder.Result}", document);            
 
-            //this.AddAmendments(document);
+            this.AddAmendmentsNTE(document, panelSetOrder, this.m_AccessionOrder);
 
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
             YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = specimenOrder.AliquotOrderCollection.GetByAliquotOrderId(panelSetOrder.OrderedOnId);
             string description = specimenOrder.Description;
             this.AddNextNTEElement($"Specimen: {description}", document);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextNTEElement($"Collection Date/Time: {collectionDateTimeString}", document);
 
             this.AddNextNTEElement($"Method: {panelSetOrder.Method}", document);

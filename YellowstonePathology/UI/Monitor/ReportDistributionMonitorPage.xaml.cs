@@ -30,7 +30,7 @@ namespace YellowstonePathology.UI.Monitor
 
         private void LoadData()
         {
-            this.m_DistributionCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPendingDistributions();
+            this.m_DistributionCollection = Business.Gateway.AccessionOrderGateway.GetPendingDistributions();
             this.m_DistributionCollection.SetState();        
             this.NotifyPropertyChanged("");
         }

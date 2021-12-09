@@ -30,7 +30,7 @@ namespace YellowstonePathology.UI
 			this.m_AccessionOrder = accessionOrder;
             this.m_PanelSetOrder = panelSetOrder;
 
-			this.m_Users = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.AmendmentSigner, true);
+			this.m_Users = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.AmendmentSigner, true);
 			InitializeComponent();
 
 			this.DataContext = this.m_Amendment;

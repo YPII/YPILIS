@@ -11,10 +11,10 @@ namespace YellowstonePathology.Business.Test.IHCQC
 		{
 			this.m_PanelSetId = 201;
 			this.m_PanelSetName = "IHC QC";
-			this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
+			this.m_CaseType = Business.CaseType.IHC;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;            
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterT();
             this.m_Active = true;
             this.m_IsBillable = true;
@@ -27,8 +27,8 @@ namespace YellowstonePathology.Business.Test.IHCQC
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.NothingToPublishReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
 
-            this.m_TechnicalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
-            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 		}
 	}
 }

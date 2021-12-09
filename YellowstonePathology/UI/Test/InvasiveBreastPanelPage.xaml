@@ -106,16 +106,19 @@
 				<TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold">Progesterone Receptor:</TextBlock>
 				<TextBlock Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.PRResultString}" />
 
-				<TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold">HER2 By D-ISH Result:</TextBlock>
-				<TextBlock Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.HER2ResultString}" />
+                <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold">Ki-67 Percentage:</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.Ki67Result}" />
 
-				<TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" FontWeight="Bold">HER2 By FISH Required:</TextBlock>
-				<CheckBox Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Margin="2,2,2,2" IsChecked="{Binding Path=InvasiveBreastPanelResult.IsHER2ByFISHRequired, Mode=OneWay}" IsEnabled="False" />
+                <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" FontWeight="Bold">HER2 By D-ISH Result:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.HER2ResultString}" />
 
-				<TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold">HER2 By FISH Result:</TextBlock>
-				<TextBlock Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.HER2ByFISHResultString}" />
+				<TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold">HER2 By FISH Required:</TextBlock>
+				<CheckBox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Margin="2,2,2,2" IsChecked="{Binding Path=InvasiveBreastPanelResult.IsHER2ByFISHRequired, Mode=OneWay}" IsEnabled="False" />
 
-				<TextBlock Grid.Column="0" Grid.Row="11" FontWeight="Black" Margin="2,2,2,2">Current Orders:</TextBlock>
+				<TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" FontWeight="Bold">HER2 By FISH Result:</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=InvasiveBreastPanelResult.HER2ByFISHResultString}" />
+
+                <TextBlock Grid.Column="0" Grid.Row="11" FontWeight="Black" Margin="2,2,2,2">Current Orders:</TextBlock>
 				<ListView Name="ListBoxPanelSetOrders" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="12" Margin="2,2,2,2" HorizontalAlignment="Stretch"
                       ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection}">
 					<ListView.View>

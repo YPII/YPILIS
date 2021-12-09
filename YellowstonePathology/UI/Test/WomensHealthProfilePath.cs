@@ -5,7 +5,7 @@ using System.Text;
 
 namespace YellowstonePathology.UI.Login
 {
-    public class WomensHealthProfilePath : Test.ResultPath
+    public class WomensHealthProfilePath : YellowstonePathology.UI.Test.ResultPath
     {
         public delegate void BackEventHandler(object sender, EventArgs e);
         public event BackEventHandler Back;

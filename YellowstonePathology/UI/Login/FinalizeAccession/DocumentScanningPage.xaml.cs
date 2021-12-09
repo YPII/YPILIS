@@ -78,13 +78,13 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
             if(this.m_ScanAsCaseTIF == false)
             {
-                this.m_FileName = YellowstonePathology.Business.Requisition.GetNextFileName(orderIdParser);
+                this.m_FileName = Business.Requisition.GetNextFileName(orderIdParser);
             }
             else
             {
                 string reportNo = this.m_AccessionOrder.PanelSetOrderCollection[0].ReportNo;
                 Business.OrderIdParser orderIdParserRN = new Business.OrderIdParser(reportNo);
-                this.m_FileName = YellowstonePathology.Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParserRN);
+                this.m_FileName = Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParserRN);
             }
             
             this.NotifyPropertyChanged("FileName");

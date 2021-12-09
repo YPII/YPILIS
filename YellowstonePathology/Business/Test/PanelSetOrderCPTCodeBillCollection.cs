@@ -41,7 +41,7 @@ namespace YellowstonePathology.Business.Test
         public PanelSetOrderCPTCodeBill GetNextItem(string reportNo)
         {
 			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-            string panelSetOrderCPTCodeBillId = YellowstonePathology.Business.OrderIdParser.GetNextPanelSetOrderCPTCodeBillId(this, reportNo);
+            string panelSetOrderCPTCodeBillId = Business.OrderIdParser.GetNextPanelSetOrderCPTCodeBillId(this, reportNo);
 			PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill = new PanelSetOrderCPTCodeBill(reportNo, objectId, panelSetOrderCPTCodeBillId);
             return panelSetOrderCPTCodeBill;
         }        
@@ -157,7 +157,7 @@ namespace YellowstonePathology.Business.Test
             if (this.HasPQRSCodes() == true) result = true;
             return result;
         }
-
+        
         public bool HasPQRSCodes()
         {
             bool result = false;

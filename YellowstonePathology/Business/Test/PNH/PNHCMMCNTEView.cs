@@ -61,7 +61,7 @@ namespace YellowstonePathology.Business.Test.PNH
             this.AddNextNteElement("Specimen Description: " + specimenOrder.Description, document);
             this.AddBlankNteElement(document);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextNteElement("Collection Date/Time: " + collectionDateTimeString, document);
             this.AddBlankNteElement(document);
 
@@ -112,7 +112,7 @@ namespace YellowstonePathology.Business.Test.PNH
             this.AddNextNteElement("Specimen Description: " + specimenOrder.Description, document);
             this.AddBlankNteElement(document);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextNteElement("Collection Date/Time: " + collectionDateTimeString, document);
             this.AddBlankNteElement(document);
 

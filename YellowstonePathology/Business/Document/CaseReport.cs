@@ -66,7 +66,7 @@ namespace YellowstonePathology.Business.Document
 			switch (this.m_ReportSaveMode)
             {
                 case YellowstonePathology.Business.Document.ReportSaveModeEnum.Normal:
-					this.m_SaveFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + this.m_PanelSetOrder.ReportNo + ".xml";                
+					this.m_SaveFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + this.m_PanelSetOrder.ReportNo + ".xml";                
                     break;
                 case YellowstonePathology.Business.Document.ReportSaveModeEnum.Draft:
                     this.m_SaveFileName = CaseDocument.GetSaveDraftDocumentFilePath(orderIdParser);

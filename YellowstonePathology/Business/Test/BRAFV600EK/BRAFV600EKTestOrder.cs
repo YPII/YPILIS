@@ -165,11 +165,11 @@ namespace YellowstonePathology.Business.Test.BRAFV600EK
 
                 if (this.ResultCode == notDetectedResult.ResultCode)
                 {
-                    brafResult = YellowstonePathology.Business.Test.TestResult.NotDetected;
+                    brafResult = Business.Test.TestResult.NotDetected;
                 }
                 else if (this.ResultCode == detectedResult.ResultCode)
                 {
-                    brafResult = YellowstonePathology.Business.Test.TestResult.Detected;
+                    brafResult = Business.Test.TestResult.Detected;
                 }
             }
             return brafResult;

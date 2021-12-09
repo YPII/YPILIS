@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Visitor
             : base(true, true)
         {
             this.m_PanelSetOrder = panelSetOrder;
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 
             this.m_AddedTestOrderCollection = new YellowstonePathology.Business.Test.Model.TestOrderCollection();
             this.m_CancelledTestOrderCollection = new YellowstonePathology.Business.Test.Model.TestOrderCollection();
@@ -90,7 +90,7 @@ namespace YellowstonePathology.Business.Visitor
         {
             if (this.m_TaskOrderStainAcknowlegedment == null)
             {
-				string taskOrderId = YellowstonePathology.Business.OrderIdParser.GetNextTaskOrderId(this.m_AccessionOrder.TaskOrderCollection, this.m_AccessionOrder.MasterAccessionNo);
+				string taskOrderId = Business.OrderIdParser.GetNextTaskOrderId(this.m_AccessionOrder.TaskOrderCollection, this.m_AccessionOrder.MasterAccessionNo);
                 string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 
 				this.m_TaskOrderStainAcknowlegedment = new YellowstonePathology.Business.Task.Model.TaskOrderStainAcknowledgement(taskOrderId, objectId, this.m_AccessionOrder, this.m_PanelSetOrder, this.m_SystemIdentity);                
@@ -103,7 +103,7 @@ namespace YellowstonePathology.Business.Visitor
 			YellowstonePathology.Business.Task.Model.TaskAcknowledgeStainOrder taskAcknowledgeStainOrder = new YellowstonePathology.Business.Task.Model.TaskAcknowledgeStainOrder();
             if (this.m_TaskOrderDetailAddedTestOrders == null)
             {
-				string taskOrderDetailId = YellowstonePathology.Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrderStainAcknowlegedment.TaskOrderDetailCollection, this.m_TaskOrderStainAcknowlegedment.TaskOrderId);
+				string taskOrderDetailId = Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrderStainAcknowlegedment.TaskOrderDetailCollection, this.m_TaskOrderStainAcknowlegedment.TaskOrderId);
                 string taskOrderDetailObjectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 				this.m_TaskOrderDetailAddedTestOrders = new YellowstonePathology.Business.Task.Model.TaskOrderDetail(taskOrderDetailId, this.m_TaskOrderStainAcknowlegedment.TaskOrderId, taskOrderDetailObjectId, taskAcknowledgeStainOrder, this.m_AccessionOrder.ClientId);
                 this.m_TaskOrderStainAcknowlegedment.TaskOrderDetailCollection.Add(this.m_TaskOrderDetailAddedTestOrders);
@@ -115,7 +115,7 @@ namespace YellowstonePathology.Business.Visitor
 			YellowstonePathology.Business.Task.Model.TaskAcknowledgeStainOrder taskAcknowledgeStainOrder = new YellowstonePathology.Business.Task.Model.TaskAcknowledgeStainOrder();
             if (this.m_TaskOrderDetailCancelledTestOrders == null)
             {
-				string taskOrderDetailId = YellowstonePathology.Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrderStainAcknowlegedment.TaskOrderDetailCollection, this.m_TaskOrderStainAcknowlegedment.TaskOrderId);
+				string taskOrderDetailId = Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrderStainAcknowlegedment.TaskOrderDetailCollection, this.m_TaskOrderStainAcknowlegedment.TaskOrderId);
                 string taskOrderDetailObjectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 				this.m_TaskOrderDetailCancelledTestOrders = new YellowstonePathology.Business.Task.Model.TaskOrderDetail(taskOrderDetailId, this.m_TaskOrderStainAcknowlegedment.TaskOrderId, taskOrderDetailObjectId, taskAcknowledgeStainOrder, this.m_AccessionOrder.ClientId);                
                 this.m_TaskOrderStainAcknowlegedment.TaskOrderDetailCollection.Add(this.m_TaskOrderDetailCancelledTestOrders);
@@ -153,7 +153,7 @@ namespace YellowstonePathology.Business.Visitor
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this.m_AddedTestOrderCollection)
             {
-                YellowstonePathology.Business.Test.Model.Test test = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone(testOrder.TestId);
+                YellowstonePathology.Business.Test.Model.Test test = Business.Test.Model.TestCollectionInstance.GetClone(testOrder.TestId);
                 if (test.NeedsAcknowledgement == true)
                 {
                     taskOrderDetailDescription.AppendLine(testOrder.DisplayString);
@@ -171,7 +171,7 @@ namespace YellowstonePathology.Business.Visitor
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this.m_CancelledTestOrderCollection)
             {
-                YellowstonePathology.Business.Test.Model.Test test = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone(testOrder.TestId);
+                YellowstonePathology.Business.Test.Model.Test test = Business.Test.Model.TestCollectionInstance.GetClone(testOrder.TestId);
                 if (test.NeedsAcknowledgement == true)
                 {
                     taskOrderDetailDescription.AppendLine(testOrder.DisplayString);

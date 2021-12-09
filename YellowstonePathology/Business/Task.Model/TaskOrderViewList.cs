@@ -5,12 +5,9 @@ namespace YellowstonePathology.Business.Task.Model
 {
     public class TaskOrderViewList : ObservableCollection<TaskOrderView>
     {
-        public TaskOrderViewList(TaskOrderCollection taskOrderCollection)
+        public TaskOrderViewList()
         {
-            foreach(TaskOrder taskOrder in taskOrderCollection)
-            {
-                this.Add(new Model.TaskOrderView(taskOrder));
-            }
+            
         }
     }
 }

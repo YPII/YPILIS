@@ -52,7 +52,7 @@ namespace YellowstonePathology.Business.Rules.Surgical
 		{
 			if (!string.IsNullOrEmpty(this.m_PLastName))
 			{
-				this.m_RecentAccessionViewCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetRecentAccessionOrders(this.m_PLastName, this.m_PFirstName);
+				this.m_RecentAccessionViewCollection = Business.Gateway.AccessionOrderGateway.GetRecentAccessionOrders(this.m_PLastName, this.m_PFirstName);
 			}
 		}
 

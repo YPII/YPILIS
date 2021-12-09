@@ -6,32 +6,17 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>            
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>            
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Margin="2,2,2,2">Timer Running:</TextBlock>
-            <CheckBox Margin="2,2,2,2" Checked="CheckBoxTimeRunning_Checked" Unchecked="CheckBoxTimerRunning_Unchecked" IsChecked="{Binding Path=TimmerRunning}"></CheckBox>
-            <TextBlock Margin="2,2,2,2">Status:</TextBlock>
-            <TextBlock Name="TextBlockStatus" Margin="2,2,2,2"></TextBlock>
-        </StackPanel>
-        
-        
-        <ListView Name="ListViewReportDistributionLogEntryCollection" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=ReportDistributionLogEntryCollection}" 
+
+        <ListView Name="ListViewLog" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=LogList}" 
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="120"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="ReportNo" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionType}" Header="Type" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Level}" Header="Level" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Source}" Header="Source" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianName}" Header="Physician" Width="150"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Client" Width="150"/>                    
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Message}" Header="Message" Width="300"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=.}" Header="Log" Width="1000"/>
                 </GridView>
             </ListView.View>
         </ListView>

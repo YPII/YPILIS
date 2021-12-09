@@ -23,7 +23,7 @@ namespace YellowstonePathology.UI.Login
 
 		public ScanPage()
 		{
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 			InitializeComponent();			
 		}				
 
@@ -36,7 +36,7 @@ namespace YellowstonePathology.UI.Login
 
 		private void BarcodeManualEntryPage_Return(object sender, ReturnEventArgs<PageFunctionResult> e)
 		{
-			if (e.Result.PageNavigationDirectionEnum == YellowstonePathology.UI.Navigation.PageNavigationDirectionEnum.Next)
+			if (e.Result.PageNavigationDirectionEnum == UI.Navigation.PageNavigationDirectionEnum.Next)
 			{
 				OnReturn(new ReturnEventArgs<PageFunctionResult>(e.Result));
 			}

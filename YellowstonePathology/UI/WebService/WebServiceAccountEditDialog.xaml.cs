@@ -35,7 +35,7 @@ namespace YellowstonePathology.UI.WebService
             }
             else
             {
-                this.m_WebServiceAccount = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(webServiceAccountId, this);
+                this.m_WebServiceAccount = Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(webServiceAccountId, this);
             }
 
             this.m_InitialPages = new List<string>();
@@ -85,7 +85,7 @@ namespace YellowstonePathology.UI.WebService
                 {
                     if (this.IsNameInUse() == false)
                     {
-                        int id = YellowstonePathology.Business.Gateway.WebServiceGateway.GetNextWebServiceAccountId();
+                        int id = Business.Gateway.WebServiceGateway.GetNextWebServiceAccountId();
                         this.m_WebServiceAccount.WebServiceAccountId = id;
                         foreach (YellowstonePathology.Business.WebService.WebServiceAccountClient webServiceAccountClient in this.m_WebServiceAccount.WebServiceAccountClientCollection)
                         {
@@ -158,10 +158,10 @@ namespace YellowstonePathology.UI.WebService
 
         private void PwGenerator_Click(object sender, RoutedEventArgs e)
         {
-            string pw = YellowstonePathology.Business.WebService.PasswordGenerator.GeneratePassword(true, true, true, false, false, 8);
+            string pw = Business.WebService.PasswordGenerator.GeneratePassword(true, true, true, false, false, 8);
             while (!YellowstonePathology.Business.WebService.PasswordGenerator.PasswordIsValid(true, true, true, false, false, pw))
             {
-                pw = YellowstonePathology.Business.WebService.PasswordGenerator.GeneratePassword(true, true, true, false, false, 8);
+                pw = Business.WebService.PasswordGenerator.GeneratePassword(true, true, true, false, false, 8);
             }
             this.m_WebServiceAccount.Password = pw;
             this.NotifyPropertyChanged(string.Empty);
@@ -176,7 +176,7 @@ namespace YellowstonePathology.UI.WebService
             }
             else
             {
-                Business.WebService.WebServiceAccount sidHarder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(1091, this);
+                Business.WebService.WebServiceAccount sidHarder = Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(1091, this);
                 sidHarder.Impersonate(this.m_WebServiceAccount);                
             }
 
@@ -192,12 +192,28 @@ namespace YellowstonePathology.UI.WebService
             }
             else
             {
-                Business.WebService.WebServiceAccount sidHarder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(1090, this);
+                Business.WebService.WebServiceAccount sidHarder = Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(1090, this);
                 sidHarder.Impersonate(this.m_WebServiceAccount);                
             }
 
             Business.Persistence.DocumentGateway.Instance.Push(this);
             this.Close();            
+        }
+
+        private void HyperLinkImpersonateEric_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.m_WebServiceAccount.WebServiceAccountId == 1083)
+            {
+                this.m_WebServiceAccount.SetAsYPI();
+            }
+            else
+            {
+                Business.WebService.WebServiceAccount ericRamsey = Business.Persistence.DocumentGateway.Instance.PullWebServiceAccount(1083, this);
+                ericRamsey.Impersonate(this.m_WebServiceAccount);
+            }
+
+            Business.Persistence.DocumentGateway.Instance.Push(this);
+            this.Close();
         }
     }
 }

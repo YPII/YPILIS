@@ -109,7 +109,7 @@ namespace YellowstonePathology.Business.Client.Model
         private void SetHPVRequiredAndOrdered(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             YellowstonePathology.Business.Test.HPV.HPVTest hpvTest = new Business.Test.HPV.HPVTest();
-            YellowstonePathology.Business.Client.Model.StandingOrder standingOrder = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.HPVStandingOrderCode);
+            YellowstonePathology.Business.Client.Model.StandingOrder standingOrder = Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.HPVStandingOrderCode);
             if (standingOrder.IsRequired(accessionOrder) == true)
             {
                 this.m_HPVRequired = true;
@@ -132,7 +132,7 @@ namespace YellowstonePathology.Business.Client.Model
         private void SetHPV1618RequiredAndOrdered(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             YellowstonePathology.Business.Test.HPV1618.HPV1618Test hpv1618Test = new Business.Test.HPV1618.HPV1618Test();
-            YellowstonePathology.Business.Client.Model.StandingOrder standingOrder = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.HPV1618StandingOrderCode);
+            YellowstonePathology.Business.Client.Model.StandingOrder standingOrder = Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.HPV1618StandingOrderCode);
             if (standingOrder.IsRequired(accessionOrder) == true)
             {
                 this.m_HPV1618Required = true;

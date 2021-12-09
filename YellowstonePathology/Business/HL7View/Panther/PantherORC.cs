@@ -10,15 +10,15 @@ namespace YellowstonePathology.Business.HL7View.Panther
 	{        		
 		private string m_DateFormat = "yyyyMMddHHmmss";
         private YellowstonePathology.Business.Specimen.Model.SpecimenOrder m_SpecimenOrder;
-        private YellowstonePathology.Business.Test.AliquotOrder m_AliquotOrder;
+        private string m_OrderedOnId;
         private YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
         private string m_ActionCode;
 
-        public PantherORC(YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, YellowstonePathology.Business.Test.AliquotOrder aliquotOrder,
+        public PantherORC(YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, string orderedOnId,
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, string actionCode)
         {
             this.m_SpecimenOrder = specimenOrder;
-            this.m_AliquotOrder = aliquotOrder;
+            this.m_OrderedOnId = orderedOnId;
             this.m_PanelSetOrder = panelSetOrder;
             this.m_ActionCode = actionCode;
         }       
@@ -33,7 +33,7 @@ namespace YellowstonePathology.Business.HL7View.Panther
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(orcElement, orc01Element);
             
             XElement orc03Element = new XElement("ORC.3");
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("ORC.3.1", this.m_AliquotOrder.AliquotOrderId, orc03Element);            
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("ORC.3.1", this.m_OrderedOnId, orc03Element);            
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(orcElement, orc03Element);                                                
             
             XElement orc09Element = new XElement("ORC.9");

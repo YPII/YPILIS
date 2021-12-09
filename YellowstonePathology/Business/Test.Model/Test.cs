@@ -32,7 +32,7 @@ namespace YellowstonePathology.Business.Test.Model
         protected string m_DefaultResult;
         protected bool m_RequestForAdditionalReport;
         protected bool m_UseWetProtocol;
-        protected bool m_PerformedByHand;
+        protected bool m_PerformedByHand;        
 
         public Test()
 		{

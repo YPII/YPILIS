@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 					this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByISH.ASCOPre2014.1.xml";
 				}
 			}
-			else if (panelSetOrderHer2ByIsh.Indicator.ToUpper() == "GASTRIC")
+			else if (panelSetOrderHer2ByIsh.Indicator.ToUpper() == "GASTRIC" || panelSetOrderHer2ByIsh.Indicator.ToUpper() == "ENDOMETRIAL")
 			{
 				if (this.m_AccessionOrder.AccessionDate >= DateTime.Parse("1/1/2014") == true)
 				{
@@ -54,7 +54,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 				amendmentSection.SetAmendment(amendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, true);
 
 				YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
-				string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+				string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
 
 				this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 
@@ -141,8 +141,9 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 				SetXmlNodeData("specimen_fixation", specimenOrder.LabFixation);
 				SetXmlNodeData("time_to_fixation", specimenOrder.TimeToFixationHourString);
                 
-				this.SetXmlNodeData("report_reference", panelSetOrderHer2ByIsh.ReportReference);
+				this.SetXMLNodeParagraphData("report_reference", panelSetOrderHer2ByIsh.ReportReference);
                 SetXmlNodeData("duration_of_fixation", specimenOrder.FixationDurationString);				
+				
 				
                 if(string.IsNullOrEmpty(specimenOrder.FixationComment) == false)
                 {

@@ -19,13 +19,13 @@ namespace YellowstonePathology.UI.Surgical
 
         public void HandlePQRS()
         {
-            YellowstonePathology.Business.Surgical.PQRSMeasureCollection pqrsCollection = YellowstonePathology.Business.Surgical.PQRSMeasureCollection.GetAll();
+            YellowstonePathology.Business.Surgical.PQRSMeasureCollection pqrsCollection = Business.Surgical.PQRSMeasureCollection.GetAll();
 			foreach (YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen in this.m_PanelSetOrder.SurgicalSpecimenCollection)
 			{
 				bool pqrsFound = false;
                 foreach (YellowstonePathology.Business.Surgical.PQRSMeasure pqrsMeasure in pqrsCollection)
                 {
-					int patientAge = YellowstonePathology.Business.Helper.PatientHelper.GetAge(this.m_AccessionOrder.PBirthdate.Value);
+					int patientAge = Business.Helper.PatientHelper.GetAge(this.m_AccessionOrder.PBirthdate.Value);
                     if (pqrsMeasure.DoesMeasureApply(this.m_PanelSetOrder, surgicalSpecimen, patientAge) == true)
                     {
                         this.m_PQRSMeasureDialog = new PQRSMeasureDialog();
@@ -67,7 +67,7 @@ namespace YellowstonePathology.UI.Surgical
             panelSetOrderCPTCode.Modifier = pqrsCode.Modifier == null ? null : pqrsCode.Modifier;
             panelSetOrderCPTCode.CodeableDescription = "PQRS Code";
             panelSetOrderCPTCode.CodeableType = "PQRS";
-            panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;
+            panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;
             panelSetOrderCPTCode.SpecimenOrderId = surgicalSpecimen.SpecimenOrderId;
             panelSetOrderCPTCode.ClientId = this.m_AccessionOrder.ClientId;
             this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.Add(panelSetOrderCPTCode);

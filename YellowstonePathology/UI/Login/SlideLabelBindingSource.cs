@@ -28,7 +28,7 @@ namespace YellowstonePathology.UI.Login
             string reportNumbers = string.Empty;
             foreach (YellowstonePathology.Business.Label.Model.AccessionLabel accessionNameLabel in this.m_AccessionLabelCollection)
             {
-				YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(accessionNameLabel.MasterAccessionNo, this.m_Writer);
+				YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(accessionNameLabel.MasterAccessionNo, this.m_Writer);
                 accessionNameLabel.PatientLastName = accessionOrder.PLastName;
                 accessionNameLabel.PatientFirstName = accessionOrder.PFirstName;
             }            

@@ -90,8 +90,8 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 		private void ReplaceContainerId(string containerId)
 		{
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromContainerId(this.m_ClientOrderDetail.ContainerId);
-            YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_LoginPageWindow);             
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromContainerId(this.m_ClientOrderDetail.ContainerId);
+            YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_LoginPageWindow);             
 						
 			if (accessionOrder != null)
 			{

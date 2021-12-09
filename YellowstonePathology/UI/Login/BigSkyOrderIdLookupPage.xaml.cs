@@ -58,7 +58,7 @@ namespace YellowstonePathology.UI.Login
 		{
 			if (string.IsNullOrEmpty(this.TextBoxBigSkyControlId.Text) == false)
 			{
-				YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrderByExternalOrderId(this.TextBoxBigSkyControlId.Text);
+				YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = Business.Gateway.ClientOrderGateway.GetClientOrderByExternalOrderId(this.TextBoxBigSkyControlId.Text);
 				UI.Navigation.PageNavigationReturnEventArgs args = new UI.Navigation.PageNavigationReturnEventArgs(UI.Navigation.PageNavigationDirectionEnum.Next, clientOrder);
 				this.Return(this, args);
 			}

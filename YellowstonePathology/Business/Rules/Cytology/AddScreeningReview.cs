@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
 
         private void AddPanelOrder()
         {
-            YellowstonePathology.Business.User.SystemIdentity systemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            YellowstonePathology.Business.User.SystemIdentity systemIdentity = Business.User.SystemIdentity.Instance;
             YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapScreeningPanel thinPrepPapScreeningPanel = new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapScreeningPanel();
             thinPrepPapScreeningPanel.ScreeningType = this.m_ScreeningType;
 

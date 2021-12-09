@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.Reports
                 finalDate = finalDate.AddDays(-3);
             }
 
-            Business.ReportNoCollection finalCases = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalFinal(finalDate);
+            Business.ReportNoCollection finalCases = Business.Gateway.AccessionOrderGateway.GetSurgicalFinal(finalDate);
             int count = finalCases.Count;
             double tenPercentOfCount = Math.Round((count * .1), 0);
 

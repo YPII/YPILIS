@@ -22,8 +22,8 @@ namespace YellowstonePathology.Business.Test.PNH
 			m_PNHTestOrders = new List<PNHTestOrder>();
 			m_cellLines = new List<PNHCellLine>();
 			m_cellLines.Add(new PNHCellLine("RedBloodCells", 0.04m, 0.1m, 1.0m));
-			m_cellLines.Add(new PNHCellLine("MonoCyteCells", 0.03m, 0.1m, 1.0m));
-			m_cellLines.Add(new PNHCellLine("GranulocyteCells", 0.02m, 0.1m, 1.0m));
+			m_cellLines.Add(new PNHCellLine("MonoCyteCells", 0.03m, 0.02m, 1.0m));
+			m_cellLines.Add(new PNHCellLine("GranulocyteCells", 0.02m, 0.01m, 1.0m));
 
 			this.m_Method = "Quantitative Flow Cytometry.  High sensitivity immunophenotypic analysis was performed using CD45/side scatter log gating, with further " +
 				"gating refinement using CD15 and CD64. GPI-linked proteins were analyzed using CD14, CD24, CD59, and fluorescent Aerolysin(FLAER). Sensitivity " +

@@ -55,7 +55,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 		private void TextBoxCollectionDate_KeyUp(object sender, KeyEventArgs e)
 		{
 			Nullable<DateTime> targetDate = null;
-			bool result = YellowstonePathology.Business.Helper.TextBoxHelper.IncrementDate(this.TextBoxCollectionDate.Text, ref targetDate, e);
+			bool result = Business.Helper.TextBoxHelper.IncrementDate(this.TextBoxCollectionDate.Text, ref targetDate, e);
 			if (result == true) this.m_ClientOrder.CollectionDate = targetDate;
 		}
 
@@ -73,7 +73,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
             if (isValidDate == true)
             {
-                this.m_ClientOrder.OrderedBy = YellowstonePathology.Business.User.SystemIdentity.Instance.User.DisplayName;
+                this.m_ClientOrder.OrderedBy = Business.User.SystemIdentity.Instance.User.DisplayName;
                 UI.Navigation.PageNavigationReturnEventArgs args = new UI.Navigation.PageNavigationReturnEventArgs(UI.Navigation.PageNavigationDirectionEnum.Next, null);
                 this.Return(this, args);
             }

@@ -36,7 +36,7 @@ namespace YellowstonePathology.UI
                 this.m_WorkDate = DateTime.Today.AddDays(-1);
             }
 
-            this.m_RetrospectiveReviewList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
+            this.m_RetrospectiveReviewList = Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
             this.NotifyPropertyChanged("RetrospectiveReviewList");
 
             InitializeComponent();
@@ -56,7 +56,7 @@ namespace YellowstonePathology.UI
             exclusionList.Add(262);
             exclusionList.Add(197);
 
-            Business.Search.ReportSearchList list = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetPossibleRetrospectiveReviews(workDate);
+            Business.Search.ReportSearchList list = Business.Gateway.ReportSearchGateway.GetPossibleRetrospectiveReviews(workDate);
             if(list.Count != 0)
             {
                 int count = list.Count;
@@ -108,7 +108,7 @@ namespace YellowstonePathology.UI
                     Business.Persistence.DocumentGateway.Instance.Push(this);
                 }
 
-                this.m_RetrospectiveReviewList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
+                this.m_RetrospectiveReviewList = Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
                 this.NotifyPropertyChanged("RetrospectiveReviewList");
             }            
         }
@@ -123,7 +123,7 @@ namespace YellowstonePathology.UI
             if (this.m_RetrospectiveReviewList.Count == 0)
             {
                 this.AddRandomTest(this.m_WorkDate);
-                this.m_RetrospectiveReviewList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
+                this.m_RetrospectiveReviewList = Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
                 this.NotifyPropertyChanged("RetrospectiveReviewList");
             }
             else
@@ -134,27 +134,27 @@ namespace YellowstonePathology.UI
 
         private void ButtonKillList_Click(object sender, RoutedEventArgs e)
         {
-            this.m_RetrospectiveReviewList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetRetrospectiveReviewKillList();
+            this.m_RetrospectiveReviewList = Business.Gateway.ReportSearchGateway.GetRetrospectiveReviewKillList();
             this.NotifyPropertyChanged("RetrospectiveReviewList");
         }
 
         private void ButtonAccessionOrderBack_Click(object sender, RoutedEventArgs e)
         {
             this.m_WorkDate = this.m_WorkDate.AddDays(-1);
-            this.m_RetrospectiveReviewList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
+            this.m_RetrospectiveReviewList = Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
             this.NotifyPropertyChanged(string.Empty);
         }
 
         private void ButtonAccessionOrderForward_Click(object sender, RoutedEventArgs e)
         {
             this.m_WorkDate = this.m_WorkDate.AddDays(1);
-            this.m_RetrospectiveReviewList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
+            this.m_RetrospectiveReviewList = Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
             this.NotifyPropertyChanged(string.Empty);
         }
 
         private void ButtonAccessionOrderRefresh_Click(object sender, RoutedEventArgs e)
         {
-            this.m_RetrospectiveReviewList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
+            this.m_RetrospectiveReviewList = Business.Gateway.ReportSearchGateway.GetRetrospectiveReviews(this.m_WorkDate);
             this.NotifyPropertyChanged(string.Empty);
         }
 

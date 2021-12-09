@@ -123,6 +123,26 @@ namespace YellowstonePathology.Business.Billing.Model
             return result;
         }
 
+        public int GetBillableWrightsStainCount()
+        {
+            int result = 0;
+            foreach (StainSpecimen stainSpecimen in this)
+            {
+                result = result + stainSpecimen.GetBillableWrightsStainCount();
+            }
+            return result;
+        }
+
+        public int GetBillable89060Count()
+        {
+            int result = 0;
+            foreach (StainSpecimen stainSpecimen in this)
+            {
+                result = result + stainSpecimen.GetBillableCrystallographyStainCount();
+            }
+            return result;
+        }
+
         public int GetBillable88342Count()
         {
             int result = 0;

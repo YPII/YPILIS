@@ -759,6 +759,7 @@
                                 </ComboBox>
                                 <TextBlock Margin="3">Year</TextBlock>
                                 <ComboBox Name="comboBoxYear" Width="100" Margin="3">
+                                    <ComboBoxItem>2021</ComboBoxItem>
                                     <ComboBoxItem>2020</ComboBoxItem>
                                     <ComboBoxItem>2019</ComboBoxItem>
                                     <ComboBoxItem>2018</ComboBoxItem>

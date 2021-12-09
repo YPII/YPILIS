@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.HL7View.Orders
 
         public void ToXml(XElement document)
         {
-			YellowstonePathology.Business.Domain.Physician casePhysician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);
+			YellowstonePathology.Business.Domain.Physician casePhysician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_AccessionOrder.PanelSetOrderCollection[0].ReportNo);
 
             MSH msh = new ARUPMSH();
@@ -36,7 +36,7 @@ namespace YellowstonePathology.Business.HL7View.Orders
             ORC orc = new ORC(this.m_AccessionOrder.PanelSetOrderCollection[0].ReportNo, this.m_AccessionOrder, casePhysician);
             orc.ToXml(document);
 
-			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_AccessionOrder.PanelSetOrderCollection[0].ReportNo + ".HL7.xml";
+			string serverFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_AccessionOrder.PanelSetOrderCollection[0].ReportNo + ".HL7.xml";
             string mirthFileName = @"\\YPIIInterface2\ChannelData\Outgoing\Testing\" + this.m_AccessionOrder.PanelSetOrderCollection[0].ReportNo + ".HL7.xml";
 
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(serverFileName))

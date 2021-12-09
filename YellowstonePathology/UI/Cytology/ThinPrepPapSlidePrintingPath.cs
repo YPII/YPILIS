@@ -38,7 +38,7 @@ namespace YellowstonePathology.UI.Cytology
 
         private void ScanSecurityBadgePage_AuthentificationSuccessful(object sender, EventArgs e)
         {
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
             this.ShowScanContainerPage();
         }
 
@@ -76,8 +76,8 @@ namespace YellowstonePathology.UI.Cytology
 
         private void ScanAliquotPage_UseThisAliquotOrderId(object sender, string aliquotOrderId)
         {
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromAliquotOrderId(aliquotOrderId);
-            this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_PrintSlideDialog);            
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromAliquotOrderId(aliquotOrderId);
+            this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_PrintSlideDialog);            
 
             if (this.m_AccessionOrder == null)
             {
@@ -113,7 +113,7 @@ namespace YellowstonePathology.UI.Cytology
         private void AddMaterialTrackingLog(YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder)
         {
             YellowstonePathology.Business.Facility.Model.Facility thisFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string thisLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.MaterialTracking.Model.MaterialTrackingLog materialTrackingLog = new Business.MaterialTracking.Model.MaterialTrackingLog(objectId, specimenOrder.SpecimenOrderId, null, thisFacility.FacilityId, thisFacility.FacilityName,
@@ -124,11 +124,11 @@ namespace YellowstonePathology.UI.Cytology
 
         private void ScanContainerPage_UseThisContainer(object sender, string containerId)
 		{
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromContainerId(containerId);
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromContainerId(containerId);
 
             if(string.IsNullOrEmpty(masterAccessionNo) == false)
             {
-                this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_PrintSlideDialog);
+                this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_PrintSlideDialog);
 
                 if (this.m_AccessionOrder == null)
                 {

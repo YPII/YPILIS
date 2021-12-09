@@ -33,7 +33,7 @@ namespace YellowstonePathology.UI.Login.SlidePrinting
 
         public ScanContainerPage()
 		{
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;            
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;            
 
 			InitializeComponent();
 

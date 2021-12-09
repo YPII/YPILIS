@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business
         private string GetMessage(Business.Test.AccessionOrder accessionOrder)
         {
             Business.OrderIdParser orderIdParser = new Business.OrderIdParser(accessionOrder.MasterAccessionNo);
-            string caseDocumentPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+            string caseDocumentPath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
             caseDocumentPath = caseDocumentPath.Replace(@"\", @"\\");
 
             StringBuilder result = new StringBuilder();

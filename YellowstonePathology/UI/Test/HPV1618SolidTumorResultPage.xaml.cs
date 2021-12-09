@@ -42,7 +42,7 @@ namespace YellowstonePathology.UI.Test
 			this.m_SystemIdentity = systemIdentity;
 			this.m_PageNavigator = pageNavigator;
 
-            this.m_IndicationList = YellowstonePathology.Business.Test.HPV1618SolidTumor.HPV1618SolidTumorIndication.GetIndicationList();
+            this.m_IndicationList = Business.Test.HPV1618SolidTumor.HPV1618SolidTumorIndication.GetIndicationList();
 			this.m_PageHeaderText = "HPV 16 18/45 Solid Tumor Results For: " + this.m_AccessionOrder.PatientDisplayName;
             this.m_ResultsList = new List<string>();
             this.m_ResultsList.Add(YellowstonePathology.Business.Test.HPV1618SolidTumor.HPV1618SolidTumorTestOrder.NotDetectedResult);
@@ -113,7 +113,7 @@ namespace YellowstonePathology.UI.Test
 			{
                 this.m_HPV1618SolidTumorTestOrder.Finish(this.m_AccessionOrder);
 
-                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
                 multiTestDistributionHandler.Set();
 
                 if (this.m_AccessionOrder.PanelSetOrderCollection.WomensHealthProfileExists() == true)

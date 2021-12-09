@@ -64,7 +64,8 @@ namespace YellowstonePathology.Business.Specimen.Model
 		private YellowstonePathology.Business.Test.AliquotOrderCollection m_AliquotOrderCollection;		
 		private List<YellowstonePathology.Business.Test.Model.TestOrder> m_PeerReviewTestOrders;		
 		private bool m_DeletePending = false;
-		private bool m_ApplyFixation = true;                
+		private bool m_ApplyFixation = true;
+        private string m_CollectionLocation;
 
 		public SpecimenOrder()
 		{
@@ -106,7 +107,8 @@ namespace YellowstonePathology.Business.Specimen.Model
             this.m_FixationComment = clientOrderDetail.FixationComment;            
 			this.m_LabFixation = clientOrderDetail.LabFixation;
             this.m_SpecimenSource = clientOrderDetail.SpecimenSource;
-            this.m_RequiresGrossExamination = clientOrderDetail.RequiresGrossExamination;            
+            this.m_RequiresGrossExamination = clientOrderDetail.RequiresGrossExamination;
+            this.m_CollectionLocation = clientOrderDetail.CollectionLocation;
 
             this.SetTimeToFixation();
 		}
@@ -1041,6 +1043,21 @@ namespace YellowstonePathology.Business.Specimen.Model
                 }
             }
         }
+        
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "45", "null", "varchar")]
+        public string CollectionLocation
+        {
+            get { return this.m_CollectionLocation; }
+            set
+            {
+                if (this.m_CollectionLocation != value)
+                {
+                    this.m_CollectionLocation = value;
+                    this.NotifyPropertyChanged("CollectionLocation");
+                }
+            }
+        }
 
         public void SetFixationStartTime()
         {
@@ -1048,11 +1065,11 @@ namespace YellowstonePathology.Business.Specimen.Model
             {
                 if (this.m_FixationStartTimeManuallyEntered == false)
                 {
-                    if (this.m_ClientFixation == YellowstonePathology.Business.Specimen.Model.FixationType.Fresh)
+                    if (this.m_ClientFixation == Business.Specimen.Model.FixationType.Fresh)
                     {
                         this.m_FixationStartTime = this.m_DateReceived;
                     }
-                    else if (this.m_ClientFixation != YellowstonePathology.Business.Specimen.Model.FixationType.NotApplicable)
+                    else if (this.m_ClientFixation != Business.Specimen.Model.FixationType.NotApplicable)
                     {
                         this.m_FixationStartTime = this.m_CollectionTime;
                     }
@@ -1083,13 +1100,13 @@ namespace YellowstonePathology.Business.Specimen.Model
                 this.m_TimeToFixation = Convert.ToInt32(timeSpan.TotalMinutes);
                 
                 double ttf = Math.Round(timeSpan.TotalMinutes, 0);
-                if (ttf <= 60) this.m_TimeToFixationHourString = YellowstonePathology.Business.Specimen.Model.TimeToFixationType.LessThanOneHour;
-                else if (ttf > 60) this.m_TimeToFixationHourString = YellowstonePathology.Business.Specimen.Model.TimeToFixationType.GreaterThanOneHour;
+                if (ttf <= 60) this.m_TimeToFixationHourString = Business.Specimen.Model.TimeToFixationType.LessThanOneHour;
+                else if (ttf > 60) this.m_TimeToFixationHourString = Business.Specimen.Model.TimeToFixationType.GreaterThanOneHour;
             }
             else
             {
                 this.m_TimeToFixation = null;
-				this.m_TimeToFixationHourString = YellowstonePathology.Business.Specimen.Model.TimeToFixationType.LessThanOneHour;
+				this.m_TimeToFixationHourString = Business.Specimen.Model.TimeToFixationType.LessThanOneHour;
             }  
           
             this.NotifyPropertyChanged("TimeToFixation");

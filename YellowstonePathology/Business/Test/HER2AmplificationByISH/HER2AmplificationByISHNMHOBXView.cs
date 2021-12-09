@@ -108,7 +108,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextOBXElement("FIXDUR", "Duration of fixation", specimenOrder.FixationDurationString, document, "F");
             this.AddNextOBXElement("SPECADEQ", "Sample adequacy", panelSetOrder.SampleAdequacy, document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextOBXElement("COLLECT", "Collection Date/Time", collectionDateTimeString, document, "F");
             
             this.AddNextOBXElement("INTERP", "Interpretation", panelSetOrder.InterpretiveComment, document, "F");
@@ -177,7 +177,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextOBXElement("", "Duration of fixation: " + specimenOrder.FixationDurationString, document, "F");
             this.AddNextOBXElement("", "Sample adequacy: " + panelSetOrder.SampleAdequacy, document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextOBXElement("", "Collection Date/Time: " + collectionDateTimeString, document, "F");
             this.AddNextOBXElement("", string.Empty, document, "F");
 
@@ -257,7 +257,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextOBXElement("", "Duration of fixation: " + specimenOrder.FixationDurationString, document, "F");
             this.AddNextOBXElement("", "Sample adequacy: " + panelSetOrder.SampleAdequacy, document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextOBXElement("", "Collection Date/Time: " + collectionDateTimeString, document, "F");
             this.AddNextOBXElement("", string.Empty, document, "F");
 
@@ -339,7 +339,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextOBXElement("", "Duration of fixation", specimenOrder.FixationDurationString, document, "F");
             this.AddNextOBXElement("", "Sample adequacy", panelSetOrder.SampleAdequacy, document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextOBXElement("", "Collection Date/Time", collectionDateTimeString, document, "F");
 
             this.AddNextOBXElement("", "Interpretation", panelSetOrder.InterpretiveComment, document, "F");

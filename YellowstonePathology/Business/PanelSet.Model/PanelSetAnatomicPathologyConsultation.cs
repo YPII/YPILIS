@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		{
 			this.m_PanelSetId = 110;
 			this.m_PanelSetName = "Anatomic Pathology Consultation";            
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Surgical;
+            this.m_CaseType = Business.CaseType.Surgical;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = true;
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.PublishedDocument;
@@ -25,8 +25,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
             string taskDescription = "Gather materials and send out to consulting pathologist.";
 
-            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
-            YellowstonePathology.Business.Facility.Model.Facility universityOfMichigan = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("UOMHS");
+            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            YellowstonePathology.Business.Facility.Model.Facility universityOfMichigan = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("UOMHS");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Transcription, taskDescription, neogenomicsIrvine));
 
             this.m_TechnicalComponentFacility = universityOfMichigan;

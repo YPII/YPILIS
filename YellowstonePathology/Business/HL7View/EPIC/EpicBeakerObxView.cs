@@ -313,5 +313,61 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 
             this.m_NTECount += 1;
         }
+
+        public void AddPDFSegments(string fileName, XElement document)
+        {
+            //OBX | 2 | ED || 1 | Content - Type: text / plain; charset = US - ASCII;
+            //OBX | 3 | ED || 1 | Content - transfer - encoding: base64
+            //OBX | 4 | ED || 1 |
+            //OBX | 5 | ED || 1 | JVBERi0xLjQKJdPr6eEKMSAwIG9iago8PC9DcmVhdG9yIChDaHJvbWl1bSkK
+            //OBX | 6 | ED || 1 | L1Byb2R1Y2VyIChTa2lhL1BERiBtODQpCi9DcmVhdGlvbkRhdGUgKEQ6MjAy
+
+            byte[] bytes = System.IO.File.ReadAllBytes(fileName);
+            string base64 = Convert.ToBase64String(bytes);
+            IEnumerable<string> lines = Split(base64, 60);
+
+            int obxCount = 1;
+            AddNextPDFOBXElement(document, "Content - Type: text / plain; charset = US - ASCII;", obxCount);
+            obxCount += 1;
+            AddNextPDFOBXElement(document, "Content - transfer - encoding: base64", obxCount);
+            obxCount += 1;
+            AddNextPDFOBXElement(document, string.Empty, obxCount);
+            obxCount += 1;
+
+            AddNextPDFOBXElement(document, base64, obxCount);           
+        }
+
+        static IEnumerable<string> Split(string str, int chunkSize)
+        {
+            return Enumerable.Range(0, str.Length / chunkSize)
+                .Select(i => str.Substring(i * chunkSize, chunkSize));
+        }
+
+        protected void AddNextPDFOBXElement(XElement document, string line, int obxCount)
+        {
+            XElement obxElement = new XElement("OBX");
+            document.Add(obxElement);
+
+            XElement obx01Element = new XElement("OBX.1");
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBX.1.1", this.m_ObxCount.ToString(), obx01Element);
+            obxElement.Add(obx01Element);
+
+            XElement obx02Element = new XElement("OBX.2");
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBX.2.1", "ED", obx02Element);
+            obxElement.Add(obx02Element);
+
+            XElement obx03Element = new XElement("OBX.3");
+            obxElement.Add(obx03Element);
+
+            XElement obx04Element = new XElement("OBX.4");
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBX.4.1", "1", obx04Element);
+            obxElement.Add(obx04Element);
+
+            XElement obx05Element = new XElement("OBX.5");
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBX.5.1", line, obx05Element);
+            obxElement.Add(obx05Element);
+
+            this.m_ObxCount += 1;
+        }
     }
 }

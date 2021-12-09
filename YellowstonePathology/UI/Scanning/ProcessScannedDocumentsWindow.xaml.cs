@@ -149,11 +149,11 @@ namespace YellowstonePathology.UI.Scanning
                     YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_ReportNo);
                     if (orderIdParser.ReportNo != null || orderIdParser.MasterAccessionNo != null)
                     {
-                        string newFileName = System.IO.Path.Combine(YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser), this.m_ReportNo + ".REQ." + nextReqNo.ToString() + ".TIF");
+                        string newFileName = System.IO.Path.Combine(Business.Document.CaseDocumentPath.GetPath(orderIdParser), this.m_ReportNo + ".REQ." + nextReqNo.ToString() + ".TIF");
                         if (orderIdParser.IsLegacyReportNo == false)
                         {
                             string masterAccessionNo = orderIdParser.MasterAccessionNo;
-                            newFileName = System.IO.Path.Combine(YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser), masterAccessionNo + ".REQ." + nextReqNo.ToString() + ".TIF");
+                            newFileName = System.IO.Path.Combine(Business.Document.CaseDocumentPath.GetPath(orderIdParser), masterAccessionNo + ".REQ." + nextReqNo.ToString() + ".TIF");
                         }
 
                         if (scannedFile.Extension.ToUpper() == ".TIF")

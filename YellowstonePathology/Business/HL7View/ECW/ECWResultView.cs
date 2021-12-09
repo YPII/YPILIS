@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.HL7View.ECW
                 this.m_SendUnsolicited = true;
             }
 
-			this.m_OrderingPhysician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);           
+			this.m_OrderingPhysician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);           
 		}        
 
         public XElement GetDocument()
@@ -73,7 +73,7 @@ namespace YellowstonePathology.Business.HL7View.ECW
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(panelSetOrder.ReportNo);
             if (amendmentCollection.Count != 0) resultStatus = ResultStatusEnum.Correction;
 
-            YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection universalServiceIdCollection = YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection.GetAll();
+            YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection universalServiceIdCollection = Business.ClientOrder.Model.UniversalServiceCollection.GetAll();
             YellowstonePathology.Business.ClientOrder.Model.UniversalService universalService = universalServiceIdCollection.GetByUniversalServiceId(panelSetOrder.UniversalServiceId);
 
             ECWOBRView obr = new ECWOBRView(this.m_PanelSetOrder.ExternalOrderId, this.m_AccessionOrder.MasterAccessionNo, this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder.SpecimenOrderCollection[0].CollectionDate, this.m_AccessionOrder.SpecimenOrderCollection[0].CollectionTime, this.m_AccessionOrder.AccessionDateTime,
@@ -92,7 +92,7 @@ namespace YellowstonePathology.Business.HL7View.ECW
             string fileExtension = ".HL7.xml";
 
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+			string serverFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;
             string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\BigSkyDermatology\" + this.m_PanelSetOrder.ReportNo + fileExtension;
             if (this.m_Testing == true) interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\BigSkyDermatology\Test\" + this.m_PanelSetOrder.ReportNo + fileExtension;            
             

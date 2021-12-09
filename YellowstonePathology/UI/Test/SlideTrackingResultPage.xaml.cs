@@ -39,7 +39,7 @@ namespace YellowstonePathology.UI.Test
 			this.m_SystemIdentity = systemIdentity;
 
             this.m_VantageSlideViewCollection = new Business.Slide.Model.VantageSlideViewCollection(this.m_AccessionOrder.MasterAccessionNo);
-            this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+            this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 
             this.m_PageHeaderText = "Slide Tracking Result For: " + this.m_AccessionOrder.PatientDisplayName;
 
@@ -122,20 +122,20 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkSimulateScan_Click(object sender, RoutedEventArgs e)
         {
-            string data = YellowstonePathology.Business.BarcodeScanning.VantageBarcode.SimulateScan();
+            string data = Business.BarcodeScanning.VantageBarcode.SimulateScan();
             this.BarcodeScanPort_VantageSlideScanReceived(data);
         }
 
         private void HyperLinkSendToBozeman_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility facility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBZMN");
+            YellowstonePathology.Business.Facility.Model.Facility facility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBZMN");
             this.m_VantageSlideViewCollection.SetLocation(facility.FacilityId);
             this.NotifyPropertyChanged(string.Empty);
         }
 
         private void HyperLinkSendToBillings_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Facility.Model.Facility facility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility facility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_VantageSlideViewCollection.SetLocation(facility.FacilityId);
             this.NotifyPropertyChanged(string.Empty);
         }

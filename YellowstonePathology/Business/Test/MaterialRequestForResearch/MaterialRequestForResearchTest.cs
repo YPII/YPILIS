@@ -13,10 +13,10 @@ namespace YellowstonePathology.Business.Test.MaterialRequestForResearch
             this.m_PanelSetId = 362;
             this.m_PanelSetName = "Material Request For Research";
             this.m_Abbreviation = "Material Request For Research";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Technical;
+            this.m_CaseType = Business.CaseType.Technical;
             this.m_HasTechnicalComponent = false;
             this.m_HasProfessionalComponent = false;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.None;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.None;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
             this.m_NeverDistribute = true;
@@ -34,7 +34,7 @@ namespace YellowstonePathology.Business.Test.MaterialRequestForResearch
 
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskSendBlockToFrontierCancer());
 
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;
             this.m_TechnicalComponentBillingFacility = ypi;
 

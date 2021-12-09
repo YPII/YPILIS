@@ -34,7 +34,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
                 this.m_MasterAccessionNo = this.m_MasterAccessionNoYear + "-" + this.m_MasterAccessionNoNumber;
                 this.m_ReportNo = this.m_MasterAccessionNoYear + "-" + this.m_MasterAccessionNoNumber + ".P";
                 this.m_CRC = lines[1].Substring(4);
-				this.m_IsValidated = YellowstonePathology.Business.BarcodeScanning.CytycCRC32.IsCRCValid(this.m_MasterAccessionNo, this.m_CRC);
+				this.m_IsValidated = Business.BarcodeScanning.CytycCRC32.IsCRCValid(this.m_MasterAccessionNo, this.m_CRC);
             }       
         }
 
@@ -64,7 +64,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
             result.m_MasterAccessionNo = masterAccessionNo;
             result.m_MasterAccessionNoYear = "20" + masterAccessionNo.Substring(0, 2);
             result.m_MasterAccessionNoNumber = masterAccessionNo.Substring(3);
-			result.m_CRC = YellowstonePathology.Business.BarcodeScanning.CytycCRC32.ComputeCrc(masterAccessionNo);
+			result.m_CRC = Business.BarcodeScanning.CytycCRC32.ComputeCrc(masterAccessionNo);
             result.m_ReportNo = result.m_MasterAccessionNo + ".P";
             result.m_LineOne = result.m_MasterAccessionNoNumber.PadLeft(7, '0');
             result.m_LineTwo = result.m_MasterAccessionNoYear + result.m_CRC;

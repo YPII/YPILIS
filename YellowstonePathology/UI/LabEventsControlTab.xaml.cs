@@ -31,7 +31,7 @@ namespace YellowstonePathology.UI
             this.m_SystemIdentity = systemIdentity;
 
 			this.m_OrderCommentLog = new YellowstonePathology.Business.Domain.OrderCommentLogCollection();
-			this.m_OrderComments = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetAllLabEvents();
+			this.m_OrderComments = Business.Gateway.AccessionOrderGateway.GetAllLabEvents();
 
 			InitializeComponent();
 			this.DataContext = this;
@@ -75,7 +75,7 @@ namespace YellowstonePathology.UI
 
 			this.m_OrderCommentLog.Add(orderCommentLog);
 			labEventLogEntryDialog.ShowDialog();
-			this.OrderCommentLog = YellowstonePathology.Business.Gateway.OrderCommentGateway.GetOrderCommentsForSpecimenLogId(this.m_CurrentOrder.SpecimenLogId);
+			this.OrderCommentLog = Business.Gateway.OrderCommentGateway.GetOrderCommentsForSpecimenLogId(this.m_CurrentOrder.SpecimenLogId);
 			this.NotifyPropertyChanged("LabEventLogHeader");
 		}
 
@@ -84,7 +84,7 @@ namespace YellowstonePathology.UI
             if (order != null)
             {
                 this.m_CurrentOrder = order;
-				this.OrderCommentLog = YellowstonePathology.Business.Gateway.OrderCommentGateway.GetOrderCommentsForSpecimenLogId(this.m_CurrentOrder.SpecimenLogId);
+				this.OrderCommentLog = Business.Gateway.OrderCommentGateway.GetOrderCommentsForSpecimenLogId(this.m_CurrentOrder.SpecimenLogId);
 				if (this.m_OrderCommentLog == null)
 				{
 					this.m_OrderCommentLog = new Business.Domain.OrderCommentLogCollection();

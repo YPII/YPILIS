@@ -7,17 +7,22 @@ using System.Threading.Tasks;
 namespace YellowstonePathology.Business.Label.Model
 {
     public class ZPLPrinterUSB
-    {        
+    {
+        private string m_PrinterName;
 
-        public ZPLPrinterUSB()
-        {            
-            
+        public ZPLPrinterUSB(string printerName)
+        {
+            this.m_PrinterName = printerName;
         }
 
         public void Print(ZPLCommand zplCommand)
+        {            
+            RawPrinterHelper.SendStringToPrinter(this.m_PrinterName, $"^XA{zplCommand.GetCommand()}^XZ");
+        }
+
+        public void Print(string zplCommand)
         {
-            string printerName = "ZDesigner GX430t";
-            RawPrinterHelper.SendStringToPrinter(printerName, "^XA" + zplCommand.GetCommand() + "^XZ");
+            RawPrinterHelper.SendStringToPrinter(this.m_PrinterName, $"^XA{zplCommand}^XZ");
         }
 
     }

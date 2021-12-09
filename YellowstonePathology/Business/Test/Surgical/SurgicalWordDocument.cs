@@ -20,20 +20,20 @@ namespace YellowstonePathology.Business.Test.Surgical
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_PanelSetOrder.ReportNo);
 
-            panelSetOrderSurgical.GrossX = YellowstonePathology.Business.Common.SpellChecker.FixString(panelSetOrderSurgical.GrossX);
-            panelSetOrderSurgical.MicroscopicX = YellowstonePathology.Business.Common.SpellChecker.FixString(panelSetOrderSurgical.MicroscopicX);
-            panelSetOrderSurgical.CancerSummary = YellowstonePathology.Business.Common.SpellChecker.FixString(panelSetOrderSurgical.CancerSummary);
-            this.m_AccessionOrder.ClinicalHistory = YellowstonePathology.Business.Common.SpellChecker.FixString(this.m_AccessionOrder.ClinicalHistory);
-            panelSetOrderSurgical.Comment = YellowstonePathology.Business.Common.SpellChecker.FixString(panelSetOrderSurgical.Comment);
+            panelSetOrderSurgical.GrossX = Business.Common.SpellChecker.FixString(panelSetOrderSurgical.GrossX);
+            panelSetOrderSurgical.MicroscopicX = Business.Common.SpellChecker.FixString(panelSetOrderSurgical.MicroscopicX);
+            panelSetOrderSurgical.CancerSummary = Business.Common.SpellChecker.FixString(panelSetOrderSurgical.CancerSummary);
+            this.m_AccessionOrder.ClinicalHistory = Business.Common.SpellChecker.FixString(this.m_AccessionOrder.ClinicalHistory);
+            panelSetOrderSurgical.Comment = Business.Common.SpellChecker.FixString(panelSetOrderSurgical.Comment);
 
             foreach (YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen in panelSetOrderSurgical.SurgicalSpecimenCollection)
             {
-                surgicalSpecimen.Diagnosis = YellowstonePathology.Business.Common.SpellChecker.FixString(surgicalSpecimen.Diagnosis);
+                surgicalSpecimen.Diagnosis = Business.Common.SpellChecker.FixString(surgicalSpecimen.Diagnosis);
             }
 
             foreach (YellowstonePathology.Business.Amendment.Model.Amendment amendment in amendmentCollection)
             {
-                amendment.Text = YellowstonePathology.Business.Common.SpellChecker.FixString(amendment.Text);
+                amendment.Text = Business.Common.SpellChecker.FixString(amendment.Text);
             }
 
             this.SetDemographicsV2();
@@ -121,7 +121,7 @@ namespace YellowstonePathology.Business.Test.Surgical
                 {
                     YellowstonePathology.Business.Amendment.Model.Amendment revisedDiagnosisAmendment = amendmentCollection.GetMostRecentFinalRevisedDiagnosis();
                     XmlNode rowRevisedDiagnosisHeader = mainTableNode.SelectSingleNode("descendant::w:tr[w:tc/w:p/w:r/w:t='Diagnosis:']", this.m_NameSpaceManager);
-                    string finalDateHead = YellowstonePathology.Business.BaseData.GetShortDateString(revisedDiagnosisAmendment.FinalDate);
+                    string finalDateHead = Business.BaseData.GetShortDateString(revisedDiagnosisAmendment.FinalDate);
                     finalDateHead += " " + YellowstonePathology.Business.BaseData.GetMillitaryTimeString(revisedDiagnosisAmendment.FinalTime);
                     rowRevisedDiagnosisHeader.SelectSingleNode("descendant::w:r[w:t='Diagnosis:']/w:t", this.m_NameSpaceManager).InnerText = "Revised Diagnosis: " + finalDateHead;
                 }
@@ -140,7 +140,7 @@ namespace YellowstonePathology.Business.Test.Surgical
                             {
                                 string finalDateP = string.Empty;
 
-                                finalDateP = YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate);
+                                finalDateP = Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate);
                                 finalDateP += " " + YellowstonePathology.Business.BaseData.GetMillitaryTimeString(panelSetOrderSurgical.FinalTime);
 
                                 XmlNode rowSpecimenBlankRowP = mainTableNode.SelectSingleNode("descendant::w:tr[w:tc/w:p/w:r/w:t='specimen_blank_row_previous']", this.m_NameSpaceManager);
@@ -177,7 +177,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 
                                 insertAfterRowP = rowCommentPClone;
                                 XmlNode rowPreviousSignaturePClone = rowPreviousSignatureP.Clone();
-                                YellowstonePathology.Business.User.SystemUser pathologistUser = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(surgicalAudit.PathologistId);
+                                YellowstonePathology.Business.User.SystemUser pathologistUser = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(surgicalAudit.PathologistId);
 
                                 string previousSignautreP = pathologistUser.Signature;
                                 rowPreviousSignaturePClone.SelectSingleNode("descendant::w:r[w:t='previous_signature']/w:t", this.m_NameSpaceManager).InnerText = previousSignautreP;
@@ -387,7 +387,7 @@ namespace YellowstonePathology.Business.Test.Surgical
             this.SetXMLNodeParagraphData("gross_description", panelSetOrderSurgical.GrossX);
             this.SetXMLNodeParagraphData("client_name", this.m_AccessionOrder.ClientName);
 
-            string finalDate = YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate) + " - " + YellowstonePathology.Business.BaseData.GetMillitaryTimeString(this.m_PanelSetOrder.FinalTime);
+            string finalDate = Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate) + " - " + YellowstonePathology.Business.BaseData.GetMillitaryTimeString(this.m_PanelSetOrder.FinalTime);
             this.SetXmlNodeData("final_date", finalDate);
 
             string immunoComment = panelSetOrderSurgical.GetImmunoComment();

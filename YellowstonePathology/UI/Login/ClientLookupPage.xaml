@@ -91,9 +91,8 @@
                         Margin="2,2,2,2" SelectionChanged="ListViewClientSearch_SelectionChanged" Height="200">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ClientId}" Header="Id" Width="50"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Name" Width="250"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Location}" Header="Location" Width="250"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ClientId}" Header="Id" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Name" Width="400"/>
                     </GridView>
                 </ListView.View>
             </ListView>                    

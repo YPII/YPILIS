@@ -29,9 +29,9 @@ namespace YellowstonePathology.UI.Cutting
 
         public void PrintLabels(Business.Test.AccessionOrder accessionOrder, Business.Test.AliquotOrder aliquotOrder)
         {
-            Business.Test.Model.Test kappa = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("360"); // KappaByISH();
-            Business.Test.Model.Test lambda = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("361"); // LambdaByISH();
-            Business.Test.Model.Test u6 = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("383"); // U6();
+            Business.Test.Model.Test kappa = Business.Test.Model.TestCollectionInstance.GetClone("360"); // KappaByISH();
+            Business.Test.Model.Test lambda = Business.Test.Model.TestCollectionInstance.GetClone("361"); // LambdaByISH();
+            Business.Test.Model.Test u6 = Business.Test.Model.TestCollectionInstance.GetClone("383"); // U6();
 
             //add test order that need to be ordered automatically
             if(accessionOrder.PanelSetOrderCollection.DoesStainOrderExist(kappa.TestId) == true && accessionOrder.PanelSetOrderCollection.DoesStainOrderExist(lambda.TestId) == true)

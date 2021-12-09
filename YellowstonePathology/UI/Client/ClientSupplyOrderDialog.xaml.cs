@@ -28,8 +28,8 @@ namespace YellowstonePathology.UI.Client
 
 		public ClientSupplyOrderDialog(string clientSupplyOrderId)
 		{
-            this.m_ClientSupplyOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullClientSupplyOrder(clientSupplyOrderId, this);
-            this.m_UserCollection = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(Business.User.SystemUserRoleDescriptionEnum.Log, true);
+            this.m_ClientSupplyOrder = Business.Persistence.DocumentGateway.Instance.PullClientSupplyOrder(clientSupplyOrderId, this);
+            this.m_UserCollection = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(Business.User.SystemUserRoleDescriptionEnum.Log, true);
 
 			InitializeComponent();
 
@@ -81,7 +81,7 @@ namespace YellowstonePathology.UI.Client
 
 		private void FillClientSupplyCollection(string clientSupplyCategory)
 		{
-			this.m_ClientSupplyCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientSupplyCollection(clientSupplyCategory);
+			this.m_ClientSupplyCollection = Business.Gateway.PhysicianClientGateway.GetClientSupplyCollection(clientSupplyCategory);
 			this.NotifyPropertyChanged("ClientSupplyCollection");
 		}
 

@@ -26,7 +26,7 @@ namespace YellowstonePathology.UI
 
         public SystemUserListDialog()
         {
-            this.m_SystemUserCollection = YellowstonePathology.Business.User.SystemUserGateway.GetSystemUserCollection();
+            this.m_SystemUserCollection = Business.User.SystemUserGateway.GetSystemUserCollection();
             InitializeComponent();
             DataContext = this;
         }
@@ -53,7 +53,7 @@ namespace YellowstonePathology.UI
         {
             SystemUserDialog dlg = new UI.SystemUserDialog(null);
             dlg.ShowDialog();
-            this.m_SystemUserCollection = YellowstonePathology.Business.User.SystemUserGateway.GetSystemUserCollection();
+            this.m_SystemUserCollection = Business.User.SystemUserGateway.GetSystemUserCollection();
             this.NotifyPropertyChanged("SystemUserCollection");
         }
 
@@ -64,7 +64,7 @@ namespace YellowstonePathology.UI
                 YellowstonePathology.Business.User.SystemUser user = (YellowstonePathology.Business.User.SystemUser)this.ListBoxSystemUsers.SelectedItem;
                 SystemUserDialog dlg = new UI.SystemUserDialog(user);
                 dlg.ShowDialog();
-                this.m_SystemUserCollection = YellowstonePathology.Business.User.SystemUserGateway.GetSystemUserCollection();
+                this.m_SystemUserCollection = Business.User.SystemUserGateway.GetSystemUserCollection();
                 this.NotifyPropertyChanged("SystemUserCollection");
             }
         }

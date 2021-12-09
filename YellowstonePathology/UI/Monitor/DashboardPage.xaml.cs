@@ -40,8 +40,10 @@ namespace YellowstonePathology.UI.Monitor
         {
             YellowstonePathology.Business.Gateway.AccessionOrderGateway.SetTodaysBlockCountRow();
             YellowstonePathology.Business.Gateway.AccessionOrderGateway.SetBillingsBlockCount();
+            YellowstonePathology.Business.Gateway.AccessionOrderGateway.SetNMHBlockCount();
+
             this.HandleBlockCountEmails();
-            this.m_BlockCountColletion = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMonitorBlockCount();
+            this.m_BlockCountColletion = Business.Gateway.AccessionOrderGateway.GetMonitorBlockCount();
             this.m_BlocksToTransfer = this.m_BlockCountColletion.SetBlocksToTransfer();
             this.NotifyPropertyChanged("");
         }        

@@ -83,7 +83,7 @@ namespace YellowstonePathology.Business.Document
                     this.m_SaveFileName = CaseDocument.GetSaveDraftDocumentFilePath(orderIdParser);
                     break;
                 case ReportSaveModeEnum.Normal:
-					this.m_SaveFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + this.m_PanelSetOrder.ReportNo + ".xml";                
+					this.m_SaveFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + this.m_PanelSetOrder.ReportNo + ".xml";                
                     break;
                 case ReportSaveModeEnum.Test:
                     this.m_SaveFileName = @"c:\test.xml";

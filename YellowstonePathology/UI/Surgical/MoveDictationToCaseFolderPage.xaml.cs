@@ -43,7 +43,7 @@ namespace YellowstonePathology.UI.Surgical
             if (string.IsNullOrEmpty(this.m_ReportNo) == false)
             {
 				YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_ReportNo.ToUpper());
-				string filePath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+				string filePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
                 //string dictationFileName = System.IO.Path.GetFileName(this.m_DictationFileName);
                 string dictationFileName = System.IO.Path.GetFileName(this.m_ReportNo.ToUpper() + ".dct");
                 string newFullPath = System.IO.Path.Combine(filePath, dictationFileName);

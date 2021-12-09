@@ -62,7 +62,7 @@ namespace YellowstonePathology.UI.Cutting
             this.m_ListBoxSlidesMouseDownTimer.Interval = new TimeSpan(0, 0, 0, 0, 750);
             this.m_ListBoxSlidesMouseDownTimer.Tick += new EventHandler(ListBoxSlidesMouseDownTimer_Tick);
 
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;            
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;            
             
 			InitializeComponent();
 			DataContext = this;            
@@ -215,7 +215,7 @@ namespace YellowstonePathology.UI.Cutting
                         {                                
                             YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder = this.m_AliquotOrder.SlideOrderCollection.Get(barcode.ID);
                             YellowstonePathology.Business.Facility.Model.Facility thisFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-                            string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+                            string thisLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
                             this.AddMaterialTrackingLog(slideOrder, thisFacility, thisLocation);
                             slideOrder.SetLocation(thisFacility, thisLocation);
@@ -263,17 +263,17 @@ namespace YellowstonePathology.UI.Cutting
             if (this.ListBoxSlideOrderCollection.SelectedItems.Count != 0)
             {
                 YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder = (YellowstonePathology.Business.Slide.Model.SlideOrder)this.ListBoxSlideOrderCollection.SelectedItem;
-                if (slideOrder.Status == YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Created.ToString())
+                if (slideOrder.Status == Business.Slide.Model.SlideStatusEnum.Created.ToString())
                 {
-                    if (slideOrder.LabelType == YellowstonePathology.Business.Slide.Model.SlideLabelTypeEnum.DirectPrint.ToString())
+                    if (slideOrder.LabelType == Business.Slide.Model.SlideLabelTypeEnum.DirectPrint.ToString())
                     {
                         this.PrintSlide(slideOrder);
-                        slideOrder.Status = YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Printed.ToString();
+                        slideOrder.Status = Business.Slide.Model.SlideStatusEnum.Printed.ToString();
                         slideOrder.Printed = true;
                     }
-                    else if (slideOrder.LabelType == YellowstonePathology.Business.Slide.Model.SlideLabelTypeEnum.PaperLabel.ToString())
+                    else if (slideOrder.LabelType == Business.Slide.Model.SlideLabelTypeEnum.PaperLabel.ToString())
                     {
-                        slideOrder.Status = YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Printed.ToString();
+                        slideOrder.Status = Business.Slide.Model.SlideStatusEnum.Printed.ToString();
                         slideOrder.Printed = true;
 
                         YellowstonePathology.Business.Label.Model.HistologySlidePaperLabel histologySlidePaperLabel = new Business.Label.Model.HistologySlidePaperLabel(slideOrder.SlideOrderId, slideOrder.ReportNo, slideOrder.Label, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
@@ -281,7 +281,7 @@ namespace YellowstonePathology.UI.Cutting
                         this.ShowTestOrderSelectionPage(this, new CustomEventArgs.AliquotOrderReturnEventArgs(this.m_AliquotOrder));
                     }
                 }
-                else if (slideOrder.Status == YellowstonePathology.Business.Slide.Model.SlideStatusEnum.ClientAccessioned.ToString())
+                else if (slideOrder.Status == Business.Slide.Model.SlideStatusEnum.ClientAccessioned.ToString())
                 {
                     MessageBox.Show("This is a client accessioned slide and cannot be printed.");
                 }
@@ -303,9 +303,9 @@ namespace YellowstonePathology.UI.Cutting
 
         private void ButtonAddSlide_Click(object sender, RoutedEventArgs e)
         {
-            Business.Test.Model.Test kappa = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("360"); // KappaByISH();
-            Business.Test.Model.Test lambda = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("361"); // LambdaByISH();
-            Business.Test.Model.Test u6 = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("383"); // U6();
+            Business.Test.Model.Test kappa = Business.Test.Model.TestCollectionInstance.GetClone("360"); // KappaByISH();
+            Business.Test.Model.Test lambda = Business.Test.Model.TestCollectionInstance.GetClone("361"); // LambdaByISH();
+            Business.Test.Model.Test u6 = Business.Test.Model.TestCollectionInstance.GetClone("383"); // U6();
 
             //add test order that need to be ordered automatically
             if (this.m_AccessionOrder.PanelSetOrderCollection.DoesStainOrderExist(kappa.TestId) == true && this.m_AccessionOrder.PanelSetOrderCollection.DoesStainOrderExist(lambda.TestId) == true)

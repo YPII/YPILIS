@@ -13,9 +13,9 @@ namespace YellowstonePathology.UI.COVID
         public const string LC96A_DIR = @"c:\covid_testing_v2\lc96a";
         public const string LC96A_SAMPLE_FILES_DIR = @"c:\covid_testing_v2\lc96a\sample_files\";
         public const string LC96A_RESULT_FILES_DIR = @"c:\covid_testing_v2\lc96a\result_files\";
-        public const string LC460A_Dir = @"c:\covid_testing_v2\lc460a";
-        public const string LC460A_SAMPLE_FILES_DIR = @"c:\covid_testing_v2\lc460a\sample_files\";
-        public const string LC460A_RESULT_FILES_DIR = @"c:\covid_testing_v2\lc460a\result_files\";        
+        public const string LC480A_Dir = @"c:\covid_testing_v2\lc480a";
+        public const string LC480A_SAMPLE_FILES_DIR = @"c:\covid_testing_v2\lc480a\sample_files\";
+        public const string LC480A_RESULT_FILES_DIR = @"c:\covid_testing_v2\lc480a\result_files\";        
 
         public COVIDCaseCollection()
 		{
@@ -35,7 +35,7 @@ namespace YellowstonePathology.UI.COVID
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
                 "join tblClientOrder co on a.MasterAccessionNo = co.MasterAccessionNo " +
                 "Join tblSARSCoV2TestOrder s on pso.ReportNo = s.ReportNo " +
-                "WHERE a.AccessionDate >= Date_Add(a.AccessionDate, interval - 30 DAY) " +
+                "WHERE a.AccessionDate >= Date_Add(current_date(), interval - 30 DAY) " +
                 "And pso.PanelSetId in ('400') " +
                 "ORDER BY a.AccessionTime desc;";
             COVIDCaseCollection result = BuildReportSearchList(cmd);
@@ -55,8 +55,28 @@ namespace YellowstonePathology.UI.COVID
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
                 "join tblClientOrder co on a.MasterAccessionNo = co.MasterAccessionNo " +
                 "Join tblSARSCoV2TestOrder s on pso.ReportNo = s.ReportNo " +
-                "WHERE a.AccessionDate >= Date_Add(a.AccessionDate, interval - 30 DAY) " +
+                "WHERE a.AccessionDate >= Date_Add(current_date(), interval -30 DAY) " +
                 "And pso.PanelSetId in ('400') and s.Result is null " +
+                "ORDER BY a.HighPriority desc, a.AccessionTime;";
+            COVIDCaseCollection result = BuildReportSearchList(cmd);
+            return result;
+        }
+
+        public static COVIDCaseCollection GetAllCOVIDCases()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = $"SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate, pso.PanelSetId, s.Result, co.ClientOrderId, co.FirstTest, co.EmployedInHealthcare, co.Symptomatic, " +
+                "co.DateOfSymptomaticOnset, co.Hospitalized, co.ICU, co.ResidentInCongregateCare, co.Pregnant, co.PRace, co.PEthnicity, a.HighPriority, " +
+                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "'' ForeignAccessionNo, pso.IsPosted, co.ClinicalHistory, co.specialInstructions " +
+                "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "join tblClientOrder co on a.MasterAccessionNo = co.MasterAccessionNo " +
+                "Join tblSARSCoV2TestOrder s on pso.ReportNo = s.ReportNo " +
+                "WHERE a.AccessionDate >= Date_Add(current_date(), interval -30 DAY) " +
+                "And pso.PanelSetId in ('400') " +
                 "ORDER BY a.HighPriority desc, a.AccessionTime;";
             COVIDCaseCollection result = BuildReportSearchList(cmd);
             return result;
@@ -75,7 +95,7 @@ namespace YellowstonePathology.UI.COVID
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
                 "join tblClientOrder co on a.MasterAccessionNo = co.MasterAccessionNo " +
                 "Join tblSARSCoV2TestOrder s on pso.ReportNo = s.ReportNo " +
-                "WHERE a.AccessionDate >= Date_Add(a.AccessionDate, interval - 30 DAY) " +
+                "WHERE a.AccessionDate >= Date_Add(current_date(), interval - 30 DAY) " +
                 "And pso.PanelSetId in ('400') and s.Result = 'Detected' " +
                 "ORDER BY a.AccessionTime desc;";
             COVIDCaseCollection result = BuildReportSearchList(cmd);
@@ -95,9 +115,9 @@ namespace YellowstonePathology.UI.COVID
                 "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
                 "join tblClientOrder co on a.MasterAccessionNo = co.MasterAccessionNo " +
                 "Join tblSARSCoV2TestOrder s on pso.ReportNo = s.ReportNo " +
-                "WHERE a.AccessionDate >= Date_Add(a.AccessionDate, interval - 30 DAY) " +
+                "WHERE a.AccessionDate >= Date_Add(current_date(), interval - 30 DAY) " +
                 "And pso.PanelSetId in ('400') and pso.ExpectedFinalTime >= '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "' and pso.final = 0 " +
-                "ORDER BY a.AccessionTime desc;";
+                "ORDER BY a.AccessionTime;";
             COVIDCaseCollection result = BuildReportSearchList(cmd);
             return result;
         }
@@ -158,9 +178,9 @@ namespace YellowstonePathology.UI.COVID
             if (System.IO.Directory.Exists(COVIDCaseCollection.LC96A_DIR) == false) System.IO.Directory.CreateDirectory(COVIDCaseCollection.LC96A_DIR);
             if (System.IO.Directory.Exists(COVIDCaseCollection.LC96A_SAMPLE_FILES_DIR) == false) System.IO.Directory.CreateDirectory(COVIDCaseCollection.LC96A_SAMPLE_FILES_DIR);
             if (System.IO.Directory.Exists(COVIDCaseCollection.LC96A_RESULT_FILES_DIR) == false) System.IO.Directory.CreateDirectory(COVIDCaseCollection.LC96A_RESULT_FILES_DIR);
-            if (System.IO.Directory.Exists(COVIDCaseCollection.LC460A_Dir) == false) System.IO.Directory.CreateDirectory(COVIDCaseCollection.LC460A_Dir);
-            if (System.IO.Directory.Exists(COVIDCaseCollection.LC460A_SAMPLE_FILES_DIR) == false) System.IO.Directory.CreateDirectory(COVIDCaseCollection.LC460A_SAMPLE_FILES_DIR);
-            if (System.IO.Directory.Exists(COVIDCaseCollection.LC460A_RESULT_FILES_DIR) == false) System.IO.Directory.CreateDirectory(COVIDCaseCollection.LC460A_RESULT_FILES_DIR);            
+            if (System.IO.Directory.Exists(COVIDCaseCollection.LC480A_Dir) == false) System.IO.Directory.CreateDirectory(COVIDCaseCollection.LC480A_Dir);
+            if (System.IO.Directory.Exists(COVIDCaseCollection.LC480A_SAMPLE_FILES_DIR) == false) System.IO.Directory.CreateDirectory(COVIDCaseCollection.LC480A_SAMPLE_FILES_DIR);
+            if (System.IO.Directory.Exists(COVIDCaseCollection.LC480A_RESULT_FILES_DIR) == false) System.IO.Directory.CreateDirectory(COVIDCaseCollection.LC480A_RESULT_FILES_DIR);            
         }
     }
 }

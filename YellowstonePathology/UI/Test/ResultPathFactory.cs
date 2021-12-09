@@ -393,11 +393,17 @@ namespace YellowstonePathology.UI.Test
                 case 400:
                     result = new SARSCoV2ResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
+                case 414:
+                    result = new PDL122C3forTNBCBreastResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
+                case 415:
+                    result = new APTIMASARSCoV2ResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
             }
 
             if (result == null)
             {
-                YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetId);
+                YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetId);
                 if (panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument)
                 {
                     result = new PublishedDocumentResultPath(reportNo, accessionOrder, pageNavigator, window);
@@ -415,7 +421,7 @@ namespace YellowstonePathology.UI.Test
         {
 			bool result = false;
 
-            YellowstonePathology.UI.Test.ResultPath resultPath = YellowstonePathology.UI.Test.ResultPathFactory.GetResultPath(panelSetOrder.PanelSetId, panelSetOrder.ReportNo, accessionOrder, pageNavigator, window, System.Windows.Visibility.Collapsed);
+            YellowstonePathology.UI.Test.ResultPath resultPath = UI.Test.ResultPathFactory.GetResultPath(panelSetOrder.PanelSetId, panelSetOrder.ReportNo, accessionOrder, pageNavigator, window, System.Windows.Visibility.Collapsed);
 
             if (resultPath != null)
             {
@@ -430,7 +436,7 @@ namespace YellowstonePathology.UI.Test
                     result = true;
 
                     YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = null;
-                    YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrders = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(accessionOrder.MasterAccessionNo);
+                    YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrders = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(accessionOrder.MasterAccessionNo);
 
                     if (clientOrders.Count > 0)
                     {

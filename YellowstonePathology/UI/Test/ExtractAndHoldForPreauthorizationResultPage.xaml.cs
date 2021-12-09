@@ -182,7 +182,7 @@ namespace YellowstonePathology.UI.Test
             string preauthFileName = Business.Document.CaseDocument.GetCaseFileNameTifPreAuth(orderIdParser);
             if (System.IO.File.Exists(preauthFileName) == true)
             {
-                Business.ReportDistribution.Model.FaxSubmission.Submit(this.m_PanelSetOrder.Fax, this.m_PanelSetOrder.ReportNo + "Preauthorization Notification", preauthFileName);
+                Business.ReportDistribution.Model.FaxSubmission.Submit(this.m_PanelSetOrder.Fax, this.m_PanelSetOrder.ReportNo + "Preauthorization Notification", preauthFileName, this.m_PanelSetOrder.ReportNo);
                 MessageBox.Show("The fax was successfully submitted.");
             }
             else

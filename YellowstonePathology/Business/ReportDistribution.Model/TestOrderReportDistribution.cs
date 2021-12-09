@@ -23,7 +23,9 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         private Nullable<DateTime> m_ScheduledDistributionTime;
         private string m_FaxNumber;
         private bool m_Rescheduled;
-        private string m_RescheduledMessage;        
+        private string m_RescheduledMessage;
+        private string m_PhoneNumber;
+        private string m_EmailAddress;
 
 		public TestOrderReportDistribution()
         {
@@ -268,6 +270,36 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
                 {
                     this.m_RescheduledMessage = value;
                     this.NotifyPropertyChanged("RescheduledMessage");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
+        public string PhoneNumber
+        {
+            get { return this.m_PhoneNumber; }
+            set
+            {
+                if (this.m_PhoneNumber != value)
+                {
+                    this.m_PhoneNumber = value;
+                    this.NotifyPropertyChanged("PhoneNumber");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
+        public string EmailAddress
+        {
+            get { return this.m_EmailAddress; }
+            set
+            {
+                if (this.m_EmailAddress != value)
+                {
+                    this.m_EmailAddress = value;
+                    this.NotifyPropertyChanged("EmailAddress");
                 }
             }
         }

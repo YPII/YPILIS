@@ -12,6 +12,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Xml.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace YellowstonePathology.UI.Login.FinalizeAccession
 {
@@ -58,11 +62,12 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             this.m_CloseButtonVisibility = closeButtonVisibility;
             this.m_BackButtonVisibility = backButtonVisibility;
 
-            this.m_SystemUserCollection = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection;
+            this.m_SystemUserCollection = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection;
 
             this.m_ClientPhysicianNotSetAuditCollection = new Business.Audit.Model.AuditCollection();
             this.m_ClientPhysicianNotSetAuditCollection.Add(new YellowstonePathology.Business.Audit.Model.ClientNotSetAudit(this.m_AccessionOrder));
             this.m_ClientPhysicianNotSetAuditCollection.Add(new YellowstonePathology.Business.Audit.Model.PhysicianNotSetAudit(this.m_AccessionOrder));
+            this.m_ClientPhysicianNotSetAuditCollection.Add(new YellowstonePathology.Business.Audit.Model.DistributeToPatientAudit(this.m_AccessionOrder));
 
             InitializeComponent();
             this.ExpanderOptions.IsExpanded = true;
@@ -198,7 +203,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
             if (this.m_ClientPhysicianNotSetAuditCollection.ActionRequired == true)
             {
-                MessageBox.Show("The provider for this case is not set. Are you sure you want to continue?", "Continue?", MessageBoxButton.OK);
+                MessageBox.Show(this.m_ClientPhysicianNotSetAuditCollection.Message, "Continue?", MessageBoxButton.OK);
             }
             else if (distributionNotSetAudit.ActionRequired == true)
             {
@@ -290,7 +295,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             this.m_PageNavigator.Navigate(this);
             this.SetPhysicianClient(e.PhysicianClientDistribution);
 
-            YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+            YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
             multiTestDistributionHandler.Set();
 
             this.SetDistribution();
@@ -322,7 +327,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         {
             this.m_AccessionOrder.SetDistribution();
             this.NotifyPropertyChanged("");            
-        }
+        }        
 
         private void HyperLinkScheduleDistributionImmediate_Click(object sender, RoutedEventArgs e)
         {
@@ -400,7 +405,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         {
             if (this.m_PanelSetOrder.Final == true)
             {
-                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
+                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
                 YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
                 YellowstonePathology.Business.Rules.MethodResult methodResult = caseDocument.DeleteCaseFiles(orderIdParser);
 
@@ -424,7 +429,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         private void HyperLinkOpenDocumentFolder_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            string folderPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+            string folderPath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Explorer.exe", folderPath);
@@ -597,7 +602,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void HyperLinkShowHl7Result_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.HL7View.IResultView resultView = YellowstonePathology.Business.HL7View.ResultViewFactory.GetResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, this.m_AccessionOrder.ClientId, false, false);
+            YellowstonePathology.Business.HL7View.IResultView resultView = Business.HL7View.ResultViewFactory.GetResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, this.m_AccessionOrder.ClientId, false, false);
             if (resultView != null)
             {
                 System.Xml.Linq.XElement document = resultView.GetDocument();
@@ -611,17 +616,26 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         }
 
         private void HyperLinkSendHL7Result_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             YellowstonePathology.Business.HL7View.IResultView resultView = Business.HL7View.ResultViewFactory.GetResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, this.m_AccessionOrder.ClientId, false, false);
             YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
-            resultView.Send(methodResult);               
+            resultView.Send(methodResult);            
         }
 
         private void HyperLinkSendHL7ResultTest_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true);
-            YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
-            resultView.Send(methodResult);
+            if(this.m_AccessionOrder.ClientId == 587)
+            {
+                YellowstonePathology.Business.HL7View.NMH.NMHResultView resultViewNMH = new Business.HL7View.NMH.NMHResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true);
+                YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+                resultViewNMH.Send(methodResult);
+            }
+            else
+            {
+                YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true);
+                YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+                resultView.Send(methodResult);
+            }            
         }
 
         private void HyperLinkSendHL7Order_Click(object sender, RoutedEventArgs e)
@@ -689,6 +703,42 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             {
                 YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution = (YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution)this.ListViewTestOrderReportDistribution.SelectedItem;
                 testOrderReportDistribution.DistributionType = "Meditech";
+            }
+        }
+
+        private void HyperLinkSendResultText_Click(object sender, RoutedEventArgs e)
+        {
+            if(string.IsNullOrEmpty(this.m_AccessionOrder.PPhoneNumberHome) == false)
+            {
+                JObject jsonRequest = Business.APIRequestHelper.GetSendCovidResultTextMessage(this.m_AccessionOrder.PPhoneNumberHome, this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder.PFirstName);
+                Business.APIResult apiResult = Business.APIRequestHelper.SubmitAPIRequestMessage(jsonRequest);                
+            }
+        }
+
+        private void HyperLinkSendResultEmail_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.m_AccessionOrder.PEmailAddress) == false)
+            {
+                JObject jsonRequest = Business.APIRequestHelper.GetSendCovidResultEmailMessage(this.m_AccessionOrder.PEmailAddress, this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder.PFirstName);
+                Business.APIResult apiResult = Business.APIRequestHelper.SubmitAPIRequestMessage(jsonRequest);
+            }
+        }
+
+        private void MenuItemSendWYDOH_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.ListViewTestOrderReportDistribution.SelectedItem != null)
+            {
+                YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution = (YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution)this.ListViewTestOrderReportDistribution.SelectedItem;
+                if(testOrderReportDistribution.DistributionType == "WYDOH")
+                {
+                    string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(testOrderReportDistribution.ReportNo);
+                    Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(masterAccessionNo);
+
+                    YellowstonePathology.Business.Rules.MethodResult resultV2 = new Business.Rules.MethodResult();
+                    YellowstonePathology.Business.HL7View.WYDOH.WYDOHResultViewV2 wyDOHResultViewV2 = new Business.HL7View.WYDOH.WYDOHResultViewV2(testOrderReportDistribution.ReportNo, accessionOrder);
+                    wyDOHResultViewV2.CanSend(resultV2);
+                    wyDOHResultViewV2.Send(resultV2);
+                }
             }
         }
     }

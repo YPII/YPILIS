@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.Client.Model
                     {
 						if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisAscusAgus(panelSetOrderCytology.ResultCode) == true)
                         {							
-							YellowstonePathology.Business.Domain.PatientHistory patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
+							YellowstonePathology.Business.Domain.PatientHistory patientHistory = Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
                             Nullable<DateTime> dateOfLastHPV = patientHistory.GetDateOfPreviousHpv(accessionOrder.AccessionDate.Value);
 
                             if (dateOfLastHPV.HasValue == true)

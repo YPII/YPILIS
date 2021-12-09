@@ -562,6 +562,9 @@
                         <Button Margin="2,2,2,2" Width="100" Height="30" Click="ButtonAliquotTypeCESlide_Click">
                             <TextBlock FontSize="12">CE Slide</TextBlock>
                         </Button>
+                        <Button Margin="2,2,2,2" Width="100" Height="30" Click="ButtonAliquotTypeCSSlide_Click">
+                            <TextBlock FontSize="12">CS Slide</TextBlock>
+                        </Button>
                         <Button Margin="2,2,2,2" Width="100" Height="30" Click="ButtonAddHESlide_Click">
                             <TextBlock FontSize="12">H&amp;E with Slide</TextBlock>
                         </Button>

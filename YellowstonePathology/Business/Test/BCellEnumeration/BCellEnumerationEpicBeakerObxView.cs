@@ -43,7 +43,7 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
 
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
 			this.AddNextObxElementBeaker("Specimen Description", specimenOrder.Description, document, "F");
-			string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+			string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
 			this.AddNextObxElementBeaker("Collection Date/Time", collectionDateTimeString, document, "F");			
 			this.AddNextObxElementBeaker("Method", panelSetOrder.Method, document, "F");						
 			this.AddNextObxElementBeaker("References", panelSetOrder.ReportReferences, document, "F");

@@ -90,7 +90,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         {
             if (this.m_ClientOrder.SystemInitiatingOrder == "EPIC")
             {                
-                this.m_Physician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByNpi(this.m_ClientOrder.ProviderId);
+                this.m_Physician = Business.Gateway.PhysicianClientGateway.GetPhysicianByNpi(this.m_ClientOrder.ProviderId);
                 this.NotifyPropertyChanged("Physician");                
             }
         }
@@ -299,10 +299,10 @@ namespace YellowstonePathology.UI.Login.Receiving
         private bool PhysicianHasDistributionsForThisClient()
         {
             bool result = false;
-            YellowstonePathology.Business.Domain.PhysicianClient physicianClient = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClient(this.m_Physician.ObjectId, this.m_ClientOrder.ClientId);
+            YellowstonePathology.Business.Domain.PhysicianClient physicianClient = Business.Gateway.PhysicianClientGateway.GetPhysicianClient(this.m_Physician.ObjectId, this.m_ClientOrder.ClientId);
             if (physicianClient != null)
             {
-                YellowstonePathology.Business.Client.Model.PhysicianClientDistributionCollection physicianClientDistributionCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionByPhysicianClientId(physicianClient.PhysicianClientId);
+                YellowstonePathology.Business.Client.Model.PhysicianClientDistributionCollection physicianClientDistributionCollection = Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionByPhysicianClientId(physicianClient.PhysicianClientId);
                 if (physicianClientDistributionCollection.Count > 0)
                 {
                     result = true;
@@ -328,7 +328,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         {
             if (string.IsNullOrEmpty(this.m_ClientOrder.SvhAccountNo) == false)
             {
-                this.m_ClientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetRecentClientOrdersBySvhAccountNo(this.m_ClientOrder.SvhAccountNo);
+                this.m_ClientOrderCollection = Business.Gateway.ClientOrderGateway.GetRecentClientOrdersBySvhAccountNo(this.m_ClientOrder.SvhAccountNo);
             }
             else
             {
@@ -373,6 +373,12 @@ namespace YellowstonePathology.UI.Login.Receiving
                 this.SelectedClientOrders(this, new CustomEventArgs.ClientOrderCollectionReturnEventArgs(result));
             }
             return result;
+        }
+
+        private void ButtonShowSpecialInstructionsPage_Click(object sender, RoutedEventArgs e)
+        {
+            SpecialInstructionsWindow specialInstructionsWindow = new SpecialInstructionsWindow(this.m_ClientOrder);
+            specialInstructionsWindow.ShowDialog();
         }
     }
 }

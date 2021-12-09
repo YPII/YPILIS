@@ -35,7 +35,7 @@ namespace YellowstonePathology.Business.Visitor
             this.m_TestOrderComment = testOrderComment;
             this.m_PanelOrderComment = panelOrderComment;
             this.m_AliquotOrder = aliquotOrder;
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
             this.m_AcknowledgeOnOrder = acknowledgeOnOrder;
             this.m_OrderAsSlide = orderAsSlide;
 			this.m_TaskOrderCollection = taskOrderCollection;
@@ -45,7 +45,7 @@ namespace YellowstonePathology.Business.Visitor
         {
             this.m_AccessionOrder = accessionOrder;
 
-            YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+            YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
             multiTestDistributionHandler.Set();
         }
 
@@ -89,7 +89,7 @@ namespace YellowstonePathology.Business.Visitor
 
         private void AddStainResult(YellowstonePathology.Business.Test.Model.Test test)
         {
-            YellowstonePathology.Business.Test.Model.StainTest stainTest = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetStainTestByTestId(test.TestId);
+            YellowstonePathology.Business.Test.Model.StainTest stainTest = Business.Gateway.AccessionOrderGateway.GetStainTestByTestId(test.TestId);
             if (stainTest != null && !string.IsNullOrEmpty(stainTest.CptCode))
             {
                 YellowstonePathology.Business.SpecialStain.StainResultItem stainResultItem = this.m_SurgicalSpecimen.StainResultItemCollection.GetNextItem(this.m_SurgicalSpecimen.SurgicalSpecimenId);
@@ -168,6 +168,12 @@ namespace YellowstonePathology.Business.Visitor
 
             this.m_TestOrder.TestStatus = "ORDERED";
             this.m_TestOrder.TestStatusUpdateTime = DateTime.Now;
+            
+            //If its a Wright Stain and a surgical then set to NoCharge.
+            if(this.m_Test.TestId == "205" && this.m_PanelSetOrder.PanelSetId != 289)
+            {                
+                this.m_TestOrder.NoCharge = true;                
+            }            
 
             Stain.Model.Stain stain = Stain.Model.StainCollection.Instance.GetStainByTestId(this.m_TestOrder.TestId);
             if (stain != null)
@@ -186,7 +192,7 @@ namespace YellowstonePathology.Business.Visitor
         {
             if (this.m_OrderAsSlide == true)
             {
-                string slideOrderId = YellowstonePathology.Business.OrderIdParser.GetNextSlideOrderId(this.m_AliquotOrder.SlideOrderCollection, this.m_AliquotOrder.AliquotOrderId);
+                string slideOrderId = Business.OrderIdParser.GetNextSlideOrderId(this.m_AliquotOrder.SlideOrderCollection, this.m_AliquotOrder.AliquotOrderId);
                 string slideOrderObjectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 
                 YellowstonePathology.Business.Visitor.AddSlideOrderVisitor addSlideOrderVisitor = new AddSlideOrderVisitor(this.m_AliquotOrder, this.m_TestOrder);

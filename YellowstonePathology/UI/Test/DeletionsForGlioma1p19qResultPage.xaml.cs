@@ -123,8 +123,8 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkAcceptResults_Click(object sender, RoutedEventArgs e)
 		{
-			if (string.IsNullOrEmpty(this.m_PanelSetOrder.ResultCode) == false)
-			{
+			//if (string.IsNullOrEmpty(this.m_PanelSetOrder.ResultCode) == false)
+			//{
 				YellowstonePathology.Business.Rules.MethodResult result = this.m_PanelSetOrder.IsOkToAccept();
 				if (result.Success == true)
 				{
@@ -134,11 +134,11 @@ namespace YellowstonePathology.UI.Test
 				{
 					MessageBox.Show(result.Message);
 				}
-			}
-			else
-			{
-				MessageBox.Show("A result must be selected before it can be accepted.");
-			}
+			//}
+			//else
+			//{
+			//	MessageBox.Show("A result must be selected before it can be accepted.");
+			//}
 		}
 
 		private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)

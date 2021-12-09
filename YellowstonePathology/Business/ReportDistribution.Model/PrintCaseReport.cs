@@ -15,14 +15,14 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         {
             this.m_ReportDistributionLogId = reportDistributionlogId;            
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_ReportNo);
-			this.m_FileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+			this.m_FileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
         }
 
         public PrintCaseReport(string reportNo)
         {
             this.m_ReportNo = reportNo;
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_ReportNo);
-			this.m_FileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+			this.m_FileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
         }
 
         public void Print()

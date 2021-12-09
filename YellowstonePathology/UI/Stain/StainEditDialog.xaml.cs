@@ -36,6 +36,7 @@ namespace YellowstonePathology.UI.Stain
 
             this.m_StainTypes = new List<string>();
             this.m_StainTypes.Add("IHC");
+            this.m_StainTypes.Add("Crystallography");
             this.m_StainTypes.Add("CytochemicalStain");
             this.m_StainTypes.Add("CytochemicalForMicroorganisms");
             this.m_StainTypes.Add("GradedStain");
@@ -86,7 +87,7 @@ namespace YellowstonePathology.UI.Stain
             YellowstonePathology.Business.Rules.MethodResult methodResult = this.CanSave();
             if (methodResult.Success == true)
             {
-                methodResult = YellowstonePathology.Business.Helper.JSONHelper.IsValidJSONString(this.m_Stain.ToJSON());
+                methodResult = Business.Helper.JSONHelper.IsValidJSONString(this.m_Stain.ToJSON());
             }
 
             if (methodResult.Success == true)

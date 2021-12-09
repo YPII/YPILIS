@@ -47,7 +47,7 @@ namespace YellowstonePathology.Business.Client.Model
         public override bool HasNoPositiveHPVInLastYear(Business.Test.AccessionOrder accessionOrder)
         {
             bool result = true;
-            YellowstonePathology.Business.Domain.PatientHistory patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
+            YellowstonePathology.Business.Domain.PatientHistory patientHistory = Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
             Nullable<DateTime> dateOfLastHPV = patientHistory.GetDateOfPreviousHpv(accessionOrder.AccessionDate.Value);
 
             if (dateOfLastHPV.HasValue == true)
@@ -57,7 +57,7 @@ namespace YellowstonePathology.Business.Client.Model
                     List<string> priorResults = patientHistory.GetPriorHPVResult(accessionOrder.MasterAccessionNo, DateTime.Today.AddDays(-330));
                     foreach (string hpvResult in priorResults)
                     {
-                        if (hpvResult == YellowstonePathology.Business.Test.HPV.HPVResult.OveralResultCodePositive)
+                        if (hpvResult == Business.Test.HPV.HPVResult.OveralResultCodePositive)
                         {
                             result = false;
                             break;

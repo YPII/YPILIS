@@ -19,10 +19,10 @@ namespace YellowstonePathology.Business.Test.TCellSubsetAnalysis
 		{
 			this.m_PanelSetId = 223;
 			this.m_PanelSetName = "BAL T-Cell Subset Analysis";
-			this.m_CaseType = YellowstonePathology.Business.CaseType.FlowCytometry;
+			this.m_CaseType = Business.CaseType.FlowCytometry;
 			this.m_HasTechnicalComponent = true;			
             this.m_HasProfessionalComponent = false;
-			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterF();
             this.m_Active = true;
 
@@ -43,8 +43,8 @@ namespace YellowstonePathology.Business.Test.TCellSubsetAnalysis
             string taskDescription = "Gather materials and perform test.";
 			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription));
 
-            this.m_TechnicalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
-            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceFLOWYPI());            
         }

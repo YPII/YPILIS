@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		{
 			this.m_PanelSetId = 70;
             this.m_PanelSetName = "HER2 Amplification by IHC";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.IHC;
+            this.m_CaseType = Business.CaseType.IHC;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = false;			
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.None;
@@ -23,11 +23,11 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
             string taskDescription = "Gather materials and send to Neo.";
 
-            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Histology, taskDescription, neogenomicsIrvine));
 
             this.m_TechnicalComponentFacility = neogenomicsIrvine;
-            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             Business.Billing.Model.PanelSetCptCode panelSetCptCode = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88342", null), 9);
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);

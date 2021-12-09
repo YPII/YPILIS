@@ -52,6 +52,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
         protected bool m_FixationStartTimeManuallyEntered;
         protected string m_FixationComment;
         protected bool m_ClientAccessioned;
+		protected string m_CollectionLocation;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -109,7 +110,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
             if (this.m_Received == false)
             {
                 this.m_Received = true;
-                this.m_DateReceived = YellowstonePathology.Business.Helper.DateTimeExtensions.DateTimeNowNoSeconds();
+                this.m_DateReceived = Business.Helper.DateTimeExtensions.DateTimeNowNoSeconds();
                 this.NotifyPropertyChanged(string.Empty);
             }
         }
@@ -739,9 +740,25 @@ namespace YellowstonePathology.Business.ClientOrder.Model
                     this.NotifyPropertyChanged("ClientAccessioned");
                 }
             }
-        }        
+        }
 
-        public Nullable<int> TimeToFixation
+		[DataMember]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "45", "null", "varchar")]
+		public string CollectionLocation
+		{
+			get { return this.m_CollectionLocation; }
+			set
+			{
+				if (this.m_CollectionLocation != value)
+				{
+					this.m_CollectionLocation = value;
+					this.NotifyPropertyChanged("CollectionLocation");
+				}
+			}
+		}
+
+		public Nullable<int> TimeToFixation
         {
             get
             {
@@ -825,11 +842,11 @@ namespace YellowstonePathology.Business.ClientOrder.Model
             {
                 if (this.m_FixationStartTimeManuallyEntered == false)
                 {
-                    if (this.m_ClientFixation == YellowstonePathology.Business.Specimen.Model.FixationType.Fresh)
+                    if (this.m_ClientFixation == Business.Specimen.Model.FixationType.Fresh)
                     {
                         this.m_FixationStartTime = this.m_DateReceived;
                     }
-                    else if (this.m_ClientFixation == YellowstonePathology.Business.Specimen.Model.FixationType.NotApplicable)
+                    else if (this.m_ClientFixation == Business.Specimen.Model.FixationType.NotApplicable)
                     {
                         this.m_FixationStartTime = null;
                     }

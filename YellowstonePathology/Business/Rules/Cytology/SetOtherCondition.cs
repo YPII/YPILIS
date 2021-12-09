@@ -43,8 +43,8 @@ namespace YellowstonePathology.Business.Rules.Cytology
 
         private void HandleEndoInWomenOlderThan40ReportComment()
         {
-			string endoOtherCondition = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetOtherConditionById("7").OtherConditionText;
-			string endoReportComment = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("44").Comment;
+			string endoOtherCondition = Business.Gateway.AccessionOrderGateway.GetOtherConditionById("7").OtherConditionText;
+			string endoReportComment = Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("44").Comment;
 
             if (string.IsNullOrEmpty(this.m_PanelOrder.OtherConditions) == false)
             {

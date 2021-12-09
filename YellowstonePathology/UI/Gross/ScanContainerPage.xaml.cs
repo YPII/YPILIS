@@ -51,7 +51,7 @@ namespace YellowstonePathology.UI.Gross
             this.m_SystemIdentity = systemIdentity;
             this.m_Message = message;
             this.m_ShowEQCOption = showEQCOption;
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 
 			this.m_PageTimeOutTimer = new System.Windows.Threading.DispatcherTimer();
 			this.m_PageTimeOutTimer.Interval = new TimeSpan(0, 20, 0);
@@ -109,6 +109,7 @@ namespace YellowstonePathology.UI.Gross
 		private void ButtonEnterNewContainerId_Click(object sender, RoutedEventArgs e)
 		{
             //this.UseThisContainer(this, "CTNR2D7AABC6-5463-451D-89BF-6F08F5DA3B8D");				
+            this.m_BarcodeScanPort.SimulateScanReceived("CTNR51ED773A-D82C-4956-82C6-F4E70E7EAE23");
         }
 
         public string SystemUserDisplayText

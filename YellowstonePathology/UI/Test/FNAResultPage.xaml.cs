@@ -98,7 +98,7 @@ namespace YellowstonePathology.UI.Test
             StringBuilder resultMessage = new StringBuilder();
 
             BindingExpression startDateBindingExpression = this.TextBoxStartDate.GetBindingExpression(TextBox.TextProperty);
-			YellowstonePathology.Business.Validation.ValidationResult startDateDataTypeValidationResult = YellowstonePathology.Business.Test.FNAAdequacyAssessment.FNAAdequacyAssessmentTestOrder.IsDateDataTypeValid(this.TextBoxStartDate.Text);
+			YellowstonePathology.Business.Validation.ValidationResult startDateDataTypeValidationResult = Business.Test.FNAAdequacyAssessment.FNAAdequacyAssessmentTestOrder.IsDateDataTypeValid(this.TextBoxStartDate.Text);
             if (startDateDataTypeValidationResult.IsValid == true)
             {
                 startDateBindingExpression.UpdateSource();                
@@ -110,7 +110,7 @@ namespace YellowstonePathology.UI.Test
             }
 
             BindingExpression endDateBindingExpression = this.TextBoxEndDate.GetBindingExpression(TextBox.TextProperty);
-			YellowstonePathology.Business.Validation.ValidationResult endDateDataTypeValidationResult = YellowstonePathology.Business.Test.FNAAdequacyAssessment.FNAAdequacyAssessmentTestOrder.IsDateDataTypeValid(this.TextBoxEndDate.Text);
+			YellowstonePathology.Business.Validation.ValidationResult endDateDataTypeValidationResult = Business.Test.FNAAdequacyAssessment.FNAAdequacyAssessmentTestOrder.IsDateDataTypeValid(this.TextBoxEndDate.Text);
             if (endDateDataTypeValidationResult.IsValid == true)
             {
                 endDateBindingExpression.UpdateSource();

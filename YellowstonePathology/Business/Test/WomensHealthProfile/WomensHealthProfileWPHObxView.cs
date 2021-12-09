@@ -92,20 +92,20 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     }
                 }
 
-                YellowstonePathology.Business.User.SystemUser systemUser = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(screeningPanelOrder.ScreenedById);
+                YellowstonePathology.Business.User.SystemUser systemUser = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(screeningPanelOrder.ScreenedById);
                 if (string.IsNullOrEmpty(systemUser.Signature) == false)
                 {
                     this.AddNextObxElement("Screened By: " + systemUser.Signature, document, "F");
                 }
 
-                string cytoTechFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(screeningPanelOrder.AcceptedTime);
+                string cytoTechFinal = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(screeningPanelOrder.AcceptedTime);
                 this.AddNextObxElement("***E - Signed " + cytoTechFinal + " * **", document, "F");
                 this.AddNextObxElement("", document, "F");
 
                 if (reviewPanelOrder != null)
                 {
-                    string reviewedBy = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
-                    string reviewedByFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(reviewPanelOrder.AcceptedDate);
+                    string reviewedBy = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
+                    string reviewedByFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(reviewPanelOrder.AcceptedDate);
 
                     if (reviewedBy.IndexOf("MD") >= 0)
                     {
@@ -143,7 +143,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     YellowstonePathology.Business.Test.HPV.HPVTestOrder hpvTestOrder = (YellowstonePathology.Business.Test.HPV.HPVTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetHPV.PanelSetId);
                     this.AddNextObxElement("High Risk HPV: " + hpvTestOrder.Result, document, "F");
                     this.AddNextObxElement("Reference: Negative", document, "F");
-                    string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(hpvTestOrder.FinalTime);
+                    string hpvFinal = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(hpvTestOrder.FinalTime);
                     this.AddNextObxElement("Date Finalized: " + hpvFinal, document, "F");
                     this.AddNextObxElement("", document, "F");
                 }
@@ -156,7 +156,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 
                     this.AddNextObxElement("HPV type 18/45: " + panelSetOrderHPV1618.HPV18Result, document, "F");
                     this.AddNextObxElement("Reference: Negative", document, "F");
-                    string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(panelSetOrderHPV1618.FinalTime);
+                    string hpvFinal = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(panelSetOrderHPV1618.FinalTime);
                     this.AddNextObxElement("Date Finalized: " + hpvFinal, document, "F");
                     this.AddNextObxElement("", document, "F");
                 }
@@ -170,7 +170,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 
                     this.AddNextObxElement("Neisseria gonorrhoeae: " + panelSetOrderNGCT.NeisseriaGonorrhoeaeResult, document, "F");
                     this.AddNextObxElement("Reference: Negative", document, "F");
-                    string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(panelSetOrderNGCT.FinalTime);
+                    string hpvFinal = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(panelSetOrderNGCT.FinalTime);
                     this.AddNextObxElement("Date Finalized: " + hpvFinal, document, "F");
                     this.AddNextObxElement("", document, "F");
                 }
@@ -181,7 +181,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     YellowstonePathology.Business.Test.Trichomonas.TrichomonasTestOrder reportOrderTrichomonas = (YellowstonePathology.Business.Test.Trichomonas.TrichomonasTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetTrichomonas.PanelSetId);
                     this.AddNextObxElement("Trichomonas vaginalis: " + reportOrderTrichomonas.Result, document, "F");
                     this.AddNextObxElement("Reference: Negative", document, "F");
-                    string hpvFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(reportOrderTrichomonas.FinalTime);
+                    string hpvFinal = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(reportOrderTrichomonas.FinalTime);
                     this.AddNextObxElement("Date Finalized: " + hpvFinal, document, "F");
                     this.AddNextObxElement("", document, "F");
                 }
@@ -217,7 +217,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest panelSetThinPrepPap = new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest();
             DateTime cutoffDate = this.m_AccessionOrder.AccessionDate.Value.AddYears(-5);
 
-            YellowstonePathology.Business.Domain.PatientHistory patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(this.m_AccessionOrder.PatientId);
+            YellowstonePathology.Business.Domain.PatientHistory patientHistory = Business.Gateway.AccessionOrderGateway.GetPatientHistory(this.m_AccessionOrder.PatientId);
             YellowstonePathology.Business.Domain.PatientHistory priorPapRelatedHistory = patientHistory.GetPriorPapRelatedHistory(this.m_AccessionOrder.MasterAccessionNo, cutoffDate);
 
             if (priorPapRelatedHistory.Count == 0)
@@ -229,7 +229,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             {
                 foreach (YellowstonePathology.Business.Domain.PatientHistoryResult patientHistoryResult in priorPapRelatedHistory)
                 {
-                    YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(patientHistoryResult.MasterAccessionNo);
+                    YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(patientHistoryResult.MasterAccessionNo);
                     foreach (YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in accessionOrder.PanelSetOrderCollection)
                     {
                         string reportNo = null;
@@ -242,7 +242,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                             panelSetOrder.PanelSetId == panelSetTrichomonas.PanelSetId)
                         {
                             reportNo = panelSetOrder.ReportNo;
-                            string finaldate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrder.FinalDate);
+                            string finaldate = Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrder.FinalDate);
                             result = panelSetOrder.GetResultWithTestName();
                             this.AddNextObxElement("Test: " + panelSetOrder.PanelSetName + " Report No: " + reportNo + " Result: " + result + " Final Date: " + finaldate, document, "F");
                             this.AddNextObxElement("", document, "F");

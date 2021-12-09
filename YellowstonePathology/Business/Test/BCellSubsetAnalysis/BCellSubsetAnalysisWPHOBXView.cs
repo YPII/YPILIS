@@ -61,7 +61,7 @@ namespace YellowstonePathology.Business.Test.BCellSubsetAnalysis
             this.AddNextObxElement("Specimen Information:", document, "F");
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
             this.AddNextObxElement("Specimen Identification: " + specimenOrder.Description, document, "F");
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");            
 
             this.AddNextObxElement("", document, "F");

@@ -32,7 +32,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             this.m_PanelSetOrderCytology = (YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology)panelSetOrder;
             this.m_ReportSaveEnum = reportSaveMode;
 
-            this.m_NativeDocumentFormat = YellowstonePathology.Business.Document.NativeDocumentFormatEnum.Word;
+            this.m_NativeDocumentFormat = Business.Document.NativeDocumentFormatEnum.Word;
             this.m_ReportXml = new XmlDocument();
             this.m_NameSpaceManager = new XmlNamespaceManager(m_ReportXml.NameTable);
             this.m_NameSpaceManager.AddNamespace("w", "http://schemas.microsoft.com/office/word/2003/wordml");            
@@ -133,7 +133,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
                 }
             }
 
-            YellowstonePathology.Business.User.SystemUser systemUser = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(screeningPanelOrder.ScreenedById);
+            YellowstonePathology.Business.User.SystemUser systemUser = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(screeningPanelOrder.ScreenedById);
             string screenedBy = string.Empty;
             if (string.IsNullOrEmpty(systemUser.Signature) == false)
             {
@@ -141,13 +141,13 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             }
             this.SetXmlNodeData("screened_by", screenedBy);
 
-            string finalDate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(this.m_PanelSetOrderCytology.FinalTime);
+            string finalDate = Business.Helper.DateTimeExtensions.DateStringFromNullable(this.m_PanelSetOrderCytology.FinalTime);
             string cytoTechFinal = screeningPanelOrder.AcceptedTime.Value.ToString("MM/dd/yyyy HH:mm");
             this.SetXmlNodeData("cytotech_final", cytoTechFinal);
 
             if (reviewPanelOrder != null)
             {
-                string reviewedBy = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
+                string reviewedBy = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
                 string reviewedByFinal = "";
                 if (reviewPanelOrder.AcceptedTime.HasValue == true)
                 {
@@ -207,7 +207,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
                     this.m_SaveFileName = CaseDocument.GetSaveDraftDocumentFilePath(orderIdParser);
                     break;
                 case YellowstonePathology.Business.Document.ReportSaveModeEnum.Normal:
-					this.m_SaveFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + this.m_PanelSetOrderCytology.ReportNo + ".xml";
+					this.m_SaveFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + this.m_PanelSetOrderCytology.ReportNo + ".xml";
                     break;
                 case YellowstonePathology.Business.Document.ReportSaveModeEnum.Test:
                     this.m_SaveFileName = @"c:\test.xml";

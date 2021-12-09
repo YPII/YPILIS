@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.HPV1618SolidTumor
             string description = specimenOrder.Description + " - Block " + aliquotOrder.GetDescription();
             base.ReplaceText("specimen_description", description);            
 
-			string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+			string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
 			this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
@@ -56,7 +56,7 @@ namespace YellowstonePathology.Business.Test.HPV1618SolidTumor
             if (panelSetOrder.HPV58Result == PanelSetOrder.NotPerformedResult) base.DeleteRow("hpv58_result");
             else base.ReplaceText("hpv58_result", panelSetOrder.HPV58Result);
 
-            if (panelSetOrder.Indication == YellowstonePathology.Business.Test.HPV1618SolidTumor.HPV1618SolidTumorIndication.SquamousCellCarcinomaHeadAndNeck)
+            if (panelSetOrder.Indication == Business.Test.HPV1618SolidTumor.HPV1618SolidTumorIndication.SquamousCellCarcinomaHeadAndNeck)
             {
                 base.ReplaceText("report_interpretation_header", "Interpretation");
                 base.ReplaceText("report_interpretation", panelSetOrder.Interpretation);

@@ -80,7 +80,7 @@ namespace YellowstonePathology.UI.Login
 		private void TextBoxAccessionDate_KeyUp(object sender, KeyEventArgs e)
 		{
 			Nullable<DateTime> targetDate = null;
-			bool result = YellowstonePathology.Business.Helper.TextBoxHelper.IncrementDate(this.TextBoxAccessionDate.Text, ref targetDate, e);
+			bool result = Business.Helper.TextBoxHelper.IncrementDate(this.TextBoxAccessionDate.Text, ref targetDate, e);
 			if (result == true) this.AccessionDate = targetDate.Value;
 		}		
 	}

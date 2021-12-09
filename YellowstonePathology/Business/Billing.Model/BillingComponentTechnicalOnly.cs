@@ -18,6 +18,7 @@ namespace YellowstonePathology.Business.Billing.Model
             switch (this.m_PanelSetOrder.BillingType)
             {
                 case "Global":
+                case "Patient":
                     billableObject.PostTechnical("Patient", "YPIBLGS");
 					billableObject.PostClientGCodes(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Technical);                      
                     break;

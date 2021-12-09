@@ -19,7 +19,8 @@ namespace YellowstonePathology.Business.Label.Model
                 label.AppendCommands(result, xOffset, yOffset);
                 xOffset += 310;
             }
-            result.Append("^XZ");            
+            result.Append("^XZ");
+            string xx = result.ToString();
             RawPrinterHelper.SendStringToPrinter(printerName, result.ToString());
         }        
     }

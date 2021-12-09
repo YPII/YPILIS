@@ -46,7 +46,7 @@ namespace YellowstonePathology.UI.Test
         {
             this.m_MainWindowCommandButtonHandler = mainWindowCommandButtonHandler;
             this.m_Writer = writer;
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 						
 			this.m_LabUI = new LabUI(this.m_SystemIdentity, writer);
 
@@ -67,7 +67,7 @@ namespace YellowstonePathology.UI.Test
             this.Loaded +=new RoutedEventHandler(LabWorkspace_Loaded);
             this.Unloaded += new RoutedEventHandler(LabWorkspace_Unloaded);
 
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 
 			this.m_ScanLogger = new YellowstonePathology.Business.Logging.ScanLogger(this.m_SystemIdentity);
             this.m_ScanLogger.Start();
@@ -705,7 +705,7 @@ namespace YellowstonePathology.UI.Test
 		private void TextBoxCollectionDate_KeyUp(object sender, KeyEventArgs e)
 		{
             Nullable<DateTime> targetDate = null;
-            bool result = YellowstonePathology.Business.Helper.TextBoxHelper.IncrementDate(this.TextBoxCollectionDate.Text, ref targetDate, e);
+            bool result = Business.Helper.TextBoxHelper.IncrementDate(this.TextBoxCollectionDate.Text, ref targetDate, e);
             if (result == true) this.m_LabUI.AccessionOrder.CollectionDate = targetDate;            
 		}
 
@@ -746,11 +746,11 @@ namespace YellowstonePathology.UI.Test
                     result = null;
                     break;
                 case "Billings":
-                    YellowstonePathology.Business.Facility.Model.Facility ypBlgs = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
+                    YellowstonePathology.Business.Facility.Model.Facility ypBlgs = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
                     result = ypBlgs.FacilityId;
                     break;
                 case "Cody":
-                    YellowstonePathology.Business.Facility.Model.Facility ypCdy = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPCDY");
+                    YellowstonePathology.Business.Facility.Model.Facility ypCdy = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPCDY");
                     result = ypCdy.FacilityId;
                     break;
             }
@@ -878,13 +878,13 @@ namespace YellowstonePathology.UI.Test
                 {
 					foreach (YellowstonePathology.Business.Search.ReportSearchItem item in this.ListViewCaseList.SelectedItems)
                     {
-                        YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+                        YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
                         YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(item.PanelSetId);
 
                         YellowstonePathology.Business.Label.Model.LabelFormatEnum labelFormat = (YellowstonePathology.Business.Label.Model.LabelFormatEnum)Enum.Parse(typeof(YellowstonePathology.Business.Label.Model.LabelFormatEnum), YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.MolecularLabelFormat);
-                        YellowstonePathology.Business.Specimen.Model.Specimen thinPrepFluid = YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNTHNPRPFLD"); // Definition.ThinPrepFluid();
+                        YellowstonePathology.Business.Specimen.Model.Specimen thinPrepFluid = Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNTHNPRPFLD"); // Definition.ThinPrepFluid();
                         YellowstonePathology.Business.Label.Model.MolecularLabelPrinter molecularLabelPrinter = new Business.Label.Model.MolecularLabelPrinter();
-                        YellowstonePathology.Business.Label.Model.Label label = YellowstonePathology.Business.Label.Model.LabelFactory.GetMolecularLabel(labelFormat, item.MasterAccessionNo, item.PFirstName, item.PLastName, item.SpecimenDescription, panelSet, true);
+                        YellowstonePathology.Business.Label.Model.Label label = Business.Label.Model.LabelFactory.GetMolecularLabel(labelFormat, item.MasterAccessionNo, item.PFirstName, item.PLastName, item.SpecimenDescription, panelSet, true);
                         molecularLabelPrinter.Queue.Enqueue(label);
                         molecularLabelPrinter.Print();
                     }
@@ -902,7 +902,7 @@ namespace YellowstonePathology.UI.Test
             {
 				YellowstonePathology.Business.Search.ReportSearchItem reportSearchItem = (YellowstonePathology.Business.Search.ReportSearchItem)this.ListViewCaseList.SelectedItem;
 				YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(reportSearchItem.ReportNo);
-				string folderPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+				string folderPath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Explorer.exe", folderPath);
@@ -916,7 +916,7 @@ namespace YellowstonePathology.UI.Test
             if (this.ListViewCaseList.SelectedItem != null)
             {
 				YellowstonePathology.Business.Search.ReportSearchItem item = (YellowstonePathology.Business.Search.ReportSearchItem)this.ListViewCaseList.SelectedItem;
-                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(this.m_LabUI.AccessionOrder, this.m_LabUI.PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
+                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_LabUI.AccessionOrder, this.m_LabUI.PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
 				YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(item.ReportNo);
                 YellowstonePathology.Business.Rules.MethodResult methodResult = caseDocument.DeleteCaseFiles(orderIdParser);
                 if (methodResult.Success == true)
@@ -971,7 +971,7 @@ namespace YellowstonePathology.UI.Test
             if (this.ListViewCaseList.SelectedItem != null)
             {
 				YellowstonePathology.Business.Search.ReportSearchItem item = (YellowstonePathology.Business.Search.ReportSearchItem)this.ListViewCaseList.SelectedItem;
-				YellowstonePathology.Business.HL7View.IResultView resultView = YellowstonePathology.Business.HL7View.ResultViewFactory.GetResultView(item.ReportNo, this.m_LabUI.AccessionOrder, this.m_LabUI.AccessionOrder.ClientId, false, false);
+				YellowstonePathology.Business.HL7View.IResultView resultView = Business.HL7View.ResultViewFactory.GetResultView(item.ReportNo, this.m_LabUI.AccessionOrder, this.m_LabUI.AccessionOrder.ClientId, false, false);
 				if (resultView != null)
 				{
 					XElement document = resultView.GetDocument();
@@ -990,7 +990,7 @@ namespace YellowstonePathology.UI.Test
             if (this.ListViewCaseList.SelectedItem != null)
             {
 				YellowstonePathology.Business.Search.ReportSearchItem item = (YellowstonePathology.Business.Search.ReportSearchItem)this.ListViewCaseList.SelectedItem;                
-                YellowstonePathology.Business.HL7View.IResultView resultView = YellowstonePathology.Business.HL7View.ResultViewFactory.GetResultView(item.ReportNo, this.m_LabUI.AccessionOrder, this.m_LabUI.AccessionOrder.ClientId, false, false);
+                YellowstonePathology.Business.HL7View.IResultView resultView = Business.HL7View.ResultViewFactory.GetResultView(item.ReportNo, this.m_LabUI.AccessionOrder, this.m_LabUI.AccessionOrder.ClientId, false, false);
                 YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
                 resultView.Send(methodResult);                               
             }
@@ -1001,7 +1001,7 @@ namespace YellowstonePathology.UI.Test
             if (this.ListViewCaseList.SelectedItem != null)
             {
 				YellowstonePathology.Business.Search.ReportSearchItem item = (YellowstonePathology.Business.Search.ReportSearchItem)this.ListViewCaseList.SelectedItem;
-                YellowstonePathology.Business.HL7View.IResultView resultView = YellowstonePathology.Business.HL7View.ResultViewFactory.GetResultView(item.ReportNo, this.m_LabUI.AccessionOrder, this.m_LabUI.AccessionOrder.ClientId, false, true);
+                YellowstonePathology.Business.HL7View.IResultView resultView = Business.HL7View.ResultViewFactory.GetResultView(item.ReportNo, this.m_LabUI.AccessionOrder, this.m_LabUI.AccessionOrder.ClientId, false, true);
                 YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
                 resultView.Send(methodResult);
             }
@@ -1043,11 +1043,12 @@ namespace YellowstonePathology.UI.Test
 
         private void MenuItemSendPantherOrder_Click(object sender, RoutedEventArgs e)
         {
+            /*
             if (this.ListViewCaseList.SelectedItems.Count != 0)
             {                
                 foreach(YellowstonePathology.Business.Search.ReportSearchItem reportSearchitem in this.ListViewCaseList.SelectedItems)
                 {
-                    YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(reportSearchitem.MasterAccessionNo, this.m_Writer);
+                    YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(reportSearchitem.MasterAccessionNo, this.m_Writer);
                     if (accessionOrder.SpecimenOrderCollection.HasThinPrepFluidSpecimen() == true)
                     {
                         YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = accessionOrder.SpecimenOrderCollection.GetThinPrep();
@@ -1068,7 +1069,7 @@ namespace YellowstonePathology.UI.Test
                                     throw new Exception(panelSetOrder.PanelSetName + " is mot implemented yet.");
                             }
 
-                            YellowstonePathology.Business.HL7View.Panther.PantherOrder pantherOrder = new Business.HL7View.Panther.PantherOrder(pantherAssay, specimenOrder, aliquotOrder, accessionOrder, panelSetOrder, YellowstonePathology.Business.HL7View.Panther.PantherActionCode.NewSample);
+                            YellowstonePathology.Business.HL7View.Panther.PantherOrder pantherOrder = new Business.HL7View.Panther.PantherOrder(pantherAssay, specimenOrder, accessionOrder, panelSetOrder, YellowstonePathology.Business.HL7View.Panther.PantherActionCode.NewSample);
                             pantherOrder.Send();
                         }
                         else
@@ -1082,6 +1083,7 @@ namespace YellowstonePathology.UI.Test
                     }
                 }                
             }
+            */
         }
     }
 }

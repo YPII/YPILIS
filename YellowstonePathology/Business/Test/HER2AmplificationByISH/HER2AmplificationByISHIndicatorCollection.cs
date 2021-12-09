@@ -10,11 +10,13 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 	{
 		public static string BreastIndication = "Breast";
 		public static string GastricIndication = "Gastric";
+		public static string EndometrialIndication = "Endometrial";
 
 		public HER2AmplificationByISHIndicatorCollection()
 		{
 			this.Add(HER2AmplificationByISHIndicatorCollection.BreastIndication);
 			this.Add(HER2AmplificationByISHIndicatorCollection.GastricIndication);
+			this.Add(HER2AmplificationByISHIndicatorCollection.EndometrialIndication);
 		}
 	}
 }

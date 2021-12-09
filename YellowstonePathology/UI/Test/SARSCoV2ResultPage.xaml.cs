@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
-using System.Xml.Linq;
+
 
 namespace YellowstonePathology.UI.Test
 {	
@@ -50,8 +50,7 @@ namespace YellowstonePathology.UI.Test
             Unloaded += ResultPage_Unloaded;
             
             this.m_ControlsNotDisabledOnFinal.Add(this.ButtonNext);
-            this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);
-            this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockNext);
+            this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);            
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalResults);            
         }
 
@@ -179,6 +178,6 @@ namespace YellowstonePathology.UI.Test
         private void ComboBoxResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
-        }
+        }        
     }
 }

@@ -56,7 +56,8 @@ namespace YellowstonePathology.UI.Test
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalResults);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockSetResults);
-        }
+			this.m_ControlsNotDisabledOnFinal.Add(this.TextBoxInterpretation);
+		}
 
         public YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeTestOrder PanelSetOrder
 		{

@@ -15,9 +15,7 @@ namespace YellowstonePathology.Business.Client.Model
     [PersistentClass("tblClient", "YPIDATA")]
 	public class Client : INotifyPropertyChanged
 	{
-		public event PropertyChangedEventHandler PropertyChanged;				
-
-		private ClientLocationCollection m_ClientLocationCollection;
+		public event PropertyChangedEventHandler PropertyChanged;						
 
         private string m_ObjectId;
         private int m_ClientId;
@@ -47,10 +45,13 @@ namespace YellowstonePathology.Business.Client.Model
         private string m_AdditionalTestingNotificationContact;
         private string m_AdditionalTestingNotificationFax;
         private string m_AlternateDistributionType;
+        private string m_COVIDBillingType;
+        private string m_COVIDTravelBillingType;
+        private string m_OrderType;
 
         public Client()
         {
-			this.m_ClientLocationCollection = new ClientLocationCollection();
+			
         }
 
 		public Client(string objectId, string clientName, int clientId)
@@ -58,16 +59,8 @@ namespace YellowstonePathology.Business.Client.Model
 			this.m_ObjectId = objectId;
 			this.m_ClientName = clientName;
 			this.m_ClientId = clientId;
-            this.m_PathologyGroupId = "YPBLGS";
-			this.m_ClientLocationCollection = new ClientLocationCollection();
-		}
-
-        [PersistentCollection()]
-        public ClientLocationCollection ClientLocationCollection
-		{
-			get { return this.m_ClientLocationCollection; }
-            set { this.m_ClientLocationCollection = value; }
-		}
+            this.m_PathologyGroupId = "YPBLGS";			
+		}        
 
         [PersistentDocumentIdProperty()]
         [PersistentDataColumnProperty(true, "50", "null", "varchar")]
@@ -485,6 +478,51 @@ namespace YellowstonePathology.Business.Client.Model
                 {
                     this.m_AlternateDistributionType = value;
                     this.NotifyPropertyChanged("AlternateDistributionType");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
+        public string COVIDBillingType
+        {
+            get { return this.m_COVIDBillingType; }
+            set
+            {
+                if (this.m_COVIDBillingType != value)
+                {
+                    this.m_COVIDBillingType = value;
+                    this.NotifyPropertyChanged("COVIDBillingType");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
+        public string COVIDTravelBillingType
+        {
+            get { return this.m_COVIDTravelBillingType; }
+            set
+            {
+                if (this.m_COVIDTravelBillingType != value)
+                {
+                    this.m_COVIDTravelBillingType = value;
+                    this.NotifyPropertyChanged("COVIDTravelBillingType");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "100", "null", "varchar")]
+        public string OrderType
+        {
+            get { return this.m_OrderType; }
+            set
+            {
+                if (this.m_OrderType != value)
+                {
+                    this.m_OrderType = value;
+                    this.NotifyPropertyChanged("OrderType");
                 }
             }
         }

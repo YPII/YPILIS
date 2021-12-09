@@ -32,7 +32,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 		public ViewClientOrderPage(YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder)
 		{
 			this.m_ClientOrder = clientOrder;            
-            object o = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Documents;
+            object o = Business.Persistence.DocumentGateway.Instance.Documents;
 
 			InitializeComponent();
 			DataContext = this;

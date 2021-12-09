@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
 		{			
 			YellowstonePathology.Business.Test.SARSCoV2.SARSCoV2TestOrder panelSetOrder = (YellowstonePathology.Business.Test.SARSCoV2.SARSCoV2TestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\SARSCoV2.1.xml";
+			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\SARSCoV2.3.xml";
 			base.OpenTemplate();
 
 			base.SetDemographicsV2();
@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
 			string description = specimenOrder.Description;
             base.ReplaceText("specimen_description", description);            
 
-			string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+			string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
 			this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
@@ -37,14 +37,14 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
 			string result = null;
 			if (panelSetOrder.Result == "DETECTED")
 			{
-				result = "POSITIVE(DETECTED)";
+				result = "POSITIVE (DETECTED)";
 				base.ReplaceText("test_result_p", result);
 				base.ReplaceText("test_result_n", string.Empty);
 			}
 
 			if (panelSetOrder.Result == "NOT DETECTED")
 			{
-				result = "Negative(Not Detected)";
+				result = "Negative (Not Detected)";
 				base.ReplaceText("test_result_n", result);
 				base.ReplaceText("test_result_p", string.Empty);
 			}
@@ -58,12 +58,14 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
 			this.SetReportDistribution();
 			this.SetCaseHistory();
 
-			this.SaveReport();
+			this.m_ReportXml.Save(this.m_SaveFileName);
 		}
 
 		public override void Publish()
 		{
-			base.Publish();
+			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
+			string filePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo;
+			Business.Helper.FileConversionHelper.publishCaseDocs(filePath, this.m_PanelSetOrder.ReportNo);			
 		}
 	}
 }

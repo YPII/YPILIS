@@ -58,7 +58,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
 		private BarcodeScanPort()
 		{            
             this.m_SerialPort = new SerialPort();
-            this.m_SerialPort.PortName = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.BarcodeScanPort;
+            this.m_SerialPort.PortName = Business.User.UserPreferenceInstance.Instance.UserPreference.BarcodeScanPort;
             this.m_SerialPort.NewLine = "\n";
             this.m_SerialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
             this.m_SerialPort.ReadTimeout = 500;

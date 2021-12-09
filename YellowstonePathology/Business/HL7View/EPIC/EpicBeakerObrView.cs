@@ -20,13 +20,14 @@ namespace YellowstonePathology.Business.HL7View.EPIC
         private Nullable<DateTime> m_CollectionDate;
         private Nullable<DateTime> m_FinalTime;
         private bool m_SendUnsolicited;
-        private string m_SystemInitiatingOrder;        
+        private string m_SystemInitiatingOrder;
+        private int m_PanelSetId;
 
         YellowstonePathology.Business.Domain.Physician m_OrderingPhysician;
         YellowstonePathology.Business.ClientOrder.Model.UniversalService m_UniversalService;
 
         public EPICBeakerObrView(string externalOrderId, string secondaryExternalOrderId, string masterAccessionNo, string reportNo, Nullable<DateTime> collectionDate, Nullable<DateTime> collectionTime, Nullable<DateTime> accessionTime, Nullable<DateTime> finalTime,
-            YellowstonePathology.Business.Domain.Physician orderingPhysician, string observationResultStatus, YellowstonePathology.Business.ClientOrder.Model.UniversalService universalService, bool sendUnsolicited, string systemInitiatingOrder)
+            YellowstonePathology.Business.Domain.Physician orderingPhysician, string observationResultStatus, YellowstonePathology.Business.ClientOrder.Model.UniversalService universalService, bool sendUnsolicited, string systemInitiatingOrder, int panelSetId)
         {         
             this.m_ExternalOrderId = externalOrderId;
             this.m_SecondaryExternalOrderId = secondaryExternalOrderId;
@@ -40,7 +41,8 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.m_ObservationResultStatus = observationResultStatus;
             this.m_UniversalService = universalService;
             this.m_SendUnsolicited = sendUnsolicited;
-            this.m_SystemInitiatingOrder = systemInitiatingOrder;            
+            this.m_SystemInitiatingOrder = systemInitiatingOrder;
+            this.m_PanelSetId = panelSetId;
         }               
 
         public void ToXml(XElement document)
@@ -51,8 +53,8 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             XElement obr01Element = new XElement("OBR.1");
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.1.1", "1", obr01Element);            
             obrElement.Add(obr01Element);
-
-            if (this.m_SendUnsolicited == false)
+            
+            if (this.OkToAddOBR2() == true)
             {
                 XElement obr02Element = new XElement("OBR.2");
                 YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.2.1", this.m_ExternalOrderId, obr02Element);
@@ -116,6 +118,14 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             XElement obr25Element = new XElement("OBR.25");
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.25.1", this.m_ObservationResultStatus, obr25Element);                        
             obrElement.Add(obr25Element);            
+        }
+
+        private bool OkToAddOBR2()
+        {
+            bool result = true;
+            if (this.m_SendUnsolicited == true) result = false;
+            if (this.m_SystemInitiatingOrder != "beaker" && this.m_PanelSetId != 13) result = false;
+            return result;
         }
 
         public void WriteUniversalServiceId(XElement obr04Element, int panelSetId)

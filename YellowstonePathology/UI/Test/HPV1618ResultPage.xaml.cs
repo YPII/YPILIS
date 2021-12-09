@@ -45,8 +45,8 @@ namespace YellowstonePathology.UI.Test
 			this.m_SystemIdentity = systemIdentity;
 			this.m_PageNavigator = pageNavigator;
 
-            this.m_Genotype16ResultCollection = YellowstonePathology.Business.Test.HPV1618.HPV1618ResultCollection.GetGenotype16Results();
-            this.m_Genotype18ResultCollection = YellowstonePathology.Business.Test.HPV1618.HPV1618ResultCollection.GetGenotype18Results();
+            this.m_Genotype16ResultCollection = Business.Test.HPV1618.HPV1618ResultCollection.GetGenotype16Results();
+            this.m_Genotype18ResultCollection = Business.Test.HPV1618.HPV1618ResultCollection.GetGenotype18Results();
 
             this.m_PageHeaderText = "HPV Genotypes 16 and 18 Results For: " + this.m_AccessionOrder.PatientDisplayName;
 			
@@ -120,7 +120,7 @@ namespace YellowstonePathology.UI.Test
 			YellowstonePathology.Business.Rules.MethodResult methodResult = this.m_PanelSetOrder.IsOkToFinalize();
 			if (methodResult.Success == true)
 			{
-                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
                 multiTestDistributionHandler.Set();
 
                 this.m_PanelSetOrder.Finish(this.m_AccessionOrder);

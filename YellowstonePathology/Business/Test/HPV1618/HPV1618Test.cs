@@ -12,10 +12,10 @@ namespace YellowstonePathology.Business.Test.HPV1618
 			this.m_PanelSetId = 62;
 			this.m_PanelSetName = "HPV Genotypes 16 and 18";
             this.m_Abbreviation = "HPV1618";
-			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+			this.m_CaseType = Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = false;
-			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterM();
             this.m_Active = true;
 
@@ -34,8 +34,8 @@ namespace YellowstonePathology.Business.Test.HPV1618
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WPH);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.CMMC);
 
-            this.m_TechnicalComponentFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");            
-            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");            
+            this.m_TechnicalComponentFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");            
+            this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");            
 
             this.m_HasSplitCPTCode = false;            
 

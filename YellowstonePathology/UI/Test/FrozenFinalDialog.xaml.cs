@@ -31,7 +31,7 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.Test.Surgical.IntraoperativeConsultationResult intraoperativeConsultation,
             YellowstonePathology.UI.TypingShortcutUserControl typingShortcutUserControl)
 		{
-			this.m_PathologistUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
+			this.m_PathologistUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
 			this.m_AccessionOrder = accessionOrder;
 			this.m_IntraoperativeConsultation = intraoperativeConsultation;
             this.m_TypingShortcutUserControl = typingShortcutUserControl;
@@ -42,6 +42,9 @@ namespace YellowstonePathology.UI.Test
 																						   select ssr).Single<YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen>();
 			this.m_SpecimenOrder = surgicalSpecimen.SpecimenOrder;
 			InitializeComponent();
+
+			if (this.m_IntraoperativeConsultation.StartDate.HasValue == false) this.m_IntraoperativeConsultation.StartDate = DateTime.Now;
+			if (this.m_IntraoperativeConsultation.EndDate.HasValue == false) this.m_IntraoperativeConsultation.EndDate = DateTime.Now.AddMinutes(15);
 
 			this.DataContext = this;
 			Closing += new System.ComponentModel.CancelEventHandler(FrozenFinalDialog_Closing);

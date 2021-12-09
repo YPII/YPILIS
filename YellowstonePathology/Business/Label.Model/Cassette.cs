@@ -25,13 +25,20 @@ namespace YellowstonePathology.Business.Label.Model
         protected string m_ClientAccessionNo;
         protected bool m_ClientAccessioned;
         protected string m_EmbeddingInstructions;
+		protected string m_ProstateDescription;
 
         public Cassette()
 		{
             
 		}
 
-        public YellowstonePathology.Business.Test.AliquotOrder AliquotOrder
+		public Cassette(string cassetteColor, string prostateDescription)
+		{
+			this.m_CassetteColor = cassetteColor;
+			this.m_ProstateDescription = prostateDescription;
+		}
+
+		public YellowstonePathology.Business.Test.AliquotOrder AliquotOrder
         {
             get { return this.m_AliquotOrder; }
         }
@@ -124,9 +131,21 @@ namespace YellowstonePathology.Business.Label.Model
 					this.m_Verified = value;					
 				}
 			}
-		}		
+		}
 
-        public string CompanyId
+		public string ProstateDescription
+		{
+			get { return this.m_ProstateDescription; }
+			set
+			{
+				if (value != this.m_ProstateDescription)
+				{
+					this.m_ProstateDescription = value;
+				}
+			}
+		}
+
+		public string CompanyId
         {
             get { return this.m_CompanyId; }
         }

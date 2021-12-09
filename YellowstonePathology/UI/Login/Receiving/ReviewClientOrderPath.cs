@@ -101,7 +101,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
         private void ShowViewAccessionPage(string masterAccessionNo)
         {
-			YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
+			YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
             ViewAccessionOrderPage viewAccessionOrderPage = new ViewAccessionOrderPage(accessionOrder);
             viewAccessionOrderPage.UseThisAccessionOrder += new ViewAccessionOrderPage.UseThisAccessionOrderEventHandler(ViewAccessionOrderPage_UseThisAccessionOrder);
             viewAccessionOrderPage.Back += new ViewAccessionOrderPage.BackEventHandler(ViewAccessionOrderPage_Back);
@@ -126,14 +126,14 @@ namespace YellowstonePathology.UI.Login.Receiving
             {
                 if (this.m_ClientOrderReceivingHandler.ClientOrder.Acknowledged == false)
                 {
-                    YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection universalServiceIdCollection = YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection.GetAll();
+                    YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection universalServiceIdCollection = Business.ClientOrder.Model.UniversalServiceCollection.GetAll();
                     YellowstonePathology.Business.ClientOrder.Model.UniversalService universalServiceId = universalServiceIdCollection.GetByUniversalServiceId(this.m_ClientOrderReceivingHandler.ClientOrder.UniversalServiceId);
 
                     YellowstonePathology.Business.HL7View.EPIC.EPICStatusMessage statusMessage = new Business.HL7View.EPIC.EPICStatusMessage(this.m_ClientOrderReceivingHandler.ClientOrder, YellowstonePathology.Business.HL7View.OrderStatusEnum.InProcess, universalServiceId, "Yellowstone Pathology Institute: Order Is In Process.", "I", this.m_ClientOrderReceivingHandler.ClientOrder.OrderDate.Value);
 					statusMessage.Publish();
 					
                     this.m_ClientOrderReceivingHandler.ClientOrder.Acknowledged = true;
-                    this.m_ClientOrderReceivingHandler.ClientOrder.AcknowledgedById = YellowstonePathology.Business.User.SystemIdentity.Instance.User.UserId;
+                    this.m_ClientOrderReceivingHandler.ClientOrder.AcknowledgedById = Business.User.SystemIdentity.Instance.User.UserId;
                     this.m_ClientOrderReceivingHandler.ClientOrder.AcknowledgedDate = DateTime.Now;					
                 }
             }

@@ -13,10 +13,10 @@ namespace YellowstonePathology.Business.Test.AmyloidProteinIDParLCMS
             this.m_PanelSetId = 257;
             this.m_PanelSetName = "Amyloid Protein ID, Par, LC-MS";
             this.m_Abbreviation = "Amyloid Protein ID, Par, LC-MS";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
             this.m_AttemptOrderTargetLookup = true;
@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.AmyloidProteinIDParLCMS
 
 this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
-            YellowstonePathology.Business.Facility.Model.Facility facility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("MAYO");
+            YellowstonePathology.Business.Facility.Model.Facility facility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("MAYO");
             string taskDescription = "Gather materials and send out to Mayo Clinic.";
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription, facility));
 

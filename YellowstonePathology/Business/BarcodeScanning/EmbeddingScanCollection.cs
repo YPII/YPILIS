@@ -50,7 +50,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
         public static EmbeddingScanCollection GetByScanDate(DateTime scanDate)
         {
             EmbeddingScanCollection result = new EmbeddingScanCollection();
-            EmbeddingScanCollection temp = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetEmbeddingScanCollectionByScanDate(scanDate);
+            EmbeddingScanCollection temp = Business.Gateway.AccessionOrderGateway.GetEmbeddingScanCollectionByScanDate(scanDate);
 
             List<EmbeddingScan> list = temp.ToList<EmbeddingScan>();
 
@@ -78,7 +78,7 @@ namespace YellowstonePathology.Business.BarcodeScanning
 
         public static EmbeddingScanCollection GetAll()
         {            
-            EmbeddingScanCollection result = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetAllEmbeddingScans();
+            EmbeddingScanCollection result = Business.Gateway.AccessionOrderGateway.GetAllEmbeddingScans();
             return result;
         }
     }

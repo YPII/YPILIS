@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Billing.Model
         public override int GetBillableIHCTestOrderCount()
         {
             int result = 0;
-            YellowstonePathology.Business.Test.Model.TestCollection ihcTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetIHCTests();
+            YellowstonePathology.Business.Test.Model.TestCollection ihcTestCollection = Business.Test.Model.TestCollectionInstance.GetIHCTests();
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this.m_TestOrderCollection)
             {
@@ -46,7 +46,7 @@ namespace YellowstonePathology.Business.Billing.Model
         public override int GetBillableGradeStainCount(bool includeOrderedAsDual)
         {
             int result = 0;
-            YellowstonePathology.Business.Test.Model.TestCollection gradedTestCollection = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetGradedTests();
+            YellowstonePathology.Business.Test.Model.TestCollection gradedTestCollection = Business.Test.Model.TestCollectionInstance.GetGradedTests();
 
             foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in this.m_TestOrderCollection)
             {

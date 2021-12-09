@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Billing.Model
 
 		public virtual void Build()
 		{			
-			this.m_ProviderNPI = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId).Npi;
+			this.m_ProviderNPI = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId).Npi;
 			this.SetAccessionNode();
 			this.SetCptCodeNodes();			
             this.SetICD10CodeNodes();
@@ -73,9 +73,9 @@ namespace YellowstonePathology.Business.Billing.Model
 
 		protected void SetAccessionNode()
 		{
-			string assignedTo = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(this.m_PanelSetOrder.AssignedToId).DisplayName;
+			string assignedTo = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(this.m_PanelSetOrder.AssignedToId).DisplayName;
 
-            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
 			YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(this.m_PanelSetOrder.PanelSetId);
 
             string professionalComponentFacilityName = string.Empty;
@@ -131,7 +131,8 @@ namespace YellowstonePathology.Business.Billing.Model
                 new JProperty("technicalComponentFacilityCLIA", technicalComponentFacilityCLIA),
                 new JProperty("technicalComponentFacilityName", technicalComponentFacilityName),
                 new JProperty("professionalComponentFacilityCLIA", professionalComponentFacilityCLIA),
-                new JProperty("professionalComponentFacilityName", professionalComponentFacilityName));
+                new JProperty("professionalComponentFacilityName", professionalComponentFacilityName),
+				new JProperty("patientPaymentInstructions", this.m_AccessionOrder.PatientPaymentInstructions));
 
 			Business.HL7View.ADTMessages adtMessages = Business.Gateway.AccessionOrderGateway.GetADTMessagesByPatientNameDOB(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, this.m_AccessionOrder.PBirthdate.Value);
 		}

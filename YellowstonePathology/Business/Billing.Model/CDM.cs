@@ -15,6 +15,7 @@ namespace YellowstonePathology.Business.Billing.Model
 
         private string m_CDMId;
         private string m_CDMCode;
+        private string m_CDMCodeNew;
         private string m_CPTCode;
         private string m_ProcedureName;
         private string m_CDMClient;
@@ -53,6 +54,20 @@ namespace YellowstonePathology.Business.Billing.Model
                 {
                     this.m_CDMCode = value;
                     this.NotifyPropertyChanged("CDMCode");
+                }
+            }
+        }
+
+        [PersistentProperty(false)]
+        public string CDMCodeNew
+        {
+            get { return this.m_CDMCodeNew; }
+            set
+            {
+                if (this.m_CDMCodeNew != value)
+                {
+                    this.m_CDMCodeNew = value;
+                    this.NotifyPropertyChanged("CDMCodeNew");
                 }
             }
         }

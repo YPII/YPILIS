@@ -92,7 +92,7 @@ namespace YellowstonePathology.UI.Login
 				firstName = commaSplit[1].Trim();
 			}
 
-			this.m_ClientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByPatientName(firstName, lastName);
+			this.m_ClientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByPatientName(firstName, lastName);
 			this.DataContext = ClientOrderCollection;
 			this.ListBoxClientOrder.SelectedIndex = -1;
 		}

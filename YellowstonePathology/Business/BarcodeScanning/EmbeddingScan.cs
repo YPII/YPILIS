@@ -44,8 +44,8 @@ namespace YellowstonePathology.Business.BarcodeScanning
             this.m_ProcessorStartTime = processorStartTime;
             this.m_ProcessorFixationDuration = processorFixationDuration;
             this.m_DateScanned = DateTime.Now;
-            this.m_ScannedBy = YellowstonePathology.Business.User.SystemIdentity.Instance.User.UserName;
-            this.m_ScannedById = YellowstonePathology.Business.User.SystemIdentity.Instance.User.UserId;
+            this.m_ScannedBy = Business.User.SystemIdentity.Instance.User.UserName;
+            this.m_ScannedById = Business.User.SystemIdentity.Instance.User.UserId;
             this.m_Updated = false;
         }
 

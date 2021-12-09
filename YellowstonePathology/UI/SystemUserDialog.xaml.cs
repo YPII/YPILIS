@@ -28,7 +28,7 @@ namespace YellowstonePathology.UI
 
         public SystemUserDialog(YellowstonePathology.Business.User.SystemUser systemUser)
         {
-            this.m_SystemUserCollection = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection;
+            this.m_SystemUserCollection = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection;
             if(systemUser == null)
             {
                 YellowstonePathology.Business.User.SystemUser user = this.m_SystemUserCollection.OrderByDescending(item => item.UserId).First();
@@ -37,7 +37,7 @@ namespace YellowstonePathology.UI
             }
             else
             {
-                this.m_SystemUser = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullSystemUser(systemUser.UserId, this);
+                this.m_SystemUser = Business.Persistence.DocumentGateway.Instance.PullSystemUser(systemUser.UserId, this);
             }
 
             this.m_SystemRoleViewCollection = new Business.User.SystemRoleViewCollection(this.m_SystemUser);
@@ -126,7 +126,7 @@ namespace YellowstonePathology.UI
 
         private void SetUserRoles()
         {
-            int systemUserRoleId = YellowstonePathology.Business.User.SystemUserGateway.GetMaxSystemUserRoleId();
+            int systemUserRoleId = Business.User.SystemUserGateway.GetMaxSystemUserRoleId();
             foreach(YellowstonePathology.Business.User.SystemRoleView roleView in this.m_SystemRoleViewCollection)
             {
                 if(roleView.IsAMember == true)

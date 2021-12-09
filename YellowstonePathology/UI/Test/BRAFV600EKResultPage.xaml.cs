@@ -55,8 +55,8 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetAliquotOrder(this.m_PanelSetOrder.OrderedOnId);
             this.m_OrderedOnDescription = specimenOrder.Description + ": " + aliquotOrder.Label;
 
-            this.m_IndicationCollection = YellowstonePathology.Business.Test.IndicationCollection.GetAll();
-            this.m_ResultCollection = YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetUniqueResultChoices();
+            this.m_IndicationCollection = Business.Test.IndicationCollection.GetAll();
+            this.m_ResultCollection = Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetUniqueResultChoices();
 
 			InitializeComponent();
 
@@ -124,10 +124,10 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkSetResults_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResult.IsOkToSetResult(this.m_PanelSetOrder);
+			YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.BRAFV600EK.BRAFV600EKResult.IsOkToSetResult(this.m_PanelSetOrder);
 			if (methodResult.Success == true)
 			{
-				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection resultCollection = YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetAll();
+				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection resultCollection = Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetAll();
 				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResult result = resultCollection.GetResult(this.m_PanelSetOrder.ResultCode, this.m_PanelSetOrder.Indication);
 				result.SetResults(this.m_PanelSetOrder);
 			}
@@ -139,10 +139,10 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkFinalize_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResult.IsOkToFinal(this.m_AccessionOrder, this.m_PanelSetOrder);
+			YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.BRAFV600EK.BRAFV600EKResult.IsOkToFinal(this.m_AccessionOrder, this.m_PanelSetOrder);
 			if (methodResult.Success == true)
 			{
-				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection resultCollection = YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetAll();
+				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection resultCollection = Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetAll();
 				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResult result = resultCollection.GetResult(this.m_PanelSetOrder.ResultCode, this.m_PanelSetOrder.Indication);
 				result.FinalizeResults(this.m_PanelSetOrder, this.m_AccessionOrder);
 
@@ -164,7 +164,7 @@ namespace YellowstonePathology.UI.Test
 			YellowstonePathology.Business.Rules.MethodResult methodResult = this.m_PanelSetOrder.IsOkToUnfinalize();
 			if (methodResult.Success == true)
 			{
-				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection resultCollection = YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetAll();
+				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection resultCollection = Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetAll();
 				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResult result = resultCollection.GetResult(this.m_PanelSetOrder.ResultCode, this.m_PanelSetOrder.Indication);
 				result.UnFinalizeResults(this.m_PanelSetOrder);
 			}
@@ -176,11 +176,11 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkAcceptResults_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResult.IsOkToAccept(this.m_PanelSetOrder);
+			YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.BRAFV600EK.BRAFV600EKResult.IsOkToAccept(this.m_PanelSetOrder);
 			if (methodResult.Success == true)
 			{
 				YellowstonePathology.Business.Test.PanelOrder panelOrder = this.m_PanelSetOrder.PanelOrderCollection.GetUnacceptedPanelOrder();
-				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection resultCollection = YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetAll();
+				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection resultCollection = Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetAll();
 				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResult result = resultCollection.GetResult(this.m_PanelSetOrder.ResultCode, this.m_PanelSetOrder.Indication);
 				result.AcceptResults(this.m_PanelSetOrder, panelOrder, this.m_SystemIdentity);
 			}
@@ -192,11 +192,11 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResult.IsOkToUnaccept(this.m_PanelSetOrder);
+			YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.BRAFV600EK.BRAFV600EKResult.IsOkToUnaccept(this.m_PanelSetOrder);
 			if (methodResult.Success == true)
 			{
 				YellowstonePathology.Business.Test.PanelOrder panelOrder = this.m_PanelSetOrder.PanelOrderCollection.GetLastAcceptedPanelOrder();
-				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection resultCollection = YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetAll();
+				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResultCollection resultCollection = Business.Test.BRAFV600EK.BRAFV600EKResultCollection.GetAll();
 				YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKResult result = resultCollection.GetResult(this.m_PanelSetOrder.ResultCode, this.m_PanelSetOrder.Indication);
 				result.UnacceptResults(this.m_PanelSetOrder);
 			}

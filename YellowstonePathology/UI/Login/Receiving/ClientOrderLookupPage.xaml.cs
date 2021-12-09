@@ -36,7 +36,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         public ClientOrderLookupPage(OrderTypeEnum ExpectedOrderType)
 		{
             this.m_ExpectedOrderType = ExpectedOrderType;
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 
 			InitializeComponent();
 
@@ -89,7 +89,7 @@ namespace YellowstonePathology.UI.Login.Receiving
                         clientOrderCollection = this.HandleOrderLookup(keyValue);
                         break;
                     case OrderTypeEnum.ECLINICALWORKS:
-                        clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByExternalOrderId(keyValue);
+                        clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByExternalOrderId(keyValue);
                         break;
                 }
                 
@@ -117,11 +117,11 @@ namespace YellowstonePathology.UI.Login.Receiving
             YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection result = new Business.ClientOrder.Model.ClientOrderCollection();
             if (this.IsTheEnteredKeyAnMrn(keyValue) == true)
             {
-                result = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersBySvhMedicalRecord(keyValue);
+                result = Business.Gateway.ClientOrderGateway.GetClientOrdersBySvhMedicalRecord(keyValue);
             }
             else
             {
-                result = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersBySvhAccountNo(keyValue);
+                result = Business.Gateway.ClientOrderGateway.GetClientOrdersBySvhAccountNo(keyValue);
             }
             return result;
         }        
@@ -176,10 +176,10 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 		private void GetClientOrderByContainerId(string containerId)
 		{
-            string clientOrderId = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrderByContainerId(containerId);
+            string clientOrderId = Business.Gateway.ClientOrderGateway.GetClientOrderByContainerId(containerId);
             if(string.IsNullOrEmpty(clientOrderId) == false)
             {
-                YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullClientOrder(clientOrderId, Window.GetWindow(this));
+                YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = Business.Persistence.DocumentGateway.Instance.PullClientOrder(clientOrderId, Window.GetWindow(this));
                 if (clientOrder != null)
                 {
                     this.ReturnClientOrder(clientOrder);

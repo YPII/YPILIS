@@ -32,7 +32,7 @@ namespace YellowstonePathology.UI.Billing
                 this.m_BillingWindowPrimary = new BillingWindowPrimary();
                 this.m_BillingWindowPrimary.Closed += BillingWindowPrimary_Closed;
                 this.m_Writer = this.m_BillingWindowPrimary;
-                this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(accessionOrder.MasterAccessionNo, this.m_Writer);
+                this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(accessionOrder.MasterAccessionNo, this.m_Writer);
                 this.m_BillingWindowPrimary.Show();
 
                 if (this.m_BillingWindowPrimary.PageNavigator.HasDualMonitors() == true)
@@ -81,7 +81,7 @@ namespace YellowstonePathology.UI.Billing
 		{
             if (string.IsNullOrEmpty(this.m_AccessionOrder.SvhMedicalRecord) == false)
             {
-                YellowstonePathology.Business.Patient.Model.SVHBillingDataCollection svhBillingDataCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSVHBillingDataCollection(this.m_AccessionOrder.SvhMedicalRecord);
+                YellowstonePathology.Business.Patient.Model.SVHBillingDataCollection svhBillingDataCollection = Business.Gateway.AccessionOrderGateway.GetSVHBillingDataCollection(this.m_AccessionOrder.SvhMedicalRecord);
                 if (svhBillingDataCollection.Count > 0)
                 {
                     YellowstonePathology.Business.Patient.Model.SVHBillingData svhBillingData = svhBillingDataCollection.GetMostRecent();
@@ -226,7 +226,7 @@ namespace YellowstonePathology.UI.Billing
             if (this.m_ReportSearchList.BeginningOfList == false)
             {
 				if (this.m_TifDocumentViewer != null) this.m_TifDocumentViewer.Close();
-                this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(this.m_ReportSearchList.CurrentReportSearchItem.MasterAccessionNo, this.m_Writer);
+                this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(this.m_ReportSearchList.CurrentReportSearchItem.MasterAccessionNo, this.m_Writer);
                 this.ShowBillingPage(this.m_AccessionOrder);
 			}
             else
@@ -241,7 +241,7 @@ namespace YellowstonePathology.UI.Billing
             if (this.m_ReportSearchList.EndOfList == false)
             {
 				if (this.m_TifDocumentViewer != null) this.m_TifDocumentViewer.Close();
-                this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(this.m_ReportSearchList.CurrentReportSearchItem.MasterAccessionNo, this.m_Writer);
+                this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(this.m_ReportSearchList.CurrentReportSearchItem.MasterAccessionNo, this.m_Writer);
                 this.ShowBillingPage(this.m_AccessionOrder);
 			}
             else

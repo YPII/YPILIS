@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 			bool distribute)
 			: base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
 		{
-            this.m_LynchSyndromeEvaluationType = YellowstonePathology.Business.Test.LynchSyndrome.LSEType.NOTSET;
+            this.m_LynchSyndromeEvaluationType = Business.Test.LynchSyndrome.LSEType.NOTSET;
 		}
 
 		public override void OrderInitialTests(AccessionOrder accessionOrder, YellowstonePathology.Business.Interface.IOrderTarget orderTarget)
@@ -134,8 +134,8 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             /*
             PanelSetOrderLynchSyndromeEvaluation panelSetToCheck = (PanelSetOrderLynchSyndromeEvaluation)clone;
             YellowstonePathology.Business.Test.LynchSyndrome.LSEResult cloneLSEResult = null;
-            YellowstonePathology.Business.Test.LynchSyndrome.LSEResult lseResult = YellowstonePathology.Business.Test.LynchSyndrome.LSEResult.GetResult(accessionOrder, panelSetToCheck);
-            YellowstonePathology.Business.Test.LynchSyndrome.LSEResult accessionLSEResult = YellowstonePathology.Business.Test.LynchSyndrome.LSEResultCollection.GetResult(lseResult, panelSetToCheck.LynchSyndromeEvaluationType);
+            YellowstonePathology.Business.Test.LynchSyndrome.LSEResult lseResult = Business.Test.LynchSyndrome.LSEResult.GetResult(accessionOrder, panelSetToCheck);
+            YellowstonePathology.Business.Test.LynchSyndrome.LSEResult accessionLSEResult = Business.Test.LynchSyndrome.LSEResultCollection.GetResult(lseResult, panelSetToCheck.LynchSyndromeEvaluationType);
 
             if (accessionLSEResult == null)
             {

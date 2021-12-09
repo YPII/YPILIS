@@ -32,11 +32,16 @@ namespace YellowstonePathology.Business.Label.Model
         public override void DrawLabel(int x, int y, System.Drawing.Printing.PrintPageEventArgs e)
         {            
             e.Graphics.DrawString(this.m_ReportNo, new System.Drawing.Font("Verdana", 9), System.Drawing.Brushes.Black, new System.Drawing.PointF(x + 3, y + 0));            
+
             e.Graphics.DrawString(this.m_SlideNumber, new System.Drawing.Font("Verdana", 8, System.Drawing.FontStyle.Bold), System.Drawing.Brushes.Black, new System.Drawing.PointF(x + 26, y + 17));
+
+            int initialStart = this.m_SlideNumber.Length * 9;
+            e.Graphics.DrawString(Business.User.SystemIdentity.Instance.User.Initials, new System.Drawing.Font("Verdana", 5), System.Drawing.Brushes.Black, new System.Drawing.PointF(x + 26 + initialStart, y + 17));
+
             e.Graphics.DrawString(this.m_FacilityLocationAbbreviation, new System.Drawing.Font("Verdana", 4), System.Drawing.Brushes.Black, new System.Drawing.PointF(x + 29, y + 31));
             e.Graphics.DrawString(this.m_ClientAccessionNo, new System.Drawing.Font("Verdana", 6), System.Drawing.Brushes.Black, new System.Drawing.PointF(x + 3, y + 39));
-            e.Graphics.DrawString(this.m_PatientLastName, new System.Drawing.Font("Verdana", 6), System.Drawing.Brushes.Black, new System.Drawing.PointF(x + 3, y + 47));
-            
+            e.Graphics.DrawString(this.m_PatientLastName, new System.Drawing.Font("Verdana", 6), System.Drawing.Brushes.Black, new System.Drawing.PointF(x + 3, y + 47));                       
+
             DataMatrix.DmtxImageEncoder encoder = new DataMatrix.DmtxImageEncoder();
             DataMatrix.DmtxImageEncoderOptions options = new DataMatrix.DmtxImageEncoderOptions();
             options.ModuleSize = 1;

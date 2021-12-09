@@ -426,7 +426,7 @@ namespace YellowstonePathology.Business.Helper
             DateTime rollingDate = new DateTime(startDate.Year, startDate.Month, startDate.Day);
             TimeSpan timeSpanOneHour = new TimeSpan(1, 0, 0);
             TimeSpan timeSpanMatch = new TimeSpan();
-            YellowstonePathology.Business.Calendar.HolidayCollection holidays = YellowstonePathology.Business.Calendar.HolidayCollection.GetByDateRange(new DateTime(startDate.Year, 1, 1), new DateTime(startDate.Add(timeSpan).Year + 1, 12, 31));
+            YellowstonePathology.Business.Calendar.HolidayCollection holidays = Business.Calendar.HolidayCollection.GetByDateRange(new DateTime(startDate.Year, 1, 1), new DateTime(startDate.Add(timeSpan).Year + 1, 12, 31));
             bool isHoliday = false;
             int dow = 0;
 

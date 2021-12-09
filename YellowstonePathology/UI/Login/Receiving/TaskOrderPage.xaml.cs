@@ -52,8 +52,8 @@ namespace YellowstonePathology.UI.Login.Receiving
             this.m_PageNavigationMode = pageNavigationMode;
 
             this.m_FacilityCollection = Business.Facility.Model.FacilityCollection.Instance;
-            this.m_TaskAssignmentList = YellowstonePathology.Business.Task.Model.TaskAssignment.GetTaskAssignmentList();
-            this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+            this.m_TaskAssignmentList = Business.Task.Model.TaskAssignment.GetTaskAssignmentList();
+            this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 
             this.m_PaymentTypeList = new List<string>();
             this.m_PaymentTypeList.Add("SENDER");
@@ -367,7 +367,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         private void HyperLinkSendAddGenericTask_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Task.Model.Task task = new Business.Task.Model.Task(string.Empty, string.Empty);
-            string taskOrderDetailId = YellowstonePathology.Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);
+            string taskOrderDetailId = Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.Task.Model.TaskOrderDetail taskOrderDetail = new Business.Task.Model.TaskOrderDetail(taskOrderDetailId, this.m_TaskOrder.TaskOrderId, objectId, task, this.m_AccessionOrder.ClientId);
             this.m_TaskOrder.TaskOrderDetailCollection.Add(taskOrderDetail);
@@ -409,7 +409,7 @@ namespace YellowstonePathology.UI.Login.Receiving
                 string notifyFileName = Business.Document.CaseDocument.GetCaseFileNameTifNotify(orderIdParser);
                 if(System.IO.File.Exists(notifyFileName) == true)
                 {
-                    Business.ReportDistribution.Model.FaxSubmission.Submit(taskOrderDetailFax.FaxNumber, panelSetOrder.ReportNo + " - Additional Testing Notification", notifyFileName);
+                    Business.ReportDistribution.Model.FaxSubmission.Submit(taskOrderDetailFax.FaxNumber, panelSetOrder.ReportNo + " - Additional Testing Notification", notifyFileName, panelSetOrder.ReportNo);
                     MessageBox.Show("The fax was successfully submitted.");
                 }
                 else
@@ -422,7 +422,7 @@ namespace YellowstonePathology.UI.Login.Receiving
                 string preauthFileName = Business.Document.CaseDocument.GetCaseFileNameTifPreAuth(orderIdParser);
                 if(System.IO.File.Exists(preauthFileName) == true)
                 {
-                    Business.ReportDistribution.Model.FaxSubmission.Submit(taskOrderDetailFax.FaxNumber, panelSetOrder.ReportNo + "Preauthorization Notification", preauthFileName);
+                    Business.ReportDistribution.Model.FaxSubmission.Submit(taskOrderDetailFax.FaxNumber, panelSetOrder.ReportNo + "Preauthorization Notification", preauthFileName, panelSetOrder.ReportNo);
                     MessageBox.Show("The fax was successfully submitted.");
                 }
                 else
@@ -435,7 +435,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         private void HyperLinkAddSendAdditionalTestingFaxTask_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Task.Model.TaskFax task = new Business.Task.Model.TaskFax(string.Empty, string.Empty, "AdditionalTesetingNotification");
-            string taskOrderDetailId = YellowstonePathology.Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);
+            string taskOrderDetailId = Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 
             Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
@@ -447,7 +447,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         private void HyperLinkAddSendAuthorizationFaxTask_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Task.Model.TaskFax task = new Business.Task.Model.TaskFax(string.Empty, string.Empty, "PreauthorizationNotification");
-            string taskOrderDetailId = YellowstonePathology.Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);
+            string taskOrderDetailId = Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 
             Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);
@@ -493,7 +493,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         private void HyperLinkBlockMaterialAlertTask_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Task.Model.Task task = new Business.Task.Model.TaskBlockMaterialAlert();
-            string taskOrderDetailId = YellowstonePathology.Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);
+            string taskOrderDetailId = Business.OrderIdParser.GetNextTaskOrderDetailId(this.m_TaskOrder.TaskOrderDetailCollection, this.m_TaskOrder.TaskOrderId);
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.Task.Model.TaskOrderDetail taskOrderDetail = new Business.Task.Model.TaskOrderDetail(taskOrderDetailId, this.m_TaskOrder.TaskOrderId, objectId, task, this.m_AccessionOrder.ClientId);
             this.m_TaskOrder.TaskOrderDetailCollection.Add(taskOrderDetail);

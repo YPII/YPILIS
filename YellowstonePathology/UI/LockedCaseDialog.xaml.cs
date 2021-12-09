@@ -48,7 +48,7 @@ namespace YellowstonePathology.UI
                     {
                         foreach (YellowstonePathology.Business.Test.AccessionLock accessionLock in this.ListViewLockedAccessionOrders.SelectedItems)
                         {
-                            YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(accessionLock.MasterAccessionNo, this);
+                            YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(accessionLock.MasterAccessionNo, this);
                             accessionOrder.AccessionLock.ReleaseLock();
                             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
 

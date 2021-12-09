@@ -28,7 +28,11 @@
             <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" Text="Category:" />
             <ComboBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Text="{Binding Path=OrderCommentLog.Category}">
                 <ComboBoxItem>General</ComboBoxItem>
+                <ComboBoxItem>Havre</ComboBoxItem>
                 <ComboBoxItem>Quality Improvement</ComboBoxItem>
+                <ComboBoxItem>Specimen Quality/Pathologist</ComboBoxItem>
+                <ComboBoxItem>Specimen Quality/Histotech</ComboBoxItem>
+                <ComboBoxItem>Transcription</ComboBoxItem>
             </ComboBox>
             <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" Text="Comment:" />
             <TextBox Name="TextBoxComment" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=OrderCommentLog.Comment}"

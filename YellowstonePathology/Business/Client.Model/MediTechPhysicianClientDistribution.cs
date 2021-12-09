@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Client.Model
         {
             if (panelSetOrder.TestOrderReportDistributionCollection.DistributionTypeExists(YellowstonePathology.Business.Client.Model.MediTechPhysicianClientDistribution.MEDITECH) == false)
             {
-                YellowstonePathology.Business.Client.Model.ClientGroupClientCollection westParkHospitalGroup = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("36");
+                YellowstonePathology.Business.Client.Model.ClientGroupClientCollection westParkHospitalGroup = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("36");
                 if (westParkHospitalGroup.ClientIdExists(accessionOrder.ClientId) == true)
                 {
                     if (string.IsNullOrEmpty(accessionOrder.SvhAccount) == true || string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
@@ -28,9 +28,9 @@ namespace YellowstonePathology.Business.Client.Model
                     }
                     else
                     {
-                        YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+                        YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
                         YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
-                        if (panelSet.ResultDocumentSource == YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
+                        if (panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
                         {
                             panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
                         }

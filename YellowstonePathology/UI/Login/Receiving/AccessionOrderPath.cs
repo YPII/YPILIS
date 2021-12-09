@@ -50,7 +50,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         {
             if (string.IsNullOrEmpty(this.m_AccessionOrder.SpecialInstructions) == false)
             {
-                SpecialInstructionsWindow specialInstructionsWindow = new SpecialInstructionsWindow(this.m_AccessionOrder.SpecialInstructions);
+                SpecialInstructionsWindow specialInstructionsWindow = new SpecialInstructionsWindow(this.m_AccessionOrder);
                 this.m_PageNavigator.ShowSecondMonitorWindow(specialInstructionsWindow);
             }
 

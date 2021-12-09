@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Visitor
 
         public override void Visit(YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder)
         {
-            YellowstonePathology.Business.Specimen.Model.Specimen thinPrepFluid = YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNTHNPRPFLD"); // Definition.ThinPrepFluid();
+            YellowstonePathology.Business.Specimen.Model.Specimen thinPrepFluid = Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNTHNPRPFLD"); // Definition.ThinPrepFluid();
             if (this.m_SpecimenOrder.SpecimenId != thinPrepFluid.SpecimenId)
             {
                 if (surgicalTestOrder.SurgicalSpecimenCollection.SpecimenOrderExists(this.m_SpecimenOrder.SpecimenOrderId) == false)

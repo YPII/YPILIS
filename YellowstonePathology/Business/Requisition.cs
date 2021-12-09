@@ -21,11 +21,11 @@ namespace YellowstonePathology.Business
             string fileName = null;
             if (orderIdParser.IsLegacyReportNo == true)
             {
-				fileName = System.IO.Path.Combine(YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser), orderIdParser.ReportNo + ".REQ.ZZZ.TIF");
+				fileName = System.IO.Path.Combine(Business.Document.CaseDocumentPath.GetPath(orderIdParser), orderIdParser.ReportNo + ".REQ.ZZZ.TIF");
             }
             else
             {
-				fileName = System.IO.Path.Combine(YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser), orderIdParser.MasterAccessionNo + ".REQ.ZZZ.TIF");
+				fileName = System.IO.Path.Combine(Business.Document.CaseDocumentPath.GetPath(orderIdParser), orderIdParser.MasterAccessionNo + ".REQ.ZZZ.TIF");
             }
 
             fileName = fileName.ToUpper();            
@@ -82,7 +82,7 @@ namespace YellowstonePathology.Business
         public static string GetSpecimenLogFileName(int specimenLogId)
         {            
             string result = string.Empty;            
-            result = YellowstonePathology.Properties.Settings.Default.SpecimenLogScannedDocumentFilePath + specimenLogId.ToString() + @".tif";            
+            result = Properties.Settings.Default.SpecimenLogScannedDocumentFilePath + specimenLogId.ToString() + @".tif";            
             return result;
         }
 
@@ -90,7 +90,7 @@ namespace YellowstonePathology.Business
         {
             string result = string.Empty;
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(reportNo);
-			result = YellowstonePathology.Business.Document.CaseDocument.GetFirstRequisitionFileName(orderIdParser);            
+			result = Business.Document.CaseDocument.GetFirstRequisitionFileName(orderIdParser);            
             return result;
         }        
 

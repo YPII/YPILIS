@@ -26,8 +26,8 @@ namespace YellowstonePathology.Business.Audit.Model
 
             foreach (YellowstonePathology.Business.Client.Model.Client client in this.m_PhysicianClientView.Clients)
             {
-                YellowstonePathology.Business.Domain.PhysicianClient physicianClient = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClient(this.m_ProviderId, client.ClientId);
-                List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> physicianClientDistributionViews = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionsV2(physicianClient.PhysicianClientId);
+                YellowstonePathology.Business.Domain.PhysicianClient physicianClient = Business.Gateway.PhysicianClientGateway.GetPhysicianClient(this.m_ProviderId, client.ClientId);
+                List<YellowstonePathology.Business.Client.Model.PhysicianClientDistributionView> physicianClientDistributionViews = Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionsV2(physicianClient.PhysicianClientId);
                 if (physicianClientDistributionViews.Count == 0)
                 {
                     this.m_Status = AuditStatusEnum.Failure;

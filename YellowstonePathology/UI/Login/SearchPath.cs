@@ -14,7 +14,7 @@ namespace YellowstonePathology.UI.Login
         {
             YellowstonePathology.Business.User.SystemIdentity systemIdentity = Business.User.SystemIdentity.Instance;
             this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();
-			this.m_LoginPageWindow.Height = 400;
+			this.m_LoginPageWindow.Height = 500;
 			this.m_LoginPageWindow.Width = 500;
 			this.m_LoginUI = loginUI;
         }

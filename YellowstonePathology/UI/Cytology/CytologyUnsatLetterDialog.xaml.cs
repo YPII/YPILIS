@@ -34,7 +34,7 @@ namespace YellowstonePathology.UI.Cytology
             DateTime firstDayOfThisMonth = DateTime.Parse(DateTime.Today.Month.ToString() + "/1/" + DateTime.Today.Year.ToString());
             this.m_StartDate = firstDayOfThisMonth.AddMonths(-1);
             this.m_EndDate = firstDayOfThisMonth.AddDays(-1);
-            this.m_OpenCaseCount = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCountOpenCytologyCasesByCollectionDateRange(this.m_StartDate, this.m_EndDate);
+            this.m_OpenCaseCount = Business.Gateway.AccessionOrderGateway.GetCountOpenCytologyCasesByCollectionDateRange(this.m_StartDate, this.m_EndDate);
             this.m_FolderLocation = @"\\CFileServer\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter";
 
             InitializeComponent();
@@ -93,7 +93,7 @@ namespace YellowstonePathology.UI.Cytology
 
 		/*private void ButtonOpenCaseCount_Click(object sender, RoutedEventArgs e)
 		{
-			this.m_OpenCaseCount = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCountOpenCytologyCasesByCollectionDateRange(this.m_StartDate, this.m_EndDate);
+			this.m_OpenCaseCount = Business.Gateway.AccessionOrderGateway.GetCountOpenCytologyCasesByCollectionDateRange(this.m_StartDate, this.m_EndDate);
 			this.TextBlockOpenCaseCount.Text = this.m_OpenCaseCount.ToString();
 		}*/
 

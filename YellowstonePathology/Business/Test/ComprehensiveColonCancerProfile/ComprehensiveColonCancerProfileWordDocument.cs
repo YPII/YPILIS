@@ -95,7 +95,7 @@ namespace YellowstonePathology.Business.Test.ComprehensiveColonCancerProfile
                 }
                 
                 YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = specimenOrder.AliquotOrderCollection.GetByAliquotOrderId(testOrder.OrderedOnId);
-                YellowstonePathology.Business.Test.LynchSyndrome.IHCResult ihcResult = YellowstonePathology.Business.Test.LynchSyndrome.IHCResult.CreateResultFromResultCode(testOrder.ResultCode);
+                YellowstonePathology.Business.Test.LynchSyndrome.IHCResult ihcResult = Business.Test.LynchSyndrome.IHCResult.CreateResultFromResultCode(testOrder.ResultCode);
 
                 XmlNode rowmlh1NodeClone = rowmlh1Node.Clone();
                 rowmlh1NodeClone.SelectSingleNode("descendant::w:r[w:t='mlh1_result']/w:t", this.m_NameSpaceManager).InnerText = ihcResult.MLH1Result.Description;

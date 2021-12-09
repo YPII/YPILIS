@@ -23,11 +23,17 @@ namespace YellowstonePathology.UI.Login
         public event PropertyChangedEventHandler PropertyChanged;
 
 		private YellowstonePathology.Business.Document.CaseDocumentCollection m_CaseDocumentCollection;
-		private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
+        private YellowstonePathology.Business.Document.CaseDocumentCollection m_ImageDocumentCollection;
+        private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
+        private List<System.IO.FileInfo> m_GrossCameraImageList;
+
 		private string m_ReportNo;
 
 		public DocumentListDialog(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo)
 		{
+
+            this.m_GrossCameraImageList = new List<System.IO.FileInfo>();
+
 			this.m_AccessionOrder = accessionOrder;
 			this.m_ReportNo = reportNo;
 			
@@ -60,9 +66,19 @@ namespace YellowstonePathology.UI.Login
 			get { return this.m_CaseDocumentCollection; }
 		}
 
+        public YellowstonePathology.Business.Document.CaseDocumentCollection ImageDocumentCollection
+        {
+            get { return this.m_ImageDocumentCollection; }
+        }
+
         public YellowstonePathology.Business.Test.AccessionOrder AccessionOrder
         {
             get { return this.m_AccessionOrder; }
+        }
+
+        public List<System.IO.FileInfo> GrossCameraImageList
+        {
+            get { return this.m_GrossCameraImageList; }
         }
 
 		private void ShowDocument(YellowstonePathology.Business.Document.CaseDocument caseDocument)
@@ -101,9 +117,9 @@ namespace YellowstonePathology.UI.Login
 		{
 			XpsDocumentViewer viewer = new XpsDocumentViewer();
 
-            //YellowstonePathology.Document.Result.Data.AccessionOrderDataSheetData accessionOrderDataSheetData = YellowstonePathology.Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
+            //YellowstonePathology.Document.Result.Data.AccessionOrderDataSheetData accessionOrderDataSheetData = Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
             //YellowstonePathology.Document.Result.Xps.AccessionOrderDataSheet accessionOrderDataSheet = new Document.Result.Xps.AccessionOrderDataSheet(accessionOrderDataSheetData);
-            YellowstonePathology.Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2 accessionOrderDataSheetData = YellowstonePathology.Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
+            YellowstonePathology.Business.XPSDocument.Result.Data.AccessionOrderDataSheetDataV2 accessionOrderDataSheetData = Business.Gateway.XmlGateway.GetAccessionOrderDataSheetData(this.m_AccessionOrder.MasterAccessionNo);
             YellowstonePathology.Document.Result.Xps.AccessionOrderDataSheetV2 accessionOrderDataSheet = new Document.Result.Xps.AccessionOrderDataSheetV2(accessionOrderDataSheetData);
             viewer.LoadDocument(accessionOrderDataSheet.FixedDocument);
 			viewer.ShowDialog();
@@ -111,7 +127,7 @@ namespace YellowstonePathology.UI.Login
 
         private void ShowPlacentalPathologySheet()
         {
-            YellowstonePathology.Business.XPSDocument.Result.Data.PlacentalPathologyQuestionnaireDataV2 placentalPathologyData = YellowstonePathology.Business.Gateway.XmlGateway.GetPlacentalPathologyQuestionnaire1(this.m_AccessionOrder.ClientOrderId, this);
+            YellowstonePathology.Business.XPSDocument.Result.Data.PlacentalPathologyQuestionnaireDataV2 placentalPathologyData = Business.Gateway.XmlGateway.GetPlacentalPathologyQuestionnaire1(this.m_AccessionOrder.ClientOrderId, this);
             YellowstonePathology.Business.XPSDocument.PlacentalPathologyQuestionnaireV2 placentalPathologyQuestionnare = new Business.XPSDocument.PlacentalPathologyQuestionnaireV2(placentalPathologyData);
             XpsDocumentViewer viewer = new XpsDocumentViewer();
             viewer.LoadDocument(placentalPathologyQuestionnare.FixedDocument);
@@ -146,9 +162,10 @@ namespace YellowstonePathology.UI.Login
             if (this.ListBoxReportOrders.SelectedItems.Count != 0)
             {
                 YellowstonePathology.Business.Test.PanelSetOrder pso = (YellowstonePathology.Business.Test.PanelSetOrder)this.ListBoxReportOrders.SelectedItem;
-                this.m_CaseDocumentCollection = new Business.Document.CaseDocumentCollection(this.m_AccessionOrder, pso.ReportNo);                
+                this.m_CaseDocumentCollection = new Business.Document.CaseDocumentCollection(this.m_AccessionOrder, pso.ReportNo);
+                this.m_ImageDocumentCollection = this.m_CaseDocumentCollection.GetImages();
                 this.HandleContextMenu(pso);
-                this.NotifyPropertyChanged("CaseDocumentCollection");
+                this.NotifyPropertyChanged(string.Empty);
             }
         }
 
@@ -184,7 +201,7 @@ namespace YellowstonePathology.UI.Login
 
             YellowstonePathology.Business.Document.CaseDocumentCollection copyToCaseDocumentCollection = new YellowstonePathology.Business.Document.CaseDocumentCollection(copyToPso.ReportNo);
                         
-            foreach (YellowstonePathology.Business.Document.CaseDocument caseDocument in this.ListBoxDocumentList.SelectedItems)
+            foreach (Business.Document.CaseDocument caseDocument in this.ListBoxDocumentList.SelectedItems)
             {
                 if (caseDocument.IsRequisition() == true)
                 {
@@ -248,12 +265,33 @@ namespace YellowstonePathology.UI.Login
         private void HyperLinkOpenFolder_Click(object sender, RoutedEventArgs e)
         {
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_ReportNo);
-			string folderPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+			string folderPath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Explorer.exe", folderPath);
             p.StartInfo = info;
             p.Start();            
-        }       
-	}
+        }
+
+        private void ListBoxImageList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(this.IsLoaded == true)
+            {
+                if(this.ListBoxImageList.SelectedItem != null)
+                {
+                    Business.Document.CaseDocument caseDocument = (Business.Document.CaseDocument)this.ListBoxImageList.SelectedItem;                                        
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(caseDocument.FullFileName);
+                    bitmap.EndInit();
+                    this.ImageGrossCamera.Source = bitmap;
+                }
+            }
+        }
+
+        private void ListBoxGrossImageList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+    }
 }

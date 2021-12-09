@@ -102,29 +102,19 @@
                             <Image Source="/Resources/Surgical.png" Height="22" Width="22"></Image>
                             <TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Receiving</TextBlock>
                         </StackPanel>
-                    </Button>                            
+                    </Button>
 
                     <TextBox Name="TextBoxMasterAccessionNo" Margin="2" KeyUp="TextBoxMasterAccessionNo_KeyUp" Width="100" BorderBrush="AliceBlue" BorderThickness="1" />
-
-                    <!--
-                    <Button Margin="2" Click="ButtonShowCOVIDCases_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Resources/Surgical.png" Height="22" Width="22"></Image>
-                            <TextBlock Margin="2,0,0,0" VerticalAlignment="Center">COIVD Cases</TextBlock>
-                        </StackPanel>
-                    </Button>
-                    -->
-                    
                     <Button Name="ButtonCOVIDTests" Margin="2">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Resources/Surgical.png" Margin="2" Height="16"></Image>
-                            <TextBlock Margin="2" VerticalAlignment="Center">COIVD Cases</TextBlock>
+                            <TextBlock Margin="2" VerticalAlignment="Center">COVID Cases</TextBlock>
                         </StackPanel>
                         <Button.ContextMenu>
                             <ContextMenu x:Name="COVIDTestingContextMenu" PlacementRectangle="{Binding RelativeSource={RelativeSource Self}}">
                                 <MenuItem Header="All" Click="ButtonShowCOVIDCases_Click" />
-                                <MenuItem Header="YPI" Click="ButtonShowYPICOVIDCases_Click" />
-                                <MenuItem Header="SCL" Click="ButtonShowSCLCOVIDCases_Click"/>
+                                <MenuItem Header="Durden COVID" Click="ButtonShowDurdenCOVIDCases_Click" />
+                                <MenuItem Header="Patient Distribution" Click="ButtonShowCOVIDPatientDistribution_Click" />
                             </ContextMenu>
                         </Button.ContextMenu>
 
@@ -143,6 +133,13 @@
                                 </BeginStoryboard>
                             </EventTrigger>
                         </Button.Triggers>
+                    </Button>
+
+                    <Button Margin="2" Click="ButtonShowCamera_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Surgical.png" Height="22" Width="22"></Image>
+                            <TextBlock Margin="2,0,0,0" VerticalAlignment="Center">Histo Camera</TextBlock>
+                        </StackPanel>
                     </Button>
 
                 </ToolBar>
@@ -188,6 +185,9 @@
                         <MenuItem Header="Show IT Audits" Click="MenuItemShowITAudits_Click"></MenuItem>
                         <MenuItem Header="Send Order To Panther" Click="MenuItemSendPantherOrder_Click"></MenuItem>
                         <MenuItem Header="Cancel Panther Order" Click="MenuItemCancelPantherOrder_Click"></MenuItem>
+                        <MenuItem Header="IT Audited" Click="MenuItemITAudited_Click"></MenuItem>
+                        <MenuItem Header="Send Provation Result" Click="ButtonSendProvationResult_Click" />
+                        <MenuItem Header="Send NMH Result" Click="ButtonSendNMHResult_Click" />
                     </ContextMenu>
                 </ListView.ContextMenu>
                         
@@ -202,6 +202,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Path=FinalTime, Converter={StaticResource MilitaryDateTimeConverter}}" Header="Final" Width="150"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=IsPosted}" Header="Billed" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=HoldDistribution}" Header="Hold" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ITAudited}" Header="IT Audit" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Client" Width="200"/>
                     </GridView>
                 </ListView.View>

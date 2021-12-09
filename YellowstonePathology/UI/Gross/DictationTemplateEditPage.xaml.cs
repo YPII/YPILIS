@@ -105,7 +105,7 @@ namespace YellowstonePathology.UI.Gross
 
             if(result.Success == true)
             {
-                result = YellowstonePathology.Business.Helper.JSONHelper.IsValidJSONString(this.m_DictationTemplate.ToJSON());
+                result = Business.Helper.JSONHelper.IsValidJSONString(this.m_DictationTemplate.ToJSON());
             }
             return result;
         }

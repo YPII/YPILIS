@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		{
 			this.m_PanelSetId = 134;
             this.m_PanelSetName = "Human Papillomavirus (HPV) Low Risk by in situ Hybridization";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = false;
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.PublishedDocument;
@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
 this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
-            YellowstonePathology.Business.Facility.Model.Facility facility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("ARUPSPD");
+            YellowstonePathology.Business.Facility.Model.Facility facility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("ARUPSPD");
             this.m_TechnicalComponentFacility = facility;
             this.m_ProfessionalComponentFacility = facility;
 

@@ -68,7 +68,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 }                
                 
                 YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2 barcode = new YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2(Business.BarcodeScanning.BarcodePrefixEnum.PSLD, aliquotOrder.AliquotOrderId);
-                YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = YellowstonePathology.Business.BarcodeScanning.CytycBarcode.Parse(this.m_AccessionOrder.MasterAccessionNo);
+                YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = Business.BarcodeScanning.CytycBarcode.Parse(this.m_AccessionOrder.MasterAccessionNo);
                 YellowstonePathology.Business.Label.Model.PAPSlideLabel papSlideLabel = new Business.Label.Model.PAPSlideLabel(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, barcode, cytycBarcode);
                 YellowstonePathology.Business.Label.Model.PAPSlideLabelPrinter papSlideLabelPrinter = new Business.Label.Model.PAPSlideLabelPrinter();
                 for (int i = 0; i < 2; i++)
@@ -88,7 +88,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPAP();
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(panelSetOrder.ReportNo);
             string normalMA = orderIdParser.MasterAccessionNo;            
-            string dummyMA = normalMA.Replace("20-", "70-");
+            string dummyMA = normalMA.Replace("21-", "71-");
 
             if (this.m_AccessionOrder.SpecimenOrderCollection.HasThinPrepFluidSpecimen() == true)
             {
@@ -96,7 +96,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = specimenOrder.AliquotOrderCollection.GetThinPrepSlide();
 
                 YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2 barcode = new YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2(Business.BarcodeScanning.BarcodePrefixEnum.PSLD, aliquotOrder.AliquotOrderId);
-                YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = YellowstonePathology.Business.BarcodeScanning.CytycBarcode.Parse(dummyMA);
+                YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = Business.BarcodeScanning.CytycBarcode.Parse(dummyMA);
                 Business.Label.Model.HologicSlideLabel hologicSlideLabel = new Business.Label.Model.HologicSlideLabel(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, barcode, cytycBarcode);
                 Business.Label.Model.HologicSlideLabelPrinter.Print(hologicSlideLabel, Business.User.UserPreferenceInstance.Instance.UserPreference.CytologySlideLabelPrinter, 2);
             }
@@ -111,9 +111,9 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             if (string.IsNullOrEmpty(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.MolecularLabelFormat) == false)
             {
                 YellowstonePathology.Business.Label.Model.LabelFormatEnum labelFormat = (YellowstonePathology.Business.Label.Model.LabelFormatEnum)Enum.Parse(typeof(YellowstonePathology.Business.Label.Model.LabelFormatEnum), YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.MolecularLabelFormat);            
-                YellowstonePathology.Business.Specimen.Model.Specimen thinPrepFluid = YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNTHNPRPFLD"); // Definition.ThinPrepFluid();
+                YellowstonePathology.Business.Specimen.Model.Specimen thinPrepFluid = Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNTHNPRPFLD"); // Definition.ThinPrepFluid();
                 YellowstonePathology.Business.Label.Model.MolecularLabelPrinter molecularLabelPrinter = new Business.Label.Model.MolecularLabelPrinter();
-                YellowstonePathology.Business.Label.Model.Label label = YellowstonePathology.Business.Label.Model.LabelFactory.GetMolecularLabel(labelFormat, this.m_AccessionOrder.MasterAccessionNo, this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, thinPrepFluid.Description, null, false);
+                YellowstonePathology.Business.Label.Model.Label label = Business.Label.Model.LabelFactory.GetMolecularLabel(labelFormat, this.m_AccessionOrder.MasterAccessionNo, this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, thinPrepFluid.Description, null, false);
                 molecularLabelPrinter.Queue.Enqueue(label);
                 molecularLabelPrinter.Print();
             }
@@ -139,7 +139,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 }
 
                 YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2 barcode = new YellowstonePathology.Business.BarcodeScanning.BarcodeVersion2(Business.BarcodeScanning.BarcodePrefixEnum.PSLD, aliquotOrder.AliquotOrderId);
-                YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = YellowstonePathology.Business.BarcodeScanning.CytycBarcode.Parse(this.m_AccessionOrder.MasterAccessionNo);
+                YellowstonePathology.Business.BarcodeScanning.CytycBarcode cytycBarcode = Business.BarcodeScanning.CytycBarcode.Parse(this.m_AccessionOrder.MasterAccessionNo);
                 Business.Label.Model.HologicSlideLabel hologicSlideLabel = new Business.Label.Model.HologicSlideLabel(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, barcode, cytycBarcode);
                 Business.Label.Model.HologicSlideLabelPrinter.Print(hologicSlideLabel, Business.User.UserPreferenceInstance.Instance.UserPreference.CytologySlideLabelPrinter, 2);
             }

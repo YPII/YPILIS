@@ -60,11 +60,11 @@ namespace YellowstonePathology.Business.Test.ComprehensiveColonCancerProfile
             {
                 this.m_LSEIHCIsOrdered = true;
                 this.m_PanelSetOrderLynchSyndromeIHC = (YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeIHC)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetLynchSyndromeIHCPanel.PanelSetId, comprehensiveColonCancerProfile.OrderedOnId, restrictToOrderedOn);
-                this.m_IHCResult = YellowstonePathology.Business.Test.LynchSyndrome.IHCResult.CreateResultFromResultCode(this.m_PanelSetOrderLynchSyndromeIHC.ResultCode);
+                this.m_IHCResult = Business.Test.LynchSyndrome.IHCResult.CreateResultFromResultCode(this.m_PanelSetOrderLynchSyndromeIHC.ResultCode);
             }
             else
             {
-                YellowstonePathology.Business.Domain.PatientHistory patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
+                YellowstonePathology.Business.Domain.PatientHistory patientHistory = Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
                 if (patientHistory.PanelSetIdExists(102) == true)
                 {
                     YellowstonePathology.Business.Domain.PatientHistoryResult patientHistoryResult = patientHistory.GetByPanelSetId(102);
@@ -80,7 +80,7 @@ namespace YellowstonePathology.Business.Test.ComprehensiveColonCancerProfile
                         this.m_PanelSetOrderLynchSyndromeIHC = (YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeIHC)lseIHCAccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(102);
                     }
 
-                    this.m_IHCResult = YellowstonePathology.Business.Test.LynchSyndrome.IHCResult.CreateResultFromResultCode(this.m_PanelSetOrderLynchSyndromeIHC.ResultCode);
+                    this.m_IHCResult = Business.Test.LynchSyndrome.IHCResult.CreateResultFromResultCode(this.m_PanelSetOrderLynchSyndromeIHC.ResultCode);
                 }
             }
 
@@ -168,7 +168,7 @@ namespace YellowstonePathology.Business.Test.ComprehensiveColonCancerProfile
 
             if (accessionOrder.PanelSetOrderCollection.Exists(panelSetLynchSyndromeIHCPanel.PanelSetId, comprehensiveColonCancerProfile.OrderedOnId, restrictToOrderedOn) == false)
             {
-                YellowstonePathology.Business.Domain.PatientHistory patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
+                YellowstonePathology.Business.Domain.PatientHistory patientHistory = Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
                 if (patientHistory.PanelSetIdExists(102) == true)
                 {
                     YellowstonePathology.Business.Domain.PatientHistoryResult patientHistoryResult = patientHistory.GetByPanelSetId(102);

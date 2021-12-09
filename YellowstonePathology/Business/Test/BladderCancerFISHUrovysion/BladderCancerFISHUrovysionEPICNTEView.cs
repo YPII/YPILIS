@@ -40,7 +40,7 @@ namespace YellowstonePathology.Business.Test.BladderCancerFISHUrovysion
             this.AddNextNTEElement("Specimen Information:", document);
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(testOrder.OrderedOn, testOrder.OrderedOnId);
 			this.AddNextNTEElement("Specimen Identification: " + specimenOrder.Description, document);
-			string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+			string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
 			this.AddNextNTEElement("Collection Date/Time: " + collectionDateTimeString, document);
 
 			this.AddNextNTEElement("", document);

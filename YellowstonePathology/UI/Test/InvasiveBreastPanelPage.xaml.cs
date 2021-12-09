@@ -49,13 +49,13 @@ namespace YellowstonePathology.UI.Test
 			this.m_InvasiveBreastPanel = testOrder;
 			this.m_InvasiveBreastPanel.SetStatus(this.m_AccessionOrder.PanelSetOrderCollection);
 
-			this.m_InvasiveBreastPanelResult = new Business.Test.InvasiveBreastPanel.InvasiveBreastPanelResult(this.m_AccessionOrder);
+			this.m_InvasiveBreastPanelResult = new Business.Test.InvasiveBreastPanel.InvasiveBreastPanelResult(testOrder.ReportNo, this.m_AccessionOrder);
 
             YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest panelSetHer2ByIsh = new YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest();
-			this.m_PanelSetOrderHer2ByIsh = (YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetHer2ByIsh.PanelSetId);
+			this.m_PanelSetOrderHer2ByIsh = (YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetHer2ByIsh.PanelSetId, testOrder.OrderedOnId, true);
 
-            YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeTest erPrSemiQuantitativeTest = new YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeTest();
-			this.m_PanelSetOrderErPrSemiQuantitative = (YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(erPrSemiQuantitativeTest.PanelSetId);
+			YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeTest erPrSemiQuantitativeTest = new YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeTest();
+			this.m_PanelSetOrderErPrSemiQuantitative = (YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(erPrSemiQuantitativeTest.PanelSetId, testOrder.OrderedOnId, true);
 
 			this.m_PageHeaderText = "Invasive Breast Panel for: " + this.m_InvasiveBreastPanel.ReportNo;
 

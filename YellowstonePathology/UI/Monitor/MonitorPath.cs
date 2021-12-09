@@ -8,6 +8,10 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Exchange.WebServices.Data;
+using System.Xml.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace YellowstonePathology.UI.Monitor
 {
@@ -23,9 +27,11 @@ namespace YellowstonePathology.UI.Monitor
 
         private DateTime m_LastReportDistributionHeartBeat;
         private DateTime m_LastBillingEODProcessRun;
+        private bool m_DistributionDownTextHasBeenSent;
 
         public MonitorPath()
-		{                        
+		{
+            this.m_DistributionDownTextHasBeenSent = false;
             this.m_LastReportDistributionHeartBeat = DateTime.Now.AddMinutes(-5);
             YellowstonePathology.Store.RedisServerProd1.Instance.Subscriber.Subscribe("ReportDistributionHeartBeat", (channel, message) =>
             {
@@ -112,8 +118,8 @@ namespace YellowstonePathology.UI.Monitor
         {            
             this.m_Timer.Stop();
             
-            DateTime timerDailyStartTime = DateTime.Parse(DateTime.Today.ToShortDateString() + " 05:00");
-            DateTime timerDailyEndTime = DateTime.Parse(DateTime.Today.ToShortDateString() + " 18:00");
+            DateTime timerDailyStartTime = DateTime.Parse(DateTime.Today.ToShortDateString() + " 04:00");
+            DateTime timerDailyEndTime = DateTime.Parse(DateTime.Today.ToShortDateString() + " 22:00");
             
             this.m_MonitorPageWindow.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
                 new System.Action(
@@ -132,6 +138,17 @@ namespace YellowstonePathology.UI.Monitor
                             }
                         	else
                         	{
+                                if(this.m_DistributionDownTextHasBeenSent == true)
+                                {
+                                    JObject jsonRequest = Business.APIRequestHelper.GetSendTextMessage("4068603984", "YPI Report Distribution is back up.");
+                                    Business.APIResult apiResult = Business.APIRequestHelper.SubmitAPIRequestMessage(jsonRequest);
+
+                                    jsonRequest = Business.APIRequestHelper.GetSendTextMessage("4066975699", "YPI Report Distribution is back up.");
+                                    apiResult = Business.APIRequestHelper.SubmitAPIRequestMessage(jsonRequest);
+                                    
+                                    this.m_DistributionDownTextHasBeenSent = false;
+                                }
+                                
                                 this.ShowNextPage();
                             }
                         }
@@ -198,6 +215,16 @@ namespace YellowstonePathology.UI.Monitor
 
         private void ShowReportDistributionDownPage()
         {
+            if(this.m_DistributionDownTextHasBeenSent == false)
+            {
+                JObject jsonRequest = Business.APIRequestHelper.GetSendTextMessage("4068603984", "YPI Report Distribution is down.");
+                Business.APIResult apiResult = Business.APIRequestHelper.SubmitAPIRequestMessage(jsonRequest);
+
+                jsonRequest = Business.APIRequestHelper.GetSendTextMessage("4066975699", "YPI Report Distribution is down.");
+                apiResult = Business.APIRequestHelper.SubmitAPIRequestMessage(jsonRequest);
+                this.m_DistributionDownTextHasBeenSent = true;
+            }            
+
             ReportDistributionDownMonitorPage reportDistributionDownMonitorPage = new ReportDistributionDownMonitorPage();
             this.m_MonitorPageWindow.PageNavigator.Navigate(reportDistributionDownMonitorPage);
             this.m_Timer.Start();

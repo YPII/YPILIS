@@ -31,9 +31,9 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         public SpecimenMappingPage(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
 		{
 			this.m_AccessionOrder = accessionOrder;
-            this.m_TimeToFixationTypeCollection = YellowstonePathology.Business.Specimen.Model.TimeToFixationType.GetTimeToFixationTypeCollection();
+            this.m_TimeToFixationTypeCollection = Business.Specimen.Model.TimeToFixationType.GetTimeToFixationTypeCollection();
 
-			this.m_PathologistUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);			
+			this.m_PathologistUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);			
 			InitializeComponent();
 
 			DataContext = this;           
@@ -211,14 +211,14 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         {
             CheckBox checkBox = (CheckBox)sender;
             YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder = (YellowstonePathology.Business.Slide.Model.SlideOrder)checkBox.Tag;
-            slideOrder.Status = YellowstonePathology.Business.Slide.Model.SlideStatusEnum.ClientAccessioned.ToString();
+            slideOrder.Status = Business.Slide.Model.SlideStatusEnum.ClientAccessioned.ToString();
         }
 
         private void CheckBoxSlideClientAccessioned_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
             YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder = (YellowstonePathology.Business.Slide.Model.SlideOrder)checkBox.Tag;
-            slideOrder.Status = YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Created.ToString();
+            slideOrder.Status = Business.Slide.Model.SlideStatusEnum.Created.ToString();
         }
 
         private void ButtonMarkBlocks_Click(object sender, RoutedEventArgs e)

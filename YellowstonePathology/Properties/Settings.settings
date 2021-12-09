@@ -6,7 +6,7 @@
       <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\</Value>
     </Setting>
     <Setting Name="LocalDictationFolder" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\Dictation\</Value>
+      <Value Profile="(Default)">c:\program data\ypi\dictation\</Value>
     </Setting>
     <Setting Name="LocalLoginDataFolder" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\Application\</Value>

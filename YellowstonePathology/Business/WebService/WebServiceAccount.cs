@@ -473,7 +473,7 @@ namespace YellowstonePathology.Business.WebService
         {
             this.m_PrimaryClientId = 1134;
             this.m_WebServiceAccountClientCollection.Clear();
-            int id = YellowstonePathology.Business.Gateway.WebServiceGateway.GetNextWebServiceAccountClientId();
+            int id = Business.Gateway.WebServiceGateway.GetNextWebServiceAccountClientId();
             
             Business.WebService.WebServiceAccountClient newWebServiceAccountClient = new Business.WebService.WebServiceAccountClient();
             newWebServiceAccountClient.WebServiceAccountClientId = id;
@@ -486,7 +486,7 @@ namespace YellowstonePathology.Business.WebService
         {
             this.m_PrimaryClientId = accountToImpersonate.m_PrimaryClientId;
             this.m_WebServiceAccountClientCollection.Clear();
-            int id = YellowstonePathology.Business.Gateway.WebServiceGateway.GetNextWebServiceAccountClientId();
+            int id = Business.Gateway.WebServiceGateway.GetNextWebServiceAccountClientId();
             foreach (WebServiceAccountClient webServiceAccountClient in accountToImpersonate.m_WebServiceAccountClientCollection)
             {                
                 Business.WebService.WebServiceAccountClient newWebServiceAccountClient = new Business.WebService.WebServiceAccountClient();
@@ -495,6 +495,24 @@ namespace YellowstonePathology.Business.WebService
                 newWebServiceAccountClient.ClientId = webServiceAccountClient.ClientId;                
                 this.WebServiceAccountClientCollection.Add(newWebServiceAccountClient);
                 id += 1;
+            }
+        }
+
+        public void CopyClients(WebServiceAccount accountToCopy)
+        {            
+            this.m_WebServiceAccountClientCollection.Clear();
+            int id = Business.Gateway.WebServiceGateway.GetNextWebServiceAccountClientId();
+            foreach (WebServiceAccountClient webServiceAccountClient in accountToCopy.m_WebServiceAccountClientCollection)
+            {
+                if(this.m_WebServiceAccountClientCollection.Exists(webServiceAccountClient.ClientId) == false)
+                {
+                    Business.WebService.WebServiceAccountClient newWebServiceAccountClient = new Business.WebService.WebServiceAccountClient();
+                    newWebServiceAccountClient.WebServiceAccountClientId = id;
+                    newWebServiceAccountClient.WebServiceAccountId = this.m_WebServiceAccountId;
+                    newWebServiceAccountClient.ClientId = webServiceAccountClient.ClientId;
+                    this.WebServiceAccountClientCollection.Add(newWebServiceAccountClient);
+                    id += 1;
+                }                
             }
         }
     }

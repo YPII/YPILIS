@@ -34,7 +34,7 @@ namespace YellowstonePathology.UI.Cytology
 
         public OtherConditionsSelection()
         {
-			this.m_OtherConditionCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetOtherConditions();
+			this.m_OtherConditionCollection = Business.Gateway.AccessionOrderGateway.GetOtherConditions();
 
             InitializeComponent();
 

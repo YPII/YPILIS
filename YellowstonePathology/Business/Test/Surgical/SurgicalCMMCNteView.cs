@@ -215,7 +215,7 @@ namespace YellowstonePathology.Business.Test.Surgical
                         {
                             if (surgicalAudit.AmendmentId == amendmentId)
                             {
-                                string finalDateP = YellowstonePathology.Business.BaseData.GetShortDateString(panelSetOrder.FinalDate);
+                                string finalDateP = Business.BaseData.GetShortDateString(panelSetOrder.FinalDate);
                                 finalDateP += " " + YellowstonePathology.Business.BaseData.GetMillitaryTimeString(panelSetOrder.FinalTime);
 
                                 string previousDiagnosisHeader = "Previous diagnosis on " + finalDateP;
@@ -233,7 +233,7 @@ namespace YellowstonePathology.Business.Test.Surgical
                                     }
                                 }
 
-                                YellowstonePathology.Business.User.SystemUser pathologistUser = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(surgicalAudit.PathologistId);
+                                YellowstonePathology.Business.User.SystemUser pathologistUser = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(surgicalAudit.PathologistId);
                                 this.AddNextNteElement(pathologistUser.Signature, document);
                                 this.AddBlankNteElement(document);
                             }

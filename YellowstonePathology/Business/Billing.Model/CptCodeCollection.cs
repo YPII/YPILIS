@@ -144,7 +144,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 {
                     while (dr.Read())
                     {
-                        YellowstonePathology.Business.Billing.Model.CptCode cptCode = YellowstonePathology.Business.Billing.Model.CptCodeFactory.FromJson(dr[0].ToString());
+                        YellowstonePathology.Business.Billing.Model.CptCode cptCode = Business.Billing.Model.CptCodeFactory.FromJson(dr[0].ToString());
                         this.Add(cptCode);
                     }
                 }

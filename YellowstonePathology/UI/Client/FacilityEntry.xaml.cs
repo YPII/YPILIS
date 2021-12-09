@@ -37,10 +37,10 @@ namespace YellowstonePathology.UI.Client
             }
             else
             {
-                this.m_Facility = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullFacility(facility.FacilityId, this);
+                this.m_Facility = Business.Persistence.DocumentGateway.Instance.PullFacility(facility.FacilityId, this);
                 if (this.m_Facility.ClientId != 0)
                 {
-                    this.m_Client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_Facility.ClientId);
+                    this.m_Client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_Facility.ClientId);
                 }
             }
 
@@ -49,7 +49,7 @@ namespace YellowstonePathology.UI.Client
             this.m_PaymentTypeList.Add("THIRD_PARTY");
             this.m_PaymentTypeList.Add("RECIPIENT");
 
-            this.m_AccessioningFacilities = YellowstonePathology.Business.Facility.Model.FacilityCollection.GetAllYPFacilities();
+            this.m_AccessioningFacilities = Business.Facility.Model.FacilityCollection.GetAllYPFacilities();
             this.m_AccessioningFacilities.Insert(0, new Business.Facility.Model.Facility());
 
             InitializeComponent();
@@ -112,7 +112,7 @@ namespace YellowstonePathology.UI.Client
             bool result = true;
             if (string.IsNullOrEmpty(this.m_Facility.FacilityName) == false)
             {
-                this.m_Facility.FacilityId = YellowstonePathology.Business.Helper.IdHelper.CapitalConsonantsInString(m_Facility.FacilityName);
+                this.m_Facility.FacilityId = Business.Helper.IdHelper.CapitalConsonantsInString(m_Facility.FacilityName);
                 if (string.IsNullOrEmpty(this.m_Facility.FacilityId) == true)
                 {
                     result = false;

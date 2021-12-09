@@ -20,17 +20,26 @@ namespace YellowstonePathology.UI.Billing
         private Nullable<DateTime> m_PostDateStart;
         private Nullable<DateTime> m_PostDateEnd;        
         private YellowstonePathology.Business.Client.Model.ClientGroup m_ClientGroup;                        
-        private YellowstonePathology.Business.Client.Model.ClientGroupCollection m_ClientGroupCollection;        
+        private YellowstonePathology.Business.Client.Model.ClientGroupCollection m_ClientGroupCollection;
+        private bool m_SVHCOVIDANubmers;
 
         public ClientBillingReportDialog()
         {
+            this.m_SVHCOVIDANubmers = false;
+
             this.m_PostDateStart =DateTime.Today;
             this.m_PostDateEnd = DateTime.Today;            
-            this.m_ClientGroupCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupCollection();            
+            this.m_ClientGroupCollection = Business.Gateway.PhysicianClientGateway.GetClientGroupCollection();            
 
             InitializeComponent();
 
             this.DataContext = this;
+        }
+
+        public bool SVHCOVIDANubmers
+        {
+            get { return this.m_SVHCOVIDANubmers; }
+            set { this.m_SVHCOVIDANubmers = value; }
         }
 
         public Nullable<DateTime> PostDateStart
@@ -63,7 +72,16 @@ namespace YellowstonePathology.UI.Billing
 
         private void ButtonShowReport_Click(object sender, RoutedEventArgs e)
         {
-            Business.XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportData clientBillingDetailReportData = YellowstonePathology.Business.Gateway.XmlGateway.GetClientBillingDetailReport(this.m_PostDateStart.Value, this.m_PostDateEnd.Value, this.m_ClientGroup.ClientGroupId);
+            Business.XPSDocument.Result.ClientBillingDetailReportResult.ClientBillingDetailReportData clientBillingDetailReportData = null;
+            if(this.m_SVHCOVIDANubmers == false)
+            {
+                clientBillingDetailReportData = Business.Gateway.XmlGateway.GetClientBillingDetailReport(this.m_PostDateStart.Value, this.m_PostDateEnd.Value, this.m_ClientGroup.ClientGroupId);
+            }
+            else
+            {
+                clientBillingDetailReportData = Business.Gateway.XmlGateway.GetClientBillingDetailReportSVHANumbers(this.m_PostDateStart.Value, this.m_PostDateEnd.Value, this.m_ClientGroup.ClientGroupId);
+            }
+            
             YellowstonePathology.Document.ClientBillingDetailReportV2 clientBillingDetailReport = new Document.ClientBillingDetailReportV2(clientBillingDetailReportData, this.m_PostDateStart.Value, this.m_PostDateEnd.Value);
 
             XpsDocumentViewer viewer = new XpsDocumentViewer();

@@ -60,7 +60,7 @@ namespace YellowstonePathology.Business.Search
 				else if (this.m_SourceValue.Length > 0 && this.CheckDigits(0))
 				{
 					this.m_IsValid = true;
-					this.m_ReportNo = YellowstonePathology.Business.OrderIdParser.SurgicalReportNoFromNumber(this.m_SourceValue);
+					this.m_ReportNo = Business.OrderIdParser.SurgicalReportNoFromNumber(this.m_SourceValue);
 					this.m_IsReportNo = true;
 				}
 			}

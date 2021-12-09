@@ -14,8 +14,8 @@ namespace YellowstonePathology.Business.Test.TestCancelled
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterT();
             this.m_HasTechnicalComponent = false;                        
             this.m_HasProfessionalComponent = false;
-            this.m_CaseType = YellowstonePathology.Business.CaseType.TestCancelled;
-			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;            
+            this.m_CaseType = Business.CaseType.TestCancelled;
+			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;            
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.TestCancelled.TestCancelledTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.TestCancelled.TestCancelledWordDocument).AssemblyQualifiedName;
 			this.m_AllowMultiplePerAccession = true;
@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.TestCancelled
 
             this.m_ReportAsAdditionalTesting = false;
 
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;
             this.m_TechnicalComponentBillingFacility = ypi;
 

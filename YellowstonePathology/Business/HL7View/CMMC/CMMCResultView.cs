@@ -19,14 +19,14 @@ namespace YellowstonePathology.Business.HL7View.CMMC
             this.m_AccessionOrder = accessionOrder;
             this.m_PanelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);            
 
-            this.m_OrderingPhysician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);
+            this.m_OrderingPhysician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);
 		}
 
         public void Send(YellowstonePathology.Business.Rules.MethodResult result)
         {
             this.CreateDocument();
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + ".HL7.xml";
+			string serverFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + ".HL7.xml";
             string mirthFileName = @"\\YPIIInterface2\ChannelData\Outgoing\1003\" + this.m_PanelSetOrder.ReportNo + ".HL7.xml";
             //string mirthFileName = @"\\YPIIInterface2\ChannelData\Outgoing\Testing\" + this.m_ReportNo + ".HL7.xml";
 

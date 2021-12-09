@@ -31,7 +31,7 @@ namespace YellowstonePathology.UI
 		public AmendmentEditPage(AmendmentUI amendmentUI)
 		{
 			this.m_AmendmentUI = amendmentUI;
-			this.AmendmentSigners = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.AmendmentSigner, true);
+			this.AmendmentSigners = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.AmendmentSigner, true);
 
 			InitializeComponent();
 

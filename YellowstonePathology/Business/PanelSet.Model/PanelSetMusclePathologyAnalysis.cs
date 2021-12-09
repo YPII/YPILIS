@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		{
 			this.m_PanelSetId = 76;
 			this.m_PanelSetName = "Muscle Pathology Analysis";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Surgical;
+            this.m_CaseType = Business.CaseType.Surgical;
 			this.m_HasTechnicalComponent = true;            
 			this.m_HasProfessionalComponent = true;
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.PublishedDocument;
@@ -25,7 +25,7 @@ this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Gather materials and send to Therapth.";
 
-            YellowstonePathology.Business.Facility.Model.Facility therapath = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("THRPTH");
+            YellowstonePathology.Business.Facility.Model.Facility therapath = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("THRPTH");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Histology, taskDescription, therapath));
 
             this.m_TechnicalComponentFacility = therapath;

@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace YellowstonePathology.UI.Login
 {
@@ -46,7 +47,7 @@ namespace YellowstonePathology.UI.Login
             this.m_LoginUI = new LoginUIV2(this.m_Writer);
             this.m_DocumentViewer = new DocumentWorkspace();
 
-            this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+            this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 
             InitializeComponent();
 
@@ -61,7 +62,7 @@ namespace YellowstonePathology.UI.Login
         {
             if (this.m_LoadedHasRun == false)
             {
-                this.ComboBoxCaseType.SelectedValue = YellowstonePathology.Business.CaseType.ALLCaseTypes;
+                this.ComboBoxCaseType.SelectedValue = Business.CaseType.ALLCaseTypes;
                 this.m_BarcodeScanPort.ContainerScanReceived += ContainerScanReceived;
                 this.m_BarcodeScanPort.HistologySlideScanReceived += new Business.BarcodeScanning.BarcodeScanPort.HistologySlideScanReceivedHandler(BarcodeScanPort_HistologySlideScanReceived);
                 this.m_BarcodeScanPort.AliquotOrderIdReceived += BarcodeScanPort_AliquotOrderIdReceived;
@@ -97,7 +98,7 @@ namespace YellowstonePathology.UI.Login
             if (this.m_LoginUI.AccessionOrder != null)
             {
                 YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_LoginUI.AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_LoginUI.ReportNo);
-                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(this.m_LoginUI.AccessionOrder, panelSetOrder, Business.Document.ReportSaveModeEnum.Draft);
+                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_LoginUI.AccessionOrder, panelSetOrder, Business.Document.ReportSaveModeEnum.Draft);
                 caseDocument.Render();
                 YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(caseDocument.SaveFileName);
             }
@@ -385,7 +386,7 @@ namespace YellowstonePathology.UI.Login
                 {
                     if (string.IsNullOrEmpty(this.m_LoginUI.AccessionOrder.ClientOrderId) == false)
                     {
-                        YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullClientOrder(this.m_LoginUI.AccessionOrder.ClientOrderId, this.m_Writer);
+                        YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = Business.Persistence.DocumentGateway.Instance.PullClientOrder(this.m_LoginUI.AccessionOrder.ClientOrderId, this.m_Writer);
 
                         YellowstonePathology.Business.User.SystemIdentity systemIdentity = Business.User.SystemIdentity.Instance;
                         this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();
@@ -537,7 +538,7 @@ namespace YellowstonePathology.UI.Login
         {
             if (this.ListViewAccessionOrders.SelectedItem != null)
             {
-                YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_LoginUI.AccessionOrder.MasterAccessionNo);
+                YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_LoginUI.AccessionOrder.MasterAccessionNo);
 
                 if (clientOrderCollection.Count != 0)
                 {
@@ -664,15 +665,15 @@ namespace YellowstonePathology.UI.Login
         {
             if (this.ListViewAccessionOrders.SelectedItem != null)
             {
-                YellowstonePathology.Business.Search.ReportSearchItem reportSearchItem = (YellowstonePathology.Business.Search.ReportSearchItem)this.ListViewAccessionOrders.SelectedItem;
+                Business.Search.ReportSearchItem reportSearchItem = (YellowstonePathology.Business.Search.ReportSearchItem)this.ListViewAccessionOrders.SelectedItem;
 
-                YellowstonePathology.Business.Task.Model.TaskOrder taskOrder = this.m_LoginUI.AccessionOrder.TaskOrderCollection.GetTaskOrderByReportNo(reportSearchItem.ReportNo);
+                Business.Task.Model.TaskOrder taskOrder = this.m_LoginUI.AccessionOrder.TaskOrderCollection.GetTaskOrderByReportNo(reportSearchItem.ReportNo);
 
                 if (taskOrder != null)
                 {                    
                     this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();
 
-                    YellowstonePathology.UI.Login.Receiving.TaskOrderPath taskOrderPath = new Receiving.TaskOrderPath(this.m_LoginUI.AccessionOrder, taskOrder, this.m_LoginPageWindow.PageNavigator, PageNavigationModeEnum.Standalone);
+                    UI.Login.Receiving.TaskOrderPath taskOrderPath = new Receiving.TaskOrderPath(this.m_LoginUI.AccessionOrder, taskOrder, this.m_LoginPageWindow.PageNavigator, PageNavigationModeEnum.Standalone);
                     taskOrderPath.Close += new Receiving.TaskOrderPath.CloseEventHandler(TaskOrderPath_Close);
                     taskOrderPath.Start();
                     this.m_LoginPageWindow.ShowDialog();
@@ -861,7 +862,7 @@ namespace YellowstonePathology.UI.Login
 
         private void TileSpecimenSelection_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_LoginUI.AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_LoginUI.ReportNo);
             YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
             YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new Business.Test.TestOrderInfo(panelSet, null, true);
@@ -875,7 +876,7 @@ namespace YellowstonePathology.UI.Login
 
         private void SpecimenSelectionPage_TargetSelected(object sender, CustomEventArgs.TestOrderInfoEventArgs e)
         {
-            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_LoginUI.AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_LoginUI.ReportNo);
             
             panelSetOrder.OrderedOn = e.TestOrderInfo.OrderTarget.GetOrderedOnType();
@@ -901,40 +902,22 @@ namespace YellowstonePathology.UI.Login
 
         private void MenuItemSendPantherOrder_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ListViewAccessionOrders.SelectedItem != null)
-            {
-                YellowstonePathology.Business.Search.ReportSearchItem reportSearchItem = (YellowstonePathology.Business.Search.ReportSearchItem)this.ListViewAccessionOrders.SelectedItem;
-                if (this.m_LoginUI.AccessionOrder.SpecimenOrderCollection.HasThinPrepFluidSpecimen() == true)
-                {
-                    YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_LoginUI.AccessionOrder.SpecimenOrderCollection.GetThinPrep();
-                    if (specimenOrder.AliquotOrderCollection.HasPantherAliquot() == true)
-                    {
-                        YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = specimenOrder.AliquotOrderCollection.GetPantherAliquot();
-                        YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_LoginUI.AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportSearchItem.ReportNo);
-                        YellowstonePathology.Business.HL7View.Panther.PantherAssay pantherAssay = null;
-                        switch (panelSetOrder.PanelSetId)
-                        {
-                            case 14:
-                                pantherAssay = new Business.HL7View.Panther.PantherAssayHPV();
-                                break;
-                            case 3:
-                                pantherAssay = new Business.HL7View.Panther.PantherAssayNGCT();
-                                break;
-                            default:
-                                throw new Exception(panelSetOrder.PanelSetName + " is mot implemented yet.");
-                        }
+            foreach(Business.Search.ReportSearchItem reportSearchItem in this.ListViewAccessionOrders.SelectedItems)
+            {                
+                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(reportSearchItem.MasterAccessionNo, this);
+                Business.Test.PanelSetOrder panelSetOrder = ao.PanelSetOrderCollection.GetPanelSetOrder(reportSearchItem.ReportNo);
+                Business.HL7View.Panther.PantherAssay pantherAssay = Business.HL7View.Panther.PantherAssayFactory.GetPantherAssay(panelSetOrder);
 
-                        YellowstonePathology.Business.HL7View.Panther.PantherOrder pantherOrder = new Business.HL7View.Panther.PantherOrder(pantherAssay, specimenOrder, aliquotOrder, this.m_LoginUI.AccessionOrder, panelSetOrder, YellowstonePathology.Business.HL7View.Panther.PantherActionCode.NewSample);
-                        pantherOrder.Send();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Panther aliquot found.");
-                    }
+                Business.Rules.MethodResult methodResult = pantherAssay.CanSendOrder(this.m_LoginUI.AccessionOrder, panelSetOrder);
+                if (methodResult.Success == true)
+                {
+                    Business.Specimen.Model.SpecimenOrder specimenOrder = ao.SpecimenOrderCollection.GetSpecimenOrderByOrderTarget(panelSetOrder.OrderedOnId);
+                    Business.HL7View.Panther.PantherOrder pantherOrder = new Business.HL7View.Panther.PantherOrder(pantherAssay, specimenOrder, ao, panelSetOrder, YellowstonePathology.Business.HL7View.Panther.PantherActionCode.NewSample);
+                    pantherOrder.Send();
                 }
                 else
                 {
-                    MessageBox.Show("No Thin Prep Fluid Specimen Found.");
+                    MessageBox.Show(methodResult.Message);
                 }
             }
         }
@@ -945,24 +928,15 @@ namespace YellowstonePathology.UI.Login
             {
                 if (this.m_LoginUI.AccessionOrder.SpecimenOrderCollection.HasThinPrepFluidSpecimen() == true)
                 {
-                    YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_LoginUI.AccessionOrder.SpecimenOrderCollection.GetThinPrep();
-                    if (specimenOrder.AliquotOrderCollection.HasPantherAliquot() == true)
-                    {
-                        YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = specimenOrder.AliquotOrderCollection.GetPantherAliquot();
-                        YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_LoginUI.AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(14);
-                        YellowstonePathology.Business.HL7View.Panther.PantherAssayHPV pantherAssayHPV = new Business.HL7View.Panther.PantherAssayHPV();
-                        YellowstonePathology.Business.HL7View.Panther.PantherOrder pantherOrder = new Business.HL7View.Panther.PantherOrder(pantherAssayHPV, specimenOrder, aliquotOrder, this.m_LoginUI.AccessionOrder, panelSetOrder, YellowstonePathology.Business.HL7View.Panther.PantherActionCode.CancelRequest);
-                        pantherOrder.Send();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Panther aliquot found.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No Thin Prep Fluid Specimen Found.");
-                }
+                    throw new Exception("Cancelling a Panther order needs work.");
+                    /*
+                    YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_LoginUI.AccessionOrder.SpecimenOrderCollection.GetThinPrep();                    
+                    YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_LoginUI.AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(14);
+                    YellowstonePathology.Business.HL7View.Panther.PantherAssayHPV pantherAssayHPV = new Business.HL7View.Panther.PantherAssayHPV();
+                    YellowstonePathology.Business.HL7View.Panther.PantherOrder pantherOrder = new Business.HL7View.Panther.PantherOrder(pantherAssayHPV, specimenOrder, aliquotOrder.AliquotOrderId, this.m_LoginUI.AccessionOrder, panelSetOrder, YellowstonePathology.Business.HL7View.Panther.PantherActionCode.CancelRequest);
+                    pantherOrder.Send();
+                    */
+                }   
             }
         }
 
@@ -1007,11 +981,42 @@ namespace YellowstonePathology.UI.Login
             this.m_LoginPageWindow = null;
         }
 
+        private void WriteGrossCameraArgsFile()
+        {
+            Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_LoginUI.AccessionOrder.MasterAccessionNo);
+            string casePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
+
+            string[] lines = { this.m_LoginUI.AccessionOrder.MasterAccessionNo, casePath };
+            System.IO.StreamWriter file = new System.IO.StreamWriter($@"\\ypiidc\YPIILIS\gross_camera_{Environment.MachineName}_args.txt");
+
+            foreach (string line in lines)
+            {
+                file.WriteLine(line);
+            }
+
+            file.Close();
+        }
+
         private void ButtonShowCamera_Click(object sender, RoutedEventArgs e)
         {
             if(this.m_LoginUI.AccessionOrder != null)
             {
-                this.m_GrossCameraPubSubHandler.CaseAquired(this.m_LoginUI.AccessionOrder);
+                string fileName = @"c:\Program Files\Yellowstone Pathology Institute\Gross Camera\Video.exe";                
+                if (System.IO.File.Exists(fileName) == true)
+                {
+                    this.WriteGrossCameraArgsFile();
+                    Process process = new Process();
+                    process.StartInfo.FileName = fileName;                    
+                    process.Start();
+                }
+                else
+                {
+                    MessageBox.Show("The Gross Camera Software has not been isntalled.");
+                }
+            }    
+            else
+            {
+                MessageBox.Show("Please select an Accession first.");
             }
         }
 
@@ -1030,5 +1035,62 @@ namespace YellowstonePathology.UI.Login
             this.m_LoginUI.GetReportSearchListBySCLCOVIDCases();
         }
 
+        private void ButtonShowCOVIDPatientDistribution_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListByCOVIDPatientDistributionCases();
+        }
+
+        private void ButtonShowDurdenCOVIDCases_Click(object sender, RoutedEventArgs e)
+        {            
+            this.m_LoginUI.GetReportSearchListByDurdenCOVIDCases();
+        }        
+
+        private void MenuItemITAudited_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.ListViewAccessionOrders.SelectedItem != null)
+            {
+                Business.Search.ReportSearchItem reportSearchItem = (Business.Search.ReportSearchItem)this.ListViewAccessionOrders.SelectedItem;
+                foreach(Business.Search.ReportSearchItem rsi in this.m_LoginUI.ReportSearchList)
+                {
+                    if(rsi.ReportNo == reportSearchItem.ReportNo)
+                    {
+                        reportSearchItem.ITAudited = true;
+                    }                    
+                }                
+                this.m_LoginUI.AccessionOrder.ITAudited = true;
+            }            
+        }
+
+        private void ButtonSendProvationResult_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewAccessionOrders.SelectedItem != null)
+            {
+                Business.Search.ReportSearchItem reportSearchItem = (Business.Search.ReportSearchItem)this.ListViewAccessionOrders.SelectedItem;
+                foreach (Business.Search.ReportSearchItem rsi in this.ListViewAccessionOrders.SelectedItems)
+                {
+                    Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(rsi.MasterAccessionNo, this);
+                    Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(rsi.ReportNo, ao, false, false);
+                    Business.Rules.MethodResult result = new Business.Rules.MethodResult();
+                    resultView.HandleSendToProvation(result);
+                }
+                MessageBox.Show("All done.");
+            }
+        }
+
+        private void ButtonSendNMHResult_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewAccessionOrders.SelectedItem != null)
+            {
+                Business.Search.ReportSearchItem reportSearchItem = (Business.Search.ReportSearchItem)this.ListViewAccessionOrders.SelectedItem;
+                foreach (Business.Search.ReportSearchItem rsi in this.ListViewAccessionOrders.SelectedItems)
+                {
+                    Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(rsi.MasterAccessionNo, this);
+                    Business.HL7View.NMH.NMHResultView resultView = new Business.HL7View.NMH.NMHResultView(rsi.ReportNo, ao, false);
+                    Business.Rules.MethodResult result = new Business.Rules.MethodResult();
+                    resultView.Send(result);
+                }
+                MessageBox.Show("All done.");
+            }
+        }
     }
 }

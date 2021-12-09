@@ -139,7 +139,7 @@ namespace YellowstonePathology.UI.Cutting
 
         private void HandleMasterAccessionNoFound(string masterAccessionNo)
         {
-            this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, m_CuttingWorkspaceWindow);			
+            this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, m_CuttingWorkspaceWindow);			
 
             if(this.m_AccessionOrder.AccessionLock.IsLockAquiredByMe == true)
             {
@@ -195,11 +195,11 @@ namespace YellowstonePathology.UI.Cutting
         private void ScanAliquotPage_AliquotOrderSelected(object sender, CustomEventArgs.BarcodeReturnEventArgs eventArgs)
         {            
             this.m_AliquotOrderId = eventArgs.Barcode.ID;
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromAliquotOrderId(this.m_AliquotOrderId);
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromAliquotOrderId(this.m_AliquotOrderId);
 
             if (string.IsNullOrEmpty(masterAccessionNo) == false)
             {
-                this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_CuttingWorkspaceWindow);
+                this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_CuttingWorkspaceWindow);
 
                 if (this.m_AccessionOrder != null)
                 {
@@ -227,7 +227,7 @@ namespace YellowstonePathology.UI.Cutting
         {
             Business.Test.AliquotOrder aliquotOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetAliquotOrder(this.m_AliquotOrderId);
             YellowstonePathology.Business.Facility.Model.Facility thisFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            string thisLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
 
             this.AddMaterialTrackingLog(aliquotOrder, thisFacility, thisLocation);

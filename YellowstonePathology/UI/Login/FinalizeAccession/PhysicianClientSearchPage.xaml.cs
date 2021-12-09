@@ -50,7 +50,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         {
             this.m_AccessionOrder = accessionOrder;
 			this.m_ShowNavigationButtons = showNavigationButtons;
-            this.m_PhysicianClientDistributionCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionByClientIdV2(clientId);            
+            this.m_PhysicianClientDistributionCollection = Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionByClientIdV2(clientId);            
 
             InitializeComponent();
 
@@ -85,11 +85,11 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             {
                 if (physicianNameHelper.IsLastNameOnly == false)
                 {
-                    this.m_PhysicianClientDistributionCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionByPhysicianFirstLastNameV2(physicianNameHelper.FirstName, physicianNameHelper.LastName);
+                    this.m_PhysicianClientDistributionCollection = Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionByPhysicianFirstLastNameV2(physicianNameHelper.FirstName, physicianNameHelper.LastName);
                 }
                 else
                 {
-                    this.m_PhysicianClientDistributionCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionByPhysicianLastNameV2(physicianNameHelper.LastName);
+                    this.m_PhysicianClientDistributionCollection = Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionByPhysicianLastNameV2(physicianNameHelper.LastName);
                 }
 
                 this.listViewPhysicianClient.SelectedIndex = -1;

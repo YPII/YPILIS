@@ -97,7 +97,7 @@ namespace YellowstonePathology.Business.Test
 		public YellowstonePathology.Business.Test.PanelOrder GetNew(string reportNo, YellowstonePathology.Business.Panel.Model.Panel panel, int orderedById)
 		{
 			string panelOrderId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-			YellowstonePathology.Business.Test.PanelOrder panelOrder = YellowstonePathology.Business.Test.PanelOrderFactory.CreatePanelOrder(reportNo, panelOrderId, panelOrderId, panel, orderedById);
+			YellowstonePathology.Business.Test.PanelOrder panelOrder = Business.Test.PanelOrderFactory.CreatePanelOrder(reportNo, panelOrderId, panelOrderId, panel, orderedById);
 			return panelOrder;
 		}
         */

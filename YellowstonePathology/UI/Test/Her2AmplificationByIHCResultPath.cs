@@ -65,7 +65,7 @@ namespace YellowstonePathology.UI.Test
             bool result = false;
             if (this.m_AccessionOrder.PanelSetOrderCollection.HasSurgical() == true)
             {
-                if (this.m_PanelSetOrder.Result != YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
+                if (this.m_PanelSetOrder.Result != Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
                 {
                     YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
                     YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(surgicalTestOrder.ReportNo);

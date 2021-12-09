@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
 
         public EGFRToALKReflexAnalysisElementResult(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, int panelSetId)
         {
-            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
             this.m_PanelSet = panelSetCollection.GetPanelSet(panelSetId);
 
             this.m_TestAbbreviation = this.m_PanelSet.Abbreviation;

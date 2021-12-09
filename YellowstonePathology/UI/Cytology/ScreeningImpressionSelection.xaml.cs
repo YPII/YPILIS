@@ -36,7 +36,7 @@ namespace YellowstonePathology.UI.Cytology
 
         public ScreeningImpressionSelection()
         {
-			this.m_ScreeningImpressionCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetScreeningImpressions();
+			this.m_ScreeningImpressionCollection = Business.Gateway.AccessionOrderGateway.GetScreeningImpressions();
 
             InitializeComponent();
 

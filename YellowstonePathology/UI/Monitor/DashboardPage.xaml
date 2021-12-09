@@ -39,6 +39,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=DateDisplayString}" Header="Date" Width="400"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=NMHBlocks}" Header="NMH" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=YPIBlocks}" Header="YPI" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=YPIPaths}" Header=" YPI Paths" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=BozemanBlocks}" Header="Bozeman" Width="100"/>

@@ -45,8 +45,9 @@ namespace YellowstonePathology.Business
             {
                 File.Copy(item.FullPath, copyDestination);
             }
-            string moveDestination = YellowstonePathology.Properties.Settings.Default.LocalDictationFolder + slashSplit[slashSplit.Length - 1];
-			if (File.Exists(item.FullPath) == true && File.Exists(moveDestination) == false)
+            //string moveDestination = Properties.Settings.Default.LocalDictationFolder + slashSplit[slashSplit.Length - 1];
+            string moveDestination = $@"{YellowstonePathology.Properties.Settings.Default.LocalDictationFolder}{slashSplit[slashSplit.Length - 1]}";
+            if (File.Exists(item.FullPath) == true && File.Exists(moveDestination) == false)
             {
                 File.Move(item.FullPath, moveDestination);
             }
@@ -55,7 +56,7 @@ namespace YellowstonePathology.Business
         public void MoveLocalFileToDone(FileListItem item)
         {
 			string[] slashSplit = item.FullPath.Split('\\');
-			string copyDestination = item.FullPath.Replace(slashSplit[slashSplit.Length - 1], @"Done\" + Guid.NewGuid() + ".dct");
+			string copyDestination = item.FullPath.Replace(slashSplit[slashSplit.Length - 1], @"done\" + Guid.NewGuid() + ".dct");
 			File.Move(item.FullPath, copyDestination);
         }        
     }    

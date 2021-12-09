@@ -8,7 +8,7 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 	public class ErPrSemiQuantitativeResult : YellowstonePathology.Business.Test.TestResult
 	{
 		private string m_ReportReferences = "Hammond et al., ASCO/CAP Guideline Recommendations for testing ER/PR in breast cancer, Arch Path Lab Med 2010, 134:907-22.";
-		private string m_Method = "The estrogen (ER) and progesterone (PR) immunohistochemical assays were performed on paraffin embedded tissue with the ER (SP1) and PR (SP42) rabbit monoclonal antibodies.  The test was performed according to ASCO/CAP guidelines.";
+		private string m_Method = "The estrogen (ER) and progesterone (PR) immunohistochemical assays were performed on paraffin embedded tissue with the ER (SP1) and PR (SP42) rabbit monoclonal antibodies. The Ki-67 immunohistochemical assay was performed on paraffin-embedded tissue using Ventana Ki-67 clone 30-9 rabbit monoclonal antibody. The test was performed according to ASCO/CAP guidelines.";
         protected string m_FixationOutOfBoundsComment = "The specimen fixation time does not meet ASCO CAP guidelines (6 to 72 hours), which may cause false negative results.  Repeat testing on an alternate specimen that meets fixation time guidelines is recommended, if available.";
 
         protected string m_ErResult;
@@ -49,10 +49,10 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 		{
 			panelSetOrderErPrSemiQuantitative.ResultCode = this.m_ResultCode;
 			panelSetOrderErPrSemiQuantitative.ReportReferences = this.m_ReportReferences;
-			panelSetOrderErPrSemiQuantitative.Method = this.m_Method;
-			panelSetOrderErPrSemiQuantitative.Interpretation = this.m_Interpretation;
+			panelSetOrderErPrSemiQuantitative.Method = this.m_Method;			
+			panelSetOrderErPrSemiQuantitative.Interpretation = this.m_Interpretation + $" Ki-67 stain highlights up to {panelSetOrderErPrSemiQuantitative.Ki67Result} of tumor cell nuclei.  External controls reacted appropriately.";
 
-            if (specimenOrder.FixationDuration > 72 || specimenOrder.FixationDuration < 6)
+			if (specimenOrder.FixationDuration > 72 || specimenOrder.FixationDuration < 6)
             {
                 specimenOrder.FixationComment = m_FixationOutOfBoundsComment;
             }

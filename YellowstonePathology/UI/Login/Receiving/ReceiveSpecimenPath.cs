@@ -106,7 +106,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 		{
             if (string.IsNullOrEmpty(this.m_ClientOrderReceivingHandler.ClientOrder.SpecialInstructions) == false)
             {
-                SpecialInstructionsWindow specialInstructionsWindow = new SpecialInstructionsWindow(this.m_ClientOrderReceivingHandler.ClientOrder.SpecialInstructions);
+                SpecialInstructionsWindow specialInstructionsWindow = new SpecialInstructionsWindow(this.m_ClientOrderReceivingHandler.ClientOrder);
                 this.m_LoginPageWindow.PageNavigator.ShowSecondMonitorWindow(specialInstructionsWindow);
             }
 

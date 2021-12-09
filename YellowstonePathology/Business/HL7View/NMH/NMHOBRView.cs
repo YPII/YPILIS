@@ -83,7 +83,10 @@ namespace YellowstonePathology.Business.HL7View.NMH
                     YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.4.2", "Pap Smear", obr04Element);                    
                     break;                
                 default:
-                    throw new Exception("not implemented yet.");
+                    YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.4.1", "PATH", obr04Element);
+                    YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.4.2", "PATH", obr04Element);
+                    YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.4.3", "Pathology", obr04Element);
+                    break;
             } 
             
             obrElement.Add(obr04Element);
@@ -92,34 +95,41 @@ namespace YellowstonePathology.Business.HL7View.NMH
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.6.1", "YPI", obr06Element);            
             obrElement.Add(obr06Element);
 
-            YellowstonePathology.Business.Helper.DateTimeJoiner collectionDateJoiner = new Business.Helper.DateTimeJoiner(this.m_CollectionDate.Value, "yyyyMMddHHmm", this.m_CollectionTime, "yyyyMMddHHmm");
-            XElement obr07Element = new XElement("OBR.7");            
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.7.1", collectionDateJoiner.DisplayString, obr07Element);
-            obrElement.Add(obr07Element);
+            if(this.m_CollectionDate.HasValue == true)
+            {
+                YellowstonePathology.Business.Helper.DateTimeJoiner collectionDateJoiner = new Business.Helper.DateTimeJoiner(this.m_CollectionDate.Value, "yyyyMMddHHmm", this.m_CollectionTime, "yyyyMMddHHmm");
+                XElement obr07Element = new XElement("OBR.7");
+
+                YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.7.1", collectionDateJoiner.DisplayString, obr07Element);
+                obrElement.Add(obr07Element);
+            }                                    
 
             XElement obr14Element = new XElement("OBR.14");
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.14.1",this.m_AccessionTime.Value.ToString(m_DateFormat) , obr14Element);                        
             obrElement.Add(obr14Element);
 
-            string[] pipeSplit = this.m_SecondaryExternalOrderId.Split('|');
-            if (pipeSplit.Length >= 4)
+            if(string.IsNullOrEmpty(this.m_SecondaryExternalOrderId) == false)
             {
-                XElement obr16Element = new XElement("OBR.16", pipeSplit[3]);                
-                obrElement.Add(obr16Element);
-            }                            
-            
-            if(pipeSplit.Length >= 3)
-            {
-                XElement obr20Element = new XElement("OBR.20");
-                YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.20.1", pipeSplit[2], obr20Element);
-                obrElement.Add(obr20Element);
-            }
+                string[] pipeSplit = this.m_SecondaryExternalOrderId.Split('|');
+                if (pipeSplit.Length >= 4)
+                {
+                    XElement obr16Element = new XElement("OBR.16", pipeSplit[3]);
+                    obrElement.Add(obr16Element);
+                }
 
-            if (pipeSplit.Length >= 5)
-            {
-                XElement obr21Element = new XElement("OBR.21");
-                YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.21.1", pipeSplit[4], obr21Element);
-                obrElement.Add(obr21Element);
+                if (pipeSplit.Length >= 3)
+                {
+                    XElement obr20Element = new XElement("OBR.20");
+                    YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.20.1", pipeSplit[2], obr20Element);
+                    obrElement.Add(obr20Element);
+                }
+
+                if (pipeSplit.Length >= 5)
+                {
+                    XElement obr21Element = new XElement("OBR.21");
+                    YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.21.1", pipeSplit[4], obr21Element);
+                    obrElement.Add(obr21Element);
+                }
             }            
 
             XElement obr22Element = new XElement("OBR.22");

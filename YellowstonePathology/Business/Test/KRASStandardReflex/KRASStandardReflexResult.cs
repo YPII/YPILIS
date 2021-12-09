@@ -108,7 +108,7 @@ namespace YellowstonePathology.Business.Test.KRASStandardReflex
         public static YellowstonePathology.Business.Rules.MethodResult IsOkToFinal(KRASStandardReflexResult krasStandardReflexResult)
 		{
             YellowstonePathology.Business.Rules.MethodResult result = new YellowstonePathology.Business.Rules.MethodResult();
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             if (krasStandardReflexResult.KRASStandardReflexTestOrder.Final == false)
 			{
                 if (krasStandardReflexResult.KRASStandardTestOrder.Final == false)
@@ -164,7 +164,7 @@ namespace YellowstonePathology.Business.Test.KRASStandardReflex
 			}
 			else
 			{
-				YellowstonePathology.Business.Test.KRASStandard.KRASStandardResultCollection resultCollection = YellowstonePathology.Business.Test.KRASStandard.KRASStandardResultCollection.GetAll();
+				YellowstonePathology.Business.Test.KRASStandard.KRASStandardResultCollection resultCollection = Business.Test.KRASStandard.KRASStandardResultCollection.GetAll();
                 YellowstonePathology.Business.Test.KRASStandard.KRASStandardResult standardResult = resultCollection.GetResult(krasStandardReflexResult.KRASStandardTestOrder.ResultCode);
 				if (standardResult is YellowstonePathology.Business.Test.KRASStandard.KRASStandardDetectedResult)
 				{

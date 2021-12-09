@@ -101,6 +101,12 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <ListView Name="ListViewClientGroups" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" ItemsSource="{Binding Path=ClientGroupCollection}" MouseDoubleClick="ListViewClientGroups_MouseDoubleClick">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Edit" Click="MenuItemEditClientGroup_Click" />
+                                <MenuItem Header="Add" Click="MenuItemAddClientGroup_Click" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Path=ClientGroupId}" />
@@ -126,6 +132,12 @@
 
                     <ListView Name="ListViewFacilities" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="2,2,2,2" MouseDoubleClick="ListBoxFacility_MouseDoubleClick"
 							 ItemsSource="{Binding Path=FacilityCollection}">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Edit" Click="MenuItemEditFacility_Click" />
+                                <MenuItem Header="Add" Click="MenuItemAddFacility_Click" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" Width="400" DisplayMemberBinding="{Binding Path=FacilityName}" />

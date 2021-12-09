@@ -15,6 +15,7 @@ namespace YellowstonePathology.Business.View
         private string m_ClientName;
         private string m_ReportedTo;
         private DateTime? m_TimeOfLastDistribution;
+        private string m_DistributionType;
 
         public StVClientDOHReportView() { }
 
@@ -78,6 +79,20 @@ namespace YellowstonePathology.Business.View
                 {
                     this.m_TimeOfLastDistribution = value;
                     NotifyPropertyChanged("TimeOfLastDistribution");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string DistributionType
+        {
+            get { return this.m_DistributionType; }
+            set
+            {
+                if (this.m_DistributionType != value)
+                {
+                    this.m_DistributionType = value;
+                    NotifyPropertyChanged("DistributionType");
                 }
             }
         }

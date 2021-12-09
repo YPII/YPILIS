@@ -38,7 +38,7 @@ namespace YellowstonePathology.UI
 		public void ShowDocument(string file)
 		{
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(file);
-			string fileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
 			fileName += file + ".xps";
 
 			FileStream fileStream = File.OpenRead(fileName);

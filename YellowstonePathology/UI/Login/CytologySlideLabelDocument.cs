@@ -44,9 +44,9 @@ namespace YellowstonePathology.UI.Login
 			string labelLine2 = string.Empty;
 			
 			string masterAccessionNo = orderIdParser.MasterAccessionNo;
-            string crc = YellowstonePathology.Business.BarcodeScanning.CytycCRC32.ComputeCrc(masterAccessionNo);
-			labelLine1 = YellowstonePathology.Business.BarcodeScanning.CrcLabel.LabelLine1(masterAccessionNo);
-			labelLine2 = YellowstonePathology.Business.BarcodeScanning.CrcLabel.LabelLine2(masterAccessionNo, crc);			
+            string crc = Business.BarcodeScanning.CytycCRC32.ComputeCrc(masterAccessionNo);
+			labelLine1 = Business.BarcodeScanning.CrcLabel.LabelLine1(masterAccessionNo);
+			labelLine2 = Business.BarcodeScanning.CrcLabel.LabelLine2(masterAccessionNo, crc);			
 
             CytologySlideLabelPanel label1 = new CytologySlideLabelPanel(labelLine1, labelLine2, lastName, acidWash);
             CytologySlideLabelPanel label2 = new CytologySlideLabelPanel(labelLine1, labelLine2, lastName, acidWash);

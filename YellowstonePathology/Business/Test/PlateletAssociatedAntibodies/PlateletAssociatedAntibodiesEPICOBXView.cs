@@ -53,7 +53,7 @@ namespace YellowstonePathology.Business.Test.PlateletAssociatedAntibodies
             this.AddNextObxElement("Specimen Information:", document, "F");
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(testOrder.OrderedOn, testOrder.OrderedOnId);
             this.AddNextObxElement("Specimen Description: " + specimenOrder.Description, document, "F");
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");
 
             this.AddNextObxElement("", document, "F");

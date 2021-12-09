@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Test.ReticulatedPlateletAnalysisV2
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(testOrder.OrderedOn, testOrder.OrderedOnId);
             this.ReplaceText("specimen_description", specimenOrder.Description);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.ReplaceText("date_time_collected", collectionDateTimeString);
 
             this.ReplaceText("test_result", testOrder.Result);

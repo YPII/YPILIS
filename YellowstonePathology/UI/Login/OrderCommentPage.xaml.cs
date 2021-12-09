@@ -30,7 +30,7 @@ namespace YellowstonePathology.UI.Login
 
 		public OrderCommentPage(YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder)
 		{
-			this.m_OrderCommentLogCollection = YellowstonePathology.Business.Gateway.OrderCommentGateway.GetOrderCommentLogCollectionByClientOrderId(clientOrder.ClientOrderId);
+			this.m_OrderCommentLogCollection = Business.Gateway.OrderCommentGateway.GetOrderCommentLogCollectionByClientOrderId(clientOrder.ClientOrderId);
 			this.m_PageHeaderText = "Events for " + clientOrder.PatientDisplayName;
 
 			InitializeComponent();

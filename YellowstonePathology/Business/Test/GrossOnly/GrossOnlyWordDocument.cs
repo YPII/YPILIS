@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Test.GrossOnly
             
             this.ReplaceText("gross_description", grossOnlyTestOrder.GrossX);            
 
-            string finalDate = YellowstonePathology.Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate) + " - " + YellowstonePathology.Business.BaseData.GetMillitaryTimeString(this.m_PanelSetOrder.FinalTime);
+            string finalDate = Business.BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate) + " - " + YellowstonePathology.Business.BaseData.GetMillitaryTimeString(this.m_PanelSetOrder.FinalTime);
             this.SetXmlNodeData("final_date", finalDate);
 
             this.SetReportDistribution();

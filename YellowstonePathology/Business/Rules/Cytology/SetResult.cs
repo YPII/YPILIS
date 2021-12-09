@@ -35,7 +35,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
         private void SetSpecimenAdequacy()
         {
 			string adequacy = this.m_ResultCode.ToString().Substring(1, 2);
-			YellowstonePathology.Business.Cytology.Model.SpecimenAdequacy specimenAdequacy = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSpecimenAdequacyByResultCode(adequacy);
+			YellowstonePathology.Business.Cytology.Model.SpecimenAdequacy specimenAdequacy = Business.Gateway.AccessionOrderGateway.GetSpecimenAdequacyByResultCode(adequacy);
 
 			List<YellowstonePathology.Business.Cytology.Model.SpecimenAdequacyComment> selectedSpecimenAdequacyComments = new List<YellowstonePathology.Business.Cytology.Model.SpecimenAdequacyComment>();
             YellowstonePathology.Business.Rules.Cytology.SetSpecimenAdequacy setSpecimenAdequacy = new SetSpecimenAdequacy();            
@@ -45,7 +45,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
         private void SetScreeningImpression()
         {
 			string impression = this.m_ResultCode.ToString().Substring(3, 2);
-			YellowstonePathology.Business.Cytology.Model.ScreeningImpression screeningImpression = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetScreeningImpressionByResultCode(impression);
+			YellowstonePathology.Business.Cytology.Model.ScreeningImpression screeningImpression = Business.Gateway.AccessionOrderGateway.GetScreeningImpressionByResultCode(impression);
 			this.m_PanelOrder.ScreeningImpression = screeningImpression.Description;
         }
 

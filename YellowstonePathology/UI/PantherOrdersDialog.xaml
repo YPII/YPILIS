@@ -237,6 +237,53 @@
 
                 </Grid>
             </TabItem>
+            <TabItem Header="SARS-Cov-2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="91*"></ColumnDefinition>
+                        <ColumnDefinition Width="180*"/>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <ComboBox Name="ComboBoxListTypeCOVID" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2.4" HorizontalAlignment="Stretch" SelectedValuePath="Content" SelectionChanged="ComboBoxListTypeCOVID_SelectionChanged" Grid.ColumnSpan="2">
+                        <ComboBoxItem IsSelected="True">COVID cases with no result</ComboBoxItem>
+                        <ComboBoxItem>COVID cases with a result but not final</ComboBoxItem>
+                        <ComboBoxItem>COVID case that are final</ComboBoxItem>
+                    </ComboBox>
+
+                    <ListView Grid.Column="0" Grid.Row="1" Name="ListViewPantherCOVIDOrders" Margin="2,1.6" ItemsSource="{Binding Path=PantherCOVIDOrderList}" Grid.ColumnSpan="2">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Report No" DisplayMemberBinding="{Binding Path=ReportNo}" Width="100" />
+                                <GridViewColumn Header="Order Time" DisplayMemberBinding="{Binding Path=OrderTime, Converter={StaticResource MilitaryDateTimeConverter}}" Width="130" />
+                                <GridViewColumn Header="Test" DisplayMemberBinding="{Binding Path=PanelSetName}" Width="120" />
+                                <GridViewColumn Header="Accepted" DisplayMemberBinding="{Binding Path=AcceptedTime, Converter={StaticResource MilitaryDateTimeConverter}}" Width="130" />
+                                <GridViewColumn Header="Finaled" DisplayMemberBinding="{Binding Path=FinalTime, Converter={StaticResource MilitaryDateTimeConverter}}" Width="150" />
+                                <GridViewColumn Header="Result" DisplayMemberBinding="{Binding Path=Result}" Width="120" />
+                                <GridViewColumn Header="Hold Distribution" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path=HoldDistribution}" Margin="2,2,2,2" HorizontalAlignment="Center" IsEnabled="False"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Instrument Order" DisplayMemberBinding="{Binding Path=InstrumentOrderDate, Converter={StaticResource MilitaryDateTimeConverter}}" Width="150" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <StackPanel Grid.Column="2" Margin="0,26,0,-0.4" Grid.RowSpan="3">
+                        <Button Click="ButtonShowCOVIDResult_Click" Margin="2,2,2,2" Width="100" Height="50" VerticalAlignment="Top">Result</Button>
+                        <Button Click="ButtonResendCOVIDPantherOrder_Click" Margin="2,2,2,2" Width="100" Height="50" VerticalAlignment="Top">Resend Order</Button>
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
             <TabItem Header="Previously Run">
                 <Grid>
                     <Grid.ColumnDefinitions>

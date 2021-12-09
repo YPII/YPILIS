@@ -20,9 +20,9 @@ namespace YellowstonePathology.Business.WebService
             bool includeSpaces, int lengthOfPassword)
         {
             const int MAXIMUM_IDENTICAL_CONSECUTIVE_CHARS = 2;
-            const string LOWERCASE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz";
-            const string UPPERCASE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            const string NUMERIC_CHARACTERS = "0123456789";
+            const string LOWERCASE_CHARACTERS = "abcdefghijkmnopqrstuvwxyz";
+            const string UPPERCASE_CHARACTERS = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
+            const string NUMERIC_CHARACTERS = "23456789";
             const string SPECIAL_CHARACTERS = @"!#$%&*@\";
             const string SPACE_CHARACTER = " ";
             const int PASSWORD_LENGTH_MIN = 8;

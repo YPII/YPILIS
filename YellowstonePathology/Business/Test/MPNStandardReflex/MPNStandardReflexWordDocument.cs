@@ -62,7 +62,7 @@ namespace YellowstonePathology.Business.Test.MPNStandardReflex
             base.ReplaceText("specimen_description", specimenOrder.Description);
             this.ReplaceText("result_comment", panelSetOrderMPNStandardReflex.Comment);            
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
             this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 

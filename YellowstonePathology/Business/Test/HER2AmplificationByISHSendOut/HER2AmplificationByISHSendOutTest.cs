@@ -12,10 +12,10 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISHSendOut
         {
             this.m_PanelSetId = 329;
             this.m_PanelSetName = "HER2 Amplification by D-ISH (Send Out)";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = false;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
             this.m_IsBillable = true;
@@ -28,7 +28,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISHSendOut
 
 this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
-            YellowstonePathology.Business.Facility.Model.Facility mayo = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("MAYO");
+            YellowstonePathology.Business.Facility.Model.Facility mayo = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("MAYO");
             this.m_TechnicalComponentFacility = mayo;
             this.m_TechnicalComponentBillingFacility = mayo;
 

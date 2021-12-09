@@ -96,7 +96,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextNteElement("Duration of fixation: " + specimenOrder.FixationDurationString, document);
             this.AddNextNteElement("Sample adequacy: " + panelSetOrder.SampleAdequacy, document);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextNteElement("Collection Date/Time: " + collectionDateTimeString, document);
             this.AddBlankNteElement(document);
 
@@ -175,7 +175,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextNteElement("Duration of fixation: " + specimenOrder.FixationDurationString, document);
             this.AddNextNteElement("Sample adequacy: " + panelSetOrder.SampleAdequacy, document);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextNteElement("Collection Date/Time: " + collectionDateTimeString, document);
             this.AddBlankNteElement(document);
 
@@ -251,7 +251,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextNteElement("Duration of fixation: " + specimenOrder.FixationDurationString, document);
             this.AddNextNteElement("Sample adequacy: " + panelSetOrder.SampleAdequacy, document);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextNteElement("Collection Date/Time: " + collectionDateTimeString, document);
             this.AddBlankNteElement(document);
 
@@ -337,7 +337,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextNteElement("Duration of fixation: " + specimenOrder.FixationDurationString, document);
             this.AddNextNteElement("Sample adequacy: " + panelSetOrder.SampleAdequacy, document);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextNteElement("Collection Date/Time: " + collectionDateTimeString, document);
             this.AddBlankNteElement(document);
 

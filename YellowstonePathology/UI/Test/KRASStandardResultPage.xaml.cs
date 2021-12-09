@@ -53,8 +53,8 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetAliquotOrder(this.m_PanelSetOrder.OrderedOnId);
             this.m_OrderedOnDescription = specimenOrder.Description + ": " + aliquotOrder.Label;
 
-			this.m_KRASStandardResultCollection = YellowstonePathology.Business.Test.KRASStandard.KRASStandardResultCollection.GetAll();
-            this.m_IndicationCollection = YellowstonePathology.Business.Test.IndicationCollection.GetAll();
+			this.m_KRASStandardResultCollection = Business.Test.KRASStandard.KRASStandardResultCollection.GetAll();
+            this.m_IndicationCollection = Business.Test.IndicationCollection.GetAll();
             this.m_KRASStandardMutationCollection = new YellowstonePathology.Business.Test.KRASStandard.KRASStandardMutationCollection();
             this.m_KRASStandardResultSelectionCollection = new YellowstonePathology.Business.Test.KRASStandard.KRASStandardResultSelectionCollection();
 
@@ -178,7 +178,7 @@ namespace YellowstonePathology.UI.Test
 					string resultDescription = null;
 					if (this.ComboBoxResultDescription.SelectedItem != null) resultDescription = this.ComboBoxResultDescription.SelectedItem.ToString();
 
-					YellowstonePathology.Business.Test.KRASStandard.KRASStandardResultCollection resultCollection = YellowstonePathology.Business.Test.KRASStandard.KRASStandardResultCollection.GetAll();
+					YellowstonePathology.Business.Test.KRASStandard.KRASStandardResultCollection resultCollection = Business.Test.KRASStandard.KRASStandardResultCollection.GetAll();
 					if (resultCollection.IsValid(resultString, resultDescription) == true)
 					{
 						YellowstonePathology.Business.Test.KRASStandard.KRASStandardResult result = resultCollection.GetResult(resultString, resultDescription);
@@ -265,8 +265,8 @@ namespace YellowstonePathology.UI.Test
 			if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(krasStandardReflexTest.PanelSetId) == true)
 			{
 				string reportNo = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(krasStandardReflexTest.PanelSetId).ReportNo;
-				YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResult krasStandardReflexResult = YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResultFactory.GetResult(reportNo, this.m_AccessionOrder);
-				YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResult.IsOkToOrderBRAF(krasStandardReflexResult);
+				YellowstonePathology.Business.Test.KRASStandardReflex.KRASStandardReflexResult krasStandardReflexResult = Business.Test.KRASStandardReflex.KRASStandardReflexResultFactory.GetResult(reportNo, this.m_AccessionOrder);
+				YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.KRASStandardReflex.KRASStandardReflexResult.IsOkToOrderBRAF(krasStandardReflexResult);
 				if (methodResult.Success == true)
 				{
 					this.OrderBRAF(this, new EventArgs());

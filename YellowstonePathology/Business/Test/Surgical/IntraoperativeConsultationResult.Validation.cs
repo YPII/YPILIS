@@ -54,7 +54,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 			set
 			{
-				string formattedString = YellowstonePathology.Business.Helper.DateTimeExtensions.AddSlashesSpacesAndColon(value);
+				string formattedString = Business.Helper.DateTimeExtensions.AddSlashesSpacesAndColon(value);
 				this.m_StartDateBinding = formattedString;
 
 				DateTime startDate;
@@ -143,7 +143,7 @@ namespace YellowstonePathology.Business.Test.Surgical
 			}
 			set
 			{
-				string formattedString = YellowstonePathology.Business.Helper.DateTimeExtensions.AddSlashesSpacesAndColon(value);
+				string formattedString = Business.Helper.DateTimeExtensions.AddSlashesSpacesAndColon(value);
 				this.m_EndDateBinding = formattedString;
 
 				DateTime endDate;

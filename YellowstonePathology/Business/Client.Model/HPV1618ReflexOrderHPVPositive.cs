@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Client.Model
             if (accessionOrder.PanelSetOrderCollection.Exists(panelSetHPV.PanelSetId) == true)
             {
                 YellowstonePathology.Business.Test.HPV.HPVTestOrder hpvTestOrder = (YellowstonePathology.Business.Test.HPV.HPVTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetHPV.PanelSetId);
-                if (hpvTestOrder.ResultCode == YellowstonePathology.Business.Test.HPV.HPVResult.OveralResultCodePositive)
+                if (hpvTestOrder.ResultCode == Business.Test.HPV.HPVResult.OveralResultCodePositive)
                 {
                     result = true;                    
                 }               

@@ -163,8 +163,7 @@ namespace YellowstonePathology.Business.Gateway
         public static YellowstonePathology.Business.Client.Model.Client GetClientByClientId(int clientId)
         {
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "SELECT * FROM tblClient where tblClient.ClientId = @ClientId; " +
-                "SELECT * from tblClientLocation where tblClientLocation.ClientId = @ClientId;";
+            cmd.CommandText = "SELECT * FROM tblClient where tblClient.ClientId = @ClientId; ";                
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@ClientId", clientId);
             ClientBuilderV2 clientBuilderV2 = new ClientBuilderV2();
@@ -176,9 +175,7 @@ namespace YellowstonePathology.Business.Gateway
         public static YellowstonePathology.Business.Client.Model.ClientCollection GetClientsByClientName(string clientName)
         {
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "SELECT * FROM tblClient where tblClient.ClientName like concat(@ClientName, '%') order by tblClient.ClientName; " +
-                "SELECT * from tblClientLocation where tblClientLocation.ClientId in (SELECT ClientId FROM tblClient where " +
-                "tblClient.ClientName like concat(@ClientName, '%')) order by tblClientLocation.Location;";
+            cmd.CommandText = "SELECT * FROM tblClient where tblClient.ClientName like concat(@ClientName, '%') order by tblClient.ClientName; ";                
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@ClientName", clientName);
             Client.Model.ClientCollection result = BuildClientCollection(cmd);
@@ -194,31 +191,12 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        public static View.ClientLocationViewCollection GetClientLocationViewByClientName(string clientName)
+        public static YellowstonePathology.Business.Client.Model.ClientCollection GetFavoriteClients()
         {
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "select c.ClientId, c.ClientName, cl.ClientLocationId, cl.Location from tblClientLocation cl " +
-                "join tblClient c on cl.ClientId = c.ClientId where c.ClientName like concat(@ClientName, '%') Order By 2, 4;";
+            cmd.CommandText = "SELECT * FROM tblClient where ClientId in (1341,558,154,1203,660,723,184,54,126,1321,1446,579,573,1565,1520,280,587,225,1046) order by clientName;";
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@ClientName", clientName);
-            View.ClientLocationViewCollection result = new View.ClientLocationViewCollection();
-
-            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
-            {
-                cn.Open();
-                cmd.Connection = cn;
-                using (MySqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        View.ClientLocationView clientLocationView = new View.ClientLocationView();
-                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(clientLocationView, dr);
-                        sqlDataReaderPropertyWriter.WriteProperties();
-                        result.Add(clientLocationView);
-                    }
-                }
-            }
-
+            Client.Model.ClientCollection result = BuildClientCollection(cmd);
             return result;
         }
 
@@ -277,25 +255,7 @@ namespace YellowstonePathology.Business.Gateway
                         Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(client, dr);
                         sqlDataReaderPropertyWriter.WriteProperties();
                         result.Add(client);
-                    }
-                    if (dr.IsClosed == false)
-                    {
-                        dr.NextResult();
-                        while (dr.Read())
-                        {
-                            YellowstonePathology.Business.Client.Model.ClientLocation clientLocation = new YellowstonePathology.Business.Client.Model.ClientLocation();
-                            Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(clientLocation, dr);
-                            sqlDataReaderPropertyWriter.WriteProperties();
-                            foreach (Client.Model.Client client in result)
-                            {
-                                if (client.ClientId == clientLocation.ClientId)
-                                {
-                                    client.ClientLocationCollection.Add(clientLocation);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                    }                    
                 }
             }
             return result;
@@ -1189,7 +1149,7 @@ namespace YellowstonePathology.Business.Gateway
 
         public static YellowstonePathology.Business.Client.Model.ClientGroupClientCollection GetClientGroupClientCollectionByClientGroupId(List<string> clientGroupIds)
         {
-            string inClause = YellowstonePathology.Business.Helper.IdListHelper.ToIdString(clientGroupIds);
+            string inClause = Business.Helper.IdListHelper.ToIdString(clientGroupIds);
             YellowstonePathology.Business.Client.Model.ClientGroupClientCollection result = new Client.Model.ClientGroupClientCollection();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select * from tblClientGroupClient where ClientGroupId in (" + inClause + ");";
@@ -1220,6 +1180,32 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandText = "Select * from tblClientGroupClient where tblClientGroupClient.ClientGroupId = @ClientGroupId;";
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@ClientGroupId", clientGroupId);
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.Client.Model.ClientGroupClient clientGroupClient = new Client.Model.ClientGroupClient();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(clientGroupClient, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(clientGroupClient);
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static YellowstonePathology.Business.Client.Model.ClientGroupClientCollection GetClientGroupClientCollectionByClientId(string clientId)
+        {
+            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection result = new Client.Model.ClientGroupClientCollection();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select * from tblClientGroupClient where clientGroupId = (select clientGroupId from tblClientGroupClient where clientId = @ClientId);";
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@ClientId", clientId);
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {

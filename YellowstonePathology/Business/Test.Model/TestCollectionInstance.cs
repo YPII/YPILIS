@@ -106,7 +106,6 @@ namespace YellowstonePathology.Business.Test.Model
             result.Add(new CD25());
             result.Add(new CD52());
             result.Add(new CD79a());
-            result.Add(new Cytokeratin17());
             result.Add(new Cytokeratin818());
             result.Add(new EGFR());
             result.Add(new FactorVIII());
@@ -187,6 +186,19 @@ namespace YellowstonePathology.Business.Test.Model
             foreach (Test test in TestCollectionInstance.Instance)
             {
                 if (test is CytochemicalTest == true)
+                {
+                    result.Add(TestCollectionInstance.GetTestClone(test));
+                }
+            }
+            return result;
+        }
+
+        public static TestCollection GetCrystallographyTests()
+        {
+            TestCollection result = new TestCollection();
+            foreach (Test test in TestCollectionInstance.Instance)
+            {
+                if (test is CrystalographyTest == true)
                 {
                     result.Add(TestCollectionInstance.GetTestClone(test));
                 }

@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                 this.m_SendUnsolicited = true;
             }
 
-            this.m_OrderingPhysician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);           
+            this.m_OrderingPhysician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);           
 		}        
 
         public XElement GetDocument()
@@ -76,16 +76,16 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(panelSetOrder.ReportNo);
             if (amendmentCollection.Count != 0) resultStatus = ResultStatusEnum.Correction.Value;
 
-            YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection universalServiceIdCollection = YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection.GetAll();
-            YellowstonePathology.Business.ClientOrder.Model.UniversalService universalService = universalServiceIdCollection.GetByUniversalServiceId(panelSetOrder.UniversalServiceId);            
-
+            YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection universalServiceIdCollection = Business.ClientOrder.Model.UniversalServiceCollection.GetAll();
+            YellowstonePathology.Business.ClientOrder.Model.UniversalService universalService = universalServiceIdCollection.GetByUniversalServiceId(panelSetOrder.UniversalServiceId);
+            
             EPICObrView obr = new EPICObrView(this.m_PanelSetOrder.ExternalOrderId, this.m_AccessionOrder.MasterAccessionNo, this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder.SpecimenOrderCollection[0].CollectionDate, this.m_AccessionOrder.SpecimenOrderCollection[0].CollectionTime, this.m_AccessionOrder.AccessionDateTime,
                 panelSetOrder.FinalTime, this.m_OrderingPhysician, resultStatus, universalService, this.m_SendUnsolicited);
             obr.ToXml(document);
             
             EPICBeakerObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, this.m_SendUnsolicited, this.m_Testing);
             epicObxView.ToXml(document);
-            this.m_ObxCount = epicObxView.ObxCount;                            
+            this.m_ObxCount = epicObxView.ObxCount;                                        
 
             return document;
         }
@@ -95,8 +95,9 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             string fileExtension = ".HL7.xml";
 
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-			string serverFileName = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;
-            string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\SCLHealth\wait\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+			string serverFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+            //string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\SCLHealth\wait\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+            string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\Provation\wait\" + this.m_PanelSetOrder.ReportNo + fileExtension;
 
             if (this.m_Testing == true)
             {

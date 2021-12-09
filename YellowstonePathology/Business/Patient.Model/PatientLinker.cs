@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Patient.Model
 
 		public void GetLinkingList()
 		{
-			this.m_LinkingList = YellowstonePathology.Business.Gateway.PatientLinkingGateway.GetPatientLinkingList(this.m_ItemToLink);
+			this.m_LinkingList = Business.Gateway.PatientLinkingGateway.GetPatientLinkingList(this.m_ItemToLink);
 			this.m_LinkingList.Insert(0, this.m_ItemToLink);
 		}
 
@@ -62,7 +62,7 @@ namespace YellowstonePathology.Business.Patient.Model
 
         public void Refresh()
         {
-			this.m_LinkingList = YellowstonePathology.Business.Gateway.PatientLinkingGateway.GetPatientLinkingList(this.m_ItemToLink);
+			this.m_LinkingList = Business.Gateway.PatientLinkingGateway.GetPatientLinkingList(this.m_ItemToLink);
 			this.m_LinkingList.Insert(0, this.m_ItemToLink);
 		}
 
@@ -134,7 +134,7 @@ namespace YellowstonePathology.Business.Patient.Model
 
 			if (needNewId)
 			{
-				patientId = YellowstonePathology.Business.Gateway.PatientLinkingGateway.GetNewPatientId();
+				patientId = Business.Gateway.PatientLinkingGateway.GetNewPatientId();
 			}
 
 			return patientId;

@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.Client.Model
             {
                 physicianClientDistribution.SetDistribution(panelSetOrder, accessionOrder);
             }            
-        }
+        }        
 
         public void HandleSurgeonDistribution(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
@@ -45,12 +45,13 @@ namespace YellowstonePathology.Business.Client.Model
                         Domain.Physician physician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(physicianId);
                         Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(clientId);
 
-                        PhysicianClientDistributionListItem physicianClientDistribution = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution("Web Service");
+                        PhysicianClientDistributionListItem physicianClientDistribution = Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution("Web Service");
                         physicianClientDistribution.ClientId = client.ClientId;
                         physicianClientDistribution.ClientName = client.ClientName;
                         physicianClientDistribution.PhysicianId = physician.PhysicianId;
                         physicianClientDistribution.PhysicianName = physician.DisplayName;
                         physicianClientDistribution.DistributionType = client.DistributionType;
+                        physicianClientDistribution.FaxNumber = client.Fax;
                         this.Add(physicianClientDistribution);
                     }
                 }
@@ -61,7 +62,7 @@ namespace YellowstonePathology.Business.Client.Model
         {            
             if(this.DoesWebServiceDistributionExist() == false)
             {
-                PhysicianClientDistributionListItem physicianClientDistribution = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution("Web Service");
+                PhysicianClientDistributionListItem physicianClientDistribution = Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution("Web Service");
                 physicianClientDistribution.ClientId = accessionOrder.ClientId;
                 physicianClientDistribution.ClientName = accessionOrder.ClientName;
                 physicianClientDistribution.PhysicianId = accessionOrder.PhysicianId;
@@ -96,7 +97,7 @@ namespace YellowstonePathology.Business.Client.Model
                 {
                     int paifClientId = 1201;
                     Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(paifClientId);
-                    PhysicianClientDistributionListItem physicianClientDistribution = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(client.DistributionType);
+                    PhysicianClientDistributionListItem physicianClientDistribution = Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(client.DistributionType);
                     physicianClientDistribution.ClientId = client.ClientId;
                     physicianClientDistribution.ClientName = client.ClientName;
                     physicianClientDistribution.PhysicianId = 728;
@@ -119,7 +120,7 @@ namespace YellowstonePathology.Business.Client.Model
                 Business.Facility.Model.Facility pathFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(client.PathologyGroupId);
                 Business.Client.Model.Client pathClient = Business.Gateway.PhysicianClientGateway.GetClientByClientId(pathFacility.ClientId);
 
-                PhysicianClientDistributionListItem physicianClientDistribution = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(client.DistributionType);
+                PhysicianClientDistributionListItem physicianClientDistribution = Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(client.DistributionType);
                 physicianClientDistribution.ClientId = pathClient.ClientId;
                 physicianClientDistribution.ClientName = pathClient.ClientName;
                 physicianClientDistribution.PhysicianId = 728;
@@ -130,7 +131,7 @@ namespace YellowstonePathology.Business.Client.Model
                 
                 if(client.PathologyGroupId == "PAOIF")
                 {
-                    PhysicianClientDistributionListItem physicianClientDistributionFax = YellowstonePathology.Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(client.DistributionType);
+                    PhysicianClientDistributionListItem physicianClientDistributionFax = Business.Client.Model.PhysicianClientDistributionFactory.GetPhysicianClientDistribution(client.DistributionType);
                     physicianClientDistributionFax.ClientId = pathClient.ClientId;
                     physicianClientDistributionFax.ClientName = pathClient.ClientName;
                     physicianClientDistributionFax.PhysicianId = 728;
@@ -158,10 +159,10 @@ namespace YellowstonePathology.Business.Client.Model
         
         private void HandleReferringProvider(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
-            YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(accessionOrder.ClientId);
+            YellowstonePathology.Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(accessionOrder.ClientId);
             if(client.HasReferringProvider == true)
             {
-                PhysicianClientDistributionListItem physicianClientDistribution = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(client.ReferringProviderClientId);
+                PhysicianClientDistributionListItem physicianClientDistribution = Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(client.ReferringProviderClientId);
                 this.Add(physicianClientDistribution);
             }
         }
@@ -171,8 +172,8 @@ namespace YellowstonePathology.Business.Client.Model
             bool result = false;
             foreach (YellowstonePathology.Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistributionListItem in this)
             {
-                if (physicianClientDistributionListItem.DistributionType == YellowstonePathology.Business.Client.Model.EPICPhysicianClientDistribution.EPIC ||
-                    physicianClientDistributionListItem.DistributionType == YellowstonePathology.Business.Client.Model.EPICAndFaxPhysicianClientDistribution.EPICANDFAX)
+                if (physicianClientDistributionListItem.DistributionType == Business.Client.Model.EPICPhysicianClientDistribution.EPIC ||
+                    physicianClientDistributionListItem.DistributionType == Business.Client.Model.EPICAndFaxPhysicianClientDistribution.EPICANDFAX)
                 {
                     result = true;
                     break;

@@ -23,8 +23,8 @@ namespace YellowstonePathology.UI.Monitor
 
         public PendingTestDelayDialog(string reportNo)
         {
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo);
-            this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this);
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo);
+            this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this);
             this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
 
             InitializeComponent();
@@ -72,10 +72,10 @@ namespace YellowstonePathology.UI.Monitor
             int daysToDelay = Convert.ToInt32(comboBoxItem.Tag.ToString());
             TimeSpan timeSpanDelay = new TimeSpan(daysToDelay,0,0,0);
             this.m_PanelSetOrder.IsDelayed = true;
-            this.m_PanelSetOrder.DelayedBy = YellowstonePathology.Business.User.SystemIdentity.Instance.User.DisplayName;
+            this.m_PanelSetOrder.DelayedBy = Business.User.SystemIdentity.Instance.User.DisplayName;
             this.m_PanelSetOrder.DelayedDate = DateTime.Now;
 
-            this.m_PanelSetOrder.ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetEndDate(this.m_PanelSetOrder.ExpectedFinalTime.Value, timeSpanDelay);
+            this.m_PanelSetOrder.ExpectedFinalTime = Business.Helper.DateTimeExtensions.GetEndDate(this.m_PanelSetOrder.ExpectedFinalTime.Value, timeSpanDelay);
         }
     }
 }

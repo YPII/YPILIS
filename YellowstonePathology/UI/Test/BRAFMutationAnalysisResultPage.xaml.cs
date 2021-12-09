@@ -51,7 +51,7 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetAliquotOrder(this.m_PanelSetOrder.OrderedOnId);
             this.m_OrderedOnDescription = specimenOrder.Description + ": " + aliquotOrder.Label;
 
-            this.m_IndicationCollection = YellowstonePathology.Business.Test.IndicationCollection.GetAll();
+            this.m_IndicationCollection = Business.Test.IndicationCollection.GetAll();
             this.m_ResultCollection = new Business.Test.TestResultCollection();
             this.m_ResultCollection.Add(new YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisDetectedResult());
             this.m_ResultCollection.Add(new YellowstonePathology.Business.Test.BRAFMutationAnalysis.BRAFMutationAnalysisNotDetectedResult());

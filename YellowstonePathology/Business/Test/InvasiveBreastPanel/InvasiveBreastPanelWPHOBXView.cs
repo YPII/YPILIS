@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
         public override void ToXml(XElement document)
         {
             InvasiveBreastPanel panelSetOrder = (InvasiveBreastPanel)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            InvasiveBreastPanelResult invasiveBreastPanelResult = new InvasiveBreastPanelResult(this.m_AccessionOrder);
+            InvasiveBreastPanelResult invasiveBreastPanelResult = new InvasiveBreastPanelResult(this.m_ReportNo, this.m_AccessionOrder);
 
             this.AddHeader(document, panelSetOrder, panelSetOrder.PanelSetName);
             this.AddNextObxElement("", document, "F");

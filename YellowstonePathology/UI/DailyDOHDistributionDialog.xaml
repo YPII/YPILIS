@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI"
         mc:Ignorable="d"
-        Title="DailyDOHDistributionDialog" Height="600" Width="650">
+        WindowStyle="ToolWindow"
+        Title="Daily DOH Distribution Dialog" Height="600" Width="750">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -14,10 +15,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" TextAlignment="Right" VerticalAlignment="Center" FontWeight="Bold">Client:</TextBlock>
+        <ComboBox Name="ComboboxClient" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=Clients}" SelectedValue="{Binding Path=Client}" HorizontalAlignment="Stretch" Margin="2,2,2,2" 
+                  SelectionChanged="ComboboxClient_SelectionChanged"/>
 
         <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2">Date:</TextBlock>
         <Grid Grid.Column="1" Grid.Row="1">
@@ -51,6 +55,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Client" Width="200"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=ReportedTo}" Header="Reported To" Width="200"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=TimeOfLastDistribution, Converter={StaticResource MilitaryDateTimeConverterV2}}" Header="Distributed" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionType}" Header="Type" Width="100"/>
                 </GridView>
             </ListView.View>
         </ListView>

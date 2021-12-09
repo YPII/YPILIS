@@ -130,8 +130,8 @@ namespace YellowstonePathology.Business.Test.PlasmaCellMyelomaRiskStratification
 			result.AppendLine("Interpretation: " + this.m_Interpretation);
 			result.AppendLine();
 
-			result.AppendLine("Probeset Detail: " + this.m_ProbeSetDetail);
-			result.AppendLine();
+			//result.AppendLine("Probeset Detail: " + this.m_ProbeSetDetail);
+			//result.AppendLine();
 
 			return result.ToString();
 		}

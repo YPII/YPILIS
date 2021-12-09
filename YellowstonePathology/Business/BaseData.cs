@@ -33,7 +33,7 @@ namespace YellowstonePathology.Business
 
         public BaseData()
         {
-            this.m_CurrentUser = YellowstonePathology.Business.User.SystemIdentity.Instance.User;
+            this.m_CurrentUser = Business.User.SystemIdentity.Instance.User;
 		}
 
         protected void NotifyPropertyChanged(String info)

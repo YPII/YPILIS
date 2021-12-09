@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             switch (panelSetId)
             {
                 case 1:
-                    view = new YellowstonePathology.Business.Test.JAK2V617F.JAK2V617FEPICNTEView(accessionOrder, reportNo, obxCount);
+                    view = new YellowstonePathology.Business.Test.JAK2V617F.JAK2V617FEPICNTEView(accessionOrder, reportNo, obxCount);                    
                     break;            
                 case 3:                                        
                     view = new YellowstonePathology.Business.Test.NGCT.NGCTEPICBeakerObxView(accessionOrder, reportNo, obxCount);                                        
@@ -122,8 +122,9 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 					//view = new YellowstonePathology.Business.Test.CalreticulinMutationAnalysis.CalreticulinMutationAnalysisEPICObxView(accessionOrder, reportNo, obxCount);
 					break;
 				case 141:
-					view = new YellowstonePathology.Business.Test.JAK2Exon1214.JAK2Exon1214EPICNTEView(accessionOrder, reportNo, obxCount);
-					break;
+                    //view = new YellowstonePathology.Business.Test.JAK2Exon1214.JAK2Exon1214EPICNTEView(accessionOrder, reportNo, obxCount);
+                    view = new YellowstonePathology.Business.Test.JAK2Exon1214.JAK2Exon1214EPICOBXView(accessionOrder, reportNo, obxCount);
+                    break;
 				case 143:
 					//view = new YellowstonePathology.Business.Test.ZAP70LymphoidPanel.ZAP70LymphoidPanelEPICObxView(accessionOrder, reportNo, obxCount);
 					break;

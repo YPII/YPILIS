@@ -144,7 +144,7 @@ namespace YellowstonePathology.UI.Test
 			YellowstonePathology.Business.Rules.MethodResult methodResult = this.m_PanelSetOrder.IsOkToSetResults();
 			if (methodResult.Success == true)
 			{
-				YellowstonePathology.Business.Test.PNH.PNHResult pnhResult = YellowstonePathology.Business.Test.PNH.PNHResultCollection.GetResult(this.m_PanelSetOrder, this.m_AccessionOrder);
+				YellowstonePathology.Business.Test.PNH.PNHResult pnhResult = Business.Test.PNH.PNHResultCollection.GetResult(this.m_PanelSetOrder, this.m_AccessionOrder);
 				pnhResult.SetResults(this.m_PanelSetOrder);
 				this.NotifyPropertyChanged(string.Empty);
 			}

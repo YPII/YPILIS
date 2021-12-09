@@ -74,7 +74,7 @@ namespace YellowstonePathology.UI.Client
             if (this.ListViewClientSupplyOrders.SelectedItem != null)
             {
                 YellowstonePathology.Business.Client.Model.ClientSupplyOrder clientSupplyOrder = (YellowstonePathology.Business.Client.Model.ClientSupplyOrder)this.ListViewClientSupplyOrders.SelectedItem;
-                //XElement dataElement = YellowstonePathology.Business.Gateway.XmlGateway.GetClientSupplyOrderReportData(clientSupplyOrder.ClientSupplyOrderId);
+                //XElement dataElement = Business.Gateway.XmlGateway.GetClientSupplyOrderReportData(clientSupplyOrder.ClientSupplyOrderId);
                 //YellowstonePathology.Business.XPSDocument.Result.Data.ClientSupplyOrderReportData clientSupplyOrderReportData = new Business.XPSDocument.Result.Data.ClientSupplyOrderReportData(dataElement);
                 //YellowstonePathology.Business.XPSDocument.Result.Xps.ClientSupplyOrderReport clientSupplyOrderReport = new Business.XPSDocument.Result.Xps.ClientSupplyOrderReport(clientSupplyOrderReportData);
                 YellowstonePathology.Business.XPSDocument.Result.Xps.ClientSupplyOrderReportV2 clientSupplyOrderReport = new Business.XPSDocument.Result.Xps.ClientSupplyOrderReportV2(clientSupplyOrder);
@@ -103,11 +103,11 @@ namespace YellowstonePathology.UI.Client
             {
                 if (this.ComboBoxOrderSelection.SelectedIndex == 0)
                 {
-                    this.m_ClientSupplyOrderCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientSupplyOrderCollection();
+                    this.m_ClientSupplyOrderCollection = Business.Gateway.PhysicianClientGateway.GetClientSupplyOrderCollection();
                 }
                 else if (this.ComboBoxOrderSelection.SelectedIndex == 1)
                 {
-                    this.m_ClientSupplyOrderCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientSupplyOrderCollectionByFinal(false);
+                    this.m_ClientSupplyOrderCollection = Business.Gateway.PhysicianClientGateway.GetClientSupplyOrderCollectionByFinal(false);
                 }
 
                 this.NotifyPropertyChanged("ClientSupplyOrderCollection");

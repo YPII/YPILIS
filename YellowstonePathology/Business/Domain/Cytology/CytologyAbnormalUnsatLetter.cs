@@ -42,7 +42,7 @@ namespace YellowstonePathology.Reports.Cytology
             string path = @"\\CFileServer\documents\Reports\Cytology\CytologyAbnormalUnsatLetter\";
             YellowstonePathology.Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(item.ClientId);
             string fileName = path + item.PhysicianClientId.ToString() + ".doc";
-            YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Cytology Unsat Letters", fileName);
+            YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Cytology Unsat Letters", fileName, "CytologyAbnormalUnsatLetter");
         }
 
         /*public void CreateReports()

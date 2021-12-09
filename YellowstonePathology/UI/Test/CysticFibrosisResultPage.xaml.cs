@@ -46,7 +46,7 @@ namespace YellowstonePathology.UI.Test
 			this.m_PageNavigator = pageNavigator;
 
 			this.m_PageHeaderText = "Cystic Fibrosis Results For: " + this.m_AccessionOrder.PatientDisplayName;
-			this.m_ResultCollection = YellowstonePathology.Business.Test.CysticFibrosis.CysticFibrosisResultCollection.GetAllResults();
+			this.m_ResultCollection = Business.Test.CysticFibrosis.CysticFibrosisResultCollection.GetAllResults();
             this.m_EthnicGroupCollection = new YellowstonePathology.Business.Test.CysticFibrosis.CysticFibrosisEthnicGroupCollection();
             this.m_CysticFibrosisGeneNames = new YellowstonePathology.Business.Test.CysticFibrosis.CysticFibrosisGeneNames();
             this.m_CysticFibrosisTemplateCollection = new YellowstonePathology.Business.Test.CysticFibrosis.CysticFibrosisTemplateCollection();

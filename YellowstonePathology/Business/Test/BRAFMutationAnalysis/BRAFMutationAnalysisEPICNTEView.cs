@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
 {
-    public class BRAFMutationAnalysisEPICNTEView : YellowstonePathology.Business.HL7View.EPIC.EPICBeakerObxView
+    public class BRAFMutationAnalysisEPICNTEView : Business.HL7View.EPIC.EPICBeakerObxView
     {
         public BRAFMutationAnalysisEPICNTEView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount) 
             : base(accessionOrder, reportNo, obxCount)
@@ -13,59 +16,56 @@ namespace YellowstonePathology.Business.Test.BRAFMutationAnalysis
 
         public override void ToXml(XElement document)
         {
+            string observationResultStatus = "F";
+
             BRAFMutationAnalysisTestOrder panelSetOrder = (BRAFMutationAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
 
-            //Add the first element as narrative for Nikki to see.
-            Business.HL7View.EPIC.EPICBeakerNarrativeOBXView.AddElement(document);
+            this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, observationResultStatus);
+            this.AddNextObxElementBeaker("BRAF Result", panelSetOrder.Result, document, observationResultStatus, "Not Detected", false);            
+            this.AddNextObxElementBeaker("Pathologist", panelSetOrder.ReferenceLabSignature, document, observationResultStatus);
 
-            this.AddCompanyHeaderNTE(document);
-            this.AddNextNTEElement(panelSetOrder.PanelSetName, document);
-            this.AddNextNTEElement("", document);
-
-            this.AddNextNTEElement("Result: " + panelSetOrder.Result, document);
-            this.AddNextNTEElement("", document);
-
-            this.AddNextNTEElement("Pathologist: " + panelSetOrder.ReferenceLabSignature, document);
             if (panelSetOrder.ReferenceLabFinalDate.HasValue == true)
             {
-                this.AddNextNTEElement("E-signed " + panelSetOrder.ReferenceLabFinalDate.Value.ToString("MM/dd/yyyy HH:mm"), document);
+                this.AddNextObxElementBeaker("E-signed", panelSetOrder.ReferenceLabFinalDate.Value.ToString("MM/dd/yyyy HH:mm"), document, observationResultStatus);
             }
-            this.AddNextNTEElement("", document);
-            this.AddAmendments(document);
 
-            this.AddNextNTEElement("Indication: " + panelSetOrder.Indication, document);
-            this.AddNextNTEElement("", document);
+            YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
+            if (amendmentCollection.Count != 0)
+            {
+                StringBuilder amendments = new StringBuilder();
+                foreach (YellowstonePathology.Business.Amendment.Model.Amendment amendment in amendmentCollection)
+                {
+                    if (amendment.Final == true)
+                    {
+                        amendments.AppendLine(amendment.AmendmentType + ": " + amendment.AmendmentDate.Value.ToString("MM/dd/yyyy"));
+                        amendments.AppendLine(amendment.Text);
+                        if (amendment.RequirePathologistSignature == true)
+                        {
+                            amendments.AppendLine("Signature: " + amendment.PathologistSignature);
+                            amendments.AppendLine("E-signed " + amendment.FinalTime.Value.ToString("MM/dd/yyyy HH:mm"));
+                        }
+                    }
+                }
+                amendments.AppendLine();
+                this.AddNextObxElementBeaker("Amendments", amendments.ToString(), document, observationResultStatus);
+            }
 
-            this.AddNextNTEElement("Interpretation: ", document);
-            this.AddNextNTEElement(panelSetOrder.Interpretation, document);
-            this.AddNextNTEElement("", document);
+            this.AddNextObxElementBeaker("Indication", panelSetOrder.Indication, document, observationResultStatus);
+            this.AddNextObxElementBeaker("Interpretation", panelSetOrder.Interpretation, document, observationResultStatus, "", false);
 
             if (string.IsNullOrEmpty(panelSetOrder.TumorNucleiPercentage) == false)
             {
-                this.AddNextNTEElement("Tumor Nuclei Percent: ", document);
-                this.AddNextNTEElement(panelSetOrder.TumorNucleiPercentage, document);
-                this.AddNextNTEElement("", document);
+                this.AddNextObxElementBeaker("Tumor Nuclei Percent: ", panelSetOrder.TumorNucleiPercentage, document, observationResultStatus);                
             }
-
-            this.AddNextNTEElement("Specimen Description:", document);
+            
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
-            this.AddNextNTEElement(specimenOrder.Description, document);
-            this.AddNextNTEElement(string.Empty, document);
-
-            string method = panelSetOrder.Method;
-            this.AddNextNTEElement("Method: " + method, document);
-            this.AddNextNTEElement("", document);
-
-            this.AddNextNTEElement("References: ", document);
-            this.AddNextNTEElement(panelSetOrder.ReportReferences, document);
-            this.AddNextNTEElement("", document);
-
-            string asr = panelSetOrder.ReportDisclaimer;
-            this.AddNextNTEElement(asr, document);
+            this.AddNextObxElementBeaker("Specimen Description", specimenOrder.Description, document, observationResultStatus);                        
+            this.AddNextObxElementBeaker("Method", panelSetOrder.Method, document, observationResultStatus);            
+            this.AddNextObxElementBeaker("References", panelSetOrder.ReportReferences, document, observationResultStatus);                        
+            this.AddNextObxElementBeaker("Disclosure", panelSetOrder.ReportDisclaimer, document, observationResultStatus);
 
             string locationPerformed = panelSetOrder.GetLocationPerformedComment();
-            this.AddNextNTEElement(locationPerformed, document);
-            this.AddNextNTEElement(string.Empty, document);
+            this.AddNextObxElementBeaker("Location Performed", locationPerformed, document, observationResultStatus);            
         }
     }
 }

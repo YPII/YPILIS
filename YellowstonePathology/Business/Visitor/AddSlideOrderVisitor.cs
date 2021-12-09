@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Visitor
         {
             this.m_AliquotOrder = aliquotOrder;
             this.m_TestOrder = testOrder;            
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
         }
 
         public Business.Slide.Model.SlideOrder NewSlideOrder
@@ -35,7 +35,7 @@ namespace YellowstonePathology.Business.Visitor
 
             int nextSlideNumber = this.m_AliquotOrder.SlideOrderCollection.Count() + 1; 
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();            
-            string slideOrderId = YellowstonePathology.Business.OrderIdParser.GetNextSlideOrderId(this.m_AliquotOrder.SlideOrderCollection, this.m_AliquotOrder.AliquotOrderId);            
+            string slideOrderId = Business.OrderIdParser.GetNextSlideOrderId(this.m_AliquotOrder.SlideOrderCollection, this.m_AliquotOrder.AliquotOrderId);            
 
             YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder = new Business.Slide.Model.SlideOrder(objectId, slideOrderId, this.m_AliquotOrder, this.m_TestOrder, this.m_SystemIdentity, nextSlideNumber);
             slideOrder.TestOrder = this.m_TestOrder;

@@ -69,19 +69,19 @@ namespace YellowstonePathology.UI.Gross
 
             this.SetReportNoToUse();
 
-			this.m_CaseNotesDocument = YellowstonePathology.Business.Gateway.XmlGateway.GetOrderComments(this.m_AccessionOrder.MasterAccessionNo);
+			this.m_CaseNotesDocument = Business.Gateway.XmlGateway.GetOrderComments(this.m_AccessionOrder.MasterAccessionNo);
 			this.m_DocumentViewer = new DocumentWorkspace();
 			this.m_CaseDocumentCollection = new YellowstonePathology.Business.Document.CaseDocumentCollection(this.m_AccessionOrder, this.m_ReportNoToUse);
 
 			this.m_GrossBlockManagementView = new Business.View.GrossBlockManagementView(this.m_AccessionOrder, this.m_CaseNotesDocument, this.m_SpecimenOrder);
 			this.SetupSpecimenView();
 
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 
-			this.m_HandETest = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("49");
-			this.m_IronTest = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("115");
-			this.m_HPyloriTest = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("107");
-			this.m_FrozenTest = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone("45");
+			this.m_HandETest = Business.Test.Model.TestCollectionInstance.GetClone("49");
+			this.m_IronTest = Business.Test.Model.TestCollectionInstance.GetClone("115");
+			this.m_HPyloriTest = Business.Test.Model.TestCollectionInstance.GetClone("107");
+			this.m_FrozenTest = Business.Test.Model.TestCollectionInstance.GetClone("45");
 			this.Aliquots = 1;
 
 			this.m_ListBoxBlocksMouseDownTimer = new System.Windows.Threading.DispatcherTimer();
@@ -186,7 +186,7 @@ namespace YellowstonePathology.UI.Gross
                 if (this.m_SpecimenOrder.AliquotOrderCollection.Exists(barcode.ID))
 				{
 					YellowstonePathology.Business.Facility.Model.Facility thisFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-					string thisLocation = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+					string thisLocation = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
 
                     YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = this.m_SpecimenOrder.AliquotOrderCollection.GetByAliquotOrderId(barcode.ID);
 					string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
@@ -291,7 +291,7 @@ namespace YellowstonePathology.UI.Gross
 
 		private void AddBlocksToSpecimen(YellowstonePathology.Business.Test.Model.Test test, int quantity, string blockType, string prefix)
 		{
-			string patientInitials = YellowstonePathology.Business.Helper.PatientHelper.GetPatientInitials(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName);            
+			string patientInitials = Business.Helper.PatientHelper.GetPatientInitials(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName);            
 
 			for (int i = 0; i < quantity; i++)
 			{
@@ -557,5 +557,37 @@ namespace YellowstonePathology.UI.Gross
             block.ID = "18-7486.1A";
             this.HistologyBlockScanReceived(block);
         }
-    }
+
+		private void ButtonTakePicture_Click(object sender, RoutedEventArgs e)
+		{			
+			string fileName = @"c:\Program Files\Yellowstone Pathology Institute\Gross Camera\Video.exe";
+			if (System.IO.File.Exists(fileName) == true)
+			{
+				this.WriteGrossCameraArgsFile();
+				System.Diagnostics.Process process = new System.Diagnostics.Process();
+				process.StartInfo.FileName = fileName;
+				process.Start();
+			}
+			else
+			{
+				MessageBox.Show("The Gross Camera Software has not been isntalled.");
+			}			
+		}
+
+		private void WriteGrossCameraArgsFile()
+		{
+			Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_AccessionOrder.MasterAccessionNo);
+			string casePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
+
+			string[] lines = { this.m_AccessionOrder.MasterAccessionNo, casePath };
+			System.IO.StreamWriter file = new System.IO.StreamWriter($@"\\ypiidc\YPIILIS\gross_camera_{Environment.MachineName}_args.txt");
+
+			foreach (string line in lines)
+			{
+				file.WriteLine(line);
+			}
+
+			file.Close();
+		}
+	}
 }

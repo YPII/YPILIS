@@ -51,7 +51,6 @@ namespace YellowstonePathology.UI
                 this.m_MainWindowCommandButtonHandler.RemoveTab += MainWindowCommandButtonHandler_RemoveTab;
             }
 
-
             this.m_LoadedHasRun = true;
         }
 
@@ -96,9 +95,11 @@ namespace YellowstonePathology.UI
         {
             if (this.ListViewTaskOrders.SelectedItem != null)
             {
-                YellowstonePathology.Business.Task.Model.TaskOrderView taskOrderView = (YellowstonePathology.Business.Task.Model.TaskOrderView)this.ListViewTaskOrders.SelectedItem;
-                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(taskOrderView.TaskOrder.MasterAccessionNo, this.m_Writer);
-                Login.Receiving.TaskOrderDataSheet taskOrderDataSheet = new Login.Receiving.TaskOrderDataSheet(taskOrderView.TaskOrder, accessionOrder);
+                Business.Task.Model.TaskOrderView taskOrderView = (YellowstonePathology.Business.Task.Model.TaskOrderView)this.ListViewTaskOrders.SelectedItem;                
+                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(taskOrderView.MasterAccessionNo, this.m_Writer);
+
+                Business.Task.Model.TaskOrder taskOrder = accessionOrder.TaskOrderCollection.GetTaskOrderByReportNo(taskOrderView.ReportNo);
+                Login.Receiving.TaskOrderDataSheet taskOrderDataSheet = new Login.Receiving.TaskOrderDataSheet(taskOrder, accessionOrder);
 
                 System.Printing.PrintQueue printQueue = new System.Printing.LocalPrintServer().DefaultPrintQueue;
                 System.Windows.Controls.PrintDialog printDialog = new System.Windows.Controls.PrintDialog();
@@ -113,8 +114,8 @@ namespace YellowstonePathology.UI
             if (this.ListViewTaskOrders.SelectedItem != null)
             {
                 YellowstonePathology.Business.Task.Model.TaskOrderView selectedTaskOrderView = (YellowstonePathology.Business.Task.Model.TaskOrderView)this.ListViewTaskOrders.SelectedItem;
-                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(selectedTaskOrderView.TaskOrder.MasterAccessionNo, this.m_Writer);
-                YellowstonePathology.Business.Task.Model.TaskOrder taskOrder = accessionOrder.TaskOrderCollection.GetTaskOrder(selectedTaskOrderView.TaskOrder.TaskOrderId);
+                YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(selectedTaskOrderView.MasterAccessionNo, this.m_Writer);
+                YellowstonePathology.Business.Task.Model.TaskOrder taskOrder = accessionOrder.TaskOrderCollection.GetTaskOrder(selectedTaskOrderView.TaskOrderId);
 
                 this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();
 
@@ -134,7 +135,7 @@ namespace YellowstonePathology.UI
 
         private void ButtonTasksNotAcknowledged_Click(object sender, RoutedEventArgs e)
         {
-            string acknowledgeTasksFor = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.AcknowledgeTasksFor;
+            string acknowledgeTasksFor = Business.User.UserPreferenceInstance.Instance.UserPreference.AcknowledgeTasksFor;
             if (string.IsNullOrEmpty(acknowledgeTasksFor) == false)
             {
                 this.m_TaskUI.GetTasksNotAcknowledged();
@@ -157,7 +158,7 @@ namespace YellowstonePathology.UI
             {
                 foreach (YellowstonePathology.Business.Task.Model.TaskOrder listTaskOrder in this.ListViewDailyTaskOrders.SelectedItems)
                 {
-                    YellowstonePathology.Business.Task.Model.TaskOrder pulledTaskOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullTaskOrder(listTaskOrder.TaskOrderId, this.m_Writer);
+                    YellowstonePathology.Business.Task.Model.TaskOrder pulledTaskOrder = Business.Persistence.DocumentGateway.Instance.PullTaskOrder(listTaskOrder.TaskOrderId, this.m_Writer);
                     if (pulledTaskOrder.Acknowledged == false)
                     {
                         listTaskOrder.Acknowledged = true;
@@ -226,16 +227,15 @@ namespace YellowstonePathology.UI
 
         private void ButtonDailyTaskOrderAddDays_Click(object sender, RoutedEventArgs e)
         {
-            /*
+            
             StringBuilder message = new StringBuilder();
-            YellowstonePathology.Business.Rules.MethodResult result = YellowstonePathology.Business.Task.Model.TaskOrderCollection.AddDailyTaskOrderCytologySlideDisposal(30);
+            YellowstonePathology.Business.Rules.MethodResult result = Business.Task.Model.TaskOrderCollection.AddDailyTaskOrderCytologySlideDisposal(30, this);
             message.AppendLine(result.Message);
 
-            result = YellowstonePathology.Business.Task.Model.TaskOrderCollection.AddDailyTaskOrderSurgicalSpecimenDisposal(30);
+            result = Business.Task.Model.TaskOrderCollection.AddDailyTaskOrderSurgicalSpecimenDisposal(30, this);
             message.AppendLine(result.Message);
 
-            MessageBox.Show(message.ToString());
-            */            
+            MessageBox.Show(message.ToString());            
         }
 
         private void MenuItemDeleteTask_Click(object sender, RoutedEventArgs e)
@@ -244,12 +244,14 @@ namespace YellowstonePathology.UI
             {
                 foreach (YellowstonePathology.Business.Task.Model.TaskOrderView taskOrderView in this.ListViewTaskOrders.SelectedItems)
                 {
-                    YellowstonePathology.Business.Persistence.DocumentGateway.Instance.DeleteDocument(taskOrderView.TaskOrder, this.m_Writer);
+                    Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(taskOrderView.MasterAccessionNo, this);
+                    Business.Task.Model.TaskOrder taskOrder = accessionOrder.TaskOrderCollection.GetTaskOrder(taskOrderView.TaskOrderId);
+                    accessionOrder.TaskOrderCollection.Remove(taskOrder);
                 }
                 this.m_TaskUI.GetTaskOrderViewList();
             }
         }
-
+       
         private void TextBoxTrackingNumber_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)

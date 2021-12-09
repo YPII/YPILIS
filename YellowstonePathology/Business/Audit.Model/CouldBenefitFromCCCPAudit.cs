@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Audit.Model
             if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(lynchSyndromeEvaluationTest.PanelSetId) == true)
             {
                 YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeEvaluation panelSetOrderLynchSyndromeEvaluation = (YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderLynchSyndromeEvaluation)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(lynchSyndromeEvaluationTest.PanelSetId);
-                if (panelSetOrderLynchSyndromeEvaluation.LynchSyndromeEvaluationType == YellowstonePathology.Business.Test.LynchSyndrome.LSEType.COLON)
+                if (panelSetOrderLynchSyndromeEvaluation.LynchSyndromeEvaluationType == Business.Test.LynchSyndrome.LSEType.COLON)
                 {
                     if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(comprehensiveColonCancerProfileTest.PanelSetId) == false)
                     {

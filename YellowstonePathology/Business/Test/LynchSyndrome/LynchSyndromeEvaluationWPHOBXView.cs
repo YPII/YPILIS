@@ -22,8 +22,8 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             this.AddHeader(document, panelSetOrderLynchSyndromeEvaluation, "Mismatch Repair (MMR)/Lynch Syndrome Evaluation");
             this.AddNextObxElement("", document, "F");
 
-            this.HandleLongString("Result:", document, "F");
-            this.AddNextObxElement(panelSetOrderLynchSyndromeEvaluation.Result, document, "F");
+            this.AddNextObxElement("Result:", document, "F");
+            this.HandleLongString(panelSetOrderLynchSyndromeEvaluation.Result, document, "F");
             this.AddNextObxElement("", document, "F");
 
             this.AddNextObxElement("Interpretation:", document, "F");

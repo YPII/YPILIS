@@ -47,7 +47,7 @@ namespace YellowstonePathology.UI.Test
             this.m_PageHeaderText = "Bone Marrow Summary Results For: " + this.m_AccessionOrder.PatientDisplayName;
 
             this.SetAccessionReportsIncluded();
-            this.m_OtherReportViewCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetOtherReportViewCollection(this.m_AccessionOrder.PatientId, this.m_AccessionOrder.MasterAccessionNo);
+            this.m_OtherReportViewCollection = Business.Gateway.AccessionOrderGateway.GetOtherReportViewCollection(this.m_AccessionOrder.PatientId, this.m_AccessionOrder.MasterAccessionNo);
 
             InitializeComponent();
 
@@ -272,7 +272,7 @@ namespace YellowstonePathology.UI.Test
                 Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(otherReportView.ReportNo);
                 panelSetOrder.SummaryReportNo = this.m_PanelSetOrder.ReportNo;
                 Business.Persistence.DocumentGateway.Instance.Save();
-                this.OtherReportViewCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetOtherReportViewCollection(this.m_AccessionOrder.PatientId, this.m_AccessionOrder.MasterAccessionNo);
+                this.OtherReportViewCollection = Business.Gateway.AccessionOrderGateway.GetOtherReportViewCollection(this.m_AccessionOrder.PatientId, this.m_AccessionOrder.MasterAccessionNo);
             }
             else
             {
@@ -293,7 +293,7 @@ namespace YellowstonePathology.UI.Test
                         Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(otherReportView.ReportNo);
                         panelSetOrder.SummaryReportNo = null;
                         Business.Persistence.DocumentGateway.Instance.Save();
-                        this.OtherReportViewCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetOtherReportViewCollection(this.m_AccessionOrder.PatientId, this.m_AccessionOrder.MasterAccessionNo);
+                        this.OtherReportViewCollection = Business.Gateway.AccessionOrderGateway.GetOtherReportViewCollection(this.m_AccessionOrder.PatientId, this.m_AccessionOrder.MasterAccessionNo);
                     }
                     else
                     {
@@ -316,7 +316,32 @@ namespace YellowstonePathology.UI.Test
                 YellowstonePathology.Business.Test.BoneMarrowSummary.OtherReportView view = new Business.Test.BoneMarrowSummary.OtherReportView();
                 view.ReportNo = pso.ReportNo;
                 view.PanelSetName = pso.PanelSetName;
+                view.IncludeOnSummaryReport = pso.IncludeOnSummaryReport;
                 this.m_AccessionReportsIncluded.Add(view);
+            }
+        }
+
+        private void HyperLinkExcludeSelectedReport_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.ListViewAccessionReports.SelectedItem!= null)
+            {
+                Business.Test.BoneMarrowSummary.OtherReportView otherReportView = (Business.Test.BoneMarrowSummary.OtherReportView)this.ListViewAccessionReports.SelectedItem;
+                Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(otherReportView.ReportNo);
+                panelSetOrder.IncludeOnSummaryReport = false;
+                this.SetAccessionReportsIncluded();
+                this.NotifyPropertyChanged(string.Empty);
+            }
+        }
+
+        private void HyperLinkIncludeSelectedReport_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewAccessionReports.SelectedItem != null)
+            {
+                Business.Test.BoneMarrowSummary.OtherReportView otherReportView = (Business.Test.BoneMarrowSummary.OtherReportView)this.ListViewAccessionReports.SelectedItem;
+                Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(otherReportView.ReportNo);
+                panelSetOrder.IncludeOnSummaryReport = true;
+                this.SetAccessionReportsIncluded();
+                this.NotifyPropertyChanged(string.Empty);
             }
         }
     }

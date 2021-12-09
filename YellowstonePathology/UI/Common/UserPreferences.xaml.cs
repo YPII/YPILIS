@@ -34,15 +34,15 @@ namespace YellowstonePathology.UI.Common
 
         public UserPreferences(YellowstonePathology.Business.User.UserPreference userPreference)
 		{
-            this.m_UserPreferenceList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetAllUserPreferences();
-            this.m_MolecularLabelFormatCollection = YellowstonePathology.Business.Label.Model.LabelFormatCollection.GetMolecularLabelCollection();
+            this.m_UserPreferenceList = Business.Gateway.AccessionOrderGateway.GetAllUserPreferences();
+            this.m_MolecularLabelFormatCollection = Business.Label.Model.LabelFormatCollection.GetMolecularLabelCollection();
             this.m_CassettePrinterCollection = new Business.Label.Model.CassettePrinterCollection();
             this.m_FacilityCollection = Business.Facility.Model.FacilityCollection.Instance;
 
             System.Printing.LocalPrintServer printServer = new System.Printing.LocalPrintServer();            
             this.m_PrintQueueCollection = printServer.GetPrintQueues(new[] { System.Printing.EnumeratedPrintQueueTypes.Local, System.Printing.EnumeratedPrintQueueTypes.Connections });
 
-			this.m_ApplicationVersion = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.GetApplicationVersion(this);			            
+			this.m_ApplicationVersion = Business.Persistence.DocumentGateway.Instance.GetApplicationVersion(this);			            
 
 			InitializeComponent();
 
@@ -53,7 +53,7 @@ namespace YellowstonePathology.UI.Common
             }
             else
             {
-                this.m_UserPreference = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullUserPreference(userPreference.HostName, this);
+                this.m_UserPreference = Business.Persistence.DocumentGateway.Instance.PullUserPreference(userPreference.HostName, this);
                 this.m_HostNameEnabled = false;
             }
 

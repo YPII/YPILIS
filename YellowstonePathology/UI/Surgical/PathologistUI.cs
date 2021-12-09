@@ -48,10 +48,10 @@ namespace YellowstonePathology.UI.Surgical
 			this.m_SelectedTabIndex = 0;
             
 			this.m_PathologistSearch = new YellowstonePathology.Business.Search.PathologistSearch(this.m_Writer);
-			this.m_PathologistUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetPathologistUsers();
+			this.m_PathologistUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetPathologistUsers();
 
 			this.m_FieldEnabler = new YellowstonePathology.Business.Common.FieldEnabler();
-			this.m_AmendmentUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.AmendmentSigner, true);
+			this.m_AmendmentUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.AmendmentSigner, true);
 
             this.m_PanelSetIdsThatCanOrderStains = new List<int>();
             YellowstonePathology.Business.Test.Surgical.SurgicalTest surgicalTest = new Business.Test.Surgical.SurgicalTest();
@@ -62,7 +62,7 @@ namespace YellowstonePathology.UI.Surgical
             this.m_PanelSetIdsThatCanOrderStains.Add(reviewForAdditionalTestingTest.PanelSetId);
 
             this.m_Facility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId);
-            this.m_Location = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
+            this.m_Location = Business.User.UserPreferenceInstance.Instance.UserPreference.HostName;
         }
 
         public Business.User.SystemIdentity SystemIdentity
@@ -172,7 +172,7 @@ namespace YellowstonePathology.UI.Surgical
 
 		public virtual void GetAccessionOrder(string masterAccessionNo, string reportNo)
 		{             
-            this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);             
+            this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);             
 			this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
 			this.RunWorkspaceEnableRules();
 			this.m_CaseDocumentCollection = new Business.Document.CaseDocumentCollection(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo);
@@ -182,8 +182,8 @@ namespace YellowstonePathology.UI.Surgical
         
 		public virtual void GetAccessionOrderByReportNo(string reportNo)
 		{
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo);
-            this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo);
+            this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
 
             this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
 			this.m_AccessionOrder.PanelSetOrderCollection.PathologistTestOrderItemList.Build(this.m_AccessionOrder);

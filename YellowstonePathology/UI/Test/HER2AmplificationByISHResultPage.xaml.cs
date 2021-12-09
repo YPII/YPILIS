@@ -159,7 +159,7 @@ namespace YellowstonePathology.UI.Test
                 YellowstonePathology.Business.Test.FinalizeTestResult finalizeTestResult = this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
                 this.HandleFinalizeTestResult(finalizeTestResult);
 
-                if (this.m_PanelSetOrder.Result != YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
+                if (this.m_PanelSetOrder.Result != Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
                 {
                     YellowstonePathology.Business.Test.Surgical.SurgicalTest panelSetSurgical = new YellowstonePathology.Business.Test.Surgical.SurgicalTest();
 
@@ -169,7 +169,7 @@ namespace YellowstonePathology.UI.Test
                         YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(surgicalPanelSetOrder.ReportNo);
                         if (amendmentCollection.HasAmendmentForReport(this.m_PanelSetOrder.ReportNo) == false)
                         {
-                            string amendmentText = YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHSystemGeneratedAmendmentText.AmendmentText(this.m_PanelSetOrder);
+                            string amendmentText = Business.Test.HER2AmplificationByISH.HER2AmplificationByISHSystemGeneratedAmendmentText.AmendmentText(this.m_PanelSetOrder);
                             YellowstonePathology.Business.Amendment.Model.Amendment amendment = this.m_AccessionOrder.AddAmendment(surgicalPanelSetOrder.ReportNo);
                             amendment.TestResultAmendmentFill(surgicalPanelSetOrder.ReportNo, surgicalPanelSetOrder.AssignedToId, amendmentText);
                             amendment.ReferenceReportNo = this.m_PanelSetOrder.ReportNo;
@@ -282,7 +282,7 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest her2AmplificationRecountTest = new YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
             YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest();
             YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC panelSetOrderHer2AmplificationByIHC = (YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(her2AmplificationByIHCTest.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
-            if (panelSetOrderHer2AmplificationByIHC.Final == true && panelSetOrderHer2AmplificationByIHC.Score == "2+" && this.m_PanelSetOrder.Result == YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
+            if (panelSetOrderHer2AmplificationByIHC.Final == true && panelSetOrderHer2AmplificationByIHC.Score == "2+" && this.m_PanelSetOrder.Result == Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
             {
                 this.OrderATest(her2AmplificationRecountTest);
             }

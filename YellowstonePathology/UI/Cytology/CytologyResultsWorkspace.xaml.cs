@@ -29,7 +29,7 @@ namespace YellowstonePathology.UI.Cytology
 		public CytologyResultsWorkspace(TabItem writer)
 		{
             this.m_Writer = writer;
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 			this.m_CytologyUI = new CytologyUI(this.m_Writer);
             this.DataContext = this.m_CytologyUI;            
 
@@ -41,7 +41,7 @@ namespace YellowstonePathology.UI.Cytology
 
         public CytologyResultsWorkspace(CytologyUI cytologyUI)
 		{
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
             this.m_CytologyUI = cytologyUI;
             this.DataContext = this.m_CytologyUI;
 
@@ -215,21 +215,21 @@ namespace YellowstonePathology.UI.Cytology
 				{
 					searchText = ((YellowstonePathology.Business.MasterAccessionNo)textSearchObject).Value;
 					YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(searchText);
-					searchText = orderIdParser.CreateCyotlogyReportNoFromMasterAccessionNo();
+					searchText = orderIdParser.CreateCytologyReportNoFromMasterAccessionNo();
 				}
 			}
 			if (e.Key == Key.Up)
 			{
 				if (textSearchObject is YellowstonePathology.Business.ReportNo)
 				{
-					searchText = YellowstonePathology.Business.OrderIdParser.IncrementReportNo(this.TextBoxReportNoSearch.Text, 1);
+					searchText = Business.OrderIdParser.IncrementReportNo(this.TextBoxReportNoSearch.Text, 1);
 				}
 			}
 			if (e.Key == Key.Down)
 			{
 				if (textSearchObject is YellowstonePathology.Business.ReportNo)
 				{
-					searchText = YellowstonePathology.Business.OrderIdParser.IncrementReportNo(this.TextBoxReportNoSearch.Text, -1);
+					searchText = Business.OrderIdParser.IncrementReportNo(this.TextBoxReportNoSearch.Text, -1);
 				}
 			}
 
@@ -654,7 +654,7 @@ namespace YellowstonePathology.UI.Cytology
         {
             if (this.m_CytologyUI.AccessionOrder != null)
             {
-                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(this.m_CytologyUI.AccessionOrder, this.m_CytologyUI.PanelSetOrderCytology, Business.Document.ReportSaveModeEnum.Normal);
+                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_CytologyUI.AccessionOrder, this.m_CytologyUI.PanelSetOrderCytology, Business.Document.ReportSaveModeEnum.Normal);
                 caseDocument.Render();
                 caseDocument.Publish();                
                 MessageBox.Show("The document has been published");
@@ -668,7 +668,7 @@ namespace YellowstonePathology.UI.Cytology
                 this.m_CytologyUI.HandleWHPOpened();
 
                 YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = null;
-                YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrders = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_CytologyUI.AccessionOrder.MasterAccessionNo);
+                YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrders = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_CytologyUI.AccessionOrder.MasterAccessionNo);
 
                 if (clientOrders.Count > 0)
                 {

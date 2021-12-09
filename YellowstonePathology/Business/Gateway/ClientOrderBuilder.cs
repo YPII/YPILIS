@@ -98,7 +98,7 @@ namespace YellowstonePathology.Business.Gateway
 
                     this.m_DataReader.NextResult();
 
-                    YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetail clientOrderDetail = YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetailFactory.GetClientOrderDetail(orderTypeCode, Persistence.PersistenceModeEnum.UpdateChangedProperties);
+                    YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetail clientOrderDetail = Business.ClientOrder.Model.ClientOrderDetailFactory.GetClientOrderDetail(orderTypeCode, Persistence.PersistenceModeEnum.UpdateChangedProperties);
                     while (this.m_DataReader.Read())
                     {
                         YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter propertyWriter = new Persistence.SqlDataReaderPropertyWriter(clientOrderDetail, this.m_DataReader);

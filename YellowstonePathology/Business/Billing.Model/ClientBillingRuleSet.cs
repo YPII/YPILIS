@@ -32,6 +32,17 @@ namespace YellowstonePathology.Business.Billing.Model
             billingRule1.PostDischarge = new RuleValueAny();
             billingRule1.BillingType = BillingTypeEnum.Global;
             this.m_BillingRuleCollection.Add(billingRule1);
+            
+            BillingRule billingRule11 = new BillingRule();
+            billingRule11.BillingRuleSetId = this.m_BillingRuleSetId;
+            billingRule11.Priority = 1;
+            billingRule11.PatientType = new RuleValueAny();
+            billingRule11.PrimaryInsurance = new RuleValueString("BCBS");
+            billingRule11.SecondaryInsurance = new RuleValueAny();
+            billingRule11.PostDischarge = new RuleValueAny();
+            billingRule11.BillingType = BillingTypeEnum.Global;
+            this.m_BillingRuleCollection.Add(billingRule11);
+
 
             BillingRule billingRule2 = new BillingRule();
             billingRule2.BillingRuleSetId = this.m_BillingRuleSetId;

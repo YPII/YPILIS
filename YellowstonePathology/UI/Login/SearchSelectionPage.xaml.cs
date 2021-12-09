@@ -23,6 +23,7 @@ namespace YellowstonePathology.UI.Login
         public event PropertyChangedEventHandler PropertyChanged;
 
         private DateTime m_AccessionDate;
+        private DateTime m_FinalDate;
         private string m_ReportNo;
         private string m_SpecimenDescription;
         private DateTime m_KeyWordStartDate;
@@ -48,6 +49,7 @@ namespace YellowstonePathology.UI.Login
 		{
             this.m_LoginUI = loginUI;
             this.m_AccessionDate = DateTime.Today;
+            this.m_FinalDate = DateTime.Today;
             this.m_PanelSetFinalDate = DateTime.Today;
             this.m_PostDate = DateTime.Today;
             this.m_SVHPostDate = DateTime.Today;
@@ -64,7 +66,7 @@ namespace YellowstonePathology.UI.Login
 
             this.m_TestStartDate = DateTime.Today.AddMonths(-1);
             this.m_TestEndDate = DateTime.Today;
-            this.m_PanelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            this.m_PanelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
 
             InitializeComponent();
 
@@ -80,6 +82,12 @@ namespace YellowstonePathology.UI.Login
         {
             get { return this.m_AccessionDate; }
             set { this.m_AccessionDate = value; }
+        }
+
+        public DateTime FinalDate
+        {
+            get { return this.m_FinalDate; }
+            set { this.m_FinalDate = value; }
         }
 
         public string ReportNo
@@ -351,6 +359,36 @@ namespace YellowstonePathology.UI.Login
                 this.m_LoginUI.GetReportSearchListByClientId(this.m_ClientId, this.m_ClientStartDate, this.m_ClientEndDate);
                 Window.GetWindow(this).Close();
             }            
+        }
+
+        private void ButtonBillingDelayed_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListByBillingDelayed();
+            Window.GetWindow(this).Close();
+        }
+
+        private void ButtonDelayedDistribution_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListByDistributionDelayed();
+            Window.GetWindow(this).Close();
+        }
+
+        private void ButtonSVHNotFinalMultipleOrders_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListBySVHNotFinalMultipleOrders();
+            Window.GetWindow(this).Close();
+        }        
+
+        private void ButtonNMHFinalDateSearch_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListByNMHFinal(this.m_FinalDate);
+            Window.GetWindow(this).Close();
+        }
+
+        private void ButtonBOBGYNFinalDateSearch_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_LoginUI.GetReportSearchListByProvationFinal(this.m_FinalDate);
+            Window.GetWindow(this).Close();
         }
     }
 }

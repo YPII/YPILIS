@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		{
 			this.m_PanelSetId = 96;
 			this.m_PanelSetName = "Renal Biopsy Panel";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Surgical;
+            this.m_CaseType = Business.CaseType.Surgical;
 			this.m_HasTechnicalComponent = true;            
 			this.m_HasProfessionalComponent = true;
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.PublishedDocument;
@@ -25,7 +25,7 @@ this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Gather materials and send to U of W.";
 
-            YellowstonePathology.Business.Facility.Model.Facility universityOfWashington = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("UWRLS");
+            YellowstonePathology.Business.Facility.Model.Facility universityOfWashington = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("UWRLS");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Histology, taskDescription, universityOfWashington));
 
             this.m_TechnicalComponentFacility = universityOfWashington;

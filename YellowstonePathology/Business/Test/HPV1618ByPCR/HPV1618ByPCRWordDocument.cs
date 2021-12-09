@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.HPV1618ByPCR
             string description = specimenOrder.Description + " - Block " + aliquotOrder.GetDescription();
             base.ReplaceText("specimen_description", description);            
 
-			string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+			string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
 			this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(m_PanelSetOrder.ReportNo);
@@ -37,7 +37,7 @@ namespace YellowstonePathology.Business.Test.HPV1618ByPCR
 			base.ReplaceText("hpv16_result", panelSetOrder.HPV16Result);
 			base.ReplaceText("hpv18_result", panelSetOrder.HPV18Result);
 
-            if (panelSetOrder.Indication == YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRIndication.SquamousCellCarcinoma)
+            if (panelSetOrder.Indication == Business.Test.HPV1618ByPCR.HPV1618ByPCRIndication.SquamousCellCarcinoma)
             {
                 base.ReplaceText("report_interpretation_header", "Interpretation");
                 base.ReplaceText("report_interpretation", panelSetOrder.Interpretation);

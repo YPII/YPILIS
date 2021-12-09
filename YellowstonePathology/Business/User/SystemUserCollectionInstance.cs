@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.User
 
 		private SystemUserCollectionInstance()
 		{            
-			m_SystemUserCollection = YellowstonePathology.Business.User.SystemUserGateway.GetSystemUserCollection(); 
+			m_SystemUserCollection = Business.User.SystemUserGateway.GetSystemUserCollection(); 
 		}
 
 		public static SystemUserCollectionInstance Instance

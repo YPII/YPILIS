@@ -53,7 +53,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
 		{
 			if (String.IsNullOrEmpty(m_PanelOrder.ReportComment) == false)
 			{
-				string otherFacilityComment = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("54").Comment;
+				string otherFacilityComment = Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("54").Comment;
 				this.m_PanelOrder.ReportComment = this.m_PanelOrder.ReportComment.Replace(otherFacilityComment, string.Empty).Trim();
 			}
 		}
@@ -61,17 +61,17 @@ namespace YellowstonePathology.Business.Rules.Cytology
         public void SetScreeningImpressionCode()
         {
             this.m_ResultCode = this.m_PanelOrder.ResultCode.ToString();
-			string changedResultCode = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.ChangeResultCode(this.m_ResultCode, this.m_ScreeningImpression);
+			string changedResultCode = Business.Cytology.Model.CytologyResultCode.ChangeResultCode(this.m_ResultCode, this.m_ScreeningImpression);
             this.m_PanelOrder.ResultCode = changedResultCode;
             this.m_ResultCode = changedResultCode;
         }  
 
 		private void AddBiopsyPerformedInAnotherFacilityComment()
 		{
-			bool diagnosisIsGreaterThanThree = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisGreaterThanThree(this.m_PanelOrder.ResultCode);
+			bool diagnosisIsGreaterThanThree = Business.Cytology.Model.CytologyResultCode.IsDiagnosisGreaterThanThree(this.m_PanelOrder.ResultCode);
 			if (diagnosisIsGreaterThanThree == true)
 			{
-				string otherFacilityComment = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("54").Comment;
+				string otherFacilityComment = Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("54").Comment;
 				if (string.IsNullOrEmpty(this.m_PanelOrder.ReportComment) == true || this.m_PanelOrder.ReportComment.Contains(otherFacilityComment) == false)
 				{
 					if (string.IsNullOrEmpty(this.m_PanelOrder.ReportComment) == false)

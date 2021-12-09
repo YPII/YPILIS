@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Search
 
 		public CytologyScreeningSearch()
 		{
-			this.m_Screeners = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.CytologyScreener, true);
+			this.m_Screeners = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.CytologyScreener, true);
 			YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.AddAllToUserList(this.m_Screeners, true);
             this.m_AccessionDate = new Search.AccessionDateField(DateTime.Today.AddDays(-1));
             this.NotifyPropertyChanged("AccessionDate");
@@ -55,7 +55,7 @@ namespace YellowstonePathology.Business.Search
 
 			YellowstonePathology.Business.Search.DateLimitField dateLimitField = new DateLimitField(730, "AccessionDate");
 			sqlStatement.SearchFields.Add(dateLimitField);
-			this.m_Results = YellowstonePathology.Business.Gateway.CytologyScreeningSearchGateway.GetCytologyScreeningSearchResults(sqlStatement.ToString());
+			this.m_Results = Business.Gateway.CytologyScreeningSearchGateway.GetCytologyScreeningSearchResults(sqlStatement.ToString());
 			this.NotifyPropertyChanged("Results");
         }
 
@@ -74,7 +74,7 @@ namespace YellowstonePathology.Business.Search
 			YellowstonePathology.Business.Search.DateLimitField dateLimitField = new DateLimitField(730, "AccessionDate");
 			sqlStatement.SearchFields.Add(dateLimitField);
 
-			this.m_Results = YellowstonePathology.Business.Gateway.CytologyScreeningSearchGateway.GetCytologyScreeningSearchResults(sqlStatement.ToString());
+			this.m_Results = Business.Gateway.CytologyScreeningSearchGateway.GetCytologyScreeningSearchResults(sqlStatement.ToString());
 			this.NotifyPropertyChanged("Results");
 		}
 
@@ -93,7 +93,7 @@ namespace YellowstonePathology.Business.Search
 			YellowstonePathology.Business.Search.DateLimitField dateLimitField = new DateLimitField(730, "AccessionDate");
 			sqlStatement.SearchFields.Add(dateLimitField);            
 
-			this.m_Results = YellowstonePathology.Business.Gateway.CytologyScreeningSearchGateway.GetCytologyScreeningSearchResults(sqlStatement.ToString());
+			this.m_Results = Business.Gateway.CytologyScreeningSearchGateway.GetCytologyScreeningSearchResults(sqlStatement.ToString());
 			this.NotifyPropertyChanged("Results");
         }
 
@@ -104,13 +104,13 @@ namespace YellowstonePathology.Business.Search
             reportNoField.Value = reportNo;
 
             sqlStatement.SearchFields.Add(reportNoField);
-			this.m_Results = YellowstonePathology.Business.Gateway.CytologyScreeningSearchGateway.GetCytologyScreeningSearchResults(sqlStatement.ToString());
+			this.m_Results = Business.Gateway.CytologyScreeningSearchGateway.GetCytologyScreeningSearchResults(sqlStatement.ToString());
 			this.NotifyPropertyChanged("Results");
         }
 
         public void ExecuteAtLoggerheadSearch(int assignedToId)
         {            
-            this.m_Results = YellowstonePathology.Business.Gateway.CytologyScreeningSearchGateway.GetCytologyScreeningSearchResultsByAtLoggerheads(assignedToId);
+            this.m_Results = Business.Gateway.CytologyScreeningSearchGateway.GetCytologyScreeningSearchResultsByAtLoggerheads(assignedToId);
             this.NotifyPropertyChanged("Results");
         }
 

@@ -51,11 +51,14 @@ namespace YellowstonePathology.Business.Task.Model
             this.m_MasterAccessionNo = masterAccessionNo;
             this.m_ReportNo = reportNo;
             this.m_TaskName = task.TaskName;                                    
-            this.m_OrderedById = YellowstonePathology.Business.User.SystemIdentity.Instance.User.UserId;
-			this.m_OrderedByInitials = YellowstonePathology.Business.User.SystemIdentity.Instance.User.Initials;
-			this.m_TargetId = orderTarget.GetId();
-            this.m_TargetType = orderTarget.GetOrderedOnType();
-            this.m_TargetDescription = orderTarget.GetDescription();
+            this.m_OrderedById = Business.User.SystemIdentity.Instance.User.UserId;
+			this.m_OrderedByInitials = Business.User.SystemIdentity.Instance.User.Initials;
+            if (orderTarget != null)
+            {
+                this.m_TargetId = orderTarget.GetId();
+                this.m_TargetType = orderTarget.GetOrderedOnType();
+                this.m_TargetDescription = orderTarget.GetDescription();
+            }
             this.m_OrderDate = DateTime.Now;
             this.m_PanelSetName = panelSetName;
 			this.m_AcknowledgementType = acknowledgementType;

@@ -55,6 +55,16 @@ namespace YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefini
         }
 	}
 
+    public class UniversalServiceJAK2Exon1213 : UniversalService
+    {
+        public UniversalServiceJAK2Exon1213()
+        {
+            this.m_UniversalServiceId = "520288";
+            this.m_ServiceName = "JAK2 Mutation Xeon 12-13";
+            this.m_ApplicationName = UniversalServiceApplicationNameEnum.EPIC;
+        }
+    }
+
     public class UniversalServiceCTGC : UniversalService
     {
         public UniversalServiceCTGC()

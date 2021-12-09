@@ -531,11 +531,11 @@ namespace YellowstonePathology.Business.Specimen.Model
 		public YellowstonePathology.Business.Specimen.Model.SpecimenOrder GetSpecimenOrder(string targetType, string targetId)
         {
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder result = null;
-            if (targetType == YellowstonePathology.Business.OrderedOn.Specimen || targetType == YellowstonePathology.Business.OrderedOn.ThinPrepFluid)
+            if (targetType == Business.OrderedOn.Specimen || targetType == Business.OrderedOn.ThinPrepFluid)
             {                
                 result = this.GetSpecimenOrderById(targetId);                    
             }
-            else if (targetType == YellowstonePathology.Business.OrderedOn.Aliquot)
+            else if (targetType == Business.OrderedOn.Aliquot)
             {
                 result = this.GetByAliquotOrderId(targetId);
             }

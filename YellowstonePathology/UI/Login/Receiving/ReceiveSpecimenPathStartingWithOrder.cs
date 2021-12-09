@@ -7,15 +7,18 @@ using System.Xml.Linq;
 namespace YellowstonePathology.UI.Login.Receiving
 {
 	public class ReceiveSpecimenPathStartingWithOrder
-	{        
-        private YellowstonePathology.UI.Login.Receiving.LoginPageWindow m_LoginPageWindow;
+	{
+		public delegate void NextEventHandler(object sender, EventArgs e);
+		public event NextEventHandler Next;
+
+		private YellowstonePathology.UI.Login.Receiving.LoginPageWindow m_LoginPageWindow;
         private YellowstonePathology.UI.Login.Receiving.ClientOrderReceivingHandler m_ClientOrderReceivingHandler;        
         private YellowstonePathology.Business.ClientOrder.Model.ClientOrder m_ClientOrder;
 
         public ReceiveSpecimenPathStartingWithOrder(string clientOrderId)
         {            
             this.m_LoginPageWindow = new Receiving.LoginPageWindow();
-            this.m_ClientOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullClientOrder(clientOrderId, this.m_LoginPageWindow);
+            this.m_ClientOrder = Business.Persistence.DocumentGateway.Instance.PullClientOrder(clientOrderId, this.m_LoginPageWindow);
         }
 
         public void Start()
@@ -29,8 +32,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 			this.m_ClientOrderReceivingHandler = new Receiving.ClientOrderReceivingHandler(this.m_LoginPageWindow);
 			this.m_ClientOrderReceivingHandler.IFoundAClientOrder(this.m_ClientOrder);			
 
-			YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_ClientOrderReceivingHandler.ClientOrder.ClientId);
-			client.ClientLocationCollection.SetCurrentLocation(client.ClientLocationCollection[0].ClientLocationId);
+			YellowstonePathology.Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_ClientOrderReceivingHandler.ClientOrder.ClientId);			
 			this.m_ClientOrderReceivingHandler.IFoundAClient(client, false);
             
 			this.ShowItemsReceivedPage();
@@ -50,6 +52,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         private void ItemsReceivedPage_Back(object sender, EventArgs e)
         {
             this.m_LoginPageWindow.Close();
+			this.Next(this, new EventArgs());
         }
 
 		private void ItemsReceivedPage_ContainerScannedReceived(object sender, YellowstonePathology.Business.BarcodeScanning.ContainerBarcode containerBarcode)

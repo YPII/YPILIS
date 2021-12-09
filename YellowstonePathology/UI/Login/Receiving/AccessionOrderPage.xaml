@@ -136,6 +136,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="*"></RowDefinition>
@@ -143,41 +144,51 @@
 					<RowDefinition Height="*"></RowDefinition>
 				</Grid.RowDefinitions>
 
-				<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Accessioning Facility:</TextBlock>
-                <ComboBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.AccessioningFacilityId}" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Collection Facility:</TextBlock>
+                <ComboBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.CollectionFacilityId}" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
                     <ComboBoxItem>YPIBLGS</ComboBoxItem>
                     <ComboBoxItem>YPICDY</ComboBoxItem>
                     <ComboBoxItem>YPIHVR</ComboBoxItem>
+                    <ComboBoxItem>YPICOVID</ComboBoxItem>
+                    <ComboBoxItem>CLIENT</ComboBoxItem>
+                </ComboBox>
+                
+				<TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Accessioning Facility:</TextBlock>
+                <ComboBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.AccessioningFacilityId}" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
+                    <ComboBoxItem>YPIBLGS</ComboBoxItem>
+                    <ComboBoxItem>YPICDY</ComboBoxItem>
+                    <ComboBoxItem>YPIHVR</ComboBoxItem>
+                    <ComboBoxItem>YPICOVID</ComboBoxItem>
                 </ComboBox>
 
-				<TextBlock Grid.Column="0" Grid.Row="1" FontSize="12" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Master Accession No:</TextBlock>
-				<TextBlock Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.MasterAccessionNo}" FontSize="12" FontWeight="Black"/>
+				<TextBlock Grid.Column="0" Grid.Row="2" FontSize="12" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Master Accession No:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.MasterAccessionNo}" FontSize="12" FontWeight="Black"/>
 
-				<TextBlock Grid.Column="0" Grid.Row="2" FontSize="12" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Patient:</TextBlock>
-				<TextBlock Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" MinWidth="200" Text="{Binding Path=AccessionOrder.PatientName}" FontSize="12" />
+				<TextBlock Grid.Column="0" Grid.Row="3" FontSize="12" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Patient:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" MinWidth="200" Text="{Binding Path=AccessionOrder.PatientName}" FontSize="12" />
 
-                <TextBlock Grid.Column="0" Grid.Row="3" FontSize="12" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Date Of Service:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.CollectionDate, Converter={StaticResource ShortDateConverter}}" FontSize="12" />
+                <TextBlock Grid.Column="0" Grid.Row="4" FontSize="12" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Date Of Service:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.CollectionDate, Converter={StaticResource ShortDateConverter}}" FontSize="12" />
                 
-                <TextBlock Grid.Column="0" Grid.Row="4" FontSize="12" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Accession Date:</TextBlock>
-				<TextBlock Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.AccessionTime, Converter={StaticResource MilitaryDateTimeConverter}}" FontSize="12" />
+                <TextBlock Grid.Column="0" Grid.Row="5" FontSize="12" Margin="2,2,2,2" HorizontalAlignment="Right" FontWeight="Bold">Accession Date:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.AccessionTime, Converter={StaticResource MilitaryDateTimeConverter}}" FontSize="12" />
 				
-				<ListView Name="ListViewPanelSetOrder" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Margin="2,2,2,2" MinWidth="250" ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection}"
+				<ListView Name="ListViewPanelSetOrder" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Margin="2,2,2,2" MinWidth="250" ItemsSource="{Binding Path=AccessionOrder.PanelSetOrderCollection}"
 						  ItemTemplate="{StaticResource PanelSetOrderTemplate}" MouseDoubleClick="ListViewPanelSetOrder_MouseDoubleClick"/>
 
-                <TextBlock  Grid.Column="0" Grid.Row="6" Margin="2,2,2,2">
+                <TextBlock  Grid.Column="0" Grid.Row="7" Margin="2,2,2,2">
                     <Hyperlink Click="HyperLinkSurgicalDiagnosis_Click">
                         <TextBlock Text="Surgical Diagnosis"></TextBlock>
                     </Hyperlink>
                 </TextBlock>
 
-                <TextBlock  Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" HorizontalAlignment="Right">
+                <TextBlock  Grid.Column="1" Grid.Row="8" Margin="2,2,2,2" HorizontalAlignment="Right">
                     <Hyperlink Click="HyperLinkGrossDescription_Click">
                         <TextBlock Text="Gross Description"></TextBlock>
                     </Hyperlink>
                 </TextBlock>
 
-                <ListBox Name="ListBoxSpecimen" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Margin="2,2,2,2" ItemsSource="{Binding Path=AccessionOrder.SpecimenOrderCollection}"
+                <ListBox Name="ListBoxSpecimen" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9" Margin="2,2,2,2" ItemsSource="{Binding Path=AccessionOrder.SpecimenOrderCollection}"
 					 ItemTemplate="{StaticResource SpecimenTemplate}" ItemContainerStyle="{StaticResource SpecimenStyle}" MouseDoubleClick="ListBoxSpecimen_DoubleClick">
 				</ListBox>
 			</Grid>
@@ -251,6 +262,18 @@
                     
                     <ListBox Name="ListViewTestOrders" Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" ItemsSource="{Binding Path=PanelSetCollectionView}" ItemTemplate="{StaticResource PanelSetTemplate}" Margin="2,0,2,2"
 							 ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding PanelSetId}" Value="415">
+                                        <Setter Property="Background" Value="#ffe6e6" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding PanelSetId}" Value="400">
+                                        <Setter Property="Background" Value="#ffffcc" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Disabled"></StackPanel>

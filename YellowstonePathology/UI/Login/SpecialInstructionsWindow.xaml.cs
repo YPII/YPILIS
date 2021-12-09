@@ -24,24 +24,24 @@ namespace YellowstonePathology.UI.Login
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-        public string m_SpecialInstructions;
+		public Object m_Order;
 
-        public SpecialInstructionsWindow(string specialInstructions)
+		public SpecialInstructionsWindow(object order)
 		{
-            this.m_SpecialInstructions = specialInstructions;
+			this.m_Order =order;
 			InitializeComponent();
 			this.DataContext = this;						
 		}
 
-        public string SpecialInstructions
-        {
-            get { return this.m_SpecialInstructions; }
+        public Object Order
+		{
+            get { return this.m_Order; }
             set
             {
-                if (this.m_SpecialInstructions != value)
+                if (this.m_Order != value)
                 {
-                    this.m_SpecialInstructions = value;
-                    this.NotifyPropertyChanged("SpecialInstructions");
+                    this.m_Order = value;
+                    this.NotifyPropertyChanged("Order");
                 }
             }
         }

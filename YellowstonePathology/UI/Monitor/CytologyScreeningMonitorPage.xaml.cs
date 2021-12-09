@@ -30,8 +30,8 @@ namespace YellowstonePathology.UI.Monitor
 
         private void LoadData()
         {
-            YellowstonePathology.Business.Calendar.HolidayCollection holidays = YellowstonePathology.Business.Calendar.HolidayCollection.GetByDateRange(new DateTime(DateTime.Today.AddYears(-1).Year, 1, 1), new DateTime(DateTime.Today.AddYears(1).Year, 12, 31));
-            YellowstonePathology.Business.Monitor.Model.CytologyScreeningCollection cytologyScreeningCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPendingCytologyScreening();            
+            YellowstonePathology.Business.Calendar.HolidayCollection holidays = Business.Calendar.HolidayCollection.GetByDateRange(new DateTime(DateTime.Today.AddYears(-1).Year, 1, 1), new DateTime(DateTime.Today.AddYears(1).Year, 12, 31));
+            YellowstonePathology.Business.Monitor.Model.CytologyScreeningCollection cytologyScreeningCollection = Business.Gateway.AccessionOrderGateway.GetPendingCytologyScreening();            
             cytologyScreeningCollection.SetState(holidays);
             cytologyScreeningCollection = cytologyScreeningCollection.SortByState();
             this.m_CytologyScreeningCollection = cytologyScreeningCollection;

@@ -21,17 +21,17 @@ namespace YellowstonePathology.UI.Login
 		public delegate void ReturnEventHandler(object sender, UI.Navigation.PageNavigationReturnEventArgs e);
 		public event ReturnEventHandler Return;
 
-		private YellowstonePathology.Business.Client.Model.Client m_Client;
-        private YellowstonePathology.Business.View.ClientLocationViewCollection m_ClientCollection;
-        private YellowstonePathology.Business.View.ClientLocationViewCollection m_FavoriteClientCollection;
-		private YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort m_BarcodeScanPort;
+		private Business.Client.Model.Client m_Client;
+        private Business.Client.Model.ClientCollection m_ClientCollection;
+        private Business.Client.Model.ClientCollection m_FavoriteClientCollection;
+		private Business.BarcodeScanning.BarcodeScanPort m_BarcodeScanPort;
         
         private string m_PageHeaderText = "Select Client";		
 
 		public ClientLookupPage()
 		{
-            this.m_FavoriteClientCollection = Business.View.ClientLocationViewCollection.GetFavorites();
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+            this.m_FavoriteClientCollection = Business.Gateway.PhysicianClientGateway.GetFavoriteClients();
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 
 			InitializeComponent();
 
@@ -48,16 +48,19 @@ namespace YellowstonePathology.UI.Login
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(window);
         }
 
+        public Business.Client.Model.ClientCollection ClientCollection
+        {
+            get { return this.m_ClientCollection; }
+        }
+
 		private void BarcodeScanPort_ClientScanReceived(Business.BarcodeScanning.Barcode barcode)
         {
             this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Input, new System.Threading.ThreadStart(delegate()
             {
                 int clientId = Convert.ToInt32(barcode.ID);
-				this.m_Client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(clientId);
-                if (this.m_Client.ClientLocationCollection.Count > 0)
-                {
-                    this.m_Client.ClientLocationCollection.SetCurrentLocationToMedicalRecordsOrFirst();
-
+				this.m_Client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(clientId);
+                if (string.IsNullOrEmpty(this.m_Client.OrderType) == false)
+                {                    
                     bool useRequisition = false;
                     List<object> returnData = new List<object>();
                     returnData.Add(this.m_Client);
@@ -67,7 +70,7 @@ namespace YellowstonePathology.UI.Login
                 }
                 else
                 {
-                    MessageBox.Show("This client does not have a location entered.  Please tell Sid.", "No Locations", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show("This client does not have an OrderType selected.", "No OrderType", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
             }
             ));
@@ -84,34 +87,18 @@ namespace YellowstonePathology.UI.Login
         }        
         
 		public void GoNext()
-		{			
-            YellowstonePathology.Business.View.ClientLocationView clientLocationView = null;
-            if (this.ListViewFavoriteClients.SelectedItem != null)
-			{
-				clientLocationView = this.ListViewFavoriteClients.SelectedItem as YellowstonePathology.Business.View.ClientLocationView;		
-			}
-			else if (this.ListViewClientSearch.SelectedItem != null)
-			{
-				clientLocationView = this.ListViewClientSearch.SelectedItem as YellowstonePathology.Business.View.ClientLocationView;				
-			}
-
-            if (clientLocationView != null)
-            {
-				this.m_Client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(clientLocationView.ClientId);                
-                this.m_FavoriteClientCollection.AddRecent(this.m_Client);
-
-				if (this.m_Client != null)
-                {
-                    this.m_Client.ClientLocationCollection.SetCurrentLocation(clientLocationView.ClientLocationId);
-                    bool useRequisition = false;
-                    if(this.CheckBoxUseRequisition.IsChecked == true) useRequisition = true;
-                    List<object> returnData = new List<object>();
-                    returnData.Add(this.m_Client);
-                    returnData.Add(useRequisition);
-					UI.Navigation.PageNavigationReturnEventArgs args = new UI.Navigation.PageNavigationReturnEventArgs(UI.Navigation.PageNavigationDirectionEnum.Next, returnData);
-                    this.Return(this, args);					
-				}
-            }
+		{			                        
+            this.m_Client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_Client.ClientId);                            
+			if (this.m_Client != null)
+            {                
+                bool useRequisition = false;
+                if(this.CheckBoxUseRequisition.IsChecked == true) useRequisition = true;
+                List<object> returnData = new List<object>();
+                returnData.Add(this.m_Client);
+                returnData.Add(useRequisition);
+				UI.Navigation.PageNavigationReturnEventArgs args = new UI.Navigation.PageNavigationReturnEventArgs(UI.Navigation.PageNavigationDirectionEnum.Next, returnData);
+                this.Return(this, args);					
+			}            
             this.ListViewFavoriteClients.SelectedIndex = -1;
 		}		
 
@@ -120,21 +107,12 @@ namespace YellowstonePathology.UI.Login
             if (this.TextBoxClientName.Text.Length > 0)
             {
                 string text = this.TextBoxClientName.Text;
-				this.ClientCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientLocationViewByClientName(text);
+				this.m_ClientCollection = Business.Gateway.PhysicianClientGateway.GetClientsByClientName(text);
+                this.NotifyPropertyChanged(string.Empty);
             }
-        }		
+        }		        
 
-        public YellowstonePathology.Business.View.ClientLocationViewCollection ClientCollection
-        {
-            get { return this.m_ClientCollection; }
-            set 
-            { 
-                this.m_ClientCollection = value;
-                this.NotifyPropertyChanged("ClientCollection");
-            }
-        }
-
-        public YellowstonePathology.Business.View.ClientLocationViewCollection FavoriteClientCollection
+        public Business.Client.Model.ClientCollection FavoriteClientCollection
         {
             get { return this.m_FavoriteClientCollection; }
             set 
@@ -156,6 +134,7 @@ namespace YellowstonePathology.UI.Login
         {
             if (this.ListViewFavoriteClients.SelectedItems.Count != 0)
             {
+                this.m_Client = (Business.Client.Model.Client)this.ListViewFavoriteClients.SelectedItem;
                 this.ButtonNext.IsEnabled = true;
                 this.GoNext();
             }
@@ -173,7 +152,11 @@ namespace YellowstonePathology.UI.Login
 
         private void ListViewClientSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.ButtonNext.IsEnabled = true;
+            if(this.ListViewClientSearch.SelectedItem != null)
+            {
+                this.m_Client = (Business.Client.Model.Client)this.ListViewClientSearch.SelectedItem;
+                this.ButtonNext.IsEnabled = true;
+            }            
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)

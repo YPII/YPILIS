@@ -30,7 +30,7 @@ namespace YellowstonePathology.UI.Client
 			this.m_ClientName = clientName;
 			this.m_Copies = 25;
 
-			this.m_UserPreference = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference;
+			this.m_UserPreference = Business.User.UserPreferenceInstance.Instance.UserPreference;
 
 			InitializeComponent();
 

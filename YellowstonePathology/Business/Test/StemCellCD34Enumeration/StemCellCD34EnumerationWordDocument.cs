@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Test.StemCellCD34Enumeration
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(stemCellCD34EnumerationTestOrder.OrderedOn, stemCellCD34EnumerationTestOrder.OrderedOnId);
             this.SetXmlNodeData("specimen_description", specimenOrder.Description);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 
             this.SetXmlNodeData("cd34_percentage", stemCellCD34EnumerationTestOrder.CD34Percentage);

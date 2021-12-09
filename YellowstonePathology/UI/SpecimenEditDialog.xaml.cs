@@ -65,7 +65,7 @@ namespace YellowstonePathology.UI
             {
                 if (this.m_HoldToCompareString != this.m_SpecimenString)
                 {
-                    YellowstonePathology.Business.Specimen.Model.Specimen specimenToSave = YellowstonePathology.Business.Specimen.Model.SpecimenCollection.FromJSON(this.m_SpecimenString);
+                    YellowstonePathology.Business.Specimen.Model.Specimen specimenToSave = Business.Specimen.Model.SpecimenCollection.FromJSON(this.m_SpecimenString);
                     specimenToSave.Save();
                     this.DialogResult = true;
                 }
@@ -84,7 +84,7 @@ namespace YellowstonePathology.UI
 
         private Business.Rules.MethodResult CanSave()
         {
-            Business.Rules.MethodResult result = YellowstonePathology.Business.Helper.JSONHelper.IsValidJSONString(this.m_SpecimenString);
+            Business.Rules.MethodResult result = Business.Helper.JSONHelper.IsValidJSONString(this.m_SpecimenString);
 
             if (result.Success == true)
             {

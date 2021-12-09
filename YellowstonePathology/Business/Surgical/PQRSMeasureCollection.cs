@@ -11,6 +11,8 @@ namespace YellowstonePathology.Business.Surgical
         {
             PQRSMeasureCollection result = new PQRSMeasureCollection();            			            
             result.Add(new PQRSMelanomaMeasure());
+            result.Add(new PQRSMeasure249());
+            result.Add(new PQRSMeasure250());
             result.Add(new PQRSMeasure395());
             result.Add(new PQRSMeasure396());
 			return result;

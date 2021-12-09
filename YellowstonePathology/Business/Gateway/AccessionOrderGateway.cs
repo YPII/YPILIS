@@ -93,6 +93,25 @@ namespace YellowstonePathology.Business.Gateway
             }
         }
 
+        public static void SetNMHBlockCount()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "update tblBlockCount set NMHBlocks = (Select count(*) " +
+                "from tblAliquotOrder ao join tblSpecimenOrder so on ao.specimenOrderId = so.SpecimenOrderId " +
+                "join tblAccessionOrder a on so.MasterAccessionNo = a.MasterAccessionNo " +
+                "where Date_Format(a.AccessionDate, '%Y-%m-%d') = curdate() and a.accessioningFacilityId = 'YPIHVR' " +
+                "and not exists(select null from tblPanelSetOrder where MasterAccessionNo = a.MasterAccessionNo and assignedToId in (5132, 5133))) " +
+                "where BlockCountDate = curdate();";
+            cmd.CommandType = CommandType.Text;
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public static void SetBozemanBlockCount(int bozemanBlockCount, DateTime countDate)
         {
             MySqlCommand cmd = new MySqlCommand();
@@ -181,7 +200,7 @@ namespace YellowstonePathology.Business.Gateway
                 "join tblClient c on bll.ClientId = c.ClientId " +
                 "join tblPanelSetOrder pso on bll.ReportNo = pso.ReportNo " +
                 "join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
-                "where postdate is null and bll.MedicalRecord like 'A%' and length(bll.MedicalRecord) = 8 and bll.BillTo = 'Client'";
+                "where postdate is null and bll.MedicalRecord like 'A%' and length(bll.MedicalRecord) = 8 and bll.BillTo = 'Client' and pso.PanelSetId <> 400;";
             cmd.CommandType = CommandType.Text;
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
@@ -669,11 +688,11 @@ namespace YellowstonePathology.Business.Gateway
         {
             List<YellowstonePathology.Business.Test.PanelSetOrderView> result = new List<Test.PanelSetOrderView>();
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "Select * from tblPanelSetOrder pso where pso.Final = 1 and pso.FinalTime < date_Add(Now(), Interval -15 Minute) " +
-                "and pso.ScheduledPublishTime <= Now() union " +
+            cmd.CommandText = "Select * from tblPanelSetOrder pso where pso.Final = 1 and pso.FinalTime < date_Add(Now(), Interval -5 Minute) " +
+                "and pso.ScheduledPublishTime <= Now() and pso.HoldDistribution = 0 and pso.DistributionDelayed = 0 union " +
                 "Select pso.* from tblPanelSetOrder pso join tblTestOrderReportDistribution trd on pso.ReportNo = trd.ReportNo " +
-                "where pso.Final = 1 and pso.FinalTime < date_Add(Now(), Interval -15 Minute) and trd.ScheduledDistributionTime <= Now() " +
-                "and pso.Distribute = 1;";
+                "where pso.Final = 1 and pso.FinalTime < date_Add(Now(), Interval -5 Minute) and trd.ScheduledDistributionTime <= Now() " +
+                "and pso.Distribute = 1 and pso.HoldDistribution = 0 and pso.DistributionDelayed = 0;";
             cmd.CommandType = CommandType.Text;
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
@@ -690,7 +709,7 @@ namespace YellowstonePathology.Business.Gateway
                         result.Add(panelSetOrderView);
                     }
                 }
-            }
+            }            
             return result;
         }
 
@@ -1191,6 +1210,57 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
+        public static Surgical.SurgicalOrderList GetSurgicalOrderListByFNA(DateTime workDate)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select pso.ReportNo, ao.AccessionDate, concat(ao.PFirstName, ' ', ao.PLastName) AS PatientName, pso.AcceptedDate, pso.FinalDate, null AS Pathologist, null AS PathologistId, pso.Audited " +
+                "from tblAccessionOrder ao " +
+                "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo " +
+                "where pso.PanelSetId = 13 " +
+                "and 0 < (select count(*) from tblSpecimenOrder s " +
+                "join tblAccessionOrder acc on s.MasterAccessionNo = acc.MasterAccessionNo " +
+                "where acc.MasterAccessionNo = ao.MasterAccessionNo and s.Description like '%fine needle aspirate%' " +
+                $"and acc.AccessionDate = '{workDate.ToString("yyyy-MM-dd")}');";
+            cmd.CommandType = CommandType.Text;
+
+            Surgical.SurgicalOrderList result = AccessionOrderGateway.BuildSurgicalOrderList(cmd);
+            return result;
+        }
+
+        public static Surgical.SurgicalOrderList GetSurgicalOrderListByFluid(DateTime workDate)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select pso.ReportNo, ao.AccessionDate, concat(ao.PFirstName, ' ', ao.PLastName) AS PatientName, pso.AcceptedDate, pso.FinalDate, null AS Pathologist, null AS PathologistId, pso.Audited " +
+                "from tblAccessionOrder ao " +
+                "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo " +
+                "where pso.PanelSetId = 13 " +
+                "and 0 < (select count(*) from tblSpecimenOrder s " +
+                "join tblAccessionOrder acc on s.MasterAccessionNo = acc.MasterAccessionNo " +
+                "where acc.MasterAccessionNo = ao.MasterAccessionNo and s.Description regexp 'fluid|urine' " +
+                $"and acc.AccessionDate = '{workDate.ToString("yyyy-MM-dd")}');";
+            cmd.CommandType = CommandType.Text;
+
+            Surgical.SurgicalOrderList result = AccessionOrderGateway.BuildSurgicalOrderList(cmd);
+            return result;
+        }
+
+        public static Surgical.SurgicalOrderList GetSurgicalOrderListByPeripheralBloodSmear(DateTime workDate)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select pso.ReportNo, ao.AccessionDate, concat(ao.PFirstName, ' ', ao.PLastName) AS PatientName, pso.AcceptedDate, pso.FinalDate, null AS Pathologist, null AS PathologistId, pso.Audited " +
+                "from tblAccessionOrder ao " +
+                "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo " +
+                "where pso.PanelSetId = 13 " +
+                "and 0 < (select count(*) from tblSpecimenOrder s " +
+                "join tblAccessionOrder acc on s.MasterAccessionNo = acc.MasterAccessionNo " +
+                "where acc.MasterAccessionNo = ao.MasterAccessionNo and s.Description like '%Peripheral Blood Smear%' " +
+                $"and acc.AccessionDate = '{workDate.ToString("yyyy-MM-dd")}');";
+            cmd.CommandType = CommandType.Text;
+
+            Surgical.SurgicalOrderList result = AccessionOrderGateway.BuildSurgicalOrderList(cmd);
+            return result;
+        }
+
         public static Surgical.SurgicalOrderList GetSurgicalOrderListForSvhClientOrder(DateTime date)
         {
             MySqlCommand cmd = new MySqlCommand();
@@ -1436,9 +1506,9 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        public static ReportNoCollection GetReportNumbers()
+        public static ReportNoCollection GetReportNumbers(string sql)
         {
-            MySqlCommand cmd = new MySqlCommand("select distinct pso.masterAccessionNo from tblTestOrderReportDistribution tord join tblPanelSetOrder pso on tord.ReportNo = pso.reportNo where physicianid = 3435;");
+            MySqlCommand cmd = new MySqlCommand(sql);
             cmd.CommandType = CommandType.Text;
 
             YellowstonePathology.Business.ReportNoCollection reportNoCollection = new ReportNoCollection();
@@ -1466,6 +1536,31 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "Select Distinct ReportNo from tblPanelSetOrderCPTCodeBill where tblPanelSetOrderCPTCodeBill.PostDate = @PostDate;";
             cmd.Parameters.AddWithValue("@PostDate", postDate);
+
+            YellowstonePathology.Business.ReportNoCollection reportNoCollection = new ReportNoCollection();
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.ReportNo reportNo = new ReportNo(dr.GetString(0));
+                        reportNoCollection.Add(reportNo);
+                    }
+                }
+            }
+
+            return reportNoCollection;
+        }
+
+        public static ReportNoCollection GetReportNumbersBySQL(string sql)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sql;            
 
             YellowstonePathology.Business.ReportNoCollection reportNoCollection = new ReportNoCollection();
 
@@ -1724,6 +1819,23 @@ namespace YellowstonePathology.Business.Gateway
             }
         }
 
+        public static void SetPanelSetOrderAsDelayedDistribution(string reportNo, string comment)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "Update tblPanelSetOrder set DistributionDelayed = 1, DistributionDelayedComment = @Comment where ReportNo = @ReportNo;";
+            cmd.Parameters.AddWithValue("@ReportNo", reportNo);
+            cmd.Parameters.AddWithValue("@Comment", comment);
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public static YellowstonePathology.Business.Domain.PatientHistory GetPatientHistory(string patientId)
         {
             YellowstonePathology.Business.Domain.PatientHistory result = new Domain.PatientHistory();
@@ -1816,6 +1928,38 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
+        public static YellowstonePathology.Business.Test.PantherOrderList GetPantherOrdersNotAcceptedCOVID()
+        {
+            YellowstonePathology.Business.Test.PantherOrderList result = new Test.PantherOrderList();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select pso.MasterAccessionNo, pso.ReportNo, pso.OrderTime, pso.PanelSetName, a.PLastName, " +
+                "a.PFirstName, pso.ResultCode, pso.AcceptedTime, pso.FinalTime, psoh.Result, pso.HoldDistribution, pso.InstrumentOrderDate " +
+                "from tblPanelSetOrder pso " +
+                "join tblAPTIMASARSCoV2TestOrder psoh on pso.ReportNo = psoh.ReportNo " +
+                "join tblAccessionOrder a on pso.MasterAccessionNo = a.MasterAccessionNo " +
+                "where TechnicalComponentInstrumentId = 'PNTHR' and pso.Accepted = 0 order by pso.OrderTime;";
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.Test.PantherOrderListItem pantherOrderListItem = new Test.PantherOrderListItem();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(pantherOrderListItem, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(pantherOrderListItem);
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public static YellowstonePathology.Business.Test.PantherOrderList GetPantherOrdersNotAcceptedNGCT()
         {
             YellowstonePathology.Business.Test.PantherOrderList result = new Test.PantherOrderList();
@@ -1881,6 +2025,8 @@ namespace YellowstonePathology.Business.Gateway
 
             return result;
         }
+
+        
 
         public static YellowstonePathology.Business.Test.PantherOrderList GetPantherOrdersFinalNGCT()
         {
@@ -2157,6 +2303,38 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
+        public static YellowstonePathology.Business.Test.PantherOrderList GetPantherOrdersNotFinalCOVID()
+        {
+            YellowstonePathology.Business.Test.PantherOrderList result = new Test.PantherOrderList();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select pso.MasterAccessionNo, pso.ReportNo, pso.OrderTime, pso.PanelSetName, a.PLastName, " +
+                "a.PFirstName, pso.AcceptedTime, pso.FinalTime, t.Result, pso.HoldDistribution, pso.InstrumentOrderDate " +
+                "from tblPanelSetOrder pso " +
+                "join tblAPTIMASARSCoV2TestOrder t on pso.ReportNo = t.ReportNo " +
+                "join tblAccessionOrder a on pso.MasterAccessionNo = a.MasterAccessionNo " +
+                "where TechnicalComponentInstrumentId = 'PNTHR' and pso.Accepted = 1 and pso.Final = 0 order by pso.FinalTime desc;";
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.Test.PantherOrderListItem pantherOrderListItem = new Test.PantherOrderListItem();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(pantherOrderListItem, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(pantherOrderListItem);
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public static YellowstonePathology.Business.Test.PantherOrderList GetPantherOrdersFinalHPV1618()
         {
             YellowstonePathology.Business.Test.PantherOrderList result = new Test.PantherOrderList();
@@ -2206,6 +2384,38 @@ namespace YellowstonePathology.Business.Gateway
                 "a.PFirstName, pso.AcceptedTime, pso.FinalTime, t.Result, pso.HoldDistribution, pso.InstrumentOrderDate " +
                 "from tblPanelSetOrder pso " +
                 "join tblTrichomonasTestOrder t on pso.ReportNo = t.ReportNo " +
+                "join tblAccessionOrder a on pso.MasterAccessionNo = a.MasterAccessionNo " +
+                "where TechnicalComponentInstrumentId = 'PNTHR' and pso.Final = 1 order by pso.FinalTime desc;";
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.Test.PantherOrderListItem pantherOrderListItem = new Test.PantherOrderListItem();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(pantherOrderListItem, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(pantherOrderListItem);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static YellowstonePathology.Business.Test.PantherOrderList GetPantherOrdersFinalCOVID()
+        {
+            YellowstonePathology.Business.Test.PantherOrderList result = new Test.PantherOrderList();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select pso.MasterAccessionNo, pso.ReportNo, pso.OrderTime, pso.PanelSetName, a.PLastName, " +
+                "a.PFirstName, pso.AcceptedTime, pso.FinalTime, t.Result, pso.HoldDistribution, pso.InstrumentOrderDate " +
+                "from tblPanelSetOrder pso " +
+                "join tblAPTIMASARSCoV2TestOrder t on pso.ReportNo = t.ReportNo " +
                 "join tblAccessionOrder a on pso.MasterAccessionNo = a.MasterAccessionNo " +
                 "where TechnicalComponentInstrumentId = 'PNTHR' and pso.Final = 1 order by pso.FinalTime desc;";
 
@@ -2292,33 +2502,36 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetTaskOrderCollection(string acknowledgementType)
+        public static Business.Task.Model.TaskOrderViewList GetTaskOrderViewList(string acknowledgementType)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tblTaskOrder where AcknowledgementType = @AcknowledgementType and " +
-                "OrderDate between date_add(curdate(), Interval -15 Day) and now() order by OrderDate desc; " +
-                "select * from tblTaskOrderDetail tod " +
-                "left outer join tblTaskOrderDetailFedexShipment todf on tod.TaskOrderDetailId = todf.TaskOrderDetailId " +
-                "where TaskOrderId in(select TaskOrderId from tblTaskOrder where " +
-                "AcknowledgementType = @AcknowledgementType and tblTaskOrder.OrderDate between date_add(curdate(), Interval -15 Day) and now()) " +
-                "order by tod.TaskOrderDetailId;");
+            string sql = "select t.TaskOrderId, t.ReportNo, t.MasterAccessionNo, ao.PLastName, TargetDescription, t.OrderDate, su.LastName 'OrderedBy', AcknowledgedDate, pso.PanelSetName, " +
+                "(select TrackingNumber from tblTaskOrderDetail tod join tblTaskOrderDetailFedexShipment todf on tod.TaskOrderDetailId = todf.TaskOrderDetailId where tod.TaskOrderId = t.TaskOrderid limit 1) 'TrackingNumber' " +
+                "from tblTaskOrder t " +
+                "join tblSystemUser su on t.OrderedById = su.UserId " +
+                "join tblPanelSetOrder pso on t.ReportNo = pso.ReportNo " +
+                "join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
+                "where AcknowledgementType = @AcknowledgementType " +
+                "and t.OrderDate between date_add(curdate(), Interval -15 Day) and now() " +
+                "order by t.OrderDate desc;";
+
+            MySqlCommand cmd = new MySqlCommand(sql);
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@AcknowledgementType", acknowledgementType);
-            YellowstonePathology.Business.Task.Model.TaskOrderCollection result = BuildTaskOrderCollection(cmd);
+            Business.Task.Model.TaskOrderViewList result = BuildTaskOrderViewList(cmd);
             return result;
         }
 
-        public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetTaskOrderCollectionByTrackingNumber(string acknowledgementType, string trackingNumber)
+        public static Business.Task.Model.TaskOrderViewList GetTaskOrderViewListByTrackingNumber(string trackingNumber)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tblTaskOrder t " +
-                "join tblTaskOrderDetail tod on t.TaskOrderId = tod.TaskOrderId " +
-                "join tblTaskOrderDetailFedexShipment fedex on tod.TaskOrderDetailId = fedex.TaskOrderDetailId " +
-                "where fedex.TrackingNumber like '" + trackingNumber + "%'; " +
-                "select * from tblTaskOrderDetail tod " +
-                "join tblTaskOrderDetailFedexShipment todf on tod.TaskOrderDetailId = todf.TaskOrderDetailId " +
-                "where todf.TrackingNumber like '" + trackingNumber + "%';");
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@AcknowledgementType", acknowledgementType);
-            YellowstonePathology.Business.Task.Model.TaskOrderCollection result = BuildTaskOrderCollection(cmd);
+            string sql = "select t.ReportNo, t.MasterAccessionNo, ao.PLastName, TargetDescription, t.OrderDate, su.LastName 'OrderedBy', t.AcknowledgedDate, pso.PanelSetName, fedex.TrackingNumber " +
+                "from tblTaskOrder t join tblSystemUser su on t.OrderedById = su.UserId join tblPanelSetOrder pso on t.ReportNo = pso.ReportNo join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
+                "join tblTaskOrderDetail tod on t.TaskOrderId = tod.TaskOrderid " +
+                "join tblTaskOrderDetailFedexShipment fedex on tod.TaskOrderDetailid = fedex.TaskOrderDetailId " +
+                $"where fedex.TrackingNumber like '{trackingNumber}%'; ";
+
+            MySqlCommand cmd = new MySqlCommand(sql);
+            cmd.CommandType = CommandType.Text;            
+            Business.Task.Model.TaskOrderViewList result = BuildTaskOrderViewList(cmd);
             return result;
         }
 
@@ -2475,7 +2688,7 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
-        public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetTasksNotAcknowledged(string assignedTo, string acknowledgementType)
+        public static Business.Task.Model.TaskOrderViewList GetTasksNotAcknowledged(string assignedTo, string acknowledgementType)
         {
             MySqlCommand cmd = new MySqlCommand("select * from tblTaskOrder where tblTaskOrder.AcknowledgementType = @AcknowledgementType " +
                 "and TaskOrderId in (Select TaskOrderId from tblTaskOrderDetail where Acknowledged = 0 and " +
@@ -2485,13 +2698,24 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@AssignedTo", assignedTo);
             cmd.Parameters.AddWithValue("@AcknowledgementType", acknowledgementType);
-            YellowstonePathology.Business.Task.Model.TaskOrderCollection result = BuildTaskOrderCollection(cmd);
+            Business.Task.Model.TaskOrderViewList result = BuildTaskOrderViewList(cmd);
             return result;
         }
 
-        private static Task.Model.TaskOrderCollection BuildTaskOrderCollection(MySqlCommand cmd)
+        public static Business.Task.Model.TaskOrder GetTaskOrder(string taskOrderId)
         {
-            YellowstonePathology.Business.Task.Model.TaskOrderCollection result = new YellowstonePathology.Business.Task.Model.TaskOrderCollection();
+            MySqlCommand cmd = new MySqlCommand("select * from tblTaskOrder where taskOrderId = @TaskOrderId;" +
+                "select * from tblTaskOrderDetail tod left outer join tblTaskOrderDetailFedexShipment todf on tod.TaskOrderDetailId = todf.TaskOrderDetailId " +
+                "where Acknowledged = 0 and tod.AssignedTo = @AssignedTo order by tod.TaskOrderDetailId;");
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@TaskOrderid", taskOrderId);            
+            Business.Task.Model.TaskOrder result = BuildTaskOrder(cmd);
+            return result;
+        }
+
+        private static Task.Model.TaskOrder BuildTaskOrder(MySqlCommand cmd)
+        {
+            YellowstonePathology.Business.Task.Model.TaskOrder result = null;
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
@@ -2503,7 +2727,7 @@ namespace YellowstonePathology.Business.Gateway
                         Task.Model.TaskOrder taskOrder = new Task.Model.TaskOrder();
                         Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(taskOrder, dr);
                         sqlDataReaderPropertyWriter.WriteProperties();
-                        result.Add(taskOrder);
+                        result = taskOrder;
                     }
                     dr.NextResult();
                     while (dr.Read())
@@ -2517,16 +2741,29 @@ namespace YellowstonePathology.Business.Gateway
 
                         Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(taskOrderDetail, dr);
                         sqlDataReaderPropertyWriter.WriteProperties();
-
-                        foreach (Task.Model.TaskOrder taskOrder in result)
-                        {
-                            if (taskOrderDetail.TaskOrderId == taskOrder.TaskOrderId)
-                            {
-                                taskOrder.TaskOrderDetailCollection.Add(taskOrderDetail);
-                                break;
-                            }
-                        }
+                        result.TaskOrderDetailCollection.Add(taskOrderDetail);
                     }
+                }
+            }
+            return result;
+        }
+
+        private static Task.Model.TaskOrderViewList BuildTaskOrderViewList(MySqlCommand cmd)
+        {
+            YellowstonePathology.Business.Task.Model.TaskOrderViewList result = new YellowstonePathology.Business.Task.Model.TaskOrderViewList();
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Task.Model.TaskOrderView taskOrderView = new Task.Model.TaskOrderView();
+                        Business.Persistence.SqlDataReaderPropertyWriter sqlDataReaderPropertyWriter = new Persistence.SqlDataReaderPropertyWriter(taskOrderView, dr);
+                        sqlDataReaderPropertyWriter.WriteProperties();
+                        result.Add(taskOrderView);
+                    }                    
                 }
             }
             return result;
@@ -2534,7 +2771,7 @@ namespace YellowstonePathology.Business.Gateway
 
         public static Test.PanelOrder BuildPanelOrder(XElement panelOrderElement)
         {
-            YellowstonePathology.Business.Panel.Model.PanelCollection panelCollection = YellowstonePathology.Business.Panel.Model.PanelCollection.GetAll();
+            YellowstonePathology.Business.Panel.Model.PanelCollection panelCollection = Business.Panel.Model.PanelCollection.GetAll();
             int panelId = Convert.ToInt32(panelOrderElement.Element("PanelId").Value);
             YellowstonePathology.Business.Panel.Model.Panel panel = panelCollection.GetPanel(panelId);
             Test.PanelOrder panelOrder = Test.PanelOrderFactory.GetPanelOrder(panel);
@@ -3196,7 +3433,7 @@ namespace YellowstonePathology.Business.Gateway
                 "join tblTestOrderReportDistribution trd on a.ReportNo = trd.ReportNo " +
                 "join tblPanelSetOrder pso on trd.ReportNo = pso.ReportNo " +
                 "where trd.TimeOfLastDistribution < a.FinalTime and trd.ScheduledDistributionTime is null and " +
-                "a.FinalTime < date_Add(now(), Interval -15 Minute) and a.DistributeOnFinal = 1 ;";
+                "a.FinalTime < date_Add(now(), Interval -15 Minute) and a.DistributeOnFinal = 1 and pso.DistributionDelayed = 0;";
 
             cmd.CommandType = CommandType.Text;
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
@@ -3225,7 +3462,7 @@ namespace YellowstonePathology.Business.Gateway
                 "join tblPanelSetOrder pso on a.MasterAccessionNo = pso.MasterAccessionNo " +
                 "join tblTestOrderReportDistribution trd on pso.ReportNo = trd.ReportNo " +
                 "where trd.TimeOfLastDistribution < a.FinalTime and trd.ScheduledDistributionTime is null and " +
-                "a.FinalTime < date_Add(now(), Interval -15 Minute) and a.DistributeOnFinal = 1 and a.ReportNo is null;";
+                "a.FinalTime < date_Add(now(), Interval -15 Minute) and a.DistributeOnFinal = 1 and a.ReportNo is null and pso.DistributionDelayed = 0;";
 
             cmd.CommandType = CommandType.Text;
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
@@ -3248,9 +3485,8 @@ namespace YellowstonePathology.Business.Gateway
         {
             List<Business.MasterAccessionNo> result = new List<Business.MasterAccessionNo>();
 
-            MySqlCommand cmd = new MySqlCommand();
-            //cmd.CommandText = "Select distinct MasterAccessionNo from tblPanelSetOrder pso where final = 1 and distribute = 1 and not exists (Select * from tblTestOrderReportDistribution where reportNo = pso.ReportNo)";
-            cmd.CommandText = "Select distinct MasterAccessionNo from tblPanelSetOrder pso where final = 1 and " +
+            MySqlCommand cmd = new MySqlCommand();            
+            cmd.CommandText = "Select distinct MasterAccessionNo from tblPanelSetOrder pso where final = 1 and pso.DistributionDelayed = 0 and " +
                 "pso.FinalTime < date_Add(Now(), Interval -15 Minute) and distribute = 1 and not exists " +
                 "(Select * from tblTestOrderReportDistribution where ReportNo = pso.ReportNo);";
             cmd.CommandType = CommandType.Text;
@@ -3297,7 +3533,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandText = "Select distinct pso.MasterAccessionNo from tblTestOrderReportDistribution tor " +
                 "join tblPanelSetOrder pso on tor.ReportNo = pso.ReportNo " +
                 "where tor.Distributed = 0 and tor.ScheduledDistributionTime is null and pso.Final = 1 and " +
-                "pso.FinalTime < date_Add(now(), Interval -15 Minute) and pso.Distribute = 1 and pso.HoldDistribution = 0;";
+                "pso.FinalTime < date_Add(now(), Interval -15 Minute) and pso.Distribute = 1 and pso.HoldDistribution = 0 and pso.DistributionDelayed = 0;";
 
             cmd.CommandType = CommandType.Text;
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
@@ -3322,7 +3558,7 @@ namespace YellowstonePathology.Business.Gateway
 
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "Select Distinct MasterAccessionNo from tblPanelSetOrder pso where pso.Final = 1 and " +
-                "pso.FinalTime < date_Add(now(), Interval -15 Minute) and pso.ScheduledPublishTime is null and pso.Published = 0;";
+                "pso.FinalTime < date_Add(now(), Interval -15 Minute) and pso.ScheduledPublishTime is null and pso.Published = 0 and pso.DistributionDelayed = 0;";
 
             cmd.CommandType = CommandType.Text;
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
@@ -3373,7 +3609,7 @@ namespace YellowstonePathology.Business.Gateway
             Business.Test.BoneMarrowSummary.OtherReportViewCollection result = new Test.BoneMarrowSummary.OtherReportViewCollection();
 
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "Select pso.ReportNo, pso.MasterAccessionNo, pso.PanelSetName, pso.FinalDate, pso.SummaryReportNo, pso.PanelSetId from " +
+            cmd.CommandText = "Select pso.ReportNo, pso.MasterAccessionNo, pso.PanelSetName, pso.FinalDate, pso.SummaryReportNo, pso.PanelSetId, pso.IncludeOnSummaryReport from " +
                 "tblPanelSetOrder pso join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo where ao.PatientId = @PatientId " +
                 "and pso.MasterAccessionNo != @MasterAccessionNo order by pso.SummaryReportNo DESC, pso.FinalDate DESC;";
 

@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Billing.Model
         {
             if (this.IsOkToPost() == true)
             {
-                YellowstonePathology.Business.PanelSet.Model.PanelSetCollection allPanelSets = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+                YellowstonePathology.Business.PanelSet.Model.PanelSetCollection allPanelSets = Business.PanelSet.Model.PanelSetCollection.GetAll();
                 YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = allPanelSets.GetPanelSet(this.m_PanelSetOrder.PanelSetId);
 
                 YellowstonePathology.Business.Test.PanelSetOrderCPTCodeCollection panelSetOrderCPTCodeSummaryCollection = this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.GetSummaryCollection();

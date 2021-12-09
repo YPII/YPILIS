@@ -38,7 +38,7 @@ namespace YellowstonePathology.Business.Test.CSF3RMutationAnalysis
             if (aliquotOrder != null) specimenDescription += ", Block " + aliquotOrder.Label;
             this.ReplaceText("specimen_description", specimenDescription);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.SetXmlNodeData("date_time_collected", collectionDateTimeString);
 
             if (string.IsNullOrEmpty(testOrder.Comment) == true)

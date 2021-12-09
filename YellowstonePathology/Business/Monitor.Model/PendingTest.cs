@@ -204,7 +204,7 @@ namespace YellowstonePathology.Business.Monitor.Model
 
         private void SetGoalTime(Calendar.HolidayCollection holidays)
         {
-            this.m_GoalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetHoursBetween(this.m_OrderTime, this.m_ExpectedFinalTime.Value, holidays);
+            this.m_GoalTime = Business.Helper.DateTimeExtensions.GetHoursBetween(this.m_OrderTime, this.m_ExpectedFinalTime.Value, holidays);
             
             if (this.m_GoalTime.TotalHours <= 48)
             {
@@ -219,7 +219,7 @@ namespace YellowstonePathology.Business.Monitor.Model
 
         private void SetRunningTime(Calendar.HolidayCollection holidays)
         {
-            this.m_RunningTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetHoursBetween(this.m_OrderTime, DateTime.Now, holidays);
+            this.m_RunningTime = Business.Helper.DateTimeExtensions.GetHoursBetween(this.m_OrderTime, DateTime.Now, holidays);
             if (this.m_RunningTime.TotalHours <= 48)
             {
                 this.m_RunningTimeString = Math.Round(this.m_RunningTime.TotalHours, 0).ToString() + " hrs";

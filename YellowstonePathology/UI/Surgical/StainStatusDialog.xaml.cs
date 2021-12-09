@@ -31,7 +31,7 @@ namespace YellowstonePathology.UI.Surgical
         public StainStatusDialog(int pathologistId)
         {
             this.m_PathologistId = pathologistId;
-            this.m_Pathologists = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetPathologistUsers();
+            this.m_Pathologists = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetPathologistUsers();
             YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.AddUnassignedToUserList(this.m_Pathologists, true);
             YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.AddAllToUserList(this.m_Pathologists, true);
             this.m_Pathologists[0].UserId = -1;
@@ -150,7 +150,7 @@ namespace YellowstonePathology.UI.Surgical
 
         private void FillTestOrderStatusViewCollection()
         {
-            this.TestOrderStatusViewCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetTestOrderStatusViewCollection(this.m_OrderDate, this.m_PathologistId, this.m_Status);
+            this.TestOrderStatusViewCollection = Business.Gateway.AccessionOrderGateway.GetTestOrderStatusViewCollection(this.m_OrderDate, this.m_PathologistId, this.m_Status);
         }
     }
 }

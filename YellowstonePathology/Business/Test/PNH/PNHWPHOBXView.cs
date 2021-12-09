@@ -54,7 +54,7 @@ namespace YellowstonePathology.Business.Test.PNH
             this.AddNextObxElement("Specimen Description: " + specimenOrder.Description, document, "F");
             this.AddNextObxElement("", document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
@@ -107,7 +107,7 @@ namespace YellowstonePathology.Business.Test.PNH
             this.AddNextObxElement("Specimen Description: " + specimenOrder.Description, document, "F");
             this.AddNextObxElement("", document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 

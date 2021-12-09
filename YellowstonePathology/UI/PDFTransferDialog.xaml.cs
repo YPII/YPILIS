@@ -123,7 +123,7 @@ namespace YellowstonePathology.UI
                         this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this);
                         
                         Business.OrderIdParser orderIdParser = new Business.OrderIdParser(masterAccessionNo);
-                        string casePath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+                        string casePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
                         this.m_CaseDocuments = System.IO.Directory.GetFiles(casePath).ToList<string>();                        
                     }                    
                 }                               
@@ -156,7 +156,7 @@ namespace YellowstonePathology.UI
 
                     string sourcePDFFileName = (string)this.ListViewFiles.SelectedItem;
                     Business.OrderIdParser orderIdParser = new Business.OrderIdParser(panelSetOrder.ReportNo);
-                    string casePath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+                    string casePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
 
                     if (panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument)
                     {                        
@@ -328,7 +328,7 @@ namespace YellowstonePathology.UI
 
                 this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(this.m_MasterAccessionNo, this);
                 Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_MasterAccessionNo);
-                string casePath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+                string casePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
                 this.m_CaseDocuments = System.IO.Directory.GetFiles(casePath).ToList<string>();
 
                 this.NotifyPropertyChanged("AccessionOrder");

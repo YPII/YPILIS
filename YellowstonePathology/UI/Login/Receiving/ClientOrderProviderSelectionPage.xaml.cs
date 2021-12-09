@@ -34,7 +34,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         public ClientOrderProviderSelectionPage(YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder)
 		{
 			this.m_ClientOrder = clientOrder;
-            this.m_PhysicianClientCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientListByClientIdV2(this.m_ClientOrder.ClientId);
+            this.m_PhysicianClientCollection = Business.Gateway.PhysicianClientGateway.GetPhysicianClientListByClientIdV2(this.m_ClientOrder.ClientId);
 
 			InitializeComponent();
 
@@ -85,7 +85,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 		private void SetPhysician(YellowstonePathology.Business.Client.Model.PhysicianClient physicianClient)
 		{
-			YellowstonePathology.Business.Domain.Physician physician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(physicianClient.PhysicianId);
+			YellowstonePathology.Business.Domain.Physician physician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(physicianClient.PhysicianId);
 			if (physician != null)
 			{
 				this.m_ClientOrder.ProviderId = physician.Npi;
@@ -104,7 +104,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 		public void TextBoxClientSearch_KeyUp(object sender, RoutedEventArgs args)
 		{			
-            this.m_PhysicianClientCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientListByPhysicianLastNameV2(this.TextBoxClientSearch.Text);
+            this.m_PhysicianClientCollection = Business.Gateway.PhysicianClientGateway.GetPhysicianClientListByPhysicianLastNameV2(this.TextBoxClientSearch.Text);
 			this.listViewPhysicianClient.SelectedIndex = -1;
             this.NotifyPropertyChanged("PhysicianClientCollection");
 		}		

@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
 			this.m_OrderingPhysician = orderingPhysician;
 
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(13);
-            this.m_SigningPathologist = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(panelSetOrder.AssignedToId);
+            this.m_SigningPathologist = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(panelSetOrder.AssignedToId);
 
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(panelSetOrder.ReportNo);
             if (amendmentCollection.Count == 0)
@@ -47,12 +47,12 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
             obrElement.Add(obr01Element);
             
 
-            XElement obr03Element = new XElement("OBR.3");
-            XElement obr0301Element = new XElement("OBR.3.1", this.m_ReportNo);
-            XElement obr0302Element = new XElement("OBR.3.2", "YPILIS");
-            obr03Element.Add(obr0301Element);
-            obr03Element.Add(obr0302Element);
-            obrElement.Add(obr03Element);
+            XElement obr02Element = new XElement("OBR.2");
+            XElement obr0201Element = new XElement("OBR.2.1", this.m_ReportNo);
+            XElement obr0202Element = new XElement("OBR.2.2", "YPILIS");
+            obr02Element.Add(obr0201Element);
+            obr02Element.Add(obr0202Element);
+            obrElement.Add(obr02Element);
 
             XElement obr04Element = new XElement("OBR.4");
             XElement obr0401Element = new XElement("OBR.4.1", "YPI");
@@ -83,6 +83,13 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
 			obr16Element.Add(obr1603Element);
 			YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(obr16Element, obr1604Element);
 			obrElement.Add(obr16Element);
+
+            XElement obr20Element = new XElement("OBR.20");
+            XElement obr2001Element = new XElement("OBR.20.1", this.m_ReportNo);
+            XElement obr2002Element = new XElement("OBR.20.2", "YPILIS");
+            obr20Element.Add(obr2001Element);
+            obr20Element.Add(obr2002Element);
+            obrElement.Add(obr20Element);
 
             XElement obr22Element = new XElement("OBR.22");
             XElement obr2201Element = new XElement("OBR.22.1", DateTime.Now.ToString(m_DateFormat));

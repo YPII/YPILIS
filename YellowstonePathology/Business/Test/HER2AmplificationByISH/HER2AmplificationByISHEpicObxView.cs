@@ -87,7 +87,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextObxElement("Duration of fixation: " + specimenOrder.FixationDurationString, document, "F");
             this.AddNextObxElement("Sample adequacy: " + panelSetOrder.SampleAdequacy, document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
             
@@ -167,7 +167,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextObxElement("Duration of fixation: " + specimenOrder.FixationDurationString, document, "F");
             this.AddNextObxElement("Sample adequacy: " + panelSetOrder.SampleAdequacy, document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
@@ -244,7 +244,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextObxElement("Duration of fixation: " + specimenOrder.FixationDurationString, document, "F");
             this.AddNextObxElement("Sample adequacy: " + panelSetOrder.SampleAdequacy, document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 
@@ -328,7 +328,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
             this.AddNextObxElement("Duration of fixation: " + specimenOrder.FixationDurationString, document, "F");
             this.AddNextObxElement("Sample adequacy: " + panelSetOrder.SampleAdequacy, document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");
             this.AddNextObxElement(string.Empty, document, "F");
 

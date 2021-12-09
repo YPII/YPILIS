@@ -35,7 +35,8 @@ namespace YellowstonePathology.Business.Audit.Model
             this.Add(new RASRAForMetastaticColorectalCancerAudit(accessionOrder));
             this.Add(new PNHOnBoneMarrowSpecimenAudit(accessionOrder));
             this.Add(new PDL1NonsmallCellLungCancerAudit(accessionOrder));
-            this.Add(new BoneMarrowSummaryAudit(accessionOrder));            
+            this.Add(new BoneMarrowSummaryAudit(accessionOrder));
+            this.Add(new GISTAudit(accessionOrder));
         }
 
         public AuditCollection GetAuditMessageCollection()
@@ -70,6 +71,7 @@ namespace YellowstonePathology.Business.Audit.Model
                 if (audit.GetType() == typeof(LynchSyndromeAudit) ||
                     audit.GetType() == typeof(CCCPAudit) ||
                     audit.GetType() == typeof(BRAFMetastaticMelanomaAudit) ||
+                    audit.GetType() == typeof(GISTAudit) ||
                     audit.GetType() == typeof(HPV1618ForSiteAudit) ||
                     audit.GetType() == typeof(RASRAForMetastaticColorectalCancerAudit) ||
                     audit.GetType() == typeof(PNHOnBoneMarrowSpecimenAudit) ||

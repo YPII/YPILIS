@@ -65,7 +65,7 @@ namespace YellowstonePathology.UI
 
 			this.m_WavPlayer = new System.Media.SoundPlayer();
 
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 
             this.m_TabItemFlow = new TabItem();            
             this.m_TabItemFlow.Header = SetHeader("Flow", "Flow.ico");
@@ -908,7 +908,7 @@ namespace YellowstonePathology.UI
 
         private void MenuItemTesting_Click(object sender, RoutedEventArgs e)
         {
-            TestWindow window = new TestWindow();
+            TestX window = new TestX();
             window.Show();
         }
 
@@ -951,7 +951,7 @@ namespace YellowstonePathology.UI
 
         private void MenuItemSimulateVantageScan_Click(object sender, RoutedEventArgs e)
         {
-            string key = YellowstonePathology.Business.BarcodeScanning.VantageBarcode.SimulateScan();
+            string key = Business.BarcodeScanning.VantageBarcode.SimulateScan();
             YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance.SimulateScanReceived(key);
         }
 
@@ -1080,6 +1080,24 @@ namespace YellowstonePathology.UI
         {
             COVID.COVIDTestingDialog covidTestingDialog = new COVID.COVIDTestingDialog();
             covidTestingDialog.ShowDialog();
+        }
+
+        private void MenuItemManagementReports_Click(object sender, RoutedEventArgs e)
+        {
+            ManagementReports.ReportSelection reportSelection = new ManagementReports.ReportSelection();
+            reportSelection.ShowDialog();
+        }
+
+        private void MenuItemSyncTest_Click(object sender, RoutedEventArgs e)
+        {
+            TestEnvironment.Sync();
+            MessageBox.Show("Test Environment has been synchronized.");
+        }
+
+        private void MenuItemProstateBiopsyKit_Click(object sender, RoutedEventArgs e)
+        {
+            ProstateBiopsyKitDialog prostateBiopsyKitDialog = new ProstateBiopsyKitDialog();
+            prostateBiopsyKitDialog.ShowDialog();
         }
     }
 }

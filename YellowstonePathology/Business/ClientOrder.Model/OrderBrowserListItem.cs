@@ -15,6 +15,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
         private string m_PFirstName;
         private string m_OrderedBy;
         private Nullable<DateTime> m_OrderTime;
+        private Nullable<DateTime> m_DateOrderReceived;
         private string m_ProviderName;
         private string m_ClientName;
         private bool m_Submitted;
@@ -74,6 +75,14 @@ namespace YellowstonePathology.Business.ClientOrder.Model
         {
             get { return this.m_OrderTime; }
             set { this.m_OrderTime = value; }
+        }
+
+        [DataMember]
+        [PersistentProperty()]
+        public Nullable<DateTime> DateOrderReceived
+        {
+            get { return this.m_DateOrderReceived; }
+            set { this.m_DateOrderReceived = value; }
         }
 
         [DataMember]

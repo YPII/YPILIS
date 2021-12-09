@@ -46,7 +46,7 @@ namespace YellowstonePathology.Business.Test.HPV1618ByPCR
                 this.HandleLongString(panelSetOrder.Comment, document);
             }
 
-            if (panelSetOrder.Indication == YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRIndication.SquamousCellCarcinoma)
+            if (panelSetOrder.Indication == Business.Test.HPV1618ByPCR.HPV1618ByPCRIndication.SquamousCellCarcinoma)
             {
                 this.AddNextNteElement(panelSetOrder.Signature, document);
                 this.AddNextNteElement("*** E-signed " + panelSetOrder.FinalTime.Value.ToString("MM/dd/yyyy HH:mm") + "***", document);
@@ -61,11 +61,11 @@ namespace YellowstonePathology.Business.Test.HPV1618ByPCR
             this.AddNextNteElement("Specimen: " + description, document);
 			this.AddBlankNteElement(document);
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextNteElement("Collection Date/Time: " + collectionDateTimeString, document);
             this.AddBlankNteElement(document);
 
-            if (panelSetOrder.Indication == YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRIndication.SquamousCellCarcinoma)
+            if (panelSetOrder.Indication == Business.Test.HPV1618ByPCR.HPV1618ByPCRIndication.SquamousCellCarcinoma)
             {
                 this.AddNextNteElement("Interpretation:", document);
                 this.HandleLongString(panelSetOrder.Interpretation, document);

@@ -558,9 +558,9 @@ namespace YellowstonePathology.Business.Domain
         public YellowstonePathology.Business.Client.Model.StandingOrderCollection GetStandingOrderCollection()
         {
             YellowstonePathology.Business.Client.Model.StandingOrderCollection result = new YellowstonePathology.Business.Client.Model.StandingOrderCollection();
-            YellowstonePathology.Business.Client.Model.StandingOrder hpvStandingOrder = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.m_HPVStandingOrderCode);
+            YellowstonePathology.Business.Client.Model.StandingOrder hpvStandingOrder = Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.m_HPVStandingOrderCode);
             result.Add(hpvStandingOrder);
-            YellowstonePathology.Business.Client.Model.StandingOrder hpv1618StandingOrder = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.m_HPV1618StandingOrderCode);
+            YellowstonePathology.Business.Client.Model.StandingOrder hpv1618StandingOrder = Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.m_HPV1618StandingOrderCode);
             result.Add(hpv1618StandingOrder);
             return result;
         }

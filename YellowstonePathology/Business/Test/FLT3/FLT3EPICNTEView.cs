@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.FLT3
 		public override void ToXml(XElement document)
 		{
 			PanelSetOrderFLT3 panelSetOrder = (PanelSetOrderFLT3)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(panelSetOrder.PanelSetId);
 
 			//Add the first element as narrative for Nikki to see.
 			Business.HL7View.EPIC.EPICBeakerNarrativeOBXView.AddElement(document);
@@ -46,7 +46,7 @@ namespace YellowstonePathology.Business.Test.FLT3
             this.AddNextNTEElement("Specimen Information:", document);
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(panelSetOrder.OrderedOn, panelSetOrder.OrderedOnId);
 			this.AddNextNTEElement("Specimen Identification: " + specimenOrder.Description, document);
-			string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+			string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
 			this.AddNextNTEElement("Collection Date/Time: " + collectionDateTimeString, document);
 
 			this.AddNextNTEElement("", document);

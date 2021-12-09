@@ -30,7 +30,7 @@ namespace YellowstonePathology.UI.Cytology
         {
             this.m_SystemIdentity = systemIdentity;
             this.m_Message = message;
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;			
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;			
 
 			InitializeComponent();
 

@@ -28,10 +28,14 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.m_Quantity = quantity;
             this.m_MasterAccessionNo = masterAccessionNo;
             this.m_OrderingPhysician = orderingPhysician;
-            YellowstonePathology.Business.Billing.Model.CDM cdm = YellowstonePathology.Business.Billing.Model.CDMCollection.Instance.GetCDMS(this.m_CptCode.Code, "SVH");
+            YellowstonePathology.Business.Billing.Model.CDM cdm = Business.Billing.Model.CDMCollection.Instance.GetCDMS(this.m_CptCode.Code, "SVH");
             if(cdm != null)
             {
                 this.m_CDMCode = cdm.CDMCode;
+
+                //Unmark this when testing SVH
+                //this.m_CDMCode = cdm.CDMCodeNew;
+
                 this.m_ProcedureName = cdm.ProcedureName;
             }
         }
@@ -68,6 +72,10 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 
             XElement ft110Element = new XElement("FT1.10", this.m_Quantity);            
             ft1Element.Add(ft110Element);
+
+            //unmark this when testing new inteface with SCL
+            //XElement ft130Element = new XElement("FT1.13", "502");
+            //ft1Element.Add(ft130Element);
 
             XElement ft118Element = new XElement("FT1.18", "I");
             ft1Element.Add(ft118Element);

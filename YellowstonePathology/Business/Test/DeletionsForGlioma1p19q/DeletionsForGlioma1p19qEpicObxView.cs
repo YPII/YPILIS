@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.DeletionsForGlioma1p19q
 		public override void ToXml(XElement document)
 		{
 			DeletionsForGlioma1p19qTestOrder testOrder = (DeletionsForGlioma1p19qTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(testOrder.PanelSetId);
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(testOrder.PanelSetId);
             this.AddHeader(document, testOrder, panelSet.PanelSetName);
 
             this.AddNextObxElement("", document, "F");
@@ -37,7 +37,7 @@ namespace YellowstonePathology.Business.Test.DeletionsForGlioma1p19q
             this.AddNextObxElement("Specimen Information:", document, "F");
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(testOrder.OrderedOn, testOrder.OrderedOnId);
 			this.AddNextObxElement("Specimen Identification: " + specimenOrder.Description, document, "F");
-			string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+			string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
 			this.AddNextObxElement("Collection Date/Time: " + collectionDateTimeString, document, "F");
 
 			this.AddNextObxElement("", document, "F");

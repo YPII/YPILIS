@@ -54,13 +54,31 @@ namespace YellowstonePathology.Business.Billing.Model
 			return result;
 		}
 
-		public virtual int GetBillableCytochemicalForMicroorganismsStainCount()
+        public virtual int GetBillableCrystallographyStainCount()
+        {
+            int result = this.TestOrderCollection.GetBillableCrystallographyStainCount();
+            return result;
+        }
+
+        public virtual int GetBillablePerformedByHandStainCount()
+        {            
+            int result = this.TestOrderCollection.GetBillablePerformedByHandStainCount();
+            return result;
+        }
+
+        public virtual int GetBillableCytochemicalForMicroorganismsStainCount()
 		{
 			int result = this.TestOrderCollection.GetCytochemicalForMicroorganismsStainCount();
 			return result;
 		}
 
-		public virtual int GetBillableIHCTestOrderCount()
+        public virtual int GetBillableWrightsStainCount()
+        {
+            int result = this.TestOrderCollection.GetWrightsStainCount();
+            return result;
+        }
+
+        public virtual int GetBillableIHCTestOrderCount()
 		{
 			int result = this.TestOrderCollection.GetChargeableIHCTestOrderCount();
 			return result;

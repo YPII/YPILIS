@@ -43,8 +43,8 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             this.HasProfessionalComponent = false;
             this.ScreeningType = "Final Result";
 
-            this.m_ReportReferences = YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapResult.References;
-            this.m_Method = YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapResult.Method;
+            this.m_ReportReferences = Business.Test.ThinPrepPap.ThinPrepPapResult.References;
+            this.m_Method = Business.Test.ThinPrepPap.ThinPrepPapResult.Method;
         }
 
         public override void OrderInitialTests(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Interface.IOrderTarget orderTarget)
@@ -612,10 +612,10 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
         public void CalculateExpectedFinalTimeWhenAddingPanel()
         {
             ThinPrepPapTest test = new ThinPrepPap.ThinPrepPapTest();
-            DateTime originalExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetExpectedFinalTime(this.m_OrderTime.Value, test.ExpectedDuration);
+            DateTime originalExpectedFinalTime = Business.Helper.DateTimeExtensions.GetExpectedFinalTime(this.m_OrderTime.Value, test.ExpectedDuration);
             if(this.m_ExpectedFinalTime <= originalExpectedFinalTime)
             {
-                this.m_ExpectedFinalTime = YellowstonePathology.Business.Helper.DateTimeExtensions.GetExpectedFinalTime(this.m_ExpectedFinalTime.Value, new TimeSpan(24, 0, 0));
+                this.m_ExpectedFinalTime = Business.Helper.DateTimeExtensions.GetExpectedFinalTime(this.m_ExpectedFinalTime.Value, new TimeSpan(24, 0, 0));
             }
         }
 
@@ -632,8 +632,8 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             if (this.m_PanelOrderCollection.HasPathologistReview() == true)
             {
                 this.HasProfessionalComponent = true;
-                this.ProfessionalComponentFacilityId = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId;
-                this.ProfessionalComponentBillingFacilityId = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS").FacilityId;
+                this.ProfessionalComponentFacilityId = Business.User.UserPreferenceInstance.Instance.UserPreference.FacilityId;
+                this.ProfessionalComponentBillingFacilityId = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS").FacilityId;
             }
             else
             {

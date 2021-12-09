@@ -128,7 +128,7 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
             {
                 blockDescription = " - Block " + aliquotOrder.Label;
             }
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
 
             this.AddNextNteElement("Specimen Information", document);
             this.AddNextNteElement("Specimen site and type: " + specimenOrder.Description + blockDescription, document);

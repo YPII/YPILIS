@@ -69,7 +69,7 @@ namespace YellowstonePathology.Business.Audit.Model
 			if (accessionOrder.PanelSetOrderCollection.Exists(womensHealthProfileTest.PanelSetId) == true)
             {
 				YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder womensHealthProfileTestOrder = (YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(womensHealthProfileTest.PanelSetId);
-				YellowstonePathology.Business.Client.Model.ReflexOrder reflexOrder = YellowstonePathology.Business.Client.Model.ReflexOrderCollection.GetByReflexByOrderCode(womensHealthProfileTestOrder.HPV1618ReflexOrderCode);                
+				YellowstonePathology.Business.Client.Model.ReflexOrder reflexOrder = Business.Client.Model.ReflexOrderCollection.GetByReflexByOrderCode(womensHealthProfileTestOrder.HPV1618ReflexOrderCode);                
 
                 if (reflexOrder.IsRequired(accessionOrder) == true)
                 {

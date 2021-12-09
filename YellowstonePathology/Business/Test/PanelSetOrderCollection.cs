@@ -799,6 +799,18 @@ namespace YellowstonePathology.Business.Test
             return null;
         }
 
+        public YellowstonePathology.Business.Test.PanelSetOrder GetFirstCOVIDTest()
+        {
+            foreach (YellowstonePathology.Business.Test.PanelSetOrder item in this)
+            {
+                if (item.PanelSetId == 400 || item.PanelSetId == 415)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
         public YellowstonePathology.Business.Test.PanelSetOrder GetPanelSetOrder(int panelSetId, string orderedOnId, bool restrictToOrderedOn)
         {
             PanelSetOrder result = null;
@@ -1191,7 +1203,7 @@ namespace YellowstonePathology.Business.Test
         public List<Business.Test.PanelSetOrder> GetBoneMarrowAccessionSummaryList(string summaryReportNo, bool includeOtherReports)
         {
             List<Business.Test.PanelSetOrder> result = new List<PanelSetOrder>();
-            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSets = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSets = Business.PanelSet.Model.PanelSetCollection.GetAll();
 
             Business.Test.PanelSetOrderCollection flow = new PanelSetOrderCollection();
             Business.Test.PanelSetOrderCollection cyto = new PanelSetOrderCollection();
@@ -1206,10 +1218,10 @@ namespace YellowstonePathology.Business.Test
                 if (exclusionList.IndexOf(pso.PanelSetId) == -1)
                 {
                     YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSets.GetPanelSet(pso.PanelSetId);
-                    if (panelSet.CaseType == YellowstonePathology.Business.CaseType.FlowCytometry) flow.Insert(0, pso);
-                    else if (panelSet.CaseType == YellowstonePathology.Business.CaseType.Cytogenetics) cyto.Insert(0, pso);
-                    else if (panelSet.CaseType == YellowstonePathology.Business.CaseType.FISH) fish.Insert(0, pso);
-                    else if (panelSet.CaseType == YellowstonePathology.Business.CaseType.Molecular) molecular.Insert(0, pso);
+                    if (panelSet.CaseType == Business.CaseType.FlowCytometry) flow.Insert(0, pso);
+                    else if (panelSet.CaseType == Business.CaseType.Cytogenetics) cyto.Insert(0, pso);
+                    else if (panelSet.CaseType == Business.CaseType.FISH) fish.Insert(0, pso);
+                    else if (panelSet.CaseType == Business.CaseType.Molecular) molecular.Insert(0, pso);
                     else other.Insert(0, pso);
                 }
             }
@@ -1255,6 +1267,23 @@ namespace YellowstonePathology.Business.Test
             result.Add(361);
             result.Add(363); //Authorization For Verbal Test Request
 
+            return result;
+        }
+
+        public bool DoesSpecimenHavCPTCodes(string specimenOrderId)
+        {
+            bool result = false;
+            foreach(PanelSetOrder panelSetOrder in this)
+            {
+                foreach(PanelSetOrderCPTCode panelSetOrderCPTCode in panelSetOrder.PanelSetOrderCPTCodeCollection)
+                {
+                    if(panelSetOrderCPTCode.SpecimenOrderId == specimenOrderId)
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+            }
             return result;
         }
 

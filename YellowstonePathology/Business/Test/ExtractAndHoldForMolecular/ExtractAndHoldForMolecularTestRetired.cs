@@ -13,10 +13,10 @@ namespace YellowstonePathology.Business.Test.ExtractAndHoldForMolecular
             this.m_PanelSetId = 230;
             this.m_PanelSetName = "Extract And Hold For Molecular - Retired";
             this.m_Abbreviation = "Extract And Hold For Molecular";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = false;
             this.m_HasProfessionalComponent = false;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.None;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.None;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterT();
             this.m_Active = false;
             this.m_NeverDistribute = true;

@@ -10,7 +10,11 @@ namespace YellowstonePathology.Business.Billing.Model
         public static BillableObject GetBillableObject(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo)
         {
             BillableObject result = null;
-            if (IsMountainViewNeo(accessionOrder, reportNo) == true)
+            if(IsCOVID(accessionOrder, reportNo) == true)
+            {
+                result = new BillableObjectCOVID(accessionOrder, reportNo);
+            }
+            else if(IsMountainViewNeo(accessionOrder, reportNo) == true)
             {
                 result = new BillableObjectMountainViewNeo(accessionOrder, reportNo);
             }
@@ -26,6 +30,17 @@ namespace YellowstonePathology.Business.Billing.Model
             {
                 result = GetStandardBillableObject(accessionOrder, reportNo);
             }            
+            return result;
+        } 
+        
+        public static bool IsCOVID(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo)
+        {
+            bool result = false;
+            Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
+            if(panelSetOrder.PanelSetId == 400 || panelSetOrder.PanelSetId == 415)
+            {
+                result = true;
+            }
             return result;
         }
 
@@ -45,7 +60,7 @@ namespace YellowstonePathology.Business.Billing.Model
             bool result = false;
 
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
-            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
             YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
 
             if (panelSet is YellowstonePathology.Business.Test.AutopsyTechnicalOnly.AutopsyTechnicalOnlyTest == true)
@@ -58,12 +73,13 @@ namespace YellowstonePathology.Business.Billing.Model
         public static bool IsMedicareProstateNeedleBiopsy(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo)
         {
             bool result = false;
+            /*
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
             if (panelSetOrder.PanelSetId == 13)
             {
                 if (accessionOrder.PrimaryInsurance == "Medicare")
                 {
-                    YellowstonePathology.Business.Specimen.Model.Specimen prostateNeedleBiopsy = YellowstonePathology.Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNPRSTTNDLBPSY"); // Definition.ProstateNeedleBiopsy();
+                    YellowstonePathology.Business.Specimen.Model.Specimen prostateNeedleBiopsy = Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen("SPCMNPRSTTNDLBPSY"); // Definition.ProstateNeedleBiopsy();
                     foreach (YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder in accessionOrder.SpecimenOrderCollection)
                     {
                         if (specimenOrder.SpecimenId == prostateNeedleBiopsy.SpecimenId)
@@ -74,6 +90,7 @@ namespace YellowstonePathology.Business.Billing.Model
                     }
                 }
             }
+            */
             return result;
         }
 
@@ -81,10 +98,10 @@ namespace YellowstonePathology.Business.Billing.Model
         {
             bool result = false;
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
-            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection mountainViewGroup = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("44");
+            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection mountainViewGroup = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("44");
             if(mountainViewGroup.ClientIdExists(accessionOrder.ClientId) == true)
             {
-                YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+                YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
                 if (panelSetOrder.TechnicalComponentFacilityId == neogenomicsIrvine.FacilityId)
                 {
                     //exclude flow performed by NEO                    
@@ -115,7 +132,7 @@ namespace YellowstonePathology.Business.Billing.Model
             BillableObject result = null;
 
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
-            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
             YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
 
 			if (panelSetOrder is YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder == true)

@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Persistence
             switch (databaseName)
             {
                 case "YPIDATA":                    
-                    this.m_ConnectionString = YellowstonePathology.Properties.Settings.Default.CurrentConnectionString;
+                    this.m_ConnectionString = Properties.Settings.Default.CurrentConnectionString;
                     break;
                 //case "YPILocalData":
                 //    this.m_ConnectionString = @"Data Source=.\LIS;Initial Catalog=YPILocalData;Integrated Security=True";
@@ -98,7 +98,9 @@ namespace YellowstonePathology.Business.Persistence
                             cn.Close();
                         }
                         throw(ex);
-                    }                
+                    }
+
+                    cn.Close();
                 }
             }
             return result;

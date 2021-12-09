@@ -22,7 +22,7 @@ namespace YellowstonePathology.UI.Login
 
         public LabEventLogDialog(int specimenLogId)
         {
-			m_OrderCommentLogCollection = YellowstonePathology.Business.Gateway.OrderCommentGateway.GetOrderCommentsForSpecimenLogId(specimenLogId);
+			m_OrderCommentLogCollection = Business.Gateway.OrderCommentGateway.GetOrderCommentsForSpecimenLogId(specimenLogId);
             InitializeComponent();
             
             this.DataContext = this;

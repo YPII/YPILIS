@@ -64,7 +64,7 @@ namespace YellowstonePathology.UI
 		{
 			if (!string.IsNullOrEmpty(this.TextBoxReportNo.Text))
 			{
-				this.m_SlideOrderCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetSlideOrdersByReportNo(this.TextBoxReportNo.Text);
+				this.m_SlideOrderCollection = Business.Gateway.SlideAccessionGateway.GetSlideOrdersByReportNo(this.TextBoxReportNo.Text);
 				NotifyPropertyChanged("SlideOrderCollection");
 			}
 		}
@@ -82,7 +82,7 @@ namespace YellowstonePathology.UI
 			if (this.ListBoxSlides.SelectedItem != null)
 			{
 				YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder = (YellowstonePathology.Business.Slide.Model.SlideOrder)this.ListBoxSlides.SelectedItem;
-				this.m_SlideTrackingLogCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetMaterialTrackingLogCollectionByMaterialId(slideOrder.SlideOrderId.ToString());
+				this.m_SlideTrackingLogCollection = Business.Gateway.SlideAccessionGateway.GetMaterialTrackingLogCollectionByMaterialId(slideOrder.SlideOrderId.ToString());
 				NotifyPropertyChanged("SlideTrackingLogCollection");
 			}
 		}
@@ -100,7 +100,7 @@ namespace YellowstonePathology.UI
             if (this.ListBoxSlides.SelectedItem != null)
             {
                 YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder = (YellowstonePathology.Business.Slide.Model.SlideOrder)this.ListBoxSlides.SelectedItem;
-				this.m_SlideTrackingLogCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetMaterialTrackingLogCollectionByMaterialId(slideOrder.SlideOrderId.ToString());
+				this.m_SlideTrackingLogCollection = Business.Gateway.SlideAccessionGateway.GetMaterialTrackingLogCollectionByMaterialId(slideOrder.SlideOrderId.ToString());
                 NotifyPropertyChanged("SlideTrackingLogCollection");
             }
         }

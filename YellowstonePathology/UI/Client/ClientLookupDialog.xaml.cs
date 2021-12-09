@@ -98,7 +98,7 @@ namespace YellowstonePathology.UI.Client
 
         private void DoClientSearch(string clientName)
         {
-            this.m_ClientCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientsByClientName(clientName);
+            this.m_ClientCollection = Business.Gateway.PhysicianClientGateway.GetClientsByClientName(clientName);
             NotifyPropertyChanged("ClientCollection");
             this.ListViewClients.SelectedIndex = -1;
         }

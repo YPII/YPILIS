@@ -34,7 +34,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 			this.m_AccessionOrder = accessionOrder;
             this.m_FacilityCollection = Business.Facility.Model.FacilityCollection.Instance;
 
-			this.m_PathologistUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
+			this.m_PathologistUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
 			
 			InitializeComponent();
 
@@ -133,7 +133,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 Business.Test.PanelSetOrder panelSetOrder = (Business.Test.PanelSetOrder)this.ListViewPanelSets.SelectedItem;
                 if (panelSetOrder.Final == true && panelSetOrder.FinaledById == 0 && panelSetOrder.Signature == null && panelSetOrder.AssignedToId != 0)
                 {
-                    Business.User.SystemUser systemUser = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(panelSetOrder.AssignedToId);
+                    Business.User.SystemUser systemUser = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(panelSetOrder.AssignedToId);
                     panelSetOrder.FinaledById = systemUser.UserId;
                     panelSetOrder.Signature = systemUser.Signature;
                 }

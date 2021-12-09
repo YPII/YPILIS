@@ -14,7 +14,10 @@ namespace YellowstonePathology.Business.Client.Model
             {
                 case YellowstonePathology.Business.Client.Model.FaxPhysicianClientDistribution.FAX:
                     physicianClientDistribution = new FaxPhysicianClientDistribution();
-                    break;                                                       
+                    break;
+                case YellowstonePathology.Business.Client.Model.ECWRiverstonePhysicianClientDistribution.ECWRIVERSTONE:
+                    physicianClientDistribution = new ECWRiverstonePhysicianClientDistribution();
+                    break;
                 case YellowstonePathology.Business.Client.Model.ECWPhysicianClientDistribution.ECW:
                     physicianClientDistribution = new ECWPhysicianClientDistribution();
                     break;
@@ -30,6 +33,9 @@ namespace YellowstonePathology.Business.Client.Model
                     break;
                 case YellowstonePathology.Business.Client.Model.MediTechPhysicianClientDistribution.MEDITECH:
                     physicianClientDistribution = new MediTechPhysicianClientDistribution();
+                    break;
+                case YellowstonePathology.Business.Client.Model.MediTechNMHPhysicianClientDistribution.MEDITECHNMH:
+                    physicianClientDistribution = new MediTechNMHPhysicianClientDistribution();
                     break;
                 case YellowstonePathology.Business.Client.Model.EPICAndFaxPhysicianClientDistribution.EPICANDFAX:
                     physicianClientDistribution = new EPICAndFaxPhysicianClientDistribution();

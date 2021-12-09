@@ -27,7 +27,7 @@ namespace YellowstonePathology.UI
 		public TypingShortcutUserControl(YellowstonePathology.Business.User.SystemIdentity systemIdentity, object writer)
         {            
             this.m_SystemIdentity = systemIdentity;
-            this.m_TypingShortcutCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetTypingShortcutCollectionByUser(this.m_SystemIdentity.User.UserId);
+            this.m_TypingShortcutCollection = Business.Gateway.AccessionOrderGateway.GetTypingShortcutCollectionByUser(this.m_SystemIdentity.User.UserId);
             this.m_LimitedTypingShortcutCollection = this.m_TypingShortcutCollection;
             this.m_Writer = writer;
             InitializeComponent();
@@ -85,7 +85,7 @@ namespace YellowstonePathology.UI
 
         private void TypingShortcutDialogAdd_Finished(object sender, CustomEventArgs.TypingShortcutReturnEventArgs e)
         {
-            this.m_TypingShortcutCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetTypingShortcutCollectionByUser(this.m_SystemIdentity.User.UserId);
+            this.m_TypingShortcutCollection = Business.Gateway.AccessionOrderGateway.GetTypingShortcutCollectionByUser(this.m_SystemIdentity.User.UserId);
             this.m_LimitedTypingShortcutCollection = this.m_TypingShortcutCollection;
             this.NotifyPropertyChanged("LimitedTypingShortcutCollection");
         }

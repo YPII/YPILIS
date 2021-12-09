@@ -14,8 +14,8 @@ namespace YellowstonePathology.Business.Test.ReticulatedPlateletAnalysis
 			this.m_AllowMultiplePerAccession = true;
             this.m_ExpectedDuration = TimeSpan.FromHours(24);
             this.m_Active = true;
-            this.m_CaseType = this.m_CaseType = YellowstonePathology.Business.CaseType.FlowCytometry;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
+            this.m_CaseType = this.m_CaseType = Business.CaseType.FlowCytometry;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
@@ -27,7 +27,7 @@ this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
             this.m_HasProfessionalComponent = false;
             this.m_ProfessionalComponentFacility = null;
 
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;
             this.m_TechnicalComponentBillingFacility = ypi;
 

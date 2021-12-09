@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Reports
 
 		public void CreateReport(DateTime reportDate)
 		{
-			YellowstonePathology.Business.Domain.OrderLogCollection orderLogCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetOrderLogCollectionByReportDate(reportDate);
+			YellowstonePathology.Business.Domain.OrderLogCollection orderLogCollection = Business.Gateway.AccessionOrderGateway.GetOrderLogCollectionByReportDate(reportDate);
 
 			this.m_ReportTemplate = @"\\CFileServer\documents\Reports\Templates\LabOrdersLog1.xml";
 

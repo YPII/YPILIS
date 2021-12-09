@@ -41,7 +41,7 @@ namespace YellowstonePathology.UI.Test
 			this.m_SystemIdentity = systemIdentity;
 			this.m_PageNavigator = pageNavigator;
 
-            this.m_IndicationList = YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRIndication.GetIndicationList();
+            this.m_IndicationList = Business.Test.HPV1618ByPCR.HPV1618ByPCRIndication.GetIndicationList();
 			this.m_PageHeaderText = "HPV Genotypes 16 and 18 By PCR Results For: " + this.m_AccessionOrder.PatientDisplayName;
 			
 			InitializeComponent();
@@ -101,11 +101,11 @@ namespace YellowstonePathology.UI.Test
 			YellowstonePathology.Business.Rules.MethodResult methodResult = this.m_HPV1618ByPCRTestOrder.IsOkToFinalize();
 			if (methodResult.Success == true)
 			{
-				YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRResultCollection resultCollection = YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRResultCollection.GetAllResults();
+				YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRResultCollection resultCollection = Business.Test.HPV1618ByPCR.HPV1618ByPCRResultCollection.GetAllResults();
 				YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRResult hpv1618Result = resultCollection.GetResult(this.m_HPV1618ByPCRTestOrder.ResultCode);
 				hpv1618Result.FinalizeResults(this.m_HPV1618ByPCRTestOrder, this.m_SystemIdentity, this.m_AccessionOrder);
 
-                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
                 multiTestDistributionHandler.Set();
 
                 if (this.m_AccessionOrder.PanelSetOrderCollection.WomensHealthProfileExists() == true)
@@ -147,7 +147,7 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkAcceptResults_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToAccept(this.m_HPV1618ByPCRTestOrder);
+			YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToAccept(this.m_HPV1618ByPCRTestOrder);
 			if (methodResult.Success == true)
 			{
                 this.m_HPV1618ByPCRTestOrder.Accept();
@@ -167,7 +167,7 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkBothNegative_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToSetResult(this.m_HPV1618ByPCRTestOrder);
+            YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToSetResult(this.m_HPV1618ByPCRTestOrder);
             if (methodResult.Success == true)
             {
 				YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618BothNegativeResult result = new Business.Test.HPV1618ByPCR.HPV1618BothNegativeResult();
@@ -181,7 +181,7 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLink16Positive18Negative_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToSetResult(this.m_HPV1618ByPCRTestOrder);
+            YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToSetResult(this.m_HPV1618ByPCRTestOrder);
             if (methodResult.Success == true)
             {
 				YellowstonePathology.Business.Test.HPV1618ByPCR.HPV16PositiveHPV18NegativeResult result = new Business.Test.HPV1618ByPCR.HPV16PositiveHPV18NegativeResult();
@@ -195,7 +195,7 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLink16Negative18Positive_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToSetResult(this.m_HPV1618ByPCRTestOrder);
+            YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToSetResult(this.m_HPV1618ByPCRTestOrder);
             if (methodResult.Success == true)
             {
 				YellowstonePathology.Business.Test.HPV1618ByPCR.HPV16NegativeHPV18PositiveResult result = new Business.Test.HPV1618ByPCR.HPV16NegativeHPV18PositiveResult();
@@ -209,7 +209,7 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkBothPositive_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToSetResult(this.m_HPV1618ByPCRTestOrder);
+            YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToSetResult(this.m_HPV1618ByPCRTestOrder);
             if (methodResult.Success == true)
             {
 				YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618BothPositiveResult result = new Business.Test.HPV1618ByPCR.HPV1618BothPositiveResult();
@@ -223,7 +223,7 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkIndeterminate_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Rules.MethodResult methodResult = YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToSetResult(this.m_HPV1618ByPCRTestOrder);
+            YellowstonePathology.Business.Rules.MethodResult methodResult = Business.Test.HPV1618ByPCR.HPV1618ByPCRResult.IsOkToSetResult(this.m_HPV1618ByPCRTestOrder);
             if (methodResult.Success == true)
             {
 				YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618IndeterminateResult result = new Business.Test.HPV1618ByPCR.HPV1618IndeterminateResult();

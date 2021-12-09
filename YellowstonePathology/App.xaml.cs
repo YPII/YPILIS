@@ -40,7 +40,7 @@ namespace YellowstonePathology.UI
 			}
 
             this.Exit += App_Exit;
-            this.DispatcherUnhandledException += new System.Windows.Threading.DispatcherUnhandledExceptionEventHandler(YellowstonePathology.Business.Logging.EmailExceptionHandler.HandleException);
+            this.DispatcherUnhandledException += new System.Windows.Threading.DispatcherUnhandledExceptionEventHandler(Business.Logging.EmailExceptionHandler.HandleException);
 		}
 
         private void App_Exit(object sender, ExitEventArgs e)
@@ -72,6 +72,7 @@ namespace YellowstonePathology.UI
             Store.AppDataStore.Instance.LoadData();
 
             Business.Test.AccessionLockCollection accessionLockCollection = new Business.Test.AccessionLockCollection();
+            //accessionLockCollection.DelayDistributionLocksHeldBy("");
             accessionLockCollection.ClearLocks();
 
             string startUpWindow = string.Empty;
@@ -84,7 +85,7 @@ namespace YellowstonePathology.UI
             }
             else if (System.Environment.MachineName.ToUpper() == "CYTOLOG2") // || System.Environment.MachineName.ToUpper() == "COMPILE")
             {
-                YellowstonePathology.UI.Cytology.ThinPrepPapSlidePrintingPath thinPrepPapSlidePrintingPath = new Cytology.ThinPrepPapSlidePrintingPath();
+                UI.Cytology.ThinPrepPapSlidePrintingPath thinPrepPapSlidePrintingPath = new Cytology.ThinPrepPapSlidePrintingPath();
                 thinPrepPapSlidePrintingPath.Start();
             }
             else
@@ -133,6 +134,8 @@ namespace YellowstonePathology.UI
             appDirectories.Add(@"C:\ProgramData\ypi\");
             appDirectories.Add(@"C:\ProgramData\ypi\drafts\");
             appDirectories.Add(@"C:\ProgramData\ypi\dictionary\");
+            appDirectories.Add(YellowstonePathology.Properties.Settings.Default.LocalDictationFolder);
+            appDirectories.Add($"{YellowstonePathology.Properties.Settings.Default.LocalDictationFolder}done");
 
             foreach (string appDir in appDirectories)
             {

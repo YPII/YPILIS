@@ -35,7 +35,9 @@ namespace YellowstonePathology.Business.Test.Surgical
 		public override void ToXml(XElement document)
 		{
 			SurgicalTestOrder panelSetOrderSurgical = (SurgicalTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+            this.AddPDFSegments("the file", document);
 
+            /*
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(panelSetOrderSurgical.ReportNo);
             string observationResultStatus = "F";
             if (amendmentCollection.HasFinalAmendments() == true) observationResultStatus = "C";
@@ -109,7 +111,7 @@ namespace YellowstonePathology.Business.Test.Surgical
                             {
                                 if (surgicalAudit.AmendmentId == amendmentId)
                                 {
-                                    string finalDateP = YellowstonePathology.Business.BaseData.GetShortDateString(panelSetOrderSurgical.FinalDate);
+                                    string finalDateP = Business.BaseData.GetShortDateString(panelSetOrderSurgical.FinalDate);
                                     finalDateP += " " + YellowstonePathology.Business.BaseData.GetMillitaryTimeString(panelSetOrderSurgical.FinalTime);
                                     amendments.AppendLine("Previous diagnosis on " + finalDateP);                                    
 
@@ -125,7 +127,7 @@ namespace YellowstonePathology.Business.Test.Surgical
                                         }
                                     }
 
-                                    YellowstonePathology.Business.User.SystemUser pathologistUser = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(surgicalAudit.PathologistId);
+                                    YellowstonePathology.Business.User.SystemUser pathologistUser = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(surgicalAudit.PathologistId);
                                     amendments.AppendLine("Signature: " + pathologistUser.Signature);
                                     amendments.AppendLine();                                 
                                 }
@@ -224,6 +226,7 @@ namespace YellowstonePathology.Business.Test.Surgical
             
 			string locationPerformed = panelSetOrderSurgical.GetLocationPerformedComment();			
             this.AddNextOBXElement("LOC", "Location Performed", locationPerformed, document, observationResultStatus);
+            */
         }        
 
         private void InformRevisedDiagnosis(XElement document, YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection)

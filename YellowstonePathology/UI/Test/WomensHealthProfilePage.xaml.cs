@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace YellowstonePathology.UI.Test
 {    
@@ -51,17 +54,17 @@ namespace YellowstonePathology.UI.Test
         {
             this.m_AccessionOrder = accessionOrder;
             
-            this.m_HPVReflexOrderCollection = YellowstonePathology.Business.Client.Model.ReflexOrderCollection.GetHPVRequisitionReflexOrders();
-            this.m_HPVStandingOrderCollection = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetHPVStandingOrders();
-            this.m_HPV1618ReflexOrderCollection = YellowstonePathology.Business.Client.Model.ReflexOrderCollection.GetHPV1618ReflexOrders();
-            this.m_HPV1618StandingOrderCollection = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetHPV1618StandingOrders();
+            this.m_HPVReflexOrderCollection = Business.Client.Model.ReflexOrderCollection.GetHPVRequisitionReflexOrders();
+            this.m_HPVStandingOrderCollection = Business.Client.Model.StandingOrderCollection.GetHPVStandingOrders();
+            this.m_HPV1618ReflexOrderCollection = Business.Client.Model.ReflexOrderCollection.GetHPV1618ReflexOrders();
+            this.m_HPV1618StandingOrderCollection = Business.Client.Model.StandingOrderCollection.GetHPV1618StandingOrders();
             
             this.m_ClientOrder = clientOrder;			
             this.m_WomensHealthProfileTestOrder = womensHealthProfileTestOrder;
             this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
             this.m_BackButtonVisibility = backButtonVisibility;
 
-			this.m_Physician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);
+			this.m_Physician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);
 
 			this.m_PanelSetOrderCytology = (YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(15);
 
@@ -70,11 +73,11 @@ namespace YellowstonePathology.UI.Test
 
             if (string.IsNullOrEmpty(accessionOrder.PatientId) == false)
             {
-				YellowstonePathology.Business.Domain.PatientHistory patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
+				YellowstonePathology.Business.Domain.PatientHistory patientHistory = Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
                 this.m_DateOfLastHPV = patientHistory.GetDateOfPreviousHpv(this.m_AccessionOrder.AccessionDate.Value);
             }
 
-            YellowstonePathology.Business.Client.Model.StandingOrder standingOrder = YellowstonePathology.Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.m_WomensHealthProfileTestOrder.HPVStandingOrderCode);
+            YellowstonePathology.Business.Client.Model.StandingOrder standingOrder = Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.m_WomensHealthProfileTestOrder.HPVStandingOrderCode);
             this.m_HPVStandingOrderDescription = standingOrder.ToString();
 
             InitializeComponent();
@@ -88,7 +91,7 @@ namespace YellowstonePathology.UI.Test
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalize);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockNext);
-            this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockASCCPCheck);
+            this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockManagementRecomendation);
             this.m_ControlsNotDisabledOnFinal.Add(this.CheckBoxManagePerASCCP);
             this.m_ControlsNotDisabledOnFinal.Add(this.CheckBoxManagePerASCCPWithCotest);
 
@@ -194,7 +197,7 @@ namespace YellowstonePathology.UI.Test
                 this.m_AccessionOrder.TakeATrip(orderTestOrderVisitor);
                 this.m_AuditCollection.Run();
 
-                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
                 multiTestDistributionHandler.Set();
 
                 this.NotifyPropertyChanged(string.Empty);
@@ -217,7 +220,7 @@ namespace YellowstonePathology.UI.Test
                 YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitor = new Business.Visitor.OrderTestOrderVisitor(testOrderInfo);
                 this.m_AccessionOrder.TakeATrip(orderTestOrderVisitor);
 
-                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
                 multiTestDistributionHandler.Set();
 
                 this.m_AuditCollection.Run();
@@ -250,7 +253,7 @@ namespace YellowstonePathology.UI.Test
                 YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitor = new Business.Visitor.OrderTestOrderVisitor(testOrderInfo);
                 this.m_AccessionOrder.TakeATrip(orderTestOrderVisitor);
 
-                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
                 multiTestDistributionHandler.Set();
 
                 this.m_AuditCollection.Run();
@@ -274,7 +277,7 @@ namespace YellowstonePathology.UI.Test
                 YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitor = new Business.Visitor.OrderTestOrderVisitor(testOrderInfo);
                 this.m_AccessionOrder.TakeATrip(orderTestOrderVisitor);
 
-                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
                 multiTestDistributionHandler.Set();
 
                 this.m_AuditCollection.Run();
@@ -297,7 +300,7 @@ namespace YellowstonePathology.UI.Test
                 YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitor = new Business.Visitor.OrderTestOrderVisitor(testOrderInfo);
                 this.m_AccessionOrder.TakeATrip(orderTestOrderVisitor);
 
-                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
                 multiTestDistributionHandler.Set();
 
                 this.m_AuditCollection.Run();
@@ -385,7 +388,7 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkFinalize_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+            YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
             multiTestDistributionHandler.Set();
 
             //this.m_AuditCollection.Run();
@@ -416,16 +419,7 @@ namespace YellowstonePathology.UI.Test
 
                 Business.ASCCPRule.RuleCollection ruleCollection = new Business.ASCCPRule.RuleCollection();
                 Business.ASCCPRule.BaseRule matchingRule = ruleCollection.GetMatchingRule(woman);
-                matchingRule.Finalize(woman);
-
-                if(woman.Age >= 30 && this.m_WomensHealthProfileTestOrder.ManagePerASCCP == true)
-                {
-                    Business.Logging.EmailExceptionHandler.HandleException("The following ASCCP WHP was finalized: " + this.m_AccessionOrder.MasterAccessionNo);
-                }
-                else if(Business.Cytology.Model.CytologyResultCode.IsDiagnosisGreaterThanThree(this.m_PanelSetOrderCytology.ResultCode) == true)
-                {
-                    Business.Logging.EmailExceptionHandler.HandleException("The following ASCCP WHP was finalized: " + this.m_AccessionOrder.MasterAccessionNo);
-                }
+                matchingRule.Finalize(woman);                
             }
         }        
 
@@ -505,6 +499,39 @@ namespace YellowstonePathology.UI.Test
 
             UI.ASCCPWomanViewer asccpWomanViewer = new ASCCPWomanViewer(woman, this.m_WomensHealthProfileTestOrder, this.m_AccessionOrder);
             asccpWomanViewer.Show();
+        }
+
+        private void HyperLinkManagementRecomendation_Click(object sender, RoutedEventArgs e)
+        {            	        
+            JArray table = JArray.Parse(System.IO.File.ReadAllText(@"\\cfileserver\Documents\IT\managementrecomendation.json"));
+            Business.Domain.PatientHistory ph = Business.Gateway.AccessionOrderGateway.GetPatientHistory(this.m_AccessionOrder.PatientId);
+            Business.Domain.PatientHistory hpvs = ph.GetHPVs();
+            hpvs.SetResultCodes();
+
+            StringBuilder managementRecomendation = new StringBuilder();
+            if(hpvs.Count >= 1)
+            {
+                string previousHPVResultCode = hpvs[1].ResultCode;
+                string currentHPVResultCode = hpvs[0].ResultCode;
+                Business.Test.PanelSetOrder pso = this.m_AccessionOrder.PanelSetOrderCollection.GetPAP();
+                string currentPapResultCode = pso.ResultCode.Substring(pso.ResultCode.Length - 2, 2);
+                
+                managementRecomendation.AppendLine($"Previous HPV Result Code: {previousHPVResultCode}");
+                managementRecomendation.AppendLine($"Current HPV Result Code: {currentHPVResultCode}");
+
+                foreach (JObject row in table)
+                {
+                    if(row["previousHpvResultCode"].ToString() == previousHPVResultCode &&
+                        row["currentHpvResultCode"].ToString() == currentHPVResultCode &&
+                        row["currentPapResultCode"].ToString() == currentPapResultCode)
+                    {
+                        managementRecomendation.AppendLine($"Current PAP Result: {row["currentPapResultAbbreviation"].ToString()}");
+                        managementRecomendation.AppendLine($"Management Recomendation: {row["managementRecomendation"].ToString()}");
+                    }
+                }
+            }
+
+            MessageBox.Show(managementRecomendation.ToString());
         }
     }
 }

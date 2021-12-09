@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		{
 			this.m_PanelSetId = 78;
 			this.m_PanelSetName = "Summary Report";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Summary;
+            this.m_CaseType = Business.CaseType.Summary;
             this.m_HasTechnicalComponent = false;            
             this.m_HasProfessionalComponent = false;            
             this.m_ResultDocumentSource = ResultDocumentSourceEnum.PublishedDocument;
@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
 
 this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;
             this.m_TechnicalComponentBillingFacility = ypi;
 

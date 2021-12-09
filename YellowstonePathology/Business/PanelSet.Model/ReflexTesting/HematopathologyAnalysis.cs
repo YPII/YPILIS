@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model.ReflexTesting
 		{
 			this.m_PanelSetId = 113;
 			this.m_PanelSetName = "Hematopathology Analysis";
-			this.m_CaseType = YellowstonePathology.Business.CaseType.ALLCaseTypes;
+			this.m_CaseType = Business.CaseType.ALLCaseTypes;
 			this.m_HasTechnicalComponent = false;
 			this.m_HasProfessionalComponent = false;
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.YPIDatabase;

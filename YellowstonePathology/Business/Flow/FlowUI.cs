@@ -36,7 +36,7 @@ namespace YellowstonePathology.Business.Flow
             this.m_Writer = writer;
             this.m_FlowLogSearch = new FlowLogSearch();
 
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
             if (this.m_SystemIdentity.User.IsUserInRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist))
             {
                 this.m_FlowLogSearch.SetByLeukemiaNotFinal();
@@ -46,8 +46,8 @@ namespace YellowstonePathology.Business.Flow
                 this.m_FlowLogSearch.SetByAccessionMonth(DateTime.Now);
             }
 
-            this.m_PathologistUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
-            this.m_MedTechUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.MedTech, true);
+            this.m_PathologistUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);
+            this.m_MedTechUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.MedTech, true);
 
             this.m_FlowComment = new FlowComment();
             this.m_FlowComment.FlowCommentCollection.SetFillCommandAll();
@@ -59,13 +59,13 @@ namespace YellowstonePathology.Business.Flow
 
             this.m_FlowCaseValidation = new FlowCaseValidation();
 
-            this.m_ICDCodeList = YellowstonePathology.Business.Billing.Model.ICDCodeCollection.GetFlowCodeList();
+            this.m_ICDCodeList = Business.Billing.Model.ICDCodeCollection.GetFlowCodeList();
 
             this.m_FlowPanelList = new FlowPanelList();
             this.m_FlowPanelList.SetFillCommandByAll();
             this.m_FlowPanelList.Fill();
 
-            this.m_FacilityCollection = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance;
+            this.m_FacilityCollection = Business.Facility.Model.FacilityCollection.Instance;
 
             this.m_CaseDocumentCollection = new Document.CaseDocumentCollection();
             this.m_PatientHistoryList = new YellowstonePathology.Business.Patient.Model.PatientHistoryList();
@@ -163,7 +163,7 @@ namespace YellowstonePathology.Business.Flow
 
         public void GetAccessionOrder(string reportNo, string masterAccessionNo)
         {
-            this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
+            this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
 
             this.m_PanelSetOrderLeukemiaLymphoma = (YellowstonePathology.Business.Test.LLP.PanelSetOrderLeukemiaLymphoma)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
             this.m_ReportNo = reportNo;

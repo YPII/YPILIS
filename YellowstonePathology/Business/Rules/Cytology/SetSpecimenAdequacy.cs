@@ -64,7 +64,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
 		{
 			if (String.IsNullOrEmpty(m_PanelOrder.ReportComment) == false)
 			{
-				string reportComment = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("48").Comment.Trim();
+				string reportComment = Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("48").Comment.Trim();
 				this.m_PanelOrder.ReportComment = this.m_PanelOrder.ReportComment.Replace(reportComment, string.Empty).Trim();
 			}
 		}
@@ -73,7 +73,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
 		{
 			if (String.IsNullOrEmpty(m_PanelOrder.ReportComment) == false)
 			{
-				string reportComment = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("17").Comment;
+				string reportComment = Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("17").Comment;
 				this.m_PanelOrder.ReportComment = this.m_PanelOrder.ReportComment.Replace(reportComment, string.Empty).Trim();
 			}
 		}
@@ -81,17 +81,17 @@ namespace YellowstonePathology.Business.Rules.Cytology
         public void SetSpecimenAdequacyCode()
         {
             this.m_ResultCode = this.m_PanelOrder.ResultCode;
-			string changedResultCode = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.ChangeResultCode(this.m_ResultCode, this.m_SpecimenAdequacy);
+			string changedResultCode = Business.Cytology.Model.CytologyResultCode.ChangeResultCode(this.m_ResultCode, this.m_SpecimenAdequacy);
             this.m_PanelOrder.ResultCode = changedResultCode;
             this.m_ResultCode = changedResultCode;
         }
 
         public void HandleAbsentTZoneReportComment()
         {
-			bool tZoneIsAbsent = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeTZoneAbsent(this.m_PanelOrder.ResultCode);
+			bool tZoneIsAbsent = Business.Cytology.Model.CytologyResultCode.IsResultCodeTZoneAbsent(this.m_PanelOrder.ResultCode);
             if (tZoneIsAbsent == true)
             {
-				string reportComment = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("48").Comment;
+				string reportComment = Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("48").Comment;
                 if (string.IsNullOrEmpty(this.m_PanelOrder.ReportComment) == true || this.m_PanelOrder.ReportComment.Contains(reportComment) == false)
                 {
                     if (string.IsNullOrEmpty(this.m_PanelOrder.ReportComment) == false)
@@ -107,11 +107,11 @@ namespace YellowstonePathology.Business.Rules.Cytology
         {
 			if (YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeUnsat(this.m_PanelOrder.ResultCode) == true)
             {
-				YellowstonePathology.Business.Cytology.Model.ScreeningImpression screeningImpression = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetScreeningImpressionByResultCode("00");
+				YellowstonePathology.Business.Cytology.Model.ScreeningImpression screeningImpression = Business.Gateway.AccessionOrderGateway.GetScreeningImpressionByResultCode("00");
                 YellowstonePathology.Business.Rules.Cytology.SetScreeningImpression setScreeningImpression = new SetScreeningImpression();
                 setScreeningImpression.Execute(screeningImpression, this.m_PanelOrder, this.m_AccessionOrder, this.m_ExecutionStatus);
 
-				string reportComment = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("17").Comment;
+				string reportComment = Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("17").Comment;
                 YellowstonePathology.Business.Rules.Cytology.SetReportComment setReportComment = new SetReportComment();
                 setReportComment.Execute(reportComment, this.m_PanelOrder, this.m_ExecutionStatus);
             }

@@ -56,7 +56,7 @@ namespace YellowstonePathology.Business.Common
 			get
 			{
 				PageScanner result = null;
-				string scannerName = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.PageScanner;
+				string scannerName = Business.User.UserPreferenceInstance.Instance.UserPreference.PageScanner;
 				foreach (PageScanner pageScanner in this)
 				{
 					if (pageScanner.ScannerName == scannerName)

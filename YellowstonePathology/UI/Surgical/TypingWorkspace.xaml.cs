@@ -43,7 +43,7 @@ namespace YellowstonePathology.UI.Surgical
                 this.m_SecondMonitorWindow.WindowState = WindowState.Maximized;
             }
 
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
             
 			this.m_TypingUI = new YellowstonePathology.Business.Typing.TypingUIV2(this.m_Writer);									
             this.m_DocumentViewer = new DocumentWorkspace();            
@@ -374,7 +374,7 @@ namespace YellowstonePathology.UI.Surgical
                 methodResult.Message = message;
             }
 
-			YellowstonePathology.Business.Domain.Physician physician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_TypingUI.AccessionOrder.PhysicianId);
+			YellowstonePathology.Business.Domain.Physician physician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_TypingUI.AccessionOrder.PhysicianId);
             if (string.IsNullOrEmpty(physician.Npi) == true)
             {
                 methodResult.Message += "The provider NPI is blank.";
@@ -523,7 +523,10 @@ namespace YellowstonePathology.UI.Surgical
         }
 
         public void ButtonGetList_Click(object sender, RoutedEventArgs args)
-        {            
+        {
+            DateTime rptDate;
+            bool dateIsValid = DateTime.TryParse(this.TextBoxCaseListDate.Text, out rptDate);
+
             switch (this.ComboboxListSelection.Text)
             {                
                 case "Cases With Intraoperative Consulations":
@@ -556,9 +559,7 @@ namespace YellowstonePathology.UI.Surgical
                         }
                     }
                     break;                    
-				case "SVH Electronic Orders":
-                    DateTime rptDate;
-                    bool dateIsValid = DateTime.TryParse(this.TextBoxCaseListDate.Text, out rptDate);
+				case "SVH Electronic Orders":                    
 					if (dateIsValid)
 					{
 						this.m_TypingUI.SurgicalOrderList.FillBySvhClientOrder(rptDate);
@@ -569,6 +570,15 @@ namespace YellowstonePathology.UI.Surgical
                     break;
                 case "No Clinical Info":
                     this.m_TypingUI.SurgicalOrderList.FillByNoClinicalInfo();
+                    break;
+                case "Fluid/Urine":
+                    this.m_TypingUI.SurgicalOrderList.FillByFluid(rptDate);
+                    break;
+                case "FNA":
+                    this.m_TypingUI.SurgicalOrderList.FillByFNA(rptDate);
+                    break;
+                case "Peripheral Blood Smear":
+                    this.m_TypingUI.SurgicalOrderList.FillByPeriphearlBloodSmear(rptDate);
                     break;
             }            
         }        
@@ -708,7 +718,7 @@ namespace YellowstonePathology.UI.Surgical
 
         private void ButtonProviderEntry_Click(object sender, RoutedEventArgs e)
         {
-			YellowstonePathology.Business.Domain.Physician physician = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullPhysician(this.m_TypingUI.AccessionOrder.PhysicianId, this.m_Writer);
+			YellowstonePathology.Business.Domain.Physician physician = Business.Persistence.DocumentGateway.Instance.PullPhysician(this.m_TypingUI.AccessionOrder.PhysicianId, this.m_Writer);
             Client.ProviderEntry providerEntry = new Client.ProviderEntry(physician);
             providerEntry.ShowDialog();
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(physician, this.m_Writer);
@@ -738,7 +748,7 @@ namespace YellowstonePathology.UI.Surgical
 		{
 			if (string.IsNullOrEmpty(this.m_TypingUI.AccessionOrder.SvhMedicalRecord) == false)
 			{
-                YellowstonePathology.Business.Patient.Model.SVHBillingDataCollection svhBillingDataCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSVHBillingDataCollection(this.m_TypingUI.AccessionOrder.SvhMedicalRecord);
+                YellowstonePathology.Business.Patient.Model.SVHBillingDataCollection svhBillingDataCollection = Business.Gateway.AccessionOrderGateway.GetSVHBillingDataCollection(this.m_TypingUI.AccessionOrder.SvhMedicalRecord);
 				if (svhBillingDataCollection.Count > 0)
 				{
                     YellowstonePathology.Business.Patient.Model.SVHBillingData svhBillingDate = svhBillingDataCollection.GetMostRecent();
@@ -825,7 +835,7 @@ namespace YellowstonePathology.UI.Surgical
             {
                 YellowstonePathology.Business.Surgical.SurgicalOrderListItem surgicalOrderListItem = (YellowstonePathology.Business.Surgical.SurgicalOrderListItem)this.ListViewSurgicalCaseList.SelectedItem;
 				YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(surgicalOrderListItem.ReportNo);
-				string folderPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+				string folderPath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Explorer.exe", folderPath);
@@ -836,7 +846,7 @@ namespace YellowstonePathology.UI.Surgical
 
         private void MenuItemImportPreopDiagnosis_Click(object sender, RoutedEventArgs e)
         {            
-            YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_TypingUI.AccessionOrder.MasterAccessionNo);
+            YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_TypingUI.AccessionOrder.MasterAccessionNo);
             if (clientOrderCollection.Count != 0)
             {
                 BindingExpression bindingExpression = this.TextBoxClinical.GetBindingExpression(TextBox.TextProperty);
@@ -856,7 +866,7 @@ namespace YellowstonePathology.UI.Surgical
 
         private void MenuItemImportSpecialInstructions_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_TypingUI.AccessionOrder.MasterAccessionNo);
+            YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByMasterAccessionNo(this.m_TypingUI.AccessionOrder.MasterAccessionNo);
             if (clientOrderCollection.Count != 0)
             {
                 BindingExpression bindingExpression = this.TextBoxClinical.GetBindingExpression(TextBox.TextProperty);
@@ -1180,7 +1190,7 @@ namespace YellowstonePathology.UI.Surgical
             panelSetOrderCPTCode.Modifier = cptCodeModifier;
             panelSetOrderCPTCode.CodeableDescription = comment;
             panelSetOrderCPTCode.CodeableType = "Surgical Diagnosis";
-            panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;
+            panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;
             panelSetOrderCPTCode.SpecimenOrderId = specimenOrder.SpecimenOrderId;
             panelSetOrderCPTCode.CodeType = cptCodeType;
             panelSetOrderCPTCode.ClientId = this.m_TypingUI.AccessionOrder.ClientId;

@@ -129,7 +129,7 @@ namespace YellowstonePathology.UI
 			panelSetOrderCPTCode.Modifier = cptItem.CptCode.Modifier == null ? null : cptItem.CptCode.Modifier;
 			panelSetOrderCPTCode.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + this.m_SurgicalTestOrder.PanelSetName;
 			panelSetOrderCPTCode.CodeableType = "Surgical Diagnosis";
-			panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;
+			panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;
 			panelSetOrderCPTCode.SpecimenOrderId = specimenOrder.SpecimenOrderId;
             panelSetOrderCPTCode.CodeType = cptItem.CptCode.CodeType.ToString();
 			panelSetOrderCPTCode.ClientId = this.m_AccessionOrder.ClientId;

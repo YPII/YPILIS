@@ -152,7 +152,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 {
                     while (dr.Read())
                     {
-                        YellowstonePathology.Business.Billing.Model.ICDCode icdCode = YellowstonePathology.Business.Billing.Model.ICDCodeFactory.FromJson(dr[0].ToString());
+                        YellowstonePathology.Business.Billing.Model.ICDCode icdCode = Business.Billing.Model.ICDCodeFactory.FromJson(dr[0].ToString());
                         result.Add(icdCode);
                     }
                 }

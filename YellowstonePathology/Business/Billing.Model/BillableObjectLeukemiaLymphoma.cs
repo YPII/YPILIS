@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Billing.Model
                     panelSetOrderCPTCode88184.CodeType = cpt88184.CodeType.ToString();
 					panelSetOrderCPTCode88184.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + "Flow Markers";
 					panelSetOrderCPTCode88184.CodeableType = "FlowMarkers";
-					panelSetOrderCPTCode88184.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+					panelSetOrderCPTCode88184.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
 					panelSetOrderCPTCode88184.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 					panelSetOrderCPTCode88184.ClientId = this.m_AccessionOrder.ClientId;
                     panelSetOrderCPTCode88184.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
@@ -48,7 +48,7 @@ namespace YellowstonePathology.Business.Billing.Model
                     panelSetOrderCPTCode88185.CodeType = cpt88185.CodeType.ToString();
 					panelSetOrderCPTCode88185.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + "Flow Markers";
 					panelSetOrderCPTCode88185.CodeableType = "FlowMarkers";
-					panelSetOrderCPTCode88185.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+					panelSetOrderCPTCode88185.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
 					panelSetOrderCPTCode88185.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 					panelSetOrderCPTCode88185.ClientId = this.m_AccessionOrder.ClientId;
                     panelSetOrderCPTCode88185.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
@@ -65,7 +65,7 @@ namespace YellowstonePathology.Business.Billing.Model
                         panelSetOrderCPTCode88187.CodeType = cpt88187.CodeType.ToString();
 						panelSetOrderCPTCode88187.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + "Leukemia Lymphoma";
 						panelSetOrderCPTCode88187.CodeableType = "Leukemia Lymphoma";
-						panelSetOrderCPTCode88187.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+						panelSetOrderCPTCode88187.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
 						panelSetOrderCPTCode88187.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 						panelSetOrderCPTCode88187.ClientId = this.m_AccessionOrder.ClientId;
                         panelSetOrderCPTCode88187.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
@@ -81,7 +81,7 @@ namespace YellowstonePathology.Business.Billing.Model
                         panelSetOrderCPTCode88188.CodeType = cpt88188.CodeType.ToString();
 						panelSetOrderCPTCode88188.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + "Leukemia Lymphoma";
 						panelSetOrderCPTCode88188.CodeableType = "Leukemia Lymphoma";
-						panelSetOrderCPTCode88188.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+						panelSetOrderCPTCode88188.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
 						panelSetOrderCPTCode88188.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 						panelSetOrderCPTCode88188.ClientId = this.m_AccessionOrder.ClientId;
                         panelSetOrderCPTCode88188.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
@@ -97,7 +97,7 @@ namespace YellowstonePathology.Business.Billing.Model
                         panelSetOrderCPTCode88189.CodeType = cpt88189.CodeType.ToString();
 						panelSetOrderCPTCode88189.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + "Leukemia Lymphoma";
 						panelSetOrderCPTCode88189.CodeableType = "Leukemia Lymphoma";
-						panelSetOrderCPTCode88189.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+						panelSetOrderCPTCode88189.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
 						panelSetOrderCPTCode88189.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 						panelSetOrderCPTCode88189.ClientId = this.m_AccessionOrder.ClientId;
                         panelSetOrderCPTCode88189.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;

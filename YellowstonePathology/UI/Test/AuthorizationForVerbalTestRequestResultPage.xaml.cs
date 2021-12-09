@@ -139,9 +139,9 @@ namespace YellowstonePathology.UI.Test
         {
             if (this.m_PanelSetOrder.Final == true)
             {
-                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
+                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
                 YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-                string xpsPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + this.m_PanelSetOrder.ReportNo + ".xps";
+                string xpsPath = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + this.m_PanelSetOrder.ReportNo + ".xps";
                 if (File.Exists(xpsPath) == true)
                 {
                     YellowstonePathology.Business.Rules.MethodResult methodResult = caseDocument.DeleteCaseFiles(orderIdParser);
@@ -173,10 +173,10 @@ namespace YellowstonePathology.UI.Test
             if (result.Success == true)
             {
                 Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-                string tifPath = YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.tif";
+                string tifPath = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".auth.tif";
                 if (File.Exists(tifPath) == true)
                 {
-                    YellowstonePathology.Business.ReportDistribution.Model.DistributionResult distributionResult = Business.ReportDistribution.Model.FaxSubmission.Submit(this.m_PanelSetOrder.Fax, "Authorization For Verbal Test Request", tifPath);
+                    YellowstonePathology.Business.ReportDistribution.Model.DistributionResult distributionResult = Business.ReportDistribution.Model.FaxSubmission.Submit(this.m_PanelSetOrder.Fax, "Authorization For Verbal Test Request", tifPath, this.m_AccessionOrder.MasterAccessionNo);
                     if (distributionResult.IsComplete == false)
                     {
                         MessageBox.Show(distributionResult.Message);

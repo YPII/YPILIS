@@ -30,7 +30,7 @@ namespace YellowstonePathology.UI
             this.m_MainWindowCommandButtonHandler = mainWindowCommandButtonHandler;
             this.m_Writer = writer;
 
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
             this.m_Search = new Business.SearchUI();            
             this.m_DocumentViewer = new DocumentWorkspace();            
 
@@ -58,7 +58,7 @@ namespace YellowstonePathology.UI
             if (this.listViewCaseList.SelectedItem != null)
             {
                 YellowstonePathology.Business.SearchListItem item = (YellowstonePathology.Business.SearchListItem)this.listViewCaseList.SelectedItem;
-				YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(item.MasterAccessionNo, this.m_Writer);
+				YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(item.MasterAccessionNo, this.m_Writer);
 
                 YellowstonePathology.UI.Login.FinalizeAccession.ProviderDistributionPath providerDistributionPath =
                     new Login.FinalizeAccession.ProviderDistributionPath(item.ReportNo, accessionOrder,
@@ -195,7 +195,7 @@ namespace YellowstonePathology.UI
             if (this.listViewCaseList.SelectedItems.Count != 0)
             {
                 YellowstonePathology.Business.SearchListItem item = (YellowstonePathology.Business.SearchListItem)this.listViewCaseList.SelectedItem;
-				YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(item.MasterAccessionNo, this.m_Writer);
+				YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(item.MasterAccessionNo, this.m_Writer);
 
                 YellowstonePathology.UI.Common.CaseHistoryDialog caseHistoryDialog = new Common.CaseHistoryDialog(accessionOrder);
                 caseHistoryDialog.ShowDialog();

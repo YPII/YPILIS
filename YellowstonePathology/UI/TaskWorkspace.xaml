@@ -75,13 +75,14 @@
                 </ListView.ContextMenu>
                 <ListView.View>
                     <GridView AllowsColumnReorder="True">
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=TaskOrder.ReportNo}" Header="Report No" Width="85"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=TaskOrder.PanelSetName}" Header="Test" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=TaskOrder.TargetDescription}" Header="Ordered On" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=TaskOrder.OrderDate, Converter={StaticResource MilitaryDateTimeConverter}}" Header="Ordered" Width="110"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=OrderedByUser.LastName}" Header="Ordered By" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=TaskOrder.AcknowledgedDate, Converter={StaticResource MilitaryDateTimeConverter}}" Header="Acknowledged" Width="110"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=TaskOrder.TrackingNumber}" Header="Tracking" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="85"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Test" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=TargetDescription}" Header="Ordered On" Width="120"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=OrderDate, Converter={StaticResource MilitaryDateTimeConverter}}" Header="Ordered" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=OrderedBy}" Header="Ordered By" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=AcknowledgedDate, Converter={StaticResource MilitaryDateTimeConverter}}" Header="Acknowledged" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=TrackingNumber}" Header="Tracking" Width="120"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=PLastName}" Header="Patient" Width="100"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -128,6 +129,12 @@
                         </StackPanel>
                     </Button>
 
+                    <Button Margin="2" Click="ButtonDailyTaskOrderAddDays_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Refresh.ico"></Image>
+                            <TextBlock Margin="2,0,0,0">Add Days</TextBlock>
+                        </StackPanel>
+                    </Button>
                 </ToolBar>
             </ToolBarTray>
 

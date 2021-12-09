@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Reports
 
         public CytologySlideDisposalReport(DateTime disposalDate)
         {
-            this.m_DisposalReportData = YellowstonePathology.Business.Gateway.SlideDisposalReportGateway.GetCytologySlideDisposalReport_1(disposalDate);
+            this.m_DisposalReportData = Business.Gateway.SlideDisposalReportGateway.GetCytologySlideDisposalReport_1(disposalDate);
             this.m_DispatcherPriority = DispatcherPriority.SystemIdle;
             this.LoadTemplate();
             this.InjectData();

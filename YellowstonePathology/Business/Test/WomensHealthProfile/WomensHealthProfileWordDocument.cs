@@ -74,7 +74,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 
             if (this.m_PanelSetOrder.FinalTime.HasValue == true)
             {
-                string finalDateTime = YellowstonePathology.Business.Document.CaseReportV2.ReportDateTimeFormat(this.m_PanelSetOrder.FinalTime.Value);
+                string finalDateTime = Business.Document.CaseReportV2.ReportDateTimeFormat(this.m_PanelSetOrder.FinalTime.Value);
                 this.SetXmlNodeData("final_date", finalDateTime);
             }
             else
@@ -169,7 +169,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 				}
 			}
 
-			YellowstonePathology.Business.User.SystemUser systemUser = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(screeningPanelOrder.ScreenedById);
+			YellowstonePathology.Business.User.SystemUser systemUser = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(screeningPanelOrder.ScreenedById);
 			string screenedBy = string.Empty;
 			if (string.IsNullOrEmpty(systemUser.Signature) == false)
 			{
@@ -177,13 +177,13 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 			}
 			this.SetXmlNodeData("screened_by", screenedBy);
 
-			string cytoTechFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(screeningPanelOrder.AcceptedDate);
+			string cytoTechFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(screeningPanelOrder.AcceptedDate);
 			this.SetXmlNodeData("cytotech_final", cytoTechFinal);
 
 			if (reviewPanelOrder != null)
 			{
-				string reviewedBy = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
-				string reviewedByFinal = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(reviewPanelOrder.AcceptedDate);
+				string reviewedBy = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(reviewPanelOrder.ScreenedById).Signature;
+				string reviewedByFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(reviewPanelOrder.AcceptedDate);
 
 				if (reviewedBy.IndexOf("MD") >= 0)
 				{
@@ -222,7 +222,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 				rowResultNodeClone.SelectSingleNode("descendant::w:r[w:t='test_name']/w:t", this.m_NameSpaceManager).InnerText = "High Risk HPV";
 				rowResultNodeClone.SelectSingleNode("descendant::w:r[w:t='test_result']/w:t", this.m_NameSpaceManager).InnerText = hpvTestOrder.Result;
                 rowResultNodeClone.SelectSingleNode("descendant::w:r[w:t='test_reference']/w:t", this.m_NameSpaceManager).InnerText = "Negative";
-				string testFinaldate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(hpvTestOrder.FinalDate);
+				string testFinaldate = Business.Helper.DateTimeExtensions.DateStringFromNullable(hpvTestOrder.FinalDate);
 				rowResultNodeClone.SelectSingleNode("descendant::w:r[w:t='test_final_date']/w:t", this.m_NameSpaceManager).InnerText = testFinaldate;
 				mainTableNode.InsertAfter(rowResultNodeClone, insertAfterRow);
 				insertAfterRow = rowResultNodeClone;
@@ -247,7 +247,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 				rowResultNode16Clone.SelectSingleNode("descendant::w:r[w:t='test_name']/w:t", this.m_NameSpaceManager).InnerText = "HPV type 16";
 				rowResultNode16Clone.SelectSingleNode("descendant::w:r[w:t='test_result']/w:t", this.m_NameSpaceManager).InnerText = panelSetOrderHPV1618.HPV16Result;
                 rowResultNode16Clone.SelectSingleNode("descendant::w:r[w:t='test_reference']/w:t", this.m_NameSpaceManager).InnerText = "Negative";
-				string testFinaldate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderHPV1618.FinalDate);
+				string testFinaldate = Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderHPV1618.FinalDate);
 				rowResultNode16Clone.SelectSingleNode("descendant::w:r[w:t='test_final_date']/w:t", this.m_NameSpaceManager).InnerText = testFinaldate;
 				mainTableNode.InsertAfter(rowResultNode16Clone, insertAfterRow);
 				insertAfterRow = rowResultNode16Clone;
@@ -274,7 +274,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 				this.SetXmlNodeData("chlamydia_gonorrhea_screening", string.Empty);
 				this.SetXmlNodeData("ct_result", panelSetOrderNGCT.ChlamydiaTrachomatisResult);
 				this.SetXmlNodeData("ng_result", panelSetOrderNGCT.NeisseriaGonorrhoeaeResult);
-				string hpvFinaldate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderNGCT.FinalDate);
+				string hpvFinaldate = Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderNGCT.FinalDate);
 				this.SetXmlNodeData("ngct_final_date", hpvFinaldate);
 
 
@@ -287,7 +287,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 				rowResultNodeCtClone.SelectSingleNode("descendant::w:r[w:t='test_name']/w:t", this.m_NameSpaceManager).InnerText = "Chlamydia trachomatis";
 				rowResultNodeCtClone.SelectSingleNode("descendant::w:r[w:t='test_result']/w:t", this.m_NameSpaceManager).InnerText = panelSetOrderNGCT.ChlamydiaTrachomatisResult;
                 rowResultNodeCtClone.SelectSingleNode("descendant::w:r[w:t='test_reference']/w:t", this.m_NameSpaceManager).InnerText = "Negative";
-				string testFinaldate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderNGCT.FinalDate);
+				string testFinaldate = Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderNGCT.FinalDate);
 				rowResultNodeCtClone.SelectSingleNode("descendant::w:r[w:t='test_final_date']/w:t", this.m_NameSpaceManager).InnerText = testFinaldate;
 				mainTableNode.InsertAfter(rowResultNodeCtClone, insertAfterRow);
 				insertAfterRow = rowResultNodeCtClone;
@@ -320,7 +320,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 				rowResultNodeClone.SelectSingleNode("descendant::w:r[w:t='test_name']/w:t", this.m_NameSpaceManager).InnerText = "Trichomonas vaginalis";
 				rowResultNodeClone.SelectSingleNode("descendant::w:r[w:t='test_result']/w:t", this.m_NameSpaceManager).InnerText = reportOrderTrichomonas.Result;
                 rowResultNodeClone.SelectSingleNode("descendant::w:r[w:t='test_reference']/w:t", this.m_NameSpaceManager).InnerText = "Negative";
-				string testFinaldate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(reportOrderTrichomonas.FinalDate);
+				string testFinaldate = Business.Helper.DateTimeExtensions.DateStringFromNullable(reportOrderTrichomonas.FinalDate);
 				rowResultNodeClone.SelectSingleNode("descendant::w:r[w:t='test_final_date']/w:t", this.m_NameSpaceManager).InnerText = testFinaldate;
 				mainTableNode.InsertAfter(rowResultNodeClone, insertAfterRow);
 				insertAfterRow = rowResultNodeClone;
@@ -360,12 +360,12 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 			XmlNode insertAfterRow = rowHistoryNode;
 
 			YellowstonePathology.Business.Domain.PatientHistory patientHistory = new YellowstonePathology.Business.Domain.PatientHistory();
-			patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(this.m_AccessionOrder.PatientId);
+			patientHistory = Business.Gateway.AccessionOrderGateway.GetPatientHistory(this.m_AccessionOrder.PatientId);
             YellowstonePathology.Business.Domain.PatientHistory priorPapRelatedHistory = patientHistory.GetPriorPapRelatedHistory(this.m_AccessionOrder.MasterAccessionNo, cutoffDate);
 
             foreach (YellowstonePathology.Business.Domain.PatientHistoryResult patientHistoryResult in priorPapRelatedHistory)
 			{
-				YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(patientHistoryResult.MasterAccessionNo);
+				YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(patientHistoryResult.MasterAccessionNo);
 				foreach (YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in accessionOrder.PanelSetOrderCollection)
 				{
 					string reportNo = null;
@@ -382,7 +382,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 						finalDate = panelSetOrder.FinalDate;
 						result = panelSetOrder.GetResultWithTestName();
 						XmlNode rowHistoryNodeClone = rowHistoryNode.Clone();
-						string testFinaldate = YellowstonePathology.Business.Helper.DateTimeExtensions.DateStringFromNullable(finalDate);
+						string testFinaldate = Business.Helper.DateTimeExtensions.DateStringFromNullable(finalDate);
 
 						rowHistoryNodeClone.SelectSingleNode("descendant::w:r[w:t='prior_final_date']/w:t", this.m_NameSpaceManager).InnerText = testFinaldate;
 						rowHistoryNodeClone.SelectSingleNode("descendant::w:r[w:t='prior_report_no']/w:t", this.m_NameSpaceManager).InnerText = reportNo;

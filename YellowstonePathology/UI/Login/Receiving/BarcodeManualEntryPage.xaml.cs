@@ -97,7 +97,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 		{
 			if (this.IdString.Length > 0)
 			{								
-				string containerId = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetContainerIdByLast12Characters(this.IdString);				
+				string containerId = Business.Gateway.ClientOrderGateway.GetContainerIdByLast12Characters(this.IdString);				
 				this.Return(this, containerId);				
 			}
 		}				

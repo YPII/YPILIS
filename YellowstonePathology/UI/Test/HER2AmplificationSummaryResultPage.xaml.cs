@@ -200,7 +200,7 @@ namespace YellowstonePathology.UI.Test
                     YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(surgicalPanelSetOrder.ReportNo);
                     if (amendmentCollection.HasAmendmentForReport(this.m_PanelSetOrder.ReportNo) == false)
                     {
-                        string amendmentText = YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummarySystemGeneratedAmendmentText.AmendmentText(this.m_PanelSetOrder);
+                        string amendmentText = Business.Test.HER2AnalysisSummary.HER2AnalysisSummarySystemGeneratedAmendmentText.AmendmentText(this.m_PanelSetOrder);
                         YellowstonePathology.Business.Amendment.Model.Amendment amendment = this.m_AccessionOrder.AddAmendment(surgicalPanelSetOrder.ReportNo);
                         amendment.TestResultAmendmentFill(surgicalPanelSetOrder.ReportNo, surgicalPanelSetOrder.AssignedToId, amendmentText);
                         amendment.ReferenceReportNo = this.m_PanelSetOrder.ReportNo;
@@ -267,12 +267,19 @@ namespace YellowstonePathology.UI.Test
             {
                 YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection her2AmplificationResultCollection = new Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection(this.m_AccessionOrder.PanelSetOrderCollection, this.m_PanelSetOrder);
                 YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
-                YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
-                her2AmplificationResult.SetSummaryResults(specimenOrder);
-
-                if(string.IsNullOrEmpty(this.m_PanelSetOrder.Result) == true)
+                if(her2AmplificationResult != null)
                 {
-                    MessageBox.Show("The result needs to be determined by internal adjudication.");
+                    YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
+                    her2AmplificationResult.SetSummaryResults(specimenOrder);
+
+                    if (string.IsNullOrEmpty(this.m_PanelSetOrder.Result) == true)
+                    {
+                        MessageBox.Show("The result needs to be determined by internal adjudication.");
+                    }
+                }    
+                else
+                {
+                    MessageBox.Show("A matching result was not found for the provided counts.");
                 }
             }
             else

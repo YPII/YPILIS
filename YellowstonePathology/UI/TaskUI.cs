@@ -23,8 +23,8 @@ namespace YellowstonePathology.UI
         public TaskUI(object writer)
         {
             this.m_Writer = writer;
-            this.m_LogUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Log, true);
-            this.m_TaskAcknowledgementTypeList = YellowstonePathology.Business.Task.Model.TaskAcknowledgementType.GetAll();
+            this.m_LogUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Log, true);
+            this.m_TaskAcknowledgementTypeList = Business.Task.Model.TaskAcknowledgementType.GetAll();
 
             this.GetTaskOrderViewList();
             this.GetDailyTaskOrderCollection();
@@ -32,9 +32,9 @@ namespace YellowstonePathology.UI
             YellowstonePathology.UI.TaskNotifier.Instance.Notifier.Alert += new TaskNotifier.AlertEventHandler(Notifier_Alert);
         }
 
-        private void Notifier_Alert(object sender, CustomEventArgs.TaskOrderCollectionReturnEventArgs e)
+        private void Notifier_Alert(object sender, CustomEventArgs.TaskOrderViewListReturnEventArgs e)
         {
-            this.m_TaskOrderViewList = new Business.Task.Model.TaskOrderViewList(e.TaskOrderCollection);
+            //this.m_TaskOrderViewList = new Business.Task.Model.TaskOrderViewList(e.TaskOrderCollection);
             this.NotifyPropertyChanged("TaskOrderViewList");
             YellowstonePathology.UI.TaskNotifier.Instance.Notifier.Alert -= Notifier_Alert;
         }
@@ -89,38 +89,38 @@ namespace YellowstonePathology.UI
 
         public void GetTaskOrderViewList()
         {
-            this.m_TaskOrderViewList = new Business.Task.Model.TaskOrderViewList(YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetTaskOrderCollection(YellowstonePathology.Business.Task.Model.TaskAcknowledgementType.Immediate));
+            this.m_TaskOrderViewList = Business.Gateway.AccessionOrderGateway.GetTaskOrderViewList(YellowstonePathology.Business.Task.Model.TaskAcknowledgementType.Immediate);
             this.NotifyPropertyChanged("TaskOrderViewList");
         }
 
         public void GetTaskOrderViewListByTrackingNumber(string trackingNumber)
         {
-            this.m_TaskOrderViewList = new Business.Task.Model.TaskOrderViewList(YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetTaskOrderCollectionByTrackingNumber(YellowstonePathology.Business.Task.Model.TaskAcknowledgementType.Immediate, trackingNumber));
+            this.m_TaskOrderViewList = Business.Gateway.AccessionOrderGateway.GetTaskOrderViewListByTrackingNumber(trackingNumber);
             this.NotifyPropertyChanged("TaskOrderViewList");
         }
 
         public void GetTasksNotAcknowledged()
         {
-            string assignedTo = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.AcknowledgeTasksFor;
-            this.m_TaskOrderViewList = new Business.Task.Model.TaskOrderViewList(YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetTasksNotAcknowledged(assignedTo, YellowstonePathology.Business.Task.Model.TaskAcknowledgementType.Immediate));
+            string assignedTo = Business.User.UserPreferenceInstance.Instance.UserPreference.AcknowledgeTasksFor;
+            this.m_TaskOrderViewList = Business.Gateway.AccessionOrderGateway.GetTasksNotAcknowledged(assignedTo, YellowstonePathology.Business.Task.Model.TaskAcknowledgementType.Immediate);
             this.NotifyPropertyChanged("TaskOrderViewList");
         }
 
         public void GetDailyTaskOrderCollection()
         {
-            this.m_DailyTaskOrderCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetDailyTaskOrderCollection();
+            this.m_DailyTaskOrderCollection = Business.Gateway.AccessionOrderGateway.GetDailyTaskOrderCollection();
             this.NotifyPropertyChanged("DailyTaskOrderCollection");
         }
 
         public void GetDailyTaskOrderCollectionByTrackingNumber(string trackingNumber)
         {
-            this.m_DailyTaskOrderCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetDailyTaskOrderCollectionByTrackingNumber(trackingNumber);
+            this.m_DailyTaskOrderCollection = Business.Gateway.AccessionOrderGateway.GetDailyTaskOrderCollectionByTrackingNumber(trackingNumber);
             this.NotifyPropertyChanged("DailyTaskOrderCollection");
         }
 
         public void GetDailyTaskOrderHistoryCollection()
         {
-            this.m_DailyTaskOrderCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetDailyTaskOrderHistoryCollection(30);
+            this.m_DailyTaskOrderCollection = Business.Gateway.AccessionOrderGateway.GetDailyTaskOrderHistoryCollection(30);
             this.NotifyPropertyChanged("DailyTaskOrderCollection");
         }
 

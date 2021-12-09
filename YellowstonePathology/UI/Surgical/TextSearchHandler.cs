@@ -24,7 +24,7 @@ namespace YellowstonePathology.UI.Surgical
 			}
             else if(orderIdParser.IsValidMasterAccessionNo == true)
             {
-                result = YellowstonePathology.Business.MasterAccessionNo.Parse(this.m_SearchText, true);
+                result = Business.MasterAccessionNo.Parse(this.m_SearchText, true);
             }
             else
             {

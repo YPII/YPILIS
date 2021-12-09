@@ -21,7 +21,11 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             this.Add("EYDOH");
             this.Add("Athena Health");
             this.Add("Meditech");
-            this.Add("Do Not Distribute");  
+            this.Add("Do Not Distribute");
+            this.Add("Text");
+            this.Add("Email");
+            this.Add("ECW Riverstone");
+            this.Add("Meditech NMH");
         }
     }
 }

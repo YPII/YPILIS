@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Domain
 
 		public DataLoadResult()
 		{
-			this.DataLoadStatusEnum = YellowstonePathology.Business.Domain.DataLoadStatusEnum.NotFound;
+			this.DataLoadStatusEnum = Business.Domain.DataLoadStatusEnum.NotFound;
 		}
 
 		public YellowstonePathology.Business.Domain.DataLoadStatusEnum DataLoadStatusEnum
@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Domain
 
 		public bool Successful
 		{
-			get { return this.m_DataLoadStatusEnum == YellowstonePathology.Business.Domain.DataLoadStatusEnum.Successful; }
+			get { return this.m_DataLoadStatusEnum == Business.Domain.DataLoadStatusEnum.Successful; }
 		}
 	}
 }

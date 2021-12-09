@@ -174,7 +174,7 @@ namespace YellowstonePathology.UI.Surgical
                 panelSetOrderCPTCode.Modifier = pqrsCode.Modifier == null ? null : pqrsCode.Modifier;
                 panelSetOrderCPTCode.CodeableDescription = "PQRS Code";
                 panelSetOrderCPTCode.CodeableType = "PQRS";
-                panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;
+                panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.ManualEntry;
                 panelSetOrderCPTCode.SpecimenOrderId = this.m_SurgicalSpecimen.SpecimenOrderId;
                 panelSetOrderCPTCode.ClientId = this.m_AccessionOrder.ClientId;
                 this.m_SurgicalTestOrder.PanelSetOrderCPTCodeCollection.Add(panelSetOrderCPTCode);

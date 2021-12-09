@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             YellowstonePathology.Business.ClientOrder.Model.UniversalService universalService, string resultMessage, string resultStatus, DateTime dateOfService)
 		{
 			this.m_ClientOrder = clientOrder;
-			this.m_OrderingPhysician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByNpi(this.m_ClientOrder.ProviderId);
+			this.m_OrderingPhysician = Business.Gateway.PhysicianClientGateway.GetPhysicianByNpi(this.m_ClientOrder.ProviderId);
 			this.m_OrderStatus = orderStatus;
             this.m_UniversalService = universalService;            
             this.m_ResultMessage = resultMessage;

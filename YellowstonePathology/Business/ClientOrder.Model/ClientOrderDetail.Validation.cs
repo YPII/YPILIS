@@ -179,7 +179,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
             }
             set
             {                
-                string formattedString = YellowstonePathology.Business.Helper.DateTimeExtensions.AddSlashesSpacesAndColon(value);
+                string formattedString = Business.Helper.DateTimeExtensions.AddSlashesSpacesAndColon(value);
                 this.m_CollectionDateBinding = formattedString;
 
                 DateTime collectionDate;
@@ -206,7 +206,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
             bool isGoodDate = DateTime.TryParse(this.m_CollectionDateBinding, out collectionDate);
             if (isGoodDate == true)
             {
-                if (this.m_ClientFixation != YellowstonePathology.Business.Specimen.Model.FixationType.PreservCyt)
+                if (this.m_ClientFixation != Business.Specimen.Model.FixationType.PreservCyt)
                 {
                     if (this.m_FixationStartTime.HasValue == true && this.m_CollectionDate.HasValue == true && this.m_FixationStartTime < this.m_CollectionDate)
                     {
@@ -250,7 +250,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
             }
             set
             {
-                string formattedString = YellowstonePathology.Business.Helper.DateTimeExtensions.AddSlashesSpacesAndColon(value);
+                string formattedString = Business.Helper.DateTimeExtensions.AddSlashesSpacesAndColon(value);
                 this.m_FixationStartTimeBinding = formattedString;
 
                 DateTime fixationStartTime;
@@ -296,7 +296,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
             {
                 if (this.m_ClientAccessioned == false)
                 {
-                    if (this.m_ClientFixation != YellowstonePathology.Business.Specimen.Model.FixationType.NotApplicable)
+                    if (this.m_ClientFixation != Business.Specimen.Model.FixationType.NotApplicable)
                     {
                         if (string.IsNullOrEmpty(this.m_FixationStartTimeBinding) == true)
                         {

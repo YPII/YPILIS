@@ -31,7 +31,7 @@ namespace YellowstonePathology.UI
             this.m_IsNewItem = isNewShortcut;
             if (isNewShortcut == false)
             {
-                this.m_TypingShortcut = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullTypingShortcut(objectId, this);
+                this.m_TypingShortcut = Business.Persistence.DocumentGateway.Instance.PullTypingShortcut(objectId, this);
             }
             else
             {
@@ -40,7 +40,7 @@ namespace YellowstonePathology.UI
 
             InitializeComponent();
 
-            this.m_SystemUserCollection = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Typing, true);
+            this.m_SystemUserCollection = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Typing, true);
 
             this.DataContext = this.m_TypingShortcut;
             this.comboBoxTypingUsers.ItemsSource = this.m_SystemUserCollection;            

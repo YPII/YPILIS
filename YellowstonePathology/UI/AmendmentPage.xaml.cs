@@ -40,7 +40,7 @@ namespace YellowstonePathology.UI
             this.m_AccessionOrder = accessionOrder;            
             this.m_Amendment = amendment;
             this.m_SystemIdentity = systemIdentity;
-            this.AmendmentSigners = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.AmendmentSigner, true);
+            this.AmendmentSigners = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.AmendmentSigner, true);
 
             this.m_PageHeaderText = "Amendment For: " + this.m_AccessionOrder.PatientDisplayName + " (" +this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical().ReportNo + ")";
 
@@ -114,7 +114,7 @@ namespace YellowstonePathology.UI
             if (methodResult.Success == true)
             {
                 YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder her2AmplificationByISHTestOrder = (Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_Amendment.ReferenceReportNo);
-                this.m_Amendment.Text = YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHSystemGeneratedAmendmentText.AmendmentText(her2AmplificationByISHTestOrder);
+                this.m_Amendment.Text = Business.Test.HER2AmplificationByISH.HER2AmplificationByISHSystemGeneratedAmendmentText.AmendmentText(her2AmplificationByISHTestOrder);
             }
             else
             {

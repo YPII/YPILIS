@@ -694,7 +694,7 @@ namespace YellowstonePathology.Business.Amendment.Model
                 YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTest her2AmplificationByISHTest = new Test.HER2AmplificationByISH.HER2AmplificationByISHTest();
                 if (panelSetOrder.PanelSetId == her2AmplificationByISHTest.PanelSetId)
                 {
-                    string generatedText = YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHSystemGeneratedAmendmentText.AmendmentText((YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)panelSetOrder);
+                    string generatedText = Business.Test.HER2AmplificationByISH.HER2AmplificationByISHSystemGeneratedAmendmentText.AmendmentText((YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)panelSetOrder);
                     result = this.m_Text.Contains(generatedText);
                 }
             }

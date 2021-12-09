@@ -36,12 +36,12 @@ namespace YellowstonePathology.Business.Search
 			this.m_FinalDates.Add("Final Last 7 Days");
 			this.m_FinalDates.Add("Final Last 30 Days");
 
-            this.m_Pathologists = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetPathologistUsers();
+            this.m_Pathologists = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetPathologistUsers();
 			YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.AddAllToUserList(this.m_Pathologists, true);
 			this.m_Pathologists[0].UserId = -1;
 			YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.AddUnassignedToUserList(this.m_Pathologists, true);
 			
-			this.m_PanelSets = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+			this.m_PanelSets = Business.PanelSet.Model.PanelSetCollection.GetAll();
 
 			this.m_PathologistCaseTypes = this.m_PanelSets.GetPathologistsCaseTypes();
             this.m_SelectedCaseType = "All Case Types";
@@ -52,7 +52,7 @@ namespace YellowstonePathology.Business.Search
 			this.m_SelectedPathologistId = -1;
             if (YellowstonePathology.Business.User.SystemIdentity.Instance.User.IsUserInRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist))
 			{				
-                this.m_SelectedPathologistId = YellowstonePathology.Business.User.SystemIdentity.Instance.User.UserId;
+                this.m_SelectedPathologistId = Business.User.SystemIdentity.Instance.User.UserId;
 			}
 
 			m_SearchValue = string.Empty;
@@ -238,8 +238,8 @@ namespace YellowstonePathology.Business.Search
 			{
 				if (item.Assign && item.GroupType != "Flow" && item.GroupType != "Cytology")
 				{
-					YellowstonePathology.Business.Rules.Surgical.RulesAssignPathologistId rule = YellowstonePathology.Business.Rules.Surgical.RulesAssignPathologistId.Instance;
-					YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(item.MasterAccessionNo, this);					
+					YellowstonePathology.Business.Rules.Surgical.RulesAssignPathologistId rule = Business.Rules.Surgical.RulesAssignPathologistId.Instance;
+					YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(item.MasterAccessionNo, this);					
 					YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(item.ReportNo);
 					rule.AccessionOrder = accessionOrder;
 					rule.PanelSetOrder = panelSetOrder;                    

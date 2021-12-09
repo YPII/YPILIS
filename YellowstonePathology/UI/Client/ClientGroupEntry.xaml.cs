@@ -19,16 +19,16 @@ namespace YellowstonePathology.UI.Client
     {
 		public event PropertyChangedEventHandler PropertyChanged;
 		
-		private YellowstonePathology.Business.Client.Model.ClientGroup m_ClientGroup;
-		private YellowstonePathology.Business.Client.Model.ClientCollection m_MembersClientCollection;
-        private YellowstonePathology.Business.Client.Model.ClientCollection m_SearchClientCollection;
-        private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
+		private Business.Client.Model.ClientGroup m_ClientGroup;
+		private Business.Client.Model.ClientCollection m_MembersClientCollection;
+        private Business.Client.Model.ClientCollection m_SearchClientCollection;
+        private Business.User.SystemIdentity m_SystemIdentity;
 
-        public ClientGroupEntry(YellowstonePathology.Business.Client.Model.ClientGroup clientGroup)
+        public ClientGroupEntry(Business.Client.Model.ClientGroup clientGroup)
         {                                
             this.m_ClientGroup = clientGroup;
             this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
-            this.m_MembersClientCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientCollectionByClientGroupId(this.m_ClientGroup.ClientGroupId);
+            this.m_MembersClientCollection = Business.Gateway.PhysicianClientGateway.GetClientCollectionByClientGroupId(this.m_ClientGroup.ClientGroupId);
             
             InitializeComponent();
 
@@ -49,17 +49,17 @@ namespace YellowstonePathology.UI.Client
 			}
 		}     
         
-        public YellowstonePathology.Business.Client.Model.ClientGroup ClientGroup
+        public Business.Client.Model.ClientGroup ClientGroup
         {
             get { return this.m_ClientGroup; }
         }   
 
-		public YellowstonePathology.Business.Client.Model.ClientCollection MembersClientCollection
+		public Business.Client.Model.ClientCollection MembersClientCollection
         {
 			get { return this.m_MembersClientCollection; }
 		}
 
-        public YellowstonePathology.Business.Client.Model.ClientCollection SearchClientCollection
+        public Business.Client.Model.ClientCollection SearchClientCollection
         {
             get { return this.m_SearchClientCollection; }
         }
@@ -71,43 +71,43 @@ namespace YellowstonePathology.UI.Client
 
         private void Save(bool releaseLock)
         {
-            YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
-        }
-
-        private void ButtonAddToGroup_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.ListViewSearchClient.SelectedItem != null)
-            {
-                YellowstonePathology.Business.Client.Model.Client client = (YellowstonePathology.Business.Client.Model.Client)this.ListViewSearchClient.SelectedItem;
-                if (this.m_MembersClientCollection.Exists(client.ClientId) == false)
-                {
-                    string clientGroupClientId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-                    YellowstonePathology.Business.Client.Model.ClientGroupClient clientGroupClient = new Business.Client.Model.ClientGroupClient(clientGroupClientId, client.ClientId, this.m_ClientGroup.ClientGroupId);
-                    YellowstonePathology.Business.Persistence.DocumentGateway.Instance.InsertDocument(clientGroupClient, this);                    
-
-                    this.m_MembersClientCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientCollectionByClientGroupId(this.m_ClientGroup.ClientGroupId);
-                    this.NotifyPropertyChanged("MembersClientCollection");
-                }
-            }
-        }
-
-        private void ButtonRemoveFromGroup_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.ListViewMembers.SelectedItem != null)
-            {
-                YellowstonePathology.Business.Client.Model.Client client = (YellowstonePathology.Business.Client.Model.Client)this.ListViewMembers.SelectedItem;
-                YellowstonePathology.Business.Gateway.PhysicianClientGateway.DeleteClientGroupClient(client.ClientId, this.m_ClientGroup.ClientGroupId);
-                this.m_MembersClientCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientCollectionByClientGroupId(this.m_ClientGroup.ClientGroupId);
-                this.NotifyPropertyChanged("MembersClientCollection");
-            }
-        }        
+            Business.Persistence.DocumentGateway.Instance.Push(this);
+        }            
 
         private void TextBoxClientNameSearchText_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.TextBoxClientNameSearchText.Text.Length > 0)
             {
-                this.m_SearchClientCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientsByClientName(this.TextBoxClientNameSearchText.Text);
+                this.m_SearchClientCollection = Business.Gateway.PhysicianClientGateway.GetClientsByClientName(this.TextBoxClientNameSearchText.Text);
                 this.NotifyPropertyChanged("SearchClientCollection");
+            }
+        }
+
+        private void MenuItemRemoveMember_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewMembers.SelectedItem != null)
+            {
+                Business.Client.Model.Client client = (Business.Client.Model.Client)this.ListViewMembers.SelectedItem;
+                Business.Gateway.PhysicianClientGateway.DeleteClientGroupClient(client.ClientId, this.m_ClientGroup.ClientGroupId);
+                this.m_MembersClientCollection = Business.Gateway.PhysicianClientGateway.GetClientCollectionByClientGroupId(this.m_ClientGroup.ClientGroupId);
+                this.NotifyPropertyChanged("MembersClientCollection");
+            }
+        }
+
+        private void MenuItemAddMember_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListViewSearchClient.SelectedItem != null)
+            {
+                Business.Client.Model.Client client = (Business.Client.Model.Client)this.ListViewSearchClient.SelectedItem;
+                if (this.m_MembersClientCollection.Exists(client.ClientId) == false)
+                {
+                    string clientGroupClientId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                    Business.Client.Model.ClientGroupClient clientGroupClient = new Business.Client.Model.ClientGroupClient(clientGroupClientId, client.ClientId, this.m_ClientGroup.ClientGroupId);
+                    Business.Persistence.DocumentGateway.Instance.InsertDocument(clientGroupClient, this);
+
+                    this.m_MembersClientCollection = Business.Gateway.PhysicianClientGateway.GetClientCollectionByClientGroupId(this.m_ClientGroup.ClientGroupId);
+                    this.NotifyPropertyChanged("MembersClientCollection");
+                }
             }
         }
     }

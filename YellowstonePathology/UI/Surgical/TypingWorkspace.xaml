@@ -808,10 +808,11 @@
                             <ComboBoxItem>PQRI Cases</ComboBoxItem>
                             <ComboBoxItem>No Gross</ComboBoxItem>
                             <ComboBoxItem>No Clinical Info</ComboBoxItem>
+                            <ComboBoxItem>Fluid/Urine</ComboBoxItem>
+                            <ComboBoxItem>FNA</ComboBoxItem>
+                            <ComboBoxItem>Peripheral Blood Smear</ComboBoxItem>
                         </ComboBox>
                         <Button Width="50" Height="22" VerticalAlignment="Center" Click="ButtonGetList_Click">Go</Button>
-                        <TextBlock Margin="20,2,2,2" VerticalAlignment="Center">Enable Audit Mode</TextBlock>
-                        <CheckBox Margin="2" VerticalAlignment="Center" IsChecked="{Binding Path=AuditMode}"></CheckBox>
                     </StackPanel>
 
                 </Grid>

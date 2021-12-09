@@ -112,7 +112,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
         private void IsUserPathologistOrCytotech()
         {
             this.m_UserHasPermissions = false;
-			YellowstonePathology.Business.User.SystemUser user = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(this.m_UserPerformingFinal.UserId) as YellowstonePathology.Business.User.SystemUser;
+			YellowstonePathology.Business.User.SystemUser user = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(this.m_UserPerformingFinal.UserId) as YellowstonePathology.Business.User.SystemUser;
 			if (user.IsUserInRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist) || user.IsUserInRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Cytotech))
 			{
                 this.m_UserHasPermissions = true;
@@ -186,7 +186,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
 
         private void AddNoChargePeerReviewForEndoGreaterThan40Comment()
         {
-			string endoComment = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("44").Comment;
+			string endoComment = Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("44").Comment;
             if (string.IsNullOrEmpty(this.m_PanelOrderToFinal.ReportComment) == false && this.m_PanelOrderToFinal.ReportComment.Contains(endoComment) == true)
             {
                 if (this.m_PanelSetOrderCytology.DoesPathologistReviewExist() == false)
@@ -206,7 +206,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
 
         private void AddPathologistReviewIfDiagnosisIsTwoOrBetter()
         {
-			bool isTwoOrBetter = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsDiagnosisTwoOrBetter(this.m_PanelOrderToFinal.ResultCode);
+			bool isTwoOrBetter = Business.Cytology.Model.CytologyResultCode.IsDiagnosisTwoOrBetter(this.m_PanelOrderToFinal.ResultCode);
             if (isTwoOrBetter == true)
             {
 				if (this.m_PanelSetOrderCytology.DoesPathologistReviewExist() == false)
@@ -220,7 +220,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
 
         private void HandleUnsatPrimaryScreeningResult()
         {
-			bool resultIsUnsat = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeUnsat(this.m_PanelOrderToFinal.ResultCode);
+			bool resultIsUnsat = Business.Cytology.Model.CytologyResultCode.IsResultCodeUnsat(this.m_PanelOrderToFinal.ResultCode);
             if (resultIsUnsat == true)
             {
 				if (this.m_PanelSetOrderCytology.DoesPathologistReviewExist() == false)
@@ -236,7 +236,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
         {
             if (this.m_PanelOrderToFinal.ScreeningType.ToUpper() == "PATHOLOGIST REVIEW")
             {
-				bool pathologistReviewResultIsUnsat = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeUnsat(this.m_PanelOrderToFinal.ResultCode);
+				bool pathologistReviewResultIsUnsat = Business.Cytology.Model.CytologyResultCode.IsResultCodeUnsat(this.m_PanelOrderToFinal.ResultCode);
                 if (pathologistReviewResultIsUnsat == true)
                 {
 					this.m_PanelSetOrderCytology.NoCharge = true;
@@ -257,7 +257,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
         {
             if (this.m_PanelOrderToFinal.ScreeningType.ToUpper() == "PATHOLOGIST REVIEW")
             {
-				bool pathologistReviewResultIsNormal = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(this.m_PanelOrderToFinal.ResultCode);
+				bool pathologistReviewResultIsNormal = Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(this.m_PanelOrderToFinal.ResultCode);
 				if (pathologistReviewResultIsNormal == true)
 				{
 					this.m_PanelOrderToFinal.NoCharge = true;
@@ -269,8 +269,8 @@ namespace YellowstonePathology.Business.Rules.Cytology
 		{
             if (this.m_PanelOrderToFinal.ScreeningType.ToUpper() == "PATHOLOGIST REVIEW")
             {
-				bool pathologistReviewResultIsNormal = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(this.m_PanelOrderToFinal.ResultCode);
-				string endoComment = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("44").Comment;
+				bool pathologistReviewResultIsNormal = Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(this.m_PanelOrderToFinal.ResultCode);
+				string endoComment = Business.Gateway.AccessionOrderGateway.GetCytologyReportCommentById("44").Comment;
 				
 				if (pathologistReviewResultIsNormal == false && 
 					string.IsNullOrEmpty(this.m_PanelOrderToFinal.ReportComment) == false && this.m_PanelOrderToFinal.ReportComment.Contains(endoComment) == true)
@@ -373,7 +373,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
                 if (this.m_PanelOrderToFinal.ScreeningType.ToUpper() != "PRIMARY SCREENING")
                 {
                     YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology primaryScreening = (YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology)this.m_PanelSetOrderCytology.PanelOrderCollection.GetPrimaryScreening();
-					bool primaryScreeningIsNormal = YellowstonePathology.Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(primaryScreening.ResultCode);
+					bool primaryScreeningIsNormal = Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(primaryScreening.ResultCode);
                     if (primaryScreeningIsNormal == true)
                     {
                         YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology cytotechReview = (YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology)this.m_PanelOrderToFinal;

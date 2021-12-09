@@ -30,7 +30,7 @@ namespace YellowstonePathology.UI.Calendar
         public CalendarDialog()
         {
             this.m_StartDate = DateTime.Today.AddDays(-(DateTime.Today.Day - 1));
-            this.m_PathologistCalendarDayCollection = YellowstonePathology.Business.Calendar.PathologistCalendarDayCollection.Load(this.m_StartDate, this.m_StartDate.AddMonths(1).AddDays(-1));
+            this.m_PathologistCalendarDayCollection = Business.Calendar.PathologistCalendarDayCollection.Load(this.m_StartDate, this.m_StartDate.AddMonths(1).AddDays(-1));
 
             this.m_CalendarStatusList = new List<string>();
             this.m_CalendarStatusList.Add("Billings");
@@ -126,7 +126,7 @@ namespace YellowstonePathology.UI.Calendar
         private void ButtonGetPathologistCalendar_Click(object sender, RoutedEventArgs e)
         {
             this.m_PathologistCalendarDayCollection.Save();
-            this.m_PathologistCalendarDayCollection = YellowstonePathology.Business.Calendar.PathologistCalendarDayCollection.Load(this.m_StartDate, this.m_StartDate.AddMonths(1).AddDays(-1));
+            this.m_PathologistCalendarDayCollection = Business.Calendar.PathologistCalendarDayCollection.Load(this.m_StartDate, this.m_StartDate.AddMonths(1).AddDays(-1));
 
             foreach (Business.Calendar.PathologistCalendarDay day in this.m_PathologistCalendarDayCollection)
             {
@@ -158,16 +158,16 @@ namespace YellowstonePathology.UI.Calendar
 
         private void GetHolidays()
         {
-            this.m_HolidayCollection = YellowstonePathology.Business.Calendar.HolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
+            this.m_HolidayCollection = Business.Calendar.HolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
             this.NotifyPropertyChanged("HolidayCollection");
         }
 
         private void ButtonAddStandardHolidays_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Calendar.HolidayCollection holidays = YellowstonePathology.Business.Calendar.HolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
+            YellowstonePathology.Business.Calendar.HolidayCollection holidays = Business.Calendar.HolidayCollection.GetByDateRange(new DateTime(this.m_SelectedYear, 1, 1), new DateTime(this.m_SelectedYear, 12, 31));
             if (holidays.Count == 0)
             {
-                holidays = YellowstonePathology.Business.Helper.DateTimeExtensions.GetHolidays(this.m_SelectedYear);
+                holidays = Business.Helper.DateTimeExtensions.GetHolidays(this.m_SelectedYear);
                 foreach (YellowstonePathology.Business.Calendar.Holiday holiday in holidays)
                 {
                     holiday.Save();

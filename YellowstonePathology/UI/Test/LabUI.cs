@@ -45,10 +45,10 @@ namespace YellowstonePathology.UI.Test
             this.m_Writer = writer;
 			
 			this.m_SearchEngine = new Business.Test.SearchEngine();
-			this.m_MedTechUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.MedTech, true);
-			this.m_LogUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Log, true);
+			this.m_MedTechUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.MedTech, true);
+			this.m_LogUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Log, true);
 
-            this.m_PanelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetMolecularLabPanelSets();
+            this.m_PanelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetMolecularLabPanelSets();
 			
 			this.m_DigeneImportFileList = new YellowstonePathology.Business.FileList();
             			
@@ -58,11 +58,11 @@ namespace YellowstonePathology.UI.Test
 
 			this.m_PathologistSearch = new YellowstonePathology.Business.Search.PathologistSearch(this.m_Writer);
 
-			this.m_PathologistUsers = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);			
+			this.m_PathologistUsers = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetUsersByRole(YellowstonePathology.Business.User.SystemUserRoleDescriptionEnum.Pathologist, true);			
 
 			this.m_FieldEnabler = new YellowstonePathology.Business.Common.FieldEnabler();
 
-			this.m_PanelSetCaseTypeCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPanelSetCaseTypeCollection();            
+			this.m_PanelSetCaseTypeCollection = Business.Gateway.AccessionOrderGateway.GetPanelSetCaseTypeCollection();            
 		}
 
         public YellowstonePathology.Business.User.SystemIdentity SystemIdentity
@@ -163,7 +163,7 @@ namespace YellowstonePathology.UI.Test
 
         public void GetAccessionOrder(string masterAccessionNo, string reportNo)
 		{                         
-            this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
+            this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
 			this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);             
 
 			this.m_CaseDocumentCollection = new YellowstonePathology.Business.Document.CaseDocumentCollection(this.AccessionOrder, reportNo);
@@ -224,7 +224,7 @@ namespace YellowstonePathology.UI.Test
 					Nullable<int> id = m_PanelSetOrder.OrderedById;
 					if (id.HasValue)
 					{
-						YellowstonePathology.Business.User.SystemUser orderedBy = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(id.Value);
+						YellowstonePathology.Business.User.SystemUser orderedBy = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(id.Value);
 						name = orderedBy.UserName;
 					}
 				}

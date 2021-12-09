@@ -233,8 +233,8 @@ namespace YellowstonePathology.Business.Document.Old
 
 		public static string getCasePath(string reportNo)
 		{
-			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(reportNo);
-			return YellowstonePathology.Document.CaseDocumentPath.GetPath(orderIdParser);
+			Business.OrderIdParser orderIdParser = new Business.OrderIdParser(reportNo);
+			return Business.Document.CaseDocumentPath.GetPath(orderIdParser);
 		}
     }
 }

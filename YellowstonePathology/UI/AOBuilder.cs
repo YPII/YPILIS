@@ -31,7 +31,7 @@ namespace YellowstonePathology.UI
 
         private void BuildClientOrder()
         {
-            YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(280);
+            YellowstonePathology.Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(280);
             client.ClientLocationCollection.SetCurrentLocationToMedicalRecordsOrFirst();
             this.m_ClientOrderReceivingHandler.IFoundAClient(client);
             this.m_ClientOrderReceivingHandler.LetsUseANewClientOrder();
@@ -46,13 +46,13 @@ namespace YellowstonePathology.UI
 
         private void BuildClientOrderDetail()
         {
-            YellowstonePathology.Business.BarcodeScanning.ContainerBarcode containerBarcode = YellowstonePathology.Business.BarcodeScanning.ContainerBarcode.Parse();
+            YellowstonePathology.Business.BarcodeScanning.ContainerBarcode containerBarcode = Business.BarcodeScanning.ContainerBarcode.Parse();
             YellowstonePathology.UI.Login.Receiving.IFoundAContainerResult result = this.m_ClientOrderReceivingHandler.IFoundAContainer(containerBarcode.ToString());
 
             result.ClientOrderDetail.DescriptionToAccessionBinding = "Speciment 1";
             result.ClientOrderDetail.FixationStartTimeBinding = DateTime.Now.AddHours(-3).ToString("dd/MM/yyyy HH:mm");
-            result.ClientOrderDetail.ClientFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.Formalin;
-            result.ClientOrderDetail.LabFixationBinding = YellowstonePathology.Business.Specimen.Model.FixationType.Formalin;
+            result.ClientOrderDetail.ClientFixationBinding = Business.Specimen.Model.FixationType.Formalin;
+            result.ClientOrderDetail.LabFixationBinding = Business.Specimen.Model.FixationType.Formalin;
             result.ClientOrderDetail.SetFixationStartTime();
         }
 
@@ -64,12 +64,12 @@ namespace YellowstonePathology.UI
 
         private void LinkPatient()
         {
-            this.m_ClientOrderReceivingHandler.AccessionOrder.PatientId = YellowstonePathology.Business.Gateway.PatientLinkingGateway.GetNewPatientId();
+            this.m_ClientOrderReceivingHandler.AccessionOrder.PatientId = Business.Gateway.PatientLinkingGateway.GetNewPatientId();
         }
 
         private void SetProvider()
         {
-            YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionByClientPhysicianLastNameV2("Yellowstone Pathologists, P.C.", "Schultz");
+            YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = Business.Gateway.PhysicianClientGateway.GetPhysicianClientDistributionByClientPhysicianLastNameV2("Yellowstone Pathologists, P.C.", "Schultz");
             this.m_ClientOrderReceivingHandler.AccessionOrder.SetPhysicianClient(physicianClientDistributionCollection[0]);
         }
 

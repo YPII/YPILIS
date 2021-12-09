@@ -12,6 +12,7 @@ namespace YellowstonePathology.Business.Billing.Model
         public static string CYTOCHMCL = "Cytochemical";
         public static string CYTOCHMCLMO = "Cytochemical for Microorganisms";
         public static string SRGCLDIAG = "Surgical Diagnosis";
-        public static string QUANTITATIVE = "Quantitative";        
+        public static string QUANTITATIVE = "Quantitative";
+        public static string CRYSTALLOGRAPHY = "Crystallography";
     }
 }

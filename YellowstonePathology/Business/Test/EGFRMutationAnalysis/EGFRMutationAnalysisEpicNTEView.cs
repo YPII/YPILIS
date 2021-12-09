@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.EGFRMutationAnalysis
         public override void ToXml(XElement document)
         {
             EGFRMutationAnalysisTestOrder egfrMutationAnalysisTestOrder = (EGFRMutationAnalysisTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(egfrMutationAnalysisTestOrder.PanelSetId);
+            YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = Business.PanelSet.Model.PanelSetCollection.GetAll().GetPanelSet(egfrMutationAnalysisTestOrder.PanelSetId);
 
             //Add the first element as narrative for Nikki to see.
             Business.HL7View.EPIC.EPICBeakerNarrativeOBXView.AddElement(document);

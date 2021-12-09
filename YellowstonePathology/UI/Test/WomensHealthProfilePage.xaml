@@ -76,8 +76,8 @@
                     <Hyperlink Click="HyperLinkNext_Click">Next</Hyperlink>
             </TextBlock>
 
-            <TextBlock Name="TextBlockASCCPCheck" Grid.Column="0" Grid.Row="11" Margin="5,3,0,0">                    
-                    <Hyperlink Click="HyperLinkASCCPCheck_Click">ASCCP Check</Hyperlink>
+            <TextBlock Name="TextBlockManagementRecomendation" Grid.Column="0" Grid.Row="11" Margin="5,3,0,0">                    
+                    <Hyperlink Click="HyperLinkManagementRecomendation_Click">Management Recomendation</Hyperlink>
             </TextBlock>
             
 			<TextBlock Grid.Column="0" Grid.Row="12" Margin="5,3,0,0">                    

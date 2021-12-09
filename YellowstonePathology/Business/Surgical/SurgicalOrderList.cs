@@ -49,55 +49,73 @@ namespace YellowstonePathology.Business.Surgical
 
 		public void FillByAccessionDate(DateTime date)
 		{
-			SurgicalOrderList surgicalOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByAccessionDate(date);
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByAccessionDate(date);
 			this.FillFromList(surgicalOrderList);
 		}
 
 		public void FillByFinalDate(DateTime date)
 		{
-			SurgicalOrderList surgicalOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByFinalDate(date);
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByFinalDate(date);
 			this.FillFromList(surgicalOrderList);
 		}
 
         public void FillByPqri(DateTime finalDate)
         {
-			SurgicalOrderList surgicalOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByAccessionDatePQRI(finalDate);
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByAccessionDatePQRI(finalDate);
             this.FillFromList(surgicalOrderList);
         }
 
 		public void FillByNotAudited()
 		{
-			SurgicalOrderList surgicalOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByNotAudited();
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByNotAudited();
 			this.FillFromList(surgicalOrderList);
 		}
 
 		public void FillByIntraoperative()
 		{
-			SurgicalOrderList surgicalOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByIntraoperative();
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByIntraoperative();
 			this.FillFromList(surgicalOrderList);
 		}
 
 		public void FillByNoSignature()
 		{
-			SurgicalOrderList surgicalOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByNotAssigned();
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByNotAssigned();
 			this.FillFromList(surgicalOrderList);
 		}
 
         public void FillByNoGross()
         {
-            SurgicalOrderList surgicalOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByNoGross();
+            SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByNoGross();
             this.FillFromList(surgicalOrderList);
         }
 
         public void FillByNoClinicalInfo()
         {
-            SurgicalOrderList surgicalOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByNoClinicalInfo();
+            SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByNoClinicalInfo();
             this.FillFromList(surgicalOrderList);
         }
 
+		public void FillByFNA(DateTime workDate)
+		{
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByFNA(workDate);
+			this.FillFromList(surgicalOrderList);
+		}
+
+		public void FillByFluid(DateTime workDate)
+		{
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByFluid(workDate);
+			this.FillFromList(surgicalOrderList);
+		}
+
+		public void FillByPeriphearlBloodSmear(DateTime workDate)
+		{
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByPeripheralBloodSmear(workDate);
+			this.FillFromList(surgicalOrderList);
+		}
+
 		public void FillBySvhClientOrder(DateTime date)
 		{
-			SurgicalOrderList surgicalOrderList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListForSvhClientOrder(date);
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListForSvhClientOrder(date);
 			this.FillFromList(surgicalOrderList);
 		}
 

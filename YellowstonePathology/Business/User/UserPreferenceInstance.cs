@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.User
 
 		private UserPreferenceInstance()
 		{
-            this.m_UserPreference = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullUserPreference(System.Environment.MachineName, this);
+            this.m_UserPreference = Business.Persistence.DocumentGateway.Instance.PullUserPreference(System.Environment.MachineName, this);
         }
 
         public static UserPreferenceInstance Instance

@@ -10,11 +10,12 @@ namespace YellowstonePathology.Business.Test.MPNExtendedReflex
 		public MPNExtendedReflexTest()
 		{
 			this.m_PanelSetId = 137;
-			this.m_PanelSetName = "MPN Extended Reflex";
-			this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+			//this.m_PanelSetName = "MPN Extended Reflex";
+			this.m_PanelSetName = "MPN JAK2 V617 with Sequential Reflex to JAK2 Exon 12-13, CALR and MPL";
+			this.m_CaseType = Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;
 			this.m_HasProfessionalComponent = true;
-			this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
 			this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterY();
 			this.m_Active = true;
 
@@ -33,20 +34,27 @@ namespace YellowstonePathology.Business.Test.MPNExtendedReflex
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);
 
-            YellowstonePathology.Business.Facility.Model.Facility neo = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            YellowstonePathology.Business.Facility.Model.Facility neo = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
             string taskDescription = "Gather materials and send to NEO.";
 			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Molecular, taskDescription, neo));
 
 			this.m_TechnicalComponentFacility = neo;
-			this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+			this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
 			this.m_ProfessionalComponentFacility = neo;
-			this.m_ProfessionalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+			this.m_ProfessionalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
 
-            Business.Billing.Model.PanelSetCptCode panelSetCptCode1 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81479", null), 1);
-            this.m_PanelSetCptCodeCollection.Add(panelSetCptCode1);            
+            Business.Billing.Model.PanelSetCptCode panelSetCptCode1 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81219", null), 1);
+			Business.Billing.Model.PanelSetCptCode panelSetCptCode2 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81279", null), 1);
+			Business.Billing.Model.PanelSetCptCode panelSetCptCode3 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81270", null), 1);
+			Business.Billing.Model.PanelSetCptCode panelSetCptCode4 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81339", null), 1);
 
-            this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServicePathSummary());
+			this.m_PanelSetCptCodeCollection.Add(panelSetCptCode1);
+			this.m_PanelSetCptCodeCollection.Add(panelSetCptCode2);
+			this.m_PanelSetCptCodeCollection.Add(panelSetCptCode3);
+			this.m_PanelSetCptCodeCollection.Add(panelSetCptCode4);
+
+			this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServicePathSummary());
 		}
 	}
 }

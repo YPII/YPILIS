@@ -12,9 +12,9 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobin
             this.m_PanelSetId = 28;
             this.m_PanelSetName = "Fetal Hemoglobin - Retired";            
 			this.m_AllowMultiplePerAccession = true;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterF();
-            this.m_CaseType = this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = this.m_CaseType = Business.CaseType.Molecular;
             this.m_Active = false;
             this.m_ExpectedDuration = TimeSpan.FromHours(24);
 

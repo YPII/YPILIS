@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
 
         public void Assign()
         {
-			this.m_CytologyAccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(this.m_MasterAccessionNo, this.m_Writer);
+			this.m_CytologyAccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(this.m_MasterAccessionNo, this.m_Writer);
 			this.m_PanelSetOrderCytology = (YellowstonePathology.Business.Test.ThinPrepPap.PanelSetOrderCytology)this.m_CytologyAccessionOrder.PanelSetOrderCollection.GetPAP();			
 
 			this.m_PanelSetOrderCytology.AssignedToId = this.m_AssignedToId;

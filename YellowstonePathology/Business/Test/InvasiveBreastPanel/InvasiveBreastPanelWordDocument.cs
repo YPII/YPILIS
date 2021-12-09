@@ -17,13 +17,13 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
 
         public override void Render()
         {            
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\InvasiveBreastPanel.2.xml";
+            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\InvasiveBreastPanel.3.xml";
             this.OpenTemplate();
             this.SetDemographicsV2();
             this.SetReportDistribution();
 
-			YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanel invasiveBreastPanel = (YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanel)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(125);
-			YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanelResult invasiveBreastPanelResult = new Test.InvasiveBreastPanel.InvasiveBreastPanelResult(this.m_AccessionOrder);
+            YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanel invasiveBreastPanel = (YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanel)this.m_PanelSetOrder;
+			YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanelResult invasiveBreastPanelResult = new Test.InvasiveBreastPanel.InvasiveBreastPanelResult(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder);
 
             this.ReplaceText("specimen_description", invasiveBreastPanelResult.SpecimenOrder.GetSpecimenDescriptionString());
 			if (invasiveBreastPanelResult.HasSurgical == true)
@@ -34,9 +34,10 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
 
             this.ReplaceText("her2_result", invasiveBreastPanelResult.HER2ResultString);
             this.ReplaceText("er_result", invasiveBreastPanelResult.ERResultString);
-            this.ReplaceText("pr_result", invasiveBreastPanelResult.PRResultString);
+            this.ReplaceText("pr_result", invasiveBreastPanelResult.PRResultString);            
+            this.ReplaceText("ki67_result", invasiveBreastPanelResult.Ki67Result);
 
-			this.ReplaceText("report_date", BaseData.GetShortDateString(invasiveBreastPanel.FinalDate));
+            this.ReplaceText("report_date", BaseData.GetShortDateString(invasiveBreastPanel.FinalDate));
 			this.ReplaceText("pathologist_signature", invasiveBreastPanel.Signature);
 
             this.SaveReport();

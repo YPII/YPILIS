@@ -173,7 +173,7 @@ namespace YellowstonePathology.UI.Test
             if(this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) == true)
             {
                 YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder testOrder = (YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
-                if (testOrder.Final == true && testOrder.Result == YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
+                if (testOrder.Final == true && testOrder.Result == Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
                 {
                     result.Success = true;
                 }

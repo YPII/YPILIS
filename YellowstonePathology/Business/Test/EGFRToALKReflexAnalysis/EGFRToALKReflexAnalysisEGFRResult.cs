@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Test.EGFRToALKReflexAnalysis
             if (this.m_Final == true)
             {                
                 YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisTestOrder egfrMutationAnalysisTestOrder = (YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisTestOrder)this.m_PanelSetOrder;
-                this.m_EGFRMutationAnalysisResult = YellowstonePathology.Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisResultFactory.GetResult(egfrMutationAnalysisTestOrder.ResultCode);
+                this.m_EGFRMutationAnalysisResult = Business.Test.EGFRMutationAnalysis.EGFRMutationAnalysisResultFactory.GetResult(egfrMutationAnalysisTestOrder.ResultCode);
                 this.m_ResultAbbreviation = this.m_EGFRMutationAnalysisResult.ResultAbbreviation;                
             }           
         }

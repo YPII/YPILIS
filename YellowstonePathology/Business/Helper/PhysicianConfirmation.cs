@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Helper
 		public static bool IsNPIValid(string npi)
 		{
 			bool result = true;
-			YellowstonePathology.Business.Domain.Physician physician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByNpi(npi);
+			YellowstonePathology.Business.Domain.Physician physician = Business.Gateway.PhysicianClientGateway.GetPhysicianByNpi(npi);
 			if (physician == null)
 			{
 				result = false;

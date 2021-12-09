@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
             this.m_Rule.ActionList.Add(DoesCytotechReviewExist);
             this.m_Rule.ActionList.Add(AddQCPanel);
 
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
 		}
 
         private void IsModulusNotZero()

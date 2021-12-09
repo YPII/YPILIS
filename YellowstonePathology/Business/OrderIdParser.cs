@@ -195,7 +195,7 @@ namespace YellowstonePathology.Business
 			}
 		}
 
-		public string CreateCyotlogyReportNoFromMasterAccessionNo()
+		public string CreateCytologyReportNoFromMasterAccessionNo()
 		{
 			return this.MasterAccessionNo + ".P";
 		}

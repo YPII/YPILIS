@@ -10,12 +10,12 @@ namespace YellowstonePathology.Business.Facility.Model
     {
         public ClientBillingFacilityCollection()
         {
-            Facility neogenomicsIrvine = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
-            Facility neogenomicsFlorida = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCINC");
+            Facility neogenomicsIrvine = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            Facility neogenomicsFlorida = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCINC");
 
-            Facility ypii = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
-            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection clientGroupStVincent = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("1");
-            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection clientGroupAllClients = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollection();
+            Facility ypii = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection clientGroupStVincent = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("1");
+            YellowstonePathology.Business.Client.Model.ClientGroupClientCollection clientGroupAllClients = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollection();
 
             this.Add(new ClientBillingFacility(neogenomicsIrvine, ypii, clientGroupStVincent, "Technical"));
             this.Add(new ClientBillingFacility(neogenomicsFlorida, ypii, clientGroupStVincent, "Technical"));

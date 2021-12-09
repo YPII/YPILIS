@@ -52,7 +52,7 @@ namespace YellowstonePathology.UI.Login
             YellowstonePathology.UI.Login.CytologySlideLabelDocument cyologySlideLabelDocument = new CytologySlideLabelDocument(this.TextBoxDummyReportNumber.Text, lastName, false);
             System.Windows.Controls.PrintDialog printDialog = new System.Windows.Controls.PrintDialog();
 
-            System.Printing.PrintQueue printQueue = YellowstonePathology.UI.PrintQueueFactory.GetSlideLabelPrintQueue(YellowstonePathology.Properties.Settings.Default.CytologySlideLabelPrinterName);
+            System.Printing.PrintQueue printQueue = UI.PrintQueueFactory.GetSlideLabelPrintQueue(YellowstonePathology.Properties.Settings.Default.CytologySlideLabelPrinterName);
             printDialog.PrintQueue = printQueue;
             printDialog.PrintDocument(cyologySlideLabelDocument.DocumentPaginator, "Slide Labels");   
             
@@ -79,7 +79,7 @@ namespace YellowstonePathology.UI.Login
 
             /*
             string lastName = string.Empty;
-			YellowstonePathology.Business.Test.AccessionOrder accessionOrder = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetAccessionOrderByReportNo(this.TextBoxRealReportNumber.Text);
+			YellowstonePathology.Business.Test.AccessionOrder accessionOrder = Business.Gateway.AccessionOrderGateway.GetAccessionOrderByReportNo(this.TextBoxRealReportNumber.Text);
 			if (accessionOrder != null)
             {
                 lastName = accessionOrder.PLastName;

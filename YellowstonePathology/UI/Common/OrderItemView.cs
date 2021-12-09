@@ -60,7 +60,7 @@ namespace YellowstonePathology.UI.Common
                     if (element.Element("Order").Value == "True")
                     {                        
                         string testId = element.Element("Id").Value;
-                        YellowstonePathology.Business.Test.Model.Test test = YellowstonePathology.Business.Test.Model.TestCollectionInstance.GetClone(testId);
+                        YellowstonePathology.Business.Test.Model.Test test = Business.Test.Model.TestCollectionInstance.GetClone(testId);
                         string testOrderComment = element.Element("Comment").Value;
                         test.OrderComment = testOrderComment;
                         result.Add(test);
@@ -73,7 +73,7 @@ namespace YellowstonePathology.UI.Common
         public List<YellowstonePathology.Business.Test.Model.DualStain> GetSelectedDualStains()
         {
             List<YellowstonePathology.Business.Test.Model.DualStain> result = new List<YellowstonePathology.Business.Test.Model.DualStain>();
-            YellowstonePathology.Business.Test.Model.DualStainCollection dualStainCollection = YellowstonePathology.Business.Test.Model.DualStainCollection.GetAll();
+            YellowstonePathology.Business.Test.Model.DualStainCollection dualStainCollection = Business.Test.Model.DualStainCollection.GetAll();
 
             foreach (XElement element in this.m_OrderItemElementList)
             {

@@ -680,7 +680,7 @@ namespace YellowstonePathology.Business.Test
                 this.m_ValidatedById = Business.User.SystemIdentity.Instance.User.UserId;
                 this.m_ValidationDate = DateTime.Now;
                 this.m_Validated = true;
-                this.m_Status = YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Validated.ToString();
+                this.m_Status = Business.Slide.Model.SlideStatusEnum.Validated.ToString();
                 this.NotifyPropertyChanged(string.Empty);
             }
         }
@@ -724,14 +724,14 @@ namespace YellowstonePathology.Business.Test
         {
             get
             {
-                YellowstonePathology.Business.Slide.Model.SlideStatusEnum result = YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Created;
+                YellowstonePathology.Business.Slide.Model.SlideStatusEnum result = Business.Slide.Model.SlideStatusEnum.Created;
                 if (this.GrossVerified == true)
                 {
-                    result = YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Validated;
+                    result = Business.Slide.Model.SlideStatusEnum.Validated;
                 }
                 else if (this.Printed == true)
                 {
-                    result = YellowstonePathology.Business.Slide.Model.SlideStatusEnum.Printed;
+                    result = Business.Slide.Model.SlideStatusEnum.Printed;
                 }
                 return result;
             }

@@ -54,7 +54,7 @@ namespace YellowstonePathology.Business.Domain
 
         public void SetBillingType()
         {           
-            YellowstonePathology.Business.Rules.Billing.RulesSetBillingType rulesSetBillingType = YellowstonePathology.Business.Rules.Billing.RulesSetBillingType.Instance;
+            YellowstonePathology.Business.Rules.Billing.RulesSetBillingType rulesSetBillingType = Business.Rules.Billing.RulesSetBillingType.Instance;
             rulesSetBillingType.CptBillingCode = this;
             rulesSetBillingType.Execute();            
         }

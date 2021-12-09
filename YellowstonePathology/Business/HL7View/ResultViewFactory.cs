@@ -61,6 +61,10 @@ namespace YellowstonePathology.Business.HL7View
                 case 1732:
                 case 1668:
                 case 1759:
+                case 1306:
+                case 1308:
+                case 1058:
+                case 54:                
                     resultView = new Business.HL7View.EPIC.EPICBeakerResultView(reportNo, accessionOrder, sendUnsoliceted, testing);                    
                     break;
                 case 203: //Richard Taylor
@@ -106,6 +110,9 @@ namespace YellowstonePathology.Business.HL7View
                     break;
                 case 1622:
                     resultView = new HL7View.CMMC.CMMCResultView(reportNo, accessionOrder);
+                    break;
+                case 136:
+                    resultView = new HL7View.Riverstone.RiverstoneResultView(reportNo, accessionOrder, testing);
                     break;
             }       
             return resultView;

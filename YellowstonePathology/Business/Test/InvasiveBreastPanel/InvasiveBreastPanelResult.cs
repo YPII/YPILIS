@@ -7,6 +7,7 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
 {
     public class InvasiveBreastPanelResult
     {
+        private string m_ReportNo;
         private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
 
 		private YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanel m_InvasiveBreastPanel;
@@ -18,27 +19,30 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
         private bool m_HasSurgical;
         private YellowstonePathology.Business.SpecialStain.StainResultItem m_StainResultER;
         private YellowstonePathology.Business.SpecialStain.StainResultItem m_StainResultPR;
+        private YellowstonePathology.Business.SpecialStain.StainResultItem m_StainResultKi67;
 
         private string m_ERResultString;
         private string m_PRResultString;
+        private string m_Ki67Result;
         private string m_HER2ResultString;
 		private string m_HER2ByFISHResultString;
 		private bool m_IsHER2ByFISHRequired;
 		private bool m_HER2ByFISHHasBeenOrdered;
 
-        public InvasiveBreastPanelResult(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public InvasiveBreastPanelResult(string reportNo, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
+            this.m_ReportNo = reportNo;
             this.m_AccessionOrder = accessionOrder;
 
 			YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanelTest panelSetInvasiveBreastPanel = new YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanelTest();
-			this.m_InvasiveBreastPanel = (YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanel)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetInvasiveBreastPanel.PanelSetId);
+			this.m_InvasiveBreastPanel = (YellowstonePathology.Business.Test.InvasiveBreastPanel.InvasiveBreastPanel)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
             this.m_InvasiveBreastPanel.SetStatus(this.m_AccessionOrder.PanelSetOrderCollection);
 
             this.m_SpecimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByOrderTarget(this.m_InvasiveBreastPanel.OrderedOnId);
 
             if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(46) == true)
             {
-                this.m_PanelSetOrderHer2ByIsh = (YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(46);
+                this.m_PanelSetOrderHer2ByIsh = (YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(46, this.m_InvasiveBreastPanel.OrderedOnId, true);
                 this.m_HER2ResultString = this.m_PanelSetOrderHer2ByIsh.Result;
             }
             else
@@ -67,29 +71,37 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
 				this.m_StainResultPR = panelSetOrderSurgical.GetStainResult(testOrderPR.TestOrderId);
                 this.m_PRResultString = this.m_StainResultPR.Result;
 
+                YellowstonePathology.Business.Test.Model.TestOrder testOrderKi67 = this.m_AccessionOrder.PanelSetOrderCollection.GetTestOrderByTestId("349");
+                this.m_StainResultKi67 = panelSetOrderSurgical.GetStainResult(testOrderKi67.TestOrderId);                
+                this.m_Ki67Result = this.m_StainResultKi67.Result;
+                if(this.m_Ki67Result.ToLower().Contains("see comment"))
+                {
+                    this.m_Ki67Result = this.m_StainResultKi67.ReportComment;
+                }
             }
 			else if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(erPrSemiQuantitativeTest.PanelSetId) == true)
             {
-				this.m_PanelSetOrderErPrSemiQuantitative = (YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(erPrSemiQuantitativeTest.PanelSetId);
+				this.m_PanelSetOrderErPrSemiQuantitative = (YellowstonePathology.Business.Test.ErPrSemiQuantitative.ErPrSemiQuantitativeTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(erPrSemiQuantitativeTest.PanelSetId, this.m_InvasiveBreastPanel.OrderedOnId, true);
                 this.m_ERResultString = this.m_PanelSetOrderErPrSemiQuantitative.ErResult;
                 this.m_PRResultString = this.m_PanelSetOrderErPrSemiQuantitative.PrResult;
+                this.m_Ki67Result = this.m_PanelSetOrderErPrSemiQuantitative.Ki67Result;
             }
 
-			if (this.m_HER2ResultString == YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder.EquivocalResult) this.m_IsHER2ByFISHRequired = true;
+			if (this.m_HER2ResultString == Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder.EquivocalResult) this.m_IsHER2ByFISHRequired = true;
 
 			YellowstonePathology.Business.PanelSet.Model.PanelSetHer2AmplificationByFishRetired3 panelSetHer2AmplificationByFishRetired3 = new YellowstonePathology.Business.PanelSet.Model.PanelSetHer2AmplificationByFishRetired3();
 			YellowstonePathology.Business.Test.Her2AmplificationByFish.Her2AmplificationByFishTest panelSetHer2AmplificationByFish = new YellowstonePathology.Business.Test.Her2AmplificationByFish.Her2AmplificationByFishTest();
 			if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(panelSetHer2AmplificationByFishRetired3.PanelSetId) == true)
 			{
 				this.m_HER2ByFISHHasBeenOrdered = true;
-				YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetHer2AmplificationByFishRetired3.PanelSetId);
-				this.m_HER2ByFISHResultString = "Result in Report " + panelSetOrder.ReportNo;
+				YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetHer2AmplificationByFishRetired3.PanelSetId, this.m_InvasiveBreastPanel.OrderedOnId, true);
+                this.m_HER2ByFISHResultString = "Result in Report " + panelSetOrder.ReportNo;
 			}
 			else if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(panelSetHer2AmplificationByFish.PanelSetId) == true)
 			{
 				this.m_HER2ByFISHHasBeenOrdered = true;
-				YellowstonePathology.Business.Test.Her2AmplificationByFish.PanelSetOrderHer2AmplificationByFish panelSetOrderHer2AmplificationByFish = (YellowstonePathology.Business.Test.Her2AmplificationByFish.PanelSetOrderHer2AmplificationByFish)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetHer2AmplificationByFish.PanelSetId);
-				this.m_HER2ByFISHResultString = panelSetOrderHer2AmplificationByFish.Result;
+				YellowstonePathology.Business.Test.Her2AmplificationByFish.PanelSetOrderHer2AmplificationByFish panelSetOrderHer2AmplificationByFish = (YellowstonePathology.Business.Test.Her2AmplificationByFish.PanelSetOrderHer2AmplificationByFish)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(panelSetHer2AmplificationByFish.PanelSetId, this.m_InvasiveBreastPanel.OrderedOnId, true);
+                this.m_HER2ByFISHResultString = panelSetOrderHer2AmplificationByFish.Result;
 			}
 			else this.m_HER2ByFISHResultString = "Not Required.";
         }
@@ -107,6 +119,11 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
         public string PRResultString
         {
             get { return this.m_PRResultString; }
+        }
+
+        public string Ki67Result
+        {
+            get { return this.m_Ki67Result; }
         }
 
         public string HER2ResultString

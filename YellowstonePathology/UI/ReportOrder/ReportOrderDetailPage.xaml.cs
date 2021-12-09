@@ -11,14 +11,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using System.ComponentModel;
 
 namespace YellowstonePathology.UI.ReportOrder
 {
 	/// <summary>
 	/// Interaction logic for PanelSetOrderDetails.xaml
 	/// </summary>
-	public partial class ReportOrderDetailPage : Window
-	{
+	public partial class ReportOrderDetailPage : Window, INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
         private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
 		private YellowstonePathology.Business.User.SystemUserCollection m_UserCollection;
@@ -26,6 +29,7 @@ namespace YellowstonePathology.UI.ReportOrder
         private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
         private string m_ReportDocumentPath;
         private Login.Receiving.LoginPageWindow m_LoginPageWindow;
+        private YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection m_ClientOrderCollection;
 
         private List<string> m_ResultDocumentSources;
 
@@ -34,17 +38,17 @@ namespace YellowstonePathology.UI.ReportOrder
             this.m_AccessionOrder = accessionOrder;
             this.m_PanelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
             this.m_SystemIdentity = systemIdentity;
-			this.m_UserCollection = YellowstonePathology.Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection;
+			this.m_UserCollection = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection;
             this.m_FacilityCollection = Business.Facility.Model.FacilityCollection.Instance;            
 
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-			this.m_ReportDocumentPath = YellowstonePathology.Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
+			this.m_ReportDocumentPath = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
 
             this.m_ResultDocumentSources = new List<string>();
             this.m_ResultDocumentSources.Add(YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase.ToString());
             this.m_ResultDocumentSources.Add(YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument.ToString());
             this.m_ResultDocumentSources.Add(YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.RetiredTestDocument.ToString());
-            this.m_ResultDocumentSources.Add(YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.None.ToString());
+            this.m_ResultDocumentSources.Add(YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.None.ToString());            
 
             InitializeComponent();
 
@@ -57,9 +61,15 @@ namespace YellowstonePathology.UI.ReportOrder
 			this.Save(false);
         }
 
-		private void Save(bool releaseLock)
+        public Business.ClientOrder.Model.ClientOrderCollection ClientOrderCollection
+        {
+            get { return this.m_ClientOrderCollection; }
+        }
+
+
+        private void Save(bool releaseLock)
 		{
-            //YellowstonePathology.Business.Persistence.DocumentGateway.Instance.SubmitChanges(this.m_AccessionOrder, releaseLock);			
+            
 		}
 
         public string PageHeaderText
@@ -124,7 +134,7 @@ namespace YellowstonePathology.UI.ReportOrder
 
 		private void HyperLinkShowDocument_Click(object sender, RoutedEventArgs e)
 		{
-			YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft);
+			YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Draft);
 			caseDocument.Render();
 
 			YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(caseDocument.SaveFileName);
@@ -149,7 +159,7 @@ namespace YellowstonePathology.UI.ReportOrder
         private bool IsOKToFinal()
         {
             bool result = true;
-            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
             YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(this.m_PanelSetOrder.PanelSetId);
 
             if (panelSet != null && panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
@@ -171,7 +181,7 @@ namespace YellowstonePathology.UI.ReportOrder
 		{
             if (this.DoesXPSDocumentExist() == true)
             {
-                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = YellowstonePathology.Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
+                YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
                 caseDocument.Render();
                 caseDocument.Publish();
                 MessageBox.Show("The case was successfully published.");
@@ -212,7 +222,7 @@ namespace YellowstonePathology.UI.ReportOrder
         {
             bool result = true;
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            string xpsFileName = YellowstonePathology.Business.Document.CaseDocument.GetCaseFileNameXPS(orderIdParser);
+            string xpsFileName = Business.Document.CaseDocument.GetCaseFileNameXPS(orderIdParser);
             if (System.IO.File.Exists(xpsFileName) == false)
             {                
                 result = false;
@@ -224,7 +234,7 @@ namespace YellowstonePathology.UI.ReportOrder
         {
             bool result = true;
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            string tifFileName = YellowstonePathology.Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParser);
+            string tifFileName = Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParser);
             if (System.IO.File.Exists(tifFileName) == false)
             {
                 result = false;
@@ -250,7 +260,7 @@ namespace YellowstonePathology.UI.ReportOrder
         private void ButtonShowSelectSpecimenDialog_Click(object sender, RoutedEventArgs e)
         {
             YellowstonePathology.Business.Interface.IOrderTarget orderTarget = this.m_AccessionOrder.SpecimenOrderCollection.GetOrderTarget(this.m_PanelSetOrder.OrderedOnId);
-            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = YellowstonePathology.Business.PanelSet.Model.PanelSetCollection.GetAll();
+            YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
             YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(this.m_PanelSetOrder.PanelSetId);
             YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new Business.Test.TestOrderInfo(panelSet, orderTarget, false);
 
@@ -281,6 +291,40 @@ namespace YellowstonePathology.UI.ReportOrder
         private void SpecimenOrderDetailsPage_Next(object sender, EventArgs e)
         {
             this.m_LoginPageWindow.Close();
+        }
+
+        private void MenuItemUpdateExternalIds_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.ListViewClientOrders.SelectedItem != null)
+            {
+                Business.ClientOrder.Model.ClientOrder clientOrder = (Business.ClientOrder.Model.ClientOrder)this.ListViewClientOrders.SelectedItem;
+                this.m_PanelSetOrder.ExternalOrderId = clientOrder.ExternalOrderId;
+                this.m_PanelSetOrder.SecondaryExternalOrderId = clientOrder.SecondaryExternalOrderId;
+
+                if(string.IsNullOrEmpty(clientOrder.UniversalServiceId) == false)
+                {
+                    this.m_PanelSetOrder.UniversalServiceId = clientOrder.UniversalServiceId;
+                }                
+
+                this.m_AccessionOrder.SvhAccount = clientOrder.SvhAccountNo;
+                this.m_AccessionOrder.SvhMedicalRecord = clientOrder.SvhMedicalRecord;
+                this.m_AccessionOrder.SystemInitiatingOrder = clientOrder.SystemInitiatingOrder;
+                MessageBox.Show("The Order Id's have been updated.");
+            }
+        }
+
+        private void HyperLinkGetOrders_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_ClientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByPatientName(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName);
+            this.NotifyPropertyChanged(string.Empty);
+        }
+
+        protected void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
         }
     }
 }

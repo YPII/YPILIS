@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 panelSetOrderCPTCode.Modifier = CptCodeModifier.TechnicalComponent;
                 panelSetOrderCPTCode.CodeableDescription = "Autopsy Block";
                 panelSetOrderCPTCode.CodeableType = "BillableTest";
-                panelSetOrderCPTCode.EntryType = YellowstonePathology.Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+                panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
                 panelSetOrderCPTCode.ClientId = this.m_AccessionOrder.ClientId;
                 panelSetOrderCPTCode.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
                 panelSetOrderCPTCode.Account = this.m_AccessionOrder.SvhAccount;

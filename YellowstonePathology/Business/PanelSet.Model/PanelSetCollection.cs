@@ -17,6 +17,25 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             PanelSetCollection panelSetCollection = new PanelSetCollection();
 
+            panelSetCollection.Add(new Business.PanelSet.Model.NeoTYPEFISH());
+            panelSetCollection.Add(new Business.PanelSet.Model.NeoTYPEHRDProfile());
+            panelSetCollection.Add(new Business.Test.APTIMASARSCoV2.APTIMASARSCoV2Test());
+            panelSetCollection.Add(new Business.Test.PDL122C3forTNBCBreast.PDL122C3ForTNBCBreastTest());
+
+            panelSetCollection.Add(new Business.PanelSet.Model.IgG4ByIHC());
+            panelSetCollection.Add(new Business.PanelSet.Model.IgGByIHC());
+
+            panelSetCollection.Add(new Business.PanelSet.Model.BCRABL1NonStandardp230());
+            panelSetCollection.Add(new Business.PanelSet.Model.KMT2AMLL11q23());
+            panelSetCollection.Add(new Business.PanelSet.Model.LEF1Test());
+            panelSetCollection.Add(new Business.PanelSet.Model.PanelSetElectronMicroscopy());
+            panelSetCollection.Add(new Business.Test.POCChromosomeAnalysis.POCChromosomeAnalysisTest());
+            panelSetCollection.Add(new Business.Test.HER2Other.HER2OtherTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.PDGFRaMutaionAnlaysis.PDGFRaMutaionAnlaysisTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.NeotypeEndometrialTumorProfile.NeotypeEndometrialTumorProfileTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.ThyroidNGSFusionPanel.ThyroidNGSFusionPanelTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.ALLFISHPanel.ALLFISHPanelTest());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.MammaprintBlueprint.MammaprintBlueprintTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.SARSCoV2.SARSCoV2Test());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.HCGbeta.HCGbetaTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.MUC4.MUC4Test());
@@ -520,6 +539,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
 			panelSetCollection.Add(new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapTest());
 			panelSetCollection.Add(new YellowstonePathology.Business.Test.WomensHealthProfile.WomensHealthProfileTest());
             panelSetCollection.Add(new YellowstonePathology.Business.Test.SARSCoV2.SARSCoV2Test());
+            panelSetCollection.Add(new YellowstonePathology.Business.Test.APTIMASARSCoV2.APTIMASARSCoV2Test());
+
             panelSetCollection.Add(new YellowstonePathology.Business.Test.FNAAdequacyAssessment.FNAAdequacyAssessmentTest());
             panelSetCollection.Add(new PanelSetFNASampleCollection());
 			panelSetCollection.Add(new YellowstonePathology.Business.Test.LLP.LeukemiaLymphomaTest());			
@@ -651,7 +672,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             PanelSetCollection allPanelSets = GetAll();
             List<int> result = new List<int>();
-            if (caseType != YellowstonePathology.Business.CaseType.ALLCaseTypes)
+            if (caseType != Business.CaseType.ALLCaseTypes)
             {
                 result = (from x in allPanelSets where x.CaseType == caseType select x.PanelSetId).ToList<int>();
             }
@@ -685,7 +706,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             PanelSetCollection result = new PanelSetCollection();
             foreach(PanelSet panelSet in allPanelSets)
             {
-                if (panelSet.CaseType == YellowstonePathology.Business.CaseType.FISH)
+                if (panelSet.CaseType == Business.CaseType.FISH)
                     result.Add(panelSet);
             }
             return result;
@@ -734,7 +755,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             PanelSetCollection allTests = PanelSetCollection.GetAll();
             foreach(PanelSet panelSet in allTests)
             {
-                if(panelSet.MonitorPriority == YellowstonePathology.Business.PanelSet.Model.PanelSet.MonitorPriorityCritical)
+                if(panelSet.MonitorPriority == Business.PanelSet.Model.PanelSet.MonitorPriorityCritical)
                 {
                     result.Add(panelSet);
                 }

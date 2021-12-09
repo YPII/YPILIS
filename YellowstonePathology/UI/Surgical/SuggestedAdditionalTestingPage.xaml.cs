@@ -202,5 +202,23 @@ namespace YellowstonePathology.UI.Surgical
                 this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(bmsTest));
             }
         }
+
+        private void HyperLinkCKit_Click(object sender, RoutedEventArgs e)
+        {
+            Business.Test.CKIT.CKITTest ckitTest = new Business.Test.CKIT.CKITTest();
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(ckitTest.PanelSetId) == false)
+            {
+                this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(ckitTest));
+            }
+        }
+
+        private void HyperLinkPDGFRa_Click(object sender, RoutedEventArgs e)
+        {
+            Business.Test.PDGFRaMutaionAnlaysis.PDGFRaMutaionAnlaysisTest pdgfra = new Business.Test.PDGFRaMutaionAnlaysis.PDGFRaMutaionAnlaysisTest();
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(pdgfra.PanelSetId) == false)
+            {
+                this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(pdgfra));
+            }
+        }
     }
 }

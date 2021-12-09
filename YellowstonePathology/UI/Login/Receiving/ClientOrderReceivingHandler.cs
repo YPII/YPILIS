@@ -23,7 +23,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 		public ClientOrderReceivingHandler(object writer)
         {
-            this.m_SystemIdentity = YellowstonePathology.Business.User.SystemIdentity.Instance;
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
             this.m_AClientHasBeenFound = false;
             this.m_AClientOrderHasBeenAcquired = false;
             this.m_AClientOrderHasBeenConfirmed = false;
@@ -81,8 +81,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         {
 			string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = new Business.ClientOrder.Model.SurgicalClientOrder(objectId);
-            clientOrder.SetDefaults(this.m_Client.ClientId, this.m_Client.ClientName);
-            clientOrder.ClientLocation = this.m_Client.ClientLocationCollection.CurrentLocation;
+            clientOrder.SetDefaults(this.m_Client.ClientId, this.m_Client.ClientName);            
             clientOrder.OrderedById = this.m_SystemIdentity.User.UserId.ToString();
             clientOrder.OrderedBy = this.m_SystemIdentity.User.UserName;
             clientOrder.CollectionDate = DateTime.Today;
@@ -113,7 +112,7 @@ namespace YellowstonePathology.UI.Login.Receiving
             this.m_AClientHasBeenFound = true;
             if (useRequsition == false)
             {
-                this.m_ExpectedOrderType = (OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), client.ClientLocationCollection.CurrentLocation.OrderType, true);
+                this.m_ExpectedOrderType = (OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), client.OrderType, true);
             }
             else
             {
@@ -197,7 +196,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 			YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetail result = null;
             if (this.ClientOrder.ClientOrderDetailCollection.ExistsByContainerId(containerId) == false)
 			{
-				YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetail clientOrderDetail = YellowstonePathology.Business.Gateway.ClientOrderGateway.GetClientOrderDetailByContainerId(containerId);
+				YellowstonePathology.Business.ClientOrder.Model.ClientOrderDetail clientOrderDetail = Business.Gateway.ClientOrderGateway.GetClientOrderDetailByContainerId(containerId);
 				if (clientOrderDetail == null)
 				{
                     result = this.ClientOrder.ClientOrderDetailCollection.GetNextItem(containerId, this.ClientOrder.ClientOrderId, "SRGCL", "YPIILAB", "None.", 
@@ -243,7 +242,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 		public void CreateNewAccessionOrder(YellowstonePathology.Business.Test.AccessionTypeEnum accessionType)
 		{
-            string masterAccessionNo = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetNextMasterAccessionNo();            
+            string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetNextMasterAccessionNo();            
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 			switch (accessionType)
 			{				
@@ -266,7 +265,7 @@ namespace YellowstonePathology.UI.Login.Receiving
         {
             for(int idx = 0; idx < this.m_ClientOrderCollection.Count; idx++)
             {
-                this.m_ClientOrderCollection[idx] = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullClientOrder(this.m_ClientOrderCollection[idx].ClientOrderId, this.m_Writer);
+                this.m_ClientOrderCollection[idx] = Business.Persistence.DocumentGateway.Instance.PullClientOrder(this.m_ClientOrderCollection[idx].ClientOrderId, this.m_Writer);
                 YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder = this.m_ClientOrderCollection[idx];
                 clientOrder.Accession(this.m_AccessionOrder.MasterAccessionNo);
 
@@ -316,7 +315,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 			{
 				if (clientOrder.Acknowledged == false)
 				{
-                    YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection universalServiceIdCollection = YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection.GetAll();
+                    YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection universalServiceIdCollection = Business.ClientOrder.Model.UniversalServiceCollection.GetAll();
                     YellowstonePathology.Business.ClientOrder.Model.UniversalService universalService = universalServiceIdCollection.GetByUniversalServiceId(clientOrder.UniversalServiceId);
 
 					YellowstonePathology.Business.HL7View.EPIC.EPICStatusMessage statusMessage = new Business.HL7View.EPIC.EPICStatusMessage(clientOrder, YellowstonePathology.Business.HL7View.OrderStatusEnum.InProcess, universalService, "Yellowstone Pathology Institute: Order Is In Process.", "I", clientOrder.OrderDate.Value);
@@ -331,7 +330,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 		public void UseThisMasterAccessionNoToGetTheAccessionOrder(string masterAccessionNo)
 		{
-			this.m_AccessionOrder = YellowstonePathology.Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
+			this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this.m_Writer);
             this.SetExternalOrderIds();
 			this.m_AnAccessionOrderHasBeenAquired = true;
 		}
@@ -347,7 +346,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
 			if (this.ClientOrder.SystemInitiatingOrder == "EPIC")
 			{
-				YellowstonePathology.Business.Domain.Physician physician = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetPhysicianByNpi(this.ClientOrder.ProviderId);
+				YellowstonePathology.Business.Domain.Physician physician = Business.Gateway.PhysicianClientGateway.GetPhysicianByNpi(this.ClientOrder.ProviderId);
 				if (physician == null)
 				{
 					result = false;
@@ -364,7 +363,7 @@ namespace YellowstonePathology.UI.Login.Receiving
 
         private void SetExternalOrderIds()
         {
-            YellowstonePathology.Business.ClientOrder.Model.ExternalOrderIdsCollection externalOrderIdsCollection = YellowstonePathology.Business.ClientOrder.Model.ExternalOrderIdsCollection.FromFormattedValue(this.m_AccessionOrder.ExternalOrderId);
+            YellowstonePathology.Business.ClientOrder.Model.ExternalOrderIdsCollection externalOrderIdsCollection = Business.ClientOrder.Model.ExternalOrderIdsCollection.FromFormattedValue(this.m_AccessionOrder.ExternalOrderId);
             if (string.IsNullOrEmpty(this.ClientOrder.ExternalOrderId) == false && this.ClientOrder.PanelSetId.HasValue)
             {
                 YellowstonePathology.Business.ClientOrder.Model.ExternalOrderIds externalOrderIds = new Business.ClientOrder.Model.ExternalOrderIds(this.ClientOrder);

@@ -29,7 +29,7 @@ namespace YellowstonePathology.UI.Billing
         public ADTLinkingDialog()
         {
             InitializeComponent();
-            this.m_ReportSearchList = YellowstonePathology.Business.Gateway.ReportSearchGateway.GetReportSearchListByNoADT(DateTime.Today.AddDays(-1));
+            this.m_ReportSearchList = Business.Gateway.ReportSearchGateway.GetReportSearchListByNoADT(DateTime.Today.AddDays(-1));
             this.DataContext = this;
         }
 

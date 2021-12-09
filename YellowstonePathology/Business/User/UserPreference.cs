@@ -48,6 +48,7 @@ namespace YellowstonePathology.Business.User
         private Nullable<int> m_GPathologistId;
         private string m_FedExLabelPrinter;
         private bool m_Administrator;
+        private string m_PantherCOVIDLabelPrinter;
 
         public UserPreference()
         {
@@ -537,6 +538,21 @@ namespace YellowstonePathology.Business.User
                 {
                     this.m_Administrator = value;
                     this.NotifyPropertyChanged("Administrator");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string PantherCOVIDLabelPrinter
+        {
+            get { return this.m_PantherCOVIDLabelPrinter; }
+            set
+            {
+                if (this.m_PantherCOVIDLabelPrinter != value)
+                {
+                    this.m_PantherCOVIDLabelPrinter = value;
+                    this.NotifyPropertyChanged("PantherCOVIDLabelPrinter");
                 }
             }
         }

@@ -13,9 +13,9 @@ namespace YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2
             this.m_PanelSetId = 338;
             this.m_PanelSetName = "Thrombocytopenia Profile";
             this.m_AllowMultiplePerAccession = true;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterF();
-            this.m_CaseType = this.m_CaseType = YellowstonePathology.Business.CaseType.FlowCytometry;
+            this.m_CaseType = this.m_CaseType = Business.CaseType.FlowCytometry;
             this.m_Active = true;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = false;
@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2
             string taskDescription = "Perform thrombocytopenia profile testing.";
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription));
 
-            YellowstonePathology.Business.Facility.Model.Facility ypi = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            YellowstonePathology.Business.Facility.Model.Facility ypi = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
             this.m_TechnicalComponentFacility = ypi;
             this.m_TechnicalComponentBillingFacility = ypi;
 

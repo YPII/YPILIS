@@ -27,15 +27,28 @@ namespace YellowstonePathology.UI
 
         private YellowstonePathology.Business.View.StVClientDOHReportViewCollection m_StVClientDOHReportViewCollection;
         private DateTime m_DateAdded;
+        private string m_Client;
+        private List<string> m_Clients;
 
         public DailyDOHDistributionDialog()
         {
+            this.m_Clients = new List<string>();
+            this.m_Clients.Add("SCL");
+            this.m_Clients.Add("WYDOH");
+
             this.m_StVClientDOHReportViewCollection = new YellowstonePathology.Business.View.StVClientDOHReportViewCollection();
             this.DateAdded = DateTime.Today;
+            this.Client = "SCL";
 
             InitializeComponent();
+            this.Loaded += DailyDOHDistributionDialog_Loaded;
 
             this.DataContext = this;
+        }
+
+        private void DailyDOHDistributionDialog_Loaded(object sender, RoutedEventArgs e)
+        {            
+            this.GetDistributions(this.m_Client);
         }
 
         public DateTime DateAdded
@@ -45,11 +58,28 @@ namespace YellowstonePathology.UI
             {
                 if (this.m_DateAdded != value)
                 {
-                    this.m_DateAdded = value;
-                    this.GetDistributions();
+                    this.m_DateAdded = value;                    
                     this.NotifyPropertyChanged("DateAdded");
                 }
             }
+        }
+
+        public string Client
+        {
+            get { return this.m_Client; }
+            set
+            {
+                if (this.m_Client != value)
+                {
+                    this.m_Client = value;
+                    this.NotifyPropertyChanged("Client");
+                }
+            }
+        }
+
+        public List<String> Clients
+        {
+            get { return this.m_Clients; }
         }
 
         public YellowstonePathology.Business.View.StVClientDOHReportViewCollection StVClientDOHReportViewCollection
@@ -57,20 +87,30 @@ namespace YellowstonePathology.UI
             get { return this.m_StVClientDOHReportViewCollection; }
         }
 
-        private void GetDistributions()
-        {
-            this.m_StVClientDOHReportViewCollection = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetReportDistributionCollectionByDateTumorRegistryStVClients(this.m_DateAdded, this.m_DateAdded.AddHours(24));
-            this.NotifyPropertyChanged("StVClientDOHReportViewCollection");
+        private void GetDistributions(string selectedClient)
+        {            
+            if(selectedClient == "SCL")
+            {
+                this.m_StVClientDOHReportViewCollection = Business.Gateway.ReportDistributionGateway.GetReportDistributionCollectionByDateTumorRegistryStVClients(this.m_DateAdded, this.m_DateAdded.AddHours(24));
+                this.NotifyPropertyChanged("StVClientDOHReportViewCollection");
+            }
+            else if (selectedClient == "WYDOH")
+            {
+                this.m_StVClientDOHReportViewCollection = Business.Gateway.ReportDistributionGateway.GetReportDistributionCollectionByDateTumorRegistryWyoming(this.m_DateAdded, this.m_DateAdded.AddHours(24));
+                this.NotifyPropertyChanged("StVClientDOHReportViewCollection");
+            }            
         }
 
         private void ButtonDateBack_Click(object sender, RoutedEventArgs args)
         {
             this.DateAdded = this.m_DateAdded.AddDays(-1);
+            this.GetDistributions(this.m_Client);
         }
 
         private void ButtonDateForward_Click(object sender, RoutedEventArgs args)
         {
             this.DateAdded = this.m_DateAdded.AddDays(1);
+            this.GetDistributions(this.m_Client);
         }
 
         private void ButtonSendFax_Click(object sender, RoutedEventArgs args)
@@ -81,10 +121,17 @@ namespace YellowstonePathology.UI
                 foreach (YellowstonePathology.Business.View.StVClientDOHReportView view in this.StVClientDOHReportViewCollection)
                 {
                     YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(view.ReportNo);
-                    string tifCaseFileName = YellowstonePathology.Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParser);
+                    string tifCaseFileName = Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParser);
                     if (File.Exists(tifCaseFileName) == true)
                     {
-                        YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit("4062373672", view.ReportNo, tifCaseFileName);
+                        string faxNumber = "4062373672";
+                        if (this.m_Client == "WDOH")
+                        {
+                            faxNumber = "3077773419";
+                        }
+
+                        YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit(faxNumber, view.ReportNo, tifCaseFileName, $"SCL DOH: {view.ReportNo}");
+                        //YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit("4062386361", view.ReportNo, tifCaseFileName);
                     }
                     else
                     {
@@ -118,6 +165,15 @@ namespace YellowstonePathology.UI
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        private void ComboboxClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(this.IsLoaded)
+            {
+                string client = (string)this.ComboboxClient.SelectedItem;
+                this.GetDistributions(client);
             }
         }
     }

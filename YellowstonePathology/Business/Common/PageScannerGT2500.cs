@@ -17,7 +17,8 @@ namespace YellowstonePathology.Business.Common
             this.ScanSettings.UseDocumentFeeder = true;
             this.ScanSettings.Resolution = new Business.Twain.ResolutionSettings();
             this.ScanSettings.Resolution.ColourSetting = Business.Twain.ColourSetting.BlackAndWhite;
-            this.ScanSettings.Resolution.Dpi = 150;            
+            this.ScanSettings.Resolution.Dpi = 150;
+			this.ScanSettings.UseDuplex = true;
 		}
 	}
 }

@@ -134,7 +134,7 @@ namespace YellowstonePathology.UI.Test
                     YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(surgicalPanelSetOrder.ReportNo);
                     if (amendmentCollection.HasAmendmentForReport(this.m_PanelSetOrder.ReportNo) == false)
                     {
-                        string amendmentText = YellowstonePathology.Business.Test.PDL1SP142.PDL1SP142SystemGeneratedAmendmentText.AmendmentText(this.m_PanelSetOrder);
+                        string amendmentText = Business.Test.PDL1SP142.PDL1SP142SystemGeneratedAmendmentText.AmendmentText(this.m_PanelSetOrder);
                         YellowstonePathology.Business.Amendment.Model.Amendment amendment = this.m_AccessionOrder.AddAmendment(surgicalPanelSetOrder.ReportNo);
                         amendment.TestResultAmendmentFill(surgicalPanelSetOrder.ReportNo, surgicalPanelSetOrder.AssignedToId, amendmentText);
                         amendment.ReferenceReportNo = this.m_PanelSetOrder.ReportNo;

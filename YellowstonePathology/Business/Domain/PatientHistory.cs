@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using System.Collections.ObjectModel;
+using MySql.Data.MySqlClient;
+using System.Text;
+using System.Data;
 
 namespace YellowstonePathology.Business.Domain
 {
@@ -12,6 +15,43 @@ namespace YellowstonePathology.Business.Domain
         public PatientHistory()
         {
 
+        }   
+        
+        public void SetResultCodes()
+        {
+            string reportNos = this.GetReportNoCommaSeparatedString();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = $"select reportNo, resultCode from tblPanelSetOrder where reportNo in ({reportNos})";
+            cmd.CommandType = CommandType.Text;            
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        foreach(PatientHistoryResult phr in this)
+                        {
+                            if(phr.ReportNo == dr.GetString("reportNo"))
+                            {
+                                phr.ResultCode = dr.GetString("resultCode");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public string GetReportNoCommaSeparatedString()
+        {
+            string result = "";
+            foreach (PatientHistoryResult phr in this)
+            {
+                result = result + $"'{phr.ReportNo}', ";
+            }
+            return result.Substring(0, result.Length - 2);
         }
 
         public bool PanelSetIdExists(int panelSetId)
@@ -132,6 +172,19 @@ namespace YellowstonePathology.Business.Domain
                 }
             }
 
+            return result;
+        }
+
+        public PatientHistory GetHPVs()
+        {
+            PatientHistory result = new PatientHistory();
+            foreach(PatientHistoryResult phr in this)
+            {
+                if(phr.PanelSetId == 14)
+                {
+                    result.Add(phr);
+                }
+            }
             return result;
         }
     }

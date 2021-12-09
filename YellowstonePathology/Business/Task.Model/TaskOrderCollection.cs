@@ -63,7 +63,21 @@ namespace YellowstonePathology.Business.Task.Model
 			return result;
 		}
 
-		public TaskOrder GetTaskOrder(string taskOrderId)
+        public bool ReportNoExists(string reportNo)
+        {
+            bool result = false;
+            foreach (TaskOrder taskOrder in this)
+            {
+                if (taskOrder.ReportNo == reportNo)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        public TaskOrder GetTaskOrder(string taskOrderId)
 		{
 			TaskOrder result = null;
 			foreach (TaskOrder taskOrder in this)
@@ -109,7 +123,7 @@ namespace YellowstonePathology.Business.Task.Model
 		{
 			YellowstonePathology.Business.Rules.MethodResult result = new Rules.MethodResult();
 			YellowstonePathology.Business.Task.Model.TaskCytologySlideDisposal task = new TaskCytologySlideDisposal();
-			DateTime actionDate = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetNewestDailyTaskOrderTaskDate(task.TaskId);
+			DateTime actionDate = Business.Gateway.AccessionOrderGateway.GetNewestDailyTaskOrderTaskDate(task.TaskId);
             YellowstonePathology.Business.User.SystemIdentity systemIdentity = Business.User.SystemIdentity.Instance;
 
 			DateTime finalDate = actionDate.AddDays(days);
@@ -132,7 +146,7 @@ namespace YellowstonePathology.Business.Task.Model
         public static YellowstonePathology.Business.Rules.MethodResult AddDailyTaskOrderRetrospectiveReviews(object writer)
         {           
             YellowstonePathology.Business.Rules.MethodResult result = new Rules.MethodResult();            
-            //DateTime actionDate = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetNewestDailyTaskOrderTaskDate(task.TaskId);
+            //DateTime actionDate = Business.Gateway.AccessionOrderGateway.GetNewestDailyTaskOrderTaskDate(task.TaskId);
             DateTime actionDate = DateTime.Today;
             YellowstonePathology.Business.User.SystemIdentity systemIdentity = Business.User.SystemIdentity.Instance;
 
@@ -160,7 +174,7 @@ namespace YellowstonePathology.Business.Task.Model
 		{
 			YellowstonePathology.Business.Rules.MethodResult result = new Rules.MethodResult();
 			YellowstonePathology.Business.Task.Model.TaskSurgicalSpecimenDisposal task = new TaskSurgicalSpecimenDisposal();
-			DateTime actionDate = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetNewestDailyTaskOrderTaskDate(task.TaskId);
+			DateTime actionDate = Business.Gateway.AccessionOrderGateway.GetNewestDailyTaskOrderTaskDate(task.TaskId);
             YellowstonePathology.Business.User.SystemIdentity systemIdentity = Business.User.SystemIdentity.Instance;
 
 			DateTime finalDate = actionDate.AddDays(days);
@@ -184,7 +198,7 @@ namespace YellowstonePathology.Business.Task.Model
 		{
 			YellowstonePathology.Business.Rules.MethodResult result = new Rules.MethodResult();
 			YellowstonePathology.Business.Task.Model.TaskPOCReport task = new TaskPOCReport();
-			DateTime actionDate = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetNewestWeeklyTaskOrderTaskDate(task.TaskId);
+			DateTime actionDate = Business.Gateway.AccessionOrderGateway.GetNewestWeeklyTaskOrderTaskDate(task.TaskId);
 			YellowstonePathology.Business.Task.Model.TaskOrderCollection taskOrderCollection = new YellowstonePathology.Business.Task.Model.TaskOrderCollection();			
 			YellowstonePathology.Business.User.SystemIdentity systemIdentity = Business.User.SystemIdentity.Instance;
 

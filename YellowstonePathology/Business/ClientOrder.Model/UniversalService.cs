@@ -10,10 +10,19 @@ namespace YellowstonePathology.Business.ClientOrder.Model
         protected string m_UniversalServiceId;
         protected string m_ServiceName;
         protected UniversalServiceApplicationNameEnum m_ApplicationName;
+        protected int m_PanelSetId;
 
         public UniversalService()
         {
             
+        }
+
+        public UniversalService(string serviceId, string serviceName, UniversalServiceApplicationNameEnum applicationName, int panelSetId)
+        {
+            this.m_UniversalServiceId = serviceId;
+            this.m_ServiceName = serviceName;
+            this.m_ApplicationName = applicationName;
+            this.m_PanelSetId = panelSetId;
         }
 
         public string UniversalServiceId
@@ -32,6 +41,12 @@ namespace YellowstonePathology.Business.ClientOrder.Model
         {
             get { return this.m_ApplicationName; }
             set { this.m_ApplicationName = value; }
+        }
+
+        public int PanelSetId
+        {
+            get { return this.m_PanelSetId; }
+            set { this.m_PanelSetId = value; }
         }
     }
 }

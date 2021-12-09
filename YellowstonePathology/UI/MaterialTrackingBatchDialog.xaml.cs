@@ -19,7 +19,7 @@ namespace YellowstonePathology.UI
 
 		public MaterialTrackingBatchDialog()
 		{
-			this.m_MaterialLocationCollection = YellowstonePathology.Business.Gateway.SlideAccessionGateway.GetMaterialLocationCollection();
+			this.m_MaterialLocationCollection = Business.Gateway.SlideAccessionGateway.GetMaterialLocationCollection();
 			InitializeComponent();
 			this.DataContext = this;
 		}

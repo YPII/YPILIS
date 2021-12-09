@@ -49,7 +49,7 @@ namespace YellowstonePathology.UI.Surgical
 
 		private void GetSurgicalRescreenItemCollection()
 		{
-			SurgicalRescreenItemCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetSurgicalRescreenItemCollectionByDate(this.m_WorkDate);
+			SurgicalRescreenItemCollection = Business.Gateway.AccessionOrderGateway.GetSurgicalRescreenItemCollectionByDate(this.m_WorkDate);
 		}
 
 		private void ButtonOk_Click(object sender, RoutedEventArgs e)

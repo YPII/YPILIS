@@ -28,7 +28,7 @@ namespace YellowstonePathology.Business.Client.Model
                     {						
                         if (accessionOrder.PBirthdate < DateTime.Today.AddYears(-20))
                         {
-							YellowstonePathology.Business.Domain.PatientHistory patientHistory = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
+							YellowstonePathology.Business.Domain.PatientHistory patientHistory = Business.Gateway.AccessionOrderGateway.GetPatientHistory(accessionOrder.PatientId);
                             Nullable<DateTime> dateOfLastHPV = patientHistory.GetDateOfPreviousHpv(accessionOrder.AccessionDate.Value);
 
                             if (dateOfLastHPV.HasValue == true)

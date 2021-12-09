@@ -34,7 +34,7 @@ namespace YellowstonePathology.UI.Cytology
 
         public ReportCommentSelection()
         {
-			this.m_CytologyReportCommentCollection = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetCytologyReportComments();
+			this.m_CytologyReportCommentCollection = Business.Gateway.AccessionOrderGateway.GetCytologyReportComments();
 
             InitializeComponent();
 

@@ -56,14 +56,27 @@
 
                     <TextBox Name="TextBoxClientOrderSearch" Margin="2" KeyUp="TextBoxClientOrderSearch_KeyUp" Width="150" BorderBrush="AliceBlue" BorderThickness="1" />
 
+                    <Button Margin="2" Height="25" Click="ButtonSVHCOVIDCases_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Hold.png"></Image>
+                            <TextBlock Margin="2,0,0,0">SVH COVID</TextBlock>
+                        </StackPanel>
+                    </Button>
+
                 </ToolBar>
             </ToolBarTray>
 
             <ListView Name="ListViewClientOrders" Grid.Row="1" Margin="3"  ItemsSource="{Binding Path=OrderBrowserListItemCollection}" 
                         SelectionChanged="ListViewClientOrders_SelectionChanged" MouseDoubleClick="ListViewClientOrders_MouseDoubleClick">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Accession As COVID" Click="MenuItemAccessionAsCOVID_Click"></MenuItem>
+                    </ContextMenu>
+                </ListView.ContextMenu>
                 <ListView.View>
                     <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Case List">
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=OrderTime, Converter={StaticResource MilitaryDateTimeConverter}}" Header="Date" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=OrderTime, Converter={StaticResource MilitaryDateTimeConverter}}" Header="DOS" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=DateOrderReceived, Converter={StaticResource MilitaryDateTimeConverter}}" Header="DOR" Width="110"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=OrderStatus}" Header="Status" Width="60"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PFirstName}" Header="First Name" Width="150"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=PLastName}" Header="Last Name" Width="150"/>
@@ -100,7 +113,7 @@
             </TabControl>
         </Grid>
 
-        <StatusBar Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+        <StatusBar Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4">
 
             <StatusBarItem>
                 <TextBlock Margin="2" TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center">User:</TextBlock>
@@ -118,7 +131,7 @@
             </StatusBarItem>
 
             <StatusBarItem>
-                <TextBlock Width="200" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=SelectedItemCount}"></TextBlock>
+                <TextBox Width="200" Margin="2" TextAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=ScanSimulation, UpdateSourceTrigger=PropertyChanged}" KeyUp="TextBoxScanSimulationSearch_KeyUp"></TextBox>
             </StatusBarItem>
 
         </StatusBar>

@@ -101,7 +101,7 @@ namespace YellowstonePathology.UI.Login
 		{
 			if (this.m_AccessionOrder.ClientId != 0)
 			{
-				YellowstonePathology.Business.Client.Model.Client client = YellowstonePathology.Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);				
+				YellowstonePathology.Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(this.m_AccessionOrder.ClientId);				
 
                 Business.Test.MissingInformation.MissingInformationWordDocument missingInformationWordDocument = new Business.Test.MissingInformation.MissingInformationWordDocument(this.m_AccessionOrder, this.m_MissingInformationTestOrder, Business.Document.ReportSaveModeEnum.Normal);
                 missingInformationWordDocument.Render();
@@ -109,7 +109,7 @@ namespace YellowstonePathology.UI.Login
 
                 Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_MissingInformationTestOrder.ReportNo);
                 string filePath = Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParser);
-                YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Missing Information", filePath);
+                YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Missing Information", filePath, $"Missing Info: {this.m_AccessionOrder.MasterAccessionNo}");
             }
 			else
 			{

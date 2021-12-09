@@ -48,7 +48,7 @@ namespace YellowstonePathology.Business.Test.PNH
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(testOrder.OrderedOn, testOrder.OrderedOnId);
             this.AddNextObxElementBeaker("Specimen Description", specimenOrder.Description, document, "F");
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElementBeaker("Collection Date/Time", collectionDateTimeString, document, "F");
             
             this.AddNextObxElementBeaker("Method", testOrder.Method, document, "F");
@@ -84,7 +84,7 @@ namespace YellowstonePathology.Business.Test.PNH
             YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(testOrder.OrderedOn, testOrder.OrderedOnId);
             this.AddNextObxElementBeaker("Specimen Description", specimenOrder.Description, document, "F");            
 
-            string collectionDateTimeString = YellowstonePathology.Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
+            string collectionDateTimeString = Business.Helper.DateTimeExtensions.CombineDateAndTime(specimenOrder.CollectionDate, specimenOrder.CollectionTime);
             this.AddNextObxElementBeaker("Collection Date/Time", collectionDateTimeString, document, "F");
             this.AddNextObxElementBeaker("Method", testOrder.Method, document, "F");
 

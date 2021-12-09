@@ -349,7 +349,7 @@ namespace YellowstonePathology.Business.SpecialStain
         {
 			get
 			{
-				this.m_ResultList = YellowstonePathology.Business.Gateway.AccessionOrderGateway.GetStainResultOptionListByStainResultId(this.m_StainResultId);
+				this.m_ResultList = Business.Gateway.AccessionOrderGateway.GetStainResultOptionListByStainResultId(this.m_StainResultId);
 				return this.m_ResultList;
 			}
         }

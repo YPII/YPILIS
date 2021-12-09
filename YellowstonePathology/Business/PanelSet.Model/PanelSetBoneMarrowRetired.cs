@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 		{
 			this.m_PanelSetId = 49;
 			this.m_PanelSetName = "Bone Marrow";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Surgical;
+            this.m_CaseType = Business.CaseType.Surgical;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;			
 			this.m_ResultDocumentSource = ResultDocumentSourceEnum.RetiredTestDocument;

@@ -58,7 +58,7 @@ namespace YellowstonePathology.UI.Login
         {
             if(string.IsNullOrEmpty(this.m_NewText) == false)
             {
-                string newDialog = YellowstonePathology.Business.User.SystemIdentity.Instance.User.DisplayName + ": " + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + Environment.NewLine + this.m_NewText;
+                string newDialog = Business.User.SystemIdentity.Instance.User.DisplayName + ": " + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + Environment.NewLine + this.m_NewText;
                 if (string.IsNullOrEmpty(this.m_AccessionOrder.CaseDialog) == false)
                 {
                     this.m_AccessionOrder.CaseDialog = newDialog + Environment.NewLine + Environment.NewLine + this.m_AccessionOrder.CaseDialog;

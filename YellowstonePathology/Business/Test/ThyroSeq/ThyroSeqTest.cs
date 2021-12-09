@@ -13,10 +13,10 @@ namespace YellowstonePathology.Business.Test.ThyroSeq
             this.m_PanelSetId = 389;
             this.m_PanelSetName = "ThyroSeq";
             this.m_Abbreviation = "ThyroSeq";
-            this.m_CaseType = YellowstonePathology.Business.CaseType.Molecular;
+            this.m_CaseType = Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = true;
-            this.m_ResultDocumentSource = YellowstonePathology.Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
+            this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
             this.m_AttemptOrderTargetLookup = true;
@@ -29,11 +29,11 @@ namespace YellowstonePathology.Business.Test.ThyroSeq
 
             string taskDescription = "Gather materials and send to CBL Path.";
 
-            YellowstonePathology.Business.Facility.Model.Facility cblPath = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("CBLPTHNC");
+            YellowstonePathology.Business.Facility.Model.Facility cblPath = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("CBLPTHNC");
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription, cblPath));
 
             this.m_TechnicalComponentFacility = cblPath;
-            this.m_TechnicalComponentBillingFacility = YellowstonePathology.Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
+            this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             this.m_ProfessionalComponentFacility = cblPath;
             this.m_ProfessionalComponentBillingFacility = cblPath;

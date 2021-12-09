@@ -46,7 +46,7 @@ namespace YellowstonePathology.Business.ASCCPRule
 
             this.m_Name = accessionOrder.PatientDisplayName;
             this.m_OrderType = orderTypeCollection.Get(womansHealthProfileTestOrder);
-            this.m_Age = YellowstonePathology.Business.Helper.PatientHelper.GetAge(accessionOrder.PBirthdate.Value);
+            this.m_Age = Business.Helper.PatientHelper.GetAge(accessionOrder.PBirthdate.Value);
             if(string.IsNullOrEmpty(panelSetOrderCytology.ResultCode) == false) this.m_ScreeningImpression = screeningImpressions.Get(panelSetOrderCytology.ResultCode);
 
             if (string.IsNullOrEmpty(panelSetOrderCytology.ResultCode) == false)

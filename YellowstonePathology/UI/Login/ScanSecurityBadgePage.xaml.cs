@@ -40,7 +40,7 @@ namespace YellowstonePathology.UI.Login
 
             YellowstonePathology.Business.User.SystemIdentity.Instance.EnableManualSecurityBadgeScan();
             Business.User.SystemIdentity.Instance.SetToLoggedInUser();
-			this.m_BarcodeScanPort = YellowstonePathology.Business.BarcodeScanning.BarcodeScanPort.Instance;
+			this.m_BarcodeScanPort = Business.BarcodeScanning.BarcodeScanPort.Instance;
 			this.m_BarcodeScanPort.SecurityBadgeScanReceived += new Business.BarcodeScanning.BarcodeScanPort.SecurityBadgeScanReceivedHandler(BarcodeScanPort_SecurityBadgeScanReceived);            
 		}
 

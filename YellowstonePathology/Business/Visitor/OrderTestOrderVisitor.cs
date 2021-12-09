@@ -70,35 +70,11 @@ namespace YellowstonePathology.Business.Visitor
         private void HandlePantherOrder()
         {
             if (this.m_PanelSet.SendOrderToPanther == true)
-            {
-                YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = (YellowstonePathology.Business.Test.AliquotOrder)this.m_TestOrderInfo.OrderTarget;
-                YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByAliquotOrderId(aliquotOrder.AliquotOrderId);
-
-                YellowstonePathology.Business.HL7View.Panther.PantherAssay pantherAssay = null;  
-                switch (this.m_PanelSetOrder.PanelSetId)
-                {
-                    case 14:
-                        pantherAssay = new Business.HL7View.Panther.PantherAssayHPV();
-                        break;
-                    case 3:
-                        pantherAssay = new Business.HL7View.Panther.PantherAssayNGCT();
-                        break;
-                    case 62:
-                    case 269:
-                        pantherAssay = new Business.HL7View.Panther.PantherAssayHPV1618();
-                        break;
-                    case 61:
-                        pantherAssay = new Business.HL7View.Panther.PantherAssayTrich();
-                        break;                    
-                    default:
-                        throw new Exception(this.m_PanelSetOrder.PanelSetName +  " is mot implemented yet.");
-                }
-
-                this.m_PanelSetOrder.OrderedOnId = aliquotOrder.AliquotOrderId;
-                this.m_PanelSetOrder.OrderedOn = YellowstonePathology.Business.Specimen.Model.OrderedOn.Aliquot;
+            {                
+                Business.HL7View.Panther.PantherAssay pantherAssay = Business.HL7View.Panther.PantherAssayFactory.GetPantherAssay(this.m_PanelSetOrder);                  
+                Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByOrderTarget(this.m_PanelSetOrder.OrderedOnId);                                
                 this.m_PanelSetOrder.InstrumentOrderDate = DateTime.Now;                
-
-                YellowstonePathology.Business.HL7View.Panther.PantherOrder pantherOrder = new Business.HL7View.Panther.PantherOrder(pantherAssay, specimenOrder, aliquotOrder, this.m_AccessionOrder, this.m_PanelSetOrder, YellowstonePathology.Business.HL7View.Panther.PantherActionCode.NewSample);
+                YellowstonePathology.Business.HL7View.Panther.PantherOrder pantherOrder = new Business.HL7View.Panther.PantherOrder(pantherAssay, specimenOrder, this.m_AccessionOrder, this.m_PanelSetOrder, YellowstonePathology.Business.HL7View.Panther.PantherActionCode.NewSample);
                 pantherOrder.Send();                    
             }
         }
@@ -152,9 +128,7 @@ namespace YellowstonePathology.Business.Visitor
         private void HandlePanelSetOrder()
         {
             ClientOrder.Model.ExternalOrderIdsCollection externalOrderIdsCollection = ClientOrder.Model.ExternalOrderIdsCollection.FromFormattedValue(this.m_AccessionOrder.ExternalOrderId);
-            string externalOrderId = externalOrderIdsCollection.GetExternalOrderId(this.m_PanelSet.PanelSetId);
-            string universalServiceId = externalOrderIdsCollection.GetUniversalServiceId(this.m_PanelSet.PanelSetId);
-            if (this.m_AccessionOrder.UniversalServiceId == "SMP") universalServiceId = "SMP"; //this per SVH
+            string externalOrderId = externalOrderIdsCollection.GetExternalOrderId(this.m_PanelSet.PanelSetId);            
 
             this.m_ReportNo = this.m_AccessionOrder.GetNextReportNo(this.m_PanelSet);
             string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
@@ -172,7 +146,7 @@ namespace YellowstonePathology.Business.Visitor
             this.m_PanelSetOrder = null;
             if (this.m_PanelSet.HasNoOrderTarget == true)
             {
-                this.m_PanelSetOrder = YellowstonePathology.Business.Test.PanelSetOrderFactory.CreatePanelSetOrder(this.m_AccessionOrder.MasterAccessionNo, this.m_ReportNo, objectId, this.m_PanelSet, distribute);
+                this.m_PanelSetOrder = Business.Test.PanelSetOrderFactory.CreatePanelSetOrder(this.m_AccessionOrder.MasterAccessionNo, this.m_ReportNo, objectId, this.m_PanelSet, distribute);
             }
             else
             {
@@ -180,11 +154,29 @@ namespace YellowstonePathology.Business.Visitor
                 {
                     this.m_OrderTarget = this.m_AccessionOrder.SpecimenOrderCollection.GetOrderTarget(this.m_PanelSet.OrderTargetTypeCollectionRestrictions);
                 }
-                this.m_PanelSetOrder = YellowstonePathology.Business.Test.PanelSetOrderFactory.CreatePanelSetOrder(this.m_AccessionOrder.MasterAccessionNo, this.m_ReportNo, objectId, this.m_PanelSet, this.m_OrderTarget, distribute);
+                this.m_PanelSetOrder = Business.Test.PanelSetOrderFactory.CreatePanelSetOrder(this.m_AccessionOrder.MasterAccessionNo, this.m_ReportNo, objectId, this.m_PanelSet, this.m_OrderTarget, distribute);
             }
-
+            
             this.m_PanelSetOrder.ExternalOrderId = externalOrderId;
-            if (string.IsNullOrEmpty(universalServiceId) == false) this.m_PanelSetOrder.UniversalServiceId = universalServiceId;
+            
+            string universalServiceId = externalOrderIdsCollection.GetUniversalServiceId(this.m_PanelSet.PanelSetId);
+            if (this.m_AccessionOrder.UniversalServiceId == "SMP" && this.m_PanelSet.PanelSetId == 13) universalServiceId = "SMP"; //this per SVH
+            if(string.IsNullOrEmpty(universalServiceId) == false)
+            {
+                this.m_PanelSetOrder.UniversalServiceId = universalServiceId;
+            }
+            else
+            {
+                if(this.m_AccessionOrder.ClientId == 136)
+                {
+                    Business.ClientOrder.Model.UniversalServiceCollectionRiverstone uscr = new ClientOrder.Model.UniversalServiceCollectionRiverstone();
+                    Business.ClientOrder.Model.UniversalService us = uscr.GetByPanelSetId(this.m_PanelSet.PanelSetId);
+                    if(us != null)
+                    {
+                        this.m_PanelSetOrder.UniversalServiceId = us.UniversalServiceId;
+                    }
+                }
+            }           
 
             if (this.m_PanelSet.OrderInitialTestsOnly == false)
             {
@@ -202,13 +194,13 @@ namespace YellowstonePathology.Business.Visitor
             foreach (YellowstonePathology.Business.Panel.Model.Panel panel in this.m_PanelSet.PanelCollection)
             {
                 string panelOrderId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-                YellowstonePathology.Business.Test.PanelOrder panelOrder = YellowstonePathology.Business.Test.PanelOrderFactory.GetPanelOrder(this.m_ReportNo, panelOrderId, panelOrderId, panel, YellowstonePathology.Business.User.SystemIdentity.Instance.User.UserId, YellowstonePathology.Business.User.SystemIdentity.Instance.User.Initials);
+                YellowstonePathology.Business.Test.PanelOrder panelOrder = Business.Test.PanelOrderFactory.GetPanelOrder(this.m_ReportNo, panelOrderId, panelOrderId, panel, YellowstonePathology.Business.User.SystemIdentity.Instance.User.UserId, YellowstonePathology.Business.User.SystemIdentity.Instance.User.Initials);
                 this.m_PanelSetOrder.PanelOrderCollection.Add(panelOrder);
 
                 if (panel.AcknowledgeOnOrder == true)
                 {
                     panelOrder.Acknowledged = true;
-                    panelOrder.AcknowledgedById = YellowstonePathology.Business.User.SystemIdentity.Instance.User.UserId;
+                    panelOrder.AcknowledgedById = Business.User.SystemIdentity.Instance.User.UserId;
                     panelOrder.AcknowledgedDate = DateTime.Today;
                     panelOrder.AcknowledgedTime = DateTime.Now;
                 }
@@ -243,8 +235,9 @@ namespace YellowstonePathology.Business.Visitor
 
         public virtual void HandlDistribution()
         {
-            YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = YellowstonePathology.Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(this.m_AccessionOrder.PhysicianId, this.m_AccessionOrder.ClientId);
-            physicianClientDistributionCollection.SetDistribution(this.m_PanelSetOrder, this.m_AccessionOrder);
+            this.m_AccessionOrder.SetDistribution();
+            //YellowstonePathology.Business.Client.Model.PhysicianClientDistributionList physicianClientDistributionCollection = Business.Gateway.ReportDistributionGateway.GetPhysicianClientDistributionCollection(this.m_AccessionOrder.PhysicianId, this.m_AccessionOrder.ClientId);
+            //physicianClientDistributionCollection.SetDistribution(this.m_PanelSetOrder, this.m_AccessionOrder);
         }
 
         public virtual void HandlReflexTestingPlan()

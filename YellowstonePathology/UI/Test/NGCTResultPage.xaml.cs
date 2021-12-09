@@ -42,8 +42,8 @@ namespace YellowstonePathology.UI.Test
 			this.m_SystemIdentity = systemIdentity;
 
 			this.m_PageHeaderText = "NG CT Results For: " + this.m_AccessionOrder.PatientDisplayName;
-			this.m_NGResultCollection = YellowstonePathology.Business.Test.NGCT.NGCTResultCollection.GetNGResultCollection();
-			this.m_CTResultCollection = YellowstonePathology.Business.Test.NGCT.NGCTResultCollection.GetCTResultCollection();
+			this.m_NGResultCollection = Business.Test.NGCT.NGCTResultCollection.GetNGResultCollection();
+			this.m_CTResultCollection = Business.Test.NGCT.NGCTResultCollection.GetCTResultCollection();
 
 			InitializeComponent();
 
@@ -120,14 +120,14 @@ namespace YellowstonePathology.UI.Test
 			YellowstonePathology.Business.Rules.MethodResult methodResult = this.m_PanelSetOrder.IsOkToFinalize();
 			if (methodResult.Success == true)
 			{
-                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
+                YellowstonePathology.Business.ReportDistribution.Model.MultiTestDistributionHandler multiTestDistributionHandler = Business.ReportDistribution.Model.MultiTestDistributionHandlerFactory.GetHandler(this.m_AccessionOrder);
                 multiTestDistributionHandler.Set();                
 
 				this.m_PanelSetOrder.Finish(this.m_AccessionOrder);
 
 				if (this.m_PanelSetOrder.NeisseriaGonorrhoeaeResult == "Positive" || this.m_PanelSetOrder.ChlamydiaTrachomatisResult == "Positive")
 				{
-					Business.ReportDistribution.Model.DepartmentOfHealthHandler.HandleDistribution(this.m_AccessionOrder, this.m_PanelSetOrder);
+					//Business.ReportDistribution.Model.DepartmentOfHealthHandler.HandleDistribution(this.m_AccessionOrder, this.m_PanelSetOrder);
 				}
 
 				if (this.m_AccessionOrder.PanelSetOrderCollection.WomensHealthProfileExists() == true)
