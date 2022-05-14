@@ -31,7 +31,6 @@ namespace YellowstonePathology.UI
 		{            
 			if (CheckDuplicateProcess())
 			{
-
 				MessageBox.Show("A LIS application is already running on this computer.\n\nThis application will now exit.",
 					"Too many instances", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 				App.Current.Shutdown(-1);
