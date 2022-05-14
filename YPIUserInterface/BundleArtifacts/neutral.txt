@@ -1,0 +1,2 @@
+MainPackage=D:\git\Sid\YPILIS\YPIUserInterface\bin\AnyCPU\Debug\YPIUserInterface_1.0.2.0_AnyCPU_Debug.msix
+SymbolPackage=D:\git\Sid\YPILIS\YPIUserInterface\obj\Debug\Symbols\YPIUserInterface_1.0.2.0_AnyCPU_Debug.appxsym

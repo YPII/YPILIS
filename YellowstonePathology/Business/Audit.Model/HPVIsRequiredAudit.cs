@@ -50,8 +50,8 @@ namespace YellowstonePathology.Business.Audit.Model
 
                 Business.ASCCPRule.RuleCollection ruleCollection = new Business.ASCCPRule.RuleCollection();
                 Business.ASCCPRule.BaseRule matchingRule = ruleCollection.GetMatchingRule(woman);
+                
                 matchingRule.Finalize(woman);
-
                 if (woman.PerformHPV == true)
                 {
                     YellowstonePathology.Business.Test.HPV.HPVTest panelSetHPV = new YellowstonePathology.Business.Test.HPV.HPVTest();
@@ -60,7 +60,7 @@ namespace YellowstonePathology.Business.Audit.Model
                         this.m_ActionRequired = true;
                         this.m_Message.AppendLine("A " + panelSetHPV.PanelSetName + " is required by ASCCP guidelines but is not ordered.");
                     }
-                }
+                }                
             }
         }
 

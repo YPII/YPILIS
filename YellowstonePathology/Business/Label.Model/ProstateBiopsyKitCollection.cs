@@ -7,41 +7,41 @@ using System.Threading.Tasks;
 
 namespace YellowstonePathology.Business.Label.Model
 {
-    public class ProstateBiopsyKitCollection : ObservableCollection<GeneralDataCassette>
+    public class ProstateBiopsyKitCollection : ObservableCollection<GeneralDataCassetteProstate>
     {
-        string m_RightColor = "White";
-        string m_LeftColor = "Orange";
+        //string m_RightColor = "White";
+        //string m_LeftColor = "Orange";        
 
         List<string> m_Descriptions;
 
         public ProstateBiopsyKitCollection()
         {
             this.m_Descriptions = new List<string>();
-            this.m_Descriptions.Add("Right Base");
-            this.m_Descriptions.Add("Right Lateral Base");
-            this.m_Descriptions.Add("Right Mid");
-            this.m_Descriptions.Add("Right Lateral Mid");
-            this.m_Descriptions.Add("Right Apex");
-            this.m_Descriptions.Add("Right Lateral Apex");
-            this.m_Descriptions.Add("Left Base");
-            this.m_Descriptions.Add("Left Lateral Base");
-            this.m_Descriptions.Add("Left Mid");
-            this.m_Descriptions.Add("Left Lateral Mid");
-            this.m_Descriptions.Add("Left Apex");
-            this.m_Descriptions.Add("Left Lateral Apex");
+            this.m_Descriptions.Add("RT BASE");
+            this.m_Descriptions.Add("RT LAT BASE");
+            this.m_Descriptions.Add("RT MID");
+            this.m_Descriptions.Add("RT LAT MID");
+            this.m_Descriptions.Add("RT APEX");
+            this.m_Descriptions.Add("RT LAT APEX");
+            this.m_Descriptions.Add("LT BASE");
+            this.m_Descriptions.Add("LT LAT BASE");
+            this.m_Descriptions.Add("LT MID");
+            this.m_Descriptions.Add("LT LAT MID");
+            this.m_Descriptions.Add("LT APEX");
+            this.m_Descriptions.Add("LT LAT APEX");
 
             foreach (string description in this.m_Descriptions)
             {
                 string color = null;
-                if(description.StartsWith("Left") == true)
-                {
-                    color = "White";
-                } 
-                else if(description.StartsWith("Right") == true)
+                if(description.StartsWith("LT") == true)
                 {
                     color = "Orange";
+                } 
+                else if(description.StartsWith("RT") == true)
+                {
+                    color = "Lilac";
                 }
-                this.Add(new GeneralDataCassette(color, description));
+                this.Add(new GeneralDataCassetteProstate(color, description));
             }        
         }
     }

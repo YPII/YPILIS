@@ -35,6 +35,7 @@ namespace YellowstonePathology.Business.Test.GastricAdenocarcinoma
             this.m_ProfessionalComponentFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPBLGS");
             this.m_ProfessionalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
+            /*
             string task1Description = "Cut 2 unstained slides and an after H&E. Give to molecular.";
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Histology, task1Description));
 
@@ -43,6 +44,7 @@ namespace YellowstonePathology.Business.Test.GastricAdenocarcinoma
 
             string task3Description = "Please check to make sure the Fixation is entered correctly for this case.";
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, task3Description));
+            */
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMiscellaneous());
         }

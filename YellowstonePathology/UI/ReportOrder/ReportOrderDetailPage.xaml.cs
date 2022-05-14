@@ -184,13 +184,32 @@ namespace YellowstonePathology.UI.ReportOrder
                 YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
                 caseDocument.Render();
                 caseDocument.Publish();
+                this.HandlePassThroughPDF();
                 MessageBox.Show("The case was successfully published.");
             }
             else
             {
                 MessageBox.Show("Cannot publish this case until the XPS document is present.");
             }
-		}        
+		} 
+        
+        private void HandlePassThroughPDF()
+        {
+            string publishedDocument = Enum.GetName(typeof(Business.PanelSet.Model.ResultDocumentSourceEnum), Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument);
+            if (this.m_PanelSetOrder.ResultDocumentSource == publishedDocument)
+            {
+                Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
+                string pdfCaseFileName = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
+                if(System.IO.File.Exists(pdfCaseFileName) == false)
+                {
+                    string neoPdfCaseFilName = Business.Document.CaseDocument.GetCaseFileNameNEOPDF(orderIdParser);
+                    if(System.IO.File.Exists(neoPdfCaseFilName) == true)
+                    {
+                        System.IO.File.Copy(neoPdfCaseFilName, pdfCaseFileName);
+                    }
+                }
+            }
+        }
 
 		private void HyperLinkUnacceptResults_Click(object sender, RoutedEventArgs e)
 		{
@@ -296,19 +315,31 @@ namespace YellowstonePathology.UI.ReportOrder
         private void MenuItemUpdateExternalIds_Click(object sender, RoutedEventArgs e)
         {
             if(this.ListViewClientOrders.SelectedItem != null)
-            {
+            {                
                 Business.ClientOrder.Model.ClientOrder clientOrder = (Business.ClientOrder.Model.ClientOrder)this.ListViewClientOrders.SelectedItem;
-                this.m_PanelSetOrder.ExternalOrderId = clientOrder.ExternalOrderId;
-                this.m_PanelSetOrder.SecondaryExternalOrderId = clientOrder.SecondaryExternalOrderId;
 
-                if(string.IsNullOrEmpty(clientOrder.UniversalServiceId) == false)
+                if(clientOrder.ClientId == 587)
                 {
-                    this.m_PanelSetOrder.UniversalServiceId = clientOrder.UniversalServiceId;
-                }                
+                    this.m_AccessionOrder.SvhAccount = clientOrder.SvhAccountNo;
+                    this.m_AccessionOrder.SvhMedicalRecord = clientOrder.SvhMedicalRecord;
+                    this.m_AccessionOrder.SystemInitiatingOrder = clientOrder.SystemInitiatingOrder;
+                    this.m_AccessionOrder.ExternalOrderId = clientOrder.ExternalOrderId;
+                    this.m_AccessionOrder.SecondaryExternalOrderId = clientOrder.SecondaryExternalOrderId;
+                }
+                else
+                {
+                    this.m_PanelSetOrder.ExternalOrderId = clientOrder.ExternalOrderId;
+                    this.m_PanelSetOrder.SecondaryExternalOrderId = clientOrder.SecondaryExternalOrderId;
 
-                this.m_AccessionOrder.SvhAccount = clientOrder.SvhAccountNo;
-                this.m_AccessionOrder.SvhMedicalRecord = clientOrder.SvhMedicalRecord;
-                this.m_AccessionOrder.SystemInitiatingOrder = clientOrder.SystemInitiatingOrder;
+                    if (string.IsNullOrEmpty(clientOrder.UniversalServiceId) == false)
+                    {
+                        this.m_PanelSetOrder.UniversalServiceId = clientOrder.UniversalServiceId;
+                    }
+
+                    this.m_AccessionOrder.SvhAccount = clientOrder.SvhAccountNo;
+                    this.m_AccessionOrder.SvhMedicalRecord = clientOrder.SvhMedicalRecord;
+                    this.m_AccessionOrder.SystemInitiatingOrder = clientOrder.SystemInitiatingOrder;                 
+                }
                 MessageBox.Show("The Order Id's have been updated.");
             }
         }

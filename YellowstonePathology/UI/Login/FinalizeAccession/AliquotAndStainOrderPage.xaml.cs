@@ -536,7 +536,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                     string taskOrderId = Business.OrderIdParser.GetNextTaskOrderId(this.m_AccessionOrder.TaskOrderCollection, this.m_AccessionOrder.MasterAccessionNo);
                     string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 
-                    Business.Task.Model.Task task = new Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Cytology, "Do some cool stuff.");
+                    Business.Task.Model.Task task = new Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Cytology, "Perform Cytospin.");
 
                     YellowstonePathology.Business.Task.Model.TaskOrder taskOrder = null;
                     if (this.m_AccessionOrder.TaskOrderCollection.ReportNoExists(this.m_PanelSetOrder.ReportNo) == false)

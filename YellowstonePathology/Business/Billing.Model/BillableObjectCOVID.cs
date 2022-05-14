@@ -101,8 +101,7 @@ namespace YellowstonePathology.Business.Billing.Model
             else
             {
                 throw new Exception($"The COVID Billing Type is not set for this client: {client.ClientName}");
-            }   
-            
+            }                        
             
             if(string.IsNullOrEmpty(client.COVIDTravelBillingType) == false)
             {
@@ -114,6 +113,11 @@ namespace YellowstonePathology.Business.Billing.Model
                         this.m_PanelSetOrder.BillingType = client.COVIDTravelBillingType;
                     }
                 }
+            }
+
+            if (this.m_AccessionOrder.PaymentType == "Insurance")
+            {
+                this.m_PanelSetOrder.BillingType = "Patient";
             }
         }
 

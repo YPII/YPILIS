@@ -214,7 +214,7 @@ namespace YellowstonePathology.Business.Document
                 string caseHistory = "";
                 foreach (Business.Patient.Model.PatientHistoryListItem item in patientHistoryList)
                 {
-					if (item.ReportNo != this.m_PanelSetOrder.ReportNo)
+					if (item.ReportNo != this.m_PanelSetOrder.ReportNo && item.ReportNo.Contains("Q") == false)
                     {
 						caseHistory += item.ReportNo + ", ";
                     }

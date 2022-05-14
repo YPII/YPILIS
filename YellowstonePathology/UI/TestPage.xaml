@@ -4,6 +4,6 @@
         Title="Test Page" Height="800" Width="1090" FontSize="12"
 		WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Click="ButtonGo_Click">GO</Button>
+        <WebBrowser Source="http://10.1.2.90:50071/documents/2022/15000-15999/22-15430/22-15430.S.pdf"></WebBrowser>
     </Grid>
 </Window>

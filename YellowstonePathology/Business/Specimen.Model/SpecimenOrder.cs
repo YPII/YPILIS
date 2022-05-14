@@ -128,7 +128,21 @@ namespace YellowstonePathology.Business.Specimen.Model
 
 		}
 
-		public string GetCollectionDateTimeString()
+        public bool HasCytospin()
+        {
+            bool result = false;            
+            foreach (YellowstonePathology.Business.Test.AliquotOrder aliquotOrder in this.AliquotOrderCollection)
+            {
+                if (string.IsNullOrEmpty(aliquotOrder.Label) == false && aliquotOrder.Label.Contains("CS") == true)
+                {
+                    result = true;
+                    break;
+                }
+            }            
+            return result;
+        }
+
+        public string GetCollectionDateTimeString()
 		{
 			string result = string.Empty;
 			if (this.m_CollectionDate.HasValue == true)

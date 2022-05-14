@@ -249,50 +249,6 @@
 
                     </Grid>
                 </TabItem>
-                <!--
-                <TabItem Header="State Reporting">
-                    <Grid Grid.Column="0" Grid.Row="1" Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        <ListView Name="ListViewCOVIDCasesState" Margin="2,2,2,2" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" ItemsSource="{Binding Path=COVIDCaseCollection}">
-                            <ListView.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Do something interesting."></MenuItem>
-                                </ContextMenu>
-                            </ListView.ContextMenu>
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=AccessionDate}" Header="Accessioned" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PatientName}" Header="Patient Name" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PRace}" Header="Race" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PEthnicity}" Header="Ethnicity" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=FirstTest}" Header="First Test" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployedInHealthcare}" Header="Employed In Healthcare" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Symptomatic}" Header=" Symptomatic" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=DateOfSymptomaticOnset}" Header="Date Of Symptomatic Onset" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Hospitalized}" Header="Hospitalized" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ICU}" Header="ICU" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ResidentInCongregateCare}" Header="Resident In Congregate Care" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Pregnant}" Header="Pregnant" Width="150"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        
-                        <Button Grid.Column="0" Grid.Row="2" Width="250" Height="25" Margin="2,2,2,2" Click="ButtonParseSpecialInstructions_Click">Parse Special Instructions</Button>
-
-                    </Grid>
-                </TabItem>
-                -->
                 <TabItem Header="Ordering Provider">
                     <Grid Grid.Column="0" Grid.Row="1" Margin="10">
                         <Grid.ColumnDefinitions>
@@ -324,6 +280,9 @@
 
                         <Button Grid.Column="0" Grid.Row="1" Width="100" Height="25" Margin="2,2,2,2" Click="ButtonGetUnsigned_Click" HorizontalAlignment="Right">Get Unsigned</Button>
                     </Grid>
+                </TabItem>
+                <TabItem Header="Pools">
+                    
                 </TabItem>
             </TabControl>
 

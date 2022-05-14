@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 
 namespace YellowstonePathology.UI.Billing
 {
@@ -35,11 +36,11 @@ namespace YellowstonePathology.UI.Billing
                 this.m_AccessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(accessionOrder.MasterAccessionNo, this.m_Writer);
                 this.m_BillingWindowPrimary.Show();
 
-                if (this.m_BillingWindowPrimary.PageNavigator.HasDualMonitors() == true)
-                {
+                //if (this.m_BillingWindowPrimary.PageNavigator.HasDualMonitors() == true)
+                //{
                     this.m_BillingWindowSecondary = new BillingWindowSecondary();                    
                     this.m_BillingWindowPrimary.PageNavigator.ShowSecondMonitorWindow(this.m_BillingWindowSecondary);
-                }
+                //}
 
 				this.ShowBillingPage(this.m_AccessionOrder);                
 			}
@@ -53,6 +54,7 @@ namespace YellowstonePathology.UI.Billing
             this.m_BillingPage.Close += new BillingPage.CloseEventHandler(BillingPage_Close);
             this.m_BillingPage.ShowXPSDocument += new BillingPage.ShowXPSDocumentEventHandler(BillingPage_ShowXPSDocument);
             this.m_BillingPage.ShowTIFDocument += new BillingPage.ShowTIFDocumentEventHandler(BillingPage_ShowTIFDocument);
+            this.m_BillingPage.ShowPDFDocument += new BillingPage.ShowPDFDocumentEventHandler(BillingPage_ShowPDFDocument);
             this.m_BillingPage.ShowICDCodeEntry += new BillingPage.ShowICDCodeEntryEventHandler(BillingPage_ShowICDCodeEntry);
             this.m_BillingPage.ShowCPTCodeEntry += new BillingPage.ShowCPTCodeEntryEventHandler(BillingPage_ShowCPTCodeEntry);
 			this.m_BillingPage.ShowPatientDetailPage += new BillingPage.ShowPatientDetailPageEventHandler(BillingPage_ShowPatientDetailPage);
@@ -170,8 +172,16 @@ namespace YellowstonePathology.UI.Billing
         private void BillingPage_ShowTIFDocument(object sender, CustomEventArgs.FileNameReturnEventArgs e)
         {
             if (this.m_BillingWindowPrimary.PageNavigator.HasDualMonitors() == true)
-            {
+            {            
                 this.ShowTIFDocumentDualMonitor(e.FileName);
+            }            
+        }
+
+        private void BillingPage_ShowPDFDocument(object sender, CustomEventArgs.FileNameReturnEventArgs e)
+        {
+            if (this.m_BillingWindowPrimary.PageNavigator.HasDualMonitors() == true)
+            {            
+                this.ShowPDFDocumentDualMonitor(e.FileName);
             }            
         }
 
@@ -195,10 +205,28 @@ namespace YellowstonePathology.UI.Billing
         }
 
         private void ShowTIFDocumentDualMonitor(string fileName)
-        {
+        {            
             TifDocumentViewerPage tifDocumentViewerPage = new TifDocumentViewerPage();
             tifDocumentViewerPage.Load(fileName);
-            this.m_BillingWindowSecondary.PageNavigator.Navigate(tifDocumentViewerPage);
+            this.m_BillingWindowSecondary.PageNavigator.Navigate(tifDocumentViewerPage);            
+        }
+
+        private void ShowPDFDocumentDualMonitor(string fileName)
+        {            
+            UserControl userControl = new UserControl();
+            ScrollViewer scrollViewer = new ScrollViewer();
+            scrollViewer.CanContentScroll = true;
+            scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
+            scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+
+            WebBrowser webBrowser = new WebBrowser();
+            string url = fileName.Replace(@"\\CFileServer\AccessionDocuments\", "http://10.1.2.90:50071/documents/");
+            url = url.Replace("\\", "/");
+            webBrowser.Source = new Uri(url);
+            scrollViewer.Content = webBrowser;
+            userControl.Content = scrollViewer;
+
+            this.m_BillingWindowSecondary.PageNavigator.Navigate(userControl);            
         }
 
         private void ShowXPSDocumentSingleMonitor(string fileName)

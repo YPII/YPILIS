@@ -73,7 +73,8 @@ namespace YellowstonePathology.UI.Login.Receiving
 			
 
 			this.WriteData(grid, 0, 0, "ReportNo:", this.m_TaskOrder.ReportNo);
-            this.WriteData(grid, 0, 1, "Test:", this.m_TaskOrder.PanelSetName);			
+			//this.WriteData(grid, 0, 1, "Patient:", this.m_AccessionOrder.PatientDisplayName);
+			this.WriteData(grid, 0, 2, "Test:", this.m_TaskOrder.PanelSetName);				
 
 			string dataText = Business.Helper.DateTimeExtensions.DateAndTimeStringFromNullable(this.m_TaskOrder.OrderDate);
 			this.WriteData(grid, 0, 3, "Order Date:", dataText);

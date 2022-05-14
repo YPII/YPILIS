@@ -7,7 +7,7 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 {
     public class ERPRSemiQuantitativePanel : YellowstonePathology.Business.Panel.Model.Panel
     {
-        public ERPRSemiQuantitativePanel()
+        public ERPRSemiQuantitativePanel(bool includeKi67)
         {        
             this.m_PanelId = 62;
             this.m_PanelName = "Estrogen/Progesterone Receptor, Semi-Quantitative";
@@ -19,8 +19,11 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
             YellowstonePathology.Business.Test.Model.Test pr = Business.Test.Model.TestCollectionInstance.GetClone("145"); // ProgesteroneReceptorSemiquant();
             this.m_TestCollection.Add(pr);
 
-            YellowstonePathology.Business.Test.Model.Test ki67 = Business.Test.Model.TestCollectionInstance.GetClone("349"); 
-            this.m_TestCollection.Add(ki67);
+            if(includeKi67 == true)
+            {
+                YellowstonePathology.Business.Test.Model.Test ki67 = Business.Test.Model.TestCollectionInstance.GetClone("349");
+                this.m_TestCollection.Add(ki67);
+            }            
         }        
     }
 }

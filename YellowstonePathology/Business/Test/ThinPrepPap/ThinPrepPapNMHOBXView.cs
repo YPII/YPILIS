@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.ThinPrepPap
 {
-    public class ThinPrepPapNMHOBXView : Business.HL7View.NMH.NMHOBXView
+    public class ThinPrepPapNMHOBXView : Business.HL7View.NMH.NMHOBXViewOld
     {
         public ThinPrepPapNMHOBXView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount) 
             : base(accessionOrder, reportNo, obxCount)

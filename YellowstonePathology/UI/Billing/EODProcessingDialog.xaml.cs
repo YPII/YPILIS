@@ -330,9 +330,17 @@ namespace YellowstonePathology.UI.Billing
                             this.CreateJSONBillingDocument(accessionOrder, reportNo.Value);
 
                             JArray documentsArray = new JArray();
-                            List<string> files = this.CopyFilesAPS(reportNo.Value, accessionOrder.MasterAccessionNo, workingFolder);
+                            List<string> files = null;
+                            //if (accessionOrder.ClientId == 587)
+                            //{
+                                files = this.CopyFilesAPSPDF(reportNo.Value, accessionOrder.MasterAccessionNo, workingFolder);
+                            //}
+                            //else
+                            //{
+                            //    files = this.CopyFilesAPS(reportNo.Value, accessionOrder.MasterAccessionNo, workingFolder);
+                            //}
 
-                            foreach(string file in files)
+                            foreach (string file in files)
                             {
                                 documentsArray.Add(new JValue(file));
                             }
@@ -388,32 +396,39 @@ namespace YellowstonePathology.UI.Billing
                 {
                     if (panelSetOrder.IsBillable == true)
                     {
-                        //if (panelSetOrder.PanelSetOrderCPTCodeBillCollection.HasItemsToSendToPSA() == true)
+                        
+                        JObject dailyLogItem = new JObject();
+                        JProperty masterAccessionNoProperty = new JProperty("masterAccessionNo", masterAccessionNo);
+                        JProperty reportNoProperty = new JProperty("reportNo", reportNo.Value);
+                        dailyLogItem.Add(masterAccessionNoProperty);
+                        dailyLogItem.Add(reportNoProperty);
+
+                        this.m_ReportNumbersToProcess.Add(reportNo.Value);
+                        this.CreatePatientTifFile(reportNo.Value);
+                        this.CreateJSONBillingDocument(accessionOrder, reportNo.Value);
+
+                        JArray documentsArray = new JArray();
+                        List<string> files = null;
+
+                        //if(accessionOrder.ClientId == 587)
                         //{
-                            JObject dailyLogItem = new JObject();
-                            JProperty masterAccessionNoProperty = new JProperty("masterAccessionNo", masterAccessionNo);
-                            JProperty reportNoProperty = new JProperty("reportNo", reportNo.Value);
-                            dailyLogItem.Add(masterAccessionNoProperty);
-                            dailyLogItem.Add(reportNoProperty);
-
-                            this.m_ReportNumbersToProcess.Add(reportNo.Value);
-                            this.CreatePatientTifFile(reportNo.Value);
-                            this.CreateJSONBillingDocument(accessionOrder, reportNo.Value);
-
-                            JArray documentsArray = new JArray();
-                            List<string> files = this.CopyFilesAPS(reportNo.Value, accessionOrder.MasterAccessionNo, workingFolder);
-
-                            foreach (string file in files)
-                            {
-                                documentsArray.Add(new JValue(file));
-                            }
-
-                            this.m_BackgroundWorker.ReportProgress(1, reportNo.Value + " Complete.");
-                            rowCount += 1;
-
-                            dailyLogItem.Add(new JProperty("documents", documentsArray));
-                            dailyLogItems.Add(dailyLogItem);
+                        files = this.CopyFilesAPSPDF(reportNo.Value, accessionOrder.MasterAccessionNo, workingFolder);
                         //}
+                        //else
+                        //{
+                        //    files = this.CopyFilesAPS(reportNo.Value, accessionOrder.MasterAccessionNo, workingFolder);
+                        //}
+                        
+                        foreach (string file in files)
+                        {
+                            documentsArray.Add(new JValue(file));
+                        }
+
+                        this.m_BackgroundWorker.ReportProgress(1, reportNo.Value + " Complete.");
+                        rowCount += 1;
+
+                        dailyLogItem.Add(new JProperty("documents", documentsArray));
+                        dailyLogItems.Add(dailyLogItem);                        
                     }
                 }
             }            
@@ -467,16 +482,18 @@ namespace YellowstonePathology.UI.Billing
                 string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo.Value);
                 Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(masterAccessionNo, this);
 
-                Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo.Value);                
+                Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo.Value);
+
+                if (panelSetOrder.PanelSetId == 289) continue; //Don't send Autopsy's                
                 foreach (Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill in panelSetOrder.PanelSetOrderCPTCodeBillCollection)
                 {
                     if (panelSetOrderCPTCodeBill.BillTo == "Client" && panelSetOrderCPTCodeBill.PostDate == this.m_PostDate)
                     {
-                        if(Business.Billing.Model.CDMCollection.Instance.Exists(panelSetOrderCPTCodeBill.CPTCode, "SVH") == true)
-                        {                            
-                            if(panelSetOrderCPTCodeBill.PostedToClient == false)
+                        if (Business.Billing.Model.CDMCollection.Instance.Exists(panelSetOrderCPTCodeBill.CPTCode, "SVH") == true)
+                        {
+                            if (panelSetOrderCPTCodeBill.PostedToClient == false)
                             {
-                                if(string.IsNullOrEmpty(panelSetOrderCPTCodeBill.MedicalRecord) == false && string.IsNullOrEmpty(panelSetOrderCPTCodeBill.Account) == false)
+                                if (string.IsNullOrEmpty(panelSetOrderCPTCodeBill.MedicalRecord) == false && string.IsNullOrEmpty(panelSetOrderCPTCodeBill.Account) == false)
                                 {
                                     if (this.IsOKToSendSVHCDM(panelSetOrderCPTCodeBill, panelSetOrder) == true)
                                     {
@@ -496,18 +513,17 @@ namespace YellowstonePathology.UI.Billing
                                 else
                                 {
                                     panelSetOrder.BillingDelayed = true;
-                                    panelSetOrder.BillingDelayedComment = "Cannot process the SVH CDM because the MRN and/or ACCT is null.";
-                                    //throw new Exception("This MRN or ACCT is null.");
-                                }                                
-                            }                            
+                                    panelSetOrder.BillingDelayedComment = "Cannot process the SVH CDM because the MRN and/or ACCT is null.";                                    
+                                }
+                            }
                         }
                         else
                         {
-                            this.m_BackgroundWorker.ReportProgress(1, "There is no CDM for ReportNo/Code: " + reportNo.Value + " - " + panelSetOrderCPTCodeBill.CPTCode);
+                            this.m_BackgroundWorker.ReportProgress(1, "There is no CDM for ReportNo/Code: " + reportNo.Value + " - " + panelSetOrderCPTCodeBill.CPTCode);                            
                             Business.Billing.Model.SVHNoCDMMailMessage.SendMessage(panelSetOrderCPTCodeBill.CPTCode);
                         }
                     }
-                }                
+                }                               
             }
             Business.Persistence.DocumentGateway.Instance.Push(this);
             this.m_BackgroundWorker.ReportProgress(1, "Wrote " + rowCount + " SVH CDM files.");
@@ -565,7 +581,25 @@ namespace YellowstonePathology.UI.Billing
         private List<string> CopyFilesAPS(string reportNo, string masterAccessionNo, string workingFolder)
         {
             Business.Document.CaseDocumentCollection caseDocumentCollection = new Business.Document.CaseDocumentCollection(reportNo);
+            
             Business.Document.CaseDocumentCollection billingCaseDocumentCollection = caseDocumentCollection.GetAPSFiles(reportNo, masterAccessionNo);
+            List<string> result = new List<string>();
+
+            foreach (Business.Document.CaseDocument caseDocument in billingCaseDocumentCollection)
+            {
+                string sourceFile = caseDocument.FullFileName;
+                string destinationFile = System.IO.Path.Combine(workingFolder, System.IO.Path.GetFileName(sourceFile));
+                string fileName = System.IO.Path.GetFileName(sourceFile);
+                result.Add(System.IO.Path.GetFileName(sourceFile));
+                File.Copy(sourceFile, destinationFile, true);
+            }
+            return result;
+        }
+
+        private List<string> CopyFilesAPSPDF(string reportNo, string masterAccessionNo, string workingFolder)
+        {
+            Business.Document.CaseDocumentCollection caseDocumentCollection = new Business.Document.CaseDocumentCollection(reportNo);
+            Business.Document.CaseDocumentCollection billingCaseDocumentCollection = caseDocumentCollection.GetAPSFilesPDF(reportNo, masterAccessionNo);
             List<string> result = new List<string>();
 
             foreach (Business.Document.CaseDocument caseDocument in billingCaseDocumentCollection)
@@ -650,12 +684,7 @@ namespace YellowstonePathology.UI.Billing
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
-        }              
-
-        private void TransferPSAFiles(object sender, System.ComponentModel.DoWorkEventArgs e)        
-        {
-            this.m_BackgroundWorker.ReportProgress(1, "WARNING: Please don't forget to send the files to PSA.");            
-        }
+        }                      
 
         private void TransferAPSFiles(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
@@ -746,10 +775,7 @@ namespace YellowstonePathology.UI.Billing
             else this.m_BackgroundWorker.ReportProgress(1, "Process PSA Files Already Performed: " + this.m_EODProcessStatus.ProcessPSAFiles.Value.ToLongTimeString());
 
             if (this.m_EODProcessStatus.ProcessAPSFiles.HasValue == false) this.ProcessAPSFiles(sender, e);
-            else this.m_BackgroundWorker.ReportProgress(1, "Process APS Files Already Performed: " + this.m_EODProcessStatus.ProcessAPSFiles.Value.ToLongTimeString());
-
-            //if (this.m_EODProcessStatus.TransferPSAFiles.HasValue == false) this.TransferPSAFiles(sender, e);
-            //else this.m_BackgroundWorker.ReportProgress(1, "Transfer PSA Files Already Performed: " + this.m_EODProcessStatus.TransferPSAFiles.Value.ToLongTimeString());
+            else this.m_BackgroundWorker.ReportProgress(1, "Process APS Files Already Performed: " + this.m_EODProcessStatus.ProcessAPSFiles.Value.ToLongTimeString());            
 
             if (this.m_EODProcessStatus.TransferAPSFiles.HasValue == false) this.TransferAPSFiles(sender, e);
             else this.m_BackgroundWorker.ReportProgress(1, "Transfer APS Files Already Performed: " + this.m_EODProcessStatus.TransferAPSFiles.Value.ToLongTimeString());
@@ -1303,6 +1329,59 @@ namespace YellowstonePathology.UI.Billing
 
             this.m_BackgroundWorker.ReportProgress(1, $"Finished billing COVID cases: {rowCount} COVID Cases");
             //Business.Gateway.BillingGateway.UpdateBillingEODProcess(this.m_PostDate, "ProcessPSAFiles");
+        }
+
+        private void MenuItemProcessSVHCDMFiles_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_StatusMessageList.Clear();
+            this.m_BackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.m_BackgroundWorker.WorkerSupportsCancellation = false;
+            this.m_BackgroundWorker.WorkerReportsProgress = true;
+            this.m_BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
+            this.m_BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(ProcessSVHCDMFiles);
+            this.m_BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
+            this.m_BackgroundWorker.RunWorkerAsync();
+        }
+
+        private void MenuItemSpecialTransfer_Click(object sender, RoutedEventArgs e)
+        {
+            string configFilePath = @"C:\Program Files\Yellowstone Pathology Institute\aps-ssh-config.json";
+
+            JObject psaSSHConfig = null;
+            using (StreamReader file = File.OpenText(configFilePath))
+            using (JsonTextReader reader = new JsonTextReader(file))
+            {
+                psaSSHConfig = (JObject)JToken.ReadFrom(reader);
+            }
+
+            string sql = "select reportNo from tblPanelSetOrder where panelsetid in (378,379) and orderDate >= '2022-01-11'";
+            Business.ReportNoCollection reportNos = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
+
+            List<string> fileList = new List<string>();
+            foreach (Business.ReportNo reportNo in reportNos)
+            {
+                string path = Business.Document.CaseDocumentPath.GetPath(new Business.OrderIdParser(reportNo.Value));                
+                string pdf = $"{path}\\{reportNo.Value}.pdf";
+                string json = $"{path}\\{reportNo.Value}.BillingDetails.json";
+                fileList.Add(pdf);
+                fileList.Add(json);
+            }
+
+            //Business.SSHFileTransfer sshFileTransfer = new Business.SSHFileTransfer(psaSSHConfig["host"].ToString(), Convert.ToInt32(psaSSHConfig["port"]),
+            //            psaSSHConfig["username"].ToString(), psaSSHConfig["password"].ToString());
+            //sshFileTransfer.Failed += SshFileTransfer_Failed;
+
+            //sshFileTransfer.StatusMessage += SSHFileTransfer_StatusMessage;
+            string[] files = fileList.ToArray<string>();
+
+            foreach(string file in files)
+            {
+                if(System.IO.File.Exists(file) == false)
+                {
+                    Console.WriteLine(file);
+                }
+            }
+            //sshFileTransfer.UploadFilesToAPS(files);
         }
     }
 }

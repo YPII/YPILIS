@@ -8,6 +8,8 @@ namespace YellowstonePathology.UI.Navigation
 {
     public class PageNavigator
     {
+        public const bool ShowSecondMonitorOnSame = false;
+
         private ContentControl m_ContentControl;
         private UserControl m_CurrentPage;
 
@@ -80,13 +82,37 @@ namespace YellowstonePathology.UI.Navigation
                 this.m_SecondMonitorWindow.Top = screen2Rectangle.Top + (screen2Rectangle.Height - this.m_SecondMonitorWindow.Height) / 2;                               
                 
                 this.m_SecondMonitorWindow.Show();
-            }
+            }             
+            else if (ShowSecondMonitorOnSame == true)
+            {
+                if (this.m_SecondMonitorWindow != null) this.m_SecondMonitorWindow.Close();
+
+                System.Windows.Forms.Screen screen1 = System.Windows.Forms.Screen.AllScreens
+                    .Where(s => s.Primary == true)
+                    .Single();
+
+                System.Drawing.Rectangle screen1Rectangle = screen1.WorkingArea;
+
+                this.m_SecondMonitorWindow = window;
+                this.m_SecondMonitorWindow.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+
+                this.m_SecondMonitorWindow.Width = 1500;
+                this.m_SecondMonitorWindow.Height = 800;
+                this.m_SecondMonitorWindow.Left = screen1Rectangle.Left + (screen1Rectangle.Width - this.m_SecondMonitorWindow.Width) / 2;
+                this.m_SecondMonitorWindow.Top = screen1Rectangle.Top + (screen1Rectangle.Height - this.m_SecondMonitorWindow.Height) / 2;
+
+                this.m_SecondMonitorWindow.Show();
+            }                        
         }
 
         public bool HasDualMonitors()
         {
             bool result = false;
             if (System.Windows.Forms.Screen.AllScreens.Length == 2)
+            {
+                result = true;
+            } 
+            else if(ShowSecondMonitorOnSame == true)
             {
                 result = true;
             }

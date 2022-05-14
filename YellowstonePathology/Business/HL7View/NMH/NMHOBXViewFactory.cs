@@ -23,13 +23,13 @@ namespace YellowstonePathology.Business.HL7View.NMH
                     break;
                 case 13:
                 case 128:
-				    view = new YellowstonePathology.Business.Test.Surgical.SurgicalNMHOBXView(accessionOrder, reportNo, obxCount);
+				    view = new YellowstonePathology.Business.Test.Surgical.SurgicalNMHObxView(accessionOrder, reportNo, obxCount);
                     break;
                 case 14:
-					view = new YellowstonePathology.Business.Test.HPV.HPVNMHOBXView(accessionOrder, reportNo, obxCount);
+					//view = new YellowstonePathology.Business.Test.HPV.HPVNMHOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 15:
-					view = new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapNMHOBXView(accessionOrder, reportNo, obxCount);
+					//view = new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapNMHOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 18:
 					//view = new YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKWPHOBXView(accessionOrder, reportNo, obxCount);
@@ -68,7 +68,7 @@ namespace YellowstonePathology.Business.HL7View.NMH
 					//view = new YellowstonePathology.Business.Test.Trichomonas.TrichomonasWPHOBXView(accessionOrder, reportNo, obxCount);
                     break;
                 case 62:
-					view = new YellowstonePathology.Business.Test.HPV1618.HPV1618NMHOBXView(accessionOrder, reportNo, obxCount);
+					//view = new YellowstonePathology.Business.Test.HPV1618.HPV1618NMHOBXView(accessionOrder, reportNo, obxCount);
                     break;
                case 66:
 					//view = new YellowstonePathology.Business.Test.TestCancelled.TestCancelledWPHOBXView(accessionOrder, reportNo, obxCount);

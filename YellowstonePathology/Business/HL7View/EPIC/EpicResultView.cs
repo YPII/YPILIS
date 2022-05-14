@@ -20,6 +20,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
         public EPICResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool testing)
         {
             throw new Exception("EPIC Result view should not be used.");
+            /*
             this.m_Testing = testing;
             this.m_AccessionOrder = accessionOrder;
             this.m_PanelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);                        
@@ -30,6 +31,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             }
 
             this.m_OrderingPhysician = Business.Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(this.m_AccessionOrder.PhysicianId);           
+            */
 		}        
 
         public XElement GetDocument()
@@ -102,7 +104,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             if (this.m_Testing == true)
             {
                 throw new Exception("Test sending svh results is not implemented right now.");
-                interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\1002\BeakerTesting\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+                //interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\1002\BeakerTesting\" + this.m_PanelSetOrder.ReportNo + fileExtension;
             }
 
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(serverFileName))

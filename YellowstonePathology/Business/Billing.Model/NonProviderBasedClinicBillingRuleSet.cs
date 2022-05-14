@@ -28,6 +28,17 @@ namespace YellowstonePathology.Business.Billing.Model
             billingRule0.PanelSetIncludeOnlyList.Add(138);
             this.m_BillingRuleCollection.Add(billingRule0);
 
+            BillingRule billingRule01 = new BillingRule();
+            billingRule01.BillingRuleSetId = this.m_BillingRuleSetId;
+            billingRule01.Priority = 1;
+            billingRule01.PatientType = new RuleValueAny();
+            billingRule01.PrimaryInsurance = new RuleValueAny();
+            billingRule01.SecondaryInsurance = new RuleValueAny();
+            billingRule01.PostDischarge = new RuleValueAny();
+            billingRule01.BillingType = BillingTypeEnum.Split;
+            billingRule01.ReferenceLab = new RuleValueBoolean(true);
+            this.m_BillingRuleCollection.Add(billingRule01);
+
             BillingRule billingRule1 = new BillingRule();
             billingRule1.BillingRuleSetId = this.m_BillingRuleSetId;
             billingRule1.Priority = 1;            

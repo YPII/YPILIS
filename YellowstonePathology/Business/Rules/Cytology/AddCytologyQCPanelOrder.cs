@@ -29,14 +29,21 @@ namespace YellowstonePathology.Business.Rules.Cytology
 
         private void IsModulusNotZero()
         {			
-			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelOrderToFinal.ReportNo);			
-			int reportNoInt = orderIdParser.MasterAccessionNoNumber.Value;
-			int modValue = 11;
+            if(Business.Cytology.Model.CytologyResultCode.IsResultCodeNILM(this.m_PanelOrderToFinal.ResultCode) == true)
+            {
+                YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelOrderToFinal.ReportNo);
+                int reportNoInt = orderIdParser.MasterAccessionNoNumber.Value;
+                int modValue = 15;
 
-			if (reportNoInt % modValue != 0)
-			{
-				this.m_ExecutionStatus.AddMessage("Not Qualified", true);
-			}
+                if (reportNoInt % modValue != 0)
+                {
+                    this.m_ExecutionStatus.AddMessage("Not Qualified", true);
+                }                
+            }
+            else
+            {
+                this.m_ExecutionStatus.AddMessage("Not Qualified", true);
+            }			
         }
 
         private void DoesPathologistReviewExist()
@@ -88,6 +95,8 @@ namespace YellowstonePathology.Business.Rules.Cytology
             YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapQCPanel thinPrepPapQCPanel = new YellowstonePathology.Business.Test.ThinPrepPap.ThinPrepPapQCPanel();
             string panelOrderId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
             YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology panelOrder = new YellowstonePathology.Business.Test.ThinPrepPap.PanelOrderCytology(this.m_PanelSetOrderCytology.ReportNo, panelOrderId, panelOrderId, thinPrepPapQCPanel, this.m_SystemIdentity.User.UserId, this.m_SystemIdentity.User.Initials);
+            panelOrder.QC = true;
+            panelOrder.RandomQC = true;
             panelOrder.FromExistingPanelOrder(this.m_PanelOrderToFinal, thinPrepPapQCPanel.ScreeningType, true, m_SystemIdentity.User.UserId, m_SystemIdentity.User.Initials);
 			this.m_PanelSetOrderCytology.PanelOrderCollection.Add(panelOrder);
             this.m_PanelSetOrderCytology.CalculateExpectedFinalTimeWhenAddingPanel();

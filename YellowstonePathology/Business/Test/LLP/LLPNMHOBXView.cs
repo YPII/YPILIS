@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace YellowstonePathology.Business.Test.LLP
 {
-    public class LLPNMHOBXView : YellowstonePathology.Business.HL7View.NMH.NMHOBXView
+    public class LLPNMHOBXView : YellowstonePathology.Business.HL7View.NMH.NMHOBXViewOld
     {
         public LLPNMHOBXView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount) 
             : base(accessionOrder, reportNo, obxCount)

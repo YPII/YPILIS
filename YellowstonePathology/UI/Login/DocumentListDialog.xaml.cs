@@ -293,5 +293,11 @@ namespace YellowstonePathology.UI.Login
         {
 
         }
+
+        private void HyperLinkCopyCasePath_Click(object sender, RoutedEventArgs e)
+        {
+            string path = Business.Document.CaseDocument.GetCaseFileNamePDF(new Business.OrderIdParser(this.m_AccessionOrder.MasterAccessionNo));
+            System.Windows.Clipboard.SetData(DataFormats.Text, path);
+        }
     }
 }

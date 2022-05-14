@@ -20,7 +20,16 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
                 new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, reportNo, physicianClientDistribution.PhysicianId, physicianClientDistribution.PhysicianName,
                     physicianClientDistribution.ClientId, physicianClientDistribution.ClientName, physicianClientDistribution.DistributionType, physicianClientDistribution.FaxNumber);
             this.Add(testOrderReportDistribution);
-        }        
+        }
+
+        public void AddFaxDistribution(Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution, string reportNo)
+        {
+            string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+            YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution =
+                new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, reportNo, physicianClientDistribution.PhysicianId, physicianClientDistribution.PhysicianName,
+                    physicianClientDistribution.ClientId, physicianClientDistribution.ClientName, "Fax", physicianClientDistribution.FaxNumber);
+            this.Add(testOrderReportDistribution);
+        }
 
         public void AddAlternateDistribution(Business.Client.Model.PhysicianClientDistributionListItem physicianClientDistribution, string reportNo)
         {
@@ -71,16 +80,17 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             }
         }
 
-        public void AddNext(string testOrderReportDistributionId, string objectId, string reportNo, int physicianId, string physicianName, int clientId, string clientName, string distributionType)
+        public TestOrderReportDistribution AddNext(string testOrderReportDistributionId, string objectId, string reportNo, int physicianId, string physicianName, int clientId, string clientName, string distributionType)
         {
-            this.AddNext(testOrderReportDistributionId, objectId, reportNo, physicianId, physicianName, clientId, clientName, distributionType, null);
+            return this.AddNext(testOrderReportDistributionId, objectId, reportNo, physicianId, physicianName, clientId, clientName, distributionType, null);
         }
 
-        public void AddNext(string testOrderReportDistributionId, string objectId, string reportNo, int physicianId, string physicianName, int clientId, string clientName, string distributionType, string faxNumber)
+        public TestOrderReportDistribution AddNext(string testOrderReportDistributionId, string objectId, string reportNo, int physicianId, string physicianName, int clientId, string clientName, string distributionType, string faxNumber)
         {
             YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution = new TestOrderReportDistribution(testOrderReportDistributionId, objectId, reportNo,
                 physicianId, physicianName, clientId, clientName, distributionType, faxNumber);
             this.Add(testOrderReportDistribution);
+            return testOrderReportDistribution;
         }
 
         public bool Exists(int physicianId, int clientId, string distributionType)

@@ -25,11 +25,7 @@ namespace YellowstonePathology.UI
 
         private void ButtonGo_Click(object sender, RoutedEventArgs e)
         {            
-            System.Windows.Window window = App.Current.MainWindow;
-            var parentArea = new System.Drawing.Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
-            System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.FromRectangle(parentArea);
             
-            MessageBox.Show("Hello");
         }
     }
 }

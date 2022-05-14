@@ -117,6 +117,7 @@ namespace YellowstonePathology.Business.Test
 		private string m_CollectionFacilityId;
 		private string m_ICD10Code;
 		private string m_PatientPaymentInstructions;
+		private string m_PaymentType;
 
 		public AccessionOrder()
         {
@@ -1472,6 +1473,21 @@ namespace YellowstonePathology.Business.Test
 			}
 		}
 
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
+		public string PaymentType
+		{
+			get { return this.m_PaymentType; }
+			set
+			{
+				if (this.m_PaymentType != value)
+				{
+					this.m_PaymentType = value;
+					this.NotifyPropertyChanged("PaymentType");
+				}
+			}
+		}
+
 		public void FromClientOrder(YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder, int orderingUserId, string accessionOrderIds)
         {            
 			this.ClientId = clientOrder.ClientId;
@@ -1570,7 +1586,7 @@ namespace YellowstonePathology.Business.Test
 			this.m_PPhoneNumberHome = clientOrder.PPhone;
 			this.m_PatientDistributionType = clientOrder.PatientDistributionType;
 			this.m_DistributeToPatient = clientOrder.DistributeToPatient;
-			this.m_PatientPaymentInstructions = clientOrder.PatientPaymentInstructions;
+			this.m_PatientPaymentInstructions = clientOrder.PaymentType;
 
 			if (this.Verified)
 			{
@@ -1997,7 +2013,7 @@ namespace YellowstonePathology.Business.Test
                     Client.Model.Client client = Gateway.PhysicianClientGateway.GetClientByClientId(reportDistribution.ClientId);
                     if (client.SendAdditionalTestingNotifications == true)
                     {
-                        YellowstonePathology.Business.Task.Model.TaskFax task = new Business.Task.Model.TaskFax(string.Empty, string.Empty, "AdditionalTesetingNotification");
+                        YellowstonePathology.Business.Task.Model.TaskFax task = new Business.Task.Model.TaskFax(string.Empty, string.Empty, "AdditionalTestingNotification");
                         string taskOrderDetailId = Business.OrderIdParser.GetNextTaskOrderDetailId(taskOrder.TaskOrderDetailCollection, taskOrder.TaskOrderId);
                         string objectId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
                         YellowstonePathology.Business.Task.Model.TaskOrderDetailFax taskOrderDetail = new Business.Task.Model.TaskOrderDetailFax(taskOrderDetailId, taskOrder.TaskOrderId, objectId, task, this.m_ClientId);

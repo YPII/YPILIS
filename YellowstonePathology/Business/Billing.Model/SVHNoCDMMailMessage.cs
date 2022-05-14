@@ -19,8 +19,8 @@ namespace YellowstonePathology.Business.Billing.Model
             messageBody.Append("We are unable to send a charge for CPT Code: " + cptCode + " because we do not have a CDM for it.");
 
             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("support@ypii.com", "sid.harder@ypii.com", System.Windows.Forms.SystemInformation.UserName, messageBody.ToString());
-            message.To.Add("rebecca.ricci@sclhealth.org");
-            message.To.Add("cheryl.stoltz@sclhealth.org");
+            message.To.Add("edie.gonitzke@sclhealth.org");
+            message.To.Add("michaela.letasky-brekke@sclhealth.org");
             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
 
             Uri uri = new Uri("http://tempuri.org/");

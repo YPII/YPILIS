@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI.Gross"
         mc:Ignorable="d"
-        Title="DictationTemplateEdit" Height="800" Width="700" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+        Title="Edit Dictation Template" Height="800" Width="700" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />

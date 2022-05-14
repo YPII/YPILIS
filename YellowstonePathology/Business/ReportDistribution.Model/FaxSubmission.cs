@@ -73,7 +73,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             result.IsComplete = true;
             */
 
-            return result;
+            //return result;
         }        
     }
 }

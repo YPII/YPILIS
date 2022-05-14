@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI.Surgical"
         mc:Ignorable="d"
-        Title="Reasons for recuts" Height="400" Width="1000">
+        Title="Reasons for recuts" Height="600" Width="1000">
     <Grid Margin="5,5,5,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -13,12 +13,15 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" Margin="2,2,2,2">CLINICAL REASONS</TextBlock>
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="5,5,5,5" HorizontalAlignment="Center">
-            <RadioButton GroupName="Comment" Tag="Clinical" Content="Need to assess additional/deeper tissue for thorough histologic examination" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Tag="Clinical" Content="Need to assess additional/deeper tissue" Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Clinical" Content="Looking for polyp/dysplasia/lesion " Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Clinical" Content="Recut for YPI records" Margin="2,2,2,2"/>
         </StackPanel>
@@ -27,6 +30,7 @@
         <StackPanel Name="StackPanelTechnical" Grid.Column="1" Grid.Row="1" Margin="5,5,5,5">
             <RadioButton GroupName="Comment" Tag="Technical" Content="Poor fixation " Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical" Content="Epidermis is incomplete" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Tag="Technical" Content="Epidermis is incomplete" Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical" Content="Incomplete cross section of fallopian tube" Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical" Content="Transformation zone not visible" Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical" Content="Not deep enough/just getting into lesion" Margin="2,2,2,2"/>
@@ -34,7 +38,20 @@
             <RadioButton GroupName="Comment" Tag="Technical" Content="Folds, chatter, or defects limit histologic examination" Margin="2,2,2,2"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <TextBlock Grid.Column="1" Grid.Row="2" FontWeight="Bold" Margin="2,2,2,2">TECHNICAL HAVRE REASONS</TextBlock>
+        <StackPanel Name="StackPanelTechnicalHavre" Grid.Column="1" Grid.Row="3" Margin="5,5,5,5">
+            <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content=" Poor fixation " Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Epidermis is incomplete" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Epidermis is incomplete" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Incomplete cross section of fallopian tube" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Transformation zone not visible" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Not deep enough/just getting into lesion" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Additional sections needed due to suboptimal specimen orientation" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Folds, chatter, or defects limit histologic examination" Margin="2,2,2,2"/>
+            <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Suboptimal stain" Margin="2,2,2,2"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Width="100" Height="30" Click="ButtonOK_Click">OK</Button>
         </StackPanel>
     </Grid>

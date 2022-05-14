@@ -38,7 +38,7 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
             msh.ToXml(this.m_Document);
 
             WYDOHPIDViewV2 pid = new WYDOHPIDViewV2(this.m_AccessionOrder.PatientId, this.m_AccessionOrder.PLastName, this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PBirthdate,
-                this.m_AccessionOrder.PSex, this.m_AccessionOrder.SvhAccount, this.m_AccessionOrder.PatientId, this.m_AccessionOrder.PAddress1, this.m_AccessionOrder.PAddress2,
+                this.m_AccessionOrder.PSex, this.m_AccessionOrder.PatientId, this.m_AccessionOrder.PAddress1, this.m_AccessionOrder.PAddress2,
                 this.m_AccessionOrder.PCity, this.m_AccessionOrder.PState, this.m_AccessionOrder.PZipCode);
             pid.ToXml(this.m_Document);
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.IO;
+using ImageMagick;
 
 namespace YellowstonePathology.Business.Document
 {
@@ -47,5 +48,34 @@ namespace YellowstonePathology.Business.Document
 
 			}
 		}
+
+		public static void ConvertToPdf(string tifFileName, string pdfFileName)
+		{
+			using (MagickImageCollection tiffImageCollection = new MagickImageCollection())
+			{
+				tiffImageCollection.AddRange(tifFileName);
+				tiffImageCollection.Write(pdfFileName);
+			}
+		}
+
+		/*
+		public static List<Image> GetImageList(string fileName)
+		{
+			List<Image> result = new List<Image>();
+
+			FileStream imageStreamSource = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+			TiffBitmapDecoder tiffDecoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+			
+			for (int i = 0; i < tiffDecoder.Frames.Count; i++)
+			{
+				BitmapSource bitMapSource = tiffDecoder.Frames[i];
+				System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap()
+				Image image = new Image();
+				image.Source = bitMapSource;
+				result.Add(image);
+			}
+			return result;
+		}
+		*/
 	}
 }

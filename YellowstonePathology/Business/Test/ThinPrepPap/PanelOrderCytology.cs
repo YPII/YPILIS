@@ -21,6 +21,7 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
 		private string m_OrderComment;
 		private string m_ScreeningType;
 		private bool m_QC;
+		private bool m_RandomQC;
 		private bool m_ImagerError;
 		private bool m_NoCharge;
 		private bool m_PhysicianInterpretation;
@@ -267,6 +268,21 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
 				{
 					this.m_QC = value;
 					this.NotifyPropertyChanged("QC");
+				}
+			}
+		}
+
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "1", "null", "tinyint")]
+		public bool RandomQC
+		{
+			get { return this.m_RandomQC; }
+			set
+			{
+				if (this.m_RandomQC != value)
+				{
+					this.m_RandomQC = value;
+					this.NotifyPropertyChanged("RandomQC");
 				}
 			}
 		}

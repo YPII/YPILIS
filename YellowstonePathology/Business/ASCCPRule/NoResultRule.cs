@@ -17,9 +17,9 @@ namespace YellowstonePathology.Business.ASCCPRule
         public override bool IsMatch(Woman woman)
         {
             bool result = false;
-            if(woman.OrderType.OrderCode == "10")
+            if(woman.OrderType.OrderCode == "10" || woman.OrderType.OrderCode == "11")
             {
-                if(woman.SpecimenAdequacy == null && woman.ScreeningImpression == null)
+                if(woman.SpecimenAdequacy == null || woman.ScreeningImpression == null)
                 {
                     result = true;
                 }

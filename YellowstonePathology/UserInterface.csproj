@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <Import Project="..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.97.1.6\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.97.1.6\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.97.1.6\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.97.1.6\build\cef.redist.x64.props')" />
   <Import Project="..\packages\LibGit2Sharp.NativeBinaries.1.0.129\build\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.129\build\LibGit2Sharp.NativeBinaries.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -43,8 +46,8 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>630</ApplicationRevision>
-    <ApplicationVersion>11.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>71</ApplicationRevision>
+    <ApplicationVersion>11.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -86,8 +89,14 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CefSharp.Wpf">
-      <HintPath>..\packages\CefSharp.Wpf.57.0.0\CefSharp\x86\CefSharp.Wpf.dll</HintPath>
+    <Reference Include="CefSharp, Version=97.1.60.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.Common.97.1.60\lib\net452\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core, Version=97.1.60.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.Common.97.1.60\lib\net452\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Wpf, Version=97.1.60.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.Wpf.97.1.60\lib\net452\CefSharp.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus, Version=5.7.5.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.5.7.5\lib\net45\EPPlus.dll</HintPath>
@@ -108,6 +117,12 @@
       <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Magick.NET-Q16-AnyCPU, Version=11.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET-Q16-AnyCPU.11.0.0\lib\netstandard20\Magick.NET-Q16-AnyCPU.dll</HintPath>
+    </Reference>
+    <Reference Include="Magick.NET.Core, Version=11.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET.Core.11.0.0\lib\net20\Magick.NET.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -126,6 +141,15 @@
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1072.54, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1072.54\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1072.54, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1072.54\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1072.54, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1072.54\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel-gdi.dll</HintPath>
@@ -151,6 +175,15 @@
     </Reference>
     <Reference Include="NHunspell">
       <HintPath>dll\NHunspell.dll</HintPath>
+    </Reference>
+    <Reference Include="Patagames.Pdf, Version=9.68.38.472, Culture=neutral, PublicKeyToken=60fd6cf9b15941cf, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pdfium.Net.SDK.4.66.2704\lib\net472\Patagames.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Patagames.Pdf.WinForms, Version=4.20.17.472, Culture=neutral, PublicKeyToken=60fd6cf9b15941cf, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pdfium.Net.SDK.4.66.2704\lib\net472\Patagames.Pdf.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Patagames.Pdf.Wpf, Version=4.20.19.472, Culture=neutral, PublicKeyToken=60fd6cf9b15941cf, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pdfium.Net.SDK.4.66.2704\lib\net472\Patagames.Pdf.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp-gdi.dll</HintPath>
@@ -179,6 +212,9 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.5.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -186,8 +222,12 @@
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
       <Private>True</Private>
@@ -195,19 +235,47 @@
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5.1\System.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.WindowsRuntime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5.1\System.Runtime.WindowsRuntime.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.5.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Speech">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Threading.Tasks, Version=4.0.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
@@ -263,11 +331,11 @@
     <Compile Include="Business\ASCCPRule\BaseRule.cs" />
     <Compile Include="Business\ASCCPRule\ManagementRecomendation.cs" />
     <Compile Include="Business\ASCCPRule\Mask.cs" />
+    <Compile Include="Business\ASCCPRule\NoMatchingRule.cs" />
     <Compile Include="Business\ASCCPRule\NoResultRule.cs" />
     <Compile Include="Business\ASCCPRule\NoResultWithCotestRule.cs" />
     <Compile Include="Business\ASCCPRule\NormalWithCotestSimulation.cs" />
     <Compile Include="Business\ASCCPRule\NormalWithCotestRule.cs" />
-    <Compile Include="Business\ASCCPRule\NoMatchingRule.cs" />
     <Compile Include="Business\ASCCPRule\AbnormalRule.cs" />
     <Compile Include="Business\ASCCPRule\SimulationCollection.cs" />
     <Compile Include="Business\ASCCPRule\NormalSimulation.cs" />
@@ -496,7 +564,7 @@
     <Compile Include="Business\HL7View\EPIC\EpicResultView.cs" />
     <Compile Include="Business\HL7View\EPIC\StringHelper.cs" />
     <Compile Include="Business\HL7View\NMH\NMHNTEView.cs" />
-    <Compile Include="Business\HL7View\NMH\NMHOBXView.cs" />
+    <Compile Include="Business\HL7View\NMH\NMHOBXViewOld.cs" />
     <Compile Include="Business\HL7View\NMH\NMHHl7Client.cs" />
     <Compile Include="Business\HL7View\NMH\NMHMSHView.cs" />
     <Compile Include="Business\HL7View\NMH\NMHOBRView.cs" />
@@ -505,6 +573,7 @@
     <Compile Include="Business\HL7View\NMH\NMHPIDView.cs" />
     <Compile Include="Business\HL7View\NMH\NMHResultStatsusEnum.cs" />
     <Compile Include="Business\HL7View\NMH\NMHResultView.cs" />
+    <Compile Include="Business\HL7View\NMH\NMHOBXView.cs" />
     <Compile Include="Business\HL7View\Panther\PantherAssayCOVID.cs" />
     <Compile Include="Business\HL7View\Panther\PantherAssayFactory.cs" />
     <Compile Include="Business\HL7View\Riverstone\RiverstoneHl7Client.cs" />
@@ -520,6 +589,7 @@
     <Compile Include="Business\HL7View\WYDOH\WYDOHPIDViewV2.cs" />
     <Compile Include="Business\HL7View\WYDOH\WYDOHResultViewV2.cs" />
     <Compile Include="Business\Label.Model\CassettePrinterHavre.cs" />
+    <Compile Include="Business\Label.Model\GeneralDataCassetteProstate.cs" />
     <Compile Include="Business\Label.Model\HistologySlidePaperZPLLabelV3.cs" />
     <Compile Include="Business\Label.Model\ProstateBiopsyKitCollection.cs" />
     <Compile Include="Business\Label.Model\ReportNoLabelPrinter.cs" />
@@ -527,6 +597,13 @@
     <Compile Include="Business\Label.Model\StorageSlideLabel.cs" />
     <Compile Include="Business\Label.Model\HologicSlideLabelPrinter.cs" />
     <Compile Include="Business\Label.Model\HologicSlideLabel.cs" />
+    <Compile Include="Business\PanelSet.Model\BreastCancerIndex.cs" />
+    <Compile Include="Business\PanelSet.Model\ChimerismPostTransplant.cs" />
+    <Compile Include="Business\PanelSet.Model\Chromosome13q13.cs" />
+    <Compile Include="Business\PanelSet.Model\ComprehensiveHeartBiopsyWorkup.cs" />
+    <Compile Include="Business\PanelSet.Model\Chromosome1pqTest.cs" />
+    <Compile Include="Business\PanelSet.Model\NeoTYPEThyroidProfile.cs" />
+    <Compile Include="Business\PanelSet.Model\PloidyFISHForMolarPregnancy.cs" />
     <Compile Include="Business\PanelSet.Model\NeoTYPEFISH.cs" />
     <Compile Include="Business\PanelSet.Model\NeoTYPEHRDProfile.cs" />
     <Compile Include="Business\PanelSet.Model\IgG4ByIHC.cs" />
@@ -1266,9 +1343,11 @@
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2InvalidResult.cs" />
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2PositiveResult.cs" />
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2NegativeResult.cs" />
+    <Compile Include="Business\Test\FlowCytometryAnalysis\FlowCytometryAnalysisObxView.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultEndometrial.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultGeneric.cs" />
     <Compile Include="Business\Test\HPV\HPVRiverstoneObxView.cs" />
+    <Compile Include="Business\Test\IEP\IEPClosingResult.cs" />
     <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastWordDocument.cs" />
     <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastTestOrder.cs" />
@@ -1292,8 +1371,10 @@
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2TestOrder.cs" />
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2WordDocument.cs" />
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2RiverstoneOBXView.cs" />
+    <Compile Include="Business\Test\SPEP\SPEPClosingResult.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalRiverstoneOBXView.cs" />
     <Compile Include="Business\Test\ALLFISHPanel\ALLFISHPanelTest.cs" />
+    <Compile Include="Business\Test\Surgical\SurgicalNMHObxView.cs" />
     <Compile Include="Business\Test\ThinPrepPap\ThinPrepPapRiverstoneOBXView.cs" />
     <Compile Include="Business\Test\ThyroidNGSFusionPanel\ThyroidNGSFusionPanelTest.cs" />
     <Compile Include="Business\Test\MammaprintBlueprint\MammaprintBlueprintTest.cs" />
@@ -1549,7 +1630,7 @@
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationTestOrder.cs" />
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationWordDocument.cs" />
     <Compile Include="Business\Test\StemCellEnumeration\StemCellEnumerationTestOrder.cs" />
-    <Compile Include="Business\Test\Surgical\SurgicalNMHObxView.cs" />
+    <Compile Include="Business\Test\Surgical\SurgicalNMHObxViewOld.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalEpicBeakerObxView.cs" />
     <Compile Include="Business\Test\TCellNKProfile\TCellNKProfileWPHOBXView.cs" />
     <Compile Include="Business\Test\TET2MutationAnalysis\TET2MutationAnalysisTest.cs" />
@@ -1601,6 +1682,9 @@
     <Compile Include="UI\ManagementReports\ManagementReportCollection.cs" />
     <Compile Include="UI\ManagementReports\ReportSelection.xaml.cs">
       <DependentUpon>ReportSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PDFViewer.xaml.cs">
+      <DependentUpon>PDFViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ProstateBiopsyKitDialog.xaml.cs">
       <DependentUpon>ProstateBiopsyKitDialog.xaml</DependentUpon>
@@ -3805,7 +3889,6 @@
     <Compile Include="UI\Monitor\MonitorPageWindow.xaml.cs">
       <DependentUpon>MonitorPageWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\NetworkAuthorization.cs" />
     <Compile Include="UI\PantherOrdersDialog.xaml.cs">
       <DependentUpon>PantherOrdersDialog.xaml</DependentUpon>
     </Compile>
@@ -5175,65 +5258,10 @@
     <None Include="Business\XmlSchema\SpecimenLogExtensionDocument.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="UI\CEFSharp\CefSharp.WinForms.Example.exe.config" />
-    <None Include="UI\CEFSharp\CefSharp.WinForms.Example.vshost.exe.config" />
-    <None Include="UI\CEFSharp\CefSharp.WinForms.Example.vshost.exe.manifest" />
-    <None Include="UI\CEFSharp\CefSharp.Wpf.Example.exe.config" />
-    <None Include="UI\CEFSharp\CefSharp.Wpf.Example.vshost.exe.config" />
-    <None Include="UI\CEFSharp\devtools_resources.pak" />
-    <None Include="UI\CEFSharp\locales\am.pak" />
-    <None Include="UI\CEFSharp\locales\ar.pak" />
-    <None Include="UI\CEFSharp\locales\bg.pak" />
-    <None Include="UI\CEFSharp\locales\bn.pak" />
-    <None Include="UI\CEFSharp\locales\ca.pak" />
-    <None Include="UI\CEFSharp\locales\cs.pak" />
-    <None Include="UI\CEFSharp\locales\da.pak" />
-    <None Include="UI\CEFSharp\locales\de.pak" />
-    <None Include="UI\CEFSharp\locales\el.pak" />
-    <None Include="UI\CEFSharp\locales\en-GB.pak" />
-    <None Include="UI\CEFSharp\locales\en-US.pak" />
-    <None Include="UI\CEFSharp\locales\es-419.pak" />
-    <None Include="UI\CEFSharp\locales\es.pak" />
-    <None Include="UI\CEFSharp\locales\et.pak" />
-    <None Include="UI\CEFSharp\locales\fa.pak" />
-    <None Include="UI\CEFSharp\locales\fi.pak" />
-    <None Include="UI\CEFSharp\locales\fil.pak" />
-    <None Include="UI\CEFSharp\locales\fr.pak" />
-    <None Include="UI\CEFSharp\locales\gu.pak" />
-    <None Include="UI\CEFSharp\locales\he.pak" />
-    <None Include="UI\CEFSharp\locales\hi.pak" />
-    <None Include="UI\CEFSharp\locales\hr.pak" />
-    <None Include="UI\CEFSharp\locales\hu.pak" />
-    <None Include="UI\CEFSharp\locales\id.pak" />
-    <None Include="UI\CEFSharp\locales\it.pak" />
-    <None Include="UI\CEFSharp\locales\ja.pak" />
-    <None Include="UI\CEFSharp\locales\kn.pak" />
-    <None Include="UI\CEFSharp\locales\ko.pak" />
-    <None Include="UI\CEFSharp\locales\lt.pak" />
-    <None Include="UI\CEFSharp\locales\lv.pak" />
-    <None Include="UI\CEFSharp\locales\ml.pak" />
-    <None Include="UI\CEFSharp\locales\mr.pak" />
-    <None Include="UI\CEFSharp\locales\ms.pak" />
-    <None Include="UI\CEFSharp\locales\nb.pak" />
-    <None Include="UI\CEFSharp\locales\nl.pak" />
-    <None Include="UI\CEFSharp\locales\pl.pak" />
-    <None Include="UI\CEFSharp\locales\pt-BR.pak" />
-    <None Include="UI\CEFSharp\locales\pt-PT.pak" />
-    <None Include="UI\CEFSharp\locales\ro.pak" />
-    <None Include="UI\CEFSharp\locales\ru.pak" />
-    <None Include="UI\CEFSharp\locales\sk.pak" />
-    <None Include="UI\CEFSharp\locales\sl.pak" />
-    <None Include="UI\CEFSharp\locales\sr.pak" />
-    <None Include="UI\CEFSharp\locales\sv.pak" />
-    <None Include="UI\CEFSharp\locales\sw.pak" />
-    <None Include="UI\CEFSharp\locales\ta.pak" />
-    <None Include="UI\CEFSharp\locales\te.pak" />
-    <None Include="UI\CEFSharp\locales\th.pak" />
-    <None Include="UI\CEFSharp\locales\tr.pak" />
-    <None Include="UI\CEFSharp\locales\uk.pak" />
-    <None Include="UI\CEFSharp\locales\vi.pak" />
-    <None Include="UI\CEFSharp\locales\zh-CN.pak" />
-    <None Include="UI\CEFSharp\locales\zh-TW.pak" />
+    <None Include="Directory.Build.props" />
+    <None Include="libpdfium.dylib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -5663,6 +5691,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ManagementReports\ReportSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\PDFViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -7545,19 +7577,17 @@
     <Resource Include="UI\XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icudt.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\pdfium.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\pdfium.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\redhand.png" />
     <Resource Include="Resources\delete.png" />
-    <Content Include="UI\CEFSharp\avcodec-54.dll" />
-    <Content Include="UI\CEFSharp\avformat-54.dll" />
-    <Content Include="UI\CEFSharp\avutil-51.dll" />
-    <None Include="UI\CEFSharp\CefSharp.dll" />
-    <None Include="UI\CEFSharp\CefSharp.Example.dll" />
-    <None Include="UI\CEFSharp\CefSharp.WinForms.dll" />
-    <None Include="UI\CEFSharp\CefSharp.WinForms.Example.exe" />
-    <None Include="UI\CEFSharp\CefSharp.WinForms.Example.vshost.exe" />
-    <None Include="UI\CEFSharp\CefSharp.Wpf.dll" />
-    <None Include="UI\CEFSharp\CefSharp.Wpf.Example.exe" />
-    <None Include="UI\CEFSharp\CefSharp.Wpf.Example.vshost.exe" />
     <Content Include="Hunspellx64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -7571,13 +7601,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="Resources\Restore.png" />
-    <None Include="UI\CEFSharp\CefSharp.Wpf.xml" />
-    <None Include="UI\CEFSharp\CefSharp.xml" />
-    <None Include="UI\CEFSharp\icudt.dll" />
-    <None Include="UI\CEFSharp\libcef.dll" />
-    <None Include="UI\CEFSharp\libEGL.dll" />
-    <None Include="UI\CEFSharp\libGLESv2.dll" />
-    <None Include="UI\CEFSharp\nunit.framework.dll" />
     <None Include="dll\MongoDB.Bson.dll" />
     <None Include="dll\WPFToolkit.dll" />
     <None Include="dll\WPFToolkit.Extended.dll" />
@@ -7612,10 +7635,23 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.129\build\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibGit2Sharp.NativeBinaries.1.0.129\build\LibGit2Sharp.NativeBinaries.props'))" />
     <Error Condition="!Exists('..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1072.54\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1072.54\build\Microsoft.Web.WebView2.targets'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x64.97.1.6\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.97.1.6\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.97.1.6\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.97.1.6\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+    <Error Condition="!Exists('..\packages\Pdfium.Net.SDK.4.66.2704\build\Pdfium.Net.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Pdfium.Net.SDK.4.66.2704\build\Pdfium.Net.SDK.targets'))" />
+    <Error Condition="!Exists('..\packages\Magick.NET-Q16-AnyCPU.11.0.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q16-AnyCPU.11.0.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets'))" />
   </Target>
   <Import Project="..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets')" />
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1072.54\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1072.54\build\Microsoft.Web.WebView2.targets')" />
+  <Import Project="..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Import Project="..\packages\Pdfium.Net.SDK.4.66.2704\build\Pdfium.Net.SDK.targets" Condition="Exists('..\packages\Pdfium.Net.SDK.4.66.2704\build\Pdfium.Net.SDK.targets')" />
+  <Import Project="..\packages\Magick.NET-Q16-AnyCPU.11.0.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets" Condition="Exists('..\packages\Magick.NET-Q16-AnyCPU.11.0.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" />
 </Project>

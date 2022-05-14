@@ -580,6 +580,18 @@ namespace YellowstonePathology.UI.Surgical
                 case "Peripheral Blood Smear":
                     this.m_TypingUI.SurgicalOrderList.FillByPeriphearlBloodSmear(rptDate);
                     break;
+                case "Consult":
+                    this.m_TypingUI.SurgicalOrderList.FillBySpecimenId(rptDate, "CNSLT");
+                    break;
+                case "Tonsil Excision":
+                    this.m_TypingUI.SurgicalOrderList.FillBySpecimenId(rptDate, "TNSLSPCM"); 
+                    break;
+                case "Tonsil and Adenoids Excision":
+                    this.m_TypingUI.SurgicalOrderList.FillBySpecimenId(rptDate, "TNSLADSPCM");
+                    break;
+                case "Initial Reading":
+                    this.m_TypingUI.SurgicalOrderList.FillBySpecimenId(rptDate, "NTLRDNG");
+                    break;
             }            
         }        
 
@@ -1102,19 +1114,30 @@ namespace YellowstonePathology.UI.Surgical
             {
                 if (string.IsNullOrEmpty(specimenOrder.SpecimenId) != true)
                 {
-                    Business.Specimen.Model.Specimen specimen = Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen(specimenOrder.SpecimenId);
-                    if (specimen.CPTCode != null)
+                    if(specimenOrder.HasCytospin() == false)
                     {
-                        Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_TypingUI.AccessionOrder.PanelSetOrderCollection.GetSurgical();
-                        if(surgicalTestOrder.SurgicalSpecimenCollection.SpecimenOrderIdExists(specimenOrder.SpecimenOrderId) == true)
+                        Business.Specimen.Model.Specimen specimen = Business.Specimen.Model.SpecimenCollection.Instance.GetSpecimen(specimenOrder.SpecimenId);
+                        if (specimen.CPTCode != null)
                         {
-                            if (surgicalTestOrder.PanelSetOrderCPTCodeCollection.Exists(specimen.CPTCode.Code, specimenOrder.SpecimenOrderId) == false)
+                            Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_TypingUI.AccessionOrder.PanelSetOrderCollection.GetSurgical();
+                            if (surgicalTestOrder.SurgicalSpecimenCollection.SpecimenOrderIdExists(specimenOrder.SpecimenOrderId) == true)
                             {
-                                string comment = "Specimen " + specimenOrder.SpecimenNumber + ": " + specimen.SpecimenName;
-                                string modifier = specimen.CPTCode.Modifier == null ? null : specimen.CPTCode.Modifier;
-                                AddCPTCode(specimenOrder, specimen.CPTCode.Code, modifier, specimen.CPTCode.CodeType.ToString(), surgicalTestOrder, specimen.CPTCodeQuantity, comment);
+                                if (surgicalTestOrder.PanelSetOrderCPTCodeCollection.Exists(specimen.CPTCode.Code, specimenOrder.SpecimenOrderId) == false)
+                                {
+                                    string comment = "Specimen " + specimenOrder.SpecimenNumber + ": " + specimen.SpecimenName;
+                                    string modifier = specimen.CPTCode.Modifier == null ? null : specimen.CPTCode.Modifier;
+                                    AddCPTCode(specimenOrder, specimen.CPTCode.Code, modifier, specimen.CPTCode.CodeType.ToString(), surgicalTestOrder, specimen.CPTCodeQuantity, comment);
+                                }
                             }
                         }
+                    }
+                    else
+                    {
+                        Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_TypingUI.AccessionOrder.PanelSetOrderCollection.GetSurgical();
+                        if (surgicalTestOrder.PanelSetOrderCPTCodeCollection.Exists("88108", specimenOrder.SpecimenOrderId) == false)
+                        {                            
+                            AddCPTCode(specimenOrder, "88108", null, "Global", surgicalTestOrder, 1, "Specimen " + specimenOrder.SpecimenNumber + ": Cytospin");
+                        }                            
                     }
                 }
             }

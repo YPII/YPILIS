@@ -156,10 +156,16 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
 
-                <CheckBox Name="CheckBoxRecuts" Tag="150" Grid.Column="0" Margin="2,2,2,2"></CheckBox>
-                <TextBlock Grid.Column="1" Margin="2,2,2,2">Recuts</TextBlock>
-                <TextBox Name="TextBoxRecuts" Grid.Column="2" Margin="2,2,2,2" Text="{Binding Path=RecutComment}" HorizontalAlignment="Stretch"></TextBox>
+                <CheckBox Name="CheckBoxRecuts" Tag="150" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2"></CheckBox>
+                <TextBlock Grid.Column="1" Margin="2,2,2,2" Grid.Row="0">Recuts</TextBlock>
+                <TextBox Name="TextBoxRecuts" Grid.Column="2" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=RecutComment}" HorizontalAlignment="Stretch"></TextBox>
+                <CheckBox Name="CheckBoxReprocessBlock" Tag="151" Unchecked="CheckboxReporcessBlock_Unchecked" Checked="CheckboxReprocessBlock_Checked" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2"></CheckBox>
+                <TextBlock Grid.Column="1" Margin="2,2,2,2" Grid.Row="1">Reprocess Block(s)</TextBlock>
             </Grid>
             
             <Grid Grid.Column="0" Grid.Row="4">
@@ -725,12 +731,14 @@
                     <CheckBox Name="StainOrder423" Tag="fscn" Grid.Column="0" Grid.Row="24" Margin="2,2,2,2"></CheckBox>
                     <TextBlock Grid.Column="1" Grid.Row="24" Margin="2,2,2,2">Fascin</TextBlock>
 
+                    <!--
                     <CheckBox Name="StainOrder424" Tag="kppbysh" Grid.Column="0" Grid.Row="25" Margin="2,2,2,2"></CheckBox>
                     <TextBlock Grid.Column="1" Grid.Row="25" Margin="2,2,2,2">Kappa by ISH</TextBlock>
 
                     <CheckBox Name="StainOrder425" Tag="lmbdbysh" Grid.Column="0" Grid.Row="26" Margin="2,2,2,2"></CheckBox>
                     <TextBlock Grid.Column="1" Grid.Row="26" Margin="2,2,2,2">Lambda by ISH</TextBlock>
-
+                    -->
+                    
                     <CheckBox Name="StainOrder426" Tag="mm1" Grid.Column="0" Grid.Row="27" Margin="2,2,2,2"></CheckBox>
                     <TextBlock Grid.Column="1" Grid.Row="27" Margin="2,2,2,2">MUM-1</TextBlock>
 

@@ -314,27 +314,32 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             this.m_NTECount += 1;
         }
 
-        public void AddPDFSegments(string fileName, XElement document)
+        public void AddPDFSegments(XElement document)
         {
-            //OBX | 2 | ED || 1 | Content - Type: text / plain; charset = US - ASCII;
-            //OBX | 3 | ED || 1 | Content - transfer - encoding: base64
-            //OBX | 4 | ED || 1 |
-            //OBX | 5 | ED || 1 | JVBERi0xLjQKJdPr6eEKMSAwIG9iago8PC9DcmVhdG9yIChDaHJvbWl1bSkK
-            //OBX | 6 | ED || 1 | L1Byb2R1Y2VyIChTa2lhL1BERiBtODQpCi9DcmVhdGlvbkRhdGUgKEQ6MjAy
+            string fileName = Business.Document.CaseDocument.GetCaseFileNamePDF(new OrderIdParser(this.m_ReportNo));
 
-            byte[] bytes = System.IO.File.ReadAllBytes(fileName);
-            string base64 = Convert.ToBase64String(bytes);
-            IEnumerable<string> lines = Split(base64, 60);
+            if (System.IO.File.Exists(fileName) == true)
+            {
+                byte[] bytes = System.IO.File.ReadAllBytes(fileName);
+                string base64 = Convert.ToBase64String(bytes);
 
-            int obxCount = 1;
-            AddNextPDFOBXElement(document, "Content - Type: text / plain; charset = US - ASCII;", obxCount);
-            obxCount += 1;
-            AddNextPDFOBXElement(document, "Content - transfer - encoding: base64", obxCount);
-            obxCount += 1;
-            AddNextPDFOBXElement(document, string.Empty, obxCount);
-            obxCount += 1;
+                XElement obxElement = new XElement("OBX");
+                document.Add(obxElement);
 
-            AddNextPDFOBXElement(document, base64, obxCount);           
+                XElement obx01Element = new XElement("OBX.1");
+                Business.Helper.XmlDocumentHelper.AddElement("OBX.1.1", this.m_ObxCount.ToString(), obx01Element);
+                obxElement.Add(obx01Element);
+
+                XElement obx05Element = new XElement("OBX.5");
+                Business.Helper.XmlDocumentHelper.AddElement("OBX.5.2", "PDF", obx05Element);
+                Business.Helper.XmlDocumentHelper.AddElement("OBX.5.4", "Base64", obx05Element);
+                Business.Helper.XmlDocumentHelper.AddElement("OBX.5.5", base64, obx05Element);
+                obxElement.Add(obx05Element);
+            }
+            else
+            {
+                throw new Exception($"PDF File not found: {fileName}");
+            }
         }
 
         static IEnumerable<string> Split(string str, int chunkSize)

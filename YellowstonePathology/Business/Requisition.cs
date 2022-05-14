@@ -6,6 +6,11 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.DocumentObjectModel.Tables;
+using ImageMagick;
 
 namespace YellowstonePathology.Business
 {
@@ -16,16 +21,16 @@ namespace YellowstonePathology.Business
 
         }
 
-		public static string GetNextFileName(YellowstonePathology.Business.OrderIdParser orderIdParser)
+		public static string GetNextFileName(YellowstonePathology.Business.OrderIdParser orderIdParser, string extension)
         {
             string fileName = null;
             if (orderIdParser.IsLegacyReportNo == true)
             {
-				fileName = System.IO.Path.Combine(Business.Document.CaseDocumentPath.GetPath(orderIdParser), orderIdParser.ReportNo + ".REQ.ZZZ.TIF");
+				fileName = System.IO.Path.Combine(Business.Document.CaseDocumentPath.GetPath(orderIdParser), orderIdParser.ReportNo + $".REQ.ZZZ.{extension}");
             }
             else
             {
-				fileName = System.IO.Path.Combine(Business.Document.CaseDocumentPath.GetPath(orderIdParser), orderIdParser.MasterAccessionNo + ".REQ.ZZZ.TIF");
+				fileName = System.IO.Path.Combine(Business.Document.CaseDocumentPath.GetPath(orderIdParser), orderIdParser.MasterAccessionNo + $".REQ.ZZZ.{extension}");
             }
 
             fileName = fileName.ToUpper();            
@@ -70,6 +75,46 @@ namespace YellowstonePathology.Business
 			{
 				throw new Exception("No frames in the scanned file encoder.");
 			}            
+            
+        }
+
+        private static System.Drawing.Imaging.ImageCodecInfo GetEncoder(System.Drawing.Imaging.ImageFormat format)
+        {
+            System.Drawing.Imaging.ImageCodecInfo[] codecs = System.Drawing.Imaging.ImageCodecInfo.GetImageEncoders();
+            foreach (System.Drawing.Imaging.ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        }
+
+        public static System.Drawing.Bitmap ResizeBitmap(System.Drawing.Bitmap bmp, int width, int height)
+        {
+            System.Drawing.Bitmap result = new System.Drawing.Bitmap(width, height);
+            result.SetResolution(300, 300);
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                g.DrawImage(bmp, 0, 0, width, height);
+            }
+
+            return result;
+        }
+
+        public static void SavePDF(string fileName, List<System.Drawing.Bitmap> bitmapList)
+        {            
+            ImageMagick.MagickImageCollection imageCollection = new MagickImageCollection();
+            foreach (System.Drawing.Bitmap bitmap in bitmapList)
+            {
+                MemoryStream ms = new MemoryStream();
+                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Tiff);
+                ms.Position = 0;
+                ImageMagick.MagickImage image = new MagickImage(ms, MagickFormat.Tiff);
+                imageCollection.Add(image);
+            }                       
+            imageCollection.Write(fileName);
         }
 
         public static void CopyToReportNo(int specimenLogId, string reportNo)

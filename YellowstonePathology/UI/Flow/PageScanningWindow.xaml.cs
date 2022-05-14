@@ -18,10 +18,10 @@ namespace YellowstonePathology.UI.Flow
     /// </summary>
     public partial class PageScanningWindow : Window
     {
-        public PageScanningWindow(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        public PageScanningWindow(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo)
         {
             InitializeComponent();
-            YellowstonePathology.UI.Login.FinalizeAccession.DocumentScanningPage documentScanningPage = new Login.FinalizeAccession.DocumentScanningPage(accessionOrder);
+            YellowstonePathology.UI.Login.FinalizeAccession.DocumentScanningPage documentScanningPage = new Login.FinalizeAccession.DocumentScanningPage(accessionOrder, reportNo);
 			documentScanningPage.Return += new Login.FinalizeAccession.DocumentScanningPage.ReturnEventHandler(DocumentScanningPage_Return);
             this.MainContent.Content = documentScanningPage;
         }

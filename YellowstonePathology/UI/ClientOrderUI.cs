@@ -14,7 +14,7 @@ namespace YellowstonePathology.UI
 
         private DateTime m_ClientOrderDate;
 
-        private YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection m_OrderBrowserListItemCollection;
+        private Business.ClientOrder.Model.OrderBrowserListItemCollection m_OrderBrowserListItemCollection;
         private string m_SelectedItemCount;
         private object m_Writer;
         private string m_ScanSimulation;
@@ -92,6 +92,12 @@ namespace YellowstonePathology.UI
         public void GetSVHCOVIDClientOrderList()
         {
             this.m_OrderBrowserListItemCollection = Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByOrderDateSVHCOVID(this.m_ClientOrderDate);
+            this.NotifyPropertyChanged("OrderBrowserListItemCollection");
+        }
+
+        public void GetBSDOrderList()
+        {
+            this.m_OrderBrowserListItemCollection = Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByBSDOrders();
             this.NotifyPropertyChanged("OrderBrowserListItemCollection");
         }
 

@@ -55,6 +55,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         protected bool m_ReportAsAdditionalTesting;
         protected string m_MonitorPriority;
         protected bool m_OrderInitialTestsOnly;
+        protected bool m_SendClosingResult;
 
         protected List<string> m_ImplementedResultTypes;
 
@@ -83,7 +84,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_NeverDistribute = false;            
             this.m_Active = true;
             this.m_ExpectedDuration = TimeSpan.FromDays(5);
-
+            this.m_SendClosingResult = false;
             this.m_PanelCollection = new Business.Panel.Model.PanelCollection();
             this.m_UniversalServiceIdCollection = new Business.ClientOrder.Model.UniversalServiceCollection();
             this.m_PanelSetCptCodeCollection = new Business.Billing.Model.PanelSetCptCodeCollection();
@@ -269,6 +270,19 @@ namespace YellowstonePathology.Business.PanelSet.Model
             }
         }
 
+        [PersistentProperty()]
+        public bool SendClosingResult
+        {
+            get { return this.m_SendClosingResult; }
+            set
+            {
+                if (this.m_SendClosingResult != value)
+                {
+                    this.m_SendClosingResult = value;
+                    this.NotifyPropertyChanged("SendClosingResult");
+                }
+            }
+        }
 
         [PersistentProperty()]
 		public bool RequiresPathologistSignature

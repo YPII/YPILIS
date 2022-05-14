@@ -407,7 +407,15 @@ namespace YellowstonePathology.Business.Document
             return fileName;
         }
 
-		public static string GetCaseFileNameTif(YellowstonePathology.Business.OrderIdParser orderIdParser)
+        public static string GetCaseFileNameNEOPDF(YellowstonePathology.Business.OrderIdParser orderIdParser)
+        {
+            string[] dotSplit = orderIdParser.ReportNo.Split('.');
+            string neoReportNo = dotSplit[0] + ".NEO." + dotSplit[1] + ".pdf";
+            string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + neoReportNo;
+            return fileName;
+        }
+
+        public static string GetCaseFileNameTif(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
 			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".tif";            
             return fileName;

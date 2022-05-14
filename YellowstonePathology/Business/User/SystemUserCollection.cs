@@ -23,7 +23,28 @@ namespace YellowstonePathology.Business.User
 			return user;
 		}
 
-        public SystemUser GetSystemUserByUserName(string userName)
+		public SystemUser GetSystemUserByInitials(string initials)
+		{
+			SystemUser result = null;
+			if(string.IsNullOrEmpty(initials) == false)
+			{
+				foreach (SystemUser systemUser in this)
+				{
+					if(string.IsNullOrEmpty(systemUser.Initials) == false)
+					{
+						if (systemUser.Initials.ToUpper() == initials.ToUpper())
+						{
+							result = systemUser;
+							break;
+						}
+					}					
+				}
+			}
+			
+			return result;
+		}
+
+		public SystemUser GetSystemUserByUserName(string userName)
         {
             SystemUser result = null;
             try

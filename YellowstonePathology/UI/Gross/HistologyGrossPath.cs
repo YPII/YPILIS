@@ -32,15 +32,14 @@ namespace YellowstonePathology.UI.Gross
             this.m_HistologyGrossDialog.Closing += new System.ComponentModel.CancelEventHandler(HistologyGrossDialog_Closing);
             this.m_HistologyGrossDialog.Show();
                                     
-            if (this.m_HistologyGrossDialog.PageNavigator.HasDualMonitors() == true)
-            {
+            //if (this.m_HistologyGrossDialog.PageNavigator.HasDualMonitors() == true)
+            //{
                 this.m_SecondaryWindow = new SecondaryWindow();
                 this.m_HistologyGrossDialog.PageNavigator.ShowSecondMonitorWindow(this.m_SecondaryWindow);
                 this.m_HistologyGrossDialog.PageNavigator.SecondMonitorWindow.WindowState = System.Windows.WindowState.Maximized;
                 BlankPage blankPage = new BlankPage();
                 this.m_SecondaryWindow.PageNavigator.Navigate(blankPage);
-            }             
-
+            //}                
             this.ShowScanSecurityBadgePage();			
 		}
 
@@ -171,11 +170,11 @@ namespace YellowstonePathology.UI.Gross
         {            
             this.AddMaterialTrackingLog(this.m_SpecimenOrder);
 
-            if (this.m_HistologyGrossDialog.PageNavigator.HasDualMonitors() == true)
-            {
+            //if (this.m_HistologyGrossDialog.PageNavigator.HasDualMonitors() == true)
+            //{
                 DictationTemplatePage dictationTemplatePage = new DictationTemplatePage(this.m_SpecimenOrder, this.m_AccessionOrder, this.m_SystemIdentity);
                 this.m_SecondaryWindow.PageNavigator.Navigate(dictationTemplatePage);
-            }            
+            //}            
 
             if (string.IsNullOrEmpty(this.m_AccessionOrder.CassetteColor) && this.m_AccessionOrder.PanelSetOrderCollection.HasTestBeenOrdered("48") == false)
             {
@@ -261,10 +260,13 @@ namespace YellowstonePathology.UI.Gross
                 System.Windows.MessageBox.Show("The scanned container was not found.");
                 this.ShowScanContainerPage();
                 return;
-            }			
+            }
 
-			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByContainerId(containerId);
-            this.ShowPrintBlockPage(specimenOrder);           
+            YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrderByContainerId(containerId);
+            this.ShowPrintBlockPage(specimenOrder);
+
+            DictationTemplatePage dictationTemplatePage = new DictationTemplatePage(specimenOrder, this.m_AccessionOrder, this.m_SystemIdentity);
+            this.m_SecondaryWindow.PageNavigator.Navigate(dictationTemplatePage);            
 		}        
 
 		public void ShowBlockOptionsPage(YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, YellowstonePathology.Business.Test.AliquotOrder aliquotOrder)

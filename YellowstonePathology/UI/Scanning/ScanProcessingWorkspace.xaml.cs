@@ -19,75 +19,12 @@ using System.Windows.Xps;
 namespace YellowstonePathology.UI.Scanning
 {
     public partial class ScanProcessingWorkspace : System.Windows.Controls.UserControl
-    {
-        static ScanProcessingWorkspace m_Instance;
-
-        YellowstonePathology.Business.Scanning.ScanningProcessing m_ScanProcessing;
-
+    {        
         public ScanProcessingWorkspace()
-        {
-            this.m_ScanProcessing = new YellowstonePathology.Business.Scanning.ScanningProcessing();
+        {            
             InitializeComponent();
-            this.DataContext = this.m_ScanProcessing;            
-        }
-
-        public static ScanProcessingWorkspace Instance
-        {
-            get
-            {
-                if (m_Instance == null)
-                {
-                    m_Instance = new ScanProcessingWorkspace();
-                }
-                return m_Instance;
-            }
-        }
-
-        public void ListViewScannedFiles_PreviewKeyDown(object sender, KeyEventArgs args)
-        {     
-            
-        }
-
-        public void ListViewScanFolders_SelectionChanged(object sender, RoutedEventArgs args)
-        {
-            if (this.listViewScanFolders.SelectedItem != null)
-            {
-                YellowstonePathology.Business.DirectoryListItem item = (YellowstonePathology.Business.DirectoryListItem)this.listViewScanFolders.SelectedItem;                
-            }
-        }
-
-        public void ListViewScannedFiles_SelectionChanged(object sender, RoutedEventArgs args)
-        {
-            if (this.listViewScannedFiles.SelectedItem != null)
-            {
-                System.Windows.Xps.Packaging.XpsDocument xpsDocument = new System.Windows.Xps.Packaging.XpsDocument(@"c:\ypiidata\xpsdocument55.xps", System.IO.FileAccess.Read);                
-                this.DocumentViewer.Document = xpsDocument.GetFixedDocumentSequence();         
-            }
-        }
-
-        public void ButtonExtract_Click(object sender, RoutedEventArgs args)
-        {            
-            
-        }
-
-        public void ButtonExtractAll_Click(object sender, RoutedEventArgs args)
-        {            
-            
-        }
-
-        public void ButtonFlipAll_Click(object sender, RoutedEventArgs args)
-        {
-            
-        }
-
-        public void ButtonDeleteFiles_Click(object sender, RoutedEventArgs args)
-        {
-
-        }
-
-        public void ButtonProcessImages_Click(object sender, RoutedEventArgs args)
-        {
- 
-        }
+            this.DataContext = this;
+            this.Browser.Address = "http://10.1.2.90:50071/scanfolders";
+        }               
     }
 }

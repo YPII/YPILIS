@@ -91,7 +91,7 @@ namespace YellowstonePathology.UI.Surgical
                 YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = (YellowstonePathology.Business.Specimen.Model.SpecimenOrder)this.ListBoxSpecimenOrders.SelectedItem;                    
                 if(string.IsNullOrEmpty(specimenOrder.SpecimenId) == false)
                 {
-                    this.m_DictationTemplate = Gross.DictationTemplateCollection.Instance.GetClone(specimenOrder.SpecimenId);
+                    this.m_DictationTemplate = Gross.DictationTemplateCollection.Instance.GetClone(specimenOrder);
 
                     if (this.m_DictationTemplate.TemplateName != "Template Not Found.")
                     {

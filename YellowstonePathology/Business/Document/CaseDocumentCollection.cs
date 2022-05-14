@@ -131,6 +131,9 @@ namespace YellowstonePathology.Business.Document
         {
             CaseDocument result = null;
 
+			result = GetRequisitionResult("REQ.1.PDF");
+			if (result != null) return result;
+
 			result = GetRequisitionResult("REQ.1.TIF");
 			if (result != null) return result;
 
@@ -146,7 +149,7 @@ namespace YellowstonePathology.Business.Document
 			result = GetRequisitionResult("1000.TIF");
 			if (result != null) return result;			
 
-            result = GetElectronicResult();
+			result = GetElectronicResult();
             if (result != null) return result;
 
             return result;
@@ -252,6 +255,25 @@ namespace YellowstonePathology.Business.Document
 					item.FileName.ToUpper() == masterAccessionNo.ToUpper() + ".INSURANCE.TIF" ||
 					item.FileName.ToUpper() == reportNo.ToUpper() + ".BILLINGDETAILS.JSON" ||
 					item.FileName.ToUpper() == reportNo.ToUpper() + ".TIF")
+				{
+					caseDocumentCollection.Add(item);
+				}				
+			}
+
+			return caseDocumentCollection;
+		}
+
+		public CaseDocumentCollection GetAPSFilesPDF(string reportNo, string masterAccessionNo)
+		{
+			CaseDocumentCollection caseDocumentCollection = new CaseDocumentCollection();
+			foreach (CaseDocument item in this)
+			{
+				if (item.FileName.ToUpper().Contains("REQ") ||
+					this.FileIs1000s(item.FileName) ||
+					item.FileName.ToUpper() == masterAccessionNo.ToUpper() + ".PATIENT.TIF" ||
+					item.FileName.ToUpper() == masterAccessionNo.ToUpper() + ".INSURANCE.TIF" ||
+					item.FileName.ToUpper() == reportNo.ToUpper() + ".BILLINGDETAILS.JSON" ||
+					item.FileName.ToUpper() == reportNo.ToUpper() + ".PDF")
 				{
 					caseDocumentCollection.Add(item);
 				}

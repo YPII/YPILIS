@@ -34,7 +34,7 @@ namespace YellowstonePathology.Business.Slide.Model
 
         protected bool m_Printed;
         protected string m_PrintStation;
-        protected int m_PrintedById;
+        protected Nullable<int> m_PrintedById;
         protected string m_PrintedBy;
         protected Nullable<DateTime> m_PrintDate;
 
@@ -309,7 +309,7 @@ namespace YellowstonePathology.Business.Slide.Model
 
         [PersistentProperty()]
         [PersistentDataColumnProperty(true, "11", "null", "int")]
-        public int PrintedById
+        public Nullable<int> PrintedById
         {
             get
             {

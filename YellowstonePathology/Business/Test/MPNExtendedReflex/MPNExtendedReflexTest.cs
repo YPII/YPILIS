@@ -10,8 +10,8 @@ namespace YellowstonePathology.Business.Test.MPNExtendedReflex
 		public MPNExtendedReflexTest()
 		{
 			this.m_PanelSetId = 137;
-			//this.m_PanelSetName = "MPN Extended Reflex";
-			this.m_PanelSetName = "MPN JAK2 V617 with Sequential Reflex to JAK2 Exon 12-13, CALR and MPL";
+			
+			this.m_PanelSetName = "MPN JAK2 V617F with Sequential Reflex to JAK2 Exon 12-13, CALR and MPL";
 			this.m_CaseType = Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;
 			this.m_HasProfessionalComponent = true;

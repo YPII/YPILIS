@@ -49,20 +49,28 @@ namespace YellowstonePathology.UI.Gross
             return result;
         }
 
-        public DictationTemplate GetClone(string specimenId)
+        public DictationTemplate GetClone(Business.Specimen.Model.SpecimenOrder specimenOrder)
         {
             DictationTemplate notFound = DictationTemplateCollection.Instance.FirstOrDefault(t => t.TemplateName == "Template Not Found.");
             YellowstonePathology.Business.Persistence.ObjectCloner objectCloner = new YellowstonePathology.Business.Persistence.ObjectCloner();
             DictationTemplate result = (DictationTemplate)objectCloner.Clone(notFound);
-
-            foreach (DictationTemplate dictationTemplate in this)
+            
+            if (specimenOrder.HasCytospin() == true)
             {
-                if(dictationTemplate.SpecimenCollection.Exists(specimenId) == true)
-                {
-                    result = (DictationTemplate)objectCloner.Clone(dictationTemplate);
-                    break;
-                }
+                result = this.GetCloneByTemplateId("fldcytspn");
             }
+            else
+            {
+                foreach (DictationTemplate dictationTemplate in this)
+                {
+                    if (dictationTemplate.SpecimenCollection.Exists(specimenOrder.SpecimenId) == true)
+                    {
+                        result = (DictationTemplate)objectCloner.Clone(dictationTemplate);
+                        break;
+                    }
+                }
+            }            
+
             return result;
         }
 

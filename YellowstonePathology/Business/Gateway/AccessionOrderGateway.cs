@@ -1261,6 +1261,21 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
+        public static Surgical.SurgicalOrderList GetSurgicalOrderListBySpecimenId(DateTime workDate, string specimenId)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select pso.ReportNo, ao.AccessionDate, concat(ao.PFirstName, ' ', ao.PLastName) AS PatientName, pso.AcceptedDate, pso.FinalDate, null AS Pathologist, null AS PathologistId, pso.Audited " +
+                "from tblAccessionOrder ao " +
+                "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo " +
+                "where pso.PanelSetId = 13 " +
+                $"and 0 < (select count(*) from tblSpecimenOrder where masterAccessionNo = ao.masterAccessionNo and specimenId = '{specimenId}' " +                
+                $"and ao.AccessionDate = '{workDate.ToString("yyyy-MM-dd")}');";
+            cmd.CommandType = CommandType.Text;
+
+            Surgical.SurgicalOrderList result = AccessionOrderGateway.BuildSurgicalOrderList(cmd);
+            return result;
+        }
+
         public static Surgical.SurgicalOrderList GetSurgicalOrderListForSvhClientOrder(DateTime date)
         {
             MySqlCommand cmd = new MySqlCommand();

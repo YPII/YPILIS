@@ -226,8 +226,7 @@ namespace YellowstonePathology.UI
         }
 
         private void ButtonDailyTaskOrderAddDays_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {            
             StringBuilder message = new StringBuilder();
             YellowstonePathology.Business.Rules.MethodResult result = Business.Task.Model.TaskOrderCollection.AddDailyTaskOrderCytologySlideDisposal(30, this);
             message.AppendLine(result.Message);

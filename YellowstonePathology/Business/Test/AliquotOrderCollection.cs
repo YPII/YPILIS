@@ -229,18 +229,27 @@ namespace YellowstonePathology.Business.Test
             return aliquotOrder;
         }
 
-        public AliquotOrder AddCSSlide(YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, DateTime accessionDate)
+        public void AddCSSlide(YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, DateTime accessionDate)
         {
-            AliquotOrder aliquotOrder = this.GetNextItem(specimenOrder, AliquotType.Slide, accessionDate);
-            aliquotOrder.SpecimenOrderId = specimenOrder.SpecimenOrderId;
-            aliquotOrder.Description = string.Empty;
-            aliquotOrder.AliquotType = "Slide";
-            aliquotOrder.LabelPrefix = string.Empty;
-            aliquotOrder.Label = specimenOrder.SpecimenNumber.ToString() + ".CS";
-            aliquotOrder.LabelType = Business.Specimen.Model.AliquotLabelType.PaperLabel;
-            this.Add(aliquotOrder);
-            this.SetBlockLabels(specimenOrder.SpecimenNumber);
-            return aliquotOrder;
+            AliquotOrder csP = this.GetNextItem(specimenOrder, AliquotType.Slide, accessionDate);
+            csP.SpecimenOrderId = specimenOrder.SpecimenOrderId;
+            csP.Description = string.Empty;
+            csP.AliquotType = "Slide";
+            csP.LabelPrefix = string.Empty;
+            csP.Label = specimenOrder.SpecimenNumber.ToString() + ".CS-P";
+            csP.LabelType = Business.Specimen.Model.AliquotLabelType.PaperLabel;
+            this.Add(csP);
+
+            AliquotOrder csD = this.GetNextItem(specimenOrder, AliquotType.Slide, accessionDate);
+            csD.SpecimenOrderId = specimenOrder.SpecimenOrderId;
+            csD.Description = string.Empty;
+            csD.AliquotType = "Slide";
+            csD.LabelPrefix = string.Empty;
+            csD.Label = specimenOrder.SpecimenNumber.ToString() + ".CS-D";
+            csD.LabelType = Business.Specimen.Model.AliquotLabelType.PaperLabel;
+            this.Add(csD);
+
+            this.SetBlockLabels(specimenOrder.SpecimenNumber);            
         }
 
         public AliquotOrder AddFNASlide(YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, int slideNumber, DateTime accessionDate)

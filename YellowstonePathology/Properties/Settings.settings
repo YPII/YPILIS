@@ -48,7 +48,7 @@
       <Value Profile="(Default)">\\\\cfileserver\\documents\\SpecimenLog\\</Value>
     </Setting>
     <Setting Name="ServerDictationFolder" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">\\\\cfileserver\\documents\\Dictation\\</Value>
+      <Value Profile="(Default)">\\cfileserver\documents\Dictation\</Value>
     </Setting>
     <Setting Name="MySqlConnectionString" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis; Pooling=True;</Value>
@@ -58,6 +58,9 @@
     </Setting>
     <Setting Name="MonitoredPropertyFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">%USERPROFILE%\AppData\Local\ypi\MonitoredProperty</Value>
+    </Setting>
+    <Setting Name="ShowSecondMonitorOnSame" Type="System.String" Scope="User">
+      <Value Profile="(Default)">true</Value>
     </Setting>
   </Settings>
 </SettingsFile>

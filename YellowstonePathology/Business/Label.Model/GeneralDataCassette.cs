@@ -30,26 +30,11 @@ namespace YellowstonePathology.Business.Label.Model
         public override string GetLine(int printerColorCode)
         {
             //C:\Program Files\General Data Company\Cassette Printing\Normal.itl|102|15-28044|1A|JA|YPII|ALQ15-28044.1A|15|28044
+            YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_MasterAccessionNo);
+            StringBuilder line = new StringBuilder(this.m_Delimeter);
 
-            YellowstonePathology.Business.OrderIdParser orderIdParser = null;
-            if(string.IsNullOrEmpty(this.m_MasterAccessionNo) == false)
-            {
-                orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_MasterAccessionNo);
-            }
-            
-            StringBuilder line = new StringBuilder(TemplateFileName + this.m_Delimeter);                        
-
-            line.Append(printerColorCode.ToString() + this.m_Delimeter);  
-            
-            if(orderIdParser == null)
-            {
-                line.Append(this.m_Delimeter);
-            }
-            else
-            {
-                line.Append(orderIdParser.MasterAccessionNo + this.m_Delimeter);
-            }
-            
+            line.Append(printerColorCode.ToString() + this.m_Delimeter);
+            line.Append(orderIdParser.MasterAccessionNo + this.m_Delimeter);
             line.Append(this.BlockTitle + this.m_Delimeter);
             line.Append(this.PatientInitials + this.m_Delimeter);
 
@@ -67,22 +52,12 @@ namespace YellowstonePathology.Business.Label.Model
                 {
                     line.Append(this.m_CompanyId + this.m_Delimeter);
                 }
-            }            
+            }
 
-            if(orderIdParser == null)
-            {
-                line.Append(this.m_Delimeter);
-                line.Append(this.m_Delimeter);
-                line.Append(this.m_Delimeter);
-            }
-            else
-            {
-                line.Append($"{this.ScanningId}{this.m_Delimeter}");
-                line.Append($"{orderIdParser.MasterAccessionNoYear.Value.ToString()}{this.m_Delimeter}");
-                line.Append($"{orderIdParser.MasterAccessionNoNumber.Value.ToString()}{this.m_Delimeter}");
-            }
-                        
-            line.Append(this.m_ProstateDescription);
+            line.Append(this.ScanningId + this.m_Delimeter);
+            line.Append(orderIdParser.MasterAccessionNoYear.Value.ToString() + this.m_Delimeter);
+            line.Append(orderIdParser.MasterAccessionNoNumber.Value.ToString() + this.m_Delimeter);
+            line.Append(this.m_Delimeter);
             return line.ToString();
         }
     }

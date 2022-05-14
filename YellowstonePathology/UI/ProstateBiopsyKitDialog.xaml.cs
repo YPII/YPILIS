@@ -27,8 +27,9 @@ namespace YellowstonePathology.UI
         private void ButtonPrint_Click(object sender, RoutedEventArgs e)
         {
             Business.Label.Model.ProstateBiopsyKitCollection prostateBiopsyKitCollection = new Business.Label.Model.ProstateBiopsyKitCollection();
-            Business.Label.Model.CassettePrinterGrossTech printer = new Business.Label.Model.CassettePrinterGrossTech();
+            Business.Label.Model.CassettePrinterGrossHobbit printer = new Business.Label.Model.CassettePrinterGrossHobbit();
             printer.Print(prostateBiopsyKitCollection);
+            MessageBox.Show("Prostate biopsy kit blocks have been sent to the printer.");
         }
     }
 }

@@ -23,7 +23,7 @@ namespace YellowstonePathology.Business.Test.FLT3Preliminary
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
-            this.m_NeverDistribute = true;
+            this.m_NeverDistribute = false;
             this.m_AcceptOnFinal = true;
             this.m_HasNoOrderTarget = true;
 

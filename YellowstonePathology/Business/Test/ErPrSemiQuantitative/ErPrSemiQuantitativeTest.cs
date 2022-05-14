@@ -6,11 +6,12 @@ using System.Text;
 namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
 {
 	public class ErPrSemiQuantitativeTest : YellowstonePathology.Business.PanelSet.Model.PanelSet
-	{
+	{        
+
 		public ErPrSemiQuantitativeTest()
 		{
 			this.m_PanelSetId = 50;
-			this.m_PanelSetName = "Estrogen/Progesterone Receptor, Semi-Quantitative";
+			this.m_PanelSetName = "Estrogen/Progesterone Receptor, Semi-Quantitative";     
 			this.m_CaseType = Business.CaseType.IHC;
             this.m_HasTechnicalComponent = true;
 			this.m_HasProfessionalComponent = true;
@@ -41,8 +42,12 @@ namespace YellowstonePathology.Business.Test.ErPrSemiQuantitative
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode);
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceYPI());
-
-            ERPRSemiQuantitativePanel erprSemiQuantitativePanel = new ERPRSemiQuantitativePanel();
+            this.AddPanel();
+        }
+        
+        public virtual void AddPanel()
+        {
+            ERPRSemiQuantitativePanel erprSemiQuantitativePanel = new ERPRSemiQuantitativePanel(true);
             this.m_PanelCollection.Add(erprSemiQuantitativePanel);
         }
     }

@@ -40,8 +40,11 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                 case 19:                    
                     view = new YellowstonePathology.Business.Test.PNH.PNHEPICBeakerObxView(accessionOrder, reportNo, obxCount);                    
                     break;
-                case 20:                    
+                case 20:                
                     view = new YellowstonePathology.Business.Test.LLP.LLPEPICBeakerObxView(accessionOrder, reportNo, obxCount);                                        
+                    break;
+                case 248:
+                    view = new YellowstonePathology.Business.Test.FlowCytometryAnalysis.FlowCytometryAnalysisObxView(accessionOrder, reportNo, obxCount);
                     break;
                 case 21:
 					//view = new YellowstonePathology.Business.Test.ThrombocytopeniaProfile.ThrombocytopeniaProfileEPICObxView(accessionOrder, reportNo, obxCount);
@@ -343,6 +346,12 @@ namespace YellowstonePathology.Business.HL7View.EPIC
                     break;
                 case 400:
                     view = new YellowstonePathology.Business.Test.SARSCoV2.SARSCoV2EPICOBXView(accessionOrder, reportNo, obxCount);
+                    break;
+                case 379:
+                    view = new YellowstonePathology.Business.Test.SPEP.SPEPClosingResult(accessionOrder, reportNo, obxCount);
+                    break;
+                case 378:
+                    view = new YellowstonePathology.Business.Test.IEP.IEPClosingResult(accessionOrder, reportNo, obxCount);
                     break;
             }
             return view;

@@ -83,11 +83,17 @@ namespace YellowstonePathology.Business.Persistence
                     MySqlTransaction trans = cn.BeginTransaction();
                     try
                     {
+                        foreach (MySqlCommand s in this.m_SqlInsertCommands)
+                        {
+                            Console.WriteLine(s.CommandText);
+                        }
+
                         this.RunSqlCommands(this.m_SqlUpdateCommands, cn, trans);
                         this.RunSqlCommands(this.m_SqlDeleteFirstCommands, cn, trans);
                         this.RunSqlCommands(this.m_SqlDeleteCommands, cn, trans);
                         this.RunSqlCommands(this.m_SqlInsertCommands, cn, trans);
                         this.RunSqlCommands(this.m_SqlInsertLastCommands, cn, trans);
+                        
                         trans.Commit();
                     }
                     catch (Exception ex) //error occurred

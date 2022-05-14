@@ -811,6 +811,10 @@
                             <ComboBoxItem>Fluid/Urine</ComboBoxItem>
                             <ComboBoxItem>FNA</ComboBoxItem>
                             <ComboBoxItem>Peripheral Blood Smear</ComboBoxItem>
+                            <ComboBoxItem>Consult</ComboBoxItem>
+                            <ComboBoxItem>Initial Reading</ComboBoxItem>
+                            <ComboBoxItem>Tonsil Excision</ComboBoxItem>
+                            <ComboBoxItem>Tonsil and Adenoids Excision</ComboBoxItem>
                         </ComboBox>
                         <Button Width="50" Height="22" VerticalAlignment="Center" Click="ButtonGetList_Click">Go</Button>
                     </StackPanel>

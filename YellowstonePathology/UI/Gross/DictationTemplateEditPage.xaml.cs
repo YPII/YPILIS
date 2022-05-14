@@ -156,7 +156,8 @@ namespace YellowstonePathology.UI.Gross
         {
             if(this.ListViewSpecimen.SelectedItem != null)
             {
-
+                Business.Specimen.Model.Specimen specimen = (Business.Specimen.Model.Specimen)this.ListViewSpecimen.SelectedItem;
+                DictationTemplate.SpecimenCollection.Remove(specimen);
             }
         }
     }

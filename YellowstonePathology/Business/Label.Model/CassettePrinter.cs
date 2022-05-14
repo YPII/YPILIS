@@ -39,26 +39,25 @@ namespace YellowstonePathology.Business.Label.Model
 
         public void Print(ProstateBiopsyKitCollection prostateBiopsyKitCollection)
         {
-            CarouselColumn firstColumn = this.m_Carousel.GetColumn(prostateBiopsyKitCollection[0].CassetteColor);
-            //string fileName = System.IO.Path.Combine(firstColumn.PrinterPath, $"prostate_biopsy_kit_{MongoDB.Bson.ObjectId.GenerateNewId().ToString()}.{prostateBiopsyKitCollection[0].GetFileExtension()}");
-            string fileName = System.IO.Path.Combine(@"c:\testing", $"prostate_biopsy_kit_{MongoDB.Bson.ObjectId.GenerateNewId().ToString()}{prostateBiopsyKitCollection[0].GetFileExtension()}");
+            CarouselColumn firstColumn = this.m_Carousel.GetColumn(prostateBiopsyKitCollection[0].CassetteColor);            
 
-            //try
-            //{
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName))
+            try
+            {
+                foreach (GeneralDataCassetteProstate cassette in prostateBiopsyKitCollection)
                 {
-                    foreach (GeneralDataCassette cassette in prostateBiopsyKitCollection)
+                    string fileName = System.IO.Path.Combine(firstColumn.PrinterPath, $"prostate_biopsy_kit_{MongoDB.Bson.ObjectId.GenerateNewId().ToString()}{prostateBiopsyKitCollection[0].GetFileExtension()}");
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName))
                     {
                         CarouselColumn column = this.m_Carousel.GetColumn(cassette.CassetteColor);
                         string line = cassette.GetLine(column.PrinterCode);
                         file.Write(line + "\r\n");
-                    }
-                }
-            //}
-            //catch (Exception e)
-            //{
+                    }                    
+                }                
+            }
+            catch (Exception e)
+            {
                 //System.Windows.MessageBox.Show(fileName + ": " + e.Message, "Cassette Printer Location.", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Exclamation);
-            //}                        
+            }                        
         }
 
         public void Print(YellowstonePathology.Business.Test.AliquotOrderCollection aliquotOrderCollection, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)

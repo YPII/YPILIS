@@ -23,13 +23,13 @@ namespace YellowstonePathology.UI.Gross
         private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
         private DictationTemplate m_DictationTemplate;
 
-        public DictationTemplatePage(YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.User.SystemIdentity systemIdentity)
+        public DictationTemplatePage(Business.Specimen.Model.SpecimenOrder specimenOrder, Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.User.SystemIdentity systemIdentity)
         {
             this.m_SpecimenOrder = specimenOrder;
             this.m_AccessionOrder = accessionOrder;
             this.m_SystemIdentity = systemIdentity;
 
-            this.m_DictationTemplate = DictationTemplateCollection.Instance.GetClone(m_SpecimenOrder.SpecimenId);
+            this.m_DictationTemplate = DictationTemplateCollection.Instance.GetClone(m_SpecimenOrder);
             this.SetGrossDescription();
 
             InitializeComponent();

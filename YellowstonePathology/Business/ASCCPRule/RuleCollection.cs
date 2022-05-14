@@ -49,7 +49,7 @@ namespace YellowstonePathology.Business.ASCCPRule
                     woman.RuleIsMatch = true;
                     break;
                 }
-            }
+            }            
             return result;
         }
     }

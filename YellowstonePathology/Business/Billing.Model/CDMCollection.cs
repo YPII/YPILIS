@@ -41,7 +41,7 @@ namespace YellowstonePathology.Business.Billing.Model
         private static CDMCollection Load()
         {
             CDMCollection result = new CDMCollection();
-            MySqlCommand cmd = new MySqlCommand("Select CDMCode, CDMCodeNew, CPTCode, ProcedureName, CDMClient from tblCDM order by CDMCode;");
+            MySqlCommand cmd = new MySqlCommand($"Select CDMCode, CDMCodeNew, CPTCode, ProcedureName, CDMClient from tblCDM order by CDMCode;");
             cmd.CommandType = CommandType.Text;
 
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
@@ -60,7 +60,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 }
             }
             return result;
-        }
+        }        
 
         public static void Refresh()
         {

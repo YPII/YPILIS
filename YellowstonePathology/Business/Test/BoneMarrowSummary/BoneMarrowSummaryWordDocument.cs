@@ -92,8 +92,7 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
             XmlNode testTableNode = this.m_ReportXml.SelectSingleNode("descendant::w:tbl[w:tr/w:tc/w:p/w:r/w:t='test_name']", this.m_NameSpaceManager);            
             XmlNode rowTestNode = testTableNode.SelectSingleNode("descendant::w:tr[w:tc/w:p/w:r/w:t='test_name']", this.m_NameSpaceManager);
 
-            List<Business.Test.PanelSetOrder> testingSummaryList = this.m_AccessionOrder.PanelSetOrderCollection.GetBoneMarrowAccessionSummaryList(this.m_PanelSetOrder.ReportNo, true);
-            //this.GetOtherCases(testingSummaryList);
+            List<Business.Test.PanelSetOrder> testingSummaryList = this.m_AccessionOrder.PanelSetOrderCollection.GetBoneMarrowAccessionSummaryList(this.m_PanelSetOrder.ReportNo, true);            
 
             int surgicalPanelSetId = new Test.Surgical.SurgicalTest().PanelSetId;
             foreach (Business.Test.PanelSetOrder pso in testingSummaryList)

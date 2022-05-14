@@ -144,6 +144,8 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         
                         <TextBlock Grid.Row="0" Margin="5,3,0,0" VerticalAlignment="Bottom">
@@ -168,6 +170,18 @@
 
                         <TextBlock Grid.Row="6" Margin="5,3,0,0">
 					        <Hyperlink Click="HyperLinkSendResultEmail_Click">Send Result Email</Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="7" Margin="5,3,0,0">
+					        <Hyperlink Click="HyperLinkSendWDOOH_Click">Send WYDOH</Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="8" Margin="5,3,0,0">
+					        <Hyperlink Click="HyperLinkSendSCLPDFTest_Click">Send SCL PDF - Test</Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="9" Margin="5,3,0,0">
+					        <Hyperlink Click="HyperLinkSendSCLClosingResult_Click">Send SCL Closing Result - Test</Hyperlink>
                         </TextBlock>
                     </Grid>
                 </Expander>

@@ -468,7 +468,8 @@ namespace YellowstonePathology.UI.Login
         {
             if (this.ListViewAccessionOrders.SelectedItem != null)
             {
-                FinalizeAccession.DocumentScanningPath documentScanningPath = new FinalizeAccession.DocumentScanningPath(this.m_LoginUI.AccessionOrder);
+                YellowstonePathology.Business.Search.ReportSearchItem reportSearchItem = (YellowstonePathology.Business.Search.ReportSearchItem)this.ListViewAccessionOrders.SelectedItem;
+                FinalizeAccession.DocumentScanningPath documentScanningPath = new FinalizeAccession.DocumentScanningPath(this.m_LoginUI.AccessionOrder, reportSearchItem.ReportNo);
                 documentScanningPath.Start();
             }
         }
@@ -588,7 +589,8 @@ namespace YellowstonePathology.UI.Login
 
             if (this.ListViewAccessionOrders.SelectedItem != null)
             {
-                YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_LoginUI.AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_LoginUI.ReportNo);
+                Business.Search.ReportSearchItem reportSearchItem = (Business.Search.ReportSearchItem)this.ListViewAccessionOrders.SelectedItem;
+                YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_LoginUI.AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportSearchItem.ReportNo);
                 YellowstonePathology.Business.User.SystemIdentity systemIdentity = Business.User.SystemIdentity.Instance;
 
                 YellowstonePathology.UI.Test.ResultPathFactory resultPathFactory = new Test.ResultPathFactory();
@@ -1069,7 +1071,7 @@ namespace YellowstonePathology.UI.Login
                 foreach (Business.Search.ReportSearchItem rsi in this.ListViewAccessionOrders.SelectedItems)
                 {
                     Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(rsi.MasterAccessionNo, this);
-                    Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(rsi.ReportNo, ao, false, false);
+                    Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(rsi.ReportNo, ao, false, false, false);
                     Business.Rules.MethodResult result = new Business.Rules.MethodResult();
                     resultView.HandleSendToProvation(result);
                 }

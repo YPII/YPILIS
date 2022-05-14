@@ -102,7 +102,9 @@ namespace YellowstonePathology.Business.Billing.Model
         {
             YellowstonePathology.Business.Billing.Model.CptCode cpt88313 = Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88313", null);
             string modifier = cpt88313.GetModifier(billingComponent);
-            int cpt88313Count = this.m_StainSpecimenCollection.GetBillable88313Count() - this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.GetBilledCount(cpt88313.Code, modifier);
+            int billableCount = this.m_StainSpecimenCollection.GetBillable88313Count();
+            int billedCount = this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.GetBilledCount(cpt88313.Code, modifier);
+            int cpt88313Count = billableCount - billedCount;
             if (cpt88313Count > 0)
             {                
                 YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill = this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.GetNextItem(this.m_PanelSetOrder.ReportNo);
@@ -208,7 +210,9 @@ namespace YellowstonePathology.Business.Billing.Model
         {
             YellowstonePathology.Business.Billing.Model.CptCode cpt88342 = Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88342", null);
             string modifier = cpt88342.GetModifier(billingComponent);
-            int cpt88342Count = this.m_StainSpecimenCollection.GetBillable88342Count() - this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.GetBilledCount(cpt88342.Code, modifier);
+            int billableCount = this.m_StainSpecimenCollection.GetBillable88342Count();
+            int billedCount = this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.GetBilledCount(cpt88342.Code, modifier);
+            int cpt88342Count = billableCount - billedCount;
             
             if (cpt88342Count > 0)
             {                                
@@ -230,7 +234,9 @@ namespace YellowstonePathology.Business.Billing.Model
         {
             YellowstonePathology.Business.Billing.Model.CptCode cpt88341 = Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88341", null);
             string modifier = cpt88341.GetModifier(billingComponent);
-            int cpt88341Count = this.m_StainSpecimenCollection.GetBillable88341Count() - this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.GetBilledCount(cpt88341.Code, modifier);            
+            int billableCount = this.m_StainSpecimenCollection.GetBillable88341Count();
+            int billedCount = this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.GetBilledCount(cpt88341.Code, modifier);
+            int cpt88341Count = billableCount - billedCount;
 
             if (cpt88341Count > 0)
             {                

@@ -124,6 +124,30 @@ namespace YellowstonePathology.UI.Test
 
 		private void HyperLinkFinalize_Click(object sender, RoutedEventArgs e)
 		{
+			List<int> offsiteFrozenClients = new List<int>();
+			offsiteFrozenClients.Add(553);
+			offsiteFrozenClients.Add(935);
+			offsiteFrozenClients.Add(1341);
+			offsiteFrozenClients.Add(587);			
+
+			if(offsiteFrozenClients.Contains(this.m_AccessionOrder.ClientId) == true)
+			{				
+				switch (this.m_AccessionOrder.ClientId)
+				{
+					case 553:
+					case 935:
+					case 1341:
+						this.m_IntraoperativeConsultation.FacilityId = "YPICDY";
+						break;
+					case 587:
+						this.m_IntraoperativeConsultation.FacilityId = "YPIHVR";
+						break;
+					default:
+						this.m_IntraoperativeConsultation.FacilityId = "YPIBLGS";
+						break;
+				}				
+			}
+
 			YellowstonePathology.Business.Rules.MethodResult methodResult = this.m_IntraoperativeConsultation.IsOkToFinalize();
 			if (methodResult.Success == true)
 			{

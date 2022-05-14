@@ -576,19 +576,19 @@
 
 				<Button Grid.Row="4" Background="#F5F8C9" Click="ButtonScreeningFinal_Click">Screening Final</Button>
 
-				<Button Grid.Row="5" Background="#D1F8C9" Click="ButtonSetSatNegECC_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Sat/Neg/ECC</Button>
-				<Button Grid.Row="6" Background="#D1F8C9" Click="ButtonSetSatNegNoECC_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Sat/Neg/ No ECC</Button>
-				<Button Grid.Row="7" Background="#D1F8C9" Click="ButtonSetSatNeg_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Sat/Neg</Button>
-				<Button Grid.Row="8" Background="#D1F8C9" Click="ButtonSetSatReactive_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Sat/Reactive</Button>
+				<Button Grid.Row="5" Background="#D1F8C9" Click="ButtonSetSatNegECC_Click" Visibility="Visible">Sat/Neg/ECC</Button>
+				<Button Grid.Row="6" Background="#D1F8C9" Click="ButtonSetSatNegNoECC_Click" Visibility="Visible">Sat/Neg/ No ECC</Button>
+				<Button Grid.Row="7" Background="#D1F8C9" Click="ButtonSetSatNeg_Click" Visibility="Visible">Sat/Neg</Button>
+				<Button Grid.Row="8" Background="#D1F8C9" Click="ButtonSetSatReactive_Click" Visibility="Visible">Sat/Reactive</Button>
 
-                <Button Grid.Row="9" Background="#F8C0F6" Click="ButtonAddCytotechReview_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Cytotech Review</Button>
-                <Button Grid.Row="10" Background="#F8C0F6" Click="ButtonAddPathologistReview_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Pathologist Review</Button>
-                <Button Grid.Row="11" Background="#F8C0F6" Click="ButtonAddDotReview_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Dot Review</Button>
-                <Button Grid.Row="12" Background="#F8C0F6" Click="ButtonAddAcidWash_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Acid Wash</Button>
+                <Button Grid.Row="9" Background="#F8C0F6" Click="ButtonAddCytotechReview_Click" Visibility="Visible">Cytotech Review</Button>
+                <Button Grid.Row="10" Background="#F8C0F6" Click="ButtonAddPathologistReview_Click" Visibility="Visible">Pathologist Review</Button>
+                <Button Grid.Row="11" Background="#F8C0F6" Click="ButtonAddDotReview_Click" Visibility="Visible">Dot Review</Button>
+                <Button Grid.Row="12" Background="#F8C0F6" Click="ButtonAddAcidWash_Click" Visibility="Visible">Acid Wash</Button>
 
 				<Button Grid.Row="13" Background="#FFADBB" Click="ButtonUnFinalScreening_Click">Unfinal Screening</Button>
-				<Button Grid.Row="14" Background="#FFADBB" Click="ButtonClearCase_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Clear Screening</Button>
-                <Button Grid.Row="15" Background="#FFADBB" Click="ButtonDeleteItem_Click" Visibility="{Binding Path=OptionalButtonVisibility}">Delete Item</Button>
+				<Button Grid.Row="14" Background="#FFADBB" Click="ButtonClearCase_Click" Visibility="Visible">Clear Screening</Button>
+                <Button Grid.Row="15" Background="#FFADBB" Click="ButtonDeleteItem_Click" Visibility="Visible">Delete Item</Button>
 
                 <Button Grid.Row="16" Background="#FFADBB" Click="ButtonWomensHealthProfile_Click">Woman's Health Profile</Button>
 

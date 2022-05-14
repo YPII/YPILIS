@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Yellowstone Pathology", "Yellowstone Pathology", "{477C1F97-BA67-44FE-A37C-BCBD2EFE6688}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,22 +22,61 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Mongo|Any CPU = Mongo|Any CPU
+		Mongo|ARM = Mongo|ARM
+		Mongo|ARM64 = Mongo|ARM64
+		Mongo|x64 = Mongo|x64
+		Mongo|x86 = Mongo|x86
 		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Debug|x64.Build.0 = Debug|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Debug|x86.ActiveCfg = Debug|Win32
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Debug|x86.Build.0 = Debug|Win32
 		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Mongo|Any CPU.ActiveCfg = Mongo|Any CPU
 		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Mongo|Any CPU.Build.0 = Mongo|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Mongo|ARM.ActiveCfg = Mongo|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Mongo|ARM.Build.0 = Mongo|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Mongo|ARM64.ActiveCfg = Mongo|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Mongo|ARM64.Build.0 = Mongo|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Mongo|x64.ActiveCfg = Mongo|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Mongo|x64.Build.0 = Mongo|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Mongo|x86.ActiveCfg = Mongo|Win32
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Mongo|x86.Build.0 = Mongo|Win32
 		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Release|ARM.Build.0 = Release|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Release|ARM64.Build.0 = Release|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Release|x64.ActiveCfg = Release|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Release|x64.Build.0 = Release|Any CPU
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Release|x86.ActiveCfg = Release|Win32
+		{B592C3C3-C7D0-4B34-A932-06605568E45F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{477C1F97-BA67-44FE-A37C-BCBD2EFE6688} = {44311866-8304-490A-830A-CBEE183082A3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A9C04DA-2B60-4000-A82A-DD8D3BFF2FEB}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = YellowstonePathology3.vsmdi

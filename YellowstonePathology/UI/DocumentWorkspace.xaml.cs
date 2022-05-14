@@ -67,8 +67,8 @@ namespace YellowstonePathology.UI
 
 			if (this.m_CaseDocument != null)
 			{
-				caseDocument.Show(this.ContentControlDocument, Window.GetWindow(this));
-			}
+				caseDocument.Show(this.ContentControlDocument, Window.GetWindow(this));               
+            }
        }		
     }
 }

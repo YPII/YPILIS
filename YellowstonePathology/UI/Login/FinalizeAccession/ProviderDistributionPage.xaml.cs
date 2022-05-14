@@ -632,7 +632,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             }
             else
             {
-                YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true);
+                YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true, false);
                 YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
                 resultView.Send(methodResult);
             }            
@@ -670,9 +670,9 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             if(this.ListViewTestOrderReportDistribution.SelectedItem != null)
             {
                 Business.ReportDistribution.Model.TestOrderReportDistribution rd = (Business.ReportDistribution.Model.TestOrderReportDistribution)this.ListViewTestOrderReportDistribution.SelectedItem;
-                if(rd.DistributionType == "EPIC")
+                if(rd.DistributionType == "EPIC" || rd.DistributionType == "EPIC->Fax")
                 {
-                    YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true, false);
+                    YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true, false, false);
                     YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
                     resultView.Send(methodResult);
                     MessageBox.Show("The result was sent unsolicted to EPIC");
@@ -740,6 +740,37 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                     wyDOHResultViewV2.Send(resultV2);
                 }
             }
+        }
+
+        private void HyperLinkSendHL7ResultTestWithPDF_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true, true);
+            YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+            resultView.Send(methodResult);
+        }
+
+        private void HyperLinkSendWDOOH_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Rules.MethodResult resultV2 = new Business.Rules.MethodResult();
+            YellowstonePathology.Business.HL7View.WYDOH.WYDOHResultViewV2 wyDOHResultViewV2 = new Business.HL7View.WYDOH.WYDOHResultViewV2(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder);
+            wyDOHResultViewV2.CanSend(resultV2);
+            wyDOHResultViewV2.Send(resultV2);
+        }
+
+        private void HyperLinkSendSCLPDFTest_Click(object sender, RoutedEventArgs e)
+        {            
+            Business.HL7View.EPIC.EPICBeakerResultViewPDF view = new Business.HL7View.EPIC.EPICBeakerResultViewPDF(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, false);
+            Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+            view.Send(methodResult);
+            MessageBox.Show("PDF sent to SCL in Test.");
+        }
+
+        private void HyperLinkSendSCLClosingResult_Click(object sender, RoutedEventArgs e)
+        {
+            Business.HL7View.EPIC.EPICBeakerResultView view = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true, false);
+            Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+            view.Send(methodResult);
+            MessageBox.Show("Closing Result sent to SCL in Test.");
         }
     }
 }

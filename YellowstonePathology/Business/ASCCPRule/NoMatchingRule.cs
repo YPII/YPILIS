@@ -11,6 +11,6 @@ namespace YellowstonePathology.Business.ASCCPRule
         public NoMatchingRule()
         {
             this.m_Description = "No matching rule.";            
-        }
+        }        
     }
 }

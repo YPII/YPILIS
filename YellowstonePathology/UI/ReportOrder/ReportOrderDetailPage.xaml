@@ -68,6 +68,7 @@
 
             <TabControl Grid.Column="1" Margin="5,5,5,5">
                 <TabItem Header="General">
+                    <ScrollViewer>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -223,6 +224,7 @@
                         <TextBox Grid.Column="1" Grid.Row="27" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=AccessionOrder.SystemInitiatingOrder}"/>
 
                     </Grid>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Client Orders">
                     <Grid>

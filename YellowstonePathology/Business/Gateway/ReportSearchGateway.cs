@@ -848,7 +848,7 @@ namespace YellowstonePathology.Business.Gateway
                 "'' ForeignAccessionNo " +
                 "from tblAccessionOrder a " +                
                 "join tblPanelSetOrder pso on a.MasterAccessionNo = pso.masterAccessionNo " +
-                $"where pso.FinalDate >= '{finalDate.ToString("yyyy-MM-dd")}' and a.ClientId in (select clientid from tblClientGroupClient where clientGroupId = 42)";
+                $"where a.ClientId = 587 and a.AccessionDate >= '2022-04-10';";
             Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
             return reportSearchList;
         }

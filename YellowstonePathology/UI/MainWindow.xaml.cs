@@ -34,7 +34,7 @@ namespace YellowstonePathology.UI
         TabItem m_TabItemCytology;        
 		TabItem m_TabItemLogin;
         TabItem m_TabItemClientOrder;
-        TabItem m_TabItemTask;
+        TabItem m_TabItemTask;       
 
         TabItem m_TabItemTyping;		
         Surgical.TypingWorkspace m_TypingWorkspace;
@@ -44,6 +44,7 @@ namespace YellowstonePathology.UI
         ReportDistribution.ReportDistributionWorkspace m_ReportDistributionWorkspace; 
 
         Cytology.CytologyWorkspace m_CytologyWorkspace;
+        Scanning.ScanProcessingWorkspace m_ScanProcessingWorkspace;
 
 		Login.LoginWorkspace m_LoginWorkspace;
         ClientOrderWorkspace m_ClientOrderWorkspace;
@@ -251,6 +252,20 @@ namespace YellowstonePathology.UI
                 pageNavigationWindow.Left = screen2Rectangle.Left + (screen2Rectangle.Width - pageNavigationWindow.Width) / 2;
                 pageNavigationWindow.Top = screen2Rectangle.Top + (screen2Rectangle.Height - pageNavigationWindow.Height) / 2;
                 pageNavigationWindow.Show();
+            } 
+            else
+            {
+                pageNavigationWindow = new PageNavigationWindow(this.m_SystemIdentity);
+
+                System.Windows.Forms.Screen screen1 = System.Windows.Forms.Screen.AllScreens[0];
+                System.Drawing.Rectangle screen1Rectangle = screen1.WorkingArea;
+
+                pageNavigationWindow.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+                pageNavigationWindow.Width = 1500;
+                pageNavigationWindow.Height = 800;
+                pageNavigationWindow.Left = screen1Rectangle.Left + (screen1Rectangle.Width - pageNavigationWindow.Width) / 2;
+                pageNavigationWindow.Top = screen1Rectangle.Top + (screen1Rectangle.Height - pageNavigationWindow.Height) / 2;
+                pageNavigationWindow.Show();
             }
 
             return pageNavigationWindow;
@@ -417,7 +432,7 @@ namespace YellowstonePathology.UI
                 this.m_TabItemCytology.Focus();
             }         
             this.m_TabItemCytology.Focus();
-       }                             
+        }       
 
         public void AddPathologistWorkspace()
         {            
@@ -1086,18 +1101,39 @@ namespace YellowstonePathology.UI
         {
             ManagementReports.ReportSelection reportSelection = new ManagementReports.ReportSelection();
             reportSelection.ShowDialog();
-        }
-
-        private void MenuItemSyncTest_Click(object sender, RoutedEventArgs e)
-        {
-            TestEnvironment.Sync();
-            MessageBox.Show("Test Environment has been synchronized.");
-        }
+        }        
 
         private void MenuItemProstateBiopsyKit_Click(object sender, RoutedEventArgs e)
         {
             ProstateBiopsyKitDialog prostateBiopsyKitDialog = new ProstateBiopsyKitDialog();
             prostateBiopsyKitDialog.ShowDialog();
+        }        
+
+        private void ToolBarButtonScanningWorkspace_Click(object sender, RoutedEventArgs e)
+        {
+            this.AddScanningWorkspace();
+        }
+
+        public void AddScanningWorkspace()
+        {
+            if (this.m_TabItemScanning.Parent == null)
+            {
+                this.m_ScanProcessingWorkspace = new Scanning.ScanProcessingWorkspace();
+                this.m_TabItemScanning.Content = this.m_ScanProcessingWorkspace;
+
+                this.TabControlLeftWorkspace.Items.Add(this.m_TabItemScanning);
+
+                this.m_TabItemScanning.Focus();
+            }
+            this.m_TabItemScanning.Focus();
+        }
+
+        private void MenuItemPDFViewer_Click(object sender, RoutedEventArgs e)
+        {
+            //PDFViewer viewer = new PDFViewer();
+            //viewer.Show();
+            TestPage tp = new TestPage();
+            tp.Show();
         }
     }
 }

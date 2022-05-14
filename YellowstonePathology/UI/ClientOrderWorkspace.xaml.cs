@@ -238,11 +238,34 @@ namespace YellowstonePathology.UI
                     this.m_ClientOrderUI.GetClientOrderListByContainerId(this.m_ClientOrderUI.ScanSimulation);
                 }
             }
+        }       
+
+        private void ButtonBSDOrders_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_ClientOrderUI.GetBSDOrderList();
         }
 
-        private void ButtonSVHCOVIDCases_Click(object sender, RoutedEventArgs e)
+        private void MenuItemReconcileBSDOrders_Click(object sender, RoutedEventArgs e)
         {
-            this.m_ClientOrderUI.GetSVHCOVIDClientOrderList();
+            //Business.ClientOrder.Model.OrderBrowserListItemCollection
+            if(this.ListViewClientOrders.SelectedItem != null)
+            {
+                foreach(Business.ClientOrder.Model.OrderBrowserListItem item in this.ListViewClientOrders.SelectedItems)
+                {
+                    Business.ClientOrder.Model.ClientOrder clientOrder = Business.Persistence.DocumentGateway.Instance.PullClientOrder(item.ClientOrderId, this);
+                    Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersBySvhMedicalRecord(clientOrder.SvhMedicalRecord);
+                    if(clientOrderCollection.Count >= 2)
+                    {
+                        if(clientOrderCollection.ContainsAnAccessionedOrder() == true)
+                        {
+                            clientOrder.Reconciled = true;
+                            Business.Persistence.DocumentGateway.Instance.Push(this);
+                        }                        
+                    }
+                }
+                MessageBox.Show("Orders have been reconciled.");
+                this.m_ClientOrderUI.GetBSDOrderList();
+            }
         }
     }    
 }

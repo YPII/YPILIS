@@ -35,6 +35,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Grpc.Core;
 using MySql.Data.MySqlClient;
+using ImageMagick;
 
 
 namespace YellowstonePathology.UI
@@ -999,15 +1000,15 @@ namespace YellowstonePathology.UI
 
         private void CreateFolders()
         {
-            int start = 60000;
-            int end = 70000;
+            int start = 0;
+            int end = 60000;
             
             for(int i=start; i<end; i += 1000)
             {
-                string path = $@"\\cfileserver\AccessionDocuments\2021\{i.ToString()}-{(i + 999).ToString()}\";
+                string path = $@"\\cfileserver\AccessionDocuments\2022\{i.ToString().PadLeft(5, '0')}-{(i + 999).ToString().PadLeft(5, '0')}\";
                 for (int j = i; j <= i + 999; j++)
                 {
-                    System.IO.Directory.CreateDirectory($"{path}\\21-{j.ToString()}");
+                    System.IO.Directory.CreateDirectory($"{path}\\22-{j.ToString()}");
                 }
             }            
         }
@@ -1073,8 +1074,249 @@ namespace YellowstonePathology.UI
             }
         }
 
+        private void ImageTesting()
+        {
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(@"c:\temp\compression\bitmap1.bmp");
+            MemoryStream bmpStream = new MemoryStream();
+            bitmap.Save(bmpStream, System.Drawing.Imaging.ImageFormat.Tiff);
+
+            MagickFactory f = new MagickFactory();
+            IMagickImage magickImage = new MagickImage(f.Image.Create(bmpStream));
+            magickImage.Write(@"c:\temp\compression\bitmap1.pdf", MagickFormat.Pdf);
+
+            //MagickImageCollection imageCollection = new MagickImageCollection();
+            //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(@"c:\temp\compression\one.jpg");
+            //MemoryStream ms = new MemoryStream();
+            //bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            //ms.Position = 0;
+            //imageCollection.AddRange(ms);
+            //imageCollection.Write(@"c:\temp\compression\toast.pdf", MagickFormat.Pdf);
+
+            //MagickImageCollection imageCollection2 = new MagickImageCollection();
+            //imageCollection2.Read(@"c:\temp\compression\three.pdf");
+            //imageCollection2.Write(@"c:\temp\compression\three2.pdf", MagickFormat.Pdf);
+
+            //string fileName = @"c:\temp\compression\biglic.jpg";
+            //string tempFile = @"c:\temp\compression\small.pdf";
+            //string tempFile2 = @"c:\temp\compression\small2.pdf";
+
+            //using (MagickImageCollection tiffImageCollection = new MagickImageCollection())
+            //{
+            //    tiffImageCollection.AddRange(tempFile);
+            //    tiffImageCollection.Write(tempFile2, MagickFormat.Pdf);
+            //}
+
+            //using (MagickImage image = new MagickImage(tempFile))
+            //{                                
+            //    ImageOptimizer optimizer = new ImageOptimizer();                
+            //    bool x = optimizer.Compress(tempFile);                                
+            //}
+        }
+
+        private System.Drawing.Imaging.ImageCodecInfo GetEncoder(System.Drawing.Imaging.ImageFormat format)
+        {
+            System.Drawing.Imaging.ImageCodecInfo[] codecs = System.Drawing.Imaging.ImageCodecInfo.GetImageEncoders();
+            foreach (System.Drawing.Imaging.ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        }
+
+        private void VaryQualityLevel()
+        {
+            // Get a bitmap. The using statement ensures objects  
+            // are automatically disposed from memory after use.  
+            using (System.Drawing.Bitmap bmp1 = new System.Drawing.Bitmap(@"C:\temp\compression\bitmap1.bmp"))
+            {
+                System.Drawing.Imaging.ImageCodecInfo jpgEncoder = GetEncoder(System.Drawing.Imaging.ImageFormat.Tiff);
+
+                // Create an Encoder object based on the GUID  
+                // for the Quality parameter category.  
+                System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Compression;
+
+                // Create an EncoderParameters object.  
+                // An EncoderParameters object has an array of EncoderParameter  
+                // objects. In this case, there is only one  
+                // EncoderParameter object in the array.  
+                System.Drawing.Imaging.EncoderParameters myEncoderParameters = new System.Drawing.Imaging.EncoderParameters(1);
+
+                System.Drawing.Imaging.EncoderParameter myEncoderParameter = new System.Drawing.Imaging.EncoderParameter(myEncoder, 50L);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                bmp1.Save(@"C:\temp\compression\bitmap1.tif", jpgEncoder, myEncoderParameters);
+
+                myEncoderParameter = new System.Drawing.Imaging.EncoderParameter(myEncoder, 100L);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                bmp1.Save(@"C:\temp\compression\bitmap2.tif", jpgEncoder, myEncoderParameters);
+
+                // Save the bitmap as a JPG file with zero quality level compression.  
+                myEncoderParameter = new System.Drawing.Imaging.EncoderParameter(myEncoder, 1L);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                bmp1.Save(@"C:\temp\compression\bitmap3.tif", jpgEncoder, myEncoderParameters);
+            }
+        }
+
+        private void SplitTif()
+        {
+            string sql = "select pso.ReportNo " +
+                "from tblAccessionOrder ao " +
+                "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.masterAccessionNo " +               
+                "where pso.ReportNo = '22-13867.R1';";
+            
+            Business.ReportNoCollection reportNos = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
+            foreach (Business.ReportNo reportNo in reportNos)
+            {
+                string path = Business.Document.CaseDocumentPath.GetPath(new Business.OrderIdParser(reportNo.Value));
+                string r1ReportNo = reportNo.Value.Replace(".R2", ".R1");
+                string r2ReportNo = reportNo.Value;
+                string tiff = $"{path}\\{r1ReportNo}.tif";
+                ImageMagick.MagickImageCollection pages = new MagickImageCollection();
+                pages.AddRange(tiff);
+
+                int pgCnt = pages.Count/2;
+
+                ImageMagick.MagickImageCollection r2Doc = new MagickImageCollection();
+                ImageMagick.MagickImageCollection r1Doc = new MagickImageCollection();
+
+                string pathR1 = $"{path}\\{r1ReportNo}.tmp.pdf";
+                string pathR2 = $"{path}\\{r2ReportNo}.tmp.pdf";
+
+                for (int i=0; i<pages.Count; i++)
+                {
+                    if(i<pgCnt)
+                    {
+                        r1Doc.Add(pages[i]);
+                    }
+                    else
+                    {
+                        r2Doc.Add(pages[i]);
+                    }
+                }
+
+                r1Doc.Write(pathR1, MagickFormat.Pdf);
+                r2Doc.Write(pathR2, MagickFormat.Pdf);
+            }
+        }
+
+        private void RenamePDF()
+        {
+            string sql = "select pso.ReportNo " +
+                "from tblAccessionOrder ao " +
+                "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.masterAccessionNo " +
+                "join tblPanelSetOrderCPTCodeBill psoc on pso.ReportNo = psoc.ReportNo " +
+                "where ao.AccessionDate >= '2022-01-11' and PanelSetId in (378, 379) " +
+                "and pso.reportNo like '%.R2';";
+            Business.ReportNoCollection reportNos = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
+            foreach (Business.ReportNo reportNo in reportNos)
+            {
+                string path = Business.Document.CaseDocumentPath.GetPath(new Business.OrderIdParser(reportNo.Value));
+                string r1ReportNo = reportNo.Value.Replace(".R2", ".R1");
+                string r2ReportNo = reportNo.Value;
+                string tiff = $"{path}\\{r1ReportNo}.tif";
+
+                //System.IO.File.Move($"{path}\\{r1ReportNo}.pdf", $"{path}\\{r1ReportNo}.old.pdf");
+                System.IO.File.Move($"{path}\\{r1ReportNo}.tmp.pdf", $"{path}\\{r1ReportNo}.pdf");
+                System.IO.File.Move($"{path}\\{r2ReportNo}.tmp.pdf", $"{path}\\{r2ReportNo}.pdf");
+            }
+        }
+
+        private void SendAPI()
+        {
+            string sql = "select pso.ReportNo " +
+                "from tblAccessionOrder ao " +
+                "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.masterAccessionNo " +
+                "join tblPanelSetOrderCPTCodeBill psoc on pso.ReportNo = psoc.ReportNo " +
+                "where ao.AccessionDate >= '2022-01-11' and PanelSetId in (378, 379) ";
+
+            Business.ReportNoCollection reportNos = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
+            List<string> fileList = new List<string>();
+
+            foreach (Business.ReportNo reportNo in reportNos)
+            {
+                string path = Business.Document.CaseDocumentPath.GetPath(new Business.OrderIdParser(reportNo.Value));                
+                string pdf = $"{path}\\{reportNo.Value}.pdf";
+                string tif = $"{path}\\{reportNo.Value}.tif";
+                string json = $"{path}\\{reportNo.Value}.billingdetails.json";
+                string man = reportNo.Value.Split('.')[0];
+
+                /*
+                if (System.IO.File.Exists(pdf) == false)
+                {
+                    string fl = tif;
+                    if(System.IO.File.Exists(tif) == false)
+                    {
+                        fl = $"{path}\\{man}.REQ.1.tif";
+                    }
+
+                    MagickImageCollection tiff = new MagickImageCollection();
+                    tiff.AddRange(fl);
+                    tiff.Write($"{path}\\{reportNo.Value}.pdf", MagickFormat.Pdf);
+                }
+                */
+
+                System.IO.File.Copy(pdf, $"c:\\temp\\aps\\{reportNo.Value}.pdf", true);
+                System.IO.File.Copy(json, $"c:\\temp\\aps\\{reportNo.Value}.billingdetails.json", true);
+            }
+        }
+
+
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
+            this.SplitTif();
+            //this.SendAPI();
+
+            //string sql = "Select pso.ReportNo from tblPanelSetOrder pso left outer join tblPanelSetOrderCPTCode psoc on pso.ReportNo = psoc.ReportNo where panelsetid in (378, 379) and psoc.ReportNo is null";
+            //Business.ReportNoCollection reportNos = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
+            //foreach (Business.ReportNo reportNo in reportNos)
+            //{
+                
+            //}
+
+            /*
+            string sql = "select reportNo from tblPanelSetOrder where panelsetid in (378,379) and orderDate >= '2022-01-01'";
+            Business.ReportNoCollection reportNos = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
+            foreach(Business.ReportNo reportNo in reportNos)
+            {
+                string path = Business.Document.CaseDocumentPath.GetPath(new Business.OrderIdParser(reportNo.Value));
+                string tiff = $"{path}\\{reportNo.Value}.tif";
+                string pdf = $"{path}\\{reportNo.Value}.pdf";
+                if (System.IO.File.Exists(tiff) == true)
+                {
+                    Business.Document.TifDocument.ConvertToPdf(tiff, pdf);
+                }
+            }
+            */
+
+            //string fileName = @"\\CFileServer\AccessionDocuments\2022\00001-00999\22-1\22-1.S.TIF";
+            //string fileName2 = @"\\CFileServer\AccessionDocuments\2022\00001-00999\22-1\22-1.ZZZ.PDF";
+            //List<Image> imageList = Business.Document.TifDocument.GetImageList(fileName);
+            //Business.Requisition.SavePDF(fileName2, imageList);
+
+            /*
+            string text = System.IO.File.ReadAllText(@"d:\testing\modfiles.txt");
+            string[] lines = text.Split('\n');
+            foreach (string line in lines)
+            {
+                string[] colonSplit = line.Split(':');
+                string sanatizedName = colonSplit[1].Trim().Replace("/", "\\");
+                string fileName = $"d:\\git\\sid\\ypilis\\{sanatizedName}";
+                string copyToFileName = $"d:\\git\\ypi-lis\\{sanatizedName.Replace("YellowstonePathology\\", "")}";
+                System.IO.File.Copy(fileName, copyToFileName, true);
+            }
+            */
+
+            //Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("22-10934", this);
+            //string tord = "6222556c86c07ba59cfe0591.TO2";
+            //string slideOrderId = "22-10934.2A3";
+            //Business.HL7View.VentanaStainOrder ord = new Business.HL7View.VentanaStainOrder();
+            //string result = ord.Build(accessionOrder, tord, slideOrderId);
+
+            //Console.WriteLine(result);
+            //this.CreateFolders();
+            /*
             string filePath = @"c:\temp\new_cdm.csv";
             int count = 0;
             foreach (string line in System.IO.File.ReadLines(filePath))
@@ -1087,6 +1329,7 @@ namespace YellowstonePathology.UI
                 }
                 count += 1;
             }
+            */
 
             /*
             //string sql = "select ao.masterAccessionNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where pso.PanelsetId = 13 and physicianId in (166,688,3887,2190,3069,4062,2458,4793,2101,4929,4748,4942) and accessionDate >= '2021-07-01';";
@@ -1106,27 +1349,32 @@ namespace YellowstonePathology.UI
             */
 
             /*
-            string sql = "select ReportNo from tblTestOrderReportDistribution where distributionType like '%fax%' and timeoflastdistribution >= '2021-11-03 17:10' order by timeOfLastDistribution";
-            Business.ReportNoCollection reportNoCollection = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
-            foreach(Business.ReportNo reportNo in reportNoCollection)
-            {
-                string ma = reportNo.Value.Split('.')[0];
-                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(ma, this);
-                Business.Test.PanelSetOrder pso = ao.PanelSetOrderCollection.GetPanelSetOrder(reportNo.Value);
-                Business.ReportDistribution.Model.TestOrderReportDistributionCollection faxes = pso.TestOrderReportDistributionCollection.GetFaxes();
-                foreach(Business.ReportDistribution.Model.TestOrderReportDistribution tord in faxes)
+            string sql = "select masterAccessionNo from tblAccessionOrder where physicianId = 3610";
+            List<Business.MasterAccessionNo> maCollection = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(sql);
+            foreach(Business.MasterAccessionNo ma in maCollection)
+            {                
+                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(ma.Value, this);
+                foreach(Business.Test.PanelSetOrder panelSetOrder in ao.PanelSetOrderCollection)
                 {
-                    tord.ScheduleForDistribution(DateTime.Now);
+                    if (panelSetOrder.TestOrderReportDistributionCollection.Exists(3610, 1785) == false)
+                    {
+                        string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                        Business.ReportDistribution.Model.TestOrderReportDistribution tord = panelSetOrder.TestOrderReportDistributionCollection.AddNext(testOrderReportDistributionId, testOrderReportDistributionId, panelSetOrder.ReportNo, 3610, "Randy J. Folker, M.D.",
+                        1785, "Randy Folker ENT and Allergy", "Web Service");
+                        tord.Distributed = true;
+                        tord.TimeOfLastDistribution = DateTime.Now;
+                    }
                 }
-            }
+                Business.Persistence.DocumentGateway.Instance.Push(this);
+            }            
             */
 
-            /*
-            Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("21-34827", this);
-            Business.HL7View.EPIC.EPICBeakerResultViewPDF view = new Business.HL7View.EPIC.EPICBeakerResultViewPDF("21-34827.M1", accessionOrder, false, false);
-            Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
-            view.Send(methodResult);
-            */
+
+            //Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("22-13309", this);
+            //Business.HL7View.EPIC.EPICBeakerResultViewPDF view = new Business.HL7View.EPIC.EPICBeakerResultViewPDF("22-13309.S", accessionOrder, false, false);
+            //Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+            //view.Send(methodResult);
+
 
             /*
             string sql = "select masterAccessionNo from tblAccessionOrder where ClientId = 1805 and distributeToPatient = 1;";
@@ -1145,18 +1393,15 @@ namespace YellowstonePathology.UI
         }
 
         private void BillStuff()
-        {
-            //string sql = "select distinct pso.masterAccessionNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where pso.final = 1 and pso.PanelSetId = 400 and ao.ClientId = 1759 and isposted = false";
-            //string sql = "select distinct pso.masterAccessionNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where pso.final = 1 and pso.PanelSetId = 400 and ao.ClientId = 1758 and isposted = false";
+        {            
             string sql = "select distinct pso.masterAccessionNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where pso.final = 1 and pso.PanelSetId = 400 and ao.ClientId in (280,1134) and isposted = false";
             List<Business.MasterAccessionNo> manList = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(sql);
             foreach (Business.MasterAccessionNo man in manList)
             {
-
                 Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(man.Value, this);
-                Business.Test.SARSCoV2.SARSCoV2TestOrder sars = (Business.Test.SARSCoV2.SARSCoV2TestOrder)ao.PanelSetOrderCollection.GetPanelSetOrder(400);
+                Business.Test.PanelSetOrder pso = ao.PanelSetOrderCollection.GetPanelSetOrder(400);
 
-                YellowstonePathology.Business.Billing.Model.BillableObject billableObject = Business.Billing.Model.BillableObjectFactory.GetBillableObject(ao, sars.ReportNo);
+                YellowstonePathology.Business.Billing.Model.BillableObject billableObject = Business.Billing.Model.BillableObjectFactory.GetBillableObject(ao, pso.ReportNo);
                 YellowstonePathology.Business.Rules.MethodResult methodResult = billableObject.Set();
                 if (methodResult.Success == false)
                 {

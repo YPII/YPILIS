@@ -705,6 +705,15 @@ namespace YellowstonePathology.UI.Flow
             {
                 YellowstonePathology.Business.Document.CaseDocument item = (YellowstonePathology.Business.Document.CaseDocument)this.listViewCaseFileList.SelectedItem;
                 this.m_DocumentViewer.ShowDocument(item);
+                
+                if(item.FullFileName.ToUpper().Contains(".PDF") == true)
+                {
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.Process p = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(item.FullFileName);
+                    p.StartInfo = info;
+                    p.Start();
+                } 
             }
         }
 
@@ -1009,6 +1018,15 @@ namespace YellowstonePathology.UI.Flow
                 this.m_LoginPageWindow.PageNavigator.Navigate(specimenSelectionPage);
                 this.m_LoginPageWindow.ShowDialog();
             }
+        }
+
+        private void ButtonOpenNovocyteFolder_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Explorer.exe", @"\\10.1.1.52\Novocyte_Run_PDFS");
+            p.StartInfo = info;
+            p.Start();
         }
     }
 }

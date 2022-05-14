@@ -77,7 +77,7 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByFish
             this.AddNextNTEElement(string.Empty, document);
 
             this.AddNextNTEElement("Method: ", document);
-            string method = System.Security.SecurityElement.Escape("This test was performed using a molecular method, In Situ Hybridization (ISH) with the US FDA approved Inform HER2 DNA probe kit, modified to report results according to ASCO/CAP guidelines. The test was performed on paraffin embedded tissue in compliance with ASCO/CAP guidelines.  Probes used include a locus specific probe for HER2 and an internal hybridization control probe for the centromeric region of chromosome 17 (Chr17).");
+            string method = System.Security.SecurityElement.Escape("This test was performed using a molecular method, In Situ Hybridization (ISH) with the US FDA approved Ventana HER2 DNA probe kit, modified to report results according to ASCO/CAP guidelines. The test was performed on paraffin embedded tissue in compliance with ASCO/CAP guidelines.  Probes used include a locus specific probe for HER2 and an internal hybridization control probe for the centromeric region of chromosome 17 (Chr17).");
             this.AddNextNTEElement(method, document);
             this.AddNextNTEElement(string.Empty, document);            
 

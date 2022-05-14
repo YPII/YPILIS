@@ -1942,6 +1942,19 @@ namespace YellowstonePathology.Business.Test
 			return result;
 		}
 
+        public YellowstonePathology.Business.Test.Model.TestOrderCollection GetTestOrderCollection()
+        {
+            YellowstonePathology.Business.Test.Model.TestOrderCollection result = new YellowstonePathology.Business.Test.Model.TestOrderCollection();
+            foreach (YellowstonePathology.Business.Test.PanelOrder panelOrder in this.PanelOrderCollection)
+            {
+                foreach (YellowstonePathology.Business.Test.Model.TestOrder testOrder in panelOrder.TestOrderCollection)
+                {        
+                    result.Add(testOrder);        
+                }
+            }
+            return result;
+        }
+
         public YellowstonePathology.Business.Test.Model.TestOrderCollection GetTestOrderCollection(string aliquotOrderId)
         {
             YellowstonePathology.Business.Test.Model.TestOrderCollection result = new YellowstonePathology.Business.Test.Model.TestOrderCollection();

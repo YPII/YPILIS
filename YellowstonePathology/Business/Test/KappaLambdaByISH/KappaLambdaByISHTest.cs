@@ -10,13 +10,13 @@ namespace YellowstonePathology.Business.Test.KappaLambdaByISH
         public KappaLambdaByISHTest()
 		{
 			this.m_PanelSetId = 235;
-            this.m_PanelSetName = "Kappa Lambda By ISH (Retired)";
+            this.m_PanelSetName = "Kappa Lambda By ISH";
             this.m_CaseType = Business.CaseType.FISH;
 			this.m_HasTechnicalComponent = true;			
 			this.m_HasProfessionalComponent = true;
 			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
-            this.m_Active = false;
+            this.m_Active = true;
             this.m_ExpectedDuration = TimeSpan.FromDays(1);
 
             this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Test.KappaLambdaByISH
             this.m_AllowMultiplePerAccession = true;
             this.m_NeverDistribute = true;
 
-this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             string taskDescription = "Gather materials (Bone Marrow Aspirate: 1-2 mL sodium heparin tube. EDTA tube is acceptable. " +
                 "Peripheral Blood: 2-5 mL sodium heparin tube. EDTA tube is acceptable." +

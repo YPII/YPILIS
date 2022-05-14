@@ -38,14 +38,14 @@ namespace YellowstonePathology.Business.Test.GastricAdenocarcinoma
                 YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitor = new Visitor.OrderTestOrderVisitor(testOrderInfo);
                 accessionOrder.TakeATrip(orderTestOrderVisitor);
             }
-
+           
             YellowstonePathology.Business.Test.PDL122C3forGastricGEA.PDL122C3forGastricGEATest pdl122C3forGastricGEATest = new PDL122C3forGastricGEA.PDL122C3forGastricGEATest();
             if (accessionOrder.PanelSetOrderCollection.Exists(pdl122C3forGastricGEATest.PanelSetId, this.m_OrderedOnId, true) == false)
             {
                 YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new TestOrderInfo(pdl122C3forGastricGEATest, orderTarget, false);
                 YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitor = new Visitor.OrderTestOrderVisitor(testOrderInfo);
                 accessionOrder.TakeATrip(orderTestOrderVisitor);
-            }
+            }           
         }
     }
 }

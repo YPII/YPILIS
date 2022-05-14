@@ -261,13 +261,13 @@ namespace YellowstonePathology.Business.Twain
         {
             EndingScan();
             DataSource.Close();
-            try
-            {
+            //try
+            //{
                 ScanningComplete(this, new ScanningCompleteEventArgs(exception));
-            }
-            catch
-            {
-            }
+            //}
+            //catch
+            //{
+            //}
         }
 
         protected void EndingScan()

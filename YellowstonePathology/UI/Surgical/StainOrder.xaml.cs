@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace YellowstonePathology.UI.Surgical
 {
@@ -383,6 +384,43 @@ namespace YellowstonePathology.UI.Surgical
         {
             UI.Surgical.RecutCommentsDialog recutCommentsDialog = new RecutCommentsDialog(this);
             recutCommentsDialog.ShowDialog();            
+        }
+
+        private void HandleProcessBlockComment(bool removeOnly)
+        {
+            string pattern = "Please reprocess block.+\\.";
+            bool exists = (!string.IsNullOrEmpty(this.m_RecutComment) && Regex.IsMatch(this.m_RecutComment, pattern, RegexOptions.None));
+            if (exists)
+            {
+                this.m_RecutComment = Regex.Replace(this.m_RecutComment, pattern, string.Empty, RegexOptions.None);
+            }
+
+            if (removeOnly == false)
+            {
+                Business.Test.AliquotOrderCollection selectedBlocks = this.m_AliquotAndStainOrderView.GetSelectedAliquots();
+                if (selectedBlocks.Count > 0)
+                {
+                    string blocks = string.Join(", ", selectedBlocks.Select(i => i.Label));
+                    string reprocessComment = $"Please reprocess block(s) { blocks}.";
+                    int lastCommaIndex = reprocessComment.LastIndexOf(",");
+                    if(lastCommaIndex > 0)
+                    {
+                        reprocessComment = reprocessComment.Remove(lastCommaIndex, 1).Insert(lastCommaIndex, " and");
+                    }                    
+                    this.m_RecutComment = $"{((string.IsNullOrEmpty(this.m_RecutComment) == false) ? this.m_RecutComment + " " : "")}{reprocessComment}";
+                }
+            }
+            this.NotifyPropertyChanged("RecutComment");
+        }
+
+        private void CheckboxReprocessBlock_Checked(object sender, RoutedEventArgs e)
+        {
+            this.HandleProcessBlockComment(false);               
+        }
+
+        private void CheckboxReporcessBlock_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.HandleProcessBlockComment(true);
         }
     }
 }

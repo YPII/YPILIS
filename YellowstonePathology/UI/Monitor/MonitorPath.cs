@@ -182,8 +182,7 @@ namespace YellowstonePathology.UI.Monitor
                
         private bool UnreadAutopsyRequestExist()
         {                  
-        	bool result = false;
-
+        	bool result = false;            
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidationCallBack;
             ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2007_SP1);
             service.Credentials = new WebCredentials("ypiilab\\histology", "Let'sMakeSlides");            
@@ -201,8 +200,7 @@ namespace YellowstonePathology.UI.Monitor
             view.OrderBy.Add(ItemSchema.DateTimeReceived, SortDirection.Descending);
             view.Traversal = ItemTraversal.Shallow;
             FindItemsResults<Item> findResults = service.FindItems(WellKnownFolderName.Inbox, searchFilter, view);
-            if (findResults.Items.Count > 0) result = true;    
-                    
+            if (findResults.Items.Count > 0) result = true;                
             return result;
         }         
         

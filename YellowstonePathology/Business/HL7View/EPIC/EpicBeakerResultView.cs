@@ -11,14 +11,16 @@ namespace YellowstonePathology.Business.HL7View.EPIC
     {        
         private int m_ObxCount;        
         private bool m_SendUnsolicited;
-        private bool m_Testing;        
+        private bool m_Testing;
+        private bool m_IncludePdfSegments;
 
         private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
         private YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
         private YellowstonePathology.Business.Domain.Physician m_OrderingPhysician;
 
-        public EPICBeakerResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool sendUnsolicted, bool testing)
+        public EPICBeakerResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool sendUnsolicted, bool testing, bool includePdfSegments)
         {
+            this.m_IncludePdfSegments = includePdfSegments;
             this.m_SendUnsolicited = sendUnsolicted;
             this.m_Testing = testing;
             this.m_AccessionOrder = accessionOrder;
@@ -119,19 +121,14 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             
             EPICBeakerObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, this.m_SendUnsolicited, false);
             if (epicObxView != null)
-            {
+            {                
                 epicObxView.ToXml(document);
+                if (this.m_IncludePdfSegments == true) epicObxView.AddPDFSegments(document);
             }
             else
-            {
-                //this.m_PanelSetOrder.DistributionDelayedComment = $"{this.m_PanelSetOrder.PanelSetName} needs to be build. {this.m_PanelSetOrder.ReportNo}";
+            {                
                 throw new Exception($"{this.m_PanelSetOrder.PanelSetName} needs to be build. {this.m_PanelSetOrder.ReportNo}");
-            }             
-
-            //Business.OrderIdParser orderIdParser = new OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            //string pdfFileName = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
-            //EPICBeakerObxView obxView = new EPICBeakerObxView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, 0);
-            //obxView.AddPDFSegments(pdfFileName, document);
+            }                         
 
             return document;
         }

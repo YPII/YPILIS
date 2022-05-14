@@ -262,7 +262,7 @@
                         <ListView Grid.Column="1" Grid.Row="0" Name="listViewCaseFileList" ItemsSource="{Binding Path=PatientHistoryList.CaseDocumentCollection}" IsSynchronizedWithCurrentItem="True" MouseDoubleClick="listViewCaseFileList_MouseDoubleClick">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=FileName}" Header="File Name" Width="200"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=FileName}" Header="File Name" Width="400"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -759,6 +759,7 @@
                                 </ComboBox>
                                 <TextBlock Margin="3">Year</TextBlock>
                                 <ComboBox Name="comboBoxYear" Width="100" Margin="3">
+                                    <ComboBoxItem>2022</ComboBoxItem>
                                     <ComboBoxItem>2021</ComboBoxItem>
                                     <ComboBoxItem>2020</ComboBoxItem>
                                     <ComboBoxItem>2019</ComboBoxItem>
@@ -813,7 +814,8 @@
 
                         <Button Width="200" Grid.Column="1" Grid.Row="0" Style="{StaticResource NormalButton}" Click="ButtonOpenDocumentFolder_Click">Open Document Folder</Button>
                         <Button Width="200" Grid.Column="1" Grid.Row="1" Style="{StaticResource NormalButton}" Click="ButtonOpenFC500Folder_Click">Open FC500 Folder</Button>
-                        <Button Width="200" Grid.Column="1" Grid.Row="1" Style="{StaticResource NormalButton}" Click="ButtonOpenFGalliosFolder_Click">Open Gallios Folder</Button>
+                        <Button Width="200" Grid.Column="1" Grid.Row="2" Style="{StaticResource NormalButton}" Click="ButtonOpenFGalliosFolder_Click">Open Gallios Folder</Button>
+                        <Button Width="200" Grid.Column="1" Grid.Row="3" Style="{StaticResource NormalButton}" Click="ButtonOpenNovocyteFolder_Click">Open Novocyte Folder</Button>
 
                     </Grid>
                 </TabItem>

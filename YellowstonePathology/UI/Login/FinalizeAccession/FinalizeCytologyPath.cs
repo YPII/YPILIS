@@ -162,7 +162,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void ShowScanDocumentPage()
         {
-            FinalizeAccession.DocumentScanningPage documentScanningPage = new FinalizeAccession.DocumentScanningPage(this.m_AccessionOrder);
+            FinalizeAccession.DocumentScanningPage documentScanningPage = new FinalizeAccession.DocumentScanningPage(this.m_AccessionOrder, this.m_ReportNo);
             documentScanningPage.Return += new FinalizeAccession.DocumentScanningPage.ReturnEventHandler(DocumentScanningPage_Return);
             this.m_PageNavigator.Navigate(documentScanningPage);
         }

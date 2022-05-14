@@ -113,6 +113,12 @@ namespace YellowstonePathology.Business.Surgical
 			this.FillFromList(surgicalOrderList);
 		}
 
+		public void FillBySpecimenId(DateTime workDate, string specimenId)
+		{
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListBySpecimenId(workDate, specimenId);
+			this.FillFromList(surgicalOrderList);
+		}
+
 		public void FillBySvhClientOrder(DateTime date)
 		{
 			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListForSvhClientOrder(date);

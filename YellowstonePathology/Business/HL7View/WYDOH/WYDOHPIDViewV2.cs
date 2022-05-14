@@ -15,8 +15,7 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
         string m_FirstName;
         Nullable<DateTime> m_Birthdate;
         string m_Sex;
-        string m_PatientAccountNumber;
-        string m_Mrn;
+        string m_PatientAccountNumber;        
         string m_Address1;
         string m_Address2;
         string m_City;
@@ -24,15 +23,14 @@ namespace YellowstonePathology.Business.HL7View.WYDOH
         string m_Zip;
 
         public WYDOHPIDViewV2(string patientId, string lastName, string firstName, Nullable<DateTime> birthdate,
-            string sex, string patientAccountNumber, string mrn, string address1, string address2, string city, string state, string zip)
+            string sex, string patientAccountNumber, string address1, string address2, string city, string state, string zip)
         {
             this.m_PatientId = patientId;
             this.m_LastName = lastName;
             this.m_FirstName = firstName;
             this.m_Birthdate = birthdate;
             this.m_Sex = sex;
-            this.m_PatientAccountNumber = patientAccountNumber;
-            this.m_Mrn = mrn;
+            this.m_PatientAccountNumber = patientAccountNumber;            
             this.m_Address1 = address1;
             this.m_Address2 = address2;
             this.m_City = city;

@@ -22,7 +22,11 @@ namespace YellowstonePathology.Business.Client.Model
                 if (accessionOrder.ClientId == 136)
                 {
                     panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
-                }                
+                }           
+                else
+                {
+                    panelSetOrder.TestOrderReportDistributionCollection.AddFaxDistribution(this, panelSetOrder.ReportNo);
+                }
             }
         }
     }

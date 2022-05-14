@@ -16,7 +16,6 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using Microsoft.Win32;
 using System.Diagnostics;
-//using LibGit2Sharp;
 
 namespace YellowstonePathology.UI
 {

@@ -114,7 +114,11 @@
         <TextBlock Grid.Column="0" Grid.Row="1" Margin="20,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center">                    
             <Hyperlink Click="HyperLinkOpenFolder_Click">Open Folder In Windows</Hyperlink>
         </TextBlock>
-        
+
+        <TextBlock Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="2,2,2,2" HorizontalAlignment="Center" VerticalAlignment="Center">                    
+            <Hyperlink Click="HyperLinkCopyCasePath_Click">Copy Case Path</Hyperlink>
+        </TextBlock>
+
         <Button Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Width="100" Height="40" Content="Close" Click="ButtonCancel_Click" HorizontalAlignment="Right"/>		
 	</Grid>
 </Window>

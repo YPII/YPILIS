@@ -174,7 +174,7 @@ namespace YellowstonePathology.Business.Test.Surgical
                         
                                 ancillaryStudies.AppendLine("Test: " + stainResultItem.ProcedureName);
                                 ancillaryStudies.AppendLine("Result: " + stainResultItem.Result);
-
+                                if(string.IsNullOrEmpty(stainResultItem.ReportComment) == false) ancillaryStudies.AppendLine("Comment: " + stainResultItem.ReportComment);
                             }
                             ancillaryStudies.AppendLine();
 						}						

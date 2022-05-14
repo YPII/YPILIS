@@ -20,22 +20,19 @@ namespace YellowstonePathology.Business.HL7View.EPIC
         string m_ProcedureName;
 
         public EPICFT1View(YellowstonePathology.Business.Billing.Model.CptCode cptCode, DateTime billDate, DateTime postDate, string quantity,
-            YellowstonePathology.Business.Domain.Physician orderingPhysician, string masterAccessionNo)
+            YellowstonePathology.Business.Domain.Physician orderingPhysician, string masterAccessionNo, DateTime collectionDate)
         {
             this.m_CptCode = cptCode;
             this.m_BillDate = billDate;
             this.m_PostDate = postDate;
             this.m_Quantity = quantity;
             this.m_MasterAccessionNo = masterAccessionNo;
-            this.m_OrderingPhysician = orderingPhysician;
+            this.m_OrderingPhysician = orderingPhysician;            
             YellowstonePathology.Business.Billing.Model.CDM cdm = Business.Billing.Model.CDMCollection.Instance.GetCDMS(this.m_CptCode.Code, "SVH");
             if(cdm != null)
             {
-                this.m_CDMCode = cdm.CDMCode;
-
-                //Unmark this when testing SVH
-                //this.m_CDMCode = cdm.CDMCodeNew;
-
+                this.m_CDMCode = cdm.CDMCodeNew;
+                if (collectionDate < DateTime.Parse("03-01-2022")) this.m_CDMCode = cdm.CDMCode;                
                 this.m_ProcedureName = cdm.ProcedureName;
             }
         }
@@ -74,8 +71,8 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             ft1Element.Add(ft110Element);
 
             //unmark this when testing new inteface with SCL
-            //XElement ft130Element = new XElement("FT1.13", "502");
-            //ft1Element.Add(ft130Element);
+            XElement ft130Element = new XElement("FT1.13", "502");
+            ft1Element.Add(ft130Element);
 
             XElement ft118Element = new XElement("FT1.18", "I");
             ft1Element.Add(ft118Element);

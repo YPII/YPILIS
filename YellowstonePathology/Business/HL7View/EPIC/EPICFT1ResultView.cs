@@ -53,7 +53,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             DateTime transactionDate = m_AccessionOrder.CollectionDate.Value;
             DateTime transactionPostingDate = this.m_PanelSetOrderCPTCodeBill.PostDate.Value;
 
-            EPICFT1View epicFT1View = new EPICFT1View(cptCode, transactionDate, transactionPostingDate, this.m_PanelSetOrderCPTCodeBill.Quantity.ToString(), orderingPhysician, this.m_AccessionOrder.MasterAccessionNo);
+            EPICFT1View epicFT1View = new EPICFT1View(cptCode, transactionDate, transactionPostingDate, this.m_PanelSetOrderCPTCodeBill.Quantity.ToString(), orderingPhysician, this.m_AccessionOrder.MasterAccessionNo, this.m_AccessionOrder.CollectionDate.Value);
             epicFT1View.ToXml(document, 1);
                         
             string fileName = System.IO.Path.Combine(basePath, this.m_PanelSetOrderCPTCodeBill.PanelSetOrderCPTCodeBillId + "." + cptCode.Code + ".hl7.xml");

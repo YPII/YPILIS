@@ -22,6 +22,7 @@ namespace YellowstonePathology.Business.Test.MissingInformation
             base.OpenTemplate();
 			this.SetDemographicsV2();
 
+            this.ReplaceText("letter_body", this.m_MissingInformationTestOrder.LetterBody);
             YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
             this.m_SaveFileName = Business.Document.CaseDocument.GetCaseFileNameXml(orderIdParser);
             this.m_ReportXml.Save(this.m_SaveFileName);            

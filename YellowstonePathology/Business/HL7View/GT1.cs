@@ -28,23 +28,26 @@ namespace YellowstonePathology.Business.HL7View
         public void FromHL7(string gt1Segment)
         {
             string[] split = gt1Segment.Split('|');
-            string guarantorString = split[3];
-            string[] guarantorSplit = guarantorString.Split('^');
-
-            this.m_GuarantorLastName = Business.Helper.JSONHelper.HandleValue(guarantorSplit, 0);
-            this.m_GuarantorFirstName = Business.Helper.JSONHelper.HandleValue(guarantorSplit, 1);
-            this.m_GuarantorMiddleName = Business.Helper.JSONHelper.HandleValue(guarantorSplit, 2);
-
-            if (string.IsNullOrEmpty(split[5]) == false)
+            if(split.Length >= 6)
             {
-                string[] subAddressSubfields = split[5].Split('^');
+                string guarantorString = split[3];
+                string[] guarantorSplit = guarantorString.Split('^');
 
-                this.m_GuarantorAddressLine1 = Business.Helper.JSONHelper.HandleValue(subAddressSubfields, 0);
-                this.m_GuarantorAddressLine2 = Business.Helper.JSONHelper.HandleValue(subAddressSubfields, 1);
-                this.m_GuarantorCity = Business.Helper.JSONHelper.HandleValue(subAddressSubfields, 2);
-                this.m_GuarantorState = Business.Helper.JSONHelper.HandleValue(subAddressSubfields, 3);
-                this.m_GuarantorZip = Business.Helper.JSONHelper.HandleValue(subAddressSubfields, 4);                
-            }                        
+                this.m_GuarantorLastName = Business.Helper.JSONHelper.HandleValue(guarantorSplit, 0);
+                this.m_GuarantorFirstName = Business.Helper.JSONHelper.HandleValue(guarantorSplit, 1);
+                this.m_GuarantorMiddleName = Business.Helper.JSONHelper.HandleValue(guarantorSplit, 2);
+
+                if (string.IsNullOrEmpty(split[5]) == false)
+                {
+                    string[] subAddressSubfields = split[5].Split('^');
+
+                    this.m_GuarantorAddressLine1 = Business.Helper.JSONHelper.HandleValue(subAddressSubfields, 0);
+                    this.m_GuarantorAddressLine2 = Business.Helper.JSONHelper.HandleValue(subAddressSubfields, 1);
+                    this.m_GuarantorCity = Business.Helper.JSONHelper.HandleValue(subAddressSubfields, 2);
+                    this.m_GuarantorState = Business.Helper.JSONHelper.HandleValue(subAddressSubfields, 3);
+                    this.m_GuarantorZip = Business.Helper.JSONHelper.HandleValue(subAddressSubfields, 4);
+                }
+            }            
         }
 
         public string GuarantorLastName

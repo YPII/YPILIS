@@ -56,10 +56,10 @@
 
                     <TextBox Name="TextBoxClientOrderSearch" Margin="2" KeyUp="TextBoxClientOrderSearch_KeyUp" Width="150" BorderBrush="AliceBlue" BorderThickness="1" />
 
-                    <Button Margin="2" Height="25" Click="ButtonSVHCOVIDCases_Click">
+                    <Button Margin="2" Height="25" Click="ButtonBSDOrders_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Resources/Hold.png"></Image>
-                            <TextBlock Margin="2,0,0,0">SVH COVID</TextBlock>
+                            <TextBlock Margin="2,0,0,0">BSD Orders</TextBlock>
                         </StackPanel>
                     </Button>
 
@@ -70,6 +70,7 @@
                         SelectionChanged="ListViewClientOrders_SelectionChanged" MouseDoubleClick="ListViewClientOrders_MouseDoubleClick">
                 <ListView.ContextMenu>
                     <ContextMenu>
+                        <MenuItem Header="Reconcile BSD Orders" Click="MenuItemReconcileBSDOrders_Click"></MenuItem>
                         <MenuItem Header="Accession As COVID" Click="MenuItemAccessionAsCOVID_Click"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>

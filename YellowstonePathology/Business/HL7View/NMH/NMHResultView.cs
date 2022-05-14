@@ -81,16 +81,17 @@ namespace YellowstonePathology.Business.HL7View.NMH
             Business.OrderIdParser orderIdParser = new OrderIdParser(this.m_PanelSetOrder.ReportNo);
             string pdfFileName = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
 
-            NMHOBXView wphObxView = new NMHOBXView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, 1);
-            wphObxView.AddPDFSegments(pdfFileName, document);
-
-            //NMHOBXView wphObxView = NMHOBXViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
-            //wphObxView.ToXml(document);
-
-            //NMHNTEView nmhNTEView = new NMHNTEView();
-            //nmhNTEView.AddCompanyHeader(document);
-
-            this.m_ObxCount = wphObxView.ObxCount;
+            if(this.m_Testing == true)
+            {
+                NMHOBXView wphObxView = NMHOBXViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                wphObxView.ToXml(document);
+                this.m_ObxCount = wphObxView.ObxCount;
+            }
+            else
+            {                
+                NMHOBXViewOld wphObxView = new NMHOBXViewOld(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                wphObxView.AddPDFSegments(pdfFileName, document);                
+            }                        
 
             return document;
         }

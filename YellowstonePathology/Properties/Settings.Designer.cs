@@ -12,7 +12,7 @@ namespace YellowstonePathology.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -134,7 +134,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis; Pooling=True; Connection Timeout=1000" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis; Pooling=True" +
             ";")]
         public string CurrentConnectionString {
             get {
@@ -168,7 +168,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\\\\\cfileserver\\\\documents\\\\Dictation\\\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\cfileserver\\documents\\Dictation\\")]
         public string ServerDictationFolder {
             get {
                 return ((string)(this["ServerDictationFolder"]));
@@ -206,6 +206,18 @@ namespace YellowstonePathology.Properties {
             }
             set {
                 this["MonitoredPropertyFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("true")]
+        public string ShowSecondMonitorOnSame {
+            get {
+                return ((string)(this["ShowSecondMonitorOnSame"]));
+            }
+            set {
+                this["ShowSecondMonitorOnSame"] = value;
             }
         }
     }

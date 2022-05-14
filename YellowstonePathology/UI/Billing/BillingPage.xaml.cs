@@ -37,6 +37,9 @@ namespace YellowstonePathology.UI.Billing
         public delegate void ShowTIFDocumentEventHandler(object sender, CustomEventArgs.FileNameReturnEventArgs e);
         public event ShowTIFDocumentEventHandler ShowTIFDocument;
 
+        public delegate void ShowPDFDocumentEventHandler(object sender, CustomEventArgs.FileNameReturnEventArgs e);
+        public event ShowPDFDocumentEventHandler ShowPDFDocument;
+
         public delegate void ShowICDCodeEntryEventHandler(object sender, CustomEventArgs.AccessionOrderWithTrackerReturnEventArgs e);
         public event ShowICDCodeEntryEventHandler ShowICDCodeEntry;
 
@@ -49,17 +52,18 @@ namespace YellowstonePathology.UI.Billing
         public delegate void ShowADTPageEventHandler(object sender, EventArgs e);
         public event ShowADTPageEventHandler ShowADTPage;
 
-        private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
-        private YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
+        private Business.Test.AccessionOrder m_AccessionOrder;
+        private Business.Test.PanelSetOrder m_PanelSetOrder;
 		private string m_PageHeaderText;
         
-        private YellowstonePathology.Business.Test.PanelSetOrderCPTCodeCollection m_PanelSetOrderCPTCodeCollection;
-        private YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBillCollection m_PanelSetOrderCPTCodeBillCollection;
-        private YellowstonePathology.Business.Document.CaseDocumentCollection m_CaseDocumentCollection;
+        private Business.Test.PanelSetOrderCPTCodeCollection m_PanelSetOrderCPTCodeCollection;
+        private Business.Test.PanelSetOrderCPTCodeBillCollection m_PanelSetOrderCPTCodeBillCollection;
+        private Business.Document.CaseDocumentCollection m_CaseDocumentCollection;
+        private Business.Test.Model.TestOrderCollection m_TestOrderCollection;
                 
         private string m_ReportNo;
-        private YellowstonePathology.Business.Facility.Model.FacilityCollection m_FacilityCollection;
-        private YellowstonePathology.Business.Client.Model.ClientCollection m_SVHClients;
+        private Business.Facility.Model.FacilityCollection m_FacilityCollection;
+        private Business.Client.Model.ClientCollection m_SVHClients;
 
         public BillingPage(string reportNo, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
 		{			
@@ -75,7 +79,9 @@ namespace YellowstonePathology.UI.Billing
             this.m_PanelSetOrderCPTCodeBillCollection = this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection;                        
 
             this.m_CaseDocumentCollection = new Business.Document.CaseDocumentCollection(this.m_ReportNo);            
-			this.m_PageHeaderText = "Billing For: " + this.m_AccessionOrder.PatientDisplayName + " - " + this.m_AccessionOrder.PBirthdate.Value.ToShortDateString();            
+			this.m_PageHeaderText = "Billing For: " + this.m_AccessionOrder.PatientDisplayName + " - " + this.m_AccessionOrder.PBirthdate.Value.ToShortDateString();
+
+            this.m_TestOrderCollection = this.m_PanelSetOrder.GetTestOrderCollection();
 
 			InitializeComponent();
 
@@ -88,8 +94,16 @@ namespace YellowstonePathology.UI.Billing
         {             
             YellowstonePathology.Business.Document.CaseDocument firstRequisition = this.m_CaseDocumentCollection.GetFirstRequisition();
             if(firstRequisition != null)
-            {
-                this.ShowTIFDocument(this, new CustomEventArgs.FileNameReturnEventArgs(firstRequisition.FullFileName));
+            {                
+                switch (firstRequisition.Extension.ToUpper())
+                {
+                    case "TIF":
+                        this.ShowTIFDocument(this, new CustomEventArgs.FileNameReturnEventArgs(firstRequisition.FullFileName));
+                        break;
+                    case "PDF":
+                        this.ShowPDFDocument(this, new CustomEventArgs.FileNameReturnEventArgs(firstRequisition.FullFileName));
+                        break;
+                }                
             }            
         }
 
@@ -122,6 +136,11 @@ namespace YellowstonePathology.UI.Billing
         {
             get { return this.m_PanelSetOrder; }
         }
+
+        public Business.Test.Model.TestOrderCollection TestOrderCollection
+        {
+            get { return this.m_TestOrderCollection; }
+        }            
 
 		public string PageHeaderText
 		{
@@ -253,6 +272,9 @@ namespace YellowstonePathology.UI.Billing
                         break;
                     case "TIF":
                         if (this.ShowTIFDocument != null) this.ShowTIFDocument(this, new CustomEventArgs.FileNameReturnEventArgs(caseDocument.FullFileName));            
+                        break;
+                    case "PDF":
+                        if (this.ShowPDFDocument != null) this.ShowPDFDocument(this, new CustomEventArgs.FileNameReturnEventArgs(caseDocument.FullFileName));
                         break;
                 }
             }
@@ -475,6 +497,14 @@ namespace YellowstonePathology.UI.Billing
                 YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill = (YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill)this.ListViewPanelSetOrderCPTCodeBill.SelectedItem;
                 PanelSetOrderCPTCodeBillEditDialog dlg = new Billing.PanelSetOrderCPTCodeBillEditDialog(panelSetOrderCPTCodeBill);
                 dlg.ShowDialog();
+            }
+        }
+
+        private void MenuItemFlipCharge(object sender, RoutedEventArgs e)
+        {
+            if(this.ListViewStains.SelectedItem != null)
+            {
+                
             }
         }
     }

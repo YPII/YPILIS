@@ -9,7 +9,13 @@ namespace YellowstonePathology.Business.PanelSet.Model
     {
         public PanelSetERPRForDCIS()
         {
-            this.m_PanelSetName = "ER/PR for DCIS";
+            this.m_PanelSetName = "ER/PR for DCIS";            
+        }
+
+        public override void AddPanel()
+        {
+            Business.Test.ErPrSemiQuantitative.ERPRSemiQuantitativePanel erprSemiQuantitativePanel = new Business.Test.ErPrSemiQuantitative.ERPRSemiQuantitativePanel(false);
+            this.m_PanelCollection.Add(erprSemiQuantitativePanel);
         }
     }
 }

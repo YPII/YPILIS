@@ -271,6 +271,7 @@ namespace YellowstonePathology.UI.Test
             {
                 Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(otherReportView.ReportNo);
                 panelSetOrder.SummaryReportNo = this.m_PanelSetOrder.ReportNo;
+                panelSetOrder.IncludeOnSummaryReport = true;
                 Business.Persistence.DocumentGateway.Instance.Save();
                 this.OtherReportViewCollection = Business.Gateway.AccessionOrderGateway.GetOtherReportViewCollection(this.m_AccessionOrder.PatientId, this.m_AccessionOrder.MasterAccessionNo);
             }
@@ -328,6 +329,7 @@ namespace YellowstonePathology.UI.Test
                 Business.Test.BoneMarrowSummary.OtherReportView otherReportView = (Business.Test.BoneMarrowSummary.OtherReportView)this.ListViewAccessionReports.SelectedItem;
                 Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(otherReportView.ReportNo);
                 panelSetOrder.IncludeOnSummaryReport = false;
+                panelSetOrder.SummaryReportNo = null;
                 this.SetAccessionReportsIncluded();
                 this.NotifyPropertyChanged(string.Empty);
             }
@@ -339,7 +341,7 @@ namespace YellowstonePathology.UI.Test
             {
                 Business.Test.BoneMarrowSummary.OtherReportView otherReportView = (Business.Test.BoneMarrowSummary.OtherReportView)this.ListViewAccessionReports.SelectedItem;
                 Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(otherReportView.ReportNo);
-                panelSetOrder.IncludeOnSummaryReport = true;
+                panelSetOrder.IncludeOnSummaryReport = true;                
                 this.SetAccessionReportsIncluded();
                 this.NotifyPropertyChanged(string.Empty);
             }

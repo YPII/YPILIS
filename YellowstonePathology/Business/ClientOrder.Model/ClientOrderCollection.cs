@@ -50,7 +50,21 @@ namespace YellowstonePathology.Business.ClientOrder.Model
 				}
 			}
 			return result;
-		}       
+		}    
+        
+        public bool ContainsAnAccessionedOrder()
+        {
+            bool result = false;
+            foreach (ClientOrder clientOrder in this)
+            {
+                if(clientOrder.Accessioned == true)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
 
 		public bool LisOrderExists()
 		{

@@ -5,12 +5,42 @@ using System.Text;
 
 namespace YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions
 {
+    public class UniversalServiceFNA : UniversalService
+    {
+        public UniversalServiceFNA()
+        {
+            this.m_UniversalServiceId = "FNA";
+            this.m_ServiceName = "FINE NEEDLE ASPIRATE";
+            this.m_ApplicationName = UniversalServiceApplicationNameEnum.EPIC;
+        }        
+    }
+
     public class UniversalServiceCFYPI : UniversalService
     {
         public UniversalServiceCFYPI()
         {
             this.m_UniversalServiceId = "CFYPI";
             this.m_ServiceName = "CFYPI";
+            this.m_ApplicationName = UniversalServiceApplicationNameEnum.EPIC;
+        }
+    }
+
+    public class UniversalServiceSPEP : UniversalService
+    {
+        public UniversalServiceSPEP()
+        {
+            this.m_UniversalServiceId = "SPEP";
+            this.m_ServiceName = "SPEP";
+            this.m_ApplicationName = UniversalServiceApplicationNameEnum.EPIC;
+        }        
+    }
+
+    public class UniversalServiceIEP : UniversalService
+    {        
+        public UniversalServiceIEP()
+        {
+            this.m_UniversalServiceId = "IEP";
+            this.m_ServiceName = "IEP";
             this.m_ApplicationName = UniversalServiceApplicationNameEnum.EPIC;
         }
     }
