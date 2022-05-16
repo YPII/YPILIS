@@ -3,7 +3,6 @@
   <Import Project="..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.props')" />
   <Import Project="..\packages\cef.redist.x86.97.1.6\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.97.1.6\build\cef.redist.x86.props')" />
   <Import Project="..\packages\cef.redist.x64.97.1.6\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.97.1.6\build\cef.redist.x64.props')" />
-  <Import Project="..\packages\LibGit2Sharp.NativeBinaries.1.0.129\build\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.129\build\LibGit2Sharp.NativeBinaries.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -21,7 +20,7 @@
     <ManifestCertificateThumbprint>4C14207605FEA3771245BE4157A0ECF2637A8347</ManifestCertificateThumbprint>
     <ManifestKeyFile>UserInterface_TemporaryKey.pfx</ManifestKeyFile>
     <ApplicationExtension>.application</ApplicationExtension>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -7633,7 +7632,6 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.129\build\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibGit2Sharp.NativeBinaries.1.0.129\build\LibGit2Sharp.NativeBinaries.props'))" />
     <Error Condition="!Exists('..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1072.54\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1072.54\build\Microsoft.Web.WebView2.targets'))" />
     <Error Condition="!Exists('..\packages\cef.redist.x64.97.1.6\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.97.1.6\build\cef.redist.x64.props'))" />
