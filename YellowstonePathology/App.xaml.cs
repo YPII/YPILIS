@@ -29,6 +29,8 @@ namespace YellowstonePathology.UI
 
 		public App()
 		{            
+
+
 			if (CheckDuplicateProcess())
 			{
 				MessageBox.Show("A LIS application is already running on this computer.\n\nThis application will now exit.",
