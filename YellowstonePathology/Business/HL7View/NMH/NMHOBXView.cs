@@ -87,7 +87,7 @@ namespace YellowstonePathology.Business.HL7View.NMH
             obxElement.Add(obx03Element);           
 
             XElement obx05Element = new XElement("OBX.5");
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBX.5.1", fieldValue, obx05Element);
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBX.5.1", ReplaceSpecialCharacters(fieldValue), obx05Element);
             obxElement.Add(obx05Element);            
 
             this.m_ObxCount += 1;
@@ -169,6 +169,20 @@ namespace YellowstonePathology.Business.HL7View.NMH
         {
             return Enumerable.Range(0, str.Length / chunkSize)
                 .Select(i => str.Substring(i * chunkSize, chunkSize));
+        }
+
+        protected string ReplaceSpecialCharacters(string fieldValue)
+        {
+            string result = fieldValue;
+            if (string.IsNullOrEmpty(fieldValue) == false)
+            {
+                result = result.Trim();
+                result = result.Replace("\r\n", @"\.br\").Replace("\n", @"\.br\").Replace("\r", @"\.br\");
+                result = result.Replace("&", @"\T\");
+                result = result.Replace("~", @"\R\");
+                result = result.Replace("^", @"\S\");
+            }
+            return result;
         }
 
         protected void AddNextPDFOBXElement(XElement document, string line, int obxCount)

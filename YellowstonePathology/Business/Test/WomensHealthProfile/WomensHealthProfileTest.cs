@@ -29,6 +29,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             this.m_ShowResultPageOnOrder = true;            
             this.m_ExpectedDuration = TimeSpan.FromDays(6);
             this.m_MonitorPriority = PanelSet.Model.PanelSet.MonitorPriorityNormal;
+            this.m_NmhObxView = typeof(WomensHealthProfileNMHObxView);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

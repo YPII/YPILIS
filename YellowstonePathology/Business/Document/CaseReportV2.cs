@@ -315,7 +315,7 @@ namespace YellowstonePathology.Business.Document
             try
             {
                 XmlNode node = m_ReportXml.SelectSingleNode("//w:t[.='" + field + "']", this.m_NameSpaceManager);
-                node.InnerText = data;
+                if(node != null) node.InnerText = data;
             }
             catch (NullReferenceException)
             {
@@ -327,22 +327,25 @@ namespace YellowstonePathology.Business.Document
             try
             {
                 XmlNode parentNode = m_ReportXml.SelectSingleNode("descendant::w:tc[w:p/w:r/w:t='" + field + "']", this.m_NameSpaceManager);
-                XmlNode childNode = parentNode.SelectSingleNode("descendant::w:p[w:r/w:t='" + field + "']", this.m_NameSpaceManager);                               
-
-                Regex regex = new Regex("(\r\n)");            
-                string[] lineSplit = regex.Split(data);                
-
-                for (int i = 0; i < lineSplit.Length; i++)
+                if(parentNode != null)
                 {
-                    if (lineSplit[i] != "\r\n")
+                    XmlNode childNode = parentNode.SelectSingleNode("descendant::w:p[w:r/w:t='" + field + "']", this.m_NameSpaceManager);
+
+                    Regex regex = new Regex("(\r\n)");
+                    string[] lineSplit = regex.Split(data);
+
+                    for (int i = 0; i < lineSplit.Length; i++)
                     {
-                        XmlNode childNodeClone = childNode.Clone();
-                        XmlNode node = childNodeClone.SelectSingleNode("descendant::w:r[w:t='" + field + "']/w:t", this.m_NameSpaceManager);
-                        node.InnerText = lineSplit[i];
-                        parentNode.AppendChild(childNodeClone);
+                        if (lineSplit[i] != "\r\n")
+                        {
+                            XmlNode childNodeClone = childNode.Clone();
+                            XmlNode node = childNodeClone.SelectSingleNode("descendant::w:r[w:t='" + field + "']/w:t", this.m_NameSpaceManager);
+                            node.InnerText = lineSplit[i];
+                            parentNode.AppendChild(childNodeClone);
+                        }
                     }
-                }
-                parentNode.RemoveChild(childNode);
+                    parentNode.RemoveChild(childNode);
+                }                
             }
             catch (Exception)
             {

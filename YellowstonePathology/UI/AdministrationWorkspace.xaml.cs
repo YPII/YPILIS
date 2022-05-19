@@ -1265,7 +1265,23 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            this.SplitTif();
+            List<string> fields = new List<string>();
+            string[] lines = System.IO.File.ReadAllLines(@"c:\temp\nmh\whp.txt");
+            foreach(string line in lines)
+            {
+                MatchCollection mc = Regex.Matches(line, "this.AddNextObxElementBeaker\\(\"(.*?)\"");
+                foreach (Match m in mc)
+                {
+                    if(m.Groups.Count == 2)
+                    {
+                        fields.Add(m.Groups[1].Value);
+                    }                    
+                }                
+            }
+
+            System.IO.File.WriteAllLines(@"c:\temp\nmh\whp_fields.txt", fields.ToArray());
+
+            //this.SplitTif();
             //this.SendAPI();
 
             //string sql = "Select pso.ReportNo from tblPanelSetOrder pso left outer join tblPanelSetOrderCPTCode psoc on pso.ReportNo = psoc.ReportNo where panelsetid in (378, 379) and psoc.ReportNo is null";

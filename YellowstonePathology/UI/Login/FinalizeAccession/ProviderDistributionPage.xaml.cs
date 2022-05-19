@@ -767,7 +767,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void HyperLinkSendSCLClosingResult_Click(object sender, RoutedEventArgs e)
         {
-            Business.HL7View.EPIC.EPICBeakerResultView view = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true, false);
+            Business.HL7View.EPIC.EPICBeakerResultView view = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, false, false);
             Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
             view.Send(methodResult);
             MessageBox.Show("Closing Result sent to SCL in Test.");

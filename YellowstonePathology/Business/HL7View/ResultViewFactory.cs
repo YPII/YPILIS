@@ -69,6 +69,7 @@ namespace YellowstonePathology.Business.HL7View
                 case 660:
                 case 1830:
                 case 1838:
+                case 831:
                     resultView = new Business.HL7View.EPIC.EPICBeakerResultView(reportNo, accessionOrder, sendUnsoliceted, testing, false);                    
                     break;
                 case 203: //Richard Taylor

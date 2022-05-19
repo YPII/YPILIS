@@ -45,7 +45,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>71</ApplicationRevision>
+    <ApplicationRevision>75</ApplicationRevision>
     <ApplicationVersion>11.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -558,7 +558,6 @@
     <Compile Include="Business\HL7View\NMH\NMHHl7Client.cs" />
     <Compile Include="Business\HL7View\NMH\NMHMSHView.cs" />
     <Compile Include="Business\HL7View\NMH\NMHOBRView.cs" />
-    <Compile Include="Business\HL7View\NMH\NMHOBXViewFactory.cs" />
     <Compile Include="Business\HL7View\NMH\NMHORCView.cs" />
     <Compile Include="Business\HL7View\NMH\NMHPIDView.cs" />
     <Compile Include="Business\HL7View\NMH\NMHResultStatsusEnum.cs" />
@@ -589,6 +588,7 @@
     <Compile Include="Business\Label.Model\HologicSlideLabel.cs" />
     <Compile Include="Business\PanelSet.Model\BreastCancerIndex.cs" />
     <Compile Include="Business\PanelSet.Model\ChimerismPostTransplant.cs" />
+    <Compile Include="Business\PanelSet.Model\NeoTYPEFollicularLymphomaProfile.cs" />
     <Compile Include="Business\PanelSet.Model\Chromosome13q13.cs" />
     <Compile Include="Business\PanelSet.Model\ComprehensiveHeartBiopsyWorkup.cs" />
     <Compile Include="Business\PanelSet.Model\Chromosome1pqTest.cs" />
@@ -1362,9 +1362,10 @@
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2WordDocument.cs" />
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2RiverstoneOBXView.cs" />
     <Compile Include="Business\Test\SPEP\SPEPClosingResult.cs" />
+    <Compile Include="Business\Test\Surgical\SurgicalNMHObxView.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalRiverstoneOBXView.cs" />
     <Compile Include="Business\Test\ALLFISHPanel\ALLFISHPanelTest.cs" />
-    <Compile Include="Business\Test\Surgical\SurgicalNMHObxView.cs" />
+    <Compile Include="Business\Test\Surgical\SurgicalNMHObxViewOLD2.cs" />
     <Compile Include="Business\Test\ThinPrepPap\ThinPrepPapRiverstoneOBXView.cs" />
     <Compile Include="Business\Test\ThyroidNGSFusionPanel\ThyroidNGSFusionPanelTest.cs" />
     <Compile Include="Business\Test\MammaprintBlueprint\MammaprintBlueprintTest.cs" />
@@ -1643,6 +1644,7 @@
     <Compile Include="Business\Test\UPEP\UPEPTest.cs" />
     <Compile Include="Business\Test\VaricellaZosterVirus\VaricellaZosterVirusTest.cs" />
     <Compile Include="Business\Test\WholeExomeSequencing\WholeExomeSequencingTest.cs" />
+    <Compile Include="Business\Test\WomensHealthProfile\WomensHealthProfileNMHObxView.cs" />
     <Compile Include="Business\Test\WomensHealthProfile\WomensHealthProfileRiverstoneOBXView.cs" />
     <Compile Include="Business\Test\WomensHealthProfile\WomensHealthProfileEPICBeakerObxView.cs" />
     <Compile Include="Business\Test\WT1MutationAnalsysis\WT1MutationAnalsysisTest.cs" />
@@ -1680,6 +1682,10 @@
       <DependentUpon>ProstateBiopsyKitDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\TestEnvironment.cs" />
+    <Compile Include="UI\Test\FLT3ResultPage.xaml.cs">
+      <DependentUpon>FLT3ResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\FLT3ResultPath.cs" />
     <Compile Include="UI\Test\PDL122C3forTNBCBreastResultPath.cs" />
     <Compile Include="UI\Test\PDL122C3forTNBCBreastResultPage.xaml.cs">
       <DependentUpon>PDL122C3forTNBCBreastResultPage.xaml</DependentUpon>
@@ -4212,10 +4218,6 @@
       <DependentUpon>FISH5p159q2215p22ResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Test\FISH5p159q2215p22ResultPath.cs" />
-    <Compile Include="UI\Test\FLT3ResultPage.xaml.cs">
-      <DependentUpon>FLT3ResultPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Test\FLT3ResultPath.cs" />
     <Compile Include="UI\Test\ExtractAndHoldForPreauthorizationResultPage.xaml.cs">
       <DependentUpon>ExtractAndHoldForPreauthorizationResultPage.xaml</DependentUpon>
     </Compile>
@@ -6111,6 +6113,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Test\FLT3ResultPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Test\HER2AmplificationRecountResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -6220,10 +6226,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Test\FISH5p159q2215p22ResultPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Test\FLT3ResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

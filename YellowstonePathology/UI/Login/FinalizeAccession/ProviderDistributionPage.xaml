@@ -181,7 +181,7 @@
                         </TextBlock>
 
                         <TextBlock Grid.Row="9" Margin="5,3,0,0">
-					        <Hyperlink Click="HyperLinkSendSCLClosingResult_Click">Send SCL Closing Result - Test</Hyperlink>
+					        <Hyperlink Click="HyperLinkSendSCLClosingResult_Click">Send SCL Closing Result</Hyperlink>
                         </TextBlock>
                     </Grid>
                 </Expander>

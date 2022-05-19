@@ -56,6 +56,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         protected string m_MonitorPriority;
         protected bool m_OrderInitialTestsOnly;
         protected bool m_SendClosingResult;
+        protected Type m_NmhObxView;
 
         protected List<string> m_ImplementedResultTypes;
 
@@ -670,6 +671,20 @@ namespace YellowstonePathology.Business.PanelSet.Model
                 {
                     this.m_OrderInitialTestsOnly = value;
                     this.NotifyPropertyChanged("OrderInitialTestsOnly");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public Type NmhObxView
+        {
+            get { return this.m_NmhObxView; }
+            set
+            {
+                if (this.m_NmhObxView != value)
+                {
+                    this.m_NmhObxView = value;
+                    this.NotifyPropertyChanged("NmhObxView");
                 }
             }
         }

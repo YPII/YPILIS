@@ -70,7 +70,8 @@ namespace YellowstonePathology.Business.ASCCPRule
                 else if (woman.ScreeningImpression.ResultCode == "04" ||
                     woman.ScreeningImpression.ResultCode == "05" ||
                     woman.ScreeningImpression.ResultCode == "06" ||
-                    woman.ScreeningImpression.ResultCode == "07")
+                    woman.ScreeningImpression.ResultCode == "07" ||
+                    woman.ScreeningImpression.ResultCode == "09")
                 {                    
                     woman.ManagementRecommendation = ManagementRecomendation.GetColposcopy();
                 }                

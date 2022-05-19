@@ -81,11 +81,15 @@ namespace YellowstonePathology.Business.HL7View.NMH
             Business.OrderIdParser orderIdParser = new OrderIdParser(this.m_PanelSetOrder.ReportNo);
             string pdfFileName = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
 
+            Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
+            Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
+
             if(this.m_Testing == true)
             {
-                NMHOBXView wphObxView = NMHOBXViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                NMHOBXView wphObxView = (NMHOBXView)Activator.CreateInstance(panelSet.NmhObxView, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);                
                 wphObxView.ToXml(document);
                 this.m_ObxCount = wphObxView.ObxCount;
+                wphObxView.AddPDFSegments(pdfFileName, document);
             }
             else
             {                
@@ -154,6 +158,6 @@ namespace YellowstonePathology.Business.HL7View.NMH
                 result.Message = "The Universal Serivce Id in the PanelSetOrder is blank.";
                 result.Success = false;
             }
-        }
-	}
+        }        
+    }
 }

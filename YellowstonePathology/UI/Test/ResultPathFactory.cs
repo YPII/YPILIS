@@ -149,10 +149,7 @@ namespace YellowstonePathology.UI.Test
                     break;
 				case 152:
 					result = new TCellRecepterGammaGeneRearrangementResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
-				case 153:
-					result = new FLT3ResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
+                    break;				
 				case 155:
 					result = new NPM1ResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
@@ -339,15 +336,15 @@ namespace YellowstonePathology.UI.Test
                 case 290:
                     result = new SlideTrackingResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
-                case 291:
-                    result = new TechnicalOnlyResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
+                //case 291:
+                    //result = new TechnicalOnlyResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    //break;
                 case 300:
                     result = new ExtractAndHoldForPreauthorizationResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
-                case 303:
-                    result = new TechnicalOnlyResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
+                //case 303:
+                //    result = new TechnicalOnlyResultPath(reportNo, accessionOrder, pageNavigator, window);
+                //    break;
                 case 313:
                     result = new HER2AmplificationSummaryResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
