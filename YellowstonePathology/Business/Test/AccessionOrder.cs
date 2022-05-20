@@ -1610,8 +1610,24 @@ namespace YellowstonePathology.Business.Test
 				this.HoldSVHDistribution = true;
 			}
 
-            if (ShouldBillingBeHeld() == true) this.m_HoldBilling = true;			
+            if (ShouldBillingBeHeld() == true) this.m_HoldBilling = true;
+			this.HandleNoSCLOrderEmail();
 		}  
+
+		public void HandleNoSCLOrderEmail()
+        {
+			if(string.IsNullOrEmpty(this.m_ExternalOrderId) == true && string.IsNullOrEmpty(this.m_SecondaryExternalOrderId) == true)
+            {
+				Business.Client.Model.ClientCollection sclClients = Business.Gateway.PhysicianClientGateway.GetClientCollectionByClientGroupId("1");
+				if(sclClients.Exists(this.m_ClientId) == true)
+                {
+					if(string.IsNullOrEmpty(this.m_PLastName) == false && string.IsNullOrEmpty(this.m_PFirstName) == false && this.m_PBirthdate.HasValue == true)
+                    {
+						Business.Billing.Model.SVHNoOrderMailMessage.SendMessage(this.m_PLastName, this.m_PFirstName, this.m_PBirthdate.Value.ToString("MM/dd/yyyy"));
+					}					
+                }
+            }
+        }
         
         public bool ShouldBillingBeHeld()
         {

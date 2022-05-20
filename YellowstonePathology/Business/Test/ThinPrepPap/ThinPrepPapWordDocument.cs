@@ -415,7 +415,10 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
             try
             {
                 XmlNode node = m_ReportXml.SelectSingleNode("//w:t[.='" + field + "']", this.m_NameSpaceManager);
-                node.InnerText = data;
+                if(node != null)
+                {
+                    node.InnerText = data;
+                }                
             }
             catch (NullReferenceException)
             {

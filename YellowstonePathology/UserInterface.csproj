@@ -45,7 +45,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>75</ApplicationRevision>
+    <ApplicationRevision>81</ApplicationRevision>
     <ApplicationVersion>11.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -460,6 +460,7 @@
     <Compile Include="Business\Billing.Model\PropertyChanges.cs" />
     <Compile Include="Business\Billing.Model\APSBillingDocument.cs" />
     <Compile Include="Business\Billing.Model\SimulationSerializer.cs" />
+    <Compile Include="Business\Billing.Model\SVHNoOrderMailMessage.cs" />
     <Compile Include="Business\Billing.Model\SVHNoCDMMailMessage.cs" />
     <Compile Include="Business\Calendar\Holiday.cs" />
     <Compile Include="Business\Calendar\HolidayCollection.cs" />
@@ -588,6 +589,7 @@
     <Compile Include="Business\Label.Model\HologicSlideLabel.cs" />
     <Compile Include="Business\PanelSet.Model\BreastCancerIndex.cs" />
     <Compile Include="Business\PanelSet.Model\ChimerismPostTransplant.cs" />
+    <Compile Include="Business\PanelSet.Model\ToxoplasmaImmunohistochemical.cs" />
     <Compile Include="Business\PanelSet.Model\NeoTYPEFollicularLymphomaProfile.cs" />
     <Compile Include="Business\PanelSet.Model\Chromosome13q13.cs" />
     <Compile Include="Business\PanelSet.Model\ComprehensiveHeartBiopsyWorkup.cs" />

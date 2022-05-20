@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Test.NeoTYPELungTumorProfile
         public override void OrderInitialTests(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Interface.IOrderTarget orderTarget)
         {
             YellowstonePathology.Business.Test.EGFRMutationAnalysisPreliminary.EGFRMutationAnalysisPreliminaryTest egfrMutationAnalysisPreliminaryTest = new EGFRMutationAnalysisPreliminary.EGFRMutationAnalysisPreliminaryTest();
-            YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new TestOrderInfo(egfrMutationAnalysisPreliminaryTest, orderTarget, false);
+            YellowstonePathology.Business.Test.TestOrderInfo testOrderInfo = new TestOrderInfo(egfrMutationAnalysisPreliminaryTest, orderTarget, true);
             YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitor = new Visitor.OrderTestOrderVisitor(testOrderInfo);
             accessionOrder.TakeATrip(orderTestOrderVisitor);
         }
