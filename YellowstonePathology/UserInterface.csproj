@@ -45,7 +45,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>81</ApplicationRevision>
+    <ApplicationRevision>92</ApplicationRevision>
     <ApplicationVersion>11.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -589,6 +589,8 @@
     <Compile Include="Business\Label.Model\HologicSlideLabel.cs" />
     <Compile Include="Business\PanelSet.Model\BreastCancerIndex.cs" />
     <Compile Include="Business\PanelSet.Model\ChimerismPostTransplant.cs" />
+    <Compile Include="Business\PanelSet.Model\NeoTypeAllProfile.cs" />
+    <Compile Include="Business\PanelSet.Model\PDL1LDT.cs" />
     <Compile Include="Business\PanelSet.Model\ToxoplasmaImmunohistochemical.cs" />
     <Compile Include="Business\PanelSet.Model\NeoTYPEFollicularLymphomaProfile.cs" />
     <Compile Include="Business\PanelSet.Model\Chromosome13q13.cs" />

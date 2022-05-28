@@ -8,6 +8,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
     public enum ResultDocumentSourceEnum
     {
         None,
+        ClosingResult,
         PublishedDocument,
         YPIDatabase,
 		RetiredTestDocument        

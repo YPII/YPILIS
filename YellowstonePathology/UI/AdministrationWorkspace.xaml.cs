@@ -1264,7 +1264,24 @@ namespace YellowstonePathology.UI
 
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
-        {
+        {            
+            string[] lines = System.IO.File.ReadAllLines(@"c:\temp\nmhmap.csv");
+            
+            foreach (string line in lines)
+            {
+                string[] fields = line.Split(',');
+                string[] names = fields[1].Split(' ');
+                Business.Domain.Physician ph = Business.Gateway.PhysicianClientGateway.GetPhysicianByFirstLastName(names[0], names[1]);
+                if(ph != null)
+                {
+                    Business.Domain.Physician u = Business.Persistence.DocumentGateway.Instance.PullPhysician(ph.PhysicianId, this);
+                    u.ClientPhysicianId = fields[0];                    
+                }                
+           }
+           Business.Persistence.DocumentGateway.Instance.Push(this);
+
+
+            /*
             List<string> fields = new List<string>();
             string[] lines = System.IO.File.ReadAllLines(@"c:\temp\nmh\whp.txt");
             foreach(string line in lines)
@@ -1280,7 +1297,7 @@ namespace YellowstonePathology.UI
             }
 
             System.IO.File.WriteAllLines(@"c:\temp\nmh\whp_fields.txt", fields.ToArray());
-
+            */
             //this.SplitTif();
             //this.SendAPI();
 
@@ -1288,7 +1305,7 @@ namespace YellowstonePathology.UI
             //Business.ReportNoCollection reportNos = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
             //foreach (Business.ReportNo reportNo in reportNos)
             //{
-                
+
             //}
 
             /*

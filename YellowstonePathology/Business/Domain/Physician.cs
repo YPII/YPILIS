@@ -46,6 +46,7 @@ namespace YellowstonePathology.Business.Domain
         private bool m_DistributeWHPOnly;
         private bool m_HoldForWHP;
         private bool m_DontSendWHP;
+		private string m_ClientPhysicianId;
 
         public Physician()
 		{
@@ -541,7 +542,8 @@ namespace YellowstonePathology.Business.Domain
             }
         }
 
-        [PersistentDataColumnProperty(false, "1", "0", "tinyint")]
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "1", "0", "tinyint")]
         public bool DontSendWHP
         {
             get { return this.m_DontSendWHP; }
@@ -555,7 +557,22 @@ namespace YellowstonePathology.Business.Domain
             }
         }
 
-        public YellowstonePathology.Business.Client.Model.StandingOrderCollection GetStandingOrderCollection()
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(false, "200", null, "varchar")]
+		public string ClientPhysicianId
+		{
+			get { return this.m_ClientPhysicianId; }
+			set
+			{
+				if (this.m_ClientPhysicianId != value)
+				{
+					this.m_ClientPhysicianId = value;
+					this.NotifyPropertyChanged("ClientPhysicianId");
+				}
+			}
+		}
+
+		public YellowstonePathology.Business.Client.Model.StandingOrderCollection GetStandingOrderCollection()
         {
             YellowstonePathology.Business.Client.Model.StandingOrderCollection result = new YellowstonePathology.Business.Client.Model.StandingOrderCollection();
             YellowstonePathology.Business.Client.Model.StandingOrder hpvStandingOrder = Business.Client.Model.StandingOrderCollection.GetByStandingOrderCode(this.m_HPVStandingOrderCode);

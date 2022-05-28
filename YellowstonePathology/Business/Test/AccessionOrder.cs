@@ -2157,6 +2157,10 @@ namespace YellowstonePathology.Business.Test
 			{
 				this.HandleAPTIMACOVIDPatientDistribution();
 			}
+			else if (this.PanelSetOrderCollection.DoesPanelSetExist(378) == true || this.PanelSetOrderCollection.DoesPanelSetExist(379))
+			{
+				this.HandleElectroPhoresisDistribution();
+			}
 
 			if (this.m_ClientId != 1134) //YPI
 			{
@@ -2244,6 +2248,27 @@ namespace YellowstonePathology.Business.Test
 					}
 				}
 			}
+		}
+
+		private void HandleElectroPhoresisDistribution()
+		{
+			List<Business.Test.PanelSetOrder> panelSetOrders = new List<Business.Test.PanelSetOrder>();
+			Business.Test.PanelSetOrder spep = this.m_PanelSetOrderCollection.GetPanelSetOrder(379);
+			if (spep != null) panelSetOrders.Add(spep);
+
+			Business.Test.PanelSetOrder iep = this.m_PanelSetOrderCollection.GetPanelSetOrder(378);
+			if (iep != null) panelSetOrders.Add(iep);
+
+			foreach(Business.Test.PanelSetOrder pso in panelSetOrders)
+            {
+				if (pso.TestOrderReportDistributionCollection.HasEPICDistribution() == false)
+				{					
+					string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+					YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution =
+						new YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution(testOrderReportDistributionId, testOrderReportDistributionId, pso.ReportNo, this.m_PhysicianId, this.m_PhysicianName, this.m_ClientId, this.m_ClientName, "EPIC", null);					
+					pso.TestOrderReportDistributionCollection.Add(testOrderReportDistribution);
+				}
+			}			
 		}
 	}
 }

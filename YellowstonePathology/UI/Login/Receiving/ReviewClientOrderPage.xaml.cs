@@ -93,6 +93,12 @@ namespace YellowstonePathology.UI.Login.Receiving
                 this.m_Physician = Business.Gateway.PhysicianClientGateway.GetPhysicianByNpi(this.m_ClientOrder.ProviderId);
                 this.NotifyPropertyChanged("Physician");                
             }
+            else if (this.m_ClientOrder.SystemInitiatingOrder == "NMH")
+            {
+                this.m_Physician = Business.Gateway.PhysicianClientGateway.GetPhysicianByClientPhysicianId(this.m_ClientOrder.ProviderId);
+                if(this.m_Physician != null) this.m_ClientOrder.ProviderId = this.m_Physician.Npi;
+                this.NotifyPropertyChanged("Physician");
+            }
         }
 
         public Visibility CloseButtonVisibility

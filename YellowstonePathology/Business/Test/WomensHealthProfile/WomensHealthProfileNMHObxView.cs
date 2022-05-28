@@ -14,6 +14,21 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 
         public override void ToXml(XElement document)
         {
+            /*
+            RN
+            PAPRSLT
+            AMEND
+            CURTS
+            SPECDES
+            SPECSRC
+            COLLECT
+            CH
+            METHOD
+            REF
+            LOC
+            PRPAP
+            */
+
             WomensHealthProfileTestOrder womensHealthProfileTestOrder = (WomensHealthProfileTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
             WomensHealthProfileResult womensHealthProfileResult = new WomensHealthProfileResult(this.m_AccessionOrder);
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(this.m_ReportNo);
@@ -124,7 +139,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     }
                 }
                 amendments.AppendLine();
-                this.AddNextObxElementV2("AM", "Amendments", amendments.ToString(), document, "F");
+                this.AddNextObxElementV2("AMEND", "Amendments", amendments.ToString(), document, "F");
             }
 
             StringBuilder testsPerformed = new StringBuilder();
@@ -189,14 +204,14 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 
             this.AddNextObxElementV2("CURTS", "CURRENT MOLECULAR TEST SUMMARY", testsPerformed.ToString(), document, "F");
 
-            this.AddNextObxElementV2("SD", "Specimen Description", "Thin Prep Fluid", document, "F");
-            this.AddNextObxElementV2("SS", "Specimen Source", this.m_AccessionOrder.SpecimenOrderCollection[0].SpecimenSource, document, "F");
+            this.AddNextObxElementV2("SPECDES", "Specimen Description", "Thin Prep Fluid", document, "F");
+            this.AddNextObxElementV2("SPECSRC", "Specimen Source", this.m_AccessionOrder.SpecimenOrderCollection[0].SpecimenSource, document, "F");
             string collectionDateTimeString = this.m_AccessionOrder.SpecimenOrderCollection[0].GetCollectionDateTimeString();
-            this.AddNextObxElementV2("COLD", "Collection Date/Time", collectionDateTimeString, document, "F");
+            this.AddNextObxElementV2("COLLECT", "Collection Date/Time", collectionDateTimeString, document, "F");
 
             this.AddNextObxElementV2("CH", "Clinical History", this.m_AccessionOrder.ClinicalHistory, document, "F");
 
-            this.AddNextObxElementV2("MD", "Method", womensHealthProfileResult.Method, document, "F");
+            this.AddNextObxElementV2("METHOD", "Method", womensHealthProfileResult.Method, document, "F");
 
             this.AddNextObxElementV2("REF", "References", womensHealthProfileResult.References, document, "F");
 

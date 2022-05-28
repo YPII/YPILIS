@@ -78,17 +78,7 @@ namespace YellowstonePathology.UI.Billing
         {
             get { return this.m_EODProcessStatusCollection; }
         }
-
-        private void MenuItemOpenPSAFolder_Click(object sender, RoutedEventArgs e)
-        {
-            string workingFolder = System.IO.Path.Combine(this.m_BaseWorkingFolderPathPSA, this.m_PostDate.ToString("MMddyyyy"));
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Explorer.exe", workingFolder);
-            p.StartInfo = info;
-            p.Start();
-        }
-
+        
         private void MenuItemOpenAPSFolder_Click(object sender, RoutedEventArgs e)
         {
             string workingFolder = System.IO.Path.Combine(this.m_BaseWorkingFolderPathAPS, this.m_PostDate.ToString("MMddyyyy"));
@@ -127,19 +117,7 @@ namespace YellowstonePathology.UI.Billing
             int rowCount = Business.Billing.Model.SVHClinicMailMessage.SendMessage();
             this.m_BackgroundWorker.ReportProgress(1, "SVH Clinic Email Sent with " + rowCount.ToString() + " rows");
             Business.Gateway.BillingGateway.UpdateBillingEODProcess(this.m_PostDate, "SendSVHClinicEmail");
-        }
-
-        private void MenuItemProcessPSAFiles_Click(object sender, RoutedEventArgs e)
-        {
-            this.m_StatusMessageList.Clear();                                    
-            this.m_BackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.m_BackgroundWorker.WorkerSupportsCancellation = false;
-            this.m_BackgroundWorker.WorkerReportsProgress = true;
-            this.m_BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
-            this.m_BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(ProcessPSAFiles);
-            this.m_BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
-            this.m_BackgroundWorker.RunWorkerAsync();        
-        }
+        }        
 
         private void MenuItemProcessAPSFiles_Click(object sender, RoutedEventArgs e)
         {
@@ -255,45 +233,7 @@ namespace YellowstonePathology.UI.Billing
                 }
             }
         }
-
-        private void ProcessPSAFiles(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            int rowCount = 0;
-            this.m_BackgroundWorker.ReportProgress(1, "Starting processing PSA Files: " + DateTime.Now.ToLongTimeString());
-
-            Business.ReportNoCollection reportNoCollection = Business.Gateway.AccessionOrderGateway.GetReportNumbersByPostDate(this.m_PostDate);
-            string workingFolder = System.IO.Path.Combine(m_BaseWorkingFolderPathPSA, this.m_PostDate.ToString("MMddyyyy"));            
-            if (Directory.Exists(workingFolder) == false)
-                Directory.CreateDirectory(workingFolder);
-
-            foreach (Business.ReportNo reportNo in reportNoCollection)
-            {
-                string masterAccessionNo = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoFromReportNo(reportNo.Value);
-                Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(masterAccessionNo);
-                Business.Test.PanelSetOrder panelSetOrder = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo.Value);
-
-                if (accessionOrder.UseBillingAgent == true)
-                {
-                    if (panelSetOrder.IsBillable == true)
-                    {
-                        if (panelSetOrder.PanelSetOrderCPTCodeBillCollection.HasItemsToSendToPSA() == true)
-                        {
-                            this.m_ReportNumbersToProcess.Add(reportNo.Value);
-                            this.CreatePatientTifFile(reportNo.Value);
-                            this.CreateXmlBillingDocument(accessionOrder, reportNo.Value);
-                            this.CopyFilesPSA(reportNo.Value, accessionOrder.MasterAccessionNo, workingFolder);
-
-                            this.m_BackgroundWorker.ReportProgress(1, reportNo.Value + " Complete.");
-                            rowCount += 1;
-                        }
-                    }
-                }
-            }
-
-            this.m_BackgroundWorker.ReportProgress(1, "Finished processing " + rowCount + " PSA Files");
-            Business.Gateway.BillingGateway.UpdateBillingEODProcess(this.m_PostDate, "ProcessPSAFiles");
-        }
-
+        
         private void ProcessAPSFiles(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             int rowCount = 0;
@@ -769,10 +709,7 @@ namespace YellowstonePathology.UI.Billing
             else this.m_BackgroundWorker.ReportProgress(1, "Transfer SVH Files Already Performed: " + this.m_EODProcessStatus.TransferSVHFiles.Value.ToLongTimeString());
 
             if (this.m_EODProcessStatus.SendSVHClinicEmail.HasValue == false) this.SendSVHClinicEmail(sender, e);
-            else this.m_BackgroundWorker.ReportProgress(1, "Send SVH Clinic Email Already Performed: " + this.m_EODProcessStatus.SendSVHClinicEmail.Value.ToLongTimeString());
-
-            if (this.m_EODProcessStatus.ProcessPSAFiles.HasValue == false) this.ProcessPSAFiles(sender, e);
-            else this.m_BackgroundWorker.ReportProgress(1, "Process PSA Files Already Performed: " + this.m_EODProcessStatus.ProcessPSAFiles.Value.ToLongTimeString());
+            else this.m_BackgroundWorker.ReportProgress(1, "Send SVH Clinic Email Already Performed: " + this.m_EODProcessStatus.SendSVHClinicEmail.Value.ToLongTimeString());            
 
             if (this.m_EODProcessStatus.ProcessAPSFiles.HasValue == false) this.ProcessAPSFiles(sender, e);
             else this.m_BackgroundWorker.ReportProgress(1, "Process APS Files Already Performed: " + this.m_EODProcessStatus.ProcessAPSFiles.Value.ToLongTimeString());            

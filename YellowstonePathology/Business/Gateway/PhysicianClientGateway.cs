@@ -35,6 +35,29 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
+        public static Domain.Physician GetPhysicianByClientPhysicianId(string clientPhysicianId)
+        {
+            Domain.Physician result = null;            
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "SELECT * FROM tblPhysician where ClientPhysicianId = @ClientPhysicianId;";
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@ClientPhysicianId", clientPhysicianId);
+            result = PhysicianClientGateway.GetPhysicianFromCommand(cmd);            
+            return result;
+        }
+
+        public static Domain.Physician GetPhysicianByFirstLastName(string firstName, string lastName)
+        {
+            Domain.Physician result = null;            
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "SELECT * FROM tblPhysician where firstName = @firstName and lastName = @lastName;";
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@firstName", firstName);
+            cmd.Parameters.AddWithValue("@lastName", lastName);
+            result = PhysicianClientGateway.GetPhysicianFromCommand(cmd);            
+            return result;
+        }
+
         public static YellowstonePathology.Business.Client.Model.ProviderClientCollection GetHomeBaseProviderClientListByMissingNPI()
         {
             MySqlCommand cmd = new MySqlCommand();
@@ -194,7 +217,7 @@ namespace YellowstonePathology.Business.Gateway
         public static YellowstonePathology.Business.Client.Model.ClientCollection GetFavoriteClients()
         {
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "SELECT * FROM tblClient where ClientId in (1341,558,154,1203,660,723,184,54,126,1321,1446,579,573,1565,1520,280,587,225,1046) order by clientName;";
+            cmd.CommandText = "SELECT * FROM tblClient where ClientId in (1341,558,154,1203,660,723,184,54,126,1321,1446,579,573,1565,1520,280,587,225,1046,1822) order by clientName;";
             cmd.CommandType = CommandType.Text;
             Client.Model.ClientCollection result = BuildClientCollection(cmd);
             return result;

@@ -33,14 +33,11 @@
                                 <MenuItem Header="Update MRN/ACT" Click="MenuItemUpdateMRNACT_Click"></MenuItem>
                                 <MenuItem Header="Match SVH ADT" Click="MenuItemMatchSVHADT_Click"></MenuItem>
                                 <MenuItem Header="Process SVH CDM Files" Click="MenuItemProcessSVHCDMFiles_Click"></MenuItem>
-                                <MenuItem Header="Process PSA Files" Click="MenuItemProcessPSAFiles_Click"></MenuItem>
                                 <MenuItem Header="Process APS Files" Click="MenuItemProcessAPSFiles_Click"></MenuItem>
-                                <MenuItem Header="Process APS Fix Files" Click="MenuItemProcessAPSFixFiles_Click"></MenuItem>
                                 <MenuItem Header="Transfer SVH Files" Click="MenuItemTransferSVHFiles_Click"></MenuItem>
                                 <MenuItem Header="Transfer APS Files" Click="MenuItemTransferAPSFiles_Click"></MenuItem>
                                 <MenuItem Header="Send Clinic Case Email" Click="MenuItemSendClinicCaseEmail_Click"></MenuItem>
                                 <MenuItem Header="Fax Report" Click="MenuItemFaxReport_Click"></MenuItem>
-                                <MenuItem Header="Open PSA Folder" Click="MenuItemOpenPSAFolder_Click"></MenuItem>
                                 <MenuItem Header="Open SVH Folder" Click="MenuItemOpenSVHFolder_Click"></MenuItem>
                                 <MenuItem Header="Open APS Folder" Click="MenuItemOpenAPSFolder_Click"></MenuItem>
                                 <MenuItem Header="Special Transfer" Click="MenuItemSpecialTransfer_Click"></MenuItem>

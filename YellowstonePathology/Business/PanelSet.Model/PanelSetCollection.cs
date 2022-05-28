@@ -17,6 +17,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             PanelSetCollection panelSetCollection = new PanelSetCollection();
 
+            panelSetCollection.Add(new Business.PanelSet.Model.NeoTypeAllProfile());
+            panelSetCollection.Add(new Business.PanelSet.Model.PDL1LDT());
             panelSetCollection.Add(new Business.PanelSet.Model.ToxoplasmaImmunohistochemical());
             panelSetCollection.Add(new Business.PanelSet.Model.NeoTYPEFollicularLymphomaProfile());
             panelSetCollection.Add(new Business.PanelSet.Model.Chromosome13q13());
