@@ -45,7 +45,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>92</ApplicationRevision>
+    <ApplicationRevision>93</ApplicationRevision>
     <ApplicationVersion>11.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -97,8 +97,8 @@
     <Reference Include="CefSharp.Wpf, Version=97.1.60.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
       <HintPath>..\packages\CefSharp.Wpf.97.1.60\lib\net452\CefSharp.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus, Version=5.7.5.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.5.7.5\lib\net45\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.14.0\lib\net45\Google.Protobuf.dll</HintPath>
@@ -175,6 +175,12 @@
     <Reference Include="NHunspell">
       <HintPath>dll\NHunspell.dll</HintPath>
     </Reference>
+    <Reference Include="OfficeOpenXml.Core.ExcelPackage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OfficeOpenXml.Core.ExcelPackage.1.0.0\lib\net46\OfficeOpenXml.Core.ExcelPackage.dll</HintPath>
+    </Reference>
+    <Reference Include="OfficeOpenXml.Extends, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OfficeOpenXml.Extends.1.0.6.0\lib\net40\OfficeOpenXml.Extends.dll</HintPath>
+    </Reference>
     <Reference Include="PdfSharp-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp-gdi.dll</HintPath>
     </Reference>
@@ -221,6 +227,14 @@
     <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
@@ -1342,6 +1356,7 @@
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultGeneric.cs" />
     <Compile Include="Business\Test\HPV\HPVRiverstoneObxView.cs" />
     <Compile Include="Business\Test\IEP\IEPClosingResult.cs" />
+    <Compile Include="Business\Test\NGCT\NGCTNMHObxView.cs" />
     <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastWordDocument.cs" />
     <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastTestOrder.cs" />
@@ -1671,6 +1686,7 @@
     <Compile Include="Policy\Directory.cs" />
     <Compile Include="Policy\DirectoryCollection.cs" />
     <Compile Include="Policy\IPFS.cs" />
+    <Compile Include="UI\Billing\DailyBillingReportSheet.cs" />
     <Compile Include="UI\ManagementReports\DepartmentOfHealthDailyCOVID.xaml.cs">
       <DependentUpon>DepartmentOfHealthDailyCOVID.xaml</DependentUpon>
     </Compile>

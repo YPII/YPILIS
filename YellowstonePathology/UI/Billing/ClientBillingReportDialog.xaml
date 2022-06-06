@@ -29,6 +29,7 @@
         <CheckBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsChecked="{Binding Path=SVHCOVIDANubmers}" />
 
         <Button Grid.Column="0" Grid.Row="10" Height="30" Width="100" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="ButtonShowReport_Click">Show Report</Button>
+        <Button Grid.Column="1" Grid.Row="10" Height="30" Width="100" Margin="2,2,2,2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="ButtonSendXls_Click">Send XLS</Button>
         <Button Grid.Column="1" Grid.Row="10" Height="30" Width="100" Margin="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="ButtonClose_Click">Close</Button>
     </Grid>
 </Window>

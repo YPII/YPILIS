@@ -88,5 +88,11 @@ namespace YellowstonePathology.UI.Billing
             viewer.LoadDocument(clientBillingDetailReport.FixedDocument);
             viewer.ShowDialog();
         }
+
+        private void ButtonSendXls_Click(object sender, RoutedEventArgs e)
+        {
+            DailyBillingReportSheet report = new DailyBillingReportSheet(DateTime.Parse("06-02-2022"), DateTime.Parse("06-02-2022"), 1);
+            
+        }
     }
 }

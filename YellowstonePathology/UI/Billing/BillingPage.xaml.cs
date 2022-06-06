@@ -504,7 +504,8 @@ namespace YellowstonePathology.UI.Billing
         {
             if(this.ListViewStains.SelectedItem != null)
             {
-                
+                Business.Test.Model.TestOrder testOrder = (Business.Test.Model.TestOrder)this.ListViewStains.SelectedItem;
+                testOrder.NoCharge = !testOrder.NoCharge;
             }
         }
     }

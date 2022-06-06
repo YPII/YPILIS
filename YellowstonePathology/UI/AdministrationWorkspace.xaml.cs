@@ -1264,7 +1264,8 @@ namespace YellowstonePathology.UI
 
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
-        {            
+        {      
+            /*
             string[] lines = System.IO.File.ReadAllLines(@"c:\temp\nmhmap.csv");
             
             foreach (string line in lines)
@@ -1279,11 +1280,11 @@ namespace YellowstonePathology.UI
                 }                
            }
            Business.Persistence.DocumentGateway.Instance.Push(this);
+        */
 
-
-            /*
+          
             List<string> fields = new List<string>();
-            string[] lines = System.IO.File.ReadAllLines(@"c:\temp\nmh\whp.txt");
+            string[] lines = System.IO.File.ReadAllLines(@"c:\temp\nmh\ng.txt");
             foreach(string line in lines)
             {
                 MatchCollection mc = Regex.Matches(line, "this.AddNextObxElementBeaker\\(\"(.*?)\"");
@@ -1297,7 +1298,7 @@ namespace YellowstonePathology.UI
             }
 
             System.IO.File.WriteAllLines(@"c:\temp\nmh\whp_fields.txt", fields.ToArray());
-            */
+          
             //this.SplitTif();
             //this.SendAPI();
 

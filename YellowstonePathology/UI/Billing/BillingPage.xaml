@@ -299,7 +299,7 @@
                     <ListView Name="ListViewStains" ItemsSource="{Binding Path=TestOrderCollection}" Margin="2,2,2,2">
                         <ListView.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Flip the Charge" Click="MenuItemFlipCharge"></MenuItem> /MenuItem>
+                                <MenuItem Header="Flip the Charge" Click="MenuItemFlipCharge"></MenuItem>
                             </ContextMenu>
                         </ListView.ContextMenu>
                         <ListView.View>

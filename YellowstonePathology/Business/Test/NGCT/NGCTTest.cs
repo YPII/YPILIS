@@ -35,7 +35,7 @@ namespace YellowstonePathology.Business.Test.NGCT
             this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
             this.m_HasSplitCPTCode = false;
-            //this.m_RequiresAssignment = true;
+            this.m_NmhObxView = typeof(NGCTNMHObxView);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

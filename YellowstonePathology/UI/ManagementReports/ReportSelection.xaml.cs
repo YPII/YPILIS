@@ -26,12 +26,9 @@ namespace YellowstonePathology.UI.ManagementReports
         private List<string> m_DocumentList;
 
         public ReportSelection()
-        {
-            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+        {            
             this.m_ManagementReportCollection = new ManagementReportCollection();            
-
             InitializeComponent();
-
             this.DataContext = this;
         }
 
