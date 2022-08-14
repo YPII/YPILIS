@@ -17,6 +17,7 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
             SARSCoV2ResultCollection result = new SARSCoV2ResultCollection();            
             result.Add(new SARSCoV2DetectedResult());
             result.Add(new SARSCoV2NotDetectedResult());
+            result.Add(new SARSCoV2InvalidResult());
             return result;
         }
     }

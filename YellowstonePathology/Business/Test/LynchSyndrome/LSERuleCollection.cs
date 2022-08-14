@@ -70,6 +70,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             result.Add(new LSEColonAllIntact());
             result.Add(new LSEColonBRAFMeth());
             result.Add(new LSEColonSendOut());
+            result.Add(new LSEColonComplete());
 
             result.Add(new LSEGYNAllIntact());
             result.Add(new LSEGYNMeth());

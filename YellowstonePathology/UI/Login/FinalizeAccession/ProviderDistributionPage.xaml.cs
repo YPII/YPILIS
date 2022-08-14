@@ -466,7 +466,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 {
                     string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
                     this.m_PanelSetOrder.TestOrderReportDistributionCollection.AddNext(testOrderReportDistributionId, testOrderReportDistributionId, this.m_PanelSetOrder.ReportNo, 2678, "Reportable Disease Physician, Infection Control",
-                        1335, "Wyoming Department Of Health", YellowstonePathology.Business.Client.Model.WYDOHPhysicianClientDistribution.WYDOH);
+                        1335, "Wyoming Department Of Health", YellowstonePathology.Business.Client.Model.FaxPhysicianClientDistribution.FAX, "3077773419");
                 }
                 else
                 {
@@ -630,6 +630,12 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
                 resultViewNMH.Send(methodResult);
             }
+            else if(this.m_AccessionOrder.ClientId == 136)
+            {
+                Business.HL7View.Riverstone.RiverstoneResultView resultView = new Business.HL7View.Riverstone.RiverstoneResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true);
+                YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+                resultView.Send(methodResult);
+            }
             else
             {
                 YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true, false);
@@ -771,6 +777,21 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
             view.Send(methodResult);
             MessageBox.Show("Closing Result sent to SCL in Test.");
+        }
+
+        private void HyperLinkSendSCLPDFTestUnsoliceted_Click(object sender, RoutedEventArgs e)
+        {
+            Business.HL7View.EPIC.EPICBeakerResultViewPDF view = new Business.HL7View.EPIC.EPICBeakerResultViewPDF(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true, false);
+            Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+            view.Send(methodResult);
+            MessageBox.Show("PDF sent to SCL in Test.");
+        }        
+
+        private void HyperLinkAddHRHOPNDistribution_Click(object sender, RoutedEventArgs e)
+        {
+            string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+            this.m_PanelSetOrder.TestOrderReportDistributionCollection.AddNext(testOrderReportDistributionId, testOrderReportDistributionId, this.m_PanelSetOrder.ReportNo, 5502, "Jenille, HRH Oncology Navigator",
+                1848, "HRH Oncology Patient Navigator", YellowstonePathology.Business.Client.Model.FaxPhysicianClientDistribution.FAX, "4062062472");
         }
     }
 }

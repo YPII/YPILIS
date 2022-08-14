@@ -74,7 +74,7 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
                 YellowstonePathology.Business.Test.Model.TestOrder testOrderKi67 = this.m_AccessionOrder.PanelSetOrderCollection.GetTestOrderByTestId("349");
                 this.m_StainResultKi67 = panelSetOrderSurgical.GetStainResult(testOrderKi67.TestOrderId);                
                 this.m_Ki67Result = this.m_StainResultKi67.Result;
-                if(this.m_Ki67Result.ToLower().Contains("see comment"))
+                if(this.m_Ki67Result != null && this.m_Ki67Result.ToLower().Contains("see comment"))
                 {
                     this.m_Ki67Result = this.m_StainResultKi67.ReportComment;
                 }

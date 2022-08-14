@@ -29,8 +29,8 @@ namespace YellowstonePathology.Business.BarcodeScanning
             this.m_Year = year;
             this.m_StartNumber = startNumber;
             this.m_EndNumber = endNumber;
-            this.m_SlideStorageId = (BarcodePrefixEnum.SLDSTRG + this.m_Facility + this.m_StorageAbbreviation + "C" + this.m_CabinetNumber + "D" + this.m_DrawerNumber).ToUpper();
-            this.m_Barcode = new BarcodeVersion1(BarcodePrefixEnum.SLDSTRG, this.m_SlideStorageId);
+            this.m_SlideStorageId = (BarcodePrefixEnum.SLST + this.m_Facility + this.m_StorageAbbreviation + "C" + this.m_CabinetNumber + "D" + this.m_DrawerNumber).ToUpper();
+            this.m_Barcode = new BarcodeVersion1(BarcodePrefixEnum.SLST, this.m_SlideStorageId);
         }                    
 
         public BarcodeVersion1 Barcode

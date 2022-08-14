@@ -71,8 +71,10 @@ namespace YellowstonePathology.Business.HL7View.NMH
 
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_PanelSetOrder.ReportNo);                                   
 
-            YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection universalServiceIdCollection = Business.ClientOrder.Model.UniversalServiceCollection.GetAll();
-            YellowstonePathology.Business.ClientOrder.Model.UniversalService universalService = universalServiceIdCollection.GetByUniversalServiceId(panelSetOrder.UniversalServiceId);            
+            YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollectionNMH universalServiceIdCollection = new Business.ClientOrder.Model.UniversalServiceCollectionNMH();
+            YellowstonePathology.Business.ClientOrder.Model.UniversalService universalService = universalServiceIdCollection.GetByUniversalServiceId(panelSetOrder.UniversalServiceId);
+
+            //if (universalService == null) throw new Exception($"Need to add Universal service id for NMH: {panelSetOrder.UniversalServiceId}");
 
             NMHOBRView obr = new NMHOBRView(this.m_AccessionOrder.ExternalOrderId, this.m_AccessionOrder.MasterAccessionNo, this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder.SpecimenOrderCollection[0].CollectionDate, this.m_AccessionOrder.SpecimenOrderCollection[0].CollectionTime, this.m_AccessionOrder.AccessionDateTime,
                 panelSetOrder.FinalTime, this.m_OrderingPhysician, this.m_SigningPathologist, this.GetResultStatus(), universalService, this.m_AccessionOrder.SecondaryExternalOrderId, this.m_PanelSetOrder.PanelSetId, this.m_SendUnsolicited);
@@ -83,20 +85,20 @@ namespace YellowstonePathology.Business.HL7View.NMH
 
             Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
             Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
-
-            if(this.m_Testing == true)
+            
+            if(panelSet.NmhObxView != null)
             {
-                NMHOBXView wphObxView = (NMHOBXView)Activator.CreateInstance(panelSet.NmhObxView, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);                
-                wphObxView.ToXml(document);
-                this.m_ObxCount = wphObxView.ObxCount;
-                wphObxView.AddPDFSegments(pdfFileName, document);
+                NMHOBXView nmhObxView = (NMHOBXView)Activator.CreateInstance(panelSet.NmhObxView, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                nmhObxView.ToXml(document);
+                this.m_ObxCount = nmhObxView.ObxCount;
+                nmhObxView.AddPDFSegments(pdfFileName, document);
             }
             else
-            {                
-                NMHOBXViewOld wphObxView = new NMHOBXViewOld(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
-                wphObxView.AddPDFSegments(pdfFileName, document);                
-            }                        
-
+            {
+                NMHOBXView nMHOBXView = new NMHOBXView(this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount);
+                nMHOBXView.AddPDFSegments(pdfFileName, document);
+            }
+            
             return document;
         }
 
@@ -126,7 +128,7 @@ namespace YellowstonePathology.Business.HL7View.NMH
             YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
 			string serverFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;
             string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\NMH\Prod\" + this.m_PanelSetOrder.ReportNo + fileExtension;
-            if (this.m_Testing == true) interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\NMH\Testing\" + this.m_PanelSetOrder.ReportNo + fileExtension;                                   
+            //if (this.m_Testing == true) interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\NMH\Testing\" + this.m_PanelSetOrder.ReportNo + fileExtension;                                   
 
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(serverFileName))
             {

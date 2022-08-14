@@ -16,8 +16,8 @@ namespace YellowstonePathology.Business.BarcodeScanning
 		DCMT,
 		CLNT,     
         RPTN,
-        SLDSTRG,
-        BLKSTRG,   
+        SLST,
+        BLST,   
         UNDEFINED,
         MAN, //Sunset    
         ALQ, //Sunset

@@ -514,10 +514,7 @@ namespace YellowstonePathology.UI.ReportDistribution
                     break;
                 case YellowstonePathology.Business.Client.Model.MTDOHPhysicianClientDistribution.MTDOH:
                     result = this.HandleMTDOHDistribution(testOrderReportDistribution.ReportNo, accessionOrder);
-                    break;
-                case YellowstonePathology.Business.Client.Model.WYDOHPhysicianClientDistribution.WYDOH:
-                    result = this.HandleWYDOHDistribution(testOrderReportDistribution.ReportNo, accessionOrder);
-                    break;
+                    break;                
                 case "Text":
                     result = this.HandleTextDistribution(testOrderReportDistribution.ReportNo, accessionOrder);
                     break;
@@ -559,6 +556,7 @@ namespace YellowstonePathology.UI.ReportDistribution
             return distributionResult;
         }
 
+        /*
         private YellowstonePathology.Business.ReportDistribution.Model.DistributionResult HandleWYDOHDistribution(string reportNo, Business.Test.AccessionOrder accessionOrder)
         {
             YellowstonePathology.Business.Rules.MethodResult result = new Business.Rules.MethodResult();
@@ -576,6 +574,7 @@ namespace YellowstonePathology.UI.ReportDistribution
             distributionResult.Message = result.Message;
             return distributionResult;
         }
+        */
 
         private YellowstonePathology.Business.ReportDistribution.Model.DistributionResult HandleMTDOHDistribution(string reportNo, Business.Test.AccessionOrder accessionOrder)
         {

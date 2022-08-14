@@ -14,6 +14,7 @@ namespace YellowstonePathology.Business.HL7View
             {                
                 case 558:
                 case 820:
+                case 845:
                 case 723:
                 case 33:
                 case 1417:

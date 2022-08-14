@@ -159,7 +159,7 @@ namespace YellowstonePathology.UI.Surgical
 
         private void HyperLinkPublish_Click(object sender, RoutedEventArgs e)
         {
-            if (this.DoesXPSDocumentExist() == true)
+            if (this.DoesPDFDocumentExist() == true)
             {
                 YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_PanelSetOrder, Business.Document.ReportSaveModeEnum.Normal);
                 caseDocument.Render();
@@ -185,12 +185,12 @@ namespace YellowstonePathology.UI.Surgical
             }
         }
 
-        private bool DoesXPSDocumentExist()
+        private bool DoesPDFDocumentExist()
         {
             bool result = true;
             YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            string xpsFileName = Business.Document.CaseDocument.GetCaseFileNameXPS(orderIdParser);
-            if (System.IO.File.Exists(xpsFileName) == false)
+            string pdfFileName = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
+            if (System.IO.File.Exists(pdfFileName) == false)
             {
                 result = false;
             }
@@ -201,8 +201,8 @@ namespace YellowstonePathology.UI.Surgical
         {
             bool result = true;
             YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            string tifFileName = Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParser);
-            if (System.IO.File.Exists(tifFileName) == false)
+            string pdfFileName = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
+            if (System.IO.File.Exists(pdfFileName) == false)
             {
                 result = false;
             }

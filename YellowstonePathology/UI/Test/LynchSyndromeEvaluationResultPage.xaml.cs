@@ -139,7 +139,7 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkSetResults_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ListViewResults.Items.Count == 1)
+            if (this.ListViewResults.Items.Count >= 1)
             {
                 YellowstonePathology.Business.Test.LynchSyndrome.LSERule lseRule = (YellowstonePathology.Business.Test.LynchSyndrome.LSERule)this.ListViewResults.Items[0];
                 YellowstonePathology.Business.Audit.Model.AuditResult result = lseRule.IsOkToSetResults(this.m_AccessionOrder, this.m_PanelSetOrderLynchSyndromeEvaluation);
@@ -154,7 +154,7 @@ namespace YellowstonePathology.UI.Test
             }
             else
             {
-                MessageBox.Show("Results can be set as the evaluation is not complete.");
+                MessageBox.Show("Results cannot be set as the evaluation is not complete.");
             }
         }
 

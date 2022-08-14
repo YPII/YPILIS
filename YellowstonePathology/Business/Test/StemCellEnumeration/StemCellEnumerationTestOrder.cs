@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.StemCellEnumeration
             bool distribute)
 			: base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
 		{
-            this.m_Method = "Quantitative Flow Cytometry - Sensitivity for CD34 is 0.02 %";
+            this.m_Method = "Quantitative Flow Cytometry - Sensitivity for CD34 is 0.03 %";
         }
 
         [PersistentProperty()]

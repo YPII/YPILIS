@@ -45,7 +45,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>93</ApplicationRevision>
+    <ApplicationRevision>138</ApplicationRevision>
     <ApplicationVersion>11.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -539,6 +539,7 @@
     <Compile Include="Business\Client.Model\HPVStatus.cs" />
     <Compile Include="Business\ClientOrder.Model\ExternalOrderIds.cs" />
     <Compile Include="Business\ClientOrder.Model\ExternalOrderIdsCollection.cs" />
+    <Compile Include="Business\ClientOrder.Model\UniversalServiceCollectionNMH.cs" />
     <Compile Include="Business\ClientOrder.Model\UniversalServiceCollectionRiverstone.cs" />
     <Compile Include="Business\Common\Block.cs" />
     <Compile Include="Business\Cytology.Model\OrderType.cs" />
@@ -569,7 +570,6 @@
     <Compile Include="Business\HL7View\EPIC\EpicResultView.cs" />
     <Compile Include="Business\HL7View\EPIC\StringHelper.cs" />
     <Compile Include="Business\HL7View\NMH\NMHNTEView.cs" />
-    <Compile Include="Business\HL7View\NMH\NMHOBXViewOld.cs" />
     <Compile Include="Business\HL7View\NMH\NMHHl7Client.cs" />
     <Compile Include="Business\HL7View\NMH\NMHMSHView.cs" />
     <Compile Include="Business\HL7View\NMH\NMHOBRView.cs" />
@@ -595,6 +595,7 @@
     <Compile Include="Business\Label.Model\CassettePrinterHavre.cs" />
     <Compile Include="Business\Label.Model\GeneralDataCassetteProstate.cs" />
     <Compile Include="Business\Label.Model\HistologySlidePaperZPLLabelV3.cs" />
+    <Compile Include="Business\Label.Model\MaterialStorageLabel.cs" />
     <Compile Include="Business\Label.Model\ProstateBiopsyKitCollection.cs" />
     <Compile Include="Business\Label.Model\ReportNoLabelPrinter.cs" />
     <Compile Include="Business\Label.Model\ReportNoLabel.cs" />
@@ -603,6 +604,9 @@
     <Compile Include="Business\Label.Model\HologicSlideLabel.cs" />
     <Compile Include="Business\PanelSet.Model\BreastCancerIndex.cs" />
     <Compile Include="Business\PanelSet.Model\ChimerismPostTransplant.cs" />
+    <Compile Include="Business\PanelSet.Model\IRF4RearrangementByFISH.cs" />
+    <Compile Include="Business\PanelSet.Model\SalivaryGlandNGSInfusionPanel.cs" />
+    <Compile Include="Business\PanelSet.Model\NPM1MRDMolecularAnalysis.cs" />
     <Compile Include="Business\PanelSet.Model\NeoTypeAllProfile.cs" />
     <Compile Include="Business\PanelSet.Model\PDL1LDT.cs" />
     <Compile Include="Business\PanelSet.Model\ToxoplasmaImmunohistochemical.cs" />
@@ -1356,6 +1360,7 @@
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultGeneric.cs" />
     <Compile Include="Business\Test\HPV\HPVRiverstoneObxView.cs" />
     <Compile Include="Business\Test\IEP\IEPClosingResult.cs" />
+    <Compile Include="Business\Test\LynchSyndrome\LSEColonComplete.cs" />
     <Compile Include="Business\Test\NGCT\NGCTNMHObxView.cs" />
     <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastWordDocument.cs" />
@@ -1379,12 +1384,12 @@
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2Test.cs" />
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2TestOrder.cs" />
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2WordDocument.cs" />
+    <Compile Include="Business\Test\SARSCoV2\SARSCoV2InvalidResult.cs" />
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2RiverstoneOBXView.cs" />
     <Compile Include="Business\Test\SPEP\SPEPClosingResult.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalNMHObxView.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalRiverstoneOBXView.cs" />
     <Compile Include="Business\Test\ALLFISHPanel\ALLFISHPanelTest.cs" />
-    <Compile Include="Business\Test\Surgical\SurgicalNMHObxViewOLD2.cs" />
     <Compile Include="Business\Test\ThinPrepPap\ThinPrepPapRiverstoneOBXView.cs" />
     <Compile Include="Business\Test\ThyroidNGSFusionPanel\ThyroidNGSFusionPanelTest.cs" />
     <Compile Include="Business\Test\MammaprintBlueprint\MammaprintBlueprintTest.cs" />
@@ -1445,7 +1450,6 @@
     <Compile Include="Business\Test\Her2AmplificationByIHC\Her2AmplificationByIHCEpicBeakerObxView.cs" />
     <Compile Include="Business\Test\Her2AmplificationByIHC\HER2AmplificationByIHCSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISHSendOut\HER2AmplificationByISHSendOutTest.cs" />
-    <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationByISHNMHOBXView.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationByISHEpicBeakerObxView.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResult.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultBreast.cs" />
@@ -1469,20 +1473,17 @@
     <Compile Include="Business\Test\HighGradeLargeBCellLymphoma\HighGradeLargeBCellLymphomaWPHOBXView.cs" />
     <Compile Include="Business\Test\HoldForFlow\CultureAndHoldForCytogeneticsTest.cs" />
     <Compile Include="Business\Test\HoldForFlow\DirectHarvestForFISHTest.cs" />
-    <Compile Include="Business\Test\HPV1618\HPV1618NMHOBXView.cs" />
     <Compile Include="Business\Test\HPV1618\HPV1618EPICBeakerObxView.cs" />
     <Compile Include="Business\Test\HPV1618\HPV1618WPHOBXView.cs" />
     <Compile Include="Business\Test\HPVDNATissueTyping\HPVDNATissueTypingTest.cs" />
     <Compile Include="Business\Test\HPVRNAISH\HPVRNAISHTest.cs" />
     <Compile Include="Business\Test\HPV\HPVEPICBeakerObxView.cs" />
-    <Compile Include="Business\Test\HPV\HPVNMHOBXView.cs" />
     <Compile Include="Business\Test\IEP\IEPTest.cs" />
     <Compile Include="Business\Test\INI1\INI1Test.cs" />
     <Compile Include="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelEPICOBXView.cs" />
     <Compile Include="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelWPHOBXView.cs" />
     <Compile Include="Business\Test\JAK29P241\JAK29P241Test.cs" />
     <Compile Include="Business\Test\JAK2V617F\JAK2V617FEPICNTEView.cs" />
-    <Compile Include="Business\Test\LLP\LLPNMHOBXView.cs" />
     <Compile Include="Business\Test\LLP\LLPEPICBeakerObxView.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEColonBRAFMeth.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEColonSendOut.cs" />
@@ -1640,12 +1641,10 @@
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationTestOrder.cs" />
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationWordDocument.cs" />
     <Compile Include="Business\Test\StemCellEnumeration\StemCellEnumerationTestOrder.cs" />
-    <Compile Include="Business\Test\Surgical\SurgicalNMHObxViewOld.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalEpicBeakerObxView.cs" />
     <Compile Include="Business\Test\TCellNKProfile\TCellNKProfileWPHOBXView.cs" />
     <Compile Include="Business\Test\TET2MutationAnalysis\TET2MutationAnalysisTest.cs" />
     <Compile Include="Business\Test\TFE3\TFE3Test.cs" />
-    <Compile Include="Business\Test\ThinPrepPap\ThinPrepPapNMHOBXView.cs" />
     <Compile Include="Business\Test\ThinPrepPap\ThinPrepPapEPICBeakerObxView.cs" />
     <Compile Include="Business\Test\ThrombocytopeniaProfileV2\ThrombocytopeniaProfileV2CMMCNTEView.cs" />
     <Compile Include="Business\Test\ThrombocytopeniaProfileV2\ThrombocytopeniaProfileV2EPICBeakerObxView.cs" />
@@ -1695,11 +1694,22 @@
     <Compile Include="UI\ManagementReports\ReportSelection.xaml.cs">
       <DependentUpon>ReportSelection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\MaterialStorage\MaterialStorageDialog.xaml.cs">
+      <DependentUpon>MaterialStorageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MaterialStorage\MaterialStorageScanLog.cs" />
+    <Compile Include="UI\MaterialStorage\MaterialStorageScanLogItem.cs" />
     <Compile Include="UI\PDFViewer.xaml.cs">
       <DependentUpon>PDFViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ProstateBiopsyKitDialog.xaml.cs">
       <DependentUpon>ProstateBiopsyKitDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MaterialStorageLabels.xaml.cs">
+      <DependentUpon>MaterialStorageLabels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ReferenceLabTestingWorkspace.xaml.cs">
+      <DependentUpon>ReferenceLabTestingWorkspace.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\TestEnvironment.cs" />
     <Compile Include="UI\Test\FLT3ResultPage.xaml.cs">
@@ -5703,11 +5713,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\MaterialStorage\MaterialStorageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\PDFViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ProstateBiopsyKitDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MaterialStorageLabels.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReferenceLabTestingWorkspace.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

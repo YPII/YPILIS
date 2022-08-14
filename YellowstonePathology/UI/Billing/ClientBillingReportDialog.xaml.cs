@@ -92,7 +92,7 @@ namespace YellowstonePathology.UI.Billing
         private void ButtonSendXls_Click(object sender, RoutedEventArgs e)
         {
             DailyBillingReportSheet report = new DailyBillingReportSheet(DateTime.Parse("06-02-2022"), DateTime.Parse("06-02-2022"), 1);
-            
+            Business.Billing.Model.SVHClinicMailMessage.SendReport();
         }
     }
 }

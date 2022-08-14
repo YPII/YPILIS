@@ -10,6 +10,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
         NONE,
         EPIC,
         ATHENA,
-        ECLINICALWORKS
+        ECLINICALWORKS,
+        NMH
     }
 }

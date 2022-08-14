@@ -929,15 +929,12 @@ namespace YellowstonePathology.UI.Login
             if (this.ListViewAccessionOrders.SelectedItem != null)
             {
                 if (this.m_LoginUI.AccessionOrder.SpecimenOrderCollection.HasThinPrepFluidSpecimen() == true)
-                {
-                    throw new Exception("Cancelling a Panther order needs work.");
-                    /*
+                {                    
                     YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_LoginUI.AccessionOrder.SpecimenOrderCollection.GetThinPrep();                    
                     YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_LoginUI.AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(14);
                     YellowstonePathology.Business.HL7View.Panther.PantherAssayHPV pantherAssayHPV = new Business.HL7View.Panther.PantherAssayHPV();
-                    YellowstonePathology.Business.HL7View.Panther.PantherOrder pantherOrder = new Business.HL7View.Panther.PantherOrder(pantherAssayHPV, specimenOrder, aliquotOrder.AliquotOrderId, this.m_LoginUI.AccessionOrder, panelSetOrder, YellowstonePathology.Business.HL7View.Panther.PantherActionCode.CancelRequest);
-                    pantherOrder.Send();
-                    */
+                    YellowstonePathology.Business.HL7View.Panther.PantherOrder pantherOrder = new Business.HL7View.Panther.PantherOrder(pantherAssayHPV, specimenOrder, this.m_LoginUI.AccessionOrder, panelSetOrder, Business.HL7View.Panther.PantherActionCode.CancelRequest);
+                    pantherOrder.Send();                    
                 }   
             }
         }

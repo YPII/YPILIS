@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Test.ReticulatedPlateletAnalysisV2
             bool distribute)
             : base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
         {
-            this.m_ResultReference = "0-0.37%";
+            this.m_ResultReference = "0-0.36%";
             this.m_Method = "Quantitative Flow Cytometry";
             this.m_ASRComment = "Tests utilizing Analytic Specific Reagents (ASR's) were developed and performance characteristics " +
                 "determined by Yellowstone Pathology Institute, Inc.  They have not been cleared or approved by the U.S. Food and Drug " +

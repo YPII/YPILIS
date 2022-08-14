@@ -61,6 +61,9 @@
                     <MenuItem Header="Print SVH Labels" Click="MenuItemPrintSVHLabels_Click" />
                     <MenuItem Header="COVID Testing Dialog" Click="MenuItemCOVIDTestingDialog_Click" />
                     <MenuItem Header="Prostate Biopsy Kits" Click="MenuItemProstateBiopsyKit_Click" />
+                    <MenuItem Header="Material Storage Labels" Click="MenuItemMaterialStorageLabels_Click" />
+                    <MenuItem Header="Material Storage Scans" Click="MenuItemMaterialStorageScans_Click" />
+                    <MenuItem Header="Reference Lab testing" Click="MenuItemReferenceLabTesting_Click" />
                 </MenuItem>
 
                 <MenuItem Header="_Client" Name="MenuItemClient">

@@ -1282,7 +1282,7 @@ namespace YellowstonePathology.UI
            Business.Persistence.DocumentGateway.Instance.Push(this);
         */
 
-          
+            /*
             List<string> fields = new List<string>();
             string[] lines = System.IO.File.ReadAllLines(@"c:\temp\nmh\ng.txt");
             foreach(string line in lines)
@@ -1298,6 +1298,7 @@ namespace YellowstonePathology.UI
             }
 
             System.IO.File.WriteAllLines(@"c:\temp\nmh\whp_fields.txt", fields.ToArray());
+            */
           
             //this.SplitTif();
             //this.SendAPI();
@@ -1383,18 +1384,17 @@ namespace YellowstonePathology.UI
             */
 
             /*
-            string sql = "select masterAccessionNo from tblAccessionOrder where physicianId = 3610";
+            string sql = "select masterAccessionNo from tblAccessionOrder where physicianId = 3435";
             List<Business.MasterAccessionNo> maCollection = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(sql);
             foreach(Business.MasterAccessionNo ma in maCollection)
             {                
                 Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(ma.Value, this);
                 foreach(Business.Test.PanelSetOrder panelSetOrder in ao.PanelSetOrderCollection)
                 {
-                    if (panelSetOrder.TestOrderReportDistributionCollection.Exists(3610, 1785) == false)
+                    if (panelSetOrder.TestOrderReportDistributionCollection.Exists(3435, 1733, "Web Service") == false)
                     {
                         string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-                        Business.ReportDistribution.Model.TestOrderReportDistribution tord = panelSetOrder.TestOrderReportDistributionCollection.AddNext(testOrderReportDistributionId, testOrderReportDistributionId, panelSetOrder.ReportNo, 3610, "Randy J. Folker, M.D.",
-                        1785, "Randy Folker ENT and Allergy", "Web Service");
+                        Business.ReportDistribution.Model.TestOrderReportDistribution tord = panelSetOrder.TestOrderReportDistributionCollection.AddNext(testOrderReportDistributionId, testOrderReportDistributionId, panelSetOrder.ReportNo, 3435, "Thomas Etter, D.O.", 1733, "Cody Surgical Associates", "Web Service");
                         tord.Distributed = true;
                         tord.TimeOfLastDistribution = DateTime.Now;
                     }

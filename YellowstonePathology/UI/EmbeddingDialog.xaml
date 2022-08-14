@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YellowstonePathology.UI"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowState="Maximized" FontSize="16"
         Title="Embedding Dialog" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
     <Grid>
                 
@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -42,7 +42,7 @@
             <TextBox Name="TextBoxProcessorFixationDuration" Margin="2" Width="120" Text="{Binding Path=ProcessorFixationDuration.TotalMinutes, Mode=OneWay}" />
         </StackPanel>
 
-        <ListView Name="ListViewEmbeddingScans" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" ItemsSource="{Binding Path=EmbeddingScanCollection}">
+        <ListView Name="ListViewEmbeddingScans" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" ItemsSource="{Binding Path=EmbeddingScanCollection}" SelectionChanged="ListViewScans_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Block" Width="100" DisplayMemberBinding="{Binding Path=AliquotOrderId}" />
@@ -126,6 +126,9 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+            </TabItem>
+            <TabItem Header="Gross Description">
+                <TextBox Name="TextBoxGross" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=CurrentGrossDescription}" IsEnabled="False"></TextBox>
             </TabItem>
         </TabControl>
 

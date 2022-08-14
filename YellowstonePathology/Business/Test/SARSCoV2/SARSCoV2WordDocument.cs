@@ -34,6 +34,11 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
             YellowstonePathology.Business.Document.AmendmentSection amendmentSection = new YellowstonePathology.Business.Document.AmendmentSection();
 			amendmentSection.SetAmendment(amendmentCollection, this.m_ReportXml, this.m_NameSpaceManager, false);
 
+			string comment = "Questions about your test result or clinical condition should be directed to your personal physician or healthcare provider.  For local quarantine and return-to-work guidelines, refer to https://covid.riverstonehealth.org/.";
+			if (string.IsNullOrEmpty(panelSetOrder.Comment) == false) comment = panelSetOrder.Comment;
+			this.SetXmlNodeData("report_comment", comment);
+
+
 			string result = null;
 			if (panelSetOrder.Result == "DETECTED")
 			{
@@ -48,7 +53,14 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
 				base.ReplaceText("test_result_n", result);
 				base.ReplaceText("test_result_p", string.Empty);
 			}
-			
+
+			if (panelSetOrder.Result == "Invalid")
+			{
+				result = "Invalid";
+				base.ReplaceText("test_result_n", result);
+				base.ReplaceText("test_result_p", string.Empty);
+			}
+
 			base.ReplaceText("report_method", panelSetOrder.Method);
 			base.ReplaceText("report_result", panelSetOrder.Result);                                    
             base.ReplaceText("report_references", panelSetOrder.ReportReferences);

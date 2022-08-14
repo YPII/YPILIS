@@ -17,13 +17,13 @@ namespace YellowstonePathology.UI.Billing
         {
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select ao.MasterAccessionNo, pso.ReportNo, pso.PanelSetName, ao.ClientId, ao.CollectionDate DateOfService, ao.PFirstName, ao.PLastName, ao.PMiddleInitial, ao.PBirthdate, " +
+            cmd.CommandText = "select ao.CollectionDate `DateOfService`, ao.MasterAccessionNo, pso.ReportNo, pso.PanelSetName, ao.PFirstName, ao.PLastName, ao.PMiddleInitial, ao.PBirthdate, " +
                 "ao.ClientName, ao.PhysicianName, ao.SvhAccount, ao.SvhMedicalRecord, ao.PatientType, ao.PrimaryInsurance, ao.SecondaryInsurance, pso.NoCharge, pso.Ordered14DaysPostDischarge, pso.BillingType, psob.Quantity, psob.CptCode  " +
                 "from tblAccessionOrder ao  " +
                 "join tblClientGroupClient cgc on ao.ClientId = cgc.ClientId  " +
                 "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo  " +
                 "join tblPanelSetOrderCPTCodeBill psob on pso.ReportNo = psob.ReportNo  " +
-                "where psob.PostDate between @StartDate and @EndDate and pso.IsBillable = 1 and cgc.ClientGroupId = @ClientGroupId;";
+                "where psob.PostDate between @StartDate and @EndDate and pso.IsBillable = 1 and cgc.ClientGroupId = @ClientGroupId and psob.BillTo = 'Client';";
 
             cmd.Parameters.AddWithValue("StartDate", postDateStart);
             cmd.Parameters.AddWithValue("EndDate", postDateEnd);
@@ -55,13 +55,22 @@ namespace YellowstonePathology.UI.Billing
                             {
                                 for (int c = 0; c < dr.FieldCount; c++)
                                 {
-                                    worksheet.Cells[r, c + 1].Value = dr.GetValue(c);
-                                    worksheet.Cells[r, c + 1].Style.Font.Bold = false;
+                                    if(c == 0)
+                                    {
+                                        DateTime dt = DateTime.Parse(dr.GetValue(c).ToString());
+                                        worksheet.Cells[r, c + 1].Value = dt.ToString("MM/dd/yyyy");
+                                        worksheet.Cells[r, c + 1].Style.Font.Bold = false;
+                                    }
+                                    else
+                                    {
+                                        worksheet.Cells[r, c + 1].Value = dr.GetValue(c);
+                                        worksheet.Cells[r, c + 1].Style.Font.Bold = false;
+                                    }                                    
                                 }
                                 r += 1;
                             }
 
-                            worksheet.Cells.AutoFitColumns();
+                            worksheet.Cells.AutoFitColumns();                            
                         }
                     }
                 }
@@ -70,6 +79,22 @@ namespace YellowstonePathology.UI.Billing
                 System.IO.Stream stream = System.IO.File.Create(path);
                 package.SaveAs(stream);
                 stream.Close();
+
+                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();                
+                xlApp.Visible = true;
+
+                Microsoft.Office.Interop.Excel.Workbook wb = xlApp.Workbooks.Add(path);
+                Microsoft.Office.Interop.Excel.Worksheet ws = (Microsoft.Office.Interop.Excel.Worksheet)wb.Worksheets[1];
+                
+                string pathPassword = $@"c:\temp\billing_report_protected.xlsx";
+                if(System.IO.File.Exists(pathPassword) == true)
+                {
+                    System.IO.File.Delete(pathPassword);
+                }
+
+                wb.WritePassword = "billing";
+                wb.SaveAs(pathPassword);
+                wb.Close();                   
             }            
         }
     }

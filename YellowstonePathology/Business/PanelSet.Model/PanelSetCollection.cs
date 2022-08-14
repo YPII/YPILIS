@@ -17,6 +17,9 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             PanelSetCollection panelSetCollection = new PanelSetCollection();
 
+            panelSetCollection.Add(new Business.PanelSet.Model.IRF4RearrangementByFISH());
+            panelSetCollection.Add(new Business.PanelSet.Model.SalivaryGlandNGSInfusionPanel());
+            panelSetCollection.Add(new Business.PanelSet.Model.NPM1MRDMolecularAnalysis());
             panelSetCollection.Add(new Business.PanelSet.Model.NeoTypeAllProfile());
             panelSetCollection.Add(new Business.PanelSet.Model.PDL1LDT());
             panelSetCollection.Add(new Business.PanelSet.Model.ToxoplasmaImmunohistochemical());

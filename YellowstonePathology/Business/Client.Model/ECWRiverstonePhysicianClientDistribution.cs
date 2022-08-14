@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Client.Model
 
         public override void SetDistribution(PanelSetOrder panelSetOrder, AccessionOrder accessionOrder)
         {
-            if (panelSetOrder.TestOrderReportDistributionCollection.ECWDistributionTypeExists() == false)
+            if (panelSetOrder.TestOrderReportDistributionCollection.ECWRiverstoneDistributionTypeExists() == false)
             {
                 if (accessionOrder.ClientId == 136)
                 {

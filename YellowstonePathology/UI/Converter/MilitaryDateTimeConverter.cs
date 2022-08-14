@@ -22,7 +22,7 @@ namespace YellowstonePathology.UI.Converter
                 //return dateTime.ToString("MM/dd/yyy");
 			//}
 
-			return dateTime.ToString("MM/dd/yyyy HH:mm");
+			return dateTime.ToString("MM/dd/yyyy HH:mm:ss");
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

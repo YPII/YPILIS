@@ -76,8 +76,9 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 
             //Lab/Pathology Result
             //Lab/Pathology Result_CC
-            string pathologyRecord = "Lab/Pathology Result";
-            if (this.m_ClientId == "54") pathologyRecord = "Lab/Pathology Result_CC"; //Billings OB/GYN
+
+            string pathologyRecord = $"{this.m_UniversalService.UniversalServiceId}^Lab/Pathology Result";
+            if (this.m_ClientId == "54") pathologyRecord = $"{this.m_UniversalService}^Lab/Pathology Result_CC"; //Billings OB/GYN
 
             XElement obr04Element = new XElement("OBR.4");                        
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBR.4.1", pathologyRecord, obr04Element);            

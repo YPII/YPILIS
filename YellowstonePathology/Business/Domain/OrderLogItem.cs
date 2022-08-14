@@ -18,6 +18,7 @@ namespace YellowstonePathology.Business.Domain
 		private string m_ProcedureComment;
         private string m_Comment;
         private string m_LastName;
+		private string m_CutBy;
 
         public OrderLogItem()
 		{
@@ -78,5 +79,12 @@ namespace YellowstonePathology.Business.Domain
             get { return this.m_LastName; }
             set { this.m_LastName = value; }
         }
-    }
+
+		[PersistentProperty()]
+		public string CutBy
+		{
+			get { return this.m_CutBy; }
+			set { this.m_CutBy = value; }
+		}
+	}
 }

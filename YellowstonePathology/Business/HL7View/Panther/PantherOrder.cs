@@ -16,8 +16,8 @@ namespace YellowstonePathology.Business.HL7View.Panther
         private PantherAssay m_Assay;
         private string m_ActionCode;
 
-        public PantherOrder(PantherAssay assay, YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, 
-            YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder,
+        public PantherOrder(PantherAssay assay, Business.Specimen.Model.SpecimenOrder specimenOrder, 
+            Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder,
             string actionCode)
         {            
             this.m_Assay = assay;

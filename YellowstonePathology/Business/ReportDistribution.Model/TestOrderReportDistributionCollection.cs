@@ -157,7 +157,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             bool result = false;
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
-                if (testOrderReportDistribution.DistributionType == distributionType)
+                if (testOrderReportDistribution.DistributionType.Contains(distributionType) == true)
                 {
                     result = true;
                     break;
@@ -171,7 +171,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             bool result = false;
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
-                if (testOrderReportDistribution.DistributionType == "EPIC" || testOrderReportDistribution.DistributionType == "EPIC->Fax")
+                if (testOrderReportDistribution.DistributionType.Contains("EPIC") == true)
                 {
                     result = true;
                     break;
@@ -185,7 +185,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             bool result = false;
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
-                if (testOrderReportDistribution.DistributionType == "Meditech" || testOrderReportDistribution.DistributionType == "Meditech->Fax")
+                if (testOrderReportDistribution.DistributionType.Contains("Meditech") == true)
                 {
                     result = true;
                     break;
@@ -199,7 +199,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             bool result = false;
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
-                if (testOrderReportDistribution.DistributionType == "Athena Health" || testOrderReportDistribution.DistributionType == "Athena Health->Fax")
+                if (testOrderReportDistribution.DistributionType.Contains("Athena Health") == true)
                 {
                     result = true;
                     break;
@@ -213,7 +213,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             bool result = false;
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
-                if (testOrderReportDistribution.DistributionType == "Eclinical Works" || testOrderReportDistribution.DistributionType == "Eclinical Works->Fax")
+                if (testOrderReportDistribution.DistributionType.Contains("Eclinical Works") == true)
                 {
                     result = true;
                     break;
@@ -227,7 +227,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             bool result = false;
             foreach (TestOrderReportDistribution testOrderReportDistribution in this)
             {
-                if (testOrderReportDistribution.DistributionType == "Riverstone ECW" || testOrderReportDistribution.DistributionType == "Riverstone ECW->Fax")
+                if (testOrderReportDistribution.DistributionType.Contains("ECW Riverstone") == true)
                 {
                     result = true;
                     break;

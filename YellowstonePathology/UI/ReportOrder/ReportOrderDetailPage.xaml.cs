@@ -253,8 +253,8 @@ namespace YellowstonePathology.UI.ReportOrder
         {
             bool result = true;
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
-            string tifFileName = Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParser);
-            if (System.IO.File.Exists(tifFileName) == false)
+            string pdfFileName = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
+            if (System.IO.File.Exists(pdfFileName) == false)
             {
                 result = false;
             }

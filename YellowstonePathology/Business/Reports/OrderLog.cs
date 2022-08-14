@@ -63,6 +63,7 @@ namespace YellowstonePathology.Business.Reports
 				string orderedBy = orderLogItem.LastName;
 				string procedure = orderLogItem.TestName;
 				string block = orderLogItem.Description;
+				string cutBy = orderLogItem.CutBy;
 				string comment = orderLogItem.ProcedureComment;
                 if(string.IsNullOrEmpty(orderLogItem.Comment) == false)
                 {
@@ -79,6 +80,7 @@ namespace YellowstonePathology.Business.Reports
 				this.ReplaceTextInRowNode(nodeNewR1, "by", orderedBy);
 				this.ReplaceTextInRowNode(nodeNewR1, "procedure", procedure);
 				this.ReplaceTextInRowNode(nodeNewR1, "block", block);
+				this.ReplaceTextInRowNode(nodeNewR1, "cut_by", cutBy);
 				this.ReplaceTextInRowNode(nodeNewR1, "comment", comment);
 
 				nodeTable.AppendChild(nodeNewR1);

@@ -1466,7 +1466,8 @@ namespace YellowstonePathology.Business.Gateway
                "WHEN 'FS' then concat('FS', ao.Label, ' - ', ifnull(so.Description, '')) " +
               "WHEN 'CB' then concat('CB', ao.Label, ' - ', ifnull(so.Description, '')) " +
               "ELSE concat(ifnull(ao.Label, ''), ' - ', ifnull(so.Description, '')) END as Description, po.OrderTime, " +
-              "ifnull(sr.ProcedureComment, '') as ProcedureComment, po.Comment FROM tblPanelOrder po Left Outer JOIN tblSystemUser su ON po.OrderedById = su.userID " +
+              "ifnull(sr.ProcedureComment, '') as ProcedureComment, po.Comment, (Select validatedBy from tblSlideOrder where aliquotOrderId = ao.AliquotOrderId and validatedby is not null limit 1) `CutBy` " +
+              "FROM tblPanelOrder po Left Outer JOIN tblSystemUser su ON po.OrderedById = su.userID " +
               "JOIN tblPanelSetOrder pso ON po.ReportNo = pso.ReportNo JOIN tblTestOrder ot on ot.PanelOrderId = po.PanelOrderId " +
               "JOIN tblAliquotOrder ao ON ot.AliquotOrderId = ao.AliquotOrderId " +
               "JOIN tblSpecimenOrder so ON ao.SpecimenOrderId = so.SpecimenOrderId LEFT OUTER JOIN tblStainResult sr ON  sr.TestOrderId = ot.TestOrderId " +

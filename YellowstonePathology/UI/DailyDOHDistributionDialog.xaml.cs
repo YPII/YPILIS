@@ -125,7 +125,7 @@ namespace YellowstonePathology.UI
                     if (File.Exists(tifCaseFileName) == true)
                     {
                         string faxNumber = "4062373672";
-                        if (this.m_Client == "WDOH")
+                        if (this.m_Client == "WYDOH")
                         {
                             faxNumber = "3077773419";
                         }

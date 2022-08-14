@@ -30,7 +30,6 @@
         <StackPanel Name="StackPanelTechnical" Grid.Column="1" Grid.Row="1" Margin="5,5,5,5">
             <RadioButton GroupName="Comment" Tag="Technical" Content="Poor fixation " Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical" Content="Epidermis is incomplete" Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Tag="Technical" Content="Epidermis is incomplete" Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical" Content="Incomplete cross section of fallopian tube" Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical" Content="Transformation zone not visible" Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical" Content="Not deep enough/just getting into lesion" Margin="2,2,2,2"/>
@@ -41,7 +40,6 @@
         <TextBlock Grid.Column="1" Grid.Row="2" FontWeight="Bold" Margin="2,2,2,2">TECHNICAL HAVRE REASONS</TextBlock>
         <StackPanel Name="StackPanelTechnicalHavre" Grid.Column="1" Grid.Row="3" Margin="5,5,5,5">
             <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content=" Poor fixation " Margin="2,2,2,2"/>
-            <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Epidermis is incomplete" Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Epidermis is incomplete" Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Incomplete cross section of fallopian tube" Margin="2,2,2,2"/>
             <RadioButton GroupName="Comment" Tag="Technical (Havre)" Content="Transformation zone not visible" Margin="2,2,2,2"/>

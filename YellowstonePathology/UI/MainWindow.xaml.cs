@@ -34,7 +34,8 @@ namespace YellowstonePathology.UI
         TabItem m_TabItemCytology;        
 		TabItem m_TabItemLogin;
         TabItem m_TabItemClientOrder;
-        TabItem m_TabItemTask;       
+        TabItem m_TabItemTask;
+        TabItem m_TabItemReferenceLabTesting;
 
         TabItem m_TabItemTyping;		
         Surgical.TypingWorkspace m_TypingWorkspace;
@@ -52,7 +53,9 @@ namespace YellowstonePathology.UI
 
         SearchWorkspace m_SearchWorkspace;                
         Test.LabWorkspace m_LabWorkspace;        
-        AdministrationWorkspace m_AdministrationWorkspace;                		
+        AdministrationWorkspace m_AdministrationWorkspace;
+
+        ReferenceLabTestingWorkspace m_ReferenceLabTestingWorkspace;
 
 		YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
         MainWindowCommandButtonHandler m_MainWindowCommandButtonHandler;
@@ -124,6 +127,10 @@ namespace YellowstonePathology.UI
             this.m_TabItemTask = new TabItem();
             this.m_TabItemTask.Header = SetHeader("Tasks", "AcceptResults.ico");
             this.m_TabItemTask.Tag = "Tasks";
+
+            this.m_TabItemReferenceLabTesting = new TabItem();
+            this.m_TabItemReferenceLabTesting.Header = SetHeader("Reference Lab Testing", "AcceptResults.ico");
+            this.m_TabItemReferenceLabTesting.Tag = "Reference_Lab_Testing";
 
             InitializeComponent();
             
@@ -731,6 +738,21 @@ namespace YellowstonePathology.UI
             }
         }
 
+        private void ShowReferenceLabTestingWorkspace()
+        {
+            if (m_TabItemReferenceLabTesting.Parent != null)
+            {
+                m_TabItemReferenceLabTesting.Focus();
+            }
+            else
+            {
+                this.m_ReferenceLabTestingWorkspace = new ReferenceLabTestingWorkspace();
+                this.m_TabItemReferenceLabTesting.Content = this.m_ReferenceLabTestingWorkspace;
+                this.TabControlLeftWorkspace.Items.Add(this.m_TabItemReferenceLabTesting);
+                this.m_TabItemReferenceLabTesting.Focus();
+            }
+        }
+
         private void ShowClientOrderWorkspace()
         {
             if (m_TabItemClientOrder.Parent != null)
@@ -1134,6 +1156,23 @@ namespace YellowstonePathology.UI
             //viewer.Show();
             TestPage tp = new TestPage();
             tp.Show();
+        }        
+
+        private void MenuItemMaterialStorageLabels_Click(object sender, RoutedEventArgs e)
+        {
+            MaterialStorageLabels materialStorageLabels = new MaterialStorageLabels();
+            materialStorageLabels.ShowDialog();
+        }
+
+        private void MenuItemMaterialStorageScans_Click(object sender, RoutedEventArgs e)
+        {
+            UI.MaterialStorage.MaterialStorageDialog dialog = new MaterialStorage.MaterialStorageDialog();
+            dialog.ShowDialog();
+        }
+
+        private void MenuItemReferenceLabTesting_Click(object sender, RoutedEventArgs e)
+        {
+            this.ShowReferenceLabTestingWorkspace();
         }
     }
 }

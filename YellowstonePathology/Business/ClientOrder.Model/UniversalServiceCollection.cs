@@ -56,7 +56,7 @@ namespace YellowstonePathology.Business.ClientOrder.Model
             result.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceIEP());
             result.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceFNA());
             return result;
-        }
+        }        
 
         public bool Exists(string universalServiceId)
         {

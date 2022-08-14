@@ -169,8 +169,8 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
                     string hpvFinal = Business.Helper.DateTimeExtensions.DateStringFromNullable(panelSetOrderHPV1618.FinalDate);
                     this.AddNextNteElement($"Date Finalized: {hpvFinal}", document);
 
-                    this.AddNextObxWithAttributeElement("HPV16RESULT^HPV Genotypes 16", "Negative", document, resultStatus);
-                    this.AddNextObxWithAttributeElement("HPV18RESULT^HPV Genotypes 18", "Negative", document, resultStatus);
+                    this.AddNextObxWithAttributeElement("HPV16RESULT^HPV Genotypes 16", panelSetOrderHPV1618.HPV16Result, document, resultStatus);
+                    this.AddNextObxWithAttributeElement("HPV18RESULT^HPV Genotypes 18", panelSetOrderHPV1618.HPV18Result, document, resultStatus);
                 }
                 else
                 {
