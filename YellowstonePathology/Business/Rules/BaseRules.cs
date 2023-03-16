@@ -92,7 +92,7 @@ namespace YellowstonePathology.Business.Rules
         }
 
         protected void Validate(Type type)
-        {            
+        {                        
             this.m_RuleValidation = new System.Workflow.Activities.Rules.RuleValidation(type, null);
             this.m_RuleSet.Validate(this.m_RuleValidation);
 
@@ -100,7 +100,7 @@ namespace YellowstonePathology.Business.Rules
             if (errors.Count > 0)
             {
                 throw new Exception("There were Errors in the validation");
-            }            
+            }             
         }
 
         protected void Deserialize()

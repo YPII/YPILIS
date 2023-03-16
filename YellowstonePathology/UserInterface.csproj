@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <Import Project="..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.props" Condition="Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.props')" />
   <Import Project="..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.props')" />
   <Import Project="..\packages\cef.redist.x86.97.1.6\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.97.1.6\build\cef.redist.x86.props')" />
   <Import Project="..\packages\cef.redist.x64.97.1.6\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.97.1.6\build\cef.redist.x64.props')" />
@@ -45,8 +46,8 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>138</ApplicationRevision>
-    <ApplicationVersion>11.0.1.%2a</ApplicationVersion>
+    <ApplicationRevision>63</ApplicationRevision>
+    <ApplicationVersion>11.0.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -187,6 +188,7 @@
     <Reference Include="PdfSharp.Charting-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp.Charting-gdi.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="PresentationFramework.Luna" />
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
@@ -294,13 +296,13 @@
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Windows">
+      <HintPath>C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.19041.0\Windows.winmd</HintPath>
+    </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="PresentationCore">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="ReachFramework" />
@@ -356,6 +358,7 @@
     <Compile Include="Business\Audit.Model\AccessionOrderAudit.cs" />
     <Compile Include="Business\Audit.Model\AccountNoAudit.cs" />
     <Compile Include="Business\Audit.Model\AliquotAndStainOrderAuditCollection.cs" />
+    <Compile Include="Business\Audit.Model\MetastaticColorectalAudit.cs" />
     <Compile Include="Business\Audit.Model\ASCCPAudit.cs" />
     <Compile Include="Business\Audit.Model\BoneMarrowSummaryAudit.cs" />
     <Compile Include="Business\Audit.Model\GISTAudit.cs" />
@@ -546,16 +549,26 @@
     <Compile Include="Business\Cytology.Model\OrderTypeCollectionCollection.cs" />
     <Compile Include="Business\Document\CaseDocumentFileTypeEnum.cs" />
     <Compile Include="Business\Document\CaseDocumentTypeEnum.cs" />
+    <Compile Include="Business\Client.Model\EMAPhysicianClientDistribution.cs" />
     <Compile Include="Business\EthBlock.cs" />
     <Compile Include="Business\EthContract.cs" />
     <Compile Include="Business\EthContractCollection.cs" />
     <Compile Include="Business\Gateway\MangementReportsGateway.cs" />
     <Compile Include="Business\GrossCameraPubSubHandler.cs" />
     <Compile Include="Business\Helper\JSONHelper.cs" />
+    <Compile Include="Business\HL7View\EMA\EMAHl7Client.cs" />
+    <Compile Include="Business\HL7View\EMA\EMAMSHView.cs" />
+    <Compile Include="Business\HL7View\EMA\EMAOBRView.cs" />
+    <Compile Include="Business\HL7View\EMA\EMAOBXView.cs" />
+    <Compile Include="Business\HL7View\EMA\EMAORCView.cs" />
+    <Compile Include="Business\HL7View\EMA\EMAPIDView.cs" />
+    <Compile Include="Business\HL7View\EMA\EMAResultView.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerNarrativeOBXView.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerObrViewPDF.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicBeakerObxViewPDF.cs" />
+    <Compile Include="Business\HL7View\EPIC\EPICClosingOrderView.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerResultViewPDF.cs" />
+    <Compile Include="Business\HL7View\EPIC\EpicCodyClient.cs" />
     <Compile Include="Business\HL7View\EPIC\EpicHRHClient.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerResultView.cs" />
     <Compile Include="Business\HL7View\EPIC\EPICBeakerObrView.cs" />
@@ -604,6 +617,13 @@
     <Compile Include="Business\Label.Model\HologicSlideLabel.cs" />
     <Compile Include="Business\PanelSet.Model\BreastCancerIndex.cs" />
     <Compile Include="Business\PanelSet.Model\ChimerismPostTransplant.cs" />
+    <Compile Include="Business\PanelSet.Model\TCellReceptorBeta.cs" />
+    <Compile Include="Business\PanelSet.Model\TCellReceptorDelta.cs" />
+    <Compile Include="Business\PanelSet.Model\NeoTypeMyeloidProfileTest.cs" />
+    <Compile Include="Business\PanelSet.Model\NeoTypeMDSCMMLProfileTest.cs" />
+    <Compile Include="Business\PanelSet.Model\NeoTypeAMLPrognosticProfileTest.cs" />
+    <Compile Include="Business\PanelSet.Model\FLT3PreliminaryByPCRTest.cs" />
+    <Compile Include="Business\PanelSet.Model\Onep36DeletionFISH.cs" />
     <Compile Include="Business\PanelSet.Model\IRF4RearrangementByFISH.cs" />
     <Compile Include="Business\PanelSet.Model\SalivaryGlandNGSInfusionPanel.cs" />
     <Compile Include="Business\PanelSet.Model\NPM1MRDMolecularAnalysis.cs" />
@@ -1149,16 +1169,6 @@
     <Compile Include="Business\HL7View\ResultViewFactory.cs" />
     <Compile Include="Business\HL7View\SurgicalObxView.cs" />
     <Compile Include="Business\HL7View\VentanaStainOrderOld.cs" />
-    <Compile Include="Business\HL7View\WPH\WPHHl7Client.cs" />
-    <Compile Include="Business\HL7View\WPH\WPHMSHView.cs" />
-    <Compile Include="Business\HL7View\WPH\WPHOBRView.cs" />
-    <Compile Include="Business\HL7View\WPH\WPHOBXCCView.cs" />
-    <Compile Include="Business\HL7View\WPH\WPHOBXView.cs" />
-    <Compile Include="Business\HL7View\WPH\WPHOBXViewFactory.cs" />
-    <Compile Include="Business\HL7View\WPH\WPHORCView.cs" />
-    <Compile Include="Business\HL7View\WPH\WPHPIDView.cs" />
-    <Compile Include="Business\HL7View\WPH\WPHResultStatsusEnum.cs" />
-    <Compile Include="Business\HL7View\WPH\WPHResultView.cs" />
     <Compile Include="Business\HL7View\WYDOH\WYDOHClient.cs" />
     <Compile Include="Business\HL7View\WYDOH\WYDOHMSHView.cs" />
     <Compile Include="Business\HL7View\WYDOH\WYDOHOBRView.cs" />
@@ -1314,11 +1324,11 @@
     <Compile Include="Business\PreviousResult.cs" />
     <Compile Include="Business\PreviousResultCollection.cs" />
     <Compile Include="Business\ReportDistribution.Model\DepartmentOfHealthHandler.cs" />
+    <Compile Include="Business\ReportDistribution.Model\EMADistribution.cs" />
     <Compile Include="Business\ReportDistribution.Model\MeditechNMHDistribution.cs" />
     <Compile Include="Business\ReportDistribution.Model\TextAndEmailSubmission.cs" />
     <Compile Include="Business\ReportDistribution.Model\TextSubmission.cs" />
     <Compile Include="Business\ReportDistribution.Model\EmailSubmission.cs" />
-    <Compile Include="Business\ReportDistribution.Model\MeditechDistribution.cs" />
     <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerNoWHP.cs" />
     <Compile Include="Business\ReportDistribution.Model\MultiTestDistributionHandlerWHPHold.cs" />
     <Compile Include="Business\ReportDistribution.Model\PrintDistribution.cs" />
@@ -1342,22 +1352,38 @@
     <Compile Include="Business\Surgical\PQRSMeasure249.cs" />
     <Compile Include="Business\Surgical\PQRSMeasure250.cs" />
     <Compile Include="Business\Surgical\PQRSMeasure440.cs" />
+    <Compile Include="Business\SvhAuditItem.cs" />
+    <Compile Include="Business\SvhAuditList.cs" />
     <Compile Include="Business\Task.Model\TaskBlockMaterialAlert.cs" />
     <Compile Include="Business\Task.Model\TaskSendBlockToFrontierCancer.cs" />
     <Compile Include="Business\Task.Model\TaskOrderView.cs" />
     <Compile Include="Business\Task.Model\TaskOrderViewList.cs" />
+    <Compile Include="Business\Test.Model\Claudin4T.cs" />
     <Compile Include="Business\Test.Model\CrystallographyTest.cs" />
     <Compile Include="Business\Test.Model\SpecificCptCodeTest.cs" />
     <Compile Include="Business\Test.Model\TestCollectionInstance.cs" />
     <Compile Include="Business\Test.Model\TestFactory.cs" />
     <Compile Include="Business\Test.Model\TestOrderStatusView.cs" />
     <Compile Include="Business\Test.Model\TestOrderStatusViewCollection.cs" />
+    <Compile Include="Business\Test\ABL1KinaseDomainMutation\ABL1KinaseDomainMutationDetectedResult - Copy.cs" />
+    <Compile Include="Business\Test\AnalCytology\AnalCytologyEPICOBXView.cs" />
+    <Compile Include="Business\Test\AnalCytology\AnalCytologyTest.cs" />
+    <Compile Include="Business\Test\AnalCytology\AnalCytologyTestOrder.cs" />
+    <Compile Include="Business\Test\AnalCytology\AnalyCytologyWordDocument.cs" />
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2InvalidResult.cs" />
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2PositiveResult.cs" />
     <Compile Include="Business\Test\APTIMASARSCoV2\APTIMASARSCoV2NegativeResult.cs" />
+    <Compile Include="Business\Test\BoneMarrowSummary\ReferenceLabSummary.cs" />
+    <Compile Include="Business\Test\BoneMarrowSummary\ReferenceLabSummaryCollection.cs" />
     <Compile Include="Business\Test\FlowCytometryAnalysis\FlowCytometryAnalysisObxView.cs" />
+    <Compile Include="Business\Test\Her2AmplificationByIHC\HER2AmplificationByIHCIndicatorCollection.cs" />
+    <Compile Include="Business\Test\Her2AmplificationByIHC\Her2IHCResult.cs" />
+    <Compile Include="Business\Test\Her2AmplificationByIHC\Her2IHCResultCollection.cs" />
+    <Compile Include="Business\Test\Her2AmplificationByIHC\MetastaticStatusCollection.cs" />
+    <Compile Include="Business\Test\Her2AmplificationByIHC\MetastaticStatusResult.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultEndometrial.cs" />
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultGeneric.cs" />
+    <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultMetastatic.cs" />
     <Compile Include="Business\Test\HPV\HPVRiverstoneObxView.cs" />
     <Compile Include="Business\Test\IEP\IEPClosingResult.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEColonComplete.cs" />
@@ -1387,6 +1413,7 @@
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2InvalidResult.cs" />
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2RiverstoneOBXView.cs" />
     <Compile Include="Business\Test\SPEP\SPEPClosingResult.cs" />
+    <Compile Include="Business\Test\Surgical\SurgicalEMAOBXView.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalNMHObxView.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalRiverstoneOBXView.cs" />
     <Compile Include="Business\Test\ALLFISHPanel\ALLFISHPanelTest.cs" />
@@ -1414,7 +1441,6 @@
     <Compile Include="Business\Test\AndrogenReceptor\AndrogenReceptorEPICOBXView.cs" />
     <Compile Include="Business\Test\AndrogenReceptor\AndrogenReceptorTestOrder.cs" />
     <Compile Include="Business\Test\AndrogenReceptor\AndrogenReceptorWordDocument.cs" />
-    <Compile Include="Business\Test\API2MALT1ByFISH\API2MALT1ByFISHWPHOBXView.cs" />
     <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestTest.cs" />
     <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestTestOrder.cs" />
     <Compile Include="Business\Test\AuthorizationForVerbalTestRequest\AuthorizationForVerbalTestRequestWordDocument.cs" />
@@ -1435,7 +1461,6 @@
     <Compile Include="Business\Test\EGFRToALKReflexAnalysis\EGFRToALKReflexAnalysisBRAFResult.cs" />
     <Compile Include="Business\Test\ElaneSequenceAnalysis\ElaneSequenceAnalysisTest.cs" />
     <Compile Include="Business\Test\ErPrSemiQuantitative\ErPrSemiQuantitativeEpicBeakerObxView.cs" />
-    <Compile Include="Business\Test\ErPrSemiQuantitative\ErPrSemiQuantitativeWPHOBXView.cs" />
     <Compile Include="Business\Test\ETV6F\ETV6FTest.cs" />
     <Compile Include="Business\Test\ExtractAndHoldForMolecular\ExtractAndHoldForMolecularTestRetired.cs" />
     <Compile Include="Business\Test\ExtractAndHoldForPreauthorization\ExtractAndHoldForPreauthorizationWordDocument.cs" />
@@ -1469,19 +1494,15 @@
     <Compile Include="Business\Test\HER2AnalysisSummary\HER2AnalysisSummaryTest.cs" />
     <Compile Include="Business\Test\HER2AnalysisSummary\HER2AnalysisSummaryTestOrder.cs" />
     <Compile Include="Business\Test\HER2AnalysisSummary\HER2AnalysisSummaryWordDocument.cs" />
-    <Compile Include="Business\Test\HER2AnalysisSummary\HER2AnalysisSummaryWPHOBXView.cs" />
-    <Compile Include="Business\Test\HighGradeLargeBCellLymphoma\HighGradeLargeBCellLymphomaWPHOBXView.cs" />
     <Compile Include="Business\Test\HoldForFlow\CultureAndHoldForCytogeneticsTest.cs" />
     <Compile Include="Business\Test\HoldForFlow\DirectHarvestForFISHTest.cs" />
     <Compile Include="Business\Test\HPV1618\HPV1618EPICBeakerObxView.cs" />
-    <Compile Include="Business\Test\HPV1618\HPV1618WPHOBXView.cs" />
     <Compile Include="Business\Test\HPVDNATissueTyping\HPVDNATissueTypingTest.cs" />
     <Compile Include="Business\Test\HPVRNAISH\HPVRNAISHTest.cs" />
     <Compile Include="Business\Test\HPV\HPVEPICBeakerObxView.cs" />
     <Compile Include="Business\Test\IEP\IEPTest.cs" />
     <Compile Include="Business\Test\INI1\INI1Test.cs" />
     <Compile Include="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelEPICOBXView.cs" />
-    <Compile Include="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelWPHOBXView.cs" />
     <Compile Include="Business\Test\JAK29P241\JAK29P241Test.cs" />
     <Compile Include="Business\Test\JAK2V617F\JAK2V617FEPICNTEView.cs" />
     <Compile Include="Business\Test\LLP\LLPEPICBeakerObxView.cs" />
@@ -1498,32 +1519,20 @@
     <Compile Include="Business\Test\LynchSyndrome\LSEIHCResultLossOfExpression.cs" />
     <Compile Include="Business\Test\MITF\MITFTest.cs" />
     <Compile Include="Business\Test\MPNExtendedReflexPanel\MPNExtendedReflexPanelTest.cs" />
-    <Compile Include="Business\Test\BCellEnumeration\BCellEnumerationWPHOBXView.cs" />
     <Compile Include="Business\Test\BCellGeneRearrangement\BCellGeneRearrangementCMMCNTEView.cs" />
-    <Compile Include="Business\Test\BCellGeneRearrangement\BCellGeneRearrangementWPHOBXView.cs" />
     <Compile Include="Business\Test\BCL2t1418ByFISH\BCL2t1418ByFISHCMMCNTEView.cs" />
-    <Compile Include="Business\Test\BCL2t1418ByFISH\BCL2t1418ByFISHWPHOBXView.cs" />
     <Compile Include="Business\Test\BCRABLByFish\BCRABLByFishCMMCNTEView.cs" />
-    <Compile Include="Business\Test\BCRABLByFish\BCRABLByFishWPHOBXView.cs" />
     <Compile Include="Business\Test\BCRABLByPCR\BCRABLByPCRCMMCNTEView.cs" />
-    <Compile Include="Business\Test\BCRABLByPCR\BCRABLByPCRWPHOBXView.cs" />
     <Compile Include="Business\Test\CCNDIBCLIGHByFISH\CCNDIBCLIGHByFISHCMMCNTEView.cs" />
-    <Compile Include="Business\Test\CCNDIBCLIGHByFISH\CCNDIBCLIGHByFISHWPHOBXView.cs" />
     <Compile Include="Business\Test\CDKN2ADeletionFISHforALL\CDKN2ADeletionFISHforALLTest.cs" />
     <Compile Include="Business\Test\CEBPA\CEBPACMMCNTEView.cs" />
-    <Compile Include="Business\Test\CEBPA\CEBPAWPHOBXView.cs" />
     <Compile Include="Business\Test\ChromosomeAnalysisForFetalAnomaly\ChromosomeAnalysisForFetalAnomalCMMCNteView.cs" />
-    <Compile Include="Business\Test\ChromosomeAnalysisForFetalAnomaly\ChromosomeAnalysisForFetalAnomalyWPHOBXView.cs" />
     <Compile Include="Business\Test\CLLByFish\CLLByFishCMMCNTEView.cs" />
-    <Compile Include="Business\Test\CLLByFish\CLLByFishWPHOBXView.cs" />
     <Compile Include="Business\Test\EosinophiliaByFISH\EosinophiliaByFISHCMMCNTEView.cs" />
-    <Compile Include="Business\Test\EosinophiliaByFISH\EosinophiliaByFISHWPHOBXView.cs" />
     <Compile Include="Business\Test\ExtractAndHoldForPreauthorization\ExtractAndHoldForPreauthorizationTest.cs" />
     <Compile Include="Business\Test\ExtractAndHoldForPreauthorization\ExtractAndHoldForPreauthorizationTestOrder.cs" />
     <Compile Include="Business\Test\FLT3Preliminary\FLT3PreliminaryTest.cs" />
     <Compile Include="Business\Test\FLT3\FLT3CMMCNTEView.cs" />
-    <Compile Include="Business\Test\FLT3\FLT3WPHOBXView.cs" />
-    <Compile Include="Business\Test\HPV1618SolidTumor\HPV1618SolidTumorWPHOBXView.cs" />
     <Compile Include="Business\Test\IgHMFABByFish\IgHMFABByFishEPICOBXView.cs" />
     <Compile Include="Business\Test\IgHMFABByFish\IgHMFABByFishTest.cs" />
     <Compile Include="Business\Test\IgHMFABByFish\IgHMFABByFishTestOrder.cs" />
@@ -1534,11 +1543,8 @@
     <Compile Include="Business\Test\LymphocyteSubsetPanel4\LymphocyteSubsetPanel4Test.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEGeneralAllIntact.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LynchSyndromeIHCPanelCMMCNTEView.cs" />
-    <Compile Include="Business\Test\LynchSyndrome\LynchSyndromeIHCPanelWPHOBXView.cs" />
     <Compile Include="Business\Test\MDSExtendedByFish\MDSExtendedByFishCMMCNTEView.cs" />
-    <Compile Include="Business\Test\MDSExtendedByFish\MDSExtendedByFishWPHOBXView.cs" />
     <Compile Include="Business\Test\MicrobiologyByPCR\MicrobiologyByPCRTest.cs" />
-    <Compile Include="Business\Test\MPNFish\MPNFishWPHOBXView.cs" />
     <Compile Include="Business\Test\MultipleMyelomaMGUSByFish\MultipleMyelomaMGUSByFishInconclusiveResult.cs" />
     <Compile Include="Business\Test\MyeloidMalignanciesMutationPanel\MyeloidMalignanciesMutationPanelTest.cs" />
     <Compile Include="Business\Test\NeoLABMyeloidDisordersProfile\NeoLABMyeloidDisordersProfileTest.cs" />
@@ -1573,7 +1579,6 @@
     <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3EsophSquamCellCarcinomaEPICOBXView.cs" />
     <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3EsophSquamCellCarcinomaSysGenAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3EsophSquamCellCarcinomaWordDocument.cs" />
-    <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3EsophSquamCellCarcinomaWPHOBXView.cs" />
     <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3forEsophagealSquamousCellCarcinomaTest.cs" />
     <Compile Include="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3forEsophagealSquamousCellCarcinomaTestOrder.cs" />
     <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEAEPICNTEView.cs" />
@@ -1581,28 +1586,24 @@
     <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEATestOrder.cs" />
     <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEAWordDocument.cs" />
     <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEACMMCNTEView.cs" />
-    <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEAWPHOBXView.cs" />
     <Compile Include="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEASystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckEpicObxView.cs" />
     <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckTest.cs" />
     <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckTestOrder.cs" />
     <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckWordDocument.cs" />
     <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckCMMCNTEView.cs" />
-    <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckWPHOBXView.cs" />
     <Compile Include="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerEpicNTEView.cs" />
     <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerTest.cs" />
     <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerTestOrder.cs" />
     <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerWordDocument.cs" />
     <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerCMMCNTEView.cs" />
-    <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerWPHOBXView.cs" />
     <Compile Include="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaEPICNTEView.cs" />
     <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaTest.cs" />
     <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaTestOrder.cs" />
     <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaWordDocument.cs" />
     <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaCMMCNTEView.cs" />
-    <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaWPHOBXView.cs" />
     <Compile Include="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3\PDL22C3CMMCNTEView.cs" />
     <Compile Include="Business\Test\PDL1288\PDL1288Test.cs" />
@@ -1615,7 +1616,6 @@
     <Compile Include="Business\Test\PlateletAssociatedAntibodiesV2\PlateletAssociatedAntibodiesV2WordDocument.cs" />
     <Compile Include="Business\Test\PNH\PNHCMMCNTEView.cs" />
     <Compile Include="Business\Test\PNH\PNHEpicBeakerObxView.cs" />
-    <Compile Include="Business\Test\PNH\PNHWPHOBXView.cs" />
     <Compile Include="Business\Test\PrealbuminTTR\PrealbuminTTRTest.cs" />
     <Compile Include="Business\Test\AmyloidAandAmyloidP\AmyloidAandAmyloidPTest.cs" />
     <Compile Include="Business\Test\PTENIHC\PTENIHCTest.cs" />
@@ -1623,7 +1623,6 @@
     <Compile Include="Business\Test\ReticulatedPlateletAnalysisV2\ReticulatedPlateletAnalysisV2EPICBeakerOBXView.cs" />
     <Compile Include="Business\Test\SDHB\SDHB.cs" />
     <Compile Include="Business\Test\SF3B1MutationAnalysis\SF3B1MutationAnalysisTest.cs" />
-    <Compile Include="Business\Test\RASRAFPanel\RASRAFPanelWPHOBXView.cs" />
     <Compile Include="Business\Test\RBCBand3ProteinReduction\RBCBand3ProteinReductionTest.cs" />
     <Compile Include="Business\Test\ReticulatedPlateletAnalysisV2\ReticulatedPlateletAnalysisV2EPICOBXView.cs" />
     <Compile Include="Business\Test\ReticulatedPlateletAnalysisV2\ReticulatedPlateletAnalysisV2Test.cs" />
@@ -1642,7 +1641,6 @@
     <Compile Include="Business\Test\StemCellCD34Enumeration\StemCellCD34EnumerationWordDocument.cs" />
     <Compile Include="Business\Test\StemCellEnumeration\StemCellEnumerationTestOrder.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalEpicBeakerObxView.cs" />
-    <Compile Include="Business\Test\TCellNKProfile\TCellNKProfileWPHOBXView.cs" />
     <Compile Include="Business\Test\TET2MutationAnalysis\TET2MutationAnalysisTest.cs" />
     <Compile Include="Business\Test\TFE3\TFE3Test.cs" />
     <Compile Include="Business\Test\ThinPrepPap\ThinPrepPapEPICBeakerObxView.cs" />
@@ -1658,7 +1656,6 @@
     <Compile Include="Business\Test\TP53MutationAnalysis\TP53MutationAnalysisTest.cs" />
     <Compile Include="Business\Test\TPS63Rearrangement\TPS63RearrangmentTest.cs" />
     <Compile Include="Business\Test\Trichomonas\TrichomonasEPICBeakerObxView.cs" />
-    <Compile Include="Business\Test\Trichomonas\TrichomonasWPHOBXView.cs" />
     <Compile Include="Business\Test\UPEP\UPEPTest.cs" />
     <Compile Include="Business\Test\VaricellaZosterVirus\VaricellaZosterVirusTest.cs" />
     <Compile Include="Business\Test\WholeExomeSequencing\WholeExomeSequencingTest.cs" />
@@ -1679,6 +1676,7 @@
     <Compile Include="Business\WebService\WebServiceAccountView.cs" />
     <Compile Include="Business\WebService\WebServiceAccountCollection.cs" />
     <Compile Include="Business\WebService\WebServiceClientView.cs" />
+    <Compile Include="Business\XPSDocument\Result\Xps\HoldListReport.cs" />
     <Compile Include="Policy\EditDirectoryDialog.xaml.cs">
       <DependentUpon>EditDirectoryDialog.xaml</DependentUpon>
     </Compile>
@@ -1699,6 +1697,9 @@
     </Compile>
     <Compile Include="UI\MaterialStorage\MaterialStorageScanLog.cs" />
     <Compile Include="UI\MaterialStorage\MaterialStorageScanLogItem.cs" />
+    <Compile Include="UI\Monitor\HuddleDashboardPage.xaml.cs">
+      <DependentUpon>HuddleDashboardPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\PDFViewer.xaml.cs">
       <DependentUpon>PDFViewer.xaml</DependentUpon>
     </Compile>
@@ -1712,6 +1713,10 @@
       <DependentUpon>ReferenceLabTestingWorkspace.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\TestEnvironment.cs" />
+    <Compile Include="UI\Test\AnalyCytologyResultPage.xaml.cs">
+      <DependentUpon>AnalyCytologyResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\AnalCytologyResultPath.cs" />
     <Compile Include="UI\Test\FLT3ResultPage.xaml.cs">
       <DependentUpon>FLT3ResultPage.xaml</DependentUpon>
     </Compile>
@@ -1759,7 +1764,6 @@
     <Compile Include="Business\Test\AdditionalTestingNotification\AdditionalTestingNotificationWordDocument.cs" />
     <Compile Include="Business\Test\AMLFavorableRisk\AMLFavorableRiskTest.cs" />
     <Compile Include="Business\Test\AMLPrognosticProfile\AMLPrognosticProfileTest.cs" />
-    <Compile Include="Business\Test\AMLStandardByFish\AMLStandardByFishWPHOBXView.cs" />
     <Compile Include="Business\Test\AmyloidProteinIDParLCMS\AmyloidProteinIDParLCMSTest.cs" />
     <Compile Include="Business\Test\ATRXIHC\ATRXIHCTest.cs" />
     <Compile Include="Business\Test\AutopsyTechnicalOnly\AutopsyTechnicalOnlyTest.cs" />
@@ -1769,7 +1773,6 @@
     <Compile Include="Business\Test\BCellSubsetAnalysis\BCellSubsetAnalysisTest.cs" />
     <Compile Include="Business\Test\BCellSubsetAnalysis\BCellSubsetAnalysisWordDocument.cs" />
     <Compile Include="Business\Test\BCellSubsetAnalysis\BCellSubsetAnalysisTestOrder.cs" />
-    <Compile Include="Business\Test\BCellSubsetAnalysis\BCellSubsetAnalysisWPHOBXView.cs" />
     <Compile Include="Business\Test\BCellSubsetAnalysis\ReferenceRanges.cs" />
     <Compile Include="Business\Test\BCellSubsetAnalysis\ReferenceRangeValue.cs" />
     <Compile Include="Business\Test\BoneMarrowSummary\OtherReportViewCollection.cs" />
@@ -1782,14 +1785,9 @@
     <Compile Include="Business\Test\BRAFMutationAnalysis\BRAFMutationAnalysisTest.cs" />
     <Compile Include="Business\Test\BRAFMutationAnalysis\BRAFMutationAnalysisTestOrder.cs" />
     <Compile Include="Business\Test\BRAFMutationAnalysis\BRAFMutationAnalysisWordDocument.cs" />
-    <Compile Include="Business\Test\BRAFMutationAnalysis\BRAFMutationAnalysisWPHOBXView.cs" />
-    <Compile Include="Business\Test\BRAFV600EK\BRAFV600EKWPHOBXView.cs" />
     <Compile Include="Business\Test\CalcitoninByImmunohistochemistry\CalcitoninByImmunohistochemistryTest.cs" />
-    <Compile Include="Business\Test\CalreticulinMutationAnalysis\CalreticulinMutationAnalysisWPHOBXView.cs" />
     <Compile Include="Business\Test\ChromosomeAnalysisBreakage\ChromosomeAnalysisBreakageTest.cs" />
-    <Compile Include="Business\Test\CKIT\CKITWPHOBXView.cs" />
     <Compile Include="Business\Test\COL1A1PDGFB\COL1A1PDGFBTest.cs" />
-    <Compile Include="Business\Test\ComprehensiveColonCancerProfile\ComprehensiveColonCancerProfileWPHOBXView.cs" />
     <Compile Include="Business\Test\ConstitutionalChromosomeAnalysis\ConstitutionalChromosomeAnalysisTest.cs" />
     <Compile Include="Business\Test\CXCR4MutationAnalysis\CXCR4MutationAnalysisTest.cs" />
     <Compile Include="Business\Test\EGFRT790MLiquidBiopsy\EGFRT790MLiquidBiopsyTest.cs" />
@@ -1804,9 +1802,7 @@
     <Compile Include="Business\Test\BoneMarrowSummary\BoneMarrowSummaryEPICOBXView.cs" />
     <Compile Include="Business\Test\BoneMarrowSummary\BoneMarrowSummaryTest.cs" />
     <Compile Include="Business\Test\BoneMarrowSummary\BoneMarrowSummaryWordDocument.cs" />
-    <Compile Include="Business\Test\BoneMarrowSummary\BoneMarrowSummaryWPHOBXView.cs" />
     <Compile Include="Business\Test\HER2BreastEquivocalFISHPanel\HER2BreastEquivocalFISHPanelTest.cs" />
-    <Compile Include="Business\Test\HoldForFlow\HoldForFlowWPHOBXView.cs" />
     <Compile Include="Business\Test\HPV1618SolidTumor\HPV1618SolidTumorCMMCView.cs" />
     <Compile Include="Business\Test\HPV1618SolidTumor\HPV1618SolidTumorEPICOBXView.cs" />
     <Compile Include="Business\Test\HPV1618SolidTumor\HPV1618SolidTumorIndication.cs" />
@@ -1818,41 +1814,28 @@
     <Compile Include="Business\Test\IgHClonalityMRDByNGS\IgHClonalityMRDByNGSTest.cs" />
     <Compile Include="Business\Test\LymphocyteSubsetPanel5\LymphocyteSubsetPanel5Test.cs" />
     <Compile Include="Business\Test\LymphocyteSubsetPanel7\LymphocyteSubsetPanel7Test.cs" />
-    <Compile Include="Business\Test\LynchSyndrome\LynchSyndromeEvaluationWPHOBXView.cs" />
-    <Compile Include="Business\Test\MDSByFish\MDSByFishWPHOBXView.cs" />
     <Compile Include="Business\Test\METMutationAnalysis\METMutationAnalysisTest.cs" />
     <Compile Include="Business\Test\Miprofile\MiprofileTest.cs" />
-    <Compile Include="Business\Test\MPL\MPLWPHOBXView.cs" />
     <Compile Include="Business\Test\MPNStandardReflexPanel\MPNStandardReflexPanelTest.cs" />
     <Compile Include="Business\Test\FlowCytometryAnalysis\FlowCytometryAnalysisTest.cs" />
     <Compile Include="Business\Test\BCRABLByFish\BCRABLByFishTestOrder.cs" />
-    <Compile Include="Business\Test\ChromosomeAnalysis\ChromosomeAnalysisWPHOBXView.cs" />
     <Compile Include="Business\Test\EGFRToALKReflexAnalysis\EGFRToALKReflexAnalysisPDL122C3Result.cs" />
     <Compile Include="Business\Test\EGFRToALKReflexAnalysis\EGFRToALKReflexAnalysisPDL1SP142Result.cs" />
     <Compile Include="Business\Test\GrossOnly\GrossOnlyTest.cs" />
     <Compile Include="Business\Test\GrossOnly\GrossOnlyTestOrder.cs" />
     <Compile Include="Business\Test\GrossOnly\GrossOnlyWordDocument.cs" />
     <Compile Include="Business\Test\BrainDonation\BrainDonationTest.cs" />
-    <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationByISHWPHOBXView.cs" />
-    <Compile Include="Business\Test\HPV\HPVWPHOBXView.cs" />
-    <Compile Include="Business\Test\JAK2V617F\JAK2V617FWPHObxView.cs" />
-    <Compile Include="Business\Test\LLP\LLPWPHOBXView.cs" />
-    <Compile Include="Business\Test\MultipleMyelomaMGUSByFish\MultipleMyelomaMGUSByFishWPHOBXView.cs" />
     <Compile Include="Business\Test\MUM1ByIHC\MUM1ByIHCTest.cs" />
     <Compile Include="Business\Test\NeoTYPEColorectalTumorProfile\NeoTYPEColorectalTumorProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPELungTumorProfile\NeoTYPELungTumorProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPEMDSCMMLProfile\NeoTYPEMDSCMMLProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPEOtherSolidTumorProfile\NeoTYPEOtherSolidTumorProfileTest.cs" />
     <Compile Include="Business\Test\NeoTYPEPancreaseTumorProfile\NeoTYPEPancreaseTumorProfileTest.cs" />
-    <Compile Include="Business\Test\NGCT\NGCTWPHOBXView.cs" />
-    <Compile Include="Business\Test\NPM1\NPM1WPHOBXView.cs" />
     <Compile Include="Business\Test\PDL122C3\PDL122C3EpicObxView.cs" />
     <Compile Include="Business\Test\PDL122C3\PDL122C3SystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3\PDL122C3Test.cs" />
     <Compile Include="Business\Test\PDL122C3\PDL122C3TestOrder.cs" />
     <Compile Include="Business\Test\PDL122C3\PDL122C3WordDocument.cs" />
-    <Compile Include="Business\Test\PDL122C3\PDL122C3WPHOBXView.cs" />
-    <Compile Include="Business\Test\PDL1SP142\PDL1SP142WPHOBXView.cs" />
     <Compile Include="Business\Test\PlasmaCellMyelomaPrognosticFISHPanel\PlasmaCellMyelomaPrognosticFISHPanelTest.cs" />
     <Compile Include="Business\Test\PlateletAssociatedAntibodies\PlateletAssociatedAntibodiesEPICOBXView.cs" />
     <Compile Include="Business\Test\RestrospectiveReview\RetrospectiveReviewTestOrderDetail.cs" />
@@ -1873,10 +1856,7 @@
     <Compile Include="Business\Test\TCellNKProfile\TCellNKProfileTest.cs" />
     <Compile Include="Business\Test\TCellNKProfile\TCellNKProfileTestOrder.cs" />
     <Compile Include="Business\Test\TCellNKProfile\TCellNKProfileWordDocument.cs" />
-    <Compile Include="Business\Test\TestCancelled\TestCancelledWPHOBXView.cs" />
-    <Compile Include="Business\Test\ThinPrepPap\ThinPrepPapWPHOBXView.cs" />
     <Compile Include="Business\Test\TP63F\TP63FTest.cs" />
-    <Compile Include="Business\Test\WomensHealthProfile\WomensHealthProfileWPHOBXView.cs" />
     <Compile Include="Business\XPSDocument\ClientBillingDetailReportV2.cs" />
     <Compile Include="Business\XPSDocument\ImageType.cs" />
     <Compile Include="Business\XPSDocument\PlacentalPathologyQuestionnaireV2.cs" />
@@ -2439,7 +2419,7 @@
     <Compile Include="Business\Test.Model\Villin.cs" />
     <Compile Include="Business\Test.Model\WrightsStain.cs" />
     <Compile Include="Business\Test.Model\Zap70.cs" />
-    <Compile Include="Business\Test\ABL1KinaseDomainMutation\ABL1KinaseDomainMutationDetectedResult.cs" />
+    <Compile Include="Business\Test\ABL1KinaseDomainMutation\ABL1KinaseDomainQNSResult.cs" />
     <Compile Include="Business\Test\ABL1KinaseDomainMutation\ABL1KinaseDomainMutationEpicObxView.cs" />
     <Compile Include="Business\Test\ABL1KinaseDomainMutation\ABL1KinaseDomainMutationNotDetectedResult.cs" />
     <Compile Include="Business\Test\ABL1KinaseDomainMutation\ABL1KinaseDomainMutationResultCollection.cs" />
@@ -3175,7 +3155,6 @@
     <Compile Include="Business\Test\Surgical\SurgicalAuditCollection.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalCMMCNteView.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalECWOBXView.cs" />
-    <Compile Include="Business\Test\Surgical\SurgicalWPHObxView.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalEpicObxView.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalSpecimen.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalSpecimenAudit.cs" />
@@ -5354,7 +5333,6 @@
     <Resource Include="Business\Rules\Billing\RulesSetBillingType.xml" />
     <Resource Include="Business\Rules\PanelOrder\RulesAcceptPeerReviewResults.xml" />
     <Resource Include="Business\Rules\PanelSetOrder\RulesSignatureButtonText.xml" />
-    <EmbeddedResource Include="Business\Rules\Surgical\RulesAssignPathologistId.xml" />
     <Resource Include="Business\XMLTemplates\AccessionSummaryBreastCancer.xml" />
     <Resource Include="Business\XMLTemplates\AccessionSummaryColorectalCancer.xml" />
     <Resource Include="Business\XMLTemplates\AccessionSummaryHematoPathology.xml" />
@@ -5716,6 +5694,10 @@
     <Page Include="UI\MaterialStorage\MaterialStorageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Monitor\HuddleDashboardPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\PDFViewer.xaml">
       <SubType>Designer</SubType>
@@ -6089,6 +6071,10 @@
     <Page Include="UI\Test\AMLStandardByFishResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Test\AnalyCytologyResultPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Test\AndrogenReceptorResultPage.xaml">
       <SubType>Designer</SubType>
@@ -7663,6 +7649,8 @@
     <Error Condition="!Exists('..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
     <Error Condition="!Exists('..\packages\Magick.NET-Q16-AnyCPU.11.0.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q16-AnyCPU.11.0.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.targets'))" />
   </Target>
   <Import Project="..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.1.0\build\net45\Grpc.Core.targets')" />
   <PropertyGroup>
@@ -7673,4 +7661,5 @@
   <Import Project="..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.97.1.60\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
   <Import Project="..\packages\Magick.NET-Q16-AnyCPU.11.0.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets" Condition="Exists('..\packages\Magick.NET-Q16-AnyCPU.11.0.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" />
+  <Import Project="..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.targets" Condition="Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.194\build\Microsoft.Windows.SDK.BuildTools.targets')" />
 </Project>

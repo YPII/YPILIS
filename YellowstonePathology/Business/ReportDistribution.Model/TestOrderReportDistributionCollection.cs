@@ -236,6 +236,20 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             return result;
         }
 
+        public bool EMADistributionTypeExists()
+        {
+            bool result = false;
+            foreach (TestOrderReportDistribution testOrderReportDistribution in this)
+            {
+                if (testOrderReportDistribution.DistributionType.Contains("EMA") == true)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public bool Exists(string testOrderReportDistributionId)
         {
             bool result = false;

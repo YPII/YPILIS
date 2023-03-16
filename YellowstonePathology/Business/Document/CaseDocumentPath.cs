@@ -94,9 +94,11 @@ namespace YellowstonePathology.Business.Document
             {
                 string legacyReportNo = GetLegacyPath(orderIdParser.ReportNo);
                 return legacyReportNo;
-            }                
+            }
 
-            string strPath = @"\\CFileServer\AccessionDocuments\20" + orderIdParser.MasterAccessionNoYear.Value.ToString();            
+            //\\YPIILab.YPII.com\Public\Accession Documents
+            //string strPath = @"\\FileServer\AccessionDocuments\20" + orderIdParser.MasterAccessionNoYear.Value.ToString();                        
+            string strPath = $@"{Properties.Settings.Default.AccessionDocuments}\20" + orderIdParser.MasterAccessionNoYear.Value.ToString();
             string number = orderIdParser.MasterAccessionNoNumber.Value.ToString();
             int length = number.Length;
 

@@ -782,7 +782,7 @@ namespace YellowstonePathology.UI.Flow
                 System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;
                 System.Net.NetworkCredential credential = credentials.GetCredential(uri, "Basic");
 
-                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
+                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.110 ");
                 client.Credentials = credential;
                 client.Send(mailMessage);
 

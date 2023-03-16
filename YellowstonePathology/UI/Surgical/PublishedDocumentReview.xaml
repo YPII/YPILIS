@@ -15,18 +15,27 @@
         <TextBlock Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right">
             <Hyperlink Click="HyperLinkShowFinalizeDialog_Click">Show Finalize Dialog</Hyperlink>
         </TextBlock>
+        <WebBrowser x:Name="WebBrowserReport" Grid.Column="0" Grid.Row="1"></WebBrowser>
         
-        <DocumentViewer Grid.Column="0" Grid.Row="1" Document="{Binding Path=PublishedDocument}">
-            <DocumentViewer.Resources>
-                <Style TargetType="ContentControl">
-                    <Style.Triggers>
-                        <Trigger Property="Name" Value="PART_FindToolBarHost">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
-                    </Style.Triggers>                    
-                </Style>
-            </DocumentViewer.Resources>
-        </DocumentViewer>              
-
+        <!--
+        <TabControl >
+            <TabItem Header="PDF">
+                
+            </TabItem>
+            <TabItem Header="XPS">
+                <DocumentViewer  Document="{Binding Path=PublishedDocument}">
+                    <DocumentViewer.Resources>
+                        <Style TargetType="ContentControl">
+                            <Style.Triggers>
+                                <Trigger Property="Name" Value="PART_FindToolBarHost">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DocumentViewer.Resources>
+                </DocumentViewer>
+            </TabItem>
+        </TabControl>
+        -->
     </Grid>
 </UserControl>

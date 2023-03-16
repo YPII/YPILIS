@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.PNH
 
 			this.m_Method = "Quantitative Flow Cytometry.  High sensitivity immunophenotypic analysis was performed using CD45/side scatter log gating, with further " +
 				"gating refinement using CD15 and CD64. GPI-linked proteins were analyzed using CD14, CD24, CD59, and fluorescent Aerolysin(FLAER). Sensitivity " +
-				"for granulocytes: 0.01%. Sensitivity for RBC: 0.03%. Sensitivity for Monocytes: 0.02%.";
+				"for granulocytes: 0.01%. Sensitivity for RBC: 0.01%. Sensitivity for Monocytes: 0.01%.";
 			this.m_References = "Diagnosis and Management of PNH.  Parker C, et al.  Blood. 2005 Dec 1; 106(12):3699-709." + Environment.NewLine + 
 				"Guidelines for the diagnosis and monitoring of paroxysmal nocturnal hemoglobinuria and related disorders by flow cytometry. Borowitz MJ, Craig FE, " +
 				"DiGiuseppe JA, Illingworth AJ, Rosse W, Sutherland DR, Wittwer CT, Richards SJ. Cytometry B (Clin Cytometry) 2010 Jul; 78B(4): 211-30.";

@@ -38,6 +38,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="*"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
@@ -60,22 +61,26 @@
                 <TextBlock Grid.Column="0" Grid.Row="5" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>
 
                 <TextBlock Grid.Column="0" Grid.Row="6" Margin="5,3,0,0">
+                    <Hyperlink Click="HyperLinkSetResults_Click">Set Results</Hyperlink>
+                </TextBlock>
+                
+                <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">
                     <Hyperlink Click="HyperLinkAcceptResults_Click">Accept Results</Hyperlink>
 				</TextBlock>
 
-                <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="7" Margin="5,3,0,0">                    
+                <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="8" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkShowDocument_Click">Show Document</Hyperlink>
 				</TextBlock>
 
-				<TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,5">
+				<TextBlock Grid.Column="0" Grid.Row="9" Margin="5,3,0,5">
 					<Hyperlink Click="HyperLinkFinalizeResults_Click">Finalize</Hyperlink>
 				</TextBlock>
 
-				<TextBlock Grid.Column="0" Grid.Row="10" Margin="5,3,0,0">                    
+				<TextBlock Grid.Column="0" Grid.Row="11" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkUnacceptResults_Click">Unaccept Results</Hyperlink>
 				</TextBlock>
 
-                <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="11" Margin="5,3,0,0">                    
+                <TextBlock Name="TextBlockUnfinalResults" Grid.Column="0" Grid.Row="12" Margin="5,3,0,0">                    
                     <Hyperlink Click="HyperLinkUnfinalResults_Click">Unfinalize Results</Hyperlink>
 				</TextBlock>
 
@@ -104,37 +109,45 @@
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
-						<RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
 					</Grid.RowDefinitions>
 
 					<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,5" FontWeight="Bold">Ordered On:</TextBlock>
 					<TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,5" Text="{Binding Path=OrderedOnDescription}"></TextBlock>
 
-					<TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,5" FontWeight="Bold">Result:</TextBlock>
-					<TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,5" Text="{Binding Path=PanelSetOrder.Result}" />
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" VerticalAlignment="Center" FontWeight="Bold">Indication:</TextBlock>
+                    <ComboBox x:Name="ComboboxIndicator" Grid.Column="1" Grid.Row="1" Margin="2" ItemsSource="{Binding Path=IndicatorCollection}" SelectedValue="{Binding Path=PanelSetOrder.Indicator}" SelectionChanged="ComboboxIndicator_SelectionChanged"/>
 
-					<TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,5" FontWeight="Bold">Score:</TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,5" Text="{Binding Path=PanelSetOrder.Score}" />
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold">Interpretation:</TextBlock>
+                    <ComboBox x:Name="ComboboxInterpretation" Grid.Column="1" Grid.Row="2" Margin="2" ItemsSource="{Binding Path=Her2IHCResultCollection}" DisplayMemberPath="Interpretation" SelectedValuePath="Interpretation" SelectedValue="{Binding Path=PanelSetOrder.Interpretation}" SelectionChanged="ComboboxInterpretation_SelectionChanged"/>
 
-                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,5" FontWeight="Bold">Breast Testing Fixative:</TextBlock>
-					<TextBox Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="2,2,2,5" Text="{Binding Path=PanelSetOrder.BreastTestingFixative}" TextWrapping="Wrap" AcceptsReturn="True" />
+                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,5" FontWeight="Bold">Result:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="3" Margin="2" ItemsSource="{Binding Path=ResultList}" SelectedValue="{Binding Path=PanelSetOrder.Result}" IsEnabled="False"/>
 
-					<TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold">Interpretation:</TextBlock>
-					<TextBox Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Interpretation}" TextWrapping="Wrap" AcceptsReturn="True" />
+                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,5" FontWeight="Bold">Score:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="4" Margin="2" ItemsSource="{Binding Path=ScoreList}" SelectedValue="{Binding Path=PanelSetOrder.Score}" IsEnabled="False"/>
 
-					<TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" FontWeight="Bold">Method:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,5" FontWeight="Bold">Breast Testing Fixative:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="5" Margin="2" ItemsSource="{Binding Path=FixationList}" SelectedValue="{Binding Path=PanelSetOrder.BreastTestingFixative}" IsEnabled="True"/>
+
+                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" FontWeight="Bold">Method:</TextBlock>
 					<TextBox Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Method}" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
 
 					<TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,5" FontWeight="Bold">References:</TextBlock>
 					<TextBox Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.Reference}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="12" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}"></CheckBox>
+                    <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,5" FontWeight="Bold">Disclaimer:</TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="13" Grid.ColumnSpan="2" Margin="2,2,2,2" Text="{Binding Path=PanelSetOrder.ReportDisclaimer}" TextWrapping="Wrap" AcceptsReturn="True" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="13" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="13" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.NoCharge}"></CheckBox>
+                    <TextBlock Grid.Column="0" Grid.Row="14" Margin="2,2,2,2" FontWeight="Bold">Distribute:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="14" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.Distribute}"></CheckBox>
 
-                    <Grid Grid.Column="0" Grid.Row="14" Grid.ColumnSpan="2">
+                    <TextBlock Grid.Column="0" Grid.Row="15" Margin="2,2,2,2" FontWeight="Bold">No Charge:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="15" Margin="2,2,2,2" IsChecked="{Binding Path=PanelSetOrder.NoCharge}"></CheckBox>
+
+                    <Grid Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>

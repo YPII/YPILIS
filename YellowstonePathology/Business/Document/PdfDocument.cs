@@ -28,7 +28,8 @@ namespace YellowstonePathology.Business.Document
 			WebBrowser webBrowser = new WebBrowser();
 			scrollViewer.Content = webBrowser;
 			contentControl.Content = scrollViewer;
-			string url = this.FullFileName.Replace(@"\\CFileServer\AccessionDocuments\", "http://10.1.2.90:50071/documents/");
+			//string url = this.FullFileName.Replace(@"\\FileServer\AccessionDocuments\", "http://10.1.2.90:50071/documents/");
+			string url = this.FullFileName.Replace(@"\\FileServer\AccessionDocuments\", "http://10.1.2.122:50000/");
 			url = url.Replace("\\", "/");
 			webBrowser.Source = new Uri(url);								
 		}

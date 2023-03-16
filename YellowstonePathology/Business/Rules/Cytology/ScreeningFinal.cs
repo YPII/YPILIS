@@ -27,11 +27,14 @@ namespace YellowstonePathology.Business.Rules.Cytology
         {            
             this.m_ProcessingMode = processingMode;
             this.m_Rule = new YellowstonePathology.Business.Rules.Rule();
-            
+                        
             this.m_Rule.ActionList.Add(IsUserPathologistOrCytotech);
-            this.m_Rule.ActionList.Add(DoesPriorUnacceptedScreeningExist);
+            this.m_Rule.ActionList.Add(DoesPriorUnacceptedScreeningExist);            
             this.m_Rule.ActionList.Add(ArePanelResultsAlreadyAccepted);
-			this.m_Rule.ActionList.Add(DoesTheResultCodeHaveAnyNines);
+
+            this.m_Rule.ActionList.Add(UserHasSignedOtherScreening);
+
+            this.m_Rule.ActionList.Add(DoesTheResultCodeHaveAnyNines);
             this.m_Rule.ActionList.Add(HandleHistorectomyWarning);            
             this.m_Rule.ActionList.Add(AreThePanelOrderResultsSet);
             this.m_Rule.ActionList.Add(SetScreenedByUserData);            
@@ -49,8 +52,8 @@ namespace YellowstonePathology.Business.Rules.Cytology
             this.m_Rule.ActionList.Add(IsOkToFinalPanelSetOrderResult);
 			this.m_Rule.ActionList.Add(IsQCScreenerSameAsInitialScreener);
 			this.m_Rule.ActionList.Add(FinalPanelSetOrder);
-            this.m_Rule.ActionList.Add(HandleScreeningError);
-		}
+            this.m_Rule.ActionList.Add(HandleScreeningError);            
+        }
 
         public bool UserHasPermissions
         {
@@ -96,6 +99,17 @@ namespace YellowstonePathology.Business.Rules.Cytology
                     this.m_PanelSetOrderCytology.ScreeningError = false;
                 }
             }            
+        }
+
+        private void UserHasSignedOtherScreening()
+        {
+            YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(15);
+            bool result = panelSetOrder.PanelOrderCollection.UserHasOtherSigned(User.SystemIdentity.Instance.User.UserId);
+            if (result == true)
+            {
+                this.m_ExecutionStatus.AddMessage("You cannot finalize this screening because you have signed another screening in this case.", true);
+                this.m_ExecutionStatus.ShowMessage = true;
+            }
         }
 
         private void DoesPriorUnacceptedScreeningExist()

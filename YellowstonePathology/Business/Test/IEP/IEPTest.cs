@@ -39,7 +39,8 @@ namespace YellowstonePathology.Business.Test.IEP
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceIEP());
 
             this.m_ProfessionalComponentFacility = yp;
-            this.m_ProfessionalComponentBillingFacility = ypi;            
+            this.m_ProfessionalComponentBillingFacility = ypi;
+            this.m_DoNotFax = true;
         }
     }
 }

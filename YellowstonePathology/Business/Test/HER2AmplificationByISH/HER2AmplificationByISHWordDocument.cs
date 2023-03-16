@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 		{			
 			HER2AmplificationByISHTestOrder panelSetOrderHer2ByIsh = (HER2AmplificationByISHTestOrder)this.m_PanelSetOrder;
 
-			if (panelSetOrderHer2ByIsh.Indicator.ToUpper() == "BREAST")
+			if (panelSetOrderHer2ByIsh.Indicator.ToUpper().Contains("BREAST") == true)
 			{
 				if (this.m_AccessionOrder.AccessionDate >= DateTime.Parse("1/1/2014") == true)
 				{

@@ -1152,10 +1152,8 @@ namespace YellowstonePathology.UI
 
         private void MenuItemPDFViewer_Click(object sender, RoutedEventArgs e)
         {
-            //PDFViewer viewer = new PDFViewer();
-            //viewer.Show();
-            TestPage tp = new TestPage();
-            tp.Show();
+            PDFViewer viewer = new PDFViewer();
+            viewer.ShowDialog();
         }        
 
         private void MenuItemMaterialStorageLabels_Click(object sender, RoutedEventArgs e)
@@ -1173,6 +1171,12 @@ namespace YellowstonePathology.UI
         private void MenuItemReferenceLabTesting_Click(object sender, RoutedEventArgs e)
         {
             this.ShowReferenceLabTestingWorkspace();
+        }
+
+        private void MenuItemHuddleDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.UI.Monitor.MonitorPath monitorPath = new Monitor.MonitorPath();
+            monitorPath.Show(YellowstonePathology.UI.Monitor.MonitorPageLoadEnum.HuddleDashboard);
         }
     }
 }

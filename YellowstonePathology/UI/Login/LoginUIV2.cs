@@ -25,6 +25,8 @@ namespace YellowstonePathology.UI.Login
         private string m_SelectedItemCount;
         private object m_Writer;
         private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
+        private Business.SvhAuditList m_SvhAuditList;
+        private Business.ClientOrder.Model.ClientOrderCollection m_ClientOrderCollection;
 
         public LoginUIV2(object writer)
 		{
@@ -51,6 +53,18 @@ namespace YellowstonePathology.UI.Login
                     this.NotifyPropertyChanged("SelectedItemCount");
                 }
             }
+        }
+
+        public Business.SvhAuditList SvhAuditList
+        {
+            get { return this.m_SvhAuditList; }
+            set { this.m_SvhAuditList = value; }
+        }
+
+        public Business.ClientOrder.Model.ClientOrderCollection ClientOrderCollection
+        {
+            get { return this.m_ClientOrderCollection; }
+            set { this.m_ClientOrderCollection = value; }
         }
 
         public string CurrentCaseType
@@ -92,6 +106,7 @@ namespace YellowstonePathology.UI.Login
 		public YellowstonePathology.Business.Search.ReportSearchList ReportSearchList
 		{
 			get { return this.m_ReportSearchList; }
+            set { this.m_ReportSearchList = value; }
 		}
 
 		public YellowstonePathology.Business.User.SystemUserCollection LogUsers

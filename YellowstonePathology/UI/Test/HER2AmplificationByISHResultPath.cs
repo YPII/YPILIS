@@ -36,6 +36,17 @@ namespace YellowstonePathology.UI.Test
 
             YellowstonePathology.Business.Visitor.OrderTestOrderVisitor orderTestOrderVisitor = new Business.Visitor.OrderTestOrderVisitor(testOrderInfo);
             this.m_AccessionOrder.TakeATrip(orderTestOrderVisitor);
+            
+            if(testOrderInfo.PanelSet.PanelSetId == 171) //IHC
+            {
+                if (this.m_AccessionOrder.PanelSetOrderCollection.DoesPanelSetExist(46) == true)
+                {
+                    //look up the DISH
+                    Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder ish = (Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetFirstByPanelSetId(46);
+                    Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC ihc = (Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)this.m_AccessionOrder.PanelSetOrderCollection.GetFirstByPanelSetId(171);
+                    ihc.Indicator = ish.Indicator;
+                }
+            }
 
             if (testOrderInfo.PanelSet.TaskCollection.Count != 0)
             {

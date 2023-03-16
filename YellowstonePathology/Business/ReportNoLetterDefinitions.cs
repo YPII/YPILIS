@@ -66,14 +66,14 @@ namespace YellowstonePathology.Business
             this.m_Letter = "R";
             this.m_AllowMultipleInSameAccession = true;
         }
-    }
+    }    
 
     public class ReportNoLetterA : ReportNoLetter
     {
         public ReportNoLetterA()
         {
             this.m_Letter = "A";
-            this.m_AllowMultipleInSameAccession = false;
+            this.m_AllowMultipleInSameAccession = true;
         }
     }
 

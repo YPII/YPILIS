@@ -72,6 +72,7 @@
                     <ContextMenu>
                         <MenuItem Header="Reconcile BSD Orders" Click="MenuItemReconcileBSDOrders_Click"></MenuItem>
                         <MenuItem Header="Accession As COVID" Click="MenuItemAccessionAsCOVID_Click"></MenuItem>
+                        <MenuItem Header="Send HL7 Result" Click="MenuItemSendHl7Result_Click"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>

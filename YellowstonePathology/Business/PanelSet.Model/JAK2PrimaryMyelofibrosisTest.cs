@@ -11,6 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             this.m_PanelSetName = "JAK2 Primary Myelofibrosis";
             this.m_Abbreviation = "J2PM";
+            this.m_Active = false;
         }
     }
 }

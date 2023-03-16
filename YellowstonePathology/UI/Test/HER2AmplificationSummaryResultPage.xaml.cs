@@ -33,6 +33,8 @@ namespace YellowstonePathology.UI.Test
         private string m_Her2SignalsCounted;
         private string m_Chr17SignalsCounted;
         private string m_NumberOfObservers;
+        private string m_Her2Ratio;
+        private string m_Her2CopyNumber;
 
 
         public HER2AmplificationSummaryResultPage(YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTestOrder testOrder,
@@ -78,6 +80,8 @@ namespace YellowstonePathology.UI.Test
                 this.m_Her2SignalsCounted = this.m_HER2AmplificationRecountTestOrder.Her2SignalsCounted.ToString();
                 this.m_Chr17SignalsCounted = this.m_HER2AmplificationRecountTestOrder.Chr17SignalsCounted.ToString();
                 this.m_NumberOfObservers = this.m_HER2AmplificationRecountTestOrder.NumberOfObservers.ToString();
+                this.m_Her2Ratio = this.m_HER2AmplificationRecountTestOrder.AverageHer2Chr17Signal;
+                this.m_Her2CopyNumber = this.m_HER2AmplificationRecountTestOrder.AverageHer2NeuSignal.ToString();
             }
             else
             {
@@ -85,6 +89,8 @@ namespace YellowstonePathology.UI.Test
                 this.m_Her2SignalsCounted = "NA";
                 this.m_Chr17SignalsCounted = "NA";
                 this.m_NumberOfObservers = "NA";
+                this.m_Her2Ratio = "NA";
+                this.m_Her2CopyNumber = "NA";
             }
 
             InitializeComponent();
@@ -180,6 +186,16 @@ namespace YellowstonePathology.UI.Test
             get { return this.m_NumberOfObservers; }
         }
 
+        public string Her2Ratio
+        {
+            get { return this.m_Her2Ratio; }
+        }
+
+        public string Her2CopyNumber
+        {
+            get { return this.m_Her2CopyNumber; }
+        }
+
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {
             this.Next(this, new EventArgs());
@@ -262,25 +278,25 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkSetResults_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.Audit.Model.AuditResult result = this.m_PanelSetOrder.IsOkToSetResults(this.m_AccessionOrder);
+            Business.Audit.Model.AuditResult result = this.m_PanelSetOrder.IsOkToSetResults(this.m_AccessionOrder);
             if(result.Status == Business.Audit.Model.AuditStatusEnum.OK)
-            {
-                YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection her2AmplificationResultCollection = new Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection(this.m_AccessionOrder.PanelSetOrderCollection, this.m_PanelSetOrder);
-                YellowstonePathology.Business.Test.HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
-                if(her2AmplificationResult != null)
+            {                                
+                Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection her2AmplificationResultCollection = new Business.Test.HER2AmplificationByISH.HER2AmplificationResultCollection(this.m_AccessionOrder.PanelSetOrderCollection, this.m_PanelSetOrder);
+                Business.Test.HER2AmplificationByISH.HER2AmplificationResult her2AmplificationResult = her2AmplificationResultCollection.FindMatch();
+                if (her2AmplificationResult != null)
                 {
-                    YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
+                    Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
                     her2AmplificationResult.SetSummaryResults(specimenOrder);
 
                     if (string.IsNullOrEmpty(this.m_PanelSetOrder.Result) == true)
                     {
                         MessageBox.Show("The result needs to be determined by internal adjudication.");
                     }
-                }    
+                }
                 else
                 {
                     MessageBox.Show("A matching result was not found for the provided counts.");
-                }
+                }                
             }
             else
             {

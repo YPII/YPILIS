@@ -11,6 +11,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        protected PanelSetOrderCollection m_PanelSetOrderCollection;
         protected HER2AmplificationByISHTestOrder m_HER2AmplificationByISHTestOrder;
         protected HER2AnalysisSummary.HER2AnalysisSummaryTestOrder m_HER2AnalysisSummaryTestOrder;
         protected Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC m_PanelSetOrderHer2AmplificationByIHC;
@@ -70,6 +71,8 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 
         public HER2AmplificationResult(PanelSetOrderCollection panelSetOrderCollection, HER2AnalysisSummary.HER2AnalysisSummaryTestOrder panelSetOrder)
         {
+            this.m_PanelSetOrderCollection = panelSetOrderCollection;
+
             this.m_HER2AmplificationByISHTestOrder = (HER2AmplificationByISH.HER2AmplificationByISHTestOrder)panelSetOrderCollection.GetPanelSetOrder(46);
             Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new Her2AmplificationByIHC.Her2AmplificationByIHCTest();
             HER2AmplificationRecount.HER2AmplificationRecountTest her2AmplificationRecountTest = new HER2AmplificationRecount.HER2AmplificationRecountTest();
@@ -94,6 +97,11 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                 this.m_IsHER2AmplificationRecountOrdered = true;
                 this.m_HER2AmplificationRecountTestOrder = (HER2AmplificationRecount.HER2AmplificationRecountTestOrder)panelSetOrderCollection.GetPanelSetOrder(her2AmplificationRecountTest.PanelSetId);
             }
+        }
+
+        public PanelSetOrderCollection panelSetOrderCollection
+        {
+            get { return this.m_PanelSetOrderCollection; }
         }
 
         public virtual bool IsAMatch()
@@ -133,6 +141,11 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                     this.m_HER2AmplificationByISHTestOrder.RecountRequired = false;
                 }
             }
+        }
+
+        public virtual void SetIHCResult()
+        {
+            //do nothing
         }
 
         public virtual void SetISHResults(Business.Specimen.Model.SpecimenOrder specimenOrder)

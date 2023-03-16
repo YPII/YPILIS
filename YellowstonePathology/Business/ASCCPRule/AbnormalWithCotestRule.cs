@@ -71,13 +71,14 @@ namespace YellowstonePathology.Business.ASCCPRule
                     woman.ScreeningImpression.ResultCode == "05" ||
                     woman.ScreeningImpression.ResultCode == "06" ||
                     woman.ScreeningImpression.ResultCode == "07" ||
-                    woman.ScreeningImpression.ResultCode == "09")
+                    woman.ScreeningImpression.ResultCode == "09" ||
+                    woman.ScreeningImpression.ResultCode == "10")
                 {                    
                     woman.ManagementRecommendation = ManagementRecomendation.GetColposcopy();
                 }                
                 else
                 {
-                    throw new Exception("not handled.");
+                    throw new Exception("An ASCCP rule for this scenario could not be found.");
                 }
             }
             else

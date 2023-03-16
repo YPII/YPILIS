@@ -31,6 +31,7 @@
             <DatePicker Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" SelectedDate="{Binding Path=SelectedDate}"></DatePicker>
 
             <Button Grid.Column="1" Grid.Row="1" Click="ButtonGo_Click" Margin="2,2,2,2" HorizontalAlignment="Right" Width="125">Create Report</Button>
+            <Button Grid.Column="1" Grid.Row="1" Click="ButtonUpload_Click" Margin="2,2,2,2" HorizontalAlignment="Left" Width="125">Upload</Button>
         </Grid>
 
     </Grid>

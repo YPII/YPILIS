@@ -28,33 +28,88 @@ namespace YellowstonePathology.UI.Test
         public delegate void OrderTestEventHandler(object sender, CustomEventArgs.PanelSetReturnEventArgs e);
         public event OrderTestEventHandler OrderTest;
 
-        private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
-		private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
+        private Business.User.SystemIdentity m_SystemIdentity;
+		private Business.Test.AccessionOrder m_AccessionOrder;
 		private string m_PageHeaderText;
 
-		private YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC m_PanelSetOrder;
+		private Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC m_PanelSetOrder;
 		private string m_OrderedOnDescription;
 
-		public Her2AmplificationByIHCResultPage(YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC panelSetOrderHer2AmplificationByIHC,
-			YellowstonePathology.Business.Test.AccessionOrder accessionOrder,
-			YellowstonePathology.Business.User.SystemIdentity systemIdentity) : base(panelSetOrderHer2AmplificationByIHC, accessionOrder)
-		{
-			this.m_PanelSetOrder = panelSetOrderHer2AmplificationByIHC;
+        private Business.Test.Her2AmplificationByIHC.HER2AmplificationByIHCIndicatorCollection m_IndicatorCollection;
+        private List<string> m_ResultList;
+        private List<string> m_ScoreList;
+        private List<string> m_FixationList;
+        private Business.Test.Her2AmplificationByIHC.Her2IHCResultCollection m_Her2IHCResultCollection;
+
+        public Her2AmplificationByIHCResultPage(Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC panelSetOrderHer2AmplificationByIHC,
+			Business.Test.AccessionOrder accessionOrder,
+			Business.User.SystemIdentity systemIdentity) : base(panelSetOrderHer2AmplificationByIHC, accessionOrder)
+		{            
+            this.m_IndicatorCollection = new Business.Test.Her2AmplificationByIHC.HER2AmplificationByIHCIndicatorCollection();
+
+            this.m_ResultList = new List<string>();
+            this.m_ResultList.Add("Positive");
+            this.m_ResultList.Add("Low Positive");
+            this.m_ResultList.Add("Equivocal");
+            this.m_ResultList.Add("Negative");
+
+            this.m_ScoreList = new List<string>();
+            this.m_ScoreList.Add("3+");
+            this.m_ScoreList.Add("2+");
+            this.m_ScoreList.Add("1+");
+            this.m_ScoreList.Add("0");
+
+            this.m_FixationList = new List<string>();
+            this.m_FixationList.Add("10% Formaldehyde");
+            this.m_FixationList.Add("Ethanol");
+
+            this.m_PanelSetOrder = panelSetOrderHer2AmplificationByIHC;
 			this.m_AccessionOrder = accessionOrder;
 			this.m_SystemIdentity = systemIdentity;
 
 			this.m_PageHeaderText = "Her2 Amplification By IHC Result For: " + this.m_AccessionOrder.PatientDisplayName;
 
-			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
+			Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
 			this.m_OrderedOnDescription = specimenOrder.Description;
 
-			InitializeComponent();
+            if (string.IsNullOrEmpty(this.m_PanelSetOrder.Indicator) == false)
+            {
+                Business.Test.Her2AmplificationByIHC.Her2IHCResultCollection allResults = Business.Test.Her2AmplificationByIHC.Her2IHCResultCollection.GetALL();
+                this.m_Her2IHCResultCollection = allResults.FilterByIndication(this.m_PanelSetOrder.Indicator);
+            }
+
+            InitializeComponent();
 
 			DataContext = this;
 
             this.m_ControlsNotDisabledOnFinal.Add(this.ButtonNext);
             this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockShowDocument);
-            this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalResults);
+            this.m_ControlsNotDisabledOnFinal.Add(this.TextBlockUnfinalResults);            
+        }
+
+        public List<string> ResultList
+        {
+            get { return this.m_ResultList; }
+        }
+
+        public List<string> ScoreList
+        {
+            get { return this.m_ScoreList; }
+        }
+
+        public List<string> FixationList
+        {
+            get { return this.m_FixationList; }
+        }
+
+        public Business.Test.Her2AmplificationByIHC.HER2AmplificationByIHCIndicatorCollection IndicatorCollection
+        {
+            get { return this.m_IndicatorCollection; }
+        }
+
+        public Business.Test.Her2AmplificationByIHC.Her2IHCResultCollection Her2IHCResultCollection
+        {
+            get { return this.m_Her2IHCResultCollection; }
         }
 
         public string OrderedOnDescription
@@ -221,11 +276,7 @@ namespace YellowstonePathology.UI.Test
             {
                 CustomEventArgs.PanelSetReturnEventArgs args = new CustomEventArgs.PanelSetReturnEventArgs(test);
                 this.OrderTest(this, args);
-            }
-            /*else
-            {
-                MessageBox.Show("Unable to order a " + test.PanelSetName + " as one already exists.");
-            }*/
+            }            
         }
 
 
@@ -233,5 +284,57 @@ namespace YellowstonePathology.UI.Test
 		{
 			if (this.Next != null) this.Next(this, new EventArgs());
 		}
-	}
+
+        private void HyperLinkSetResults_Click(object sender, RoutedEventArgs e)
+        {
+            bool resultFound = this.m_Her2IHCResultCollection.Any(r => r.Indication == this.m_PanelSetOrder.Indicator &&
+            r.Score == this.m_PanelSetOrder.Score && r.Result == this.m_PanelSetOrder.Result);
+
+            if(resultFound == false)
+            {
+                MessageBox.Show("Didn't find a matching rule, the interpretation can not be set.");
+            }
+            else
+            {
+                Business.Test.Her2AmplificationByIHC.Her2IHCResult foundResult = this.m_Her2IHCResultCollection.First(r => r.Indication == this.m_PanelSetOrder.Indicator &&
+                    r.Score == this.m_PanelSetOrder.Score && r.Result == this.m_PanelSetOrder.Result);
+                this.m_PanelSetOrder.Interpretation = foundResult.Interpretation;
+                this.m_PanelSetOrder.Method = foundResult.Method;
+            }
+        }
+
+        private void ComboboxIndicator_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(this.IsLoaded == true)
+            {
+                if (this.ComboboxIndicator.SelectedItem != null)
+                {
+                    string indication = this.ComboboxIndicator.SelectedItem as string;
+                    Business.Test.Her2AmplificationByIHC.Her2IHCResultCollection allResults = Business.Test.Her2AmplificationByIHC.Her2IHCResultCollection.GetALL();
+                    this.m_Her2IHCResultCollection = allResults.FilterByIndication(indication);
+                    this.m_PanelSetOrder.Result = null;
+                    this.m_PanelSetOrder.Method = null;
+                    this.m_PanelSetOrder.Score = null;
+                    this.m_PanelSetOrder.Interpretation = null;
+                    this.NotifyPropertyChanged(string.Empty);
+                }
+            }            
+        }
+
+        private void ComboboxInterpretation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(this.IsLoaded == true)
+            {
+                if (this.ComboboxInterpretation.SelectedItem != null)
+                {
+                    string indication = this.ComboboxIndicator.SelectedItem as string;
+                    Business.Test.Her2AmplificationByIHC.Her2IHCResult selectedResult = (Business.Test.Her2AmplificationByIHC.Her2IHCResult)this.ComboboxInterpretation.SelectedItem;
+                    this.m_PanelSetOrder.Score = selectedResult.Score;
+                    this.m_PanelSetOrder.Result = selectedResult.Result;
+                    this.m_PanelSetOrder.Method = selectedResult.Method;
+                    this.NotifyPropertyChanged(string.Empty);
+                }
+            }            
+        }
+    }
 }

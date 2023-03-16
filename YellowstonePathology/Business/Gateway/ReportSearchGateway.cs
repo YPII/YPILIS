@@ -368,6 +368,22 @@ namespace YellowstonePathology.Business.Gateway
             return reportSearchList;
         }
 
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByPatientInfo(string lastName, string firstName, DateTime dateOfBirth)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
+                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "'' ForeignAccessionNo, pso.IsPosted " +
+                "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                $"WHERE a.PFirstName = '{firstName}' and a.PLastName = '{lastName}' and a.PBirthdate = '{dateOfBirth.ToString("yyyyMMdd")}' " +                
+                "ORDER BY AccessionTime desc;";            
+            Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);
+            return reportSearchList;
+        }
+
         public static YellowstonePathology.Business.Search.ReportSearchList GetRecentCOVIDOrders()
         {            
             MySqlCommand cmd = new MySqlCommand();

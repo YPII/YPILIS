@@ -96,6 +96,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
 				<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Amendment Date:</TextBlock>
 				<TextBox Name="TextBoxAmendmentDate" Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=SelectedAmendment.AmendmentDate, Converter={StaticResource ShortDateConverter}}"></TextBox>
@@ -126,11 +127,14 @@
                 <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Report No:</TextBlock>
                 <TextBlock Name="TextBoxReportNo" Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=SelectedAmendment.ReportNo}"></TextBlock>
 
-                <TextBlock Grid.Column="1" Grid.Row="4" Margin="2">
+                <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Ref Report No:</TextBlock>
+                <TextBlock Name="TextBoxRefReportNo" Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=SelectedAmendment.ReferenceReportNo}"></TextBlock>
+
+                <TextBlock Grid.Column="1" Grid.Row="5" Margin="2">
                     <Hyperlink Click="HyperlinkMakeGlobal_Click">Make Global</Hyperlink>
                 </TextBlock>
 
-                <TextBlock Grid.Column="2" Grid.Row="4" Margin="2">
+                <TextBlock Grid.Column="2" Grid.Row="5" Margin="2">
                     <Hyperlink Click="HyperlinkMakeLocal_Click">Make Local</Hyperlink>
                 </TextBlock>
 

@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace YellowstonePathology.Business.HL7View.WPH
+namespace YellowstonePathology.Business.HL7View.EMA
 {
-	public class WPHMSHView
-    {
+	public class EMAMSHView
+	{
         public static string CLIANUMBER = "27D0946844";
 
         Hl7Client m_Client;
         Hl7MessageType m_MessageType;
         string m_LocationCode;
 
-		public WPHMSHView(Hl7Client client, Hl7MessageType messageType, string locationCode)
+        public EMAMSHView(Hl7Client client, Hl7MessageType messageType, string locationCode)
 		{
             this.m_Client = client;
             this.m_MessageType = messageType;

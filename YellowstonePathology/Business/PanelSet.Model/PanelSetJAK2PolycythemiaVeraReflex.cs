@@ -10,7 +10,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public PanelSetJAK2PolycythemiaVeraReflex()
         {
             this.m_PanelSetName = "JAK2 Polycythemia Vera Reflex";
-            this.Abbreviation = "J2PV";
+            this.m_Abbreviation = "J2PV";
+            this.m_Active = false;
         }
     }
 }

@@ -291,6 +291,50 @@
                         </Grid>
                     </ScrollViewer>
                 </TabItem>
+                <TabItem Name="TabItemOrderAudit" Header="Order Audit">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <ListView Name="ListViewClientOrders" Margin="5" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=ClientOrderCollection}">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Client Order List">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderStatus}" Header="Status" Width="90"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PLastName}" Header="Last Name" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PFirstName}" Header="First Name" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PBirthdate, Converter={StaticResource ShortDateConverter}}" Header="DOB" Width="110"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderTime, Converter={StaticResource ShortDateTimeConverter}}" Header="Order Date" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Accessioned}" Header="Accessioned" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderedBy}" Header="Ordered By" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderType}" Header="Order Type" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ExternalOrderId}" Header="Order Id" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=SecondaryExternalOrderId}" Header="Secondary Id" Width="150"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Right">
+                            <Hyperlink Click="HyperLinkGetSvhErrors_Click">Get List From Image</Hyperlink>
+                        </TextBlock>
+                        <ListView Name="ListViewSVHErrors" Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=SvhAuditList}" SelectionChanged="ListViewSVHErrors_SelectionChanged">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}" Header="Last" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" Header="First" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Mrn}" Header="MRN" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=SvhReportNo}" Header="SVH No" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Dob}" Header="DOB" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Dos}" Header="DOS" Width="100"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </TabItem>
 			</TabControl>
 		</Grid>
 

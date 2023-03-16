@@ -10,12 +10,13 @@ namespace YellowstonePathology.Business.Test.NeoTYPEMyeloidDisordersProfile
     {
         public NeoTYPEMyeloidDisordersProfileTest()
         {
+            this.m_Version = "2.0.0";
             this.m_PanelSetId = 336;
             this.m_PanelSetName = "NeoTYPE Myeloid Disorders Profile (Molecular)";
             this.m_Abbreviation = "Neo TYPE Myeloid Disorders Profile";
             this.m_CaseType = Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
-            this.m_HasProfessionalComponent = true;
+            this.m_HasProfessionalComponent = false;
             this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterR();
             this.m_Active = true;
@@ -35,8 +36,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPEMyeloidDisordersProfile
             this.m_TechnicalComponentFacility = neogenomicsIrvine;
             this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
-            this.m_ProfessionalComponentFacility = neogenomicsIrvine;
-            this.m_ProfessionalComponentBillingFacility = neogenomicsIrvine;
+            //this.m_ProfessionalComponentFacility = neogenomicsIrvine;
+            //this.m_ProfessionalComponentBillingFacility = neogenomicsIrvine;
 
             YellowstonePathology.Business.Billing.Model.PanelSetCptCode panelSetCptCode1 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81450", null), 1);
             this.m_PanelSetCptCodeCollection.Add(panelSetCptCode1);

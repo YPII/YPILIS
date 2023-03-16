@@ -28,6 +28,7 @@ namespace YellowstonePathology.UI.Login.Receiving
                 case OrderTypeEnum.ECLINICALWORKS:
                 case OrderTypeEnum.MEDITECH:
                 case OrderTypeEnum.ECWRIVERSTONE:
+                case OrderTypeEnum.EMA:
                     this.ShowClientOrderLookupPage();
                     break;
                 case OrderTypeEnum.REQUISITION:

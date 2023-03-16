@@ -18,6 +18,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public static string MonitorPriorityCritical = "CRITICAL";
         public static string MonitorPriorityNormal = "NORMAL";
 
+        protected string m_Version;
         protected string m_ObjectId;
 		protected int m_PanelSetId;
         protected string m_PanelSetOrderClassName;
@@ -57,6 +58,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
         protected bool m_OrderInitialTestsOnly;
         protected bool m_SendClosingResult;
         protected Type m_NmhObxView;
+        protected Type m_EmaObxView;
+        protected bool m_DoNotFax;
 
         protected List<string> m_ImplementedResultTypes;
 
@@ -81,6 +84,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             this.m_ImplementedResultTypes = new List<string>();
 
+            this.m_Version = "1.0.0";
             this.m_IsBillable = true;
             this.m_NeverDistribute = false;            
             this.m_Active = true;
@@ -106,6 +110,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
 
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.PanelSetOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.NothingToPublishReport).AssemblyQualifiedName;
+
+            this.m_DoNotFax = false;
 		}
 
         public bool IsMRNACCTRequired()
@@ -200,6 +206,20 @@ namespace YellowstonePathology.Business.PanelSet.Model
 				}
 			}
 		}
+
+        [PersistentProperty()]
+        public string Version
+        {
+            get { return this.m_Version; }
+            set
+            {
+                if (this.m_Version != value)
+                {
+                    this.m_Version = value;
+                    this.NotifyPropertyChanged("Version");
+                }
+            }
+        }
 
         [PersistentProperty()]
 		public string PanelSetName
@@ -685,6 +705,20 @@ namespace YellowstonePathology.Business.PanelSet.Model
                 {
                     this.m_NmhObxView = value;
                     this.NotifyPropertyChanged("NmhObxView");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public Type EmaObxView
+        {
+            get { return this.m_EmaObxView; }
+            set
+            {
+                if (this.m_EmaObxView != value)
+                {
+                    this.m_EmaObxView = value;
+                    this.NotifyPropertyChanged("EmaObxView");
                 }
             }
         }

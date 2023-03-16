@@ -441,6 +441,10 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         {
             if (this.m_PanelSetOrder.PanelSetId == 13)
             {
+                string tordId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                this.m_PanelSetOrder.TestOrderReportDistributionCollection.AddNext(tordId, tordId, this.m_PanelSetOrder.ReportNo, 3946, "Cari Williams, RN",
+                    1542, "Oncology Patient Navigator", YellowstonePathology.Business.Client.Model.WebServicePhysicianClientDistribution.WEBSERVICE);
+
                 if (string.IsNullOrEmpty(this.m_AccessionOrder.PAddress1) == false)
                 {
                     string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
@@ -636,11 +640,17 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
                 resultView.Send(methodResult);
             }
-            else
+            else if (this.m_AccessionOrder.ClientId == 1822)
             {
-                YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true, false);
+                Business.HL7View.EMA.EMAResultView resultView = new Business.HL7View.EMA.EMAResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true);
                 YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
                 resultView.Send(methodResult);
+            }
+            else
+            {
+                YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true);
+                YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+                resultView.Send(methodResult);                
             }            
         }
 
@@ -678,17 +688,18 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 Business.ReportDistribution.Model.TestOrderReportDistribution rd = (Business.ReportDistribution.Model.TestOrderReportDistribution)this.ListViewTestOrderReportDistribution.SelectedItem;
                 if(rd.DistributionType == "EPIC" || rd.DistributionType == "EPIC->Fax")
                 {
-                    YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true, false, false);
+                    YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true, false);
                     YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
                     resultView.Send(methodResult);
                     MessageBox.Show("The result was sent unsolicted to EPIC");
                 }
                 else if (rd.DistributionType == "Meditech")
                 {
-                    YellowstonePathology.Business.HL7View.WPH.WPHResultView resultView = new Business.HL7View.WPH.WPHResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true, false);
-                    YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
-                    resultView.Send(methodResult);
-                    MessageBox.Show("The result was sent unsolicted to EPIC");
+                    throw new Exception("Meditech is not a valid distribution anymore.");
+                    //YellowstonePathology.Business.HL7View.WPH.WPHResultView resultView = new Business.HL7View.WPH.WPHResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, true, false);
+                    //YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+                    //resultView.Send(methodResult);
+                    //MessageBox.Show("The result was sent unsolicted to EPIC");
                 }
                 else
                 {
@@ -750,7 +761,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void HyperLinkSendHL7ResultTestWithPDF_Click(object sender, RoutedEventArgs e)
         {
-            YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true, true);
+            YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true);
             YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
             resultView.Send(methodResult);
         }
@@ -773,7 +784,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void HyperLinkSendSCLClosingResult_Click(object sender, RoutedEventArgs e)
         {
-            Business.HL7View.EPIC.EPICBeakerResultView view = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, false, false);
+            Business.HL7View.EPIC.EPICBeakerResultView view = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, false);
             Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
             view.Send(methodResult);
             MessageBox.Show("Closing Result sent to SCL in Test.");

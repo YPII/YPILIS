@@ -128,10 +128,9 @@ namespace YellowstonePathology.UI
                         if (this.m_Client == "WYDOH")
                         {
                             faxNumber = "3077773419";
+                            YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit(faxNumber, view.ReportNo, tifCaseFileName, $"SCL DOH: {view.ReportNo}");
+                            //YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit("4062386361", view.ReportNo, tifCaseFileName);
                         }
-
-                        YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit(faxNumber, view.ReportNo, tifCaseFileName, $"SCL DOH: {view.ReportNo}");
-                        //YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit("4062386361", view.ReportNo, tifCaseFileName);
                     }
                     else
                     {

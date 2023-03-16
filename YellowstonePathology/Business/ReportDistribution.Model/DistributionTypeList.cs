@@ -26,6 +26,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             this.Add("Email");
             this.Add("ECW Riverstone");
             this.Add("Meditech NMH");
+            this.Add("EMA");
         }
     }
 }

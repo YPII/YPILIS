@@ -44,6 +44,7 @@ namespace YellowstonePathology.Business.Test.LLP
 		private string m_TestCancelledComment;
 		private bool m_TestCancelled;
         private string m_GrossX;
+		private Nullable<Int32> m_CellularConcentrationAbsoluteCount;
 
 		private Flow.FlowMarkerCollection m_FlowMarkerCollection;        
 
@@ -601,7 +602,38 @@ namespace YellowstonePathology.Business.Test.LLP
             }
         }
 
-        public void RefreshGatingPercent()
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "5000", "null", "varchar")]
+		public Nullable<Int32> CellularConcentrationAbsoluteCount
+		{
+			get { return this.m_CellularConcentrationAbsoluteCount; }
+			set
+			{
+				if (this.m_CellularConcentrationAbsoluteCount != value)
+				{
+					this.m_CellularConcentrationAbsoluteCount = value;
+					this.NotifyPropertyChanged("CellularConcentrationAbsoluteCount");
+					this.NotifyPropertyChanged("TestingVolume");
+				}
+			}
+		}
+
+		public Nullable<Double> TestingVolume
+		{
+			get
+			{
+				if(this.m_CellularConcentrationAbsoluteCount.HasValue == true)
+                {
+					return 1000000/(this.m_CellularConcentrationAbsoluteCount.Value * 20);
+                }
+                else
+                {
+					return null;
+                }
+			}
+		}
+
+		public void RefreshGatingPercent()
 		{
 			this.NotifyPropertyChanged("LymphocyteCountPercent");
 			this.NotifyPropertyChanged("MonocyteCountPercent");

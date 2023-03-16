@@ -85,10 +85,12 @@ namespace YellowstonePathology.UI.Login.Receiving
                 {
                     case OrderTypeEnum.EPIC:
                     case OrderTypeEnum.YPICONNECT:
-                    case OrderTypeEnum.MEDITECH:
+                    case OrderTypeEnum.MEDITECH:                    
                         clientOrderCollection = this.HandleOrderLookup(keyValue);
                         break;
+                    case OrderTypeEnum.ECWRIVERSTONE:
                     case OrderTypeEnum.ECLINICALWORKS:
+                    case OrderTypeEnum.EMA:
                         clientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByExternalOrderId(keyValue);
                         break;
                 }

@@ -150,6 +150,12 @@
                     <TextBlock Grid.Column="0" Grid.Row="10" Margin="2" VerticalAlignment="Center" FontWeight="Bold">Number of Observers:</TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="10" Margin="2" Text="{Binding Path=NumberOfObservers}" />
 
+                    <TextBlock Grid.Column="0" Grid.Row="11" Margin="2" FontWeight="Bold" VerticalAlignment="Center">HER2 by ISH Ratio:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="11" Margin="2" Text="{Binding Path=Her2Ratio}" VerticalAlignment="Center" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="12" Margin="2" FontWeight="Bold" VerticalAlignment="Center">HER2 by ISH Copy Number:</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="12" Margin="2" Text="{Binding Path=Her2CopyNumber}" VerticalAlignment="Center" />
+                    
                     <TextBlock Grid.Column="0" Grid.Row="21" Margin="2" FontWeight="Bold" VerticalAlignment="Center">Result Comment:</TextBlock>
                     <TextBox Grid.Column="0" Grid.Row="22" Margin="2" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Path=PanelSetOrder.ResultComment}" />
 

@@ -1064,6 +1064,37 @@ namespace YellowstonePathology.UI.Surgical
         {
             this.m_TypingUI.AccessionOrder.ClinicalHistory = this.m_TypingUI.AccessionOrder.ClinicalHistory.Replace("Comprehensive Consult:->No", "");
             this.m_TypingUI.AccessionOrder.ClinicalHistory = this.m_TypingUI.AccessionOrder.ClinicalHistory.Replace(" (CMS-HCC)", "");
+            this.m_TypingUI.AccessionOrder.ClinicalHistory = this.m_TypingUI.AccessionOrder.ClinicalHistory.Replace("path_note: rule out viral inclusion bodies", "");
+            this.m_TypingUI.AccessionOrder.ClinicalHistory = this.m_TypingUI.AccessionOrder.ClinicalHistory.Trim();
+
+            var separators = new[] { '\r', '\n' };
+            string[] lines = this.m_TypingUI.AccessionOrder.ClinicalHistory.Split(separators);
+            StringBuilder newText = new StringBuilder();
+            foreach(string line in lines)
+            {
+                if(string.IsNullOrEmpty(line.Trim()) == false)
+                {
+                    newText.AppendLine(line.Trim());
+                }                
+            }
+
+            if(this.m_TypingUI.AccessionOrder.ClientId == 1822) //Yellowstone Derm
+            {
+                int lineIndex = 0;
+                foreach(string line in lines)
+                {
+                    if(line.StartsWith("Specimen Label") == true)
+                    {
+                        lineIndex += 1;
+                    }
+                    else
+                    {
+                        lineIndex += 0;
+                    }                    
+                }
+            }
+
+            this.m_TypingUI.AccessionOrder.ClinicalHistory = newText.ToString().Trim();
         }
 
         private void HyperLinkSpellCheck_Click(object sender, RoutedEventArgs e)

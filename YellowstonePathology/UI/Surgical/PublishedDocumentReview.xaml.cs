@@ -26,10 +26,22 @@ namespace YellowstonePathology.UI.Surgical
 		public PublishedDocumentReview(PathologistUI pathologistUI, YellowstonePathology.Business.User.SystemIdentity systemIdentity)
 		{
 			this.m_PathologistUI = pathologistUI;
-			this.m_SystemIdentity = systemIdentity;
+			this.m_SystemIdentity = systemIdentity;            
 
-			InitializeComponent();
+            InitializeComponent();
 			this.DataContext = this.PanelSetOrder;
+
+            Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PathologistUI.PanelSetOrder.ReportNo);
+            string pdfFilePath = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);            
+            if(System.IO.File.Exists(pdfFilePath) == true)
+            {
+                string url = $"file:{pdfFilePath.Replace('\\', '/')}";
+                this.WebBrowserReport.Navigate(url);
+            }
+            else
+            {
+                this.WebBrowserReport.Navigate("about:blank");
+            }            
         }
 
         YellowstonePathology.Business.Test.PanelSetOrder PanelSetOrder

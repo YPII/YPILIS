@@ -24,6 +24,7 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = accessionOrder.AmendmentCollection.GetAmendmentsForReport(testOrder.ReportNo);
 
             this.m_DisableRequired = false;
+            /*
             if (accessionOrder.AccessionLock.IsLockAquiredByMe == false)
             {
                 this.m_DisableRequired = true;
@@ -43,7 +44,7 @@ namespace YellowstonePathology.UI.Test
                     this.m_DisableRequired = true;
                 }
             }            
-
+            */
             this.Loaded += ResultControl_Loaded;
         }
 

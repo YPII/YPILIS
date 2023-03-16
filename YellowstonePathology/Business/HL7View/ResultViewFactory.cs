@@ -70,8 +70,8 @@ namespace YellowstonePathology.Business.HL7View
                 case 660:
                 case 1830:
                 case 1838:
-                case 831:
-                    resultView = new Business.HL7View.EPIC.EPICBeakerResultView(reportNo, accessionOrder, sendUnsoliceted, testing, false);                    
+                case 831:                
+                    resultView = new Business.HL7View.EPIC.EPICBeakerResultView(reportNo, accessionOrder, sendUnsoliceted, testing);                    
                     break;
                 case 203: //Richard Taylor
                 case 1177: //Spring Creek
@@ -103,8 +103,8 @@ namespace YellowstonePathology.Business.HL7View
                 case 1399:
                 case 1508:
                 case 1319:
-                case 1338:                
-                    resultView = new HL7View.WPH.WPHResultView(reportNo, accessionOrder, testing, false);
+                case 1338:
+                    resultView = new Business.HL7View.EPIC.EPICBeakerResultView(reportNo, accessionOrder, sendUnsoliceted, testing);
                     break;
                 case 587: //NMH                    
                 case 588:
@@ -119,6 +119,9 @@ namespace YellowstonePathology.Business.HL7View
                     break;
                 case 136:
                     resultView = new HL7View.Riverstone.RiverstoneResultView(reportNo, accessionOrder, testing);
+                    break;
+                case 1822:
+                    resultView = new HL7View.EMA.EMAResultView(reportNo, accessionOrder, testing);
                     break;
             }       
             return resultView;

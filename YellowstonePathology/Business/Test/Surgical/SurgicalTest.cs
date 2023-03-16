@@ -27,6 +27,7 @@ namespace YellowstonePathology.Business.Test.Surgical
             this.m_ExpectedDuration = TimeSpan.FromDays(3);
 
             this.m_NmhObxView = typeof(SurgicalNMHObxView);
+            this.m_EmaObxView = typeof(SurgicalEMAOBXView);
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.WORD);
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.EPIC);

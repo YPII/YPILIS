@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace YellowstonePathology.UI
 {
@@ -265,6 +267,17 @@ namespace YellowstonePathology.UI
                 }
                 MessageBox.Show("Orders have been reconciled.");
                 this.m_ClientOrderUI.GetBSDOrderList();
+            }
+        }
+
+        private void MenuItemSendHl7Result_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(Business.ClientOrder.Model.OrderBrowserListItem item in this.ListViewClientOrders.SelectedItems)
+            {
+                Business.ClientOrder.Model.ClientOrder clientOrder = Business.Persistence.DocumentGateway.Instance.PullClientOrder(item.ClientOrderId, this);
+                Business.HL7View.EPIC.EPICClosingOrderView close = new Business.HL7View.EPIC.EPICClosingOrderView(clientOrder);
+                XElement document = close.CreateDocument();
+                close.WriteDocumentToServer(document);
             }
         }
     }    

@@ -4,28 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace YellowstonePathology.Business.HL7View.WPH
+namespace YellowstonePathology.Business.HL7View.EMA
 {
-	public class WPHPIDView
-    {        		
+	public class EMAPIDView
+	{        		
 		string m_DateFormat = "yyyyMMdd";
 
         string m_PatientId;
         string m_LastName;
         string m_FirstName;
         Nullable<DateTime> m_Birthdate;
-        string m_Sex;
-        string m_PatientAccountNumber;
-        string m_Ssn;		
+        string m_Sex;        
+        string m_Ssn;
 
-        public WPHPIDView(string patientId, string lastName, string firstName, Nullable<DateTime> birthdate, string sex, string patientAccountNumber, string ssn)
+        public EMAPIDView(string patientId, string lastName, string firstName, Nullable<DateTime> birthdate, string sex, string ssn)
         {
             this.m_PatientId = patientId;
             this.m_LastName = lastName;
             this.m_FirstName = firstName;
             this.m_Birthdate = birthdate;
-            this.m_Sex = sex;
-            this.m_PatientAccountNumber = patientAccountNumber;
+            this.m_Sex = sex;            
             this.m_Ssn = ssn;
         }        
 
@@ -33,10 +31,18 @@ namespace YellowstonePathology.Business.HL7View.WPH
         {                       
             XElement pidElement = new XElement("PID");
             document.Add(pidElement);
-                        
-            XElement pid03Element = new XElement("PID.3");
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.3.1", this.m_PatientId, pid03Element);            
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid03Element);
+
+            XElement pid01Element = new XElement("PID.1");
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.1.1", "1", pid01Element);
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid01Element);
+
+            XElement pid02Element = new XElement("PID.2");
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.2.1", this.m_PatientId, pid02Element);            
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid02Element);
+
+            XElement pid04Element = new XElement("PID.4");
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.4.1", this.m_PatientId, pid04Element);
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid04Element);
 
             XElement pid05Element = new XElement("PID.5");
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.5.1", this.m_LastName, pid05Element);
@@ -49,11 +55,7 @@ namespace YellowstonePathology.Business.HL7View.WPH
 
             XElement pid08Element = new XElement("PID.8");
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.8.1", this.m_Sex, pid08Element);
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid08Element);            
-
-            XElement pid18Element = new XElement("PID.18");            
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.18.1", this.m_PatientAccountNumber, pid18Element);            
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid18Element);
+            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(pidElement, pid08Element);                        
 
             XElement pid19Element = new XElement("PID.19");
             YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("PID.19.1", YellowstonePathology.Business.Helper.SsnHelper.FormatWithoutDashes(this.m_Ssn), pid19Element);                        

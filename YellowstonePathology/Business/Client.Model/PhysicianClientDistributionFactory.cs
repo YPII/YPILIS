@@ -37,6 +37,9 @@ namespace YellowstonePathology.Business.Client.Model
                 case YellowstonePathology.Business.Client.Model.MediTechNMHPhysicianClientDistribution.MEDITECHNMH:
                     physicianClientDistribution = new MediTechNMHPhysicianClientDistribution();
                     break;
+                case YellowstonePathology.Business.Client.Model.EMAPhysicianClientDistribution.EMA:
+                    physicianClientDistribution = new EMAPhysicianClientDistribution();
+                    break;
                 case YellowstonePathology.Business.Client.Model.EPICAndFaxPhysicianClientDistribution.EPICANDFAX:
                     physicianClientDistribution = new EPICAndFaxPhysicianClientDistribution();
                     break;

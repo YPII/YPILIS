@@ -492,7 +492,7 @@ namespace YellowstonePathology.UI.MaterialTracking
                 {
                     System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("histology@ypii.com", "kerrie.emerick@ypii.com", System.Windows.Forms.SystemInformation.UserName, "There are slides that are being sent to you.");
                     message.To.Add("christopher.nero@ypii.com");
-                    System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
+                    System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.110 ");
 
                     Uri uri = new Uri("http://tempuri.org/");
                     System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;

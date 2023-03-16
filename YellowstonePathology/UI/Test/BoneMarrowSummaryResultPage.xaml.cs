@@ -26,18 +26,20 @@ namespace YellowstonePathology.UI.Test
         public delegate void NextEventHandler(object sender, EventArgs e);
         public event NextEventHandler Next;
 
-        private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
-        private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
-        private YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
-        private YellowstonePathology.UI.Navigation.PageNavigator m_PageNavigator;
-        private YellowstonePathology.Business.Test.BoneMarrowSummary.OtherReportViewCollection m_AccessionReportsIncluded;
-        private YellowstonePathology.Business.Test.BoneMarrowSummary.OtherReportViewCollection m_OtherReportViewCollection;
+        private Business.User.SystemIdentity m_SystemIdentity;
+        private Business.Test.AccessionOrder m_AccessionOrder;
+        private Business.Test.PanelSetOrder m_PanelSetOrder;
+        private UI.Navigation.PageNavigator m_PageNavigator;
+        private Business.Test.BoneMarrowSummary.OtherReportViewCollection m_AccessionReportsIncluded;
+        private Business.Test.BoneMarrowSummary.OtherReportViewCollection m_OtherReportViewCollection;
         private string m_PageHeaderText;
 
+        private Business.Test.BoneMarrowSummary.ReferenceLabSummaryCollection m_ReferenceLabSummaryCollection;
+
         public BoneMarrowSummaryResultPage(YellowstonePathology.Business.Test.PanelSetOrder testOrder,
-            YellowstonePathology.Business.Test.AccessionOrder accessionOrder,
-            YellowstonePathology.Business.User.SystemIdentity systemIdentity,
-            YellowstonePathology.UI.Navigation.PageNavigator pageNavigator) : base(testOrder, accessionOrder)
+            Business.Test.AccessionOrder accessionOrder,
+            Business.User.SystemIdentity systemIdentity,
+            UI.Navigation.PageNavigator pageNavigator) : base(testOrder, accessionOrder)
 		{
             this.m_AccessionOrder = accessionOrder;
             this.m_PanelSetOrder = testOrder;
@@ -45,6 +47,7 @@ namespace YellowstonePathology.UI.Test
             this.m_PageNavigator = pageNavigator;
 
             this.m_PageHeaderText = "Bone Marrow Summary Results For: " + this.m_AccessionOrder.PatientDisplayName;
+            this.m_ReferenceLabSummaryCollection = new Business.Test.BoneMarrowSummary.ReferenceLabSummaryCollection();
 
             this.SetAccessionReportsIncluded();
             this.m_OtherReportViewCollection = Business.Gateway.AccessionOrderGateway.GetOtherReportViewCollection(this.m_AccessionOrder.PatientId, this.m_AccessionOrder.MasterAccessionNo);
@@ -64,6 +67,11 @@ namespace YellowstonePathology.UI.Test
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
+        }
+
+        public Business.Test.BoneMarrowSummary.ReferenceLabSummaryCollection ReferenceLabSummaryCollection
+        {
+            get { return this.m_ReferenceLabSummaryCollection; }
         }
 
         public YellowstonePathology.Business.Test.PanelSetOrder PanelSetOrder

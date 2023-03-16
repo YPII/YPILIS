@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             bool hasPap = this.m_AccessionOrder.PanelSetOrderCollection.Exists(thinPrepPapTest.PanelSetId);
             if (hasPap)
             {
-                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\WomensHealthProfile.2.xml";
+                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\WomensHealthProfile.3.xml";
                 this.OpenTemplate();
                 this.SetCurrentPapResults();
             }
@@ -324,6 +324,25 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
 				rowResultNodeClone.SelectSingleNode("descendant::w:r[w:t='test_final_date']/w:t", this.m_NameSpaceManager).InnerText = testFinaldate;
 				mainTableNode.InsertAfter(rowResultNodeClone, insertAfterRow);
 				insertAfterRow = rowResultNodeClone;
+			}
+
+			headerText = "Anal Cytology";
+			Business.Test.AnalCytology.AnalCytologyTest analCytologyTest = new Business.Test.AnalCytology.AnalCytologyTest();
+			if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(analCytologyTest.PanelSetId) == true)
+			{							
+				YellowstonePathology.Business.Test.AnalCytology.AnalCytologyTestOrder analCytologyTestOrder = (Business.Test.AnalCytology.AnalCytologyTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(analCytologyTest.PanelSetId);				
+				this.SetXmlNodeData("anal_cytology_screening_impression", analCytologyTestOrder.ScreeningImpression);
+				this.SetXmlNodeData("anal_cytology_specimen_adequacy", analCytologyTestOrder.SpecimenAdequacy);
+				this.SetXmlNodeData("anal_cytology_other_conditions", analCytologyTestOrder.OtherConditions);
+				this.SetXmlNodeData("anal_cytology_report_comment", analCytologyTestOrder.ReportComment);
+				this.SetXmlNodeData("anal_cytology_screened_by", analCytologyTestOrder.Signature);
+
+				string testFinaldate = Business.Helper.DateTimeExtensions.DateStringFromNullable(analCytologyTestOrder.FinalDate);
+				this.SetXmlNodeData("anal_cytology_cytotech_final", testFinaldate);								
+			}
+			else
+            {
+				this.DeleteTable("Anal Cytology Result");
 			}
 
 			if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(panelSetHPV.PanelSetId) == false &&

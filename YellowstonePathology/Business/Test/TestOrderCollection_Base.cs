@@ -112,10 +112,10 @@ namespace YellowstonePathology.Business.Test.Model
                     if (cytochemicalTestCollection.Exists(testOrder.TestId) == true)
                     {
                         Test test = cytochemicalTestCollection.GetTest(testOrder.TestId);
-                        if (test.PerformedByHand == false)
-                        {
+                        //if (test.PerformedByHand == false)
+                        //{
                             result += 1;
-                        };
+                        //};
                     }
                 }
             }

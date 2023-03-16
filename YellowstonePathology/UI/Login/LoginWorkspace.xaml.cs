@@ -13,6 +13,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using System.Diagnostics;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace YellowstonePathology.UI.Login
 {
@@ -35,10 +38,12 @@ namespace YellowstonePathology.UI.Login
         private Billing.BillingPath m_BillingPath;
 
         private Login.Receiving.LoginPageWindow m_LoginPageWindow;
-        private Business.GrossCameraPubSubHandler m_GrossCameraPubSubHandler;      
+        private Business.GrossCameraPubSubHandler m_GrossCameraPubSubHandler;
+        private string m_FormMode;
 
         public LoginWorkspace(MainWindowCommandButtonHandler mainWindowCommandButtonHandler, TabItem writer)
         {
+            this.m_FormMode = "Standard";
             this.m_MainWindowCommandButtonHandler = mainWindowCommandButtonHandler;
             this.m_LoadedHasRun = false;
             this.m_Writer = writer;
@@ -153,6 +158,8 @@ namespace YellowstonePathology.UI.Login
             }
             ));
         }
+
+        
 
         private void BarcodeScanPort_VantageSlideScanReceived(string scanData)
         {
@@ -279,15 +286,23 @@ namespace YellowstonePathology.UI.Login
             {
                 this.m_LoginUI.SelectedItemCount = "Selected Items: " + this.ListViewAccessionOrders.SelectedItems.Count.ToString();
 
-                if (this.m_LoginUI.AccessionOrder.AccessionLock.IsLockAquiredByMe == true)
+                if(this.m_FormMode == "Standard")
                 {
-                    this.TabControlRightSide.SelectedIndex = 1;
-                    this.TabItemTasks.IsEnabled = true;
+                    if (this.m_LoginUI.AccessionOrder.AccessionLock.IsLockAquiredByMe == true)
+                    {
+                        this.TabControlRightSide.SelectedIndex = 1;
+                        this.TabItemTasks.IsEnabled = true;
+                    }
+                    else
+                    {
+                        this.TabControlRightSide.SelectedIndex = 0;
+                        this.TabItemTasks.IsEnabled = false;
+                    }
                 }
                 else
                 {
-                    this.TabControlRightSide.SelectedIndex = 0;
-                    this.TabItemTasks.IsEnabled = false;
+                    this.m_LoginUI.ClientOrderCollection = Business.Gateway.ClientOrderGateway.GetClientOrdersByPatientName(this.m_LoginUI.AccessionOrder.PFirstName, this.m_LoginUI.AccessionOrder.PLastName);
+                    this.m_LoginUI.NotifyPropertyChanged(string.Empty);
                 }
 
                 this.m_LoginUI.ReportSearchList.SetLockIsAquiredByMe(this.m_LoginUI.AccessionOrder);
@@ -1068,7 +1083,7 @@ namespace YellowstonePathology.UI.Login
                 foreach (Business.Search.ReportSearchItem rsi in this.ListViewAccessionOrders.SelectedItems)
                 {
                     Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(rsi.MasterAccessionNo, this);
-                    Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(rsi.ReportNo, ao, false, false, false);
+                    Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(rsi.ReportNo, ao, false, false);
                     Business.Rules.MethodResult result = new Business.Rules.MethodResult();
                     resultView.HandleSendToProvation(result);
                 }
@@ -1090,6 +1105,30 @@ namespace YellowstonePathology.UI.Login
                 }
                 MessageBox.Show("All done.");
             }
+        }
+        
+        private void ListViewSVHErrors_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(this.ListViewSVHErrors.SelectedItem != null)
+            {
+                Business.SvhAuditItem auditItem = (Business.SvhAuditItem)this.ListViewSVHErrors.SelectedItem;
+                DateTime dateOfBirth = DateTime.Parse(auditItem.Dob);
+                this.m_LoginUI.ReportSearchList = Business.Gateway.ReportSearchGateway.GetReportSearchListByPatientInfo(auditItem.LastName, auditItem.FirstName, dateOfBirth);
+                this.m_LoginUI.ClientOrderCollection = new Business.ClientOrder.Model.ClientOrderCollection();
+                this.m_LoginUI.NotifyPropertyChanged("ReportSearchList");                
+            }
+        }
+
+        private void HyperLinkGetSvhErrors_Click(object sender, RoutedEventArgs e)
+        {
+            string path = @"d:\testing\svherrors.json";
+            string json = System.IO.File.ReadAllText(path);
+            JsonTextReader reader = new JsonTextReader(new System.IO.StringReader(json));
+            JArray cases = JArray.Load(reader);
+
+            this.m_FormMode = "SVHAudit";
+            this.m_LoginUI.SvhAuditList = Business.SvhAuditList.FromJSON(cases);
+            this.m_LoginUI.NotifyPropertyChanged(string.Empty);
         }
     }
 }

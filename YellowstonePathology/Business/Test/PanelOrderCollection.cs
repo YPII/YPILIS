@@ -283,6 +283,23 @@ namespace YellowstonePathology.Business.Test
             return result;
         }
 
+        public bool UserHasOtherSigned(int userId)
+        {
+            bool result = false;
+            foreach (Business.Test.PanelOrder panelOrder in this)
+            {
+                if (typeof(Business.Test.PanelOrder).IsAssignableFrom(typeof(Business.Test.ThinPrepPap.PanelOrderCytology)) == true)
+                {
+                    if (panelOrder.AcceptedById == userId)
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
         public int GetAcceptedPanelCount()
         {
             int result = 0;

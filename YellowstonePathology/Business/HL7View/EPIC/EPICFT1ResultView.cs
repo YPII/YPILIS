@@ -26,9 +26,17 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 
             Hl7Client client = null;
             YellowstonePathology.Business.Client.Model.ClientGroupClientCollection hrhGroup = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("2");
-            if(hrhGroup.ClientIdExists(this.m_AccessionOrder.ClientId) == true)
+            Client.Model.ClientGroupClientCollection codyGroup = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("36");
+
+            string departmentCode = "502";
+            if (hrhGroup.ClientIdExists(this.m_AccessionOrder.ClientId) == true)
             {
                 client = new EPICHRHClient();                
+            }
+            else if(codyGroup.ClientIdExists(this.m_AccessionOrder.ClientId) == true)
+            {
+                client = new EPICCodyClient();
+                departmentCode = "2050130";
             }
             else
             {
@@ -53,7 +61,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             DateTime transactionDate = m_AccessionOrder.CollectionDate.Value;
             DateTime transactionPostingDate = this.m_PanelSetOrderCPTCodeBill.PostDate.Value;
 
-            EPICFT1View epicFT1View = new EPICFT1View(cptCode, transactionDate, transactionPostingDate, this.m_PanelSetOrderCPTCodeBill.Quantity.ToString(), orderingPhysician, this.m_AccessionOrder.MasterAccessionNo, this.m_AccessionOrder.CollectionDate.Value);
+            EPICFT1View epicFT1View = new EPICFT1View(cptCode, transactionDate, transactionPostingDate, this.m_PanelSetOrderCPTCodeBill.Quantity.ToString(), orderingPhysician, this.m_AccessionOrder.MasterAccessionNo, this.m_AccessionOrder.CollectionDate.Value, departmentCode);
             epicFT1View.ToXml(document, 1);
                         
             string fileName = System.IO.Path.Combine(basePath, this.m_PanelSetOrderCPTCodeBill.PanelSetOrderCPTCodeBillId + "." + cptCode.Code + ".hl7.xml");

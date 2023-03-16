@@ -439,6 +439,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="2,2,2,2" FontWeight="Bold" 
@@ -509,6 +510,9 @@
 
                     <CheckBox Name="StainOrder221" Tag="mc31" Grid.Column="0" Grid.Row="22" Margin="2,2,2,2"></CheckBox>
                     <TextBlock Grid.Column="1" Grid.Row="22" Margin="2,2,2,2">MOC 31</TextBlock>
+
+                    <CheckBox Name="StainOrder222" Tag="cldn4t" Grid.Column="0" Grid.Row="23" Margin="2,2,2,2"></CheckBox>
+                    <TextBlock Grid.Column="1" Grid.Row="23" Margin="2,2,2,2">Claudin 4 T</TextBlock>
                 </Grid>
 
                 <Grid Grid.Column="3" Margin="5,5,5,5">

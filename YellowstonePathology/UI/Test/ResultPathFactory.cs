@@ -19,10 +19,7 @@ namespace YellowstonePathology.UI.Test
         {
             ResultPath result = null;
             switch(panelSetId)
-            {
-				case 1:
-					result = new JAK2V617FResultPath(reportNo, accessionOrder, pageNavigator, window);
-					break;				
+            {				
 				case 3:
 					result = new NGCTResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
@@ -61,19 +58,13 @@ namespace YellowstonePathology.UI.Test
                     break;
 				case 50:
 					result = new ErPrSemiQuantitativeResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
-				case 60:
-                    result = new EGFRResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
+                    break;				
                 case 61:
 					result = new TrichomonasResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
 				case 62:
 					result = new HPV1618ResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
-                case 79:
-                    //result = new PMLRARAByFishResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
+                    break;                
                 case 213:
                     result = new HPV1618ByPCRResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
@@ -194,6 +185,9 @@ namespace YellowstonePathology.UI.Test
                     break;
 				case 172:
 					result = new EosinophiliaByFISHResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;
+                case 153:
+                    result = new FLT3ResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
 				case 173:
 					result = new PlasmaCellMyelomaRiskStratificationResultPath(reportNo, accessionOrder, pageNavigator, window);
@@ -335,16 +329,10 @@ namespace YellowstonePathology.UI.Test
                     break;
                 case 290:
                     result = new SlideTrackingResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
-                //case 291:
-                    //result = new TechnicalOnlyResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    //break;
+                    break;                
                 case 300:
                     result = new ExtractAndHoldForPreauthorizationResultPath(reportNo, accessionOrder, pageNavigator, window);
-                    break;
-                //case 303:
-                //    result = new TechnicalOnlyResultPath(reportNo, accessionOrder, pageNavigator, window);
-                //    break;
+                    break;                
                 case 313:
                     result = new HER2AmplificationSummaryResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
@@ -396,7 +384,9 @@ namespace YellowstonePathology.UI.Test
                 case 415:
                     result = new APTIMASARSCoV2ResultPath(reportNo, accessionOrder, pageNavigator, window);
                     break;
-            }
+                case 433:
+                    result = new AnalCytologyResultPath(reportNo, accessionOrder, pageNavigator, window);
+                    break;            }
 
             if (result == null)
             {
@@ -417,6 +407,14 @@ namespace YellowstonePathology.UI.Test
             System.Windows.Visibility backButtonVisibility)
         {
 			bool result = false;
+
+            if(panelSetOrder.ResultDocumentSource == "PublishedDocument")
+            {                
+                PublishedDocumentResultPath publishedDocumentResultPath = new PublishedDocumentResultPath(panelSetOrder.ReportNo, accessionOrder, pageNavigator, window);
+                publishedDocumentResultPath.Finish += ResultPath_Finish;
+                publishedDocumentResultPath.Start();
+                return true;
+            }
 
             YellowstonePathology.UI.Test.ResultPath resultPath = UI.Test.ResultPathFactory.GetResultPath(panelSetOrder.PanelSetId, panelSetOrder.ReportNo, accessionOrder, pageNavigator, window, System.Windows.Visibility.Collapsed);
 

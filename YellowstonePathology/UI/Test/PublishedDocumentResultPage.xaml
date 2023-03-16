@@ -17,8 +17,11 @@
 		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
 		<TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
 
+        <!--
 		<DocumentViewer Grid.Column="0" Grid.Row="1" Document="{Binding Path=PanelSetOrder.PublishedDocument}" ></DocumentViewer>
-
+		-->
+        <WebBrowser x:Name="WebBrowser" Grid.Column="0" Grid.Row="1"></WebBrowser>
+        
 		<Border Grid.Column="0" Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
 		<Button Grid.Column="0" Grid.Row="2" Width="100" Height="40" HorizontalAlignment="Right" Margin="5,5,5,5" Click="ButtonNext_Click">Next ></Button>
 

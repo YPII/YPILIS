@@ -88,7 +88,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPAP();
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(panelSetOrder.ReportNo);
             string normalMA = orderIdParser.MasterAccessionNo;            
-            string dummyMA = normalMA.Replace("22-", "72-");
+            string dummyMA = normalMA.Replace("23-", "73-");
 
             if (this.m_AccessionOrder.SpecimenOrderCollection.HasThinPrepFluidSpecimen() == true)
             {

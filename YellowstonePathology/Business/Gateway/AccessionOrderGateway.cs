@@ -81,6 +81,7 @@ namespace YellowstonePathology.Business.Gateway
                 "from tblAliquotOrder ao join tblSpecimenOrder so on ao.specimenOrderId = so.SpecimenOrderId " +
                 "join tblAccessionOrder a on so.MasterAccessionNo = a.MasterAccessionNo " +
                 "where ao.GrossVerified = 1 and Date_Format(ao.GrossVerifiedDate, '%Y-%m-%d') = curdate() " +
+                "and a.accessioningFacilityId != 'YPIHVR' " +
                 "and not exists(select null from tblPanelSetOrder where MasterAccessionNo = a.MasterAccessionNo and assignedToId in (5132, 5133))) " +
                 "where BlockCountDate = curdate();";
             cmd.CommandType = CommandType.Text;
@@ -688,10 +689,10 @@ namespace YellowstonePathology.Business.Gateway
         {
             List<YellowstonePathology.Business.Test.PanelSetOrderView> result = new List<Test.PanelSetOrderView>();
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "Select * from tblPanelSetOrder pso where pso.Final = 1 and pso.FinalTime < date_Add(Now(), Interval -5 Minute) " +
+            cmd.CommandText = "Select * from tblPanelSetOrder pso where pso.Final = 1 and pso.FinalTime < date_Add(Now(), Interval -15 Minute) " +
                 "and pso.ScheduledPublishTime <= Now() and pso.HoldDistribution = 0 and pso.DistributionDelayed = 0 union " +
                 "Select pso.* from tblPanelSetOrder pso join tblTestOrderReportDistribution trd on pso.ReportNo = trd.ReportNo " +
-                "where pso.Final = 1 and pso.FinalTime < date_Add(Now(), Interval -5 Minute) and trd.ScheduledDistributionTime <= Now() " +
+                "where pso.Final = 1 and pso.FinalTime < date_Add(Now(), Interval -15 Minute) and trd.ScheduledDistributionTime <= Now() " +
                 "and pso.Distribute = 1 and pso.HoldDistribution = 0 and pso.DistributionDelayed = 0;";
             cmd.CommandType = CommandType.Text;
 
@@ -1633,7 +1634,7 @@ namespace YellowstonePathology.Business.Gateway
                 "join tblPanelSetOrder pso on bll.ReportNo = pso.ReportNo " +
                 "join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +
                 "where postdate = @PostDate and bll.BillTo = 'Client' " +
-                "and ao.ClientId in (select clientId from tblClientGroupClient where ClientGroupId in (1,2))";
+                "and ao.ClientId in (select clientId from tblClientGroupClient where ClientGroupId in (1,2,36))"; //1,2
             cmd.Parameters.AddWithValue("@PostDate", postDate);
 
             YellowstonePathology.Business.ReportNoCollection reportNoCollection = new ReportNoCollection();

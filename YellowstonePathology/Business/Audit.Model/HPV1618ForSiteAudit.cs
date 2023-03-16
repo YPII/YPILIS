@@ -7,11 +7,11 @@ namespace YellowstonePathology.Business.Audit.Model
 {
     public class HPV1618ForSiteAudit : Audit
     {
-        private YellowstonePathology.Business.Surgical.KeyWordCollection m_SpecimenDescriptionKeyWords;
-        private YellowstonePathology.Business.Surgical.KeyWordCollection m_ExcludeWords;
-        private YellowstonePathology.Business.Surgical.KeyWordCollection m_DiagnosisKeyWords;
-        private YellowstonePathology.Business.Billing.Model.CptCodeCollection m_CptCodeCollection;
-        private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
+        private Business.Surgical.KeyWordCollection m_SpecimenDescriptionKeyWords;
+        private Business.Surgical.KeyWordCollection m_ExcludeWords;
+        private Business.Surgical.KeyWordCollection m_DiagnosisKeyWords;
+        private Business.Billing.Model.CptCodeCollection m_CptCodeCollection;
+        private Business.Test.AccessionOrder m_AccessionOrder;
 
         public HPV1618ForSiteAudit(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
@@ -31,13 +31,13 @@ namespace YellowstonePathology.Business.Audit.Model
             this.m_Status = AuditStatusEnum.OK;
             this.m_Message.Clear();
 
-            YellowstonePathology.Business.Test.HPV1618.HPV1618Test hpv1618Test = new Test.HPV1618.HPV1618Test();
+            Business.Test.HPV1618.HPV1618Test hpv1618Test = new Test.HPV1618.HPV1618Test();
             if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(hpv1618Test.PanelSetId) == false)
             {
-                YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
+                Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
                 foreach (YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen in surgicalTestOrder.SurgicalSpecimenCollection)
                 {
-                    YellowstonePathology.Business.Test.PanelSetOrderCPTCodeCollection panelSetOrderCPTCodeCollectionForThisSpecimen = surgicalTestOrder.PanelSetOrderCPTCodeCollection.GetSpecimenOrderCollection(surgicalSpecimen.SpecimenOrder.SpecimenOrderId);
+                    Business.Test.PanelSetOrderCPTCodeCollection panelSetOrderCPTCodeCollectionForThisSpecimen = surgicalTestOrder.PanelSetOrderCPTCodeCollection.GetSpecimenOrderCollection(surgicalSpecimen.SpecimenOrder.SpecimenOrderId);
                     if (this.HPVIndicatorExists(surgicalSpecimen.SpecimenOrder.Description, surgicalSpecimen.Diagnosis, panelSetOrderCPTCodeCollectionForThisSpecimen) == true)
                     {
                         this.m_Status = AuditStatusEnum.Failure;

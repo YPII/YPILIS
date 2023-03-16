@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,16 +19,19 @@ namespace YellowstonePathology.Business.HL7View.EPIC
         YellowstonePathology.Business.Domain.Physician m_OrderingPhysician;
         string m_CDMCode;
         string m_ProcedureName;
+        string m_DepartmentCode;
 
         public EPICFT1View(YellowstonePathology.Business.Billing.Model.CptCode cptCode, DateTime billDate, DateTime postDate, string quantity,
-            YellowstonePathology.Business.Domain.Physician orderingPhysician, string masterAccessionNo, DateTime collectionDate)
+            YellowstonePathology.Business.Domain.Physician orderingPhysician, string masterAccessionNo, DateTime collectionDate, string departmentCode)
         {
             this.m_CptCode = cptCode;
             this.m_BillDate = billDate;
             this.m_PostDate = postDate;
             this.m_Quantity = quantity;
             this.m_MasterAccessionNo = masterAccessionNo;
-            this.m_OrderingPhysician = orderingPhysician;            
+            this.m_OrderingPhysician = orderingPhysician;
+            this.m_DepartmentCode = departmentCode;
+
             YellowstonePathology.Business.Billing.Model.CDM cdm = Business.Billing.Model.CDMCollection.Instance.GetCDMS(this.m_CptCode.Code, "SVH");
             if(cdm != null)
             {
@@ -71,7 +75,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             ft1Element.Add(ft110Element);
 
             //unmark this when testing new inteface with SCL
-            XElement ft130Element = new XElement("FT1.13", "502");
+            XElement ft130Element = new XElement("FT1.13", this.m_DepartmentCode);
             ft1Element.Add(ft130Element);
 
             XElement ft118Element = new XElement("FT1.18", "I");

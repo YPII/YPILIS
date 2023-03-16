@@ -14,7 +14,7 @@ namespace YellowstonePathology.Business.Test.MPNExtendedReflex
 			this.m_PanelSetName = "MPN JAK2 V617F with Sequential Reflex to JAK2 Exon 12-13, CALR and MPL";
 			this.m_CaseType = Business.CaseType.Molecular;
 			this.m_HasTechnicalComponent = true;
-			this.m_HasProfessionalComponent = true;
+			this.m_HasProfessionalComponent = false;
 			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
 			this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterY();
 			this.m_Active = true;
@@ -41,8 +41,8 @@ namespace YellowstonePathology.Business.Test.MPNExtendedReflex
 			this.m_TechnicalComponentFacility = neo;
 			this.m_TechnicalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("YPIBLGS");
 
-			this.m_ProfessionalComponentFacility = neo;
-			this.m_ProfessionalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+			//this.m_ProfessionalComponentFacility = neo;
+			//this.m_ProfessionalComponentBillingFacility = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
 
             Business.Billing.Model.PanelSetCptCode panelSetCptCode1 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81219", null), 1);
 			Business.Billing.Model.PanelSetCptCode panelSetCptCode2 = new YellowstonePathology.Business.Billing.Model.PanelSetCptCode(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("81279", null), 1);

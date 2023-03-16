@@ -22,7 +22,7 @@ namespace YellowstonePathology.UI.Test
 		}
 
         protected override void ShowResultPage()
-        {
+        {			
 			this.m_ResultPage = new PublishedDocumentResultPage(this.m_AccessionOrder, this.m_PanelSetOrder);
 			this.m_ResultPage.Next += new PublishedDocumentResultPage.NextEventHandler(ResultPage_Next);
 			this.m_PageNavigator.Navigate(this.m_ResultPage);

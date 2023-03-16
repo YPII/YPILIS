@@ -220,7 +220,7 @@ namespace YellowstonePathology.UI.Billing
             scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
 
             WebBrowser webBrowser = new WebBrowser();
-            string url = fileName.Replace(@"\\CFileServer\AccessionDocuments\", "http://10.1.2.90:50071/documents/");
+            string url = fileName.Replace(@"\\FileServer\AccessionDocuments\", "http://10.1.2.90:50071/documents/");
             url = url.Replace("\\", "/");
             webBrowser.Source = new Uri(url);
             scrollViewer.Content = webBrowser;

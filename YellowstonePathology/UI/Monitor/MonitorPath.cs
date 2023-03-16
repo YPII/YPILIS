@@ -84,6 +84,10 @@ namespace YellowstonePathology.UI.Monitor
                     billingEODProcessingPage.Refresh();
                     this.m_MonitorPageWindow.PageNavigator.Navigate(billingEODProcessingPage);
                     break;
+                case MonitorPageLoadEnum.HuddleDashboard:
+                    HuddleDashboardPage huddleDashboardPage = new HuddleDashboardPage();
+                    this.m_MonitorPageWindow.PageNavigator.Navigate(huddleDashboardPage);
+                    break;
             }
             this.m_MonitorPageWindow.Show();
         }

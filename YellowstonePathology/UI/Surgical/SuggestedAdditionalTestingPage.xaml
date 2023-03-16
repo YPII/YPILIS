@@ -23,8 +23,9 @@
 
             <Border Grid.Row="0" Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
 
-            <Grid Grid.Column="0" Margin="10" Width="240">
+            <Grid Grid.Column="0" Margin="10" Width="350">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -98,6 +99,10 @@
                 <TextBlock Grid.Column="0" Grid.Row="14" Margin="5,3,0,0" TextWrapping="Wrap">                    
                     <Hyperlink Click="HyperLinkPDGFRa_Click">PDGFRa Mutation Analysis</Hyperlink>
                 </TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="15" Margin="5,3,0,0" TextWrapping="Wrap">                    
+                    <Hyperlink Click="HyperLinkNeoTypeColorectalTumorProfile_Click">NeoType Colorectal Tumor Profile</Hyperlink>
+                </TextBlock>
             </Grid>
 
             <Grid Grid.Column="1">
@@ -125,7 +130,7 @@
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="100"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=OrderTime}" Header="Date" Width="160"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Order" Width="230"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=PanelSetName}" Header="Order" Width="300"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=FinalTime}" Header="Final" Width="80"/>
                         </GridView>
                     </ListView.View>

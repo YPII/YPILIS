@@ -42,11 +42,17 @@ namespace YellowstonePathology.UI.Test
             bool result = false;
             if (this.m_AccessionOrder.PanelSetOrderCollection.HasSurgical() == true)
             {
-                if (this.m_PanelSetOrder.Result != Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
+                var showAmendmentPage = false;
+                if (this.m_PanelSetOrder.Result != Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString() == true) showAmendmentPage = true;
+
+                Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder her2ISH = (Business.Test.HER2AmplificationByISH.HER2AmplificationByISHTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(46);
+                if (her2ISH.Indicator == "Breast Metastatic") showAmendmentPage = true;
+
+                if (showAmendmentPage == true)
                 {
                     YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
                     YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(surgicalTestOrder.ReportNo);
-                    if (amendmentCollection.HasAmendmentForReferenceReportNo(this.m_PanelSetOrder.ReportNo) == true)
+                    if (amendmentCollection.HasAmendmentForReferenceReportNo(her2ISH.ReportNo) == true)
                     {
                         result = true;
                         YellowstonePathology.Business.Amendment.Model.Amendment amendment = amendmentCollection.GetAmendmentForReferenceReportNo(this.m_PanelSetOrder.ReportNo);

@@ -38,7 +38,7 @@
             <Button Width="150" Margin="2,2,2,2" Click="ButtonRefresh_Click">Refresh</Button>
             <Button Width="150" Margin="2,2,2,2" Click="ButtonUpdate_Click">Update</Button>
             <ComboBox  Name="ComboBoxProcessorRuns" ItemsSource="{Binding Path=ProcessorRunCollection}" DisplayMemberPath="Name" Margin="2,2,2,2" Width="200" SelectionChanged="ComboBoxProcessorRun_SelectionChanged"></ComboBox>
-            <TextBox Name="TextBoxProcessorStartTime" Margin="2" Width="120" Text="{Binding Path=ProcessorStartTime, Converter={StaticResource MilitaryDateTimeConverter}}" />
+            <TextBox Name="TextBoxProcessorStartTime" Margin="2" Width="160" Text="{Binding Path=ProcessorStartTime, Converter={StaticResource MilitaryDateTimeConverter}}" />
             <TextBox Name="TextBoxProcessorFixationDuration" Margin="2" Width="120" Text="{Binding Path=ProcessorFixationDuration.TotalMinutes, Mode=OneWay}" />
         </StackPanel>
 
@@ -57,22 +57,32 @@
 
         <TabControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
             <TabItem Header="On Hold">
-                <ListView Name="ListViewHoldList" Margin="2,2,2,2" ItemsSource="{Binding Path=AliquotOrderHoldCollection}">
-                    <ListView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Tag="{Binding}" Header="Remove Hold" Click="ContextMenuRemoveHold_Click"></MenuItem>
-                        </ContextMenu>
-                    </ListView.ContextMenu>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Path=AliquotOrderId}" />
-                            <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Path=AliquotType}" />
-                            <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Path=Status}" />
-                            <GridViewColumn Header="Description" Width="300" DisplayMemberBinding="{Binding Path=Description}" />
-                            <GridViewColumn Header="Instructions" Width="300" DisplayMemberBinding="{Binding Path=EmbeddingInstructions}" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Margin="2,2,2,2" Height="30" Width="100" Click="ButtonPrintHoldList_Click">Print</Button>
+                    <ListView Name="ListViewHoldList" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" ItemsSource="{Binding Path=AliquotOrderHoldCollection}">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Tag="{Binding}" Header="Remove Hold" Click="ContextMenuRemoveHold_Click"></MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Path=AliquotOrderId}" />
+                                <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Path=AliquotType}" />
+                                <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Path=Status}" />
+                                <GridViewColumn Header="Description" Width="300" DisplayMemberBinding="{Binding Path=Description}" />
+                                <GridViewColumn Header="Instructions" Width="300" DisplayMemberBinding="{Binding Path=EmbeddingInstructions}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
             </TabItem>
             <TabItem Header="Not Scanned">
                 <ListView Name="ListViewNotScannedList" Margin="2,2,2,2" ItemsSource="{Binding Path=EmbeddingNotScannedList}">
@@ -128,7 +138,9 @@
                 </ListView>
             </TabItem>
             <TabItem Header="Gross Description">
-                <TextBox Name="TextBoxGross" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=CurrentGrossDescription}" IsEnabled="False"></TextBox>
+                <ScrollViewer>
+                    <TextBox Name="TextBoxGross" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=CurrentGrossDescription}" IsEnabled="False"></TextBox>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
 

@@ -146,7 +146,7 @@ namespace YellowstonePathology.Business.Domain
 		{
 			string message = this.ToString();
 			System.Net.Mail.MailMessage mailMessage = new System.Net.Mail.MailMessage("Administrator@ypii.com", this.NotificationAddress, user.DisplayName + " - Event Notification", message);
-			System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
+			System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.110 ");
 
             Uri uri = new Uri("http://tempuri.org/");
             System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;

@@ -11,16 +11,14 @@ namespace YellowstonePathology.Business.HL7View.EPIC
     {        
         private int m_ObxCount;        
         private bool m_SendUnsolicited;
-        private bool m_Testing;
-        private bool m_IncludePdfSegments;
+        private bool m_Testing;        
 
         private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
         private YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
         private YellowstonePathology.Business.Domain.Physician m_OrderingPhysician;
 
-        public EPICBeakerResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool sendUnsolicted, bool testing, bool includePdfSegments)
-        {
-            this.m_IncludePdfSegments = includePdfSegments;
+        public EPICBeakerResultView(string reportNo, Business.Test.AccessionOrder accessionOrder, bool sendUnsolicted, bool testing)
+        {        
             this.m_SendUnsolicited = sendUnsolicted;
             this.m_Testing = testing;
             this.m_AccessionOrder = accessionOrder;
@@ -37,7 +35,19 @@ namespace YellowstonePathology.Business.HL7View.EPIC
         public void Send(YellowstonePathology.Business.Rules.MethodResult result)
         {                        
             XElement detailDocument = CreateDocument();
-            this.WriteDocumentToServer(detailDocument);            
+            this.WriteDocumentToServer(detailDocument);
+
+            //Dont send pdf if one of these.
+            List<int> exclusionList = new List<int>();
+            exclusionList.Add(378); //IEP
+            exclusionList.Add(379); //SPEP
+
+            if(exclusionList.Any(i => i == this.m_PanelSetOrder.PanelSetId) == false)
+            {
+                YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultViewPDF resultViewPdf = new Business.HL7View.EPIC.EPICBeakerResultViewPDF(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, this.m_SendUnsolicited, this.m_Testing);
+                YellowstonePathology.Business.Rules.MethodResult methodResultPdf = new Business.Rules.MethodResult();
+                resultViewPdf.Send(methodResultPdf);
+            }            
 
             result.Success = true;
             result.Message = "An HL7 message was created and sent to the interface.";
@@ -122,8 +132,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
             EPICBeakerObxView epicObxView = EPICObxViewFactory.GetObxView(panelSetOrder.PanelSetId, this.m_AccessionOrder, this.m_PanelSetOrder.ReportNo, this.m_ObxCount, this.m_SendUnsolicited, false);
             if (epicObxView != null)
             {                
-                epicObxView.ToXml(document);
-                if (this.m_IncludePdfSegments == true) epicObxView.AddPDFSegments(document);
+                epicObxView.ToXml(document);                
             }
             else
             {                
@@ -139,8 +148,7 @@ namespace YellowstonePathology.Business.HL7View.EPIC
 
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
 			string serverFileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + "\\" + this.m_PanelSetOrder.ReportNo + fileExtension;            
-            string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\SCLHealth\" + this.m_PanelSetOrder.ReportNo + fileExtension;
-            //string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\Provation\wait\" + this.m_PanelSetOrder.ReportNo + fileExtension;
+            string interfaceFileName = @"\\YPIIInterface2\ChannelData\Outgoing\SCLHealth\" + this.m_PanelSetOrder.ReportNo + fileExtension;            
 
             if (this.m_Testing == true)
                 interfaceFileName = @"\\ypiiinterface2\ChannelData\Outgoing\1002.OLD\BeakerTesting\" + this.m_PanelSetOrder.ReportNo + fileExtension;

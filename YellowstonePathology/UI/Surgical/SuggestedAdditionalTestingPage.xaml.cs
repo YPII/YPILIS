@@ -220,5 +220,14 @@ namespace YellowstonePathology.UI.Surgical
                 this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(pdgfra));
             }
         }
+
+        private void HyperLinkNeoTypeColorectalTumorProfile_Click(object sender, RoutedEventArgs e)
+        {
+            Business.Test.NeoTYPEColorectalTumorProfile.NeoTYPEColorectalTumorProfileTest neo = new Business.Test.NeoTYPEColorectalTumorProfile.NeoTYPEColorectalTumorProfileTest();
+            if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(neo.PanelSetId) == false)
+            {
+                this.OrderTest(this, new CustomEventArgs.PanelSetReturnEventArgs(neo));
+            }
+        }
     }
 }

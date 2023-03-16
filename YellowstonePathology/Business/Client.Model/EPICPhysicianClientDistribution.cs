@@ -22,11 +22,11 @@ namespace YellowstonePathology.Business.Client.Model
                 List<string> clientGroupIds = new List<string>();
                 clientGroupIds.Add("1");
                 clientGroupIds.Add("2");
+                clientGroupIds.Add("36");
 
                 YellowstonePathology.Business.Client.Model.ClientGroupClientCollection stVincentAndHRHGroup = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId(clientGroupIds);
                 if (stVincentAndHRHGroup.ClientIdExists(accessionOrder.ClientId) == true || accessionOrder.ClientId == 1759 || accessionOrder.ClientId == 54)
-                {
-                    //if (string.IsNullOrEmpty(accessionOrder.SvhAccount) == true || string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
+                {                    
                     if (string.IsNullOrEmpty(accessionOrder.SvhMedicalRecord) == true)
                     {
                         panelSetOrder.TestOrderReportDistributionCollection.AddAlternateDistribution(this, panelSetOrder.ReportNo);
@@ -35,7 +35,7 @@ namespace YellowstonePathology.Business.Client.Model
                     {
                         YellowstonePathology.Business.PanelSet.Model.PanelSetCollection panelSetCollection = Business.PanelSet.Model.PanelSetCollection.GetAll();
                         YellowstonePathology.Business.PanelSet.Model.PanelSet panelSet = panelSetCollection.GetPanelSet(panelSetOrder.PanelSetId);
-                        if (panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase)
+                        if (panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase || panelSet.ResultDocumentSource == Business.PanelSet.Model.ResultDocumentSourceEnum.ClosingResult)
                         {
                             panelSetOrder.TestOrderReportDistributionCollection.AddPrimaryDistribution(this, panelSetOrder.ReportNo);
                         }

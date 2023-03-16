@@ -19,8 +19,12 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
 		private string m_Interpretation;
 		private string m_ReportDisclaimer;
 		private string m_Reference;
+		private string m_Indicator;
 
-        public PanelSetOrderHer2AmplificationByIHC()
+		public static string BreastPrimaryMethod = "Ventana PATHWAY anti-HER-2/neu antibody(clone 4B5) is used and staining is performed per the package insert. Scoring is based on ASCO/CAP guidelines for immunohistochemical testing of HER2 in breast cancer: a positive result(score 3+) is based on uniform, intense membrane staining in greater than 10% of invasive tumor cells; an equivocal result(score 2+) is based on weak to moderate complete membrane staining in greater than 10% of the tumor cells(see reference 2 for exceptions); a negative result(score 1+) is defined as incomplete membrane staining that is faint/barely perceptible and within<10% of the invasive tumor cells; and a negative result(score 0) is based on no staining or faint, partial membrane staining in </=10% of the tumor cells. The technical staining of this tumor was performed at Bozeman Health Laboratory, and interpretation performed at Yellowstone Pathology Institute.";
+		public static string BreastMetastaticMethod = "Ventana PATHWAY anti-HER-2/neu antibody (clone 4B5) is used and staining is performed per the package insert. Scoring is based on ASCO/CAP guidelines for immunohistochemical testing of HER2 in breast cancer, a positive result (score 3+) is based on uniform, intense membrane staining in greater than 10% of invasive tumor cells; a low positive result (score 2+) is based on weak to moderate complete membrane staining in greater than 10% of the tumor cells (see reference 2 for exceptions); a low positive result (score 1+) is defined as incomplete membrane staining that is faint/barely perceptible and within <10% of the invasive tumor cells; and a negative result (score 0) is based on no staining or faint, partial membrane staining in </=10% of the tumor cells. The technical staining of this tumor was performed at Bozeman Health Laboratory, and interpretation performed at Yellowstone Pathology Institute.";
+
+		public PanelSetOrderHer2AmplificationByIHC()
         {
 
         }
@@ -31,19 +35,9 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
 			bool distribute)
 			: base(masterAccessionNo, reportNo, objectId, panelSet, orderTarget, distribute)
 		{
-            this.ReportDisclaimer = this.GetLocationPerformedComment() + Environment.NewLine + "The performance characteristics of this test " +
-                "have been determined by NeoGenomics Laboratories.  This test has not been approved by the FDA.  The FDA has determined such " +
-                "clearance or approval is not necessary.  This laboratory is CLIA certified to perform high complexity clinical testing.";
-
-            this.Method = "Ventana PATHWAY anti-HER-2/neu antibody (clone 4B5) is used and staining is performed per the package " +
-                "insert. Scoring is based on ASCO/CAP guidelines for immunohistochemical testing of HER2 in breast cancer, a " +
-                "positive result (score 3+) is based on uniform, intense membrane staining in greater than 10% of invasive tumor cells; " +
-                "an equivocal result (score 2+) is based on weak to moderate complete membrane staining in greater than 10% of the tumor " +
-                "cells (see reference 2 for exceptions); a negative result (score 1+) is defined as incomplete membrane staining that is " +
-                "faint/barely perceptible and within <10% of the invasive tumor cells; and a negative result (score 0) is based on no " +
-                "staining or faint, partial membrane staining in </=10% of the tumor cells. The technical staining of this tumor was performed " +
-                "at Neogenomics Laboratory, and interpretation performed at Yellowstone Pathology Institute.";
-        }
+			this.ReportDisclaimer = this.GetLocationPerformedComment() + Environment.NewLine + "The Roche Ventana HER2 Pathway antibody test is FDA approved for In Vitro Diagnostic use.";
+			this.Reference = "Wolff AC, Hammond EH, Allison KH, et al: Human Epidermal Growth Factor Receptor 2 Testing in Breast Cancer: American Society of Clinical Oncology/College of American Pathologists Clinical Practice Guideline Focused Update: Arch Pathol Lab Med 142:1364-1382, 2018.";			
+		}
 
 		[PersistentProperty()]
 		[PersistentDataColumnProperty(true, "500", "null", "varchar")]
@@ -165,6 +159,21 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
 			}
 		}
 
+		[PersistentProperty()]
+		[PersistentDataColumnProperty(true, "100", "null", "varchar")]
+		public string Indicator
+		{
+			get { return this.m_Indicator; }
+			set
+			{
+				if (this.m_Indicator != value)
+				{
+					this.m_Indicator = value;
+					this.NotifyPropertyChanged("Indicator");
+				}
+			}
+		}
+
 		public override string ToResultString(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
 		{
 			StringBuilder result = new StringBuilder();
@@ -217,7 +226,7 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
                     HER2AmplificationByISH.HER2AmplificationByISHTestOrder ishTestOrder = (HER2AmplificationByISH.HER2AmplificationByISHTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(ishTest.PanelSetId, this.m_OrderedOnId, true);
                     if(ishTestOrder.Final == true)
                     {
-                        if (this.m_Score.Contains("2+") == true)
+                        if (this.m_Score.Contains("2+") == true && this.m_Indicator == "Breast")
                         {
                             HER2AmplificationRecount.HER2AmplificationRecountTest test = new HER2AmplificationRecount.HER2AmplificationRecountTest();
                             if (accessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_OrderedOnId, true) == false)

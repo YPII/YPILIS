@@ -118,7 +118,6 @@ namespace YellowstonePathology.UI.Test
         private bool ShowHER2AmplificationSummaryResultPage()
         {
             bool result = false;
-
             YellowstonePathology.Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest test = new Business.Test.HER2AnalysisSummary.HER2AnalysisSummaryTest();
             if (this.m_AccessionOrder.PanelSetOrderCollection.Exists(test.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true) == true)
             {

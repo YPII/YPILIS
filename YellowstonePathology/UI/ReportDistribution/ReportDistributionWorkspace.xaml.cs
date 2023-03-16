@@ -187,7 +187,7 @@ namespace YellowstonePathology.UI.ReportDistribution
                                     /*
                                     this.AddToLog($"ERROR: not able to handle unset distribution for: {panelSetOrder.ReportNo}");
                                     System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("Support@ypii.com", "Support@ypii.com", System.Windows.Forms.SystemInformation.UserName, reason + ": " + panelSetOrder.ReportNo);
-                                    System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
+                                    System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.110 ");
 
                                     Uri uri = new Uri("http://tempuri.org/");
                                     System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;
@@ -319,33 +319,12 @@ namespace YellowstonePathology.UI.ReportDistribution
         public bool TryDelete(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Interface.ICaseDocument caseDocument,
 			YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
-            bool result = true;
-            
+            bool result = true;            
             YellowstonePathology.Business.Rules.MethodResult methodResult = caseDocument.DeleteCaseFiles(orderIdParser);
 
             if (methodResult.Success == false)
             {
-                throw new Exception($"{panelSetOrder.ReportNo}: Not able to delete files prior to publishing.  Case will be delayed.");
-
-                /*
-                this.DelayPublishAndDistribution(15, "Not able to delete files prior to publishing.", panelSetOrder);
-
-                //this.m_ReportDistributionLogEntryCollection.AddEntry("ERROR", "Publish Next", null, panelSetOrder.ReportNo, panelSetOrder.MasterAccessionNo,
-                //                null, null, "Not able to delete files prior to publishing.");
-                this.AddToLog($"Not able to delete files prior to publishing: {panelSetOrder.ReportNo}");
-
-                System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("Support@ypii.com", "Support@ypii.com", System.Windows.Forms.SystemInformation.UserName, "Not able to delete files prior to publishing: " + panelSetOrder.ReportNo);
-                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
-
-                Uri uri = new Uri("http://tempuri.org/");
-                System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;
-                System.Net.NetworkCredential credential = credentials.GetCredential(uri, "Basic");
-
-                client.Credentials = credential;
-                client.Send(message);
-
-                result = false;
-                */
+                throw new Exception($"{panelSetOrder.ReportNo}: Not able to delete files prior to publishing.  Case will be delayed.");                
             }
 
             return result;
@@ -433,7 +412,7 @@ namespace YellowstonePathology.UI.ReportDistribution
                                                 this.AddToLog($"ERROR publishing case: {panelSetOrder.ReportNo} - {panelSetOrder.PanelSetName}");
 
                                                 System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("Sid.Harder@ypii.com", "Sid.Harder@ypii.com", System.Windows.Forms.SystemInformation.UserName, distributionResult.Message);
-                                                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.112 ");
+                                                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.110 ");
 
                                                 Uri uri = new Uri("http://tempuri.org/");
                                                 System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;
@@ -457,7 +436,9 @@ namespace YellowstonePathology.UI.ReportDistribution
                         processCount += 1;
                         if (processCount == maxProcessCount) break;
                     }                    
-                }
+                
+            }
+            
                 catch (Exception exception)
                 {
                     Business.Logging.EmailExceptionHandler.HandleException(exception.Message, WorkingReportNo.Instance.ReportNo);
@@ -468,7 +449,7 @@ namespace YellowstonePathology.UI.ReportDistribution
                     YellowstonePathology.WorkingReportNo.Instance.ReportNo = null;
                 }                
             }                
-
+            
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
         }        
 
@@ -505,6 +486,9 @@ namespace YellowstonePathology.UI.ReportDistribution
                     break;
                 case YellowstonePathology.Business.Client.Model.MediTechNMHPhysicianClientDistribution.MEDITECHNMH:
                     result = this.HandleMeditechNMHDistribution(testOrderReportDistribution.ReportNo, accessionOrder);
+                    break;
+                case YellowstonePathology.Business.Client.Model.EMAPhysicianClientDistribution.EMA:
+                    result = this.HandleEMADistribution(testOrderReportDistribution.ReportNo, accessionOrder);
                     break;
                 case YellowstonePathology.Business.Client.Model.WebServicePhysicianClientDistribution.WEBSERVICE:
                     result = this.HandleWebServiceDistribution(testOrderReportDistribution);
@@ -554,27 +538,7 @@ namespace YellowstonePathology.UI.ReportDistribution
         {
             Business.ReportDistribution.Model.DistributionResult distributionResult = Business.ReportDistribution.Model.TextAndEmailSubmission.Submit(accessionOrder.PPhoneNumberHome, accessionOrder.PEmailAddress, reportNo, accessionOrder.PFirstName);
             return distributionResult;
-        }
-
-        /*
-        private YellowstonePathology.Business.ReportDistribution.Model.DistributionResult HandleWYDOHDistribution(string reportNo, Business.Test.AccessionOrder accessionOrder)
-        {
-            YellowstonePathology.Business.Rules.MethodResult result = new Business.Rules.MethodResult();
-            //YellowstonePathology.Business.HL7View.WYDOH.WYDOHResultView wyDOHResultView = new Business.HL7View.WYDOH.WYDOHResultView(reportNo, accessionOrder);
-            //wyDOHResultView.CanSend(result);
-            //wyDOHResultView.Send(result);
-
-            YellowstonePathology.Business.Rules.MethodResult resultV2 = new Business.Rules.MethodResult();
-            YellowstonePathology.Business.HL7View.WYDOH.WYDOHResultViewV2 wyDOHResultViewV2 = new Business.HL7View.WYDOH.WYDOHResultViewV2(reportNo, accessionOrder);
-            wyDOHResultViewV2.CanSend(resultV2);
-            wyDOHResultViewV2.Send(resultV2);
-
-            YellowstonePathology.Business.ReportDistribution.Model.DistributionResult distributionResult = new Business.ReportDistribution.Model.DistributionResult();
-            distributionResult.IsComplete = result.Success;
-            distributionResult.Message = result.Message;
-            return distributionResult;
-        }
-        */
+        }        
 
         private YellowstonePathology.Business.ReportDistribution.Model.DistributionResult HandleMTDOHDistribution(string reportNo, Business.Test.AccessionOrder accessionOrder)
         {
@@ -625,14 +589,21 @@ namespace YellowstonePathology.UI.ReportDistribution
 
         private YellowstonePathology.Business.ReportDistribution.Model.DistributionResult HandleMeditechDistribution(string reportNo, Business.Test.AccessionOrder accessionOrder)
         {
-            YellowstonePathology.Business.ReportDistribution.Model.MeditechDistribution meditechDistribution = new Business.ReportDistribution.Model.MeditechDistribution();            
-            return meditechDistribution.Distribute(reportNo, accessionOrder);
+            throw new Exception("Meditech distribution is no longer valid.");
+            //YellowstonePathology.Business.ReportDistribution.Model.MeditechDistribution meditechDistribution = new Business.ReportDistribution.Model.MeditechDistribution();            
+            //return meditechDistribution.Distribute(reportNo, accessionOrder);
         }
 
         private YellowstonePathology.Business.ReportDistribution.Model.DistributionResult HandleMeditechNMHDistribution(string reportNo, Business.Test.AccessionOrder accessionOrder)
         {
             YellowstonePathology.Business.ReportDistribution.Model.MeditechNMHDistribution meditechNMHDistribution = new Business.ReportDistribution.Model.MeditechNMHDistribution();
             return meditechNMHDistribution.Distribute(reportNo, accessionOrder);
+        }
+
+        private YellowstonePathology.Business.ReportDistribution.Model.DistributionResult HandleEMADistribution(string reportNo, Business.Test.AccessionOrder accessionOrder)
+        {
+            YellowstonePathology.Business.ReportDistribution.Model.EMADistribution emaDistribution = new Business.ReportDistribution.Model.EMADistribution();
+            return emaDistribution.Distribute(reportNo, accessionOrder);
         }
 
         private YellowstonePathology.Business.ReportDistribution.Model.DistributionResult HandleECWDistribution(YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution, Business.Test.AccessionOrder accessionOrder)

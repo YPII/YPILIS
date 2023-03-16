@@ -270,11 +270,7 @@ namespace YellowstonePathology.UI.Test
             {
                 CustomEventArgs.PanelSetReturnEventArgs args = new CustomEventArgs.PanelSetReturnEventArgs(test);
                 this.OrderTest(this, args);
-            }
-            /*else
-            {
-                MessageBox.Show("Unable to order a " + test.PanelSetName + " as one already exists.");
-            }*/
+            }            
         }
 
         private void OrderRecountOnNeed()
@@ -282,9 +278,12 @@ namespace YellowstonePathology.UI.Test
             YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest her2AmplificationRecountTest = new YellowstonePathology.Business.Test.HER2AmplificationRecount.HER2AmplificationRecountTest();
             YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new YellowstonePathology.Business.Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest();
             YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC panelSetOrderHer2AmplificationByIHC = (YellowstonePathology.Business.Test.Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(her2AmplificationByIHCTest.PanelSetId, this.m_PanelSetOrder.OrderedOnId, true);
-            if (panelSetOrderHer2AmplificationByIHC.Final == true && panelSetOrderHer2AmplificationByIHC.Score == "2+" && this.m_PanelSetOrder.Result == Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
-            {
-                this.OrderATest(her2AmplificationRecountTest);
+            if (panelSetOrderHer2AmplificationByIHC.Indicator != "Breast Metastatic" && 
+                panelSetOrderHer2AmplificationByIHC.Final == true && 
+                panelSetOrderHer2AmplificationByIHC.Score == "2+" && 
+                this.m_PanelSetOrder.Result == Business.Test.HER2AmplificationByISH.HER2AmplificationResultEnum.Equivocal.ToString())
+            {                
+                this.OrderATest(her2AmplificationRecountTest);               
             }
         }
 

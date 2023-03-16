@@ -100,6 +100,7 @@ namespace YellowstonePathology.Business.Test.Model
             result.Add(new Alk());
 
             //IHC
+            result.Add(new Claudin4T());
             result.Add(new AmyloidAProtein());
             result.Add(new AmyloidPProtein());
             result.Add(new CD138Quantitative());

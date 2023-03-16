@@ -63,7 +63,7 @@
                     <MenuItem Header="Prostate Biopsy Kits" Click="MenuItemProstateBiopsyKit_Click" />
                     <MenuItem Header="Material Storage Labels" Click="MenuItemMaterialStorageLabels_Click" />
                     <MenuItem Header="Material Storage Scans" Click="MenuItemMaterialStorageScans_Click" />
-                    <MenuItem Header="Reference Lab testing" Click="MenuItemReferenceLabTesting_Click" />
+                    <MenuItem Header="Case Documents" Click="MenuItemReferenceLabTesting_Click" />
                 </MenuItem>
 
                 <MenuItem Header="_Client" Name="MenuItemClient">
@@ -119,6 +119,7 @@
                     <MenuItem Name="MenuItemMonitorMissingInformation" Header="Missing Information" Click="MenuItemShowMissingInformationMonitor_Click"></MenuItem>
                     <MenuItem Name="MenuItemDashboard" Header="Dashboard" Click="MenuItemShowDashboardMonitor_Click"></MenuItem>
                     <MenuItem Name="MenuItemBillingEOD" Header="Billing EOD Process" Click="MenuItemShowBillingEOD_Click"></MenuItem>
+                    <MenuItem Name="MenuItemHuddleDashboard" Header="Huddle Dashboard" Click="MenuItemHuddleDashboard_Click"></MenuItem>
                 </MenuItem>
                 
             </Menu>

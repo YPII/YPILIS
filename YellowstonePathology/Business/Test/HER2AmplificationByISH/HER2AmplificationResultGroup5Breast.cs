@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
         public override bool IsAMatch()
         {
             bool result = false;
-            if (this.m_Indicator == HER2AmplificationByISHIndicatorCollection.BreastIndication)
+            if (this.m_Indicator.ToString().StartsWith("Breast"))
             {
                 if(this.m_AverageHer2Chr17SignalAsDouble.HasValue && this.m_AverageHer2NeuSignal.HasValue)
                 {

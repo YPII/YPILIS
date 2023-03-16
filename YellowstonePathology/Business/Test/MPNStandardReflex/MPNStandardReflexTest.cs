@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.MPNStandardReflex
 			this.m_HasProfessionalComponent = true;
 			this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.YPIDatabase;
 			this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterY();
-			this.m_Active = true;
+			this.m_Active = false;
 
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.MPNStandardReflex.PanelSetOrderMPNStandardReflex).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.MPNStandardReflex.MPNStandardReflexWordDocument).AssemblyQualifiedName;

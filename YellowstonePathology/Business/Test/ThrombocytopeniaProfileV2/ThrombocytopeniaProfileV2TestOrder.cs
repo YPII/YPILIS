@@ -31,7 +31,7 @@ namespace YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2
         {
             this.m_AntiPlateletAntibodyIgGReference = "Negative";
             this.m_AntiPlateletAntibodyIgMReference = "Negative";
-            this.m_ReticulatedPlateletAnalysisReference = "0-0.37%";
+            this.m_ReticulatedPlateletAnalysisReference = "<=0.36%";
             this.m_Interpretation = "* Negative:  IgG and/or IgM values are not elevated.  There is no indication that immune mechanisms " +
                 "are involved in the thrombocytopenia.  Other etiologies should be considered." + Environment.NewLine + Environment.NewLine +
                 "* Weakly Positive: The moderately elevated IgG and / or IgM value suggests that immune mechanisms could be involved in the " +

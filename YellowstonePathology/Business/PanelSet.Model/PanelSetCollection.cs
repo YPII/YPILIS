@@ -16,7 +16,15 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public static PanelSetCollection GetAll()
         {
             PanelSetCollection panelSetCollection = new PanelSetCollection();
+            panelSetCollection.Add(new TCellReceptorBetaTest());
+            panelSetCollection.Add(new TCellReceptorDeltaTest());
+            panelSetCollection.Add(new FLT3PreliminaryByPCRTest());
+            panelSetCollection.Add(new NeoTypeAMLPrognosticProfileTest());
+            panelSetCollection.Add(new NeoTypeMDSCMMLProfileTest());
+            panelSetCollection.Add(new NeoTypeMyeloidProfileTest());
+            panelSetCollection.Add(new Business.Test.AnalCytology.AnalCytologyTest());
 
+            panelSetCollection.Add(new Business.PanelSet.Model.Onep36DeletionFISH());
             panelSetCollection.Add(new Business.PanelSet.Model.IRF4RearrangementByFISH());
             panelSetCollection.Add(new Business.PanelSet.Model.SalivaryGlandNGSInfusionPanel());
             panelSetCollection.Add(new Business.PanelSet.Model.NPM1MRDMolecularAnalysis());

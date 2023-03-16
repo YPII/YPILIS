@@ -62,5 +62,8 @@
     <Setting Name="ShowSecondMonitorOnSame" Type="System.String" Scope="User">
       <Value Profile="(Default)">true</Value>
     </Setting>
+    <Setting Name="AccessionDocuments" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\FileServer\AccessionDocuments</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -11,6 +11,7 @@ namespace YellowstonePathology.Business.Test.ABL1KinaseDomainMutation
 		{
 			this.Add(new ABL1KinaseDomainMutationNotDetectedResult());
 			this.Add(new ABL1KinaseDomainMutationDetectedResult());
+			this.Add(new ABL1KinaseDomainQNSResult());
 			this.Add(new YellowstonePathology.Business.Test.TestResultNoResult());
 		}
 	}

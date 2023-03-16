@@ -101,61 +101,68 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
             HER2AmplificationByISH.HER2AmplificationByISHTest ishTest = new HER2AmplificationByISH.HER2AmplificationByISHTest();
             Her2AmplificationByIHC.Her2AmplificationByIHCTest ihcTest = new Her2AmplificationByIHC.Her2AmplificationByIHCTest();
             HER2AmplificationRecount.HER2AmplificationRecountTest recountTest = new HER2AmplificationRecount.HER2AmplificationRecountTest();
-
+            
             if(accessionOrder.PanelSetOrderCollection.Exists(ishTest.PanelSetId) == true)
             {
                 HER2AmplificationByISH.HER2AmplificationByISHTestOrder ishTestOrder = (HER2AmplificationByISH.HER2AmplificationByISHTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(ishTest.PanelSetId, this.m_OrderedOnId, true);
-                if (ishTestOrder.Final == false)
+                if(ishTestOrder.Indicator == "Breast Metastatic")
                 {
-                    result.Status = AuditStatusEnum.Failure;
-                    result.Message += "The " + ishTest.PanelSetName + " must be final before results can be set." + Environment.NewLine;
+                    result.Status = AuditStatusEnum.OK;
                 }
                 else
                 {
-                    if (accessionOrder.PanelSetOrderCollection.Exists(ihcTest.PanelSetId, this.OrderedOnId, true) == true)
+                    if (ishTestOrder.Final == false)
                     {
-                        Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC testOrder = (Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(ihcTest.PanelSetId, this.OrderedOnId, true);
-                        if (testOrder.Final == false)
-                        {
-                            result.Status = AuditStatusEnum.Failure;
-                            result.Message += "The " + ihcTest.PanelSetName + " must be final before results can be set." + Environment.NewLine;
-                        }
-                        else
-                        {
-                            if (testOrder.Score == "2+")
-                            {
-                                if (accessionOrder.PanelSetOrderCollection.Exists(recountTest.PanelSetId, this.OrderedOnId, true) == true)
-                                {
-                                    HER2AmplificationRecount.HER2AmplificationRecountTestOrder recountTestOrder = (HER2AmplificationRecount.HER2AmplificationRecountTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(recountTest.PanelSetId, this.OrderedOnId, true);
-                                    if (recountTestOrder.Final == false)
-                                    {
-                                        result.Status = AuditStatusEnum.Failure;
-                                        result.Message += "The " + recountTest.PanelSetName + " must be final before results can be set." + Environment.NewLine;
-                                    }
-                                }
-                                else
-                                {
-                                    result.Status = AuditStatusEnum.Failure;
-                                    result.Message += "A " + recountTest.PanelSetName + " must be ordered and final before results can be set." + Environment.NewLine;
-                                }
-                            }
-                        }
+                        result.Status = AuditStatusEnum.Failure;
+                        result.Message += "The " + ishTest.PanelSetName + " must be final before results can be set." + Environment.NewLine;
                     }
                     else
                     {
-                        result.Status = AuditStatusEnum.Failure;
-                        result.Message += "A " + ihcTest.PanelSetName + " must be ordered and final before results can be set." + Environment.NewLine;
-                    }
-
-                    if (result.Status == AuditStatusEnum.OK)
-                    {
-                        if (this.m_Accepted == true)
+                        if (accessionOrder.PanelSetOrderCollection.Exists(ihcTest.PanelSetId, this.OrderedOnId, true) == true)
+                        {
+                            Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC testOrder = (Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(ihcTest.PanelSetId, this.OrderedOnId, true);
+                            if (testOrder.Final == false)
+                            {
+                                result.Status = AuditStatusEnum.Failure;
+                                result.Message += "The " + ihcTest.PanelSetName + " must be final before results can be set." + Environment.NewLine;
+                            }
+                            else
+                            {
+                                if (testOrder.Score == "2+")
+                                {
+                                    if (accessionOrder.PanelSetOrderCollection.Exists(recountTest.PanelSetId, this.OrderedOnId, true) == true)
+                                    {
+                                        HER2AmplificationRecount.HER2AmplificationRecountTestOrder recountTestOrder = (HER2AmplificationRecount.HER2AmplificationRecountTestOrder)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(recountTest.PanelSetId, this.OrderedOnId, true);
+                                        if (recountTestOrder.Final == false)
+                                        {
+                                            result.Status = AuditStatusEnum.Failure;
+                                            result.Message += "The " + recountTest.PanelSetName + " must be final before results can be set." + Environment.NewLine;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        result.Status = AuditStatusEnum.Failure;
+                                        result.Message += "A " + recountTest.PanelSetName + " must be ordered and final before results can be set." + Environment.NewLine;
+                                    }
+                                }
+                            }
+                        }
+                        else
                         {
                             result.Status = AuditStatusEnum.Failure;
-                            result.Message = "The results may not be set because they have already been accepted." + Environment.NewLine;
+                            result.Message += "A " + ihcTest.PanelSetName + " must be ordered and final before results can be set." + Environment.NewLine;
+                        }
+
+                        if (result.Status == AuditStatusEnum.OK)
+                        {
+                            if (this.m_Accepted == true)
+                            {
+                                result.Status = AuditStatusEnum.Failure;
+                                result.Message = "The results may not be set because they have already been accepted." + Environment.NewLine;
+                            }
                         }
                     }
-                }
+                }                
             }
             else
             {

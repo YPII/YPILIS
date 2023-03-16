@@ -127,7 +127,7 @@ namespace YellowstonePathology.UI.Test
 
 				if (this.m_PanelSetOrder.NeisseriaGonorrhoeaeResult == "Positive" || this.m_PanelSetOrder.ChlamydiaTrachomatisResult == "Positive")
 				{
-					//Business.ReportDistribution.Model.DepartmentOfHealthHandler.HandleDistribution(this.m_AccessionOrder, this.m_PanelSetOrder);
+					Business.ReportDistribution.Model.DepartmentOfHealthHandler.HandleDistribution(this.m_AccessionOrder, this.m_PanelSetOrder);
 				}
 
 				if (this.m_AccessionOrder.PanelSetOrderCollection.WomensHealthProfileExists() == true)

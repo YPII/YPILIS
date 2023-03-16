@@ -1519,6 +1519,7 @@ namespace YellowstonePathology.Business.Test
 			this.HighPriority = clientOrder.HighPriority;
 			if (clientOrder.ClientId == 1759) this.HighPriority = true;
 
+			this.PatientType = clientOrder.PatientType;
             switch(clientOrder.PatientType)
             {
                 case "IN":
@@ -2160,6 +2161,7 @@ namespace YellowstonePathology.Business.Test
 			else if (this.PanelSetOrderCollection.DoesPanelSetExist(378) == true || this.PanelSetOrderCollection.DoesPanelSetExist(379))
 			{
 				this.HandleElectroPhoresisDistribution();
+				return;
 			}
 
 			if (this.m_ClientId != 1134) //YPI

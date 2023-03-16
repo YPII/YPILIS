@@ -766,68 +766,88 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                 }
             }
 
-            if (result.Status == AuditStatusEnum.OK)
+			Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new Her2AmplificationByIHC.Her2AmplificationByIHCTest();
+			if (result.Status == AuditStatusEnum.OK)
             {
-                if (this.m_Result == HER2AmplificationResultEnum.Equivocal.ToString())
+				if (this.m_Indicator != "Breast Metastatic")
                 {
-                    Test.Her2AmplificationByIHC.Her2AmplificationByIHCTest her2AmplificationByIHCTest = new Her2AmplificationByIHC.Her2AmplificationByIHCTest();
-                    HER2AnalysisSummary.HER2AnalysisSummaryTest her2AmplificationSummaryTest = new HER2AnalysisSummary.HER2AnalysisSummaryTest();
-                    if (accessionOrder.PanelSetOrderCollection.Exists(her2AmplificationByIHCTest.PanelSetId, this.OrderedOnId, true) == false)
-                    {
-                        result.Status = AuditStatusEnum.Warning;
-                        if (accessionOrder.PanelSetOrderCollection.Exists(her2AmplificationSummaryTest.PanelSetId, this.OrderedOnId, true) == false)
-                        {
-                            result.Message = "This test will be finalized but not distributed as a " + her2AmplificationByIHCTest.PanelSetName +
-                            " is needed to determine the actual result and will be ordered." + Environment.NewLine + "A " + her2AmplificationSummaryTest.PanelSetName +
-                            " will also be ordered and set for distribution.";
-                        }
-                        else
-                        {
-                            result.Message = "This test will be finalized but not distributed as a " + her2AmplificationSummaryTest.PanelSetName +
-                            " will be ordered and set for distribution.";
-                        }
-                    }
-                    else
-                    {
-                        Test.HER2AmplificationRecount.HER2AmplificationRecountTest her2AmplificationRecountTest = new HER2AmplificationRecount.HER2AmplificationRecountTest();
-                        bool recountNeeded = false;
-                        string recountString = her2AmplificationRecountTest.PanelSetName + " is needed to determine the actual result and will be ordered.";
-                        Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC panelSetOrderHer2AmplificationByIHC = (Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(her2AmplificationByIHCTest.PanelSetId, this.OrderedOnId, true);
-                        if(panelSetOrderHer2AmplificationByIHC.Final == true && panelSetOrderHer2AmplificationByIHC.Score =="2+" && this.Result == HER2AmplificationResultEnum.Equivocal.ToString())
-                        {
-                            recountNeeded = true;
-                        }
+					if (this.m_Result == HER2AmplificationResultEnum.Equivocal.ToString())
+					{						
+						HER2AnalysisSummary.HER2AnalysisSummaryTest her2AmplificationSummaryTest = new HER2AnalysisSummary.HER2AnalysisSummaryTest();
+						if (accessionOrder.PanelSetOrderCollection.Exists(her2AmplificationByIHCTest.PanelSetId, this.OrderedOnId, true) == false)
+						{
+							result.Status = AuditStatusEnum.Warning;
+							if (accessionOrder.PanelSetOrderCollection.Exists(her2AmplificationSummaryTest.PanelSetId, this.OrderedOnId, true) == false)
+							{
+								result.Message = "This test will be finalized but not distributed as a " + her2AmplificationByIHCTest.PanelSetName +
+								" is needed to determine the actual result and will be ordered." + Environment.NewLine + "A " + her2AmplificationSummaryTest.PanelSetName +
+								" will also be ordered and set for distribution.";
+							}
+							else
+							{
+								result.Message = "This test will be finalized but not distributed as a " + her2AmplificationSummaryTest.PanelSetName +
+								" will be ordered and set for distribution.";
+							}
+						}
+						else
+						{
+							Test.HER2AmplificationRecount.HER2AmplificationRecountTest her2AmplificationRecountTest = new HER2AmplificationRecount.HER2AmplificationRecountTest();
+							bool recountNeeded = false;
+							string recountString = her2AmplificationRecountTest.PanelSetName + " is needed to determine the actual result and will be ordered.";
+							Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC panelSetOrderHer2AmplificationByIHC = (Her2AmplificationByIHC.PanelSetOrderHer2AmplificationByIHC)accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(her2AmplificationByIHCTest.PanelSetId, this.OrderedOnId, true);
+							if (panelSetOrderHer2AmplificationByIHC.Final == true && panelSetOrderHer2AmplificationByIHC.Score == "2+" && this.Result == HER2AmplificationResultEnum.Equivocal.ToString())
+							{
+								recountNeeded = true;
+							}
 
-                        if (accessionOrder.PanelSetOrderCollection.Exists(her2AmplificationSummaryTest.PanelSetId, this.OrderedOnId, true) == false)
-                        {
-                            result.Status = AuditStatusEnum.Warning;
-                            if (recountNeeded == true)
-                            {
-                                result.Message = "This test will be finalized but not distributed as a " + recountString + Environment.NewLine + "A " + her2AmplificationSummaryTest.PanelSetName + 
-                                    " will also be ordered and set for distribution.";
-                            }
-                            else
-                            {
-                                result.Message = "This test will be finalized but not distributed as a " + her2AmplificationSummaryTest.PanelSetName + 
-                                    " will be ordered and set for distribution.";
-                            }
-                        }
-                        else
-                        {
-                            result.Status = AuditStatusEnum.Warning;
-                            if (recountNeeded == true)
-                            {
-                                result.Message = "This test will be finalized but not distributed as a " + recountString + Environment.NewLine + 
-                                    "Then results will be transferred to the " + her2AmplificationSummaryTest.PanelSetName +
-                                    " which will be set for distribution.";
-                            }
-                            else
-                            {
-                                result.Message = "This test will be finalized but not distributed as results will be transferred to the " + her2AmplificationSummaryTest.PanelSetName +
-                                " which will be set for distribution.";
-                            }
-                        }
+							if (accessionOrder.PanelSetOrderCollection.Exists(her2AmplificationSummaryTest.PanelSetId, this.OrderedOnId, true) == false)
+							{
+								result.Status = AuditStatusEnum.Warning;
+								if (recountNeeded == true)
+								{
+									result.Message = "This test will be finalized but not distributed as a " + recountString + Environment.NewLine + "A " + her2AmplificationSummaryTest.PanelSetName +
+										" will also be ordered and set for distribution.";
+								}
+								else
+								{
+									result.Message = "This test will be finalized but not distributed as a " + her2AmplificationSummaryTest.PanelSetName +
+										" will be ordered and set for distribution.";
+								}
+							}
+							else
+							{
+								result.Status = AuditStatusEnum.Warning;
+								if (recountNeeded == true)
+								{
+									result.Message = "This test will be finalized but not distributed as a " + recountString + Environment.NewLine +
+										"Then results will be transferred to the " + her2AmplificationSummaryTest.PanelSetName +
+										" which will be set for distribution.";
+								}
+								else
+								{
+									result.Message = "This test will be finalized but not distributed as results will be transferred to the " + her2AmplificationSummaryTest.PanelSetName +
+									" which will be set for distribution.";
+								}
+							}
+						}
+					}
+				}
+                else if (this.m_Indicator == "Breast Metastatic")
+                {
+					if(this.m_Result == "Negative" || this.m_Result == "Equivocal")
+                    {
+						result.Status = AuditStatusEnum.Warning;
+						result.Message = "This test will be finalized but not distributed as a " + her2AmplificationByIHCTest.PanelSetName +
+								" is needed to determine the actual result and will be ordered.";
+					}
+                    else if(this.m_Result == "Positive")
+                    {
+						result.Message = "Because the result is Positive this report will be signed out and distributed. No further testing is required.";
                     }
+                }
+                else
+                {
+					throw new Exception("The indication is not set.");
                 }
             }
 

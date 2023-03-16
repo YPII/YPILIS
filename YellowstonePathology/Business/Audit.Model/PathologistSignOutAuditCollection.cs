@@ -12,7 +12,7 @@ namespace YellowstonePathology.Business.Audit.Model
 
         public PathologistSignoutAuditCollection(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
-            YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = accessionOrder.PanelSetOrderCollection.GetSurgical();
+            Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder = accessionOrder.PanelSetOrderCollection.GetSurgical();
             this.Add(new CellBlockWarningAudit(accessionOrder));
             this.Add(new AncillaryStudiesAreHandledAudit(surgicalTestOrder));
             this.Add(new SurgicalCaseHasQuestionMarksAudit(accessionOrder, surgicalTestOrder));
@@ -32,11 +32,12 @@ namespace YellowstonePathology.Business.Audit.Model
             this.Add(new CCCPAudit(accessionOrder));
             this.Add(new BRAFMetastaticMelanomaAudit(accessionOrder));
             this.Add(new HPV1618ForSiteAudit(accessionOrder));
-            this.Add(new RASRAForMetastaticColorectalCancerAudit(accessionOrder));
+            //this.Add(new RASRAForMetastaticColorectalCancerAudit(accessionOrder));
             this.Add(new PNHOnBoneMarrowSpecimenAudit(accessionOrder));
             this.Add(new PDL1NonsmallCellLungCancerAudit(accessionOrder));
             this.Add(new BoneMarrowSummaryAudit(accessionOrder));
             this.Add(new GISTAudit(accessionOrder));
+            this.Add(new MetastaticColorectalAudit(surgicalTestOrder, accessionOrder));
         }
 
         public AuditCollection GetAuditMessageCollection()
@@ -73,6 +74,7 @@ namespace YellowstonePathology.Business.Audit.Model
                     audit.GetType() == typeof(BRAFMetastaticMelanomaAudit) ||
                     audit.GetType() == typeof(GISTAudit) ||
                     audit.GetType() == typeof(HPV1618ForSiteAudit) ||
+                    audit.GetType() == typeof(MetastaticColorectalAudit) ||
                     audit.GetType() == typeof(RASRAForMetastaticColorectalCancerAudit) ||
                     audit.GetType() == typeof(PNHOnBoneMarrowSpecimenAudit) ||
                     audit.GetType() == typeof(PDL1NonsmallCellLungCancerAudit) ||

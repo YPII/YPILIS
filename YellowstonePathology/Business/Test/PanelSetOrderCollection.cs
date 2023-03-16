@@ -608,6 +608,20 @@ namespace YellowstonePathology.Business.Test
             return result;
         }
 
+        public YellowstonePathology.Business.Test.PanelSetOrder GetFirstByPanelSetId(int panelSetId)
+        {
+            YellowstonePathology.Business.Test.PanelSetOrder result = null;
+            foreach (YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder in this)
+            {
+                if(panelSetOrder.PanelSetId == panelSetId)
+                {
+                    result = panelSetOrder;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public YellowstonePathology.Business.Test.PanelSetOrder GetPanelSetOrderByTestOrderId(string testOrderId)
         {
             YellowstonePathology.Business.Test.PanelSetOrder result = null;

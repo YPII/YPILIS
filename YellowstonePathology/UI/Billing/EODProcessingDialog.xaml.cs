@@ -401,7 +401,7 @@ namespace YellowstonePathology.UI.Billing
         private void ProcessSVHCDMFiles(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             this.m_BackgroundWorker.ReportProgress(1, "Starting processing SVH CDM files.");
-            Business.Client.Model.ClientGroupClientCollection hrhGroup = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("2");
+            //Business.Client.Model.ClientGroupClientCollection hrhGroup = Business.Gateway.PhysicianClientGateway.GetClientGroupClientCollectionByClientGroupId("2");
             Business.ReportNoCollection reportNoCollection = Business.Gateway.AccessionOrderGateway.GetReportNumbersBySVHProcess(this.m_PostDate);
             string workingFolder = System.IO.Path.Combine(this.m_BaseWorkingFolderPathSVH, this.m_PostDate.ToString("MMddyyyy"));
             if (Directory.Exists(workingFolder) == false)
@@ -476,6 +476,7 @@ namespace YellowstonePathology.UI.Billing
             if (panelSetOrderCPTCodeBill.MedicalRecord.StartsWith("V")) result = true;
             if (panelSetOrderCPTCodeBill.MedicalRecord.StartsWith("R")) result = true;
             if (panelSetOrderCPTCodeBill.MedicalRecord.StartsWith("X")) result = true;
+            if (panelSetOrderCPTCodeBill.MedicalRecord.StartsWith("C")) result = true;
             //if (panelSetOrder.PanelSetId == 400 && panelSetOrderCPTCodeBill.MedicalRecord.StartsWith("A") == false) result = true;            
             if (panelSetOrder.PanelSetId == 400) result = true;            
             return result;

@@ -115,5 +115,10 @@ namespace YellowstonePathology.UI.ManagementReports
         {
             this.CreateReport();
         }
+
+        private void ButtonUpload_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("This is not quite ready yet.");
+        }
     }
 }

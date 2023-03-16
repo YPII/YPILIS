@@ -401,7 +401,13 @@ namespace YellowstonePathology.Business.Document
             return fileName;
         }
 
-		public static string GetCaseFileNamePDF(YellowstonePathology.Business.OrderIdParser orderIdParser)
+        public static string GetCaseFileNamePS(YellowstonePathology.Business.OrderIdParser orderIdParser)
+        {
+            string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".ps";
+            return fileName;
+        }
+
+        public static string GetCaseFileNamePDF(YellowstonePathology.Business.OrderIdParser orderIdParser)
         {
 			string fileName = Business.Document.CaseDocumentPath.GetPath(orderIdParser) + orderIdParser.ReportNo + ".pdf";            
             return fileName;

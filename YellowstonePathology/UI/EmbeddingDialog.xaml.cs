@@ -192,10 +192,10 @@ namespace YellowstonePathology.UI
                     this.ComboBoxProcessorRuns.Focus();
                     YellowstonePathology.Business.BarcodeScanning.EmbeddingScan result = this.m_EmbeddingScanCollection.HandleScan(aliquotOrderId, this.m_ProcessorStartTime.Value, this.m_ProcessorFixationDuration);
                     this.ListViewEmbeddingScans.SelectedIndex = 0;
-                    this.m_ScanCount = "Block Count: " + this.m_EmbeddingScanCollection.Count.ToString();
-                    this.NotifyPropertyChanged("ScanCount");
+                    this.m_ScanCount = "Block Count: " + this.m_EmbeddingScanCollection.Count.ToString();                    
                     string masterAccessionNo = aliquotOrderId.Split('.')[0];
-                }
+                    this.NotifyPropertyChanged(string.Empty);
+                    this.ListViewEmbeddingScans.ScrollIntoView(this.ListViewEmbeddingScans.Items[0]);                }
                 else
                 {
                     MessageBox.Show("I can't add the scan until a processor start time is entered.");
@@ -493,6 +493,14 @@ namespace YellowstonePathology.UI
                 string masterAccessionNo = embeddingScan.AliquotOrderId.Split('.')[0];
                 this.GetCurrentGross(masterAccessionNo);
             }
+        }
+
+        private void ButtonPrintHoldList_Click(object sender, RoutedEventArgs e)
+        {            
+            Business.XPSDocument.Result.Xps.HoldListReport report = new Business.XPSDocument.Result.Xps.HoldListReport(this.m_AliquotOrderHoldCollection);
+            XpsDocumentViewer xpsDocumentViewer = new XpsDocumentViewer();
+            xpsDocumentViewer.LoadDocument(report.FixedDocument);
+            xpsDocumentViewer.ShowDialog();
         }
     }
 }

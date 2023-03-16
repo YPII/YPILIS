@@ -37,7 +37,6 @@ using Grpc.Core;
 using MySql.Data.MySqlClient;
 using ImageMagick;
 
-
 namespace YellowstonePathology.UI
 {
     public partial class AdministrationWorkspace : System.Windows.Controls.UserControl
@@ -1005,7 +1004,7 @@ namespace YellowstonePathology.UI
             
             for(int i=start; i<end; i += 1000)
             {
-                string path = $@"\\cfileserver\AccessionDocuments\2022\{i.ToString().PadLeft(5, '0')}-{(i + 999).ToString().PadLeft(5, '0')}\";
+                string path = $@"\\FileServer\AccessionDocuments\2022\{i.ToString().PadLeft(5, '0')}-{(i + 999).ToString().PadLeft(5, '0')}\";
                 for (int j = i; j <= i + 999; j++)
                 {
                     System.IO.Directory.CreateDirectory($"{path}\\22-{j.ToString()}");
@@ -1262,168 +1261,108 @@ namespace YellowstonePathology.UI
             }
         }
 
+        private void ConvertWithGhost(string device, string inputFile, string outputFile)
+        {            
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.CreateNoWindow = false;
+            startInfo.UseShellExecute = false;
+            startInfo.CreateNoWindow = true;
+            startInfo.FileName = @"C:\Program Files\gs\gs10.00.0\bin\gswin64c.exe";
+            startInfo.Arguments = $@"-dNOPAUSE -dBATCH -sDEVICE={device} -dPDFSETTINGS=/screen -sOutputFile={outputFile} {inputFile}";            
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+            try
+            {
+                using (Process exeProcess = Process.Start(startInfo))
+                {
+                    exeProcess.WaitForExit();
+                }
+            }
+            catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message);
+            }
+
+            Console.WriteLine("DONE");
+        }
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
-        {      
+        {
             /*
-            string[] lines = System.IO.File.ReadAllLines(@"c:\temp\nmhmap.csv");
-            
-            foreach (string line in lines)
-            {
-                string[] fields = line.Split(',');
-                string[] names = fields[1].Split(' ');
-                Business.Domain.Physician ph = Business.Gateway.PhysicianClientGateway.GetPhysicianByFirstLastName(names[0], names[1]);
-                if(ph != null)
-                {
-                    Business.Domain.Physician u = Business.Persistence.DocumentGateway.Instance.PullPhysician(ph.PhysicianId, this);
-                    u.ClientPhysicianId = fields[0];                    
-                }                
-           }
-           Business.Persistence.DocumentGateway.Instance.Push(this);
-        */
-
-            /*
-            List<string> fields = new List<string>();
-            string[] lines = System.IO.File.ReadAllLines(@"c:\temp\nmh\ng.txt");
+            List<string> sql = new List<string>();
+            string[] lines = System.IO.File.ReadAllLines(@"d:\testing\riverstonecases.txt");
             foreach(string line in lines)
             {
-                MatchCollection mc = Regex.Matches(line, "this.AddNextObxElementBeaker\\(\"(.*?)\"");
-                foreach (Match m in mc)
+                string[] fields = line.Split('\t');
+                string firstName = fields[0].Split(',')[1].Replace("\"", "").Trim().Split(' ')[0];
+                string lastName = fields[0].Split(',')[0].Replace("\"", "").Trim();
+                DateTime startDate = DateTime.Parse(fields[4]).AddDays(-3);
+                DateTime endDate = DateTime.Parse(fields[4]).AddDays(3);
+
+                string s = "select distinct concat('mas.Add(\"', ao.masterAccessionNo, '\");') " +
+                    "from tblAccessionOrder ao " +
+                    "join tblPanelSetOrder pso on ao.masterAccessionno = pso.masterAccessionNo " +
+                    $"where ao.pfirstname = '{firstName}' and ao.PLastName = '{lastName}' and pbirthdate = '{fields[1]}' and ao.AccessionDate between '{startDate.ToString("yyyyMMdd")}' and '{endDate.ToString("yyyyMMdd")}'";
+                sql.Add(s);
+            }
+
+            string stmnt = String.Join(" union all " + Environment.NewLine, sql) + ";";
+            */
+
+            List<string> mas = new List<string>();
+            mas.Add("23-5537");
+            mas.Add("23-5528");
+            mas.Add("23-5397");
+            mas.Add("23-5252");
+            mas.Add("23-5246");
+            mas.Add("23-5229");
+            mas.Add("23-4972");
+            mas.Add("23-4834");
+            mas.Add("23-4833");
+            mas.Add("23-4790");
+            mas.Add("23-4789");
+            mas.Add("23-4647");
+            mas.Add("23-4628");
+            mas.Add("23-4611");
+            mas.Add("23-4499");
+            mas.Add("23-4489");
+            mas.Add("23-4487");
+            mas.Add("23-4485");
+            mas.Add("23-4483");
+            mas.Add("23-4463");
+            mas.Add("23-4252");
+            mas.Add("23-4181");
+            mas.Add("23-4179");
+            mas.Add("23-4178");
+            mas.Add("23-4159");
+            mas.Add("23-4131");
+            mas.Add("23-3844");
+            mas.Add("23-3776");
+            mas.Add("23-3774");
+            mas.Add("23-3588");
+            mas.Add("23-3563");
+            mas.Add("23-3562");
+            mas.Add("23-3561");
+            mas.Add("23-3539");
+            mas.Add("23-3523");
+            mas.Add("23-3226");
+            mas.Add("23-3225");
+            mas.Add("23-3224");
+            mas.Add("23-3222");
+            mas.Add("23-3125");
+            mas.Add("23-2924");
+            mas.Add("23-2921");
+            mas.Add("23-2811");
+
+            foreach(string man in mas)
+            {
+                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(man, this);
+                foreach(Business.Test.PanelSetOrder pso in ao.PanelSetOrderCollection)
                 {
-                    if(m.Groups.Count == 2)
-                    {
-                        fields.Add(m.Groups[1].Value);
-                    }                    
+                    pso.TestOrderReportDistributionCollection.MarkAllAsNotDistributed();
                 }                
             }
-
-            System.IO.File.WriteAllLines(@"c:\temp\nmh\whp_fields.txt", fields.ToArray());
-            */
-          
-            //this.SplitTif();
-            //this.SendAPI();
-
-            //string sql = "Select pso.ReportNo from tblPanelSetOrder pso left outer join tblPanelSetOrderCPTCode psoc on pso.ReportNo = psoc.ReportNo where panelsetid in (378, 379) and psoc.ReportNo is null";
-            //Business.ReportNoCollection reportNos = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
-            //foreach (Business.ReportNo reportNo in reportNos)
-            //{
-
-            //}
-
-            /*
-            string sql = "select reportNo from tblPanelSetOrder where panelsetid in (378,379) and orderDate >= '2022-01-01'";
-            Business.ReportNoCollection reportNos = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
-            foreach(Business.ReportNo reportNo in reportNos)
-            {
-                string path = Business.Document.CaseDocumentPath.GetPath(new Business.OrderIdParser(reportNo.Value));
-                string tiff = $"{path}\\{reportNo.Value}.tif";
-                string pdf = $"{path}\\{reportNo.Value}.pdf";
-                if (System.IO.File.Exists(tiff) == true)
-                {
-                    Business.Document.TifDocument.ConvertToPdf(tiff, pdf);
-                }
-            }
-            */
-
-            //string fileName = @"\\CFileServer\AccessionDocuments\2022\00001-00999\22-1\22-1.S.TIF";
-            //string fileName2 = @"\\CFileServer\AccessionDocuments\2022\00001-00999\22-1\22-1.ZZZ.PDF";
-            //List<Image> imageList = Business.Document.TifDocument.GetImageList(fileName);
-            //Business.Requisition.SavePDF(fileName2, imageList);
-
-            /*
-            string text = System.IO.File.ReadAllText(@"d:\testing\modfiles.txt");
-            string[] lines = text.Split('\n');
-            foreach (string line in lines)
-            {
-                string[] colonSplit = line.Split(':');
-                string sanatizedName = colonSplit[1].Trim().Replace("/", "\\");
-                string fileName = $"d:\\git\\sid\\ypilis\\{sanatizedName}";
-                string copyToFileName = $"d:\\git\\ypi-lis\\{sanatizedName.Replace("YellowstonePathology\\", "")}";
-                System.IO.File.Copy(fileName, copyToFileName, true);
-            }
-            */
-
-            //Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("22-10934", this);
-            //string tord = "6222556c86c07ba59cfe0591.TO2";
-            //string slideOrderId = "22-10934.2A3";
-            //Business.HL7View.VentanaStainOrder ord = new Business.HL7View.VentanaStainOrder();
-            //string result = ord.Build(accessionOrder, tord, slideOrderId);
-
-            //Console.WriteLine(result);
-            //this.CreateFolders();
-            /*
-            string filePath = @"c:\temp\new_cdm.csv";
-            int count = 0;
-            foreach (string line in System.IO.File.ReadLines(filePath))
-            {
-                if(count != 0)
-                {                    
-                    string[] fields = line.Split(',');
-                    string sql = $"Insert tblCDMV2 (CDMID, CDMCode, cptCode, CDMCodeNew) values ('{MongoDB.Bson.ObjectId.GenerateNewId().ToString()}', '{fields[1]}', '{fields[0]}', '{fields[2]}');";
-                    Console.WriteLine(sql);
-                }
-                count += 1;
-            }
-            */
-
-            /*
-            //string sql = "select ao.masterAccessionNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where pso.PanelsetId = 13 and physicianId in (166,688,3887,2190,3069,4062,2458,4793,2101,4929,4748,4942) and accessionDate >= '2021-07-01';";
-            string sql = "select ao.masterAccessionNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where pso.PanelsetId = 13 and physicianId in (5197) and accessionDate >= '2021-07-01';";
-            List<Business.MasterAccessionNo> manos = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(sql);
-            foreach(Business.MasterAccessionNo ma in manos)
-            {
-                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(ma.Value, this);                
-                string reportNo = ao.PanelSetOrderCollection.GetSurgical().ReportNo;
-                if(string.IsNullOrEmpty(ao.SvhMedicalRecord) == false)
-                {
-                    Business.HL7View.EPIC.EPICBeakerResultView result = new Business.HL7View.EPIC.EPICBeakerResultView(reportNo, ao, false, false);
-                    Business.Rules.MethodResult result2 = new Business.Rules.MethodResult();
-                    result.HandleSendToProvation(result2);
-                }                
-            }
-            */
-
-            /*
-            string sql = "select masterAccessionNo from tblAccessionOrder where physicianId = 3435";
-            List<Business.MasterAccessionNo> maCollection = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(sql);
-            foreach(Business.MasterAccessionNo ma in maCollection)
-            {                
-                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(ma.Value, this);
-                foreach(Business.Test.PanelSetOrder panelSetOrder in ao.PanelSetOrderCollection)
-                {
-                    if (panelSetOrder.TestOrderReportDistributionCollection.Exists(3435, 1733, "Web Service") == false)
-                    {
-                        string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-                        Business.ReportDistribution.Model.TestOrderReportDistribution tord = panelSetOrder.TestOrderReportDistributionCollection.AddNext(testOrderReportDistributionId, testOrderReportDistributionId, panelSetOrder.ReportNo, 3435, "Thomas Etter, D.O.", 1733, "Cody Surgical Associates", "Web Service");
-                        tord.Distributed = true;
-                        tord.TimeOfLastDistribution = DateTime.Now;
-                    }
-                }
-                Business.Persistence.DocumentGateway.Instance.Push(this);
-            }            
-            */
-
-
-            //Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder("22-13309", this);
-            //Business.HL7View.EPIC.EPICBeakerResultViewPDF view = new Business.HL7View.EPIC.EPICBeakerResultViewPDF("22-13309.S", accessionOrder, false, false);
-            //Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
-            //view.Send(methodResult);
-
-
-            /*
-            string sql = "select masterAccessionNo from tblAccessionOrder where ClientId = 1805 and distributeToPatient = 1;";
-            List < Business.MasterAccessionNo > manos = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(sql); 
-
-            foreach(Business.MasterAccessionNo item in manos)
-            {                
-                Business.Test.AccessionOrder accessionOrder = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(item.Value, this);
-                Business.Test.PanelSetOrder pso = accessionOrder.PanelSetOrderCollection.GetPanelSetOrder(415);
-                if(pso.TestOrderReportDistributionCollection.HasTextDistribution() == false)
-                {
-                    accessionOrder.SetDistribution();
-                }
-            } 
-            */
+            Business.Persistence.DocumentGateway.Instance.Push(this);
         }
 
         private void BillStuff()

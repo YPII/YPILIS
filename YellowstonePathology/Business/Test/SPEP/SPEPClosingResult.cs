@@ -19,7 +19,6 @@ namespace YellowstonePathology.Business.Test.SPEP
         public override void ToXml(XElement document)
         {
             string observationResultStatus = "F";            
-
             this.AddNextObxElementBeaker("Report No", this.m_ReportNo, document, observationResultStatus);            
             this.AddNextObxElementBeaker("Serum Protein Electrophoresis", "No result required.", document, observationResultStatus, "No Result Required", false);            
         }

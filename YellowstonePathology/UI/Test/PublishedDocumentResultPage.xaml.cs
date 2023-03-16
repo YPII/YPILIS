@@ -21,32 +21,26 @@ namespace YellowstonePathology.UI.Test
 	{
 		public delegate void NextEventHandler(object sender, EventArgs e);
 		public event NextEventHandler Next;
-
-		private YellowstonePathology.Business.Test.PanelSetOrder m_PanelSetOrder;
-
+		
 		private string m_PageHeaderText;
 
 		public PublishedDocumentResultPage(YellowstonePathology.Business.Test.AccessionOrder accessionOrder,
-			YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder)
-		{
-			this.m_PanelSetOrder = panelSetOrder;
-
-			this.m_PageHeaderText = "Report For: " + accessionOrder.PatientDisplayName;
-
+			Business.Test.PanelSetOrder panelSetOrder)
+		{					
 			InitializeComponent();
 
 			DataContext = this;
+			this.m_PageHeaderText = "Report For: " + accessionOrder.PatientDisplayName;
+
+			Business.OrderIdParser orderIdParser = new Business.OrderIdParser(panelSetOrder.ReportNo);
+			string pdfFile = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
+			this.WebBrowser.Navigate(pdfFile);
 		}
 
 		public string PageHeaderText
 		{
 			get { return this.m_PageHeaderText; }
-		}
-
-		public YellowstonePathology.Business.Test.PanelSetOrder PanelSetOrder
-		{
-			get { return this.m_PanelSetOrder; }
-		}
+		}		
 
 		private void ButtonNext_Click(object sender, RoutedEventArgs e)
 		{

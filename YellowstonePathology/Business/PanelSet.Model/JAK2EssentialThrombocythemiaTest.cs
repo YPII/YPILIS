@@ -11,6 +11,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             this.m_PanelSetName = "JAK2 Essential Thrombocythemia";
             this.m_Abbreviation = "J2ET";
+            this.m_Active = false;
         }
     }
 }
