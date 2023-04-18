@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:converter="clr-namespace:YellowstonePathology.UI.Gross"             
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:YellowstonePathology.UI"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1000">
     <Grid>
@@ -146,6 +147,14 @@
             </Grid>
 		</Grid>
 
-		<ContentControl Name="DocumentViewer" Grid.Column="1" Grid.Row="0" />
+        <TabControl Name="TabControlDocumentViewer" Grid.Column="1" Grid.Row="0">
+            <TabItem Header="TIF" Name="TabItemDocumentViewer">
+                <ContentControl Name="DocumentViewer"/>
+            </TabItem>
+            <TabItem Header="PDF" Name="TabItemPdfDocumentViewer">
+                <controls:PdfViewerControl x:Name="PdfViewerControl"/>
+            </TabItem>
+        </TabControl>
+		
 	</Grid>
 </UserControl>

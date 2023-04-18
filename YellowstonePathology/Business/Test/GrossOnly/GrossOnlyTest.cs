@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Test.GrossOnly
 			this.m_PanelSetOrderClassName = typeof(YellowstonePathology.Business.Test.GrossOnly.GrossOnlyTestOrder).AssemblyQualifiedName;
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Test.GrossOnly.GrossOnlyWordDocument).AssemblyQualifiedName;
 			this.m_AllowMultiplePerAccession = true;
-            this.m_NeverDistribute = true;            
+            this.m_NeverDistribute = false;            
 			this.m_AcceptOnFinal = true;
             this.m_HasNoOrderTarget = true;
 

@@ -8,8 +8,10 @@ namespace YellowstonePathology.Business.Surgical
 {
     public class PQRSMeasure
     {
-        protected PQRIKeyWordCollection m_PQRIKeyWordCollection;
-		protected string m_Header;
+        protected List<string> m_DiagnosisWordCollection;
+        protected List<string> m_SpecimenWordCollection;
+
+        protected string m_Header;
         protected YellowstonePathology.Business.Billing.Model.CptCodeCollection m_CptCodeCollection;
         protected YellowstonePathology.Business.Billing.Model.PQRSCodeCollection m_PQRSCodeCollection;
         protected PQRSAgeDefinitionEnum m_PQRSAgeDefinition;
@@ -17,16 +19,17 @@ namespace YellowstonePathology.Business.Surgical
         public PQRSMeasure()
         {
             this.m_PQRSAgeDefinition = PQRSAgeDefinitionEnum.AllPatients;
-            this.m_PQRIKeyWordCollection = new PQRIKeyWordCollection();
+            this.m_DiagnosisWordCollection = new List<string>();
+            this.m_SpecimenWordCollection = new List<string>();
             this.m_CptCodeCollection = new Business.Billing.Model.CptCodeCollection();
             this.m_PQRSCodeCollection = new Business.Billing.Model.PQRSCodeCollection();
         }
 
-		public virtual bool DoesMeasureApply(YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder,
-            YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen, int patientAge)
+		public virtual bool DoesMeasureApply(Business.Test.Surgical.SurgicalTestOrder surgicalTestOrder,
+            Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen, int patientAge)
         {
             bool result = false;            
-            if (this.m_PQRIKeyWordCollection.WordsExistIn(surgicalSpecimen.SpecimenOrder.Description) == true)				
+            if (WordsExistIn(surgicalSpecimen.SpecimenOrder.Description, this.m_DiagnosisWordCollection) == true)				
 			{
                 YellowstonePathology.Business.Test.PanelSetOrderCPTCodeCollection panelSetOrderCPTCodeCollectionForThisSpecimen = surgicalTestOrder.PanelSetOrderCPTCodeCollection.GetSpecimenOrderCollection(surgicalSpecimen.SpecimenOrder.SpecimenOrderId);
                 if (panelSetOrderCPTCodeCollectionForThisSpecimen.DoesCollectionHaveCodes(this.m_CptCodeCollection) == true)
@@ -47,12 +50,17 @@ namespace YellowstonePathology.Business.Surgical
 			get { return this.m_PQRSCodeCollection; }
 		}
 
-		public PQRIKeyWordCollection PQRIKeyWordCollection
+		public List<string> DiagnosisWordCollection
 		{
-            get { return this.m_PQRIKeyWordCollection; }
+            get { return this.m_DiagnosisWordCollection; }
 		}
 
-		public string Header
+        public List<string> SpecimenWordCollection
+        {
+            get { return this.m_SpecimenWordCollection; }
+        }
+
+        public string Header
 		{
 			get { return this.m_Header; }
 		}
@@ -60,6 +68,23 @@ namespace YellowstonePathology.Business.Surgical
         public PQRSAgeDefinitionEnum PQRSAgeDefinition
         {
             get { return this.m_PQRSAgeDefinition; }
+        }
+
+        public static bool WordsExistIn(string text, List<string> stringList)
+        {
+            bool result = false;
+            foreach (string keyWord in stringList)
+            {
+                if (string.IsNullOrEmpty(text) == false)
+                {
+                    if (text.ToUpper().Contains(keyWord.ToUpper()) == true)
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+            return result;
         }
     }
 }

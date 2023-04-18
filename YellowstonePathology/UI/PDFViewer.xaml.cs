@@ -11,7 +11,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Windows;
 using Windows.Data.Pdf;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using System.Diagnostics;
+using System.Drawing.Printing;
 
 namespace YellowstonePathology.UI
 {
@@ -19,21 +24,31 @@ namespace YellowstonePathology.UI
     /// Interaction logic for PDFViewer.xaml
     /// </summary>
     public partial class PDFViewer : Window
-    {        
-        public PDFViewer()
-        {                        
-            InitializeComponent();
-            this.GetFile();
-        }
+    {
+        public string m_FileName;
 
-        private async void GetFile()
+        public PDFViewer(string fileName)
         {
-            //Windows.Storage.IStorageFile file = Windows.Storage.ist.
-            //PdfDocument doc = PdfDocument.LoadFromFileAsync()
+            this.m_FileName = fileName;
+            InitializeComponent();
+            this.Pdf.PdfPath = fileName;
+        }              
 
-            Windows.Storage.StorageFile xx = await Windows.Storage.StorageFile.GetFileFromPathAsync(@"c:\temp\testing.pdf");
-            //.ContinueWith(t => PdfDocument.LoadFromFileAsync(t.Result).AsTask()).Unwrap()          
-            //.ContinueWith(t2 => PdfToImages(pdfDrawer, t2.Result), TaskScheduler.FromCurrentSynchronizationContext());
+        public string FileName
+        {
+            get { return m_FileName; }
         }
+
+        private void ButtonPrint_Click(object sender, RoutedEventArgs e)
+        {
+            Process p = new Process();
+            p.StartInfo = new ProcessStartInfo()
+            {
+                CreateNoWindow = true,
+                Verb = "print",
+                FileName = this.m_FileName
+            };
+            p.Start();
+        }                
     }
 }

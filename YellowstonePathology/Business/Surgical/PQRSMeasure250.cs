@@ -11,8 +11,8 @@ namespace YellowstonePathology.Business.Surgical
         {            
 			this.m_Header = "Radical Prostatectomy Pathology Reporting #250";
 
-            this.m_PQRIKeyWordCollection.Add("prostate");
-            this.m_PQRIKeyWordCollection.Add("resection");
+            this.m_DiagnosisWordCollection.Add("prostate");
+            this.m_DiagnosisWordCollection.Add("resection");
             
             this.m_CptCodeCollection.Add(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88309", null));
 
@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.Surgical
             bool result = false;
             if (string.IsNullOrEmpty(surgicalSpecimen.Diagnosis) == false)
             {                                
-                if (this.m_PQRIKeyWordCollection.WordsExistIn(surgicalSpecimen.Diagnosis) == true)
+                if (WordsExistIn(surgicalSpecimen.Diagnosis, this.m_DiagnosisWordCollection) == true)
                 {                    
                     YellowstonePathology.Business.Test.PanelSetOrderCPTCodeCollection panelSetOrderCPTCodeCollectionForThisSpecimen = surgicalTestOrder.PanelSetOrderCPTCodeCollection.GetSpecimenOrderCollection(surgicalSpecimen.SpecimenOrder.SpecimenOrderId);
                     if (panelSetOrderCPTCodeCollectionForThisSpecimen.DoesCollectionHaveCodes(this.m_CptCodeCollection) == true)

@@ -324,12 +324,12 @@ namespace YellowstonePathology.Business.Document
 			return result;
 		}
 
-		private CaseDocument GetRequisitionResult(string searchString)
+		private CaseDocument GetRequisitionResult(string searchStr)
 		{
 			CaseDocument result = null;
             foreach (YellowstonePathology.Business.Document.CaseDocument caseDocument in this)
             {
-                if (caseDocument.FileName.ToUpper().IndexOf(searchString) > 0)
+                if (caseDocument.FileName.ToUpper().IndexOf(searchStr) > 0)
                 {
                     result = caseDocument;
                     break;

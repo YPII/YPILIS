@@ -15,7 +15,8 @@ namespace YellowstonePathology.Business.Surgical
             result.Add(new PQRSMeasure250());
             result.Add(new PQRSMeasure395());
             result.Add(new PQRSMeasure396());
-			return result;
+            result.Add(new PQRSMeasure491());
+            return result;
         }
     }
 }

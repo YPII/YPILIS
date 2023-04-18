@@ -48,7 +48,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
             this.m_Rule.ActionList.Add(AcceptPanelOrder);
             this.m_Rule.ActionList.Add(DoesDotReviewExist);
 			this.m_Rule.ActionList.Add(AddQCReviewIfNecessary);
-            this.m_Rule.ActionList.Add(HandleImagerError);
+            //this.m_Rule.ActionList.Add(HandleImagerError);
             this.m_Rule.ActionList.Add(IsOkToFinalPanelSetOrderResult);
 			this.m_Rule.ActionList.Add(IsQCScreenerSameAsInitialScreener);
 			this.m_Rule.ActionList.Add(FinalPanelSetOrder);
@@ -295,7 +295,7 @@ namespace YellowstonePathology.Business.Rules.Cytology
 		}
 
         private void HandleImagerError()
-        {
+        {            
             if (this.m_PanelOrderToFinal.ImagerError == true)
             {
 				if (this.m_PanelSetOrderCytology.DoesScreeningReviewExist() == false)

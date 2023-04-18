@@ -11,9 +11,9 @@ namespace YellowstonePathology.Business.Surgical
         {            
 			this.m_Header = "Lung Cancer Reporting #395";
 
-            this.m_PQRIKeyWordCollection.Add("Lung");
-            this.m_PQRIKeyWordCollection.Add("Bronch");
-            this.m_PQRIKeyWordCollection.Add("Pleural");
+            this.m_DiagnosisWordCollection.Add("Lung");
+            this.m_DiagnosisWordCollection.Add("Bronch");
+            this.m_DiagnosisWordCollection.Add("Pleural");
 
             this.m_CptCodeCollection.Add(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88104", null));
             this.m_CptCodeCollection.Add(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88108", null));
@@ -35,7 +35,7 @@ namespace YellowstonePathology.Business.Surgical
             bool result = false;
             if (string.IsNullOrEmpty(surgicalSpecimen.SpecimenOrder.Description) == false)
             {                                
-                if (this.m_PQRIKeyWordCollection.WordsExistIn(surgicalSpecimen.SpecimenOrder.Description) == true)
+                if (WordsExistIn(surgicalSpecimen.SpecimenOrder.Description, this.m_DiagnosisWordCollection) == true)
                 {
                     string diagnosisKeyWord = "Carcinoma";
                     if (string.IsNullOrEmpty(surgicalSpecimen.Diagnosis) == false && surgicalSpecimen.Diagnosis.ToUpper().Contains(diagnosisKeyWord.ToUpper()) == true)

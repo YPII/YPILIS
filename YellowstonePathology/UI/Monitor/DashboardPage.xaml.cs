@@ -77,7 +77,7 @@ namespace YellowstonePathology.UI.Monitor
         }        
 
         public void HandleBlockCountEmails()
-        {                        
+        {                         
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidationCallBack;
             ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2007_SP1);
             service.Credentials = new WebCredentials("ypiilab\\blockcount", "blockorama");

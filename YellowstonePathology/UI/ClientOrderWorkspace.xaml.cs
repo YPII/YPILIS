@@ -280,5 +280,10 @@ namespace YellowstonePathology.UI
                 close.WriteDocumentToServer(document);
             }
         }
+
+        private void ButtonPlacentaOrders_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_ClientOrderUI.GetPlacentaOrderList();
+        }
     }    
 }

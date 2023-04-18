@@ -115,9 +115,19 @@ namespace YellowstonePathology.UI.Gross
 			this.m_BarcodeScanPort.HistologyBlockScanReceived += this.HistologyBlockScanReceived;
             this.m_BarcodeScanPort.ContainerScanReceived += BarcodeScanPort_ContainerScanReceived;
 
-			if (this.m_CaseDocumentCollection.GetFirstRequisition() != null)
+			Business.Document.CaseDocument firstRequisition = this.m_CaseDocumentCollection.GetFirstRequisition();
+			if (firstRequisition != null)
 			{
-				this.m_DocumentViewer.ShowDocument(this.m_CaseDocumentCollection.GetFirstRequisition());
+				if(firstRequisition.Extension == "PDF")
+                {
+					this.PdfViewerControl.PdfPath = firstRequisition.FullFileName;
+					this.TabControlDocumentViewer.SelectedIndex = 1;
+				}
+                else
+                {
+					this.m_DocumentViewer.ShowDocument(this.m_CaseDocumentCollection.GetFirstRequisition());
+					this.TabControlDocumentViewer.SelectedIndex = 0;
+				}				
 			}
 			if (string.IsNullOrEmpty(this.m_AccessionOrder.CassetteColor) == false)
 			{

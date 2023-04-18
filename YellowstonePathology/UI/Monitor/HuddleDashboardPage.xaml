@@ -5,7 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:YellowstonePathology.UI.Monitor"
              xmlns:my="clr-namespace:YellowstonePathology.Business.Document;assembly=BusinessObjects">
-    <Grid ShowGridLines="True">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Control}" x:Key="baseStyle">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource baseStyle}"></Style>
+    </UserControl.Resources>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -18,22 +24,205 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Background="#47AD70">Daily Reflection Rotation</Label>
-        <Label Grid.Column="1" Grid.Row="0" Background="#47AD70">Daily</Label>
-        <Label Grid.Column="2" Grid.Row="0" Background="#47AD70">Staffing</Label>
-        <Label Grid.Column="3" Grid.Row="0" Background="#DBA98E">Quality</Label>
-        <Label Grid.Column="4" Grid.Row="0" Background="#DBA98E">Compliance</Label>
-        <Label Grid.Column="5" Grid.Row="0" Background="#C0FF">Pathologist</Label>
+        <Border Grid.Column="0" Grid.Row="0" Background="#47AD70" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Daily Reflection Rotation</Label>
+
+        <Border Grid.Column="1" Grid.Row="0" Background="#47AD70" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Daily</Label>
+
+        <Border Grid.Column="2" Grid.Row="0" Background="#47AD70" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Staffing</Label>
+
+        <Border Grid.Column="3" Grid.Row="0" Background="#336BFF" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Label Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Quality</Label>
+
+        <Border Grid.Column="4" Grid.Row="0" Background="#336BFF" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Label Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Compliance</Label>
+
+        <Border Grid.Column="5" Grid.Row="0" Background="#C0FF" BorderThickness="1,1,1,0" BorderBrush="Black"></Border>
+        <Label Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Pathologist</Label>
+
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,2,2,2">Monday</Label>
+            <Border Grid.Column="0" Grid.Row="0" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,2,2,2">Cytology</Label>
+            <Border Grid.Column="1" Grid.Row="0" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,2,2,2">Tuesday</Label>
+            <Border Grid.Column="0" Grid.Row="1" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,2,2,2">Flow Cytometry</Label>
+            <Border Grid.Column="1" Grid.Row="1" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">Wednesday</Label>
+            <Border Grid.Column="0" Grid.Row="2" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">Michelle/Kevin</Label>
+            <Border Grid.Column="1" Grid.Row="2" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">Thursday</Label>
+            <Border Grid.Column="0" Grid.Row="3" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">Histology</Label>
+            <Border Grid.Column="1" Grid.Row="3" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">Friday</Label>
+            <Border Grid.Column="0" Grid.Row="4" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center">Administratrion/IT</Label>
+            <Border Grid.Column="1" Grid.Row="5" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+
+            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Block Count</Label>
+            <Border Grid.Column="2" Grid.Row="0" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <TextBox Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Path=HuddleDashboard.BlockCount}" Margin="5,0,5,0"></TextBox>
+            <Border Grid.Column="3" Grid.Row="0" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">Paps</Label>
+            <Border Grid.Column="2" Grid.Row="1" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <!--<TextBox Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,5,0"></TextBox>-->
+            <Border Grid.Column="3" Grid.Row="1" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">Other Flow</Label>
+            <Border Grid.Column="2" Grid.Row="2" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <!--<TextBox Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,5,0"></TextBox>-->
+            <Border Grid.Column="3" Grid.Row="2" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+            <Label Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">SVH BM</Label>
+            <Border Grid.Column="2" Grid.Row="3" BorderThickness="1,1,0,1" BorderBrush="Black"></Border>
+
+            <!--<TextBox Grid.Column="3" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,5,0"></TextBox>-->
+            <Border Grid.Column="3" Grid.Row="3" BorderThickness="1,1,0,1" BorderBrush="Black"></Border>
+
+        </Grid>
+
+        <TextBox Margin="2,2,2,2" Grid.Column="2" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" FontSize="22"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path=HuddleDashboard.Staffing, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <TextBox Margin="2,2,2,2" Grid.Column="3" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" FontSize="22"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path=HuddleDashboard.Quality, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <TextBox Margin="2,2,2,2" Grid.Column="4" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" FontSize="22" 
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path=HuddleDashboard.Compliance, UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <TextBox Margin="2,2,2,2" Grid.Column="5" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" FontSize="22"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path=HuddleDashboard.Pathologist, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Angela Durden" Click="MenuItemAddPathologist"></MenuItem>
+                    <MenuItem Header="Michael Brown" Click="MenuItemAddPathologist"></MenuItem>
+                    <MenuItem Header="Scott Bibbey" Click="MenuItemAddPathologist"></MenuItem>
+                    <MenuItem Header="Christopher Rozelle" Click="MenuItemAddPathologist"></MenuItem>
+                    <MenuItem Header="Kelli Schnieder" Click="MenuItemAddPathologist"></MenuItem>
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Border Grid.Column="2" Grid.Row="1" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Border Grid.Column="3" Grid.Row="1" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Border Grid.Column="4" Grid.Row="1" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Border Grid.Column="5" Grid.Row="1" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+
+        <Border Grid.Column="0" Grid.Row="2" BorderThickness="1,1,0,0" BorderBrush="Black" Background="#336BFF"></Border>
+        <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">FedX</Label>
+        
+        <Border Grid.Column="1" Grid.Row="2" BorderThickness="1,1,0,0" BorderBrush="Black" Background="#FF336B"></Border>
+        <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Safety</Label>
+
+        <Border Grid.Column="2" Grid.Row="2" BorderThickness="1,1,0,0" BorderBrush="Black" Background="#FF6133"></Border>
+        <Label Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Equipment Issues / Maint</Label>
+
+        <Border Grid.Column="3" Grid.Row="2" BorderThickness="1,1,0,0" BorderBrush="Black" Background="#FF6133"></Border>
+        <Label Grid.Column="3" Grid.Row="2" Background="#FF6133" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Supplies</Label>
+
+        <Border Grid.Column="4" Grid.Row="2" BorderThickness="1,1,0,0" BorderBrush="Black" Background="#75767A"></Border>
+        <Label Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Clients</Label>
+
+        <Border Grid.Column="5" Grid.Row="2" BorderThickness="1,1,1,0" BorderBrush="Black" Background="#75767A"></Border>
+        <Label Grid.Column="5" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Couriers</Label>
+        
+        <Border Grid.Column="1" Grid.Row="3" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Border Grid.Column="2" Grid.Row="3" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Border Grid.Column="3" Grid.Row="3" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+        <Border Grid.Column="4" Grid.Row="3" BorderThickness="1,1,0,0" BorderBrush="Black"></Border>
+
+        <TextBox Margin="2,2,2,2" Grid.Column="0" Grid.Row="3" TextWrapping="Wrap" AcceptsReturn="True" FontSize="22"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path=HuddleDashboard.Fedx, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        
+        <TextBox Margin="2,2,2,2" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" AcceptsReturn="True" FontSize="22"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path=HuddleDashboard.Safety, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <TextBox Margin="2,2,2,2" Grid.Column="2" Grid.Row="3" TextWrapping="Wrap" AcceptsReturn="True" FontSize="22"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path=HuddleDashboard.Equipment, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <TextBox Margin="2,2,2,2" Grid.Column="3" Grid.Row="3" TextWrapping="Wrap" AcceptsReturn="True" FontSize="22" 
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path=HuddleDashboard.Supplies, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <TextBox Margin="2,2,2,2" Grid.Column="4" Grid.Row="3" TextWrapping="Wrap" AcceptsReturn="True" FontSize="22"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path=HuddleDashboard.Clients, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        
+        <ListView Margin="2,2,2,2" Grid.Column="5" Grid.Row="3" ItemsSource="{Binding Path=CourierList}">
+            <ListView.Resources>
+                <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="16" />
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Route" Width="220"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Status}" Header="Status" Width="70"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+        <ListView Margin="2,2,2,2" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="4" ItemsSource="{Binding Path=Data[issues]}">
+            <ListView.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="20" />
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=[issueDate]}" Header="Date" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=[issue]}" Header="Item/Issue" Width="300"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=[assigned]}" Header="Assigned" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=[resolution]}" Header="Resolution" Width="250"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=[barriers]}" Header="Potential Barriers" Width="250"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=[comments]}" Header="Comments" Width="250"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=[completionDate]}" Header="Completion Date" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
     </Grid>
 </UserControl>

@@ -70,6 +70,39 @@ namespace YellowstonePathology.Business.Gateway
             return resultCollection;
         }
 
+
+        public static YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection GetOrderBrowserListItemsByPlacentaOrders()
+        {
+            YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection resultCollection = new YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, ClientName, " +
+                "OrderedBy, OrderTime, Submitted, Received, OrderType, ExternalOrderId, DateOrderReceived " +
+                "from tblClientOrder " +
+                "Where accessioned = 0 and orderType = 'PSPYPI' and clientId in (select clientId from tblClientGroupClient where clientGroupId = 1) and reconciled = 0 " +
+                "Order by OrderTime desc;";
+
+            cmd.CommandType = System.Data.CommandType.Text;
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItem orderBrowserListItem = new YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItem();
+                        YellowstonePathology.Business.Persistence.SqlDataReaderPropertyWriter propertyWriter = new Business.Persistence.SqlDataReaderPropertyWriter(orderBrowserListItem, dr);
+                        propertyWriter.WriteProperties();
+                        resultCollection.Add(orderBrowserListItem);
+                    }
+                }
+            }
+
+            return resultCollection;
+        }
+
+
         public static YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection GetOrderBrowserListItemsByOrderDate(DateTime orderDate)
         {
             YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection resultCollection = new YellowstonePathology.Business.ClientOrder.Model.OrderBrowserListItemCollection();

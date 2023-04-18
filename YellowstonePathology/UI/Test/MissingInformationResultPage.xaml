@@ -114,7 +114,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Missing Information:</TextBlock>
                 <ComboBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Stretch" IsEditable="True" Text="{Binding Path=MissingInformtionTestOrder.MissingInformation}">
                     <ComboBoxItem>Clinical History</ComboBoxItem>
-                    <ComboBoxItem>ICD9</ComboBoxItem>
+                    <ComboBoxItem>ICD10</ComboBoxItem>
                     <ComboBoxItem>Provider</ComboBoxItem>
                 </ComboBox>
 

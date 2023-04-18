@@ -28,6 +28,7 @@ namespace YellowstonePathology.UI.Monitor
         private DateTime m_LastReportDistributionHeartBeat;
         private DateTime m_LastBillingEODProcessRun;
         private bool m_DistributionDownTextHasBeenSent;
+        private HuddleDashboardPage m_HuddleDashboardPage;
 
         public MonitorPath()
 		{
@@ -85,11 +86,17 @@ namespace YellowstonePathology.UI.Monitor
                     this.m_MonitorPageWindow.PageNavigator.Navigate(billingEODProcessingPage);
                     break;
                 case MonitorPageLoadEnum.HuddleDashboard:
-                    HuddleDashboardPage huddleDashboardPage = new HuddleDashboardPage();
-                    this.m_MonitorPageWindow.PageNavigator.Navigate(huddleDashboardPage);
+                    this.m_HuddleDashboardPage = new HuddleDashboardPage(true);
+                    this.m_MonitorPageWindow.Closing += MonitorPageWindow_Closing;
+                    this.m_MonitorPageWindow.PageNavigator.Navigate(this.m_HuddleDashboardPage);
                     break;
             }
             this.m_MonitorPageWindow.Show();
+        }
+
+        private void MonitorPageWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.m_HuddleDashboardPage.Save();
         }
 
         public void LoadAllPages()
@@ -108,6 +115,9 @@ namespace YellowstonePathology.UI.Monitor
 
             DashboardPage dashboardPage = new Monitor.DashboardPage();
             this.m_PageQueue.Enqueue(dashboardPage);
+
+            HuddleDashboardPage huddleDashboard = new HuddleDashboardPage(false);
+            this.m_PageQueue.Enqueue(huddleDashboard);
         }
 
         public void StartTimer()
@@ -186,7 +196,7 @@ namespace YellowstonePathology.UI.Monitor
                
         private bool UnreadAutopsyRequestExist()
         {                  
-        	bool result = false;            
+        	bool result = false;               
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidationCallBack;
             ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2007_SP1);
             service.Credentials = new WebCredentials("ypiilab\\histology", "Let'sMakeSlides");            
@@ -204,7 +214,7 @@ namespace YellowstonePathology.UI.Monitor
             view.OrderBy.Add(ItemSchema.DateTimeReceived, SortDirection.Descending);
             view.Traversal = ItemTraversal.Shallow;
             FindItemsResults<Item> findResults = service.FindItems(WellKnownFolderName.Inbox, searchFilter, view);
-            if (findResults.Items.Count > 0) result = true;                
+            if (findResults.Items.Count > 0) result = true;              
             return result;
         }         
         

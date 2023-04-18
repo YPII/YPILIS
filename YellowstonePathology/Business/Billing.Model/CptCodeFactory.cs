@@ -12,6 +12,12 @@ namespace YellowstonePathology.Business.Billing.Model
 
         public static CptCode FromJson(string jString)
         {
+            JObject xx = JObject.Parse(jString);
+            if (xx["code"].ToString().StartsWith("M"))
+            {
+             
+            }
+
             CptCode result = null;
             JObject jObject = JsonConvert.DeserializeObject<JObject>(jString);
             if (jObject["codeType"].ToString() == "PQRS")

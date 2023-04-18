@@ -148,7 +148,16 @@ namespace YellowstonePathology.UI.Login
             if (this.ListBoxDocumentList.SelectedItem != null)
 			{
                 YellowstonePathology.Business.Document.CaseDocument caseDocument = (YellowstonePathology.Business.Document.CaseDocument)this.ListBoxDocumentList.SelectedItem;
-				this.ShowDocument(caseDocument);
+                if(caseDocument.Extension.ToUpper() != "PDF")
+                {
+                    this.ShowDocument(caseDocument);
+                }
+                else
+                {
+                    PDFViewer pdfViewer = new PDFViewer(caseDocument.FullFileName);
+                    pdfViewer.ShowDialog();
+                }
+				
 			}
 		}
 

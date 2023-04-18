@@ -11,12 +11,12 @@ namespace YellowstonePathology.Business.Surgical
         {            
 			this.m_Header = "Barrett’s Esophagus #249";
 
-            this.m_PQRIKeyWordCollection.Add("Barrett");
+            this.m_DiagnosisWordCollection.Add("Barrett");
             this.m_PQRSAgeDefinition = PQRSAgeDefinitionEnum.AllPatients;
 
             this.m_CptCodeCollection.Add(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88305", null));
 
-            this.m_PQRIKeyWordCollection.Add("barrett");            
+            this.m_DiagnosisWordCollection.Add("barrett");            
 
             this.m_PQRSCodeCollection.Add(Billing.Model.PQRSCodeCollection.Get("3126F", null));
 			this.m_PQRSCodeCollection.Add(Billing.Model.PQRSCodeCollection.Get("3126F", "1P"));
@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.Surgical
             bool result = false;
             if (string.IsNullOrEmpty(surgicalSpecimen.Diagnosis) == false)
             {                                
-                if (this.m_PQRIKeyWordCollection.WordsExistIn(surgicalSpecimen.Diagnosis) == true)
+                if (WordsExistIn(surgicalSpecimen.Diagnosis, this.m_DiagnosisWordCollection) == true)
                 {                    
                     YellowstonePathology.Business.Test.PanelSetOrderCPTCodeCollection panelSetOrderCPTCodeCollectionForThisSpecimen = surgicalTestOrder.PanelSetOrderCPTCodeCollection.GetSpecimenOrderCollection(surgicalSpecimen.SpecimenOrder.SpecimenOrderId);
                     if (panelSetOrderCPTCodeCollectionForThisSpecimen.DoesCollectionHaveCodes(this.m_CptCodeCollection) == true)

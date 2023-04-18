@@ -14,9 +14,9 @@ namespace YellowstonePathology.Business.Surgical
             this.m_CptCodeCollection.Add(Store.AppDataStore.Instance.CPTCodeCollection.GetClone("88305", null));
             this.m_PQRSAgeDefinition = PQRSAgeDefinitionEnum.AllPatients;
 
-            this.m_PQRIKeyWordCollection.Add("Basal Cell Carcinoma");
-            this.m_PQRIKeyWordCollection.Add("Squamous Cell Carcinoma");
-            this.m_PQRIKeyWordCollection.Add("Melanoma");
+            this.m_DiagnosisWordCollection.Add("Basal Cell Carcinoma");
+            this.m_DiagnosisWordCollection.Add("Squamous Cell Carcinoma");
+            this.m_DiagnosisWordCollection.Add("Melanoma");
 
             this.m_PQRSCodeCollection.Add(Billing.Model.PQRSCodeCollection.Get("G9785", null));
 			this.m_PQRSCodeCollection.Add(Billing.Model.PQRSCodeCollection.Get("G9786", null));
@@ -30,7 +30,7 @@ namespace YellowstonePathology.Business.Surgical
             bool result = false;
             if (string.IsNullOrEmpty(surgicalSpecimen.Diagnosis) == false)
             {
-                if (this.m_PQRIKeyWordCollection.WordsExistIn(surgicalSpecimen.Diagnosis) == true)
+                if (WordsExistIn(surgicalSpecimen.Diagnosis, this.m_DiagnosisWordCollection) == true)
                 {
                     YellowstonePathology.Business.Test.PanelSetOrderCPTCodeCollection panelSetOrderCPTCodeCollectionForThisSpecimen = surgicalTestOrder.PanelSetOrderCPTCodeCollection.GetSpecimenOrderCollection(surgicalSpecimen.SpecimenOrder.SpecimenOrderId);
                     if (panelSetOrderCPTCodeCollectionForThisSpecimen.DoesCollectionHaveCodes(this.m_CptCodeCollection) == true)

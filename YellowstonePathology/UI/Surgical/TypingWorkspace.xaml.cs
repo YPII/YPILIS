@@ -690,7 +690,7 @@ namespace YellowstonePathology.UI.Surgical
 
         private void MenuItemShowRequisition_Click(object sender, RoutedEventArgs e)
         {
-            Business.Document.CaseDocument caseDocument = this.m_TypingUI.CaseDocumentCollection.GetRequisition();
+            Business.Document.CaseDocument caseDocument = this.m_TypingUI.CaseDocumentCollection.GetFirstRequisition();
             this.m_DocumentViewer.ShowDocument(caseDocument);
         }        
 

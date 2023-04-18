@@ -44,10 +44,10 @@ namespace YellowstonePathology.UI.Gross
 		private System.Windows.Threading.DispatcherTimer m_PageTimeOutTimer;
 		private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
         private string m_Message;
-        private bool m_ShowEQCOption;
+        private bool m_ShowEQCOption;        
 
 		public ScanContainerPage(YellowstonePathology.Business.User.SystemIdentity systemIdentity, string message, bool showEQCOption)
-        {
+        {            
             this.m_SystemIdentity = systemIdentity;
             this.m_Message = message;
             this.m_ShowEQCOption = showEQCOption;
@@ -109,7 +109,18 @@ namespace YellowstonePathology.UI.Gross
 		private void ButtonEnterNewContainerId_Click(object sender, RoutedEventArgs e)
 		{
             //this.UseThisContainer(this, "CTNR2D7AABC6-5463-451D-89BF-6F08F5DA3B8D");				
-            this.m_BarcodeScanPort.SimulateScanReceived("CTNR51ED773A-D82C-4956-82C6-F4E70E7EAE23");
+
+            var app = Application.Current as App;            
+            this.m_BarcodeScanPort.SimulateScanReceived(app.ContainerList[app.CurrentContainerIndex]);
+
+            if (app.CurrentContainerIndex != app.ContainerList.Count - 1)
+            {
+                app.CurrentContainerIndex += 1;
+            }
+            else
+            {
+                app.CurrentContainerIndex = 0;
+            }
         }
 
         public string SystemUserDisplayText

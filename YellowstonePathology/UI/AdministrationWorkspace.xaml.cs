@@ -1288,6 +1288,15 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
+            Business.Test.LynchSyndrome.LSERuleCollection rules =Business.Test.LynchSyndrome.LSERuleCollection.GetAll();
+            foreach (Business.Test.LynchSyndrome.LSERule rule in rules)
+            {
+                Type type = rule.GetType();
+                FieldInfo field = type.GetField("Interpretation", BindingFlags.Static | BindingFlags.Public);                
+                //Console.WriteLine(rule.RuleName);
+                Console.WriteLine(field.GetValue(null));
+            }
+
             /*
             List<string> sql = new List<string>();
             string[] lines = System.IO.File.ReadAllLines(@"d:\testing\riverstonecases.txt");

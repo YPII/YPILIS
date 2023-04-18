@@ -1152,8 +1152,8 @@ namespace YellowstonePathology.UI
 
         private void MenuItemPDFViewer_Click(object sender, RoutedEventArgs e)
         {
-            PDFViewer viewer = new PDFViewer();
-            viewer.ShowDialog();
+            PDFViewer viewer = new PDFViewer("d:/testing/test.pdf");
+            viewer.Show();
         }        
 
         private void MenuItemMaterialStorageLabels_Click(object sender, RoutedEventArgs e)

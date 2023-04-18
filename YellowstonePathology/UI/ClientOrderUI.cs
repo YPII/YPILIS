@@ -101,6 +101,12 @@ namespace YellowstonePathology.UI
             this.NotifyPropertyChanged("OrderBrowserListItemCollection");
         }
 
+        public void GetPlacentaOrderList()
+        {
+            this.m_OrderBrowserListItemCollection = Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByPlacentaOrders();
+            this.NotifyPropertyChanged("OrderBrowserListItemCollection");
+        }
+
         public void GetClientOrderListByMasterAccessionNo(string masterAccessionNo)
         {
             this.m_OrderBrowserListItemCollection = Business.Gateway.ClientOrderGateway.GetOrderBrowserListItemsByMasterAccessionNo(masterAccessionNo);
