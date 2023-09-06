@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.ALLAdultByFISH
 		{			
 			ALLAdultByFISHTestOrder testOrder = (ALLAdultByFISHTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ALLAdultByFISH.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\ALLAdultByFISH.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

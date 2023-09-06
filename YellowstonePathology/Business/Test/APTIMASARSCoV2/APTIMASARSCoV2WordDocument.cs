@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.APTIMASARSCoV2
 		{			
 			YellowstonePathology.Business.Test.APTIMASARSCoV2.APTIMASARSCoV2TestOrder panelSetOrder = (Business.Test.APTIMASARSCoV2.APTIMASARSCoV2TestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\APTIMASARSCoV2.1.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\APTIMASARSCoV2.1.xml";
 			base.OpenTemplate();
 
 			base.SetDemographicsV2();

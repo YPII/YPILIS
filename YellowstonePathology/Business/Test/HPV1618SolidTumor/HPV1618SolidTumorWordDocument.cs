@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.HPV1618SolidTumor
 		{			
 			YellowstonePathology.Business.Test.HPV1618SolidTumor.HPV1618SolidTumorTestOrder panelSetOrder = (YellowstonePathology.Business.Test.HPV1618SolidTumor.HPV1618SolidTumorTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HPV1618GenotypingSolidTumor.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\HPV1618GenotypingSolidTumor.3.xml";
 			base.OpenTemplate();
 
 			base.SetDemographicsV2();

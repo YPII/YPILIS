@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3
         {            
             PDL122C3TestOrder testOrder = (PDL122C3TestOrder)this.m_PanelSetOrder;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\PDL122C3.4.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\PDL122C3.4.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

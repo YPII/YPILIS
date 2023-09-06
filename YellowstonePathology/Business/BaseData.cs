@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business
 				return Properties.Settings.Default.CurrentConnectionString;
 			}
         }
-        public const string DocumentPathRoot = @"\\CFileServer\Documents";
+        public const string DocumentPathRoot = @"\\fileserver\Documents";
 
 		public static string SurgicalSourceTable = "tblSurgical";
 		public static bool SurgicalSourceTableDetermined = false;

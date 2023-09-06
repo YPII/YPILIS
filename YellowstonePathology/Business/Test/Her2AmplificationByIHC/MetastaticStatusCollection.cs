@@ -11,12 +11,12 @@ namespace YellowstonePathology.Business.Test.Her2AmplificationByIHC
     {
         public MetastaticStatusCollection()
         {
-            this.Add(new MetastaticStatusResult("Negative", "Negative", "0", "Her2 Negative"));
-            this.Add(new MetastaticStatusResult("Negative", "Low Positive", "1+", "Her2 Low Expression"));
-            this.Add(new MetastaticStatusResult("Negative", "Low Positive", "2+", "Her2 Low Expression"));            
-            this.Add(new MetastaticStatusResult("Equivocal", "Low Positive", "1+", "Her2 Low Expression"));
-            this.Add(new MetastaticStatusResult("Equivocal", "Low Positive", "2+", "Her2 Low Expression"));
-            this.Add(new MetastaticStatusResult("Positive", "Any", "Any", "Her2 Positive"));
+            this.Add(new MetastaticStatusResult("Negative", "Negative", "0", "Negative"));
+            this.Add(new MetastaticStatusResult("Negative", "Low Positive", "1+", "Low Expression"));
+            this.Add(new MetastaticStatusResult("Negative", "Low Positive", "2+", "Low Expression"));            
+            this.Add(new MetastaticStatusResult("Equivocal", "Low Positive", "1+", "Low Expression"));
+            this.Add(new MetastaticStatusResult("Equivocal", "Low Positive", "2+", "Low Expression"));
+            this.Add(new MetastaticStatusResult("Positive", "Any", "Any", "Positive"));
         }
 
         public MetastaticStatusResult GetResult(string ishResult, string ihcResult, string ihcScore)

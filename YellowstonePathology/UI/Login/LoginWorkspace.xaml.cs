@@ -652,6 +652,14 @@ namespace YellowstonePathology.UI.Login
             {
                 if (this.m_LoginUI.AccessionOrder.PanelSetOrderCollection.HasSurgical() == true)
                 {
+                    
+                    UI.Surgical.DictationTemplatePage dictationTemplatePage = new UI.Surgical.DictationTemplatePage(this.m_LoginUI.AccessionOrder, this.m_LoginUI.SystemIdentity);
+                    this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();
+                    this.m_LoginPageWindow.Width = 700;
+                    this.m_LoginPageWindow.PageNavigator.Navigate(dictationTemplatePage);
+                    this.m_LoginPageWindow.ShowDialog();
+
+                    /*
                     YellowstonePathology.UI.Login.FinalizeAccession.GrossEntryPage grossEntryPage = new FinalizeAccession.GrossEntryPage(this.m_LoginUI.AccessionOrder);
                     grossEntryPage.Next += new FinalizeAccession.GrossEntryPage.NextEventHandler(GrossEntryPage_Next);
                     grossEntryPage.Back += new FinalizeAccession.GrossEntryPage.BackEventHandler(GrossEntryPage_Back);
@@ -659,6 +667,7 @@ namespace YellowstonePathology.UI.Login
                     this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();
                     this.m_LoginPageWindow.PageNavigator.Navigate(grossEntryPage);
                     this.m_LoginPageWindow.ShowDialog();
+                    */
                 }
             }
         }
@@ -1001,7 +1010,7 @@ namespace YellowstonePathology.UI.Login
             string casePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);
 
             string[] lines = { this.m_LoginUI.AccessionOrder.MasterAccessionNo, casePath };
-            System.IO.StreamWriter file = new System.IO.StreamWriter($@"\\ypiidc\YPIILIS\gross_camera_{Environment.MachineName}_args.txt");
+            System.IO.StreamWriter file = new System.IO.StreamWriter($@"\\fileserver\Data\YPIILIS\gross_camera_{Environment.MachineName}_args.txt");
 
             foreach (string line in lines)
             {
@@ -1129,6 +1138,28 @@ namespace YellowstonePathology.UI.Login
             this.m_FormMode = "SVHAudit";
             this.m_LoginUI.SvhAuditList = Business.SvhAuditList.FromJSON(cases);
             this.m_LoginUI.NotifyPropertyChanged(string.Empty);
+        }
+
+        private void HyperLinkImportSvhList_Click(object sender, RoutedEventArgs e)
+        {
+            string path = @"d:\testing\svh_order_errors.csv";
+            string lines = System.IO.File.ReadAllText(path);
+            
+        }
+
+        private void MenuItemShowDrReckMasterLog_Click(object sender, RoutedEventArgs e)
+        {
+            YellowstonePathology.Business.Reports.Surgical.SurgicalMasterLog report = new YellowstonePathology.Business.Reports.Surgical.SurgicalMasterLog();
+            report.CreateDrReckReport(this.m_LoginUI.AccessionOrderDate);
+            report.OpenReport();
+        }
+
+        private void ButtonGrossSpeechTest_Click(object sender, RoutedEventArgs e)
+        {
+            Gross.DictationTemplatePage dictationTemplatePage = new Gross.DictationTemplatePage(this.m_LoginUI.AccessionOrder.SpecimenOrderCollection[0], this.m_LoginUI.AccessionOrder, Business.User.SystemIdentity.Instance);
+            Gross.SecondaryWindow window = new Gross.SecondaryWindow();
+            window.Show();
+            window.PageNavigator.Navigate(dictationTemplatePage);
         }
     }
 }

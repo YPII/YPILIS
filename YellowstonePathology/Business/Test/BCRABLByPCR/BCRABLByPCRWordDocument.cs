@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.BCRABLByPCR
 		{			
 			BCRABLByPCRTestOrder testOrder = (BCRABLByPCRTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BCRABLByPCR.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\BCRABLByPCR.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

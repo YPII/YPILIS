@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Document
         public override void Render()
 		{            			
 			YellowstonePathology.Business.Test.Retired.PanelSetOrderHer2AmplificationByFishRetired2 panelSetOrderHer2AmplificationByFishRetired2 = (YellowstonePathology.Business.Test.Retired.PanelSetOrderHer2AmplificationByFishRetired2)this.m_PanelSetOrder;
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByFish.5.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByFish.5.xml";
 
 			base.OpenTemplate();
 

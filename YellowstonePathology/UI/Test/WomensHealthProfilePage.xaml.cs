@@ -503,7 +503,7 @@ namespace YellowstonePathology.UI.Test
 
         private void HyperLinkManagementRecomendation_Click(object sender, RoutedEventArgs e)
         {            	        
-            JArray table = JArray.Parse(System.IO.File.ReadAllText(@"\\cfileserver\Documents\IT\managementrecomendation.json"));
+            JArray table = JArray.Parse(System.IO.File.ReadAllText(@"\\fileserver\Documents\IT\managementrecomendation.json"));
             Business.Domain.PatientHistory ph = Business.Gateway.AccessionOrderGateway.GetPatientHistory(this.m_AccessionOrder.PatientId);
             Business.Domain.PatientHistory hpvs = ph.GetHPVs();
             hpvs.SetResultCodes();

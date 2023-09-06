@@ -10,10 +10,10 @@ namespace YellowstonePathology.Business.Document.Old
 {
     public class Common
     {
-        public const string reportTemplatePath = @"\\CFileServer\documents\ReportTemplates\";
-        public const string printDistributionPath = @"\\CFileServer\documents\distribution\print\";
-        public const string printDistributionDonePath = @"\\CFileServer\documents\distribution\print\done";
-        public const string faxDistributionPath = @"\\CFileServer\documents\distribution\fax\";
+        public const string reportTemplatePath = @"\\fileserver\documents\ReportTemplates\";
+        public const string printDistributionPath = @"\\fileserver\documents\distribution\print\";
+        public const string printDistributionDonePath = @"\\fileserver\documents\distribution\print\done";
+        public const string faxDistributionPath = @"\\fileserver\documents\distribution\fax\";
 
         public enum FlowTestTypes
         {
@@ -162,7 +162,7 @@ namespace YellowstonePathology.Business.Document.Old
                 info.Verb = "Print";                
                 p.StartInfo = info;
                 p.Start();              
-                string doneFile = file.Replace(@"\\CFileServer\documents\Distribution\Print", @"\\CFileServer\documents\Distribution\Print\Done");
+                string doneFile = file.Replace(@"\\fileserver\documents\Distribution\Print", @"\\fileserver\documents\Distribution\Print\Done");
                 File.Move(file, doneFile);
             }
             MessageBox.Show(files.Length.ToString() + " files have been printed.");

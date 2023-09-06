@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.BCellEnumeration
 		{			
 			BCellEnumerationTestOrder testOrder = (BCellEnumerationTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BCellEnumeration.2.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\BCellEnumeration.2.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

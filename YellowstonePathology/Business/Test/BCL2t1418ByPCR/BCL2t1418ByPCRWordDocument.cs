@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.BCL2t1418ByPCR
 		{
             BCL2t1418ByPCRTestOrder panelSetOrder = (BCL2t1418ByPCRTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BCL2t1418ByPCR.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\BCL2t1418ByPCR.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

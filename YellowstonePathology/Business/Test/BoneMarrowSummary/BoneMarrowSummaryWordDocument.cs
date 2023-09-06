@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.BoneMarrowSummary
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BoneMarrowSummary.4.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\BoneMarrowSummary.4.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

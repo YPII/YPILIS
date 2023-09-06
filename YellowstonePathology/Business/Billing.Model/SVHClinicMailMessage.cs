@@ -15,16 +15,11 @@ namespace YellowstonePathology.Business.Billing.Model
 
         public static int SendMessage()
         {
-            StringBuilder messageBody = new StringBuilder();
-            //Peaks_svhlab-rd@imail.org
-            //amanda.wiederien@imail.org
-            //edie.gonitzke@imail.org
-
+            StringBuilder messageBody = new StringBuilder();            
             int rowCount = Business.Gateway.AccessionOrderGateway.GetSVHClinicMessageBody(messageBody);
             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("support@ypii.com", "sid.harder@ypii.com", System.Windows.Forms.SystemInformation.UserName, messageBody.ToString());            
             message.To.Add("amanda.wiederien@imail.org");
-            message.To.Add("edie.gonitzke@imail.org");
-            message.To.Add("michaela.letasky-brekke@sclhealth.org");
+            message.To.Add("edie.gonitzke@imail.org");            
             message.To.Add("Peaks_svhlab-rd@imail.org");            
             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.110 ");
             
@@ -45,8 +40,7 @@ namespace YellowstonePathology.Business.Billing.Model
             message.Attachments.Add(attachment);
             message.To.Add("eric.ramsey@ypii.com");
             //message.To.Add("amanda.wiederien@sclhealth.org");
-            //message.To.Add("edie.gonitzke@sclhealth.org");
-            //message.To.Add("michaela.letasky-brekke@sclhealth.org");
+            //message.To.Add("edie.gonitzke@sclhealth.org");            
             //message.To.Add("svhlab-rd@sclhealth.org");
             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.110 ");
 

@@ -26,11 +26,11 @@ namespace YellowstonePathology.Business.Test.PNH
             PNHNegativeResult pnhNegativeResult = new PNHNegativeResult();
 			if (testOrder.ResultCode == pnhNegativeResult.ResultCode)
 			{
-				this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\PNHAnalysisNegative.1.xml";
+				this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\PNHAnalysisNegative.1.xml";
 			}
 			else
 			{
-				this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\PNHAnalysisPositive.1.xml";
+				this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\PNHAnalysisPositive.1.xml";
 			}
 
 

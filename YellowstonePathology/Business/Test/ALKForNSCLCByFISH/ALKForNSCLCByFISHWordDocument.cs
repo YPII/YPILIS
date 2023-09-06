@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Test.ALKForNSCLCByFISH
 
         public override void Render()
 		{						
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ALKForNSCLCByFISH.2.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\ALKForNSCLCByFISH.2.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

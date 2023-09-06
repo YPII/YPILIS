@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.FISH5p159q2215p22
         {
             FISH5p159q2215p22TestOrder panelSetOrder = (FISH5p159q2215p22TestOrder)this.m_PanelSetOrder;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\FISH5p159q2215p22.1.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\FISH5p159q2215p22.1.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

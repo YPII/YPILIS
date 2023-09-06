@@ -41,8 +41,41 @@ namespace YellowstonePathology.Business.Visitor
             this.HandlDistribution();
             this.HandlReflexTestingPlan();
             this.HandlePantherOrder();
-            this.HandleRetrospectiveReviews();            
-        }                   
+            this.HandleRetrospectiveReviews();
+            this.HandleSurgicalAmendments();
+        }  
+        
+        private void HandleSurgicalAmendments()
+        {
+            if(this.m_PanelSet.AddSurgicalAmendment == true && this.m_AccessionOrder.PanelSetOrderCollection.HasSurgical() == true)
+            {
+                PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetSurgical();
+                Amendment.Model.Amendment amendment = new Amendment.Model.Amendment();
+                amendment.AmendmentId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+                amendment.MasterAccessionNo = this.m_AccessionOrder.MasterAccessionNo;
+                amendment.ReportNo = panelSetOrder.ReportNo;
+                amendment.AmendmentDate = DateTime.Today;
+                amendment.AmendmentTime = DateTime.Now;
+                amendment.AmendmentType = "Addendum";
+                amendment.DistributeOnFinal = true;
+                amendment.SystemGenerated = true;
+                amendment.Text = this.m_PanelSet.SurgicalAmendmentTemplate;
+                this.m_AccessionOrder.AmendmentCollection.Add(amendment);
+
+                YellowstonePathology.Business.Test.PanelSetOrderCPTCode panelSetOrderCPTCode = this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.GetNextItem(panelSetOrder.ReportNo);
+                panelSetOrderCPTCode.Quantity = 1;
+                panelSetOrderCPTCode.CPTCode = "88363";
+                panelSetOrderCPTCode.Modifier = null;
+                //panelSetOrderCPTCode.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + this.m_PanelSetOrder.PanelSetName;
+                //panelSetOrderCPTCode.CodeableType = "BillableTest";
+                panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
+                //panelSetOrderCPTCode.SpecimenOrderId = specimenOrder.SpecimenOrderId;
+                panelSetOrderCPTCode.ClientId = this.m_AccessionOrder.ClientId;
+                panelSetOrderCPTCode.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
+                panelSetOrderCPTCode.Account = this.m_AccessionOrder.SvhAccount;
+                panelSetOrder.PanelSetOrderCPTCodeCollection.Add(panelSetOrderCPTCode);                
+            }
+        }
 
         private void HandleRetrospectiveReviews()
         {

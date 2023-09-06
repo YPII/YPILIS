@@ -177,7 +177,7 @@ namespace YellowstonePathology.Business.Document
         }
 
         public void SetReportDistribution()
-        {            
+        {                        
             XmlNode nodeP = m_ReportXml.SelectSingleNode("descendant::w:p[w:r/w:t='report_distribution']", this.m_NameSpaceManager);
             XmlNode nodeTc = m_ReportXml.SelectSingleNode("descendant::w:tc[w:p/w:r/w:t='report_distribution']", this.m_NameSpaceManager);
 			string reportDistribution = "";
@@ -196,7 +196,7 @@ namespace YellowstonePathology.Business.Document
             else
             {
                 this.ReplaceText("report_distribution", string.Empty);
-            }
+            }            
         }
 
         public void SetCaseHistory()

@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         public DistributionTypeList()
         {
             this.Add("Fax");
-            this.Add("Mail");
+            //this.Add("Mail");
             this.Add("Print");
             this.Add("Web Service");
             this.Add("Web Service and Fax");

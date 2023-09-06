@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:LocalUI="clr-namespace:YellowstonePathology.UI"
     xmlns:SurgicalUI="clr-namespace:YellowstonePathology.UI.Surgical"
+    xmlns:controls="clr-namespace:YellowstonePathology.UI"
     xmlns:CustomControlsUI="clr-namespace:YellowstonePathology.UI.CustomControls"
     xmlns:s="clr-namespace:System;assembly=mscorlib" Loaded="TypingWorkspace_Loaded" Name="UserControlTypingWorkspace">
 
@@ -675,31 +676,17 @@
             </TabItem>
 
         </TabControl>
-
+        
         <TabControl Name="TabControlRightMain" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Margin="3,5,5,5">
 
-            <TabItem Name="tabItemDocumentViewer" Header="Document">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-
-                    <ContentControl Name="ContentControlDocument" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2"></ContentControl>
-
-                    <Menu Grid.Column="0" Grid.Row="1" Height="30" Margin="2,2,2,2" Grid.RowSpan="2">
-                        <MenuItem Header="Requisition" Click="MenuItemShowRequisition_Click"></MenuItem>
-                        <MenuItem Header="Accession Data Sheet" Click="MenuItemShowAccessionDataSheet_Click"></MenuItem>
-                        <MenuItem Header="Patient Face Sheet" Click="MenuItemShowPatientFaceSheet_Click"></MenuItem>
-                    </Menu>
-
-                </Grid>
+            <TabItem Header="TIF" Name="TabItemDocumentViewer">
+                <ContentControl Name="ContentControlDocument"/>
             </TabItem>
-
+            
+            <TabItem Header="PDF" Name="TabItemPdfDocumentViewer">
+                <controls:PdfViewerControl x:Name="PdfViewerControl"/>
+            </TabItem>
+            
             <TabItem Name="tabItemDictationSearchWorkspace" Header="Dictation">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -804,6 +791,7 @@
                             <ComboBoxItem>Daily Final List</ComboBoxItem>
                             <ComboBoxItem>Cases Not Audited</ComboBoxItem>
                             <ComboBoxItem>Cases Not Assigned</ComboBoxItem>
+                            <ComboBoxItem>Distribution Not Set</ComboBoxItem>
                             <ComboBoxItem>SVH Electronic Orders</ComboBoxItem>
                             <ComboBoxItem>PQRI Cases</ComboBoxItem>
                             <ComboBoxItem>No Gross</ComboBoxItem>
@@ -817,6 +805,10 @@
                             <ComboBoxItem>Tonsil and Adenoids Excision</ComboBoxItem>
                         </ComboBox>
                         <Button Width="50" Height="22" VerticalAlignment="Center" Click="ButtonGetList_Click">Go</Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">
+                        <TextBlock Margin="2,2,2,2">Count:</TextBlock>
+                        <TextBlock Margin="2,2,2,2" Text="{Binding Path=SurgicalOrderList.ListCollectionView.Count}"></TextBlock>
                     </StackPanel>
 
                 </Grid>

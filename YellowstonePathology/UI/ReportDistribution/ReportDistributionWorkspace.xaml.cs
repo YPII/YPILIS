@@ -438,7 +438,6 @@ namespace YellowstonePathology.UI.ReportDistribution
                     }                    
                 
             }
-            
                 catch (Exception exception)
                 {
                     Business.Logging.EmailExceptionHandler.HandleException(exception.Message, WorkingReportNo.Instance.ReportNo);

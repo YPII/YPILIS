@@ -21,7 +21,7 @@ namespace YellowstonePathology.Business.Test.AndrogenReceptor
                 return;
             }
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\AndrogenReceptor.1.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\AndrogenReceptor.1.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

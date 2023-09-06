@@ -107,7 +107,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
         private void SavePNG()
         {
-            string filePath = @"\\CFILESERVER\Documents\Scanning\png\" + this.m_AccessionOrder.MasterAccessionNo;
+            string filePath = @"\\fileserver\Documents\Scanning\png\" + this.m_AccessionOrder.MasterAccessionNo;
             System.Windows.MessageBox.Show(this.m_ImageList.Count.ToString());
             foreach (System.Windows.Controls.Image visual in this.m_ImageList)
             {

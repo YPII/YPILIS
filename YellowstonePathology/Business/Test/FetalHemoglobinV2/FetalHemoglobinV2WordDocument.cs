@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.FetalHemoglobinV2
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\FetalHemoglobinV2.4.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\FetalHemoglobinV2.4.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

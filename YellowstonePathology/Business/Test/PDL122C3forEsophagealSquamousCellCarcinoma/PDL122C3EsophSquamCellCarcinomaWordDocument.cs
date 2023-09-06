@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3forEsophagealSquamousCellCa
         {
             PDL122C3forEsophagealSquamousCellCarcinomaTestOrder testOrder = (PDL122C3forEsophagealSquamousCellCarcinomaTestOrder)this.m_PanelSetOrder;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\PDL122C3forEsophagealSquamousCellCarcinomaTestOrder.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\PDL122C3forEsophagealSquamousCellCarcinomaTestOrder.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

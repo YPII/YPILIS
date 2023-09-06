@@ -60,6 +60,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
         protected Type m_NmhObxView;
         protected Type m_EmaObxView;
         protected bool m_DoNotFax;
+        protected bool m_AddSurgicalAmendment;
+        protected string m_SurgicalAmendmentTemplate;
 
         protected List<string> m_ImplementedResultTypes;
 
@@ -129,27 +131,27 @@ namespace YellowstonePathology.Business.PanelSet.Model
             get { return this.m_ImplementedResultTypes; }
         }
 
-        public YellowstonePathology.Business.OrderTargetTypeCollection OrderTargetTypeCollectionExclusions
+        public Business.OrderTargetTypeCollection OrderTargetTypeCollectionExclusions
         {
             get { return this.m_OrderTargetTypeCollectionExclusions; }
         }
 
-        public YellowstonePathology.Business.OrderTargetTypeCollection OrderTargetTypeCollectionRestrictions
+        public Business.OrderTargetTypeCollection OrderTargetTypeCollectionRestrictions
         {
             get { return this.m_OrderTargetTypeCollectionRestrictions; }
         }
 
-		public YellowstonePathology.Business.Task.Model.TaskCollection TaskCollection
+		public Business.Task.Model.TaskCollection TaskCollection
         {
             get { return this.m_TaskCollection; }
         }
 
-        public YellowstonePathology.Business.Panel.Model.PanelCollection PanelCollection
+        public Business.Panel.Model.PanelCollection PanelCollection
         {
             get { return this.m_PanelCollection; }
         }
         
-        public YellowstonePathology.Business.ClientOrder.Model.UniversalServiceCollection UniversalServiceIdCollection
+        public Business.ClientOrder.Model.UniversalServiceCollection UniversalServiceIdCollection
         {
             get { return this.m_UniversalServiceIdCollection; }            
         }
@@ -164,17 +166,17 @@ namespace YellowstonePathology.Business.PanelSet.Model
             get { return this.m_TechnicalComponentFacility; }
         }
 
-        public YellowstonePathology.Business.Facility.Model.Facility ProfessionalComponentFacility
+        public Business.Facility.Model.Facility ProfessionalComponentFacility
         {
             get { return this.m_ProfessionalComponentFacility; }
         }
 
-        public YellowstonePathology.Business.Facility.Model.Facility TechnicalComponentBillingFacility
+        public Business.Facility.Model.Facility TechnicalComponentBillingFacility
         {
             get { return this.m_TechnicalComponentBillingFacility; }
         }
 
-        public YellowstonePathology.Business.Facility.Model.Facility ProfessionalComponentBillingFacility
+        public Business.Facility.Model.Facility ProfessionalComponentBillingFacility
         {
             get { return this.m_ProfessionalComponentBillingFacility; }
         }
@@ -719,6 +721,34 @@ namespace YellowstonePathology.Business.PanelSet.Model
                 {
                     this.m_EmaObxView = value;
                     this.NotifyPropertyChanged("EmaObxView");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public bool AddSurgicalAmendment
+        {
+            get { return this.m_AddSurgicalAmendment; }
+            set
+            {
+                if (this.m_AddSurgicalAmendment != value)
+                {
+                    this.m_AddSurgicalAmendment = value;
+                    this.NotifyPropertyChanged("AddSurgicalAmendment");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string SurgicalAmendmentTemplate
+        {
+            get { return this.m_SurgicalAmendmentTemplate; }
+            set
+            {
+                if (this.m_SurgicalAmendmentTemplate != value)
+                {
+                    this.m_SurgicalAmendmentTemplate = value;
+                    this.NotifyPropertyChanged("SurgicalAmendmentTemplate");
                 }
             }
         }

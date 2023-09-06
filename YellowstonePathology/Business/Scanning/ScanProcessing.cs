@@ -45,7 +45,7 @@ namespace YellowstonePathology.Business.Scanning
     {
         public ScanFolderList() 
         {
-            this.Fill(@"\\CFileServer\Documents\Scanning");
+            this.Fill(@"\\fileserver\Documents\Scanning");
             System.Windows.MessageBox.Show(this.Count.ToString());
         }
     } 

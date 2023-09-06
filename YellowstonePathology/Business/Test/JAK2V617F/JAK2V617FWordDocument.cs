@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Test.JAK2V617F
         public override void Render()
 		{            
 			JAK2V617FTestOrder panelSetOrderJAK2V617F = (JAK2V617FTestOrder)this.m_PanelSetOrder;
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\JAK2V617F.5.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\JAK2V617F.5.xml";
 			base.OpenTemplate();
 
             this.SetDemographicsV2();

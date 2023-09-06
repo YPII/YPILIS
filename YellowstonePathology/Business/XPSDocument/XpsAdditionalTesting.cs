@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.XPSDocument
 
         Business.Test.AccessionOrder m_AccessionOrder;
         Business.Test.PanelSetOrder m_PanelSetOrder;
-        string m_Template = @"\\cfileserver\Documents\ReportTemplates\XmlTemplates\AdditionalTestingNotification.2.xps";
+        string m_Template = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\AdditionalTestingNotification.2.xps";
         string m_DestinationPath;
         Dictionary<string, string> m_PlaceHolders;
 

@@ -78,7 +78,7 @@ namespace YellowstonePathology.Business.Gateway
             cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, ClientName, " +
                 "OrderedBy, OrderTime, Submitted, Received, OrderType, ExternalOrderId, DateOrderReceived " +
                 "from tblClientOrder " +
-                "Where accessioned = 0 and orderType = 'PSPYPI' and clientId in (select clientId from tblClientGroupClient where clientGroupId = 1) and reconciled = 0 " +
+                "Where accessioned = 0 and orderType = 'PSPYPI' and clientId in (select clientId from tblClientGroupClient where clientGroupId = 1) and orderDate >= DATE_ADD(curdate(), INTERVAL -7 DAY) " +
                 "Order by OrderTime desc;";
 
             cmd.CommandType = System.Data.CommandType.Text;

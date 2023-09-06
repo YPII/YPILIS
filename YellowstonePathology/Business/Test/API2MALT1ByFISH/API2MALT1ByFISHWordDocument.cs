@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.API2MALT1ByFISH
 		{
 			API2MALT1ByFISHTestOrder testOrder = (API2MALT1ByFISHTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\API2MALT1ByFISH.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\API2MALT1ByFISH.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

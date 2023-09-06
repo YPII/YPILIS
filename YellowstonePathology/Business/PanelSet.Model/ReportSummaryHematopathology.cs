@@ -9,7 +9,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
 	{        
         public ReportSummaryHematopathology()
 		{            
-            this.m_ReportTemplatePath = @"\\cfileserver\Documents\ReportTemplates\XmlTemplates\HematopathologySummary.xml";
+            this.m_ReportTemplatePath = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\HematopathologySummary.xml";
 		}     
 	}
 }

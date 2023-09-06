@@ -70,6 +70,13 @@
                         </StackPanel>
                     </Button>
 
+                    <Button Margin="2" Height="25" Click="ButtonPrintLog_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Printer.ico"></Image>
+                            <TextBlock Margin="2,0,0,0">Print</TextBlock>
+                        </StackPanel>
+                    </Button>
+
                 </ToolBar>
             </ToolBarTray>
 

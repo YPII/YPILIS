@@ -36,7 +36,7 @@ namespace YellowstonePathology.UI
         private Hyperlink m_SelectedHyperlink;
 
         private const string NEO_FOLDER_PATH = @"\\ypiiinterface2\ChannelData\Incoming\Neogenomics";
-        private const string FAX_FOLDER_PATH = @"\\cfileserver\Documents\Faxes";        
+        private const string FAX_FOLDER_PATH = @"\\fileserver\Documents\Faxes";        
 
         private KeyValuePair<string, string> m_SelectedFolderPath;
         private bool m_ShowArchiveFolder;
@@ -116,7 +116,7 @@ namespace YellowstonePathology.UI
         private void WebBrowser_LoadCompleted_ForEmail(object sender, NavigationEventArgs e)
         {
             System.IO.FileInfo sourceFileInfo = (System.IO.FileInfo)this.ListViewDocuments.SelectedItem;
-            string destinationFileName = System.IO.Path.Combine(@"\\cfileserver\Documents\Faxes\Done\", sourceFileInfo.Name);
+            string destinationFileName = System.IO.Path.Combine(@"\\fileserver\Documents\Faxes\Done\", sourceFileInfo.Name);
 
             string msg = "Attached is a fax that came in for you.";
             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("support@ypii.com", this.m_SelectedEmail, System.Windows.Forms.SystemInformation.UserName, msg);

@@ -14,7 +14,7 @@ namespace YellowstonePathology.Business.Reports
 {
 	public class LabOrderSheet : Report
 	{
-		string ReportBaseFileName = @"\\CFileServer\Documents\Reports\Templates\ReportBase.xml";
+		string ReportBaseFileName = @"\\fileserver\Documents\Reports\Templates\ReportBase.xml";
 		public XmlDocument ReportBaseXml;
 		protected XmlNamespaceManager NameSpaceManagerBase;
 
@@ -40,8 +40,8 @@ namespace YellowstonePathology.Business.Reports
 
 		private void PrintForAccession(XElement accessionOrderElement, string seq, DateTime acknowledgeDate, DateTime acknowledgeTime)
 		{
-			this.m_ReportTemplate = @"\\CFileServer\documents\Reports\Templates\LabOrders.xml";
-			this.m_ReportSaveFileName = @"\\CFileServer\documents\Reports\Lab\LabOrders" + seq + ".xml";
+			this.m_ReportTemplate = @"\\fileserver\documents\Reports\Templates\LabOrders.xml";
+			this.m_ReportSaveFileName = @"\\fileserver\documents\Reports\Lab\LabOrders" + seq + ".xml";
 
             this.m_ReportXml = new XmlDocument();
 			this.m_ReportXml.Load(this.m_ReportTemplate);
@@ -166,8 +166,8 @@ namespace YellowstonePathology.Business.Reports
 
         private void PrintForAccession(LabOrderSheetDataReport labOrderSheetDataReport, string seq, DateTime acknowledgeDate, DateTime acknowledgeTime)
         {
-            this.m_ReportTemplate = @"\\CFileServer\documents\Reports\Templates\LabOrders.xml";
-            this.m_ReportSaveFileName = @"\\CFileServer\documents\Reports\Lab\LabOrders" + seq + ".xml";
+            this.m_ReportTemplate = @"\\fileserver\documents\Reports\Templates\LabOrders.xml";
+            this.m_ReportSaveFileName = @"\\fileserver\documents\Reports\Lab\LabOrders" + seq + ".xml";
 
             this.m_ReportXml = new XmlDocument();
             this.m_ReportXml.Load(this.m_ReportTemplate);

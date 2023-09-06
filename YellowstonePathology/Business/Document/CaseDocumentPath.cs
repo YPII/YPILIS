@@ -9,7 +9,7 @@ namespace YellowstonePathology.Business.Document
     {
 		private static string GetLegacyPath(string reportNo)
         {
-            string strPath = @"\\CFileServer\documents";
+            string strPath = @"\\fileserver\documents";
             string strCaseType = reportNo.Substring(0, 1);
             switch (strCaseType)
             {

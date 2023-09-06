@@ -6,7 +6,7 @@ namespace YellowstonePathology.Business.Reports.Surgical
 {
 	public class SurgicalMasterLog : Report
 	{
-		string ReportBaseFileName = @"\\CFileServer\Documents\Reports\Templates\ReportBase.xml";
+		string ReportBaseFileName = @"\\fileserver\Documents\Reports\Templates\ReportBase.xml";
 		public XmlDocument ReportBaseXml;
 		protected XmlNamespaceManager NameSpaceManagerBase;
 
@@ -18,16 +18,25 @@ namespace YellowstonePathology.Business.Reports.Surgical
 
         public void CreateNorthernMtTechOnlyReport(DateTime reportDate)
         {
-            this.m_ReportSaveFileName = @"\\CFileServer\documents\Reports\Surgical\MasterLog\YEAR\MONTH\NorthernMtTechOnlyMasterLog.FILEDATE.v1.xml";
+            this.m_ReportSaveFileName = @"\\fileserver\documents\Reports\Surgical\MasterLog\YEAR\MONTH\NorthernMtTechOnlyMasterLog.FILEDATE.v1.xml";
             Business.Surgical.SurgicalMasterLogList surgicalMasterLogList = new Business.Surgical.SurgicalMasterLogList();
             surgicalMasterLogList.FillNorthernMtTechnicalOnlyByDateAndLocation(reportDate);
             string reportTitle = "Northern Montana Technical Only Master Log - " + reportDate.ToLongDateString();
             this.BuildReport(reportDate, surgicalMasterLogList, reportTitle);
         }
 
-        public void CreateReport(DateTime reportDate)
+		public void CreateDrReckReport(DateTime reportDate)
+		{
+			this.m_ReportSaveFileName = @"\\fileserver\documents\Reports\Surgical\MasterLog\YEAR\MONTH\DrReckMasterLog.FILEDATE.v1.xml";
+			Business.Surgical.SurgicalMasterLogList surgicalMasterLogList = new Business.Surgical.SurgicalMasterLogList();
+			surgicalMasterLogList.FillDrReck(reportDate);
+			string reportTitle = "Dr Reck Master Log - " + reportDate.ToLongDateString();
+			this.BuildReport(reportDate, surgicalMasterLogList, reportTitle);
+		}
+
+		public void CreateReport(DateTime reportDate)
         {
-            this.m_ReportSaveFileName = @"\\CFileServer\documents\Reports\Surgical\MasterLog\YEAR\MONTH\SurgicalMasterLog.FILEDATE.v1.xml";
+            this.m_ReportSaveFileName = @"\\fileserver\documents\Reports\Surgical\MasterLog\YEAR\MONTH\SurgicalMasterLog.FILEDATE.v1.xml";
             Business.Surgical.SurgicalMasterLogList surgicalMasterLogList = new Business.Surgical.SurgicalMasterLogList();
             surgicalMasterLogList.FillByReportDateAndLocation(reportDate);
             string reportTitle = "Surgical Master Log - " + reportDate.ToLongDateString();
@@ -36,7 +45,7 @@ namespace YellowstonePathology.Business.Reports.Surgical
 
         private void BuildReport(DateTime reportDate, Business.Surgical.SurgicalMasterLogList surgicalMasterLogList, string reportTitle)
         {
-			this.m_ReportTemplate = @"\\CFileServer\documents\Reports\Templates\SurgicalMasterLog.6.xml";
+			this.m_ReportTemplate = @"\\fileserver\documents\Reports\Templates\SurgicalMasterLog.6.xml";
 
 			this.m_ReportXml = new XmlDocument();
 			this.m_ReportXml.Load(this.m_ReportTemplate);

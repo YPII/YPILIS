@@ -22,22 +22,22 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 			{
 				if (this.m_AccessionOrder.AccessionDate >= DateTime.Parse("1/1/2014") == true)
 				{
-					this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\Her2AmplificationByISH.Breast.4.xml";
+					this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\Her2AmplificationByISH.Breast.4.xml";
 				}
 				else
 				{
-					this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByISH.ASCOPre2014.1.xml";
+					this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByISH.ASCOPre2014.1.xml";
 				}
 			}
 			else if (panelSetOrderHer2ByIsh.Indicator.ToUpper() == "GASTRIC" || panelSetOrderHer2ByIsh.Indicator.ToUpper() == "ENDOMETRIAL")
 			{
 				if (this.m_AccessionOrder.AccessionDate >= DateTime.Parse("1/1/2014") == true)
 				{
-					this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\Her2AmplificationByISH.Gastric.3.xml";
+					this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\Her2AmplificationByISH.Gastric.3.xml";
 				}
 				else
 				{
-					this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByISH.ASCOPre2014.1.xml";
+					this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByISH.ASCOPre2014.1.xml";
 				}
 			}
 

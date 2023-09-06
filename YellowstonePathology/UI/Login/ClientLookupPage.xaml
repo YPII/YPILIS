@@ -25,7 +25,7 @@
                     <Border BorderBrush="Black" BorderThickness="2" Margin="2,2,2,2" Background="#F5F5F5" CornerRadius="2">
                         <Grid Height="60" Background="Transparent">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="170"></ColumnDefinition>
+                                <ColumnDefinition Width="154"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"></RowDefinition>

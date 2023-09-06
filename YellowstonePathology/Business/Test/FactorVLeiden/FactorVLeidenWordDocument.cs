@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.FactorVLeiden
         public override void Render()
 		{            
 			FactorVLeidenTestOrder testOrder = (FactorVLeidenTestOrder)this.m_PanelSetOrder;
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\FactorVLeiden.1.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\FactorVLeiden.1.xml";
 
 			this.OpenTemplate();
 			this.SetDemographicsV2();

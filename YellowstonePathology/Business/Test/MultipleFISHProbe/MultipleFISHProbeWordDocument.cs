@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.MultipleFISHProbe
 		{			
 			PanelSetOrderMultipleFISHProbePanel panelSetOrderMultipleFISHProbePanel = (PanelSetOrderMultipleFISHProbePanel)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\MultipleFISHProbePanel.2.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\MultipleFISHProbePanel.2.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

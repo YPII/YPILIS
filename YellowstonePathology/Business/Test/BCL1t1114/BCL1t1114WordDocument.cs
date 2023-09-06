@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.BCL1t1114
 		{			
 			BCL1t1114TestOrder panelSetOrder = (BCL1t1114TestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BCL1t1114.2.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\BCL1t1114.2.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

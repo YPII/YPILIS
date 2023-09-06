@@ -7,7 +7,7 @@ namespace YellowstonePathology.Business.Test.ReticulatedPlateletAnalysis
 {
 	public class ReticulatedPlateletAnalysisWordDocument : YellowstonePathology.Business.Document.CaseReport
     {        
-        string m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ReticulatedPlateletAnalysis.1.xml";        
+        string m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\ReticulatedPlateletAnalysis.1.xml";        
 		YellowstonePathology.Business.Flow.FlowMarkerPanelList m_PanelList;		
 
         public ReticulatedPlateletAnalysisWordDocument(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Document.ReportSaveModeEnum reportSaveMode) 

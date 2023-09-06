@@ -122,6 +122,17 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 result = false;
             }
 
+            List<string> genderList = new List<string>();
+            genderList.Add("F");
+            genderList.Add("M");
+            genderList.Add("U");
+
+            if (genderList.Exists(s => s == m_AccessionOrder.PSex) == false)
+            {
+                MessageBox.Show("Patient sex must be one of the following: F/M/U.");
+                result = false;
+            }
+
             YellowstonePathology.Business.Audit.Model.AuditCollection auditCollection = new Business.Audit.Model.AuditCollection();
             auditCollection.Add(new YellowstonePathology.Business.Audit.Model.TallmanMedicalRecordAudit(this.m_AccessionOrder));
             auditCollection.Run();

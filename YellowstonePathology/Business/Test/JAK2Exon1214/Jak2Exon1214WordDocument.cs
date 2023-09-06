@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.JAK2Exon1214
 		{			
 			JAK2Exon1214TestOrder panelSetOrder = (JAK2Exon1214TestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\JAK2Exon1213.4.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\JAK2Exon1213.4.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.Autopsy
 
         public override void Render()
 		{			
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\FinalAutopsyReport.1.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\FinalAutopsyReport.1.xml";
 
 			base.OpenTemplate();
 

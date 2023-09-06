@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.KRASStandardReflex
         public override void Render()
 		{			
             KRASStandardReflexResult krasStandardReflexResult = KRASStandardReflexResultFactory.GetResult(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder);            
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\KRASStandardReflex.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\KRASStandardReflex.3.xml";
 			
 			base.OpenTemplate();
 

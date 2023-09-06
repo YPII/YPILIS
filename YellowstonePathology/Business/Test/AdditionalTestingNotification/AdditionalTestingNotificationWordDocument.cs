@@ -19,7 +19,7 @@ namespace YellowstonePathology.Business.Test.AdditionalTestingNotification
         public override void Render()
 		{
             string statement = "The following additional testing has been ordered: additional_tests, please hold the billing window open for this encounter. Additional charges will follow within 30-45 days.";
-            base.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\AdditionalTestingNotification.5.xml";
+            base.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\AdditionalTestingNotification.5.xml";
 			base.OpenTemplate();
 			this.SetDemographicsV2();
 

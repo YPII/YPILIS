@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.ComprehensiveColonCancerProfile
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ComprehensiveColonCancerProfile.1.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\ComprehensiveColonCancerProfile.1.xml";
             this.OpenTemplate();
             this.SetDemographicsV2();
             this.SetReportDistribution();

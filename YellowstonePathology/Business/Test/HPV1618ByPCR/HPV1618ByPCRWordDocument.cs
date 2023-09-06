@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.HPV1618ByPCR
 		{			
 			YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRTestOrder panelSetOrder = (YellowstonePathology.Business.Test.HPV1618ByPCR.HPV1618ByPCRTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HPV1618GenotypingByPCR.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\HPV1618GenotypingByPCR.3.xml";
 			base.OpenTemplate();
 
 			base.SetDemographicsV2();

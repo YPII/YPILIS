@@ -6,7 +6,7 @@ namespace YellowstonePathology.Business.Reports
 {
     public class BlocksSentNotReturnedReport : Report
     {
-        string ReportBaseFileName = @"\\CFileServer\Documents\Reports\Templates\ReportBase.xml";
+        string ReportBaseFileName = @"\\fileserver\Documents\Reports\Templates\ReportBase.xml";
         public XmlDocument ReportBaseXml;
         protected XmlNamespaceManager NameSpaceManagerBase;
 
@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Reports
         {
             MaterialTracking.Model.BlockSentNotReturnedCollection blockSentNotReturnedCollection = Gateway.SlideAccessionGateway.GetBlocksSentNotReturned();
 
-            this.m_ReportTemplate = @"\\CFileServer\documents\Reports\Templates\BlocksSentNotReturnedReport.xml";
+            this.m_ReportTemplate = @"\\fileserver\documents\Reports\Templates\BlocksSentNotReturnedReport.xml";
 
             this.m_ReportXml = new XmlDocument();
             this.m_ReportXml.Load(this.m_ReportTemplate);
@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.Reports
             this.m_NameSpaceManager = new XmlNamespaceManager(this.m_ReportXml.NameTable);
             this.m_NameSpaceManager.AddNamespace("w", "http://schemas.microsoft.com/office/word/2003/wordml");
             this.m_NameSpaceManager.AddNamespace("wx", "http://schemas.microsoft.com/office/word/2003/auxHint");
-            this.m_ReportSaveFileName = @"\\CFileServer\documents\Reports\MissingBlocks\BlocksSentNotReturned.FILEDATE.v1.xml";
+            this.m_ReportSaveFileName = @"\\fileserver\documents\Reports\MissingBlocks\BlocksSentNotReturned.FILEDATE.v1.xml";
 
             this.ReportBaseXml = new XmlDocument();
             this.ReportBaseXml.Load(ReportBaseFileName);

@@ -82,7 +82,7 @@ namespace YellowstonePathology.UI.Cutting
 		private void BarcodeScanPort_HistologyBlockScanReceived(Business.BarcodeScanning.Barcode barcode)
         {            
             this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Input, new System.Threading.ThreadStart(delegate()
-            {
+            {                
                 if (this.AliquotOrderSelected != null) this.AliquotOrderSelected(this, new CustomEventArgs.BarcodeReturnEventArgs(barcode));
             }
             ));

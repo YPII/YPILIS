@@ -35,7 +35,7 @@ namespace YellowstonePathology.UI.Cytology
             this.m_StartDate = firstDayOfThisMonth.AddMonths(-1);
             this.m_EndDate = firstDayOfThisMonth.AddDays(-1);
             this.m_OpenCaseCount = Business.Gateway.AccessionOrderGateway.GetCountOpenCytologyCasesByCollectionDateRange(this.m_StartDate, this.m_EndDate);
-            this.m_FolderLocation = @"\\CFileServer\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter";
+            this.m_FolderLocation = @"\\fileserver\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter";
 
             InitializeComponent();
 			DataContext = this;
@@ -83,7 +83,7 @@ namespace YellowstonePathology.UI.Cytology
 
 		private void ButtonNavigateToFolder_Click(object sender, RoutedEventArgs e)
 		{
-			//string reportFolderPath = @"\\CFileServer\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter";
+			//string reportFolderPath = @"\\fileserver\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter";
 			System.Diagnostics.Process process = new System.Diagnostics.Process();
 			System.Diagnostics.Process p = new System.Diagnostics.Process();
 			System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Explorer.exe", this.m_FolderLocation);

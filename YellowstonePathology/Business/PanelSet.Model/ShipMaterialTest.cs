@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_NeverDistribute = true;
             this.m_AllowMultiplePerAccession = true;
-            this.m_MonitorPriority = MonitorPriorityNormal;
+            this.m_MonitorPriority = MonitorPriorityNormal;            
 			
             string taskDescription = "Ship materials";
 			this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Transcription, taskDescription, new Facility.Model.Facility()));

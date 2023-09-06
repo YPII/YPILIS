@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.ABL1KinaseDomainMutation
 		{						
 			ABL1KinaseDomainMutationTestOrder testOrder = (ABL1KinaseDomainMutationTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ABL1KinaseDomainMutation.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\ABL1KinaseDomainMutation.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

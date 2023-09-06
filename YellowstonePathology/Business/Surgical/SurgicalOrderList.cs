@@ -77,6 +77,12 @@ namespace YellowstonePathology.Business.Surgical
 			this.FillFromList(surgicalOrderList);
 		}
 
+		public void FillByDistributionNotSet()
+		{
+			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByDistributionNotSet();
+			this.FillFromList(surgicalOrderList);
+		}
+
 		public void FillByNoSignature()
 		{
 			SurgicalOrderList surgicalOrderList = Business.Gateway.AccessionOrderGateway.GetSurgicalOrderListByNotAssigned();

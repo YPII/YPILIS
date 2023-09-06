@@ -18,6 +18,7 @@ namespace YellowstonePathology.Business.Audit.Model
 			this.IsMarkedOnWomensHealthProfile(this.m_AccessionOrder);
             this.IsRequiredByReflexOrder(this.m_AccessionOrder);
             this.IsRequiredByASCCPRules(this.m_AccessionOrder);
+            this.IsRequiredByStandingOrder(this.m_AccessionOrder);
         }
 
 		private void IsMarkedOnWomensHealthProfile(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
@@ -80,6 +81,29 @@ namespace YellowstonePathology.Business.Audit.Model
                         this.m_ActionRequired = true;
                         this.m_Message.AppendLine("An " + panelSetHPV.PanelSetName + " is required but not ordered.");
                     }
+                }
+            }
+        }
+
+        private void IsRequiredByStandingOrder(YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        {
+            Domain.Physician physician = Gateway.PhysicianClientGateway.GetPhysicianByPhysicianId(accessionOrder.PhysicianId);
+            if(physician != null && physician.HPVStandingOrderCode != "STNDNONE")
+            {
+                Business.Client.Model.StandingOrderCollection hpvStandingOrderCollection = Business.Client.Model.StandingOrderCollection.GetHPVStandingOrders();
+                if(hpvStandingOrderCollection.Any(s => s.StandingOrderCode == physician.HPVStandingOrderCode) == true)
+                {
+                    Business.Client.Model.StandingOrder standingOrder = hpvStandingOrderCollection.First(s => s.StandingOrderCode == physician.HPVStandingOrderCode);
+                    bool hpvIsRequired = standingOrder.IsRequired(accessionOrder);                    
+                    if (hpvIsRequired == true)
+                    {
+                        YellowstonePathology.Business.Test.HPV.HPVTest panelSetHPV = new YellowstonePathology.Business.Test.HPV.HPVTest();
+                        if (accessionOrder.PanelSetOrderCollection.Exists(panelSetHPV.PanelSetId) == false)
+                        {
+                            this.m_ActionRequired = true;
+                            this.m_Message.AppendLine("This provider has a standing order that requires HPV.");
+                        }                        
+                    }                    
                 }
             }
         }

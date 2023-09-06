@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
         {
             DistributionResult distributionResult = new DistributionResult();
 
-            string printDistributionFolderPath = @"\\cfileserver\Documents\Distribution\Print\";
+            string printDistributionFolderPath = @"\\fileserver\Documents\Distribution\Print\";
 			YellowstonePathology.Business.OrderIdParser orderIdParser = new YellowstonePathology.Business.OrderIdParser(reportNo);
 			string caseDocumentFileName = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
 

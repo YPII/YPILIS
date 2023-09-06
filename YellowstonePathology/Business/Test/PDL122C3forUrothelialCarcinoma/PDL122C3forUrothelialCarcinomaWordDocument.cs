@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3forUrothelialCarcinoma
         {
             PDL122C3forUrothelialCarcinomaTestOrder testOrder = (PDL122C3forUrothelialCarcinomaTestOrder)this.m_PanelSetOrder;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\PDL122C3forUrothelialCarcinoma.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\PDL122C3forUrothelialCarcinoma.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

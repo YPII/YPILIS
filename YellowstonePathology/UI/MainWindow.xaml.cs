@@ -168,7 +168,7 @@ namespace YellowstonePathology.UI
         }        
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {                        
+        {            
             this.ShowStartupPage();
         }        
 
@@ -465,9 +465,9 @@ namespace YellowstonePathology.UI
                 m_TabItemTyping.Focus();
             }
             else
-            {
-                this.m_TypingWorkspace = new Surgical.TypingWorkspace(this.m_MainWindowCommandButtonHandler, secondMonitorWindow, this.m_TabItemTyping);
-				this.m_TabItemTyping.Content = this.m_TypingWorkspace;
+            {                
+                this.m_TypingWorkspace = new Surgical.TypingWorkspace(this.m_MainWindowCommandButtonHandler, secondMonitorWindow, this.m_TabItemTyping);                
+                this.m_TabItemTyping.Content = this.m_TypingWorkspace;
                 this.TabControlLeftWorkspace.Items.Add(this.m_TabItemTyping);
                 this.m_TabItemTyping.Focus();                
                 this.m_TypingWorkspace.Loaded += new RoutedEventHandler(this.TypingWorkspace_Loaded);				

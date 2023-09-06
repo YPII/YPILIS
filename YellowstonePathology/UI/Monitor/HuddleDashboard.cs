@@ -12,7 +12,7 @@ using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.UI.Monitor
 {
-    [PersistentClass("tblHuddleBoard", "YPIDATA")]
+    [PersistentClass("tblHuddleDashboard", "YPIDATA")]
     public class HuddleDashboard : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -27,7 +27,20 @@ namespace YellowstonePathology.UI.Monitor
         private string m_Equipment;
         private string m_Clients;
         private string m_BlockCount;
+        private string m_PapCount;
+        private string m_OtherFlowCount;
+        private string m_SVHBMCount;
+        private string m_FollowUpProblem1;
+        private string m_FollowUpProblem2;
+        private string m_FollowUpProblem3;
+        private string m_AdditionalComment1;
         private string m_Fedx;
+
+        private bool m_CourierSheridan;
+        private bool m_CourierCodyPowell;
+        private bool m_CourierBozemanButte;
+        private bool m_CourierMCSidneyForsytheHardin;
+        private bool m_CourierHavreMalta;
 
         public HuddleDashboard()
         {
@@ -213,31 +226,182 @@ namespace YellowstonePathology.UI.Monitor
             }
         }
 
+        [PersistentProperty()]
+        public string PapCount
+        {
+            get { return this.m_PapCount; }
+            set
+            {
+                if (this.m_PapCount != value)
+                {
+                    this.m_PapCount = value;
+                    this.NotifyPropertyChanged("PapCount");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string OtherFlowCount
+        {
+            get { return this.m_OtherFlowCount; }
+            set
+            {
+                if (this.m_OtherFlowCount != value)
+                {
+                    this.m_OtherFlowCount = value;
+                    this.NotifyPropertyChanged("OtherFlowCount");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string SVHBMCount
+        {
+            get { return this.m_SVHBMCount; }
+            set
+            {
+                if (this.m_SVHBMCount != value)
+                {
+                    this.m_SVHBMCount = value;
+                    this.NotifyPropertyChanged("SVHBMCount");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string FollowUpProblem1
+        {
+            get { return this.m_FollowUpProblem1; }
+            set
+            {
+                if (this.m_FollowUpProblem1 != value)
+                {
+                    this.m_FollowUpProblem1 = value;
+                    this.NotifyPropertyChanged("FollowUpProblem1");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string FollowUpProblem2
+        {
+            get { return this.m_FollowUpProblem2; }
+            set
+            {
+                if (this.m_FollowUpProblem2 != value)
+                {
+                    this.m_FollowUpProblem2 = value;
+                    this.NotifyPropertyChanged("FollowUpProblem2");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string FollowUpProblem3
+        {
+            get { return this.m_FollowUpProblem3; }
+            set
+            {
+                if (this.m_FollowUpProblem3 != value)
+                {
+                    this.m_FollowUpProblem3 = value;
+                    this.NotifyPropertyChanged("FollowUpProblem3");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public string AdditionalComment1
+        {
+            get { return this.m_AdditionalComment1; }
+            set
+            {
+                if (this.m_AdditionalComment1 != value)
+                {
+                    this.m_AdditionalComment1 = value;
+                    this.NotifyPropertyChanged("AdditionalComment1");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public bool CourierSheridan
+        {
+            get { return this.m_CourierSheridan; }
+            set
+            {
+                if (this.m_CourierSheridan != value)
+                {
+                    this.m_CourierSheridan = value;
+                    this.NotifyPropertyChanged("CourierSheridan");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public bool CourierCodyPowell
+        {
+            get { return this.m_CourierCodyPowell; }
+            set
+            {
+                if (this.m_CourierCodyPowell != value)
+                {
+                    this.m_CourierCodyPowell = value;
+                    this.NotifyPropertyChanged("CourierCodyPowell");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public bool CourierBozemanButte
+        {
+            get { return this.m_CourierBozemanButte; }
+            set
+            {
+                if (this.m_CourierBozemanButte != value)
+                {
+                    this.m_CourierBozemanButte = value;
+                    this.NotifyPropertyChanged("CourierBozemanButte");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public bool CourierMCSidneyForsytheHardin
+        {
+            get { return this.m_CourierMCSidneyForsytheHardin; }
+            set
+            {
+                if (this.m_CourierMCSidneyForsytheHardin != value)
+                {
+                    this.m_CourierMCSidneyForsytheHardin = value;
+                    this.NotifyPropertyChanged("CourierMCSidneyForsytheHardin");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        public bool CourierHavreMalta
+        {
+            get { return this.m_CourierHavreMalta; }
+            set
+            {
+                if (this.m_CourierHavreMalta != value)
+                {
+                    this.m_CourierHavreMalta = value;
+                    this.NotifyPropertyChanged("CourierHavreMalta");
+                }
+            }
+        }
+
         public void Save()
         {
-            string staffing = this.m_Staffing != null ? "'" + Escape(this.m_Staffing) + "'" : "null";
-            string quality = this.m_Quality != null ? "'" + Escape(this.m_Quality) + "'" : "null";
-            string compliance = this.m_Compliance != null ? "'" + Escape(this.m_Compliance) + "'" : "null";
-            string pathologist = this.m_Pathologist != null ? "'" + Escape(this.m_Pathologist) + "'" : "null";
-            string safety = this.m_Safety != null ? "'" + Escape(this.m_Safety) + "'" : "null";
-            string supplies = this.m_Supplies != null ? "'" + Escape(this.m_Supplies) + "'" : "null";
-            string equipment = this.m_Equipment != null ? "'" + Escape(this.m_Equipment) + "'" : "null";
-            string clients = this.m_Clients != null ? "'" + Escape(this.m_Clients) + "'" : "null";
-            string fedx = this.m_Fedx != null ? "'" + Escape(this.m_Fedx) + "'" : "null";
-            string blockCount = this.m_BlockCount != null ? "'" + Escape(this.m_BlockCount) + "'" : "null";
+            Type type = this.GetType();
+            List<System.Reflection.PropertyInfo> propertyList = type.GetProperties().ToList<System.Reflection.PropertyInfo>();
+            string sql = Business.Sql.SQLHelper.GetUpdateCommand(typeof(HuddleDashboard), this, propertyList);
 
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = $"Update tblHuddleDashboard set Staffing = {staffing}, " +
-                $"Quality = {quality}, " +
-                $"Compliance = {compliance}, " +
-                $"Pathologist = {pathologist}, " +
-                $"Safety = {safety}, " +
-                $"Supplies = {supplies}, " +
-                $"Equipment = {equipment}, " +
-                $"Clients = {clients}, " +
-                $"BlockCount = {blockCount}, " +
-                $"FedX = {fedx} " +
-                $"where HuddleDashboardId = '{this.m_HuddleDashboardId}'";
+            cmd.CommandText = sql;  
             cmd.CommandType = System.Data.CommandType.Text;
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
@@ -245,18 +409,7 @@ namespace YellowstonePathology.UI.Monitor
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
             }
-        }
-
-        public string Escape(string value)
-        {
-            if(string.IsNullOrEmpty(value) == true)
-            {
-                return null;
-            }
-            else
-            {
-                return value.Replace("'", "''");
-            }
+            
         }
 
         public void NotifyPropertyChanged(String info)

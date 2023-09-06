@@ -87,6 +87,7 @@ namespace YellowstonePathology.UI.Gross
 		{
 			this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Input, new System.Threading.ThreadStart(delegate()
 			{
+                //MessageBox.Show(containerBarcode.ToString());
                 this.UseThisContainer(this, containerBarcode.ToString());				
 			}
 			));
@@ -107,20 +108,8 @@ namespace YellowstonePathology.UI.Gross
 		}
 
 		private void ButtonEnterNewContainerId_Click(object sender, RoutedEventArgs e)
-		{
-            //this.UseThisContainer(this, "CTNR2D7AABC6-5463-451D-89BF-6F08F5DA3B8D");				
-
-            var app = Application.Current as App;            
-            this.m_BarcodeScanPort.SimulateScanReceived(app.ContainerList[app.CurrentContainerIndex]);
-
-            if (app.CurrentContainerIndex != app.ContainerList.Count - 1)
-            {
-                app.CurrentContainerIndex += 1;
-            }
-            else
-            {
-                app.CurrentContainerIndex = 0;
-            }
+		{            
+            this.UseThisContainer(this, "CTNR04D9338E-9516-46B5-9948-48A4EE38012E");				            
         }
 
         public string SystemUserDisplayText

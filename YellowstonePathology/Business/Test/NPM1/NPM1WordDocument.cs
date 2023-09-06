@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.NPM1
 		{			
 			PanelSetOrderNPM1 panelSetOrderNPM1 = (PanelSetOrderNPM1)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\NPM1.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\NPM1.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

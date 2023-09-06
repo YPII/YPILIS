@@ -77,6 +77,7 @@
                             <ContextMenu x:Name="MasterLogContextMenu" PlacementRectangle="{Binding RelativeSource={RelativeSource Self}}">
                                 <MenuItem Header="Surgical Master Log" Click="MenuItemShowMasterLog_Click" />
                                 <MenuItem Header="Northern Mt. Healthcare Master Log" Click="MenuItemShowNorthernMtMasterLog_Click" />
+                                <MenuItem Header="Dr. Reck" Click="MenuItemShowDrReckMasterLog_Click" />
                             </ContextMenu>
                         </Button.ContextMenu>
 
@@ -188,6 +189,7 @@
                         <MenuItem Header="IT Audited" Click="MenuItemITAudited_Click"></MenuItem>
                         <MenuItem Header="Send Provation Result" Click="ButtonSendProvationResult_Click" />
                         <MenuItem Header="Send NMH Result" Click="ButtonSendNMHResult_Click" />
+                        <MenuItem Header="Gross Speech Testing" Click="ButtonGrossSpeechTest_Click" />
                     </ContextMenu>
                 </ListView.ContextMenu>
                         
@@ -319,7 +321,7 @@
                             </ListView.View>
                         </ListView>
                         <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Right">
-                            <Hyperlink Click="HyperLinkGetSvhErrors_Click">Get List From Image</Hyperlink>
+                            <Hyperlink Click="HyperLinkImportSvhList_Click">Import SVH List</Hyperlink>
                         </TextBlock>
                         <ListView Name="ListViewSVHErrors" Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=SvhAuditList}" SelectionChanged="ListViewSVHErrors_SelectionChanged">
                             <ListView.View>

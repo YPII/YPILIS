@@ -15,6 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Orientation="Horizontal">
@@ -28,6 +29,6 @@
             </ScrollViewer.Resources>
             <TextBox Margin="2,2,2,2" Text="{Binding Path=GrossDescription}" FontSize="{Binding Path=DictationTemplate.FontSize}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
         </ScrollViewer>
-
+        <ToggleButton x:Name="ToggleButtonDictationMode" Width="250" Height="50" Margin="2,2,2,2" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Content="{Binding Path=DictationMode}" Checked="ToggleButtonDictationMode_Checked"  Unchecked="ToggleButtonDictationMode_Unchecked"></ToggleButton>
     </Grid>
 </UserControl>

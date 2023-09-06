@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.NeoARRAYSNPCytogeneticProfile
 		{			
 			NeoARRAYSNPCytogeneticProfileTestOrder testOrder = (YellowstonePathology.Business.Test.NeoARRAYSNPCytogeneticProfile.NeoARRAYSNPCytogeneticProfileTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\NeoARRAYSNPCytogeneticProfile.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\NeoARRAYSNPCytogeneticProfile.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

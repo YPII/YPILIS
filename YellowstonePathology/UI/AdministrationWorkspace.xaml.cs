@@ -218,7 +218,7 @@ namespace YellowstonePathology.UI
         private void ButtonFix2001_Click(object sender, RoutedEventArgs e)
         {
             /*
-            string[] files = System.IO.Directory.GetFiles(@"\\cfileserver\Documents\Surgical\2001\08000-08999");
+            string[] files = System.IO.Directory.GetFiles(@"\\fileserver\Documents\Surgical\2001\08000-08999");
             foreach (string file in files)
             {
                 string[] slashSplit = file.Split('\\');
@@ -617,7 +617,7 @@ namespace YellowstonePathology.UI
 
         private void ButtonDoStuff_Click(object sender, RoutedEventArgs e)
         {
-            string folderRoot = @"\\cfileserver\Documents\TechnicalOnly\2013\00001-00999\";
+            string folderRoot = @"\\fileserver\Documents\TechnicalOnly\2013\00001-00999\";
             string[] directories = System.IO.Directory.GetDirectories(folderRoot);
             foreach (string directory in directories)
             {
@@ -637,7 +637,7 @@ namespace YellowstonePathology.UI
                         */
 
                         /*
-                        if (file == @"\\cfileserver\Documents\TechnicalOnly\2013\00001-00999\B13-300\B13-300.jpg")
+                        if (file == @"\\fileserver\Documents\TechnicalOnly\2013\00001-00999\B13-300\B13-300.jpg")
                         {
                             System.Drawing.Imaging.ImageCodecInfo myImageCodecInfo;
                             System.Drawing.Imaging.Encoder myEncoder;
@@ -1288,90 +1288,15 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            Business.Test.LynchSyndrome.LSERuleCollection rules =Business.Test.LynchSyndrome.LSERuleCollection.GetAll();
-            foreach (Business.Test.LynchSyndrome.LSERule rule in rules)
+            Business.ReportNoCollection list = Business.Gateway.AccessionOrderGateway.GetReportNumbersBySQL("select pso.ReportNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where ao.AccessionDate >= '2023-06-01' and reportNo like '%R%' and pso.technicalcomponentfacilityid like 'Neo%';");
+            foreach (Business.ReportNo reportNo in list)
             {
-                Type type = rule.GetType();
-                FieldInfo field = type.GetField("Interpretation", BindingFlags.Static | BindingFlags.Public);                
-                //Console.WriteLine(rule.RuleName);
-                Console.WriteLine(field.GetValue(null));
-            }
-
-            /*
-            List<string> sql = new List<string>();
-            string[] lines = System.IO.File.ReadAllLines(@"d:\testing\riverstonecases.txt");
-            foreach(string line in lines)
-            {
-                string[] fields = line.Split('\t');
-                string firstName = fields[0].Split(',')[1].Replace("\"", "").Trim().Split(' ')[0];
-                string lastName = fields[0].Split(',')[0].Replace("\"", "").Trim();
-                DateTime startDate = DateTime.Parse(fields[4]).AddDays(-3);
-                DateTime endDate = DateTime.Parse(fields[4]).AddDays(3);
-
-                string s = "select distinct concat('mas.Add(\"', ao.masterAccessionNo, '\");') " +
-                    "from tblAccessionOrder ao " +
-                    "join tblPanelSetOrder pso on ao.masterAccessionno = pso.masterAccessionNo " +
-                    $"where ao.pfirstname = '{firstName}' and ao.PLastName = '{lastName}' and pbirthdate = '{fields[1]}' and ao.AccessionDate between '{startDate.ToString("yyyyMMdd")}' and '{endDate.ToString("yyyyMMdd")}'";
-                sql.Add(s);
-            }
-
-            string stmnt = String.Join(" union all " + Environment.NewLine, sql) + ";";
-            */
-
-            List<string> mas = new List<string>();
-            mas.Add("23-5537");
-            mas.Add("23-5528");
-            mas.Add("23-5397");
-            mas.Add("23-5252");
-            mas.Add("23-5246");
-            mas.Add("23-5229");
-            mas.Add("23-4972");
-            mas.Add("23-4834");
-            mas.Add("23-4833");
-            mas.Add("23-4790");
-            mas.Add("23-4789");
-            mas.Add("23-4647");
-            mas.Add("23-4628");
-            mas.Add("23-4611");
-            mas.Add("23-4499");
-            mas.Add("23-4489");
-            mas.Add("23-4487");
-            mas.Add("23-4485");
-            mas.Add("23-4483");
-            mas.Add("23-4463");
-            mas.Add("23-4252");
-            mas.Add("23-4181");
-            mas.Add("23-4179");
-            mas.Add("23-4178");
-            mas.Add("23-4159");
-            mas.Add("23-4131");
-            mas.Add("23-3844");
-            mas.Add("23-3776");
-            mas.Add("23-3774");
-            mas.Add("23-3588");
-            mas.Add("23-3563");
-            mas.Add("23-3562");
-            mas.Add("23-3561");
-            mas.Add("23-3539");
-            mas.Add("23-3523");
-            mas.Add("23-3226");
-            mas.Add("23-3225");
-            mas.Add("23-3224");
-            mas.Add("23-3222");
-            mas.Add("23-3125");
-            mas.Add("23-2924");
-            mas.Add("23-2921");
-            mas.Add("23-2811");
-
-            foreach(string man in mas)
-            {
-                Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(man, this);
-                foreach(Business.Test.PanelSetOrder pso in ao.PanelSetOrderCollection)
+                bool exists = Business.Document.CaseDocument.DoesCaseDocXPSExist(reportNo.Value);
+                if (exists == false)
                 {
-                    pso.TestOrderReportDistributionCollection.MarkAllAsNotDistributed();
-                }                
+                    Console.WriteLine(reportNo.Value);
+                }
             }
-            Business.Persistence.DocumentGateway.Instance.Push(this);
         }
 
         private void BillStuff()

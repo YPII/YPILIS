@@ -7,7 +7,7 @@ namespace YellowstonePathology.Business.Test.ThombocytopeniaProfile
 {
 	public class ThombocytopeniaProfileWordDocument : YellowstonePathology.Business.Document.CaseReport
     {
-        private string m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ThrombocytopeniaProfile.1.xml";
+        private string m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\ThrombocytopeniaProfile.1.xml";
         private YellowstonePathology.Business.Flow.FlowMarkerPanelList m_PanelList;		
 
         public ThombocytopeniaProfileWordDocument(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Document.ReportSaveModeEnum reportSaveMode) 

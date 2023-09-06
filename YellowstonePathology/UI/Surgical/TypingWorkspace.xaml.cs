@@ -38,19 +38,20 @@ namespace YellowstonePathology.UI.Surgical
             this.m_Writer = writer;
             this.m_MainWindowCommandButtonHandler = mainWindowCommandButtonHandler;
             this.m_SecondMonitorWindow = secondMonitorWindow;
+            
             if (secondMonitorWindow != null)
-            {
+            {             
                 this.m_SecondMonitorWindow.WindowState = WindowState.Maximized;
             }
-
-            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;
             
-			this.m_TypingUI = new YellowstonePathology.Business.Typing.TypingUIV2(this.m_Writer);									
-            this.m_DocumentViewer = new DocumentWorkspace();            
+            this.m_SystemIdentity = Business.User.SystemIdentity.Instance;            
 
+            this.m_TypingUI = new YellowstonePathology.Business.Typing.TypingUIV2(this.m_Writer);									
+            this.m_DocumentViewer = new DocumentWorkspace();
+            
             this.m_LocalDictationList = new YellowstonePathology.Business.DictationList(Business.DictationLocationEnum.Local);            
-            this.m_ServerDictationList = new YellowstonePathology.Business.DictationList(Business.DictationLocationEnum.Server);            
-
+            this.m_ServerDictationList = new YellowstonePathology.Business.DictationList(Business.DictationLocationEnum.Server);
+            
             InitializeComponent();
 
             this.m_TypingShortcutUserControl = new TypingShortcutUserControl(this.m_SystemIdentity, this.m_Writer);
@@ -61,7 +62,7 @@ namespace YellowstonePathology.UI.Surgical
 
             this.ListViewLocalDictation.ItemsSource = this.m_LocalDictationList;
             this.ListViewServerDictation.ItemsSource = this.m_ServerDictationList;
-         
+            
             this.Unloaded += new RoutedEventHandler(TypingWorkspace_Unloaded);
 		}
 
@@ -257,7 +258,18 @@ namespace YellowstonePathology.UI.Surgical
                     {
                         this.TabControlRightMain.SelectedIndex = 0;
                     }
-                    this.m_DocumentViewer.ShowDocument(this.m_TypingUI.CaseDocumentCollection.GetFirstRequisition());
+
+                    Business.Document.CaseDocument firstRequisition = this.m_TypingUI.CaseDocumentCollection.GetFirstRequisition();
+                    if(firstRequisition.Extension == "PDF")
+                    {
+                        this.PdfViewerControl.PdfPath = firstRequisition.FullFileName;
+                        this.TabControlRightMain.SelectedIndex = 1;
+                    }
+                    else
+                    {
+                        this.m_DocumentViewer.ShowDocument(firstRequisition);
+                        this.TabControlRightMain.SelectedIndex = 0;
+                    }                    
                 }
                 this.RefreshWorkspaces();
 
@@ -528,7 +540,10 @@ namespace YellowstonePathology.UI.Surgical
             bool dateIsValid = DateTime.TryParse(this.TextBoxCaseListDate.Text, out rptDate);
 
             switch (this.ComboboxListSelection.Text)
-            {                
+            {
+                case "Distribution Not Set":
+                    this.m_TypingUI.SurgicalOrderList.FillByDistributionNotSet();
+                    break;
                 case "Cases With Intraoperative Consulations":
 					this.m_TypingUI.SurgicalOrderList.FillByIntraoperative();
                     break;

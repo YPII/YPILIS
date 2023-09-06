@@ -25,41 +25,16 @@ namespace YellowstonePathology.UI.Monitor
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private HuddleDashboard m_HuddleDashboard;
-        private List<DailyStat> m_DailyStatList;
-        private List<Courier> m_CourierList;
+        private HuddleDashboard m_HuddleDashboard;               
         private bool m_AllowEdits;
 
         public HuddleDashboardPage(bool allowEdits)
         {
-            this.m_AllowEdits = allowEdits;
-            this.m_DailyStatList = new List<DailyStat>();
-            this.m_DailyStatList.Add(new DailyStat("Block Count", "23"));
-            this.m_DailyStatList.Add(new DailyStat("PAPs", "15"));
-            this.m_DailyStatList.Add(new DailyStat("SVH BM", "2"));
-            this.m_DailyStatList.Add(new DailyStat("Other Flow", "2"));
-
-            this.m_CourierList = new List<Courier>();
-            this.m_CourierList.Add(new Courier("Sheridan", "Go"));
-            this.m_CourierList.Add(new Courier("Cody/Powell", "Go"));
-            this.m_CourierList.Add(new Courier("Bozeman/Butte", "Go"));
-            this.m_CourierList.Add(new Courier("MC/Sidney/Forsythe/Hardin", "Go"));
-            this.m_CourierList.Add(new Courier("Havre/Malta", "Go"));
-
+            this.m_AllowEdits = allowEdits;                      
             this.m_HuddleDashboard = HuddleDashboard.Load();
             InitializeComponent();
             this.DataContext = this;            
-        }    
-        
-        public List<DailyStat> DailyStatList
-        {
-            get { return m_DailyStatList; }
-        }
-
-        public List<Courier> CourierList
-        {
-            get { return m_CourierList; }
-        }
+        }                   
 
         public void Refresh()
         {

@@ -47,9 +47,20 @@ namespace YellowstonePathology.UI.Common
             {
                 YellowstonePathology.Business.Surgical.PathologistHistoryItem pathologistHistoryItem = (YellowstonePathology.Business.Surgical.PathologistHistoryItem)this.listViewCaseHistoryList.SelectedItem;
 				YellowstonePathology.Business.OrderIdParser orderIdParser = new Business.OrderIdParser(pathologistHistoryItem.ReportNo);                
-				string path = Business.Document.CaseDocument.GetCaseFileNameDoc(orderIdParser);
-				YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(path);
-            }
+				string path = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
+
+				if(System.IO.File.Exists(path) == true)
+                {
+					PDFViewer pdfViewer = new PDFViewer(path);
+					pdfViewer.ShowDialog();
+				}
+                else
+                {
+					MessageBox.Show("The file does not exist.");
+                }
+				
+				//YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(path);
+			}
         }
 
 		public void SetAccessionOrder( YellowstonePathology.Business.Test.AccessionOrder accessionOrder)

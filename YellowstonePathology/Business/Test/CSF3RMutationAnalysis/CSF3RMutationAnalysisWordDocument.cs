@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.CSF3RMutationAnalysis
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\CSF3RMutationAnalysis.3.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\CSF3RMutationAnalysis.3.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

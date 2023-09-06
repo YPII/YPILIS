@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.MDSByFish
 		{			
 			PanelSetOrderMDSByFish panelSetOrderMDSByFish = (PanelSetOrderMDSByFish)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\MDSByFish.4.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\MDSByFish.4.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

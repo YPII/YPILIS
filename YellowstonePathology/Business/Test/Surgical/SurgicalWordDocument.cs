@@ -14,7 +14,7 @@ namespace YellowstonePathology.Business.Test.Surgical
         public override void Render()
         {
             SurgicalTestOrder panelSetOrderSurgical = (SurgicalTestOrder)this.m_PanelSetOrder;
-            this.m_TemplateName = @"\\Cfileserver\Documents\ReportTemplates\XmlTemplates\Surgical.4.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\Surgical.4.xml";
 
             base.OpenTemplate();
 

@@ -45,7 +45,7 @@ namespace YellowstonePathology.Business.User
 		}
 
 		public SystemUser GetSystemUserByUserName(string userName)
-        {
+        {			
             SystemUser result = null;
             try
             {

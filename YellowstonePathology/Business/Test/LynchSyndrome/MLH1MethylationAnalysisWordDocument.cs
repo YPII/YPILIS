@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 		{			
 			YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderMLH1MethylationAnalysis panelSetOrderMLH1MethylationAnalysis = (YellowstonePathology.Business.Test.LynchSyndrome.PanelSetOrderMLH1MethylationAnalysis)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\MLH1.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\MLH1.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

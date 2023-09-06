@@ -179,7 +179,7 @@ namespace YellowstonePathology.UI.Test
 
 		public void ViewLabOrderLog(DateTime orderDate)
 		{
-			string rptpath = @"\\CFileServer\documents\Reports\Lab\LabOrdersLog\YEAR\MONTH\LabOrdersLog.FILEDATE.v1.xml";
+			string rptpath = @"\\fileserver\documents\Reports\Lab\LabOrdersLog\YEAR\MONTH\LabOrdersLog.FILEDATE.v1.xml";
 
 			string rptName = rptpath.Replace("YEAR", orderDate.ToString("yyyy"));
 			rptName = rptName.Replace("MONTH", orderDate.ToString("MMMM"));

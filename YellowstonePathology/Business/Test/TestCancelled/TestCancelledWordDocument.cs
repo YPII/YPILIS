@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.TestCancelled
             YellowstonePathology.Business.Test.TestCancelled.TestCancelledTestOrder reportOrderTestCancelled = (YellowstonePathology.Business.Test.TestCancelled.TestCancelledTestOrder)this.m_PanelSetOrder;
             this.m_PanelSetOrder = reportOrderTestCancelled;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\TestCancelled.1.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\TestCancelled.1.xml";
 			base.OpenTemplate();
 
 			base.SetDemographicsV2();

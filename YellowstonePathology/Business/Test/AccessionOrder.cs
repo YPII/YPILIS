@@ -1492,7 +1492,8 @@ namespace YellowstonePathology.Business.Test
         {            
 			this.ClientId = clientOrder.ClientId;
 			this.ClientName = clientOrder.ClientName;
-			this.PhysicianName = clientOrder.ProviderName;
+			this.PhysicianName = clientOrder.ProviderName;			
+
 			this.CollectionFacilityId = clientOrder.CollectionFacilityId;
 			this.ICD10Code = clientOrder.ICD10Code;
 
@@ -1515,6 +1516,8 @@ namespace YellowstonePathology.Business.Test
 			this.SvhAccount = clientOrder.SvhAccountNo;
 			this.SvhMedicalRecord = clientOrder.SvhMedicalRecord;
             this.PlaceOfService = clientOrder.PlaceOfService;
+
+			
 
 			this.HighPriority = clientOrder.HighPriority;
 			if (clientOrder.ClientId == 1759) this.HighPriority = true;
@@ -1574,7 +1577,13 @@ namespace YellowstonePathology.Business.Test
 			this.ProviderFirstName = clientOrder.ProviderFirstName;
 			this.ProviderLastName = clientOrder.ProviderLastName;
 			this.ProviderId = clientOrder.ProviderId;
-            this.SystemInitiatingOrder = clientOrder.SystemInitiatingOrder;
+
+			if (string.IsNullOrEmpty(this.ProviderId) == false && this.ProviderId == "1790832756")
+			{
+				this.CassetteColor = "Lilac";
+			}
+
+			this.SystemInitiatingOrder = clientOrder.SystemInitiatingOrder;
 			this.Verified = clientOrder.Validated;
 
 			this.PAddress1 = clientOrder.PAddress1;
@@ -1811,7 +1820,7 @@ namespace YellowstonePathology.Business.Test
         {
             if (this.IsDermatologyClient() == true)
             {
-                if(this.m_ClientId == 1260 || this.m_ClientId == 1511) //Advanced Dermatology, diagnositics
+                if(this.m_ClientId == 1260 || this.m_ClientId == 1511 || this.m_PhysicianId == 2722) //Advanced Dermatology, diagnositics
                 {                    
                     this.m_CassetteColor = "Lilac";
                 }                
@@ -1824,6 +1833,10 @@ namespace YellowstonePathology.Business.Test
             {                
                 this.m_CassetteColor = "Blue";
             }
+			else if(this.m_PhysicianId == 2722)
+            {
+				this.m_CassetteColor = "Lilac";
+			}
         }
 
         public void UpdateCaseAssignment(YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder)

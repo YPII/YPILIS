@@ -219,16 +219,21 @@ namespace YellowstonePathology.UI.Gross
             return result;            
         }
 
+        //protected string ReplaceDescription(string text, YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
+        //{            
+        //    return text.Replace("[description]", specimenOrder.Description);
+        //}
+
         protected string ReplaceIdentifier(string text, YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, YellowstonePathology.Business.Test.AccessionOrder accessionOrder)
         {
             string identifier = "Specimen " + specimenOrder.SpecimenNumber + " ";
             if (string.IsNullOrEmpty(specimenOrder.ClientFixation) == false && specimenOrder.ClientFixation != Business.Specimen.Model.FixationType.Fresh)
             {                
-                identifier += "is received in a " + specimenOrder.ClientFixation + " filled container labeled \"" + accessionOrder.PatientDisplayName + " - [description]\"";
+                identifier += "is received in a " + specimenOrder.ClientFixation + " filled container labeled \"" + accessionOrder.PatientDisplayName + $" - [???]\"";
             }
             else if (specimenOrder.ClientFixation == Business.Specimen.Model.FixationType.Fresh)
             {
-                identifier += "is received fresh in a container labeled \"" + accessionOrder.PatientDisplayName + " - [description]\"";
+                identifier += "is received fresh in a container labeled \"" + accessionOrder.PatientDisplayName + $" - [???]\"";
             }
 
             identifier = identifier.Replace("Formalin", "formalin");

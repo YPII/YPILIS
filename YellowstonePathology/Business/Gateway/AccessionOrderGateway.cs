@@ -1157,6 +1157,22 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
+        public static Surgical.SurgicalOrderList GetSurgicalOrderListByDistributionNotSet()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "SELECT DISTINCT pso.ReportNo, a.AccessionDate, concat(a.PFirstName, ' ', a.PLastName) AS PatientName, pso.AcceptedDate, " +
+                "pso.FinalDate, su.DisplayName AS Pathologist, su.UserId AS PathologistId, pso.Audited " +
+                "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "JOIN tblSystemUser su on pso.AssignedToId = su.UserId " +
+                "Left outer Join tblTestOrderReportDistribution tord on pso.ReportNo = tord.ReportNo " +
+                "WHERE pso.Final = 0 and pso.distribute = 1 and pso.panelSetId = 13 " +
+                "and tord.reportNo is null;";                
+            cmd.CommandType = CommandType.Text;
+
+            Surgical.SurgicalOrderList result = AccessionOrderGateway.BuildSurgicalOrderList(cmd);
+            return result;
+        }
+
         public static Surgical.SurgicalOrderList GetSurgicalOrderListByNotAssigned()
         {
             MySqlCommand cmd = new MySqlCommand();
@@ -1361,7 +1377,7 @@ namespace YellowstonePathology.Business.Gateway
             "PhysicianName varchar(100), " +
             "ClientName varchar(100), " +
             "ClientAccessionNo varchar(100), " +
-            "AliquotCount int " +            
+            "AliquotCount int " +
             ") " +
             "as " +
             "SELECT Distinct a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, " +
@@ -1370,6 +1386,43 @@ namespace YellowstonePathology.Business.Gateway
             "JOIN tblSpecimenOrder so on a.MasterAccessionNo = so.MasterAccessionNo " +
             "LEFT OUTER JOIN tblAliquotOrder ao on so.SpecimenOrderId = ao.SpecimenOrderId " +
             "WHERE AccessionDate = @ReportDate and pso.PanelSetId = 13 and a.ClientId = 587 and ao.Status <> 'Hold' " +
+            "group by a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, " +
+            "a.PBirthdate, a.PhysicianName, a.ClientName " +
+            "Order By AccessionTime; " +
+            "SELECT rpts.* From rpts rpts Order By AccessionTime; " +
+            "Select so.SpecimenNumber DiagnosisId, so.Description, pso.ReportNo " +
+            "FROM tblSpecimenOrder so join tblPanelSetOrder pso on so.MasterAccessionNo = pso.MasterAccessionNo " +
+            "join rpts rpts on pso.ReportNo = rpts.ReportNo order by 1; " +
+            "drop temporary table rpts; ";
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@ReportDate", reportDate);
+            return BuildMasterLogList(cmd);
+        }
+
+        public static Surgical.SurgicalMasterLogList GetDrReckMasterLogList(DateTime reportDate)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "create temporary table if not exists rpts " +
+            "( " +
+            "AccessionTime datetime, " +
+            "ReportNo varchar(20), " +
+            "AccessioningFacilityId varchar(100), " +
+            "PFirstName varchar(100), " +
+            "PLastName varchar(100), " +
+            "PBirthdate datetime, " +
+            "PhysicianName varchar(100), " +
+            "ClientName varchar(100), " +
+            "ClientAccessionNo varchar(100), " +
+            "AliquotCount int " +            
+            ") " +
+            "as " +
+            "SELECT Distinct a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, " +
+            "a.PBirthdate, a.PhysicianName, a.ClientName, a.ClientAccessionNo, Count(*) AliquotCount " +
+            "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+            "JOIN tblSpecimenOrder so on a.MasterAccessionNo = so.MasterAccessionNo " +
+            "LEFT OUTER JOIN tblAliquotOrder ao on so.SpecimenOrderId = ao.SpecimenOrderId " +
+            "WHERE AccessionDate = @ReportDate and pso.PanelSetId = 13 and a.PhysicianId = 2722 and ao.Status <> 'Hold' " +
             "group by a.AccessionTime, pso.ReportNo, a.AccessioningFacilityId, a.PFirstName, a.PLastName, " +
             "a.PBirthdate, a.PhysicianName, a.ClientName " +
             "Order By AccessionTime; " +
@@ -1810,11 +1863,9 @@ namespace YellowstonePathology.Business.Gateway
             using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
             {
                 cn.Open();
-                cmd.Connection = cn;
-                MySqlDataReader dr = cmd.ExecuteReader();
-                dr.Read();
-                int result = Convert.ToInt32(dr.GetValue(0));
-                return result;
+                cmd.Connection = cn;                
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count;
             }
         }
 

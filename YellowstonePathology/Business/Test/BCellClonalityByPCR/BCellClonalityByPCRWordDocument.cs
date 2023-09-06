@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.BCellClonalityByPCR
         public override void Render()
 		{            
 			BCellClonalityByPCRTestOrder testOrder = (BCellClonalityByPCRTestOrder)this.m_PanelSetOrder;
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BCellClonality.1.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\BCellClonality.1.xml";
 
 			this.OpenTemplate();
 			this.SetDemographicsV2();

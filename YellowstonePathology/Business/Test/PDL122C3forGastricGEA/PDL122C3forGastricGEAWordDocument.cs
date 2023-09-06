@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3forGastricGEA
         {
             PDL122C3forGastricGEATestOrder testOrder = (PDL122C3forGastricGEATestOrder)this.m_PanelSetOrder;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\PDL122C3forGastricGEA.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\PDL122C3forGastricGEA.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

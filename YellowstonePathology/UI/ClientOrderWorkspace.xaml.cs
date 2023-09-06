@@ -13,6 +13,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Linq;
+using System.Drawing.Imaging;
+using System.Drawing;
+using System.Drawing.Printing;
 
 namespace YellowstonePathology.UI
 {
@@ -29,6 +32,7 @@ namespace YellowstonePathology.UI
         private MainWindowCommandButtonHandler m_MainWindowCommandButtonHandler;
         private TabItem m_Writer;
         private Login.Receiving.LoginPageWindow m_LoginPageWindow;
+        private System.Drawing.Image m_PrintImage;
 
         public ClientOrderWorkspace(MainWindowCommandButtonHandler mainWindowCommandButtonHandler, TabItem writer)
         {
@@ -284,6 +288,47 @@ namespace YellowstonePathology.UI
         private void ButtonPlacentaOrders_Click(object sender, RoutedEventArgs e)
         {
             this.m_ClientOrderUI.GetPlacentaOrderList();
+        }
+
+        public void PrintUIElement(UIElement element)
+        {
+            var rect = new Rect(element.RenderSize);
+            var visual = new DrawingVisual();
+
+            using (var dc = visual.RenderOpen())
+            {
+                dc.DrawRectangle(new VisualBrush(element), null, rect);
+            }
+
+            var bitmap = new RenderTargetBitmap(
+                (int)rect.Width, (int)rect.Height, 96, 96, PixelFormats.Default);
+            bitmap.Render(visual);
+
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            BitmapEncoder bEncoder = new BmpBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            encoder.Save(stream);
+
+            stream.Position = 0;            
+            this.m_PrintImage = System.Drawing.Image.FromStream(stream);
+            
+            System.Drawing.Printing.PrintDocument printDoc = new System.Drawing.Printing.PrintDocument();
+            printDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(PrintDoc_PrintPage);
+            printDoc.Print();            
+        }
+
+        private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            System.Drawing.Point ulCorner = new System.Drawing.Point(10, 10);
+            e.Graphics.DrawImage(this.m_PrintImage, ulCorner);
+        }
+
+        private void ButtonPrintLog_Click(object sender, RoutedEventArgs e)
+        {
+            this.PrintUIElement(this.ListViewClientOrders);
         }
     }    
 }

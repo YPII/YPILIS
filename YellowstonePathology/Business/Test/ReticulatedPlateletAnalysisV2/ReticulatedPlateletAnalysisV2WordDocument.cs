@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Test.ReticulatedPlateletAnalysisV2
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ReticulatedPlateletAnalysisV2.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\ReticulatedPlateletAnalysisV2.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

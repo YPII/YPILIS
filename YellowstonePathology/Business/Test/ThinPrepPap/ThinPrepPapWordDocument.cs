@@ -12,8 +12,8 @@ namespace YellowstonePathology.Business.Test.ThinPrepPap
 {
     public class ThinPrepPapWordDocument : YellowstonePathology.Business.Interface.ICaseDocument
     {        
-        const string m_ThinPrepTemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\CytologyThinPrep.2.xml";
-        const string m_RegularTemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\CytologyRegular.2.xml";
+        const string m_ThinPrepTemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\CytologyThinPrep.2.xml";
+        const string m_RegularTemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\CytologyRegular.2.xml";
 
         protected string m_TemplateName;
         protected XmlDocument m_ReportXml;

@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.ZAP70LymphoidPanel
 		{			
 			ZAP70LymphoidPanelTestOrder panelSetOrderZap70 = (ZAP70LymphoidPanelTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\Zap70.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\Zap70.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

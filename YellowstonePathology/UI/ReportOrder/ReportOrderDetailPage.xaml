@@ -246,6 +246,7 @@
                             </ListView.ContextMenu>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Client Order List">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=DateOrderReceived}" Header="DOR" Width="90"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=OrderStatus}" Header="Status" Width="90"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=PLastName}" Header="Last Name" Width="100"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=PFirstName}" Header="First Name" Width="100"/>

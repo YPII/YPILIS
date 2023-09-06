@@ -14,7 +14,7 @@ namespace YellowstonePathology.Business.Test.HPV
 
         public override void Render()
 		{            
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HPV.3.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\HPV.3.xml";
             base.OpenTemplate();
 
 			base.SetDemographicsV2();

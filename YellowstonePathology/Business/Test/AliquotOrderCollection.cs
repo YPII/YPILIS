@@ -167,8 +167,10 @@ namespace YellowstonePathology.Business.Test
 			aliquotOrder.LabelPrefix = string.Empty;
             aliquotOrder.LabelType = aliquotLabelType;
 
+            string label = aliquotOrder.AliquotOrderId.Split('.')[1];
+            aliquotOrder.Label = label;
 			this.Add(aliquotOrder);
-			this.SetBlockLabels(specimenOrder.SpecimenNumber);
+			//this.SetBlockLabels(specimenOrder.SpecimenNumber);
 
 			return aliquotOrder;
 		}
@@ -183,7 +185,7 @@ namespace YellowstonePathology.Business.Test
             aliquotOrder.Label = "P" + passNumber.ToString() + "S" + slideNumber;
             aliquotOrder.LabelType = Business.Specimen.Model.AliquotLabelType.PaperLabel;
             this.Add(aliquotOrder);
-            this.SetBlockLabels(specimenOrder.SpecimenNumber);
+            //this.SetBlockLabels(specimenOrder.SpecimenNumber);
             return aliquotOrder;
         }
 
@@ -197,7 +199,7 @@ namespace YellowstonePathology.Business.Test
             aliquotOrder.Label = specimenOrder.SpecimenNumber.ToString() + ".Non-Gyn";
             aliquotOrder.LabelType = Business.Specimen.Model.AliquotLabelType.PaperLabel;
             this.Add(aliquotOrder);
-            this.SetBlockLabels(specimenOrder.SpecimenNumber);
+            //this.SetBlockLabels(specimenOrder.SpecimenNumber);
             return aliquotOrder;
         }
 
@@ -211,7 +213,7 @@ namespace YellowstonePathology.Business.Test
             aliquotOrder.Label = specimenOrder.SpecimenNumber.ToString() + ".1";
             aliquotOrder.LabelType = Business.Specimen.Model.AliquotLabelType.PaperLabel;
             this.Add(aliquotOrder);
-            this.SetBlockLabels(specimenOrder.SpecimenNumber);
+            //this.SetBlockLabels(specimenOrder.SpecimenNumber);
             return aliquotOrder;
         }
 
@@ -225,7 +227,7 @@ namespace YellowstonePathology.Business.Test
             aliquotOrder.Label = specimenOrder.SpecimenNumber.ToString() + ".CE";
             aliquotOrder.LabelType = Business.Specimen.Model.AliquotLabelType.PaperLabel;
             this.Add(aliquotOrder);
-            this.SetBlockLabels(specimenOrder.SpecimenNumber);
+            //this.SetBlockLabels(specimenOrder.SpecimenNumber);
             return aliquotOrder;
         }
 
@@ -249,7 +251,7 @@ namespace YellowstonePathology.Business.Test
             csD.LabelType = Business.Specimen.Model.AliquotLabelType.PaperLabel;
             this.Add(csD);
 
-            this.SetBlockLabels(specimenOrder.SpecimenNumber);            
+            //this.SetBlockLabels(specimenOrder.SpecimenNumber);            
         }
 
         public AliquotOrder AddFNASlide(YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder, int slideNumber, DateTime accessionDate)
@@ -262,7 +264,7 @@ namespace YellowstonePathology.Business.Test
             aliquotOrder.Label = specimenOrder.SpecimenNumber + "." + slideNumber;
             aliquotOrder.LabelType = Business.Specimen.Model.AliquotLabelType.PaperLabel;
             this.Add(aliquotOrder);
-            this.SetBlockLabels(specimenOrder.SpecimenNumber);
+            //this.SetBlockLabels(specimenOrder.SpecimenNumber);
             return aliquotOrder;
         }
 
@@ -273,9 +275,11 @@ namespace YellowstonePathology.Business.Test
 			aliquotOrder.Description = string.Empty;
 			aliquotOrder.AliquotType = "FrozenBlock";
 			aliquotOrder.LabelPrefix = "FS";
+            string label = aliquotOrder.AliquotOrderId.Split('.')[1];
+            aliquotOrder.Label = label;
             aliquotOrder.LabelType = aliquotLabelType;
 			this.Add(aliquotOrder);
-			this.SetBlockLabels(specimenOrder.SpecimenNumber);
+			//this.SetBlockLabels(specimenOrder.SpecimenNumber);
 			return aliquotOrder;
 		}
 
@@ -285,10 +289,11 @@ namespace YellowstonePathology.Business.Test
 			aliquotOrder.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 			aliquotOrder.Description = string.Empty;
 			aliquotOrder.AliquotType = "CellBlock";
-			aliquotOrder.LabelPrefix = "CB";
+			aliquotOrder.LabelPrefix = "CB";            
+            aliquotOrder.Label = aliquotOrder.AliquotOrderId.Split('.')[1];
             aliquotOrder.LabelType = aliquotLabelType;
 			this.Add(aliquotOrder);
-			this.SetBlockLabels(specimenOrder.SpecimenNumber);
+			//this.SetBlockLabels(specimenOrder.SpecimenNumber);
 			return aliquotOrder;
 		}
 
@@ -345,6 +350,7 @@ namespace YellowstonePathology.Business.Test
 			return aliquotOrder;
 		}
 
+        /*
 		private void SetBlockLabels(int specimenNumber)
 		{
 			YellowstonePathology.Business.Specimen.Model.AliquotLetterList aliquotLetterList = new YellowstonePathology.Business.Specimen.Model.AliquotLetterList();
@@ -359,6 +365,7 @@ namespace YellowstonePathology.Business.Test
 				}
 			}
 		}
+        */
 
 		private void SetSlideLabels(int specimenNumber)
 		{

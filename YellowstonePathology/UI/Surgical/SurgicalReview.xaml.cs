@@ -38,17 +38,127 @@ namespace YellowstonePathology.UI.Surgical
             this.Loaded += SurgicalReview_Loaded;
             this.PreviewLostKeyboardFocus += SurgicalReview_PreviewLostKeyboardFocus;
 
+            this.KeyDown += SurgicalReview_KeyDown;
             InitializeComponent();
             this.DataContext = this;
+        }
+
+        private void SurgicalReview_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.G)
+            {
+                this.TextBoxGross.Focus();
+                //this.TextBoxGross.SelectionStart = 0;
+                this.TextBoxGross.SelectionLength = 0;
+            }
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.K)
+            {
+                this.textBoxComment.Focus();
+                //this.textBoxComment.SelectionStart = 0;
+                this.textBoxComment.SelectionLength = 0;
+            }
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.M)
+            {
+                this.TextBoxMicroscopic.Focus();
+                //this.TextBoxMicroscopic.SelectionStart = 0;
+                this.TextBoxMicroscopic.SelectionLength = 0;
+            }
+            
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.D1)
+            {                
+                if (this.ItemsControlSpecimen.Items.Count >= 1) SetFocusOnDiagnosis(0);                    
+            }
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.D2)
+            {
+                if (this.ItemsControlSpecimen.Items.Count >= 2) SetFocusOnDiagnosis(1);
+            }
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.D3)
+            {
+                if (this.ItemsControlSpecimen.Items.Count >= 3) SetFocusOnDiagnosis(2);
+            }
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.D4)
+            {
+                if (this.ItemsControlSpecimen.Items.Count >= 4) SetFocusOnDiagnosis(3);
+            }
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.D5)
+            {
+                if (this.ItemsControlSpecimen.Items.Count >= 5) SetFocusOnDiagnosis(4);
+            }
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.D6)
+            {
+                if (this.ItemsControlSpecimen.Items.Count >= 6) SetFocusOnDiagnosis(5);
+            }
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.D7)
+            {
+                if (this.ItemsControlSpecimen.Items.Count >= 7) SetFocusOnDiagnosis(6);
+            }
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.D8)
+            {
+                if (this.ItemsControlSpecimen.Items.Count >= 8) SetFocusOnDiagnosis(7);
+            }
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.D9)
+            {
+                if (this.ItemsControlSpecimen.Items.Count >= 9) SetFocusOnDiagnosis(8);
+            }
+        }
+        
+        private void SetFocusOnDiagnosis(int itemIndex)
+        {
+            this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Input, new System.Threading.ThreadStart(delegate ()
+            {                                
+                UIElement uiElement = (UIElement)this.ItemsControlSpecimen.ItemContainerGenerator.ContainerFromItem(this.ItemsControlSpecimen.Items[itemIndex]);
+                IEnumerable<TextBox> textBoxList = FindVisualChildren<TextBox>(uiElement);
+                foreach (TextBox textBox in textBoxList)
+                {
+                    if (textBox.Name == "TextBoxDiagnosis")
+                    {
+                        textBox.Focus();
+                        textBox.SelectionLength = 0;
+                        textBox.BringIntoView();
+                        break;
+                    }
+                }                
+            }
+            ));
+        }
+
+        private childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is childItem)
+                {
+                    return (childItem)child;
+                }
+                else
+                {
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+                    if (childOfChild != null) return childOfChild;
+                }
+            }
+            return null;
         }
 
         private void SurgicalReview_Loaded(object sender, RoutedEventArgs e)
         {
             this.m_PathologistUI.RunWorkspaceEnableRules();
             this.m_PathologistUI.RunPathologistEnableRules();
-            this.SetFocusOnDiagnosis();
+            //this.SetFocusOnDiagnosis();
         }
 
+       
         public void SetFocusOnDiagnosis()
         {
             this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Input, new System.Threading.ThreadStart(delegate ()
@@ -72,7 +182,7 @@ namespace YellowstonePathology.UI.Surgical
                 }
             }
             ));
-        }
+        }       
 
         public IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {

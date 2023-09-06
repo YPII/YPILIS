@@ -21,13 +21,13 @@ namespace YellowstonePathology.Reports.Cytology
         public XmlDocument ReportXml;
         public XmlNamespaceManager NameSpaceManager;
 
-        string m_ReportFolderPath = @"\\CFileServer\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter";
+        string m_ReportFolderPath = @"\\fileserver\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter";
 
         public CytologyAbnormalUnsatLetter(DateTime startDate, DateTime endDate)
         {            
             this.m_StartDate = startDate;
             this.m_EndDate = endDate;
-            this.m_ReportTemplate = @"\\CFileServer\Documents\Reports\Templates\CytologyAbnormalUnsatLetter.xml";
+            this.m_ReportTemplate = @"\\fileserver\Documents\Reports\Templates\CytologyAbnormalUnsatLetter.xml";
             this.m_ReportData = new YellowstonePathology.Business.Reports.Cytology.CytologyUnsatLetters();
             this.m_ReportData.FillByDate(startDate, endDate);            
         }
@@ -39,7 +39,7 @@ namespace YellowstonePathology.Reports.Cytology
 
         public void FaxReport(YellowstonePathology.Business.Reports.Cytology.CytologyUnsatLetterItem item)
         {
-            string path = @"\\CFileServer\documents\Reports\Cytology\CytologyAbnormalUnsatLetter\";
+            string path = @"\\fileserver\documents\Reports\Cytology\CytologyAbnormalUnsatLetter\";
             YellowstonePathology.Business.Client.Model.Client client = Business.Gateway.PhysicianClientGateway.GetClientByClientId(item.ClientId);
             string fileName = path + item.PhysicianClientId.ToString() + ".doc";
             YellowstonePathology.Business.ReportDistribution.Model.FaxSubmission.Submit(client.Fax, "Cytology Unsat Letters", fileName, "CytologyAbnormalUnsatLetter");
@@ -57,7 +57,7 @@ namespace YellowstonePathology.Reports.Cytology
                 this.NameSpaceManager.AddNamespace("w", "http://schemas.microsoft.com/office/word/2003/wordml");
                 this.NameSpaceManager.AddNamespace("wx", "http://schemas.microsoft.com/office/word/2003/auxHint");
 
-                this.m_ReportSaveFileName = @"\\CFileServer\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter\" + item.PhysicianClientId.ToString() + ".xml";
+                this.m_ReportSaveFileName = @"\\fileserver\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter\" + item.PhysicianClientId.ToString() + ".xml";
 
                 string openingStatement = "Below is a list of your patient(s) who have had an abnormal or unsatisfactory Pap Test between report_start_date and report_end_date.";
 
@@ -158,7 +158,7 @@ namespace YellowstonePathology.Reports.Cytology
             this.NameSpaceManager.AddNamespace("w", "http://schemas.microsoft.com/office/word/2003/wordml");
             this.NameSpaceManager.AddNamespace("wx", "http://schemas.microsoft.com/office/word/2003/auxHint");
 
-            this.m_ReportSaveFileName = @"\\CFileServer\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter\" + item.PhysicianClientId.ToString() + ".xml";
+            this.m_ReportSaveFileName = @"\\fileserver\Documents\Reports\Cytology\CytologyAbnormalUnsatLetter\" + item.PhysicianClientId.ToString() + ".xml";
 
             string openingStatement = "Below is a list of your patient(s) who have had an abnormal or unsatisfactory Pap Test between report_start_date and report_end_date.";
 

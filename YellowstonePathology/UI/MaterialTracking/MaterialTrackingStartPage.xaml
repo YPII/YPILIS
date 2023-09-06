@@ -82,10 +82,10 @@
 
                 <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2">Location Billings</TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2">
-				    <Hyperlink Click="HyperlinkSendMaterialToDrKurtzman_Click">Send Material to Dr. Kurtzman</Hyperlink>
+				    <Hyperlink Click="HyperlinkSendMaterialToDrKurtzman_Click">Send Material to Dr. Kemp</Hyperlink>
                 </TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2">
-				    <Hyperlink Click="HyperlinkReceiveMaterialFromDrKurtzman_Click">Receive Material From Dr. Kurtzman</Hyperlink>
+				    <Hyperlink Click="HyperlinkReceiveMaterialFromDrKurtzman_Click">Receive Material From Dr. Kemp</Hyperlink>
                 </TextBlock>
 
                 <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2">

@@ -16,6 +16,12 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public static PanelSetCollection GetAll()
         {
             PanelSetCollection panelSetCollection = new PanelSetCollection();
+
+            panelSetCollection.Add(new DecipherProstateBiopsyGenomicClassifier());
+            panelSetCollection.Add(new Tempus());
+            panelSetCollection.Add(new Signatera());
+            panelSetCollection.Add(new PDL122C3FDAForCervical());
+            panelSetCollection.Add(new NeoComprehensiveMyeloidDisorders());
             panelSetCollection.Add(new TCellReceptorBetaTest());
             panelSetCollection.Add(new TCellReceptorDeltaTest());
             panelSetCollection.Add(new FLT3PreliminaryByPCRTest());

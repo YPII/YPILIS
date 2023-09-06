@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Test.StemCellEnumeration
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\StemCellEnumeration.1.xml";        
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\StemCellEnumeration.1.xml";        
             base.OpenTemplate();            
 
             this.SetDemographicsV2();

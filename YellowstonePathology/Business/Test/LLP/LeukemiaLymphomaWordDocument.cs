@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Test.LLP
 		{			
 			PanelSetOrderLeukemiaLymphoma panelSetOrderLeukemiaLymphoma = (PanelSetOrderLeukemiaLymphoma)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\LeukemiaLymphoma.1.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\LeukemiaLymphoma.1.xml";
 
 			base.OpenTemplate();
 

@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
 		{			
 			YellowstonePathology.Business.Test.SARSCoV2.SARSCoV2TestOrder panelSetOrder = (YellowstonePathology.Business.Test.SARSCoV2.SARSCoV2TestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\SARSCoV2.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\SARSCoV2.3.xml";
 			base.OpenTemplate();
 
 			base.SetDemographicsV2();

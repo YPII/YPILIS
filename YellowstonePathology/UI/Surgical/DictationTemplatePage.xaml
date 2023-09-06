@@ -16,6 +16,8 @@
 			<RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" Text="Specimen:" HorizontalAlignment="Left"></TextBlock>
@@ -48,5 +50,11 @@
         <TextBox Name="TextBoxGrossDescription"  Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=GrossDescription}" 
                  FontSize="14" AcceptsTab="True" PreviewKeyDown="TextBoxGrossDescription_PreviewKeyDown"></TextBox>
 
+        <TextBox Name="TextBoxGross"  Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=SurgicalTestOrder.GrossX}" 
+                 FontSize="14" AcceptsTab="True"></TextBox>
+
+        <TextBlock Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" HorizontalAlignment="Right">                    
+            <Hyperlink Click="HyperLinkShowCaseReport_Click">Print Gross Description</Hyperlink>
+        </TextBlock>
     </Grid>
 </UserControl>

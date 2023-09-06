@@ -159,7 +159,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\\\\\cfileserver\\\\documents\\\\SpecimenLog\\\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\\\\\fileserver\\\\documents\\\\SpecimenLog\\\\")]
         public string SpecimenLogScannedDocumentFilePath {
             get {
                 return ((string)(this["SpecimenLogScannedDocumentFilePath"]));
@@ -168,7 +168,7 @@ namespace YellowstonePathology.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\cfileserver\\documents\\Dictation\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\fileserver\\documents\\Dictation\\")]
         public string ServerDictationFolder {
             get {
                 return ((string)(this["ServerDictationFolder"]));

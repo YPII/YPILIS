@@ -25,12 +25,14 @@ namespace YellowstonePathology.UI.Billing
         private System.ComponentModel.BackgroundWorker m_BackgroundWorker;
         private DateTime m_PostDate;
         
-        private string m_BaseWorkingFolderPathPSA = @"\\CFileServer\Documents\Billing\PSA\";
-        private string m_BaseWorkingFolderPathSVH = @"\\CFileServer\Documents\Billing\SVH\";
-        private string m_BaseWorkingFolderPathAPS = @"\\CFileServer\Documents\Billing\APS\";
+        private string m_BaseWorkingFolderPathPSA = @"\\fileserver\Documents\Billing\PSA\";
+        private string m_BaseWorkingFolderPathSVH = @"\\fileserver\Documents\Billing\SVH\";
+        private string m_BaseWorkingFolderPathAPS = @"\\fileserver\Documents\Billing\APS\";
 
 
         private ObservableCollection<string> m_StatusMessageList;
+        private ObservableCollection<string> m_ErrorMessageList;
+
         private string m_StatusCountMessage;        
         private int m_StatusCount;
         private List<string> m_ReportNumbersToProcess;
@@ -44,6 +46,9 @@ namespace YellowstonePathology.UI.Billing
             this.m_StatusCount = 0;
             this.m_StatusMessageList = new ObservableCollection<string>();
             this.m_StatusMessageList.Add("No Status");
+
+            this.m_ErrorMessageList = new ObservableCollection<string>();
+            this.m_ErrorMessageList.Add("No Errors");
 
             this.m_PostDate = DateTime.Today;
             this.m_EODProcessStatusCollection = Business.Gateway.BillingGateway.GetBillingEODProcessStatusHistory();
@@ -66,6 +71,11 @@ namespace YellowstonePathology.UI.Billing
         public ObservableCollection<string> StatusMessageList
         {
             get { return this.m_StatusMessageList; }
+        }
+
+        public ObservableCollection<string> ErrorMessageList
+        {
+            get { return this.m_ErrorMessageList; }
         }
 
         public DateTime PostDate
@@ -190,9 +200,17 @@ namespace YellowstonePathology.UI.Billing
             {
                 this.m_StatusCount += 1;
                 string message = (string)e.UserState;
-                this.m_StatusMessageList.Insert(0, message);
-                this.m_StatusCountMessage = this.m_StatusCount.ToString();
-                this.NotifyPropertyChanged("StatusCountMessage");                
+
+                if(message.Contains("ERROR"))
+                {
+                    this.m_ErrorMessageList.Insert(0, message);
+                }
+                else
+                {
+                    this.m_StatusMessageList.Insert(0, message);
+                    this.m_StatusCountMessage = this.m_StatusCount.ToString();
+                    this.NotifyPropertyChanged("StatusCountMessage");
+                }                       
             }));                        
         }        
 
@@ -820,11 +838,16 @@ namespace YellowstonePathology.UI.Billing
                 Business.ClientOrder.Model.ClientOrder clientOrderNeedingRegistration = clientOrdersNeedingRegistration[0];
 
                 Business.ClientOrder.Model.ClientOrderCollection possibleNewClientOrders = Business.Gateway.ClientOrderGateway.GetClientOrdersByPatientName(accessionListItem.PFirstName, accessionListItem.PLastName);
-                foreach(Business.ClientOrder.Model.ClientOrder clientOrder in possibleNewClientOrders)
+
+                List<string> providerNameList = new List<string>();
+                providerNameList.Add("KELLI SCHNEIDER");
+                providerNameList.Add("ANGELA DURDEN");
+
+                foreach (Business.ClientOrder.Model.ClientOrder clientOrder in possibleNewClientOrders)
                 {
                     if (clientOrder.OrderDate > clientOrderNeedingRegistration.OrderDate &&
-                        clientOrder.PBirthdate == clientOrderNeedingRegistration.PBirthdate &&  
-                        clientOrder.ProviderName == "ANGELA DURDEN" &&
+                        clientOrder.PBirthdate == clientOrderNeedingRegistration.PBirthdate && 
+                        providerNameList.Contains(clientOrder.ProviderName) &&
                         clientOrder.SvhMedicalRecord.StartsWith("V"))
                     {
                         Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.PullAccessionOrder(accessionListItem.MasterAccessionNo, this);
@@ -1101,7 +1124,7 @@ namespace YellowstonePathology.UI.Billing
                 "join tblPanelSetOrderCPTCodeBill psocpt on pso.ReportNo = psocpt.ReportNo " +                
                 $"WHERE pso.IsPosted = 1 and psocpt.PostDate = '{postDate.ToString("yyyy-MM-dd")}' and billTo <> 'Client';";
 
-            string folder = $@"\\CFileServer\Documents\Billing\APS\{postDate.ToString("MMddyyyy")}";
+            string folder = $@"\\fileserver\Documents\Billing\APS\{postDate.ToString("MMddyyyy")}";
             string [] files = System.IO.Directory.GetFiles(folder);
 
             List<Business.MasterAccessionNo> manList = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(sql);

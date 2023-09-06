@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Document
 
         public void Create(string patientName, string providerName, YellowstonePathology.Business.Client.Model.Client client, string letterBody)
 		{
-			string templateName = @"\\CFileServer\documents\ReportTemplates\XmlTemplates\ClientMissingInfoBoldFax.1.xml";
+			string templateName = @"\\fileserver\documents\ReportTemplates\XmlTemplates\ClientMissingInfoBoldFax.1.xml";
 
 			XmlDocument xmlDocument = new XmlDocument();
 			XmlNamespaceManager nameSpaceManager = new XmlNamespaceManager(m_ReportXml.NameTable);

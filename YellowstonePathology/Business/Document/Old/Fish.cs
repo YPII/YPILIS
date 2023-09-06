@@ -4,7 +4,7 @@ namespace YellowstonePathology.Business.Document.Old
 {
     public class Fish : BaseReport, YellowstonePathology.Business.Interface.ICaseDocument
     {
-        const string m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\Fish.1.xml";
+        const string m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\Fish.1.xml";
         private YellowstonePathology.Business.Document.NativeDocumentFormatEnum m_NativeDocumentFormat;                
 
         public Fish(Business.Test.AccessionOrder accessionOrder, Business.Test.PanelSetOrder panelSetOrder, YellowstonePathology.Business.Document.ReportSaveModeEnum reportSaveMode) 

@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Test.ThrombocytopeniaProfileV2
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ThrombocytopeniaProfileV2.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\ThrombocytopeniaProfileV2.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

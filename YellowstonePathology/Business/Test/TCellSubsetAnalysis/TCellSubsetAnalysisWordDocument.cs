@@ -26,7 +26,7 @@ namespace YellowstonePathology.Business.Test.TCellSubsetAnalysis
 		{			
 			TCellSubsetAnalysisTestOrder testOrder = (TCellSubsetAnalysisTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\TCellSubsetAnalysis.1.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\TCellSubsetAnalysis.1.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

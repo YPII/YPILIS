@@ -12,6 +12,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Drawing.Imaging;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Windows.Shapes;
 
 namespace YellowstonePathology.UI.Surgical
 {
@@ -19,13 +23,14 @@ namespace YellowstonePathology.UI.Surgical
 	{
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder m_SurgicalTestOrder;
-        private YellowstonePathology.UI.Gross.DictationTemplate m_DictationTemplate;        
-        private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
-        private YellowstonePathology.Business.User.SystemIdentity m_SystemIdentity;
-        private YellowstonePathology.Business.User.SystemUserCollection m_PathologistUsers;
-        private YellowstonePathology.Business.User.UserPreference m_UserPreference;
+        private Business.Test.Surgical.SurgicalTestOrder m_SurgicalTestOrder;
+        private UI.Gross.DictationTemplate m_DictationTemplate;        
+        private Business.Test.AccessionOrder m_AccessionOrder;
+        private Business.User.SystemIdentity m_SystemIdentity;
+        private Business.User.SystemUserCollection m_PathologistUsers;
+        private Business.User.UserPreference m_UserPreference;
         private string m_GrossDescription;
+        private System.Drawing.Image m_GrossCapture;
 
         public DictationTemplatePage(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, YellowstonePathology.Business.User.SystemIdentity systemIdentity)
 		{
@@ -41,7 +46,13 @@ namespace YellowstonePathology.UI.Surgical
 
 			DataContext = this;
 		}
-        
+
+        public Business.Test.Surgical.SurgicalTestOrder SurgicalTestOrder
+        {
+            get { return this.m_SurgicalTestOrder; }
+        }
+
+
         public YellowstonePathology.Business.User.SystemUserCollection PathologistUsers
 		{
 			get { return this.m_PathologistUsers; }
@@ -253,6 +264,68 @@ namespace YellowstonePathology.UI.Surgical
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
-        }            
+        }
+
+        private void HyperLinkShowCaseReport_Click(object sender, RoutedEventArgs e)
+        {
+            //YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_LoginUI.ReportNo);
+            //YellowstonePathology.Business.Interface.ICaseDocument caseDocument = Business.Document.DocumentFactory.GetDocument(this.m_AccessionOrder, this.m_SurgicalTestOrder, Business.Document.ReportSaveModeEnum.Draft);
+            //caseDocument.Render();
+            //YellowstonePathology.Business.Document.CaseDocument.OpenWordDocumentWithWord(caseDocument.SaveFileName);
+
+            WriteToPng(this.TextBoxGross);
+        }
+
+        public void WriteToPng(UIElement element)
+        {
+            var rect = new Rect(element.RenderSize);
+            var visual = new DrawingVisual();
+
+            using (var dc = visual.RenderOpen())
+            {
+                dc.DrawRectangle(new VisualBrush(element), null, rect);
+            }
+
+            var bitmap = new RenderTargetBitmap(
+                (int)rect.Width, (int)rect.Height, 96, 96, PixelFormats.Default);
+            bitmap.Render(visual);
+
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+
+            //using (var file = System.IO.File.OpenWrite(filename))
+            //{
+            //    encoder.Save(file);
+            //}
+
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            BitmapEncoder bEncoder = new BmpBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            encoder.Save(stream);
+
+            stream.Position = 0;
+            //this.m_GrossCapture = System.Drawing.Image.FromFile(@"d:\testing\qqq.png");
+            this.m_GrossCapture = System.Drawing.Image.FromStream(stream);
+            //int newX = Convert.ToInt32(Math.Round((this.m_GrossCapture.Width * .9), 0));
+            //int newY = Convert.ToInt32(Math.Round((this.m_GrossCapture.Height * .9), 0));
+            //System.Drawing.Size newSize = new System.Drawing.Size(newX, newY);
+            //this.m_GrossCapture = new Bitmap(this.m_GrossCapture, newSize);
+            
+            //this.m_GrossCapture.Save(@"d:\testing\qqq.png");
+
+            System.Drawing.Printing.PrintDocument printDoc = new System.Drawing.Printing.PrintDocument();            
+            printDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(PrintDoc_PrintPage);
+            printDoc.Print();
+
+            //PrintPreviewDialog dlg = new PrintPreviewDialog();
+            //dlg.Document = printDoc as IDocumentPaginatorSource;
+            //dlg.ShowDialog();
+        }
+
+        private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
+        {            
+            System.Drawing.Point ulCorner = new System.Drawing.Point(10, 10);
+            e.Graphics.DrawImage(this.m_GrossCapture, ulCorner);           
+        }
     }
 }

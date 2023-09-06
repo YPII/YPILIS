@@ -12,6 +12,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using System.ComponentModel;
+using HidSharp.Experimental;
+using HidSharp.Reports;
+using HidSharp.Reports.Encodings;
+using HidSharp.Utility;
+using HidSharp;
+using HidSharp.Reports.Input;
 
 namespace YellowstonePathology.UI.Common
 {
@@ -32,8 +38,12 @@ namespace YellowstonePathology.UI.Common
         private Business.Label.Model.CassettePrinterCollection m_CassettePrinterCollection;
         private bool m_HostNameEnabled;
 
+        private List<Device> m_USBDeviceList;
+
         public UserPreferences(YellowstonePathology.Business.User.UserPreference userPreference)
-		{
+		{            
+            this.m_USBDeviceList = DeviceList.Local.GetAllDevices().ToList<Device>();
+
             this.m_UserPreferenceList = Business.Gateway.AccessionOrderGateway.GetAllUserPreferences();
             this.m_MolecularLabelFormatCollection = Business.Label.Model.LabelFormatCollection.GetMolecularLabelCollection();
             this.m_CassettePrinterCollection = new Business.Label.Model.CassettePrinterCollection();
@@ -80,7 +90,12 @@ namespace YellowstonePathology.UI.Common
         public Business.Label.Model.CassettePrinterCollection CassettePrinterCollection
         {
             get { return this.m_CassettePrinterCollection; }
-        }    
+        } 
+        
+        public List<Device> USBDeviceList
+        {
+            get { return this.m_USBDeviceList; }
+        }
 
         public YellowstonePathology.Business.Label.Model.LabelFormatCollection MolecularLabelFormatCollection
         {
@@ -218,6 +233,22 @@ namespace YellowstonePathology.UI.Common
             {
                 this.m_UserPreference.SlideMatePrinterPath = fbd.SelectedPath;
                 this.NotifyPropertyChanged("SlideMatePrinterPath");
+            }
+        }
+
+        private void HyperLinkSetFootPedal_Click(object sender, RoutedEventArgs e)
+        {
+            Hyperlink hyperLink = (Hyperlink)sender;
+            if(hyperLink.Tag is HidSharp.HidDevice)
+            {
+                HidSharp.HidDevice dev = (HidSharp.HidDevice)hyperLink.Tag;
+                this.m_UserPreference.FootPedalVendorId = Convert.ToString(dev.VendorID);
+                this.m_UserPreference.FootPedalProductId = dev.ProductID.ToString();
+                this.m_UserPreference.FootPedalName = dev.GetProductName();
+            }
+            else
+            {
+                MessageBox.Show("The selected item is the wrong device type.");
             }
         }
     }

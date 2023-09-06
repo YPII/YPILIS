@@ -217,18 +217,18 @@ namespace YellowstonePathology.Business.Gateway
         public static YellowstonePathology.Business.Client.Model.ClientCollection GetFavoriteClients()
         {
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "SELECT * FROM tblClient where ClientId in (1341,558,154,1203,660,723,184,54,126,1321,1446,579,573,1565,1520,280,587,225,1046,1822) order by clientName;";
+            cmd.CommandText = "SELECT * FROM tblClient where ClientId in (1341,558,154,1203,660,723,184,54,126,1321,1446,579,573,1565,1520,280,587,225,1046,1822,1494,1873) order by clientName;";
             cmd.CommandType = CommandType.Text;
             Client.Model.ClientCollection result = BuildClientCollection(cmd);
             return result;
         }
 
-        public static Domain.Physician GetPhysicianById(string objectId)
+        public static Domain.Physician GetPhysicianByIddd(string physicianId)
         {
             MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "SELECT * FROM tblPhysician where tblPhysician.ObjectId = @ObjectId;";
+            cmd.CommandText = "SELECT * FROM tblPhysician where tblPhysician.PhysicianId = @PhysicianId;";
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@ObjectId", objectId);
+            cmd.Parameters.AddWithValue("@PhysicianId", physicianId);
             Domain.Physician result = PhysicianClientGateway.GetPhysicianFromCommand(cmd);
             return result;
         }

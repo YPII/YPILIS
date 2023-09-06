@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.InvasiveBreastPanel
 
         public override void Render()
         {            
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\InvasiveBreastPanel.3.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\InvasiveBreastPanel.3.xml";
             this.OpenTemplate();
             this.SetDemographicsV2();
             this.SetReportDistribution();

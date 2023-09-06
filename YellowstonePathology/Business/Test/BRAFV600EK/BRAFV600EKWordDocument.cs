@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.BRAFV600EK
         public override void Render()
 		{            
             YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKTestOrder panelSetOrder = (YellowstonePathology.Business.Test.BRAFV600EK.BRAFV600EKTestOrder)this.m_PanelSetOrder;
-			base.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BRAFV600EK.3.xml";
+			base.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\BRAFV600EK.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

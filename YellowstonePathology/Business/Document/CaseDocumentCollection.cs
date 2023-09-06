@@ -24,7 +24,7 @@ namespace YellowstonePathology.Business.Document
 			string filePath = Business.Document.CaseDocumentPath.GetPath(orderIdParser);			
 			if (!Directory.Exists(filePath))
 			{
-				filePath = @"\\CFileServer\Documents";
+				filePath = @"\\fileserver\Documents";
 			}
 
 			string[] files = Directory.GetFiles(filePath);

@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Document
 			{
 				string[] dotsplit = this.FullFileName.Split('.');
 				string extenstion = dotsplit[dotsplit.Length - 1];
-				newFile = @"\\cfileserver\Documents\Distribution\OpenedWordViewerFiles\" + Guid.NewGuid() + "." + extenstion;
+				newFile = @"\\fileserver\Documents\Distribution\OpenedWordViewerFiles\" + Guid.NewGuid() + "." + extenstion;
 				File.Copy(this.FullFileName, newFile);
 
 				Process p1 = new Process();

@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.TechInitiatedPeripheralSmear
         {            
             YellowstonePathology.Business.Test.TechInitiatedPeripheralSmear.TechInitiatedPeripheralSmearTestOrder techInitiatedPeripheralSmearTestOrder = (YellowstonePathology.Business.Test.TechInitiatedPeripheralSmear.TechInitiatedPeripheralSmearTestOrder)this.m_PanelSetOrder;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\TechInitiatedPeripheralSmear.2.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\TechInitiatedPeripheralSmear.2.xml";
             base.OpenTemplate();
 
             base.SetDemographicsV2();                        

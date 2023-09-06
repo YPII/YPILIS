@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.MPNExtendedReflex
         public override void Render()
 		{
             PanelSetOrderMPNExtendedReflex panelSetOrderMPNExtendedReflex = (PanelSetOrderMPNExtendedReflex)this.m_PanelSetOrder;
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\MPNExtendedReflex.3.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\MPNExtendedReflex.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

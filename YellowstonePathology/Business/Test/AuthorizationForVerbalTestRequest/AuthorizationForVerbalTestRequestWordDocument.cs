@@ -22,7 +22,7 @@ namespace YellowstonePathology.Business.Test.AuthorizationForVerbalTestRequest
         {
             if (this.m_PanelSetOrderToAuthorize == null) return;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\AuthorizationForVerbalTestRequest.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\AuthorizationForVerbalTestRequest.xml";
             base.OpenTemplate();
 
             AuthorizationForVerbalTestRequestTestOrder testOrder = (AuthorizationForVerbalTestRequestTestOrder)this.m_PanelSetOrder;

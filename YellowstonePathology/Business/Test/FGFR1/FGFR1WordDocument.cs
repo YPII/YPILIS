@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.FGFR1
 
         public override void Render()
         {
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\FGFR1.3.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\FGFR1.3.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

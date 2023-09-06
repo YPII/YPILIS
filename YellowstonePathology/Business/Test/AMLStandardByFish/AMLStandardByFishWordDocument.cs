@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.AMLStandardByFish
 		{			
 			AMLStandardByFishTestOrder panelSetOrderAMLStandardByFish = (AMLStandardByFishTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\AMLStandardByFish.2.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\AMLStandardByFish.2.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

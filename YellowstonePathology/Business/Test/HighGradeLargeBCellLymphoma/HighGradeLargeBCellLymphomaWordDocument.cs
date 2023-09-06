@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.HighGradeLargeBCellLymphoma
 		{			
 			PanelSetOrderHighGradeLargeBCellLymphoma panelSetOrderHighGradeLargeBCellLymphoma = (PanelSetOrderHighGradeLargeBCellLymphoma)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\HighGradeLargeBCellLymphoma.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\HighGradeLargeBCellLymphoma.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

@@ -118,6 +118,23 @@ namespace YellowstonePathology.UI.Surgical
                     }
                 }
             }
+
+            Business.Audit.Model.DistributionNotSetAudit distributionNotSetAudit = new Business.Audit.Model.DistributionNotSetAudit(this.m_SurgicalTestOrder);
+            distributionNotSetAudit.Run();
+            if(distributionNotSetAudit.Status == Business.Audit.Model.AuditStatusEnum.Failure)
+            {
+                string messageBody = $"Case {this.m_SurgicalTestOrder.ReportNo} has been finalized but the distribution is not set.";
+                System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("support@ypii.com", "sid.harder@ypii.com", System.Windows.Forms.SystemInformation.UserName, messageBody);
+                message.To.Add("eirc.ramsey@ypii.com");                
+                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.110 ");
+
+                Uri uri = new Uri("http://tempuri.org/");
+                System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;
+                System.Net.NetworkCredential credential = credentials.GetCredential(uri, "Basic");
+
+                client.Credentials = credential;
+                client.Send(message);                
+            }
         }
 
         private void MoveForward(object sender, EventArgs e)

@@ -21,13 +21,13 @@ namespace YellowstonePathology.Business.Test.WomensHealthProfile
             bool hasPap = this.m_AccessionOrder.PanelSetOrderCollection.Exists(thinPrepPapTest.PanelSetId);
             if (hasPap)
             {
-                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\WomensHealthProfile.3.xml";
+                this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\WomensHealthProfile.3.xml";
                 this.OpenTemplate();
                 this.SetCurrentPapResults();
             }
             else
             {
-                this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\WomensHealthProfileNoPap.2.xml";
+                this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\WomensHealthProfileNoPap.2.xml";
                 this.OpenTemplate();
             }
 

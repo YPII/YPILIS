@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.AnalCytology
         {
             AnalCytologyTestOrder testOrder = (AnalCytologyTestOrder)this.m_PanelSetOrder;            
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\AnalCytology.1.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\AnalCytology.1.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.MolecularTesting
             xlApp = new Microsoft.Office.Interop.Excel.Application();
             xlApp.Visible = false;
 
-            Microsoft.Office.Interop.Excel.Workbook wb = xlApp.Workbooks.Add(@"\\CFileServer\documents\ReportTemplates\MolecularTesting\CaseList.xlt");
+            Microsoft.Office.Interop.Excel.Workbook wb = xlApp.Workbooks.Add(@"\\fileserver\documents\ReportTemplates\MolecularTesting\CaseList.xlt");
             Microsoft.Office.Interop.Excel.Worksheet ws = (Microsoft.Office.Interop.Excel.Worksheet)wb.Worksheets[1];
 
             ws.Cells[3, 1] = "Batch: " + description + " - " + printDate.ToShortDateString();

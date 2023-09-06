@@ -30,8 +30,8 @@ namespace YellowstonePathology.UI.Monitor
         private System.ComponentModel.BackgroundWorker m_BackgroundWorker;
         private DateTime m_PostDate;
 
-        private string m_BaseWorkingFolderPathPSA = @"\\CFileServer\Documents\Billing\PSA\";
-        private string m_BaseWorkingFolderPathSVH = @"\\CFileServer\Documents\Billing\SVH\";
+        private string m_BaseWorkingFolderPathPSA = @"\\fileserver\Documents\Billing\PSA\";
+        private string m_BaseWorkingFolderPathSVH = @"\\fileserver\Documents\Billing\SVH\";
 
         private ObservableCollection<string> m_StatusMessageList;
         private string m_StatusCountMessage;

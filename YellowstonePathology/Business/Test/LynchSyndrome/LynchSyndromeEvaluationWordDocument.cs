@@ -20,7 +20,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             Business.Test.LynchSyndrome.LynchSyndromeEvaluationTest lynchSyndromeEvaluationTest = new LynchSyndromeEvaluationTest();
 
             int molecularTestCount = 0;            
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\LynchSyndromeEvaluation.2.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\LynchSyndromeEvaluation.2.xml";
             this.OpenTemplate();
             this.SetDemographicsV2();
             this.SetReportDistribution();

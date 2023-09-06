@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.BCL2t1418ByFISH
         {
             BCL2t1418ByFISHTestOrder panelSetOrder = (BCL2t1418ByFISHTestOrder)this.m_PanelSetOrder;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\BCL2t1418ByFISH.2.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\BCL2t1418ByFISH.2.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

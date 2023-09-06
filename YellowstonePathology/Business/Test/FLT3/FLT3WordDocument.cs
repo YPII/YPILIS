@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.FLT3
 		{			
 			PanelSetOrderFLT3 panelSetOrderFLT3 = (PanelSetOrderFLT3)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\FLT3.3.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\FLT3.3.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

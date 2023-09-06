@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.API2MALT1ByPCR
         {
             API2MALT1ByPCRTestOrder testOrder = (API2MALT1ByPCRTestOrder)this.m_PanelSetOrder;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\API2MALT1ByPCR.3.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\API2MALT1ByPCR.3.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

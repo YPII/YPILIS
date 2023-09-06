@@ -106,7 +106,7 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
 			//gfx.DrawString("Hello, World!", font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.TopLeft);
 			//document.Save(@"c:\ghost\blooper.pdf");
 
-			//Aspose.Words.Document document = new Aspose.Words.Document(@"\\CFileServer\Documents\ReportTemplates\XmlTemplates\SARSCoV2.3.docx");
+			//Aspose.Words.Document document = new Aspose.Words.Document(@"\\fileserver\Documents\ReportTemplates\XmlTemplates\SARSCoV2.3.docx");
 
 			//string description = this.m_SpecimenOrder.Description;
 			//document.Range.Replace("specimen_description", description, new FindReplaceOptions(FindReplaceDirection.Forward));			
@@ -143,7 +143,7 @@ namespace YellowstonePathology.Business.Test.SARSCoV2
 			//document.Save(@"c:\ghost\hellllo.pdf", SaveFormat.Pdf);
 
 			/*
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\SARSCoV2.3.xml";			
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\SARSCoV2.3.xml";			
 
 			YellowstonePathology.Business.Specimen.Model.SpecimenOrder specimenOrder = this.m_AccessionOrder.SpecimenOrderCollection.GetSpecimenOrder(this.m_PanelSetOrder.OrderedOn, this.m_PanelSetOrder.OrderedOnId);
             YellowstonePathology.Business.Test.AliquotOrder aliquotOrder = specimenOrder.AliquotOrderCollection.GetByAliquotOrderId(this.m_PanelSetOrder.OrderedOnId);

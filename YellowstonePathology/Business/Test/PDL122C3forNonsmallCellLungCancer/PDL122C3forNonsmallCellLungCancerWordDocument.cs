@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.PDL122C3forNonsmallCellLungCancer
         {
             PDL122C3forNonsmallCellLungCancerTestOrder testOrder = (PDL122C3forNonsmallCellLungCancerTestOrder)this.m_PanelSetOrder;
 
-            this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\PDL122C3forNonsmallCellLungCancerTestOrder.xml";
+            this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\PDL122C3forNonsmallCellLungCancerTestOrder.xml";
             base.OpenTemplate();
 
             this.SetDemographicsV2();

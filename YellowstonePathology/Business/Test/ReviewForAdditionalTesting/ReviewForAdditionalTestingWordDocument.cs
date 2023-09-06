@@ -17,7 +17,7 @@ namespace YellowstonePathology.Business.Test.ReviewForAdditionalTesting
 		{			
 			ReviewForAdditionalTestingTestOrder reviewForAdditionalTestingTestOrder = (YellowstonePathology.Business.Test.ReviewForAdditionalTesting.ReviewForAdditionalTestingTestOrder)this.m_PanelSetOrder;
 
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\ReviewForAdditionalTesting.2.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\ReviewForAdditionalTesting.2.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

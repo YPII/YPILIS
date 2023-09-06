@@ -15,7 +15,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
 
         public override void Render()
 		{            
-			this.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\LynchSyndromeIHCPanel.1.xml";
+			this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\LynchSyndromeIHCPanel.1.xml";
 			base.OpenTemplate();
 
 			this.SetDemographicsV2();

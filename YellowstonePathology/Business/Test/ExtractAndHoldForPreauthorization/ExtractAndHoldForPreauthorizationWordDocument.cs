@@ -16,7 +16,7 @@ namespace YellowstonePathology.Business.Test.ExtractAndHoldForPreauthorization
 
         public override void Render()
 		{            
-			base.m_TemplateName = @"\\CFileServer\Documents\ReportTemplates\XmlTemplates\PreauthorizationNotification.5.xml";
+			base.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\PreauthorizationNotification.5.xml";
 			base.OpenTemplate();
 			this.SetDemographicsV2();			
 

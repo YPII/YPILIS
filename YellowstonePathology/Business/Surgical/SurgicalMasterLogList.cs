@@ -36,7 +36,18 @@ namespace YellowstonePathology.Business.Surgical
                 foreach (SurgicalMasterLogItem item in list) this.Add(item);
             }
         }
-    }
+
+		public void FillDrReck(DateTime reportDate)
+		{
+			this.Clear();
+
+			SurgicalMasterLogList list = Business.Gateway.AccessionOrderGateway.GetDrReckMasterLogList(reportDate);
+			if (list != null)
+			{
+				foreach (SurgicalMasterLogItem item in list) this.Add(item);
+			}
+		}
+	}
 
     public class SurgicalMasterLogItem : ListItem
 	{

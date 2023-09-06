@@ -49,6 +49,9 @@ namespace YellowstonePathology.Business.User
         private string m_FedExLabelPrinter;
         private bool m_Administrator;
         private string m_PantherCOVIDLabelPrinter;
+        private string m_FootPedalName;
+        private string m_FootPedalVendorId;
+        private string m_FootPedalProductId;
 
         public UserPreference()
         {
@@ -553,6 +556,51 @@ namespace YellowstonePathology.Business.User
                 {
                     this.m_PantherCOVIDLabelPrinter = value;
                     this.NotifyPropertyChanged("PantherCOVIDLabelPrinter");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string FootPedalName
+        {
+            get { return this.m_FootPedalName; }
+            set
+            {
+                if (this.m_FootPedalName != value)
+                {
+                    this.m_FootPedalName = value;
+                    this.NotifyPropertyChanged("FootPedalName");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string FootPedalVendorId
+        {
+            get { return this.m_FootPedalVendorId; }
+            set
+            {
+                if (this.m_FootPedalVendorId != value)
+                {
+                    this.m_FootPedalVendorId = value;
+                    this.NotifyPropertyChanged("FootPedalVendorId");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string FootPedalProductId
+        {
+            get { return this.m_FootPedalProductId; }
+            set
+            {
+                if (this.m_FootPedalProductId != value)
+                {
+                    this.m_FootPedalProductId = value;
+                    this.NotifyPropertyChanged("FootPedalProductId");
                 }
             }
         }
