@@ -657,17 +657,7 @@ namespace YellowstonePathology.UI.Login
                     this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();
                     this.m_LoginPageWindow.Width = 700;
                     this.m_LoginPageWindow.PageNavigator.Navigate(dictationTemplatePage);
-                    this.m_LoginPageWindow.ShowDialog();
-
-                    /*
-                    YellowstonePathology.UI.Login.FinalizeAccession.GrossEntryPage grossEntryPage = new FinalizeAccession.GrossEntryPage(this.m_LoginUI.AccessionOrder);
-                    grossEntryPage.Next += new FinalizeAccession.GrossEntryPage.NextEventHandler(GrossEntryPage_Next);
-                    grossEntryPage.Back += new FinalizeAccession.GrossEntryPage.BackEventHandler(GrossEntryPage_Back);
-
-                    this.m_LoginPageWindow = new Login.Receiving.LoginPageWindow();
-                    this.m_LoginPageWindow.PageNavigator.Navigate(grossEntryPage);
-                    this.m_LoginPageWindow.ShowDialog();
-                    */
+                    this.m_LoginPageWindow.ShowDialog();                    
                 }
             }
         }

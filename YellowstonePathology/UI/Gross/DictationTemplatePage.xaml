@@ -29,6 +29,7 @@
             </ScrollViewer.Resources>
             <TextBox Margin="2,2,2,2" Text="{Binding Path=GrossDescription}" FontSize="{Binding Path=DictationTemplate.FontSize}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
         </ScrollViewer>
+        <TextBlock x:Name="TextBlockFootPedalInput" Grid.Column="0" Grid.Row="2" Text="{Binding Path=FootPedalInput}"></TextBlock>
         <ToggleButton x:Name="ToggleButtonDictationMode" Width="250" Height="50" Margin="2,2,2,2" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Content="{Binding Path=DictationMode}" Checked="ToggleButtonDictationMode_Checked"  Unchecked="ToggleButtonDictationMode_Unchecked"></ToggleButton>
     </Grid>
 </UserControl>

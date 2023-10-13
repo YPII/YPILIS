@@ -174,15 +174,27 @@ namespace YellowstonePathology.UI.Surgical
 
         private bool HandleRecutComment(YellowstonePathology.Business.Test.Model.TestCollection selectedTests)
         {
+            List<int> nmhClientList = new List<int>();
+            nmhClientList.Add(587);
+            nmhClientList.Add(588);
+            nmhClientList.Add(1607);
+            nmhClientList.Add(1604);
+            nmhClientList.Add(1608);
+            nmhClientList.Add(1699);                       
+
             bool result = true;            
-            if(selectedTests.Exists("150") == true)
+
+            if(nmhClientList.Contains(this.m_AccessionOrder.ClientId))
             {
-                if(string.IsNullOrEmpty(this.m_PanelOrderComment) == true)
-                {                    
-                    result = false;
-                    MessageBox.Show("To better track the reason for recuts a comment is required. Click on the Recut Comment link to the right of the text box for canned comments.");
+                if (selectedTests.Exists("150") == true)
+                {
+                    if (string.IsNullOrEmpty(this.m_PanelOrderComment) == true)
+                    {
+                        result = false;
+                        MessageBox.Show("To better track the reason for recuts for NMH a comment is required. Click on the Recut Comment link to the right of the text box for canned comments.");
+                    }
                 }
-            }
+            }            
             return result;
         }
 

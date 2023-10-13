@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Audit.Model
         private YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
         private YellowstonePathology.Business.Test.LLP.PanelSetOrderLeukemiaLymphoma m_PanelSetOrder;
         private bool m_HasIndication;
-        private bool m_HasCLLByFish;
+        //private bool m_HasCLLByFish;
         private bool m_HasIGVH;
         private bool m_HasNeotypeCLLPrognosticPanel;
         private bool m_IsNewDiagnosis;
@@ -96,12 +96,13 @@ namespace YellowstonePathology.Business.Audit.Model
         private void HasOrder()
         {
             if (this.m_HasIndication == true)
-            {
-                Test.CLLByFish.CLLByFishTest cllByFishTest = new Test.CLLByFish.CLLByFishTest();
+            {                
                 PanelSet.Model.PanelSetIGVH panelSetIGVH = new PanelSet.Model.PanelSetIGVH();
+                PanelSet.Model.PanelSetCLLPrognosticPanel cllPrognosticPanel = new PanelSet.Model.PanelSetCLLPrognosticPanel();
+
                 foreach (Test.PanelSetOrder panelSetOrder in this.m_AccessionOrder.PanelSetOrderCollection)
                 {
-                    if (panelSetOrder.PanelSetId == cllByFishTest.PanelSetId) this.m_HasCLLByFish = true;
+                    if (panelSetOrder.PanelSetId == cllPrognosticPanel.PanelSetId) this.m_HasNeotypeCLLPrognosticPanel = true;                    
                     if (panelSetOrder.PanelSetId == panelSetIGVH.PanelSetId) this.m_HasIGVH = true;
                 }
             }
@@ -122,12 +123,12 @@ namespace YellowstonePathology.Business.Audit.Model
             this.IsNewDiagnosis();
             if (this.m_IsNewDiagnosis == true)
             {
-                if (this.m_HasCLLByFish == false)
+                if (this.m_HasNeotypeCLLPrognosticPanel == false)
                 {
                     this.m_Status = AuditStatusEnum.Failure;
-                    this.m_Message.AppendLine("The client has requested that all new diagnoses of CLL have a CLL Panel by FISH reflexively ordered.");
+                    this.m_Message.AppendLine("The client has requested that all new diagnoses of CLL have a NeoTYPE CLL Prognostic Profile ordered.");
                     this.m_Message.AppendLine();
-                    this.m_Message.AppendLine("Please order CLL Panel by FISH, and document in the interpretive comment in the flow report.");
+                    this.m_Message.AppendLine("Please order NeoTYPE CLL Prognostic Profile, and document in the interpretive comment in the flow report.");
                 }
             }
         }
@@ -137,26 +138,26 @@ namespace YellowstonePathology.Business.Audit.Model
             this.IsNewDiagnosis();
             if (this.m_IsNewDiagnosis == true)
             {
-                if(this.m_HasCLLByFish == false && this.m_HasIGVH == false)
+                if(this.m_HasNeotypeCLLPrognosticPanel == false && this.m_HasIGVH == false)
                 {
                     this.m_Status = AuditStatusEnum.Failure;
-                    this.m_Message.AppendLine("The client has requested that all new diagnoses of CLL have a CLL Panel by FISH and IgVH mutation analysis reflexively ordered.");
+                    this.m_Message.AppendLine("The client has requested that all new diagnoses of CLL have a NeoTYPE CLL Prognostic Profile and IgVH mutation analysis reflexively ordered.");
                     this.m_Message.AppendLine();
-                    this.Message.AppendLine("Please order CLL Panel by FISH, IgVH mutation analysis, and document in the interpretive comment in the flow report.");
+                    this.Message.AppendLine("Please order NeoTYPE CLL Prognostic Profile, IgVH mutation analysis, and document in the interpretive comment in the flow report.");
                 }
-                else if(this.m_HasCLLByFish == false && this.m_HasIGVH == true)
+                else if(this.m_HasNeotypeCLLPrognosticPanel == false && this.m_HasIGVH == true)
                 {
                     this.m_Status = AuditStatusEnum.Failure;
-                    this.m_Message.AppendLine("The client has requested that all new diagnoses of CLL have a CLL Panel by FISH and IgVH mutation analysis reflexively ordered.");
+                    this.m_Message.AppendLine("The client has requested that all new diagnoses of CLL have a NeoTYPE CLL Prognostic Profile and IgVH mutation analysis reflexively ordered.");
                     this.m_Message.AppendLine();
-                    this.Message.AppendLine("Please order CLL Panel by FISH as there is an IgVH mutation analysis, and document in the interpretive comment in the flow report.");
+                    this.Message.AppendLine("Please order NeoTYPE CLL Prognostic Profile as there is an IgVH mutation analysis, and document in the interpretive comment in the flow report.");
                 }
-                else if (this.m_HasCLLByFish == true && this.m_HasIGVH == false)
+                else if (this.m_HasNeotypeCLLPrognosticPanel == true && this.m_HasIGVH == false)
                 {
                     this.m_Status = AuditStatusEnum.Failure;
-                    this.m_Message.AppendLine("The client has requested that all new diagnoses of CLL have a CLL Panel by FISH and IgVH mutation analysis reflexively ordered.");
+                    this.m_Message.AppendLine("The client has requested that all new diagnoses of CLL have a NeoTYPE CLL Prognostic Profile and IgVH mutation analysis reflexively ordered.");
                     this.m_Message.AppendLine();
-                    this.Message.AppendLine("Please order IgVH mutation analysis as here is a CLL Panel by FISH, and document in the interpretive comment in the flow report.");
+                    this.Message.AppendLine("Please order IgVH mutation analysis as here is a NeoTYPE CLL Prognostic Profile, and document in the interpretive comment in the flow report.");
                 }
             }
         }

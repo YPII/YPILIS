@@ -54,7 +54,7 @@ namespace YellowstonePathology.Business.Test.HER2AnalysisSummary
                     this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByISH.ASCOPre2014.1.xml";
                 }
             }
-            else if (her2AmplificationByISHTestOrder.Indicator.ToUpper() == "GASTRIC")
+            else if (her2AmplificationByISHTestOrder.Indicator.ToUpper().Contains("GASTRIC"))
             {
                 if (this.m_AccessionOrder.AccessionDate >= DateTime.Parse("1/1/2014") == true)
                 {

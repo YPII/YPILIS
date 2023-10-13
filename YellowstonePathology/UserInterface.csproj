@@ -42,7 +42,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>153</ApplicationRevision>
+    <ApplicationRevision>181</ApplicationRevision>
     <ApplicationVersion>11.0.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -219,6 +219,8 @@
     <Compile Include="Business\Audit.Model\AccessionOrderAudit.cs" />
     <Compile Include="Business\Audit.Model\AccountNoAudit.cs" />
     <Compile Include="Business\Audit.Model\AliquotAndStainOrderAuditCollection.cs" />
+    <Compile Include="Business\Audit.Model\PositiveProstateBxAudit.cs" />
+    <Compile Include="Business\Audit.Model\UrologyPositiveBxAudit.cs" />
     <Compile Include="Business\Audit.Model\MetastaticColorectalAudit.cs" />
     <Compile Include="Business\Audit.Model\ASCCPAudit.cs" />
     <Compile Include="Business\Audit.Model\BoneMarrowSummaryAudit.cs" />
@@ -479,6 +481,7 @@
     <Compile Include="Business\PanelSet.Model\BreastCancerIndex.cs" />
     <Compile Include="Business\PanelSet.Model\ChimerismPostTransplant.cs" />
     <Compile Include="Business\PanelSet.Model\DecipherProstateBiopsyGenomicClassifier.cs" />
+    <Compile Include="Business\PanelSet.Model\NeoTYPECervicalTumorProfile.cs" />
     <Compile Include="Business\PanelSet.Model\Tempus.cs" />
     <Compile Include="Business\PanelSet.Model\Signatera.cs" />
     <Compile Include="Business\PanelSet.Model\PDL122C3FDAForCervical.cs" />
@@ -1553,6 +1556,7 @@
     <Compile Include="Policy\DirectoryCollection.cs" />
     <Compile Include="Policy\IPFS.cs" />
     <Compile Include="UI\Billing\DailyBillingReportSheet.cs" />
+    <Compile Include="UI\FootPedal.cs" />
     <Compile Include="UI\ManagementReports\DepartmentOfHealthDailyCOVID.xaml.cs">
       <DependentUpon>DepartmentOfHealthDailyCOVID.xaml</DependentUpon>
     </Compile>

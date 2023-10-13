@@ -29,7 +29,8 @@ namespace YellowstonePathology.Business.Test.NeoTYPELungTumorProfile
 
             string taskDescription = "Gather materials and send out to Neo.";
 
-            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");            
+            YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
+            this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.Task(YellowstonePathology.Business.Task.Model.TaskAssignment.Histology, "Make an H&E slide for the pathologists to circle the tumor and return the block and slide to Flow for send out."));
             this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription, neogenomicsIrvine));
 
             this.m_TechnicalComponentFacility = neogenomicsIrvine;

@@ -78,12 +78,12 @@ namespace YellowstonePathology.Business.ASCCPRule
                 }                
                 else
                 {
-                    throw new Exception("An ASCCP rule for this scenario could not be found.");
+                    //throw new Exception("An ASCCP rule for this scenario could not be found.");
                 }
             }
             else
             {
-                throw new Exception("Not handled.");
+                //throw new Exception("Not handled.");
             }
         }
 

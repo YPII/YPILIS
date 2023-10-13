@@ -17,8 +17,7 @@ namespace YellowstonePathology.Business.Audit.Model
             this.Add(new AncillaryStudiesAreHandledAudit(surgicalTestOrder));
             this.Add(new SurgicalCaseHasQuestionMarksAudit(accessionOrder, surgicalTestOrder));
             this.Add(new SigningUserIsAssignedUserAudit(surgicalTestOrder));
-            this.Add(new SvhCaseHasMRNAndAccountNoAudit(accessionOrder));
-            //this.Add(new DistributionNotSetAudit(surgicalTestOrder));
+            this.Add(new SvhCaseHasMRNAndAccountNoAudit(accessionOrder));            
             this.Add(new CaseHasNotFoundClientAudit(accessionOrder));
             this.Add(new CaseHasNotFoundProviderAudit(accessionOrder));
             this.Add(new DistributionAvailableAudit(accessionOrder));
@@ -31,13 +30,13 @@ namespace YellowstonePathology.Business.Audit.Model
             this.Add(new LynchSyndromeAudit(accessionOrder));
             this.Add(new CCCPAudit(accessionOrder));
             this.Add(new BRAFMetastaticMelanomaAudit(accessionOrder));
-            this.Add(new HPV1618ForSiteAudit(accessionOrder));
-            //this.Add(new RASRAForMetastaticColorectalCancerAudit(accessionOrder));
+            this.Add(new HPV1618ForSiteAudit(accessionOrder));            
             this.Add(new PNHOnBoneMarrowSpecimenAudit(accessionOrder));
             this.Add(new PDL1NonsmallCellLungCancerAudit(accessionOrder));
             this.Add(new BoneMarrowSummaryAudit(accessionOrder));
             this.Add(new GISTAudit(accessionOrder));
             this.Add(new MetastaticColorectalAudit(surgicalTestOrder, accessionOrder));
+            this.Add(new PositiveProstateBxAudit(surgicalTestOrder, accessionOrder));
         }
 
         public AuditCollection GetAuditMessageCollection()
@@ -56,7 +55,8 @@ namespace YellowstonePathology.Business.Audit.Model
                     audit.GetType() == typeof(DistributionAvailableAudit) ||
                     audit.GetType() == typeof(CaseHasUnfinaledProspectiveReviewAudit) ||
                     audit.GetType() == typeof(GradedStainsAreHandledAudit) ||
-                    audit.GetType() == typeof(IntraoperativeConsultationCorrelationAudit))
+                    audit.GetType() == typeof(IntraoperativeConsultationCorrelationAudit) ||
+                    audit.GetType() == typeof(PositiveProstateBxAudit))
                 {
                     result.Add(audit);
                 }

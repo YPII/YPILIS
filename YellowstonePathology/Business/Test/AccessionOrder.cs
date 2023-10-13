@@ -1503,7 +1503,14 @@ namespace YellowstonePathology.Business.Test
 			}
 			else
 			{
-				this.CollectionDate = DateTime.Today;
+				if(clientOrder.ClientOrderDetailCollection.Count > 0)
+                {
+					this.CollectionDate = clientOrder.ClientOrderDetailCollection[0].CollectionDate;
+                }
+                else
+                {
+					this.CollectionDate = DateTime.Today;
+				}				
 			}
 				
 			this.CollectionTime = clientOrder.CollectionDate;

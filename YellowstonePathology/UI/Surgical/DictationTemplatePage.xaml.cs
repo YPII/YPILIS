@@ -327,5 +327,14 @@ namespace YellowstonePathology.UI.Surgical
             System.Drawing.Point ulCorner = new System.Drawing.Point(10, 10);
             e.Graphics.DrawImage(this.m_GrossCapture, ulCorner);           
         }
+
+        private void HyperLinkPrintGrossText_Click(object sender, RoutedEventArgs e)
+        {
+            FlowDocument doc = new FlowDocument(new Paragraph(new Run(this.m_SurgicalTestOrder.GrossX)));
+            //doc.Name = "FlowDoc.";
+            IDocumentPaginatorSource idpSource = doc;
+            PrintDialog printDlg = new PrintDialog();
+            printDlg.PrintDocument(idpSource.DocumentPaginator, "Gross Description");
+        }
     }
 }

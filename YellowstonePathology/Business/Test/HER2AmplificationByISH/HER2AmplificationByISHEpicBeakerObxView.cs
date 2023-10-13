@@ -27,7 +27,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
                 {
                     this.ASCOCAP2018(document, panelSetOrder);
                 }
-                else if (panelSetOrder.Indicator == "Gastric")
+                else if (panelSetOrder.Indicator.Contains("Gastric"))
                 {
                     this.GastricToXml(document, panelSetOrder);
                 }            

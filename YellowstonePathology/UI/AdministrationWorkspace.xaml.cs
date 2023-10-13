@@ -1288,15 +1288,12 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            Business.ReportNoCollection list = Business.Gateway.AccessionOrderGateway.GetReportNumbersBySQL("select pso.ReportNo from tblAccessionOrder ao join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo where ao.AccessionDate >= '2023-06-01' and reportNo like '%R%' and pso.technicalcomponentfacilityid like 'Neo%';");
-            foreach (Business.ReportNo reportNo in list)
-            {
-                bool exists = Business.Document.CaseDocument.DoesCaseDocXPSExist(reportNo.Value);
-                if (exists == false)
-                {
-                    Console.WriteLine(reportNo.Value);
-                }
-            }
+            Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo("23-27758");
+            Business.Specimen.Model.SpecimenOrder so = ao.SpecimenOrderCollection[0];
+            Gross.DictationTemplatePage page = new Gross.DictationTemplatePage(so, ao, Business.User.SystemIdentity.Instance);
+            Login.Receiving.LoginPageWindow window = new Login.Receiving.LoginPageWindow();
+            window.PageNavigator.Navigate(page);
+            window.Show();
         }
 
         private void BillStuff()

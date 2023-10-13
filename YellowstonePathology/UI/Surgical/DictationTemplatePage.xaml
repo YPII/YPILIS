@@ -54,7 +54,7 @@
                  FontSize="14" AcceptsTab="True"></TextBox>
 
         <TextBlock Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" HorizontalAlignment="Right">                    
-            <Hyperlink Click="HyperLinkShowCaseReport_Click">Print Gross Description</Hyperlink>
+            <Hyperlink Click="HyperLinkPrintGrossText_Click">Print Gross Description</Hyperlink>
         </TextBlock>
     </Grid>
 </UserControl>

@@ -193,6 +193,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Name:</TextBlock>
@@ -223,8 +224,8 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
+                    <TextBlock x:Name="TextBlockFootPedalInput" Grid.Column="0" Grid.Row="4" Text="{Binding Path=FootPedalInstance.Input}"></TextBlock>
                 </Grid>
-
             </TabItem>
         </TabControl>
 

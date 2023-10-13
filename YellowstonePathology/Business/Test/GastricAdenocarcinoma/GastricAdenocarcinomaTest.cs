@@ -18,7 +18,7 @@ namespace YellowstonePathology.Business.Test.GastricAdenocarcinoma
             this.m_HasProfessionalComponent = false;
             this.m_ResultDocumentSource = Business.PanelSet.Model.ResultDocumentSourceEnum.PublishedDocument;
             this.m_ReportNoLetter = new YellowstonePathology.Business.ReportNoLetterQ();
-            this.m_Active = true;
+            this.m_Active = false;
             this.m_ExpectedDuration = TimeSpan.FromDays(1);
             this.m_IsBillable = false;
             this.m_NeverDistribute = true;

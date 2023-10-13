@@ -50,8 +50,8 @@ namespace YellowstonePathology.Business.User
         private bool m_Administrator;
         private string m_PantherCOVIDLabelPrinter;
         private string m_FootPedalName;
-        private string m_FootPedalVendorId;
-        private string m_FootPedalProductId;
+        private int m_FootPedalVendorId;
+        private int m_FootPedalProductId;
 
         public UserPreference()
         {
@@ -576,8 +576,8 @@ namespace YellowstonePathology.Business.User
         }
 
         [PersistentProperty()]
-        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
-        public string FootPedalVendorId
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
+        public int FootPedalVendorId
         {
             get { return this.m_FootPedalVendorId; }
             set
@@ -591,8 +591,8 @@ namespace YellowstonePathology.Business.User
         }
 
         [PersistentProperty()]
-        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
-        public string FootPedalProductId
+        [PersistentDataColumnProperty(false, "11", "0", "int")]
+        public int FootPedalProductId
         {
             get { return this.m_FootPedalProductId; }
             set

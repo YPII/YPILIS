@@ -11,7 +11,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 		public static string BreastIndication = "Breast";
 		public static string BreastPrimaryIndication = "Breast Primary";
 		public static string BreastMetastaticIndication = "Breast Metastatic";
-		public static string GastricIndication = "Gastric";
+		public static string GastricIndication = "Gastric/Other Adenocarcinoma";
 		public static string EndometrialIndication = "Endometrial";
 
 		public HER2AmplificationByISHIndicatorCollection()

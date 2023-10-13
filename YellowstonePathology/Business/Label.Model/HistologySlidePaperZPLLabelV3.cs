@@ -62,14 +62,13 @@ namespace YellowstonePathology.Business.Label.Model
                 patientname = patientname + " " + this.m_FirstName.Substring(0, 1);
             }
 
-            //A@N,18,18,E:VERDANA.TTF
-            result.Append("^FWN");
-            result.Append("^FO83,030^A@N,30,30,E:VERDANA.TTF^FD" + this.m_ReportNo + "^FS");
-            result.Append("^FO83,080^BXN,03,200,24,24^FDHSLD" + this.m_SlideOrderId + "^FS");
-            result.Append("^FO83,185^A@N,25,25,E:VERDANA.TTF^FD" + patientname + "^FS");
-            result.Append("^FO83,220^A@N,25,25,E:VERDANA.TTF^FDYPI-Blgs^FS");
-            result.Append("^FO168,85^A@N,35,35,E:VERDANA.TTF^FD" + this.m_SlideLabel + "^FS");
-            result.Append("^FO170,130^A@N,25,25,E:VERDANA.TTF^FD" + truncatedTestName + "^FS");
+            //A@N,18,18,E:VERDANA.TTF            
+            result.Append("^FO35,033^A0N,42,42^FD" + this.m_ReportNo + "^FS");
+            result.Append("^FO35,080^BXN,03,200,24,24^FDHSLD" + this.m_SlideOrderId + "^FS");
+            result.Append("^FO35,185^A0N,25,25^FD" + patientname + "^FS");
+            result.Append("^FO35,220^A0N,25,25^FDYPI-Blgs^FS");
+            result.Append("^FO120,85^A0N,35,35^FD" + this.m_SlideLabel + "^FS");
+            result.Append("^FO122,130^A0N,25,25^FD" + truncatedTestName + "^FS");
 
             return result.ToString();        
         }

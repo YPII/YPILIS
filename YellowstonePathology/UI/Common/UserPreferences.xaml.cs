@@ -39,6 +39,7 @@ namespace YellowstonePathology.UI.Common
         private bool m_HostNameEnabled;
 
         private List<Device> m_USBDeviceList;
+        private FootPedal m_FootPedalInstance;
 
         public UserPreferences(YellowstonePathology.Business.User.UserPreference userPreference)
 		{            
@@ -69,6 +70,9 @@ namespace YellowstonePathology.UI.Common
 
             this.m_PageScannerCollection = new Business.Common.PageScannerCollection();
             this.DataContext = this;
+
+            this.m_FootPedalInstance = FootPedal.Instance;            
+
 			this.Loaded += new RoutedEventHandler(UserPreferences_Loaded);
             this.Closing += UserPreferences_Closing;
 		}
@@ -80,6 +84,11 @@ namespace YellowstonePathology.UI.Common
                 YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);
             }
             YellowstonePathology.Business.User.UserPreferenceInstance.Instance.Refresh();
+        }
+
+        public FootPedal FootPedalInstance
+        {
+            get { return this.m_FootPedalInstance; }
         }
 
         private void UserPreferences_Loaded(object sender, RoutedEventArgs e)
@@ -242,8 +251,8 @@ namespace YellowstonePathology.UI.Common
             if(hyperLink.Tag is HidSharp.HidDevice)
             {
                 HidSharp.HidDevice dev = (HidSharp.HidDevice)hyperLink.Tag;
-                this.m_UserPreference.FootPedalVendorId = Convert.ToString(dev.VendorID);
-                this.m_UserPreference.FootPedalProductId = dev.ProductID.ToString();
+                this.m_UserPreference.FootPedalVendorId = dev.VendorID;
+                this.m_UserPreference.FootPedalProductId = dev.ProductID;
                 this.m_UserPreference.FootPedalName = dev.GetProductName();
             }
             else

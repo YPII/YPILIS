@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-//using CefSharp;
 using System.Windows.Threading;
 
 namespace YellowstonePathology.UI
@@ -19,16 +18,10 @@ namespace YellowstonePathology.UI
     /// Interaction logic for BrowserWindow.xaml
     /// </summary>
     public partial class BrowserWindow : Window
-    {
-        //CefSharp.Wpf.WebView m_WebView;
-
+    {        
         public BrowserWindow()
         {
-            InitializeComponent();
-
-            //CefSharp.Settings settings = new Settings();
-            //settings.PackLoadingDisabled = true;
-            //CEF.Initialize(settings);                        
+            InitializeComponent();                                   
             Loaded += new RoutedEventHandler(BrowserWindow_Loaded);
         }
 
@@ -36,14 +29,7 @@ namespace YellowstonePathology.UI
         {
             while (true)
             {
-                this.Yield(1000);
-                //if (CEF.IsInitialized == true)
-                //{
-                //    this.m_WebView = new CefSharp.Wpf.WebView();                    
-                //    this.MainGrid.Children.Add(this.m_WebView);
-                //    this.m_WebView.Address = "http://localhost:3000/index.html";
-                //    break;
-                //}                
+                this.Yield(1000);                             
             }
         }
 

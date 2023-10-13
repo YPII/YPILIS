@@ -29,7 +29,7 @@ namespace YellowstonePathology.Business.Test.HER2AmplificationByISH
 					this.m_TemplateName = @"\\fileserver\Documents\ReportTemplates\XmlTemplates\HER2AmplificationByISH.ASCOPre2014.1.xml";
 				}
 			}
-			else if (panelSetOrderHer2ByIsh.Indicator.ToUpper() == "GASTRIC" || panelSetOrderHer2ByIsh.Indicator.ToUpper() == "ENDOMETRIAL")
+			else if (panelSetOrderHer2ByIsh.Indicator.ToUpper().Contains("GASTRIC") || panelSetOrderHer2ByIsh.Indicator.ToUpper() == "ENDOMETRIAL")
 			{
 				if (this.m_AccessionOrder.AccessionDate >= DateTime.Parse("1/1/2014") == true)
 				{

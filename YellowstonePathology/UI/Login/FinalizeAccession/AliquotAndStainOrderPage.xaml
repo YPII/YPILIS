@@ -135,6 +135,7 @@
                     <StackPanel.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Send Ventana Order" Click="MenuItemSendVentanaOrder_Click" Tag="{Binding}"></MenuItem>
+                            <MenuItem Header="Print ZPL Slide Label" Click="MenuItemPrintZPLSlideLabel_Click" Tag="{Binding}"></MenuItem>
                         </ContextMenu>
                     </StackPanel.ContextMenu>
                     <Image Source="/Resources/out2.png" Width="17" Height="17" Visibility="{Binding Path=Element[ClientAccessioned].Value, Converter={StaticResource BooleanVisibilityConverter}}"></Image>

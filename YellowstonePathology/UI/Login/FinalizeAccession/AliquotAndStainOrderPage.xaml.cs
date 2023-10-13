@@ -1000,5 +1000,22 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         {
             this.Aliquot = new Business.Specimen.Model.CESlide(Business.Specimen.Model.AliquotLabelType.PaperLabel);
         }
+
+        private void MenuItemPrintZPLSlideLabel_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem menuItem = (MenuItem)sender;
+            XElement xElement = XElement.Parse(menuItem.Tag.ToString());
+
+            string slideOrderId = xElement.Element("SlideOrderId").Value;
+            string [] dotSplit = slideOrderId.Split('.');
+            
+            Business.Label.Model.HistologySlidePaperZPLLabelV3 label = new Business.Label.Model.HistologySlidePaperZPLLabelV3(slideOrderId, this.m_PanelSetOrder.ReportNo, 
+                this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, "H&E", dotSplit[1], "YPI Blgs, Mt", false, false);
+            string xx = label.GetCommandWithOffset(0);
+            string result = $"^XA{xx}^XZ";
+
+            Business.Label.Model.ZPLPrinterTCP printer = new Business.Label.Model.ZPLPrinterTCP("10.1.1.21");
+            printer.Print(result);
+        }
     }
 }

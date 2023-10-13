@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace YellowstonePathology.Business.PanelSet.Model
 {
-    public class NeoComprehensiveMyeloidDisorders : YellowstonePathology.Business.PanelSet.Model.PanelSet
+    public class NeoTYPECervicalTumorProfile : YellowstonePathology.Business.PanelSet.Model.PanelSet
     {
-        public NeoComprehensiveMyeloidDisorders()
+        public NeoTYPECervicalTumorProfile()
         {
-            this.m_PanelSetId = 440;
-            this.m_PanelSetName = "Neo Comprehensive Myeloid Disorders";
+            this.m_PanelSetId = 445;
+            this.m_PanelSetName = "NeoTYPE Cervical Tumor Profile";
             this.m_CaseType = Business.CaseType.Molecular;
             this.m_HasTechnicalComponent = true;
             this.m_HasProfessionalComponent = false;
@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
             this.m_AllowMultiplePerAccession = true;
             this.m_NeverDistribute = false;
             this.m_AcceptOnFinal = true;
-            this.m_HasNoOrderTarget = false;
+            this.m_HasNoOrderTarget = true;
 
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
