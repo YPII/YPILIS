@@ -16,6 +16,7 @@ using System.Xml.Linq;
 using System.Drawing.Imaging;
 using System.Drawing;
 using System.Drawing.Printing;
+using YellowstonePathology.Business.ClientOrder.Model;
 
 namespace YellowstonePathology.UI
 {
@@ -329,6 +330,23 @@ namespace YellowstonePathology.UI
         private void ButtonPrintLog_Click(object sender, RoutedEventArgs e)
         {
             this.PrintUIElement(this.ListViewClientOrders);
+        }
+
+        private void MenuItemConvertYDASpecimen_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.ListViewClientOrders.SelectedItem != null)
+            {
+                OrderBrowserListItem item = (OrderBrowserListItem)this.ListViewClientOrders.SelectedItem;                
+                ClientOrder clientOrder = Business.Persistence.DocumentGateway.Instance.PullClientOrder(item.ClientOrderId, this);
+
+                string[] lines = clientOrder.SpecialInstructions.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                //Skin, right proximal pretibial region, shave biopsy
+                string description = $"Skin,{lines[1]}, {lines[0]}";
+                description = description.Replace("bx", "biospy");
+                description = description.Replace("Specimen Source: A) ", "");
+                description = description.Replace("Specimen Label: ", "");
+                MessageBox.Show(description);
+            }
         }
     }    
 }

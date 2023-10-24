@@ -1,0 +1,7 @@
+﻿Dear Healthcare Provider,
+
+We are unable to process the Pap specimen on your patient PATIENT_NAME. There was some missing information.  Please provide the missing information below and fax this letter back.
+
+MISSING_INFORMATION
+
+Thank You.

@@ -1,0 +1,24 @@
+﻿<Window x:Class="YellowstonePathology.UI.Cutting.CuttingWorkspaceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized">    
+        
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>            
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Menu Name="MenuFile" Grid.Column="0" Grid.Row="0" Visibility="Collapsed">
+            <MenuItem Header="_File" Name="MenuItemFile">
+                <MenuItem Header="Preferences" Click="MenuItemPreferences_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        
+        <ContentControl Name="MainContent" Grid.Column="0" Grid.Row="1"></ContentControl>        
+	</Grid>
+</Window>

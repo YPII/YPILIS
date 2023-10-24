@@ -1,0 +1,17 @@
+﻿<Window x:Class="YellowstonePathology.UI.Common.ScanTest"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Scan Test" Height="150" Width="300" FontSize="12">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+		<TextBox Name="TextBoxInstruction" Grid.Row="0" Margin="2" Text="{Binding Path=Message}"></TextBox>
+		<StackPanel Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Center">
+			<Button Name="ButtonTest" Height="30" Width="50" Margin="2" Click="ButtonTest_Click">Test</Button>
+			<Button Name="ButtonClose" Height="30" Width="50" Margin="2" Click="ButtonClose_Click">Close</Button>
+		</StackPanel>
+	</Grid>
+</Window>

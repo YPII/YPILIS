@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PanelSetOrderExtensionDocument"
+    targetNamespace="http://tempuri.org/PanelSetOrderExtensionDocument.xsd"
+    elementFormDefault="qualified"           
+    xmlns="http://schemas.ypii.com/PanelSetOrder/ExtensionDocument"
+    xmlns:mstns="http://tempuri.org/PanelSetOrderExtensionDocument.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+  <xs:complexType name="CytologyResultType">
+    <xs:sequence>
+      <xs:element name="SpecimenAdequacy" type="xs:string"/>
+      <xs:element name="ScreeningImpression" type="xs:string"/>      
+      <xs:element name="OtherConditions" type="xs:string"/>
+      <xs:element name="ReportComment" type="xs:string"/>
+      <xs:element name="InternalComment" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="PeerReviewType">
+    <xs:sequence>
+      <xs:element name="RequestedById" type="xs:positiveInteger"/>
+      <xs:element name="RequestedByName" type="xs:string"/>
+      <xs:element name="ReviewType" type="xs:string"/>
+      <xs:element name="Instructions" type="xs:string"/>
+      <xs:element name="Reviewer" type="ReviewerType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ReviewerType">    
+      <xs:sequence>
+        <xs:element name="ReviewerId" type="xs:positiveInteger"/>
+        <xs:element name="ReviewerName" type="xs:string"/>
+        <xs:element name="Comment" type="xs:string"/>
+      </xs:sequence>    
+  </xs:complexType>
+
+  <xs:element name="Document">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="CytologyResult" type="CytologyResultType" minOccurs="0"/>
+        <xs:element name="PeerReview" type="PeerReviewType" minOccurs="0"/>        
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>  
+  
+</xs:schema>

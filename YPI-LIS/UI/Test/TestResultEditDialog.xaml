@@ -1,0 +1,31 @@
+﻿<Window x:Class="YellowstonePathology.UI.Test.TestResultEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Test Result Edit Dialog" Height="300" Width="400" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid Margin="5">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<TextBlock Grid.Column="0" Grid.Row="0" Margin="3" TextAlignment="Right">Test Name:</TextBlock>
+		<TextBlock Grid.Column="1" Grid.Row="0" Margin="3" TextAlignment="Left" Text="{Binding Path=TestName}" />
+
+		<TextBlock Grid.Column="0" Grid.Row="1" Margin="3" Grid.ColumnSpan="2" TextAlignment="Center">Result:</TextBlock>
+
+		<TextBox Grid.Column="0" Grid.Row="2" Margin="3" Grid.ColumnSpan="2" TextAlignment="Left" Text="{Binding Path=Result}" AcceptsReturn="True" TextWrapping="Wrap" />
+		
+		<StackPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Orientation="Horizontal">
+			<Button Margin="3" Click="ButtonOk_Click">
+				<TextBlock Margin="10,4,10,4">OK</TextBlock>
+			</Button>
+		</StackPanel>
+	</Grid>
+</Window>

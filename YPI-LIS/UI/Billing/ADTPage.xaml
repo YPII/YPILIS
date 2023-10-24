@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Billing.ADTPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800">
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="ADT Page" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+		<ScrollViewer Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto">
+			<Grid>
+				<Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+				<Grid Grid.Row="0" Grid.Column="0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <ListView Name="ListViewADTItems" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ItemsSource="{Binding Path=ADTMessages.Messages}" VerticalAlignment="Stretch" SelectionChanged="ListViewADT_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=DateReceived}" Header="Date" Width="120"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=PFirstName}" Header="First" Width="120"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=PLastName}" Header="Last" Width="120"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=AccountNo}" Header="MRN" Width="120"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=MessageTypeComment}" Header="Type" Width="200"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=PV1Segment.ConvertedPatientType}" Header="Patient Type" Width="120"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=HL7}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
+                    
+                </Grid>
+				
+			</Grid>
+		</ScrollViewer>
+        
+		<Border Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <Button Name="ButtonBack" Grid.Row="2" Margin="5,5,5,5" Click="ButtonSet_Click" Width="100" Height="40" HorizontalAlignment="Left">Set</Button>
+
+    </Grid>
+</UserControl>

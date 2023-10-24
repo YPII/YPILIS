@@ -1,0 +1,58 @@
+﻿<Window x:Class="YellowstonePathology.UI.Login.LabEventLogEntryDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Event Entry Dialog" Height="446" Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>           
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,2,2">Event Id:</TextBlock>
+		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=OrderCommentLog.OrderCommentId}" HorizontalAlignment="Stretch" Margin="2,2,2,2" IsEnabled="False"></TextBox>
+        
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,2,2">Log date:</TextBlock>
+		<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=OrderCommentLog.LogDate}" HorizontalAlignment="Stretch" Margin="2,2,2,2" IsEnabled="False"></TextBox>
+        
+        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,2,2">Specimen Log Id:</TextBlock>
+		<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=OrderCommentLog.SpecimenLogId}" HorizontalAlignment="Stretch" Margin="2,2,2,2" IsEnabled="False"></TextBox>
+        
+        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,2,2">Master Accession No:</TextBlock>
+		<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=OrderCommentLog.MasterAccessionNo}" HorizontalAlignment="Stretch" Margin="2,2,2,2" IsEnabled="False"></TextBox>
+        
+        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,2,2">Logged By:</TextBlock>
+		<TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=OrderCommentLog.LoggedBy}" HorizontalAlignment="Stretch" Margin="2,2,2,2" IsEnabled="False"></TextBox>
+        
+        <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,2,2">Category:</TextBlock>
+		<TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=OrderCommentLog.Category}" HorizontalAlignment="Stretch" Margin="2,2,2,2" IsEnabled="False"></TextBox>
+        
+        <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,2,2">Action:</TextBlock>
+		<TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Path=OrderCommentLog.Action}" HorizontalAlignment="Stretch" Margin="2,2,2,2" IsEnabled="False"></TextBox>
+        
+        <TextBlock Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2,2,2,2">Description:</TextBlock>
+		<TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Path=OrderCommentLog.Description}" HorizontalAlignment="Stretch" Margin="2,2,2,2"></TextBox>
+        
+        <TextBlock Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="2,2,2,2">Comment:</TextBlock>
+		<TextBox Name="TextBoxComment" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=OrderCommentLog.Comment}" 
+                 HorizontalAlignment="Stretch" Margin="2,2,2,2" TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
+        
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="5,5,5,5">
+            <Button Click="ButtonOK_Click" Height="30" Width="50" Margin="2,2,2,2">OK</Button>
+            <Button Click="ButtonCancel_Click" Height="30" Width="50" Margin="2,2,2,2">Cancel</Button>
+        </StackPanel>
+        
+    </Grid>
+</Window>

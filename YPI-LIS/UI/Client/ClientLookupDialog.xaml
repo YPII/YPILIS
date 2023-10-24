@@ -1,0 +1,38 @@
+﻿<Window x:Class="YellowstonePathology.UI.Client.ClientLookupDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI.Client"
+        mc:Ignorable="d"
+        Title="Client Lookup" Height="400" Width="610">
+    <Grid Margin="2,5,2,2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Client Name:" />
+        <TextBox Grid.Column="1" Grid.Row="0" Name="TextBoxClientName" Margin="2,2,2,2" HorizontalAlignment="Stretch" 
+                 VerticalContentAlignment="Center" KeyUp="TextBoxClientName_KeyUp" />
+
+        <ListView Name="ListViewClients" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="2,2,2,2" MouseDoubleClick="ListViewClients_MouseDoubleClick" 
+                              ItemsSource="{Binding Path=ClientCollection}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Client Name" Width="300" DisplayMemberBinding="{Binding Path=ClientName}" />
+                    <GridViewColumn Header="Phone" Width="130" DisplayMemberBinding="{Binding Path=Telephone, Converter={StaticResource PhoneNumberConverter}}" />
+                    <GridViewColumn Header="Fax" Width="130" DisplayMemberBinding="{Binding Path=Fax, Converter={StaticResource PhoneNumberConverter}}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Grid.Row="2" Grid.Column="1" Margin="5" Height="30" Width="100" HorizontalAlignment="Right" Content="OK" Click="ButtonOK_Click" />
+    </Grid>
+</Window>

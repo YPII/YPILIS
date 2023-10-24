@@ -42,7 +42,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>181</ApplicationRevision>
+    <ApplicationRevision>182</ApplicationRevision>
     <ApplicationVersion>11.0.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -91,26 +91,7 @@
       <HintPath>dll\Interop.FAXCOMEXLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Excel.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Office.Interop.Outlook" />
-    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Word.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Bson, Version=1.7.0.4714, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dll\MongoDB.Bson.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.8\Assemblies\v4.5\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="NHunspell">
       <HintPath>dll\NHunspell.dll</HintPath>
     </Reference>
@@ -123,9 +104,6 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -146,12 +124,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Workflow.Activities">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Workflow.ComponentModel">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
@@ -1037,7 +1009,6 @@
     <Compile Include="Business\HL7View\ResultStatusEnum.cs" />
     <Compile Include="Business\HL7View\ResultViewFactory.cs" />
     <Compile Include="Business\HL7View\SurgicalObxView.cs" />
-    <Compile Include="Business\HL7View\VentanaStainOrderOld.cs" />
     <Compile Include="Business\HL7View\WYDOH\WYDOHClient.cs" />
     <Compile Include="Business\HL7View\WYDOH\WYDOHMSHView.cs" />
     <Compile Include="Business\HL7View\WYDOH\WYDOHOBRView.cs" />
@@ -1924,7 +1895,6 @@
     <Compile Include="Business\Persistence\InsertCommandBuilder.cs" />
     <Compile Include="Business\Persistence\InsertedObjectFinder.cs" />
     <Compile Include="Business\Persistence\IntPropertyBridge.cs" />
-    <Compile Include="Business\Persistence\JSONDeserializer.cs" />
     <Compile Include="Business\Persistence\JSONIndenter.cs" />
     <Compile Include="Business\Persistence\JSONObjectStreamWriter.cs" />
     <Compile Include="Business\Persistence\JSONObjectWriter.cs" />
@@ -2002,7 +1972,6 @@
     <Compile Include="Business\ReportDistribution.Model\PrintCaseReport.cs" />
     <Compile Include="Business\ReportDistribution.Model\ReportDistributionLogEntry.cs" />
     <Compile Include="Business\ReportDistribution.Model\ReportDistributionLogEntryCollection.cs" />
-    <Compile Include="Business\ReportDistribution.Model\ScheduledFaxSubmission.cs" />
     <Compile Include="Business\ReportDistribution.Model\TestOrderReportDistribution.cs" />
     <Compile Include="Business\ReportDistribution.Model\TestOrderReportDistributionCollection.cs" />
     <Compile Include="Business\ReportDistribution.Model\TestOrderReportDistributionLog.cs" />
@@ -2028,8 +1997,6 @@
     <Compile Include="Business\Requisition.cs" />
     <Compile Include="Business\Rules\Amendment\FinalAmendment.cs" />
     <Compile Include="Business\Rules\Amendment\PendingStudies.cs" />
-    <Compile Include="Business\Rules\BaseRules.cs" />
-    <Compile Include="Business\Rules\Billing\RulesSetBillingType.cs" />
     <Compile Include="Business\Rules\Cytology\AddCytologyQCPanelOrder.cs" />
     <Compile Include="Business\Rules\Cytology\AddScreeningReview.cs" />
     <Compile Include="Business\Rules\Cytology\AssignScreening.cs" />
@@ -2051,16 +2018,12 @@
     </Compile>
     <Compile Include="Business\Rules\MethodResult.cs" />
     <Compile Include="Business\Rules\PanelOrder\Accept.cs" />
-    <Compile Include="Business\Rules\PanelOrder\RulesAcceptPeerReviewResults.cs" />
     <Compile Include="Business\Rules\PanelSetOrder\ReassignCase.cs" />
     <Compile Include="Business\Rules\PanelSetOrder\RulesPanelSetOrderFinalCommonV2.cs" />
-    <Compile Include="Business\Rules\PanelSetOrder\RulesSignatureButtonText.cs" />
     <Compile Include="Business\Rules\Rule.cs" />
-    <Compile Include="Business\Rules\RuleBrowserUI.cs" />
     <Compile Include="Business\Rules\RuleExecutionStatus.cs" />
     <Compile Include="Business\Rules\RuleExecutionStatusItem.cs" />
     <Compile Include="Business\Rules\RuleExecutionStatusList.cs" />
-    <Compile Include="Business\Rules\RuleManager.cs" />
     <Compile Include="Business\Rules\RulesClassItem.cs" />
     <Compile Include="Business\Rules\RuleSet.cs" />
     <Compile Include="Business\Rules\SimpleMessageRule.cs" />
@@ -3466,7 +3429,6 @@
     <Compile Include="UI\Gross\SpecimenSelectionPage.xaml.cs">
       <DependentUpon>SpecimenSelectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\ImportADRData.cs" />
     <Compile Include="UI\SVHLabelDialog.xaml.cs">
       <DependentUpon>SVHLabelDialog.xaml</DependentUpon>
     </Compile>
@@ -4346,15 +4308,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Test\TCellSubsetAnalysisResultPath.cs" />
-    <Compile Include="UI\Test\TecanImportExportPage.xaml.cs">
-      <DependentUpon>TecanImportExportPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Test\TCellRecepterGammaGeneRearrangementResultPage.xaml.cs">
       <DependentUpon>TCellRecepterGammaGeneRearrangementResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Test\TCellRecepterGammaGeneRearrangementResultPath.cs" />
-    <Compile Include="UI\Test\TecanSamplePlacementQueue.cs" />
-    <Compile Include="UI\Test\TecanSample.cs" />
     <Compile Include="UI\Test\TechInitiatedPeripheralSmearResultPage.xaml.cs">
       <DependentUpon>TechInitiatedPeripheralSmearResultPage.xaml</DependentUpon>
     </Compile>
@@ -4611,9 +4568,6 @@
     <Compile Include="UI\Gross\HistologyGrossPath.cs" />
     <Compile Include="UI\Gross\PrintBlockPage.xaml.cs">
       <DependentUpon>PrintBlockPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\HistologyGrossTemplateDialog.xaml.cs">
-      <DependentUpon>HistologyGrossTemplateDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\HistologySlideLabelDocument.cs" />
     <Compile Include="UI\Converter\BooleanStringConverter.cs" />
@@ -4891,8 +4845,6 @@
     <Compile Include="UI\Test\TestResultEditDialog.xaml.cs">
       <DependentUpon>TestResultEditDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Ventana.cs" />
-    <Compile Include="UI\VentanaGrpc.cs" />
     <Compile Include="UI\WatchBitmap.xaml.cs">
       <DependentUpon>WatchBitmap.xaml</DependentUpon>
     </Compile>
@@ -5083,9 +5035,6 @@
     <Compile Include="UI\RuleExecutionStatusDialog.xaml.cs">
       <DependentUpon>RuleExecutionStatusDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\RulesBrowser.xaml.cs">
-      <DependentUpon>RulesBrowser.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Surgical\SpecimenSelectionV2.xaml.cs">
       <DependentUpon>SpecimenSelectionV2.xaml</DependentUpon>
     </Compile>
@@ -5207,9 +5156,7 @@
     <Resource Include="Business\Document\SharedHeaderFooter.xml">
       <SubType>Designer</SubType>
     </Resource>
-    <Resource Include="Business\Rules\Billing\RulesSetBillingType.xml" />
     <Resource Include="Business\Rules\PanelOrder\RulesAcceptPeerReviewResults.xml" />
-    <Resource Include="Business\Rules\PanelSetOrder\RulesSignatureButtonText.xml" />
     <Resource Include="Business\XMLTemplates\AccessionSummaryBreastCancer.xml" />
     <Resource Include="Business\XMLTemplates\AccessionSummaryColorectalCancer.xml" />
     <Resource Include="Business\XMLTemplates\AccessionSummaryHematoPathology.xml" />
@@ -5581,8 +5528,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\PdfViewerControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="UI\ProstateBiopsyKitDialog.xaml">
       <SubType>Designer</SubType>
@@ -6375,10 +6322,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Test\TCellSubsetAnalysisResultPage.xaml" />
-    <Page Include="UI\Test\TecanImportExportPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="UI\Test\TCellRecepterGammaGeneRearrangementResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -6636,10 +6579,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Gross\PrintBlockPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\HistologyGrossTemplateDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -7097,12 +7036,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\RulesBrowser.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="UI\Surgical\SpecimenSelectionV2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -7494,7 +7427,6 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
@@ -7509,15 +7441,6 @@
   <ItemGroup>
     <PackageReference Include="CefSharp.Wpf">
       <Version>97.1.60</Version>
-    </PackageReference>
-    <PackageReference Include="Google.Protobuf">
-      <Version>3.14.0</Version>
-    </PackageReference>
-    <PackageReference Include="Grpc">
-      <Version>1.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Grpc.Tools">
-      <Version>1.1.0</Version>
     </PackageReference>
     <PackageReference Include="HidSharp">
       <Version>2.1.0</Version>
@@ -7534,11 +7457,29 @@
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream">
       <Version>1.4.1</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Office.Interop.Excel">
+      <Version>15.0.4795.1001</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Office.Interop.Outlook">
+      <Version>15.0.4797.1004</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Office.Interop.Word">
+      <Version>15.0.4797.1004</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2">
       <Version>1.0.1072.54</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools">
       <Version>10.0.22000.194</Version>
+    </PackageReference>
+    <PackageReference Include="MongoDB.Bson">
+      <Version>2.22.0</Version>
+    </PackageReference>
+    <PackageReference Include="MySql.Data">
+      <Version>8.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="netstandard-System.Data.Linq">
+      <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="NETStandard.Library">
       <Version>2.0.3</Version>
@@ -7574,7 +7515,10 @@
       <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Drawing.Common">
-      <Version>5.0.0</Version>
+      <Version>7.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.IO.Ports">
+      <Version>7.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation">
       <Version>4.3.0</Version>

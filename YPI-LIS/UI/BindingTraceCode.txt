@@ -1,0 +1,3 @@
+﻿xmlns:diagnostics="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+
+diagnostics:PresentationTraceSources.TraceLevel=High

@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Monitor.DashboardPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YellowstonePathology.UI.Monitor"
+             xmlns:my="clr-namespace:YellowstonePathology.Business.Document;assembly=BusinessObjects">
+    <Grid Background="#e5fee7">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Margin="10,10,10,10" FontSize="24">Dashboard</TextBlock>
+            <TextBlock Margin="10,10,10,10" FontSize="24" Text="{Binding Path=DashboardDate,Converter={StaticResource ShortDateTimeConverter}}"></TextBlock>
+        </StackPanel>
+
+        <Grid Grid.Column="0" Grid.Row="2" Background="#e5fee7" Margin ="5, 5, 5, 5" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ListView Margin="10" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=BlockCountCollection}">
+                <ListView.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="36" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=DateDisplayString}" Header="Date" Width="400"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=NMHBlocks}" Header="NMH" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=YPIBlocks}" Header="YPI" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=YPIPaths}" Header=" YPI Paths" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=BozemanBlocks}" Header="Bozeman" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=BozemanPaths}" Header="Bzm Paths" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=BlocksPerPath}" Header="Blcks/Path" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=BlocksPerPathBozeman}" Header="Blcks/Path/Bzm" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=BlocksToSend}" Header="Send" Width="100"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,12 @@
+﻿<Window x:Class="YellowstonePathology.UI.Test.AutopsyResultDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AutopsyResultDialog" WindowState="Maximized" WindowStyle="ToolWindow">
+    <Grid>
+        <TabControl Margin="2,2,2,2">
+            <TabItem Header="Worksheet"></TabItem>
+            <TabItem Header="Preliminary Report"></TabItem>
+            <TabItem Header="Final Report"></TabItem>
+        </TabControl>
+    </Grid>
+</Window>

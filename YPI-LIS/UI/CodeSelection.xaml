@@ -1,0 +1,52 @@
+﻿<Window x:Class="YellowstonePathology.UI.CodeSelection" 
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		Title="Code Selection" Height="668" Width="333" WindowStyle="ToolWindow"
+    >
+	<Grid KeyUp="Grid_KeyUP" KeyDown="Grid_KeyDown">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="2,2,2,2">
+			<TextBlock Margin="2,2,2,2" FontWeight="Bold" VerticalAlignment="Center">ICD9 Code:</TextBlock>
+			<TextBox Name="TextBoxIcd9Code" Margin="2,2,2,2" Height="22" Width="200"></TextBox>
+		</StackPanel>
+
+		<ListView Name="ListViewCptCodes" IsSynchronizedWithCurrentItem="True" Margin="2,2,2,2" Height="540" Grid.Column="0" Grid.Row="1">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Quantity">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal">
+									<ComboBox Width="50" Margin="3" Text="{Binding Path=Quantity}" IsEditable="True">
+										<ComboBoxItem>1</ComboBoxItem>
+										<ComboBoxItem>2</ComboBoxItem>
+										<ComboBoxItem>3</ComboBoxItem>
+									</ComboBox>
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn DisplayMemberBinding="{Binding Path=CptCode.Code}" Header="Code" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CptCode.Modifier}" Header="Modifier" Width="100"/>
+                </GridView>
+			</ListView.View>
+		</ListView>
+
+		<StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" Margin="2,2,2,2">
+			<TextBlock Margin="2,2,2,2">Add To All Specimen:</TextBlock>
+			<CheckBox Name="CheckBoxAddToAllSpecimen" Margin="2,2,2,2"></CheckBox>
+		</StackPanel>
+
+		<Button Grid.Column="0" Grid.Row="3" Click="ButtonOk_Click" Height="21" Width="75" Margin="2,2,2,2" HorizontalAlignment="Left">OK</Button>
+		<Button Grid.Column="0" Grid.Row="3" Click="ButtonCancel_Click" Height="21" Width="75" Margin="2,2,2,2" HorizontalAlignment="Right">Cancel</Button>
+	</Grid>
+</Window>

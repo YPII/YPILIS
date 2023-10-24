@@ -1,0 +1,87 @@
+﻿<Window x:Class="YellowstonePathology.UI.Client.ClientDistributionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI.Client"
+        mc:Ignorable="d"
+        Title="ClientDistributionDialog" Height="550" Width="1400" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Margin="2,2,2,2">Client Name:</TextBlock>
+            <TextBlock Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=Client.ClientName}" />
+
+            <TextBlock Grid.Column="2" Margin="2,2,2,2">Distribution Type:</TextBlock>
+            <TextBlock Grid.Column="3" Margin="2,2,2,2" Text="{Binding Path=Client.DistributionType}" />
+
+            <TextBlock Grid.Column="4" Margin="2,2,2,2">Alt. DistributionType:</TextBlock>
+            <TextBlock Grid.Column="5" Margin="2,2,2,2" Text="{Binding Path=Client.AlternateDistributionType}" />
+
+            <TextBlock Grid.Column="6" Margin="2,2,2,2">New DistributionType:</TextBlock>
+            <ComboBox Name="ComboboxDistributionTypes" Grid.Column="7" Margin="2,2,2,2" ItemsSource="{Binding Path=DistributionTypeList}" 
+                      SelectedValue="{Binding Path=Client.DistributionType}" />
+
+            <TextBlock Grid.Column="8" Margin="2,2,2,2">New Alt. Dist. Type:</TextBlock>
+            <ComboBox Grid.Column="9" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=DistributionTypeList}"
+							  SelectedValue="{Binding Path=SuggestedAlternateDistributionType}" />
+        </Grid>
+
+        <ListView Grid.Column="0" Grid.Row="1" Margin="2,2,5,2" Name="ListViewClientDistributions"
+				  ItemsSource="{Binding Path=ClientDistributionCollection}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete Distribution" Click="MenuItemDeleteDistribution_Click" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianClientDistribution.PhysicianClientDistributionID}" Width="80" Header="PCDist Id" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientPhysicianClientId}" Width="170" Header="PC Id" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionClientPhysicianClientId}" Width="170" Header="Dist PC Id" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Width="270" Header="Client" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DistributionClientName}" Width="270" Header=" Distribution Client" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DisplayName}" Width="170" Header="Provider" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianClientDistribution.DistributionType}" Width="100" Header="Distribution Type" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=SuggestedDistributionType}" Width="100" Header=" New Distribution Type" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid  Grid.Column="0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="ButtonShowDistributionChanges"  Height="30" Width="120" Margin="2,2,10,2" HorizontalAlignment="Left" Click="ButtonShowDistributionChanges_Click">Show Changes</Button>
+                <Button Name="ButtonChangeDistribution" Grid.Column="0" Grid.Row="0" Height="30" Width="120" Margin="10,2,10,2" HorizontalAlignment="Right" Click="ButtonChangeDistribution_Click">Change Distribution</Button>
+            </StackPanel>
+            
+            <Button Name="ButtonOK" Grid.Column="1" Grid.Row="0" Height="30" Width="100" Margin="50,2,2,2" HorizontalAlignment="Right" Click="ButtonOK_Click">OK</Button>
+        </Grid>
+    </Grid>
+</Window>

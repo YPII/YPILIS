@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:ms="urn:schemas-microsoft-com:mapping-schema"
+			xmlns:sql="urn:schemas-microsoft-com:xml-sql" id="LabEventLogSchema" sql:is-mapping-schema="1">
+  
+  <xsd:element name="LabEventLog" ms:relation="tblLabEventLog">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="LabEventLogId" ms:field="LabEventLogId" ms:identity="ignore" type="xsd:int"></xsd:element>
+        <xsd:element name="LabEventId" ms:field="LabEventId" type="xsd:int"></xsd:element>
+        <xsd:element name="SpecimenLogId" ms:field="SpecimenLogId" type="xsd:int"></xsd:element>
+        <xsd:element name="MasterAccessionNo" ms:field="MasterAccessionNo" type="xsd:int"></xsd:element>
+        <xsd:element name="AliquotOrderId" ms:field="AliquotOrderId" type="xsd:int"></xsd:element>
+        <xsd:element name="Category" ms:field="Category" type="xsd:string"></xsd:element>
+        <xsd:element name="Action" ms:field="Action" type="xsd:string"></xsd:element>
+        <xsd:element name="LogDate" ms:field="LogDate" type="xsd:dateTime" ms:datatype="dateTime"></xsd:element>
+        <xsd:element name="ClientId" ms:field="ClientId" type="xsd:int"></xsd:element>
+        <xsd:element name="Description" ms:field="Description" type="xsd:string"></xsd:element>
+        <xsd:element name="Comment" ms:field="Comment" type="xsd:string"></xsd:element>
+        <xsd:element name="LoggedById" ms:field="LoggedById" type="xsd:int"></xsd:element>
+        <xsd:element name="LoggedBy" ms:field="LoggedBy" type="xsd:string"></xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+</xsd:schema>

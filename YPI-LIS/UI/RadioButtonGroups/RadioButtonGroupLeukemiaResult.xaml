@@ -1,0 +1,9 @@
+<UserControl x:Class="YellowstonePathology.UI.RadioButtonGroups.RadioButtonGroupLeukemiaResult"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+			<TextBlock FontWeight="Bold" Margin="3">Leukemia Result</TextBlock>
+			<RadioButton Name="radioButtonNormal" Click="RadioButtonNormal_Click" Content="Normal" Margin="3"></RadioButton>
+			<RadioButton Name="radioButtonAbnormal" Click="RadioButtonAbnormal_Click" Content="Abnormal" Margin="3"></RadioButton>
+    </StackPanel>
+</UserControl>

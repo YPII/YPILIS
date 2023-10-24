@@ -1,0 +1,582 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>	  
+    <RootNamespace>YellowstonePathology</RootNamespace>
+    <OutputType>WinExe</OutputType>
+    <MinFrameworkVersionRequired>3.0</MinFrameworkVersionRequired>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <ManifestCertificateThumbprint>4C14207605FEA3771245BE4157A0ECF2637A8347</ManifestCertificateThumbprint>
+    <ManifestKeyFile>UserInterface_TemporaryKey.pfx</ManifestKeyFile>
+    <ApplicationExtension>.application</ApplicationExtension>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <ApplicationIcon>YPI.ico</ApplicationIcon>
+    <PublishUrl>\\fileserver\data\YPIILIS\</PublishUrl>
+    <Install>false</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>182</ApplicationRevision>
+    <ApplicationVersion>11.0.2.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <NoWarn>
+    </NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\Program Files\Yellowstone Pathology Institute\apprelease\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mongo|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Mongo\</OutputPath>
+    <DefineConstants>TRACE;MONGO</DefineConstants>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NHunspell">
+      <HintPath>dll\NHunspell.dll</HintPath>
+    </Reference>
+    <Reference Update="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Update="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit.Extended, Version=1.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="UI\Login\SlideLabelBindingSource.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <BaseApplicationManifest Include="Properties\app.manifest" />
+    <EmbeddedResource Include="Business\XmlSchema\BarcodeScanSchema.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Update="Business\XmlSchema\ComplexTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="Business\XmlSchema\LabEventLogSchema.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Update="Business\XmlSchema\OrderAcknowledgement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Business\XmlSchema\OrderInstructions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Business\XmlSchema\PanelSetOrderExtensionDocument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Business\XmlSchema\PatientHistory.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Business\XmlSchema\SpecimenLogExtensionDocument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <EmbeddedResource Include="UI\MaterialTracking\FedXTrackingRequest.json" />
+    <Resource Include="Business\Document\CaseHeader.xml" />
+    <Resource Include="Business\Document\DnaReport.xml" />
+    <Resource Include="Business\Document\SharedHeaderFooter.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Business\Rules\PanelOrder\RulesAcceptPeerReviewResults.xml" />
+    <Resource Include="Business\XMLTemplates\AccessionSummaryBreastCancer.xml" />
+    <Resource Include="Business\XMLTemplates\AccessionSummaryColorectalCancer.xml" />
+    <Resource Include="Business\XMLTemplates\AccessionSummaryHematoPathology.xml" />
+    <Resource Include="Business\XMLTemplates\CytologyOrderInstructions.xml" />
+    <Resource Include="Business\XMLTemplates\DNADefaultExtension.xml" />
+    <Resource Include="Business\Xps\ReportLogo.jpg" />
+    <EmbeddedResource Include="Business\MaterialTracking.Model\FedexProcessShipmentRequest.v15.xml" />
+    <EmbeddedResource Include="Business\MaterialTracking.Model\FedexDeleteShipmentRequest.v19.xml" />
+    <EmbeddedResource Include="Business\MaterialTracking.Model\FedexTrackingRequest.v9.xml" />
+    <EmbeddedResource Include="Business\MaterialTracking.Model\FedexProcessShipmentRequest.v19.xml" />
+    <Resource Include="Business\MaterialTracking.Model\ProcessShipmentReply.xml" />
+    <EmbeddedResource Include="Business\MaterialTracking.Model\FedexProcessShipmentRequestReturn.v19.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\MaterialTracking.Model\FedexSearchLocationRequest.v1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Add.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\delete.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Printer.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Typing.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Cases.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Search.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Save.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Microscope.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Batch.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Billing.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Finalize.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Close.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Flow.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AcceptResults.ico" />
+    <Resource Include="Resources\Specimen.ico" />
+    <Resource Include="Resources\Tree.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Lab.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Magnify.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Comments.ico" />
+    <Resource Include="Resources\Documents.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SpecialStains.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Order.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Cytology.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Amendments.ico" />
+    <Resource Include="Resources\Distribution.ico" />
+    <Resource Include="Resources\Login.ico" />
+    <Resource Include="Resources\Results.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Linking.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\List.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\caplogo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Acknowledge.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Assign.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Refresh.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Scan.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Client.ico" />
+    <Resource Include="Resources\CommittedToGood.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CancerCase.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\History.ico" />
+    <Resource Include="Resources\Review.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Patient.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Log.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DataCheck.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Go.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Next.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Previous.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Wand.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\Common\ComplexOrderItem.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Reassign.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\VoiceStuff.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Cytology\CytologyClientLetterText.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="YPI.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\BindingTraceCode.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Home.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\TextFile1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\Billing\CodeSelection.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\Redis\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Surgical\TypingTemplate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\TwoDBarcode.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Tasks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Surgical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Gears.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\datasheet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\hold.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\XMLFile1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\redhand.png" />
+    <Resource Include="Resources\delete.png" />
+    <Content Include="Hunspellx64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Hunspellx86.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Logo.jpg" />
+    <Resource Include="Resources\Document.jpg" />
+    <Resource Include="Resources\message.png" />
+    <EmbeddedResource Include="UI\XMLFile2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Resource Include="Resources\Restore.png" />
+    <Resource Include="Resources\out2.png" />
+    <Resource Include="dll\MongoDB.Driver.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CefSharp.Wpf">
+      <Version>94.4.110</Version>
+    </PackageReference>
+    <PackageReference Include="HidSharp">
+      <Version>2.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="iTextSharp">
+      <Version>5.5.13</Version>
+    </PackageReference>
+    <PackageReference Include="Magick.NET-Q16-AnyCPU">
+      <Version>11.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Exchange.WebServices">
+      <Version>2.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.IO.RecyclableMemoryStream">
+      <Version>1.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Office.Interop.Excel">
+      <Version>15.0.4795.1001</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Office.Interop.Outlook">
+      <Version>15.0.4797.1004</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Office.Interop.Word">
+      <Version>15.0.4797.1004</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Web.WebView2">
+      <Version>1.0.1072.54</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools">
+      <Version>10.0.22000.194</Version>
+    </PackageReference>
+    <PackageReference Include="MongoDB.Bson">
+      <Version>2.22.0</Version>
+    </PackageReference>
+    <PackageReference Include="MySql.Data">
+      <Version>8.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="netstandard-System.Data.Linq">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="OfficeOpenXml.Core.ExcelPackage">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="OfficeOpenXml.Extends">
+      <Version>1.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="PDFsharp-MigraDoc-gdi">
+      <Version>1.50.5147</Version>
+    </PackageReference>
+    <PackageReference Include="redis-64">
+      <Version>3.0.501</Version>
+    </PackageReference>
+    <PackageReference Include="RestSharp">
+      <Version>106.12.0</Version>
+    </PackageReference>
+    <PackageReference Include="SSH.NET">
+      <Version>2016.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="StackExchange.Redis">
+      <Version>1.2.6</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml">
+      <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="6.1.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="6.1.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="6.0.0" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="6.1.0" />
+    <PackageReference Include="System.ServiceModel.Security" Version="6.0.0" />
+    <PackageReference Include="System.ServiceModel.Federation" Version="6.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Business\Document\ClientLetter.cs" />
+    <Compile Remove="Business\Helper\DistributionTypeMap.cs" />
+    <Compile Remove="Business\MethodResult.cs" />
+    <Compile Remove="Business\Persistence\JSONDeserializer.cs" />
+    <Compile Remove="Business\Persistence\SqlCommandHelper.cs" />
+    <Compile Remove="Business\ReportDistribution.Model\ScheduledFaxSubmission.cs" />
+    <Compile Remove="Business\Rules\BaseRules.cs" />
+    <Compile Remove="Business\Rules\PanelOrder\RulesAcceptPeerReviewResults.cs" />
+    <Compile Remove="Business\Rules\PanelSetOrder\RulesSignatureButtonText.cs" />
+    <Compile Remove="Business\Rules\RuleBrowserUI.cs" />
+    <Compile Remove="Business\Rules\RuleManager.cs" />
+    <Compile Remove="Business\Surgical\PQRIKeyWordCollection.cs" />
+    <Compile Remove="Business\Test\AMLStandardByFish\AMLStandardByFishWPHOBXView.cs" />
+    <Compile Remove="Business\Test\API2MALT1ByFISH\API2MALT1ByFISHWPHOBXView.cs" />
+    <Compile Remove="Business\Test\BCellEnumeration\BCellEnumerationWPHOBXView.cs" />
+    <Compile Remove="Business\Test\BCellGeneRearrangement\BCellGeneRearrangementWPHOBXView.cs" />
+    <Compile Remove="Business\Test\BCellSubsetAnalysis\BCellSubsetAnalysisWPHOBXView.cs" />
+    <Compile Remove="Business\Test\BCL2t1418ByFISH\BCL2t1418ByFISHWPHOBXView.cs" />
+    <Compile Remove="Business\Test\BCRABLByFish\BCRABLByFishWPHOBXView.cs" />
+    <Compile Remove="Business\Test\BCRABLByPCR\BCRABLByPCRWPHOBXView.cs" />
+    <Compile Remove="Business\Test\BoneMarrowSummary\BoneMarrowSummaryWPHOBXView.cs" />
+    <Compile Remove="Business\Test\BRAFMutationAnalysis\BRAFMutationAnalysisDetectedLynchSyndromeResult.cs" />
+    <Compile Remove="Business\Test\BRAFMutationAnalysis\BRAFMutationAnalysisNotDetectedLynchSyndromeResult.cs" />
+    <Compile Remove="Business\Test\BRAFMutationAnalysis\BRAFMutationAnalysisWPHOBXView.cs" />
+    <Compile Remove="Business\Test\BRAFV600EK\BRAFV600EKWPHOBXView.cs" />
+    <Compile Remove="Business\Test\CalreticulinMutationAnalysis\CalreticulinMutationAnalysisWPHOBXView.cs" />
+    <Compile Remove="Business\Test\CCNDIBCLIGHByFISH\CCNDIBCLIGHByFISHWPHOBXView.cs" />
+    <Compile Remove="Business\Test\CEBPA\CEBPAWPHOBXView.cs" />
+    <Compile Remove="Business\Test\ChromosomeAnalysisForFetalAnomaly\ChromosomeAnalysisForFetalAnomalyWPHObxView.cs" />
+    <Compile Remove="Business\Test\ChromosomeAnalysis\ChromosomeAnalysisWPHOBXView.cs" />
+    <Compile Remove="Business\Test\CKIT\CKITWPHOBXView.cs" />
+    <Compile Remove="Business\Test\CLLByFish\CLLByFishWPHOBXView.cs" />
+    <Compile Remove="Business\Test\ComprehensiveColonCancerProfile\ComprehensiveColonCancerProfileWPHOBXView.cs" />
+    <Compile Remove="Business\Test\EosinophiliaByFISH\EosinophiliaByFISHWPHOBXView.cs" />
+    <Compile Remove="Business\Test\ErPrSemiQuantitative\ErPrSemiQuantitativeWPHOBXView.cs" />
+    <Compile Remove="Business\Test\FLT3\FLT3WPHOBXView.cs" />
+    <Compile Remove="Business\Test\HER2AmplificationByISH\HER2AmplificationByISHNMHOBXView.cs" />
+    <Compile Remove="Business\Test\HER2AmplificationByISH\HER2AmplificationByISHWPHOBXView.cs" />
+    <Compile Remove="Business\Test\HER2AnalysisSummary\HER2AnalysisSummaryWPHOBXView.cs" />
+    <Compile Remove="Business\Test\HighGradeLargeBCellLymphoma\HighGradeLargeBCellLymphomaWPHOBXView.cs" />
+    <Compile Remove="Business\Test\HoldForFlow\HoldForFlowWPHOBXView.cs" />
+    <Compile Remove="Business\Test\HPV1618SolidTumor\HPV1618SolidTumorWPHOBXView.cs" />
+    <Compile Remove="Business\Test\HPV1618\HPV1618NMHOBXView.cs" />
+    <Compile Remove="Business\Test\HPV1618\HPV1618WPHOBXView.cs" />
+    <Compile Remove="Business\Test\HPV\HPVNMHOBXView.cs" />
+    <Compile Remove="Business\Test\HPV\HPVWPHObxView.cs" />
+    <Compile Remove="Business\Test\InvasiveBreastPanel\InvasiveBreastPanelWPHOBXView.cs" />
+    <Compile Remove="Business\Test\JAK2V617F\JAK2V617FWPHObxView.cs" />
+    <Compile Remove="Business\Test\LLP\LLPNMHOBXView.cs" />
+    <Compile Remove="Business\Test\LLP\LLPWPHOBXView.cs" />
+    <Compile Remove="Business\Test\LynchSyndrome\LynchSyndromeEvaluationWPHOBXView.cs" />
+    <Compile Remove="Business\Test\LynchSyndrome\LynchSyndromeIHCPanelWPHOBXView.cs" />
+    <Compile Remove="Business\Test\MDSByFish\MDSByFishWPHOBXView.cs" />
+    <Compile Remove="Business\Test\MDSExtendedByFish\MDSExtendedByFishWPHOBXView.cs" />
+    <Compile Remove="Business\Test\MPL\MPLWPHOBXView.cs" />
+    <Compile Remove="Business\Test\MPNFish\MPNFishWPHOBXView.cs" />
+    <Compile Remove="Business\Test\MultipleMyelomaMGUSByFish\MultipleMyelomaMGUSByFishWPHOBXView.cs" />
+    <Compile Remove="Business\Test\NGCT\NGCTWPHOBXView.cs" />
+    <Compile Remove="Business\Test\NPM1\NPM1WPHOBXView.cs" />
+    <Compile Remove="Business\Test\PDL122C3forEsophagealSquamousCellCarcinoma\PDL122C3EsophSquamCellCarcinomaWPHOBXView.cs" />
+    <Compile Remove="Business\Test\PDL122C3forGastricGEA\PDL122C3forGastricGEAWPHOBXView.cs" />
+    <Compile Remove="Business\Test\PDL122C3forHeadandNeck\PDL122C3forHeadandNeckWPHOBXView.cs" />
+    <Compile Remove="Business\Test\PDL122C3forNonsmallCellLungCancer\PDL122C3forNonsmallCellLungCancerWPHOBXView.cs" />
+    <Compile Remove="Business\Test\PDL122C3forUrothelialCarcinoma\PDL122C3forUrothelialCarcinomaWPHOBXView.cs" />
+    <Compile Remove="Business\Test\PDL122C3\PDL122C3WPHOBXView.cs" />
+    <Compile Remove="Business\Test\PDL1SP142\PDL1SP142WPHOBXView.cs" />
+    <Compile Remove="Business\Test\PNH\PNHEpicObxView.cs" />
+    <Compile Remove="Business\Test\PNH\PNHWPHOBXView.cs" />
+    <Compile Remove="Business\Test\RASRAFPanel\RASRAFPanelWPHOBXView.cs" />
+    <Compile Remove="Business\Test\ReticulatedPlateletAnalysisV2\ReticulatedPlateletAnalysisV2EPICNTEView.cs" />
+    <Compile Remove="Business\Test\Surgical\SurgicalWPHObxView.cs" />
+    <Compile Remove="Business\Test\TCellNKProfile\TCellNKProfileWPHOBXView.cs" />
+    <Compile Remove="Business\Test\TechnicalOnly\TechnicalOnlyWordDocument.cs" />
+    <Compile Remove="Business\Test\TestCancelled\TestCancelledWPHOBXView.cs" />
+    <Compile Remove="Business\Test\ThinPrepPap\ThinPrepPapNMHOBXView.cs" />
+    <Compile Remove="Business\Test\ThinPrepPap\ThinPrepPapWPHOBXView.cs" />
+    <Compile Remove="Business\Test\Trichomonas\TrichomonasWPHOBXView.cs" />
+    <Compile Remove="Business\Test\WomensHealthProfile\WomensHealthProfileWPHObxView.cs" />
+    <Compile Remove="Business\View\ClientLocationView.cs" />
+    <Compile Remove="Business\View\ClientLocationViewCollection.cs" />
+    <Compile Remove="Settings.cs" />
+    <Compile Remove="UI\Client\ClientDistributionDialog.xaml.cs" />
+    <Compile Remove="UI\Client\HPVRuleDialog.xaml.cs" />
+    <Compile Remove="UI\CustomEventArgs\CancelTestEventArgs.cs" />
+    <Compile Remove="UI\CustomEventArgs\EventHandlerDefinitions.cs" />
+    <Compile Remove="UI\HistologyGrossTemplateDialog.xaml.cs" />
+    <Compile Remove="UI\ImportADRData.cs" />
+    <Compile Remove="UI\Redis\StoreSelection.xaml.cs" />
+    <Compile Remove="UI\TemplateSelector\OrderItemTemplateSelector.cs" />
+    <Compile Remove="UI\Test\StandingOrderPage.xaml.cs" />
+    <Compile Remove="UI\Test\TecanImportExportPage.xaml.cs" />
+    <Compile Remove="UI\Test\TecanSample.cs" />
+    <Compile Remove="UI\Test\TecanSamplePlacementQueue.cs" />
+    <Page Remove="Business\Document\ADTInsuranceDocument.xaml" />
+    <Page Remove="Business\Document\SVHBillingDocument.xaml" />
+    <Page Remove="Business\Reports\CytologySlideDisposalReport.xaml" />
+    <Page Remove="Business\Reports\SurgicalSpecimenDisposalReport.xaml" />
+    <Page Remove="UI\Client\ClientDistributionDialog.xaml" />
+    <Page Remove="UI\Client\HPVRuleDialog.xaml" />
+    <Page Remove="UI\GroupingListViewStyle.xaml" />
+    <Page Remove="UI\HistologyGrossTemplateDialog.xaml" />
+    <Page Remove="UI\Redis\StoreSelection.xaml" />
+    <Page Remove="UI\Test\StandingOrderPage.xaml" />
+    <Page Remove="UI\Test\TecanImportExportPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YPI-Business\YPI-Business.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,143 @@
+﻿<Window x:Class="YellowstonePathology.UI.Stain.StainEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI.Stain"
+        mc:Ignorable="d"
+        Title="Stain Edit" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" SizeToContent="Height" Width="920">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Stain Id:</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.StainId}" />
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Name:</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.StainName}" />
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Abbreviation:</TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.StainAbbreviation}" />
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Histology Display:</TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.HistologyDisplayString}" />
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Stain Type:</TextBlock>
+        <ComboBox Grid.Row="4" Grid.Column="1" Margin="2,2,2,2" FontSize="14" ItemsSource="{Binding Path=StainTypes}" 
+                  SelectedValue="{Binding Path=Stain.StainType}" />
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Aliquot Type:</TextBlock>
+        <TextBox Grid.Row="5" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.AliquotType}" />
+
+        <TextBlock Grid.Row="6" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Stain Result Group Id:</TextBlock>
+        <TextBox Grid.Row="6" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.StainResultGroupId}" />
+
+        <TextBlock Grid.Row="7" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Default Result:</TextBlock>
+        <TextBox Grid.Row="7" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.DefaultResult}" />
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Is Billable:</TextBlock>
+        <CheckBox Grid.Row="8" Grid.Column="1" Margin="2,2,2,2" FontSize="14" IsChecked="{Binding Path=Stain.IsBillable}" />
+
+        <TextBlock Grid.Row="9" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">CPT Code:</TextBlock>
+        <TextBox Grid.Row="9" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.CPTCode}" />
+
+        <TextBlock Grid.Row="10" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Has Cpt Code Levels:</TextBlock>
+        <CheckBox Grid.Row="10" Grid.Column="1" Margin="2,2,2,2" FontSize="14" IsChecked="{Binding Path=Stain.HasCptCodeLevels}" />
+
+        <TextBlock Grid.Row="11" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Subsequent CPT Code:</TextBlock>
+        <TextBox Grid.Row="11" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.SubsequentCPTCode}" />
+
+        <TextBlock Grid.Row="12" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Has G Code:</TextBlock>
+        <CheckBox Grid.Row="12" Grid.Column="1" Margin="2,2,2,2" FontSize="14" IsChecked="{Binding Path=Stain.HasGCode}" />
+
+        <TextBlock Grid.Row="13" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">G Code:</TextBlock>
+        <TextBox Grid.Row="13" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.GCode}" />
+
+        <TextBlock Grid.Row="14" Grid.Column="0" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Subsequent G Code:</TextBlock>
+        <TextBox Grid.Row="14" Grid.Column="1" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.SubsequentGCode}" />
+
+        <TextBlock Grid.Row="0" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">YPI Test Id:</TextBlock>
+        <TextBox Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.TestId}" />
+
+        <TextBlock Grid.Row="1" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Ventana Id:</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="3" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.VentanaBenchMarkId}" />
+
+        <TextBlock Grid.Row="2" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Stainer Type:</TextBlock>
+        <ComboBox Grid.Row="2" Grid.Column="3" Margin="2,2,2,2" FontSize="14" ItemsSource="{Binding Path=StainerTypes}"
+                  SelectedValue="{Binding Path=Stain.StainerType}" />
+
+        <TextBlock Grid.Row="3" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Ventana Protocol:</TextBlock>
+        <TextBox Grid.Row="3" Grid.Column="3" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.VentanaBenchMarkProtocolName}" />
+
+        <TextBlock Grid.Row="4" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Is Wet Protocol:</TextBlock>
+        <CheckBox Grid.Row="4" Grid.Column="3" Margin="2,2,2,2" FontSize="14" IsChecked="{Binding Path=Stain.IsWetProtocol}" />
+
+        <TextBlock Grid.Row="5" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Has Wet Protocol:</TextBlock>
+        <CheckBox Grid.Row="5" Grid.Column="3" Margin="2,2,2,2" FontSize="14" IsChecked="{Binding Path=Stain.HasWetProtocol}" />
+
+        <TextBlock Grid.Row="6" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Ventana Wet Protocol:</TextBlock>
+        <TextBox Grid.Row="6" Grid.Column="3" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.VentanaBenchMarkWetProtocolName}" />
+
+        <TextBlock Grid.Row="7" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Ventana Wet Id:</TextBlock>
+        <TextBox Grid.Row="7" Grid.Column="3" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.VentanaBenchMarkWetId}" />
+
+        <TextBlock Grid.Row="8" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Active:</TextBlock>
+        <CheckBox Grid.Row="8" Grid.Column="3" Margin="2,2,2,2" FontSize="14" IsChecked="{Binding Path=Stain.Active}" />
+
+        <TextBlock Grid.Row="9" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Needs Acknowledgement:</TextBlock>
+        <CheckBox Grid.Row="9" Grid.Column="3" Margin="2,2,2,2" FontSize="14" IsChecked="{Binding Path=Stain.NeedsAcknowledgement}" />
+
+        <TextBlock Grid.Row="10" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Performed By Hand:</TextBlock>
+        <CheckBox Grid.Row="10" Grid.Column="3" Margin="2,2,2,2" FontSize="14" IsChecked="{Binding Path=Stain.PerformedByHand}" />
+
+        <TextBlock Grid.Row="11" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Is Dual Protocol:</TextBlock>
+        <CheckBox Grid.Row="11" Grid.Column="3" Margin="2,2,2,2" FontSize="14" IsChecked="{Binding Path=Stain.IsDualProtocol}" />
+
+        <TextBlock Grid.Row="12" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Request For Additional Report:</TextBlock>
+        <CheckBox Grid.Row="12" Grid.Column="3" Margin="2,2,2,2" FontSize="14" IsChecked="{Binding Path=Stain.RequestForAdditionalReport}" />
+
+        <TextBlock Grid.Row="13" Grid.Column="2" Margin="2,2,2,2" FontSize="14" FontWeight="Bold" TextAlignment="Right">Order Comment:</TextBlock>
+        <TextBox Grid.Row="13" Grid.Column="3" Margin="2,2,2,2" FontSize="14" TextAlignment="Left" Text="{Binding Path=Stain.OrderComment}" />
+
+        <StackPanel Grid.Column="3" Grid.Row="28" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="ButtonOK" Width="100" Height="40" HorizontalAlignment="Right" Margin="2,2,2,2" Click="ButtonOK_Click">OK</Button>
+        </StackPanel>
+
+    </Grid>
+</Window>

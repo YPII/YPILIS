@@ -1,0 +1,296 @@
+﻿<Window x:Class="YellowstonePathology.UI.COVID.COVIDTestingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI.COVID"
+        mc:Ignorable="d"
+        Title="COVID Testing Dialog" Height="650" Width="1400" WindowStyle="ToolWindow">
+    <Grid>
+        <Grid.Resources>
+
+        </Grid.Resources>
+        <Grid Grid.Column="0" Grid.Row="1" Margin="10,10,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TabControl x:Name="MainTabControl" Grid.Column="0" Grid.Row="1">
+                <TabItem Header="Cases">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Name="CombBoxCategorySearchType" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" IsEditable="False" Text="{Binding Path=CategorySearchType}" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
+                                <ComboBoxItem>Not Run</ComboBoxItem>
+                                <ComboBoxItem>Recent Cases</ComboBoxItem>
+                                <ComboBoxItem>Detected Cases</ComboBoxItem>
+                                <ComboBoxItem>Late Cases</ComboBoxItem>
+                            </ComboBox>
+                            <Button Grid.Column="1" Width="50" Height="25" Click="ButtonCategorySearchType_Click" Margin="2,2,2,2">Search</Button>
+                        </Grid>
+                        <ListView Name="ListViewCOVIDCases" Margin="2,2,2,2" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=COVIDCaseCollection}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=HighPriority}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Background" Value="#fae5e7"/>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=HighPriority}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Background" Value="#FFFFFF"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Show Result Page" Click="MenuItemResult_Click"></MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=HighPriority}" Header="High Priority" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=AccessionDate}" Header="Accessioned" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PatientName}" Header="Patient Name" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Client" Width="200"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PhysicianName}" Header="Provider" Width="200"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Result}" Header="Result" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=FinalTime}" Header="Final" Width="150"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="LC96 Plate Map" Name="LC96">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                            <TextBlock Margin="5,3,5,0">
+                                <Hyperlink Click="HyperLinkCreateLC96Plate_Click">Create Plate</Hyperlink>
+                            </TextBlock>
+                            <TextBlock Margin="5,3,5,0">
+                                <Hyperlink Click="HyperLinkExportLC96Plate_Click">Export Plate</Hyperlink>
+                            </TextBlock>
+                            <TextBlock Margin="5,3,5,0">
+                                <Hyperlink Click="HyperLinkImportLC96Plate_Click">Import Plate</Hyperlink>
+                            </TextBlock>
+                            <TextBlock Margin="5,3,5,0">
+                                <Hyperlink Click="HyperLinkRefreshRecentCaseList_Click">Refresh Accession List</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                        <ItemsControl Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=LC96SampleCollection}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <Border.Style>
+                                            <Style>
+                                                <Setter Property="Border.Background" Value="White"/>
+                                                <Setter Property="Border.BorderBrush" Value="Gray"/>
+                                                <Setter Property="Border.BorderThickness" Value="1"/>
+                                                <Setter Property="Border.Padding" Value="1"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                                        <Setter Property="Border.BorderThickness" Value="2" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <Grid Width="100" Height="50" Margin="2,2,2,2">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0" FontSize="10" Text="{Binding Path=Position}" FontWeight="Bold" Margin="2,2,2,2"/>
+                                            <TextBlock Grid.Row="1" FontSize="10" Text="{Binding Path=SampleName}" Margin="2,2,2,2"/>
+                                            <TextBlock Grid.Row="2" FontSize="8" Text="{Binding Path=ConditionName}" Margin="2,2,2,2"/>
+
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="LC480 Plate Map" Name="LC480">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                            <TextBlock Margin="5,3,5,0">
+                                <Hyperlink Click="HyperLinkCreateLC480Plate_Click">Create Plate</Hyperlink>
+                            </TextBlock>
+                            <TextBlock Margin="5,3,5,0">
+                                <Hyperlink Click="HyperLinkExportLC480Plate_Click">Export Plate</Hyperlink>
+                            </TextBlock>
+                            <TextBlock Margin="5,3,5,0">
+                                <Hyperlink Click="HyperLinkImportLC480Plate_Click">Import Plate</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                        <ItemsControl Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=LC480SampleCollection}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <Border.Style>
+                                            <Style>
+                                                <Setter Property="Border.Background" Value="White"/>
+                                                <Setter Property="Border.BorderBrush" Value="Gray"/>
+                                                <Setter Property="Border.BorderThickness" Value="1"/>
+                                                <Setter Property="Border.Padding" Value="1"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                                        <Setter Property="Border.BorderThickness" Value="2" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <Grid Width="100" Height="50" Margin="2,2,2,2">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0" FontSize="10" Text="{Binding Path=Position}" FontWeight="Bold" Margin="2,2,2,2"/>
+                                            <TextBlock Grid.Row="1" FontSize="10" Text="{Binding Path=SampleName}" Margin="2,2,2,2"/>
+                                            <TextBlock Grid.Row="2" FontSize="8" Text="{Binding Path=SampleId}" Margin="2,2,2,2"/>
+
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Results">
+                    <Grid Grid.Column="0" Grid.Row="1" Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <ListView Name="ListViewCOVIDResults" Margin="2,2,2,2" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" ItemsSource="{Binding Path=COVIDResultCollection}">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Do something interesting."></MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Color}" Header="Color" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=SampleName}" Header="Sample Name" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=GeneName}" Header="Gene Name" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=GeneType}" Header="Gene Type" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Cq}" Header="Cq" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Call}" Header="Call" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=CombinedResult}" Header="Combined Result" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Failure}" Header="Failure" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Excluded}" Header="Excluded" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=SampleType}" Header="Sample Type" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ReplicationGroup}" Header="Replication Group" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Dye}" Header="Dye" Width="120"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <Button Grid.Column="0" Grid.Row="2" Width="110" Height="25" Margin="2,2,2,2" Click="ButtonImportResults_Click">Import</Button>
+                        <Button Grid.Column="2" Grid.Row="2" Width="200" Height="25" Margin="2,2,2,2" Click="ButtonUpdateLC480Results_Click" HorizontalAlignment="Right">Update LC480 Results</Button>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Ordering Provider">
+                    <Grid Grid.Column="0" Grid.Row="1" Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <ListView Name="ListViewOrdersNotSigned" Margin="2,2,2,2" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=OrdersNotSigned}">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Click="MenuItemSignSelected_Click" Header="Sign Selected"></MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderTime}" Header="Date" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PLastName}" Header="Last Name" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PFirstName}" Header="First Name" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ProviderName}" Header="Provider" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ClientName}" Header="Client" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ProviderSignature}" Header="Signature" Width="120"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=DateSigned}" Header="Date Signed" Width="120"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <Button Grid.Column="0" Grid.Row="1" Width="100" Height="25" Margin="2,2,2,2" Click="ButtonGetUnsigned_Click" HorizontalAlignment="Right">Get Unsigned</Button>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Pools">
+                    
+                </TabItem>
+            </TabControl>
+
+            <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                <Button Width="110" Height="25" Margin="2,2,2,2" Click="ButtonScanSimulation_Click" HorizontalAlignment="Left">Scan Simulation</Button>
+                <TextBox x:Name="TextBoxReportNo" Width="130" Margin="2,2,2,2" Text="{Binding Path=ManualEntryReportNo}"></TextBox>
+            </StackPanel>
+            
+        </Grid>
+    </Grid>
+</Window>

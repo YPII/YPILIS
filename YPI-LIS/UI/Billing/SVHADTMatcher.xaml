@@ -1,0 +1,72 @@
+﻿<Window x:Class="YellowstonePathology.UI.Billing.SVHADTMatcher"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI"
+        mc:Ignorable="d"
+        Title="SVH ADT Matcher" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" Margin="2,10,2,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2">Post Date:</TextBlock>
+            <TextBox Grid.Column="1" Grid.Row="0" Name="TextBoxPostDate" HorizontalAlignment="Stretch" Margin="2,2,2,2" Text="{Binding Path=PostDate, Converter={StaticResource ShortDateConverter}}"></TextBox>
+            <Button Grid.Column="2" Grid.Row="0" Width="25" Height="20" Margin="1,1,1,1" Click="ButtonBack_Click">&lt;</Button>
+            <Button Grid.Column="3" Grid.Row="0" Width="25" Height="20" Margin="1,1,1,1" Click="ButtonForward_Click">&gt;</Button>
+        </Grid>
+
+        <ListView Name="ListViewAccession" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=AccessionList}" Margin="2,2,2,2"
+                  SelectionChanged="ListViewAccession_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=AccessionDate, Converter={StaticResource ShortDateConverter}}" Header="Accessioned" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ReportNo}" Header="Report No" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PFirstName}" Header="First" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PLastName}" Header="Last" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PBirthdate, Converter={StaticResource ShortDateConverter}}" Header="DOB" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=MedicalRecord}" Header="MRN" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Account}" Header="ACCT" Width="120"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView Name="ListViewADT" Grid.Column="0" Grid.Row="2" ItemsSource="{Binding Path=ADTList}" Margin="2,2,2,2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DateReceived, Converter={StaticResource ShortDateConverter}}" Header="Received" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PFirstName}" Header="First" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PLastName}" Header="Last" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PBirthdate, Converter={StaticResource ShortDateConverter}}" Header="DOB" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=MedicalRecord}" Header="MRN" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Account}" Header="ACCT" Width="120"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
+            <Button Grid.Column="0" Grid.Row="3" Height="30" Width="100" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="ButtonMatch_Click">Match</Button>
+            <Button Grid.Column="0" Grid.Row="3" Height="30" Width="100" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="ButtonMatchList_Click">Match List</Button>
+        </StackPanel>
+        <Button Grid.Column="0" Grid.Row="3" Height="30" Width="100" Margin="2,2,2,2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="ButtonRefresh_Click">Refresh</Button>
+        <Button Grid.Column="0" Grid.Row="3" Height="30" Width="100" Margin="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="ButtonClose_Click">Close</Button>
+    </Grid>
+</Window>

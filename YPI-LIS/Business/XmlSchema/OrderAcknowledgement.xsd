@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	
+	<xsd:element name="ReportNo" type="xsd:string" />
+	<xsd:element name="MasterAccessionNo" type="xsd:string" />
+	<xsd:element name="PanelOrderId" type="xsd:string" />
+	<xsd:element name="PanelId" type="xsd:string" />
+	<xsd:element name="TestId" type="xsd:string" />
+	<xsd:element name="TestName" type="xsd:string" />
+	<xsd:element name="Comment" type="xsd:string" />
+	<xsd:element name="OrderTime" type="xsd:string" />
+	<xsd:element name="OrderedByName" type="xsd:string" />
+	<xsd:element name="Completed" type="xsd:string" />
+	<xsd:element name="QNS" type="xsd:string" />
+	<xsd:element name="QNSForHpvOnly" type="xsd:string" />
+
+</xs:schema>

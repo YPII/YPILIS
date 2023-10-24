@@ -1,0 +1,204 @@
+﻿<Window x:Class="YellowstonePathology.UI.Calendar.CalendarDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI.Calendar"
+        mc:Ignorable="d"
+        Title="Calendar" Height="800" Width="970" WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <TabControl Grid.Column="0" Grid.Row="0">
+            <TabItem Header="Pathologist Calendar">
+                <Grid Margin="10">
+                    <Grid.Resources>
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex"  Value="0">
+                                    <Setter Property="Background" Value="#cbf4c8" />
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        <DataTemplate DataType="system:String">
+                        </DataTemplate>
+                    </Grid.Resources>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Column="0" Grid.Row="0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,2,2,2" VerticalAlignment="Center">Month:</TextBlock>
+                        <ComboBox Name="ComboBoxPathologistMonth" Grid.Row="0" Grid.Column="1" Margin="2,2,2,2" ItemsSource="{Binding Path=MonthList}" 
+                                  SelectionChanged="ComboBoxPathologistMonth_SelectionChanged" />
+                        <TextBlock Grid.Row="0" Grid.Column="2" Margin="2,2,2,2">Year:</TextBlock>
+                        <ComboBox Name="ComboBoxPathologistYears" Grid.Row="0" Grid.Column="3" Margin="2,2,2,2" ItemsSource="{Binding Path=Years}"
+                                  SelectionChanged="ComboBoxPathologistYears_SelectionChanged">
+                        </ComboBox>
+                        <Button Grid.Row="0" Grid.Column="4" Name="ButtonGetCalendar" Margin="2,2,2,2" Height="27" Width="100" Click="ButtonGetPathologistCalendar_Click">Get Calendar</Button>
+                        <Button Grid.Row="0" Grid.Column="5" Name="ButtonAddMonth" Margin="2,2,2,2" Width="100" Height="30" Click="ButtonAddMonth_Click">Add Month</Button>
+                    </Grid>
+
+                    <ListView Name="ListViewPatholigistStatus" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2"  AlternationCount="2"
+                              ItemsSource="{Binding Path=PathologistCalendarDayCollection}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Path=CalendarDisplayDate}" />
+                                <GridViewColumn Header="Brown">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrBrownStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Durden">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrDurdenStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Bibbey">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrBibbeyStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Rozelle">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrRozelleStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Schneider">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrSchneiderStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Emerick">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrEmerickStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Nero">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrNeroStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Luem">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrLuemStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </Grid>
+
+            </TabItem>
+
+            <TabItem Header="Holiday Calendar">
+                <Grid Margin="10" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel  Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <TextBlock Margin="2,2,2,2">Year:</TextBlock>
+                        <ComboBox Name="ComboBoxYears" Margin="2,2,2,2" Width="120" ItemsSource="{Binding Path=Years}"
+                                  SelectionChanged="ComboBoxYears_SelectionChanged">
+                        </ComboBox>
+                        <Button Margin="10,2,2,2" Height="30" Width="80" Content="Add Holidays" Click="ButtonAddStandardHolidays_Click" />
+                    </StackPanel>
+
+                    <ListView Name="ListViewHolidays" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="2,2,2,2" 
+                    ItemsSource="{Binding Path=HolidayCollection}">
+
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add Day After" Click="ContextMenuAddDayAfter_Click"></MenuItem>
+                                <MenuItem Header="Add Day Before" Click="ContextMenuAddDayBefore_Click"></MenuItem>
+                                <MenuItem Header="Set as Workday" Click="ContextMenuIsWorkDay_Click"></MenuItem>
+                                <MenuItem Header="Set as not a Workday" Click="ContextMenuIsNotWorkDay_Click"></MenuItem>
+                                <MenuItem Header="Delete" Click="ContextMenuDeleteHoliday_Click"></MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Date" Width="250" DisplayMemberBinding="{Binding Path=DisplayDate}" />
+                                <GridViewColumn Header="Name" Width="210" DisplayMemberBinding="{Binding Path=HolidayName}" />
+                                <GridViewColumn Header="Work Day" Width="80" DisplayMemberBinding="{Binding Path=IsAWorkDay}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
+        <Button Grid.Row="1" Grid.Column="0" Margin="5" Height="30" Width="80" HorizontalAlignment="Right" Content="OK" Click="ButtonOK_Click" />
+
+    </Grid>
+</Window>

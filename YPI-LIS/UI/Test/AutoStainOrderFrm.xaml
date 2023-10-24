@@ -1,0 +1,64 @@
+﻿<Window x:Class="YellowstonePathology.UI.Test.AutoStainOrderFrm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Select Specimen for Stain" MaxHeight="750" Width="300" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" SizeToContent="Height">
+	<Window.Resources>
+
+		<DataTemplate x:Key="DataTemplateTestOrderList">
+			<StackPanel Margin="2">
+				<TextBlock Margin="50,2,2,2" VerticalAlignment="Center" Text="{Binding Path=TestName}" FontSize="12"></TextBlock>
+			</StackPanel>
+		</DataTemplate>
+		
+		<HierarchicalDataTemplate x:Key="DataTemplateAliquotOrderCollection" ItemsSource="{Binding Path=TestOrderItemList}" ItemTemplate="{StaticResource DataTemplateTestOrderList}">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Margin="130,2,2,2" Width="60" Text="{Binding Path=Display}" FontSize="12"></TextBlock>
+				<CheckBox Margin="2" IsChecked="{Binding Path=Order}"></CheckBox>
+			</StackPanel>
+		</HierarchicalDataTemplate>
+		
+		<HierarchicalDataTemplate x:Key="DataTemplateSpecimenOrderCollection" ItemsSource="{Binding Path=AliquotOrderCollection}" ItemTemplate="{StaticResource DataTemplateAliquotOrderCollection}">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Margin="2" Width="20" Text="{Binding Path=SpecimenNumber}" FontSize="12"></TextBlock>
+				<TextBlock Margin="2" Width="200" Text="{Binding Path=Description}" FontSize="12"></TextBlock>
+			</StackPanel>
+		</HierarchicalDataTemplate>
+	</Window.Resources>
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+		<StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="2">
+			<TextBlock Margin="2" Text="{Binding Path=AutoStainOrderMessage}" FontSize="12"></TextBlock>
+		</StackPanel>
+		
+		<StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Margin="2">
+			<TextBlock Margin="2" FontSize="12">Specimen</TextBlock>
+			<TextBlock Margin="120, 2, 2, 2" FontSize="12">Aliquots</TextBlock>
+			<TextBlock Margin="20, 2, 2,2" FontSize="12">Order</TextBlock>
+		</StackPanel>
+		
+		<TreeView Grid.Column="0" Grid.Row="2" ItemsSource="{Binding Path=SpecimenOrderCollection}" ItemTemplate="{StaticResource DataTemplateSpecimenOrderCollection}"></TreeView>
+		
+		<StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
+			<Button Margin="140, 2, 2, 2" Click="ButtonOrder_Click">
+				<StackPanel Margin="2" Orientation="Horizontal">
+					<Image Source="/Resources/Order.ico" Margin="2" Height="16"></Image>
+					<TextBlock Margin="2" VerticalAlignment="Center">Order</TextBlock>
+				</StackPanel>
+			</Button>
+			
+			<Button Margin="10, 2, 2, 2" Click="ButtonCancel_Click">
+				<StackPanel Margin="2" Orientation="Horizontal">
+					<TextBlock Margin="2" VerticalAlignment="Center">Cancel</TextBlock>
+				</StackPanel>
+			</Button>
+		</StackPanel>
+	</Grid>
+</Window>

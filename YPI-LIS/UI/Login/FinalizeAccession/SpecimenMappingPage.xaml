@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Login.FinalizeAccession.SpecimenMappingPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converter="clr-namespace:YellowstonePathology.UI.Login.FinalizeAccession" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800"
+			 FontSize="14" Name="UserControlAssignmentPage">
+    <UserControl.Resources>   
+        
+        <HierarchicalDataTemplate x:Key="DataTemplateSlideOrder">
+            <Grid Margin="2,2,2,2">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>                    
+                </Grid.RowDefinitions>
+
+                <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding Path=ClientAccessioned}" Margin="2,2,2,2" Tag="{Binding Path=.}" 
+                          Checked="CheckBoxSlideClientAccessioned_Checked" Unchecked="CheckBoxSlideClientAccessioned_Unchecked"></CheckBox>
+                <TextBlock Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="Slide:"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=Label}"></TextBlock>
+                <TextBox Grid.Column="3" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=ClientLabel}" Width="50"></TextBox>
+                <ComboBox Grid.Column="5" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" Width="100" Text="{Binding Path=FacilityId}" IsEditable="True">
+                    <ComboBoxItem>YPIBLGS</ComboBoxItem>
+                    <ComboBoxItem>STJMSHLTH</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Grid.Column="4" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=TestName}" Width="150"></TextBlock>
+            </Grid>
+        </HierarchicalDataTemplate>
+        
+        <HierarchicalDataTemplate x:Key="DataTemplateAliquotOrder" ItemsSource="{Binding Path=SlideOrderCollection}" ItemTemplate="{StaticResource DataTemplateSlideOrder}">
+            <Grid Margin="2,2,2,2">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>                    
+                    <RowDefinition Height="Auto"></RowDefinition>                    
+                </Grid.RowDefinitions>
+
+                <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding Path=ClientAccessioned}" Margin="2,2,2,2"></CheckBox>
+                <StackPanel Grid.Column="1" Grid.Row="0">
+                    <TextBlock Margin="2,2,2,2" Text="{Binding Path=AliquotType}"></TextBlock>
+                </StackPanel>                
+                <TextBlock Grid.Column="2" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=Label}"></TextBlock>
+                <TextBox Grid.Column="3" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=ClientLabel}" Width="50"></TextBox>                
+                <TextBlock Grid.Column="4" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=Location}" HorizontalAlignment="Right"></TextBlock>
+                <ComboBox Grid.Column="5" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" Width="100" Text="{Binding Path=FacilityId}" IsEditable="True">
+                    <ComboBoxItem>YPIBLGS</ComboBoxItem>
+                    <ComboBoxItem>STJMSHLTH</ComboBoxItem>
+                </ComboBox>
+                
+            </Grid>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate x:Key="DataTemplateSpecimenOrder" ItemsSource="{Binding Path=AliquotOrderCollection}" ItemTemplate="{StaticResource DataTemplateAliquotOrder}">
+            <Grid Margin="2,2,2,2">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding Path=ClientAccessioned}" Margin="2,2,2,2"></CheckBox>
+                <TextBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=ClientSpecimenNumber}" Width="50"></TextBox>
+                <TextBlock Grid.Column="2" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=SpecimenDescriptionString}" FontWeight="Bold"></TextBlock>
+
+                <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Margin="2,2,2,2" HorizontalAlignment="Right" Width="120">Time To Fixation:</TextBlock>
+                    <ComboBox ItemsSource="{Binding Path=TimeToFixationTypeCollection, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                          SelectedItem="{Binding Path=TimeToFixationHourString}" Margin="2,2,2,2" Width="100" HorizontalAlignment="Left"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock Margin="2,2,2,2" HorizontalAlignment="Right" Width="120">Fixation Duration:</TextBlock>
+                    <TextBox Margin="2,2,2,2" Text="{Binding Path=FixationDuration}" Width="100" HorizontalAlignment="Left"></TextBox>
+                </StackPanel>
+
+            </Grid>                            
+        </HierarchicalDataTemplate>
+        
+    </UserControl.Resources>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+        <Grid Grid.Column="0" Grid.Row="1" Margin="10,10,10,10">
+            
+            <Grid.ColumnDefinitions>                
+                <ColumnDefinition Width="Auto"></ColumnDefinition>                
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>		            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Client Accessioned:</TextBlock>
+            <CheckBox Grid.Column="1" Grid.Row="0" IsChecked="{Binding Path=AccessionOrder.ClientAccessioned}" Margin="2,2,2,2"></CheckBox>
+
+            <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Height="30" Click="ButtonMarkBlocks_Click">Mark All Blocks</Button>
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Master Accession No:</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=AccessionOrder.MasterAccessionNo}"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Client Accession No:</TextBlock>
+            <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Left" Text="{Binding Path=AccessionOrder.ClientAccessionNo}" Width="200"></TextBox>
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Client Name:</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.ClientName}"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Physician Name:</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.PhysicianName}"></TextBlock>
+
+            <TreeView Name="TreeViewSpecimenOrder" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" ItemsSource="{Binding Path=AccessionOrder.SpecimenOrderCollection}"
+							ItemTemplate="{StaticResource DataTemplateSpecimenOrder}" Margin="2,10,2,2" BorderThickness="1">
+            </TreeView>
+            
+            <Button Grid.Column="3" Grid.Row="6" Click="ButtonPrint_Click" Width="100" Height="50" HorizontalAlignment="Right" Margin="2,2,2,2">Print Labels</Button>
+
+        </Grid>
+
+		<Border Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<Button Grid.Column="0" Grid.Row="2" Name="ButtonBack" Margin="5,5,5,5" Click="ButtonBack_Click" Width="100" Height="40" HorizontalAlignment="Left">&lt; Back</Button>
+		<Button Grid.Column="1" Grid.Row="2" Name="ButtonNext" Margin="5,5,5,5" Click="ButtonNext_Click" Width="100" Height="40" HorizontalAlignment="Right">Next ></Button>
+        
+	</Grid>
+</UserControl>

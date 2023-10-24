@@ -1,0 +1,66 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+    x:Class="YellowstonePathology.UI.Login.PatientNameLookupPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+		<Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Orientation="Horizontal" Margin="5,5,5,5">
+                <TextBlock Margin="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14">Patient Name(last, first):</TextBlock>
+                <TextBox Name="TextBoxPatientName" Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="150" KeyUp="TextBoxPatientName_KeyUp"/>
+                <Button Content="Search" Click="ButtonSearch_Click" Width="100" Height="30" Margin="2,2,2,2"/>
+            </StackPanel>
+
+            <ListView Name="ListBoxClientOrder" Grid.Column="0" Grid.Row="1" Margin="5"
+				 ItemsSource="{Binding}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Last Name" Width="150" DisplayMemberBinding="{Binding Path=PLastName}" />
+                        <GridViewColumn Header="First Name" Width="150" DisplayMemberBinding="{Binding Path=PFirstName}" />
+                        <GridViewColumn Header="Order Date" Width="150" DisplayMemberBinding="{Binding Path=OrderDate, Converter={StaticResource ShortDateConverter}}" />
+                        <GridViewColumn Header="Provider" Width="150" DisplayMemberBinding="{Binding Path=ProviderName}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <TextBlock Grid.Row="2" Margin="20" Height="300" TextWrapping="Wrap" FontSize="14">We were unable to find the Client Order using the ID provided. Type the patients name (last, first) above to search for the order by patient name or click Back to try entering the Client's Order ID again.</TextBlock>
+
+            <StackPanel Grid.Column="1" Grid.Row="1" Margin="10" VerticalAlignment="Top">
+                <Button Content="Use Selected Order" Click="ButtonUseSelectedClientOrder_Click"  Width="130" Height="80" Margin="10"/>
+                <Button Content="Create New Order" Click="ButtonCreateClientOrder_Click" Width="130" Height="80" Margin="10"/>
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <Button Name="ButtonBack" Grid.Row="2" Margin="5,5,5,5" Click="ButtonBack_Click" Width="100" Height="40" HorizontalAlignment="Left">&lt; Back</Button>
+        <Button Name="ButtonClose" Grid.Row="2" Margin="5,5,5,5" Click="ButtonClose_Click" Width="100" Height="40" HorizontalAlignment="Right">Close</Button>
+
+    </Grid>
+</UserControl>

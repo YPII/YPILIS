@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <PageSetup>
+    <PageSize Height="1056" Width="816">
+    </PageSize>
+    <PageMargin Left="30" Top="30" Right="50" Bottom="30">
+    </PageMargin>
+  </PageSetup>
+  <PageHeaders>
+    <FirstPageHeader>
+      <Row Height="40">
+        <Image Source="C:\Program Files\Yellowstone Pathology Institute\YpiReportLogo.bmp" Left="10" Top="10">
+        </Image>
+        <TextBlock Name="ReportTitle" FontSize="14" TextAlignment="Right" Width="540" FontWeight="Bold" Foreground="#993300">DNA Ploidy &amp; S-Phase Analysis</TextBlock>
+      </Row>
+      <Row Height="29">
+        <TextBlock Name="AmendmentTitle" FontSize="12" TextAlignment="Right" Width="*" FontWeight="Bold" Foreground="#993300">
+        </TextBlock>
+      </Row>
+      <Row Height="22">
+        <TextBlock Name="ReportNoLabel" FontSize="12" TextAlignment="Right" Width="475">Report #:</TextBlock>
+        <TextBlock Name="ReportNo" FontSize="12" TextAlignment="Right" Width="60" Margin="3, 0, 0, 0">report_no
+        </TextBlock>
+      </Row>
+      <Row Height="30">
+      </Row>
+      <Row Height="22">
+        <TextBlock Name="PatientNameLabel" FontSize="9" TextAlignment="Left" Width="60">Patient:</TextBlock>
+        <TextBlock Name="PatientName" FontSize="12" TextAlignment="Left" Width="Auto" FontWeight="Bold">patient_name
+        </TextBlock>
+        <TextBlock Name="PatientAgeString" FontSize="8" TextAlignment="Left" Width="150">patient_age_string
+        </TextBlock>
+      </Row>
+      <Row Height="18">
+        <TextBlock Name="MasterAccessionNoLabel" FontSize="9" TextAlignment="Right" Width="440">Master Accession #:</TextBlock>
+        <TextBlock Name="MasterAccessionNo" FontSize="8" TextAlignment="Left" Width="120" Margin="3, 0, 0, 0">master_accessionno
+        </TextBlock>
+      </Row>
+      <Row Height="18">
+        <TextBlock Name="ProviderLabel" FontSize="9" TextAlignment="Left" Width="60">Provider:</TextBlock>
+        <TextBlock Name="PhysicianName" FontSize="8" TextAlignment="Left" Width="250">provider
+        </TextBlock>
+        <TextBlock Name="FinalDateLabel" FontSize="9" TextAlignment="Right" Width="131" LeftMargin="0">Date of Report:</TextBlock>
+        <TextBlock Name="FinalDate" FontSize="8" TextAlignment="Left" Width="120" Margin="3, 0, 0, 0">final_date
+        </TextBlock>
+      </Row>
+      <Row Height="18">
+        <TextBlock Name="BlankTextBox" Width="60">
+        </TextBlock>
+        <TextBlock Name="ClientName" FontSize="8" TextAlignment="Left" Width="250">client_name
+        </TextBlock>
+        <TextBlock Name="AccessionedLabel" FontSize="9" TextAlignment="Right" Width="131">Accessioned:</TextBlock>
+        <TextBlock Name="AccessionDate" FontSize="8" TextAlignment="Left" Width="100" Margin="3,0,0,0">accession_date
+        </TextBlock>
+      </Row>
+      <Row Height="18">
+        <TextBlock Name="BlankTextBox" Width="60">
+        </TextBlock>
+        <TextBlock Name="BlankTextBox" Width="250">
+        </TextBlock>
+        <TextBlock Name="CollectedLabel" FontSize="9" TextAlignment="Right" Width="131">Collected:</TextBlock>
+        <TextBlock Name="CollectionDate" FontSize="8" TextAlignment="Left" Width="120" Margin="3, 0, 0, 0">collection_date
+        </TextBlock>
+      </Row>
+      <Row Height="18">
+        <TextBlock Name="BlankTextBox" Width="60">
+        </TextBlock>
+        <TextBlock Name="ReportDistributionDisclosure" FontSize="7" TextAlignment="Left" Width="250" FontStyle="Italic">Full distribution list is provided at the end of the report.</TextBlock>
+        <TextBlock Name="ClientAccountLabel" FontSize="9" TextAlignment="Right" Width="131">Client Ref #:</TextBlock>
+        <TextBlock Name="Pcan" FontSize="8" TextAlignment="Left" Width="120" Margin="3, 0, 0, 0">pcan
+        </TextBlock>
+      </Row>
+      <Row Height="10">
+        <TextBlock Name="Spacer" Width="72">
+        </TextBlock>
+      </Row>
+    </FirstPageHeader>
+    <SecondPageHeader>
+    </SecondPageHeader>
+  </PageHeaders>
+  <PageFooters>
+    <FirstPageFooter>
+      <Row Height="20">
+        <TextBlock Name="CompanyNameLabel" FontSize="9" TextAlignment="Left" Width="280" FontFamily="Candara" Foreground="#993300">Yellowstone Pathology Institute, Inc.</TextBlock>
+      </Row>
+      <Row Height="20" Border="None, None, None, Single">
+        <Border>
+          <Bottom Style="Single" />
+        </Border>
+        <TextBlock Name="BillingsLabel" FontSize="9" TextAlignment="Left" Width="220" FontFamily="Candara" FontWeight="Bold" Foreground="#993300">Billings</TextBlock>
+        <TextBlock Name="CodyLabel" FontSize="9" TextAlignment="Left" Width="170" FontFamily="Candara" FontWeight="Bold" Foreground="#993300">Cody</TextBlock>
+        <TextBlock Name="WebAddressLabel" FontSize="9" TextAlignment="Right" Width="160" FontFamily="Candara" Foreground="#993300">Y e l l o w s t o n e  P a t h o l o g y . c o m</TextBlock>
+      </Row>
+      <Row Height="13">
+        <TextBlock Name="BillingsAddressLabel" FontSize="9" TextAlignment="Left" Width="220" FontFamily="Candara">2900 12th Avenue North, Suite 295 W</TextBlock>
+        <TextBlock Name="CodyAddressLabel" FontSize="9" TextAlignment="Left" Width="220" FontFamily="Candara">1008 Cody Avenue</TextBlock>
+        <TextBlock Name="BrownLabel" FontSize="8" TextAlignment="Right" Width="110" FontFamily="Candara" Foreground="#993300">Michael S. Brown, MD, FCAP</TextBlock>
+      </Row>
+      <Row Height="13">
+        <TextBlock Name="BillingsCityStateLabel" FontSize="9" TextAlignment="Left" Width="220" FontFamily="Candara">Billings, MT 59101</TextBlock>
+        <TextBlock Name="CodyCityStateLabel" FontSize="9" TextAlignment="Left" Width="210" FontFamily="Candara">Cody, WY 82414</TextBlock>
+        <TextBlock Name="CleggLabel" FontSize="8" TextAlignment="Right" Width="120" FontFamily="Candara" Foreground="#993300">Pamela P. Clegg, MD, FCAP</TextBlock>
+      </Row>
+      <Row Height="13">
+        <TextBlock Name="Blank" FontSize="9" TextAlignment="Left" Width="240">
+        </TextBlock>
+        <TextBlock Name="Blank" FontSize="9" TextAlignment="Left" Width="190">
+        </TextBlock>
+        <TextBlock Name="DurdenLabel" FontSize="8" TextAlignment="Right" Width="120" FontFamily="Candara" Foreground="#993300">Angela F. Durden, MD, FCAP</TextBlock>
+      </Row>
+      <Row Height="13">
+        <TextBlock Name="BillingsPhoneNumberLabel" FontSize="9" TextAlignment="Left" Width="30" FontFamily="Candara">phone</TextBlock>
+        <TextBlock Name="BillingsPhoneNumber" FontSize="9" TextAlignment="Left" Width="72" FontFamily="Candara" FontWeight="Bold">406.238.6360</TextBlock>
+        <TextBlock Name="BillingsFaxNumber" FontSize="9" TextAlignment="Left" Width="20" FontFamily="Candara">fax</TextBlock>
+        <TextBlock Name="BillingsFaxNumber" FontSize="9" TextAlignment="Left" Width="100" FontFamily="Candara" FontWeight="Bold">406.238.6361</TextBlock>
+        <TextBlock Name="CodyPhoneNumber" FontSize="9" TextAlignment="Left" Width="30" FontFamily="Candara">phone</TextBlock>
+        <TextBlock Name="CodyPhoneNumber" FontSize="9" TextAlignment="Left" Width="88" FontFamily="Candara" FontWeight="Bold">307.578.1850</TextBlock>
+        <TextBlock Name="CodyFaxNumber" FontSize="9" TextAlignment="Left" Width="20" FontFamily="Candara">fax</TextBlock>
+        <TextBlock Name="CodyFaxNumber" FontSize="9" TextAlignment="Left" Width="73" FontFamily="Candara" FontWeight="Bold">406.238.6361</TextBlock>
+        <TextBlock Name="EmerickLabel" FontSize="8" TextAlignment="Right" Width="120" FontFamily="Candara" Foreground="#993300">Kerrie R. Emerick, MD, FCAP</TextBlock>
+      </Row>
+      <Row Height="13">
+        <TextBlock Name="BillingsTollFree" FontSize="9" TextAlignment="Left" Width="38" FontFamily="Candara">toll-free</TextBlock>
+        <TextBlock Name="BillingsTollFree" FontSize="9" TextAlignment="Left" Width="183" FontFamily="Candara" FontWeight="Bold">1.888.400.6640</TextBlock>
+        <TextBlock Name="CodyTollFree" FontSize="9" TextAlignment="Left" Width="38" FontFamily="Candara">toll-free</TextBlock>
+        <TextBlock Name="CodyTollFree" FontSize="9" TextAlignment="Left" Width="172" FontFamily="Candara" FontWeight="Bold">1.888.400.6640</TextBlock>
+        <TextBlock Name="HolleyLabel" FontSize="8" TextAlignment="Right" Width="120" FontFamily="Candara" Foreground="#993300">Christopher J. Nero, MD, FCAP</TextBlock>
+      </Row>
+      <Row Height="13">
+        <TextBlock Name="Blank" FontSize="9" TextAlignment="Left" Width="240">
+        </TextBlock>
+        <TextBlock Name="Blank" FontSize="9" TextAlignment="Left" Width="190">
+        </TextBlock>
+        <TextBlock Name="SchultzLabel" FontSize="8" TextAlignment="Right" Width="120" FontFamily="Candara" Foreground="#993300">Duane A. Schultz, MD, FCAP</TextBlock>
+      </Row>
+    </FirstPageFooter>
+  </PageFooters>
+  <ReportBody>
+    <Row Height="30" Border="VerticalOutsideDouble, OutsideDouble, VerticalOutsideDouble, InsideSingle">
+      <Border>
+        <Left Style="Double" Corners="MiterDouble, None">
+        </Left>
+        <Top Style="Double" Corners="MiterDouble, MiterDouble">
+        </Top>
+        <Right Style="Double" Corners="MiterDouble, None">
+        </Right>
+        <Bottom Style="Single" Corners="SetBackDouble, SetBackDouble">
+        </Bottom>
+      </Border>
+      <TextBlock Name="ResultLabel" FontSize="9" TextAlignment="Left" Width="300" Margin="3, 0, 0, 0" FontWeight="Bold">Result:</TextBlock>
+    </Row>
+    <Row Height="17" Border="Double, None, Double, None">
+      <Border>
+        <Left Style="Double">
+        </Left>
+        <Right Style="Double">
+        </Right>
+      </Border>
+      <TextBlock Name="DnaResultLabel" FontSize="9" TextAlignment="Left" Width="180" Margin="7,0,0,0" FontWeight="Bold">DNA Analysis:</TextBlock>
+    </Row>
+    <Row Height="17" Border="Double, None, Double, None">
+      <Border>
+        <Left Style="Double">
+        </Left>
+        <Right Style="Double">
+        </Right>
+      </Border>
+      <TextBlock Name="DnaResult" FontSize="9" TextAlignment="Left" Width="525" Margin="7, 0, 0, 0" MultiLine="True">dna_result</TextBlock>
+    </Row>
+    <Row Height="17" Border="Double, None, Double, None">
+      <Border>
+        <Left Style="Double">
+        </Left>
+        <Right Style="Double">
+        </Right>
+      </Border>
+      <TextBlock Name="CommentLabel" FontSize="9" TextAlignment="Left" Width="525" Margin="7,0,0,0" FontWeight="Bold">Interpretive Comment:</TextBlock>
+    </Row>
+    <Row Height="17" Border="Double, None, Double, None">
+      <Border>
+        <Left Style="Double">
+        </Left>
+        <Right Style="Double">
+        </Right>
+      </Border>
+      <TextBlock Name="ReportInterpretation" FontSize="9" TextAlignment="Left" Width="525" Margin="7, 0, 0, 0" IsMultiLine="True">report_interpretation</TextBlock>
+    </Row>
+    <Row Height="17" Border="Double, None, Double, None">
+      <Border>
+        <Left Style="Double">
+        </Left>
+        <Right Style="Double">
+        </Right>
+      </Border>
+      <TextBlock Name="Spacer" Width="300">
+      </TextBlock>
+      <TextBlock Name="ReportSignature" FontSize="9" TextAlignment="Center" Width="200">report_signature</TextBlock>
+    </Row>
+    <Row Height="17" Border="VerticalOutsideDouble, None, VerticalOutsideDouble, OutsideDouble">
+      <Border>
+        <Left Style="Double" Corners="None,MiterDouble">
+        </Left>
+        <Right Style="Double" Corners="None,MiterDouble">
+        </Right>
+        <Bottom Style="Double" Corners="MiterDouble,MiterDouble">
+        </Bottom>
+      </Border>
+      <TextBlock Name="Spacer" FontSize="8" Width="300">
+      </TextBlock>
+      <TextBlock Name="ElectronicSignatureLabel" FontSize="6" TextAlignment="Center" Width="200" VerticalAlignment="Top">*** E-signed final_time ***</TextBlock>
+    </Row>
+    <Row Height="17" Name="CommentRow">
+      <TextBlock Name="CommentLabel" FontSize="7" TextAlignment="Left" Width="300" TextDecorations="Underline" FontWeight="Bold" VerticalAlignment="Bottom">Comment</TextBlock>
+      <Image Name="HistogramImage" Top="0" Left="0" Height="200" Width="200" BorderThickness="1">
+      </Image>
+    </Row>
+    <Row Height="17">
+      <TextBlock Name="ReportComment" FontSize="7" TextAlignment="Left" Width="300" IsMultiLine="True">report_comment</TextBlock>
+    </Row>
+    <Row Height="17">
+      <TextBlock Name="SpecimenDescriptionLabel" FontSize="7" TextAlignment="Left" Width="300" TextDecorations="Underline" FontWeight="Bold" VerticalAlignment="Bottom">Specimen Description</TextBlock>
+    </Row>
+    <Row Height="17">
+      <TextBlock Name="SpecimenDescription" FontSize="7" TextAlignment="Left" Width="300">specimen_description</TextBlock>
+    </Row>
+    <Row Height="17">
+      <TextBlock Name="ReportMethodLabel" FontSize="7" TextAlignment="Left" Width="300" TextDecorations="Underline" FontWeight="Bold" VerticalAlignment="Bottom">Method</TextBlock>
+    </Row>
+    <Row Height="17">
+      <TextBlock Name="ReportMethod" FontSize="7" TextAlignment="Left" Width="300" IsMultiLine="True">DNA ploidy and S-phase analysis was performed via flow cytometry using forward and side scatter gating, and use of propidium idodide.  ModFit software from Verity, Inc. was used to analyze the data.</TextBlock>
+    </Row>
+    <Row Height="17">
+      <TextBlock Name="ReportReferencesLabel" FontSize="7" TextAlignment="Left" Width="300" TextDecorations="Underline" FontWeight="Bold" VerticalAlignment="Bottom">References</TextBlock>
+    </Row>
+    <Row Height="17">
+      <TextBlock Name="ReportReferences" FontSize="6" TextAlignment="Left" Width="300" IsMultiLine="True">
+      </TextBlock>
+    </Row>
+    <Row Height="17">
+      <TextBlock Name="OtherReportsLabel" FontSize="7" TextAlignment="Left" Width="300" TextDecorations="Underline" FontWeight="Bold" VerticalAlignment="Bottom">Other Yellowstone Pathology Institute Reports</TextBlock>
+    </Row>
+    <Row Height="17">
+      <TextBlock Name="OtherReports" FontSize="7" TextAlignment="Left" Width="300" IsMultiLine="True">
+      </TextBlock>
+    </Row>
+  </ReportBody>
+</Document>

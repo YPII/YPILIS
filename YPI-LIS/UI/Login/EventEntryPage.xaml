@@ -1,0 +1,98 @@
+﻿<Page x:Class="YellowstonePathology.UI.Login.EventEntryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"       
+	Title="Event Entry Page">
+
+    <Page.Resources>
+        
+        <DataTemplate x:Key="CommentTemplate">
+            
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>                
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>                    
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                           TextAlignment="Left" FontWeight="Bold" Text="{Binding Path=.}"></TextBlock>                
+            </Grid>
+
+        </DataTemplate>
+
+        <Style x:Key="CommentStyle" TargetType="ListBoxItem">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="Border" Margin="5,5,5,5" Padding="5" SnapsToDevicePixels="true" BorderBrush="Black" BorderThickness="1" CornerRadius="6" Background="#F5F5F5">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Border" Property="CornerRadius" Value="6"/>
+                                <Setter TargetName="Border" Property="Background" Value="#DCE6F2"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsVisible}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsVisible}" Value="true">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+    </Page.Resources>
+    <Grid>
+        
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" Margin="10,10,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" TextAlignment="Right" Margin="2,2,2,2">Event Id:</TextBlock>
+			<TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=OrderCommentLog.OrderCommentId}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="1" FontWeight="Bold" TextAlignment="Right" Margin="2,2,2,2">Description:</TextBlock>
+			<TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=OrderCommentLog.Description}" Margin="2,2,2,2"></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="2" FontWeight="Bold" Margin="2,2,2,2">Response:</TextBlock>
+			<TextBox Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Path=OrderCommentLog.Response}" VerticalAlignment="Stretch" Margin="2,2,2,2"></TextBox>
+
+        </Grid>
+
+        <ListBox Name="ListBoxComments" ItemTemplate="{StaticResource CommentTemplate}" ItemsSource="{Binding Path=Comments}" SelectionChanged="ListBoxComments_SelectionChanged"
+                 ItemContainerStyle="{StaticResource CommentStyle}" BorderThickness="1" Grid.Column="0" Grid.Row="1" Margin="2,2,2,2">            
+        </ListBox>
+
+        <StackPanel Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Right">
+		    <Button Name="ButtonOK" Margin="5" Width="100" Height="30">
+			    <TextBlock Margin="2,2,2,2">OK</TextBlock>
+		    </Button>
+		</StackPanel>
+	</Grid>
+</Page>

@@ -1,0 +1,88 @@
+<UserControl x:Class="YellowstonePathology.UI.SpecialStainsWorkspace"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<!--    <Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition></RowDefinition>
+			</Grid.RowDefinitions>
+			<Grid Grid.Column="0" Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+				<StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Width="100" TextAlignment="Right">Stain ID:</TextBlock>
+						<TextBox Width="300" Text="{Binding Path=CurrentSpecialStain.StainID}"></TextBox>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Width="100" TextAlignment="Right">Stain Name:</TextBlock>
+						<TextBox Width="300" Text="{Binding Path=CurrentSpecialStain.StainName}"></TextBox>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Width="100" TextAlignment="Right">Cpt Code:</TextBlock>
+						<TextBox Width="300" Text="{Binding Path=CurrentSpecialStain.CptCode}"></TextBox>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Width="100" TextAlignment="Right">Cpt Code Quantity:</TextBlock>
+						<TextBox Width="300" Text="{Binding Path=CurrentSpecialStain.CptCodeQuantity}"></TextBox>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Width="100" TextAlignment="Right">Group:</TextBlock>
+						<TextBox Width="300" Text="{Binding Path=CurrentSpecialStain.Grouping}"></TextBox>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Width="100" TextAlignment="Right">Charge:</TextBlock>
+						<TextBox Width="300" Text="{Binding Path=CurrentSpecialStain.ChargeFlag}"></TextBox>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Width="100" TextAlignment="Right">Immuno Comment:</TextBlock>
+						<TextBox Width="300" Text="{Binding Path=CurrentSpecialStain.ImmunoComment}"></TextBox>
+					</StackPanel>
+				</StackPanel>
+				<StackPanel Grid.Column="0" Grid.Row="1">
+					<ListView Name="listViewSpecialStainGrouping" ItemsSource="{Binding Path=CurrentSpecialStain.SpecialStainGroupView}" IsSynchronizedWithCurrentItem="True" Height="300">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=GroupName}" Header="Group Name" Width="200"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+					<Button Name="buttonRemoveGroup" Click="ButtonRemoveGroup_Click" Height="20" Width="100">Remove</Button>
+				</StackPanel>
+				<StackPanel Grid.Column="1" Grid.Row="1">
+					<ListView Name="listViewGroupNames" ItemsSource="{Binding Path=GroupNamesView}" IsSynchronizedWithCurrentItem="True">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding}" Header="Group Name" Width="200"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+					<Button Name="buttonAddGroup" Click="ButtonAddGroup_Click" Height="20" Width="100">Add</Button>
+				</StackPanel>
+			</Grid>
+			<ScrollViewer Grid.Column="1" Grid.Row="0">
+				<StackPanel>				
+					<ListView Name="listViewSpecialStains" ItemsSource="{Binding Path=SpecialStainsView}" IsSynchronizedWithCurrentItem="True" SelectionChanged="lsitViewSpecialStain_SelectionChanged">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=StainId}" Header="Id" Width="50"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=StainName}" Header="Stain" Width="200"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=CptCode}" Header="Cpt Code" Width="75"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=Grouping}" Header="Group" Width="100"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Path=ChargeFlag}" Header="Charge" Width="50"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</StackPanel>
+		</ScrollViewer>
+    </Grid>-->
+</UserControl>

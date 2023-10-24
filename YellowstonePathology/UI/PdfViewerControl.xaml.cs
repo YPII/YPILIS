@@ -102,5 +102,5 @@ namespace YellowstonePathology.UI
 
       return image;
     }        
-    }
+  }
 }

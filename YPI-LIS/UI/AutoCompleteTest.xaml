@@ -1,0 +1,45 @@
+﻿<Window x:Class="YellowstonePathology.UI.AutoCompleteTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI"
+        mc:Ignorable="d"
+        Title="Auto CompleteTest" Height="700" Width="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TextBox Name="TextBoxAutoComplete" Grid.Column="0" Grid.Row="0" Width="300" Padding="2,2,2,2" KeyUp="TextBoxAutoComplet_KeyUp"></TextBox>
+        <Border  Grid.Column="0" Grid.Row="1" Width="298" Height="150" BorderBrush="Black" BorderThickness="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Name="resultStack"></StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <ComboBox Grid.Row="2" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                    TextSearch.TextPath="Firstname" Width="200" Height="100" 
+                    ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" >
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Firstname" />
+                                <Binding Path="Lastname" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        
+    </Grid>
+</Window>
