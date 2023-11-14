@@ -1,0 +1,157 @@
+﻿<Window x:Class="YellowstonePathology.UI.MaterialTrackingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Material Tracking Dialog"
+        WindowState="Maximized" WindowStyle="ToolWindow">
+
+	<Window.Resources>
+		<DataTemplate x:Key="MaterialTrackingBatchTemplate">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Margin="2" Text="{Binding Path=OpenDate, Converter={StaticResource ShortDateTimeConverter}}" HorizontalAlignment="Stretch" />
+				<TextBlock Margin="2" Text="{Binding Path=Name}" HorizontalAlignment="Stretch" />
+				<TextBlock Margin="2" Text="{Binding Path=Action}" HorizontalAlignment="Stretch" />
+			</StackPanel>
+		</DataTemplate>
+
+		<Style x:Key="MaterialTrackingBatchStyle" TargetType="ListBoxItem">
+			<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Margin" Value="2,2,2,2"/>
+            <Setter Property="Padding" Value="2,2,2,2"/>
+            <Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ListBoxItem">
+						<Border Name="Border" Margin="2,2,2,2" SnapsToDevicePixels="true" BorderBrush="Black" BorderThickness="1" CornerRadius="2" Background="#F5F5F5">
+							<ContentPresenter />
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsSelected" Value="true">								
+								<Setter TargetName="Border" Property="Background" Value="#DCE6F2"></Setter>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<Style x:Key="SlideTrackingLogStyle" TargetType="{x:Type ListBoxItem}">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+			<Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>			
+            <Setter Property="Margin" Value="2,2,2,2"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ListBoxItem}">
+						<Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+						</Border>
+						<ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="false">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Background" TargetName="Bd" Value="LightBlue"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="true">
+								<Setter Property="Foreground" Value="Black"/>
+								<Setter Property="Background" TargetName="Bd" Value="LightGray"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsSelected" Value="true"/>
+									<Condition Property="Selector.IsSelectionActive" Value="false"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Background" TargetName="Bd" Value="LightGray"/>
+								<Setter Property="Foreground" Value="Black"/>
+							</MultiTrigger>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Resources>
+
+	<Grid Margin="2,2,2,2">
+        
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>		
+
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<ListBox Name="ListBoxMaterialTrackingBatch" Grid.Column="0" Margin="2,2,2,2" ItemsSource="{Binding Path=MaterialTrackingBatchCollection}" SelectionChanged="ListBoxMaterialTrackingBatch_SelectionChanged"
+					ItemContainerStyle="{StaticResource MaterialTrackingBatchStyle}" 
+					ItemTemplate="{StaticResource MaterialTrackingBatchTemplate}"
+					IsSynchronizedWithCurrentItem="True"
+					BorderThickness="1" BorderBrush="Black">
+			</ListBox>
+
+			<ListBox Name="ListBoxSlideTracking" Grid.Column="1" Margin="2,2,2,2" ItemsSource="{Binding Path=AccessionSlideOrderViewCollection}"
+					ItemContainerStyle="{StaticResource SlideTrackingLogStyle}" 
+					IsSynchronizedWithCurrentItem="True"
+					BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"></WrapPanel>							
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Border BorderBrush="Black" BorderThickness="1">
+							<Grid Height="220" >
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto"></RowDefinition>
+									<RowDefinition Height="*"></RowDefinition>
+								</Grid.RowDefinitions>
+								<Grid Margin="2,2,2,2" Background="White" Grid.Row="0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="100"></ColumnDefinition>
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto"></RowDefinition>
+										<RowDefinition Height="Auto"></RowDefinition>
+										<RowDefinition Height="Auto"></RowDefinition>
+										<RowDefinition Height="Auto"></RowDefinition>
+										<RowDefinition Height="*"></RowDefinition>
+									</Grid.RowDefinitions>
+
+									<TextBlock Grid.Column="0" Grid.Row="0" Margin="2,5,2,2" FontSize="9" HorizontalAlignment="Center" Text="{Binding Path=ReportNo}" />
+									<TextBlock Grid.Column="0" Grid.Row="1" Margin="2,5,2,2" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Text="{Binding Path=SlideOrder.Label}" />
+									<TextBlock Grid.Column="0" Grid.Row="2" Margin="2" FontSize="9" HorizontalAlignment="Center" Text="{Binding Path=PLastName}" />
+									<TextBlock Grid.Column="0" Grid.Row="3" Margin="2" FontSize="9" HorizontalAlignment="Center" Text="{Binding Path=PhysicianName}" />
+								</Grid>
+							</Grid>
+						</Border>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+
+		<Grid Grid.Row="1">           
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Grid.Column="0" Orientation="Horizontal">
+				<Button Width="110" Height="30" Margin="2,2,2,2" VerticalAlignment="Center" Click="ButtonPrintBatch_Click" Content="Print" />
+				<Button Width="110" Height="30" Margin="2,2,2,2" VerticalAlignment="Center" Click="ButtonCreateBatch_Click" Content="Create Batch" />
+				<Button Width="110" Height="30" Margin="2,2,2,2" VerticalAlignment="Center" Click="ButtonDeleteEmptyBatch_Click" Content="Delete Batch" />
+			</StackPanel>
+			
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Margin="2,2,2,2" VerticalAlignment="Center">Slide Count:</TextBlock>
+				<TextBlock Margin="2,2,2,2" VerticalAlignment="Center" Text="{Binding Path=SlideCount}"></TextBlock>
+            </StackPanel>
+			
+			<Button Grid.Column="1" Width="100" Height="30" Margin="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="ButtonOK_Click" Content="OK" />            
+		</Grid>
+        
+	</Grid>
+</Window>

@@ -1,0 +1,110 @@
+﻿<Window x:Class="YellowstonePathology.UI.Common.PatientEditDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:converter="clr-namespace:YellowstonePathology.UI.Converter"
+	xmlns:validationRules="clr-namespace:YellowstonePathology.UI.ValidationRules"
+	xmlns:customControls="clr-namespace:YellowstonePathology.UI.CustomControls"
+    Title="Patient Information" Height="330" Width="710">
+	<Window.Resources>
+		<ResourceDictionary Source="CommonResourceDictionary.xaml"></ResourceDictionary>
+	</Window.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition></RowDefinition>
+			<RowDefinition></RowDefinition>
+			<RowDefinition></RowDefinition>
+			<RowDefinition></RowDefinition>
+			<RowDefinition></RowDefinition>
+			<RowDefinition></RowDefinition>
+			<RowDefinition></RowDefinition>
+			<RowDefinition></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<!--row 1-->
+		<TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="2,6,0,0" VerticalAlignment="Bottom" FontSize="9" Foreground="SteelBlue">Last Name:</TextBlock>
+		<TextBlock Grid.Column="0" Grid.Row="1" Foreground="Red" FontSize="14" VerticalAlignment="Center" Margin="5,0,2,0">*</TextBlock>
+		<TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Margin="2" FontSize="16" Template="{StaticResource TextBoxDataEntryTemplate}" TextAlignment="Left" Text="{Binding Path=PLastName, Converter={StaticResource UpperCaseConverter}}"></TextBox>
+
+		<TextBlock Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" Margin="2,6,0,0" VerticalAlignment="Bottom" FontSize="9" Foreground="SteelBlue">First Name:</TextBlock>
+		<TextBlock Grid.Column="2" Grid.Row="1" Foreground="Red" FontSize="14" VerticalAlignment="Center" Margin="5,0,2,0">*</TextBlock>
+		<TextBox Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" Margin="2" FontSize="16" Template="{StaticResource TextBoxDataEntryTemplate}" Text="{Binding Path=PFirstName, Converter={StaticResource UpperCaseConverter}}"></TextBox>
+
+		<TextBlock Grid.Column="5" Grid.Row="0" HorizontalAlignment="Stretch" Margin="2,6,0,0" VerticalAlignment="Bottom" FontSize="9" Foreground="SteelBlue">Middle Initial:</TextBlock>
+		<TextBlock Grid.Column="4" Grid.Row="1" Foreground="Red" FontSize="14" VerticalAlignment="Center" Margin="5,0,2,0" Visibility="Hidden">*</TextBlock>
+		<TextBox Grid.Column="5" Grid.Row="1" HorizontalAlignment="Stretch" Margin="2" FontSize="16" Template="{StaticResource TextBoxDataEntryTemplate}" Text="{Binding Path=PMiddleInitial, Converter={StaticResource UpperCaseConverter}}"></TextBox>
+
+		<TextBlock Grid.Column="7" Grid.Row="0" HorizontalAlignment="Stretch" Margin="2,6,0,0" VerticalAlignment="Bottom" FontSize="9" Foreground="SteelBlue">Suffix:</TextBlock>
+		<TextBlock Grid.Column="6" Grid.Row="1" Foreground="Red" FontSize="14" VerticalAlignment="Center" Margin="5,0,2,0" Visibility="Hidden">*</TextBlock>
+		<TextBox Grid.Column="7" Grid.Row="1" HorizontalAlignment="Stretch" Margin="2" FontSize="16" Template="{StaticResource TextBoxDataEntryTemplate}" Text="{Binding Path=PSuffix, Converter={StaticResource UpperCaseConverter}}"></TextBox>
+
+		<!--row 2-->
+		<TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="2,6,0,0" VerticalAlignment="Bottom" FontSize="9" Foreground="SteelBlue">SSN:</TextBlock>
+		<TextBlock Grid.Column="0" Grid.Row="3" Foreground="Red" FontSize="14" VerticalAlignment="Center" Margin="5,0,2,0" Visibility="Hidden">*</TextBlock>
+		<customControls:ValidTextBox x:Name="TextBoxSSN" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+									  Style="{StaticResource ValidTextBoxStyle}" FontSize="16" Template="{StaticResource TextBoxDataEntryTemplate}">
+			<TextBox.Text>
+				<Binding Path="PSSN" UpdateSourceTrigger="Explicit">
+					<Binding.Converter>
+						<converter:SocialSecurityNumberConverter />
+					</Binding.Converter>
+					<Binding.ValidationRules>
+						<validationRules:SSNValidRule />
+					</Binding.ValidationRules>
+				</Binding>
+			</TextBox.Text>
+		</customControls:ValidTextBox>
+
+		<TextBlock Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left" Margin="2,6,0,0" VerticalAlignment="Bottom" FontSize="9" Foreground="SteelBlue">Sex:</TextBlock>
+		<TextBlock Grid.Column="2" Grid.Row="3" Foreground="Red" FontSize="14" VerticalAlignment="Center" Margin="5,0,2,0" Visibility="Visible">*</TextBlock>
+		<ComboBox Grid.Column="3" Grid.Row="3" IsEditable="True" Text="{Binding Path=PSex, Converter={StaticResource UpperCaseConverter}}" FontSize="16" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
+			<ComboBoxItem>F</ComboBoxItem>
+			<ComboBoxItem>M</ComboBoxItem>
+		</ComboBox>
+
+		<TextBlock Grid.Column="5" Grid.Row="2" HorizontalAlignment="Left" Margin="2,6,0,0" VerticalAlignment="Bottom" FontSize="9" Foreground="SteelBlue">Birthdate:</TextBlock>
+		<TextBlock Grid.Column="4" Grid.Row="3" Foreground="Red" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,2,0">*</TextBlock>
+		<customControls:ValidTextBox x:Name="TextBoxPBirthDate" Grid.Column="5" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+												 Style="{StaticResource ValidTextBoxStyle}" FontSize="16" Template="{StaticResource TextBoxDataEntryTemplate}">
+			<TextBox.Text>
+				<Binding Path="PBirthdate" UpdateSourceTrigger="Explicit">
+					<Binding.Converter>
+						<converter:ShortDateConverter />
+					</Binding.Converter>
+					<Binding.ValidationRules>
+						<validationRules:BirthDateValidation />
+					</Binding.ValidationRules>
+				</Binding>
+			</TextBox.Text>
+		</customControls:ValidTextBox>
+
+		<TextBlock Grid.Column="7" Grid.Row="2" HorizontalAlignment="Left" Margin="2,6,0,0" VerticalAlignment="Bottom" FontSize="9" Foreground="SteelBlue">PCAN:</TextBlock>
+		<TextBlock Grid.Column="6" Grid.Row="3" Foreground="Red" FontSize="14" VerticalAlignment="Center" Margin="5,0,2,0" Visibility="Hidden">*</TextBlock>
+		<TextBox Grid.Column="7" Grid.Row="3" HorizontalAlignment="Stretch"  Margin="2" FontSize="16" Template="{StaticResource TextBoxDataEntryTemplate}" Text="{Binding Path=PCAN}"></TextBox>
+
+		<TextBlock Grid.Column="9" Grid.Row="2" HorizontalAlignment="Left" Margin="2,6,0,0" VerticalAlignment="Bottom" FontSize="9" Foreground="SteelBlue">Race:</TextBlock>
+		<TextBlock Grid.Column="8" Grid.Row="3" Foreground="Red" FontSize="14" VerticalAlignment="Center" Margin="5,0,2,0" Visibility="Hidden">*</TextBlock>
+		<TextBox Grid.Column="9" Grid.Row="3" HorizontalAlignment="Stretch"  Margin="2" FontSize="16" Template="{StaticResource TextBoxDataEntryTemplate}" Text="{Binding Path=PRace}"></TextBox>				
+				
+
+		<Button Grid.Column="9" Grid.Row="8" Margin="2,5,2,5" Height="30" Click="ButtonSave_Click" Focusable="False">
+			<StackPanel Orientation="Horizontal">
+<!--				<Image Margin="2" Height="20" Width="20" Source="/Resources/Save.ico"></Image>-->
+				<TextBlock Margin="2" VerticalAlignment="Center">OK</TextBlock>
+			</StackPanel>
+		</Button>
+	</Grid>
+</Window>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Document>
+	<FinalDiagnosis></FinalDiagnosis>
+	<SummaryReportComment></SummaryReportComment>
+	<SurgicalPathologyDiagnosis>
+		<ReferenceReport></ReferenceReport>
+		<Comment></Comment>
+	</SurgicalPathologyDiagnosis>
+	<CancerCaseSummary>
+		<Comment></Comment>
+	</CancerCaseSummary>
+	<AjccPathologicStage>
+		<Comment></Comment>
+	</AjccPathologicStage>
+	<MolecularTesting>
+		<ReferenceReport></ReferenceReport>
+		<Comment></Comment>
+	</MolecularTesting>
+	<MicroSatelliteInstablilty>
+		<ReferenceReport></ReferenceReport>
+		<Comment></Comment>
+	</MicroSatelliteInstablilty>
+	<ClinicalInformation></ClinicalInformation>
+</Document>

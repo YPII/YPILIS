@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:complexType name="PanelOrderType" mixed="true" >
+		<xsd:sequence maxOccurs="1">
+			<xsd:element name="PanelOrderId" type="xsd:int" />
+			<xsd:element name="ReportNo" type="xsd:string" />
+			<xsd:element name="PanelId" type="xsd:int" />
+			<xsd:element name="PanelName" type="xsd:string" nillable="true" />
+			<xsd:element name="PanelOrderBatchId" type="xsd:int" />
+			<xsd:element name="Acknowledged" type="xsd:boolean" />
+			<xsd:element name="AcknowledgedById" type="xsd:int" nillable="true" />
+			<xsd:element name="AcknowledgedDate" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="AcknowledgedTime" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="Accepted" type="xsd:boolean" />
+			<xsd:element name="AcceptedById" type="xsd:int" nillable="true" />
+			<xsd:element name="AcceptedDate" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="AcceptedTime" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="OrderedById" type="xsd:int" />
+			<xsd:element name="OrderDate" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="OrderTime" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="Comment" type="xsd:string" nillable="true" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CytologyPanelOrderType" mixed="true" >
+		<xsd:sequence maxOccurs="1">
+			<xsd:element name="PanelOrderId" type="xsd:int" />
+			<xsd:element name="ReportNo" type="xsd:string" />
+			<xsd:element name="PanelId" type="xsd:int" />
+			<xsd:element name="PanelName" type="xsd:string" nillable="true" />
+			<xsd:element name="PanelOrderBatchId" type="xsd:int" />
+			<xsd:element name="Acknowledged" type="xsd:boolean" />
+			<xsd:element name="AcknowledgedById" type="xsd:int" nillable="true" />
+			<xsd:element name="AcknowledgedDate" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="AcknowledgedTime" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="Accepted" type="xsd:boolean" />
+			<xsd:element name="AcceptedById" type="xsd:int" nillable="true" />
+			<xsd:element name="AcceptedDate" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="AcceptedTime" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="OrderedById" type="xsd:int" />
+			<xsd:element name="OrderDate" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="OrderTime" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="Comment" type="xsd:string" nillable="true" />
+			<xsd:element name="ScreenedById" type="xsd:int" nillable="true" />
+			<xsd:element name="ScreenedByName" type="xsd:string" nillable="true" />
+			<xsd:element name="ResultCode" type="xsd:int" />
+			<xsd:element name="SpecimenAdequacy" type="xsd:string" nillable="true" />
+			<xsd:element name="ScreeningImpression" type="xsd:string" nillable="true" />
+			<xsd:element name="ScreeningImpressionComment" type="xsd:string" nillable="true" />
+			<xsd:element name="OtherConditions" type="xsd:string" nillable="true" />
+			<xsd:element name="ReportComment" type="xsd:string" nillable="true" />
+			<xsd:element name="InternalComment" type="xsd:string" nillable="true" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

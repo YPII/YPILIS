@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<SpecimenOrders>
+		<SpecimenOrder>
+			<MasterAccessionNo>T</MasterAccessionNo>
+			<CollectionDate xsi:nil="true" ></CollectionDate>
+			<CollectionTime xsi:nil="true" ></CollectionTime>
+			<FixationType></FixationType>
+			<FixationStartTime xsi:nil="true" ></FixationStartTime>
+			<FixationEndTime xsi:nil="true" ></FixationEndTime>
+			<Description></Description>
+			<AliquotRequestCount>1</AliquotRequestCount>
+			<AccessionTime xsi:nil="true" ></AccessionTime>
+			<ClientFixation></ClientFixation>
+			<LabFixation></LabFixation>
+			<CollectionTimeUnknown>false</CollectionTimeUnknown>
+			<ExactFixationStartTimeUnknown>true</ExactFixationStartTimeUnknown>
+			<FixationComment></FixationComment>
+			<Sequence>1</Sequence>
+			<Source></Source>
+		</SpecimenOrder>
+	</SpecimenOrders>
+	<PanelSetOrders>
+		<PanelSetOrder>
+			<ReportNo>T</ReportNo>
+			<MasterAccessionNo>0</MasterAccessionNo>
+			<PanelSetId>29</PanelSetId>
+			<PanelSetName>DNA Content and Cell Cycle Analysis</PanelSetName>
+			<Final>false</Final>
+			<FinalDate xsi:nil="true" ></FinalDate>
+			<FinalTime xsi:nil="true" ></FinalTime>
+			<FinaledById>0</FinaledById>
+			<OrderedById>0</OrderedById>
+			<OrderDate xsi:nil="true" ></OrderDate>
+			<OrderTime xsi:nil="true" ></OrderTime>
+			<Signature></Signature>
+			<AssignedToId>0</AssignedToId>
+			<TemplateId>0</TemplateId>
+			<DnaResult>
+				<Result></Result>
+				<Interpretation></Interpretation>
+				<Comment></Comment>
+				<DnaReferenceId xsi:nil="true" ></DnaReferenceId>
+				<Cycles></Cycles>
+			</DnaResult>
+			<PanelOrders>
+				<PanelOrder>
+					<PanelOrderId>T</PanelOrderId>
+					<ReportNo>T</ReportNo>
+					<PanelId>43</PanelId>
+					<PanelName>DNA Content and Cell Cycle Analysis</PanelName>
+					<PanelOrderBatchId>0</PanelOrderBatchId>
+					<Acknowledged>false</Acknowledged>
+					<AcknowledgedById>0</AcknowledgedById>
+					<AcknowledgedDate xsi:nil="true" ></AcknowledgedDate>
+					<AcknowledgedTime xsi:nil="true" ></AcknowledgedTime>
+					<Accepted>false</Accepted>
+					<AcceptedById>0</AcceptedById>
+					<AcceptedDate xsi:nil="true" ></AcceptedDate>
+					<AcceptedTime xsi:nil="true" ></AcceptedTime>
+					<OrderedById>0</OrderedById>
+					<OrderDate xsi:nil="true" ></OrderDate>
+					<OrderTime xsi:nil="true" ></OrderTime>
+					<AssignedToId>0</AssignedToId>
+					<Comment></Comment>
+					<DnaResult>
+						<Result></Result>
+						<Interpretation></Interpretation>
+						<Comment></Comment>
+						<DnaReferenceId xsi:nil="true" ></DnaReferenceId>
+						<Cycles></Cycles>
+					</DnaResult>
+				</PanelOrder>
+			</PanelOrders>
+		</PanelSetOrder>
+	</PanelSetOrders>
+</Document>
+
+<!--<Document>
+	<DNAResult>
+		<Result></Result>
+		<Interpretataion></Interpretataion>
+		<Comment></Comment>
+		<Cycle>
+			<CycleType>Diploid</CycleType>
+			<BAD></BAD>
+			<CV></CV>
+			<DI></DI>
+			<G1></G1>
+			<G1Mean></G1Mean>
+			<G2></G2>
+			<G2G1Ratio></G2G1Ratio>
+			<G2Mean></G2Mean>
+			<Ploidy></Ploidy>
+			<S></S>
+		</Cycle>
+	</DNAResult>
+</Document>-->

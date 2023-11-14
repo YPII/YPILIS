@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Cytology.SpecimenAdequacySelection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto">
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>            
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBox Name="TextBoxSpecimenAdequacy" 
+                 Grid.Column="0" Grid.Row="0" 
+                 HorizontalAlignment="Stretch" 
+                 Margin="2,2,2,2" 
+                 TextWrapping="Wrap"
+                 TextChanged="TextBoxText_TextChanged">
+        </TextBox>
+
+        <StackPanel Name="StackPanelSpecimenAdequacy" Grid.Row="1" Visibility="Collapsed">
+            
+            <ListBox Name="ListBoxSpecimenAdequacy" ItemsSource="{Binding}"
+                                     BorderThickness="1" Margin="5,5,5,5" BorderBrush="LightBlue">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Margin="5,5,5,5"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <RadioButton IsChecked="{Binding IsSelected, RelativeSource={x:Static RelativeSource.TemplatedParent}}" Margin="2,2,2,2">
+                                        <RadioButton.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Grid.Column="0" Text="{Binding Path=ResultCode}" Margin="2,2,2,2"></TextBlock>
+                                                <TextBlock>-</TextBlock>
+                                                <TextBlock Grid.Column="1" Text="{Binding Path=Description}" Margin="2,2,2,2"></TextBlock>
+                                            </StackPanel>
+                                        </RadioButton.Content>
+                                    </RadioButton>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5,5,5,5">
+				<Button Width="50" Click="ButtonOK_Click" Margin="2,2,2,2">OK</Button>
+				<Button Width="50" Click="ButtonCancel_Click" Margin="2,2,2,2">Cancel</Button>
+			</StackPanel>
+
+			<ListView Name="ListViewComments" ItemsSource="{Binding}" Margin="5,5,5,5" SelectionMode="Multiple">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Comment}" Header="Comment"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+        </StackPanel>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,106 @@
+﻿<FlowDocument x:Class="YellowstonePathology.Business.Document.CaseReportFooter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" ColumnWidth="816">
+	<Table Margin="18,0,18,0" FontFamily="Candara">
+		<Table.Columns>
+			<TableColumn></TableColumn>
+			<TableColumn></TableColumn>
+			<TableColumn></TableColumn>
+		</Table.Columns>
+		
+		<TableRowGroup>
+			<TableRow>
+				<TableCell ColumnSpan="3">
+					<Paragraph Margin="2,0,0,0">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock FontFamily="Comic Sans MS" FontSize="9pt" Foreground="#993300" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom">Y</TextBlock>
+							<TextBlock FontSize="9pt" Foreground="#993300" HorizontalAlignment="Left" VerticalAlignment="Bottom">ellowstone Pathology Institute, Inc.</TextBlock>
+						</StackPanel>
+					</Paragraph>
+				</TableCell>
+			</TableRow>
+			
+			<TableRow>
+				<TableCell>
+					<Paragraph Margin="2,0,0,0">
+						<TextBlock FontSize="9pt" Foreground="#993300" FontWeight="Bold">Billings</TextBlock>
+					</Paragraph>
+				</TableCell>
+				
+				<TableCell>
+					<Paragraph>
+						<TextBlock FontSize="9pt" Foreground="#993300" FontWeight="Bold">Cody</TextBlock>
+					</Paragraph>
+				</TableCell>
+				
+				<TableCell>
+					<Paragraph Margin="0,0,0,2" TextAlignment="Right">
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+							<TextBlock FontFamily="Comic Sans MS" FontSize="8pt" Foreground="#993300" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom">Y</TextBlock>
+							<TextBlock FontSize="8pt" Foreground="#993300" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontStretch="ultraexpanded">e l l o w s t o n e P a t h o l o g y . c o m</TextBlock>
+						</StackPanel>
+					</Paragraph>
+				</TableCell>
+			</TableRow>
+			
+			<TableRow>
+				<TableCell ColumnSpan="3">
+					<Paragraph BorderBrush="#993300" BorderThickness="0,1,0,0" FontSize="1"></Paragraph>
+				</TableCell>
+			</TableRow>
+			
+			<TableRow>
+				<TableCell>
+					<Paragraph Margin="2,0,0,0">
+						<StackPanel>
+							<TextBlock Margin="0,0,0,0" FontSize="9pt" Foreground="#83725f">2900 12th Avenue North, Suite 295W</TextBlock>
+							<TextBlock Margin="0,0,0,0" FontSize="9pt" Foreground="#83725f">Billings, MT  59101</TextBlock>
+							<StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+								<TextBlock Margin="0,0,0,0" FontSize="8pt">phone</TextBlock>
+								<TextBlock Margin="5,0,0,0" FontSize="9pt" FontWeight="Bold">406.238.6360</TextBlock>
+								<TextBlock Margin="20,0,0,0" FontSize="8pt">fax</TextBlock>
+								<TextBlock Margin="5,0,0,0" FontSize="9pt" FontWeight="Bold">406.238.6361</TextBlock>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Margin="0,0,0,0" FontSize="8pt">toll-free</TextBlock>
+								<TextBlock Margin="5,0,0,0" FontSize="9pt" FontWeight="Bold">1.888.400.6640</TextBlock>
+							</StackPanel>
+						</StackPanel>
+					</Paragraph>
+				</TableCell>
+				
+				<TableCell>
+					<Paragraph>
+						<StackPanel>
+							<TextBlock Margin="0,0,0,0" FontSize="9pt" Foreground="#83725f">1008 Cody Avenue</TextBlock>
+							<TextBlock Margin="0,0,0,0" FontSize="9pt" Foreground="#83725f">Cody, WY  82414</TextBlock>
+							<StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+								<TextBlock Margin="0,0,0,0" FontSize="8pt">phone</TextBlock>
+								<TextBlock Margin="5,0,0,0" FontSize="9pt" FontWeight="Bold">307.578.1850</TextBlock>
+								<TextBlock Margin="20,0,0,0" FontSize="8pt">fax</TextBlock>
+								<TextBlock Margin="5,0,0,0" FontSize="9pt" FontWeight="Bold">406.238.6361</TextBlock>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Margin="0,0,0,0" FontSize="8pt">toll-free</TextBlock>
+								<TextBlock Margin="5,0,0,0" FontSize="9pt" FontWeight="Bold">1.888.400.6640</TextBlock>
+							</StackPanel>
+						</StackPanel>
+					</Paragraph>
+				</TableCell>
+				
+				<TableCell>
+					<Paragraph Margin="0,0,2,0" TextAlignment="Right">
+						<StackPanel HorizontalAlignment="Right">
+							<TextBlock FontSize="8pt" Foreground="#993300" TextAlignment="Right">Michael S. Brown, MD, FCAP</TextBlock>
+							<TextBlock FontSize="8pt" Foreground="#993300" TextAlignment="Right">Pamela P. Clegg, MD, FCAP</TextBlock>
+							<TextBlock FontSize="8pt" Foreground="#993300" TextAlignment="Right">Angela F. Durden, MD, FCAP</TextBlock>
+							<TextBlock FontSize="8pt" Foreground="#993300" TextAlignment="Right">Kerrie R. Emerick, MD, FCAP</TextBlock>
+							<TextBlock FontSize="8pt" Foreground="#993300" TextAlignment="Right">Paul W. Holley, MD, FCAP</TextBlock>
+							<TextBlock FontSize="8pt" Foreground="#993300" TextAlignment="Right">Duane A. Schultz, MD, FCAP</TextBlock>
+						</StackPanel>
+					</Paragraph>
+				</TableCell>
+			</TableRow>
+		</TableRowGroup>
+	</Table>
+</FlowDocument>

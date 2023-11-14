@@ -1,0 +1,49 @@
+﻿<Window x:Class="YellowstonePathology.UI.Cytology.CytologyMoreActionsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Cytology More Actions Dialog" Height="215" Width="300" SizeToContent="Height"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TabControl>
+            <TabItem Header="General">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>                    
+                    <Button Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Stretch" Click="ButtonOrderAcidWash_Click" Height="30">Order an Acid Wash</Button>
+                    <Button Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Stretch" Click="ButtonOrderDotReview_Click" Height="30">Order a Dot Review</Button>
+                    <Button Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Stretch" Click="ButtonScreeningUnfinal_Click" Height="30">Screening Unfinal</Button>
+                    <Button Grid.Row="3" Margin="2,2,2,2" HorizontalAlignment="Stretch" Click="ButtonClearCase_Click" Height="30">Clear Case</Button>                    
+                </Grid>                
+            </TabItem>
+            <TabItem Header="Delete">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Margin="2,2,2,2" HorizontalAlignment="Stretch" Click="ButtonDeleteScreening_Click" Height="30">Delete Screening</Button>
+                    <Button Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Stretch" Click="ButtonDeleteAcidWach_Click" Height="30">Delete Acid Wash</Button>                    
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="5,5,5,5" VerticalAlignment="Bottom">            
+            <Button Width="50" Height="30" Click="ButtonCancel_Click" Margin="2,2,2,2">Cancel</Button>
+        </StackPanel>
+
+    </Grid>
+</Window>

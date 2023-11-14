@@ -1,0 +1,82 @@
+﻿This is second change in I1
+SpeechRecognizer m_SpeechRecognizer;
+
+Grammar m_StepTwoGrammar;
+Grammar m_StepThreeGrammar;
+
+public void SetupGrammarThree()
+        {
+            GrammarBuilder grammarBuilderStepThree = new GrammarBuilder();
+            Choices choices = new Choices();
+            choices.Add("Reflex HPV");
+            choices.Add("Routine HPV");
+
+            choices.Add("High Risk Screening PAP");
+            choices.Add("Diagnostic PAP");
+
+            choices.Add("Hysterectomy");
+            choices.Add("Abnormal Bleeding");
+            choices.Add("Birth Control Pills");
+            choices.Add("Hormone Therapy");
+            choices.Add("Previous Normal PAP");
+            choices.Add("Previous Abnormal PAP");
+            choices.Add("Previous Biopsy");
+            choices.Add("Prenatal");
+            choices.Add("Postpartum");
+            choices.Add("Postmenopausal");
+            choices.Add("Abnormal Bleeding");
+            choices.Add("Cervix Absent");
+            choices.Add("Vaginal");
+            choices.Add("LMP");
+
+            choices.Add("Order NGCT");
+
+            grammarBuilderStepThree.Append(choices);
+            this.m_StepThreeGrammar = new Grammar(grammarBuilderStepThree);
+            this.m_StepThreeGrammar.Name = "StepThree";
+        }        
+
+        public void SetupGrammarTwo()
+        {
+            List<YellowstonePathology.Business.Domain.Core.Domain.Client> clientList = this.m_LocalReferenceDataRespository.GetVoiceCommandClients();
+            List<YellowstonePathology.Business.Domain.Core.Domain.Physician> physicianList = this.m_LocalReferenceDataRespository.GetVoiceCommandPhysicians();
+            GrammarBuilder grammarBuilderStepTwo = new GrammarBuilder();
+
+            Choices choices = new Choices();
+            foreach (YellowstonePathology.Business.Domain.Core.Domain.Client client in clientList)
+            {
+                choices.Add(client.VoiceCommand);
+            }
+            foreach (YellowstonePathology.Business.Domain.Core.Domain.Physician physician in physicianList)
+            {
+                choices.Add(physician.VoiceCommand);
+            }
+            grammarBuilderStepTwo.Append(choices);
+
+            this.m_StepTwoGrammar = new Grammar(grammarBuilderStepTwo);
+            this.m_StepTwoGrammar.Name = "StepTwo";            
+        }
+
+        private void SpeechRecognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {            
+            this.m_LoginTestWindow.TextBlockVoiceCommands.Text = e.Result.Text;
+
+            switch (this.m_SpeechRecognizer.Grammars[0].Name)
+            {
+                case "StepTwo":
+                    this.m_LoginTestWindow.TextBlockStepTwo.Text = this.m_LoginTestWindow.TextBlockStepTwo.Text + e.Result.Text + "\r\n";
+                    this.m_LoginTestWindow.TextBlockStepTwo.SelectionStart = this.m_LoginTestWindow.TextBlockStepTwo.Text.Length;            
+                    break;
+                case "StepThree":
+                    this.m_LoginTestWindow.TextBlockStepThree.Text = this.m_LoginTestWindow.TextBlockStepThree.Text + e.Result.Text + "\r\n";
+                    this.m_LoginTestWindow.TextBlockStepThree.SelectionStart = this.m_LoginTestWindow.TextBlockStepThree.Text.Length;            
+                    break;
+            }            
+        }             
+        
+        
+        
+        //BindingOperations.GetBindingExpressionBase(this.TextBlockStepOne, TextBox.TextProperty).UpdateSource();
+            //BindingOperations.GetBindingExpressionBase(this.TextBlockStepTwo, TextBox.TextProperty).UpdateSource();
+            //BindingOperations.GetBindingExpressionBase(this.TextBlockStepThree, TextBox.TextProperty).UpdateSource();
+            //this.m_LoginUI.ProcessInputText();            

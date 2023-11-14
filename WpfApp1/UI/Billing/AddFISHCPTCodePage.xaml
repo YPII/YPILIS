@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Billing.AddFISHCPTCodePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:YellowstonePathology.UI.Billing"
+      FontSize="12">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0" Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+
+            <Grid Grid.Column="0" Margin="10" Width="175">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>
+                
+                <ListView Name="ListViewCPTCodes" Margin="2,2,2,2" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=FISHCPTCodeList}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Quantity">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox Width="45" Margin="3" Text="{Binding Path=Quantity}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=CptCode.Code}" Header="Code" Width="55"/>
+                            <GridViewColumn  Width="40">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,3,0,0">
+                                                <Hyperlink Click="HyperLinkAddCodes_Click" Tag="{Binding}">Add</Hyperlink>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="10">
+
+                <ListView Name="ListViewPanelSetOrderCPTCode" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=PanelSetOrder.PanelSetOrderCPTCodeCollection}" Margin="10,2,2,2">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Delete" Click="MenuItemDeletePanelSetOrderCPTCodes_Click"></MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="Qty" Width="40"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=CPTCode}" Header="CPT Code" Width="70"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=CodeableDescription}" Header="Description" Width="209"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=CodeableType}" Header="Type" Width="100"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Modifier}" Header="Modifier" Width="65"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=PostDate, Converter={StaticResource ShortDateConverter}}" Header="Post Date" Width="80"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=EntryType}" Header="Entry Type" Width="100"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=ClientId}" Header="Client" Width="100"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=MedicalRecord}" Header="MRN" Width="80"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+        </Grid>
+
+        <Border Grid.Column="0" Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <Button Name="ButtonNext" Grid.Column="1" Grid.Row="2" Width="100" Height="40" HorizontalAlignment="Right" Margin="5,5,5,5" Click="ButtonNext_Click">Next ></Button>
+
+    </Grid>
+
+</UserControl>

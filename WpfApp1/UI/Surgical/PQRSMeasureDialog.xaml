@@ -1,0 +1,9 @@
+﻿<Window x:Class="YellowstonePathology.UI.Surgical.PQRSMeasureDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PQRS Measure Dialog" Height="320" Width="400"
+		WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" SizeToContent="Height">
+    <Grid>
+		<ContentControl Name="MainContent" ></ContentControl>
+	</Grid>
+</Window>

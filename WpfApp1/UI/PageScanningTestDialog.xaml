@@ -1,0 +1,38 @@
+﻿<Window x:Class="YellowstonePathology.UI.PageScanningTestDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PageScanningTestDialog" Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <GroupBox Header="Source">
+                <StackPanel>
+                    <RadioButton
+                        Name="SourceFromTwainUI"                         
+                        IsChecked="True">Use TWAIN UI</RadioButton>
+                    <Button 
+                        Margin="5"
+                        Name="selectSourceButton"                         
+                        IsEnabled="{Binding ElementName=SourceFromTwainUI, Path=IsChecked}" 
+                        Click="selectSourceButton_Click">Select Source</Button>
+
+                    <RadioButton Name="SourceUserSelected">Manual source</RadioButton>
+                    <ComboBox 
+                        Name="ManualSource"
+                        IsEnabled="{Binding ElementName=SourceUserSelected, Path=IsChecked}" />
+                </StackPanel>
+            </GroupBox>
+
+            <Button Margin="5" Name="scanButton" Click="scanButton_Click">Scan</Button>
+            <CheckBox Margin="5" Name="useTwainUICheckBox">Show TWAIN UI</CheckBox>
+            <CheckBox Margin="5" Name="useAdfCheckBox">Use ADF</CheckBox>
+            <Button Margin="5" Name="saveButton" Click="saveButton_Click">Save</Button>
+        </StackPanel>
+        <Border Grid.Column="1" BorderThickness="3, 0, 0, 0" BorderBrush="Gray">
+            <Image Margin="5" Name="image1" Stretch="UniformToFill" />
+        </Border>
+    </Grid>
+</Window>

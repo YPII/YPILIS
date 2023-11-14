@@ -1,0 +1,214 @@
+﻿<FlowDocument x:Class="YellowstonePathology.Business.Document.FlowDocumentReport"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" ColumnWidth="816">
+	<Table Margin="20,20,15,0">
+		<Table.Columns>
+			<TableColumn></TableColumn>
+		</Table.Columns>
+		
+		<TableRowGroup>
+			<TableRow>
+				<TableCell>
+					<Paragraph>
+						<Grid Name="HeaderGrid" Grid.Column="0" Grid.Row="0" Margin="0,10,15,0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition></RowDefinition>
+								<RowDefinition></RowDefinition>
+								<RowDefinition></RowDefinition>
+								<RowDefinition></RowDefinition>
+								<RowDefinition></RowDefinition>
+							</Grid.RowDefinitions>
+
+							<Grid Grid.Column="0" Grid.Row="0">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"></ColumnDefinition>
+									<ColumnDefinition Width="2*"></ColumnDefinition>
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition></RowDefinition>
+									<RowDefinition></RowDefinition>
+									<RowDefinition></RowDefinition>
+								</Grid.RowDefinitions>
+
+								<Image Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Source="../Images/YPIReportLogo.bmp"></Image>
+								<TextBlock Grid.Column="1" Grid.Row="0" Margin="0,0,0,0" FontFamily="Verdana" FontSize="18" FontWeight="bold" Foreground="#993300" HorizontalAlignment="Right" VerticalAlignment="Top" Text="{Binding Path=ReportName}"></TextBlock>
+
+								<Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition></ColumnDefinition>
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*"></RowDefinition>
+										<RowDefinition Height="3*"></RowDefinition>
+										<RowDefinition Height="4*"></RowDefinition>
+									</Grid.RowDefinitions>
+
+									<TextBlock Grid.Column="1" Grid.Row="1" Margin="0,12,0,0" FontFamily="Verdana" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding Path=AmendmentVisibility}">Amendment</TextBlock>
+									<StackPanel Grid.Column="1" Grid.Row="2" Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+										<TextBlock Margin="0,0,0,0" FontFamily="Verdana" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top">Report #:</TextBlock>
+										<TextBlock Margin="0,0,0,0" FontFamily="Verdana" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Text="{Binding Path=ReportNo}"></TextBlock>
+									</StackPanel>
+								</Grid>
+							</Grid>
+
+							<Grid Grid.Column="0" Grid.Row="3" Margin="25,10,0,0">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="75"></ColumnDefinition>
+									<ColumnDefinition Width="*"></ColumnDefinition>
+									<ColumnDefinition Width="150"></ColumnDefinition>
+									<ColumnDefinition Width="125"></ColumnDefinition>
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition></RowDefinition>
+									<RowDefinition></RowDefinition>
+									<RowDefinition></RowDefinition>
+									<RowDefinition></RowDefinition>
+									<RowDefinition></RowDefinition>
+									<RowDefinition></RowDefinition>
+								</Grid.RowDefinitions>
+
+								<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,0,2" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Bottom">Patient:</TextBlock>
+								<StackPanel Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+									<TextBlock Margin="0,0,0,0" FontFamily="Verdana" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="{Binding Path=PatientDisplayName}"></TextBlock>
+									<TextBlock Margin="10,0,0,2" FontFamily="Verdana" FontSize="12" VerticalAlignment="Bottom">(</TextBlock>
+									<TextBlock Margin="2,0,0,2" FontFamily="Verdana" FontSize="12" VerticalAlignment="Bottom" Text="{Binding Path=PatientAge}"></TextBlock>
+									<TextBlock Margin="2,0,0,2" FontFamily="Verdana" FontSize="12" VerticalAlignment="Bottom">)</TextBlock>
+								</StackPanel>
+
+								<TextBlock Grid.Column="2" Grid.Row="1" Margin="5,0,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Right">Master Accession #:</TextBlock>
+								<TextBlock Grid.Column="3" Grid.Row="1" Margin="5,0,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Left" Text="{Binding Path=MasterAccessionNo}"></TextBlock>
+
+								<TextBlock Grid.Column="0" Grid.Row="2" Margin="0,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Left">Provider:</TextBlock>
+								<TextBlock Grid.Column="1" Grid.Row="2" Margin="0,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Left" Text="{Binding Path=PhysicianName}"></TextBlock>
+								<TextBlock Grid.Column="2" Grid.Row="2" Margin="5,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Right">Date of Report:</TextBlock>
+								<TextBlock Grid.Column="3" Grid.Row="2" Margin="5,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Left" Text="{Binding Path=FinalDate}"></TextBlock>
+
+								<TextBlock Grid.Column="1" Grid.Row="3" Margin="0,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Left" Text="{Binding Path=ClientName}"></TextBlock>
+								<TextBlock Grid.Column="2" Grid.Row="3" Margin="5,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Right">Accessioned:</TextBlock>
+								<TextBlock Grid.Column="3" Grid.Row="3" Margin="5,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Left" Text="{Binding Path=AccessionTime}"></TextBlock>
+
+								<TextBlock Grid.Column="2" Grid.Row="4" Margin="5,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Right">Collected:</TextBlock>
+								<TextBlock Grid.Column="3" Grid.Row="4" Margin="5,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Left" Text="{Binding Path=CollectionTime}"></TextBlock>
+
+								<TextBlock Grid.Column="1" Grid.Row="5" Margin="0,1,0,0" FontFamily="Verdana" FontSize="9" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Bottom">Full distribution list is provided at the end of the report.</TextBlock>
+								<TextBlock Grid.Column="2" Grid.Row="5" Margin="5,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Right" Text="{Binding Path=ClientAccountHeader}"></TextBlock>
+								<TextBlock Grid.Column="3" Grid.Row="5" Margin="5,1,0,0" FontFamily="Verdana" FontSize="12" HorizontalAlignment="Left" Text="{Binding Path=ClientAccount}"></TextBlock>
+							</Grid>
+						</Grid>
+					</Paragraph>
+				</TableCell>
+			</TableRow>
+
+			<TableRow>
+				<TableCell BorderBrush="Black" BorderThickness="2">
+					<Table BorderBrush="Black" BorderThickness="1" Margin="1,1,1,1" >
+						<Table.Columns>
+							<TableColumn Width="2*"></TableColumn>
+							<TableColumn Width="7*"></TableColumn>
+							<TableColumn Width="7*"></TableColumn>
+						</Table.Columns>
+						<TableRowGroup>
+							<TableRow>
+								<TableCell ColumnSpan="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+									<Paragraph>
+										<TextBlock Margin="5,2,0,2" FontSize="12" FontFamily="Verdana" FontWeight="Bold" VerticalAlignment="Center">Result:</TextBlock>
+									</Paragraph>
+								</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell>
+									<Paragraph Margin="0,5,0,0" TextAlignment="Right">
+										<TextBlock FontSize="9pt" FontFamily="Verdana" FontWeight="Bold" HorizontalAlignment="Right">PNH:</TextBlock>
+									</Paragraph>
+								</TableCell>
+								<TableCell ColumnSpan="2">
+									<Paragraph Margin="5,5,0,0" TextAlignment="Left">
+										<TextBlock FontSize="9pt" FontFamily="Verdana" HorizontalAlignment="Left" TextWrapping="Wrap">Negative (No evidence of paroxysmal nocturnal hemoglobinuria)</TextBlock>
+									</Paragraph>
+								</TableCell>
+							</TableRow>
+
+							<TableRow>
+								<TableCell>
+									<Paragraph Margin="0,7,0,0" TextAlignment="Right">
+										<TextBlock FontSize="9pt" FontFamily="Verdana" FontWeight="Bold" HorizontalAlignment="Right">Comment:</TextBlock>
+									</Paragraph>
+								</TableCell>
+								<TableCell ColumnSpan="2">
+									<Paragraph Margin="5,7,0,0" TextAlignment="Left">
+										<TextBlock FontSize="9pt" FontFamily="Verdana" HorizontalAlignment="Left" TextWrapping="Wrap">Flow cytometric analysis does not identify any evidence of a PNH clone, based on analysis of several different GPI-linked antibodies on 3 separate cell populations (red blood cells, monocytes and granulocytes).  These findings do not support the diagnosis of PNH.</TextBlock>
+									</Paragraph>
+								</TableCell>
+							</TableRow>
+
+							<TableRow>
+								<TableCell ColumnSpan="2">
+								</TableCell>
+								<TableCell>
+									<Paragraph Margin="0,10,0,0">
+										<TextBlock FontSize="9pt" FontFamily="Verdana" HorizontalAlignment="Center" Text="{Binding Path=Signature}"></TextBlock>
+									</Paragraph>
+								</TableCell>
+							</TableRow>
+
+							<TableRow>
+								<TableCell ColumnSpan="2">
+									<Paragraph>
+									</Paragraph>
+								</TableCell>
+								<TableCell>
+									<Paragraph Margin="0,0,0,10">
+										<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+											<TextBlock FontSize="6pt" FontFamily="Verdana" FontStyle="Italic">*** E-signed</TextBlock>
+											<TextBlock FontSize="6pt" FontFamily="Verdana" FontStyle="Italic" Text="{Binding Path=FinalTime}"></TextBlock>
+											<TextBlock FontSize="6pt" FontFamily="Verdana" FontStyle="Italic"> ***</TextBlock>
+										</StackPanel>
+									</Paragraph>
+								</TableCell>
+							</TableRow>
+							
+							<TableRow>
+								<TableCell ColumnSpan="3" BorderBrush="Black" BorderThickness="0,2,0,0">
+									<Paragraph BorderBrush="Black" BorderThickness="0,1,0,0" Margin="0,1,0,0">
+										<TextBlock Margin="10,5,0,0" FontSize="8pt" FontFamily="Verdana" FontWeight="Bold">amendment_date_time</TextBlock>
+									</Paragraph>
+								</TableCell>
+							</TableRow>
+
+							<TableRow>
+								<TableCell ColumnSpan="3">
+									<Paragraph>
+										<TextBlock Margin="10,0,0,0" FontSize="8pt" FontFamily="Verdana" TextAlignment="Left" TextWrapping="Wrap">amendment_date_time</TextBlock>
+									</Paragraph>
+								</TableCell>
+							</TableRow>
+
+							<TableRow>
+								<TableCell ColumnSpan="2">
+								</TableCell>
+								<TableCell>
+									<Paragraph>
+										<TextBlock FontSize="8pt" FontFamily="Verdana" HorizontalAlignment="Center">amendment_signature</TextBlock>
+									</Paragraph>
+								</TableCell>
+							</TableRow>
+
+							<TableRow>
+								<TableCell ColumnSpan="2">
+								</TableCell>
+								<TableCell>
+									<Paragraph Margin="0,0,0,10">
+										<TextBlock FontSize="6pt" FontFamily="Verdana" FontStyle="Italic" HorizontalAlignment="Center">signature_title</TextBlock>
+									</Paragraph>
+								</TableCell>
+							</TableRow>
+						</TableRowGroup>
+					</Table>
+				</TableCell>
+			</TableRow>
+		</TableRowGroup>	
+	</Table>
+</FlowDocument>

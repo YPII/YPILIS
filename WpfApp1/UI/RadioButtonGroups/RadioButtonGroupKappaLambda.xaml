@@ -1,0 +1,21 @@
+<UserControl x:Class="YellowstonePathology.UI.RadioButtonGroups.RadioButtonGroupKappaLambda"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<StackPanel>
+		<Border BorderBrush="Blue" BorderThickness="1">
+			<StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<CheckBox Name="checkBoxKappaLamda" Margin="10,3,3,3" Unchecked="CheckBoxKappaLambda_Unchecked"></CheckBox>
+					<TextBlock Width="73" Margin="3">Kappa</TextBlock>
+					<RadioButton Name="radioButtonKappaExpresses" Tag="KappaExpresses" GroupName="radioButtonGroupKappaLambda" Click="RadioButtonGroupKappaLambda_Click" Margin="3,3,22,3"></RadioButton>
+					<RadioButton Name="radioButtonKappaEquivocal" Tag="KappaEquivocal" GroupName="radioButtonGroupKappaLambda" Click="RadioButtonGroupKappaLambda_Click" Margin="3"></RadioButton>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="72" Margin="30,3,3,3">Lambda</TextBlock>
+					<RadioButton Name="radioButtonLambdaExpresses" Tag="LambdaExpresses" GroupName="radioButtonGroupKappaLambda" Click="RadioButtonGroupKappaLambda_Click" Margin="3,3,22,3"></RadioButton>
+					<RadioButton Name="radioButtonLambdaEquivocal" Tag="LambdaEquivocal" GroupName="radioButtonGroupKappaLambda" Click="RadioButtonGroupKappaLambda_Click" Margin="3"></RadioButton>
+				</StackPanel>
+			</StackPanel>
+		</Border>
+	</StackPanel>
+</UserControl>

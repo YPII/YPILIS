@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Cutting.ScanAliquotPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800">
+    
+    <Grid>        
+        <Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>            
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>			
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>        
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">			
+			<TextBlock Text="Please Scan a Block." FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />            
+		</StackPanel>       
+        
+        <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button Height="60" Width="200" Margin="2,2,2,2" Click="ButtonSignOut_Click">Sign Out</Button>            
+            <Button Height="60" Width="200" Margin="2,2,2,2" Click="ButtonShowMasterAccessionNoEntryPage_Click">Enter Master Accession No</Button>
+            <Button Height="60" Width="200" Margin="2,2,2,2" Click="ButtonPrintImmunos_Click">Print Immuno Labels</Button>
+            <Button Height="60" Width="200" Margin="2,2,2,2" Click="ButtonLastMasterAccessionNo_Click" Content="{Binding Path=LastMasterAccessionNo}"></Button>            
+        </StackPanel>
+		
+	</Grid>
+</UserControl>

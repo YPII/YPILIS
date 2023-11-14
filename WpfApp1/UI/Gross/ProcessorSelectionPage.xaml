@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Gross.ProcessorSelectionPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 FontSize="14"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
+		
+		<TextBlock Grid.Row="0" Margin="2,2,2,2" FontSize="16" HorizontalAlignment="Center" Text="Processor Run" />
+        <ListBox Name="ListBoxProcessorRun" Grid.Column="0" Grid.Row="1" BorderThickness="0" ItemsSource="{Binding Path=ProcessorRunCollection}"
+                 HorizontalAlignment="Stretch" Margin="2,2,2,2" SelectedValue="{Binding Path=SpecimenOrder.ProcessorRunId}" SelectedValuePath="ProcessorRunId">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="1200"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="250" Height="130">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Name}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>                
+        <Button Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" Width="200" Height="50" Content="Next >" Click="ButtonNext_Click" HorizontalAlignment="Center" />            		
+        
+	</Grid>
+</UserControl>

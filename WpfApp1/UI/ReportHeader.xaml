@@ -1,0 +1,63 @@
+<UserControl x:Class="YellowstonePathology.UI.ReportHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:converter="clr-namespace:YellowstonePathology.UI.Converter">    
+		<Grid ShowGridLines="False">
+			<Grid.Resources>
+				<converter:ShortDateConverter x:Key="ShortDateConverter"/>
+				<converter:ShortTimeConverter x:Key="ShortTimeConverter"/>
+				<Style x:Key="BoundTextBox">
+					<Setter Property="TextBox.Margin" Value="0"></Setter>
+					<Setter Property="TextBox.VerticalAlignment" Value="Center"></Setter>
+				</Style>				
+				<Style x:Key="TextBlockHeaderRight">
+					<Setter Property="TextBlock.Margin" Value="0,0,3,0"></Setter>
+					<Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+					<Setter Property="TextBlock.TextAlignment" Value="Right"></Setter>
+					<Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+				</Style>
+				<Style x:Key="TextBlockHeaderLeft">
+					<Setter Property="TextBlock.Margin" Value="0,0,3,0"></Setter>
+					<Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+					<Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+				</Style>
+			</Grid.Resources>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="100"></ColumnDefinition>
+				<ColumnDefinition Width="320"></ColumnDefinition>
+				<ColumnDefinition Width="125"></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="16"></RowDefinition>
+				<RowDefinition Height="16"></RowDefinition>
+				<RowDefinition Height="16"></RowDefinition>
+				<RowDefinition Height="16"></RowDefinition>
+				<RowDefinition Height="16"></RowDefinition>
+				<RowDefinition Height="16"></RowDefinition>
+			</Grid.RowDefinitions>
+			<TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBlockHeaderRight}">Name:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource TextBlockHeaderRight}">Birthdate:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource TextBlockHeaderRight}">Age:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource TextBlockHeaderRight}">Physician:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="4" Style="{StaticResource TextBlockHeaderRight}">Copy To:</TextBlock>
+
+			<TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=Patient.PatientName}" Style="{StaticResource BoundTextBox}"></TextBlock>
+			<TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=Patient.Birthdate, Converter={StaticResource ShortDateConverter}}" Style="{StaticResource BoundTextBox}" ></TextBlock>
+			<TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=PatientAccessionAge}" Style="{StaticResource BoundTextBox}" ></TextBlock>
+			<TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=Client.PhysicianName}" Style="{StaticResource BoundTextBox}" ></TextBlock>
+			<TextBlock Grid.Column="1" Grid.Row="4" Text="See report distribution at the end of this report" Style="{StaticResource BoundTextBox}" ></TextBlock>
+
+			<TextBlock Grid.Column="2" Grid.Row="0" Style="{StaticResource TextBlockHeaderRight}">Accession No:</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBlockHeaderRight}">Collection Date:</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBlockHeaderRight}">Accession Date:</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="3" Style="{StaticResource TextBlockHeaderRight}">Accession Time:</TextBlock>
+			<TextBlock Grid.Column="2" Grid.Row="4" Style="{StaticResource TextBlockHeaderRight}">Client Case:</TextBlock>
+
+			<TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Path=AccessionNo}" Style="{StaticResource BoundTextBox}" ></TextBlock>
+			<TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Path=CollectionDate, Converter={StaticResource ShortDateConverter}}" Style="{StaticResource BoundTextBox}"></TextBlock>
+			<TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Path=AccessionDate, Converter={StaticResource ShortDateConverter}}" Style="{StaticResource BoundTextBox}"></TextBlock>
+			<TextBlock Grid.Column="3" Grid.Row="3" Text="{Binding Path=AccessionTime, Converter={StaticResource ShortTimeConverter}}" Style="{StaticResource BoundTextBox}"></TextBlock>
+			<TextBlock Grid.Column="3" Grid.Row="4" Text="{Binding Path=ClientCaseNumber}" Style="{StaticResource BoundTextBox}"></TextBlock>
+		</Grid>          
+</UserControl>

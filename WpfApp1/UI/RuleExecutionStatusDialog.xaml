@@ -1,0 +1,21 @@
+﻿<Window x:Class="YellowstonePathology.UI.RuleExecutionStatusDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Rule Execution Status Dialog" Height="300" Width="500" WindowStyle="ToolWindow">
+    <Grid>
+		<ListView Name="ListViewStatusList" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=RuleExecutionStatusList}">
+			<ListView.View>
+				<GridView >
+					<GridViewColumn DisplayMemberBinding="{Binding Path=ExecutionHalted}" Header="Execution Halted" Width="100"/>					
+					<GridViewColumn Header="Description">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding Path=Description}" TextWrapping="Wrap"></TextBlock>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+				</GridView>
+			</ListView.View>
+		</ListView>
+	</Grid>
+</Window>

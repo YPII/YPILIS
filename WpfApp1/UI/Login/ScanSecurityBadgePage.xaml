@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Login.ScanSecurityBadgePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="700">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="60"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+
+		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="User Identification Required" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+        <Button Grid.Column="0" Grid.Row="0" Height="50" Width="200" Margin="2,2,10,2" Click="ButtonClose_Click" HorizontalAlignment="Right" Visibility="{Binding Path=CloseButtonVisibility}">Close</Button>
+
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="●" Background="Transparent" Foreground="Black" Click="ButtonAutoScan_Click"
+                            FontFamily="Tw Cen MT Condensed" Margin="2,2,2,2" Width="20" Height="20" BorderBrush="Transparent" BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <TextBlock FontSize="26" VerticalAlignment="Center">Please scan your security badge</TextBlock>
+            </StackPanel>
+        </Grid>
+
+		<Border Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+	</Grid>
+</UserControl>

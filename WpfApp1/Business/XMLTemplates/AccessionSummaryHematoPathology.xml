@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Document>
+	<FinalDiagnosis></FinalDiagnosis>
+	<SummaryReportComment></SummaryReportComment>
+	<BoneMarrowMorphology>
+		<ReferenceReport></ReferenceReport>
+		<Comment></Comment>
+	</BoneMarrowMorphology>
+	<FlowCytometry>
+		<ReferenceReport></ReferenceReport>
+		<Comment></Comment>
+	</FlowCytometry>
+	<Cytogenetics>
+		<ReferenceReport></ReferenceReport>
+		<Comment></Comment>
+	</Cytogenetics>
+	<FISH>
+		<ReferenceReport></ReferenceReport>
+		<Comment></Comment>
+	</FISH>
+	<MolecularTesting>
+		<ReferenceReport></ReferenceReport>
+		<Comment></Comment>
+	</MolecularTesting>
+	<ClinicalInformation></ClinicalInformation>
+</Document>

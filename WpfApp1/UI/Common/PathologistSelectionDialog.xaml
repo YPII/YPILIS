@@ -1,0 +1,28 @@
+﻿<Window x:Class="YellowstonePathology.UI.Common.PathologistSelectionDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Select a Pathologist" Height="300" Width="300" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ListView Name="ListViewPathologistUsers" ItemsSource="{Binding Path=PathologistUsers}" Grid.Column="0" Grid.Row="0" Margin="2,2,2,2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DisplayName}" Header="Pathologist User" Width="200"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">
+            <Button Click="ButtonCancel_Click" Height="30" Width="50" Margin="2,2,2,2">Cancel</Button>
+            <Button Click="ButtonOk_Click" Height="30" Width="50" Margin="2,2,2,2">Ok</Button>            
+        </StackPanel>
+        
+    </Grid>
+</Window>

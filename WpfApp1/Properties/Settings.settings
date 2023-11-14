@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="YellowstonePathology.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LocalApplicationFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\</Value>
+    </Setting>
+    <Setting Name="LocalDictationFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\program data\ypi\dictation\</Value>
+    </Setting>
+    <Setting Name="LocalLoginDataFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\Application\</Value>
+    </Setting>
+    <Setting Name="LocalHistologyAlertFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\HistologyAlert.wav</Value>
+    </Setting>
+    <Setting Name="LocalDoneDictationFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\Dictation\Done\</Value>
+    </Setting>
+    <Setting Name="ClientMissingInformationLetterFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Yellowstone Pathology Institute\ClientMissingInformationLetter.doc</Value>
+    </Setting>
+    <Setting Name="CytologySlideLabelPrinterName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Cytology Slide Label Printer</Value>
+    </Setting>
+    <Setting Name="HistologySlideLabelPrinterName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Histology Slide Label Printer</Value>
+    </Setting>
+    <Setting Name="LocalDICFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\ProgramData\ypi\dictionary\ypi-custom.dic</Value>
+    </Setting>
+    <Setting Name="LocalAFFFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\ProgramData\ypi\dictionary\ypi-custom.aff</Value>
+    </Setting>
+    <Setting Name="ServerDICFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\ypiidc\YPIILIS\Dictionary\ypi-custom.dic</Value>
+    </Setting>
+    <Setting Name="ServerAFFFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\ypiidc\YPIILIS\Dictionary\ypi-custom.aff</Value>
+    </Setting>
+    <Setting Name="CurrentConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis; Pooling=True;</Value>
+    </Setting>
+    <Setting Name="ChangeDBPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">changedb</Value>
+    </Setting>
+    <Setting Name="SpecimenLogScannedDocumentFilePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\\\fileserver\\documents\\SpecimenLog\\</Value>
+    </Setting>
+    <Setting Name="ServerDictationFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\fileserver\documents\Dictation\</Value>
+    </Setting>
+    <Setting Name="MySqlConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis; Pooling=True;</Value>
+    </Setting>
+    <Setting Name="SqlServerConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=TestSQL;Initial Catalog=YPIData;Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="MonitoredPropertyFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%USERPROFILE%\AppData\Local\ypi\MonitoredProperty</Value>
+    </Setting>
+    <Setting Name="ShowSecondMonitorOnSame" Type="System.String" Scope="User">
+      <Value Profile="(Default)">true</Value>
+    </Setting>
+    <Setting Name="AccessionDocuments" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\FileServer\AccessionDocuments</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

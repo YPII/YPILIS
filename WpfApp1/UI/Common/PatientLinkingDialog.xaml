@@ -1,0 +1,10 @@
+﻿<Window x:Class="YellowstonePathology.UI.Common.PatientLinkingDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Patient Linking" Height="700" Width="900" Icon="/UserInterface;component/Resources/Linking.ico" 
+    WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+
+	<Grid>
+		<ContentControl Name="MainContent" />
+	</Grid>
+</Window>

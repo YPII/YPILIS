@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Gross.BlankPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 FontSize="14"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+		
+		<TextBlock Grid.Row="1" Margin="10" HorizontalAlignment="Center" Text="Histotechnologists are Awesome!" FontSize="16" FontWeight="Bold"/>
+				
+	</Grid>
+</UserControl>

@@ -1,0 +1,117 @@
+﻿<FlowDocument x:Class="YellowstonePathology.UI.PackingSlip"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" ColumnWidth="816" FontSize="10" PageHeight="11.5in">
+
+	<Table>
+		<Table.Columns>
+			<TableColumn></TableColumn>
+		</Table.Columns>
+
+		<TableRowGroup>
+			<TableRow>
+				<TableCell>
+					<Paragraph>
+						<Grid Width="7.5in" Margin=".5in">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"></RowDefinition>
+								<RowDefinition Height="Auto"></RowDefinition>
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Column="0" Grid.Row="0" Margin=".0325in" FontWeight="Bold" FontSize="10pt" TextDecorations="Underline" HorizontalAlignment="Center">Packing Slip</TextBlock>
+
+							<Grid Grid.Column="0" Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="1.1in"></ColumnDefinition>
+									<ColumnDefinition Width="3.4in"></ColumnDefinition>
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto"></RowDefinition>
+									<RowDefinition Height="Auto"></RowDefinition>
+									<RowDefinition Height="Auto"></RowDefinition>
+									<RowDefinition Height="Auto"></RowDefinition>
+									<RowDefinition Height="Auto"></RowDefinition>
+								</Grid.RowDefinitions>
+
+								<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,.0125in,.0125in,.0125in" FontSize="10pt" FontWeight="Bold" TextAlignment="Right">Shipped To:</TextBlock>
+								<TextBlock Grid.Column="1" Grid.Row="0" Margin=".0125in" FontSize="10pt" TextAlignment="Left" Text="{Binding Path=ShipmentElement.Element[ShipmentTo].Value}"></TextBlock>
+
+								<TextBlock Grid.Column="0" Grid.Row="1" Margin="0,.0125in,.0125in,.0125in" FontSize="10pt" FontWeight="Bold" TextAlignment="Right">Shipped From:</TextBlock>
+								<TextBlock Grid.Column="1" Grid.Row="1" Margin=".0125in" FontSize="10pt" TextAlignment="Left" Text="{Binding Path=ShipmentElement.Element[ShipmentFrom].Value}"></TextBlock>
+
+								<TextBlock Grid.Column="0" Grid.Row="2" Margin="0,.0125in,.0125in,.0125in" FontSize="10pt" FontWeight="Bold" TextAlignment="Right">Ship Date:</TextBlock>
+								<TextBlock Grid.Column="1" Grid.Row="2" Margin=".0125in" FontSize="10pt" TextAlignment="Left" Text="{Binding Path=ShipmentElement.Element[ShipDate].Value}" HorizontalAlignment="Left"></TextBlock>
+								<!--<TextBlock Grid.Column="1" Grid.Row="2" Margin=".0125in" FontSize="10pt" TextAlignment="Left" Text="{Binding Path=ShipmentElement.Element[ShipDate].Value, Converter={StaticResource ShortDateConverter}}" HorizontalAlignment="Left"></TextBlock>-->
+
+								<TextBlock Grid.Column="0" Grid.Row="3" Margin="0,.0125in,.0125in,.0125in" FontSize="10pt" FontWeight="Bold" TextAlignment="Right">Prepared by:</TextBlock>
+								<TextBlock Grid.Column="1" Grid.Row="3" Margin=".0125in" FontSize="10pt" TextAlignment="Left" Text="{Binding Path=ShipmentElement.Element[ShipmentPreparedBy].Value}" HorizontalAlignment="Left"></TextBlock>
+
+								<TextBlock Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,.0125in,.0125in,.0125in" FontSize="10pt" FontWeight="Bold" TextAlignment="Right">Specimen Description</TextBlock>
+							</Grid>
+						</Grid>
+					</Paragraph>
+				</TableCell>
+			</TableRow>
+		</TableRowGroup>
+	</Table>
+
+	<List Name="DetailsList" Margin=".0325in,.0125in,0,.0125in" />
+				<!--<ListBox Margin=".0325in,.0125in,0,.0125in" ItemsSource="{Binding Path=ShipmentElement.Element[ClientOrderCollection].Elements[ClientOrder]}"
+					 BorderThickness="0" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<Grid Margin="0,.0125in,0,.0125in">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"></RowDefinition>
+											<RowDefinition Height="Auto"></RowDefinition>
+										</Grid.RowDefinitions>
+										<StackPanel Grid.Row="0" Orientation="Horizontal" Margin="1.5in,.0125in,.0125in,.0125in">
+											<TextBlock Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Right" TextWrapping="Wrap" Text="Patient:" />
+											<TextBlock Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=Element[PatientName].Value}" />
+											<TextBlock Margin=".25in,.0125in,.0125in,.0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Right" TextWrapping="Wrap" Text="Birthdate:" />
+											<TextBlock Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=Element[PBirthDate].Value}" />
+										</StackPanel>
+
+										<ListBox Grid.Row="1" Margin=".0125in,.0125in,0,.0125in" ItemsSource="{Binding Path=Element[ClientOrderDetailCollection].Elements[ClientOrderDetail]}" BorderThickness="0" HorizontalAlignment="Stretch">
+											<ListBox.ItemTemplate>
+												<DataTemplate>
+													<Grid Margin="0,.0125in,0,.0125in">
+														<Grid.RowDefinitions>
+															<RowDefinition Height="Auto"></RowDefinition>
+															<RowDefinition Height="Auto"></RowDefinition>
+														</Grid.RowDefinitions>
+														<Grid Grid.Row="0">
+															<Grid.ColumnDefinitions>
+																<ColumnDefinition Width=".30in"></ColumnDefinition>
+																<ColumnDefinition Width="4.45in"></ColumnDefinition>
+																<ColumnDefinition Width=".75in"></ColumnDefinition>
+																<ColumnDefinition Width="1.75in"></ColumnDefinition>
+															</Grid.ColumnDefinitions>
+															<Grid.RowDefinitions>
+															</Grid.RowDefinitions>
+															<TextBlock Grid.Column="0" Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Left" Text="{Binding Path=Element[SpecimenNumber].Value}" />
+															<TextBlock Grid.Column="1" Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=Element[Description].Value}" />
+															<TextBlock Grid.Column="2" Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Right" TextWrapping="Wrap" Text="Collected:" />
+															<TextBlock Grid.Column="3" Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=Element[CollectionDate].Value}" />
+														</Grid>
+														<Grid Grid.Row="1">
+															<Grid.ColumnDefinitions>
+																<ColumnDefinition Width="1in"></ColumnDefinition>
+																<ColumnDefinition Width="3.75in"></ColumnDefinition>
+																<ColumnDefinition Width=".75in"></ColumnDefinition>
+																<ColumnDefinition Width="1.75in"></ColumnDefinition>
+															</Grid.ColumnDefinitions>
+
+															<TextBlock Grid.Column="0" Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Right" TextWrapping="Wrap" Text="Container Id:" />
+															<TextBlock Grid.Column="1" Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=Element[ContainerId].Value}" />
+															<TextBlock Grid.Column="2" Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Right" TextWrapping="Wrap" Text="By:" />
+															<TextBlock Grid.Column="3" Margin=".0125in" VerticalAlignment="Center" FontSize="10pt" TextAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=Element[OrderedBy].Value}" />
+														</Grid>
+													</Grid>
+												</DataTemplate>
+											</ListBox.ItemTemplate>
+										</ListBox>
+									</Grid>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox> -->
+</FlowDocument>

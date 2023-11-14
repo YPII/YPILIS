@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:ms="urn:schemas-microsoft-com:mapping-schema"
+			xmlns:sql="urn:schemas-microsoft-com:xml-sql" id="BarcodeScanSchema" sql:is-mapping-schema="1">
+	<xsd:element name="BarcodeScan" ms:relation="tblBarcodeScan">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="BarcodeScanId" ms:field="BarcodeScanId" ms:identity="ignore" type="xsd:int"></xsd:element>
+				<xsd:element name="MasterAccessionNo" ms:field="MasterAccessionNo" type="xsd:int"></xsd:element>
+				<xsd:element name="ScanData" ms:field="ScanData" type="xsd:string"></xsd:element>
+				<xsd:element name="TimeReceived" ms:field="TimeReceived" type="xsd:dateTime" ms:datatype="dateTime"></xsd:element>
+				<xsd:element name="ScannedById" ms:field="ScannedById" type="xsd:int"></xsd:element>
+				<xsd:element name="ScanStationName" ms:field="ScanStationName" type="xsd:string"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

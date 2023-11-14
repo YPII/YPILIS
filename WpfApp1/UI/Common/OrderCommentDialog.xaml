@@ -1,0 +1,65 @@
+﻿<Window x:Class="YellowstonePathology.UI.Common.OrderCommentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Order Comments" Height="300" Width="600" FontSize="12"  WindowStyle="ToolWindow" SizeToContent="Height">
+	<Window.Resources>
+		<DataTemplate x:Key="DataTemplateTest">
+			<Grid Margin="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="200"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<TextBlock Margin="2" Grid.Column="0" Text="{Binding Path=Element[TestName].Value}"></TextBlock>
+				<TextBox Margin="2" Grid.Column="2" Text="{Binding Path=Element[Comment].Value}" TextWrapping="Wrap" HorizontalAlignment="Stretch"></TextBox>
+			</Grid>
+		</DataTemplate>
+
+		<DataTemplate x:Key="DataTemplateAliquot">
+			<Grid Margin="2">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="*"></RowDefinition>
+				</Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Margin="2">Block:</TextBlock>
+                    <TextBlock Margin="2" Text="{Binding Path=Element[AliquotName].Value}" TextAlignment="Left" HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+                <ListBox Margin="3" Grid.Row="1" ItemsSource="{Binding Path=Element[Tests].Elements}" ItemTemplate="{StaticResource DataTemplateTest}" HorizontalContentAlignment="Stretch"/>
+			</Grid>
+		</DataTemplate>
+        
+        <DataTemplate x:Key="DataTemplateSpecimen">
+            <Grid Margin="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Margin="2">Specimen:</TextBlock>
+                    <TextBlock Margin="2" Text="{Binding Path=Element[Description].Value}" TextAlignment="Left" HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+                <ListBox Margin="3" Grid.Row="1" ItemsSource="{Binding Path=Element[Aliquots].Elements}" ItemTemplate="{StaticResource DataTemplateAliquot}"
+                         HorizontalContentAlignment="Stretch" BorderBrush="Transparent"/>
+            </Grid>
+        </DataTemplate>
+	</Window.Resources>
+	
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+		
+		<ListBox Name="ListBoxOrderComments" Grid.Column="0" Grid.Row="0" Margin="3" ItemsSource="{Binding}" ItemTemplate="{StaticResource DataTemplateSpecimen}"
+                 HorizontalContentAlignment="Stretch" BorderBrush="Transparent"/>
+		
+		<StackPanel Grid.Column="0" Grid.Row="1" Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
+			<Button Margin="2" Width="50" Click="ButtonOrder_Click">Order</Button>
+			<Button Margin="2" Width="50" Click="ButtonClose_Click">Close</Button>
+		</StackPanel>
+	</Grid>
+</Window>

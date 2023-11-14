@@ -1,0 +1,26 @@
+﻿<Window x:Class="YellowstonePathology.UI.Common.CaseHistoryDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Case History" Height="600" Width="550" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Margin="2" Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Margin="2">Patient Name:</TextBlock>
+            <TextBlock Name="TextBoxPatientName" Margin="2" Text="{Binding Path=PatientDisplayName}" HorizontalAlignment="Stretch"></TextBlock>
+        </StackPanel>
+
+        <ScrollViewer Name="HistoryControl" Margin="2" Grid.Column="0" Grid.Row="1"></ScrollViewer>
+        
+        <StackPanel Margin="2" Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="ButtonOK" Margin="2" Height="25" Width="50" Click="ButtonOK_Click">OK</Button>
+        </StackPanel>
+    </Grid>
+</Window>
