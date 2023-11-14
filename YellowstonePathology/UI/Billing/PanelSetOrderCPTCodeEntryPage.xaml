@@ -65,6 +65,7 @@
                     <ComboBoxItem>2677</ComboBoxItem>
                     <ComboBoxItem>76</ComboBoxItem>
                     <ComboBoxItem>77</ComboBoxItem>
+                    <ComboBoxItem>FP</ComboBoxItem>
                 </ComboBox>
 
 				<TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" FontSize="14">Type:</TextBlock>

@@ -87,6 +87,20 @@ namespace YellowstonePathology.Business.Test
             return result;
         }
 
+        public YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill GetByCPTCodeAndModifier(string cptCode, string modifier)
+        {
+            YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill result = null;
+            foreach (PanelSetOrderCPTCodeBill panelSetOrderCPTCodeBill in this)
+            {
+                if (panelSetOrderCPTCodeBill.CPTCode == cptCode && panelSetOrderCPTCodeBill.Modifier == modifier)
+                {
+                    result = panelSetOrderCPTCodeBill;
+                    break;
+                }
+            }
+            return result;
+        }
+
         public int GetBilledCount(string cptCode, string modifier)
         {
             int result = 0;

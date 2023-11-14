@@ -106,7 +106,7 @@
                         </ComboBox>                        
                         <Button Click="ButtonAssignTo_Click" ToolTip="Assign To" Margin="2,2,2,2">
                             <StackPanel Orientation="Horizontal">
-                                <Image Height="18" Source="/UserInterface;component/Resources/Magnify.ico"></Image>
+                                <Image Height="18" Source="/YPI-LIS;component/Resources/Magnify.ico"></Image>
                             </StackPanel>
                         </Button>
                     </StackPanel>

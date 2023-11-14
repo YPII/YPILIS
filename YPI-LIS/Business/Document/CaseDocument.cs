@@ -245,11 +245,8 @@ namespace YellowstonePathology.Business.Document
         {
             string newFile = string.Empty;
             if (File.Exists(fileName) == true)
-            {                
-                Process p1 = new Process();
-                p1.StartInfo = new ProcessStartInfo("winword.exe", fileName);
-                p1.Start();                                
-                p1.Close();
+            {
+                Business.Document.CaseDocument.OpenWordDoc(fileName);                
             }
             else
             {

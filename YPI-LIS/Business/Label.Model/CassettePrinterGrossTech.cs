@@ -13,7 +13,7 @@ namespace YellowstonePathology.Business.Label.Model
         public CassettePrinterGrossTech() : base("Gross Tech")
         {
             this.Carousel.Columns.Add(new CarouselColumn("White", 1, 101, "White", TECHPRINTERPATH));
-            this.Carousel.Columns.Add(new CarouselColumn("Orange", 2, 102, "#FFFFC175", TECHPRINTERPATH));
+            this.Carousel.Columns.Add(new CarouselColumn("Pink", 2, 102, "#FF33D4", TECHPRINTERPATH));
             this.Carousel.Columns.Add(new CarouselColumn("Yellow", 3, 103, "Yellow", TECHPRINTERPATH));
             this.Carousel.Columns.Add(new CarouselColumn("Lilac", 4, 104, "#b666d2", TECHPRINTERPATH));
             this.Carousel.Columns.Add(new CarouselColumn("Blue", 5, 105, "#bfefff", TECHPRINTERPATH));

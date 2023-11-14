@@ -59,7 +59,16 @@ namespace YellowstonePathology.Business.Visitor
                 amendment.AmendmentType = "Addendum";
                 amendment.DistributeOnFinal = true;
                 amendment.SystemGenerated = true;
-                amendment.Text = this.m_PanelSet.SurgicalAmendmentTemplate;
+                amendment.UserId = this.m_AccessionOrder.CaseOwnerId;
+
+                if(this.m_PanelSet.SurgicalAmendmentRequired == true)
+                {
+                    amendment.Text = this.m_PanelSet.SurgicalAmendmentTemplate;
+                    amendment.Text = amendment.Text.Replace("[PATIENTNAME]", this.m_AccessionOrder.PatientDisplayName);
+                    amendment.Text = amendment.Text.Replace("[ORDERDATE]", DateTime.Today.ToString("MM/dd/yyyy"));
+                    amendment.Text = amendment.Text.Replace("[PROVIDERLASTNAME]", this.m_AccessionOrder.PhysicianName);                    
+                }
+                
                 this.m_AccessionOrder.AmendmentCollection.Add(amendment);
 
                 YellowstonePathology.Business.Test.PanelSetOrderCPTCode panelSetOrderCPTCode = this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.GetNextItem(panelSetOrder.ReportNo);

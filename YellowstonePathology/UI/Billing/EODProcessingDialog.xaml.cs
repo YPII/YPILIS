@@ -15,6 +15,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using MySql.Data.MySqlClient;
+using System.Data;
+using YellowstonePathology.Business.Test;
 
 namespace YellowstonePathology.UI.Billing
 {    
@@ -1343,6 +1346,56 @@ namespace YellowstonePathology.UI.Billing
                 }
             }
             //sshFileTransfer.UploadFilesToAPS(files);
+        }
+
+        public void HandleSvhErrors()
+        {            
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select pso.ReportNo, f.quantity, f.Mrn, f.cptCode, count(*) - 1 " +
+                "from tblFt1Log f " +
+                "join tblAccessionOrder ao on f.MasterAccessionNo = ao.MasterAccessionNo " +
+                "join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.masterAccessionNo " +
+                "where exists(Select null from tblPanelSetOrderCPTCodeBill where reportNo = pso.reportNo and cptcode = f.cptcode) and date(f.datesent) = '2023-10-27' " +
+                "group by pso.reportNo, f.quantity, f.mrn, f.cptcode having count(*) > 1;";
+
+            cmd.CommandType = CommandType.Text;            
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var item = new { reportNo = dr.GetString(0), quantity = dr.GetInt32(1), cptCode = dr.GetString(3), count = dr.GetInt32(4) };
+                        string masterAccessionNo = item.reportNo.Split('.')[0];
+                        AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo(masterAccessionNo);
+                        PanelSetOrder pso = ao.PanelSetOrderCollection.GetPanelSetOrder(item.reportNo);
+                        PanelSetOrderCPTCodeBill psob = null;
+                        if(pso.PanelSetOrderCPTCodeBillCollection.Count == 1)
+                        {
+                            psob = pso.PanelSetOrderCPTCodeBillCollection.GetByCPTCode(item.cptCode);
+                        }
+                        else
+                        {
+                            psob = pso.PanelSetOrderCPTCodeBillCollection.GetByCPTCodeAndModifier(item.cptCode, "TC");
+                            if(psob == null)
+                            {
+                                psob = pso.PanelSetOrderCPTCodeBillCollection.GetByCPTCode(item.cptCode);
+                            }
+                        }
+
+                        psob.Quantity = (item.count * -1) * item.quantity;
+                        Business.HL7View.EPIC.EPICFT1ResultView epicFT1ResultView = new Business.HL7View.EPIC.EPICFT1ResultView(ao, psob);
+                        epicFT1ResultView.Publish(System.IO.Path.Combine("c:\\temp\\", "ft1"));           
+                    }
+                }
+            }            
+        }
+
+        private void MenuItemAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            this.HandleSvhErrors();
         }
     }
 }

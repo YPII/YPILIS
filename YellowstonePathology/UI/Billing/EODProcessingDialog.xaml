@@ -42,6 +42,7 @@
                                 <MenuItem Header="Open SVH Folder" Click="MenuItemOpenSVHFolder_Click"></MenuItem>
                                 <MenuItem Header="Open APS Folder" Click="MenuItemOpenAPSFolder_Click"></MenuItem>
                                 <MenuItem Header="Special Transfer" Click="MenuItemSpecialTransfer_Click"></MenuItem>
+                                <MenuItem Header="Admin" Click="MenuItemAdmin_Click"></MenuItem>
                             </MenuItem>
                         </Menu>
                     </StackPanel>

@@ -19,9 +19,8 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
                 return result;
             }
 
-            var client = new RestClient("https://api2.westfax.com/REST/Fax_SendFax/json");
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
+            var client = new RestClient("https://api2.westfax.com/REST/Fax_SendFax/json");            
+            var request = new RestRequest();
             request.AddHeader("ContentType", "multipart/form-data");
             request.AddParameter("Username", "sid.harder@ypii.com");
             request.AddParameter("Password", "faxorama44");
@@ -33,7 +32,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
             request.AddParameter("Numbers1", faxNumber);
             request.AddFile("Files0", fileName);            
             request.AddParameter("FaxQuality", "Fine");
-            IRestResponse response = client.Execute(request);
+            RestResponse response = client.ExecutePost(request);
 
             result.IsComplete = true;
             return result;

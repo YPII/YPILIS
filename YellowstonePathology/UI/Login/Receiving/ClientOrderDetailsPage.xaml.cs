@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Data.Linq.SqlClient;
+using YellowstonePathology.Business.ClientOrder.Model;
 
 namespace YellowstonePathology.UI.Login.Receiving
 {	
@@ -91,6 +93,8 @@ namespace YellowstonePathology.UI.Login.Receiving
             this.ComboBoxReceivedIn.SelectionChanged += new SelectionChangedEventHandler(ComboBoxReceivedIn_SelectionChanged);
             this.CheckBoxClientAccessioned.Checked +=new RoutedEventHandler(CheckBoxClientAccessioned_Checked);
             this.CheckBoxClientAccessioned.Unchecked +=new RoutedEventHandler(CheckBoxClientAccessioned_Unchecked);
+
+            //HandleSpecimenDescription(false, this.m_ClientOrderDetail, this.m_ClientOrder);
         }
 
         private void FixTimes()
@@ -455,6 +459,48 @@ namespace YellowstonePathology.UI.Login.Receiving
                         this.m_ClientOrderDetail.SetFixationStartTime();
                     }
                 }
+            }
+        }
+
+        private void HyperlinkImportSpecimenDescription_Click(object sender, RoutedEventArgs e)
+        {
+            //HandleSpecimenDescription(true, this.m_ClientOrderDetail, this.m_ClientOrder);
+        }
+
+        public static string GetSanitizedDescription(int specimenNumber, string clientOrderSpecialInstructions)
+        {
+            string result = null;
+                
+            string specimenLetter = GetSpecimenLetter(specimenNumber).ToString();
+            string[] lines = clientOrderSpecialInstructions.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            for (int i = 0; i < lines.Length; i++)
+            {                    
+                if (lines[i].Contains($"{specimenLetter})") == true && i != 0)
+                {
+                    string endString = lines[i - 1];
+                    if (endString.Contains("path")) endString = "biopsy";
+
+                    string description = $"Skin, {lines[i]}, {endString}";
+                    description = description.Replace("bx", "biopsy");
+                    description = description.Replace($"Specimen Source: {specimenLetter}) ", "");
+                    description = description.Replace("Specimen Label: ", "");                    
+                    result = description;             
+                }
+            }
+            return result;
+        }
+
+        static char GetSpecimenLetter(int specimenNumber)
+        {
+            if (specimenNumber >= 1 && specimenNumber < 26)
+            {
+                // Add 'A' to the index to get the corresponding letter.                
+                return (char)('A' + (specimenNumber - 1));
+            }
+            else
+            {
+                // Return null character '\0' to indicate an error.
+                return '\0';
             }
         }
     }

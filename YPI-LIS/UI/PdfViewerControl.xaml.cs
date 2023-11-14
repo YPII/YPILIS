@@ -29,8 +29,9 @@ namespace YellowstonePathology.UI
             if (!string.IsNullOrEmpty(pdfDrawer.PdfPath))
             {                
                 var path = System.IO.Path.GetFullPath(pdfDrawer.PdfPath);
-                List<System.Windows.Controls.Image> imageList = await YPI_Business.PdfHandler.LoadPdf(path);
-                foreach(System.Windows.Controls.Image image in imageList)
+                //List<System.Windows.Controls.Image> imageList = await YPI_Business.PdfHandler.LoadPdf(path);
+                List<System.Windows.Controls.Image> imageList = new List<Image>();
+                foreach (System.Windows.Controls.Image image in imageList)
                 {
                     pdfDrawer.PagesContainer.Items.Add(image);
                 }

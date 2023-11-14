@@ -9,9 +9,7 @@ namespace YellowstonePathology.Business.Label.Model
 {
     public class ProstateBiopsyKitCollection : ObservableCollection<GeneralDataCassetteProstate>
     {
-        //string m_RightColor = "White";
-        //string m_LeftColor = "Orange";        
-
+        
         List<string> m_Descriptions;
 
         public ProstateBiopsyKitCollection()
@@ -35,7 +33,7 @@ namespace YellowstonePathology.Business.Label.Model
                 string color = null;
                 if(description.StartsWith("LT") == true)
                 {
-                    color = "Orange";
+                    color = "Pink";
                 } 
                 else if(description.StartsWith("RT") == true)
                 {

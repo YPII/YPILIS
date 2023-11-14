@@ -45,7 +45,7 @@ namespace YellowstonePathology.UI
         ReportDistribution.ReportDistributionWorkspace m_ReportDistributionWorkspace; 
 
         Cytology.CytologyWorkspace m_CytologyWorkspace;
-        Scanning.ScanProcessingWorkspace m_ScanProcessingWorkspace;
+        //Scanning.ScanProcessingWorkspace m_ScanProcessingWorkspace;
 
 		Login.LoginWorkspace m_LoginWorkspace;
         ClientOrderWorkspace m_ClientOrderWorkspace;
@@ -1140,12 +1140,12 @@ namespace YellowstonePathology.UI
         {
             if (this.m_TabItemScanning.Parent == null)
             {
-                this.m_ScanProcessingWorkspace = new Scanning.ScanProcessingWorkspace();
-                this.m_TabItemScanning.Content = this.m_ScanProcessingWorkspace;
+                //this.m_ScanProcessingWorkspace = new Scanning.ScanProcessingWorkspace();
+                //this.m_TabItemScanning.Content = this.m_ScanProcessingWorkspace;
 
-                this.TabControlLeftWorkspace.Items.Add(this.m_TabItemScanning);
+                //this.TabControlLeftWorkspace.Items.Add(this.m_TabItemScanning);
 
-                this.m_TabItemScanning.Focus();
+                //this.m_TabItemScanning.Focus();
             }
             this.m_TabItemScanning.Focus();
         }

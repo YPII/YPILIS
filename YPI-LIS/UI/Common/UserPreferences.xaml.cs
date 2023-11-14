@@ -39,7 +39,7 @@ namespace YellowstonePathology.UI.Common
         private bool m_HostNameEnabled;
 
         private List<Device> m_USBDeviceList;
-        private FootPedal m_FootPedalInstance;
+        //private YPI_Business.FootPedal m_FootPedalInstance;
 
         public UserPreferences(YellowstonePathology.Business.User.UserPreference userPreference)
 		{            
@@ -71,7 +71,7 @@ namespace YellowstonePathology.UI.Common
             this.m_PageScannerCollection = new Business.Common.PageScannerCollection();
             this.DataContext = this;
 
-            this.m_FootPedalInstance = FootPedal.Instance;            
+            //this.m_FootPedalInstance = YPI_Business.FootPedal.Instance(userPreference.FootPedalVendorId, userPreference.FootPedalProductId);            
 
 			this.Loaded += new RoutedEventHandler(UserPreferences_Loaded);
             this.Closing += UserPreferences_Closing;
@@ -86,10 +86,12 @@ namespace YellowstonePathology.UI.Common
             YellowstonePathology.Business.User.UserPreferenceInstance.Instance.Refresh();
         }
 
-        public FootPedal FootPedalInstance
+        /*
+        public YPI_Business.FootPedal FootPedalInstance
         {
             get { return this.m_FootPedalInstance; }
         }
+        */
 
         private void UserPreferences_Loaded(object sender, RoutedEventArgs e)
 		{

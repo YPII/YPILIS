@@ -29,11 +29,11 @@ namespace YellowstonePathology.Business.Audit.Model
             this.m_Status = AuditStatusEnum.OK;
             if(this.m_AliquotCollection.HasDirectPrintBlocks() == true)
             {
-            	if(this.m_AccessionOrder.CassetteColor == "Pink" && this.m_AccessionOrder.AccessioningFacilityId == "YPIBLGS")
-            	{
-            		this.m_Status = AuditStatusEnum.Failure;
-                    this.m_Message.Append("The Accessioning Facility should be Cody when the cassette color is pink.");
-            	}
+            	//if(this.m_AccessionOrder.CassetteColor == "Pink" && this.m_AccessionOrder.AccessioningFacilityId == "YPIBLGS")
+            	//{
+            	//	this.m_Status = AuditStatusEnum.Failure;
+                //    this.m_Message.Append("The Accessioning Facility should be Cody when the cassette color is pink.");
+            	//}
             }
         }
 	}

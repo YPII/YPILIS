@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Diagnostics;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
 using System.ComponentModel;
 
 namespace YellowstonePathology.UI
@@ -78,6 +76,7 @@ namespace YellowstonePathology.UI
             }
         }        
 
+        /*
         public string ExtractTextFromPdf(string path)
         {
             using (PdfReader reader = new PdfReader(path))
@@ -92,6 +91,7 @@ namespace YellowstonePathology.UI
                 return text.ToString();
             }
         }
+        */
 
         public void NotifyPropertyChanged(String info)
         {
@@ -103,13 +103,14 @@ namespace YellowstonePathology.UI
 
         private void ListViewFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            /*
             this.m_AccessionOrder = null;
             this.m_CaseDocuments = null;
 
             if (this.ListViewFiles.SelectedItem != null)
             {
                 string pdfFilePath = (string)this.ListViewFiles.SelectedItem;
-                string text = this.ExtractTextFromPdf(pdfFilePath);
+                //string text = this.ExtractTextFromPdf(pdfFilePath);
                 string[] lines = text.Split('\n');
                 
                 foreach (string line in lines)
@@ -130,6 +131,7 @@ namespace YellowstonePathology.UI
             }
             this.NotifyPropertyChanged("AccessionOrder");
             this.NotifyPropertyChanged("CaseDocuments");
+            */
         }
 
         private void MenuItemOpenPDF_Click(object sender, RoutedEventArgs e)

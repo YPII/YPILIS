@@ -706,14 +706,19 @@ namespace YellowstonePathology.UI.Flow
                 YellowstonePathology.Business.Document.CaseDocument item = (YellowstonePathology.Business.Document.CaseDocument)this.listViewCaseFileList.SelectedItem;
                 this.m_DocumentViewer.ShowDocument(item);
                 
-                if(item.FullFileName.ToUpper().Contains(".PDF") == true)
-                {
+                //if(item.FullFileName.ToUpper().Contains(".PDF") == true)
+                //{
+                    //PDFViewer pdfViewer = new PDFViewer(item.FullFileName);
+                    //pdfViewer.ShowDialog();
+
+                    /*
                     System.Diagnostics.Process process = new System.Diagnostics.Process();
                     System.Diagnostics.Process p = new System.Diagnostics.Process();
                     System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(item.FullFileName);
                     p.StartInfo = info;
                     p.Start();
-                } 
+                    */
+                //} 
             }
         }
 

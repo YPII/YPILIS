@@ -132,7 +132,14 @@ namespace YellowstonePathology.Business.Billing.Model
                 new JProperty("technicalComponentFacilityName", technicalComponentFacilityName),
                 new JProperty("professionalComponentFacilityCLIA", professionalComponentFacilityCLIA),
                 new JProperty("professionalComponentFacilityName", professionalComponentFacilityName),
-				new JProperty("patientPaymentInstructions", this.m_AccessionOrder.PatientPaymentInstructions));
+
+                new JProperty("dateOfDeath", Helper.DateTimeExtensions.DateStringFromNullable(this.m_AccessionOrder.DateOfDeath)),
+                new JProperty("mcAuthorizationId", this.m_AccessionOrder.MCAuthorizationId),
+                new JProperty("vcAuthorizationId", this.m_AccessionOrder.VAAuthorizationId),
+                new JProperty("VAAuthorizationStart", Helper.DateTimeExtensions.DateStringFromNullable(this.m_AccessionOrder.VAAuthorizationStart)),
+                new JProperty("VAAuthorizationEnd", Helper.DateTimeExtensions.DateStringFromNullable(this.m_AccessionOrder.VAAuthorizationEnd)),
+
+                new JProperty("patientPaymentInstructions", this.m_AccessionOrder.PatientPaymentInstructions));
 
 			Business.HL7View.ADTMessages adtMessages = Business.Gateway.AccessionOrderGateway.GetADTMessagesByPatientNameDOB(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, this.m_AccessionOrder.PBirthdate.Value);
 		}

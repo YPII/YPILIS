@@ -385,7 +385,7 @@
                     <TextBlock Grid.Column="0" Grid.Row="5" Text="Cassette Color:" HorizontalAlignment="Right" Margin="2,2,2,2"></TextBlock>
                     <ComboBox Grid.Column="1" Grid.Row="5" Name="ComboBoxPrintMateColumnNumber" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.CassetteColor}" HorizontalAlignment="Stretch">
                         <ComboBoxItem>White</ComboBoxItem>
-                        <ComboBoxItem>Orange</ComboBoxItem>
+                        <ComboBoxItem>Pink</ComboBoxItem>
                         <ComboBoxItem>Yellow</ComboBoxItem>
                         <ComboBoxItem>Lilac</ComboBoxItem>
                         <ComboBoxItem>Blue</ComboBoxItem>

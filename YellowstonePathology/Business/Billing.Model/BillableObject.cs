@@ -63,14 +63,17 @@ namespace YellowstonePathology.Business.Billing.Model
                 {
                     if (this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.Exists(panelSetCptCode.CptCode.Code, panelSetCptCode.Quantity) == false)
                     {
+                        string codeableDescription = null;
+                        if (specimenOrder != null) codeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + this.m_PanelSetOrder.PanelSetName;
+
                         YellowstonePathology.Business.Test.PanelSetOrderCPTCode panelSetOrderCPTCode = this.m_PanelSetOrder.PanelSetOrderCPTCodeCollection.GetNextItem(this.m_PanelSetOrder.ReportNo);
                         panelSetOrderCPTCode.Quantity = panelSetCptCode.Quantity;
                         panelSetOrderCPTCode.CPTCode = panelSetCptCode.CptCode.Code;
                         panelSetOrderCPTCode.Modifier = panelSetCptCode.CptCode.Modifier;
-						panelSetOrderCPTCode.CodeableDescription = "Specimen " + specimenOrder.SpecimenNumber + ": " + this.m_PanelSetOrder.PanelSetName;
+                        panelSetOrderCPTCode.CodeableDescription = codeableDescription;
                         panelSetOrderCPTCode.CodeableType = "BillableTest";
                         panelSetOrderCPTCode.EntryType = Business.Billing.Model.PanelSetOrderCPTCodeEntryType.SystemGenerated;
-						panelSetOrderCPTCode.SpecimenOrderId = specimenOrder.SpecimenOrderId;
+                        if (specimenOrder != null) panelSetOrderCPTCode.SpecimenOrderId = specimenOrder.SpecimenOrderId;
 						panelSetOrderCPTCode.ClientId = this.m_AccessionOrder.ClientId;
                         panelSetOrderCPTCode.MedicalRecord = this.m_AccessionOrder.SvhMedicalRecord;
                         panelSetOrderCPTCode.Account = this.m_AccessionOrder.SvhAccount;

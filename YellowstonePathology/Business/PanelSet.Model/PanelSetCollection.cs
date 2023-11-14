@@ -16,6 +16,7 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public static PanelSetCollection GetAll()
         {
             PanelSetCollection panelSetCollection = new PanelSetCollection();
+            panelSetCollection.Add(new NeoComprehensiveHemeCancers());
             panelSetCollection.Add(new NeoTYPECervicalTumorProfile());
             panelSetCollection.Add(new DecipherProstateBiopsyGenomicClassifier());
             panelSetCollection.Add(new Tempus());

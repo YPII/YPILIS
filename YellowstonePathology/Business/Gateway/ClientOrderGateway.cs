@@ -542,6 +542,27 @@ namespace YellowstonePathology.Business.Gateway
 			return clientOrderCollection;
 		}
 
+        public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection GetClientOrdersBySql(string sql)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = sql;
+            cmd.CommandType = System.Data.CommandType.Text;
+
+            YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection clientOrderCollection = new YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection();
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    BuildClientOrderCollection(dr, clientOrderCollection);
+                }
+            }
+
+            return clientOrderCollection;
+        }
+
         public static YellowstonePathology.Business.ClientOrder.Model.ClientOrderCollection GetClientOrdersByANumber(string aNumber)
         {
             MySqlCommand cmd = new MySqlCommand();

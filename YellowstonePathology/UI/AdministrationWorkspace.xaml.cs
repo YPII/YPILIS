@@ -1,36 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml;
-using System.Printing;
 using System.IO;
-using System.Windows.Xps;
-using System.Windows.Xps.Packaging;
 using System.Diagnostics;
 using System.Data;
-using System.Data.SqlClient;
 using System.Net;
 using System.Linq;
 using System.Reflection;
-using System.Xml.XPath;
-using System.Xml.Linq;
-using System.ServiceModel;
-using YellowstonePathology.Business.Helper;
-using System.Collections.ObjectModel;
 using MongoDB.Bson;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using MySql.Data.MySqlClient;
 using ImageMagick;
 
@@ -1276,12 +1256,17 @@ namespace YellowstonePathology.UI
 
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
+            Business.Gateway.AccessionOrderGateway.GetAdHocList();            
+
+
+            /*
             Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo("23-27758");
             Business.Specimen.Model.SpecimenOrder so = ao.SpecimenOrderCollection[0];
             Gross.DictationTemplatePage page = new Gross.DictationTemplatePage(so, ao, Business.User.SystemIdentity.Instance);
             Login.Receiving.LoginPageWindow window = new Login.Receiving.LoginPageWindow();
             window.PageNavigator.Navigate(page);
             window.Show();
+            */
         }
 
         private void BillStuff()

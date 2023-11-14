@@ -118,8 +118,13 @@ namespace YellowstonePathology.Business.Test
 		private string m_ICD10Code;
 		private string m_PatientPaymentInstructions;
 		private string m_PaymentType;
+		private Nullable<DateTime> m_DateOfDeath;
+		private string m_MCAuthorizationId;
+		private Nullable<DateTime> m_VAAuthorizationEnd;
+        private Nullable<DateTime> m_VAAuthorizationStart;
+        private string m_VAAuthorizationId;
 
-		public AccessionOrder()
+        public AccessionOrder()
         {
             this.m_AccessionLock = new AccessionLock();
             this.m_SpecimenOrderCollection = new YellowstonePathology.Business.Specimen.Model.SpecimenOrderCollection();
@@ -1488,7 +1493,82 @@ namespace YellowstonePathology.Business.Test
 			}
 		}
 
-		public void FromClientOrder(YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder, int orderingUserId, string accessionOrderIds)
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
+        public string VAAuthorizationId
+        {
+            get { return this.m_VAAuthorizationId; }
+            set
+            {
+                if (this.m_VAAuthorizationId != value)
+                {
+                    this.m_VAAuthorizationId = value;
+                    this.NotifyPropertyChanged("PaymentType");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "varchar")]
+        public string MCAuthorizationId
+        {
+            get { return this.m_MCAuthorizationId; }
+            set
+            {
+                if (this.m_MCAuthorizationId != value)
+                {
+                    this.m_MCAuthorizationId = value;
+                    this.NotifyPropertyChanged("PaymentType");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "DateTime")]
+        public Nullable<DateTime> VAAuthorizationStart
+        {
+            get { return this.m_VAAuthorizationStart; }
+            set
+            {
+                if (this.m_VAAuthorizationStart != value)
+                {
+                    this.m_VAAuthorizationStart = value;
+                    this.NotifyPropertyChanged("m_VAAuthorizationStart");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "DateTime")]
+        public Nullable<DateTime> VAAuthorizationEnd
+        {
+            get { return this.m_VAAuthorizationEnd; }
+            set
+            {
+                if (this.m_VAAuthorizationEnd != value)
+                {
+                    this.m_VAAuthorizationEnd = value;
+                    this.NotifyPropertyChanged("m_VAAuthorizationEnd");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "DateTime")]
+        public Nullable<DateTime> DateOfDeath
+        {
+            get { return this.m_DateOfDeath; }
+            set
+            {
+                if (this.m_DateOfDeath != value)
+                {
+                    this.m_DateOfDeath = value;
+                    this.NotifyPropertyChanged("m_DateOfDeath");
+                }
+            }
+        }
+
+        public void FromClientOrder(YellowstonePathology.Business.ClientOrder.Model.ClientOrder clientOrder, int orderingUserId, string accessionOrderIds)
         {            
 			this.ClientId = clientOrder.ClientId;
 			this.ClientName = clientOrder.ClientName;

@@ -1600,6 +1600,60 @@ namespace YellowstonePathology.Business.Gateway
             return reportNoCollection;
         }
 
+        public static List<string> GetIdList(string sql)
+        {
+            MySqlCommand cmd = new MySqlCommand(sql);
+            cmd.CommandType = CommandType.Text;
+
+            List<string> idList = new List<string>();
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {                        
+                        idList.Add(dr.GetString(0));
+                    }
+                }
+            }
+
+            return idList;
+        }
+
+        public static void GetAdHocList()
+        {
+            string sql = "select cod.ClientOrderDetailId, co.SpecialInstructions, cod.SpecimenNumber from tblClientOrder co join tblClientOrderDetail cod on co.clientOrderId = cod.clientOrderid join tblSpecimenOrder s on cod.ContainerId = s.ContainerId where co.clientid = 1822 and co.specialinstructions is not null";
+            MySqlCommand cmd = new MySqlCommand(sql);
+            cmd.CommandType = CommandType.Text;
+
+            List<string> sqlStatements = new List<string>();
+
+            using (MySqlConnection cn = new MySqlConnection(YellowstonePathology.Properties.Settings.Default.CurrentConnectionString))
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                using (MySqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        string clientOrderDeatilId = dr.GetString(0);
+                        string clientOrderSpecialInstructions = dr.GetString(1);
+                        int specimenNumber = dr.GetInt32(2);
+                        string sanitizedDescription = UI.Login.Receiving.ClientOrderDetailsPage.GetSanitizedDescription(specimenNumber, clientOrderSpecialInstructions);
+                        string sqlStatement = $"Update tblClientOrderDetail set specialInstructions = '{sanitizedDescription}' where clientOrderDetailid = '{clientOrderDeatilId}';";
+                        if(string.IsNullOrEmpty(sanitizedDescription) == false) sqlStatements.Add(sqlStatement);
+                        System.IO.File.WriteAllLines(@"c:\Temp\sql.txt", sqlStatements.ToArray<string>());
+                    }
+                }
+            }
+            
+            
+            var obj = new { clientOrderDeatil = "" }
+;        }
+
         public static ReportNoCollection GetReportNumbersByPostDate(DateTime postDate)
         {
             MySqlCommand cmd = new MySqlCommand();

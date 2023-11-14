@@ -8,9 +8,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Windows;
-using Windows.Data.Pdf;
-using Windows.Storage;
-using Windows.Storage.Streams;
 using System.Diagnostics;
 using System.Drawing.Printing;
 
@@ -42,7 +39,8 @@ namespace YellowstonePathology.UI
             {
                 CreateNoWindow = true,
                 Verb = "print",
-                FileName = this.m_FileName
+                WorkingDirectory = "C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat",
+                FileName = "Acrobat.exe"
             };
             p.Start();
         }                

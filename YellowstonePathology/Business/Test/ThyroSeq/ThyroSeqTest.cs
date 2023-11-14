@@ -24,8 +24,10 @@ namespace YellowstonePathology.Business.Test.ThyroSeq
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
             this.m_ExpectedDuration = TimeSpan.FromDays(12);
-
+            this.m_SurgicalAmendmentRequired = true;
             this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+            this.m_AddSurgicalAmendment = true;
+            this.m_SurgicalAmendmentTemplate = "Per request of [PROVIDERLASTNAME] on [ORDERDATE], one FNA vial labeled \"[PATIENTNAME]\" was sent for Thyroseq V3 GC testing.  Testing yielded the following results:\r\n\r\n??? (site info)\r\n\r\nTest Result:  ___\r\nProbability of Cancer or NIFTP:  ???\r\nPotential Management:  ???\r\n";
 
             string taskDescription = "Gather materials and send to CBL Path.";
 

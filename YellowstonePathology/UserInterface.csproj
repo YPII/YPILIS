@@ -42,7 +42,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>182</ApplicationRevision>
+    <ApplicationRevision>195</ApplicationRevision>
     <ApplicationVersion>11.0.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -84,17 +84,13 @@
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.FAXCOMEXLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8aa395087185f434, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>dll\Interop.FAXCOMEXLib.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="mscorlib" />
-    <Reference Include="NHunspell">
-      <HintPath>dll\NHunspell.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="PresentationFramework.Luna" />
     <Reference Include="System" />
@@ -453,6 +449,7 @@
     <Compile Include="Business\PanelSet.Model\BreastCancerIndex.cs" />
     <Compile Include="Business\PanelSet.Model\ChimerismPostTransplant.cs" />
     <Compile Include="Business\PanelSet.Model\DecipherProstateBiopsyGenomicClassifier.cs" />
+    <Compile Include="Business\PanelSet.Model\NeoComprehensiveHemeCancers.cs" />
     <Compile Include="Business\PanelSet.Model\NeoTYPECervicalTumorProfile.cs" />
     <Compile Include="Business\PanelSet.Model\Tempus.cs" />
     <Compile Include="Business\PanelSet.Model\Signatera.cs" />
@@ -7401,12 +7398,6 @@
   <ItemGroup>
     <Resource Include="Resources\redhand.png" />
     <Resource Include="Resources\delete.png" />
-    <Content Include="Hunspellx64.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Hunspellx86.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Resources\Logo.jpg" />
     <Resource Include="Resources\Document.jpg" />
     <Resource Include="Resources\message.png" />
@@ -7440,22 +7431,22 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CefSharp.Wpf">
-      <Version>97.1.60</Version>
+      <Version>118.6.80</Version>
     </PackageReference>
     <PackageReference Include="HidSharp">
       <Version>2.1.0</Version>
     </PackageReference>
     <PackageReference Include="iTextSharp">
-      <Version>5.5.13</Version>
+      <Version>5.5.13.3</Version>
     </PackageReference>
     <PackageReference Include="Magick.NET-Q16-AnyCPU">
-      <Version>11.0.0</Version>
+      <Version>13.4.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Exchange.WebServices">
       <Version>2.2.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream">
-      <Version>1.4.1</Version>
+      <Version>2.3.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Office.Interop.Excel">
       <Version>15.0.4795.1001</Version>
@@ -7467,16 +7458,16 @@
       <Version>15.0.4797.1004</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2">
-      <Version>1.0.1072.54</Version>
+      <Version>1.0.2088.41</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools">
-      <Version>10.0.22000.194</Version>
+      <Version>10.0.22621.2428</Version>
     </PackageReference>
     <PackageReference Include="MongoDB.Bson">
       <Version>2.22.0</Version>
     </PackageReference>
     <PackageReference Include="MySql.Data">
-      <Version>8.1.0</Version>
+      <Version>8.2.0</Version>
     </PackageReference>
     <PackageReference Include="netstandard-System.Data.Linq">
       <Version>1.0.1</Version>
@@ -7485,7 +7476,10 @@
       <Version>2.0.3</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>8.0.3</Version>
+      <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="NHunspell">
+      <Version>1.2.5554.16953</Version>
     </PackageReference>
     <PackageReference Include="OfficeOpenXml.Core.ExcelPackage">
       <Version>1.0.0</Version>
@@ -7497,22 +7491,22 @@
       <Version>1.50.5147</Version>
     </PackageReference>
     <PackageReference Include="redis-64">
-      <Version>3.0.501</Version>
+      <Version>3.0.503</Version>
     </PackageReference>
     <PackageReference Include="RestSharp">
-      <Version>106.12.0</Version>
+      <Version>110.2.0</Version>
     </PackageReference>
     <PackageReference Include="SSH.NET">
-      <Version>2016.1.0</Version>
+      <Version>2023.0.0</Version>
     </PackageReference>
     <PackageReference Include="StackExchange.Redis">
-      <Version>1.2.6</Version>
+      <Version>2.7.4</Version>
     </PackageReference>
     <PackageReference Include="System.ComponentModel.Annotations">
-      <Version>4.7.0</Version>
+      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Configuration.ConfigurationManager">
-      <Version>5.0.0</Version>
+      <Version>7.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Drawing.Common">
       <Version>7.0.0</Version>
@@ -7527,7 +7521,7 @@
       <Version>4.3.0</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml">
-      <Version>4.6.0</Version>
+      <Version>4.7.0</Version>
     </PackageReference>
     <PackageReference Include="System.ValueTuple">
       <Version>4.5.0</Version>

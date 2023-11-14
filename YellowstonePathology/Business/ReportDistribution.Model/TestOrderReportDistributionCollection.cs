@@ -33,7 +33,7 @@ namespace YellowstonePathology.Business.ReportDistribution.Model
 
         public void AddWebSerivceDistribution(string reportNo, string clientName, int clientId, string physicianName, int physicianId)
         {
-            if (this.Exists(physicianId, clientId, "Web Service") == false)
+            if (this.Exists(physicianId, clientId, "Web Service") == false && this.Count >= 0)
             {
                 string testOrderReportDistributionId = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
                 YellowstonePathology.Business.ReportDistribution.Model.TestOrderReportDistribution testOrderReportDistribution =
