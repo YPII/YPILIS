@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template>
+  <Header>
+    <Title>TypingTemplate</Title>
+    <Shortcut>abc</Shortcut>
+    <Description>Template for Typing</Description>
+    <Author>Sid Harder</Author>
+    <SnippetTypes>
+      <SnippetType>Expansion</SnippetType>
+    </SnippetTypes>
+  </Header>
+  <Snippet>
+    <Declarations>
+      <Literal>
+        <ID>Gross</ID>
+        <ToolTip>Gross Description</ToolTip>
+        <Default>Gross Description</Default>
+      </Literal>
+      <Literal>
+        <ID>ClinicalInfo</ID>
+        <ToolTip>Clinical Information</ToolTip>
+        <Default>Clinical Information</Default>
+      </Literal>      
+    </Declarations>
+    <Text>
+      <![CDATA[Gross: $Gross$
+      Clinical Information: $ClinicalInfo$
+      $end$]]>
+    </Text>
+  </Snippet>
+</Template>

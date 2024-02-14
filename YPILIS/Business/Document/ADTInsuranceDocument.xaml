@@ -1,0 +1,36 @@
+﻿<FixedDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xml:lang="en-au">
+	<PageContent>
+		<FixedPage Width="8.5in" Height="11in">
+			<Grid Width="8.5in" Height="11in" Margin="0.5in">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1.65in" />
+                    <ColumnDefinition Width="4in" />
+                </Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+				
+				<Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					
+					<TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,0,.125in" FontWeight="Bold" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" Text="Insurance Data" />
+				</Grid>
+
+                <TextBlock Grid.Column="1" Grid.Row="1" Margin=".0125in" FontWeight="Bold" FontSize="9pt" TextAlignment="Left" Text="{Binding Path=DisplayText}"></TextBlock>
+
+            </Grid>
+		</FixedPage>
+	</PageContent>
+</FixedDocument>
+

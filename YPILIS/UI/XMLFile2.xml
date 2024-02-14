@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Codes>
+  <Code ICD9="V76.2" ICD10="Z12.4" Description="Encounter for screening for malignant neoplasm of cervix" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V72.31" ICD10="Z01.411" Description="Encounter for gynecological examination (general) (routine) with abnormal findings" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V72.31" ICD10="Z01.419" Description="Encounter for gynecological examination (general) (routine) without abnormal findings" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V76.47" ICD10="Z12.72" Description="Encounter for screening for malignant neoplasm of vagina" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V15.89" ICD10="Z77.9" Description="Other contact with and (suspected) exposures hazardous to health" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V15.89" ICD10="Z92.89" Description="Personal history of other medical treatment" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V76.49" ICD10="Z12.89" Description="Encounter for screening for malignant neoplasm of other sites" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V77.6" ICD10="Z13.288" Description="Encounter for screening for other metabolic disorders" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V70.0" ICD10="Z00.00" Description="Encounter for general adult medical examination without abnormal findings" Test="Cytology" Quantity="1"/>
+  <Code ICD9="795.01" ICD10="R87.610" Description="Atypical squamous cells of undetermined significance on cytologic smear of cervix (ASC-US)" Test="Cytology" Quantity="1"/>
+  <Code ICD9="795.02" ICD10="R87.611" Description="Atypical squamous cells cannot exclude high grade squamous intraepithelial lesion on cytologic smear of cervix (ASC-H)" Test="Cytology" Quantity="1"/>
+  <Code ICD9="795.03" ICD10="R87.612" Description="Low grade squamous intraepithelial lesion on cytologic smear of cervix (LGSIL)" Test="Cytology" Quantity="1"/>
+  <Code ICD9="795.04" ICD10="R87.613" Description="High grade squamous intraepithelial lesion on cytologic smear of cervix (HGSIL)" Test="Cytology" Quantity="1"/>
+  <Code ICD9="795.05" ICD10="R87.810" Description="Cervical high risk human papillomavirus (HPV) DNA test positive" Test="Cytology" Quantity="1"/>
+  <Code ICD9="795.09" ICD10="R87.820" Description="Cervical low risk human papillomavirus (HPV) DNA test positive" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V22.0" ICD10="Z34.00" Description="Encounter for supervision of normal first pregnancy, unspecified trimester" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V22.1" ICD10="Z34.80" Description="Encounter for supervision of other normal pregnancy, unspecified trimester" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V22.1" ICD10="V34.90" Description="Encounter for supervision of normal pregnancy, unspecified, unspecified trimester" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V24.1" ICD10="Z39.1" Description="Encounter for care and examination of lactating mother" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V24.2" ICD10="Z39.2" Description="Encounter for routine postpartum follow-up" Test="Cytology" Quantity="1"/>
+  <Code ICD9="V73.81" ICD10="Z11.51" Description="Encounter for screening for human papillomavirus (HPV)" Test="Routine HPV" Quantity="1"/>
+  <Code ICD9="V74.5" ICD10="Z11.3" Description="Encounter for screening for infections with a predominantly sexual mode of transmission" Test="General" Quantity="1"/>
+  <Code ICD9="V01.6" ICD10="Z20.2" Description="Contact with and (suspected) exposure to infections with a predominantly sexual mode of transmission" Test="NGCT" Quantity="1"/>
+  <Code ICD9="V73.98" ICD10="Z11.8" Description="Encounter for screening for other infectious and parasitic diseases" Test="NGCT" Quantity="1"/>
+  <Code ICD9="V73.88" ICD10="Z11.8" Description="Encounter for screening for other infectious and parasitic diseases" Test="NGCT" Quantity="1"/>
+  <Code ICD9="V73.89" ICD10="Z11.59" Description="Encounter for screening for other viral diseases" Test="NGCT" Quantity="1"/>
+  <Code ICD9="131.0" ICD10="" Description="Crosswalk indicates this code sucks" Test="Trichomonas/Vag,Vulv" Quantity="1"/>
+  <Code ICD9="131.09" ICD10="A59.09" Description="Other urogenital trichomoniasis" Test="Trichomonas/Cervx" Quantity="1"/>
+  <Code ICD9="131.9" ICD10="A59.9" Description=" Trichomoniasis, unspecified" Test="Trichomonas" Quantity="1"/>
+  <Code ICD9="172.9" ICD10="C43.9" Description="Malignant melanoma of skin, unspecified" Quantity="1"/>
+  <Code ICD9="172.9" ICD10="D03.9" Description="Melanoma in situ, unspecified" Quantity="1"/>
+  <Code ICD9="193" ICD10="C73" Description="Malignant neoplasm of thyroid gland" Quantity="1"/>
+  <Code ICD9="238.71" ICD10="D47.3" Description="Essential (hemorrhagic) thrombocythemia" Quantity="1"/>
+  <Code ICD9="174.9" ICD10="C50.919" Description="Malignant neoplasm of unspecified site of unspecified female breast" Quantity="1"/>
+  <Code ICD9="165.9" ICD10="C39.9" Description="Malignant neoplasm of lower respiratory tract, part unspecified" Quantity="1"/>
+  <Code ICD9="153.9" ICD10="C18.9" Description="Malignant neoplasm of colon, unspecified" Quantity="1"/>
+  <Code ICD9="287.5" ICD10="D69.6" Description="Thrombocytopenia, unspecified" Quantity="1"/>
+  <Code ICD9="453.9" ICD10="I82.91" Description="Chronic embolism and thrombosis of unspecified vein" Quantity="1"/>
+  <Code ICD9="626.6" ICD10="N92.0" Description="Excessive and frequent menstruation (heavy)" Test="Cytology" Quantity="1"/>
+  <Code ICD9="626.6" ICD10="N92.1" Description="Excessive and frequent menstruation (irregular)" Test="Cytology" Quantity="1"/>
+  <Code ICD9="626.6" ICD10="N92.4" Description="Excessive bleeding in the premenopausal period" Test="Cytology" Quantity="1"/>
+  <Code ICD9="625.3" ICD10="N94.6" Description="Dysmenorrhea, unspecified (painful menstruation)" Test="Cytology" Quantity="1"/>
+  <Code ICD9="626.0" ICD10="N91.2" Description="Amenorrhea, unspecified" Test="Cytology" Quantity="1"/>
+</Codes>

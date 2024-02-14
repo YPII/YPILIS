@@ -1,0 +1,143 @@
+﻿<Window x:Class="YellowstonePathology.UI.Surgical.ImmediateExamCorrelationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Immediate Exam Correlation Dialog" FontSize="12" Height="400" Width="540" WindowStyle="ToolWindow"
+		WindowStartupLocation="CenterScreen" Name="ImmediateExamCorrelationWindow">
+    <Grid Margin="10">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="7*"></ColumnDefinition>
+			<ColumnDefinition Width="15*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Column="0" Grid.Row="0" Margin="10">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>
+
+			<Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="5" BorderBrush="#DCE6F2" BorderThickness="1" CornerRadius="6" Background="#DCE6F2" />
+			<Grid Grid.Column="0" Grid.Row="0" Margin="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="*"></RowDefinition>
+				</Grid.RowDefinitions>
+				<TextBlock Grid.Column="0" Grid.Row="0" Margin="5,5,5,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold">Correlation:</TextBlock>
+
+				<ListBox Name="ListBoxCorrelation" Grid.Column="0" Grid.Row="1" Margin="5,0,10,2" KeyboardNavigation.DirectionalNavigation="Cycle" BorderBrush="Transparent" HorizontalAlignment="Left"
+						 ItemsSource="{Binding ElementName=ImmediateExamCorrelationWindow, Path=DataContext.CorrelationTypes}" 
+						 SelectedValue="{Binding Path=IntraoperativeConsultationResult.Correlation, Mode=TwoWay}" Background="Transparent" >
+					<ListBox.Resources>
+						<Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}" >
+							<Setter Property="Margin" Value="2,2,2,0"/>
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate>
+										<Border Background="Transparent">
+											<RadioButton IsHitTestVisible="false" Focusable="false" Content="{Binding Path=.}"
+														 IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</ListBox.Resources>
+				</ListBox>
+			</Grid>
+		</Grid>
+
+		<Grid Grid.Column="1" Grid.Row="0" Margin="10">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>
+
+			<Border Grid.Column="0" Grid.Row="0" Margin="5" BorderBrush="#DCE6F2" BorderThickness="1" CornerRadius="5" Background="#DCE6F2" />
+			<Grid Grid.Column="0" Grid.Row="0" Margin="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+				
+				<TextBlock Grid.Column="0" Grid.Row="0" Margin="5,5,5,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold">Effect on Patient Care:</TextBlock>
+
+				<ListBox Name="ListBoxPatientCare" Grid.Column="0" Grid.Row="1" Margin="5,0,10,2" KeyboardNavigation.DirectionalNavigation="Cycle" BorderBrush="Transparent" HorizontalAlignment="Left"
+						 ItemsSource="{Binding ElementName=ImmediateExamCorrelationWindow, Path=DataContext.PatientCareEffects}" Background="Transparent"
+						 SelectedValue="{Binding Path=IntraoperativeConsultationResult.CorrelationEffectOnPatientCare, Mode=TwoWay}" >
+					<ListBox.Resources>
+						<Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}" >
+							<Setter Property="Margin" Value="2,2,2,0"/>
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate>
+										<Border Background="Transparent">
+											<RadioButton IsHitTestVisible="false" Focusable="false" Content="{Binding Path=.}"
+														 IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</ListBox.Resources>
+				</ListBox>
+			</Grid>
+
+			<Border Grid.Column="0" Grid.Row="1" Margin="5" BorderBrush="#DCE6F2" BorderThickness="1" CornerRadius="5" Background="#DCE6F2" />
+			<Grid Grid.Column="0" Grid.Row="1" Margin="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+				<TextBlock Grid.Column="0" Grid.Row="0" Margin="5,5,5,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold">Type of Discrepancy:</TextBlock>
+
+				<ListBox Name="ListBoxDiscrepancy" Grid.Column="0" Grid.Row="1" Margin="5,0,10,2" KeyboardNavigation.DirectionalNavigation="Cycle" BorderBrush="Transparent" HorizontalAlignment="Left"
+						 ItemsSource="{Binding ElementName=ImmediateExamCorrelationWindow, Path=DataContext.DescrepancyTypes}" Background="Transparent"
+						 SelectedValue="{Binding Path=IntraoperativeConsultationResult.CorrelationDiscrepancyType, Mode=TwoWay}" >
+					<ListBox.Resources>
+						<Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}" >
+							<Setter Property="Margin" Value="2,2,2,0"/>
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate>
+										<Border Background="Transparent">
+											<RadioButton IsHitTestVisible="false" Focusable="false" Content="{Binding Path=.}"
+														 IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</ListBox.Resources>
+				</ListBox>
+			</Grid>
+		</Grid>
+
+		<StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+			<Button Margin="5,5,5,0" Width="50" Height="35" HorizontalAlignment="Right" Click="ButtonOk_Click">
+				<TextBlock>OK</TextBlock>
+			</Button>
+		</StackPanel>
+	</Grid>
+</Window>

@@ -1,0 +1,419 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Login.Receiving.TaskOrderPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:TemplateSelectorUI="clr-namespace:YellowstonePathology.UI.TemplateSelector"
+             xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800">
+    <UserControl.Resources>
+        
+        <TemplateSelectorUI:TaskOrderDetailTemplateSelector x:Key="TaskOrderDetailTemplateSelector"/>
+
+        <DataTemplate x:Key="FaxTaskOrderDetailDataTemplate">
+            <Grid>
+                <Border BorderThickness="1" Margin="0,0,0,0" CornerRadius="5">
+
+                    <Grid Margin="2,2,2,2" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" TextAlignment="Right" VerticalAlignment="Center" FontWeight="Bold">Primary Insurance:</TextBlock>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Text="{Binding DataContext.AccessionOrder.PrimaryInsurance, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" HorizontalAlignment="Stretch" Margin="2,2,2,2">
+                            <ComboBoxItem Content="Not Selected"></ComboBoxItem>
+                            <ComboBoxItem Content="Medicare"></ComboBoxItem>
+                            <ComboBoxItem Content="Medicaid"></ComboBoxItem>
+                            <ComboBoxItem Content="BCHP"></ComboBoxItem>
+                            <ComboBoxItem Content="BCBS"></ComboBoxItem>
+                            <ComboBoxItem Content="Governmental"></ComboBoxItem>
+                            <ComboBoxItem Content="Commercial"></ComboBoxItem>
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right" IsEnabled="False">Fax Number:</TextBlock>
+                        <wpfx:MaskedTextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" RestrictToAscii="False" AllowPromptAsInput="False"
+                                            IncludeLiteralsInValue="False" IncludePromptInValue="False" ValueDataType="{x:Type sys:String}"
+                                            Mask="(000) 000\-0000" Value="{Binding Path=FaxNumberProxy}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right" IsEnabled="False">Attention:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=SendToName}"/>
+                        
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">DocumentName:</TextBlock>
+                        <ComboBox Name="ComboBoxFaxDocumentName" Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" SelectedValue="{Binding Path=DocumentName}"
+                                ItemsSource="{Binding DataContext.FaxDocumentNameList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}">
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Assigned To:</TextBlock>
+                        <ComboBox Name="ComboBoxTaskAssignment" Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" SelectedValue="{Binding Path=AssignedTo}"
+                                ItemsSource="{Binding DataContext.TaskAssignmentList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}">
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Acknowledged By:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" Text="{Binding Path=AcknowledgedByInitials}" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Acknowledged Date:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="7" Margin="2,2,2,2" Text="{Binding Path=AcknowledgedDate}" />
+
+                        <StackPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="5" Margin="10,10,10,10">
+                            <TextBlock Margin="2,2,2,2">
+                                <Hyperlink Click="HyperLinkPublishFax_Click" Tag="{Binding Path=.}">Publish</Hyperlink>
+                            </TextBlock>
+                            
+                            <TextBlock Margin="2,2,2,2">
+                                <Hyperlink Click="HyperLinkSendFax_Click" Tag="{Binding Path=.}">Send Fax</Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Margin="2,2,2,2">
+                                <Hyperlink Click="HyperLinkAcknowledge_Click" Tag="{Binding Path=.}">Acknowledge</Hyperlink>
+                            </TextBlock>
+
+
+                            <TextBlock Margin="2,2,2,2">
+                                <Hyperlink Click="HyperLinkDelete_Click" Tag="{Binding Path=.}">Delete</Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Margin="2,2,2,2">
+                                <Hyperlink Click="HyperLinkUnacknowledge_Click" Tag="{Binding Path=.}">Unacknowledge</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="FedexShipmentTaskOrderDetailDataTemplate">
+            <Grid>
+                <Border BorderThickness="1" Margin="0,0,0,0" CornerRadius="5">
+
+                    <Grid Margin="2,2,2,2" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Description:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=Description}" TextWrapping="WrapWithOverflow"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Comment:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=Comment}" TextWrapping="Wrap"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right" IsEnabled="False">Ship To:</TextBlock>
+                        <ComboBox Name="ComboboxShipToFacility" Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Stretch" IsEditable="True" 
+                            ItemsSource="{Binding Path=FacilityCollection, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            SelectedValuePath="FacilityId" DisplayMemberPath="FacilityName" IsEnabled="{Binding Path=PropertiesAreEnabled}"
+							SelectedValue="{Binding Path=ShipToFacilityId}" SelectionChanged="ComboboxShipToFacility_SelectionChanged"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right" IsEnabled="False">Address 1:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=ShipToAddress1}" IsEnabled="{Binding Path=PropertiesAreEnabled}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right" IsEnabled="False">Address 2:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=ShipToAddress2}" IsEnabled="{Binding Path=PropertiesAreEnabled}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right" IsEnabled="False">City/State/Zip:</TextBlock>
+                        <Grid Grid.Column="1" Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="0" Margin="2,2,2,2" Text="{Binding Path=ShipToCity}" IsEnabled="{Binding Path=PropertiesAreEnabled}"/>
+                            <TextBox Grid.Column="1" Margin="2,2,2,2" Text="{Binding Path=ShipToState}" IsEnabled="{Binding Path=PropertiesAreEnabled}"/>
+                            <TextBox Grid.Column="2" Margin="2,2,2,2" Text="{Binding Path=ShipToZip}" IsEnabled="{Binding Path=PropertiesAreEnabled}"/>
+                        </Grid>
+
+                        <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right" IsEnabled="False">Phone Number:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" Text="{Binding Path=ShipToPhoneBinding, Converter={StaticResource PhoneNumberConverter}}" IsEnabled="{Binding Path=PropertiesAreEnabled}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right" IsEnabled="False">Payment Type:</TextBlock>
+                        <ComboBox Name="ComboBoxPaymentType" Grid.Column="1" Grid.Row="7" Margin="2,2,2,2" SelectedValue="{Binding Path=PaymentType}"
+                                        ItemsSource="{Binding DataContext.PaymentTypeList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}">
+                        </ComboBox>
+                        
+                        <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">FedEx Tracking No:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="8" Margin="2,2,2,2" Text="{Binding Path=TrackingNumber}" IsEnabled="True"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Service Type:</TextBlock>
+                        <ComboBox Name="ComboBoxServiceType" Grid.Column="1" Grid.Row="9" Margin="2,2,2,2" IsEditable="True" Text="{Binding Path=ServiceType}" HorizontalAlignment="Stretch">
+                            <ComboBoxItem>PRIORITY_OVERNIGHT</ComboBoxItem>
+                            <ComboBoxItem>STANDARD_OVERNIGHT</ComboBoxItem>
+                            <ComboBoxItem>FEDEX_2_DAY</ComboBoxItem>
+                            <ComboBoxItem>FEDEX_2_DAY_AM</ComboBoxItem>
+                            <ComboBoxItem>FEDEX_GROUND</ComboBoxItem>
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Account No:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="10" Margin="2,2,2,2" Text="{Binding Path=AccountNoBinding}" IsEnabled="True" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Assigned To:</TextBlock>
+                        <ComboBox Name="ComboBoxTaskAssignment" Grid.Column="1" Grid.Row="11" Margin="2,2,2,2" SelectedValue="{Binding Path=AssignedTo}"
+                                ItemsSource="{Binding DataContext.TaskAssignmentList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}">
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Acknowledged By:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="12" Margin="2,2,2,2" Text="{Binding Path=AcknowledgedByInitials}" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="13" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Acknowledged Date:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="13" Margin="2,2,2,2" Text="{Binding Path=AcknowledgedDate}" />
+
+                        <StackPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" Margin="10,10,10,10">
+
+                            <TextBlock Margin="2,2,2,2">
+                                <Hyperlink Click="HyperLinkGetTrackingNumber_Click" Tag="{Binding Path=.}">Get Tracking Number</Hyperlink>
+                            </TextBlock>
+                            
+                            <TextBlock Margin="2,2,2,2">
+                                <Hyperlink Click="HyperLinkPrintLabel_Click" Tag="{Binding Path=.}">Print Label</Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Margin="2,2,2,2">
+                                <Hyperlink Click="HyperLinkCancelShipment_Click" Tag="{Binding Path=.}">Cancel Shipment</Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Margin="2,2,2,2">
+                                <Hyperlink Click="HyperLinkAcknowledge_Click" Tag="{Binding Path=.}">Acknowledge</Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Margin="2,50,2,2">
+                                <Hyperlink Click="HyperLinkOptiFreight_Click" Tag="{Binding Path=.}">OptiFreight</Hyperlink>
+                            </TextBlock>
+
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GenericTaskOrderDetailDataTemplate">
+            <Grid>
+                <Border BorderThickness="1" Margin="0,0,0,0" CornerRadius="5">
+
+                    <Grid Margin="2,2,2,2" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Description:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=Description}" TextWrapping="WrapWithOverflow"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Comment:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=Comment}" TextWrapping="Wrap"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Assigned To:</TextBlock>
+                        <ComboBox Name="ComboBoxTaskAssignment" Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" SelectedValue="{Binding Path=AssignedTo}"
+                                        ItemsSource="{Binding DataContext.TaskAssignmentList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}">
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Acknowledged By:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=AcknowledgedByInitials}" />
+
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold" HorizontalAlignment="Right">Acknowledged Date:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=AcknowledgedDate}" />
+
+                        <StackPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" Margin="10,10,10,10">
+
+                            <TextBlock Grid.Column="2" Grid.Row="1" Margin="2,2,2,2">
+                                            <Hyperlink Click="HyperLinkAcknowledge_Click" Tag="{Binding Path=.}">Acknowledge</Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Grid.Column="2" Grid.Row="4" Margin="2,2,2,2">
+                                            <Hyperlink Click="HyperLinkDelete_Click" Tag="{Binding Path=.}">Delete</Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Grid.Column="2" Grid.Row="1" Margin="2,2,2,2">
+                                            <Hyperlink Click="HyperLinkUnacknowledge_Click" Tag="{Binding Path=.}">Unacknowledge</Hyperlink>
+                            </TextBlock>
+
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <Style x:Key="TaskOrderDetailStyle" TargetType="ListBoxItem">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="Border" Margin="5,5,5,5" Padding="5" SnapsToDevicePixels="true" BorderBrush="Black" BorderThickness="1" CornerRadius="6" Background="#F5F5F5">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Border" Property="CornerRadius" Value="6"/>
+                                <Setter TargetName="Border" Property="Background" Value="#DCE6F2"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="Task Order Page" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+		<Grid Grid.Row="1" Margin="5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Row="0" Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>			
+
+			<Grid Grid.Column="0" Margin="10" Width="200">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    
+				</Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,0" FontWeight="Bold" FontSize="14">Options</TextBlock>								
+                <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,3,0,5">
+                    <Hyperlink Click="HyperLinkSendAddGenericTask_Click">Add Generic Task</Hyperlink>
+                </TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,3,0,5">
+                    <Hyperlink Click="HyperLinkAddSendAdditionalTestingFaxTask_Click">Additional Testing Fax</Hyperlink>
+                </TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,3,0,5">
+                    <Hyperlink Click="HyperLinkAddSendAuthorizationFaxTask_Click">Authorization Fax</Hyperlink>
+                </TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,3,0,5">
+                    <Hyperlink Click="HyperLinkBlockMaterialAlertTask_Click">Block Material Alert</Hyperlink>
+                </TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,3,0,5" VerticalAlignment="Bottom">
+                    <Hyperlink Click="HyperlingPrintTaskOrder_Click">Print (1 copy)</Hyperlink>
+                </TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="8" Margin="5,3,0,5" VerticalAlignment="Bottom">
+                    <Hyperlink Click="HyperlingPrint2CopiesTaskOrder_Click">Print (2 copies)</Hyperlink>
+                </TextBlock>
+
+            </Grid>
+
+			<Grid Grid.Column="1" Margin="10">	
+                <Grid.Resources>
+                    
+                </Grid.Resources>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="*"></RowDefinition>
+				</Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Patient:" Margin="2,2,2,2" FontSize="14" TextAlignment="Right" FontWeight="Bold"></TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=AccessionOrder.PatientDisplayName}" Margin="2,2,2,2" FontSize="14"></TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Report No:" Margin="2,2,2,2" FontSize="14" TextAlignment="Right" FontWeight="Bold"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=TaskOrder.ReportNo}" Margin="2,2,2,2" FontSize="14"></TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Test:" Margin="2,2,2,2" FontSize="14" TextAlignment="Right" FontWeight="Bold"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=TaskOrder.PanelSetName}" Margin="2,2,2,2" FontSize="14"></TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="3" Margin="2" FontSize="14" TextAlignment="Right" FontWeight="Bold">Ordered On:</TextBlock>
+				<TextBlock Grid.Column="1" Grid.Row="3" Margin="3" FontSize="14" Text="{Binding Path=TaskOrder.TargetDescription}"></TextBlock>
+
+                <TextBlock Grid.Column="2" Grid.Row="0" Margin="2" FontSize="14" TextAlignment="Right" FontWeight="Bold">Ordered By:</TextBlock>
+				<TextBlock Grid.Column="3" Grid.Row="0" Margin="2" FontSize="14" Text="{Binding Path=TaskOrder.OrderedByInitials}"></TextBlock>
+
+                <TextBlock Grid.Column="2" Grid.Row="1" Margin="2" FontSize="14" TextAlignment="Right" FontWeight="Bold">Acknowledged:</TextBlock>
+				<TextBlock Grid.Column="3" Grid.Row="1" Margin="2" FontSize="14" Text="{Binding Path=TaskOrder.AcknowledgedDate, Converter={StaticResource MilitaryDateTimeConverter}}"></TextBlock>
+
+                <TextBlock Grid.Column="2" Grid.Row="2" Margin="2" FontSize="14" TextAlignment="Right" FontWeight="Bold">Patient Id:</TextBlock>
+                <TextBlock Grid.Column="3" Grid.Row="2" Margin="2" FontSize="14" Text="{Binding Path=AccessionOrder.PatientId}"></TextBlock>
+
+                <ListBox Name="ListBoxTaskDetails" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="7" Margin="2,2,2,2" ItemsSource="{Binding Path=TaskOrder.TaskOrderDetailCollection}"
+					 ItemTemplateSelector="{StaticResource TaskOrderDetailTemplateSelector}" ItemContainerStyle="{StaticResource TaskOrderDetailStyle}" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                </ListBox>     
+                
+			</Grid>
+
+		</Grid>
+
+		<Border Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<Button Name="ButtonBack" Grid.Row="2" Margin="5,5,5,5" Click="ButtonBack_Click" Width="100" Height="40" HorizontalAlignment="Left" Visibility="Collapsed">&lt; Back</Button>
+
+		<StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
+			<Button Name="ButtonClose" Margin="5,5,5,5" Click="ButtonClose_Click" Width="100" Height="40" Visibility="Collapsed">Close</Button>
+			<Button Name="ButtonNext" Margin="5,5,5,5" Click="ButtonNext_Click" Width="100" Height="40" Visibility="Collapsed">Next ></Button>
+		</StackPanel>
+
+	</Grid>
+</UserControl>

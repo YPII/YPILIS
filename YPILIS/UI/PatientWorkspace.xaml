@@ -1,0 +1,93 @@
+<UserControl x:Class="YellowstonePathology.UI.PatientWorkspace"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:converter="clr-namespace:YellowstonePathology.UI.Converter">
+    <Grid>			
+			<Grid.Resources>
+				<converter:UpperCaseConverter x:Key="UpperCaseConverter"/>
+				<converter:ShortDateConverter x:Key="ShortDateConverter"/>				
+				<Style x:Key="TextBoxInput">
+					<Setter Property="TextBox.Margin" Value="3"></Setter>
+					<Setter Property="TextBox.VerticalAlignment" Value="Center"></Setter>
+					<Setter Property="TextBox.Width" Value="200"></Setter>
+					<Setter Property="TextBox.HorizontalAlignment" Value="Left"></Setter>
+				</Style>
+				<Style x:Key="TextBlockHeaderRight">
+					<Setter Property="TextBlock.Margin" Value="3"></Setter>
+					<Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+					<Setter Property="TextBlock.TextAlignment" Value="Right"></Setter>
+				</Style>
+			</Grid.Resources>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="150"></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>				
+			</Grid.ColumnDefinitions>
+			
+			<Grid.RowDefinitions>
+				<RowDefinition Height="20"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>
+			
+   		<TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource TextBlockHeaderRight}">Last Name:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource TextBlockHeaderRight}">First Name:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="4" Style="{StaticResource TextBlockHeaderRight}">Middle Initial:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="5" Style="{StaticResource TextBlockHeaderRight}">Birthdate:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="6" Style="{StaticResource TextBlockHeaderRight}">Sex:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="7" Style="{StaticResource TextBlockHeaderRight}">SSN:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="8" Style="{StaticResource TextBlockHeaderRight}">Patient Type:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="9" Style="{StaticResource TextBlockHeaderRight}">Insurance:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="10" Style="{StaticResource TextBlockHeaderRight}">Svh MR/Acct:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="11" Style="{StaticResource TextBlockHeaderRight}">Patient ID:</TextBlock>
+			<TextBlock Grid.Column="0" Grid.Row="12" Style="{StaticResource TextBlockHeaderRight}">History:</TextBlock>
+
+			<TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=PLastName}" Style="{StaticResource TextBoxInput}" IsEnabled="{Binding Path=Lock.LockAquired}"></TextBox>
+			<TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=PFirstName}" Style="{StaticResource TextBoxInput}" IsEnabled="{Binding Path=Lock.LockAquired}"></TextBox>
+			<TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=PMiddleInitial}" Style="{StaticResource TextBoxInput}" IsEnabled="{Binding Path=Lock.LockAquired}"></TextBox>
+			<TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=PBirthdate, Converter={StaticResource ShortDateConverter}}" Style="{StaticResource TextBoxInput}" IsEnabled="{Binding Path=Lock.LockAquired}"></TextBox>
+			<ComboBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=PSex}" Margin="3" Width="50" HorizontalAlignment="Left" IsEnabled="{Binding Path=Lock.LockAquired}">
+				<ComboBoxItem>F</ComboBoxItem>
+				<ComboBoxItem>M</ComboBoxItem>
+			</ComboBox>
+			<TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=PSSN}" Style="{StaticResource TextBoxInput}" IsEnabled="{Binding Path=Lock.LockAquired}"></TextBox>
+			<ComboBox Grid.Column="1" Grid.Row="8" Text="{Binding Path=PatientType}" Margin="3" Width="100" HorizontalAlignment="Left" IsEnabled="{Binding Path=Lock.LockAquired}">
+				<ComboBoxItem>IP</ComboBoxItem>
+				<ComboBoxItem>OP</ComboBoxItem>
+				<ComboBoxItem>Not Selected</ComboBoxItem>
+			</ComboBox>
+			<ComboBox Grid.Column="1" Grid.Row="9" Text="{Binding Path=PrimaryInsurance}" Margin="3" Width="100" HorizontalAlignment="Left" IsEnabled="{Binding Path=Lock.LockAquired}">
+            <ComboBoxItem Content="Not Selected"></ComboBoxItem>
+            <ComboBoxItem Content="Medicare"></ComboBoxItem>
+            <ComboBoxItem Content="Medicaid"></ComboBoxItem>
+            <ComboBoxItem Content="BCHP"></ComboBoxItem>
+            <ComboBoxItem Content="BCBS"></ComboBoxItem>
+            <ComboBoxItem Content="Governmental"></ComboBoxItem>
+            <ComboBoxItem Content="Commercial"></ComboBoxItem>
+        </ComboBox>
+			<StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="10">
+				<TextBox Text="{Binding Path=SvhMedicalRecord}" Style="{StaticResource TextBoxInput}" Width="75" IsEnabled="{Binding Path=Lock.LockAquired}"></TextBox>
+				<TextBox Text="{Binding Path=SvhAccount}" Style="{StaticResource TextBoxInput}" Width="75" IsEnabled="{Binding Path=Lock.LockAquired}"></TextBox>
+			</StackPanel>
+			<TextBlock Grid.Column="1" Grid.Row="11" Margin="3" Width="100" Text="{Binding Path=PatientId}" Style="{StaticResource TextBoxInput}" IsEnabled="{Binding Path=Lock.LockAquired}"></TextBlock>
+			<ListView Name="listViewPatientHistory" Width="250" MouseDoubleClick="ListViewPatientHistory_DoubleClick" Grid.Column="1" Grid.Row="12" Height="100" Margin="3" ItemsSource="{Binding Path=PatientHistoryList}" HorizontalAlignment="Left">
+				<ListView.View>
+					<GridView>
+						<GridViewColumn DisplayMemberBinding="{Binding Path=AccessionNo}" Header="Accession No" Width="100"/>						
+						<GridViewColumn DisplayMemberBinding="{Binding Path=AccessionDate, Converter={StaticResource ShortDateConverter}}" Header="Date" Width="100"/>						
+					</GridView>
+				</ListView.View>
+			</ListView>			
+		</Grid>
+</UserControl>

@@ -1,0 +1,155 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="ArbitraryNameToEliminateBogusGenericsError"
+    xmlns:converter="clr-namespace:YellowstonePathology.UI.Converter"
+	xmlns:validationRules="clr-namespace:YellowstonePathology.UI.ValidationRules">
+
+    <converter:DotDotDotConverter x:Key="DotDotDotConverter"/>
+    <converter:ShortDateConverter x:Key="ShortDateConverter"/>  
+    <converter:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
+    <converter:BooleanInverseVisibilityConverter x:Key="BooleanInverseVisibilityConverter"/>
+    <converter:PhoneNumberConverter x:Key="PhoneNumberConverter"/>
+    <converter:ShortTimeConverter x:Key="ShortTimeConverter"/>
+    <converter:MilitaryDateTimeConverter x:Key="MilitaryDateTimeConverter"/>
+    <converter:PercentConverter x:Key="PercentConverter"/>
+    <converter:PercentConverterV2 x:Key="PercentConverterV2"/>
+	<converter:GatingPercentConverter x:Key="GatingPercentConverter"/>
+    <converter:NumberConverter x:Key="NumberConverter"/>
+    <converter:ListViewBackgroundConverter x:Key="ListViewBackgroundConverter"/>
+    <converter:ComboBoxNullValueConverter x:Key="ComboBoxNullValueConverter"/>
+    <converter:SocialSecurityNumberConverter x:Key="SocialSecurityNumberConverter"/>
+    <converter:UpperCaseConverter x:Key="UpperCaseConverter"/>    
+    <converter:ReportableCaseConverter x:Key="ReportableCaseConverter"/>
+    <validationRules:IntValidation x:Key="IntValidation"/>
+
+    <Style TargetType="Button" x:Key="NormalButton">
+    <Setter Property="Margin" Value="5"/>
+    <Setter Property="Height" Value="25"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="NormalTextBlock">
+    <Setter Property="Margin" Value="3"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="NewTextBox">
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="Margin" Value="2"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Style.Triggers>
+        <Trigger Property="TextBox.IsEnabled" Value="False">
+        <Setter Property="TextBox.Foreground" Value="Black"/>
+	    </Trigger>
+        <Trigger Property="TextBox.IsEnabled" Value="True">
+        <Setter Property="TextBox.Foreground" Value="Black"/>
+        </Trigger>
+    </Style.Triggers>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="ReadOnlyTextBox">
+	    <Setter Property="HorizontalAlignment" Value="Left"/>
+	    <Setter Property="Margin" Value="2"/>
+	    <Setter Property="IsReadOnly" Value="true"/>
+	    <Setter Property="Background" Value="#EEE"/>
+	    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style TargetType="ComboBox" x:Key="NewComboBox">
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="Margin" Value="2"/>
+    <Style.Triggers>
+        <Trigger Property="ComboBox.IsEnabled" Value="False">
+        <Setter Property="ComboBox.Foreground" Value="Black"/>		
+	    </Trigger>
+        <Trigger Property="ComboBox.IsEnabled" Value="True">
+        <Setter Property="ComboBox.Foreground" Value="Black"/>
+        </Trigger>
+    </Style.Triggers>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="NormalTextBox">
+    <Setter Property="Margin" Value="3"/>
+    <Setter Property="Height" Value="20"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="BoundTextBox">
+    <Setter Property="TextBox.Margin" Value="3"></Setter>
+    <Setter Property="TextBox.Width" Value="300"></Setter>
+    </Style>
+    
+    <Style x:Key="HeadingTextBlock">
+    <Setter Property="TextBlock.Width" Value="120"></Setter>
+    <Setter Property="TextBlock.Margin" Value="3"></Setter>
+    <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+    <Setter Property="TextBlock.TextAlignment" Value="Right"></Setter>
+    </Style>
+    
+    <Style x:Key="AlternateRowColors" TargetType="{x:Type ListViewItem}">
+    <Setter Property="Background">
+        <Setter.Value>
+        <Binding RelativeSource="{RelativeSource Self}" Converter="{StaticResource ListViewBackgroundConverter}"/>
+        </Setter.Value>
+    </Setter>
+    </Style>
+    
+    <Style x:Key="RadioButtonStyle">
+    <Setter Property="RadioButton.Margin" Value="3"></Setter>
+    </Style>
+    <Style x:Key="GatingTextBox">
+    <Setter Property="TextBox.Margin" Value="3"></Setter>
+    <Setter Property="TextBox.Width" Value="75"></Setter>
+    </Style>
+    <Style x:Key="GatingTextBlock">
+    <Setter Property="TextBlock.Width" Value="120"></Setter>
+    <Setter Property="TextBlock.Margin" Value="3"></Setter>
+    <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+    <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
+    </Style>
+    <Style x:Key="GatingRadioButton">
+    <Setter Property="RadioButton.Margin" Value="3"></Setter>
+    </Style>
+    <Style x:Key="LabelStyle">
+    <Setter Property="TextBlock.Margin" Value="3"></Setter>
+    </Style>
+    <Style x:Key="HeadingStyle">
+    <Setter Property="TextBlock.Margin" Value="3"></Setter>
+    <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+    </Style>
+    <Style x:Key="RadioButtonStackPanel">
+    <Setter Property="RadioButton.Margin" Value="10,0,10,10"></Setter>
+    </Style>
+    <Style x:Key="TextBoxMultiline">
+    <Setter Property="TextBox.Margin" Value="3"></Setter>
+    <Setter Property="TextBox.TextWrapping" Value="Wrap"></Setter>
+    </Style>
+    <Style x:Key="TextBlockHeaderRight">
+    <Setter Property="TextBlock.Margin" Value="3"></Setter>
+    <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+    <Setter Property="TextBlock.TextAlignment" Value="Right"></Setter>
+    </Style>
+    <Style x:Key="TextBlockHeaderLeft">
+    <Setter Property="TextBlock.Margin" Value="3"></Setter>
+    <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+    </Style>
+    <ControlTemplate x:Key="validationTemplate">
+    <DockPanel>
+        <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+        <AdornedElementPlaceholder/>
+    </DockPanel>
+    </ControlTemplate>
+    <Style x:Key="textBoxValidatedGating" TargetType="{x:Type TextBox}">
+    <Setter Property="TextBlock.Width" Value="75"></Setter>
+    <Setter Property="TextBlock.Margin" Value="3"></Setter>
+    <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
+    <Style.Triggers>
+        <Trigger Property="Validation.HasError" Value="true">
+        <Setter Property="TextBlock.Foreground" Value="Red"/>
+        <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+        <Setter Property="ToolTip"
+				    Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+        </Trigger>
+    </Style.Triggers>
+    </Style>
+</ResourceDictionary>

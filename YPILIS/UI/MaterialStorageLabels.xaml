@@ -1,0 +1,53 @@
+﻿<Window x:Class="YellowstonePathology.UI.MaterialStorageLabels"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowstonePathology.UI"
+        mc:Ignorable="d"
+        Title="Material Storage Labels" Height="250" Width="500" WindowStyle="ToolWindow">
+    <Grid Margin="2,2,2,2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TabControl Margin="2,2,2,2">
+            <TabItem Header="Slides">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2">Case Type:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=CaseType}">
+                        <ComboBoxItem IsSelected="True">S</ComboBoxItem>
+                        <ComboBoxItem>A</ComboBoxItem>
+                        <ComboBoxItem>S</ComboBoxItem>
+                        <ComboBoxItem>P</ComboBoxItem>
+                        <ComboBoxItem>M</ComboBoxItem>
+                    </ComboBox>
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2">Start Id:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=SlideStartNumber}"></TextBox>
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2">Quantity:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Stretch" Text="{Binding Path=SlideQuantity}"></TextBox>
+                    
+                    <Button Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Height="30" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="ButtonMaterialStorageLabels_Click">Print Label</Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Blocks">
+                
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

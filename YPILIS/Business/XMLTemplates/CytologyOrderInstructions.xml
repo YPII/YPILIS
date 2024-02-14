@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OrderInstructions>
+    <Instruction>
+      <ScreeningType>Routine</ScreeningType>
+      <ICD9Code></ICD9Code>
+      <HPVInstructions>Not Specified</HPVInstructions>
+      <OrderNGCT>false</OrderNGCT>
+      <Specimen>
+        <Specimen>
+          <Description>Thin Prep</Description>
+          <CollectionDate xsi:nil="true" ></CollectionDate>
+          <Source></Source>
+        </Specimen>
+      </Specimen>
+      <OrderableTests>
+        <Test>
+          <TestName>Routine Screening Pap</TestName>
+          <OrderableTestId>5000</OrderableTestId>
+          <CptCodes></CptCodes>
+          <Icd9Codes></Icd9Codes>
+        </Test>
+      </OrderableTests>
+    </Instruction>
+  </OrderInstructions>
+</Document>

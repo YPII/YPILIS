@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">  
+  
+	<xsd:complexType name="SpecimenType" mixed="true">    
+		<xsd:sequence minOccurs="1" maxOccurs="1">
+			<xsd:element name="Description" type="xsd:string" nillable="true"  />
+			<xsd:element name ="CollectionDate" type="xsd:dateTime" nillable="true" />
+			<xsd:element name="Source" type="xsd:string" nillable="true" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="SpecimenListType" mixed="true">
+		<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+			<xsd:element name="Specimen" type="SpecimenType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OrderableTestType" mixed="true">
+		<xsd:sequence minOccurs="1" maxOccurs="1">
+			<xsd:element name="TestName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OrderableTestsType" mixed="true">
+		<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+			<xsd:element name="Test" type="OrderableTestType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InstructionType" mixed="true">
+		<xsd:sequence minOccurs="1" maxOccurs="1">
+			<xsd:element name="ScreeningType" type="xsd:string" nillable="true" />
+			<xsd:element name="ICD9Code" type="xsd:string" nillable="true" />
+			<xsd:element name="HPVInstructions" type="xsd:string" />
+			<xsd:element name="OrderNGCT" type="xsd:boolean" />
+			<xsd:element name="Specimen" type="SpecimenListType" />
+			<xsd:element name="OrderableTests" type="OrderableTestsType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OrderInstructionsType" mixed="true">
+		<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+			<xsd:element name="Instruction" type="InstructionType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DocumentType" mixed="true">
+		<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+			<xsd:element name="OrderInstructions" type="OrderInstructionsType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="Document" type="DocumentType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
+</xsd:schema>

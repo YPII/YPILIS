@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Cutting.SlideOptionsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800">
+    <Grid Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" Click="ButtonDeleteSlide_Click" Height="100" Width="200" Margin="5,5,5,5">Delete</Button>
+        <Button Grid.Row="1" Click="ButtonPrintSlide_Click" Height="100" Width="200" Margin="5,5,5,5">Print Slide</Button>
+        <Button Grid.Row="2" Click="ButtonPrintPaperLabel_Click" Height="100" Width="200" Margin="5,5,5,5">Print Paper Label</Button>
+        <Button Grid.Row="3" Click="ButtonCombineNextSlide_Click" Height="100" Width="200" Margin="5,5,5,5">Combine Next Slide</Button>
+        <Button Grid.Row="4" Click="ButtonUncombine_Click" Height="100" Width="200" Margin="5,5,5,5">Uncombine</Button>
+        <Button Grid.Row="5" Click="ButtonClose_Click" Height="100" Width="200" Margin="5,5,5,5">Close</Button>
+
+    </Grid>
+</UserControl>

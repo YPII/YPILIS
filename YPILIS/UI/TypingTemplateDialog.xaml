@@ -1,0 +1,57 @@
+﻿<Window x:Class="YellowstonePathology.UI.TypingTemplateDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Template Selection Dialog" Height="700" Width="1000">
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<ListBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Name="ListBoxParagraphTemplates" Height="150" SelectionChanged="ListBoxParagraphTemplates_SelectionChanged"
+                             ItemsSource="{Binding Path=ParagraphTemplateCollection}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{Binding Path=Description}"/>
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<ListBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Name="ListBoxParagraphTemplateWords" VerticalAlignment="Stretch" Margin="2,2,2,2"
+                             ItemsSource="{Binding ElementName=ListBoxParagraphTemplates, Path=SelectedItem.WordCollection}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{Binding Path=Description}"/>
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<TextBox Name="TextBoxTemplateTypedWords" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" AcceptsReturn="True" 
+                 Margin="2,2,2,2" TextWrapping="Wrap"></TextBox>
+        
+        <Button Grid.Column="2" Grid.Row="1" VerticalAlignment="Stretch" Click="ButtonAddText_Click" Width="100">Go</Button>
+        
+		<TextBox Name="TextBoxTemplateParagraphText" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" AcceptsTab="True" Focusable="True"
+                             AcceptsReturn="True" Margin="2,2,2,2" TextWrapping="Wrap" KeyDown="TextBoxTemplateParagraphText_KeyDown"></TextBox>
+
+		<StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" Margin="5,5,0,5" Orientation="Horizontal" HorizontalAlignment="Right">
+            <!--
+			<Button HorizontalAlignment="Right" Width="100" Height="30" Margin="2,2,8,2" Click="ButtonGenerateText_Click">Generate Text</Button>
+            -->
+			<Button HorizontalAlignment="Right" Width="100" Height="30" Margin="2,2,8,2" Click="ButtonOk_Click">OK</Button>
+			<Button HorizontalAlignment="Right" Width="100" Height="30" Margin="2,2,2,2" Click="ButtonClose_Click">Close</Button>
+		</StackPanel>
+        
+	</Grid>
+</Window>

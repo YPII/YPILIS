@@ -1,0 +1,239 @@
+﻿<Window x:Class="YellowstonePathology.UI.Common.UserPreferences"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Title="User Preferences" Height="540" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+
+    <Grid Margin="2,2,2,2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TabControl Grid.Column="0" Grid.Row="0" Margin="2,2,2,2">
+            <TabItem Header="General">
+                <Grid Margin="5,5,5,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Host Name:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="0" Name="TextBoxLocation" Text="{Binding Path=UserPreference.HostName}" IsEnabled="{Binding Path=HostNameEnabled}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Barcode Scanner Enabled:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" IsChecked="{Binding Path=UserPreference.BarcodeScanEnabled}" HorizontalAlignment="Stretch"></CheckBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Barcode Scanner Port:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=UserPreference.BarcodeScanPort}" HorizontalAlignment="Stretch"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Facility:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="3" Name="ComboBoxFacility"  ItemsSource="{Binding Path=FacilityCollection}" Margin="2,2,2,2"
+                              HorizontalAlignment="Stretch" SelectionChanged="ComboBoxFacility_SelectionChanged"
+                              SelectedValue="{Binding Path=UserPreference.FacilityId}" SelectedValuePath="FacilityId" DisplayMemberPath="FacilityName" >
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Lock Mode:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=UserPreference.LockMode}" IsEditable="True">
+                        <ComboBoxItem>Always Attempt Lock</ComboBoxItem>
+                        <ComboBoxItem>Never Attempt Lock</ComboBoxItem>
+                    </ComboBox>
+
+
+                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="2" VerticalAlignment="Center" TextAlignment="Right">Startup Page:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="5" Name="ComboBoxStartupPage" Margin="2"
+                              IsEditable="True" Text="{Binding Path=UserPreference.StartupPage}" HorizontalAlignment="Stretch">
+                        <ComboBoxItem>Main Window</ComboBoxItem>
+                        <ComboBoxItem>Pathologist Workspace</ComboBoxItem>
+                        <ComboBoxItem>Login Workspace</ComboBoxItem>
+                        <ComboBoxItem>Lab Workspace</ComboBoxItem>
+                        <ComboBoxItem>Flow Workspace</ComboBoxItem>
+                        <ComboBoxItem>Cutting Workspace</ComboBoxItem>
+                        <ComboBoxItem>Gross Workspace</ComboBoxItem>
+                        <ComboBoxItem>Cytology Workspace</ComboBoxItem>
+                        <ComboBoxItem>Typing Workspace</ComboBoxItem>
+                        <ComboBoxItem>Monitor Workspace</ComboBoxItem>
+                        <ComboBoxItem>Report Distribution Workspace</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" Margin="2,2,2,2" TextAlignment="Right">Page Scanner:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="6" Name="ComboBoxPageScanner" Margin="2"
+                              IsEditable="True" Text="{Binding Path=UserPreference.PageScanner}" HorizontalAlignment="Stretch"
+                              ItemsSource="{Binding Path=PageScannerCollection}" DisplayMemberPath="ScannerName">
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Activate Notification Alert:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="7" Margin="2,2,2,2" IsChecked="{Binding Path=UserPreference.ActivateNotificationAlert}" HorizontalAlignment="Stretch"></CheckBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Alert Wave File:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="8" Margin="2,2,2,2" Text="{Binding Path=UserPreference.AlertWaveFileName}" HorizontalAlignment="Stretch"></TextBox>
+                    <Button Grid.Column="2" Grid.Row="8" Width="30" Margin="2,2,2,2" Click="ButtonAlertWaveFileNameBrowse_Click">...</Button>
+
+                    <TextBlock Grid.Column="0" Grid.Row="9" Margin="2" VerticalAlignment="Center" TextAlignment="Right">Acknowledge Tasks For:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="9" Name="ComboBoxAcknowledgeTasksFor" Margin="2"
+                  IsEditable="True" Text="{Binding Path=UserPreference.AcknowledgeTasksFor}" HorizontalAlignment="Stretch">
+                        <ComboBoxItem>Cytology</ComboBoxItem>
+                        <ComboBoxItem>Flow</ComboBoxItem>
+                        <ComboBoxItem>Histology</ComboBoxItem>
+                        <ComboBoxItem>Molecular</ComboBoxItem>
+                        <ComboBoxItem>Transcription</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">This Version:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="10" Margin="2,2,2,2" Text="{Binding Path=CurrentVersion, Mode=OneWay}" HorizontalAlignment="Stretch"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="11" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Available Application Version:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="11" Margin="2,2,2,2" Text="{Binding Path=ApplicationVersion.Version}" HorizontalAlignment="Stretch"></TextBox>
+                    <CheckBox Grid.Column="2" Grid.Row="11" Margin="2,2,2,2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding Path=ApplicationVersion.EnforceChange}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="12" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Administrator:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="12" Margin="2,2,2,2" IsChecked="{Binding Path=UserPreference.Administrator}" HorizontalAlignment="Stretch"></CheckBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Printers" >
+                <Grid Margin="5,5,5,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Histology Slide Label Printer:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="0" Name="ComboBoxHistologySlideLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.HistologySlideLabelPrinter}" IsEditable="True">
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Cytology Slide Label Printer:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="1" Name="ComboBoxCytologySlideLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CytologySlideLabelPrinter}" IsEditable="True">
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Requisition Printer:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="2" Name="ComboBoxRequisitionLabelPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.RequisitionPrinter}" IsEditable="True">
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Stain Acknowledgement Printer:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="3" Name="ComboBoxStainAcknowledgementPrinter" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.SpecialStainAcknowledgementPrinter}" IsEditable="True">
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Panther COVID Printer:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="4" Name="ComboBoxPantherCOVIDLabelPrinter" Margin="2,2,2,2" ItemsSource="{Binding Path=PrintQueueCollection}" DisplayMemberPath="Name" 
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.PantherCOVIDLabelPrinter}" IsEditable="True" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Molecular Label Format:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="5" Name="ComboBoxMolecularLabelFormat" Margin="2,2,2,2" ItemsSource="{Binding Path=MolecularLabelFormatCollection}"
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.MolecularLabelFormat}" IsEditable="True" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="6" Margin="2" VerticalAlignment="Center" TextAlignment="Right">Cassette Printer:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="6" ItemsSource="{Binding Path=CassettePrinterCollection}" DisplayMemberPath="Name"  Margin="2,2,2,2"
+                        HorizontalAlignment="Stretch" Text="{Binding Path=UserPreference.CassettePrinter}" IsEditable="True">
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="7" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Slide Printer:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="7" Margin="2,2,2,2" Text="{Binding Path=UserPreference.ThermoFisherSlidePrinter}" HorizontalAlignment="Stretch"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="2" VerticalAlignment="Center" TextAlignment="Right">FedEx Label Printer:</TextBlock>
+                    <ComboBox Grid.Column="1" Grid.Row="8" Name="ComboBoxFedExLabelPrinter" Margin="2"
+                            IsEditable="True" Text="{Binding Path=UserPreference.FedExLabelPrinter}" HorizontalAlignment="Stretch">
+                        <ComboBoxItem>10.1.1.20</ComboBoxItem>
+                        <ComboBoxItem>10.1.1.33</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Use Laser Cassette Printer:</TextBlock>
+                    <CheckBox Grid.Column="1" Grid.Row="9" Margin="2,2,2,2" IsChecked="{Binding Path=UserPreference.UseLaserCassettePrinter}" HorizontalAlignment="Stretch"></CheckBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">ZPL Slide Printer:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="10" Margin="2,2,2,2" Text="{Binding Path=UserPreference.ZplSlidePrinter}" HorizontalAlignment="Stretch"></TextBox>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Foot Pedal">
+                <Grid Margin="5,5,5,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Name:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=UserPreference.FootPedalName}" HorizontalAlignment="Stretch"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Vendor Id:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=UserPreference.FootPedalVendorId}" HorizontalAlignment="Stretch"></TextBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Product Id:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=UserPreference.FootPedalProductId}" HorizontalAlignment="Stretch"></TextBox>
+
+                    <ListView Name="ListViewUSBDevices" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Margin="2,2,2,2" ItemsSource="{Binding Path=USBDeviceList}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Margin="2,2,2,2" HorizontalAlignment="Left">
+                                                 <Hyperlink Click="HyperLinkSetFootPedal_Click" Tag="{Binding .}">Set</Hyperlink>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Manufacturer" Width="100" DisplayMemberBinding="{Binding Path=Manufacturer}" />
+                                <GridViewColumn Header="Product Name" Width="100" DisplayMemberBinding="{Binding Path=ProductName}" />
+                                <GridViewColumn Header="Vendor Id" Width="100" DisplayMemberBinding="{Binding Path=VendorID}" />
+                                <GridViewColumn Header="Product Id" Width="100" DisplayMemberBinding="{Binding Path=ProductID}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <TextBlock x:Name="TextBlockFootPedalInput" Grid.Column="0" Grid.Row="4" Text="{Binding Path=FootPedalInstance.Input}"></TextBlock>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Name="ButtonOK" Margin="5,5,5,5" HorizontalAlignment="Center" Click="ButtonOK_Click" Width="50" Height="30">OK</Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Monitor.BillingEODProcessingPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YellowstonePathology.UI.Monitor"
+             mc:Ignorable="d" FontSize="20">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" Margin="2,10,2,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" VerticalAlignment="Center">Start Date:</TextBlock>
+            <TextBox Grid.Column="1" Grid.Row="0" Name="TextBoxStartDate" Height="25" HorizontalAlignment="Stretch" Margin="2,2,2,2" Text="{Binding Path=PostDate, Converter={StaticResource ShortDateConverter}}"></TextBox>
+            <Button Name="ButtonBack" Grid.Column="2" Grid.Row="0" Width="25" Height="30" Margin="1,1,1,1" VerticalAlignment="Center" Click="ButtonBack_Click">&lt;</Button>
+            <Button Name="ButtonForward" Grid.Column="3" Grid.Row="0" Width="25" Height="30" Margin="1,1,1,1" VerticalAlignment="Center" Click="ButtonForward_Click">&gt;</Button>
+            <Button Name="ButtonStart" Grid.Column="4" Grid.Row="0" Height="30" Width="100" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ButtonStart_Click">Start</Button>
+            <TextBlock Grid.Column="5" Grid.Row="0" Name="TextBlockStatusCount" Margin="2,2,2,2" Text="{Binding Path=StatusCountMessage}" HorizontalAlignment="Right"></TextBlock>
+
+        </Grid>
+
+        <ListView Name="ListViewStatus" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path=StatusMessageList}" Margin="2,2,2,2" SizeChanged="ListViewStatus_SizeChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=.}" Header="Status Message" Width="Auto"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,144 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+    x:Class="YellowstonePathology.UI.Login.Receiving.ItemsReceivedPage"
+	xmlns:converter="clr-namespace:YellowstonePathology.UI.Converter"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:TemplateSelectorUI="clr-namespace:YellowstonePathology.UI.TemplateSelector"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="800">
+
+    <Grid Name="MainGrid">
+		<Grid.Resources>
+			<Style x:Key="ClientOrderMediaContainerStyle" TargetType="ListBoxItem">
+				<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+				<Setter Property="Margin" Value="10" />
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="ListBoxItem">
+							<Border Name="Border" Padding="2" SnapsToDevicePixels="true">
+								<ContentPresenter />
+							</Border>
+							<ControlTemplate.Triggers>
+								<Trigger Property="IsSelected" Value="true">
+									<Setter TargetName="Border" Property="Background" Value="#DCE6F2"/>
+								</Trigger>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>			
+
+			<DataTemplate x:Key="SpecimenTemplate">
+                <Grid Grid.Column="0" Grid.Row="0" Margin="20" Height="235" Width="180" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Column="0" Grid.Row="0" CornerRadius="2" Background="{Binding Path=Received, Converter={StaticResource ItemsReceivedColorConverter}}" BorderBrush="Black" BorderThickness="2">
+                        <Rectangle Height="50"></Rectangle>
+                    </Border>
+
+                    <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="2,2,2,2"></Border>                                        
+                    
+                    <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Margin="2,2,2,2" FontSize="12" Text="Specimen Number: "/>
+                        <TextBlock Margin="2,2,2,2" FontSize="12" Text="{Binding Path=SpecimenNumber}"/>
+                    </StackPanel>                        
+
+                    <Grid Margin="10,10,10,10" Grid.Column="0" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" FontWeight="Bold" FontSize="12">Specimen Description:</TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,1,2,2" FontSize="12" Text="{Binding Path=Description}" TextWrapping="Wrap" IsEnabled="False"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" FontWeight="Bold" FontSize="12">Accession Description:</TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,1,2,2" FontSize="12" Text="{Binding Path=DescriptionToAccession}" TextWrapping="Wrap" IsEnabled="False"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" FontWeight="Bold" FontSize="12">Container Id:</TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,1,2,2" FontSize="12" Text="{Binding Path=ContainerId, Converter={StaticResource Last12CharacterConverter}}" TextWrapping="Wrap" IsEnabled="False"></TextBlock>
+
+                        <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" HorizontalAlignment="Right">                    
+                                <Hyperlink Click="HyperLinkDeleteSpecimen_Click" Tag="{Binding Path=.}">Delete</Hyperlink>
+                        </TextBlock>
+                        
+                    </Grid>
+
+                </Grid>
+            </DataTemplate>			           			
+            
+		</Grid.Resources>
+	
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0" Content="●" Background="Transparent" Foreground="Black" Click="ButtonEnterNewContainerId_Click" HorizontalAlignment="Left" VerticalAlignment="Center"
+                            FontFamily="Tw Cen MT Condensed" Margin="5,5,2,2" Width="20" Height="20" BorderBrush="Transparent" BorderThickness="0">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="20,2,2,2" Text="{Binding Path=PageHeaderText}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"></TextBlock>
+
+			<Button Grid.Column="1" Grid.Row="0" Margin="5,2,20,2" Width="100" Height="40" Content="Case Notes" Click="ButtonCaseNotes_Click">
+			</Button>
+		</Grid>
+
+		<Grid Grid.Row="1" Margin="5,5,5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Name="TextBlockShowDocument" Grid.Column="0" Grid.Row="0" Margin="5,3,0,0" HorizontalAlignment="Right">
+                <Hyperlink Click="ButtonBarcodeWontScan_Click">Barcode Won't Scan</Hyperlink>
+            </TextBlock>
+
+            <ListBox Name="ListBoxClientOrderMedia" Grid.Row="1" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" ItemsSource="{Binding Path=ClientOrderMediaCollection}" MouseDoubleClick="ListBoxContainers_DoubleClick"
+				 ItemTemplate="{StaticResource SpecimenTemplate}" ItemContainerStyle="{StaticResource ClientOrderMediaContainerStyle}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" MaxWidth="950" HorizontalAlignment="Left"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>                       
+            
+        </Grid>
+
+        <Border Grid.Row="2" BorderBrush="Transparent" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"></Border>
+        <Button Grid.Column="0" Grid.Row="2" Name="ButtonBack" Margin="5,5,5,5" Click="ButtonBack_Click" Width="100" Height="40" HorizontalAlignment="Left">&lt; Back</Button>
+		<Button Grid.Column="1" Grid.Row="2" Name="ButtonNext" Margin="5,5,5,5" Click="ButtonNext_Click" Width="100" Height="40" HorizontalAlignment="Right">Next ></Button>
+
+    </Grid>
+</UserControl>

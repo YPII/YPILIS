@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="YellowstonePathology.UI.Surgical.PublishedDocumentReview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>            
+		</Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right">
+            <Hyperlink Click="HyperLinkShowFinalizeDialog_Click">Show Finalize Dialog</Hyperlink>
+        </TextBlock>
+        <WebBrowser x:Name="WebBrowserReport" Grid.Column="0" Grid.Row="1"></WebBrowser>
+        
+        <!--
+        <TabControl >
+            <TabItem Header="PDF">
+                
+            </TabItem>
+            <TabItem Header="XPS">
+                <DocumentViewer  Document="{Binding Path=PublishedDocument}">
+                    <DocumentViewer.Resources>
+                        <Style TargetType="ContentControl">
+                            <Style.Triggers>
+                                <Trigger Property="Name" Value="PART_FindToolBarHost">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DocumentViewer.Resources>
+                </DocumentViewer>
+            </TabItem>
+        </TabControl>
+        -->
+    </Grid>
+</UserControl>
