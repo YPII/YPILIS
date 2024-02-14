@@ -308,5 +308,18 @@ namespace YellowstonePathology.UI.Login
             string path = Business.Document.CaseDocument.GetCaseFileNamePDF(new Business.OrderIdParser(this.m_AccessionOrder.MasterAccessionNo));
             System.Windows.Clipboard.SetData(DataFormats.Text, path);
         }
+
+        private void MenuItemListBoxDocumentListPdfViewer2_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ListBoxDocumentList.SelectedItem != null)
+            {
+                YellowstonePathology.Business.Document.CaseDocument caseDocument = (YellowstonePathology.Business.Document.CaseDocument)this.ListBoxDocumentList.SelectedItem;
+                if (caseDocument.Extension.ToUpper() == "PDF")
+                {
+                    PDFViewerV2 pdfViewer = new PDFViewerV2(caseDocument.FullFileName);
+                    pdfViewer.ShowDialog();
+                }                
+            }
+        }
     }
 }

@@ -96,7 +96,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 technicalComponentFacilityName = technicalComponentFacility.FacilityName;
                 technicalComponentFacilityCLIA = technicalComponentFacility.CLIALicenseNumber;
             }			
-
+			
 			this.m_JObject = new JObject(new JProperty("masterAccessionNo", this.m_AccessionOrder.MasterAccessionNo),
 				new JProperty("panelSetName", this.m_PanelSetOrder.PanelSetName),
 				new JProperty("reportNo", this.m_ReportNo),
@@ -119,7 +119,8 @@ namespace YellowstonePathology.Business.Billing.Model
 				new JProperty("patientCity", this.m_AccessionOrder.PCity),                
 				new JProperty("patientState", this.m_AccessionOrder.PState),
 				new JProperty("patientZip", this.m_AccessionOrder.PZipCode),
-				new JProperty("patientInsurancePlan1", this.m_AccessionOrder.InsurancePlan1),
+                new JProperty("patientSsn", this.m_AccessionOrder.PSSN),
+                new JProperty("patientInsurancePlan1", this.m_AccessionOrder.InsurancePlan1),
 				new JProperty("patientInsurancePlan2", this.m_AccessionOrder.InsurancePlan2),
 				new JProperty("clientId", this.m_AccessionOrder.ClientId),
 				new JProperty("clientName", this.m_AccessionOrder.ClientName),
@@ -132,13 +133,14 @@ namespace YellowstonePathology.Business.Billing.Model
                 new JProperty("technicalComponentFacilityName", technicalComponentFacilityName),
                 new JProperty("professionalComponentFacilityCLIA", professionalComponentFacilityCLIA),
                 new JProperty("professionalComponentFacilityName", professionalComponentFacilityName),
-
+                new JProperty("additionalInformation", this.m_AccessionOrder.AdditionalInformation),                
                 new JProperty("dateOfDeath", Helper.DateTimeExtensions.DateStringFromNullable(this.m_AccessionOrder.DateOfDeath)),
-                new JProperty("mcAuthorizationId", this.m_AccessionOrder.MCAuthorizationId),
+                new JProperty("dateOfInjury", Helper.DateTimeExtensions.DateStringFromNullable(this.m_AccessionOrder.DateOfInjury)),
+                new JProperty("wcAuthorizationId", this.m_AccessionOrder.WCAuthorizationId),
                 new JProperty("vcAuthorizationId", this.m_AccessionOrder.VAAuthorizationId),
+                new JProperty("ordered14DaysPostDischarge", this.m_PanelSetOrder.Ordered14DaysPostDischarge),
                 new JProperty("VAAuthorizationStart", Helper.DateTimeExtensions.DateStringFromNullable(this.m_AccessionOrder.VAAuthorizationStart)),
-                new JProperty("VAAuthorizationEnd", Helper.DateTimeExtensions.DateStringFromNullable(this.m_AccessionOrder.VAAuthorizationEnd)),
-
+                new JProperty("VAAuthorizationEnd", Helper.DateTimeExtensions.DateStringFromNullable(this.m_AccessionOrder.VAAuthorizationEnd)),                
                 new JProperty("patientPaymentInstructions", this.m_AccessionOrder.PatientPaymentInstructions));
 
 			Business.HL7View.ADTMessages adtMessages = Business.Gateway.AccessionOrderGateway.GetADTMessagesByPatientNameDOB(this.m_AccessionOrder.PFirstName, this.m_AccessionOrder.PLastName, this.m_AccessionOrder.PBirthdate.Value);

@@ -276,7 +276,7 @@ namespace YellowstonePathology.UI.Cutting
                         slideOrder.Status = Business.Slide.Model.SlideStatusEnum.Printed.ToString();
                         slideOrder.Printed = true;
 
-                        YellowstonePathology.Business.Label.Model.HistologySlidePaperLabel histologySlidePaperLabel = new Business.Label.Model.HistologySlidePaperLabel(slideOrder.SlideOrderId, slideOrder.ReportNo, slideOrder.Label, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
+                        YellowstonePathology.Business.Label.Model.HistologySlidePaperLabel histologySlidePaperLabel = new Business.Label.Model.HistologySlidePaperLabel(slideOrder.SlideOrderId, slideOrder.ReportNo, slideOrder.Label, slideOrder.PatientFirstName, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
                         this.m_HistologySlidePaperLabelPrinter.Queue.Enqueue(histologySlidePaperLabel);
                         this.ShowTestOrderSelectionPage(this, new CustomEventArgs.AliquotOrderReturnEventArgs(this.m_AliquotOrder));
                     }
@@ -343,7 +343,7 @@ namespace YellowstonePathology.UI.Cutting
             printDialog.PrintQueue = printQueue;
 
             YellowstonePathology.Business.Label.Model.HistologySlidePaperLabel histologySlidePaperLabel = new Business.Label.Model.HistologySlidePaperLabel(slideOrder.SlideOrderId, 
-                slideOrder.ReportNo, slideOrder.Label, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
+                slideOrder.ReportNo, slideOrder.Label, slideOrder.PatientFirstName, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
             YellowstonePathology.Business.Label.Model.HistologySlidePaperLabelPrinter histologySlidePaperLabelPrinter = new Business.Label.Model.HistologySlidePaperLabelPrinter();
             histologySlidePaperLabelPrinter.Queue.Enqueue(histologySlidePaperLabel);
             histologySlidePaperLabelPrinter.Print();            

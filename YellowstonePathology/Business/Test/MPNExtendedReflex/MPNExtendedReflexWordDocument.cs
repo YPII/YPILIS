@@ -95,8 +95,18 @@ namespace YellowstonePathology.Business.Test.MPNExtendedReflex
             this.ReplaceText("report_method", panelSetOrderMPNExtendedReflex.Method);
             this.ReplaceText("report_reference", panelSetOrderMPNExtendedReflex.ReportReferences);
 
-			this.ReplaceText("report_date", BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate));
-            this.ReplaceText("pathologist_signature", panelSetOrderMPNExtendedReflex.Signature);
+			
+
+            if(this.m_AccessionOrder.AccessionDate > DateTime.Parse("1/1/2024"))
+            {
+                this.ReplaceText("pathologist_signature", panelSetOrderMPNExtendedReflex.ReferenceLabSignature);
+                this.ReplaceText("report_date", BaseData.GetShortDateString(this.m_PanelSetOrder.ReferenceLabFinalDate));
+            }
+            else
+            {
+                this.ReplaceText("pathologist_signature", panelSetOrderMPNExtendedReflex.Signature);
+                this.ReplaceText("report_date", BaseData.GetShortDateString(this.m_PanelSetOrder.FinalDate));
+            }           
 
 			this.SaveReport();
 		}

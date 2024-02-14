@@ -47,6 +47,7 @@
                         <ListBox.ContextMenu>
                             <ContextMenu Name="ContextMenuDocumentList">
                                 <MenuItem Header="Delete" Click="MenuItemListBoxDocumentListDelete_Click"></MenuItem>
+                                <MenuItem Header="New Viewer" Click="MenuItemListBoxDocumentListPdfViewer2_Click"></MenuItem>
                             </ContextMenu>
                         </ListBox.ContextMenu>
                         <ListBox.ItemsPanel>

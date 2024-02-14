@@ -17,6 +17,7 @@ namespace YellowstonePathology.Business.Calendar
         {
             this.m_Pathologists = new List<string>();
             this.m_Pathologists.Add("Dr Bibbey");
+            this.m_Pathologists.Add("Dr Braunberger");            
             this.m_Pathologists.Add("Dr Brown");
             this.m_Pathologists.Add("Dr Durden");
             this.m_Pathologists.Add("Dr Emerick");
@@ -41,7 +42,7 @@ namespace YellowstonePathology.Business.Calendar
                 using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
-                    {
+                    {                        
                         PathologistCalendarDay pathologistCalendarDay = JsonConvert.DeserializeObject<PathologistCalendarDay>(dr[0].ToString(), new JsonSerializerSettings
                         {
                             TypeNameHandling = TypeNameHandling.All,

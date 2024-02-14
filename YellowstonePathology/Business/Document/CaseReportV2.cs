@@ -406,8 +406,11 @@ namespace YellowstonePathology.Business.Document
         {
             string rowPath = $"descendant::w:tbl[w:tr/w:tc/w:tbl[w:tr/w:tc/w:p/w:r/w:t='{field}']";
             XmlNode parentTable = m_ReportXml.SelectSingleNode($"descendant::w:tbl[w:tr/w:tc/w:tbl[w:tr/w:tc/w:p/w:r/w:t='{field}']]", this.m_NameSpaceManager);
-            XmlNode tableRow = parentTable.SelectSingleNode($"w:tr[w:tc/w:tbl[w:tr/w:tc/w:p/w:r/w:t='{field}']]", this.m_NameSpaceManager);
-            parentTable.RemoveChild(tableRow);            
+            if(parentTable != null)
+            {
+                XmlNode tableRow = parentTable.SelectSingleNode($"w:tr[w:tc/w:tbl[w:tr/w:tc/w:p/w:r/w:t='{field}']]", this.m_NameSpaceManager);
+                parentTable.RemoveChild(tableRow);
+            }            
         }
 
         public void SaveReport()

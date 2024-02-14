@@ -42,8 +42,8 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>195</ApplicationRevision>
-    <ApplicationVersion>11.0.2.%2a</ApplicationVersion>
+    <ApplicationRevision>36</ApplicationRevision>
+    <ApplicationVersion>11.0.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -376,6 +376,7 @@
     <Compile Include="Business\ClientOrder.Model\UniversalServiceCollectionNMH.cs" />
     <Compile Include="Business\ClientOrder.Model\UniversalServiceCollectionRiverstone.cs" />
     <Compile Include="Business\Common\Block.cs" />
+    <Compile Include="Business\Common\PageScannerFI8170.cs" />
     <Compile Include="Business\Cytology.Model\OrderType.cs" />
     <Compile Include="Business\Cytology.Model\OrderTypeCollectionCollection.cs" />
     <Compile Include="Business\Document\CaseDocumentFileTypeEnum.cs" />
@@ -387,6 +388,19 @@
     <Compile Include="Business\Gateway\MangementReportsGateway.cs" />
     <Compile Include="Business\GrossCameraPubSubHandler.cs" />
     <Compile Include="Business\Helper\JSONHelper.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgeNteView.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgeNteViewFactory.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgeMshView.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgeNarrativeOBXView.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgeObrView.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgeObxView.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgeOrcView.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgePv1View.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgeResultView.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgeHl7Client.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgeObxViewFactory.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\DeerLodgePidView.cs" />
+    <Compile Include="Business\HL7View\DeerLodge\StringHelper.cs" />
     <Compile Include="Business\HL7View\EMA\EMAHl7Client.cs" />
     <Compile Include="Business\HL7View\EMA\EMAMSHView.cs" />
     <Compile Include="Business\HL7View\EMA\EMAOBRView.cs" />
@@ -449,8 +463,10 @@
     <Compile Include="Business\PanelSet.Model\BreastCancerIndex.cs" />
     <Compile Include="Business\PanelSet.Model\ChimerismPostTransplant.cs" />
     <Compile Include="Business\PanelSet.Model\DecipherProstateBiopsyGenomicClassifier.cs" />
+    <Compile Include="Business\PanelSet.Model\HumanPapillomavirus.cs" />
     <Compile Include="Business\PanelSet.Model\NeoComprehensiveHemeCancers.cs" />
     <Compile Include="Business\PanelSet.Model\NeoTYPECervicalTumorProfile.cs" />
+    <Compile Include="Business\PanelSet.Model\P53Test.cs" />
     <Compile Include="Business\PanelSet.Model\Tempus.cs" />
     <Compile Include="Business\PanelSet.Model\Signatera.cs" />
     <Compile Include="Business\PanelSet.Model\PDL122C3FDAForCervical.cs" />
@@ -715,9 +731,6 @@
     <Compile Include="Business\Common\PageScanner.cs" />
     <Compile Include="Business\Common\PageScannerCollection.cs" />
     <Compile Include="Business\Common\PageScannerFI7160.cs" />
-    <Compile Include="Business\Common\PageScannerGT2500.cs" />
-    <Compile Include="Business\Common\PageScannerIS200e.cs" />
-    <Compile Include="Business\Common\PageScannerXeroxDocuMate3640.cs" />
     <Compile Include="Business\Common\PathologistSpellCheckList.cs" />
     <Compile Include="Business\Common\SpellChecker.cs" />
     <Compile Include="Business\Common\SpellCheckListItem.cs" />
@@ -1205,7 +1218,7 @@
     <Compile Include="Business\Test.Model\TestFactory.cs" />
     <Compile Include="Business\Test.Model\TestOrderStatusView.cs" />
     <Compile Include="Business\Test.Model\TestOrderStatusViewCollection.cs" />
-    <Compile Include="Business\Test\ABL1KinaseDomainMutation\ABL1KinaseDomainMutationDetectedResult - Copy.cs" />
+    <Compile Include="Business\Test\ABL1KinaseDomainMutation\ABL1KinaseDomainMutationDetectedResult.cs" />
     <Compile Include="Business\Test\AnalCytology\AnalCytologyEPICOBXView.cs" />
     <Compile Include="Business\Test\AnalCytology\AnalCytologyTest.cs" />
     <Compile Include="Business\Test\AnalCytology\AnalCytologyTestOrder.cs" />
@@ -1226,7 +1239,9 @@
     <Compile Include="Business\Test\HER2AmplificationByISH\HER2AmplificationResultMetastatic.cs" />
     <Compile Include="Business\Test\HPV\HPVRiverstoneObxView.cs" />
     <Compile Include="Business\Test\IEP\IEPClosingResult.cs" />
+    <Compile Include="Business\Test\LLP\LLPNMHObxView.cs" />
     <Compile Include="Business\Test\LynchSyndrome\LSEColonComplete.cs" />
+    <Compile Include="Business\Test\LynchSyndrome\LSEGYNMSH6Loss.cs" />
     <Compile Include="Business\Test\NGCT\NGCTNMHObxView.cs" />
     <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastSystemGeneratedAmendmentText.cs" />
     <Compile Include="Business\Test\PDL122C3forTNBCBreast\PDL122C3forTNBCBreastWordDocument.cs" />
@@ -1253,7 +1268,9 @@
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2InvalidResult.cs" />
     <Compile Include="Business\Test\SARSCoV2\SARSCoV2RiverstoneOBXView.cs" />
     <Compile Include="Business\Test\SPEP\SPEPClosingResult.cs" />
+    <Compile Include="Business\Test\Surgical\SurgicalDeerLodgeNteView.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalEMAOBXView.cs" />
+    <Compile Include="Business\Test\Surgical\SurgicalDeerLodgeObxView.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalNMHObxView.cs" />
     <Compile Include="Business\Test\Surgical\SurgicalRiverstoneOBXView.cs" />
     <Compile Include="Business\Test\ALLFISHPanel\ALLFISHPanelTest.cs" />
@@ -1525,6 +1542,7 @@
     <Compile Include="Policy\IPFS.cs" />
     <Compile Include="UI\Billing\DailyBillingReportSheet.cs" />
     <Compile Include="UI\FootPedal.cs" />
+    <Compile Include="UI\Login\AcidWashListReport.cs" />
     <Compile Include="UI\ManagementReports\DepartmentOfHealthDailyCOVID.xaml.cs">
       <DependentUpon>DepartmentOfHealthDailyCOVID.xaml</DependentUpon>
     </Compile>
@@ -1549,6 +1567,9 @@
     </Compile>
     <Compile Include="UI\PdfViewerControl.xaml.cs">
       <DependentUpon>PdfViewerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PDFViewerV2.xaml.cs">
+      <DependentUpon>PDFViewerV2.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ProstateBiopsyKitDialog.xaml.cs">
       <DependentUpon>ProstateBiopsyKitDialog.xaml</DependentUpon>
@@ -5169,7 +5190,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\MaterialTracking.Model\FedexSearchLocationRequest.v1.xml" />
-    <None Include="dll\Interop.FAXCOMEXLib.dll" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Business\Document\CaseReportFooter.xaml">
@@ -5522,11 +5542,15 @@
     </Page>
     <Page Include="UI\PDFViewer.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="UI\PdfViewerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="UI\PDFViewerV2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ProstateBiopsyKitDialog.xaml">
       <SubType>Designer</SubType>
@@ -7433,6 +7457,12 @@
     <PackageReference Include="CefSharp.Wpf">
       <Version>118.6.80</Version>
     </PackageReference>
+    <PackageReference Include="Ghostscript.NET">
+      <Version>1.2.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="GhostScriptSharp">
+      <Version>1.3.1.4</Version>
+    </PackageReference>
     <PackageReference Include="HidSharp">
       <Version>2.1.0</Version>
     </PackageReference>
@@ -7481,6 +7511,9 @@
     <PackageReference Include="NHunspell">
       <Version>1.2.5554.16953</Version>
     </PackageReference>
+    <PackageReference Include="NTwain">
+      <Version>3.7.3</Version>
+    </PackageReference>
     <PackageReference Include="OfficeOpenXml.Core.ExcelPackage">
       <Version>1.0.0</Version>
     </PackageReference>
@@ -7526,6 +7559,14 @@
     <PackageReference Include="System.ValueTuple">
       <Version>4.5.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Hunspellx86.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\print.png" />
+    <Resource Include="Resources\navigate_left.png" />
+    <Resource Include="Resources\navigate_right.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

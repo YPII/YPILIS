@@ -255,9 +255,21 @@ namespace YellowstonePathology.UI
         {
             if (e.Key == Key.Enter)
             {
-                if (this.TextBoxTrackingNumber.Text.Length >= 4)
+                bool containsInt = this.TextBoxTrackingNumber.Text.Any(char.IsDigit);                
+                if (containsInt == true && this.TextBoxTrackingNumber.Text.Length >= 4)
                 {
                     this.m_TaskUI.GetTaskOrderViewListByTrackingNumber(this.TextBoxTrackingNumber.Text);
+                }
+                else
+                {
+                    Surgical.TextSearchHandler textSearchHandler = new Surgical.TextSearchHandler(this.TextBoxTrackingNumber.Text);
+                    object textSearchObject = textSearchHandler.GetSearchObject();
+                    if (textSearchObject is YellowstonePathology.Business.MasterAccessionNo)
+                    {
+                        YellowstonePathology.Business.MasterAccessionNo masterAccessionNo = (YellowstonePathology.Business.MasterAccessionNo)textSearchObject;
+                        //this.m_TaskUI.GetTaskOrderViewListByTracking
+                        this.m_TaskUI.GetTaskOrderViewListByMasterAccessionNo(masterAccessionNo.Value);
+                    }                    
                 }
             }
         }

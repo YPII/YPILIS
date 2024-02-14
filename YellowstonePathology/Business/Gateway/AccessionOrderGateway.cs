@@ -2657,6 +2657,18 @@ namespace YellowstonePathology.Business.Gateway
             return result;
         }
 
+        public static Business.Task.Model.TaskOrderViewList GetTaskOrderViewListByMasterAccessionNo(string masterAccessionNo)
+        {
+            string sql = "select t.ReportNo, t.MasterAccessionNo, ao.PLastName, TargetDescription, t.OrderDate, su.LastName 'OrderedBy', t.AcknowledgedDate, pso.PanelSetName, null as TrackingNumber " +
+                "from tblTaskOrder t join tblSystemUser su on t.OrderedById = su.UserId join tblPanelSetOrder pso on t.ReportNo = pso.ReportNo join tblAccessionOrder ao on pso.MasterAccessionNo = ao.MasterAccessionNo " +                
+                $"where t.MasterAccessionNo = '{masterAccessionNo}'; ";
+
+            MySqlCommand cmd = new MySqlCommand(sql);
+            cmd.CommandType = CommandType.Text;
+            Business.Task.Model.TaskOrderViewList result = BuildTaskOrderViewList(cmd);
+            return result;
+        }
+
         public static YellowstonePathology.Business.Task.Model.TaskOrderCollection GetDailyTaskOrderCollection()
         {
             YellowstonePathology.Business.Task.Model.TaskOrderCollection result = new YellowstonePathology.Business.Task.Model.TaskOrderCollection();

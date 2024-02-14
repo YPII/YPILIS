@@ -7,6 +7,7 @@ namespace YellowstonePathology.Business
 {
     public class CaseType
     {
+        public static string NEOCaseTypes = "NEO";
         public static string ALLCaseTypes = "All Case Types";
         public static string FNA = "FNA";
         public static string Autopsy = "Autopsy";

@@ -8,11 +8,11 @@ namespace YellowstonePathology.Business.HL7View.CDC
 {
 	public class MTDohObxView
 	{		
-		YellowstonePathology.Business.Test.AccessionOrder m_AccessionOrder;
+		Business.Test.AccessionOrder m_AccessionOrder;
 		string m_ReportNo;
         int m_ObxCount;
 
-        public MTDohObxView(YellowstonePathology.Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount)
+        public MTDohObxView(Business.Test.AccessionOrder accessionOrder, string reportNo, int obxCount)
 		{
 			this.m_AccessionOrder = accessionOrder;
 			this.m_ReportNo = reportNo;
@@ -26,53 +26,81 @@ namespace YellowstonePathology.Business.HL7View.CDC
 
 		public void ToXml(XElement document)
 		{
-			YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder panelSetOrderSurgical = (YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
-
-			int observationSubId = 1;
-			foreach (YellowstonePathology.Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen in panelSetOrderSurgical.SurgicalSpecimenCollection)
+			Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+			if(panelSetOrder.PanelSetId == 13)
 			{
-				XElement natureOfSpecimenObx3 = this.CreateObx3Segement("22633-2", "Nature of Specimen", "LN");
-				string natureOfSpecimen = this.StripWhiteSpace(surgicalSpecimen.SpecimenOrder.Description);
-				this.AddNextObxElement(document, natureOfSpecimenObx3, observationSubId, natureOfSpecimen, "F");
-
-				XElement finalDiagnosisObx3 = this.CreateObx3Segement("22637-3", "Final Diagnosis", "LN");
-				string finalDiagnosis = this.StripWhiteSpace(surgicalSpecimen.Diagnosis);
-				this.AddNextObxElement(document, finalDiagnosisObx3, observationSubId, finalDiagnosis, "F");
-
-				observationSubId += 1;
+				HandleSurgical(document);
 			}
-
-			observationSubId += 1;
-			XElement grossObx03Element = this.CreateObx3Segement("22634-0", "Gross Pathology", "LN");
-			string grossDescription = this.StripWhiteSpace(panelSetOrderSurgical.GrossX);
-			this.AddNextObxElement(document, grossObx03Element, observationSubId, grossDescription, "F");
-
-			observationSubId += 1;
-			XElement microObx03Element = this.CreateObx3Segement("22635-7", "Micro Pathology", "LN");
-			string microDescription = this.StripWhiteSpace(panelSetOrderSurgical.MicroscopicX);
-			this.AddNextObxElement(document, microObx03Element, observationSubId, microDescription, "F");
-
-			observationSubId += 1;
-			XElement clinicalInfoObx03Element = this.CreateObx3Segement("22636-5", "Clinical History", "LN");
-			string clinicalInfo = this.StripWhiteSpace(this.m_AccessionOrder.ClinicalHistory);
-			this.AddNextObxElement(document, clinicalInfoObx03Element, observationSubId, clinicalInfo, "F");
-
-			observationSubId += 1;
-			XElement commentObx03Element = this.CreateObx3Segement("22638-1", "Comment Section", "LN");
-			string comment = this.StripWhiteSpace(panelSetOrderSurgical.Comment);
-			this.AddNextObxElement(document, commentObx03Element, observationSubId, comment, "F");
-
-			observationSubId += 1;
-            YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(panelSetOrderSurgical.ReportNo);
-            foreach (YellowstonePathology.Business.Amendment.Model.Amendment amendment in amendmentCollection)
+			else if(panelSetOrder.PanelSetId == 3)
 			{
-				XElement supplemental03Element = this.CreateObx3Segement("22639-9", "SupplementalReports/Addendum", "LN");
-				string supplemental = this.StripWhiteSpace(amendment.Text);
-				this.AddNextObxElement(document, supplemental03Element, observationSubId, supplemental, "F");
+				HandleNGT(document);
 			}
 		}
 
-		private XElement CreateObx3Segement(string identifier, string identifierName, string codingSystem)
+		private void HandleSurgical(XElement document)
+		{
+            Business.Test.Surgical.SurgicalTestOrder panelSetOrderSurgical = (YellowstonePathology.Business.Test.Surgical.SurgicalTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+
+            int observationSubId = 1;
+            foreach (Business.Test.Surgical.SurgicalSpecimen surgicalSpecimen in panelSetOrderSurgical.SurgicalSpecimenCollection)
+            {
+                XElement natureOfSpecimenObx3 = this.CreateObx3Segement("22633-2", "Nature of Specimen", "LN");
+                string natureOfSpecimen = this.StripWhiteSpace(surgicalSpecimen.SpecimenOrder.Description);
+                this.AddNextObxElement(document, natureOfSpecimenObx3, observationSubId, natureOfSpecimen, "F");
+
+                XElement finalDiagnosisObx3 = this.CreateObx3Segement("22637-3", "Final Diagnosis", "LN");
+                string finalDiagnosis = this.StripWhiteSpace(surgicalSpecimen.Diagnosis);
+                this.AddNextObxElement(document, finalDiagnosisObx3, observationSubId, finalDiagnosis, "F");
+
+                observationSubId += 1;
+            }
+
+            observationSubId += 1;
+            XElement grossObx03Element = this.CreateObx3Segement("22634-0", "Gross Pathology", "LN");
+            string grossDescription = this.StripWhiteSpace(panelSetOrderSurgical.GrossX);
+            this.AddNextObxElement(document, grossObx03Element, observationSubId, grossDescription, "F");
+
+            observationSubId += 1;
+            XElement microObx03Element = this.CreateObx3Segement("22635-7", "Micro Pathology", "LN");
+            string microDescription = this.StripWhiteSpace(panelSetOrderSurgical.MicroscopicX);
+            this.AddNextObxElement(document, microObx03Element, observationSubId, microDescription, "F");
+
+            observationSubId += 1;
+            XElement clinicalInfoObx03Element = this.CreateObx3Segement("22636-5", "Clinical History", "LN");
+            string clinicalInfo = this.StripWhiteSpace(this.m_AccessionOrder.ClinicalHistory);
+            this.AddNextObxElement(document, clinicalInfoObx03Element, observationSubId, clinicalInfo, "F");
+
+            observationSubId += 1;
+            XElement commentObx03Element = this.CreateObx3Segement("22638-1", "Comment Section", "LN");
+            string comment = this.StripWhiteSpace(panelSetOrderSurgical.Comment);
+            this.AddNextObxElement(document, commentObx03Element, observationSubId, comment, "F");
+
+            observationSubId += 1;
+            YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(panelSetOrderSurgical.ReportNo);
+            foreach (YellowstonePathology.Business.Amendment.Model.Amendment amendment in amendmentCollection)
+            {
+                XElement supplemental03Element = this.CreateObx3Segement("22639-9", "SupplementalReports/Addendum", "LN");
+                string supplemental = this.StripWhiteSpace(amendment.Text);
+                this.AddNextObxElement(document, supplemental03Element, observationSubId, supplemental, "F");
+            }
+        }
+
+		private void HandleNGT(XElement document)
+		{
+            //LOINC 74384-9
+            int observationSubId = 1;
+            Business.Test.NGCT.NGCTTestOrder ngctTestOrder = (Business.Test.NGCT.NGCTTestOrder)this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+
+            XElement ngResult = this.CreateObx3Segement("74384-9", "Neisseria Gonorrhoeae", "LN");            
+            this.AddNextObxElement(document, ngResult, observationSubId, ngctTestOrder.NeisseriaGonorrhoeaeResult, "F");
+
+            observationSubId += 1;
+
+            XElement ctResult = this.CreateObx3Segement("74384-9", "Chlamydia Trachomatis", "LN");            
+            this.AddNextObxElement(document, ctResult, observationSubId, ngctTestOrder.ChlamydiaTrachomatisResult, "F");
+        }
+
+        private XElement CreateObx3Segement(string identifier, string identifierName, string codingSystem)
 		{
 			XElement obx03Element = new XElement("OBX.3");
 			YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElement("OBX.3.1", identifier, obx03Element);

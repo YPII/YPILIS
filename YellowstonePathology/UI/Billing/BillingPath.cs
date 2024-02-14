@@ -226,6 +226,7 @@ namespace YellowstonePathology.UI.Billing
             scrollViewer.Content = webBrowser;
             userControl.Content = scrollViewer;
 
+            //this.m_BillingWindowPrimary.PageNavigator.Navigate(userControl);
             this.m_BillingWindowSecondary.PageNavigator.Navigate(userControl);            
         }
 

@@ -199,7 +199,7 @@ namespace YellowstonePathology.UI.Monitor
         	bool result = false;               
             ServicePointManager.ServerCertificateValidationCallback = CertificateValidationCallBack;
             ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2007_SP1);
-            service.Credentials = new WebCredentials("ypiilab\\histology", "Let'sMakeSlides");            
+            service.Credentials = new WebCredentials("ypiilab\\histology", "slidesrus");            
 
             service.TraceEnabled = true;
             service.TraceFlags = TraceFlags.All;

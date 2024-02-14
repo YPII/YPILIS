@@ -646,6 +646,12 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                 YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
                 resultView.Send(methodResult);
             }
+            else if (this.m_AccessionOrder.ClientId == 1494)
+            {
+                Business.HL7View.DeerLodge.DeerLodgeResultView resultView = new Business.HL7View.DeerLodge.DeerLodgeResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true);
+                YellowstonePathology.Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+                resultView.Send(methodResult);
+            }
             else
             {
                 YellowstonePathology.Business.HL7View.EPIC.EPICBeakerResultView resultView = new Business.HL7View.EPIC.EPICBeakerResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder, false, true);
@@ -809,6 +815,46 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
         {
             this.m_PanelSetOrder.TestOrderReportDistributionCollection.AddWebSerivceDistribution(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder.ClientName, this.m_AccessionOrder.ClientId,
                 this.m_AccessionOrder.PhysicianName, this.m_AccessionOrder.PhysicianId);
+        }
+
+        private void MenuItemDistributeNow_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void HyperLinkSendMTDOH_Click(object sender, RoutedEventArgs e)
+        {
+            Business.HL7View.CDC.MTDohResultView resultView = new Business.HL7View.CDC.MTDohResultView(this.m_PanelSetOrder.ReportNo, this.m_AccessionOrder);
+            Business.Rules.MethodResult methodResult = new Business.Rules.MethodResult();
+            resultView.Send(methodResult);
+        }
+
+        private void HyperLinkDistributionCheck_Click(object sender, RoutedEventArgs e)
+        {
+            Business.OrderIdParser orderIdParser = new Business.OrderIdParser(this.m_PanelSetOrder.ReportNo);
+            string pdfPath = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
+
+            if(System.IO.File.Exists(pdfPath) == false)
+            {
+                MessageBoxResult result = MessageBox.Show("The PDF for this case does not exist, would you like to send an email to Flow?", "Missing PDF", MessageBoxButton.YesNo);
+                if(result == MessageBoxResult.Yes)
+                {
+                    SendMessageToFlow(this.m_PanelSetOrder.ReportNo, $"A PDF document for ReportNo {this.m_PanelSetOrder.ReportNo} does not exist and distribution is delayed.");
+                }
+            }
+        }
+
+        public static void SendMessageToFlow(string subject, string body)
+        {            
+            System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage("flowstaff@ypii.com", "sid.harder@ypii.com", subject, body);                        
+            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("10.1.2.110");
+
+            Uri uri = new Uri("http://tempuri.org/");
+            System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;
+            System.Net.NetworkCredential credential = credentials.GetCredential(uri, "Basic");
+
+            client.Credentials = credential;
+            client.Send(message);            
         }
     }
 }

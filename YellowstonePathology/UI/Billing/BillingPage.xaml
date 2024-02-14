@@ -180,6 +180,9 @@
                             <TextBlock Grid.Column="2" Grid.Row="2" Margin="2,2,2,2" TextAlignment="Right" VerticalAlignment="Center" FontWeight="Bold">Audited:</TextBlock>
                             <CheckBox Grid.Column="3" Grid.Row="2" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=PanelSetOrder.Audited}" />
 
+                            <TextBlock Grid.Column="2" Grid.Row="3" Margin="2,2,2,2" TextAlignment="Right" VerticalAlignment="Center" FontWeight="Bold">Addional Info:</TextBlock>
+                            <CheckBox Grid.Column="3" Grid.Row="3" Margin="2,2,2,2" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=AccessionOrder.AdditionalInformation}" />
+
                         </Grid>
 
                         <ListView Name="ListViewDocuments" Grid.Column="0" Grid.Row="19" Grid.ColumnSpan="2" ItemsSource="{Binding Path=CaseDocumentCollection}" 
@@ -208,26 +211,36 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">Deceased:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.DateOfDeath, Converter={StaticResource ShortDateConverter}}" HorizontalAlignment="Stretch"></TextBox>
+                        
+                        <!--
                         <TextBlock Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">Patient payment instructions:</TextBlock>
                         <TextBox Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.PatientPaymentInstructions}" HorizontalAlignment="Stretch"></TextBox>
 
                         <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">Payment Type:</TextBlock>
                         <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.PaymentType}" HorizontalAlignment="Stretch"></TextBox>
+                        -->
+                        
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">VA Authorization Id:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.VAAuthorizationId}" HorizontalAlignment="Stretch"></TextBox>
 
-                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">VA Authorization Id:</TextBlock>
-                        <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.VAAuthorizationId}" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">VA Authorization Start:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="2" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.VAAuthorizationStart, Converter={StaticResource ShortDateConverter}}" HorizontalAlignment="Stretch"></TextBox>
 
-                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">VA Authorization Start:</TextBlock>
-                        <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.VAAuthorizationStart, Converter={StaticResource ShortDateConverter}}" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">VA Authorization End:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="3" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.VAAuthorizationEnd, Converter={StaticResource ShortDateConverter}}" HorizontalAlignment="Stretch"></TextBox>
 
-                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">VA Authorization End:</TextBlock>
-                        <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.VAAuthorizationEnd, Converter={StaticResource ShortDateConverter}}" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">WC Authorization Id:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.WCAuthorizationId}" HorizontalAlignment="Stretch"></TextBox>
 
-                        <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">MC Authorization Id:</TextBlock>
-                        <TextBox Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.MCAuthorizationId}" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">WC Authorization Id:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="4" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.WCAuthorizationId}" HorizontalAlignment="Stretch"></TextBox>
 
-                        <TextBlock Grid.Column="0" Grid.Row="6" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">DOD:</TextBlock>
-                        <TextBox Grid.Column="1" Grid.Row="6" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.DateOfDeath, Converter={StaticResource ShortDateConverter}}" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Margin="2,2,2,2" TextAlignment="Right" FontWeight="Bold">Date Of Injury:</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="5" Margin="2,2,2,2" Text="{Binding Path=AccessionOrder.DateOfInjury, Converter={StaticResource ShortDateConverter}}" HorizontalAlignment="Stretch"></TextBox>
+
                     </Grid>
                 </TabItem>
             </TabControl>

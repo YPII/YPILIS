@@ -349,7 +349,24 @@ namespace YellowstonePathology.Business.Gateway
             return reportSearchList;
         }
 
-		public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByAccessionDate(DateTime accessionDate, List<int> panelSetIdList)
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByNeo(DateTime accessionDate)
+        {            
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT pso.MasterAccessionNo, pso.ReportNo, a.AccessionTime AccessionDate,  pso.PanelSetId, " +
+                "concat(a.PFirstName, ' ', a.PLastName) AS PatientName, " +
+                "a.PLastName, a.PFirstName, a.ClientName, a.PhysicianName, a.PBirthdate, pso.FinalTime, pso.PanelSetName, su.UserName as OrderedBy, " +
+                "'' ForeignAccessionNo, pso.IsPosted " +
+                "FROM tblAccessionOrder a JOIN tblPanelSetOrder pso ON a.MasterAccessionNo = pso.MasterAccessionNo " +
+                "Left Outer Join tblSystemUser su on pso.OrderedById = su.UserId " +
+                "WHERE a.AccessionDate = @AccessionDate and pso.TechnicalComponentFacilityid in ('NEOGNMCIRVN','NEOGNMCNSHVLL') " +                
+                "ORDER BY AccessionTime desc;";
+            cmd.Parameters.AddWithValue("@AccessionDate", accessionDate);
+            Search.ReportSearchList reportSearchList = BuildReportSearchList(cmd);            
+            return reportSearchList;
+        }
+
+        public static YellowstonePathology.Business.Search.ReportSearchList GetReportSearchListByAccessionDate(DateTime accessionDate, List<int> panelSetIdList)
         {
             string panelSetIdString = Business.Helper.IdListHelper.ToIdString(panelSetIdList);
             MySqlCommand cmd = new MySqlCommand();

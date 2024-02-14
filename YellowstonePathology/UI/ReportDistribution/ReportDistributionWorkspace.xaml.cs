@@ -356,7 +356,7 @@ namespace YellowstonePathology.UI.ReportDistribution
             int processCount = 0;
 
             foreach (YellowstonePathology.Business.Test.PanelSetOrderView view in caseList)
-            {                
+            {
                 try
                 {
                     YellowstonePathology.WorkingReportNo.Instance.ReportNo = view.ReportNo;
@@ -435,8 +435,8 @@ namespace YellowstonePathology.UI.ReportDistribution
 
                         processCount += 1;
                         if (processCount == maxProcessCount) break;
-                    }                    
-                
+                    }
+
                 }
                 catch (Exception exception)
                 {
@@ -446,7 +446,8 @@ namespace YellowstonePathology.UI.ReportDistribution
                 finally
                 {
                     YellowstonePathology.WorkingReportNo.Instance.ReportNo = null;
-                }                
+                }
+                                
             }                
             
             YellowstonePathology.Business.Persistence.DocumentGateway.Instance.Push(this);

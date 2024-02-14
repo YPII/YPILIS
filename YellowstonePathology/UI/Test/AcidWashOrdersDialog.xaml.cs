@@ -59,6 +59,14 @@ namespace YellowstonePathology.UI.Test
                 this.m_AcidWashList = Business.Gateway.ReportSearchGateway.GetAcidWashList(DateTime.Today.AddMonths(-3));
                 this.NotifyPropertyChanged("AcidWashList");
             }
-        }        
+        }
+
+        private void ButtonPrint_Click(object sender, RoutedEventArgs e)
+        {
+            UI.Login.AcidWashListReport report = new Login.AcidWashListReport(this.m_AcidWashList);
+            YellowstonePathology.UI.XpsDocumentViewer xpsDocumentViewer = new XpsDocumentViewer();
+            xpsDocumentViewer.LoadDocument(report.FixedDocument);
+            xpsDocumentViewer.ShowDialog();
+        }
     }
 }

@@ -194,7 +194,7 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
                                 if (slideOrder.ClientAccessioned == true)
                                 {
                                     YellowstonePathology.Business.Label.Model.HistologySlidePaperLabel paperLabel = new Business.Label.Model.HistologySlidePaperLabel(slideOrder.SlideOrderId,
-                                        this.m_AccessionOrder.MasterAccessionNo, slideOrder.Label, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
+                                        this.m_AccessionOrder.MasterAccessionNo, slideOrder.Label, slideOrder.PatientFirstName, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
 
                                     YellowstonePathology.Business.Label.Model.HistologySlidePaperLabelPrinter printer = new Business.Label.Model.HistologySlidePaperLabelPrinter();
                                     printer.Queue.Enqueue(paperLabel);

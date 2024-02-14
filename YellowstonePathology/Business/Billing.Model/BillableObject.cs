@@ -127,7 +127,14 @@ namespace YellowstonePathology.Business.Billing.Model
 						item.FromPanelSetOrderCPTCode(panelSetOrderCPTCode);
 						item.BillTo = billTo;
 						item.BillBy = billby;
-						item.Modifier = cptCode.GetModifier(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Professional);
+                        if(string.IsNullOrEmpty(panelSetOrderCPTCode.Modifier) == false)
+                        {
+                            item.Modifier = panelSetOrderCPTCode.Modifier;
+                        }
+                        else
+                        {
+                            item.Modifier = cptCode.GetModifier(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Professional);
+                        }						
 
                         if (this.m_AccessionOrder.PrimaryInsurance == "Medicare")
                         {
@@ -158,7 +165,8 @@ namespace YellowstonePathology.Business.Billing.Model
 						item.FromPanelSetOrderCPTCode(panelSetOrderCPTCode);
 						item.BillTo = billTo;
 						item.BillBy = billby;
-						item.Modifier = cptCode.GetModifier(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Technical);
+						string modifier = cptCode.GetModifier(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Technical);
+                        if (string.IsNullOrEmpty(modifier) == false) item.Modifier = modifier;
 
                         if (this.m_AccessionOrder.PrimaryInsurance == "Medicare" && cptCode.HasMedicareQuantityLimit == true && billTo == "Patient")
                         {                                                        
@@ -221,7 +229,7 @@ namespace YellowstonePathology.Business.Billing.Model
                 foreach (YellowstonePathology.Business.Test.PanelSetOrderCPTCode panelSetOrderCPTCode in panelSetOrderCPTCodeSummaryCollection)
 				{                    
 					YellowstonePathology.Business.Billing.Model.CptCode cptCode = Store.AppDataStore.Instance.CPTCodeCollection.GetClone(panelSetOrderCPTCode.CPTCode, panelSetOrderCPTCode.Modifier);
-                    if (cptCode.HasBillableProfessionalComponent() == true)
+                    if (cptCode.HasBillableProfessionalComponent() == true && cptCode.CodeType != CPTCodeTypeEnum.PQRS)
                     {                        
                         YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill item = this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.GetNextItem(this.m_PanelSetOrder.ReportNo);
                         item.FromPanelSetOrderCPTCode(panelSetOrderCPTCode);
@@ -359,13 +367,16 @@ namespace YellowstonePathology.Business.Billing.Model
 				{
 					YellowstonePathology.Business.Billing.Model.CptCode cptCode = Store.AppDataStore.Instance.CPTCodeCollection.GetClone(panelSetOrderCPTCode.CPTCode, panelSetOrderCPTCode.Modifier);
 					if (cptCode is YellowstonePathology.Business.Billing.Model.PQRSCode == true)
-					{
+					{                        
 						YellowstonePathology.Business.Test.PanelSetOrderCPTCodeBill pqriCode = this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.GetNextItem(this.m_PanelSetOrder.ReportNo);
-						pqriCode.ClientId = this.m_AccessionOrder.ClientId;
-						pqriCode.FromPanelSetOrderCPTCode(panelSetOrderCPTCode);
-						pqriCode.BillTo = null;
-						pqriCode.BillBy = null;
-						this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.Add(pqriCode);
+                        if (this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.CPTCodeExists(cptCode.Code) == false)
+                        {
+                            pqriCode.ClientId = this.m_AccessionOrder.ClientId;
+                            pqriCode.FromPanelSetOrderCPTCode(panelSetOrderCPTCode);
+                            pqriCode.BillTo = "Patient";
+                            pqriCode.BillBy = "YPIBLGS";
+                            this.m_PanelSetOrder.PanelSetOrderCPTCodeBillCollection.Add(pqriCode);
+                        }                        
 					}
 				}
 			}

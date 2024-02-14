@@ -64,6 +64,7 @@
             </ListView.View>
         </ListView>
 
+        <Button Grid.Column="0" Grid.Row="1" Width="100" Height="30" Click="ButtonPrint_Click"  HorizontalAlignment="Left" Margin="2,2,2,2">Print</Button>
         <Button Grid.Column="0" Grid.Row="1" Width="100" Height="30" Click="ButtonClose_Click"  HorizontalAlignment="Right" Margin="2,2,2,2">Close</Button>
 
     </Grid>

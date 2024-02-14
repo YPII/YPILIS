@@ -10,7 +10,7 @@ namespace YellowstonePathology.Business.Gateway
 		public static ObservableCollection<YellowstonePathology.Business.Patient.Model.PatientLinkingListItem> GetPatientLinkingList(YellowstonePathology.Business.Patient.Model.PatientLinkingListItem patientLinkingListItem)
 		{
 			ObservableCollection<YellowstonePathology.Business.Patient.Model.PatientLinkingListItem> result = new ObservableCollection<Patient.Model.PatientLinkingListItem>();
-			MySqlCommand cmd = new MySqlCommand("pGetPatientLinkingV2");
+			MySqlCommand cmd = new MySqlCommand("pGetPatientLinkingV3");
 			cmd.CommandType = CommandType.StoredProcedure;
 
 			cmd.Parameters.AddWithValue("MasterAccessionNo", patientLinkingListItem.MasterAccessionNo);

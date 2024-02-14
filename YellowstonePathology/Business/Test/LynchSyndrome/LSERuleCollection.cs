@@ -75,6 +75,7 @@ namespace YellowstonePathology.Business.Test.LynchSyndrome
             result.Add(new LSEGYNAllIntact());
             result.Add(new LSEGYNMeth());
             result.Add(new LSEGYNSendOut());
+            result.Add(new LSEGYNMSH6Loss());
 
             result.Add(new LSEGeneralAllIntact());
             result.Add(new LSEGeneralSendOut());

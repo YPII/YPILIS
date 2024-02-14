@@ -25,7 +25,7 @@ namespace YellowstonePathology.Business.Test.SoftTissueTumorProfile
             this.m_WordDocumentClassName = typeof(YellowstonePathology.Business.Document.ReferenceLabReport).AssemblyQualifiedName;
             this.m_AllowMultiplePerAccession = true;
 
-this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
+            this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);            
 
             YellowstonePathology.Business.Facility.Model.Facility neogenomicsIrvine = Business.Facility.Model.FacilityCollection.Instance.GetByFacilityId("NEOGNMCIRVN");
             this.m_TechnicalComponentFacility = neogenomicsIrvine;
@@ -33,6 +33,9 @@ this.m_ImplementedResultTypes.Add(Business.Test.ResultType.REFLAB);
 
             this.m_ProfessionalComponentFacility = neogenomicsIrvine;
             this.m_ProfessionalComponentBillingFacility = neogenomicsIrvine;
+
+            string taskDescription = "Gather materials and send out to Neo.";
+            this.m_TaskCollection.Add(new YellowstonePathology.Business.Task.Model.TaskFedexShipment(YellowstonePathology.Business.Task.Model.TaskAssignment.Flow, taskDescription, neogenomicsIrvine));
 
             this.m_UniversalServiceIdCollection.Add(new YellowstonePathology.Business.ClientOrder.Model.UniversalServiceDefinitions.UniversalServiceMOLEGEN());
         }

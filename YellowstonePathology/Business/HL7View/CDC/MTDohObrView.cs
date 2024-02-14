@@ -22,17 +22,20 @@ namespace YellowstonePathology.Business.HL7View.CDC
 			this.m_ReportNo = reportNo;
 			this.m_OrderingPhysician = orderingPhysician;
 
-            YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(13);
-            this.m_SigningPathologist = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(panelSetOrder.AssignedToId);
+            YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(reportNo);
+            if(panelSetOrder.PanelSetId == 13)
+            {
+                this.m_SigningPathologist = Business.User.SystemUserCollectionInstance.Instance.SystemUserCollection.GetSystemUserById(panelSetOrder.AssignedToId);
 
-            YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(panelSetOrder.ReportNo);
-            if (amendmentCollection.Count == 0)
-            {
-                this.m_ObservationResultStatus = "F";
-            }
-            else
-            {
-                this.m_ObservationResultStatus = "C";
+                YellowstonePathology.Business.Amendment.Model.AmendmentCollection amendmentCollection = this.m_AccessionOrder.AmendmentCollection.GetAmendmentsForReport(panelSetOrder.ReportNo);
+                if (amendmentCollection.Count == 0)
+                {
+                    this.m_ObservationResultStatus = "F";
+                }
+                else
+                {
+                    this.m_ObservationResultStatus = "C";
+                }
             }            
 		}        
 
@@ -94,22 +97,27 @@ namespace YellowstonePathology.Business.HL7View.CDC
             obr25Element.Add(obr2501Element);
             obrElement.Add(obr25Element);
 
-            XElement obr32Element = new XElement("OBR.32");
+            YellowstonePathology.Business.Test.PanelSetOrder panelSetOrder = this.m_AccessionOrder.PanelSetOrderCollection.GetPanelSetOrder(this.m_ReportNo);
+            if (panelSetOrder.PanelSetId == 13)
+            {
+                XElement obr32Element = new XElement("OBR.32");
 
-            StringBuilder obr3201Data = new StringBuilder();
-            obr3201Data.Append(this.m_SigningPathologist.NationalProviderId);
-            obr3201Data.Append("&" + this.m_SigningPathologist.LastName);
-            obr3201Data.Append("&" + this.m_SigningPathologist.FirstName);
-            obr3201Data.Append("&" + this.m_SigningPathologist.Initials.Substring(1, 1));
-            obr3201Data.Append("&" + "MD");
-            obr3201Data.Append("&" + string.Empty);
-            obr3201Data.Append("&" + string.Empty);
-            obr3201Data.Append("&" + string.Empty);
-            obr3201Data.Append("&" + "MT");
-            XElement obr3201Element = new XElement("OBR.32.1", obr3201Data.ToString());
+                StringBuilder obr3201Data = new StringBuilder();
+                obr3201Data.Append(this.m_SigningPathologist.NationalProviderId);
+                obr3201Data.Append("&" + this.m_SigningPathologist.LastName);
+                obr3201Data.Append("&" + this.m_SigningPathologist.FirstName);
+                obr3201Data.Append("&" + this.m_SigningPathologist.Initials.Substring(1, 1));
+                obr3201Data.Append("&" + "MD");
+                obr3201Data.Append("&" + string.Empty);
+                obr3201Data.Append("&" + string.Empty);
+                obr3201Data.Append("&" + string.Empty);
+                obr3201Data.Append("&" + "MT");
+                XElement obr3201Element = new XElement("OBR.32.1", obr3201Data.ToString());
 
-            YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(obr32Element, obr3201Element);
-			YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(obrElement, obr32Element);
+                YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(obr32Element, obr3201Element);
+                YellowstonePathology.Business.Helper.XmlDocumentHelper.AddElementIfNotEmpty(obrElement, obr32Element);
+
+            }            
 		}
 	}
 }

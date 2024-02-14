@@ -52,6 +52,7 @@ namespace YellowstonePathology.Business.User
         private string m_FootPedalName;
         private int m_FootPedalVendorId;
         private int m_FootPedalProductId;
+        private string m_ZplSlidePrinter;
 
         public UserPreference()
         {
@@ -601,6 +602,21 @@ namespace YellowstonePathology.Business.User
                 {
                     this.m_FootPedalProductId = value;
                     this.NotifyPropertyChanged("FootPedalProductId");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "50", "null", "varchar")]
+        public string ZplSlidePrinter
+        {
+            get { return this.m_ZplSlidePrinter; }
+            set
+            {
+                if (this.m_ZplSlidePrinter != value)
+                {
+                    this.m_ZplSlidePrinter = value;
+                    this.NotifyPropertyChanged("ZplSlidePrinter");
                 }
             }
         }

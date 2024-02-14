@@ -18,33 +18,40 @@ namespace YellowstonePathology.Business.Helper
     public class FileConversionHelper
     {
         public static void CreateXPSFromPNGFiles(string sourceImagesPath, string xpsFIlePath)
-        {           
-            var bitmaps = new List<System.Drawing.Bitmap>();
-            foreach (var file in Directory.EnumerateFiles(sourceImagesPath, "*.png"))
-            {
-                bitmaps.Add(new System.Drawing.Bitmap(file));
-            }
-
+        {            
             FixedDocument doc = new FixedDocument();
-            foreach (var bitmap in bitmaps)
+            foreach (string file in System.IO.Directory.GetFiles(sourceImagesPath))
             {
-                ImageSource imageSource;
+                BitmapImage bitmapImage = new BitmapImage();                
                 using (var stream = new MemoryStream())
                 {
-                    bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                    stream.Position = 0;
-                    imageSource = BitmapFrame.Create(stream,
-                        BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                    using (var bitmap = new System.Drawing.Bitmap(file))
+                    {
+                        bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                        stream.Position = 0;
+
+                        bitmapImage.BeginInit(); ;
+                        bitmapImage.StreamSource = stream;
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmapImage.EndInit();
+
+                        //bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                        //stream.Position = 0;
+                        //imageSource = BitmapFrame.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);                                                
+                        // Assign the Source property of your image
+                        //image.Source = imageSource;
+                    }                                       
                 }
-                var page = new FixedPage();
-                page.Children.Add(new System.Windows.Controls.Image { Source = imageSource });
+
+                FixedPage page = new FixedPage();
+                page.Children.Add(new System.Windows.Controls.Image { Source = bitmapImage });
                 doc.Pages.Add(new PageContent { Child = page });
-            }
+            }                       
 
             var xps = new XpsDocument(xpsFIlePath, FileAccess.Write, System.IO.Packaging.CompressionOption.Fast);
             var writer = XpsDocument.CreateXpsDocumentWriter(xps);
             writer.Write(doc);
-            xps.Close();            
+            xps.Close();                        
         }
 
         public static void SaveFixedDocumentToXPS(FixedDocument document, string filePath)

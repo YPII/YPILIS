@@ -131,6 +131,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2,2,2,2">Histology Slide Label Printer:</TextBlock>
@@ -179,6 +180,8 @@
                     <TextBlock Grid.Column="0" Grid.Row="9" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">Use Laser Cassette Printer:</TextBlock>
                     <CheckBox Grid.Column="1" Grid.Row="9" Margin="2,2,2,2" IsChecked="{Binding Path=UserPreference.UseLaserCassettePrinter}" HorizontalAlignment="Stretch"></CheckBox>
 
+                    <TextBlock Grid.Column="0" Grid.Row="10" Margin="2,2,2,2" VerticalAlignment="Center" TextAlignment="Right">ZPL Slide Printer:</TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="10" Margin="2,2,2,2" Text="{Binding Path=UserPreference.ZplSlidePrinter}" HorizontalAlignment="Stretch"></TextBox>
                 </Grid>
 
             </TabItem>

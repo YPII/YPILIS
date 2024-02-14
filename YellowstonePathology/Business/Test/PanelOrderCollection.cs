@@ -290,7 +290,7 @@ namespace YellowstonePathology.Business.Test
             {
                 if (typeof(Business.Test.PanelOrder).IsAssignableFrom(typeof(Business.Test.ThinPrepPap.PanelOrderCytology)) == true)
                 {
-                    if (panelOrder.AcceptedById == userId)
+                    if (panelOrder.AcceptedById == userId && panelOrder.PanelId != 39) //exclude acid washes.
                     {
                         result = true;
                         break;

@@ -16,6 +16,9 @@ namespace YellowstonePathology.Business.PanelSet.Model
         public static PanelSetCollection GetAll()
         {
             PanelSetCollection panelSetCollection = new PanelSetCollection();
+
+            panelSetCollection.Add(new HumanPapillomavirus());
+            panelSetCollection.Add(new P53Test());
             panelSetCollection.Add(new NeoComprehensiveHemeCancers());
             panelSetCollection.Add(new NeoTYPECervicalTumorProfile());
             panelSetCollection.Add(new DecipherProstateBiopsyGenomicClassifier());
@@ -557,7 +560,8 @@ namespace YellowstonePathology.Business.PanelSet.Model
         {
             PanelSetCollection allPanelSets = PanelSetCollection.GetAll();
             List<string> result = (from x in allPanelSets orderby x.CaseType select x.CaseType).Distinct<string>().ToList<string>();
-            result.Add(YellowstonePathology.Business.CaseType.ALLCaseTypes);
+            result.Add(Business.CaseType.ALLCaseTypes);
+            result.Add(Business.CaseType.NEOCaseTypes);
             return result;
         }
 

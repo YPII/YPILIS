@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using MySqlX.XDevAPI.Common;
 
 namespace YellowstonePathology.UI.Gross
 {
@@ -132,7 +133,33 @@ namespace YellowstonePathology.UI.Gross
 			{
 				this.PrintBlocks();
 			}
-		}
+						
+            if (this.m_SpecimenOrder.Description.ToUpper().Contains("BREAST") == true)
+            {
+                if (YellowstonePathology.Business.Helper.DateTimeExtensions.DoesDateHaveTime(this.m_SpecimenOrder.CollectionTime) == false)
+                {
+                    MessageBox.Show("This case appears to be a breast case and there is no Collection Time.");                    
+                }
+                else
+                {
+                    if (this.m_SpecimenOrder.FixationStartTime.HasValue == true)
+                    {
+                        DateTime todayAt500 = DateTime.Parse(DateTime.Today.ToString("yyyy-MM-dd") + "T17:00");
+                        Business.Surgical.ProcessorRun run = new Business.Surgical.ProcessorRun("This Afternoon", todayAt500, new TimeSpan(2, 30, 0));
+                        DateTime fixationEndTime = run.GetFixationEndTime(this.m_SpecimenOrder.FixationStartTime.Value);
+                        TimeSpan fixationDuration = fixationEndTime.Subtract(this.m_SpecimenOrder.FixationStartTime.Value);
+                        if (fixationDuration.TotalHours < 6)
+                        {
+                            MessageBox.Show("Warning! Fixation duration will be under 6 hours unless this specimen is held.");
+                        }
+                        else if (fixationDuration.TotalHours > 72)
+                        {
+                            MessageBox.Show("Warning! Fixation duration will be over 72 hours if processed normally.");
+                        }
+                    }
+                }
+            }			
+        }
 
         private void BarcodeScanPort_ContainerScanReceived(Business.BarcodeScanning.ContainerBarcode containerBarcode)
         {

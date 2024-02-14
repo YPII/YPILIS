@@ -119,10 +119,12 @@ namespace YellowstonePathology.Business.Test
 		private string m_PatientPaymentInstructions;
 		private string m_PaymentType;
 		private Nullable<DateTime> m_DateOfDeath;
-		private string m_MCAuthorizationId;
+        private Nullable<DateTime> m_DateOfInjury;
+        private string m_WCAuthorizationId;
 		private Nullable<DateTime> m_VAAuthorizationEnd;
         private Nullable<DateTime> m_VAAuthorizationStart;
         private string m_VAAuthorizationId;
+		private bool m_AdditionalInformation;
 
         public AccessionOrder()
         {
@@ -1510,15 +1512,15 @@ namespace YellowstonePathology.Business.Test
 
         [PersistentProperty()]
         [PersistentDataColumnProperty(true, "500", "null", "varchar")]
-        public string MCAuthorizationId
+        public string WCAuthorizationId
         {
-            get { return this.m_MCAuthorizationId; }
+            get { return this.m_WCAuthorizationId; }
             set
             {
-                if (this.m_MCAuthorizationId != value)
+                if (this.m_WCAuthorizationId != value)
                 {
-                    this.m_MCAuthorizationId = value;
-                    this.NotifyPropertyChanged("PaymentType");
+                    this.m_WCAuthorizationId = value;
+                    this.NotifyPropertyChanged("WCAuthorizationId");
                 }
             }
         }
@@ -1563,7 +1565,37 @@ namespace YellowstonePathology.Business.Test
                 if (this.m_DateOfDeath != value)
                 {
                     this.m_DateOfDeath = value;
-                    this.NotifyPropertyChanged("m_DateOfDeath");
+                    this.NotifyPropertyChanged("DateOfDeath");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "500", "null", "DateTime")]
+        public Nullable<DateTime> DateOfInjury
+        {
+            get { return this.m_DateOfInjury; }
+            set
+            {
+                if (this.m_DateOfInjury != value)
+                {
+                    this.m_DateOfInjury = value;
+                    this.NotifyPropertyChanged("DateOfInjury");
+                }
+            }
+        }
+
+        [PersistentProperty()]
+        [PersistentDataColumnProperty(true, "1", "0", "tinyint")]
+        public bool AdditionalInformation
+        {
+            get { return this.m_AdditionalInformation; }
+            set
+            {
+                if (this.m_AdditionalInformation != value)
+                {
+                    this.m_AdditionalInformation = value;
+                    this.NotifyPropertyChanged("AdditionalInformation");
                 }
             }
         }
@@ -2254,14 +2286,15 @@ namespace YellowstonePathology.Business.Test
 			{
 				this.HandleCOVIDPatientDistribution();					
 			}
-			else if (this.PanelSetOrderCollection.DoesPanelSetExist(415) == true && this.m_DistributeToPatient == true)
+			
+			if (this.PanelSetOrderCollection.DoesPanelSetExist(415) == true && this.m_DistributeToPatient == true)
 			{
 				this.HandleAPTIMACOVIDPatientDistribution();
 			}
-			else if (this.PanelSetOrderCollection.DoesPanelSetExist(378) == true || this.PanelSetOrderCollection.DoesPanelSetExist(379))
+			
+			if (this.PanelSetOrderCollection.DoesPanelSetExist(378) == true || this.PanelSetOrderCollection.DoesPanelSetExist(379))
 			{
-				this.HandleElectroPhoresisDistribution();
-				return;
+				this.HandleElectroPhoresisDistribution();				
 			}
 
 			if (this.m_ClientId != 1134) //YPI

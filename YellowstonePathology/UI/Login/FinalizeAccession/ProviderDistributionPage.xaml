@@ -151,6 +151,8 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         
                         <TextBlock Grid.Row="0" Margin="5,3,0,0" VerticalAlignment="Bottom">
@@ -182,15 +184,23 @@
                         </TextBlock>
 
                         <TextBlock Grid.Row="8" Margin="5,3,0,0">
-					        <Hyperlink Click="HyperLinkSendSCLPDFTest_Click">Send SCL PDF - Test</Hyperlink>
+					        <Hyperlink Click="HyperLinkSendMTDOH_Click">Send MTDOH</Hyperlink>
                         </TextBlock>
 
                         <TextBlock Grid.Row="9" Margin="5,3,0,0">
-					        <Hyperlink Click="HyperLinkSendSCLPDFTestUnsoliceted_Click">Send SCL PDF - Test(UnS)</Hyperlink>
+					        <Hyperlink Click="HyperLinkSendSCLPDFTest_Click">Send SCL PDF - Test</Hyperlink>
                         </TextBlock>
 
                         <TextBlock Grid.Row="10" Margin="5,3,0,0">
+					        <Hyperlink Click="HyperLinkSendSCLPDFTestUnsoliceted_Click">Send SCL PDF - Test(UnS)</Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="11" Margin="5,3,0,0">
 					        <Hyperlink Click="HyperLinkSendSCLClosingResult_Click">Send SCL Closing Result</Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="12" Margin="5,3,0,0">
+					        <Hyperlink Click="HyperLinkDistributionCheck_Click">Distribution Check</Hyperlink>
                         </TextBlock>
                     </Grid>
                 </Expander>

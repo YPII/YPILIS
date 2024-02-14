@@ -47,7 +47,7 @@ namespace YellowstonePathology.Business.Gateway
                 "OrderedBy, OrderTime, Submitted, Received, OrderType, ExternalOrderId, DateOrderReceived " +
                 "from tblClientOrder " +
                 "Where accessioned = 0 and clientId = 1203 and reconciled = 0 " +
-                "Order by OrderTime desc;";
+                "Order by OrderTime desc, DateOrderReceived desc;";
             
             cmd.CommandType = System.Data.CommandType.Text;
 
@@ -79,7 +79,7 @@ namespace YellowstonePathology.Business.Gateway
                 "OrderedBy, OrderTime, Submitted, Received, OrderType, ExternalOrderId, DateOrderReceived " +
                 "from tblClientOrder " +
                 "Where accessioned = 0 and orderType = 'PSPYPI' and clientId in (select clientId from tblClientGroupClient where clientGroupId = 1) and orderDate >= DATE_ADD(curdate(), INTERVAL -7 DAY) " +
-                "Order by OrderTime desc;";
+                "Order by OrderTime desc, DateOrderReceived desc;";
 
             cmd.CommandType = System.Data.CommandType.Text;
 
@@ -143,7 +143,7 @@ namespace YellowstonePathology.Business.Gateway
                 "OrderedBy, OrderTime, Submitted, Received, OrderType, ExternalOrderId, DateOrderReceived " +
                 "from tblClientOrder " +
                 "Where Hold = 1 " +
-                "Order by OrderTime desc;";
+                "Order by OrderTime desc, DateOrderReceived desc;";
             
             cmd.CommandType = System.Data.CommandType.Text;
 
@@ -316,7 +316,7 @@ namespace YellowstonePathology.Business.Gateway
 			{
 				cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, " +
                     "ClientName, OrderedBy, OrderTime, Submitted, Received, OrderType, ExternalOrderId, DateOrderReceived " +
-                    "from tblClientOrder Where tblClientOrder.PLastName like concat(@PLastName, '%') Order by OrderTime desc;";
+                    "from tblClientOrder Where tblClientOrder.PLastName like concat(@PLastName, '%') Order by OrderTime desc, DateOrderReceived desc;";
 			}
 			else
 			{
@@ -324,7 +324,7 @@ namespace YellowstonePathology.Business.Gateway
 				cmd.CommandText = "Select ClientOrderId, OrderStatus, PanelSetId, PLastName, PFirstName, ProviderName, " +
                     "ClientName, OrderedBy, OrderTime, Submitted, Received, OrderType, ExternalOrderId, DateOrderReceived " +
                     "from tblClientOrder Where tblClientOrder.PLastName like concat(@PLastName, '%') and PFirstName like " +
-                    "concat(@PFirstName, '%') Order by OrderTime desc;";
+                    "concat(@PFirstName, '%') Order by OrderTime desc, DateOrderReceived desc;";
 			}
 
 			cmd.CommandType = System.Data.CommandType.Text;

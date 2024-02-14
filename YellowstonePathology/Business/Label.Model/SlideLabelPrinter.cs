@@ -43,13 +43,13 @@ namespace YellowstonePathology.Business.Label.Model
         }        
 
         public void Print()
-        {
+        {                 
             this.m_PrintDocument = new System.Drawing.Printing.PrintDocument();
             System.Printing.PrintServer printServer = new System.Printing.LocalPrintServer();
             System.Printing.PrintQueue printQueue = printServer.GetPrintQueue(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HistologySlideLabelPrinter);
             this.m_PrintDocument.PrinterSettings.PrinterName = printQueue.FullName;
             this.m_PrintDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(PrintDocument_PrintPage);
-            this.m_PrintDocument.Print();
+            this.m_PrintDocument.Print();         
         }
 
         private void PrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)

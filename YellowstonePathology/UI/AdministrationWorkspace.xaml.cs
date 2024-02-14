@@ -13,6 +13,12 @@ using MongoDB.Bson;
 using Newtonsoft.Json;
 using MySql.Data.MySqlClient;
 using ImageMagick;
+using NTwain;
+using NTwain.Data;
+using Newtonsoft.Json.Linq;
+using System.Xml.Linq;
+using YellowstonePathology.Business;
+using GhostscriptSharp;
 
 namespace YellowstonePathology.UI
 {
@@ -583,52 +589,39 @@ namespace YellowstonePathology.UI
             
         }
 
-        private void ButtonDoStuff_Click(object sender, RoutedEventArgs e)
+        private void NewYearFolders()
         {
-            string folderRoot = @"\\fileserver\Documents\TechnicalOnly\2013\00001-00999\";
-            string[] directories = System.IO.Directory.GetDirectories(folderRoot);
-            foreach (string directory in directories)
+            //string folderRoot = @"\\FileServer\AccessionDocuments\2024\04000-04999";
+            string folderRoot = @"\\FileServer\AccessionDocuments\2024"; //04000-04999";
+            //string[] directories = System.IO.Directory.GetDirectories(folderRoot);
+
+            for(int i=40; i<50; i++)
             {
-                string[] files = System.IO.Directory.GetFiles(directory);
-                foreach (string file in files)
+                string dir = $"{folderRoot}\\{i.ToString().PadLeft(2, '0').PadRight(5, '0')}-{i.ToString().PadLeft(2, '0').PadRight(5, '9')}";
+                System.IO.Directory.CreateDirectory(dir);
+                for (int j = i*1000; j < i*1000 + 1000; j++)
                 {
-                    if (System.IO.Path.GetExtension(file) == ".jpg")
-                    {
-                        /*
-                        bool result = false;
-                        using (BinaryReader br = new BinaryReader(File.Open(file, FileMode.Open)))
-                        {
-                            UInt16 soi = br.ReadUInt16();  // Start of Image (SOI) marker (FFD8)
-                            UInt16 jfif = br.ReadUInt16(); // JFIF marker (FFE0)                            
-                            result = (soi == 0xd8ff && jfif == 0xe0ff);
-                        }
-                        */
-
-                        /*
-                        if (file == @"\\fileserver\Documents\TechnicalOnly\2013\00001-00999\B13-300\B13-300.jpg")
-                        {
-                            System.Drawing.Imaging.ImageCodecInfo myImageCodecInfo;
-                            System.Drawing.Imaging.Encoder myEncoder;
-                            System.Drawing.Imaging.EncoderParameter myEncoderParameter;
-                            System.Drawing.Imaging.EncoderParameters myEncoderParameters;
-
-                            myImageCodecInfo = GetEncoderInfo("image/tiff");
-                            myEncoder = System.Drawing.Imaging.Encoder.Compression;
-                            myEncoderParameters = new System.Drawing.Imaging.EncoderParameters(1);
-
-                            myEncoderParameter = new System.Drawing.Imaging.EncoderParameter(myEncoder, (long)System.Drawing.Imaging.EncoderValue.CompressionCCITT4);
-                            myEncoderParameters.Param[0] = myEncoderParameter;
-
-                            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(file);
-                            string newFile = System.IO.Path.ChangeExtension(file, "tif");
-                            bitmap.Save(newFile, myImageCodecInfo, myEncoderParameters);                                                   
-                        } 
-                         */
-
-                        System.IO.File.Delete(file);
-                    }
+                    System.IO.Directory.CreateDirectory($"{dir}\\24-{j}");
                 }
             }
+
+            /*
+            for(int i=4000; i<5000; i++)
+            {
+                System.IO.Directory.CreateDirectory($"{folderRoot}\\24-{i}");
+            }
+            */
+
+            /*
+            foreach (string directory in directories)
+            {
+                if(directory.Contains("23-") == true)
+                {
+                    string newDirectory = directory.Replace("23-", "24-");
+                    System.IO.Directory.Move(directory, newDirectory);
+                }
+            }
+            */
         }
 
         private static System.Drawing.Imaging.ImageCodecInfo GetEncoderInfo(String mimeType)
@@ -1254,19 +1247,120 @@ namespace YellowstonePathology.UI
             Console.WriteLine("DONE");
         }
 
+        private void TwainIt()
+        {
+            var appId = TWIdentity.CreateFromAssembly(DataGroups.Image, Assembly.GetExecutingAssembly());            
+            var session = new TwainSession(appId);
+            session.TransferReady += Session_TransferReady;
+            session.Open();
+
+            DataSource myDS = session.FirstOrDefault();
+            myDS.Open();
+        }
+
+        private void Session_TransferReady(object sender, TransferReadyEventArgs e)
+        {
+            
+        }
+
+       
+        private void ParseFt1Files()
+        {
+            string filePath = @"C:\Temp\ft1";
+            string[] files = System.IO.Directory.GetFiles(filePath);
+            foreach(string file in files)
+            {
+                XElement ft1 = XElement.Load(file);
+                string mrn = ft1.Element("PID").Element("PID.3").Element("PID.3.1").Value;
+                string first = ft1.Element("PID").Element("PID.5").Element("PID.5.1").Value;
+                string last = ft1.Element("PID").Element("PID.5").Element("PID.5.2").Value;
+                string bd = ft1.Element("PID").Element("PID.7").Element("PID.7.1").Value;
+                string cdm = ft1.Element("FT1").Element("FT1.7").Value;
+                string qty = ft1.Element("FT1").Element("FT1.10").Value;
+                string ma = ft1.Element("FT1").Element("FT1.23").Value;
+                string cpt = ft1.Element("FT1").Element("FT1.25").Value;
+                string line = mrn + ", " + first + ", " + last + ", " + bd + ", " + cdm + ", " + qty + ", " + ma + ", " + cpt;
+                Console.WriteLine(line);
+            }            
+        }
+
         private void ButtonRunMethod_Click(object sender, RoutedEventArgs e)
         {
-            Business.Gateway.AccessionOrderGateway.GetAdHocList();            
+            //NewYearFolders();
 
+            //Business.OrderIdParser orderIdParser = new OrderIdParser("23-12691.R1");
+            //string pdfPath = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
+            //string xpsPath = Business.Document.CaseDocument.GetCaseFileNameXPS(orderIdParser);
+            //GhostPDFToPNG(pdfPath, xpsPath);    
 
             /*
-            Business.Test.AccessionOrder ao = Business.Persistence.DocumentGateway.Instance.GetAccessionOrderByMasterAccessionNo("23-27758");
-            Business.Specimen.Model.SpecimenOrder so = ao.SpecimenOrderCollection[0];
-            Gross.DictationTemplatePage page = new Gross.DictationTemplatePage(so, ao, Business.User.SystemIdentity.Instance);
-            Login.Receiving.LoginPageWindow window = new Login.Receiving.LoginPageWindow();
-            window.PageNavigator.Navigate(page);
-            window.Show();
+            string sql = "select pso.ReportNo\r\n  from tblAccessionOrder ao\r\n  join tblPanelSetOrder pso on ao.MasterAccessionNo = pso.MasterAccessionNo\r\n  where pso.reportNo like '%.R%' and pso.final = 1 and pso.finaldate between '2023/01/01' and '2023/06/01' and pso.panelsetid not in (244, 379);";
+            ReportNoCollection reportNos = Business.Gateway.AccessionOrderGateway.GetReportNumbers(sql);
+            foreach(ReportNo rno in reportNos)
+            {
+               Business.OrderIdParser orderIdParser = new OrderIdParser(rno.Value);
+                string pdfPath = Business.Document.CaseDocument.GetCaseFileNamePDF(orderIdParser);
+                string xpsPath = Business.Document.CaseDocument.GetCaseFileNameXPS(orderIdParser);
+                string tifPath = Business.Document.CaseDocument.GetCaseFileNameTif(orderIdParser);
+
+                FileInfo fileInfo = new FileInfo(xpsPath);
+                if (fileInfo.CreationTime.Month == 12 && fileInfo.CreationTime.Day == 19 && System.IO.File.Exists(tifPath) == false)
+                {
+                    Console.WriteLine(rno.Value);
+                    GhostPDFToPNG(pdfPath, xpsPath);
+                }
+            } 
             */
+        }
+
+        public void GhostPDFToPNG(string pdfResultFilePath, string xpsCaseFilePath)
+        {
+            string guid = System.Guid.NewGuid().ToString().ToUpper();
+
+            string programDataPath = @"C:\ProgramData\ypi";
+            string tmpFolderPath = System.IO.Path.Combine(programDataPath, guid);
+
+            System.IO.Directory.CreateDirectory(tmpFolderPath);
+
+            //C:\Program Files (x86)\gs\gs10.02.1\
+            string gs = "C:\\Program Files (x86)\\gs\\gs10.02.1\\bin\\gswin32c.exe";
+            string args = "-DBATCH -dNOPAUSE -dNOPROMPT -sDEVICE=png16m -dDownScaleFactor=5 -dTextAlphabits=4 -r720x720 -sOutputFile=\"" + tmpFolderPath + "\\img_%00d.png\" \"" + pdfResultFilePath + "\"";
+
+            Process p = new Process();
+            ProcessStartInfo info = new ProcessStartInfo(gs, args);            
+            p.StartInfo = info;
+            p.Start();
+            p.WaitForExit();
+
+            System.Threading.Thread.Sleep(5000);            
+            Business.Helper.FileConversionHelper.CreateXPSFromPNGFiles(tmpFolderPath, xpsCaseFilePath);
+        }
+
+        private void DFTAudit()
+        {
+            string errorPath = "\\\\fileserver\\Documents\\Billing\\SVH\\11172023\\ft1\\done\\error";
+            string donePath = "\\\\fileserver\\Documents\\Billing\\SVH\\11172023\\ft1\\done";
+
+            string[] errorFiles = System.IO.Directory.GetFiles(errorPath);
+            string[] doneFiles = System.IO.Directory.GetFiles(donePath);
+
+            string sql = "select MasterAccessionNo from tblFt1Log";
+            List<Business.MasterAccessionNo> manList = Business.Gateway.AccessionOrderGateway.GetMasterAccessionNoListBySQL(sql);
+
+            List<string> notSentList = new List<string>();
+            foreach(Business.MasterAccessionNo man in manList)
+            {
+                bool doneFound = false;
+                for(int i = 0; i< doneFiles.Length; i++)
+                {
+                    if (doneFiles[i].Contains(man.Value))
+                    {
+                        doneFound = true;
+                        break;
+                    }
+                }
+                if (doneFound == false) notSentList.Add(man.Value);
+            }
         }
 
         private void BillStuff()

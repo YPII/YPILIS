@@ -32,7 +32,7 @@ namespace YellowstonePathology.UI
             if (System.IO.File.Exists(fileName) == true)
             {
                 XpsDocument xpsDocument = new XpsDocument(fileName, System.IO.FileAccess.Read);
-                this.Viewer.Document = xpsDocument.GetFixedDocumentSequence();                
+                this.Viewer.Document = xpsDocument.GetFixedDocumentSequence();                                
                 xpsDocument.Close();
             }
         }

@@ -70,6 +70,15 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Path=CalendarDisplayDate}" />
+                                <GridViewColumn Header="Braunberger">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ComboBox Width="82" BorderThickness="0" SelectedValue="{Binding Path=DrBraunbergerStatus.Status}" ItemsSource="{Binding Path=CalendarStatusList, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                                 <GridViewColumn Header="Brown">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>

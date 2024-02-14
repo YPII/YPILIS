@@ -136,11 +136,16 @@ namespace YellowstonePathology.UI.Login
 
 		public void GetReportSearchList()
 		{
-            List<int> panelSetIdList = Business.PanelSet.Model.PanelSetCollection.GetPanelSetIdList(this.m_CurrentCaseType);
-
-			panelSetIdList.Add(131);
-
-            this.m_ReportSearchList = Business.Gateway.ReportSearchGateway.GetReportSearchListByAccessionDate(this.m_AccessionOrderDate, panelSetIdList);
+            if(this.m_CurrentCaseType == "NEO")
+            {
+                this.m_ReportSearchList = Business.Gateway.ReportSearchGateway.GetReportSearchListByNeo(this.m_AccessionOrderDate);
+            }
+            else
+            {
+                List<int> panelSetIdList = Business.PanelSet.Model.PanelSetCollection.GetPanelSetIdList(this.m_CurrentCaseType);
+                panelSetIdList.Add(131);
+                this.m_ReportSearchList = Business.Gateway.ReportSearchGateway.GetReportSearchListByAccessionDate(this.m_AccessionOrderDate, panelSetIdList);
+            }            
 			this.NotifyPropertyChanged("ReportSearchList");
 		}
 

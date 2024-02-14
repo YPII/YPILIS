@@ -99,6 +99,12 @@ namespace YellowstonePathology.UI
             this.NotifyPropertyChanged("TaskOrderViewList");
         }
 
+        public void GetTaskOrderViewListByMasterAccessionNo(string masterAccessionNo)
+        {
+            this.m_TaskOrderViewList = Business.Gateway.AccessionOrderGateway.GetTaskOrderViewListByMasterAccessionNo(masterAccessionNo);
+            this.NotifyPropertyChanged("TaskOrderViewList");
+        }
+
         public void GetTasksNotAcknowledged()
         {
             string assignedTo = Business.User.UserPreferenceInstance.Instance.UserPreference.AcknowledgeTasksFor;

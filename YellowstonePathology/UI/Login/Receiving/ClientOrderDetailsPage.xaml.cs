@@ -503,5 +503,15 @@ namespace YellowstonePathology.UI.Login.Receiving
                 return '\0';
             }
         }
+
+        private void Hyperlink_GenerateContainerId_Click(object sender, RoutedEventArgs e)
+        {
+            if(string.IsNullOrEmpty(this.m_ClientOrderDetail.ContainerId) == true)
+            {
+                Business.BarcodeScanning.ContainerBarcode containerBarcode = Business.BarcodeScanning.ContainerBarcode.Parse();
+                this.m_ClientOrderDetail.ContainerId = containerBarcode.ToString();
+                this.NotifyPropertyChanged(String.Empty);
+            }
+        }
     }
 }

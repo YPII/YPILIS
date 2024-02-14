@@ -58,8 +58,7 @@
 		<Button Click="ButtonPqrs_Click" Width="200" Height="30" Margin="5,5,5,5">PQRI Test</Button>
 		<Button Click="ButtonVoiceSpecimenDescription_Click" Width="200" Height="30" Margin="5,5,5,5">Specimen Voice Description now PQRI</Button>		        
 		
-        <Button Click="ButtonDoStuff_Click" Width="200" Height="30" Margin="5,5,5,5">Do Stuff</Button>
-        <Button Click="ButtonAccessionMickyMouseCreate_Click" Width="200" Height="30" Margin="5,5,5,5">Create Micky Mouse Accession</Button>
+       
 
         <Button Click="ButtonAccessionMickyMouseRemove_Click" Width="200" Height="30" Margin="5,5,5,5">Remove Micky Mouse Accession</Button>
 

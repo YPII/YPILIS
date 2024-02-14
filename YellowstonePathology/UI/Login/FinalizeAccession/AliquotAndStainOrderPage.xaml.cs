@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Xml;
 using System.Xml.Linq;
+using YellowstonePathology.Business.Slide.Model;
 
 namespace YellowstonePathology.UI.Login.FinalizeAccession
 {	
@@ -795,11 +796,18 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
             foreach (YellowstonePathology.Business.Slide.Model.SlideOrder slideOrder in slideOrderCollection)
             {
                 YellowstonePathology.Business.Label.Model.HistologySlidePaperLabel paperLabel = new Business.Label.Model.HistologySlidePaperLabel(slideOrder.SlideOrderId,
-                                        this.m_AccessionOrder.MasterAccessionNo, slideOrder.Label, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
+                                        this.m_AccessionOrder.MasterAccessionNo, slideOrder.Label, slideOrder.PatientFirstName, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
 
-                YellowstonePathology.Business.Label.Model.HistologySlidePaperLabelPrinter printer = new Business.Label.Model.HistologySlidePaperLabelPrinter();
-                printer.Queue.Enqueue(paperLabel);
-                printer.Print();
+                string printerId = YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.ZplSlidePrinter;
+                if(string.IsNullOrEmpty(printerId) == false)
+                {
+                    Business.Label.Model.ZPLPrinterTCP printer = new Business.Label.Model.ZPLPrinterTCP(printerId);
+                    printer.Print(paperLabel.GetZPL());
+                }
+                else
+                {
+                    MessageBox.Show("The printer is not selected in user preferences.");
+                }                
             }            
         }
 
@@ -940,12 +948,13 @@ namespace YellowstonePathology.UI.Login.FinalizeAccession
 
                         System.Printing.PrintQueue printQueue = printServer.GetPrintQueue(YellowstonePathology.Business.User.UserPreferenceInstance.Instance.UserPreference.HistologySlideLabelPrinter);
                         printDialog.PrintQueue = printQueue;
-
+                        
                         YellowstonePathology.Business.Label.Model.HistologySlidePaperLabel histologySlidePaperLabel = new Business.Label.Model.HistologySlidePaperLabel(slideOrder.SlideOrderId,
-                            slideOrder.ReportNo, slideOrder.Label, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
+                            slideOrder.ReportNo, slideOrder.Label, slideOrder.PatientFirstName, slideOrder.PatientLastName, slideOrder.TestAbbreviation, slideOrder.AccessioningFacility);
                         YellowstonePathology.Business.Label.Model.HistologySlidePaperLabelPrinter histologySlidePaperLabelPrinter = new Business.Label.Model.HistologySlidePaperLabelPrinter();
                         histologySlidePaperLabelPrinter.Queue.Enqueue(histologySlidePaperLabel);
                         histologySlidePaperLabelPrinter.Print();
+
                     }
                 }
             }            

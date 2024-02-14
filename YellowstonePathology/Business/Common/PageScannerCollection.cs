@@ -13,14 +13,8 @@ namespace YellowstonePathology.Business.Common
 
 		public PageScannerCollection()
 		{
-			PageScannerGT2500 pageScannerGT2500 = new PageScannerGT2500();
-			this.Add(pageScannerGT2500);
-
-			PageScannerIS200e pageScannerIS200e = new PageScannerIS200e();
-			this.Add(pageScannerIS200e);
-
-			PageScannerXeroxDocuMate3640 pageScannerXeroxDocuMate3640 = new PageScannerXeroxDocuMate3640();
-			this.Add(pageScannerXeroxDocuMate3640);
+            PageScannerFI8170 pageScannerFI8160 = new PageScannerFI8170();
+            this.Add(pageScannerFI8160);
 
             PageScannerFI7160 pageScannerFI7160 = new PageScannerFI7160();
             this.Add(pageScannerFI7160);
@@ -29,27 +23,19 @@ namespace YellowstonePathology.Business.Common
 		public PageScannerCollection(YellowstonePathology.Business.Twain.Twain twain)
 		{
 			List<string> printerNames = twain.SourceNames.ToList();
-			PageScannerGT2500 pageScannerGT2500 = new PageScannerGT2500();
-			if(printerNames.Contains(pageScannerGT2500.ScannerName))
-			{
-				this.Add(pageScannerGT2500);
-			}
-			PageScannerIS200e pageScannerIS200e = new PageScannerIS200e();
-			if (printerNames.Contains(pageScannerIS200e.ScannerName))
-			{
-				this.Add(pageScannerIS200e);
-			}
-			PageScannerXeroxDocuMate3640 pageScannerXeroxDocuMate3640 = new PageScannerXeroxDocuMate3640();
-			if (printerNames.Contains(pageScannerXeroxDocuMate3640.ScannerName))
-			{
-				this.Add(pageScannerXeroxDocuMate3640);
-			}
+			
             PageScannerFI7160 pageScannerFI7160 = new PageScannerFI7160();
             if (printerNames.Contains(pageScannerFI7160.ScannerName))
             {
                 this.Add(pageScannerFI7160);
             }
-		}
+
+            PageScannerFI8170 pageScannerFI8170 = new PageScannerFI8170();
+            if (printerNames.Contains(pageScannerFI8170.ScannerName))
+            {
+                this.Add(pageScannerFI8170);
+            }
+        }
 
 		public PageScanner SelectedPageScanner
 		{

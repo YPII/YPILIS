@@ -38,7 +38,7 @@ namespace YellowstonePathology.Business.Billing.Model
 				this.Post88341(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Global, billTo, billBy);
                 this.Post88344(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Global, billTo, billBy);
                 this.Post89060(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Global, billTo, billBy);
-                this.Post3395F();
+                //this.Post3395F();
 			}
         }
 
@@ -55,7 +55,7 @@ namespace YellowstonePathology.Business.Billing.Model
 				this.Post88341(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Professional, billTo, billBy);
                 this.Post88344(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Professional, billTo, billBy);
                 this.Post89060(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Global, billTo, billBy);
-                this.Post3395F();
+                //this.Post3395F();
 			}
         }
 
@@ -73,7 +73,7 @@ namespace YellowstonePathology.Business.Billing.Model
 				this.Post88341(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Technical, billTo, billBy);
                 this.Post88344(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Technical, billTo, billBy);
                 this.Post89060(YellowstonePathology.Business.Billing.Model.BillingComponentEnum.Global, billTo, billBy);
-                this.Post3395F();
+                //this.Post3395F();
 			}
         }        
 

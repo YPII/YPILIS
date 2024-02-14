@@ -89,11 +89,11 @@
                     <Hyperlink Click="HyperlinkClearContainerId_Click">Clear Container ID</Hyperlink>
                 </TextBlock>
 
-                <!--
+                
                 <TextBlock Grid.Column="0" Grid.Row="10" Margin="5,3,0,0">
-                    <Hyperlink Click="HyperlinkImportSpecimenDescription_Click">Import Description</Hyperlink>
+                    <Hyperlink Click="Hyperlink_GenerateContainerId_Click">Admin Testing</Hyperlink>
                 </TextBlock>
-                -->
+                
 
             </Grid>
 
